@@ -36,3 +36,13 @@ The what will be the ["old" documentation repo](https://github.com/hhvm/hack-hhv
 Follow along with our progress. We are initially going to disable submitting issues, etc. until we get a good foundation established. But then we will start opening things up to have the world contribute.
 
 That said, if you see anything egregious, ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
+
+## Composer Dependencies
+
+To run some of the examples, we require some third-party libraries (e.g., `asio-utilities`). We use `composer` to download and install these dependencies. You will need `composer.phar` (either [download it](https://getcomposer.org/download/) or it might already be in your path). From the root of your checkout:
+
+```
+%~/user-documentation] hhvm composer.phar install
+```
+
+This will install all dependicies within the `vendor` directory.

@@ -1,0 +1,5 @@
+{
+  "require": {
+    "hhvm/asio-utilities": "~1.0"
+  }
+}
