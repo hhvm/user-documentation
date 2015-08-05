@@ -141,3 +141,13 @@ This scenario normally occurs in the global scope (but can occur anywhere).
 ## Remember async is NOT multi-threading
 
 Async functions are not running at the same time. They are CPU sharing via changes in wait state in executing code (i.e., preemptive multitasking). Async still lives in the single-threaded world of normal PHP and Hack.
+
+## `await` is not an expression
+
+You can use `await` in three places:
+
+1. As a statement by itself (e.g., `await func()`)
+2. On the right-hand side (RHS) of an assignment (e.g., `$r = await func()`)
+3. As an argument to `return` (e.g., `return await func()`)
+
+You cannot, for example, use `await` in `var_dump()`.
