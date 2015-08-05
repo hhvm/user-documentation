@@ -10,12 +10,12 @@ async function curl_B(): Awaitable<string> {
   return $y;
 }
 
-async function main(): Awaitable<void> {
+async function async_curl(): Awaitable<void> {
   $start = microtime(true);
   list($a, $b) = await HH\Asio\v(array(curl_A(), curl_B()));
   $end = microtime(true);
   echo "Total time taken: " . strval($end - $start) . " seconds" . PHP_EOL;
 }
 
-main();
+HH\Asio\join(async_curl());
 

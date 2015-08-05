@@ -35,6 +35,12 @@ The other is a wait handle representing a collection of other wait handles. To r
 
 Sometimes you want to get a result out of a wait handle when the function you are in **is not** `async`. For this there is `HH\Asio\join()`. Pass an `Awaitable` to `join()`.
 
+Note: that global function calls (e.g., `main()`) require a join if that function is `async`). For example:
+
+```
+HH\Asio\join(main());
+```
+
 @@ wait-handle-examples/join.php @@
 
 You should not call `join()` inside an `async` function. This would defeat the purpose of `async` as the the awaitable and any dependencies will run to completion synchronously, stopping any other awaitables in their tracks from running. Just `await` in an `async` function.
