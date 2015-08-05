@@ -44,3 +44,7 @@ class Batcher {
     return await multi_key_lookup($keys);
   }
 }
+
+async function multi_key_lookup(array<string> $keys): array<string> {
+  // lookup multiple keys
+}

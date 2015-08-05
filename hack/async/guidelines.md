@@ -126,6 +126,9 @@ This may seem unintuitive, because the function `await`s every time it’s execu
 
 [Lambdas](link to lambdas) can cut down on code verbosity that comes with writing full closure syntax. They are quite useful in conjunction with the [async utility helpers](link to utility-functions.md). 
 
+For example, look how the following three ways to accomplish the same thing can be shortened using lambdas.
+
+@@ guidelines-examples/lambdas.php @@
 
 ## Use `join` in non-async functions
 
