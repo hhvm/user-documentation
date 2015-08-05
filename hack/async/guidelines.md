@@ -132,6 +132,12 @@ For example, look how the following three ways to accomplish the same thing can 
 
 ## Use `join` in non-async functions
 
+Imagine you are making a call to an `async` function `join_async()` from a non-async scope. In order to obtain your desired results, you must `join()` in order to get the result from a wait handle. 
+
+@@ guidelines-examples/join.php @@
+
+This scenario normally occurs in the global scope (but can occur anywhere).
+
 ## Remember async is NOT multi-threading
 
 Async functions are not running at the same time. They are CPU sharing via changes in wait state in executing code (i.e., preemptive multitasking). Async still lives in the single-threaded world of normal PHP and Hack.
