@@ -2,6 +2,7 @@
 
 async function time_consuming(): Awaitable<string> {
   // ...
+  return "Hello"; // For type-checking purposes
 }
 
 async memoize_handle(): Awaitable<string> {

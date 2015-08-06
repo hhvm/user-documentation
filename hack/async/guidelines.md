@@ -50,7 +50,7 @@ Possibly the most important aspect in learning how to structure async code is un
 2. Put each bundle of parallel chains into its own `async` function.
 3. Repeat to see if there are further reductions.
 
-Let's we are getting blog posts of an author. This would involve the following of steps:
+Let's say we are getting blog posts of an author. This would involve the following of steps:
 
 1. Get the post ids for an author.
 2. Get the post text for each post id.
@@ -95,15 +95,15 @@ In the above example, `possible_side_effects()` could cause some undesired behav
 
 Basically, don't depend on the order of output between runs of the same code. i.e, don't write async code where ordering is important and instead use dependencies via wait handles and `await`.
 
-## Memoziation may be good. But only wait handles
+## Memoization may be good. But only wait handles
 
-Given that async is commonly used in operations that are time-consuming, memoizing (i.e., caching) the result of an async call can definintely be worthwhile.
+Given that async is commonly used in operations that are time-consuming, memoizing (i.e., caching) the result of an async call can definitely be worthwhile.
 
-The [`<<__Memoize>>`](link to memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explict control of the memoization, make sure you only //memoize the wait handle//.
+The [`<<__Memoize>>`](link to memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explicit control of the memoization, make sure you only //memoize the wait handle//.
 
 @@ guidelines-examples/memoize-result.php @@
 
-On the surface, this seems reasonable. We want to cache the actual data associated with the wait handle. However, this can cause a undesired race condition.
+On the surface, this seems reasonable. We want to cache the actual data associated with the wait handle. However, this can cause an undesired race condition.
 
 Imagine that there are two other async functions awaiting the result of `memoize_result()`, call them `A()` and `B()`.  The following sequence of events can happen:
 
