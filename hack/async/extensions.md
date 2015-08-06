@@ -79,6 +79,7 @@ class MCRouter {
   public async function del(string $key): Awaitable<void>;
   // More methods exist, of course
 }
+```
 
 Here is a simple example showing how one might get a user name from memcached:
 
@@ -86,9 +87,23 @@ Here is a simple example showing how one might get a user name from memcached:
 
 If an issue occurs when using this protocol, two possible exceptions can be thrown. `MCRouterException` is thrown when something goes wrong with a core option, like deleting a key. `MCRouterOptionException` occurs when you provide an non-parsable option list.
 
-## Curl
+## cURL
 
-*TL;DR*: Go straight to the [**Curl API Reference**](link to the Curl API)
+*TL;DR*: Go straight to the [**cURL API Reference**](link to the cURL API)
+
+cURL provides a data transfer library for URLs. The async cURL extension provides two functions, one of which is a wrapper around the other. `curl_multi_await()` is the async version of HHVM's [`curl_multi_select()`](link to curl_multi_select). It waits until there is activity on the cURL handle and when it completes you use [`curl_multi_exec()`](link to curl_multi_exec) to process the result, just as you would in the non-async situation. `HH\Asio\curl_exec()` is a wrapper around `curl_multi_await()`. It is easy to use as you don't necessarily have to worry about resource creation since you can just pass a string URL to it.
+
+```
+async function curl_multi_await(resource $mh, 
+                                float $timeout = 1.0): Awaitable<int>;
+namespace HH\Asio {
+  async function curl_exec(mixed $urlOrHandle): Awaitable<string>;
+}
+```
+
+Here is an example of getting a vector of URL contents:
+
+@@ extensions-examples/async-curl.php @@
 
 ## Streams  
 
