@@ -61,9 +61,30 @@ The async MySQL extension provides a mechanism to pool connection objects so you
 
 @@ extensions-examples/async-mysql-connection-pool.php @@
 
-## McRouter
+## MCRouter
 
 *TL;DR*: Go straight to the [**McRouter API Reference**](link to the McRouter API)
+
+MCRouter is a memcached protocol routing library. To help your [memcached](link to memcached) memcached deployment, it provides features like connection pooling, prefix-based routing, etc.
+
+The async MCRouter extension is basically an async, yet subset, version of the Memcached extension that is part of HHVM. The primary class is `MCRouter`. There are two ways to create an instance of an MCRouter object. The `createSimple()` takes a vector of server addresses where memcached is running. The more configurable `__construct()` allows for more option tweaking. After getting an object, you can use the *async* versions of the core memcached protocol methods like `add()`, `get()` and `del()`.
+
+```
+class MCRouter {
+  public function __construct(array<stirng, mixed> $options, string $pid = '');
+  public static function createSimple(ConstVector<string> $servers): MCRouter;
+  public async function add(string $key, string $value, int $flags = 0, 
+                            int $expiration = 0): Awaitable<void>;
+  public async function get(string $key): Awaitable<string>;
+  public async function del(string $key): Awaitable<void>;
+  // More methods exist, of course
+}
+
+Here is a simple example showing how one might get a user name from memcached:
+
+@@ extensions-examples/async-mcrouter.php @@
+
+If an issue occurs when using this protocol, two possible exceptions can be thrown. `MCRouterException` is thrown when something goes wrong with a core option, like deleting a key. `MCRouterOptionException` occurs when you provide an non-parsable option list.
 
 ## Curl
 
