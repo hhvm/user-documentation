@@ -1,0 +1,52 @@
+object(HH\Vector)#%d (%d) {
+  [0]=>
+  object(HH\Asio\WrappedException)#4 (1) {
+    ["exception":"HH\Asio\WrappedException":private]=>
+    object(Exception)#%d (%d) {
+      ["message":protected]=>
+      string(0) ""
+      ["string":"Exception":private]=>
+      string(0) ""
+      ["code":protected]=>
+      int(0)
+      ["file":protected]=>
+      string(%d) "%s"
+      ["line":protected]=>
+      int(6)
+      ["trace":"Exception":private]=>
+      array(2) {
+        [0]=>
+        array(4) {
+          ["file"]=>
+          string(%d) "%s"
+          ["line"]=>
+          int(14)
+          ["function"]=>
+          string(17) "exception_thrower"
+          ["args"]=>
+          array(0) {
+          }
+        }
+        [1]=>
+        array(4) {
+          ["file"]=>
+          string(%d) "%s"
+          ["line"]=>
+          int(22)
+          ["function"]=>
+          string(19) "wrapping_exceptions"
+          ["args"]=>
+          array(0) {
+          }
+        }
+      }
+      ["previous":"Exception":private]=>
+      NULL
+    }
+  }
+  [1]=>
+  object(HH\Asio\WrappedResult)#%d (%d) {
+    ["result":"HH\Asio\WrappedResult":private]=>
+    int(2)
+  }
+}
