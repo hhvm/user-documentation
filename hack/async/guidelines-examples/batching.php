@@ -1,5 +1,8 @@
 <?hh
 
+// For asio-utilities function later(), etc.
+require "../../../vendor/autoload.php";
+
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);
   return await Batcher::lookup($subkey);
@@ -11,7 +14,7 @@ async function b_two(string $key): Awaitable<string> {
 
 async function batching(): Awaitable<void> {
   $results = await HH\Asio\v(array(b_one('hello'), b_two('world')));
-  echo $results[0];
+  echo $results[0] . PHP_EOL;
   echo $results[1];
 }
 
@@ -45,6 +48,13 @@ class Batcher {
   }
 }
 
-async function multi_key_lookup(array<string> $keys): array<string> {
-  // lookup multiple keys
+async function multi_key_lookup(array<string> $keys)
+  : Awaitable<array<string, string>> {
+
+  // lookup multiple keys, but, for now, return something random
+  $r = array();
+  foreach ($keys as $key) {
+    $r[$key] = str_shuffle("ABCDEF");
+  }
+  return $r;
 }

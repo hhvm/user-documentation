@@ -1,9 +1,10 @@
 <?hh
 
 async function get_connection(): Awaitable<?AsyncMysqlConnection> {
-  return await AsyncMysqlClient::connect(
-    127.0.0.1, 3306, 'mydb', 'myuser', 'mypassword'
+  $conn = await AsyncMysqlClient::connect(
+    'localhost', '3306', 'db', 'user', 'password'
   );
+  return $conn;
 }
 
 async function fetch_user_name(AsyncMysqlConnection $conn,
@@ -16,9 +17,9 @@ async function fetch_user_name(AsyncMysqlConnection $conn,
 }
 
 async function async_mysql_tutorial(): Awaitable<void> {
-  $conn = get_connection();
+  $conn = await get_connection();
   if ($conn !== null) {
-    echo fetch_user_name($conn, 22);
+    echo fetch_user_name($conn, 2);
   }
 }
 
