@@ -6,6 +6,61 @@ Async in and of itself is a highly useful construct that will provide possible t
 
 *TL;DR*: Go straight to the [**MySQL API Reference**](link to the MySQL API)
 
+The async MySQL extension is similar to the [`mysqli`](link to mysqli) extension that comes with HHVM. This extension will be primarily used for asynchronously creating connections and querying MySQL databases. 
+
+The [full API](link to MySQL API) will contain all of the classes and methods available for accessing MySQL via async; we will cover a few of the more common scenarios here.
+
+The primary class for connecting to a MySQL database is `AsyncMysqlClient` and its primary method is the *async* `connect()`. The primary class for querying a database is `AsyncMysqlConnection` with the two main query methods, `query()` and `queryf()`, both *async*. The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete subclasses called `AsyncMysqlQueryResult` and `AsyncMysqlErrorResult`. The main methods on these classes are `vectorRows()` and `mapRows()`, both *non-async*.
+
+```
+<?hh
+class AsyncMysqlClient {
+  public static async function connect(
+    string $host,
+    int $port,
+    string $dbname,
+    string $user,
+    string $password,
+    int $timeout_micros = -1): Awaitable<?AsyncMysqlConnection>;
+  // More methods in this class, of course
+}
+
+class AsyncMysqlConnection {
+  public function query(string $query, int $timeout_micros)
+    : Awaitable<AsyncMysqlResult>;
+  public function queryf(string $pattern, ..$args)
+    : Awaitable<AsyncMysqlResult>;
+  // More methods in this class, of course
+}
+
+class AsyncMysqlQueryResult extends AsyncMysqlResult {
+  public function vectorRows(): Vector; // vector of Vectors
+  public function mapRows(): Vector; // vector of Maps
+  // return db column values as Hack types instead of
+  // string representations of those types.
+  public function vectorRowsTyped(): Vector;
+  public function mapRowsTyped(): Vector;
+  // More methods in this class, of course
+}
+
+class AsyncMysqlErrorResult extends AsyncMysqlResult {
+  public function failureType(): string;
+  public function mysql_errno(): int;
+  public function mysql_error(): string;
+  // More methods in this class, of course
+}
+```
+
+Here is a simple example that shows how to get a user name from a database with this extension.
+
+@@ extensions-examples/async-mysql.php @@
+
+### Connection Pools
+
+The async MySQL extension provides a mechanism to pool connection objects so you don't have to create a new connection every time you want to make a query. The class is `AsyncMysqlConnection` and one can be created like this:
+
+@@ extensions-examples/async-mysql-connection-pool.php @@
+
 ## McRouter
 
 *TL;DR*: Go straight to the [**McRouter API Reference**](link to the McRouter API)
