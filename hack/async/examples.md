@@ -30,8 +30,6 @@ This shows you a way to organize your async functions in such a way that we have
 
 Use the async mysql extension to perform database connection and queries.
 
-***TODO: MAKE SURE WE GET THIS EXAMPLE TO ACTUALLY RUN***
-
 @@ extensions-examples/async-mysql.php @@
 
 ## Batching
