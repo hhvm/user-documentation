@@ -7,6 +7,7 @@ function get_urls(): Vector<string> {
 }
 
 async function get_combined_contents(Vector $urls): Awaitable<Vector<stiring>> {
+  // Use lambda shorthand syntax here instead of full closure syntax
   $handles = $urls->mapWithKey(($idx, $url) ==> HH\Asio\curl_exec($url));
   $contents = await HH\Asio\v($handles);
   echo $contents->count();

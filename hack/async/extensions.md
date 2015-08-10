@@ -101,7 +101,7 @@ namespace HH\Asio {
 }
 ```
 
-Here is an example of getting a vector of URL contents:
+Here is an example of getting a vector of URL contents, using a [lambda](link to lambdas) to cut down on the code verbosity that would come with full closure syntax.
 
 @@ extensions-examples/async-curl.php @@
 
