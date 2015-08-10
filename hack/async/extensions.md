@@ -57,6 +57,8 @@ Here is a simple example that shows how to get a user name from a database with 
 
 ### Connection Pools
 
+The async MySQL extension **does not** support multiplexing -- each concurrent query requires its own connection. However, the extension does support connection pooling.
+
 The async MySQL extension provides a mechanism to pool connection objects so you don't have to create a new connection every time you want to make a query. The class is `AsyncMysqlConnection` and one can be created like this:
 
 @@ extensions-examples/async-mysql-connection-pool.php @@
