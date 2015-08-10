@@ -3,7 +3,7 @@
 async function get_connection(): Awaitable<?AsyncMysqlConnection> {
   // Change credentials to something that works in order to test this code
   return await AsyncMysqlClient::connect(
-    'localhost', '3306', 'db', 'user', 'password'
+    'localhost', 3306, 'db', 'user', 'password'
   );
 }
 
