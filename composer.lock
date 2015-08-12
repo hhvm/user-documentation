@@ -4,27 +4,27 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8112b8387bd6ecfe52dfd014eb28b6d1",
+    "hash": "4ecb4c6e87ed1962df2c46d8507f29a1",
     "packages": [
         {
             "name": "fredemmott/definition-finder",
-            "version": "v0.2",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "9477c31c73883202fadc905f948fdb9a8a5312c0"
+                "reference": "1b0ff252c8d05208bc0b9e09d76c853ad90cffaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/9477c31c73883202fadc905f948fdb9a8a5312c0",
-                "reference": "9477c31c73883202fadc905f948fdb9a8a5312c0",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/1b0ff252c8d05208bc0b9e09d76c853ad90cffaa",
+                "reference": "1b0ff252c8d05208bc0b9e09d76c853ad90cffaa",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "*"
+                "hhvm": "*",
+                "hhvm/systemlib-extractor": "^0.1.0"
             },
             "require-dev": {
-                "hhvm/systemlib-extractor": "^0.1.0",
                 "phpunit/phpunit": "4.5.*"
             },
             "type": "library",
@@ -49,7 +49,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-08-12 22:08:37"
+            "time": "2015-08-12 22:32:54"
         },
         {
             "name": "hhvm/asio-utilities",
@@ -93,6 +93,44 @@
                 "hhvm"
             ],
             "time": "2015-08-12 22:25:20"
+        },
+        {
+            "name": "hhvm/systemlib-extractor",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/systemlib-extractor.git",
+                "reference": "70840d4423901874f58e637cc03cf0600d226c39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/systemlib-extractor/zipball/70840d4423901874f58e637cc03cf0600d226c39",
+                "reference": "70840d4423901874f58e637cc03cf0600d226c39",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Extract the PHP, Hack, and HNI files embedded in HHVM",
+            "homepage": "https://github.com/hhvm/systemlib-extractor",
+            "keywords": [
+                "hack",
+                "hhvm"
+            ],
+            "time": "2015-08-12 21:57:53"
         }
     ],
     "packages-dev": [],

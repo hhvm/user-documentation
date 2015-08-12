@@ -1,6 +1,6 @@
 {
   "require": {
     "hhvm/asio-utilities": "~2.0",
-    "fredemmott/definition-finder": "v0.2"
+    "fredemmott/definition-finder": "^0.2.1"
   }
 }
