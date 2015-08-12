@@ -16,7 +16,13 @@ function systemlib_to_yaml(): void {
 
   $systemlib = (new SystemlibExtractor())->getSectionContents('systemlib');
   $parser = FileParser::FromData($systemlib, 'systemlib');
-  $bundle = (new DocumentationBundleBuilder($source, $parser))->toBundle();
+  $bundle = (new DocumentationBundleBuilder($source, $parser))
+    ->addFilter(
+      $x ==>
+      strpos($x->getName(), "HH\\") !== false
+      || $x->getAttributes()->keys()->toSet()->contains('__HipHopSpecific')
+    )
+    ->toBundle();
   print Spyc::YAMLDump($bundle);
 }
 

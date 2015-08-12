@@ -4,30 +4,50 @@ namespace HHVM\UserDocumentation;
 
 use FredEmmott\DefinitionFinder\FileParser;
 use FredEmmott\DefinitionFinder\ScannedClass;
+use FredEmmott\DefinitionFinder\ScannedBase;
+
+type DocumentationBundleFilter = (function(ScannedBase): bool);
 
 class DocumentationBundleBuilder {
+  private Vector<DocumentationBundleFilter> $filters = Vector { };
+
   public function __construct(
     private DocumentationSource $source,
     private FileParser $parser,
   ) {
   }
 
+  public function addFilter(DocumentationBundleFilter $filter): this {
+    $this->filters[] = $filter;
+    return $this;
+  }
+
   public function toBundle(): DocumentationBundle {
     return shape(
       'source' => $this->source,
-      'classes' => $this->parser
-        ->getClasses()
+      'classes' =>
+        $this->filtered($this->parser->getClasses())
         ->map($x ==> self::GetClassDocs($x))
         ->toArray(),
-      'interfaces' => $this->parser
-        ->getInterfaces()
+      'interfaces' =>
+        $this->filtered($this->parser->getInterfaces())
         ->map($x ==> self::GetClassDocs($x))
         ->toArray(),
-      'traits' => $this->parser
-        ->getTraits()
+      'traits' =>
+        $this->filtered($this->parser->getTraits())
         ->map($x ==> self::GetClassDocs($x))
         ->toArray(),
     );
+  }
+
+  private function filtered<T as ScannedBase>(
+    \ConstVector<T> $list,
+  ): \ConstVector<T> {
+    foreach ($this->filters as $filter) {
+      // https://github.com/facebook/hhvm/issues/5919
+      $list = $list->filter($v ==> $filter($v));
+    }
+    return $list;
   }
 
   private static function GetClassDocs(
