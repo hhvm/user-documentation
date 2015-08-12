@@ -7,12 +7,6 @@ enum DocumentationSourceType: string {
   ELF_SECTION = 'elf_section';
 };
 
-enum ClassType: string {
-  BASIC_CLASS = 'class';
-  INTERFACE_CLASS = 'interface';
-  TRAIT_CLASS = 'trait';
-}
-
 type DocumentationSource = shape(
   'type' => DocumentationSourceType,
   'name' => string,
@@ -21,11 +15,12 @@ type DocumentationSource = shape(
 
 type ClassDocumentation = shape(
   'name' => string,
-  'type' => ClassType,
   'methods' => array<string>,
 );
 
 type DocumentationBundle = shape(
   'source' => DocumentationSource,
   'classes' => array<ClassDocumentation>,
+  'interfaces' => array<ClassDocumentation>,
+  'traits' => array<ClassDocumentation>,
 );

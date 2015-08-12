@@ -19,23 +19,22 @@ class DocumentationBundleBuilder {
         ->getClasses()
         ->map($x ==> self::GetClassDocs($x))
         ->toArray(),
+      'interfaces' => $this->parser
+        ->getInterfaces()
+        ->map($x ==> self::GetClassDocs($x))
+        ->toArray(),
+      'traits' => $this->parser
+        ->getTraits()
+        ->map($x ==> self::GetClassDocs($x))
+        ->toArray(),
     );
   }
 
   private static function GetClassDocs(
     ScannedClass $class,
   ): ClassDocumentation {
-    if ($class->isInterface()) {
-      $type = ClassType::INTERFACE_CLASS;
-    } else if ($class->isTrait()) {
-      $type = ClassType::TRAIT_CLASS;
-    } else {
-      $type = ClassType::BASIC_CLASS;
-    }
-
     return shape(
       'name' => $class->getName(),
-      'type' => $type,
       'methods' => $class
         ->getMethods()
         ->map($m ==> $m->getName())
