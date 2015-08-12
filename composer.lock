@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "094f4aac3bfbed971d25d79a0cf7b105",
+    "packages": [
+        {
+            "name": "hhvm/asio-utilities",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/asio-utilities.git",
+                "reference": "0b82c74cc1fce952edd3c9ee1e47a61e607d0827"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/asio-utilities/zipball/0b82c74cc1fce952edd3c9ee1e47a61e607d0827",
+                "reference": "0b82c74cc1fce952edd3c9ee1e47a61e607d0827",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/convenience.php",
+                    "src/maps.php",
+                    "src/vectors.php",
+                    "src/ResultOrExceptionWrapper.php",
+                    "src/WrappedException.php",
+                    "src/WrappedResult.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Utilities to make working with async functions easier",
+            "homepage": "https://github.com/hhvm/asio-utilities",
+            "keywords": [
+                "asio",
+                "async",
+                "facebook",
+                "hack",
+                "hhvm"
+            ],
+            "time": "2015-05-21 17:26:11"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
