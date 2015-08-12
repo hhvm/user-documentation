@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\NonAsyncHello;
+
 function get_hello(): string {
   return "Hello";
 }

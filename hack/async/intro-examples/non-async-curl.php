@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Intro\Examples\NonAsyncCurl;
+
 function curl_A(): mixed {
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_URL, "http://www.immigration.govt.nz/");

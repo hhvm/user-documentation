@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\Hello;
+
 async function get_hello(): Awaitable<string> {
   return "Hello";
 }

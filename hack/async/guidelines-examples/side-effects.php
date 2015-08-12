@@ -1,7 +1,9 @@
 <?hh
 
-async function get_curl_data(string $url): string {
-  return await HH\Asio\curl_exec($url);
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\SideEffects;
+
+async function get_curl_data(string $url): Awaitable<string> {
+  return await \HH\Asio\curl_exec($url);
 }
 
 function possible_side_effects(): int {
@@ -16,4 +18,4 @@ async function proximity(): Awaitable<void> {
   await $handle; // instead you should await get_curl_data("....") here
 }
 
-HH\Asio\join(proximity());
+\HH\Asio\join(proximity());

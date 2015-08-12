@@ -1,7 +1,9 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\DataDependencies;
+
 // So we can use asio-utilities function vm()
-require "../../../vendor/autoload.php";
+require __DIR__ . "/../../../vendor/autoload.php";
 
 class PostData {
   // using constructor argument promotion
@@ -33,7 +35,7 @@ async function fetch_page_data(int $author_id)
   // post data and comment count
   $post_fetcher = async function(int $post_id): Awaitable<(PostData, int)> {
     list($post_data, $comment_count) =
-      await HH\Asio\v(array(
+      await \HH\Asio\v(array(
         fetch_post_data($post_id),
         fetch_comment_count($post_id),
       ));
@@ -42,7 +44,7 @@ async function fetch_page_data(int $author_id)
 
   // Transform the array of post IDs into an array of results,
   // using the vm() function from asio-utilities
-  return await HH\Asio\vm($all_post_ids, $post_fetcher);
+  return await \HH\Asio\vm($all_post_ids, $post_fetcher);
 }
 
 async function generate_page(int $author_id): Awaitable<string> {
@@ -57,5 +59,5 @@ async function generate_page(int $author_id): Awaitable<string> {
   return $page;
 }
 
-$page = HH\Asio\join(generate_page(13324)); // just made up a user id
+$page = \HH\Asio\join(generate_page(13324)); // just made up a user id
 var_dump($page);

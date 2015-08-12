@@ -1,4 +1,7 @@
 <?hh
+
+namespace Hack\UserDocumentation\Async\WaitHandles\Examples\SingleWaitHandle;
+
 async function foo(): Awaitable<int> {
   return 3;
 }

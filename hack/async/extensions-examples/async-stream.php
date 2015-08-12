@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Extensions\Examples\Stream;
+
 function get_resources(): array<resource> {
   $r1 = fopen('php://stdout', 'w');
   $r2 = fopen('php://stdout', 'w');
@@ -15,7 +17,7 @@ async function write_all(array<resource> $resources): Awaitable<void> {
       fwrite($r, time() . PHP_EOL);
     }
   };
-  await HH\Asio\v(array_map($write_single_resource, $resources));
+  await \HH\Asio\v(array_map($write_single_resource, $resources));
 }
 
-HH\Asio\join(write_all(get_resources()));
+\HH\Asio\join(write_all(get_resources()));

@@ -1,7 +1,9 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Examples\Examples\Polling;
+
 // For asio-utilities function later(), etc.
-require "../../../vendor/autoload.php";
+require __DIR__ . "/../../../vendor/autoload.php";
 
 // Of course, this is all made up :)
 class Polling {
@@ -21,7 +23,7 @@ async function do_polling(Polling $p): Awaitable<int> {
   // No async function in Polling, so loop until we are ready, but let
   // other wait handles go via later()
   while (!$p->isReady()) {
-    await HH\Asio\later();
+    await \HH\Asio\later();
   }
   echo "do polling 2" . PHP_EOL;
   return $p->getResult();
@@ -40,7 +42,7 @@ async function polling_example(): Awaitable<void> {
     $handles[] = no_polling();
   }
 
-  $results = await HH\Asio\v($handles);
+  $results = await \HH\Asio\v($handles);
 }
 
-HH\Asio\join(polling_example());
+\HH\Asio\join(polling_example());

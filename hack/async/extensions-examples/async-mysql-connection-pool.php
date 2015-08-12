@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Extensions\Examples\MySQLConnectionPool;
+
 function get_pool(): AsyncMysqlConnectionPool {
   return new AsyncMysqlConnectionPool(
     array('pool_connection_limit' => 100)
@@ -8,8 +10,8 @@ function get_pool(): AsyncMysqlConnectionPool {
 
 async function get_connection(): Awaitable<?AsyncMysqlConnection> {
   return await get_pool()->connect(
-    127.0.0.1, 3306, 'mydb', 'myuser', 'mypassword'
+    '127.0.0.1', 3306, 'mydb', 'myuser', 'mypassword'
   );
 }
 
-HH\Asio\join(get_connection());
+\HH\Asio\join(get_connection());

@@ -1,8 +1,10 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\ForgetAwait;
+
 async function speak(): Awaitable<void> {
   echo "one";
-  await HH\Asio\later();
+  await \HH\Asio\later();
   echo "two";
   echo "three";
 }

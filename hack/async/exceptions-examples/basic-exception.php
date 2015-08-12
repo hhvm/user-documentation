@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Exceptions\Examples\BasicException;
+
 async function exception_thrower(): Awaitable<void> {
   throw new Exception();
 }
@@ -12,4 +14,4 @@ async function basic_exception(): Awaitable<void> {
   await exception_thrower();
 }
 
-HH\Asio\join(basic_exception());
+\HH\Asio\join(basic_exception());

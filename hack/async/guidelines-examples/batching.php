@@ -1,7 +1,9 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\Batching;
+
 // For asio-utilities function later(), etc.
-require "../../../vendor/autoload.php";
+require __DIR__ . "/../../../vendor/autoload.php";
 
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);
@@ -13,12 +15,12 @@ async function b_two(string $key): Awaitable<string> {
 }
 
 async function batching(): Awaitable<void> {
-  $results = await HH\Asio\v(array(b_one('hello'), b_two('world')));
+  $results = await \HH\Asio\v(array(b_one('hello'), b_two('world')));
   echo $results[0] . PHP_EOL;
   echo $results[1];
 }
 
-HH\Asio\join(batching());
+\HH\Asio\join(batching());
 
 class Batcher {
   private static array<string> $pendingKeys = array();
@@ -38,7 +40,7 @@ class Batcher {
 
   private static async function go(): Awaitable<array<string, string>> {
     // Let other wait handles get into this batch
-    await HH\Asio\later();
+    await \HH\Asio\later();
     // Now this batch has started; clear the shared state
     $keys = self::$pendingKeys;
     self::$pendingKeys = array();

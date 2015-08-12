@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Examples\Examples\Closures;
+
 async function closure_async(): Awaitable<void> {
   // closure
   $hello = async function(): Awaitable<string> {

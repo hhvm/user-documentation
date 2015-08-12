@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Extensions\Examples\MySQL;
+
 async function get_connection(): Awaitable<?AsyncMysqlConnection> {
   // Change credentials to something that works in order to test this code
   return await AsyncMysqlClient::connect(
@@ -27,4 +29,4 @@ async function async_mysql_tutorial(): Awaitable<void> {
   }
 }
 
-HH\Asio\join(async_mysql_tutorial());
+\HH\Asio\join(async_mysql_tutorial());

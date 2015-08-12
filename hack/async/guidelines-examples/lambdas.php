@@ -1,7 +1,9 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\Lambdas;
+
 // For asio-utilities that we installed via composer
-require "../../../vendor/autoload.php";
+require __DIR__ . "/../../../vendor/autoload.php";
 
 async function fourth_root(num $n): Awaitable<float> {
   return sqrt(sqrt($n));
@@ -9,7 +11,7 @@ async function fourth_root(num $n): Awaitable<float> {
 
 async function normal_call(): Awaitable<Vector<float>> {
   $nums = Vector {64, 81};
-  return await HH\Asio\vm($nums, fun("fourth_root"));
+  return await \HH\Asio\vm($nums, fun('fourth_root'));
 }
 
 async function closure_call(): Awaitable<Vector<float>> {
@@ -17,12 +19,12 @@ async function closure_call(): Awaitable<Vector<float>> {
   $froots = async function(num $n): Awaitable<float> {
     return sqrt(sqrt($n));
   };
-  return await HH\Asio\vm($nums, $froots);
+  return await \HH\Asio\vm($nums, $froots);
 }
 
 async function lambda_call(): Awaitable<Vector<float>> {
   $nums = Vector {64, 81};
-  return await HH\Asio\vm($nums, async $num ==> sqrt(sqrt($num)));
+  return await \HH\Asio\vm($nums, async $num ==> sqrt(sqrt($num)));
 }
 
 async function use_lambdas(): Awaitable<void> {
@@ -34,4 +36,4 @@ async function use_lambdas(): Awaitable<void> {
   var_dump($lc);
 }
 
-HH\Asio\join(use_lambdas());
+\HH\Asio\join(use_lambdas());

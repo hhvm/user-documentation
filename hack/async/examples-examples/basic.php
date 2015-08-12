@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Async\Examples\Examples\Basic;
+
 // async specifies a function will return a wait handle. Awaitable<string> means
 // that the wait handle will ultimately return a string when complete
 async function trivial(): Awaitable<string> {
