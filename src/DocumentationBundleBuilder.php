@@ -6,8 +6,6 @@ use FredEmmott\DefinitionFinder\FileParser;
 use FredEmmott\DefinitionFinder\ScannedClass;
 use FredEmmott\DefinitionFinder\ScannedBase;
 
-type DocumentationBundleFilter = (function(ScannedBase): bool);
-
 class DocumentationBundleBuilder {
   private Vector<DocumentationBundleFilter> $filters = Vector { };
 

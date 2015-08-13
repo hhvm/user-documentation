@@ -5,6 +5,7 @@ require(__DIR__.'/../vendor/autoload.php');
 use FredEmmott\DefinitionFinder\FileParser;
 use HHVM\SystemlibExtractor\SystemlibExtractor;
 use HHVM\UserDocumentation\DocumentationBundleBuilder;
+use HHVM\UserDocumentation\DocumentationBundleFilters;
 use HHVM\UserDocumentation\DocumentationSourceType;
 
 function systemlib_to_yaml(): void {
@@ -17,11 +18,7 @@ function systemlib_to_yaml(): void {
   $systemlib = (new SystemlibExtractor())->getSectionContents('systemlib');
   $parser = FileParser::FromData($systemlib, 'systemlib');
   $bundle = (new DocumentationBundleBuilder($source, $parser))
-    ->addFilter(
-      $x ==>
-      strpos($x->getName(), "HH\\") !== false
-      || $x->getAttributes()->keys()->toSet()->contains('__HipHopSpecific')
-    )
+    ->addFilter(class_meth(DocumentationBundleFilters::class, 'IsHHSpecific'))
     ->toBundle();
   print Spyc::YAMLDump($bundle);
 }

@@ -3,35 +3,8 @@
 require(__DIR__.'/../vendor/autoload.php');
 
 use FredEmmott\DefinitionFinder\FileParser;
-use FredEmmott\DefinitionFinder\ScannedBase;
 use HHVM\SystemlibExtractor\SystemlibExtractor;
-
-function is_hh_specific(ScannedBase $def): bool {
-  $is_hh_specific =
-    strpos($def->getName(), 'HH\\') === 0
-    || strpos($def->getName(), '__SystemLib\\') === 0
-    || $def->getAttributes()->containsKey('__HipHopSpecific')
-    || strpos($def->getName(), 'fb_') === 0
-    || strpos($def->getName(), 'hphp_') === 0;
-
-  if ($is_hh_specific) {
-    return true;
-  }
-
-  if (!$def instanceof ScannedFunctionAbstract) {
-    return false;
-  }
-
-  if ($def->getReturnType()?->getTypeName() === 'Awaitable') {
-    return true;
-  }
-
-  if (count($def->getGenerics()) > 0) {
-    return true;
-  }
-
-  return false;
-}
+use HHVM\UserDocumentation\DocumentationBundleFilters;
 
 function dump_unmarked_hh_specific(): void {
   $defs = Vector { };
@@ -49,7 +22,7 @@ function dump_unmarked_hh_specific(): void {
   }
 
   $defs = $defs
-    ->filter($def ==> !is_hh_specific($def))
+    ->filter($def ==> !DocumentationBundleFilters::IsHHSpecific($def))
     ->map($def ==> $def->getName())
     ->toArray();
   sort($defs);

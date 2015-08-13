@@ -2,6 +2,10 @@
 
 namespace HHVM\UserDocumentation;
 
+use FredEmmott\DefinitionFinder\ScannedBase;
+
+type DocumentationBundleFilter = (function(ScannedBase): bool);
+
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';
