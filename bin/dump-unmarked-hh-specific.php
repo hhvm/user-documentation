@@ -10,7 +10,9 @@ function filter_hh_specific(ScannedBase $def): bool {
   return
     strpos($def->getName(), 'HH\\') === false
     && strpos($def->getName(), '__SystemLib') === false
-    && ! $def->getAttributes()->containsKey('__HipHopSpecific');
+    && ! $def->getAttributes()->containsKey('__HipHopSpecific')
+    && strpos($def->getName(), 'fb_') !== 0
+    && strpos($def->getName(), 'hphp_') !== 0;
 }
 
 function dump_unmarked_hh_specific(): void {
