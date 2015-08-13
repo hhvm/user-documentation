@@ -2,3 +2,4 @@ vendor
 composer.phar
 .commit-template
 *.swp
+LocalConfig.php

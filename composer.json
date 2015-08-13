@@ -10,7 +10,8 @@
       "src/"
     ],
     "files": [
-      "src/typedefs.php"
+      "src/typedefs.php",
+      "LocalConfig.php"
     ]
   }
 }

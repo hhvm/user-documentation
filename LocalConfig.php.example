@@ -1,0 +1,7 @@
+<?hh // strict
+
+namespace HHVM\UserDocumentation;
+
+abstract final class LocalConfig {
+  const string HHVM_TREE = '/home/fred/hhvm';
+}
