@@ -1,0 +1,1 @@
+Immediately executed async lambdas
