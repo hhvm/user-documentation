@@ -6,13 +6,31 @@ use FredEmmott\DefinitionFinder\FileParser;
 use FredEmmott\DefinitionFinder\ScannedBase;
 use HHVM\SystemlibExtractor\SystemlibExtractor;
 
-function filter_hh_specific(ScannedBase $def): bool {
-  return
-    strpos($def->getName(), 'HH\\') === false
-    && strpos($def->getName(), '__SystemLib') === false
-    && ! $def->getAttributes()->containsKey('__HipHopSpecific')
-    && strpos($def->getName(), 'fb_') !== 0
-    && strpos($def->getName(), 'hphp_') !== 0;
+function is_hh_specific(ScannedBase $def): bool {
+  $is_hh_specific =
+    strpos($def->getName(), 'HH\\') === 0
+    || strpos($def->getName(), '__SystemLib\\') === 0
+    || $def->getAttributes()->containsKey('__HipHopSpecific')
+    || strpos($def->getName(), 'fb_') === 0
+    || strpos($def->getName(), 'hphp_') === 0;
+
+  if ($is_hh_specific) {
+    return true;
+  }
+
+  if (!$def instanceof ScannedFunctionAbstract) {
+    return false;
+  }
+
+  if ($def->getReturnType()?->getTypeName() === 'Awaitable') {
+    return true;
+  }
+
+  if (count($def->getGenerics()) > 0) {
+    return true;
+  }
+
+  return false;
 }
 
 function dump_unmarked_hh_specific(): void {
@@ -31,7 +49,7 @@ function dump_unmarked_hh_specific(): void {
   }
 
   $defs = $defs
-    ->filter(fun('filter_hh_specific'))
+    ->filter($def ==> !is_hh_specific($def))
     ->map($def ==> $def->getName())
     ->toArray();
   sort($defs);
