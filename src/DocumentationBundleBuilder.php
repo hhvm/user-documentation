@@ -7,6 +7,7 @@ use FredEmmott\DefinitionFinder\ScannedClass;
 use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
 use FredEmmott\DefinitionFinder\ScannedTypehint;
+use FredEmmott\DefinitionFinder\ScannedGeneric;
 
 class DocumentationBundleBuilder {
   private Vector<DocumentationBundleFilter> $filters = Vector { };
@@ -72,7 +73,19 @@ class DocumentationBundleBuilder {
     return shape(
       'name' => $function->getName(),
       'returnType' => self::GetNullableTypehintDocs($function->getReturnType()),
-      'generics' => [],
+      'generics' => $function
+        ->getGenericTypes()
+        ->map($gt ==> self::GetGenericDocs($gt))
+        ->toArray(),
+    );
+  }
+
+  private static function GetGenericDocs(
+    ScannedGeneric $g,
+  ): GenericDocumentation {
+    return shape(
+      'name' => $g->getName(),
+      'constraint' => $g->getConstraint(),
     );
   }
 

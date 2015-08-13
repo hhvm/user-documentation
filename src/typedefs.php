@@ -27,10 +27,15 @@ type TypehintDocumentation = shape(
   'genericTypes' => array<mixed /* cyclic: TypehintDocumentation*/>,
 );
 
+type GenericDocumentation = shape(
+  'name' => string,
+  'constraint' => ?string,
+);
+
 type FunctionDocumentation = shape(
   'name' => string,
   'returnType' => ?TypehintDocumentation,
-  'generics' => array<TypehintDocumentation>,
+  'generics' => array<GenericDocumentation>,
 );
 
 type DocumentationBundle = shape(
