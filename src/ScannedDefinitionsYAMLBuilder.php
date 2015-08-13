@@ -87,6 +87,10 @@ class ScannedDefinitionsYAMLBuilder {
         ->getMethods()
         ->map($m ==> $m->getName())
         ->toArray(),
+      'generics' => $class
+        ->getGenericTypes()
+        ->map($gt ==> self::GetGenericDocumentation($gt))
+        ->toArray(),
     );
   }
 

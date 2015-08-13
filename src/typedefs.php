@@ -20,6 +20,7 @@ type DocumentationSource = shape(
 type ClassDocumentation = shape(
   'name' => string,
   'methods' => array<string>,
+  'generics' => array<GenericDocumentation>,
 );
 
 type TypehintDocumentation = shape(
