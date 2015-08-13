@@ -18,7 +18,8 @@ function systemlib_to_yaml(): void {
   $systemlib = (new SystemlibExtractor())->getSectionContents('systemlib');
   $parser = FileParser::FromData($systemlib, 'systemlib');
   $bundle = (new DocumentationBundleBuilder($source, $parser))
-    ->addFilter(class_meth(DocumentationBundleFilters::class, 'IsHHSpecific'))
+    ->addFilter($x ==> DocumentationBundleFilters::IsHHSpecific($x))
+    ->addFilter($x ==> !DocumentationBundleFilters::ShouldNotDocument($x))
     ->toBundle();
   print Spyc::YAMLDump($bundle);
 }

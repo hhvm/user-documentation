@@ -32,4 +32,8 @@ abstract final class DocumentationBundleFilters {
 
     return false;
   }
+
+  public static function ShouldNotDocument(ScannedBase $def): bool {
+    return strpos($def->getName(), "__SystemLib\\") === 0;
+  }
 }
