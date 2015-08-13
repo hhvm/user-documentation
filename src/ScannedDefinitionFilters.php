@@ -5,7 +5,7 @@ namespace HHVM\UserDocumentation;
 use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
 
-abstract final class DocumentationBundleFilters {
+abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {
     $is_hh_specific =
       strpos($def->getName(), 'HH\\') === 0

@@ -4,24 +4,29 @@ require(__DIR__.'/../vendor/autoload.php');
 
 use FredEmmott\DefinitionFinder\FileParser;
 use HHVM\SystemlibExtractor\SystemlibExtractor;
-use HHVM\UserDocumentation\DocumentationBundleBuilder;
-use HHVM\UserDocumentation\DocumentationBundleFilters;
+use HHVM\UserDocumentation\ScannedDefinitionsYAMLBuilder;
+use HHVM\UserDocumentation\ScannedDefinitionFilters;
 use HHVM\UserDocumentation\DocumentationSourceType;
 
 function systemlib_to_yaml(): void {
-  $source = shape(
-    'type' => DocumentationSourceType::ELF_SECTION,
-    'name' => 'systemlib',
-    'mtime' => stat(PHP_BINARY)['mtime'],
-  );
+  $destination = __DIR__.'/../build/yaml/';
 
-  $systemlib = (new SystemlibExtractor())->getSectionContents('systemlib');
-  $parser = FileParser::FromData($systemlib, 'systemlib');
-  $bundle = (new DocumentationBundleBuilder($source, $parser))
-    ->addFilter($x ==> DocumentationBundleFilters::IsHHSpecific($x))
-    ->addFilter($x ==> !DocumentationBundleFilters::ShouldNotDocument($x))
-    ->toBundle();
-  print Spyc::YAMLDump($bundle);
+  $mtime = stat(PHP_BINARY)['mtime'];
+  $extractor = (new SystemlibExtractor());
+  foreach ($extractor->getSectionNames() as $section) {
+    $source = shape(
+      'type' => DocumentationSourceType::ELF_SECTION,
+      'name' => $section,
+      'mtime' => $mtime,
+    );
+
+    $bytes = $extractor->getSectionContents($section);
+    $parser = FileParser::FromData($bytes, $section);
+    (new ScannedDefinitionsYAMLBuilder($source, $parser, $destination))
+      ->addFilter($x ==> ScannedDefinitionFilters::IsHHSpecific($x))
+      ->addFilter($x ==> !ScannedDefinitionFilters::ShouldNotDocument($x))
+      ->build();
+  }
 }
 
 systemlib_to_yaml();

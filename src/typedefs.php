@@ -4,7 +4,7 @@ namespace HHVM\UserDocumentation;
 
 use FredEmmott\DefinitionFinder\ScannedBase;
 
-type DocumentationBundleFilter = (function(ScannedBase): bool);
+type ScannedDefinitionFilter = (function(ScannedBase): bool);
 
 enum DocumentationSourceType: string {
   FILE = 'file';
