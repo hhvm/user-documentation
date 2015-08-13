@@ -5,6 +5,8 @@ namespace HHVM\UserDocumentation;
 use FredEmmott\DefinitionFinder\FileParser;
 use FredEmmott\DefinitionFinder\ScannedClass;
 use FredEmmott\DefinitionFinder\ScannedBase;
+use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
+use FredEmmott\DefinitionFinder\ScannedTypehint;
 
 class DocumentationBundleBuilder {
   private Vector<DocumentationBundleFilter> $filters = Vector { };
@@ -35,6 +37,10 @@ class DocumentationBundleBuilder {
         $this->filtered($this->parser->getTraits())
         ->map($x ==> self::GetClassDocs($x))
         ->toArray(),
+      'functions' =>
+        $this->filtered($this->parser->getFunctions())
+        ->map($x ==> self::GetFunctionDocs($x))
+        ->toArray(),
     );
   }
 
@@ -58,5 +64,37 @@ class DocumentationBundleBuilder {
         ->map($m ==> $m->getName())
         ->toArray(),
     );
+  }
+
+  private static function GetFunctionDocs(
+    ScannedFunctionAbstract $function,
+  ): FunctionDocumentation {
+    return shape(
+      'name' => $function->getName(),
+      'returnType' => self::GetNullableTypehintDocs($function->getReturnType()),
+      'generics' => [],
+    );
+  }
+
+  private static function GetTypehintDocs(
+    ScannedTypehint $typehint,
+  ): TypehintDocumentation {
+    return shape(
+      'typename' => $typehint->getTypeName(),
+      'genericTypes' =>
+        $typehint
+        ->getGenericTypes()
+        ->map($th ==> self::GetTypehintDocs($th))
+        ->toArray(),
+    );
+  }
+
+  private static function GetNullableTypehintDocs(
+    ?ScannedTypehint $typehint,
+  ): ?TypehintDocumentation {
+    if ($typehint === null) {
+      return null;
+    }
+    return self::GetTypehintDocs($typehint);
   }
 }

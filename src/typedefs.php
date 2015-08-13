@@ -22,9 +22,21 @@ type ClassDocumentation = shape(
   'methods' => array<string>,
 );
 
+type TypehintDocumentation = shape(
+  'typename' => string,
+  'genericTypes' => array<mixed /* cyclic: TypehintDocumentation*/>,
+);
+
+type FunctionDocumentation = shape(
+  'name' => string,
+  'returnType' => ?TypehintDocumentation,
+  'generics' => array<TypehintDocumentation>,
+);
+
 type DocumentationBundle = shape(
   'source' => DocumentationSource,
   'classes' => array<ClassDocumentation>,
   'interfaces' => array<ClassDocumentation>,
   'traits' => array<ClassDocumentation>,
+  'functions' => array<FunctionDocumentation>,
 );
