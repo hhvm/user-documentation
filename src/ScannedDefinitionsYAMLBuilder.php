@@ -8,6 +8,7 @@ use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
 use FredEmmott\DefinitionFinder\ScannedTypehint;
 use FredEmmott\DefinitionFinder\ScannedGeneric;
+use FredEmmott\DefinitionFinder\HasScannedGenerics;
 
 class ScannedDefinitionsYAMLBuilder {
   private Vector<ScannedDefinitionFilter> $filters = Vector { };
@@ -135,8 +136,7 @@ class ScannedDefinitionsYAMLBuilder {
 
   private function getFileName(string $prefix, ScannedBase $def): string {
     $def_name = strtr($def->getName(), "\\", '.');
-    if ($def instanceof ScannedFunctionAbstract) {
-      // FIXME: classses should have their generics listed too
+    if ($def instanceof HasScannedGenerics) {
       $def_name .= implode(
         '',
         $def->getGenericTypes()->map($gt ==> strtolower($gt->getName())),
