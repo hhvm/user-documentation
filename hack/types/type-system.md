@@ -25,3 +25,5 @@ Describing types in Hack is largely done through explicit [annotations](link to 
 # Shapes
 
 # Type Aliases
+
+## Classname<T>
