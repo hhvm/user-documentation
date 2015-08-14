@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "47e6d93d28cfe37e469915c6fc6067e4",
+    "hash": "88e780bea3c302b0514768e97b636ecd",
     "packages": [
         {
             "name": "fredemmott/definition-finder",
-            "version": "v0.2.4",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "12018894a490e36264617fcd4f0175a3754b46ae"
+                "reference": "da80366de9e54e6cb278e28a07cbcecf6c0eae9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/12018894a490e36264617fcd4f0175a3754b46ae",
-                "reference": "12018894a490e36264617fcd4f0175a3754b46ae",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/da80366de9e54e6cb278e28a07cbcecf6c0eae9d",
+                "reference": "da80366de9e54e6cb278e28a07cbcecf6c0eae9d",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-08-13 22:56:02"
+            "time": "2015-08-14 00:46:14"
         },
         {
             "name": "hhvm/asio-utilities",

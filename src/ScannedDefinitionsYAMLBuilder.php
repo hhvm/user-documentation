@@ -112,7 +112,7 @@ class ScannedDefinitionsYAMLBuilder {
   ): GenericDocumentation {
     return shape(
       'name' => $g->getName(),
-      'constraint' => $g->getConstraint(),
+      'constraint' => $g->getConstraintTypeName(),
     );
   }
 

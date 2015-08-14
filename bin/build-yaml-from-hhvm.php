@@ -6,6 +6,25 @@ require(__DIR__.'/../vendor/autoload.php');
 use FredEmmott\DefinitionFinder\FileParser;
 use HHVM\SystemlibExtractor\SystemlibExtractor;
 
+function get_sources(string $dir): Vector<string> {
+  $rdi = new \RecursiveDirectoryIterator($dir);
+  $rii = new \RecursiveIteratorIterator(
+    $rdi,
+    \RecursiveIteratorIterator::CHILD_FIRST,
+  );
+  $files = Vector {};
+  foreach ($rii as $info) {
+    if (!$info->isFile()) {
+      continue;
+    }
+    $ext = $info->getExtension();
+    if ($ext === 'php' || $ext === 'hhi') {
+      $files[] = $info->getPathname();
+    }
+  }
+  return $files;
+}
+
 function sources_to_yaml(
   string $destination,
   \ConstVector<string> $filenames,
@@ -29,14 +48,12 @@ function sources_to_yaml(
 function hhvm_to_yaml(): void {
   $destination = __DIR__.'/../build/systemlib/';
   $sources = (Vector { })
-    ->addAll(glob(LocalConfig::HHVM_TREE.'/hphp/system/**/*.php'))
-    ->addAll(glob(LocalConfig::HHVM_TREE.'/hphp/runtime/ext/**/*.php'));
+    ->addAll(get_sources(LocalConfig::HHVM_TREE.'/hphp/system/php/'))
+    ->addAll(get_sources(LocalConfig::HHVM_TREE.'/hphp/runtime/ext/'));
   sources_to_yaml($destination, $sources);
 
-  /** TODO: parser doesn't understand co/contravariance */
-  return;
   $destination = __DIR__.'/../build/hhi/';
-  $sources = new Vector(glob(LocalConfig::HHVM_TREE.'/hphp/hack/hhi/**/*.hhi'));
+  $sources = get_sources(LocalConfig::HHVM_TREE.'/hphp/hack/hhi/');
   sources_to_yaml($destination, $sources);
 }
 
