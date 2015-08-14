@@ -16,6 +16,10 @@ Describing types in Hack is largely done through explicit [annotations](link to 
 
 # `noreturn`
 
+# XHP
+
+`XHPChild` ....
+
 # Nullable
 
 # Generics
