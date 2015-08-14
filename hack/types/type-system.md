@@ -12,6 +12,8 @@ Describing types in Hack is largely done through explicit [annotations](link to 
 
 # `this`
 
+# `num`
+
 # `noreturn`
 
 # Nullable
