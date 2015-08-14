@@ -57,3 +57,45 @@ If there is also an `f` that means:
 * If filter function returns `true`, wrapped element is returned; `false`, the element is omitted; `throw`s, the wrapped exception is returned.
 
 See [examples](link to examples) for how to use some of these utility functions.
+
+## Type Checking Gotcha
+
+Let's say you have the following:
+
+```
+function baz(): Awaitable<(X, int)> {
+:
+:
+  list ($a, $b) = 
+    await \HH\Asio\v(array(
+      returns_an_X($foo), 
+      returns_an_int($bar),
+    ));
+:
+:
+  return tuple($a, $b);
+}
+```
+
+And you want this to type check correctly. However, you get something like:
+
+```
+example.php:60:12,44: Invalid return type (Typing[4110])
+  example.php:36:60,67: This is an object of type X
+  example.php:25:61,63: It is incompatible with an int
+```
+
+That is because `HH\Asio\v()` takes an `Traversable<Awaitable<T>>` and return an `Awaitable<Vector<T>>`. There is no `T` that can be both an `X` and an `int`. So the type checker basically throws its hands up and creates a some sort of union type for `T` that tries to represent both of those.
+
+However, when you want to return the `tuple($a, $b)`, `$a` is an `X`, `b` is an `int`, but the type-checker doesn't realize that since it thinks these should be the hybrid union type it created above.
+
+So we need to explictly assert what we know to be true in order to make the type checker happy.
+
+```
+assert ($a instanceof X);
+assert (is_int($b);
+return tuple($a, $b);
+```
+
+In the future there will be function `HH\Asio\va()` that will better support this paradigm. e.g, `va(Awaitable<T1>, Awaitable<T2>` instead of the hybrid union that messed us up above.
+

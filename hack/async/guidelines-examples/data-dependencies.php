@@ -39,9 +39,9 @@ async function fetch_page_data(int $author_id)
         fetch_post_data($post_id),
         fetch_comment_count($post_id),
       ));
-    /* The problem is that v takes Iterable<Awaitable<T>> and returns
-     * Awaitable<array<T>>, but there isn't a good value of T that represents both
-     * ints and PostData, so they're currently almost a union type.
+    /* The problem is that v takes Traverable<Awaitable<T>> and returns
+     * Awaitable<Vector<T>>, but there isn't a good value of T that represents
+     * both ints and PostData, so they're currently almost a union type.
      *
      * Now we need to tell the typechecker what's going on.
      * In the future, we plan to add HH\Asio\va() - VarArgs - to support this.
@@ -49,7 +49,9 @@ async function fetch_page_data(int $author_id)
      * arguments, for example:
      *
      *  - va(Awaitable<T1>, Awaitable<T2>): Awaitable<(T1, T2)>
-     *  - va(Awaitable<T1>, Awaitable<T2>, Awaitable<T3>): Awaitable<(T1, T2, T3)>
+     *  - va(Awaitable<T1>,
+     *       Awaitable<T2>,
+     *       Awaitable<T3>): Awaitable<(T1, T2, T3)>
      *
      * And so on, with no need for T1, T2, ... Tn to be related types.
      */
