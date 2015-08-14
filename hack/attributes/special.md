@@ -7,3 +7,4 @@ Under other
 
 <<__MockClass>>
 <<__IsFoldable>>
+<<__IMemoizeParam>>
