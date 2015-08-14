@@ -6,3 +6,14 @@ Hack supports most of argument unpacking. An exception is when you want to unpac
 a traversable.
 
 See https://wiki.php.net/rfc/argument_unpacking
+
+# Aliasing of methods in traits (VERIFY THIS)
+
+```
+<?hh
+class Hello {
+  use MyTrait {
+    someFunction as someAlias;
+  }
+}
+```
