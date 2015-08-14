@@ -4,4 +4,5 @@ namespace HHVM\UserDocumentation;
 
 abstract final class LocalConfig {
   const string HHVM_TREE = '/home/fred/hhvm';
+  const bool REBUILD_SYSTEMLIB = true;
 }

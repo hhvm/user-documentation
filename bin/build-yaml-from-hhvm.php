@@ -53,20 +53,23 @@ function sources_to_yaml(
 }
 
 function hhvm_to_yaml(): void {
-  $destination = __DIR__.'/../build/systemlib/';
-  $sources = (Vector { })
-    ->addAll(get_sources(LocalConfig::HHVM_TREE.'/hphp/system/php/'))
-    ->addAll(get_sources(LocalConfig::HHVM_TREE.'/hphp/runtime/ext/'));
-  sources_to_yaml($destination, $sources);
+  $systemlib = __DIR__.'/../build/systemlib/';
+  $hhi = __DIR__.'/../build/hhi/';
 
-  $destination = __DIR__.'/../build/hhi/';
-  $sources = get_sources(LocalConfig::HHVM_TREE.'/hphp/hack/hhi/');
-  sources_to_yaml($destination, $sources);
+  if (LocalConfig::REBUILD_SYSTEMLIB) {
+    $sources = (Vector { })
+      ->addAll(get_sources(LocalConfig::HHVM_TREE.'/hphp/system/php/'))
+      ->addAll(get_sources(LocalConfig::HHVM_TREE.'/hphp/runtime/ext/'));
+    sources_to_yaml($systemlib, $sources);
+
+    $sources = get_sources(LocalConfig::HHVM_TREE.'/hphp/hack/hhi/');
+    sources_to_yaml($hhi, $sources);
+  }
 
   $destination = __DIR__.'/../build/merged/';
   $yaml = (Vector {})
-    ->addAll(get_yaml(__DIR__.'/../build/systemlib/'))
-    ->addAll(get_yaml(__DIR__.'/../build/hhi/'));
+    ->addAll(get_yaml($systemlib))
+    ->addAll(get_yaml($hhi));
   $builder = new MergedYAMLBuilder($destination);
   foreach ($yaml as $source) {
     $builder->addDefinition(/* UNSAFE_EXPR */ \Spyc::YAMLLoad($source));
