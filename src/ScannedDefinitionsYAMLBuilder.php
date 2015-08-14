@@ -140,10 +140,10 @@ class ScannedDefinitionsYAMLBuilder {
 
   private function getFileName(string $prefix, ScannedBase $def): string {
     $def_name = strtr($def->getName(), "\\", '.');
-    if ($def instanceof HasScannedGenerics) {
-      $def_name .= implode(
+    if ($def instanceof HasScannedGenerics && $def->getGenericTypes()) {
+      $def_name .= '.'.implode(
         '',
-        $def->getGenericTypes()->map($gt ==> strtolower($gt->getName())),
+        $def->getGenericTypes()->map($gt ==> $gt->getName()),
       );
     }
 
