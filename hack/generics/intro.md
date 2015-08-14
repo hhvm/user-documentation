@@ -8,8 +8,8 @@ with `T`, it cannot be changed to hold any other type.
 
 @@ intro-examples/vector.php @@
 
-$x is a `Vector<int>`, while $y is a `Vector<string>`. A Vector<int> and
-Vector<string> are not the same type.
+$x is a `Vector<int>`, while $y is a `Vector<string>`. A `Vector<int>` and
+`Vector<string>` are not the same type.
 
 Methods and functions can also be generic. One use case is when they need to
 manipulate generic classes:
