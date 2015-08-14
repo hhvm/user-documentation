@@ -38,3 +38,9 @@ type FunctionDocumentation = shape(
   'returnType' => ?TypehintDocumentation,
   'generics' => array<GenericDocumentation>,
 );
+
+type BaseYAML = shape(
+  'sources' => array<DocumentationSource>,
+  'type' => string,
+  'data' => shape('name' => string),
+);

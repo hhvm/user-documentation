@@ -6,7 +6,7 @@ require(__DIR__.'/../vendor/autoload.php');
 use FredEmmott\DefinitionFinder\FileParser;
 use HHVM\SystemlibExtractor\SystemlibExtractor;
 
-function get_sources(string $dir): Vector<string> {
+function get_files(string $dir, Set<string> $exts): Vector<string> {
   $rdi = new \RecursiveDirectoryIterator($dir);
   $rii = new \RecursiveIteratorIterator(
     $rdi,
@@ -17,12 +17,19 @@ function get_sources(string $dir): Vector<string> {
     if (!$info->isFile()) {
       continue;
     }
-    $ext = $info->getExtension();
-    if ($ext === 'php' || $ext === 'hhi') {
+    if ($exts->contains($info->getExtension())) {
       $files[] = $info->getPathname();
     }
   }
   return $files;
+}
+
+function get_sources(string $dir): Vector<string> {
+  return get_files($dir, Set { 'php', 'hhi' });
+}
+
+function get_yaml(string $dir): Vector<string> {
+  return get_files($dir, Set { 'yml' });
 }
 
 function sources_to_yaml(
@@ -55,6 +62,16 @@ function hhvm_to_yaml(): void {
   $destination = __DIR__.'/../build/hhi/';
   $sources = get_sources(LocalConfig::HHVM_TREE.'/hphp/hack/hhi/');
   sources_to_yaml($destination, $sources);
+
+  $destination = __DIR__.'/../build/merged/';
+  $yaml = (Vector {})
+    ->addAll(get_yaml(__DIR__.'/../build/systemlib/'))
+    ->addAll(get_yaml(__DIR__.'/../build/hhi/'));
+  $builder = new MergedYAMLBuilder($destination);
+  foreach ($yaml as $source) {
+    $builder->addDefinition(/* UNSAFE_EXPR */ \Spyc::YAMLLoad($source));
+  }
+  $builder->build();
 }
 
 hhvm_to_yaml();

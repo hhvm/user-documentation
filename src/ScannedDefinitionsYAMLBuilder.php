@@ -51,20 +51,17 @@ class ScannedDefinitionsYAMLBuilder {
   private function buildDefinitions<T as ScannedBase>(
     string $prefix,
     \ConstVector<T> $defs,
-    (function(T):shape()) $converter,
+    (function(T):shape('name' => string)) $converter,
   ): void {
     $defs = $this->filtered($defs);
-
+    $writer = new YAMLWriter($this->destination);
     foreach ($defs as $def) {
-      $data = array(
+      $data = shape(
         'sources' => [$this->source],
+        'type' => $prefix,
         'data' => $converter($def),
       );
-      file_put_contents(
-        $this->getFileName($prefix, $def),
-        /* UNSAFE_EXPR: no HHI for Spyc */
-        \Spyc::YAMLDump($data),
-      );
+      $writer->write($data);
     }
   }
 
@@ -136,22 +133,5 @@ class ScannedDefinitionsYAMLBuilder {
       return null;
     }
     return self::GetTypehintDocumentation($typehint);
-  }
-
-  private function getFileName(string $prefix, ScannedBase $def): string {
-    $def_name = strtr($def->getName(), "\\", '.');
-    if ($def instanceof HasScannedGenerics && $def->getGenericTypes()) {
-      $def_name .= '.'.implode(
-        '',
-        $def->getGenericTypes()->map($gt ==> $gt->getName()),
-      );
-    }
-
-    return sprintf(
-      '%s/%s.%s.yml',
-      $this->destination,
-      $prefix,
-      $def_name,
-    );
   }
 }
