@@ -38,11 +38,3 @@ type FunctionDocumentation = shape(
   'returnType' => ?TypehintDocumentation,
   'generics' => array<GenericDocumentation>,
 );
-
-type DocumentationBundle = shape(
-  'source' => DocumentationSource,
-  'classes' => array<ClassDocumentation>,
-  'interfaces' => array<ClassDocumentation>,
-  'traits' => array<ClassDocumentation>,
-  'functions' => array<FunctionDocumentation>,
-);

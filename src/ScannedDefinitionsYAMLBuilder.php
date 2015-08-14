@@ -57,7 +57,7 @@ class ScannedDefinitionsYAMLBuilder {
 
     foreach ($defs as $def) {
       $data = array(
-        'source' => $this->source,
+        'sources' => [$this->source],
         'data' => $converter($def),
       );
       file_put_contents(
