@@ -22,6 +22,8 @@ Describing types in Hack is largely done through explicit [annotations](link to 
 
 # Callables
 
+<Make sure to mention that class_meth cannot be called on a private method>
+
 # Tuples
 
 # Shapes
