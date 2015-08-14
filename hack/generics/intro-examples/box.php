@@ -9,7 +9,7 @@ class Box<T> {
   }
 }
 
-public function swap<T>(Box<T> $a, Box<T> $b) : void {
+function swap<T>(Box<T> $a, Box<T> $b) : void {
   $temp = $a->value;
   $a->value = $b->value;
   $b->value = $temp;
