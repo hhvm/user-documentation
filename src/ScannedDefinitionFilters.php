@@ -4,6 +4,7 @@ namespace HHVM\UserDocumentation;
 
 use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
+use FredEmmott\DefinitionFinder\HasScannedGenerics;
 
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {
@@ -18,15 +19,15 @@ abstract final class ScannedDefinitionFilters {
       return true;
     }
 
+    if ($def instanceof HasScannedGenerics && $def->getGenericTypes()) {
+      return true;
+    }
+
     if (!$def instanceof ScannedFunctionAbstract) {
       return false;
     }
 
     if ($def->getReturnType()?->getTypeName() === 'Awaitable') {
-      return true;
-    }
-
-    if (count($def->getGenericTypes()) > 0) {
       return true;
     }
 
