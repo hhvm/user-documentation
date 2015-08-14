@@ -40,9 +40,19 @@ type GenericDocumentation = shape(
   'constraint' => ?string,
 );
 
+type ParameterDocumentation = shape(
+  'name' => string,
+  'typehint' => ?TypehintDocumentation,
+  'isVariadic' => bool,
+  'isPassedByReference' => bool,
+  'isOptional' => bool,
+  'default' => ?string,
+);
+
 type FunctionDocumentation = shape(
   'name' => string,
   'returnType' => ?TypehintDocumentation,
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
+  'parameters' => array<ParameterDocumentation>,
 );

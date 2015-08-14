@@ -8,6 +8,7 @@ use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
 use FredEmmott\DefinitionFinder\ScannedTypehint;
 use FredEmmott\DefinitionFinder\ScannedGeneric;
+use FredEmmott\DefinitionFinder\ScannedParameter;
 use FredEmmott\DefinitionFinder\HasScannedGenerics;
 
 class ScannedDefinitionsYAMLBuilder {
@@ -97,12 +98,32 @@ class ScannedDefinitionsYAMLBuilder {
   ): FunctionDocumentation {
     return shape(
       'name' => $function->getName(),
-      'returnType' => self::GetNullableTypehintDocumentation($function->getReturnType()),
+      'returnType' =>
+        self::GetNullableTypehintDocumentation($function->getReturnType()),
       'generics' => $function
         ->getGenericTypes()
         ->map($gt ==> self::GetGenericDocumentation($gt))
         ->toArray(),
       'docComment' => $function->getDocComment(),
+      'parameters' => $function
+        ->getParameters()
+        ->map($p ==> self::GetParameterDocumentation($p))
+        ->toArray(),
+    );
+  }
+
+  private static function GetParameterDocumentation(
+    ScannedParameter $param,
+  ): ParameterDocumentation {
+    return shape(
+      'name' => $param->getName(),
+      'typehint' =>
+        self::GetNullableTypehintDocumentation($param->getTypehint()),
+      'isVariadic' => $param->isVariadic(),
+      'isPassedByReference' => $param->isPassedByReference(),
+      'isOptional' => $param->isOptional(),
+      'default' =>
+        $param->isOptional() ? $param->getDefaultString() : null,
     );
   }
 
