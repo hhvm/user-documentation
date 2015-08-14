@@ -37,12 +37,14 @@ final class MergedYAMLBuilder {
     /* HH_FIXME[2049] *//* HH_FIXME[4026]*/
     $merged = Shapes::toArray($this->definitions[$key]);
     foreach ($def['sources'] as $source) { $merged['sources'][] = $source; }
+    // Use Map to get reference semantics
+    $data = new Map($merged['data']);
 
     // TODO: log warning if any of these are mismatched
 
     // eg SystemLib defines HH\Traversable, HHI defines \Traversable
     if (strpos($def['data']['name'], "\\") !== false) {
-      $merged['data']['name'] = $def['data']['name'];
+      $data['name'] = $def['data']['name'];
     }
 
     // eg Systemlib defines Iterable, HHI defines Iterable<Tv>
@@ -50,9 +52,17 @@ final class MergedYAMLBuilder {
       $merged,
       $def,
       $in ==> self::ShapeIDX($in['data'], 'generics'),
-      $out ==> $merged['data']['generics'] = $out,
+      $out ==> { $data['generics'] = $out; },
     );
 
+    self::MergeField(
+      $merged,
+      $def,
+      $in ==> self::ShapeIDX($in['data'], 'methods'),
+      $out ==> { $data['methods'] = $out; },
+    );
+
+    $merged['data'] = $data->toArray();
     $this->definitions[$key] = $merged;
     return $this;
   }
