@@ -33,62 +33,25 @@ final class MergedYAMLBuilder {
       return $this;
     }
 
-    /* 'Shapes' class not usable in namespaces... */
-    /* HH_FIXME[2049] *//* HH_FIXME[4026]*/
-    $merged = Shapes::toArray($this->definitions[$key]);
+    $merged = $this->definitions[$key];
     foreach ($def['sources'] as $source) { $merged['sources'][] = $source; }
-    // Use Map to get reference semantics
-    $data = new Map($merged['data']);
-
-    // TODO: log warning if any of these are mismatched
 
     // eg SystemLib defines HH\Traversable, HHI defines \Traversable
     if (strpos($def['data']['name'], "\\") !== false) {
-      $data['name'] = $def['data']['name'];
+      $merged['data']['name'] = $def['data']['name'];
     }
 
-    // eg Systemlib defines Iterable, HHI defines Iterable<Tv>
-    self::MergeField(
-      $merged,
-      $def,
-      $in ==> self::ShapeIDX($in['data'], 'generics'),
-      $out ==> { $data['generics'] = $out; },
-    );
+    // Shapes class not recognized by typechecker in namespaces
+    /* HH_FIXME[2049] *//* HH_FIXME[4026] */
+    $merged_data = new Map(Shapes::toArray($merged['data']));
+    /* HH_FIXME[2049] *//* HH_FIXME[4026] */
+    $new_data = new Map(Shapes::toArray($def['data']));
 
-    self::MergeField(
-      $merged,
-      $def,
-      $in ==> self::ShapeIDX($in['data'], 'methods'),
-      $out ==> { $data['methods'] = $out; },
-    );
-
-    $merged['data'] = $data->toArray();
+    $merged['data'] = (new MergedDataBuilder($merged_data))
+      ->addData($new_data)
+      ->build()->toArray();
+     // UNSAFE array to shape conversion
     $this->definitions[$key] = $merged;
     return $this;
-  }
-
-  private static function MergeField<T>(
-    BaseYAML $a,
-    BaseYAML $b,
-    (function(BaseYAML):T) $getter,
-    (function(T):void) $setter,
-  ): void {
-    if ($getter($b) !== null) {
-      $val = $getter($b);
-    } else {
-      $val = $getter($a);
-    }
-    if ($val !== null) {
-      $setter($val);
-    }
-  }
-
-  private static function ShapeIDX(
-    shape() $shape,
-    string $field,
-  ): mixed {
-    /* HH_FIXME[2049] *//* HH_FIXME[4026]*/
-    $arr = Shapes::toArray($shape);
-    return idx($arr, $field);
   }
 }

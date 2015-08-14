@@ -17,10 +17,17 @@ type DocumentationSource = shape(
   'mtime' => int,
 );
 
+type BaseYAML = shape(
+  'sources' => array<DocumentationSource>,
+  'type' => string,
+  'data' => shape('name' => string),
+);
+
 type ClassDocumentation = shape(
   'name' => string,
-  'methods' => array<string>,
+  'methods' => array<FunctionDocumentation>,
   'generics' => array<GenericDocumentation>,
+  'docComment' => ?string,
 );
 
 type TypehintDocumentation = shape(
@@ -37,10 +44,5 @@ type FunctionDocumentation = shape(
   'name' => string,
   'returnType' => ?TypehintDocumentation,
   'generics' => array<GenericDocumentation>,
-);
-
-type BaseYAML = shape(
-  'sources' => array<DocumentationSource>,
-  'type' => string,
-  'data' => shape('name' => string),
+  'docComment' => ?string,
 );

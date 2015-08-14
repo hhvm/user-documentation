@@ -82,12 +82,13 @@ class ScannedDefinitionsYAMLBuilder {
       'name' => $class->getName(),
       'methods' => $class
         ->getMethods()
-        ->map($m ==> $m->getName())
+        ->map($m ==> self::GetFunctionDocumentation($m))
         ->toArray(),
       'generics' => $class
         ->getGenericTypes()
         ->map($gt ==> self::GetGenericDocumentation($gt))
         ->toArray(),
+      'docComment' => $class->getDocComment(),
     );
   }
 
@@ -101,6 +102,7 @@ class ScannedDefinitionsYAMLBuilder {
         ->getGenericTypes()
         ->map($gt ==> self::GetGenericDocumentation($gt))
         ->toArray(),
+      'docComment' => $function->getDocComment(),
     );
   }
 
