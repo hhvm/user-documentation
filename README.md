@@ -1,6 +1,6 @@
 # HHVM and Hack User Documentation
 
-This is the new repo for the revamped HHVM and Hack user documentation. [docs.hhvm.com](docs.hhvm.com) is (hopefully) changing for the better.
+This is the new repo for the revamped HHVM and Hack user documentation. [docs.hhvm.com](docs.hhvm.com) is (hopefully) changing for the better. [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
 
 ## Why?
 
@@ -33,9 +33,13 @@ The what will be the ["old" documentation repo](https://github.com/hhvm/hack-hhv
 
 ## Follow Along
 
-Follow along with our progress. We are initially not going to respond to issues, etc. until we get a good foundation established. But then we will start opening things up to have the world contribute.
+Follow along with our progress. We have made this repo open from the start and you will see everything that happens from our very first commit.
 
-That said, if you see anything egregious, ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
+If you see anything egregious, you can [file an issue](https://github.com/hhvm/user-documentation/issues/new) or ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
+
+## Contribute
+
+If you would like to contribute content, checkout the [contributing information](CONTRIBUTING.md)
 
 ## Composer Dependencies
 
