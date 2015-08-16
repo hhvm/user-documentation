@@ -11,11 +11,12 @@ There are two main content sections for this repo. `hhvm` is for user content on
 - Write great content :)
 - Focus on the user of Hack and HHVM; particularly, don't necessarily assume knowledge of a particular topic.
 - Get your content reviewed by peers for accuracy and feedback. This only helps make better documentation for everyone.
+- New topics or subtopics should follow the `##-topic/subtopic` naming convention. e.g., `03-async` or `07-guidelines.md`. This is to allow documentation generation tooling an easier way to generate things like a table of contents. If necessary, you can rename/reorder topics or subtopics if it improves the logical flow.
 - Code examples are awesome.
 - Code must, obviously, be written in Hack `<?hh`, unless you are specifically writing some sort of comparison, anti-pattern, etc.
 - Hack code must typecheck with `hh_client` correctly.
-- Code samples should be in their own file under `<subtopic>-examples` directory. For example, if you are working on content for `hack/async/guidelines.md`, then your code should be placed in `hack/async/guidelines-examples`.
-- In the actual markdown files for a particular sub-topic, placeholders to examples should look like `@@ <sub-topic>-examples/example.php @@`, where the path to examples directory is relative to the root of the main overall topic. In the example below, the path is relative to the main `async` topic
+- Code samples should be in their own file under `<subtopic>-examples` directory. For example, if you are working on content for `hack/03-async/07-guidelines.md`, then your code should be placed in `hack/03-async/guidelines-examples`.
+- In the actual markdown files for a particular sub-topic, placeholders to examples should look like `@@ <sub-topic>-examples/example.php @@`, where the path to examples directory is relative to the root of the main overall topic. In the example below, the path is relative to the main `07-async` topic
 
 ```
 @@ guidelines-examples/non-async-hello.php @@
