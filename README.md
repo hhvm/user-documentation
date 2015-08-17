@@ -50,3 +50,15 @@ To run some of the examples, we require some third-party libraries (e.g., `asio-
 ```
 
 This will install all dependicies within the `vendor` directory.
+
+## Building the API Docs
+
+We extract the reference documentation from HHVM's source tree - both the
+implementation itself, and Hack's data.
+
+1. Clone the HHVM repository - you might want --depth=1
+2. Copy LocalConfig.php.example to LocalConfig.php, and adjust the
+   `HHVM_TREE` constant
+3. Run `composer install`
+4. Run `hhvm bin/build-yaml-from-hhvm.php`
+5. The YAML documentation is now in `build/merged/`
