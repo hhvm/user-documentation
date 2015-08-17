@@ -24,7 +24,9 @@ You can use the null-safe operator to call methods on a class.
 
 ## Accessing Properties
 
-You can use the null-safe operator to access properties. 
+You can use the null-safe operator to access properties.
+
+**IMPORTANT NOTE**: The null-safe operator can only be used for **read** access to properties. Write access is forbidden
 
 @@ null-safe-examples/accessing-properties.php @@
 
@@ -59,3 +61,7 @@ Of course, if the variable on which the null-safe operator is being used is not 
 The object on which the null-safe operator is being used itself should be nullable. This makes it so people are careful using this operator and not just throwing it around without any thought about it.
 
 @@ null-safe-examples/not-nullable.php @@
+
+### No Property Writes
+
+You cannot use the null-safe operator to try to write to properties. It is read-only.
