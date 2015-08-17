@@ -1,0 +1,27 @@
+<?hh
+
+namespace Hack\UserDocumentation\Operators\NullSafe\Examples\UndefinedMethods;
+
+class Bar {
+  public function baz(int $x): int {
+    return $x + 5;
+  }
+}
+
+function get_Bar(): ?Bar {
+  if (rand(0, 10) < 5) {
+    return null;
+  }
+  return new Bar();
+}
+
+function foo(): ?int {
+  $b = get_Bar();
+  // foobar does not exist; this could raise a fatal if $b is not null
+  // This will raise a typechecker error regardless.
+  // So the typechecker will pass examples, use UNSAFE.
+  // UNSAFE
+  return $b?->foobar(6);
+}
+
+var_dump(foo());
