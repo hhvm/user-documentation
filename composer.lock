@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cbe13ac72bad4b9c2a6cd37355ee612e",
+    "hash": "2f54c5abfb7f84b4ae836aa887b12f7f",
     "packages": [
         {
             "name": "facebook/xhp-lib",
@@ -99,20 +99,20 @@
         },
         {
             "name": "hhvm/asio-utilities",
-            "version": "v2.1",
+            "version": "v2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/asio-utilities.git",
-                "reference": "461eec8980ea3620145aaba29e9a9df7e963cdd2"
+                "reference": "8281daa8f495affff95123f320ad8b3e24a06f56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/asio-utilities/zipball/461eec8980ea3620145aaba29e9a9df7e963cdd2",
-                "reference": "461eec8980ea3620145aaba29e9a9df7e963cdd2",
+                "url": "https://api.github.com/repos/hhvm/asio-utilities/zipball/8281daa8f495affff95123f320ad8b3e24a06f56",
+                "reference": "8281daa8f495affff95123f320ad8b3e24a06f56",
                 "shasum": ""
             },
             "require": {
-                "hhvm": ">= 3.8 <= 3.9"
+                "hhvm": "~3.8.0 | ~3.9.0 | 3.10-dev"
             },
             "type": "library",
             "autoload": {
@@ -138,7 +138,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-08-12 22:25:20"
+            "time": "2015-08-18 18:09:46"
         },
         {
             "name": "hhvm/systemlib-extractor",
@@ -232,6 +232,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "hhvm": "~3.9"
+    },
     "platform-dev": []
 }

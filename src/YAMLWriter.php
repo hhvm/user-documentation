@@ -19,12 +19,11 @@ class YAMLWriter {
   private function getFileName(BaseYAML $def): string {
     $prefix = $def['type'];
     $data = $def['data'];
-    /* 'Shapes' class not usable in namespaces... */
-    /* HH_FIXME[2049] *//* HH_FIXME[4026]*/
-    $arr = Shapes::toArray($def);
+    $arr = StringKeyedShapes::toArray($def);
 
     $def_name = strtr($data['name'], "\\", '.');
     if ($generics = idx($arr, 'generics')) {
+      assert(is_array($generics));
       $def_name .= '.'.implode(
         '',
         array_map($generic ==> $generic['name'], $generics),

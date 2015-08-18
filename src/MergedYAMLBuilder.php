@@ -40,12 +40,9 @@ final class MergedYAMLBuilder {
     if (strpos($def['data']['name'], "\\") !== false) {
       $merged['data']['name'] = $def['data']['name'];
     }
-
-    // Shapes class not recognized by typechecker in namespaces
-    /* HH_FIXME[2049] *//* HH_FIXME[4026] */
-    $merged_data = new Map(Shapes::toArray($merged['data']));
-    /* HH_FIXME[2049] *//* HH_FIXME[4026] */
-    $new_data = new Map(Shapes::toArray($def['data']));
+ 
+    $merged_data = StringKeyedShapes::toMap($merged['data']);
+    $new_data = StringKeyedShapes::toMap($def['data']);
 
     $merged['data'] = (new MergedDataBuilder($merged_data))
       ->addData($new_data)
