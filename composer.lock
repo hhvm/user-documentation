@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "fredemmott/definition-finder",
-            "version": "v0.3.1",
+            "version": "v0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "ff6b8b0429dcaa06244cd61ccde4ca9ffb03bb31"
+                "reference": "f928b9a958980142f9f7f5bf2e2c352a28f06d48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/ff6b8b0429dcaa06244cd61ccde4ca9ffb03bb31",
-                "reference": "ff6b8b0429dcaa06244cd61ccde4ca9ffb03bb31",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/f928b9a958980142f9f7f5bf2e2c352a28f06d48",
+                "reference": "f928b9a958980142f9f7f5bf2e2c352a28f06d48",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-08-14 01:13:26"
+            "time": "2015-08-17 23:54:16"
         },
         {
             "name": "hhvm/asio-utilities",

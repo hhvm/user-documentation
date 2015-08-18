@@ -89,6 +89,12 @@ class ScannedDefinitionsYAMLBuilder {
         ->getGenericTypes()
         ->map($gt ==> self::GetGenericDocumentation($gt))
         ->toArray(),
+      'parent' =>
+        self::GetNullableTypehintDocumentation($class->getParentClassInfo()),
+      'interfaces' => $class
+        ->getInterfaceInfo()
+        ->map($interface ==> self::GetTypehintDocumentation($interface))
+        ->toArray(),
       'docComment' => $class->getDocComment(),
     );
   }

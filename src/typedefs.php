@@ -28,6 +28,8 @@ type ClassDocumentation = shape(
   'methods' => array<FunctionDocumentation>,
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
+  'parent' => ?TypehintDocumentation,
+  'interfaces' => array<TypehintDocumentation>,
 );
 
 type TypehintDocumentation = shape(
