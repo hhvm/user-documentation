@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\Difference;
 

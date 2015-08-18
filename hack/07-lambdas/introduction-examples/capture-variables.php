@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\CaptureVariables;
 
 function addLastname(string $lastname): array<string> {
@@ -20,5 +20,3 @@ function addLastnameTraditional(string $lastname): array<string> {
     return $name . " " . $lastname;
   }, $people);
 }
-
-var_dump(addLastnameTraditional("Banks"));

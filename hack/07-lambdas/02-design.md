@@ -13,7 +13,7 @@ That way you can only pass a lambda that returns `bool`. Hack infers the types a
 
 ## Annotating lambdas
 
-Since lambdas are equivalent to `Closures` you can typehint them as one. However annotating lambdas as `(function(parametertypes): returntype)` is preferred as it provides type information. The more type information you have, the more errors you can catch early.
+Lambdas are equivalent to `Closures`, but you cannot typehint them as one. However you can annotate  as `(function(parametertypes): returntype)` to provide type information. The more type information you have, the more errors you can catch early.
 
 @@ design-examples/annotation.php @@
 
