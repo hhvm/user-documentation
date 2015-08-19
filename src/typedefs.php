@@ -58,3 +58,13 @@ type FunctionDocumentation = shape(
   'docComment' => ?string,
   'parameters' => array<ParameterDocumentation>,
 );
+
+type DocumentationIndexEntry = shape(
+  'path' => string,
+  'name' => string,
+  'type' => string,
+);
+
+type DocumentationIndex = shape(
+  'types' => array<string,DocumentationIndexEntry>,
+);

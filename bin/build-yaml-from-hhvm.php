@@ -75,6 +75,15 @@ function hhvm_to_yaml(): void {
     $builder->addDefinition(/* UNSAFE_EXPR */ \Spyc::YAMLLoad($source));
   }
   $builder->build();
+
+  $sources = get_yaml($destination);
+  $index = (new IndexBuilder())
+    ->addSources(get_yaml($destination))
+    ->buildIndex();
+  file_put_contents(
+    __DIR__.'/../build/definition-index.php',
+    '<?php'.var_export($index, true),
+  );
 }
 
 hhvm_to_yaml();
