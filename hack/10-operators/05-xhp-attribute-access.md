@@ -6,7 +6,7 @@ The operator is:
 ->:<XHP attribute>
 ```
 
-This operator brings some conciseness, but more importantly, typechecking coverage is improved over the call it replaces `getAttribute("<XHP attribute")`. Plumbing has been added to the typechecker with first-class support for XHP attributes and this operator.
+This operator brings some conciseness, but more importantly, typechecking coverage is improved over the call it replaces `getAttribute("XHPAttributeName")`. Plumbing has been added to the typechecker with first-class support for XHP attributes and this operator.
 
 @@ xhp-attribute-access-examples/comparison.php @@
 
