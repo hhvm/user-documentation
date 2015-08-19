@@ -3,6 +3,7 @@
 Hack supports the creation of closures through a construct called lambda. Lambdas are generally less verbose than PHP closures and are often used in conjunction with functions like `filter` or `map`.
 
 This example shows you how to make use of the shorter lambda syntax.
+It also uses a [Vector](link to Vector) which is a [Collection](link to Collections).
 
 @@ introduction-examples/introduction.php @@
 

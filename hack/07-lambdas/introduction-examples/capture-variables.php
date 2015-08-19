@@ -1,13 +1,13 @@
 <?hh // strict
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\CaptureVariables;
 
-function addLastname(string $lastname): array<string> {
-  $people = array(
+function addLastname(string $lastname): Vector<string> {
+  $people = Vector {
       "Carlton",
       "Will",
       "Phil"
-  );
-  return array_map($name ==> $name . " " . $lastname, $people);
+  };
+  return $people->map($name ==> $name . " " . $lastname);
 }
 
 function addLastnameTraditional(string $lastname): array<string> {

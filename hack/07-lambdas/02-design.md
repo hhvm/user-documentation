@@ -5,7 +5,7 @@ Left to the arrow are arguments to the anonymous function and on the right hand 
 
 @@ design-examples/introduction.php @@
 
-Note that the definition of `Vector::filter` is
+Note that the definition of [`Vector::filter`](link to Vector::filter) is
 
      public function filter ( (function(Tv): bool) $callback ): Vector<Tv>
 
@@ -13,14 +13,14 @@ That way you can only pass a lambda that returns `bool`. Hack infers the types a
 
 ## Annotating lambdas
 
-Lambdas are equivalent to `Closures`, but you cannot typehint them as one. However you can annotate  as `(function(parametertypes): returntype)` to provide type information. The more type information you have, the more errors you can catch early.
+Lambdas are equivalent to `Closures`, but you cannot typehint them as one. However you can annotate  them as `(function(parametertypes): returntype)` to provide type information. The more type information you have, the more errors you can catch early.
 
 @@ design-examples/annotation.php @@
 
 
 ## Syntax
 
-Most of the time you need parenthesis around the arguments. However if there is only one untyped argument with no default value and your lambda has no return typehint, you may omit the parenthesis. See [examples](link to examples) for more information about this.
+Most of the time you need parenthesis around the arguments. However if there is only one untyped argument with no default value and your lambda has no return typehint, you may omit the parenthesis. See [examples](03-examples.md) for more information about this.
 
 The `==>` operator has low precedence compared with other operators. This is convenient because it allows lambdas to have a complex body without the need of parenthesis. Furthermore, the operator is right associative and can be chained.
 

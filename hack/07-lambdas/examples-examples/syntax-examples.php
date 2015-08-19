@@ -1,19 +1,19 @@
 <?hh // strict
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\SyntaxExamples;
 
-function addLastname(): array<string> {
-  $people = array(
+function addLastname(): Vector<string> {
+  $people = Vector {
       "Carlton",
       "Will",
       "Phil"
-  );
+  };
   // You need parentheses when adding a type annotation or default value
   $annotatedArgument = (string $name) ==> $name . " Banks";
   $annotatedReturnType = ($name): string ==> $name . " Banks";
   $defaultValue = (string $name = "Ashley") ==> $name . " Banks";
 
   // You could use any of the above closures.
-  return array_map($annotatedReturnType, $people);
+  return $people->map($annotatedReturnType);
 }
 
 function calculateYears(): int {
@@ -23,11 +23,11 @@ function calculateYears(): int {
 }
 
 function familySize(): int {
-  $people = array(
+  $people = Vector {
       "Carlton",
       "Will",
       "Phil"
-  );
+  };
   // You can use curly braces to create a compound statement
   $calculateSize = $family ==> {
     $counter = 0;
