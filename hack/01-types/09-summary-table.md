@@ -6,7 +6,7 @@ Primitive  |`int`, `array`           | ✓   |  ✓  | ✓   | ✓  | ✓    | �
 `num`      |`num`                    | ✓   |  ✓  | ✓   | ✓  | ✓    | ✓
 `arraykey` |`arraykey`               | ✓   |  ✓  | ✓   | ✓  | ✓    | ✓
 `void`     |`void`                   | ✓   |  ✓  | x   | x  | x    | x
-`noreturn` |`noreturn`               | ✓   |  ✓  | x   | x  | x    | x
+`noreturn` |`noreturn`               | ✓   |  ✓\*| x   | x  | x    | x
 Object     |`Foo`, `IBar`            | ✓   |  ✓  | ✓   | ✓  | ✓    | ✓
 `mixed`    |`mixed`                  | ✓   |  ✓  | ✓   | ✓  | ✓    | x
 `this`     |`this`                   | x   |  ✓  | x   | ✓  | x    | ✓ 
