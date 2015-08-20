@@ -6,7 +6,7 @@ Take this pre-Hack example:
 
 The above example is a perfectly valid program that will run on HHVM (except a fatal that will occur in the last `var_dump`). However, it is unclear the intent of the programmer in many cases. For example, did the programmer really want to allow `A::foo()` to accept `string`-like `int`s. Of course, mitigation can occur through the use of checks like `is_int()` or exception throwing.
 
-But look at this next example to see how much clear the intent was....
+But look at this next example to see how much clearer the intent was....
 
 @@ intro-examples/hack.php @@ 
 
