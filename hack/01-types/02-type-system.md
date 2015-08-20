@@ -1,4 +1,4 @@
-Describing types in Hack is largely done through explicit [annotations](03-annotations.md) in your Hack source code. Hack has a large list of possible annotation types.
+Describing types in Hack is largely done through explicit [annotations](03-annotations.md) in your Hack source code. Hack has a large list of possible annotation types. You can also check out a summary of each of these types in our [table](09-summary-table.md).
 
 ## Common Primitives
 
@@ -133,8 +133,3 @@ Hack introduces a special type aliases called [`classname<T>`](../06-type-aliase
 ## Shapes
 
 [Shapes](../08-shapes/01-intro.md) are a specific type alias representing a structured array, with a deterministic name and type of keys. They can be used as type annotations as well.
-
-
-## Table of Hack Types
-
-<Some sort of table would be interesting here, probably>
