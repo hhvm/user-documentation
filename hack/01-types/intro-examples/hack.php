@@ -28,13 +28,16 @@ function baz(): void {
   // Did we really want to allow passing a stringy int? NO!
   // The typechecker will actually error here before you even run the program,
   // so you can catch problems before runtime.
-  var_dump(bar($a, 8, "3"));
+  // Comment out so the typechecker will pass correctly in all examples
+  //var_dump(bar($a, 8, "3"));
+
   // Did we really want to allow passing booleans? NO!
   // The typechecker will error here too.
-  var_dump(bar($a, true, false));
+  //var_dump(bar($a, true, false));
+
   // This will throw a fatal at runtime
   // The typechecker will error here as well
-  var_dump(bar($z, 1, 1));
+  //var_dump(bar($z, 1, 1));
 }
 
 baz();
