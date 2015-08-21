@@ -22,7 +22,7 @@ Remember that a nullable type allows the value of a variable to be of its type o
 
 ## Mixed to Primitive
 
-Remember that `mixed` represent any annotatable type (except a nullable type). `mixed` can be refined into a more specific primitive type through the use of built-in type querying functions such as [`is_int()`](http://php.net/manual/en/function.is-int.php), [`is_float()`](http://php.net/manual/en/function.is-float.php), [`is_string()`](http://php.net/manual/en/function.is-string.php_, etc.
+Remember that `mixed` represent any annotatable type (except a nullable type). `mixed` can be refined into a more specific primitive type through the use of built-in type querying functions such as [`is_int()`](http://php.net/manual/en/function.is-int.php), [`is_float()`](http://php.net/manual/en/function.is-float.php), [`is_string()`](http://php.net/manual/en/function.is-string.php), etc.
 
 @@ refining-examples/mixed.php
 

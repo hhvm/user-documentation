@@ -13,6 +13,8 @@ class Base implements I {
 }
 
 class Child extends Base {
+  // The __Override attribute is discussed in the section on attributes
+  // TODO: LINK HERE WHEN READY!
   <<__Override>>
   public function foo(): string {
     return "Child";
