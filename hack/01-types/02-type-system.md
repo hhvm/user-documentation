@@ -149,7 +149,7 @@ Tuples provide a type specifying a fixed number of possibly varying-type values.
 (type1, ... ,type n)
 ```
 
-Tuples are like fixed arrays. You cannot remove or change any of the types from a tuple, but you can change the values of each type. To create a tuple, you use the same syntax as an array, but s/array/tuple. 
+Tuples are like fixed arrays. You cannot remove or change any of the types from a tuple, but you can change the values of each type. To create a tuple, you use the same syntax as an array, but s/`array`/`tuple`. 
 
 ```
 tuple(value1, ..., value n);

@@ -1,0 +1,41 @@
+<?hh
+
+namespace Hack\UserDocumentation\Types\TypeSystem\Examples\NoReturn;
+
+class A {
+  protected float $x;
+  public string $y;
+
+  public function __construct() {
+    $this->x = 4.0;
+    $this->y = "Day";
+  }
+  public function foo(bool $b): float {
+    return $b ? 2.3 * $this->x : 1.1 * $this->x;
+  }
+
+  // no return cannot be on an instance method
+  // only functions and static class methods
+  public static function baz(bool $b): noreturn {
+    if ($b) {
+      throw new \Exception("No Return");
+    } else {
+      exit(1);
+    }
+    // return; Even this would cause a type-errors
+  }
+}
+
+// void can only be used as a return types
+function bar(): void {
+  // local variables are inferred, not explictly typed
+  $a = new A();
+  if ($a->foo(true) > 8.0) {
+    echo "Good " . $a->y;
+  } else {
+    echo "Bad " . $a->y;
+  }
+  A::baz(true);
+}
+
+bar();
