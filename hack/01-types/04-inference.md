@@ -17,3 +17,13 @@ However what happens if instead of assigning a variable to the same type in both
 @@ inference-examples/unresolved.php @@
 
 In the conditional branch, we are assigning the same local variable to one of two types. This makes the local variable *unresolved*, meaning that the typechecker knows that the variable can be one of the two types, but doesn't know which. So at this point, only operations that can be performed on **both** types will be permitted.
+
+## Class Properties
+
+Normally class properties are annotated, so the typechecker initially knows their expected type. But sometimes the typechecker has to make some assumptions that makes inferring further use of a property a bit more complicated than it is for local variables.
+
+@@ inference-examples/props.php @@
+
+The typechecker only infers local to a function. It makes no assumptions about what might happen outside the function, say, for example, if a function calls another function. That's why the typechecker will throw an error even though we know by the eye test that there is not a `null` problem.
+
+This issue is solved by using local variables set to the property value or by using `invariant()`.
