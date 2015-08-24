@@ -58,9 +58,11 @@ class FunctionMarkdownBuilder {
     $md .= "\n".str_repeat('-', strlen($md))."\n\n";
 
     foreach ($this->yaml['data']['parameters'] as $param) {
-      $md .= '- `'.$this->paramToString($param).'`';
-      if ($tags->containsKey($param['name'])) {
-        $tag = $tags[$param['name']];
+      $name = $param['name'];
+      $tag = idx($tags, $name);
+
+      $md .= '- `'.Stringify::parameter($param, $tag).'`';
+      if ($tag) {
         $md .= ' - '.$tag->getDescription();
       }
       $md .= "\n";
@@ -69,15 +71,17 @@ class FunctionMarkdownBuilder {
   }
 
   private function getSignature(): string {
+    $tags = $this->getTagsByName('param', ParamTag::class);
+
     $params = array_map(
-      $param ==> $this->paramToString($param),
+      $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
       $this->yaml['data']['parameters'],
     );
     return sprintf(
       "function %s(%s): %s",
       $this->yaml['data']['name'],
       implode(', ', $params),
-      $this->typehintToString(
+      Stringify::typehint(
         ArgAssert::isNotNull($this->yaml['data']['returnType']),
       ),
     );
@@ -103,56 +107,5 @@ class FunctionMarkdownBuilder {
       }
     }
     return $tags;
-  }
-
-  private function paramToString(ParameterDocumentation $param): string {
-    $name = $param['name'];
-
-    $s = '';
-    $tags = $this->getTagsByName('param', ParamTag::class);
-    $tag = $tags->containsKey($name) ? $tags[$name]: null;
-    $types = $tag?->getTypes();
-    if ($types) {
-      $s .= '['.implode('|',$tags[$name]->getTypes()).'] ';
-    } else {
-      $th = $param['typehint'];
-      if ($th !== null) {
-        $s .= $this->typehintToString($th).' ';
-      }
-    }
-
-    if ($param['isVariadic']) {
-      $s .= '...';
-    }
-    if ($param['isPassedByReference']) {
-      $s .= '&';
-    }
-    $s .= '$'.$param['name'];
-
-    if ($param['isOptional']) {
-      $default = $param['default'];
-      invariant(
-        $default !== null,
-        'optional parameter without a default',
-      );
-      $s .= ' = '.$default;
-    }
-    return $s;
-  }
-
-  private function typehintToString(TypehintDocumentation $typehint): string {
-    $s = $typehint['typename'];
-    if ($typehint['genericTypes']) {
-      $s .= '<';
-      $s .= implode(
-        ',',
-        array_map(
-          $typehint ==> $this->typehintToString(/* UNSAFE_EXPR */ $typehint),
-          $typehint['genericTypes'],
-        ),
-      );
-      $s .= '>';
-    }
-    return $s;
   }
 }
