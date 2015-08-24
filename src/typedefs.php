@@ -29,6 +29,11 @@ type ClassYAML = shape(
   'data' => ClassDocumentation,
 );
 
+type FunctionYAML = shape(
+  'sources' => array<DocumentationSource>,
+  'data' => FunctionDocumentation,
+);
+
 type ClassDocumentation = shape(
   'name' => string,
   'methods' => array<FunctionDocumentation>,

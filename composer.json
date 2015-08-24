@@ -5,7 +5,8 @@
     "mustangostang/spyc": "^0.5.1",
     "hhvm/systemlib-extractor": "^0.1.0",
     "facebook/xhp-lib": "2.x",
-    "hhvm": "~3.9"
+    "hhvm": "~3.9",
+    "phpdocumentor/reflection-docblock": "^2.0"
   },
   "autoload": {
     "classmap": [
