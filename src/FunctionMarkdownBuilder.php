@@ -3,6 +3,8 @@
 namespace HHVM\UserDocumentation;
 
 use phpDocumentor\Reflection\DocBlock;
+use phpDocumentor\Reflection\DocBlock\ParamTag;
+use phpDocumentor\Reflection\DocBlock\Tag;
 
 class FunctionMarkdownBuilder {
   private FunctionYAML $yaml;
@@ -50,11 +52,19 @@ class FunctionMarkdownBuilder {
   }
 
   private function getParameters(): string {
+    $tags = $this->getTagsByName('param', ParamTag::class);
+
     $md = 'Parameters';
     $md .= "\n".str_repeat('-', strlen($md))."\n\n";
- 
 
-    $md .= 'TODO';
+    foreach ($this->yaml['data']['parameters'] as $param) {
+      $md .= '- `'.$this->paramToString($param).'`';
+      if ($tags->containsKey($param['name'])) {
+        $tag = $tags[$param['name']];
+        $md .= ' - '.$tag->getDescription();
+      }
+      $md .= "\n";
+    }
     return $md;
   }
 
@@ -73,12 +83,44 @@ class FunctionMarkdownBuilder {
     );
   }
 
-  private function paramToString(ParameterDocumentation $param): string {
-    $s = '';
-    $th = $param['typehint'];
-    if ($th !== null) {
-      $s .= $this->typehintToString($th).' ';
+  <<__Memoize>>
+  private function getTagsByName<T as Tag>(
+    string $name,
+    classname<T> $type = Tag::class,
+  ): Map<string,T> {
+    $tags = Map { };
+    $raw_tags = $this->docblock?->getTagsByName($name);
+    if ($raw_tags !== null) {
+      foreach ($tags as $tag) {
+        invariant(
+          $tag instanceof $type,
+          'Expected %s tags to be %s, got %s',
+          $name,
+          $type,
+          get_class($tag),
+        );
+        $tags[$tag->getVariableName()] = $tag;
+      }
     }
+    return $tags;
+  }
+
+  private function paramToString(ParameterDocumentation $param): string {
+    $name = $param['name'];
+
+    $s = '';
+    $tags = $this->getTagsByName('param', ParamTag::class);
+    $tag = $tags->containsKey($name) ? $tags[$name]: null;
+    $types = $tag?->getTypes();
+    if ($types) {
+      $s .= '['.implode('|',$tags[$name]->getTypes()).'] ';
+    } else {
+      $th = $param['typehint'];
+      if ($th !== null) {
+        $s .= $this->typehintToString($th).' ';
+      }
+    }
+
     if ($param['isVariadic']) {
       $s .= '...';
     }
