@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\TypeChecker\Intro\Examples\Simple;
+namespace Hack\UserDocumentation\TypeChecker\Running\Examples\Simple;
 
 function a(int $x): int {
   return x + 1;

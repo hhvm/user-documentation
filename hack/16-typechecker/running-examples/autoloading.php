@@ -1,7 +1,7 @@
 <?hh
 
 
-namespace Hack\UserDocumentation\TypeChecker\Intro\Examples\Autoloading;
+namespace Hack\UserDocumentation\TypeChecker\Running\Examples\Autoloading;
 
 class A {
   private B $b;
