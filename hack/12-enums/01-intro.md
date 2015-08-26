@@ -38,7 +38,7 @@ To access a member value, you follow the similar syntax as class constants
 
 While enums have underlying types, they are not interchangeable. The enum is a distinct type. And like any other types, you cannot, for example, pass an `int` to a function expecting an enum, or an enum value to a function expecting a `string`. 
 
-However, you can use simple casting to convert a member value of an enum to its underlying type, and you can use Hack's special [enum functions](02-functions.md) `assert()` and `coerce()` to convert from an underlying type to an enum type.
+However, you can use simple casting to convert a member value of an enum to its underlying type, and you can use Hack's special [enum functions](link to enum API) [`assert()`](link to assert API) and [`coerce()`](link to coerce API) to convert from an underlying type to an enum type.
 
 **NOTE**: You can use some language constructs like `echo` without casting to the underlying type.
 
