@@ -50,7 +50,7 @@ Let's say we forgot to put a require here to get access to the code for class `B
 
 ```
 Fatal error: Class undefined: Hack\UserDocumentation\TypeChecker\Intro\Examples\Autoloading\B
-``
+```
 
 With the autoloading of the file that contains `B`, you can accidentally forget the `require`s, but still your code will run correctly.
 
