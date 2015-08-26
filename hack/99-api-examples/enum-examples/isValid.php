@@ -13,7 +13,7 @@ enum Day : int {
 }
 
 function check_value(int $value): bool {
-  return isValid($value);
+  return Day::isValid($value);
 }
 
 var_dump(check_value(3)); // bool(true)
