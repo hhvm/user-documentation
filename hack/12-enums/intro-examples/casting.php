@@ -23,12 +23,10 @@ function sales(): void {
   // string underlying).
   say_greeting_with_size((string) Size::SMALL);
   // To go from the underlying type to the enum type, Hack provides builtin
-  // enum functions to help you. The coerce function returns a nullable in case
-  // you give it a value that doesn't exist in the enum; so assert that we are
-  // giving it a proper value.
-  $s = Size::coerce("small");
-  invariant($s, "We know small is a value");
-  give_shirt($s);
+  // enum functions to help you. The assert function basically tells the
+  // typechecker that you are NOT going to give it a value that doesn't exist
+  // in the enum.
+  give_shirt(Size::assert("small"));
 }
 
 sales();
