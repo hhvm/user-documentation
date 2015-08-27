@@ -20,7 +20,7 @@ Unless your code is one of the few allowed at the top-level by strict mode, the 
 The following are allowed at the top-level in strict mode
 
 - `require`, `include`, `require_once`, `include_once`
-- class, function namespace, and `use` declarations
+- `class`, `function` `namespace`, and `use` declarations
 
 ### Using Strict Code
 
