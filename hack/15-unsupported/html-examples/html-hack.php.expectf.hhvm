@@ -1,0 +1,2 @@
+Fatal error: HH mode: content before <?hh (Line: 3, Char: 16)
+syntax error, unexpected T_HH_ERROR, expecting $end in %s on line 1
