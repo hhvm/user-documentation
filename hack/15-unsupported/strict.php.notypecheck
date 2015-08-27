@@ -1,0 +1,9 @@
+<?hh // strict
+
+namespace Hack\UserDocumentation\Unsupported\TopLevel\Examples\Strict;
+
+function foo(int $x): void {
+  echo $x + $x;
+}
+
+foo(true); // Typechecking errors.... and, of course, will fail at runtime.
