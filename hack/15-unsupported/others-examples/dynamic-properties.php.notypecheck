@@ -1,0 +1,15 @@
+<?hh
+
+namespace Hack\UserDocumentation\Unsupported\Other\Examples\DynProps;
+
+class A {
+  // has no explicit properties
+}
+
+function dyn_prop(): void {
+  $a = new A();
+  $a->dynProp = 1;
+  echo $a->dynProp;
+}
+
+dyn_prop();

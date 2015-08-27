@@ -1,6 +1,6 @@
 <?hh // strict
 
-namespace Hack\UserDocumentation\Unsupported\Refernces\Examples\Strict;
+namespace Hack\UserDocumentation\Unsupported\References\Examples\Strict;
 
 class A {
   public int $x;

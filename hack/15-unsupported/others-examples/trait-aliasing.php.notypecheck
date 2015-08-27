@@ -1,0 +1,20 @@
+<?hh
+
+namespace Hack\UserDocumentation\Unsupported\Other\Examples\TraitAliasing;
+
+trait Hello {
+  public function hello(): void { echo "Hello"; }
+}
+
+class Hi {
+  use Hello {
+    hello as hi;
+  }
+}
+
+function foo(): void {
+  $h = new Hi();
+  $h->hi();
+}
+
+foo();

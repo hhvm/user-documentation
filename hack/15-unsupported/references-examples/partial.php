@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\Unsupported\Refernces\Examples\Partial;
+namespace Hack\UserDocumentation\Unsupported\References\Examples\Partial;
 
 class A {
   public int $x;
