@@ -1,1 +1,0 @@
-This example shows how `assert()` can be used to get the `Day` enum member value given a value of its underlying type `int`. Since there is a check making sure the provided `int` is in the proper range, we can be confident that we won't get a runtime exception for using a value that doesn't exist in the enum.
