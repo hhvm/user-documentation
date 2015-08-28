@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\Difference;
 
@@ -12,3 +12,5 @@ function addLastnameTraditional(): array<string> {
     return $name . " Banks";
   }, $people);
 }
+
+var_dump(addLastnameTraditional());

@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\SyntaxExamples;
 
 function addLastname(): Vector<string> {
@@ -38,3 +38,11 @@ function familySize(): int {
   };
   return $calculateSize($people);
 }
+
+function doAll(): void {
+  var_dump(familySize());
+  var_dump(calculateYears());
+  var_dump(addLastname());
+}
+
+doAll();
