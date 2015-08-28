@@ -16,8 +16,6 @@ function foo(): ?int {
   $b = get_Bar();
   // $b cannot be null here. so the typechecker will complain about using the
   // operator
-  // So the typechecker will pass examples, use UNSAFE.
-  // UNSAFE
   return $b?->baz();
 }
 

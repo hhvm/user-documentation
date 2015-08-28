@@ -19,8 +19,6 @@ function foo(): ?int {
   $b = get_Bar();
   // foobar does not exist; this could raise a fatal if $b is not null
   // This will raise a typechecker error regardless.
-  // So the typechecker will pass examples, use UNSAFE.
-  // UNSAFE
   return $b?->foobar(6);
 }
 

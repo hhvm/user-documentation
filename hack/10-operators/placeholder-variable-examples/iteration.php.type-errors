@@ -7,7 +7,7 @@ function phv_iteration(): void {
   // Don't care about the values
   foreach ($m as $key => $_) {
     var_dump($key); // dumps 'a', 'b', 'c'
-    //var_dump($_); can't do this
+    var_dump($_); // can't do this
   }
 }
 
