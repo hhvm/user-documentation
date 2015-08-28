@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\TypeChecker\Intro\Examples\Autoloading;
+namespace Hack\UserDocumentation\TypeChecker\Running\Examples\Autoloading;
 
 class B {
   public function getSomeInt(): int {

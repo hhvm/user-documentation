@@ -11,3 +11,5 @@ class B {
     return 100;
   }
 }
+
+var_dump(php_func(B::getSomeInt(), 4));

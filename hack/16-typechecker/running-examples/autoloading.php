@@ -1,6 +1,5 @@
 <?hh
 
-
 namespace Hack\UserDocumentation\TypeChecker\Running\Examples\Autoloading;
 
 class A {
@@ -25,7 +24,7 @@ function myAutoloader(string $class): void {
 }
 
 spl_autoload_register(
-  'Hack\UserDocumentation\TypeChecker\Intro\Examples\Autoloading\myAutoloader'
+  'Hack\UserDocumentation\TypeChecker\Running\Examples\Autoloading\myAutoloader'
 );
 
 callFoo();
