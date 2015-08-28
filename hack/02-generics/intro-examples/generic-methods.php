@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Generics\Intro\Examples\GenericMethods;
+
 // Testing generic methods in a non-generic class.
 
 class Box<T> {
@@ -15,7 +17,7 @@ function swap<T>(Box<T> $a, Box<T> $b) : void {
   $b->value = $temp;
 }
 
-function do_int_swap() {
+function do_int_swap(): void {
   $y = new Box(3);
   $z = new Box(4);
   echo $y->value." ".$z->value;
@@ -23,10 +25,17 @@ function do_int_swap() {
   echo $y->value." ".$z->value;
 }
 
-function do_string_swap() {
+function do_string_swap(): void {
   $y = new Box('a');
   $z = new Box('b');
   echo $y->value." ".$z->value;
   swap($y, $z);
   echo $y->value." ".$z->value;
 }
+
+function doAll(): void {
+  do_int_swap();
+  do_string_swap();
+}
+
+doAll();
