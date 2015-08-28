@@ -8,3 +8,5 @@ async function f(): Awaitable<int> {
   // contain the result of 2.
   return 2;
 }
+
+var_dump(\HH\Asio\join(f()));

@@ -15,4 +15,14 @@ async function memoize_result(): Awaitable<string> {
   return $result;
 }
 
-\HH\Asio\join(memoize_result());
+function runMe(): void {
+  $t1 = microtime();
+  \HH\Asio\join(memoize_result());
+  $t2 = microtime() - $t1;
+  $t3 = microtime();
+  \HH\Asio\join(memoize_result());
+  $t4 = microtime() - $t3;
+  var_dump($t4 < $t2); // The memmoized result will get here a lot faster
+}
+
+runMe();

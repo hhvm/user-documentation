@@ -2,8 +2,8 @@
 
 namespace Hack\UserDocumentation\Async\Extensions\Examples\MySQLConnectionPool;
 
-function get_pool(): AsyncMysqlConnectionPool {
-  return new AsyncMysqlConnectionPool(
+function get_pool(): \AsyncMysqlConnectionPool {
+  return new \AsyncMysqlConnectionPool(
     array('pool_connection_limit' => 100)
   ); // See API for more pool options
 }

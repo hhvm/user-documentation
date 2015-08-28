@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Async\Exceptions\Examples\BasicException;
 
 async function exception_thrower(): Awaitable<void> {
-  throw new Exception();
+  throw new \Exception("Return exception handle");
 }
 
 async function basic_exception(): Awaitable<void> {

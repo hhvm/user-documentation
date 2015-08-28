@@ -2,8 +2,12 @@
 
 namespace Hack\UserDocumentation\Async\Guidelines\Examples\NoLoop;
 
+require __DIR__ . "/../../../vendor/autoload.php";
+
 class User {
-  protected function __construct(string $name) {}
+  public string $name;
+
+  protected function __construct(string $name) { $this->name = $name; }
 
   static function get_name(int $id): User {
     return new User(str_shuffle("ABCDEFGHIJ") . strval($id));
@@ -17,7 +21,16 @@ async function load_user(int $id): Awaitable<User> {
 }
 
 async function load_users_no_loop(array<int> $ids): Awaitable<Vector<User>> {
-  return await \HH\Asio\vm($ids, fun('load_user'));
+  return await \HH\Asio\vm(
+    $ids,
+    fun('Hack\UserDocumentation\Async\Guidelines\Examples\NoLoop\load_user')
+  );
 }
 
-\HH\Asio\join(load_users_no_loop());
+function runMe(): void {
+    $ids = array(1, 2, 5, 99, 332);
+    $result = \HH\Asio\join(load_users_no_loop($ids));
+    var_dump($result[4]->name);
+}
+
+runMe();

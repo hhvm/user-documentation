@@ -2,14 +2,14 @@
 
 namespace Hack\UserDocumentation\Async\Extensions\Examples\MySQL;
 
-async function get_connection(): Awaitable<?AsyncMysqlConnection> {
+async function get_connection(): Awaitable<?\AsyncMysqlConnection> {
   // Change credentials to something that works in order to test this code
-  return await AsyncMysqlClient::connect(
+  return await \AsyncMysqlClient::connect(
     'localhost', 3306, 'db', 'user', 'password'
   );
 }
 
-async function fetch_user_name(AsyncMysqlConnection $conn,
+async function fetch_user_name(\AsyncMysqlConnection $conn,
                                int $user_id) : Awaitable<?string> {
   // Your table and column may differ, of course
   $result = await $conn->queryf('SELECT name from user_table WHERE id = %d',

@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Async\Exceptions\Examples\MultipleWaitHandle;
 
 async function exception_thrower(): Awaitable<void> {
-  throw new Exception();
+  throw new \Exception("Return exception handle");
 }
 
 async function non_exception_thrower(): Awaitable<int> {

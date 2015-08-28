@@ -11,7 +11,10 @@ async function fourth_root(num $n): Awaitable<float> {
 
 async function normal_call(): Awaitable<Vector<float>> {
   $nums = Vector {64, 81};
-  return await \HH\Asio\vm($nums, fun('fourth_root'));
+  return await \HH\Asio\vm(
+    $nums,
+    fun('Hack\UserDocumentation\Async\Guidelines\Examples\Lambdas\fourth_root')
+  );
 }
 
 async function closure_call(): Awaitable<Vector<float>> {

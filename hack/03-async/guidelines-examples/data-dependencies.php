@@ -55,8 +55,8 @@ async function fetch_page_data(int $author_id)
      *
      * And so on, with no need for T1, T2, ... Tn to be related types.
      */
-    assert($post_data instanceof PostData);
-    assert(is_int($comment_count));
+    invariant($post_data instanceof PostData, "This is good");
+    invariant(is_int($comment_count), "This is good");
     return tuple($post_data, $comment_count);
   };
 
