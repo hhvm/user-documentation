@@ -12,7 +12,7 @@ object(HH\Vector)#%d (%d) {
       ["file":protected]=>
       string(%d) "%s"
       ["line":protected]=>
-      int(6)
+      int(8)
       ["trace":"Exception":private]=>
       array(2) {
         [0]=>
@@ -20,9 +20,9 @@ object(HH\Vector)#%d (%d) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(14)
+          int(16)
           ["function"]=>
-          string(17) "exception_thrower"
+          string(75) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\exception_thrower"
           ["args"]=>
           array(0) {
           }
@@ -32,9 +32,9 @@ object(HH\Vector)#%d (%d) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(22)
+          int(24)
           ["function"]=>
-          string(19) "wrapping_exceptions"
+          string(77) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\wrapping_exceptions"
           ["args"]=>
           array(0) {
           }

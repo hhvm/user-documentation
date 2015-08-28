@@ -1,12 +1,4 @@
-array(2) {
-  ["ClassOwner"]=>
-  array(1) {
-    [0]=>
-    string(11) "Joel Marcey"
-  }
-  ["Description"]=>
-  array(1) {
-    [0]=>
-    string(23) "This class does nothing"
-  }
+array(1) {
+  [0]=>
+  string(23) "This class does nothing"
 }

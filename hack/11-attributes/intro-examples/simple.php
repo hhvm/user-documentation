@@ -9,7 +9,7 @@ function get_attributes(): void {
   $rc = new \ReflectionClass(
     "Hack\UserDocumentation\Attributes\Intro\Examples\Simple\Simple"
   );
-  var_dump($rc->getAttributes());
+  var_dump($rc->getAttributes()["Description"]);
 }
 
 get_attributes();
