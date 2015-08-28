@@ -7,8 +7,6 @@ require __DIR__ . '/decl.php';
 // top level functions in strict mode
 require __DIR__ . '/main-function.php';
 
-;
-
 use \Hack\UserDocumentation\TypeChecker\Modes\Examples\Decl as Decl;
 
 function calling_into_decl(): string {

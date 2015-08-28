@@ -1,0 +1,5 @@
+// This isn't really a test. It is just be included
+// as part of the actual example
+if (true) {
+  print "skip";
+}
