@@ -3,3 +3,5 @@ composer.phar
 .commit-template
 *.swp
 LocalConfig.php
+*.php.diff
+*.php.out
