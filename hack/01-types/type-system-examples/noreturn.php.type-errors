@@ -22,7 +22,7 @@ class A {
     } else {
       exit(1);
     }
-    // return; Even this would cause a type-errors
+    return; // Even this will cause type-errors
   }
 }
 
@@ -35,7 +35,7 @@ function bar(): void {
   } else {
     echo "Bad " . $a->y;
   }
-  A::baz(true);
+  A::baz(false);
 }
 
 bar();

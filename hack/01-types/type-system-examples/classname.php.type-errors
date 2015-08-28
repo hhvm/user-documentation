@@ -30,8 +30,8 @@ function ts_classname(): void {
   $c = new C();
   $d = new D();
   check_classname(C::class, $c);
-  //check_classname('C', $c); // error! only C::class is a classname
-  //check_classname(D::class, $d); // error! a D is not an I
+  check_classname('C', $c); // error! only C::class is a classname
+  check_classname(D::class, $d); // error! a D is not an I
 }
 
 ts_classname();

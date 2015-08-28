@@ -19,7 +19,7 @@ class A {
       // We know that this doesn't call A::setPropToNull(), but the typechecker
       // does not since inferences is local to the function.
       // Commenting out so typechecker passes on all examples
-      // does_not_set_to_null();
+      does_not_set_to_null();
 
       // We know that $x is still not null, but the typechecker doesn't
       take_an_int($this->x);

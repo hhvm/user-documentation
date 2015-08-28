@@ -35,7 +35,7 @@ function bar(Base $b): void {
   // Given the instanceof check above, we have now made $b unresolved, a union
   // between a type of I and Base. So we can only call methods common to both.
   // which in this case there are none.
-  //echo $b->foo();
+  echo $b->foo();
 }
 
 function unresolved(): void {

@@ -14,7 +14,7 @@ function foo(): arraykey {
   // the union of an int and string. So you can only perform operations that
   // can be performed on both of those types.
 
-  //var_dump($a + 20); // Nope. This isn't good for a string
+  var_dump($a + 20); // Nope. This isn't good for a string
 
   $arr = array();
   $arr[$a] = 4; // Fine. Since an array key can be an int or string

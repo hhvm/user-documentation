@@ -35,7 +35,7 @@ function ts_generics_1(): array<string> {
   // can't do this because the typechecker knows by our return statement and
   // our return type that we are binding the Box to a string type. If we did
   // something like ": array<arraykey>", then it would work.
-  // gift($box, 3);
+  gift($box, 3);
   return $box->get();
 }
 

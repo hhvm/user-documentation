@@ -10,8 +10,6 @@ function foo(@int $x): bool {
 
 function call_foo(): void {
   foo(5);
-  // Supress the actual typechecker error here.
-  // UNSAFE
   foo(false);
 }
 
