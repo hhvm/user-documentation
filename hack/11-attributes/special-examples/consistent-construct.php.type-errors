@@ -13,10 +13,10 @@ class B extends A {
 class C extends A {
   // __ConsistentConstruct applied to A will cause the typechecker to throw
   // an error when you have constructor with a different signature.
-  /*private int $x;
+  private int $x;
   public function __construct(int $x) {
     $this->x = x;
-  }*/
+  }
 }
 
 <<__ConsistentConstruct>>

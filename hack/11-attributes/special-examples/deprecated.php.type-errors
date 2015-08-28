@@ -26,7 +26,7 @@ class B extends A {
 
 function test_deprecated(): void {
   $a = new A();
-  //var_dump($a->bar()); // typechecker will throw error telling you to call baz
+  var_dump($a->bar()); // typechecker will throw error telling you to call baz
   $b = new B();
   var_dump($b->bar()); // This is ok; overrides do not inherit deprecation
 }

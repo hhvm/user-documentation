@@ -1,0 +1,4 @@
+int(5)
+Total time taken (pre-memoize): %s seconds
+int(5)
+Total time taken (post-memoize): %s seconds

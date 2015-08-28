@@ -12,8 +12,8 @@ class B extends A {
 }
 
 class C extends A {
-  // Adding __Override here would throw a typechecker error since there is no
+  // Adding __Override here throws a typechecker error since there is no
   // bar() in A
-  //<<__Override>>
+  <<__Override>>
   protected function bar(): void {}
 }

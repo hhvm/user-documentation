@@ -16,6 +16,13 @@ class C extends A {
   // use __UNSAFE_Construct to override the consistent constructor requirement
   <<__UNSAFE_Construct>>
   public function __construct(int $x) {
-    $this->x = x;
+    $this->x = $x;
+    var_dump($this->x);
   }
 }
+
+function runMe(): void {
+  $c = new C(5);
+}
+
+runMe();
