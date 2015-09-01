@@ -1,0 +1,5 @@
+source 'https://rubygems.org'
+gem 'html-pipeline', '~> 1.0'
+gem 'github-markdown'
+gem 'pygments.rb'
+gem 'colorize'
