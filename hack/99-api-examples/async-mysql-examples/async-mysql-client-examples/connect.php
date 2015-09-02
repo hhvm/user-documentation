@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\API\Examples\AsyncMysql\AsyncMysqlClient\Conn;
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\Conn;
 
 require __DIR__ . "/../connect.inc";
 
