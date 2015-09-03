@@ -23,6 +23,10 @@ final class RawYAMLBuildStep extends BuildStep {
     string $output_dir,
     Iterable<string> $sources,
   ): void {
+    if (!is_dir($output_dir)) {
+      mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
+    }
+
     foreach ($sources as $filename) {
       $source = shape(
         'type' => DocumentationSourceType::FILE,

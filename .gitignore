@@ -5,3 +5,4 @@ composer.phar
 LocalConfig.php
 *.php.diff
 *.php.out
+build/
