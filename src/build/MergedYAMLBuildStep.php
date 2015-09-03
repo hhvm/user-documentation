@@ -5,9 +5,9 @@ namespace HHVM\UserDocumentation;
 final class MergedYAMLBuildStep extends BuildStep {
   public function buildAll(): void {
     $sources = (Vector { })
-      ->addAll(self::findSources(LocalConfig::BUILD_DIR.'/systemlib', Set{'yml'}))
-      ->addAll(self::findSources(LocalConfig::BUILD_DIR.'/hhi', Set{'yml'}));
-    $builder = new MergedYAMLBuilder(LocalConfig::BUILD_DIR.'/merged');
+      ->addAll(self::findSources(BuildPaths::SYSTEMLIB_YAML, Set{'yml'}))
+      ->addAll(self::findSources(BuildPaths::HHI_YAML, Set{'yml'}));
+    $builder = new MergedYAMLBuilder(BuildPaths::MERGED_YAML);
     foreach ($sources as $source) {
       $builder->addDefinition(\Spyc::YAMLLoad($source));
     }
