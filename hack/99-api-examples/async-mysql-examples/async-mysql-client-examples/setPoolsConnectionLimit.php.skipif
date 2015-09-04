@@ -1,0 +1,2 @@
+<?hh
+require(__DIR__ . '/../require_env.inc');
