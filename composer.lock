@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d80992924e343483177f86d80cb50bd7",
+    "hash": "abe57b1f82697d6d0e147488bd9480e8",
     "packages": [
         {
             "name": "facebook/xhp-lib",
@@ -54,20 +54,20 @@
         },
         {
             "name": "fredemmott/definition-finder",
-            "version": "v0.3.3",
+            "version": "v0.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "f928b9a958980142f9f7f5bf2e2c352a28f06d48"
+                "reference": "8f6eb161bebadde37d2a031f67e5456c82fe8459"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/f928b9a958980142f9f7f5bf2e2c352a28f06d48",
-                "reference": "f928b9a958980142f9f7f5bf2e2c352a28f06d48",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/8f6eb161bebadde37d2a031f67e5456c82fe8459",
+                "reference": "8f6eb161bebadde37d2a031f67e5456c82fe8459",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "*"
+                "hhvm": "~3.9"
             },
             "require-dev": {
                 "hhvm/systemlib-extractor": "^0.1.0",
@@ -95,7 +95,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-08-17 23:54:16"
+            "time": "2015-08-20 01:26:47"
         },
         {
             "name": "hack-psr/psr7-http-message-hhi",
