@@ -6,3 +6,4 @@ LocalConfig.php
 *.php.diff
 *.php.out
 build/
+public/www.pid

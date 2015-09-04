@@ -6,7 +6,10 @@
     "hhvm/systemlib-extractor": "^0.1.0",
     "facebook/xhp-lib": "2.x",
     "hhvm": "~3.9",
-    "phpdocumentor/reflection-docblock": "^2.0"
+    "phpdocumentor/reflection-docblock": "^2.0",
+    "hack-psr/psr7-http-message-hhi": "^0.1.0",
+    "zendframework/zend-diactoros": "^1.1",
+    "nikic/fast-route": "^0.6.0"
   },
   "autoload": {
     "classmap": [
