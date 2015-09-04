@@ -14,4 +14,4 @@ There are **no typechecker errors** with this code. However, what does the call 
 
 The typechecker does error in strict mode anytime you try to use a reference. 
 
-@@ 03-references-examples/strict.php @@
+@@ 03-references-examples/strict.php.type-errors @@

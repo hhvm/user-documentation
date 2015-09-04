@@ -120,4 +120,4 @@ async function stream_await(resource $fp, int $events,
 
 This example shows how you can use `stream_await()` to write to resources
 
-@@ 06-extensions-example/async-stream.php @@
+@@ 06-extensions-examples/async-stream.php @@

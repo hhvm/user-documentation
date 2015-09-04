@@ -10,7 +10,7 @@ Hack code starting with the four characters `<?hh` at the top of it is said to b
 - You can use references `&`, but they are basically ignored as it doesn't follow the reference path. Try not to use references. 
 - You can access superglobals without error.
 
-@@ 05-modes-examples/partial.php @@
+@@ 05-modes-examples/partial.php.type-errors @@
 @@ 05-modes-examples/non-hack-code.php @@
 
 Notice that we have annotated some of the code, but not all of it. [Inferred code](../01-types/04-inference.md) is checked regardless of annotations on the function itself.
@@ -36,7 +36,7 @@ means that the typechecker is checking everything. If at all possible, start new
 
 Strict is actually the mode you want to strive to. The entire typechecker goodness is at your disposal and should ensure zero runtime type errors.
 
-@@ 05-modes-examples/strict.php @@
+@@ 05-modes-examples/strict.php.type-errors @@
 @@ 05-modes-examples/non-hack-code.php @@
 
 Notice that we cannot call into the `<?php` file any longer and that all entities in the Hack file are annotated.

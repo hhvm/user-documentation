@@ -15,7 +15,7 @@ The syntax for `HH_FIXME` is:
 
 The error code is retrieved from the actual error message you receive when running `hh_client`. The string comment can be anything you want, but usually explains why you are using `HH_FIXME` to begin with.
 
-@@ 07-special-example/hhfixme.php @@
+@@ 07-special-example/hhfixme.php.type-errors @@
 
 Let's assume that we were in [partial](05-modes.md#partial) mode and now we want to make this file [strict](05-modes.md#strict), but we know that call sites will be affected by the annotation of the function because we did some questionable type conversions. We don't want to fix this yet or we don't know how to fix it (although you should fix before runtime since it will now be a runtime error). So we apply `HH_FIXME` to all the call sites that were affected by the change so that you or someone else knows that they need to be fixed. 
 

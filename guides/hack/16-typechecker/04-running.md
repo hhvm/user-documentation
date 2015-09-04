@@ -10,7 +10,7 @@ Running the typechecker is simple. For most users and most purposes, it is a one
 
 Here is an example of some Hack code and how it is checked.
 
-@@ 04-running-examples/simple-check.php @@
+@@ 04-running-examples/simple-check.php.type-errors @@
 
 Let's examine the error message for the call to `a("5")`:
 

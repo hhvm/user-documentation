@@ -44,7 +44,7 @@ You do have to make sure that any function in which you use this operator on a `
 
 If the object used with the null-safe operator tries to call a method that doesn't exist, and that object is *not* `null`, you will get a fatal error at runtime. The typechecker will raise an error whether the object is `null` or not.
 
-@@ 03-null-safe-examples/undefined-methods.php @@
+@@ 03-null-safe-examples/undefined-methods.php.type-errors @@
 
 ### No Short Circuit
 
@@ -60,7 +60,7 @@ Of course, if the variable on which the null-safe operator is being used is not 
 
 The object on which the null-safe operator is being used itself should be nullable. This makes it so people are careful using this operator and not just throwing it around without any thought about it.
 
-@@ 03-null-safe-examples/not-nullable.php @@
+@@ 03-null-safe-examples/not-nullable.php.type-errors @@
 
 ### No Property Writes
 

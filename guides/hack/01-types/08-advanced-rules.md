@@ -4,7 +4,7 @@ The type checking rules are generally straightforward (e.g. can't pass a `string
 
 Take a look at this example.
 
-@@ 08-advanced-rules-examples/softhint.php @@
+@@ 08-advanced-rules-examples/softhint.php.type-errors @@
 
 What does the "@" in front of the type mean? This causes HHVM to trigger a warning (thus always continuing execution) instead of a catchable fatal error when the passed parameter does not match. It is used to allow you to slowly add types to your code.
 

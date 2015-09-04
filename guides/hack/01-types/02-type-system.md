@@ -42,7 +42,7 @@ It is relatively common for [async](../03-async/01-intro.md) functions to return
 
 `noreturn` is used to indicate that a given function or *static* method always throws an exception or somehow terminates the program within the function itself.
 
-@@ 02-type-system-examples/noreturn.php @@
+@@ 02-type-system-examples/noreturn.php.type-errors @@
 
 **NOTE**: `noreturn` can only be used in *static* method or function returns. It is not applicable to properties or parameters.
 
@@ -118,7 +118,7 @@ A nullable type is represented by a `?` placed as a prefix to the type itself (e
 
 [Generics](../02-generics/01-intro.md) allows a specific piece code to work against multiple types in a type-safe way. Depending on the type parameter specified, a generic type can work against one type or many. `Box<T>` for example is the most permissive for types that can be passed to it. `array<int>` is the least permissive as `int`s are only allowed to be placed in the array.
 
-@@ 02-type-system-examples/generics.php @@
+@@ 02-type-system-examples/generics.php.type-errors @@
 
 
 ## Enums
@@ -176,7 +176,7 @@ In HHVM, tuples are implemented as arrays, and you can call `is_array()` on them
 
 Hack introduces a special type aliases called [`classname<T>`](../06-type-aliases/02-opaque.md#classname). So, now when someone writes `Foo::class`, not only does the Hack typechecker recognize the string representation of the class, but also this new type that provides semantics of the class itself.
 
-@@ 02-type-system-examples/classname.php @@
+@@ 02-type-system-examples/classname.php.type-errors @@
 
 
 ## Shapes

@@ -14,7 +14,7 @@ You will get no typechecker errors, even in [strict mode](../17-typechecker/05-m
 
 ## Variable Variables
 
-@@ 06-others-examples/varvars.php @@
+@@ 06-others-examples/varvars.php.type-errors @@
 
 There is no way to do type inference in a case like this. How can the typechecker know that what we meant by assigning `x` to `$val` was that we were going to use that `x` has a variable later on.
 
@@ -22,13 +22,13 @@ There is no way to do type inference in a case like this. How can the typechecke
 
 All class properties must be explicitly declared.
 
-@@ 06-others-examples/dynamic-properties.php @@
+@@ 06-others-examples/dynamic-properties.php.type-errors @@
 
 ## Aliasing of methods in traits
 
 The typechecker doesn't understand aliasing trait methods. It actually believes it is a parse error.
 
-@@ 06-others-examples/trait-aliasing.php @@
+@@ 06-others-examples/trait-aliasing.php.type-errors @@
 
 ## Others
 
