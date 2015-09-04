@@ -1,7 +1,5 @@
 <?hh
 
-namespace HHVM\UserDocumentation;
-
 class Router {
   private function getRoutes(
   ): KeyedIterable<string, classname<WebController>> {

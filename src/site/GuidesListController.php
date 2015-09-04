@@ -1,7 +1,11 @@
 <?hh // strict
 
-namespace HHVM\UserDocumentation;
+final class GuidesListController extends WebPageController {
+  protected async function getTitle(): Awaitable<string> {
+    return 'HHVM and Hack Documentation';
+  }
 
-final class GuidesListController extends WebController {
-
+  protected async function getBody(): Awaitable<XHPRoot> {
+    return <div />;
+  }
 }

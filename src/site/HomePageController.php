@@ -1,6 +1,11 @@
 <?hh // strict
 
-namespace HHVM\UserDocumentation;
+final class HomePageController extends WebPageController {
+  protected async function getTitle(): Awaitable<string> {
+    return 'HHVM and Hack Documentation';
+  }
 
-final class HomePageController extends WebController {
+  protected async function getBody(): Awaitable<XHPRoot> {
+    return <div />;
+  }
 }

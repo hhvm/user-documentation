@@ -1,10 +1,8 @@
 <?hh // strict
 
-namespace HHVM\UserDocumentation;
-
 use Psr\Http\Message\ServerRequestInterface;
 
-final class Site {
+final class HHVMDocumentationSite {
   public async function respondTo(
     ServerRequestInterface $request,
   ): Awaitable<void> {
