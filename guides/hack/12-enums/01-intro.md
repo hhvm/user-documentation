@@ -18,7 +18,7 @@ enum <NameOfEnum> : <string | int> {
 
 The name of the enum has to be namespace unique, and members of the enum must be uniquely named too.
 
-@@ intro-examples/simple.php @@
+@@ 01-intro-examples/simple.php @@
 
 ## Enum member values
 
@@ -30,7 +30,7 @@ To access a member value, you follow the similar syntax as class constants
 <NameOfEnum>::<MemberN>
 ```
 
-@@ intro-examples/member-values.php @@
+@@ 01-intro-examples/member-values.php @@
 
 **NOTE**: There is no notion of sequential, implicit values to enum members. For example, if you set the first member to `0`, the next member doesn't, by default, have the value of `1`. All enum members must have an explicit value assigned to it. 
 
@@ -42,10 +42,10 @@ However, you can use simple casting to convert a member value of an enum to its 
 
 **NOTE**: You can use some language constructs like `echo` without casting to the underlying type.
 
-@@ intro-examples/casting.php @@
+@@ 01-intro-examples/casting.php @@
 
 ### Implicit Casting
 
 By using the `as` constraint operator, you can make it so casting to the underlying type is implict.
 
-@@ intro-examples/implicit-casting.php @@
+@@ 01-intro-examples/implicit-casting.php @@

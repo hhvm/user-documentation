@@ -4,7 +4,7 @@ The type checking rules are generally straightforward (e.g. can't pass a `string
 
 Take a look at this example.
 
-@@ advanced-rules-examples/softhint.php @@
+@@ 08-advanced-rules-examples/softhint.php @@
 
 What does the "@" in front of the type mean? This causes HHVM to trigger a warning (thus always continuing execution) instead of a catchable fatal error when the passed parameter does not match. It is used to allow you to slowly add types to your code.
 
@@ -14,7 +14,7 @@ What does the "@" in front of the type mean? This causes HHVM to trigger a warni
 
 [Superglobals](http://php.net/manual/en/language.variables.superglobals.php) are available no matter what scope you are currently in. 
 
-@@ advanced-rules-examples/superglobals.php @@
+@@ 08-advanced-rules-examples/superglobals.php @@
 
 The typechecker knows about the built-in superglobals.
 
@@ -34,13 +34,13 @@ The second method is preferred since it is more expressive with the typehint. Ho
 So, use the second method, but you will have to leave off the typehint and have your code in [partial mode](link to partial mode) or use `HH_FIXME` or `UNSAFE` in [strict mode](link to strict mode) in order to make both the
 typechecker and HHVM happy.
 
-@@ advanced-rules-examples/variadic.php @@
+@@ 08-advanced-rules-examples/variadic.php @@
 
 ## Fallthrough
 
 Unintentional fallthrough in `switch` statements are a common mistake. Hack provides a way to catch fallthrough, adding a way to tell it that it was intentional as well.
 
-@@ advanced-rules-examples/fallthrough.php @@
+@@ 08-advanced-rules-examples/fallthrough.php @@
 
 Use `// FALLTHROUGH` to tell the typechecker that our falling through is intentional.
 

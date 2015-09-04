@@ -8,11 +8,11 @@ $_
 
 You can use the placeholder variable operator when iterating over a key/value pair, but you don't care, for example, about the value of that pair.
 
-@@ placeholder-variable-examples/iteration.php @@
+@@ 04-placeholder-variable-examples/iteration.php @@
 
 Another common case for the placeholder variable is when you are using `list()` and you don't care about one or more of the variables that are being set.
 
-@@ placeholder-variable-examples/list.php @@
+@@ 04-placeholder-variable-examples/list.php @@
 
 ## Typechecker Semantics
 

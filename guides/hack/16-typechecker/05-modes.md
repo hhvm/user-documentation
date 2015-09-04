@@ -10,8 +10,8 @@ Hack code starting with the four characters `<?hh` at the top of it is said to b
 - You can use references `&`, but they are basically ignored as it doesn't follow the reference path. Try not to use references. 
 - You can access superglobals without error.
 
-@@ modes-examples/partial.php @@
-@@ modes-examples/non-hack-code.php @@
+@@ 05-modes-examples/partial.php @@
+@@ 05-modes-examples/non-hack-code.php @@
 
 Notice that we have annotated some of the code, but not all of it. [Inferred code](../01-types/04-inference.md) is checked regardless of annotations on the function itself.
 
@@ -36,8 +36,8 @@ means that the typechecker is checking everything. If at all possible, start new
 
 Strict is actually the mode you want to strive to. The entire typechecker goodness is at your disposal and should ensure zero runtime type errors.
 
-@@ modes-examples/strict.php @@
-@@ modes-examples/non-hack-code.php @@
+@@ 05-modes-examples/strict.php @@
+@@ 05-modes-examples/non-hack-code.php @@
 
 Notice that we cannot call into the `<?php` file any longer and that all entities in the Hack file are annotated.
 
@@ -53,9 +53,9 @@ is called decl mode. Decl mode code is not typechecked. It is used for taking ex
 
 New Hack code should never be in decl mode.
 
-@@ modes-examples/decl.php @@
-@@ modes-examples/call-into-decl.php @@
-@@ modes-examples/main-function.php @@
+@@ 05-modes-examples/decl.php @@
+@@ 05-modes-examples/call-into-decl.php @@
+@@ 05-modes-examples/main-function.php @@
 
 The example shows all three modes. First it shows a decl mode file that used to be in `<?php`. Nothing else was added except the header change. Then it shows a strict mode file calling into the decl mode file. The typechecker knows the signatures of the functions and classes and can ensure basic things like whether you are calling a named entity and passing the right number of arguments. Finally, we have a partial mode file that actually calls the function in strict mode because we cannot have top-level function calls in strict mode.
 

@@ -20,7 +20,7 @@ If `$obj` is `null`, then instead of throwing a fatal error, the call site will 
 
 You can use the null-safe operator to call methods on a class.
 
-@@ null-safe-examples/calling-methods.php @@
+@@ 03-null-safe-examples/calling-methods.php @@
 
 ## Accessing Properties
 
@@ -28,7 +28,7 @@ You can use the null-safe operator to access properties.
 
 **IMPORTANT NOTE**: The null-safe operator can only be used for **read** access to properties. Write access is forbidden
 
-@@ null-safe-examples/accessing-properties.php @@
+@@ 03-null-safe-examples/accessing-properties.php @@
 
 ## Gotchas
 
@@ -38,19 +38,19 @@ The null-safe operator can really save time and code space, and allow for the ty
 
 You do have to make sure that any function in which you use this operator on a `return`-type call that your function is typed as returning a [nullable](../01-types/02-type-system.md#Nullable).
 
-@@ null-safe-examples/function-return-types.php @@
+@@ 03-null-safe-examples/function-return-types.php @@
 
 ### Undefined Methods
 
 If the object used with the null-safe operator tries to call a method that doesn't exist, and that object is *not* `null`, you will get a fatal error at runtime. The typechecker will raise an error whether the object is `null` or not.
 
-@@ null-safe-examples/undefined-methods.php @@
+@@ 03-null-safe-examples/undefined-methods.php @@
 
 ### No Short Circuit
 
 Even if the object is `null`, any arguments passed to the function call will still be evaluated. In other words, there is no short-circuit process that causes all evaluation to stop if the object is `null`.
 
-@@ null-safe-examples/no-short-circuit.php @@
+@@ 03-null-safe-examples/no-short-circuit.php @@
 
 ### Not `null` or Object
 
@@ -60,7 +60,7 @@ Of course, if the variable on which the null-safe operator is being used is not 
 
 The object on which the null-safe operator is being used itself should be nullable. This makes it so people are careful using this operator and not just throwing it around without any thought about it.
 
-@@ null-safe-examples/not-nullable.php @@
+@@ 03-null-safe-examples/not-nullable.php @@
 
 ### No Property Writes
 

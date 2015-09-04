@@ -10,7 +10,7 @@ then the typechecker will verify any use of user attributes against this list in
 
 The primary use case for this is *misspellings*
 
-@@ type-checking-examples/misspelling.php @@
+@@ 03-type-checking-examples/misspelling.php @@
 
 ## Special Attributes
 

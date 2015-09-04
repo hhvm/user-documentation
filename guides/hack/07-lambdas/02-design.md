@@ -3,7 +3,7 @@
 A lambda expression is denoted by using the lambda arrow `==>`.
 Left to the arrow are arguments to the anonymous function and on the right hand side is either an expression or a list of statements enclosed in curly braces. Most of the time you will want to use the prior.
 
-@@ design-examples/introduction.php @@
+@@ 02-design-examples/introduction.php @@
 
 Note that the definition of [`Vector::filter`](link to Vector::filter) is
 
@@ -15,7 +15,7 @@ That way you can only pass a lambda that returns `bool`. Hack infers the types a
 
 Lambdas are equivalent to `Closures`, but you cannot typehint them as one. However you can annotate  them as `(function(parametertypes): returntype)` to provide type information. The more type information you have, the more errors you can catch early.
 
-@@ design-examples/annotation.php @@
+@@ 02-design-examples/annotation.php @@
 
 
 ## Syntax
@@ -24,4 +24,4 @@ Most of the time you need parenthesis around the arguments. However if there is 
 
 The `==>` operator has low precedence compared with other operators. This is convenient because it allows lambdas to have a complex body without the need of parenthesis. Furthermore, the operator is right associative and can be chained.
 
-@@ design-examples/chained.php @@
+@@ 02-design-examples/chained.php @@

@@ -1,6 +1,6 @@
 There are cases when the typechecker will report an error, but the program will run perfectly fine in HHVM.
 
-@@ runtime-examples/type-error-but-runs.php @@
+@@ 07-runtime-examples/type-error-but-runs.php @@
 
 However, there is some support for runtime type checking in HHVM, but its enforcement is currently limited. 
 

@@ -10,7 +10,7 @@ Running the typechecker is simple. For most users and most purposes, it is a one
 
 Here is an example of some Hack code and how it is checked.
 
-@@ running-examples/simple-check.php @@
+@@ 04-running-examples/simple-check.php @@
 
 Let's examine the error message for the call to `a("5")`:
 
@@ -44,7 +44,7 @@ The typechecker assumes that all usable code in your project can be used from an
 
 Of course, if your code is one file, this point is moot. But once you start having a project that has multiple files autoloading becomes very useful. If you don't autoload, the typechecker will still typecheck correctly, but it won't be able to tell that you forgot to include some file with necessary code to actually run.
 
-@@ running-examples/autoloading.php @@
+@@ 04-running-examples/autoloading.php @@
 
 Let's say we forgot to put a require here to get access to the code for class `B`. Without the autoloading code, if you run `hh_client,` you will get `No errors!`. Great, right? Well, not really. The typechecker did the right thing, but you will get a fatal at *runtime*.
 

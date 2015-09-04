@@ -2,7 +2,7 @@ Attributes are essentially a holder of metadata for any [reflectable](link to re
 
 Unless they are [special](04-special.md), attributes are a syntactic entity. They lend themselves to tooling to accomplish tasks. For example, you can have documentation-based attributes, the contents of which are extracted by reflection.
 
-@@ intro-examples/simple.php @@
+@@ 01-intro-examples/simple.php @@
 
 ## Special Attributes
 

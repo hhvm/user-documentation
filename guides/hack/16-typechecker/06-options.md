@@ -4,7 +4,7 @@ This section will not cover all the options. To see all the options, you can uti
 
 The following example will be used in discussion of these options:
 
-@@ options-examples/options.php @@
+@@ 06-options-examples/options.php @@
 
 **NOTE**: Many of these options support namespaced classes and function as their symbols. Just make sure you quote the string. e.g.,
 

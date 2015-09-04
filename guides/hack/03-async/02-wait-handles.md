@@ -8,7 +8,7 @@ Wait handles are represented through the Hack interface called `Awaitable`. Whil
 
 The type of the Awaitable will be the underlying type that the function would return if it wasn't async.
 
-@@ wait-handle-examples/wait-handle-return.php @@
+@@ 02-wait-handle-examples/wait-handle-return.php @@
 
 ## Two types of wait handles
 
@@ -18,7 +18,7 @@ There are two types of wait handles. Single and collection.
 
 One is the usual `Awaitable` that is returned from an `async` function.
 
-@@ wait-handle-examples/single-wait-handle.php @@
+@@ 02-wait-handle-examples/single-wait-handle.php @@
 
 Note that normally you will see something like `await f();` which combines the retrieving of the wait handle with the retrieving of the result of the wait handle. The example above separates it out for illustration purposes.
 
@@ -29,7 +29,7 @@ The other is a wait handle representing a collection of other wait handles. To r
 * `HH\Asio\v()`: Indexed list of wait handles with consecutive integer keys
 * `HH\Asio\m()`: Associative map of wait handles with integer or string keys
 
-@@ wait-handle-examples/multiple-wait-handles.php @@
+@@ 02-wait-handle-examples/multiple-wait-handles.php @@
 
 ## Join
 
@@ -41,6 +41,6 @@ Note: that global function calls (e.g., `main()`) require a join if that functio
 HH\Asio\join(main());
 ```
 
-@@ wait-handle-examples/join.php @@
+@@ 02-wait-handle-examples/join.php @@
 
 You should not call `join()` inside an `async` function. This would defeat the purpose of `async` as the the awaitable and any dependencies will run to completion synchronously, stopping any other awaitables in their tracks from running. Just `await` in an `async` function.

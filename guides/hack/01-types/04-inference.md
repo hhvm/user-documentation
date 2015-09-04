@@ -6,7 +6,7 @@ Basically type inference is a deduction of what the type of a variable should be
 
 Local variables are not type annotated. They are inferred based on the flow of the program. In fact, you can assign different values of different types to local variables. When a local variable is returned from the function or method, or when it is compared or somehow otherwise used against a variable of a known type, is the only point at which it matters what the type of a local variable is.
 
-@@ inference-examples/local-variables.php @@
+@@ 04-inference-examples/local-variables.php @@
 
 ### Unresolved Types
 
@@ -14,7 +14,7 @@ The above example showed a case where a variable was assigned to an `int ` in bo
 
 However what happens if instead of assigning a variable to the same type in both branches of a conditional, you decide to assign it to a different type in each branch. 
 
-@@ inference-examples/unresolved.php @@
+@@ 04-inference-examples/unresolved.php @@
 
 In the conditional branch, we are assigning the same local variable to one of two types. This makes the local variable *unresolved*, meaning that the typechecker knows that the variable can be one of the two types, but doesn't know which. So at this point, only operations that can be performed on **both** types will be permitted.
 
@@ -22,7 +22,7 @@ In the conditional branch, we are assigning the same local variable to one of tw
 
 Normally class properties are annotated, so the typechecker initially knows their expected type. But sometimes the typechecker has to make some assumptions that makes inferring further use of a property a bit more complicated than it is for local variables.
 
-@@ inference-examples/props.php @@
+@@ 04-inference-examples/props.php @@
 
 The typechecker only infers local to a function. It makes no assumptions about what might happen outside the function, say, for example, if a function calls another function. That's why the typechecker will throw an error even though we know by the eye test that there is not a `null` problem.
 

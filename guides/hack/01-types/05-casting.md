@@ -2,4 +2,4 @@ In Hack, variables can be cast to different types as normal, following the vario
 
 **NOTE**: There is one modification to the rules. Remember, you cannot use the [aliases for certain primitives](02-type-system#Alias Primitives) in Hack (e.g, `boolean` instead of `bool`). 
 
-@@ casting-examples/cast.php @@
+@@ 05-casting-examples/cast.php @@

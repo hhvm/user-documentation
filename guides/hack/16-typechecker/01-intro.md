@@ -2,11 +2,11 @@ The Hack typechecker is the primary tool that makes Hack such a unique language.
 
 Without the typechecker, this simple example would fail at runtime.
 
-@@ intro-examples/runtime-fail.php @@
+@@ 01-intro-examples/runtime-fail.php @@
 
 However, when using the typechecker before you run your code, you can catch errors before deployment, saving users from nasty fatals that may occur.
 
-@@ intro-examples/typechecker-catch.php @@
+@@ 01-intro-examples/typechecker-catch.php @@
 
 The typechecker statically analyzes your program, catching problems in all paths of your code. This **is not** compilation. It is super fast feedback on the various states that might occur in your program so you can handle them *before* your code is run. The typechecker literally monitors changes to your code and updates its analysis accordingly, in real time.
 
