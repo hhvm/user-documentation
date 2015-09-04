@@ -8,4 +8,5 @@ abstract final class BuildPaths {
   const string MERGED_YAML = LocalConfig::BUILD_DIR.'/merged';
 
   const string GUIDES_HTML = LocalConfig::BUILD_DIR.'/guides';
+  const string GUIDES_INDEX = self::GUIDES_HTML.'/index.php';
 }

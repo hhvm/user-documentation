@@ -8,7 +8,7 @@ abstract class BuildStep {
   protected static function findSources(
     string $root,
     \ConstSet<string> $extensions,
-  ): Iterable<string> {
+  ): Vector<string> {
     $rdi = new \RecursiveDirectoryIterator($root);
     $rii = new \RecursiveIteratorIterator(
       $rdi,

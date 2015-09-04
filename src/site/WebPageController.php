@@ -16,9 +16,7 @@ abstract class WebPageController extends WebController {
           <head>
             <title>{$title}</title>
           </head>
-          <body>
-            {$this->getBody()}
-          </body>
+          <body>{$body}</body>
         </html>
       </x:doctype>;
     $string = await $xhp->asyncToString();

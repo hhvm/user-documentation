@@ -1,11 +1,13 @@
 <?hh
 
+use HHVM\UserDocumentation\ArgAssert;
+
 class Router {
   private function getRoutes(
   ): KeyedIterable<string, classname<WebController>> {
     return ImmMap {
       '/' => HomePageController::class,
-      '/{category:(?:hack|hhvm)}/' => GuidesListController::class,
+      '/{product:(?:hack|hhvm)}/' => GuidesListController::class,
     };
   }
 
@@ -21,7 +23,7 @@ class Router {
 
   public function routeRequest(
     \Psr\Http\Message\ServerRequestInterface $request
-  ): (classname<WebController>, KeyedIterable<string, string>) {
+  ): (classname<WebController>, ImmMap<string, string>) {
     $path = $request->getUri()->getPath();
     $route = $this->getDispatcher()->dispatch(
       $request->getMethod(),

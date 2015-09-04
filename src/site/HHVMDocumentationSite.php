@@ -7,6 +7,6 @@ final class HHVMDocumentationSite {
     ServerRequestInterface $request,
   ): Awaitable<void> {
     list($controller, $vars) = (new Router())->routeRequest($request);
-    var_dump($controller, $vars);
+    await (new $controller($vars))->respond();
   }
 }

@@ -6,6 +6,10 @@ final class HomePageController extends WebPageController {
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
-    return <div />;
+    return
+      <ul>
+        <li><a href="/hhvm/">HHVM</a></li>
+        <li><a href="/hack/">Hack</a></li>
+      </ul>;
   }
 }
