@@ -20,7 +20,7 @@ function callFoo(): void {
 
 function myAutoloader(string $class): void {
   // Remove all the namespace stuff and just get the 'B'
-  include __DIR__ . '/' . substr($class, -1) . '.php';
+  include __DIR__ . '/' . substr($class, -1) . '.hh';
 }
 
 spl_autoload_register(

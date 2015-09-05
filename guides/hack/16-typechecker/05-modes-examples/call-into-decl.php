@@ -2,10 +2,10 @@
 
 namespace Hack\UserDocumentation\TypeChecker\Modes\Examples\CallIntoDecl;
 
-require __DIR__ . '/decl.php';
+require __DIR__ . '/decl.hh';
 // This actually makes the call to calling_into_decl() since we cannot have
 // top level functions in strict mode
-require __DIR__ . '/main-function.php';
+require __DIR__ . '/main-function.hh';
 
 use \Hack\UserDocumentation\TypeChecker\Modes\Examples\Decl as Decl;
 
