@@ -7,7 +7,7 @@ module HHVM
         base = File.dirname(context[:file])
         doc.search('p').each do |node|
           contents = node.inner_text.strip
-          if match_data = /^@@ (?<relative_path>[^ ]+\.php) @@$/.match(contents)
+          if match_data = /^@@ (?<relative_path>[^ ]+\.php(?:.type-errors)?) @@$/.match(contents)
             relative_path = match_data['relative_path']
             full_path = File.expand_path(relative_path, base)
 
