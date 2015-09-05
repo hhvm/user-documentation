@@ -1,0 +1,6 @@
+<?hh
+
+final class A {}
+
+<<__MockClass>>
+class B {}
