@@ -60,5 +60,8 @@ implementation itself, and Hack's data.
 2. Copy LocalConfig.php.example to LocalConfig.php, and adjust the
    `HHVM_TREE` constant
 3. Run `composer install`
-4. Run `hhvm bin/build-yaml-from-hhvm.php`
-5. The YAML documentation is now in `build/merged/`
+4. Run `hhvm bin/build.php`
+5. The built documentation is now in `build/`
+
+**NOTE**: You may have install a Ruby gem before doing the building. See
+[the md-render README](md-render/README.md) for details.
