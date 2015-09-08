@@ -23,9 +23,18 @@ final class GuidesListController extends WebPageController {
 
     $root = <ul />;
     foreach ($guides as $guide) {
+      $pages = GuidesIndex::getPages($product, $guide);
+      $url = sprintf(
+        "/%s/%s/%s",
+        $product,
+        $guide,
+        $pages[0],
+      );
+
       $title = ucwords(strtr($guide, '-', ' '));
+
       $root->appendChild(
-        <li><a href={sprintf("/%s/%s/", $product, $guide)}>{$title}</a></li>
+        <li><a href={$url}>{$title}</a></li>
       );
     }
     return $root;

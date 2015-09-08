@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hack and HHVM: Manual Quick Reference</title>
+
+ <link rel="shortcut icon" href="http://docs.hhvm.com/favicon.png">
+ <link rel="search" type="application/opensearchdescription+xml" href="http://docs.hhvm.com/docshhvmimprovedsearch.src" title="Add docs.hhvm.com search">
+ <link rel="alternate" type="application/atom+xml" href="http://docs.hhvm.com/releases/feed.php" title="PHP Release feed">
+ <link rel="alternate" type="application/atom+xml" href="http://docs.hhvm.com/feed.atom" title="PHP: Hypertext Preprocessor">
+
+  <meta property='og:type' content='website'>
+  <meta property='og:title' content='Hack and HHVM Manual'>
+  <meta property='og:description' content='The documentation for the Hack language and HHVM'>
+  <meta property='og:image' content='http://docs.hhvm.com/images/og.png'>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49208336-3', 'hhvm.com');
+  ga('send', 'pageview');
+
+</script>
+
+ <link rel="canonical" href="http://docs.hhvm.com/quickref.php">
+ <link rel="shorturl" href="http://docs.hhvm.com/quickref">
+
+ <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,400italic,600italic|Source+Code+Pro&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="http://docs.hhvm.com/cached.php?t=1396472609&amp;f=styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://docs.hhvm.com/styles/theme-base.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://docs.hhvm.com/cached.php?t=1395166406&amp;f=styles/theme-medium.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://docs.hhvm.com/styles/theme-medium.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://docs.hhvm.com/cached.php?t=1439411643&amp;f=styles/hack-hhvm.css" media="screen">
+<link rel="stylesheet" type="text/css" href="http://docs.hhvm.com/styles/hack-hhvm.css" media="screen">
+
+
+ <base href="http://docs.hhvm.com/manual-lookup.php">
+
+</head>
+<body class="help ">
+
+<nav id="head-nav" class="navbar navbar-fixed-top">
+  <div class="navbar-inner clearfix">
+    <a href='/' class="brand"></a>
+    <form class="navbar-search" id="topsearch" action="/search.php">
+      <input type="hidden" name="show" value="quickref">
+      <input type="search" name="pattern" class="search-query" placeholder="Search" accesskey="s">
+    </form>
+  </div>
+  <div id="flash-message"></div>
+</nav>
+<nav id="trick"><div><dl>
+<dt><a href='/manual/en/install-intro.php'>Installation and Introduction</a></dt>
+	<dd><a href='/manual/en/install-intro.install.php'>Installation</a></dd>
+	<dd><a href='/manual/en/install-intro.intro.php'>Introduction</a></dd>
+<dt><a href='/manual/en/hacklangref.php'>Hack Language Reference</a></dt>
+	<dd><a href='/manual/en/hack.intro.php'>The Hack Language</a></dd>
+	<dd><a href='/manual/en/hack.arrays.php'>Arrays</a></dd>
+	<dd><a href='/manual/en/hack.async.php'>Async</a></dd>
+	<dd><a href='/manual/en/hack.attributes.php'>Attributes</a></dd>
+	<dd><a href='/manual/en/hack.collections.php'>Collections</a></dd>
+	<dd><a href='/manual/en/hack.constructorargumentpromotion.php'>Constructor Argument Promotion</a></dd>
+	<dd><a href='/manual/en/hack.enums.php'>Enums</a></dd>
+	<dd><a href='/manual/en/hack.generics.php'>Generics</a></dd>
+	<dd><a href='/manual/en/hack.modes.php'>Hack Modes</a></dd>
+	<dd><a href='/manual/en/hack.lambda.php'>Lambda Expressions</a></dd>
+	<dd><a href='/manual/en/hack.methoddispatch.php'>Method Dispatch</a></dd>
+	<dd><a href='/manual/en/hack.nullable.php'>Nullable</a></dd>
+	<dd><a href='/manual/en/hack.otherrulesandfeatures.php'>Other Hack Rules and Features</a></dd>
+	<dd><a href='/manual/en/hack.predefined.interfaces.php'>Predefined Interfaces and Classes</a></dd>
+	<dd><a href='/manual/en/hack.shapes.php'>Shapes</a></dd>
+	<dd><a href='/manual/en/hack.traits.php'>Traits</a></dd>
+	<dd><a href='/manual/en/hack.tuples.php'>Tuples</a></dd>
+	<dd><a href='/manual/en/hack.typealiasing.php'>Type Aliasing</a></dd>
+	<dd><a href='/manual/en/hack.annotations.php'>Type Annotations</a></dd>
+	<dd><a href='/manual/en/hack.unsupported.php'>Unsupported PHP Features in Hack</a></dd>
+	<dd><a href='/manual/en/hack.xhp.php'>Typing XHP</a></dd>
+<dt><a href='/manual/en/phplangref.php'>PHP Language Reference</a></dt>
+	<dd><a href='/manual/en/language.basic-syntax.php'>Basic syntax</a></dd>
+	<dd><a href='/manual/en/language.types.php'>Types</a></dd>
+	<dd><a href='/manual/en/language.variables.php'>Variables</a></dd>
+	<dd><a href='/manual/en/language.constants.php'>Constants</a></dd>
+	<dd><a href='/manual/en/language.expressions.php'>Expressions</a></dd>
+	<dd><a href='/manual/en/language.operators.php'>Operators</a></dd>
+	<dd><a href='/manual/en/language.control-structures.php'>Control Structures</a></dd>
+	<dd><a href='/manual/en/language.functions.php'>Functions</a></dd>
+	<dd><a href='/manual/en/language.oop5.php'>Classes and Objects</a></dd>
+	<dd><a href='/manual/en/language.namespaces.php'>Namespaces</a></dd>
+	<dd><a href='/manual/en/language.exceptions.php'>Exceptions</a></dd>
+	<dd><a href='/manual/en/language.generators.php'>Generators</a></dd>
+	<dd><a href='/manual/en/language.references.php'>References Explained</a></dd>
+	<dd><a href='/manual/en/reserved.variables.php'>Predefined Variables</a></dd>
+	<dd><a href='/manual/en/reserved.exceptions.php'>Predefined Exceptions</a></dd>
+	<dd><a href='/manual/en/reserved.interfaces.php'>Predefined Interfaces and Classes</a></dd>
+	<dd><a href='/manual/en/context.php'>Context options and parameters</a></dd>
+	<dd><a href='/manual/en/wrappers.php'>Supported Protocols and Wrappers</a></dd>
+</dl>
+<dl>
+<dt><a href='/manual/en/security.php'>Security</a></dt>
+	<dd><a href='/manual/en/security.intro.php'>Introduction</a></dd>
+	<dd><a href='/manual/en/security.general.php'>General considerations</a></dd>
+	<dd><a href='/manual/en/security.cgi-bin.php'>Installed as CGI binary</a></dd>
+	<dd><a href='/manual/en/security.apache.php'>Installed as an Apache module</a></dd>
+	<dd><a href='/manual/en/security.filesystem.php'>Filesystem Security</a></dd>
+	<dd><a href='/manual/en/security.database.php'>Database Security</a></dd>
+	<dd><a href='/manual/en/security.errors.php'>Error Reporting</a></dd>
+	<dd><a href='/manual/en/security.globals.php'>Using Register Globals</a></dd>
+	<dd><a href='/manual/en/security.variables.php'>User Submitted Data</a></dd>
+	<dd><a href='/manual/en/security.magicquotes.php'>Magic Quotes</a></dd>
+	<dd><a href='/manual/en/security.hiding.php'>Hiding PHP</a></dd>
+	<dd><a href='/manual/en/security.current.php'>Keeping Current</a></dd>
+<dt><a href='/manual/en/features.php'>Features</a></dt>
+	<dd><a href='/manual/en/features.http-auth.php'>HTTP authentication with PHP</a></dd>
+	<dd><a href='/manual/en/features.cookies.php'>Cookies</a></dd>
+	<dd><a href='/manual/en/features.sessions.php'>Sessions</a></dd>
+	<dd><a href='/manual/en/features.xforms.php'>Dealing with XForms</a></dd>
+	<dd><a href='/manual/en/features.file-upload.php'>Handling file uploads</a></dd>
+	<dd><a href='/manual/en/features.remote-files.php'>Using remote files</a></dd>
+	<dd><a href='/manual/en/features.connection-handling.php'>Connection handling</a></dd>
+	<dd><a href='/manual/en/features.persistent-connections.php'>Persistent Database Connections</a></dd>
+	<dd><a href='/manual/en/features.commandline.php'>Command line usage</a></dd>
+	<dd><a href='/manual/en/features.gc.php'>Garbage Collection</a></dd>
+	<dd><a href='/manual/en/features.dtrace.php'>DTrace Dynamic Tracing</a></dd>
+</dl>
+<dl>
+<dt><a href='/manual/en/hackfuncref.php'>Hack Class and Function Reference</a></dt>
+	<dd><a href='/manual/en/book.hackcollections.php'>Hack Collections</a></dd>
+	<dd><a href='/manual/en/book.enums.php'>Functions provided by Enums</a></dd>
+	<dd><a href='/manual/en/book.hackmagic.php'>Functions Special-Cased by the type checker</a></dd>
+	<dd><a href='/manual/en/book.hack.async.mysql.php'>Async Mysql</a></dd>
+	<dd><a href='/manual/en/book.hack.mcrouter.php'>MCRouter</a></dd>
+	<dd><a href='/manual/en/book.hack.asio.php'>asio</a></dd>
+<dt><a href='/manual/en/phpfuncref.php'>PHP Function Reference</a></dt>
+	<dd><a href='/manual/en/refs.basic.php.php'>Affecting PHP's Behaviour</a></dd>
+	<dd><a href='/manual/en/refs.utilspec.audio.php'>Audio Formats Manipulation</a></dd>
+	<dd><a href='/manual/en/refs.remote.auth.php'>Authentication Services</a></dd>
+	<dd><a href='/manual/en/refs.utilspec.cmdline.php'>Command Line Specific Extensions</a></dd>
+	<dd><a href='/manual/en/refs.compression.php'>Compression and Archive Extensions</a></dd>
+	<dd><a href='/manual/en/refs.creditcard.php'>Credit Card Processing</a></dd>
+	<dd><a href='/manual/en/refs.crypto.php'>Cryptography Extensions</a></dd>
+	<dd><a href='/manual/en/refs.database.php'>Database Extensions</a></dd>
+	<dd><a href='/manual/en/refs.calendar.php'>Date and Time Related Extensions</a></dd>
+	<dd><a href='/manual/en/refs.fileprocess.file.php'>File System Related Extensions</a></dd>
+	<dd><a href='/manual/en/refs.international.php'>Human Language and Character Encoding Support</a></dd>
+	<dd><a href='/manual/en/refs.utilspec.image.php'>Image Processing and Generation</a></dd>
+	<dd><a href='/manual/en/refs.remote.mail.php'>Mail Related Extensions</a></dd>
+	<dd><a href='/manual/en/refs.math.php'>Mathematical Extensions</a></dd>
+	<dd><a href='/manual/en/refs.utilspec.nontext.php'>Non-Text MIME Output</a></dd>
+	<dd><a href='/manual/en/refs.fileprocess.process.php'>Process Control Extensions</a></dd>
+	<dd><a href='/manual/en/refs.basic.other.php'>Other Basic Extensions</a></dd>
+	<dd><a href='/manual/en/refs.remote.other.php'>Other Services</a></dd>
+	<dd><a href='/manual/en/refs.search.php'>Search Engine Extensions</a></dd>
+	<dd><a href='/manual/en/refs.utilspec.server.php'>Server Specific Extensions</a></dd>
+	<dd><a href='/manual/en/refs.basic.session.php'>Session Extensions</a></dd>
+	<dd><a href='/manual/en/refs.basic.text.php'>Text Processing</a></dd>
+	<dd><a href='/manual/en/refs.basic.vartype.php'>Variable and Type Related Extensions</a></dd>
+	<dd><a href='/manual/en/refs.webservice.php'>Web Services</a></dd>
+	<dd><a href='/manual/en/refs.utilspec.windows.php'>Windows Only Extensions</a></dd>
+	<dd><a href='/manual/en/refs.xml.php'>XML Manipulation</a></dd>
+</dl>
+<dl>
+<dt>Keyboard Shortcuts</dt><dt>?</dt>
+<dd>This help</dd>
+<dt>j</dt>
+<dd>Next menu item</dd>
+<dt>k</dt>
+<dd>Previous menu item</dd>
+<dt>g p</dt>
+<dd>Previous man page</dd>
+<dt>g n</dt>
+<dd>Next man page</dd>
+<dt>G</dt>
+<dd>Scroll to bottom</dd>
+<dt>g g</dt>
+<dd>Scroll to top</dd>
+<dt>g h</dt>
+<dd>Goto homepage</dd>
+<dt>g s</dt>
+<dd>Goto search<br>(current page)</dd>
+<dt>/</dt>
+<dd>Focus search box</dd>
+</dl></div></nav>
+<div id="goto">
+    <div class="search">
+         <div class="text"></div>
+         <div class="results"><ul></ul></div>
+   </div>
+</div>
+
+
+
+
+
+<div id="layout">
+
+
+<section id="layout-content">
+<h1>Search results</h1><noscript>
+  doc.hhvm.com's search functionality requires JavaScript to operate. Please enable
+  JavaScript and reload to continue.
+</noscript>
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  document.getElementById("cse").innerHTML = "Loading...";
+  google.load('search', '1', {language : 'en', style : google.loader.themes.MINIMALIST});
+  google.setOnLoadCallback(function() {
+    var customSearchOptions = {};
+    var customSearchControl = new google.search.CustomSearchControl(
+      '004427703517724801744:anf7gmp7eie', customSearchOptions);
+    customSearchControl.setLinkTarget(google.search.Search.LINK_TARGET_SELF);
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+    customSearchControl.execute("favicon.ico");  }, true);
+</script>
+    </section><!-- layout-content -->
+        <aside class="tips">
+        <div class="inner"><p class="panel"><h2>Hack and PHP Function List</h2><p><b>favicon.ico</b> function doesn't exist. Closest function matches:</p><!-- result list start -->
+<ul id="quickref_functions">
+<li><a href="/manual/en/class.fannconnection.php">fannconnection</a></li>
+<li><a href="/manual/en/function.iconv-mime-decode.php">iconv_mime_decode</a></li>
+<li><a href="/manual/en/function.radius-config.php">radius_config</a></li>
+<li><a href="/manual/en/function.iconv-mime-encode.php">iconv_mime_encode</a></li>
+<li><a href="/manual/en/function.tidy-config-count.php">tidy_config_count</a></li>
+<li><a href="/manual/en/function.iconv.php">iconv</a></li>
+<li><a href="/manual/en/class.swfaction.php">swfaction</a></li>
+<li><a href="/manual/en/function.fam-cancel-monitor.php">fam_cancel_monitor</a></li>
+<li><a href="/manual/en/function.m-verifyconnection.php">m_verifyconnection</a></li>
+<li><a href="/manual/en/class.amqpconnection.php">amqpconnection</a></li>
+<li><a href="/manual/en/function.swf-actionstop.php">swf_actionstop</a></li>
+<li><a href="/manual/en/function.pdf-concat.php">pdf_concat</a></li>
+<li><a href="/manual/en/function.version-compare.php">version_compare</a></li>
+<li><a href="/manual/en/function.swf-oncondition.php">swf_oncondition</a></li>
+<li><a href="/manual/en/function.ovrimos-connect.php">ovrimos_connect</a></li>
+<li><a href="/manual/en/function.oci-connect.php">oci_connect</a></li>
+<li><a href="/manual/en/function.ftp-connect.php">ftp_connect</a></li>
+<li><a href="/manual/en/function.yaz-connect.php">yaz_connect</a></li>
+<li><a href="/manual/en/function.ifx-connect.php">ifx_connect</a></li>
+<li><a href="/manual/en/class.eventconfig.php">eventconfig</a></li>
+<li><a href="/manual/en/function.m-maxconntimeout.php">m_maxconntimeout</a></li>
+<li><a href="/manual/en/class.hack.immvectortv.php">hack.immvectortv</a></li>
+<li><a href="/manual/en/function.apc-inc.php">apc_inc</a></li>
+<li><a href="/manual/en/function.eio-nop.php">eio_nop</a></li>
+<li><a href="/manual/en/function.aggregation-info.php">aggregation_info</a></li>
+<li><a href="/manual/en/function.tidy-save-config.php">tidy_save_config</a></li>
+<li><a href="/manual/en/function.fam-monitor-file.php">fam_monitor_file</a></li>
+<li><a href="/manual/en/function.ldap-connect.php">ldap_connect</a></li>
+<li><a href="/manual/en/function.apd-continue.php">apd_continue</a></li>
+<li><a href="/manual/en/function.swf-addcolor.php">swf_addcolor</a></li>
+</ul>
+<!-- result list end -->
+</div>
+    </aside>
+
+
+  </div><!-- layout -->
+
+  <footer>
+    <div class="container footer-content">
+      <div class="row-fluid">
+      <ul class="footmenu">
+        <li> Copyright &copy; 2001-2015 The PHP Group   |</li>
+        <li>Copyright &copy; 2014-2015   Facebook</li>
+      </ul>
+      </div>
+    </div>
+  </footer>
+
+    
+ <!-- External and third party libraries. -->
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://docs.hhvm.com/cached.php?t=1395166406&amp;f=/js/ext/modernizr.js"></script>
+<script type="text/javascript" src="http://docs.hhvm.com/cached.php?t=1395166406&amp;f=/js/ext/hogan-2.0.0.min.js"></script>
+<script type="text/javascript" src="http://docs.hhvm.com/cached.php?t=1395166406&amp;f=/js/ext/typeahead.min.js"></script>
+<script type="text/javascript" src="http://docs.hhvm.com/cached.php?t=1395166406&amp;f=/js/ext/mousetrap.min.js"></script>
+<script type="text/javascript" src="http://docs.hhvm.com/cached.php?t=1398365074&amp;f=/js/search.js"></script>
+<script type="text/javascript" src="http://docs.hhvm.com/cached.php?t=1409874388&amp;f=/js/common.js"></script>
+
+<a id="toTop" href="javascript:;"><span id="toTopHover"></span><img width="40" height="40" alt="To Top" src="/images/to-top@2x.png"></a>
+
+</body>
+</html>
+

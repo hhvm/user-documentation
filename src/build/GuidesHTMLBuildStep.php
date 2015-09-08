@@ -47,7 +47,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
 
   private function createIndex(
     Iterable<string> $list,
-  ): Map<string, Map<string, Vector<string>>> {
+  ): Map<string, Map<string, Map<string, string>>> {
     $out = Map { };
     foreach ($list as $path) {
       $path = str_replace(BuildPaths::GUIDES_HTML.'/', '', $path);
@@ -62,9 +62,9 @@ final class GuidesHTMLBuildStep extends BuildStep {
         $out[$product] = Map {};
       }
       if (!$out[$product]->contains($section)) {
-        $out[$product][$section] = Vector { };
+        $out[$product][$section] = Map { };
       }
-      $out[$product][$section][] = $page;
+      $out[$product][$section][$page] = $path;
     }
     return $out;
   }
