@@ -12,11 +12,13 @@ final class GuidePageController extends WebPageController {
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
-    $path = GuidesIndex::getFileForPage(
-      $this->getRequiredStringParam('product'),
-      $this->getRequiredStringParam('guide'),
-      $this->getRequiredStringParam('page'),
-    );
-    return <div>{new HTMLFileRenderable($path)}</div>;
+    return self::invariantTo404(() ==> {
+      $path = GuidesIndex::getFileForPage(
+        $this->getRequiredStringParam('product'),
+        $this->getRequiredStringParam('guide'),
+        $this->getRequiredStringParam('page'),
+      );
+      return <div>{new HTMLFileRenderable($path)}</div>;
+    });
   }
 }

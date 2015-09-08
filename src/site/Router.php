@@ -9,6 +9,8 @@ class Router {
       '/' => HomePageController::class,
       '/{product:(?:hack|hhvm)}/'
         => GuidesListController::class,
+      '/{product:(?:hack|hhvm)}/{guide}/'
+        => RedirectToGuideFirstPageController::class,
       '/{product:(?:hack|hhvm)}/{guide}/{page}'
         => GuidePageController::class,
     };
@@ -50,7 +52,3 @@ class Router {
     );
   }
 }
-
-abstract class RoutingException extends \Exception {}
-final class HTTPNotFoundException extends RoutingException {}
-final class HTTPMethodNotFoundException extends RoutingException {}

@@ -6,7 +6,11 @@ final class HHVMDocumentationSite {
   public async function respondTo(
     ServerRequestInterface $request,
   ): Awaitable<void> {
-    list($controller, $vars) = (new Router())->routeRequest($request);
-    await (new $controller($vars))->respond();
+    try {
+      list($controller, $vars) = (new Router())->routeRequest($request);
+      await (new $controller($vars))->respond();
+    } catch (HTTPException $e) {
+      $e->respond();
+    }
   }
 }
