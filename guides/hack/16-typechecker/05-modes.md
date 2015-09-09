@@ -53,9 +53,9 @@ is called decl mode. Decl mode code is not typechecked. It is used for taking ex
 
 New Hack code should never be in decl mode.
 
-@@ 05-modes-examples/decl.php @@
+@@ 05-modes-examples/decl.inc.php @@
 @@ 05-modes-examples/call-into-decl.php @@
-@@ 05-modes-examples/main-function.php @@
+@@ 05-modes-examples/main-function.inc.php @@
 
 The example shows all three modes. First it shows a decl mode file that used to be in `<?php`. Nothing else was added except the header change. Then it shows a strict mode file calling into the decl mode file. The typechecker knows the signatures of the functions and classes and can ensure basic things like whether you are calling a named entity and passing the right number of arguments. Finally, we have a partial mode file that actually calls the function in strict mode because we cannot have top-level function calls in strict mode.
 

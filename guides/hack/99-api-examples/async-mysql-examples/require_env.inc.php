@@ -1,6 +1,6 @@
 <?hh
 
-require __DIR__ . "/connect.hh";
+require __DIR__ . "/connect.inc.php";
 
 if (!extension_loaded('mysql') || !function_exists('mysqli_connect')) {
   die('Skip');

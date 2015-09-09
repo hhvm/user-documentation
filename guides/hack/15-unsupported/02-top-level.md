@@ -27,6 +27,6 @@ The following are allowed at the top-level in strict mode
 If you want your current top-level code (or new code, for that matter) to be compatible with strict mode, the best option is to wrap all your top-level code in a function, and make any necessary call to that function from one *partial* mode file that is included in the strict mode file.
 
 @@ 02-top-level-examples/good-strict.php @@
-@@ 02-top-level-examples/include-partial.inc @@
+@@ 02-top-level-examples/include-partial.inc.php @@
 
 Your strict file will typecheck fine. Your partial file still won't be typechecked, so make that file as small as possible with minimal type usage.

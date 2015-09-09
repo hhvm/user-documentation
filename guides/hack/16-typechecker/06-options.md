@@ -35,8 +35,8 @@ hh_client [OPTION]
 :
 :
 strict  user-documentation/hack/16-typechecker/modes-examples/call-into-decl.php
-decl    user-documentation/hack/16-typechecker/modes-examples/decl.php
-partial user-documentation/hack/16-typechecker/modes-examples/main-function.php
+decl    user-documentation/hack/16-typechecker/modes-examples/decl.inc.php
+partial user-documentation/hack/16-typechecker/modes-examples/main-function.inc.php
 php user-documentation/hack/16-typechecker/modes-examples/multiple-modes.php
 php user-documentation/hack/16-typechecker/modes-examples/non-hack-code.php
 partial user-documentation/hack/16-typechecker/modes-examples/partial.php

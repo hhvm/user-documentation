@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\Conn;
 
-require __DIR__ . "/../connect.hh";
+require __DIR__ . "/../connect.inc.php";
 
 async function do_connect(): Awaitable<\AsyncMysqlQueryResult> {
   list($host, $port, $db, $user, $passwd) = \get_connection_info();

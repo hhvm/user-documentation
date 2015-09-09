@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Unsupported\TopLevel\Examples\GoodStrict;
 
-require __DIR__ . "/include-partial.hh";
+require __DIR__ . "/include-partial.inc.php";
 
 function foo(int $x): void {
   echo $x + $x;
