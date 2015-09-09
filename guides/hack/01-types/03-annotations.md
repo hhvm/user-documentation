@@ -58,4 +58,4 @@ interface I {
 
 ## Local variables
 
-You **DO NOT** type annotate local variables. They are [inferred](04-inference.md) by the typechecker automatically.
+You **DO NOT** type annotate local variables. They are [inferred](inference.md) by the typechecker automatically.

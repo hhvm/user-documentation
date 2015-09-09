@@ -9,8 +9,8 @@ There are a couple of **important** things to note about these unsupported featu
 
 Here is a high-level view of some of the unsupported features. Drill down to view details.
 
-- [Top Level Code](02-top-level.md)
-- [References (e.g., `&`)](03-references.md)
-- [Mixing HTML with Hack](04-html.md)
-- [Some intrinsics (e.g., `isset()`)](05-intrinsics.md)
-- [Others](06-others.md)
+- [Top Level Code](top-level.md)
+- [References (e.g., `&`)](references.md)
+- [Mixing HTML with Hack](html.md)
+- [Some intrinsics (e.g., `isset()`)](intrinsics.md)
+- [Others](others.md)

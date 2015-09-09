@@ -4,7 +4,7 @@ Attributes usually don't have any special runtime or typechecking semantics by d
 
 When the `__Override` attribute is specified on a method, the typechecker will determine that the method is overriding a method from a parent class. If it is not, the typechecker will raise an error.
 
-@@ 04-special-examples/override.php.type-errors @@
+@@ special-examples/override.php.type-errors @@
 
 **NOTE**: The overridden method must be in a Hack file
 
@@ -18,19 +18,19 @@ In Hack, it is perfectly acceptable for a child class to have a different `__con
 
 This attribute is particularly helpful for polymorphic calls where it may not be known ahead of time which constructor will be called (e.g., like with `new static()`).
 
-@@ 04-special-examples/consistent-construct.php.type-errors @@
+@@ special-examples/consistent-construct.php.type-errors @@
 
 ### Overriding Consistent Construct
 
 There may be a case where a parent class has been marked with `__ConsistentConstruct`, but you want a specific child class to override this requirement. In those cases, you can use the `__UNSAFE_Construct` attribute.
 
-@@ 04-special-examples/consistent-construct-override.php @@
+@@ special-examples/consistent-construct-override.php @@
 
 ## `<<__Memoize>>`
 
 The `__Memoize` attribute allows functions or methods to cache their results. Memoization is used primarily to cache the result of otherwise time-consuming operations. 
 
-@@ 04-special-examples/memoize.php @@
+@@ special-examples/memoize.php @@
 
 ### Limitations
 
@@ -41,7 +41,7 @@ The `__Memoize` attribute allows functions or methods to cache their results. Me
  -- `int`
  -- `float`
  -- `string`
- -- [Nullable](../01-types/02-type-system.md#Nullable) of the above (e.g., `?int`)
+ -- [Nullable](../types/type-system.md#Nullable) of the above (e.g., `?int`)
  -- Array or collection of the above types (e.g., `Map<int>`)
  -- Or an object of a class that implements the `IMemoizeParam` interface
 
@@ -72,7 +72,7 @@ In the past, to show that a function or method was deprecated, you would need to
 
 The `__Deprecated` attribute is added to function or method to indicate that it should no longer be called. The typechecker will flag any calls to such a function or method as an error. HHVM will also issue a [`E_USER_DEPRECATED`](http://php.net/manual/en/errorfunc.constants.php) warning if your call makes it to runtime. 
 
-@@ 04-special-examples/deprecated.php.type-errors @@
+@@ special-examples/deprecated.php.type-errors @@
 
 ### Your logs may fill up
 
@@ -88,7 +88,7 @@ However, what if a class is marked as `final` or a method in a class is marked a
 
 The `__MockClass` attribute allows you to tell HHVM to override the restriction of `final` on a class or method within a class so that a mock class can be created or generated.
 
-@@ 04-special-examples/mock.php.type-errors @@
+@@ special-examples/mock.php.type-errors @@
 
 ### `<<__IsFoldable>>`
 

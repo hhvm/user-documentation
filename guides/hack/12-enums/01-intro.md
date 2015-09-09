@@ -18,7 +18,7 @@ enum <NameOfEnum> : <string | int> {
 
 The name of the enum has to be namespace unique, and members of the enum must be uniquely named too.
 
-@@ 01-intro-examples/simple.php @@
+@@ intro-examples/simple.php @@
 
 ## Enum member values
 
@@ -30,7 +30,7 @@ To access a member value, you follow the similar syntax as class constants
 <NameOfEnum>::<MemberN>
 ```
 
-@@ 01-intro-examples/member-values.php @@
+@@ intro-examples/member-values.php @@
 
 **NOTE**: There is no notion of sequential, implicit values to enum members. For example, if you set the first member to `0`, the next member doesn't, by default, have the value of `1`. All enum members must have an explicit value assigned to it. 
 
@@ -38,14 +38,14 @@ To access a member value, you follow the similar syntax as class constants
 
 While enums have underlying types, they are not interchangeable. The enum is a distinct type. And like any other types, you cannot, for example, pass an `int` to a function expecting an enum, or an enum value to a function expecting a `string`. 
 
-However, you can use simple casting to convert a member value of an enum to its underlying type, and you can use Hack's special [enum functions](link to enum API) [`assert()`](link to assert API) and [`coerce()`](link to coerce API) to convert from an underlying type to an enum type.
+However, you can use simple casting to convert a member value of an enum to its underlying type, and you can use Hack's special [enum functions](functions.md) [`assert()`](functions.md#assert) and [`coerce()`](functions.md#coerce) to convert from an underlying type to an enum type.
 
 **NOTE**: You can use some language constructs like `echo` without casting to the underlying type.
 
-@@ 01-intro-examples/casting.php @@
+@@ intro-examples/casting.php @@
 
 ### Implicit Casting
 
 By using the `as` constraint operator, you can make it so casting to the underlying type is implict.
 
-@@ 01-intro-examples/implicit-casting.php @@
+@@ intro-examples/implicit-casting.php @@

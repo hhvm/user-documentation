@@ -1,10 +1,10 @@
-In most cases, [running `hh_client`](04-running.md) without any explicit options passed to it is all you will need to do. However, there are options that can be passed to `hh_client` in order to access code data beyond the typechecking of code.
+In most cases, [running `hh_client`](running.md) without any explicit options passed to it is all you will need to do. However, there are options that can be passed to `hh_client` in order to access code data beyond the typechecking of code.
 
 This section will not cover all the options. To see all the options, you can utilize the help via `hh_client --help`.
 
 The following example will be used in discussion of these options:
 
-@@ 06-options-examples/options.php @@
+@@ options-examples/options.php @@
 
 **NOTE**: Many of these options support namespaced classes and function as their symbols. Just make sure you quote the string. e.g.,
 

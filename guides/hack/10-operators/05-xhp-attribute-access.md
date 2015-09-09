@@ -1,4 +1,4 @@
-XHP is such a big topic that it is [discussed in detail](../05-xhp/01-intro.md) elsewhere, but there is a special operator provided for XHP in order to access the attributes of an XHP object. 
+XHP is such a big topic that it is [discussed in detail](../xhp/intro.md) elsewhere, but there is a special operator provided for XHP in order to access the attributes of an XHP object. 
 
 The operator is:
 
@@ -8,7 +8,7 @@ The operator is:
 
 This operator brings some conciseness, but more importantly, typechecking coverage is improved over the call it replaces `getAttribute("XHPAttributeName")`. Plumbing has been added to the typechecker with first-class support for XHP attributes and this operator.
 
-@@ 05-xhp-attribute-access-examples/comparison.php @@
+@@ xhp-attribute-access-examples/comparison.php @@
 
 ## Namespaces
 

@@ -8,11 +8,11 @@ In general, async follows this pattern:
 
 However, sometimes an async function can throw an exception. The good news is that the same exception object that would be thrown in the non-async version of the code is the same that will be returned when you `await` the wait handle.
 
-@@ 03-exceptions-examples/basic-exception.php @@
+@@ exceptions-examples/basic-exception.php @@
 
-Using the basic utility functions [`v()`](link to v) or [`m()`](link to m) will ignore any successful wait handle results and just throw an exception of one of the wait handle result if one of the results was an exception.
+Using the basic utility functions [`v()`](utility-functions.md) or [`m()`](utility-functions.md) will ignore any successful wait handle results and just throw an exception of one of the wait handle result if one of the results was an exception.
 
-@@ 03-exceptions-examples/multiple-waithandle-exception.php @@
+@@ exceptions-examples/multiple-waithandle-exception.php @@
 
 To get around this, and get the successful results as well, we can use the `asio-utilities` function called [`HH\Asio\wrap()`](link to wrap). It takes a wait handle and returns the expected result or the exception if one was thrown. The exception is gives back is of the type `ResultOrExceptionWrapper`.
 
@@ -29,8 +29,8 @@ interface ResultOrExceptionWrapper<T> {
 
 Taking the example above and using this mechanism:
 
-@@ 03-exceptions-examples/wrapping-exceptions.php @@
+@@ exceptions-examples/wrapping-exceptions.php @@
 
 And here is the output:
 
-@@ 03-exceptions-examples/wrapping-exceptions.php.expectf @@
+@@ exceptions-examples/wrapping-exceptions.php.expectf @@

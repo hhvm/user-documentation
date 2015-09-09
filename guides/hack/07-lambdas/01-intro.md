@@ -3,16 +3,16 @@
 Hack supports the creation of closures through a construct called lambda. Lambdas are generally less verbose than PHP closures and are often used in conjunction with functions like `filter` or `map`.
 
 This example shows you how to make use of the shorter lambda syntax.
-It also uses a [Vector](link to Vector) which is a [Collection](link to Collections).
+It also uses a [Vector](link to Vector) which is a [Collection](../collections/intro.md).
 
-@@ 01-intro-examples/introduction.php @@
+@@ intro-examples/introduction.php @@
 
 The above example is equivalent to the example below using PHP's traditional syntax for anonymous functions. You should see that lambdas make the code more readable and shorter.
 
-@@ 01-intro-examples/difference.php @@
+@@ intro-examples/difference.php @@
 
 ## Capturing variables
 
 PHP provides the keyword `use` to capture variables from the enclosing scope. Hack's lambdas make this even easier. You can use variables implicitly inside of a lambda.
 
-@@ 01-intro-examples/capture-variables.php @@
+@@ intro-examples/capture-variables.php @@

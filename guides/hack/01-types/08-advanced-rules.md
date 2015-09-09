@@ -4,7 +4,7 @@ The type checking rules are generally straightforward (e.g. can't pass a `string
 
 Take a look at this example.
 
-@@ 08-advanced-rules-examples/softhint.php.type-errors @@
+@@ advanced-rules-examples/softhint.php.type-errors @@
 
 What does the "@" in front of the type mean? This causes HHVM to trigger a warning (thus always continuing execution) instead of a catchable fatal error when the passed parameter does not match. It is used to allow you to slowly add types to your code.
 
@@ -14,11 +14,11 @@ What does the "@" in front of the type mean? This causes HHVM to trigger a warni
 
 [Superglobals](http://php.net/manual/en/language.variables.superglobals.php) are available no matter what scope you are currently in. 
 
-@@ 08-advanced-rules-examples/superglobals.php @@
+@@ advanced-rules-examples/superglobals.php @@
 
 The typechecker knows about the built-in superglobals.
 
-**NOTE**: In Hack's [strict mode](link to strict mode), superglobals are not supported. So you will have to create functions in something like [partial mode](link to partial mode) to call from a strict mode file.
+**NOTE**: In Hack's [strict mode](../typechecker/modes.md#strict-mode), superglobals are not supported. So you will have to create functions in something like [partial mode](../typechecker/modes.md#partial-mode) to call from a strict mode file.
 
 ## Variadic Arguments
 
@@ -31,16 +31,16 @@ function foo(int ...$args) // $args is a list of int arguments
 
 The second method is preferred since it is more expressive with the typehint. However, and **this is important**, HHVM does not support variadic parameters *with typehints*
 
-So, use the second method, but you will have to leave off the typehint and have your code in [partial mode](link to partial mode) or use `HH_FIXME` or `UNSAFE` in [strict mode](link to strict mode) in order to make both the
+So, use the second method, but you will have to leave off the typehint and have your code in [partial mode](../typechecker/modes.md#partial-mode) or use `HH_FIXME` or `UNSAFE` in [strict mode](../typechecker/modes.md#strict-mode) in order to make both the
 typechecker and HHVM happy.
 
-@@ 08-advanced-rules-examples/variadic.php @@
+@@ advanced-rules-examples/variadic.php @@
 
 ## Fallthrough
 
 Unintentional fallthrough in `switch` statements are a common mistake. Hack provides a way to catch fallthrough, adding a way to tell it that it was intentional as well.
 
-@@ 08-advanced-rules-examples/fallthrough.php @@
+@@ advanced-rules-examples/fallthrough.php @@
 
 Use `// FALLTHROUGH` to tell the typechecker that our falling through is intentional.
 

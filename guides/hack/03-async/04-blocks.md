@@ -22,7 +22,7 @@ Async blocks have two primary use cases. Remember this is essentially syntatic s
 - Inline simple async statements that would before have required a function call to execute.
 - Replace the call required by an async lambda to return an actual `Awaitable<T>`.
 
-@@ 04-blocks-examples/syntactic-sugar.php @@
+@@ blocks-examples/syntactic-sugar.php @@
 
 ## Limitations
 

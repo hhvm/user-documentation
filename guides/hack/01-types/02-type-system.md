@@ -1,4 +1,4 @@
-Describing types in Hack is largely done through explicit [annotations](03-annotations.md) in your Hack source code. Hack has a large list of possible annotation types. You can also check out a summary of each of these types in our [table](09-summary-table.md).
+Describing types in Hack is largely done through explicit [annotations](annotations.md) in your Hack source code. Hack has a large list of possible annotation types. You can also check out a summary of each of these types in our [table](summary-table.md).
 
 ## Common Primitives
 
@@ -11,7 +11,7 @@ The general primitive types available in PHP are available as explicit type anno
 - `array`
 - `resource`
 
-@@ 02-type-system-examples/primitive.php @@
+@@ type-system-examples/primitive.php @@
 
 ### Alias Primitives
 
@@ -29,11 +29,11 @@ Alias primitives are **not supported** in Hack. So the following are not valid t
 
 **NOTE**: `void` can only be used in method or function returns. It is not applicable to properties or parameters.
 
-@@ 02-type-system-examples/void.php @@
+@@ type-system-examples/void.php @@
 
 ### In Async
 
-It is relatively common for [async](../03-async/01-intro.md) functions to return `Awaitable<void>`. This means that while the function itself is returning an `Awaitable` wait handle, the result of that wait handle will have no value. This, in essence, means the async function did some operation asynchronously that did not require a return value to the caller. 
+It is relatively common for [async](../async/intro.md) functions to return `Awaitable<void>`. This means that while the function itself is returning an `Awaitable` wait handle, the result of that wait handle will have no value. This, in essence, means the async function did some operation asynchronously that did not require a return value to the caller. 
 
 
 ## `noreturn`
@@ -42,7 +42,7 @@ It is relatively common for [async](../03-async/01-intro.md) functions to return
 
 `noreturn` is used to indicate that a given function or *static* method always throws an exception or somehow terminates the program within the function itself.
 
-@@ 02-type-system-examples/noreturn.php.type-errors @@
+@@ type-system-examples/noreturn.php.type-errors @@
 
 **NOTE**: `noreturn` can only be used in *static* method or function returns. It is not applicable to properties or parameters.
 
@@ -55,14 +55,14 @@ Given that a `noreturn` is a essentially a "terminal" type, you cannot use `nore
 
 You can use the name of any built-in or custom class or interface.
 
-@@ 02-type-system-examples/object.php @@
+@@ type-system-examples/object.php @@
 
 
 ## `mixed`
 
 `mixed` is essentially a catch-all type that represents any possible Hack value (including `null` and `void`).
 
-@@ 02-type-system-examples/mixed.php @@
+@@ type-system-examples/mixed.php @@
 
 ### Use sparsely
 
@@ -73,39 +73,39 @@ There are valid uses for `mixed`, but generally you want to be as specific as po
 
 `this` means that a class method returns an object of the same class as the calling method. You can use it to return an instance of an object from a `static` class method where you are returning something lke `new static()`.
 
-@@ 02-type-system-examples/this.php @@
+@@ type-system-examples/this.php @@
 
 
 ## `num`
 
 `num` is special union type of `int` and `float`. Normally, in Hack, `int`s and `floats` are incompatible types. However it was realized that many numerical operating functions work similarly whether you pass an integer or a float. `num` is used for those cases.
 
-@@ 02-type-system-examples/num.php @@
+@@ type-system-examples/num.php @@
 
 
 ## `arraykey`
 
-`arraykey` is special union type of `int` and `string`. Arrays and [collection](../04-collections/01.intro.md) types can be keyed by `int` or `string`.Suppose, for example, an operation was performed on an array to extract the keys, but you didn't know the type of the key. You were left with using `mixed` or doing some sort of duplicative code. `arraykey` resolves that issue.
+`arraykey` is special union type of `int` and `string`. Arrays and [collection](../collections/intro.md) types can be keyed by `int` or `string`.Suppose, for example, an operation was performed on an array to extract the keys, but you didn't know the type of the key. You were left with using `mixed` or doing some sort of duplicative code. `arraykey` resolves that issue.
 
-@@ 02-type-system-examples/arraykey.php @@
+@@ type-system-examples/arraykey.php @@
 
 
 ## XHP
 
-There are two [XHP](../05-xhp/01-intro.md) interfaces that are used when typing XHP objects: `XHPChild` and `XHPRoot`.
+There are two [XHP](../xhp/intro.md) interfaces that are used when typing XHP objects: `XHPChild` and `XHPRoot`.
 
 `XHPRoot` is any object that is an instance of an XHP class. 
 
 `XHPChild ` is the set of valid types for `echo`ing within an XHP context (e.g., `echo <div>{$xhpobj}</div>;`). This includes the primitive types of `string`, `int` and `float`, along with arrays of those types plus any XHP object.
 
-@@ 02-type-system-examples/xhp.php @@
+@@ type-system-examples/xhp.php @@
 
 
 ## Nullable
 
 A nullable type is represented by a `?` placed as a prefix to the type itself (e.g., `?int`). It merely means that the value can be of that type or `null`. 
 
-@@ 02-type-system-examples/nullable.php @@
+@@ type-system-examples/nullable.php @@
 
 ### What can't be nullable?
 
@@ -116,29 +116,29 @@ A nullable type is represented by a `?` placed as a prefix to the type itself (e
 
 ## Generics
 
-[Generics](../02-generics/01-intro.md) allows a specific piece code to work against multiple types in a type-safe way. Depending on the type parameter specified, a generic type can work against one type or many. `Box<T>` for example is the most permissive for types that can be passed to it. `array<int>` is the least permissive as `int`s are only allowed to be placed in the array.
+[Generics](../generics/intro.md) allows a specific piece code to work against multiple types in a type-safe way. Depending on the type parameter specified, a generic type can work against one type or many. `Box<T>` for example is the most permissive for types that can be passed to it. `array<int>` is the least permissive as `int`s are only allowed to be placed in the array.
 
-@@ 02-type-system-examples/generics.php.type-errors @@
+@@ type-system-examples/generics.php.type-errors @@
 
 
 ## Enums
 
-[Enums](../12-enums/01-intro.md) is a type made up of constants, usually related to each other. Unlike class constants, etc., enums are first-class types in the Hack type system. As such, they can be used as type annotations anywhere a primitive or object type can.
+[Enums](../enums/intro.md) is a type made up of constants, usually related to each other. Unlike class constants, etc., enums are first-class types in the Hack type system. As such, they can be used as type annotations anywhere a primitive or object type can.
 
-@@ 02-type-system-examples/enum.php @@
+@@ type-system-examples/enum.php @@
 
 
 ## Callables
 
 There is a `callable` typehint, but Hack does not allow it (HHVM accepts it, however if you don't care about the type checker errors).
 
-Instead, Hack provides a more expressive [callable](../13-other-features) type that can be used of the form:
+Instead, Hack provides a more expressive [callable](../other-features) type that can be used of the form:
 
 ```
 function(0..n parameter types): return type
 ```
 
-@@ 02-type-system-examples/callable.php @@
+@@ type-system-examples/callable.php @@
 
 
 ## Tuples
@@ -155,7 +155,7 @@ Tuples are like fixed arrays. You cannot remove or change any of the types from 
 tuple(value1, ..., value n);
 ```
 
-@@ 02-type-system-examples/tuple.php @@
+@@ type-system-examples/tuple.php @@
 
 
 ### Arrays under the covers
@@ -165,22 +165,22 @@ In HHVM, tuples are implemented as arrays, and you can call `is_array()` on them
 
 ## Type Aliases
 
-[Type aliases](../06-type-aliases/01-intro.md) allow you to give a new name to an existing type. They can be used just like those existing types in annotations.
+[Type aliases](../type-aliases/intro.md) allow you to give a new name to an existing type. They can be used just like those existing types in annotations.
 
-@@ 02-type-system-examples/type-alias.php @@
+@@ type-system-examples/type-alias.php @@
 
 
 ### Classname<T>
 
 `Foo::class` in PHP refers to the string constant containing the fully qualified name of `Foo`. 
 
-Hack introduces a special type aliases called [`classname<T>`](../06-type-aliases/02-opaque.md#classname). So, now when someone writes `Foo::class`, not only does the Hack typechecker recognize the string representation of the class, but also this new type that provides semantics of the class itself.
+Hack introduces a special type aliases called [`classname<T>`](../type-aliases/opaque.md#classname). So, now when someone writes `Foo::class`, not only does the Hack typechecker recognize the string representation of the class, but also this new type that provides semantics of the class itself.
 
-@@ 02-type-system-examples/classname.php.type-errors @@
+@@ type-system-examples/classname.php.type-errors @@
 
 
 ## Shapes
 
-[Shapes](../08-shapes/01-intro.md) are a specific type alias representing a structured array, with a deterministic name and type of keys. They can be used as type annotations as well.
+[Shapes](../shapes/intro.md) are a specific type alias representing a structured array, with a deterministic name and type of keys. They can be used as type annotations as well.
 
-@@ 02-type-system-examples/shape.php @@
+@@ type-system-examples/shape.php @@

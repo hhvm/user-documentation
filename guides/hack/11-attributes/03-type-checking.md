@@ -10,8 +10,8 @@ then the typechecker will verify any use of user attributes against this list in
 
 The primary use case for this is *misspellings*
 
-@@ 03-type-checking-examples/misspelling.php.type-errors @@
+@@ type-checking-examples/misspelling.php.type-errors @@
 
 ## Special Attributes
 
-Special attributes(04-special.md) are not typechecked in this way. This is only for custom user attributes.
+Special attributes(special.md) are not typechecked in this way. This is only for custom user attributes.

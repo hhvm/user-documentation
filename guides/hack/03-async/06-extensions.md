@@ -53,7 +53,7 @@ class AsyncMysqlErrorResult extends AsyncMysqlResult {
 
 Here is a simple example that shows how to get a user name from a database with this extension.
 
-@@ 06-extensions-examples/async-mysql.php @@
+@@ extensions-examples/async-mysql.php @@
 
 ### Connection Pools
 
@@ -61,7 +61,7 @@ The async MySQL extension **does not** support multiplexing -- each concurrent q
 
 The async MySQL extension provides a mechanism to pool connection objects so you don't have to create a new connection every time you want to make a query. The class is `AsyncMysqlConnection` and one can be created like this:
 
-@@ 06-extensions-examples/async-mysql-connection-pool.php @@
+@@ extensions-examples/async-mysql-connection-pool.php @@
 
 ## MCRouter
 
@@ -85,7 +85,7 @@ class MCRouter {
 
 Here is a simple example showing how one might get a user name from memcached:
 
-@@ 06-extensions-examples/async-mcrouter.php @@
+@@ extensions-examples/async-mcrouter.php @@
 
 If an issue occurs when using this protocol, two possible exceptions can be thrown. `MCRouterException` is thrown when something goes wrong with a core option, like deleting a key. `MCRouterOptionException` occurs when you provide an non-parsable option list.
 
@@ -103,9 +103,9 @@ namespace HH\Asio {
 }
 ```
 
-Here is an example of getting a vector of URL contents, using a [lambda](link to lambdas) to cut down on the code verbosity that would come with full closure syntax.
+Here is an example of getting a vector of URL contents, using a [lambda](../lambdas/intro.md) to cut down on the code verbosity that would come with full closure syntax.
 
-@@ 06-extensions-examples/async-curl.php @@
+@@ extensions-examples/async-curl.php @@
 
 ## Streams  
 
@@ -120,4 +120,4 @@ async function stream_await(resource $fp, int $events,
 
 This example shows how you can use `stream_await()` to write to resources
 
-@@ 06-extensions-examples/async-stream.php @@
+@@ extensions-examples/async-stream.php @@

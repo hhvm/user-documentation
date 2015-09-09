@@ -8,9 +8,9 @@ If you are struggling as to whether your code should be async or not, you can ge
 
 These two programs are, for all intents and purposes, equivalent.
 
-@@ 07-guidelines-examples/non-async-hello.php @@
+@@ guidelines-examples/non-async-hello.php @@
 
-@@ 07-guidelines-examples/async-hello.php @@
+@@ guidelines-examples/async-hello.php @@
 
 Just make sure you are following the rest of the guidelines. Async is great, but you still have to consider things like caching, batching and efficiency.
 
@@ -31,7 +31,7 @@ If you only remember one rule, remember this:
 
 It totally defeats the purpose of async. 
 
-@@ 07-guidelines-examples/await-loop.php @@
+@@ guidelines-examples/await-loop.php @@
 
 In the above example, the loop is doing two things: 
 
@@ -40,7 +40,7 @@ In the above example, the loop is doing two things:
 
 Instead, you will want to use our async-aware mapping function, `vm()`.
 
-@@ 07-guidelines-examples/await-no-loop.php @@
+@@ guidelines-examples/await-no-loop.php @@
 
 ## Considering data dependencies is important
 
@@ -57,7 +57,7 @@ Let's say we are getting blog posts of an author. This would involve the followi
 3. Get comment count for each post id.
 4. Generate final page of information
 
-@@ 07-guidelines-examples/data-dependencies.php @@
+@@ guidelines-examples/data-dependencies.php @@
 
 The above example follows our flow:
 
@@ -69,7 +69,7 @@ The above example follows our flow:
 
 Wait handles can be rescheduled. This means that it will be sent back to the queue of the scheduler, waiting until other wait handles have run. Batching can be a good use of rescheduling. For example, say you have high latency lookup of data, but you can send multiple keys for the lookup in a single request.
 
-@@ 07-guidelines-examples/batching.php @@
+@@ guidelines-examples/batching.php @@
 
 In the example above, we reduce the number of roundtrips to the server containing the data information to two by batching the first lookup in `b_one()` and the lookup in `b_two()`. The `Batcher::lookup()` function helps enable this reduction.
 
@@ -81,7 +81,7 @@ So, `await HH\Asio\v(array(b_one..., b_two...));` has two pending wait handles. 
 
 What do you think happens here?
 
-@@ 07-guidelines-examples/forget-await.php @@
+@@ guidelines-examples/forget-await.php @@
 
 The answer is undefined. You might get all three echoes. You might only get the first echo. You might get nothing at all. The only way to guarantee that `speak()` will run to completion is to `await` it. `await` is the trigger to the async scheduler that allows HHVM to appropriately suspend and resume `speak()`; otherwise, the async scheduler will be provide no guarantees with respect to `speak()`.
 
@@ -89,7 +89,7 @@ The answer is undefined. You might get all three echoes. You might only get the 
 
 In order to minimize any unwanted side effects (e.g., ordering disparities), your creation and awaiting of wait handles should happen as close as possible.
 
-@@ 07-guidelines-examples/side-effects.php @@
+@@ guidelines-examples/side-effects.php @@
 
 In the above example, `possible_side_effects()` could cause some undesired behavior when you get to the point of awaiting the handle associated with getting the data from the website.
 
@@ -101,7 +101,7 @@ Given that async is commonly used in operations that are time-consuming, memoizi
 
 The [`<<__Memoize>>`](link to memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explicit control of the memoization, make sure you only //memoize the wait handle//.
 
-@@ 07-guidelines-examples/memoize-result.php @@
+@@ guidelines-examples/memoize-result.php @@
 
 On the surface, this seems reasonable. We want to cache the actual data associated with the wait handle. However, this can cause an undesired race condition.
 
@@ -118,23 +118,23 @@ If `time_consuming()` has side effects (e.g. a database write), then this could 
 
 Instead, memoize the wait handle
 
-@@ 07-guidelines-examples/memoize-wait-handle.php @@
+@@ guidelines-examples/memoize-wait-handle.php @@
 
 This may seem unintuitive, because the function `await`s every time it’s executed, even on the cache-hit path. But that’s fine: on every execution except the first, `$handle` is not `null`, so a new instance of `time_consuming()` will not be started. The result of the one existing instance will be shared.
 
 ## Use lambdas where possible
 
-[Lambdas](link to lambdas) can cut down on code verbosity that comes with writing full closure syntax. They are quite useful in conjunction with the [async utility helpers](link to utility-functions.md). 
+[Lambdas](../lambdas/intro.md) can cut down on code verbosity that comes with writing full closure syntax. They are quite useful in conjunction with the [async utility helpers](utility-functions.md). 
 
 For example, look how the following three ways to accomplish the same thing can be shortened using lambdas.
 
-@@ 07-guidelines-examples/lambdas.php @@
+@@ guidelines-examples/lambdas.php @@
 
 ## Use `join` in non-async functions
 
 Imagine you are making a call to an `async` function `join_async()` from a non-async scope. In order to obtain your desired results, you must `join()` in order to get the result from a wait handle. 
 
-@@ 07-guidelines-examples/join.php @@
+@@ guidelines-examples/join.php @@
 
 This scenario normally occurs in the global scope (but can occur anywhere).
 

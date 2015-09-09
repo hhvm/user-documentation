@@ -6,7 +6,7 @@ generic. It can hold any type of value, from int to an instance of a class.
 However, for any instantiation of the class, once a type has been associated
 with `T`, it cannot be changed to hold any other type.
 
-@@ 01-intro-examples/vector.php @@
+@@ intro-examples/vector.php @@
 
 `$x` is a `Vector<int>`, while `$y` is a `Vector<string>`. A `Vector<int>` and
 `Vector<string>` are not the same type.
@@ -14,7 +14,7 @@ with `T`, it cannot be changed to hold any other type.
 Methods and functions can also be generic. One use case is when they need to
 manipulate generic classes:
 
-@@ 01-intro-examples/generic-methods.php @@
+@@ intro-examples/generic-methods.php @@
 
 The above example shows a generic function `swap<T>()` operating on a generic
 `Box<T>` class.

@@ -33,7 +33,7 @@ trait B {}
 
 ## Special Attributes
 
-Attributes starting with `__` are [special attributes](04-special.md) reserved by the typechecker and HHVM. Custom attributes cannot start with `__`.
+Attributes starting with `__` are [special attributes](special.md) reserved by the typechecker and HHVM. Custom attributes cannot start with `__`.
 
 ## Attribute Access
 
