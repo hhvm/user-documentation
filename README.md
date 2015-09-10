@@ -125,3 +125,16 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
 ```
 $ hhvm bin/build.php
 ```
+
+### Running The Site
+
+Configure a webserver and HHVM to serve the `public/` directory, with all
+requests that don't match a file being served by `index.php`. For local
+development, HHVM's built-in webserver should be sufficient:
+
+```
+$ cd user-documentation/public
+user-documentation/public$ hhvm -m server \
+  -p 8080 \
+  -v Server.DefaultDocument=index.php \
+  -v Server.ErrorDocument404=index.php
