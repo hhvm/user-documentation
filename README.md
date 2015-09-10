@@ -126,6 +126,14 @@ Use `bundle show [gemname]` to see where a bundled gem is installed.
 $ hhvm bin/build.php
 ```
 
+This will:
+
+ - parse the API definitions in HHVM and Hack, storing machine-readable
+   data and documentation in YAML files
+ - create canonical definitions, combining the data obtained from Hack and HHVM
+ - generate Markdown files for the API documentation based on these YAML files
+ - render all Markdown (API reference and written guides) to HTML
+
 ### Running The Site
 
 Configure a webserver and HHVM to serve the `public/` directory, with all
