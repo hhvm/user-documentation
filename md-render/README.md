@@ -1,51 +1,14 @@
 Markdown Rendering
 ==================
 
-This is going to need to be automated before deployment. For now, here's an
-FAQ:
+How Do I Use This?
+------------------
 
-How Do I Install The Dependencies?
-----------------------------------
-
-First, install Bundler (roughly a Ruby equivalent of Composer) if you haven't
-already:
+See the root README.md for installation instructions. Once dependencies
+are installed, use as follows:
 
 ```
-$ gem install --user-install bundler
-Fetching: bundler-1.10.6.gem (100%)
-WARNING:  You don't have /home/fred/.gem/ruby/1.9.1/bin in your PATH,
-    gem executables will not run.
-    Successfully installed bundler-1.10.6
-    1 gem installed
-    Installing ri documentation for bundler-1.10.6...
-    Installing RDoc documentation for bundler-1.10.6...
-```
-
-If you get a similar `WARNING`, modify your `$PATH` variable to include that
-directory.
-
-Then, install this project's dependencies:
-
-```
-md-render$ bundle --path vendor/
-Using i18n 0.7.0
-Using json 1.8.2
-Using minitest 5.5.1
-Using thread_safe 0.3.4
-Using tzinfo 1.2.2
-Using activesupport 4.2.0
-Using charlock_holmes 0.7.3
-Using escape_utils 1.0.1
-Using mime-types 2.4.3
-Using rugged 0.22.0b5
-Using github-linguist 4.4.2
-Using github-markdown 0.6.8
-Using mini_portile 0.6.2
-Using nokogiri 1.6.6.2
-Using html-pipeline 1.9.0
-Using bundler 1.10.6
-Bundle complete! 3 Gemfile dependencies, 16 gems now installed.
-Use `bundle show [gemname]` to see where a bundled gem is installed.
+$ ./render.rb path/to/foo.md > foo.html
 ```
 
 Why Is This Ruby?
