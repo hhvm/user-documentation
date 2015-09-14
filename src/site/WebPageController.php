@@ -15,6 +15,7 @@ abstract class WebPageController extends WebController {
         <html>
           <head>
             <title>{$title}</title>
+            <link rel="shortcut icon" href="/favicon.png" />
           </head>
           <body>{$body}</body>
         </html>
