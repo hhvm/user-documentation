@@ -12,9 +12,9 @@ It is used to reduce a bit of the verbosity that generally comes with using the 
 <?php
 $user = 'Joel';
 $greeting = function() use ($user) {
-  echo 'Hello $user';
+  return 'Hello $user';
 };
-$greeting();
+echo $greeting();
 ```
 
 can now be written as:
@@ -22,8 +22,8 @@ can now be written as:
 ```
 <?hh
 $user = 'Joel';
-$greeting = () ==> { echo 'Hello $user'; };
-$greeting();
+$greeting = () ==> "Hello $user";
+echo $greeting();
 ```
 
 Basically, the `==>` is a substitute for `function` and `use`. Variables are captured implicitly. The `()` means no arguments are to be passed to the lambda.
