@@ -1,2 +1,2 @@
 <?hh
-require(__DIR__ . '/../require_env.inc');
+require(__DIR__ . '/../require_env.inc.php');
