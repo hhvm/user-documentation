@@ -67,17 +67,17 @@ The above example follows our flow:
 
 ## Consider batching
 
-Wait handles can be rescheduled. This means that it will be sent back to the queue of the scheduler, waiting until other wait handles have run. Batching can be a good use of rescheduling. For example, say you have high latency lookup of data, but you can send multiple keys for the lookup in a single request.
+Wait handles can be rescheduled. This means that it will be sent back to the queue of the scheduler, waiting until other awaitables have run. Batching can be a good use of rescheduling. For example, say you have high latency lookup of data, but you can send multiple keys for the lookup in a single request.
 
 @@ guidelines-examples/batching.php @@
 
 In the example above, we reduce the number of roundtrips to the server containing the data information to two by batching the first lookup in `b_one()` and the lookup in `b_two()`. The `Batcher::lookup()` function helps enable this reduction.
 
-The `await HH\Asio\later()` in `Batcher::go()` basically allows `Batcher::go()` to be deferred until other pending wait handles have run.
+The `await HH\Asio\later()` in `Batcher::go()` basically allows `Batcher::go()` to be deferred until other pending awaitables have run.
 
-So, `await HH\Asio\v(array(b_one..., b_two...));` has two pending wait handles. If `b_one()` is called first, it calls `Batcher::lookup()`, which calls `Batcher::go()`, which reschdules via `later()`. Then HHVM looks for other pending wait handles. `b_two()` is also pending. It calles `Batcher::lookup()` and then it gets suspended via `await self::$waitHandle` because `Batcher::$waitHandle` is not `null` any longer. Now `Batcher::go()` resumes, fetches and returns the result.
+So, `await HH\Asio\v(array(b_one..., b_two...));` has two pending awaitables. If `b_one()` is called first, it calls `Batcher::lookup()`, which calls `Batcher::go()`, which reschdules via `later()`. Then HHVM looks for other pending awaitables. `b_two()` is also pending. It calles `Batcher::lookup()` and then it gets suspended via `await self::$aw` because `Batcher::$aw` is not `null` any longer. Now `Batcher::go()` resumes, fetches and returns the result.
 
-## Don't forget to await a wait handle
+## Don't forget to await an awaitable
 
 What do you think happens here?
 
@@ -87,36 +87,36 @@ The answer is undefined. You might get all three echoes. You might only get the 
 
 ## Minimize undesired side effects
 
-In order to minimize any unwanted side effects (e.g., ordering disparities), your creation and awaiting of wait handles should happen as close as possible.
+In order to minimize any unwanted side effects (e.g., ordering disparities), your creation and awaiting of awaitables should happen as close as possible.
 
 @@ guidelines-examples/side-effects.php @@
 
 In the above example, `possible_side_effects()` could cause some undesired behavior when you get to the point of awaiting the handle associated with getting the data from the website.
 
-Basically, don't depend on the order of output between runs of the same code. i.e, don't write async code where ordering is important and instead use dependencies via wait handles and `await`.
+Basically, don't depend on the order of output between runs of the same code. i.e, don't write async code where ordering is important and instead use dependencies via awaitables and `await`.
 
-## Memoization may be good. But only wait handles
+## Memoization may be good. But only awaitables
 
 Given that async is commonly used in operations that are time-consuming, memoizing (i.e., caching) the result of an async call can definitely be worthwhile.
 
-The [`<<__Memoize>>`](link to memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explicit control of the memoization, make sure you only //memoize the wait handle//.
+The [`<<__Memoize>>`](link to memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explicit control of the memoization, make sure you only //memoize the awaitable//.
 
 @@ guidelines-examples/memoize-result.php @@
 
-On the surface, this seems reasonable. We want to cache the actual data associated with the wait handle. However, this can cause an undesired race condition.
+On the surface, this seems reasonable. We want to cache the actual data associated with the awaitable. However, this can cause an undesired race condition.
 
 Imagine that there are two other async functions awaiting the result of `memoize_result()`, call them `A()` and `B()`.  The following sequence of events can happen:
 
 1. `A()` gets to run, and `await`s `memoize_result()`.
 2. `memoize_result()` finds that the memoization cache is empty (`$result` is
 `null`), so it `await`s `time_consuming()`. It gets suspended.
-3. `B()` gets to run, and `await`s `memoize_result()`. Note that this is a new wait handle; it’s not the same wait handle as in 1.
+3. `B()` gets to run, and `await`s `memoize_result()`. Note that this is a new awaitable; it’s not the same awaitable as in 1.
 4. `memoize_result()` again finds that the memoization cache is empty, so it
 awaits `time_consuming()` again. Now the time-consuming operation will be done twice. 
 
 If `time_consuming()` has side effects (e.g. a database write), then this could end up being a serious bug. Even if there are no side effects, it’s still a bug; the time-consuming operation is being done multiple times when it only needs to be done once.
 
-Instead, memoize the wait handle
+Instead, memoize the awaitable
 
 @@ guidelines-examples/memoize-wait-handle.php @@
 
@@ -132,7 +132,7 @@ For example, look how the following three ways to accomplish the same thing can 
 
 ## Use `join` in non-async functions
 
-Imagine you are making a call to an `async` function `join_async()` from a non-async scope. In order to obtain your desired results, you must `join()` in order to get the result from a wait handle. 
+Imagine you are making a call to an `async` function `join_async()` from a non-async scope. In order to obtain your desired results, you must `join()` in order to get the result from an awaitable. 
 
 @@ guidelines-examples/join.php @@
 

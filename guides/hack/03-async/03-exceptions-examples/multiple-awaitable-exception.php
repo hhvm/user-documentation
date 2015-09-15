@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\Async\Exceptions\Examples\MultipleWaitHandle;
+namespace Hack\UserDocumentation\Async\Exceptions\Examples\MultipleAwaitable;
 
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception("Return exception handle");

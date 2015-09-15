@@ -21,7 +21,7 @@ class Polling {
 async function do_polling(Polling $p): Awaitable<int> {
   echo "do polling 1" . PHP_EOL;
   // No async function in Polling, so loop until we are ready, but let
-  // other wait handles go via later()
+  // other awaitables go via later()
   while (!$p->isReady()) {
     await \HH\Asio\later();
   }

@@ -111,7 +111,7 @@ Here is an example of getting a vector of URL contents, using a [lambda](../lamb
 
 *TL;DR*: Go straight to the [**Streams API Reference**](link to the Streams API)
 
-The async stream extension has one function, `stream_await()`, which is functionally similar to HHVM's [`stream_select()`](link to stream_select). It waits for a stream to enter a state (e.g., `STREAM_AWAIT_READY`), but without the multiplexing functionality of `stream_select()`. You can use HH\Asio\v() to await multiple stream handles, but the resulting combined wait handle won't be complete until all of the underlying streams have completed.
+The async stream extension has one function, `stream_await()`, which is functionally similar to HHVM's [`stream_select()`](link to stream_select). It waits for a stream to enter a state (e.g., `STREAM_AWAIT_READY`), but without the multiplexing functionality of `stream_select()`. You can use HH\Asio\v() to await multiple stream handles, but the resulting combined awaitable won't be complete until all of the underlying streams have completed.
 
 ```
 async function stream_await(resource $fp, int $events, 

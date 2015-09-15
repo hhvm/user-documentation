@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\Async\WaitHandles\Examples\Join;
+namespace Hack\UserDocumentation\Async\Awaitables\Examples\Join;
 
 async function get_raw(string $url): Awaitable<string> {
   return await \HH\Asio\curl_exec($url);

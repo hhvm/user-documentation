@@ -32,4 +32,6 @@ Total time taken: 3.3065688610077 seconds
 Total time taken: 2.3396739959717 seconds
 ```
 
-The keys to async are [wait handles](wait-handles.md), which activate the internal HHVM async scheduler, and being able to organize your code to minimize data dependencies and follow general [guidelines](guidelines.md).
+The keys to async are [awaitables](awaitables.md), which activate the internal HHVM async scheduler, and being able to organize your code to minimize data dependencies and follow general [guidelines](guidelines.md).
+
+NOTE: While executing two async functions can utilize cooperative multi-tasking described here, if those async functions call blocking functions like [`curl_exec()`](php.net/manual/en/function.curl-exec.php) or `sleep()`[php.net/manual/en/function.sleep.php], those blocking calls are not cooperatively multi-tasking and will be blocked as normal.

@@ -33,7 +33,7 @@ Alias primitives are **not supported** in Hack. So the following are not valid t
 
 ### In Async
 
-It is relatively common for [async](../async/intro.md) functions to return `Awaitable<void>`. This means that while the function itself is returning an `Awaitable` wait handle, the result of that wait handle will have no value. This, in essence, means the async function did some operation asynchronously that did not require a return value to the caller. 
+It is relatively common for [async](../async/intro.md) functions to return `Awaitable<void>`. This means that while the function itself is returning an awaitable, the result of that awaitable will have no value. This, in essence, means the async function did some operation asynchronously that did not require a return value to the caller. 
 
 
 ## `noreturn`

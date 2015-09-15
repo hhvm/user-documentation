@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\MemoizeWaitHandle;
+namespace Hack\UserDocumentation\Async\Guidelines\Examples\MemoizeAwaitable;
 
 async function time_consuming(): Awaitable<string> {
   sleep(5);
@@ -10,7 +10,7 @@ async function time_consuming(): Awaitable<string> {
 async function memoize_handle(): Awaitable<string> {
   static $handle = null;
   if ($handle === null) {
-    $handle = time_consuming(); // memoize the wait handle
+    $handle = time_consuming(); // memoize the awaitable
   }
   return await $handle;
 }

@@ -10,7 +10,7 @@ This example shows the basic tenants of async, particularly the keywords used, e
 
 ## Joining
 
-To get the result of a wait handle in a non-async function, you can use `join()`.
+To get the result of an awaitable in a non-async function, you can use `join()`.
 
 @@ guidelines-examples/join.php @@
 
@@ -40,6 +40,6 @@ Use rescheduling (via `HH\Asio\later()`) to batch up operations to send multiple
 
 ## Polling
 
-You can use rescheduling in a polling loop to allow other wait handles to run. You may need a polling loop in a case where a service does not have an async function to add to the scheduler.
+You can use rescheduling in a polling loop to allow other awaitables to run. You may need a polling loop in a case where a service does not have an async function to add to the scheduler.
 
 @@ examples-examples/polling.php
