@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\AdoptConn;
 
-require __DIR__ . "/../connect.inc";
+require __DIR__ . "/../connect.inc.php";
 
 function get_synchronous_connection(): resource {
   list($host, $port, $db, $user, $passwd) = \get_connection_info();
