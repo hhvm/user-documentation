@@ -4,14 +4,21 @@ namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\setPCL;
 
 require __DIR__ . "/../connect.inc.php";
 
+use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
+
 function set_connection_pool(): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool(array());
 }
 
 async function connect_with_pool(\AsyncMysqlConnectionPool $pool):
   Awaitable<\AsyncMysqlConnection> {
-  list($host, $port, $db, $user, $passwd) = \get_connection_info();
-  return await $pool->connect($host, $port, $db, $user, $passwd);
+  return await $pool->connect(
+    CI::$host,
+    CI::$port,
+    CI::$db,
+    CI::$user,
+    CI::$passwd
+  );
 }
 
 function get_stats(\AsyncMysqlConnectionPool $pool): array<mixed> {

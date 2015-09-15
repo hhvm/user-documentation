@@ -1,12 +1,15 @@
 <?hh
 
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql;
+
 require __DIR__ . "/connect.inc.php";
+
+use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 if (!extension_loaded('mysql') || !function_exists('mysqli_connect')) {
   die('Skip');
 }
-list($h, $p, $u, $p, $d) = get_connection_info();
-if (!mysqli_connect($h, $p, $d, $u, $p)) {
+if (!mysqli_connect(CI::$host, CI::$port, CI::$user, CI::$passwd, CI::$db)) {
   die('Skip');
 }
 

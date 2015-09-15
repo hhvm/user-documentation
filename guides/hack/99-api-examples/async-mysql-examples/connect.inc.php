@@ -1,18 +1,19 @@
 <?hh
 
-function get_connection_info(): array<mixed> {
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql;
+
+class ConnectionInfo {
   /*
   Default values are "localhost", "testuser", database "testdb" and
   "testpassword" password. Change the values if you want to use another
   configuration.
   */
 
-  $host   = "localhost";
-  $port   = 3306;
-  $user   = "testuser";
-  $passwd = "testpassword";
-  $db     = "testdb";
-  return array($host, $port, $db, $user, $passwd);
+  public static string $host = "localhost";
+  public static int $port = 3306;
+  public static string $user = "testuser";
+  public static string $passwd = "testpassword";
+  public static string $db = "testdb";
 }
 
 /*

@@ -4,15 +4,16 @@ namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\Conn;
 
 require __DIR__ . "/../connect.inc.php";
 
+use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
+
 async function do_connect(): Awaitable<\AsyncMysqlQueryResult> {
-  list($host, $port, $db, $user, $passwd) = \get_connection_info();
   // Cast because the array from get_connection_info() is a mixed
   $conn = await \AsyncMysqlClient::connect(
-    (string) $host,
-    (int) $port,
-    (string) $db,
-    (string) $user,
-    (string) $passwd);
+    CI::$host,
+    CI::$port,
+    CI::$db,
+    CI::$user,
+    CI::$passwd);
   return await $conn->query('SELECT * FROM test_table');
 }
 

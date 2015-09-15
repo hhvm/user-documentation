@@ -4,10 +4,18 @@ namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\AdoptConn;
 
 require __DIR__ . "/../connect.inc.php";
 
+use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
+
 function get_synchronous_connection(): resource {
-  list($host, $port, $db, $user, $passwd) = \get_connection_info();
-  $conn = mysql_connect($host, $user, $passwd);
-  mysql_select_db($db, $conn);
+  $conn = mysql_connect(
+    CI::$host,
+    CI::$user,
+    CI::$passwd
+  );
+  mysql_select_db(
+    CI::$db,
+    $conn
+  );
   return $conn;
 }
 
