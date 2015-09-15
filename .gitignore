@@ -5,5 +5,7 @@ composer.phar
 LocalConfig.php
 *.php.diff
 *.php.out
+*.php.type-errors.diff
+*.php.type-errors.out
 build/
 public/www.pid
