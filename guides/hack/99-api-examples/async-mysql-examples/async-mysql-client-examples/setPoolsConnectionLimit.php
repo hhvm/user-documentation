@@ -26,13 +26,13 @@ function get_stats(\AsyncMysqlConnectionPool $pool): array<mixed> {
 }
 
 function run_it(): void {
-  \AsyncMysqlClient::setPoolsConnectionLimit(2);
+  \AsyncMysqlClient::setPoolsConnectionLimit(2); // limit two connections
   $pool = set_connection_pool();
   $conn_awaitables = Vector {};
   try {
+    // One of these 3 connections here will throw the exception when we join
     $conn_awaitables[] = connect_with_pool($pool);
     $conn_awaitables[] = connect_with_pool($pool);
-    // This connection here will throw the exception when we join
     $conn_awaitables[] = connect_with_pool($pool);
     $conns = \HH\Asio\join(\HH\Asio\v($conn_awaitables));
   } catch (\AsyncMysqlConnectException $ex) {
