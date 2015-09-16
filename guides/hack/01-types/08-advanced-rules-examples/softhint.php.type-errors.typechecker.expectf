@@ -1,3 +1,6 @@
-%ssofthint.php:13:7,11: Invalid argument (Typing[4110])
-  %ssofthint.php:7:14,17: This is an int
-  %ssofthint.php:13:7,11: It is incompatible with a bool
+File "%ssofthint.php", line 13, characters 7-11:
+Invalid argument (Typing[4110])
+File "%ssofthint.php", line 7, characters 14-17:
+This is an int
+File "%ssofthint.php", line 13, characters 7-11:
+It is incompatible with a bool
