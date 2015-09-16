@@ -2,7 +2,7 @@
 
 // Namespaces and XHP have issues right now
 
-require __DIR__ . "/../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/autoload.php";
 
 // A custom class extends :x:element and has a render method that returns
 // XHPRoot so that you can do something like echo "<custom-class />;" This

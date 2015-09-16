@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping;
 
-require __DIR__ . "/../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/autoload.php";
 
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception();

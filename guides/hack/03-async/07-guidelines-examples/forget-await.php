@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Async\Guidelines\Examples\ForgetAwait;
 
-require __DIR__ . "/../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/autoload.php";
 
 async function speak(): Awaitable<void> {
   echo "one";

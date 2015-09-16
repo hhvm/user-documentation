@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Async\Guidelines\Examples\NoLoop;
 
-require __DIR__ . "/../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/autoload.php";
 
 class User {
   public string $name;

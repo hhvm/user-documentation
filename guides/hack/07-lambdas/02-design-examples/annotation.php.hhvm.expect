@@ -1,7 +1,0 @@
-object(Closure$Hack\UserDocumentation\Lambdas\Examples\Design\Annotation\Hack\UserDocumentation\Lambdas\Examples\Design\Annotation\getLambda;581301254)#1 (1) {
-  ["parameter"]=>
-  array(1) {
-    ["$x"]=>
-    string(10) "<required>"
-  }
-}
