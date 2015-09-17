@@ -6,8 +6,8 @@ The following example shows how to use `AsyncMysqlConneciton::queryf`. First you
 *   `%d`   integer
 *   `%f`   float
 *   `%=s`  nullable string comparison - expands to either:
-**          `= 'escaped_string'`
-**          `IS NULL`
+    *          `= 'escaped_string'`
+    *          `IS NULL`
 *   `%=d`  nullable integer comparison
 *   `%=f`  nullable float comparison
 *   `%Q`   raw SQL query. The typechecker intentionally does not recognize
