@@ -40,7 +40,7 @@ function run_it(): void {
     $conn_awaitables[] = connect_with_pool($pool);
     $conns = \HH\Asio\join(\HH\Asio\v($conn_awaitables));
   } catch (\AsyncMysqlConnectException $ex) {
-    $stats = $pool->getPoolStats();
+    $stats = get_stats($pool);
     echo "Allowed pool connections: " . $stats['created_pool_connections'] .
          PHP_EOL .
          "Requested pool connections: " . $stats['connections_requested'] .
