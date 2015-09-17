@@ -20,6 +20,7 @@ async function simple_query(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
   $result = await $conn->query('SELECT name FROM test_table WHERE userID = 1');
+  $conn->close();
   return $result->numRows();
 }
 
