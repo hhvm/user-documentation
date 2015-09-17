@@ -19,11 +19,11 @@ async function connect(\AsyncMysqlConnectionPool $pool):
 async function simple_multi_query(): Awaitable<int> {
   // In our test database, the third query will return an empty result since
   // we do not have a user ID of 3.
-  $queries = array(
+  $queries = Vector {
     'SELECT name FROM test_table WHERE userID = 1',
     'SELECT age, email FROM test_table WHERE userID = 2',
     'SELECT name FROM test_table WHERE userID = 3',
-  );
+  };
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
   $results = await $conn->multiQuery($queries);
