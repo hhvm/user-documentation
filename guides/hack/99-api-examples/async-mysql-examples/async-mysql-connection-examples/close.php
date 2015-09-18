@@ -22,7 +22,9 @@ async function simple_query(): Awaitable<int> {
   $result = await $conn->query('SELECT name FROM test_table WHERE userID = 1');
   $conn->close();
   try {
-    $conn->query('SELECT name FROM test_table WHERE userID = 1');
+    $result2 = await $conn->query(
+      'SELECT name FROM test_table WHERE userID = 1'
+    );
   } catch (\Exception $ex) {  // probably InvalidArgumentException on query
     echo "Connection closed\n";
   }
