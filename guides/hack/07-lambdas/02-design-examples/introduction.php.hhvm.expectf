@@ -1,0 +1,22 @@
+object(HH\Vector)#3 (4) {
+  [0]=>
+  object(%s\User)#4 (1) {
+    ["name"]=>
+    string(5) "User1"
+  }
+  [1]=>
+  object(%s\User))#5 (1) {
+    ["name"]=>
+    string(5) "User2"
+  }
+  [2]=>
+  object(%s\User)#6 (1) {
+    ["name"]=>
+    string(5) "User3"
+  }
+  [3]=>
+  object(%s\User)#7 (1) {
+    ["name"]=>
+    string(5) "User4"
+  }
+}

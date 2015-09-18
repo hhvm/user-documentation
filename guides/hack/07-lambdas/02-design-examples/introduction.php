@@ -1,9 +1,17 @@
 <?hh
 namespace Hack\UserDocumentation\Lambdas\Examples\Design\Introduction;
 
-function evenNumbers(): Vector<int> {
-  $numbers = Vector { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
-  return $numbers->filter($n ==> $n % 2 == 0);
+class User {
+  public string $name;
+  protected function __construct(string $name) { $this->name = $name; }
+  static function get(int $id): User {
+    // Load user from database, return a stub for the example
+    return new User("User" . strval($id));
+  }
 }
 
-var_dump(evenNumbers());
+function getUsersFromIds(Vector<int> $userids): Vector<User> {
+  return $userids->map($id ==> User::get($id));
+}
+
+var_dump(getUsersFromIds(Vector { 1, 2, 3, 4 }));
