@@ -1,10 +1,10 @@
 # HHVM and Hack User Documentation
 
-This is the new repo for the revamped HHVM and Hack user documentation. [docs.hhvm.com](docs.hhvm.com) is (hopefully) changing for the better. [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
+This is the new repo for the revamped HHVM and Hack user documentation. [docs.hhvm.com](http://docs.hhvm.com) is (hopefully) changing for the better. [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
 
 ## Why?
 
-While initially serving its purpose, we are finding the current documentation at [docs.hhvm.com](docs.hhvm.com) limiting in many ways, both in infrastructure and content. So we decided a new approach was in order. You will see the efforts of this approach live and unfiltered; this repo is public from the beginning.
+While initially serving its purpose, we are finding the current documentation at [docs.hhvm.com](http://docs.hhvm.com) limiting in many ways, both in infrastructure and content. So we decided a new approach was in order. You will see the efforts of this approach live and unfiltered; this repo is public from the beginning.
 
 ## What?
 
@@ -29,7 +29,7 @@ The above are initial thoughts that will be fleshed out more as we get deeper in
 
 ## Old Repo
 
-The what will be the ["old" documentation repo](https://github.com/hhvm/hack-hhvm-docs) is basically read-only from this point forward (save for critical documentation / infrastructure bugs). When we are ready to launch [docs.hhvm.com](docs.hhvm.com) with the new content, we will then rename the repo *hack-hhvm-docs-legacy* to ensure that its known that the repo is no longer used or maintained.
+The what will be the ["old" documentation repo](https://github.com/hhvm/hack-hhvm-docs) is basically read-only from this point forward (save for critical documentation / infrastructure bugs). When we are ready to launch [docs.hhvm.com](http://docs.hhvm.com) with the new content, we will then rename the repo *hack-hhvm-docs-legacy* to ensure that its known that the repo is no longer used or maintained.
 
 ## Follow Along
 
