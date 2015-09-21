@@ -1,7 +1,5 @@
 <?hh
 
-namespace Hack\UserDocumentation\APIxamples\ZZZZZ\YYYYY\XXXXX;
-
-require __DIR__ .'/../connect.inc.php';
-
-use \Hack\UserDocumentation\APIxamples\AsyncMysql\ConnectionInfo as CI;
+echo "AsyncMysqlResult is abstract. See specific, concrete classes for " .
+     "examples of startTime (e.g., AsyncMysqlConnectResult, " .
+     "AsyncMysqlErrorResult)" . PHP;
