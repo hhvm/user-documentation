@@ -1,0 +1,3 @@
+float(%d.%d)
+object(AsyncMysqlClientStats)#%d (0) {
+}
