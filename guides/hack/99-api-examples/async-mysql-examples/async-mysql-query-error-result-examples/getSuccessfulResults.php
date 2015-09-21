@@ -16,7 +16,7 @@ async function connect(\AsyncMysqlConnectionPool $pool):
     CI::$passwd
   );
 }
-async function simple_query_error(): Awaitable<?int> {
+async function multi_query_error(): Awaitable<?int> {
   $queries = Vector {
     'SELECT name FROM test_table WHERE userID = 1',
     'SELECT age, email FROM test_table WHERE userID = 2',
@@ -45,7 +45,7 @@ async function simple_query_error(): Awaitable<?int> {
 }
 
 function run(): void {
-  $r = \HH\Asio\join(simple_query_error());
+  $r = \HH\Asio\join(multi_query_error());
   var_dump($r);
 }
 
