@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ConnResult\ElapsedMic;
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ConnResult\StartTime;
 
 require __DIR__ .'/../connect.inc.php';
 
