@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\API\Examples\AsyncMysql\QueryResult\ElapsedMic;
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql\QueryResult\LastInsID;
 
 require __DIR__ .'/../connect.inc.php';
 
