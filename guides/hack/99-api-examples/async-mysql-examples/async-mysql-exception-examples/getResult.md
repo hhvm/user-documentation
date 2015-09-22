@@ -1,0 +1,1 @@
+The following example shows how to use `AsyncMysqlException::getResult` to get the `AsyncMysqlErrorResult` object associated with this exception. Particularly, we call `elapsedMicros()` on that object.
