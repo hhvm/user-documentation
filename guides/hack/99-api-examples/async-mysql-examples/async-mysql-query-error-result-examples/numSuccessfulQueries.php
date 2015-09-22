@@ -28,8 +28,10 @@ async function multi_query_error(): Awaitable<?int> {
     $result = await $conn->multiQuery($queries);
   } catch (\AsyncMysqlQueryException $ex) {
     $qr = $ex->getResult();
-    // Actually `AsyncMysqlQueryErrorResult`
-    var_dump($qr instanceof \AsyncMysqlErrorResult);
+    var_dump($qr instanceof \AsyncMysqlQueryErrorResult);
+    // Constructor to the exception takes AsyncMysqlErrorResult, need to
+    // ensure typechecker that we have an AsyncMysqlQueryErrorResult
+    invariant($qr instanceof \AsyncMysqlQueryErrorResult, "Bad news if not");
     var_dump($qr->numSuccessfulQueries());
     $conn->close();
     return null;
