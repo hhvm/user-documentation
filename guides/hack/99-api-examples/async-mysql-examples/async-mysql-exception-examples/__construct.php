@@ -26,7 +26,11 @@ async function simple_query(): Awaitable<?string> {
     );
     $conn->close();
     return $result->vectorRows()[0];
-  } catch (\AsyncMysqlException $ex) { // implicitly constructed
+  } catch (\AsyncMysqlConnectException $ex) { // implicitly constructed
+    return "Connection Exception";
+  } catch (\AsyncMysqlQueryException $ex) { // implicitly constructed
+    return "Query Exception";
+  } catch (\AsyncMysqlException $ex) {
     return null;
   } finally {
     if ($conn) {
