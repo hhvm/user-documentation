@@ -1,1 +1,1 @@
-The following example shows you how to use `AsyncMysqlRowIterator::current` to get the actual field value of an `AsyncMysqlRow`.
+The following example shows you how to use `AsyncMysqlRowBlockIterator::current` to get an `AsyncMysqlRow` from the iterator.
