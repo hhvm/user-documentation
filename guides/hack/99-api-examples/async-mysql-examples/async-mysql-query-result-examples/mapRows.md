@@ -14,3 +14,5 @@ object(HH\Vector)#9 (2) {
   }
 }
 ```
+
+Note that all values in the `Map` returned from `mapRows` will be `string` or `null`. If you want specifically-typed values, use `mapRowsTyped`
