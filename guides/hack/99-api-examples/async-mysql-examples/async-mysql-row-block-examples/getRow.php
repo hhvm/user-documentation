@@ -33,7 +33,7 @@ async function simple_query(): Awaitable<string> {
     $row = $row_block->getRow(0); // An AsyncMysqlRow
     return $row->getFieldAsString('name'); // string
   } else {
-    return -1;
+    return "nothing";
   }
 }
 

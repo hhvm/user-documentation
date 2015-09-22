@@ -31,7 +31,7 @@ async function simple_query(): Awaitable<float> {
     $row_block = $row_blocks[0];
     return $row_block->getFieldAsDouble(0, 'age'); // int will be a float value
   } else {
-    return -1;
+    return -1.0;
   }
 }
 

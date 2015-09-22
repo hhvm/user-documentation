@@ -31,7 +31,7 @@ async function simple_query(): Awaitable<string> {
     $row_block = $row_blocks[0];
     return $row_block->getFieldAsString(0, 'name'); // string
   } else {
-    return -1;
+    return "nothing";
   }
 }
 
