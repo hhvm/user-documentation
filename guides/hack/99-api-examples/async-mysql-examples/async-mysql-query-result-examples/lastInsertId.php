@@ -25,7 +25,7 @@ async function simple_query(): Awaitable<int> {
          . $id . ', "' . $name . '")';
   try {
     $result = await $conn->query($query);
-    // What time was it when we finally got this result?
+    // What was the last primary id we inserted into the table?
     var_dump($result->lastInsertId());
   } catch (\AsyncMysqlQueryException $ex) {
     var_dump(-1); // this could happen if we try to insert duplicate user id
