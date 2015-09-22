@@ -33,7 +33,6 @@ async function simple_query(): Awaitable<int> {
   } else {
     return -1;
   }
-  return $result->numRows();
 }
 
 function run(): void {
