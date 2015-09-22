@@ -1,4 +1,4 @@
-The following example shows how to use `AsyncMysqlRowBlock::fieldFlags` to get the data type of the `email` field. Here are the available data types:
+The following example shows how to use `AsyncMysqlRowBlock::fieldType` to get the data type of the `email` field. Here are the available data types:
 
 Type Value | Type Description | Int Value
 ---------- | ---------------- | ---------
