@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\API\Examples\AsyncMysql\RowBlock\FieldsCount;
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql\RowBlock\FieldType;
 
 require __DIR__ .'/../connect.inc.php';
 
