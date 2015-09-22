@@ -1,0 +1,1 @@
+The following example shows how to catch an `AsyncMysqlException`. Normally you would construct one implicitly via a `try/catch` block, like we did in this example. However, you can explicitly construct one by creating an object like `new AsyncMysqlException(AsyncMysqlErrorResult $result)`.
