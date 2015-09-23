@@ -10,7 +10,8 @@ function get_simple_mcrouter(): \MCRouter {
 
 async function add_value(\MCRouter $mc, string $key,
                          string $value): Awaitable<void> {
-  await $mc->add($key, $value); // optional flags and expiration time
+  // can also pass optional int flags and int expiration time (in seconds)
+  await $mc->add($key, $value);
 }
 
 async function run(): Awaitable<void> {
