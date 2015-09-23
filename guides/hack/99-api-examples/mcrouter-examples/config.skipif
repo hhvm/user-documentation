@@ -1,0 +1,18 @@
+<?hh
+
+if (!extension_loaded('mcrouter') || !extension_loaded('memcached')) {
+  echo 'skip';
+}
+
+// e.g., export HHVM_TEST_MCROUTER=127.0.0.1:11211
+if (!getenv('HHVM_TEST_MCROUTER')) {
+  echo 'skip';
+}
+
+try {
+  $servers = Vector { getenv('HHVM_TEST_MCROUTER') };
+  $mc = \MCRouter::createSimple($servers);
+  HH\Asio\join($mc->version());
+} catch (Exception $ex) {
+  echo 'skip';
+}
