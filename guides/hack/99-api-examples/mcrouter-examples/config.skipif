@@ -12,7 +12,6 @@ if (!getenv('HHVM_TEST_MCROUTER')) {
 try {
   $servers = Vector { getenv('HHVM_TEST_MCROUTER') };
   $mc = \MCRouter::createSimple($servers);
-  HH\Asio\join($mc->version());
 } catch (Exception $ex) {
   echo 'skip';
 }
