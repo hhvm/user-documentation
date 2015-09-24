@@ -31,7 +31,7 @@ async function run(): Awaitable<void> {
     $val = await $mc->get($unique_key);
     var_dump($val); // Not going to get here.
   } catch (\MCRouterException $ex) {
-    var_dump($ex->getMessage()); // We should get here
+    var_dump($ex->getMessage()); // We should get here because key was deleted
   }
 }
 
