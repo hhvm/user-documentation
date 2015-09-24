@@ -37,7 +37,7 @@ async function del_key(\MCRouter $mc, string $key): Awaitable<void> {
 }
 
 async function flush(\MCRouter $mc): Awaitable<void> {
-  await $mc->flushAll();
+  await $mc->flushAll(); // can add an optional delay time in seconds
 }
 
 async function run(): Awaitable<void> {
