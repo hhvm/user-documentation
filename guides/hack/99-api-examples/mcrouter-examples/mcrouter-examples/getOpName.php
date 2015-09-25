@@ -22,6 +22,11 @@ async function run(): Awaitable<void> {
   var_dump(get_op_name($mc, 0));
   var_dump(get_op_name($mc, 100));
 
+  // You can pass MCRouter constants
+  var_dump(get_op_name($mc, \MCRouter::mc_op_servererr));
+  var_dump(get_op_name($mc, \MCRouter::mc_op_exec));
+  var_dump(get_op_name($mc, \MCRouter::mc_op_unknown));
+
   // You can pass something from an exception too
   try {
     $val = await $mc->get('KEYDOESNOTEXISTIHOPEREALLY');
