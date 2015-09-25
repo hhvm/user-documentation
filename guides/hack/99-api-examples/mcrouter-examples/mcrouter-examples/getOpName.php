@@ -8,31 +8,31 @@ function get_simple_mcrouter(): \MCRouter {
   return $mc;
 }
 
-function get_op_name(\MCRouter $mc, int $op_num): string {
-    return $mc->GetOpName($op_num);
+function get_op_name(int $op_num): string {
+    return \MCRouter::GetOpName($op_num);
 }
 
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
 
   // You can pass raw integers
-  var_dump(get_op_name($mc, 3));
-  var_dump(get_op_name($mc, 9));
-  var_dump(get_op_name($mc, -1));
-  var_dump(get_op_name($mc, 0));
-  var_dump(get_op_name($mc, 100));
+  var_dump(get_op_name(3));
+  var_dump(get_op_name(9));
+  var_dump(get_op_name(-1));
+  var_dump(get_op_name(0));
+  var_dump(get_op_name(100));
 
   // You can pass MCRouter constants
-  var_dump(get_op_name($mc, \MCRouter::mc_op_servererr));
-  var_dump(get_op_name($mc, \MCRouter::mc_op_exec));
-  var_dump(get_op_name($mc, \MCRouter::mc_op_unknown));
+  var_dump(get_op_name(\MCRouter::mc_op_servererr));
+  var_dump(get_op_name(\MCRouter::mc_op_exec));
+  var_dump(get_op_name(\MCRouter::mc_op_unknown));
 
   // You can pass something from an exception too
   try {
     $val = await $mc->get('KEYDOESNOTEXISTIHOPEREALLY');
   } catch (\MCRouterException $ex) {
     var_dump($ex->getOp());
-    var_dump(get_op_name($mc, $ex->getOp()));
+    var_dump(get_op_name($ex->getOp()));
   }
 }
 
