@@ -2,33 +2,33 @@ The following example shows how to use `MCRouter::getOpName` to get the English 
 
 Here is the list of the current mappings:
 
-```
-("unknown",            0)
-("echo",               1)
-("quit",               2)
-("version",            3)
-("servererr",          4)
-("get",                5)
-("set",                6)
-("add",                7)
-("replace",            8)
-("append",             9)
-("prepend",           10)
-("cas",               11)
-("delete",            12)
-("nops",              13)
-("incr",              14)
-("decr",              15)
-("flushall",          16)
-("flushre",           17)
-("stats",             18)
-("verbosity",         19)
-("lease_get",         20)
-("lease_set",         21)
-("shutdown",          22)
-("end",               23)
-("metaget",           24)
-("exec",              25)
-("gets",              26)
-("get_service_info",  27)
-```
+Integer | String
+--------|-------
+0 | unknown
+1 | echo
+2 | quit
+3 | version
+4 | servererr
+5 | get
+6 | set
+7 | add
+8 | replace
+9 | append
+10 | prepend
+11 | cas
+12 | delete
+13 | nops
+14 | incr
+15 | decr
+16 | flushall
+17 | flushre
+18 | stats
+19 | verbosity
+20 | lease-get
+21 | lease-set
+22 | shutdown
+23 | end
+24 | metaget
+25 | exec
+26 | gets
+27 | get-service-info
