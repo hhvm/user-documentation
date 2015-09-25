@@ -2,37 +2,37 @@ The following example shows how to use `MCRouter::getResultName` to get the Engl
 
 Here is the list of the current mappings:
 
-Integer | String
---------|-------
-0 | mc_res_unknown
-1 | mc_res_deleted
-2 | mc_res_found
-3 | mc_res_foundstale
-4 | mc_res_notfound
-5 | mc_res_notfoundhot
-6 | mc_res_notstored
-7 | mc_res_stalestored
-8 | mc_res_ok
-9 | mc_res_stored
-10 | mc_res_exists
-11 | mc_res_ooo
-12 | mc_res_timeout
-13 | mc_res_connect_timeout
-14 | mc_res_connect_error
-15 | mc_res_busy
-16 | mc_res_try_again
-17 | mc_res_shutdown
-18 | mc_res_tko
-19 | mc_res_bad_command
-20 | mc_res_bad_key
-21 | mc_res_bad_flags
-22 | mc_res_bad_exptime
-23 | mc_res_bad_lease_id
-24 | mc_res_bad_cas_id
-25 | mc_res_bad_value
-26 | mc_res_aborted
-27 | mc_res_client_error
-28 | mc_res_local_error
-29 | mc_res_remote_error
-30 | mc_res_waiting
-31 | mc_nres
+Integer | Constant | String
+--------|----------|-------
+0 | MCRouter::mc_res_unknown | mc_res_unknown
+1 | MCRouter::mc_res_deleted | mc_res_deleted
+2 | MCRouter::mc_res_found | mc_res_found
+3 | MCRouter::mc_res_foundstale | mc_res_foundstale
+4 | MCRouter::mc_res_notfound | mc_res_notfound
+5 | MCRouter::mc_res_notfoundhot | mc_res_notfoundhot
+6 | MCRouter::mc_res_notstored | mc_res_notstored
+7 | MCRouter::mc_res_stalestored | mc_res_stalestored
+8 | MCRouter::mc_res_ok | mc_res_ok
+9 | MCRouter::mc_res_stored | mc_res_stored
+10 | MCRouter::mc_res_exists | mc_res_exists
+11 | MCRouter::mc_res_ooo | mc_res_ooo
+12 | MCRouter::mc_res_timeout | mc_res_timeout
+13 | MCRouter::mc_res_connect_timeout | mc_res_connect_timeout
+14 | MCRouter::mc_res_connect_error | mc_res_connect_error
+15 | MCRouter::mc_res_busy | mc_res_busy
+16 | MCRouter::mc_res_try_again | mc_res_try_again
+17 | MCRouter::mc_res_shutdown | mc_res_shutdown
+18 | MCRouter::mc_res_tko | mc_res_tko
+19 | MCRouter::mc_res_bad_command | mc_res_bad_command
+20 | MCRouter::mc_res_bad_key | mc_res_bad_key
+21 | MCRouter::mc_res_bad_flags | mc_res_bad_flags
+22 | MCRouter::mc_res_bad_exptime | mc_res_bad_exptime
+23 | MCRouter::mc_res_bad_lease_id | mc_res_bad_lease_id
+24 | MCRouter::mc_res_bad_cas_id | mc_res_bad_cas_id
+25 | MCRouter::mc_res_bad_value | mc_res_bad_value
+26 | MCRouter::mc_res_aborted | mc_res_aborted
+27 | MCRouter::mc_res_client_error | mc_res_client_error
+28 | MCRouter::mc_res_local_error | mc_res_local_error
+29 | MCRouter::mc_res_remote_error | mc_res_remote_error
+30 | MCRouter::mc_res_waiting | mc_res_waiting
+31 | MCRouter::mc_nres | mc_nres
