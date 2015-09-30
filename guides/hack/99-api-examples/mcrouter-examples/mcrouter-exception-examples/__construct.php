@@ -17,7 +17,7 @@ async function simple_mcrouter(): Awaitable<void> {
 
 async function run(): Awaitable<void> {
   try {
-    $mc = await simple_mcrouter();
+    await simple_mcrouter();
   } catch (\MCRouterException $ex) {
     var_dump($ex->getMessage());
     var_dump($ex->getOp());

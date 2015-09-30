@@ -5,7 +5,7 @@ namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouterOptEx\Construct;
 function construct_mcrouter(array<string, mixed> $options): void {
   if (!array_key_exists('config_str', $options)) {
     // You can have multiple string => string errors in the array
-    $errors = array('format' => 'Need config string');
+    $errors = array(array('format' => 'Need config string'));
     throw new \MCRouterOptionException($errors);
   }
   $mc = new \MCRouter($options);

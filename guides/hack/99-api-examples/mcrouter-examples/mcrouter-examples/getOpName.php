@@ -9,7 +9,7 @@ function get_simple_mcrouter(): \MCRouter {
 }
 
 function get_op_name(int $op_num): string {
-    return \MCRouter::GetOpName($op_num);
+    return \MCRouter::getOpName($op_num);
 }
 
 async function run(): Awaitable<void> {

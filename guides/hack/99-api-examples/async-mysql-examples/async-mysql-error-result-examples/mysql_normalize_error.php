@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ErrorResult\MysqlError;
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ErrorResult\MysqlNErr;
 
 require __DIR__ .'/../connect.inc.php';
 

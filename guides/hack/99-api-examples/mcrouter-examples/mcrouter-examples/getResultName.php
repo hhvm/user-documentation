@@ -9,7 +9,7 @@ function get_simple_mcrouter(): \MCRouter {
 }
 
 function get_res_name(int $res_num): string {
-    return \MCRouter::GetResultName($res_num);
+    return \MCRouter::getResultName($res_num);
 }
 
 async function run(): Awaitable<void> {
