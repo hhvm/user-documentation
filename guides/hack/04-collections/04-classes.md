@@ -12,12 +12,14 @@ For each concrete collection class, only the methods defined by the class themse
 
 Class | Implements | Description | Defined Methods
 ------|------------|-------------|----------------
-`Vector<T>` | `MutableVector<T>` | A mutable sequence of values, indexed by sequential integers starting at 0 | `__construct()`, `linearSearch()`, `pop`, `reserve()`, `resize()`, `reverse()`, `shuffle()`, `splice()`, `__toString()`
-`Map<Tk, Tv>` | `MutableMap<Tk, Tv>` | A mutable sequence of values, indexed by sequential integers starting at 0 | `__construct()`, `fromItems()`, `__toString()`
-`Set<T>` | `MutableSet<T>` | A mutable sequence of values, indexed by sequential integers starting at 0 | `__construct()`, `fromArrays()`, `fromItems()`, `removeAll()`, `__toString()`
+`Vector<T>` | `MutableVector<T>` | A mutable sequence of values, indexed by sequential integers starting at 0. | `__construct()`, `linearSearch()`, `pop`, `reserve()`, `resize()`, `reverse()`, `shuffle()`, `splice()`, `__toString()`
+`Map<Tk, Tv>` | `MutableMap<Tk, Tv>` | A mutable, ordered set of unique keys, each of which map to a value. | `__construct()`, `fromItems()`, `__toString()`
+`Set<T>` | `MutableSet<T>` | A mutable, ordered set of unique values. | `__construct()`, `fromArrays()`, `fromItems()`, `removeAll()`, `__toString()`
 
 ## Immutable Collections
 
-`Vector<T>` | `ConstVector<T>` | A mutable sequence of values, indexed by sequential integers starting at 0 | `__construct()`, `linearSearch()`, `__toString()`
-`Map<Tk, Tv>` | `ConstMap<Tk, Tv>` | A mutable sequence of values, indexed by sequential integers starting at 0 | `__construct()`, `fromItems()`, `__toString()`
-`Set<T>` | `ConstSet<T>` | A mutable sequence of values, indexed by sequential integers starting at 0 | `__construct()`, `fromArrays()`, `fromItems()`, `__toString()`
+Class | Implements | Description | Defined Methods
+------|------------|-------------|----------------
+`Vector<T>` | `ConstVector<T>` | An immutable sequence of values, indexed by sequential integers starting at 0. | `__construct()`, `linearSearch()`, `__toString()`
+`Map<Tk, Tv>` | `ConstMap<Tk, Tv>` | A immutable, ordered set of unique keys, each of which map to a value. | `__construct()`, `fromItems()`, `__toString()`
+`Set<T>` | `ConstSet<T>` |  An immutable, ordered set of unique values. | `__construct()`, `fromArrays()`, `fromItems()`, `__toString()`
