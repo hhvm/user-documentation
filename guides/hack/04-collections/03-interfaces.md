@@ -2,6 +2,8 @@
 
 The [concrete Hack collection classes](./classes.md) are generally derived from various interfaces. In normal usage, you will not have to deal with these interfaces, but we will list them for your reference. 
 
+Descriptions of each of the interface methods can be found in the [API reference](link to API reference).
+
 ## Core Interfaces
 
 These are the interfaces that allow for iteration, conversion (e.g., `toVector()`) and manipulation (e.g., `filter`).
@@ -14,8 +16,8 @@ Interface | Description | Key Methods
 `KeyedContainer<Tk, Tv>` | Extends `KeyedTraversable<Tk, Tv>`, but only includes arrays and Hack collections (except for `Set` and `ImmSet` since they don't have keys) | N/A
 `Indexish<Tk, Tv>` | Extends `KeyedTraversable<Tk, Tv>` and is anything that can be an index in an array or collection, which in this case is `string` and `int`. It is somewhat common to have a method take an `Indexish` or return an `Indexish`. | N/A
 `IteratorAggregate<T>` | Extends `Traversable<T>` and can produce an `Iterator`. Not implemented by arrays. Rarely directly used. | `getIterator()`
-`Iterable<T>` | Extends `IteratorAggerate<T>` and is the key interface that declares the methods that provides the capabilities for Hack collections. | `toArray()`, `toValuesArray()`, `toVector()`, `toImmVector()`, `toSet()`, `toImmSet()`, `values()`, `map<Tm>(function(T): Tm $callback)`, `filter(function(T): bool $callback)`, `zip<Tz>(Traversable<Tz> $traversable)`
-`KeyedIterable<Tk, Tv>` | Extends `Iterable<Tv>` and adds key capabilities | `toKeysArray()`, `toMap()`, `keys()`, `mapWithKey<Tm>(function(Tk, Tv): Tm $callback)`, `filterWithKey(function(Tk, Tv): bool $callback)`, `getIterator()`, `map<Tm>(function(T): Tm $callback)`, `filter(function(T): bool $callback)`, `zip<Tz>(Traversable<Tz> $traversable)`
+`Iterable<T>` | Extends `IteratorAggerate<T>` and is the **primary** interface that declares the methods that provides the capabilities for Hack collections. | `toArray()`, `toValuesArray()`, `toVector()`, `toImmVector()`, `toSet()`, `toImmSet()`, `lazy()`, `values()`, `map<Tm>((function(T): Tm) $callback)`, `filter((function(T): bool) $callback)`, `zip<Tz>(Traversable<Tz> $traversable)`
+`KeyedIterable<Tk, Tv>`, `take()`, `takeWhile()`, `skip()`, `skipWhile()`, `slice()`, `concat()`, `firstValue()`, `lastValue()` | Extends `Iterable<Tv>` and adds key capabilities | `toKeysArray()`, `toMap()`, `keys()`, `lazy()`, `take()`, `takeWhile()`, `skip()`, `skipWhile()`, `firstKey()`, `lastKey()`, `mapWithKey<Tm>(function(Tk, Tv): Tm $callback)`, `filterWithKey(function(Tk, Tv): bool $callback)`, `getIterator()`, `map<Tm>(function(T): Tm $callback)`, `filter(function(T): bool $callback)`, `zip<Tz>(Traversable<Tz> $traversable)`
 
 ## General Collection Interfaces
 
