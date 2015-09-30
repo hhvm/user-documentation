@@ -23,3 +23,5 @@ The fact that arrays have value semantics and collections have reference semanti
 So, if you had some automatic code modifier to convert `array` to `Vector`, your code could break as shown by the example above.
 
 One way to help remedy this is to use `ImmVector` and Vector::immutable()` to make sure that you cannot modify the collection when you pass it to the function.
+
+@@ semantic-examples/converting-immutable.php @@
