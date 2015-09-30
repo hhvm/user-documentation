@@ -1,6 +1,6 @@
 # Collection Interfaces
 
-The [concrete Hack collection classes](./classes.md) are generally derived from various interfaces. In normal usage, you will not have to deal with these interfaces, but we will list them for your reference. 
+The [concrete Hack collection classes](./classes.md) are generally derived from various interfaces. Actually, many of the methods on the concrete classes take and/or return the interfaces listed here.
 
 Descriptions of each of the interface methods can be found in the [API reference](link to API reference).
 
