@@ -1,0 +1,22 @@
+<?hh
+
+namespace Hack\UserDocumentation\Collections\Typing\Examples\CV;
+
+// Given that this function takes an Iterable, you can pass any of
+// our current concerte collection classes to this method
+function filter_vec(\ConstVector<int> $cv): \MutableVector<int> {
+  try {
+    $cv[] = 900; // cannot modify a ConstVector
+  } catch (\InvalidOperationException $ex) {
+    var_dump($ex->getMessage());
+  }
+  $mv = $cv->filter($x ==> $x % 4 === 0);
+  return $mv->toVector();
+}
+
+function run(): void {
+  $iv = ImmVector {100, 125, 150, 175};
+  var_dump(filter_vec($iv));
+}
+
+run();

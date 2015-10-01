@@ -1,0 +1,5 @@
+string(51) "Cannot modify immutable object of type HH\ImmVector"
+object(HH\Vector)#%d (1) {
+  [0]=>
+  int(100)
+}
