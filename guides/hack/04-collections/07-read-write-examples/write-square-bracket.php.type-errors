@@ -1,0 +1,25 @@
+<?hh
+
+namespace Hack\UserDocumentation\Collections\ReadWrite\Examples\WriteSqBracket;
+
+function run(): void {
+  $vec = Vector {'A', 'B', 'C'};
+  $vec[] = 'D'; // The index will be 3
+  var_dump($vec[3]); // 'D'
+
+  $map = Map {'A' => 1, 'B' =>2};
+  $map['C'] = 3;
+  $map[] = Pair {'D', 4}; // 'D' is key, 4 is value
+  var_dump($map['C']); // 3
+  var_dump($map['D']); // 4
+
+  $pair = Pair {100, 200};
+  try {
+    // We cannot add a value to a pair, for obvious reasons
+    $pair[] = 300;
+  } catch (\InvalidOperationException $ex) {
+    var_dump($ex->getMessage());
+  }
+}
+
+run();

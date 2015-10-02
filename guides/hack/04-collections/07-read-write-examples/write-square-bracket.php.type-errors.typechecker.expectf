@@ -1,0 +1,4 @@
+File "%swrite-square-bracket.php", line 19, characters 5-11:
+an object of type Pair does not allow array append (Typing[4006])
+File "%swrite-square-bracket.php", line 16, characters 11-25:
+You might want to check this out
