@@ -58,6 +58,8 @@ Identity only evaluates to `true` if the both collections are the same object. O
 
 ## Using `list()`
 
-You can use `list()` with Hack collections just like you can with arrays. Note that you must have a zero integer key and subsequent ordered keys for `Map` and `Set`; otherwise you will get an `OutOfBoundsException`.
+You can use [`list()`](http://php.net/manual/en/function.list.php) with  `Vector` and `Pair` just like you can with arrays. 
+
+While you can use `list()` with `Map` and `Set` at runtime, the Hack typechecker will throw an error. Note that you must have a zero integer key and subsequent ordered keys for `Map` and `Set`; otherwise you will get an `OutOfBoundsException`.
 
 @@ semantics-examples/list.php @@

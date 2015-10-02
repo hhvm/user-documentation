@@ -7,3 +7,5 @@ int(1)
 int(2)
 string(1) "B"
 string(1) "A"
+int(999)
+int(9999)
