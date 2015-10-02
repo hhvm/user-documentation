@@ -1,6 +1,6 @@
 # Concrete Collection Classes
 
-There are currently six (6) Hack concrete collection classes that are available to instantiate. All of these classes derive from various levels of the [collection interfaces](./interfaces.md). 
+There are currently seven (7) Hack concrete collection classes that are available to instantiate. All of these classes derive from various levels of the [collection interfaces](./interfaces.md). 
 
 Descriptions of each of the methods can be found in the [API reference](link to API reference).
 
@@ -20,6 +20,7 @@ Class | Implements | Description | Defined Methods
 
 Class | Implements | Description | Defined Methods
 ------|------------|-------------|----------------
-`Vector<T>` | `ConstVector<T>` | An immutable sequence of values, indexed by sequential integers starting at 0. | `__construct()`, `linearSearch()`, `__toString()`
-`Map<Tk, Tv>` | `ConstMap<Tk, Tv>` | A immutable, ordered set of unique keys, each of which map to a value. | `__construct()`, `fromItems()`, `__toString()`
-`Set<T>` | `ConstSet<T>` |  An immutable, ordered set of unique values. | `__construct()`, `fromArrays()`, `fromItems()`, `__toString()`
+`ImmVector<T>` | `ConstVector<T>` | An immutable sequence of values, indexed by sequential integers starting at 0. | `__construct()`, `linearSearch()`, `__toString()`
+`ImmMap<Tk, Tv>` | `ConstMap<Tk, Tv>` | A immutable, ordered set of unique keys, each of which map to a value. | `__construct()`, `fromItems()`, `__toString()`
+`ImmSet<T>` | `ConstSet<T>` |  An immutable, ordered set of unique values. | `__construct()`, `fromArrays()`, `fromItems()`, `__toString()`
+`Pair<Tv1, Tv2>` | `ConstVector<T>` | An immutable, vector-like collection with two and only two values. | `__construct()`, `linearSearch()`, `__toString()`
