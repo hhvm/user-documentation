@@ -63,3 +63,76 @@ You can use [`list()`](http://php.net/manual/en/function.list.php) with  `Vector
 While you can use `list()` with `Map` and `Set` at runtime, the Hack typechecker will throw an error. Note that you must have a zero integer key and subsequent ordered keys for `Map` and `Set`; otherwise you will get an `OutOfBoundsException`.
 
 @@ semantics-examples/list.php @@
+
+## Using Array Built-In Functions
+
+Hack collections can some built-in functions that take arrays.
+
+### Sorting
+
+Method | Valid Collection
+-------|-----------------
+[`sort()`](http://php.net/manual/en/function.sort.php) | `Vector`
+[`rsort()`](http://php.net/manual/en/function.rsort.php) | `Vector`
+[`usort()`](http://php.net/manual/en/function.usort.php) | `Vector`
+[`asort()`](http://php.net/manual/en/function.asort.php) | `Map`, `Set`
+[`arsort()`](http://php.net/manual/en/function.arsort.php) | `Map`, `Set`
+[`ksort()`](http://php.net/manual/en/function.ksort.php) | `Map`, `Set`
+[`krsort()`](http://php.net/manual/en/function.krsort.php) | `Map`, `Set`
+[`usort()`](http://php.net/manual/en/function.usort.php) | `Map`, `Set`
+[`uasort()`](http://php.net/manual/en/function.uasort.php) | `Map`, `Set`
+[`uksort()`](http://php.net/manual/en/function.uksort.php) | `Map`, `Set`
+[`natsort()`](http://php.net/manual/en/function.natsort.php) | `Map`, `Set`
+[`natcasesort()`](http://php.net/manual/en/function.natcasesort.php) | `Map`, `Set`
+
+`Pair`s do not support sorting since they are immutable. You can convert the `Pair` to a mutable collection and then do a sort.
+
+### Querying
+
+Method | Valid Collection
+-------|-----------------
+[`array_keys()`](http://php.net/manual/en/function.array-keys.php) | All
+[`array_key_exists()`](http://php.net/manual/en/function.array-key-exists.php) | All 
+[`array_values()`](http://php.net/manual/en/function.array-values.php) | All
+[`count()`](http://php.net/manual/en/function.count.php) | All
+`idx()` | `Vector`, `Map`
+
+`idx()` is a function that takes a collection, index and an optional default return value if the index isn't found (`null` is returned if you don't specify one).
+
+### Manipulation
+
+Method | Valid Collection
+-------|-----------------
+[`array_combine()`](http://php.net/manual/en/function.array-combine.php) | All
+[`array_diff()`](http://php.net/manual/en/function.array-diff.php) | All
+[`array_diff_key()`](http://php.net/manual/en/function.array-diff-key.php) | All
+[`array_filter`](http://php.net/manual/en/function.array-filter.php) | All
+[`array_intersect()`](http://php.net/manual/en/function.array-intersect.php) | All 
+[`array_intersect_key()`](http://php.net/manual/en/function.array-intersect-key.php) | All
+[`array_map()`](http://php.net/manual/en/function.array-map.php) | All
+[`implode()`](http://php.net/manual/en/function.implode.php) | All
+[`serialize()`](http://php.net/manual/en/function.serialize.php) | All
+
+### Modification
+
+Method | Valid Collection
+-------|-----------------
+[`array_pop()`](http://php.net/manual/en/function.array-pop.php) | All
+[`array_push()`](http://php.net/manual/en/function.array-push.php) | All
+[`array_shift()`](http://php.net/manual/en/function.array-shift.php) | `Vector`, `Set`
+[`array_unshift`](http://php.net/manual/en/function.array-unshift.php) | `Vector`, `Set`
+
+### Introspection
+
+Method | Valid Collection
+-------|-----------------
+[`var_dump()`](http://php.net/manual/en/function.var-dump.php) | All
+[`print_r()`](http://php.net/manual/en/function.print-r.php) | All
+[`var_export()`](http://php.net/manual/en/function.var-export.php) | All
+[`debug_zval_dump`](http://php.net/manual/en/function.debug-zval-dump.php) | All
+
+### APC
+
+Method | Valid Collection
+-------|-----------------
+[`apc_store()`](http://php.net/manual/en/function.apc-store.php) | All
