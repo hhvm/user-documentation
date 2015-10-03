@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "abe57b1f82697d6d0e147488bd9480e8",
+    "hash": "6f19cc6b59a004963493f12d6a4b89b7",
     "packages": [
         {
             "name": "facebook/xhp-lib",
@@ -262,16 +262,16 @@
         },
         {
             "name": "nikic/fast-route",
-            "version": "v0.6.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "31fa86924556b80735f98b294a7ffdfb26789f22"
+                "reference": "4e61a268cd50341ff0fb249e7acaf8aba1c83fa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/31fa86924556b80735f98b294a7ffdfb26789f22",
-                "reference": "31fa86924556b80735f98b294a7ffdfb26789f22",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/4e61a268cd50341ff0fb249e7acaf8aba1c83fa3",
+                "reference": "4e61a268cd50341ff0fb249e7acaf8aba1c83fa3",
                 "shasum": ""
             },
             "require": {
@@ -301,7 +301,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2015-06-18 19:15:47"
+            "time": "2015-10-02 08:59:26"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -455,7 +455,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "nikic/fast-route": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

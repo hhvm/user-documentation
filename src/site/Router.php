@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 use HHVM\UserDocumentation\ArgAssert;
 

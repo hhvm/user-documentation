@@ -9,7 +9,7 @@
     "phpdocumentor/reflection-docblock": "^2.0",
     "hack-psr/psr7-http-message-hhi": "^0.1.0",
     "zendframework/zend-diactoros": "^1.1",
-    "nikic/fast-route": "^0.6.0"
+    "nikic/fast-route": "dev-master#4e61a268cd50341ff0fb249e7acaf8aba1c83fa3"
   },
   "autoload": {
     "classmap": [
