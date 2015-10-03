@@ -136,3 +136,7 @@ Method | Valid Collection
 Method | Valid Collection
 -------|-----------------
 [`apc_store()`](http://php.net/manual/en/function.apc-store.php) | All
+
+## Extending
+
+All of the concrete collection classes are `final` (i.e., they cannot be sub-classed). However, you can create new concrete collection classes from the various [interfaces](./interfaces.md) provided by the collections infrastructure
