@@ -77,13 +77,20 @@ class FunctionMarkdownBuilder {
       $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
       $this->yaml['data']['parameters'],
     );
+    $return_type = $this->yaml['data']['returnType'];
+    if ($return_type === null) {
+      return sprintf(
+        "function %s(%s)",
+        $this->yaml['data']['name'],
+        implode(', ', $params),
+      );
+    }
+
     return sprintf(
       "function %s(%s): %s",
       $this->yaml['data']['name'],
       implode(', ', $params),
-      Stringify::typehint(
-        ArgAssert::isNotNull($this->yaml['data']['returnType']),
-      ),
+      Stringify::typehint($return_type),
     );
   }
 
