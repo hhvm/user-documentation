@@ -79,6 +79,7 @@ class FunctionMarkdownBuilder {
     );
     $return_type = $this->yaml['data']['returnType'];
     if ($return_type === null) {
+      // TODO: log warning for this once we have a good logging system
       return sprintf(
         "function %s(%s)",
         $this->yaml['data']['name'],
