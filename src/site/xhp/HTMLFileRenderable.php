@@ -5,12 +5,16 @@ namespace HHVM\UserDocumentation;
 class HTMLFileRenderable implements \XHPUnsafeRenderable {
   public function __construct(
     private string $htmlFile,
+    private string $htmlRoot = BuildPaths::GUIDES_HTML,
   ) {
     invariant(file_exists($htmlFile), 'html file does not exist');
-    $root = realpath(BuildPaths::GUIDES_HTML).'/';
+    
+    $root = realpath($htmlRoot).'/';
+    
     invariant(
-      substr(realpath($htmlFile), 0, strlen($root)) === $root,
+      (substr(realpath($htmlFile), 0, strlen($root)) === $root),
       'html file %s is not a build artifact',
+      $htmlFile,
     );
   }
 

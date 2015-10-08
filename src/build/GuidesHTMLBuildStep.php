@@ -18,6 +18,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
       $output = $this->renderFile($input);
       $list[] = $output;
     }
+
     $index = $this->createIndex($list);
     file_put_contents(
       BuildPaths::GUIDES_INDEX,

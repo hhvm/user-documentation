@@ -16,12 +16,12 @@ final class GuidesListController extends WebPageController {
         return 'Hack Documentation';
     }
   }
-
-  protected async function getBody(): Awaitable<XHPRoot> {
+  
+  protected function getInnerContent(): XHPRoot {
     $product = $this->getProduct();
     $guides = GuidesIndex::getGuides($product);
 
-    $root = <ul />;
+    $root = <ul class="guideList" />;
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
       $url = sprintf(
@@ -34,10 +34,23 @@ final class GuidesListController extends WebPageController {
       $title = ucwords(strtr($guide, '-', ' '));
 
       $root->appendChild(
-        <li><a href={$url}>{$title}</a></li>
+        <li>
+          <h4><a href={$url}>{$title}</a></h4>
+          <div class="guideDescription">
+            {file_get_contents('http://loripsum.net/api/1/veryshort/plaintext')}
+          </div>
+        </li>
       );
     }
     return $root;
+  }
+
+  protected async function getBody(): Awaitable<XHPRoot> {
+    return 
+      <div class="guideListWrapper">
+        <h3 class="listTitle">Learn</h3>
+        {$this->getInnerContent()}
+      </div>;
   }
 
   <<__Memoize>>
