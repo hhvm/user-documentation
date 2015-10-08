@@ -66,11 +66,13 @@ interface IMemoizeParam {
 - HHVM can actually free memory used by memoized results if needed. Thus, sometimes, a memoized result might be removed from memory and the time consuming operation will happen again. This can be a good thing though as HHVM is managing the memory for you properly.
 - HHVM makes no guarantees about the side effects your memoization may have.
 
-## `<<__Deprecated>>`
+## `<<__Deprecated($message, $sample_rate = 1)>>`
 
 In the past, to show that a function or method was deprecated, you would need to call something like `trigger_error()` passing in `E_DEPRECATED` or `E_USER_DEPRECATED`. The deprecation would only be known at runtime.
 
-The `__Deprecated` attribute is added to function or method to indicate that it should no longer be called. The typechecker will flag any calls to such a function or method as an error. HHVM will also issue a [`E_USER_DEPRECATED`](http://php.net/manual/en/errorfunc.constants.php) warning if your call makes it to runtime. 
+The `__Deprecated` attribute is added to function or method to indicate that it should no longer be called. The typechecker will flag any calls to such a function or method as an error. HHVM will also issue a [`E_USER_DEPRECATED`](http://php.net/manual/en/errorfunc.constants.php) warning if your call makes it to runtime.
+
+The runtime error messages will get sampled at a rate of `1 / $sample_rate`, which is helpful if you are deprecating a heavily-used function.
 
 @@ special-examples/deprecated.php.type-errors @@
 
