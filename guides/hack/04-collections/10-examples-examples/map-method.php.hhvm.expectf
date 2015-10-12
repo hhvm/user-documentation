@@ -1,0 +1,14 @@
+object(HH\Vector)#%d (6) {
+  [0]=>
+  string(10) "Hello Joel"
+  [1]=>
+  string(9) "Hello Rex"
+  [2]=>
+  string(10) "Hello Fred"
+  [3]=>
+  string(13) "Hello Matthew"
+  [4]=>
+  string(9) "Hello Tim"
+  [5]=>
+  string(9) "Hello Jez"
+}
