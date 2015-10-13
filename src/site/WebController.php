@@ -25,8 +25,8 @@ abstract class WebController {
       return $what();
     } catch (/* HH_FIXME[2049] */ \HH\InvariantException $e) {
       throw new HTTPNotFoundException(
-        $e->what,
-        $e->code,
+        $e->getMessage(),
+        $e->getCode(),
         $e
       );
     }
