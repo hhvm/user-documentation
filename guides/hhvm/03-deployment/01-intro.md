@@ -2,7 +2,7 @@
 
 After [installing](../installing/intro.md) and deciding on your [configuration options](../configuration/intro.md), you are ready to deploy HHVM.
 
-HHVM has three primary deployment modes, command-line and server (and there is a special case of server mode call repo-authoritative, as well as a separate administration server), and daemon. 
+HHVM has three primary deployment modes, [command-line](#command-line) and [server](#server) (and there is a special case of server mode call [repo-authoritative](#repo-authoritative), as well as a separate [administration server](#admin-server)), and [daemon](#daemon). 
 
 ## Command-Line
 
@@ -14,7 +14,7 @@ hhvm -c config.ini myScript.php
 
 ## Server
 
-Server mode is how you will use HHVM to serve web requests. The HHVM process starts up and continuously waits for requests to come in through either its FastCGI server on top of a compatible webserver or Proxygen webserver (your choice as to which you use; Proxygen is the default).
+Server mode is how you will use HHVM to serve web requests. The HHVM process starts up and continuously waits for requests to come in through either its [FastCGI](./hhvm-servers#fastcgi) server on top of a compatible webserver (e.g., nginx) or [Proxygen](./hhvm-servers#proxygen) webserver (your choice as to which you use; Proxygen is the default).
 
 Multiple requests can, of course, be served simultaneously, and HHVM also caches code to be shared across requests as well.
 
