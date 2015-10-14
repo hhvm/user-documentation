@@ -62,7 +62,7 @@ Under HHVM, both checking and invocation of `__call()` happen on class G.
 
 ### Object internal cursors
 
-Under PHP5, objects have an internal cursor (similar to the array internal cursor) that can be used to iterate over the object's properties. Under HHVM, objects do not have internal cursors, and the `next()`, `prev()`, `current()`, `key()`, `reset()`, `end()`, and `each()`` builtin functions do not support objects.
+Under PHP5, objects have an internal cursor (similar to the array internal cursor) that can be used to iterate over the object's properties. Under HHVM, objects do not have internal cursors, and the `next()`, `prev()`, `current()`, `key()`, `reset()`, `end()`, and `each()` builtin functions do not support objects.
 
 ### Suppressing errors for params to default constructors
 
@@ -126,7 +126,7 @@ Loading of external entities in the libxml extension is disabled by default for 
 
 ### Local Variables containing a parameter
 
-If the value of a local variable containing a parameter changes, `func_get_args()`` returns the new value. This behavior matches PHP7, but not PHP5.
+If the value of a local variable containing a parameter changes, `func_get_args()` returns the new value. This behavior matches PHP7, but not PHP5.
 
 ```
   class Foo {
