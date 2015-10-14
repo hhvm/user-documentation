@@ -1,0 +1,106 @@
+# HHVM Server Types
+
+HHVM comes with two server types built in:
+
+* The default is Proxygen and is generally the easiest to get up an running. It serves the equivalent puropse of both a web server and something like FastCGI all rolled into one. 
+* The other is FastCGI, which provides a high performance interface between your codebase and webserver (e.g., persistent processes between requests, etc.), but which will also obviously require a front-end compatible web server to serve the requests (e.g., nginx).
+
+
+## Proxygen
+
+Proxygen is the default server for HHVM. So, if you run HHVM in server mode like:
+
+```
+hhvm -m server
+```
+
+you will be using Proxygen by default, listening on port 80. And in many cases, that should be just fine for most users.
+
+You can also be explicit and do something like:
+
+```
+hhvm -m server -d hhvm.server.type=proxygen -d hhvm.server.port=8080
+```
+
+Proxygen provides you a high performance web server that is equivalent to what something like the combination of FastCGI and nginx might provide. While not as configurable as a FastCGI/nginx combination, Proxygen does provide sensible defaults for many applications.
+
+Here is an example of a possible `server.ini` file using Proxygen:
+
+```
+; some of these are not necessary since they are the default value, but
+; they are good to show for illustration, and sometimes it is good for
+; documentation purposes to be explicit anyway.
+hhvm.server.port = 80
+hhvm.server.type = proxygen
+hhvm.server.default_document = index.php
+hhvm.server.error_document404 = index.php
+hhvm.server.source_root=/var/www/public
+```
+
+## FastCGI
+
+HHVM-FastCGI works much the same way as [PHP-FPM](http://php-fpm.org/). HHVM, running in FastCGI mode, is started independently of the web server (Apache, Nginx, etc). It listens on either a TCP socket (conventionally localhost:9000) or a UNIX socket. The web server listens on port 80 or port 443 like it normally would. When a new request comes in, the web server either makes a connection to the application server or reuses one of the previously open connections, and communicates using FastCGI protocol. Therefore, the web server continues to decode HTTP protocol, and supplies HHVM with information like the path of the file to be executed, request headers, and body. HHVM computes the response and sends it back to the web server using FastCGI again. Finally, the web server is in charge of sending the HTTP response to the client. 
+
+### Running the server
+
+To run the server in FastCGI mode pass the following parameters to hhvm runtime:
+
+    hhvm --mode server -vServer.Type=fastcgi -vServer.Port=9000
+
+The server will now accept connections on localhost:9000. To use a UNIX socket, use the `Server.FileSocket` option instead:
+
+    hhvm --mode server -vServer.Type=fastcgi -vServer.FileSocket=/var/run/hhvm/sock
+
+To turn the server into a daemon, change the value of mode:
+
+    hhvm --mode daemon -vServer.Type=fastcgi -vServer.FileSocket=/var/run/hhvm/sock
+
+Note, all the usual options that are accepted by hhvm runtime can be used in FastCGI mode as well. In particular, `-vAdminServer.Port=9001` will create an additional "admin" server listening on a port 9001.
+
+### Making it work with Apache 2.4
+
+The recommended way of integrating with Apache is using `mod_proxy` `mod_proxy_fcgi`. Enable the modules, then in your Apache configuration, add a line as so:
+
+    ProxyPass / fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/
+    # Or if you used a unix socket
+    # ProxyPass / unix://var/run/hhvm/sock|fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/
+
+This will route *all* the traffic to the FastCGI server. If you want to route only certain requests (e.g. only those from a subdirectory or ending *.php, you can use `ProxyPassMatch`, e.g.
+
+    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/$1 
+
+Consult `mod_proxy_fcgi` docs for more details on how to use `ProxyPass` and `ProxyPassMatch`.
+
+Also make sure to set up a `DirectoryIndex` in your Apache configuration like this:
+
+    <Directory /path/to/your/www/root/>
+        DirectoryIndex index.php
+    </Directory>
+
+This will try to access `index.php` when you send a request to a directory. 
+
+### Making it work with Nginx
+
+The default FastCGI configuration from Nginx should work just fine with HHVM-FastCGI. For instance you might want to add the following directives inside one of your `location` directives:
+
+    root /path/to/your/www/root/goes/here;
+    fastcgi_pass   127.0.0.1:9000;
+    # or if you used a unix socket 
+    # fastcgi_pass   unix:/var/run/hhvm/sock;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    include        fastcgi_params;
+
+The traffic for the surrounding `location` directive will be now routed to the HHVM-FastCGI server.
+
+*Admin Server in Nginx*
+
+If you ran with `-vAdminServer.Port=9001` then something like this would work:
+
+```
+location ~ {
+    fastcgi_pass   127.0.0.1:9001;
+    include        fastcgi_params;
+}
+```
+
