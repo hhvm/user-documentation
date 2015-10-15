@@ -1,0 +1,40 @@
+<?hh
+
+namespace Hack\UserDocumentation\TypeAliases\Opaque\Examples\AliasNoConstraint;
+
+// test-point.php - User code that tests type Point
+
+require_once 'point-functions.inc.php';
+
+function run(): void {
+  $p1 = createPoint(5, 3);
+  var_dump($p1);
+  $p2 = createPoint(9, -5);
+  var_dump($p2);
+  $dist = distance_between_2_Points($p1, $p2);
+  echo "distance between points is " . $dist ."\n";
+  // But we cannot pass a tuple of two ints since they are not a Point
+  // This will give a Hack typechecker error
+  $will_not_type_check = distance_between_2_Points(tuple(2, 3), tuple(3, 4));
+  // However, the code will still run in HHVM
+  echo "distance between points is " . $will_not_type_check ."\n";
+}
+
+run();
+
+/*
+
+Here is the type error for $will_not_type_check
+
+test-point.php:18:52,62: Invalid argument (Typing[4110])
+  point-functions.inc.php:9:36,40:
+     This is an object of type
+     Hack\UserDocumentation\TypeAliases\Opaque\Examples\AliasNoConstraint\Point
+  test-point.php:18:52,62: It is incompatible with a tuple
+test-point.php:18:65,75: Invalid argument (Typing[4110])
+  point-functions.inc.php:9:47,51:
+     This is an object of type
+     Hack\UserDocumentation\TypeAliases\Opaque\Examples\AliasNoConstraint\Point
+  test-point.php:18:65,75: It is incompatible with a tuple
+
+*/
