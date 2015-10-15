@@ -1,1 +1,0 @@
-The Hack type system.
