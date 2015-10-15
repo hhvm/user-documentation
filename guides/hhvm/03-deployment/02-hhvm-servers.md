@@ -30,10 +30,13 @@ Here is an example of a possible `server.ini` file using Proxygen:
 ; some of these are not necessary since they are the default value, but
 ; they are good to show for illustration, and sometimes it is good for
 ; documentation purposes to be explicit anyway.
+; hhvm.server.source_root and hhvm.server.port are the most likely ones
+; that need explicit values. 
 hhvm.server.port = 80
 hhvm.server.type = proxygen
 hhvm.server.default_document = index.php
 hhvm.server.error_document404 = index.php
+; default is the current directory where you launched the HHVM binary 
 hhvm.server.source_root=/var/www/public
 ```
 

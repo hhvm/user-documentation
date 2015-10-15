@@ -42,8 +42,13 @@ Installing HHVM will start it up now, but it won't be configured to start at nex
 After installing HHVM, it should automatically be running in server mode. If it is not, you can start it up by:
 
 ```
-hhvm -m server
+hhvm -m server -d hhvm.server.port=8080 -d hhvm.server.source_root=/var/www/public
 ```
+
+You can choose any port you want (80 is the default, so if you want that, then you do not need to specify the option), and you can choose any source root (place where the code will run from) you want (the default directory for proxygen is the current directory where the `hhvm` process was launched; we
+gave it an explicit value above).
+
+You do not need to add `-d hhvm.server.type=proxygen` since that is the default.
 
 Write a simple "Hello World" program named `hello.php`:
 
@@ -52,9 +57,9 @@ Write a simple "Hello World" program named `hello.php`:
 echo "Hello World!\n";
 ```
 
-and put the `hello.php` in `/var/www/public` (the default directory for proxygen).
+and put the `hello.php` in `/var/www/public`.
 
-Now load [http://localhost/hello.php](http://localhost/hello.php) and verify you see "Hello world".
+Now load [http://localhost/hello.php](http://localhost:8080/hello.php) or `curl http://localhost:8080/hello.php` and verify you see "Hello world".
 
 ## Configure HHVM
 
