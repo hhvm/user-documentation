@@ -3,6 +3,7 @@
 namespace HHVM\UserDocumentation;
 
 use FredEmmott\DefinitionFinder\ScannedBase;
+use FredEmmott\DefinitionFinder\ScannedClass;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
 use FredEmmott\DefinitionFinder\HasScannedGenerics;
 
@@ -23,11 +24,25 @@ abstract final class ScannedDefinitionFilters {
       return true;
     }
 
+    if ($def instanceof ScannedClass) {
+      foreach ($def->getMethods() as $method) {
+        if (self::IsHHSpecific($method)) {
+          return true;
+        }
+      }
+    }
+
     if (!$def instanceof ScannedFunctionAbstract) {
       return false;
     }
 
     if ($def->getReturnType()?->getTypeName() === 'Awaitable') {
+      return true;
+    }
+
+    if (
+      $def->getReturnType()?->getTypeName() === 'ExternalThreadEventWaitHandle'
+    ) {
       return true;
     }
 
