@@ -1,0 +1,25 @@
+<?hh
+
+namespace Hack\UserDocumentation\XHP\Intro\Examples\TMV;
+
+function using_string(): void {
+  echo '<div class="section-header">';
+  echo '<a href="#use">You should have used <span class="xhp">XHP</naps></a>';
+  echo '</div>';
+}
+
+function using_xhp(): void {
+  // Typechecker error
+  // Fatal syntax error at runtime
+  echo
+    <div class="section-header">
+      <a href="#use">You should have used <span class="xhp">XHP</naps></a>
+    </div>;
+}
+
+function run(): void {
+  using_string();
+  using_xhp();
+}
+
+run();
