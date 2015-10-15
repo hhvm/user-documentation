@@ -1,0 +1,1 @@
+Simplified closure syntax.
