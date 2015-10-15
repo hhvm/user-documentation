@@ -89,7 +89,9 @@ final class MergedDataBuilder {
         $key = substr($name, $ns_sep + 1);
       }
       if ($keyed->containsKey($key)) {
-        $keyed[$key] = self::MergedTypehint($keyed[$key], $interface);
+        $keyed[$key] = ArgAssert::isNotNull(
+          self::MergedTypehint($keyed[$key], $interface)
+         );
       } else {
         $keyed[$key] = $interface;
       }
