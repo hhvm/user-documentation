@@ -22,7 +22,7 @@ The first example uses string interpolation to output the HTML, while the second
 
 ## XHP Library
 
-For most things you do with XHP, you must have the XHP library `xhp-lib` included or somehow autoloaded into your codebase.
+For most things you do with XHP, you must have the [XHP library `xhp-lib`](https://github.com/facebook/xhp-lib) included or somehow autoloaded into your codebase.
 
 You can add the `xhp-lib` via composer:
 
