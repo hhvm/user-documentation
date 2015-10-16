@@ -1,7 +1,5 @@
-FROM fredemmott/hhvm-proxygen:3.9.1
-# We need >= 3.10 which isn't out yet, so...
+FROM fredemmott/hhvm-proxygen:3.10.0
 RUN apt-get update -y
-RUN apt-get install -y hhvm-nightly
 
 # We need a unicode-aware system to generate the docs
 RUN locale-gen en_US.UTF-8
