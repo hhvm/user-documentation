@@ -174,3 +174,5 @@ user-documentation/public$ hhvm -m server \
    ```
    $ eb deploy
    ```
+
+   This is the only step you will need to do for future pushes from the same checkout.
