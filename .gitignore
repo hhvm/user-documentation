@@ -9,3 +9,8 @@ LocalConfig.php
 *.php.type-errors.out
 build/
 public/www.pid
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
