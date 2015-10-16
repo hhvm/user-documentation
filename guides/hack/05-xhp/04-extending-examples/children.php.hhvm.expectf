@@ -1,0 +1,13 @@
+string(%d) "Element `my-br` was rendered with invalid children.
+
+%dchildren.php:33
+
+Verified 0 children before failing.
+
+Children expected:
+empty
+
+Children received:
+:ul[%flow]"
+<ul><li></li><li></li></ul>
+<html><head></head><body></body></html>
