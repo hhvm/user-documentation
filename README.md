@@ -146,3 +146,26 @@ user-documentation/public$ hhvm -m server \
   -p 8080 \
   -v Server.DefaultDocument=index.php \
   -v Server.ErrorDocument404=index.php
+
+
+### Deploying The Site
+
+
+#. Login in to AWS and create an access key (click on your name in the top
+   right, 'security credentials', 'access keys', 'create new access key'
+#. Install the AWS EB (Elastic Beanstalk) tools:
+
+```
+$ sudo apt-get install python-dev
+$ sudo pip install awsebcli
+```
+
+#. Configure your checkout for pushing to AWS - you will be prompted for your
+   access keys, region (`us-west-2`) and application. Select the existing
+   application.
+
+    $ eb init
+
+#. Push:
+
+    $ eb deploy
