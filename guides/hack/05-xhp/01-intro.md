@@ -20,6 +20,8 @@ echo <tt>Hello <strong>{$user_name}</strong></tt>;
 
 The first example uses string interpolation to output the HTML, while the second has no quotation marks, meaning that we have first-class objects that are part of the Hack grammar.
 
+**IMPORTANT NOTE**: In many cases, XHP does not work in namespaced code. We are aware of this, but take note that you may not be able to use XHP if your code is in a namespace.
+ 
 ## XHP Library
 
 For most things you do with XHP, you must have the [XHP library `xhp-lib`](https://github.com/facebook/xhp-lib) included or somehow autoloaded into your codebase.

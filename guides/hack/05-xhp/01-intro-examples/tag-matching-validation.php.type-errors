@@ -1,14 +1,12 @@
 <?hh
 
-namespace Hack\UserDocumentation\XHP\Intro\Examples\TMV;
-
-function using_string(): void {
+function intro_examples_tag_matching_validation_using_string(): void {
   echo '<div class="section-header">';
   echo '<a href="#use">You should have used <span class="xhp">XHP</naps></a>';
   echo '</div>';
 }
 
-function using_xhp(): void {
+function intro_examples_tag_matching_validation_using_xhp(): void {
   // Typechecker error
   // Fatal syntax error at runtime
   echo
@@ -17,9 +15,9 @@ function using_xhp(): void {
     </div>;
 }
 
-function run(): void {
-  using_string();
-  using_xhp();
+function intro_examples_tag_matching_validation_run(): void {
+  intro_examples_tag_matching_validation_using_string();
+  intro_examples_tag_matching_validation_using_xhp();
 }
 
-run();
+intro_examples_tag_matching_validation_run();

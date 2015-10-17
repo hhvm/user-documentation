@@ -1,11 +1,11 @@
 <?hh
 
-namespace Hack\UserDocumentation\XHP\Typing\Examples\ObjectMethods;
-
 require __DIR__ . "/../../../../vendor/autoload.php";
 
-function use_object_methods(Vector<int> $ids, string $text,
-                            string $title): \XHPRoot {
+function typing_examples_use_object_methods_get_root(
+  Vector<int> $ids,
+  string $text,
+  string $title): \XHPRoot {
   $para = <p />;
   $para->setAttribute("title", $title);
   $para->appendChild($text);
@@ -23,10 +23,13 @@ function use_object_methods(Vector<int> $ids, string $text,
   return $final;
 }
 
-function run(): void {
+function typing_examples_use_object_methods_run(): void {
   $ids = Vector {100, 200, 300};
-  $elem = use_object_methods($ids, "These are the initial IDs", "User IDs");
+  $elem = typing_examples_use_object_methods_get_root(
+    $ids,
+    "These are the initial IDs",
+    "User IDs");
   var_dump($elem->getChildren("p")); // Get all the paragraph children
 }
 
-run();
+typing_examples_use_object_methods_run();

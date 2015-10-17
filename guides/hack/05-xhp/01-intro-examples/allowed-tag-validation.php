@@ -1,14 +1,12 @@
 <?hh
 
-namespace Hack\UserDocumentation\XHP\Intro\Examples\ATV;
-
 require __DIR__ . "/../../../../vendor/autoload.php";
 
-function using_string(): void {
+function intro_examples_allowed_tag_validation_using_string(): void {
   echo '<ul><i>Item 1</i></ul>';
 }
 
-function using_xhp(): void {
+function intro_examples_allowed_tag_validation_using_xhp(): void {
   try {
     echo <ul><i>Item 1</i></ul>;
   } catch (\XHPInvalidChildrenException $ex) {
@@ -17,10 +15,10 @@ function using_xhp(): void {
   }
 }
 
-function run(): void {
-  using_string();
+function intro_examples_allowed_tag_validation_run(): void {
+  intro_examples_allowed_tag_validation_using_string();
   echo PHP_EOL . PHP_EOL;
-  using_xhp();
+  intro_examples_allowed_tag_validation_using_xhp();
 }
 
-run();
+intro_examples_allowed_tag_validation_run();

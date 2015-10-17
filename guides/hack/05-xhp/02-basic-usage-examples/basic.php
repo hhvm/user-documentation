@@ -1,10 +1,8 @@
 <?hh
 
-namespace Hack\UserDocumentation\XHP\BasicUsage\Examples\Basic;
-
 require __DIR__ . "/../../../../vendor/autoload.php";
 
-function basic_xhp(): void {
+function basic_usage_examples_basic_xhp(): void {
   var_dump(
     <div>
        My Text
@@ -13,4 +11,4 @@ function basic_xhp(): void {
     </div>);
 }
 
-basic_xhp();
+basic_usage_examples_basic_xhp();
