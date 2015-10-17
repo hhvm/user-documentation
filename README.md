@@ -153,26 +153,35 @@ user-documentation/public$ hhvm -m server \
 
 
 1. Login in to AWS and create an access key (click on your name in the top
-   right, 'security credentials', 'access keys', 'create new access key'
+   right, 'security credentials', 'Users', '<your user name>', 'create new access key'.
+
 2. Install the AWS EB (Elastic Beanstalk) tools:
 
    ```
+   # On Ubuntu
    $ sudo apt-get install python-dev
    $ sudo pip install awsebcli
    ```
 
-3. Configure your checkout for pushing to AWS - you will be prompted for your
-   access keys, region (`us-west-2`) and application. Select the existing
-   application.
+   ```
+   # On Mac OS X 10.7+
+   $  curl -s https://s3.amazonaws.com/elasticbeanstalk-cli-resources/install-ebcli.py | python
+   ```
+
+   Other distros, you can check here: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html
+
+3. Configure your `hhvm/user-documentation` checkout for pushing to AWS - you will be prompted for your access keys, region (`us-west-2`) and application. Select the `hack-hhvm-docs` application.
 
    ```
+   # From your user-documentation checkout directory
    $ eb init
    ```
 
-4. Push:
+4. After making one or more updates, you will want to push to AWS. From your checkout, you push with:
 
    ```
+   # After some commits, from your user-documentation checkout directory
    $ eb deploy
    ```
 
-   This is the only step you will need to do for future pushes from the same checkout.
+   **NOTE**: Step 4 is the only step you will need to do for future pushes from the same checkout.
