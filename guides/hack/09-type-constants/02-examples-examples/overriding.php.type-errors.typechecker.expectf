@@ -1,0 +1,12 @@
+File "%soverriding.php", line 20, characters 7-41:
+This object is of type Hack\UserDocumentation\TypeConstants\Exampes\Examples\Overriding\ChildOfChildOfChildWithNoConstraint (Typing[4110])
+File "%soverriding.php", line 20, characters 51-78:
+It is incompatible with this object of type Hack\UserDocumentation\TypeConstants\Exampes\Examples\Overriding\ChildOfChildWithNoConstraint
+because some declarations are incompatible.
+Read the following to see why:
+File "%soverriding.php", line 22, characters 14-14:
+The assigned type of this type constant is inconsistent with its parent
+File "%soverriding.php", line 17, characters 18-25:
+This is an array key (int/string)
+File "%soverriding.php", line 22, characters 18-23:
+It is incompatible with a string

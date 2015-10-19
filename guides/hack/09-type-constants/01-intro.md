@@ -12,7 +12,7 @@ Now imagine that you realize that sometimes the ID of a user could be a `string`
 
 Notice how we had to propagate the addition of a type parameter to the the class itself and *all* the extended it. Now think if we had hundreds and hundreds of places that used the traits and interfaces; we would have to update them as well.
 
-When it comes to class type parameterization, Hack introduces an alternative feature to generics called *type constants*. Instead of types being declared as parameters directly on the class itself, type constants allow the type to be declared as class member properties instead.
+When it comes to class type parameterization, Hack introduces an alternative feature to generics called *type constants*. Instead of types being declared as parameters directly on the class itself, type constants allow the type to be declared as class member constants instead.
 
 @@ type-constants/type-constants.php @@
 
@@ -79,7 +79,7 @@ class C2 extends NA {
 
 ### Referencing the Type Constant
 
-Given that the type constant is a first-class property of the class, you can reference it using `this`, like the normal way you would reference a static property.
+Given that the type constant is a first-class constant of the class, you can reference it using `this`, like the normal way you would reference a static constant.
 
 ```
 this::<name>
