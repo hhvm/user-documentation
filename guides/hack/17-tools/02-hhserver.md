@@ -2,6 +2,8 @@
 
 The Hack server works behind the scenes to keep your codebase in constant sync for the [`hh_client` typechecker](../typechecker/intro.md). However, the server `hh_server` can also be used for some primary standalone functionality as well.
 
+If you want to see all the options available to `hh_server`, see the help via `hh_server --help`.
+
 ## Check and Exit
 
 If you want to typecheck a file or a directory of files without the overhead of a constant server running combined with `hh_client`, you can do a quick and dirty check with `hh_server`. 
