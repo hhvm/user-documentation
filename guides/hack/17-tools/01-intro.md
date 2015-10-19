@@ -2,7 +2,7 @@
 
 In addition to the language itself, Hack provides programmers a wide set of tools for. Using [`hh_client`](../typechecking/options.md)) for typechecking and inspecting your codebase is most likely to be your most used tool. However, there are other tools used to help you make the most out of Hack
 
-* adding type annotations to your code and type checking one file only ([`hh_server`](./hhserver.md))
+* adding type annotations to your code and quick type checking ([`hh_server`](./hhserver.md))
 * migrating PHP code to Hack ([`hackificator`](./hackificator.md))
 * transpile Hack code to PHP ([`ht2p`](./transpiler.md))
 
