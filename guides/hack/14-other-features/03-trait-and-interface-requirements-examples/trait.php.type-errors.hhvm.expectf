@@ -1,0 +1,1 @@
+Fatal error: Class 'Hack\UserDocumentation\OtherFeatures\TIR\Examples\TraitReq\Paper' required to extend class 'Hack\UserDocumentation\OtherFeatures\TIR\Examples\TraitReq\Machine' by trait 'Hack\UserDocumentation\OtherFeatures\TIR\Examples\TraitReq\Plane' in %strait.php on line 36

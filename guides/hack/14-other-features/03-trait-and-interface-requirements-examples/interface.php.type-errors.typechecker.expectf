@@ -1,0 +1,17 @@
+File "%sinterface.php", line 33, characters 24-29:
+Failure to satisfy requirement: Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReq\Machine (Typing[4111])
+File "%sinterface.php", line 14, characters 19-25:
+Required here
+
+File "%sinterface.php", line 33, characters 7-11:
+This object is of type Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReq\Paper (Typing[4054])
+File "%sinterface.php", line 33, characters 24-29:
+It is incompatible with this object of type Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReq\Fliers
+because some declarations are incompatible.
+Read the following to see why:
+File "%sinterface.php", line 33, characters 7-11:
+This object doesn't implement the method closeDoors
+File "%sinterface.php", line 33, characters 24-29:
+Which is required by this interface
+File "%sinterface.php", line 9, characters 19-28:
+As defined here
