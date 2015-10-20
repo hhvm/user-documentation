@@ -13,7 +13,7 @@ class typing_examples_annotate_WebPage {
 }
 
 function typing_examples_annotate_get_link(
-  WebPage $p,
+  typing_examples_annotate_WebPage $p,
   bool $title_only = false): \XHPChild {
   if ($title_only) {
     return $p->getTitle();
