@@ -22,12 +22,14 @@ function getImag(Complex $z): float {
   return $z['imag'];
 }
 
-function setReal(Complex $z, float $real = 0.0): void {
+function setReal(Complex $z, float $real = 0.0): Complex {
   $z['real'] = $real;
+  return $z;
 }
 
-function setImag(Complex $z, float $imag = 0.0): void {
+function setImag(Complex $z, float $imag = 0.0): Complex {
   $z['imag'] = $imag;
+  return $z;
 }
 
 function add(Complex $z1, Complex $z2): Complex {

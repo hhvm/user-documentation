@@ -22,8 +22,8 @@ function run(): void {
   echo "\$z4's real part is " . getReal($z4) ."\n";
   echo "\$z4's imaginary part is " . getImag($z4) ."\n";
 
-  setReal($z2, -3.0);
-  setImag($z2, 2.67);
+  $z2 = setReal($z2, -3.0);
+  $z2 = setImag($z2, 2.67);
   echo "\$z2 contains " . toString($z2) ."\n";
 
   $z5 = add($z2, $z4);

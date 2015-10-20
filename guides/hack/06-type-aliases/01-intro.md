@@ -17,26 +17,3 @@ newtype Point = (int, int);
 ## `newtype` and `type` Keywords
 
 Type aliases are created using the `newtype` and `type` keywords. An alias created using `newtype` is an [*opaque type alias*](./02-opaque.md). An alias created using `type` is a [*transparent type alias*](./03-transparent.md).
-
-Note that [shape](../shapes/intro.md) types *must* be used with a type alias. Consider the following shape definition that is to represent a complex number:
-
-```
-<?hh
-shape('real' => float, 'imag' => float)
-```
-
-Unfortunately, a shape definition cannot be used directly in place of a type. For example, the following is prohibited:
-
-```
-<?hh
-// DISALLOWED
-function f1(shape('real' => float, 'imag' => float) $z): void {}  
-```
-
-Instead, the shape must first be given a type-alias name, with that name being used in all subsequent references to that shape type, as follows:
-
-```
-<?hh
-type Complex = shape('real' => float, 'imag' => float);
-function f1(Complex $z): void {}  // OK
-```

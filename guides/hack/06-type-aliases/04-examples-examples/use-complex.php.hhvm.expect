@@ -4,6 +4,6 @@ $z3 contains (10 - 0i)
 $z4 contains (-4 + 3.5i)
 $z4's real part is -4
 $z4's imaginary part is 3.5
-$z2 contains (0 - 0i)
-$z5 contains $z2 + $z4: (-4 + 3.5i)
-$z6 contains $z2 - $z4: (4 - 3.5i)
+$z2 contains (-3 + 2.67i)
+$z5 contains $z2 + $z4: (-7 + 6.17i)
+$z6 contains $z2 - $z4: (1 - 0.83i)
