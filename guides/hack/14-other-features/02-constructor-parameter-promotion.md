@@ -10,7 +10,7 @@ With constructor parameter promotion, all that repetitive boilerplate is removed
 
 @@ constructor-parameter-promotion-examples/promotion.php @@
 
-All you do is put a modifier in front of the contstructor parameter name and everything else in the previous example is done automatically, including the actual creation of the property.
+All you do is put a modifier in front of the constructor parameter name and everything else in the previous example is done automatically, including the actual creation of the property.
 
 ## Rules
 
