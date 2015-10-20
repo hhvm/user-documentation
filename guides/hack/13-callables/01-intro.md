@@ -18,7 +18,7 @@ The syntax for Hack callables is:
 
 ```
 (function (<param type 1>,..., <param type n): <return type>) $<callback_name>
-``
+```
 
 Since a callable is really a function, the syntax above should look like a function signature without the function and parameter names.
 
@@ -40,18 +40,18 @@ Closures work as you would expect.
 
 ### Function
 
-You can pass a named function to an entity expecting a callable by verifying that function with the special function called `fun()`.
+You can pass a named function to an entity expecting a callable by verifying that function with the special function called [`fun()`](./special-functions#fun).
 
 @@ intro-examples/function.php @@
 
 ### Instance Method
 
-You can pass an instance method to an entity expecting a callable by verifying that method with `inst_meth()`.
+You can pass an instance method to an entity expecting a callable by verifying that method with [`inst_meth()`](./special-functions#inst_meth).
 
 @@ intro-examples/instance.php @@
 
 ### Static Method
 
-You can pass a static method to an entity expecting a callable by verifying that method with `class_meth()`.
+You can pass a static method to an entity expecting a callable by verifying that method with [`class_meth()`](./special-functions#class_meth).
 
 @@ intro-examples/static.php @@
