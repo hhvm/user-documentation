@@ -4,14 +4,14 @@ The key example of this violation is that a reference passed to a function is mo
 
 ## Partial mode
 
-You can use references in partial mode (and, of course decl mode), but they are not typechecked. So use them at your own risk, because with more complicated reference usage, all sorts of interesting things can happen.
+You can use references in partial mode and decl mode, but they are not typechecked. The typechecker pretends that references don't exist: the `&` is invisible to the typechecker in these modes. So use them at your own risk, because with more complicated reference usage, it is easy to cause type errors the typechecker can't see.
 
 @@ references-examples/partial.php @@
 
-There are **no typechecker errors** with this code. However, what does the call to `baz()` return from HHVM? Well notice that none of the functions except `baz()`, return an `int`. They return `void`. Without references, you know that `$x` would be `4` at the end of the call to `baz()`. However, through the convoluted web of all the references, it actually returns `6` here.
+There are **no errors reported by the typechecker** with this code. However, what does the call to `baz()` return from HHVM? Well notice that none of the functions except `baz()`, return an `int`. They return `void`. Without references, you know that `$x` would be `4` at the end of the call to `baz()`. However, through the convoluted web of all the references, it actually returns `6` here.
 
 ## Strict mode
 
-The typechecker does error in strict mode anytime you try to use a reference. 
+The typechecker issues an error in strict mode anytime you try to use a reference. 
 
 @@ references-examples/strict.php.type-errors @@
