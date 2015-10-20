@@ -132,7 +132,7 @@ A nullable type is represented by a `?` placed as a prefix to the type itself (e
 
 There is a `callable` typehint, but Hack does not allow it (HHVM accepts it, however if you don't care about the type checker errors).
 
-Instead, Hack provides a more expressive [callable](../other-features) type that can be used of the form:
+Instead, Hack provides a more expressive [callable](../callables/intro.md) type that can be used of the form:
 
 ```
 function(0..n parameter types): return type
