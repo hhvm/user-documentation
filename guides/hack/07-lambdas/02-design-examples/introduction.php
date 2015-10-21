@@ -1,4 +1,5 @@
 <?hh
+
 namespace Hack\UserDocumentation\Lambdas\Examples\Design\Introduction;
 
 class User {
@@ -14,4 +15,8 @@ function getUsersFromIds(Vector<int> $userids): Vector<User> {
   return $userids->map($id ==> User::get($id));
 }
 
-var_dump(getUsersFromIds(Vector { 1, 2, 3, 4 }));
+function run(): void {
+  var_dump(getUsersFromIds(Vector { 1, 2, 3, 4 }));
+}
+
+run();

@@ -1,4 +1,5 @@
 <?hh
+
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\CaptureVariables;
 
 function addLastname(string $lastname): Vector<string> {
@@ -21,5 +22,9 @@ function addLastnameTraditional(string $lastname): array<string> {
   }, $people);
 }
 
-var_dump(addLastNameTraditional("Smith"));
-var_dump(addLastName("Smith"));
+function run(): void {
+  var_dump(addLastnameTraditional("Smith"));
+  var_dump(addLastname("Smith"));
+}
+
+run();

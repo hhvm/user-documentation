@@ -13,4 +13,8 @@ function addLastnameTraditional(): array<string> {
   }, $people);
 }
 
-var_dump(addLastnameTraditional());
+function run(): void {
+  var_dump(addLastnameTraditional());
+}
+
+run();

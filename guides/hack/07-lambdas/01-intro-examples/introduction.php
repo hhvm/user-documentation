@@ -1,4 +1,5 @@
 <?hh
+
 namespace Hack\UserDocumentation\Lambdas\Examples\Examples\Introduction;
 
 function addLastname(): Vector<string> {
@@ -10,4 +11,8 @@ function addLastname(): Vector<string> {
   return $people->map($name ==> $name . " Banks");
 }
 
-var_dump(addLastname());
+function run(): void {
+  var_dump(addLastname());
+}
+
+run();
