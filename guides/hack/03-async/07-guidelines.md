@@ -118,7 +118,7 @@ If `time_consuming()` has side effects (e.g. a database write), then this could 
 
 Instead, memoize the awaitable
 
-@@ guidelines-examples/memoize-wait-handle.php @@
+@@ guidelines-examples/memoize-awaitable.php @@
 
 This may seem unintuitive, because the function `await`s every time it’s executed, even on the cache-hit path. But that’s fine: on every execution except the first, `$handle` is not `null`, so a new instance of `time_consuming()` will not be started. The result of the one existing instance will be shared.
 

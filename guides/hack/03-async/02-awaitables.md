@@ -15,7 +15,7 @@ $x = foo(); // $x will be an Awaitable<int>
 $x = await foo(); // $x will be an int
 ```
 
-@@ awaitables-examples/wait-handle-return.php @@
+@@ awaitables-examples/awaitable-return.php @@
 
 ## Two types of awaitables
 

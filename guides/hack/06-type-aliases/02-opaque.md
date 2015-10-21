@@ -16,7 +16,7 @@ Only those functions that need to know `Point`'s underlying structure should be 
 
 Here then is some code that creates and uses some Points:
 
-@@ opaque-examples/test.point.php.type-errors @@
+@@ opaque-examples/test-point.php.type-errors @@
 
 Being in the same file as the alias definition, function `createPoint` and friends have---and need---direct access to the integer fields in any Point's tuple. However, any file that includes this file does not.
 
