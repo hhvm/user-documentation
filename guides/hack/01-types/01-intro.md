@@ -1,3 +1,5 @@
+# The Hack Programming Language
+
 In conjunction with the [typechecker](../typechecker/intro.md), the Hack language's typing capabilities is the cornerstone for every other Hack feature that is available. The primary motivation for the development of the Hack language was to be able to explicitly type various parts of your code, such that the code could be analyzed for type consistency and possible errors.
 
 Take this pre-Hack example:

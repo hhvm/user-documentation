@@ -1,3 +1,5 @@
+# Supported Editors
+
 Although `hh_client` can be used directly on the command line, having the immediate feedback directly in an editor can be an amazing productivity boost. If your preferred editor or IDE is unsupported, contributions of additional plugins are very welcome; the existing plugins are decent examples of how to script the `hh_client` interface.
 
 ## Nuclide

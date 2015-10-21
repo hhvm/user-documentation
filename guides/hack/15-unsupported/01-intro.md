@@ -1,3 +1,5 @@
+# Unsupported Features
+
 Hack has its roots in PHP, and supports many of its features, while adding features of its own. However, there are some PHP features Hack doesn't support.
 
 The lack of support for some features is not due to laziness. Careful decision making went into deciding which features to support and which to not support, and the general guideline for a go/no-go decision came down to the typechecker. We wanted the typechecker to be fast. We wanted the typechecker to be accurate when it came to type safety. And many of these features did not lend themselves to those guidelines.

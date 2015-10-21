@@ -1,3 +1,5 @@
+# Special Enum Functions
+
 Enums are scalar types, but they act like objects in a couple of ways. First, they are namespaceable. Secondly, you access enum member values like you do class constants. Thirdly, there are 6 static functions available to every enum.
 
 ## `assert()`

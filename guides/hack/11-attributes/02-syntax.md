@@ -1,3 +1,5 @@
+# Syntax
+
 Attributes can be placed on any reflectable piece of code. These include:
 
 - Functions

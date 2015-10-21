@@ -1,3 +1,5 @@
+# Embedded HTML
+
 In PHP, it is not uncommon to see PHP and HTML intermixed in the same file. 
 
 @@ html-examples/html-php.php @@

@@ -1,3 +1,5 @@
+# Refining Types
+
 Suppose you want to take a given type and refine (upcast) that type to another type. Hack allows this through using the following in control-flow situations:
 
 - checking for `null`

@@ -1,3 +1,5 @@
+# Type Inference
+
 You may have noticed that not everything is [annotated](annotations.md) (e.g., local variables). However, the typechecker is still able to make rational assertions on type mismatches. It fills in the annotation gaps through *type inference*. 
 
 Basically type inference is a deduction of what the type of a variable should be based upon the knowns that are given to it. And the typechecker can do inference based on the knowns of the annotations it does see as well as the current flow of the program.

@@ -1,3 +1,5 @@
+# Lambda
+
 Lambdas are an important feature of Hack and, as such, are [discussed in detail](../lambdas/intro.md) elsewhere. Here is a quick look at the lambda operator.
 
 The operator is:

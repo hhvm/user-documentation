@@ -1,3 +1,5 @@
+# Setting Up the Typechecker
+
 Once the [typechecker is installed](install.md), you need to setup your code so that the typechecker can be used.
 
 ## `.hhconfig`

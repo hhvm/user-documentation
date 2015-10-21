@@ -1,3 +1,5 @@
+# Top-level Code
+
 Hack's position on top-level code is two-fold:
 
 - It is not allowed in strict mode, save for a few exceptions.

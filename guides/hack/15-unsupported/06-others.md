@@ -1,3 +1,5 @@
+# Others
+
 Here is a quick look at some other PHP features that are unsupported in Hack. Remember, when we say *unsupported*, we mean the following:
 
 - The typechecker will issue an error in [strict mode](../typechecker/modes.md#strict-mode).

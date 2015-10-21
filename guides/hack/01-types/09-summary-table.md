@@ -1,3 +1,5 @@
+# Type Summary Table
+
 The following table summarizes the type system available in Hack, examples of how they are used in annotations, where they can be annotated (function, class method, class property, function/method return, parameter), and if they can be nullable. Remember, a return type is always preceded by a `:`.
 
 Type       |    Example Annotations  |Func?|Meth?|Prop?|Ret?|Param?|Nullable?
