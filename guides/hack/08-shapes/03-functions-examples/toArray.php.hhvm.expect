@@ -1,0 +1,37 @@
+======== Shapes::toArray ========
+
+# elements in array = 0
+array(0) {
+}
+array(0) {
+}
+----------------------------
+# elements in array = 2
+array(2) {
+  ["x"]=>
+  int(10)
+  ["y"]=>
+  int(20)
+}
+array(2) {
+  ["x"]=>
+  int(10)
+  ["y"]=>
+  int(20)
+}
+----------------------------
+# elements in array = 2
+array(2) {
+  ["y"]=>
+  int(20)
+  ["x"]=>
+  int(10)
+}
+array(2) {
+  ["y"]=>
+  int(20)
+  ["x"]=>
+  int(10)
+}
+----------------------------
+# elements in array = 3

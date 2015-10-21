@@ -1,0 +1,4 @@
+======== Shapes::keyExists ========
+
+keyExists($s, 'x') = 1
+keyExists($s, 'name') =

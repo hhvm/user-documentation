@@ -1,0 +1,19 @@
+<?hh
+
+namespace Hack\UserDocumentation\Shapes\Introduction\Examples\Fields;
+
+type user = shape('id' => int, 'name' => string);
+
+class UserClass {
+  public static function create_user(int $id, string $name): user {
+    $user = shape();
+    $user['id'] = $id;
+    return $user;
+  }
+}
+
+function run(): void {
+  var_dump(UserClass::create_user(1, 'James'));
+}
+
+run();

@@ -1,0 +1,30 @@
+File "%ssubtype.php", line 35, characters 24-31:
+Invalid argument (Typing[4140])
+File "%ssubtype.php", line 31, characters 3-30:
+The field 'amount' is missing
+
+File "%ssubtype.php", line 39, characters 30-37:
+Invalid argument (Typing[4140])
+File "%ssubtype.php", line 31, characters 3-30:
+The field 'amount' is missing
+
+File "%ssubtype.php", line 48, characters 30-37:
+The field amount is undefined (Typing[4108])
+
+File "%ssubtype.php", line 48, characters 64-75:
+The field fromaccnum is undefined (Typing[4108])
+
+File "%ssubtype.php", line 49, characters 32-41:
+The field toaccnum is undefined (Typing[4108])
+
+File "%ssubtype.php", line 54, characters 29-36:
+The field amount is undefined (Typing[4108])
+
+File "%ssubtype.php", line 54, characters 61-70:
+The field toaccnum is undefined (Typing[4108])
+
+File "%ssubtype.php", line 57, characters 32-39:
+The field amount is undefined (Typing[4108])
+
+File "%ssubtype.php", line 58, characters 15-26:
+The field fromaccnum is undefined (Typing[4108])
