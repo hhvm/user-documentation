@@ -146,8 +146,8 @@ development, HHVM's built-in webserver should be sufficient:
 $ cd user-documentation/public
 user-documentation/public$ hhvm -m server \
   -p 8080 \
-  -v Server.DefaultDocument=index.php \
-  -v Server.ErrorDocument404=index.php
+  -d hhvm.server.default_document=index.php \
+  -d hhvm.server.error_document404=index.php
 ```
 
 
