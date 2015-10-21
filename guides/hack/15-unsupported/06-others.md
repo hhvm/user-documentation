@@ -1,8 +1,8 @@
 Here is a quick look at some other PHP features that are unsupported in Hack. Remember, when we say *unsupported*, we mean the following:
 
-- The typechecker will definitely error in [strict mode](../typechecker/modes.md#strict-mode), or just ignore the construct altogether.
-- The typechecker may or may not error in partial mode, but will definitely not typecheck the construct, or just ignore the construct altogether.
-- Most of the time, these constructs will run unimpeded under HHVM.
+- The typechecker will issue an error in [strict mode](../typechecker/modes.md#strict-mode).
+- The typechecker will either issue an error in partial mode, or will ignore (and not typecheck) the construct.
+- These constructs will run unimpeded under HHVM when running PHP (not Hack) code.
 
 ## `eval()` and `create_function()`
 
@@ -16,7 +16,7 @@ You will get no typechecker errors, even in [strict mode](../typechecker/modes.m
 
 @@ others-examples/varvars.php.type-errors @@
 
-There is no way to do type inference in a case like this. How can the typechecker know that what we meant by assigning `x` to `$val` was that we were going to use that `x` has a variable later on.
+There is no way to do type inference in a case like this. The typechecker can't know that what we meant by assigning `x` to `$val` was that we were going to use that `x` has a variable later on.
 
 ## Dynamic Properties
 
@@ -26,7 +26,7 @@ All class properties must be explicitly declared.
 
 ## Aliasing of methods in traits
 
-The typechecker doesn't understand aliasing trait methods. It actually believes it is a parse error.
+To preserve consistency and greppability, the typechecker doesn't allow aliasing trait methods.
 
 @@ others-examples/trait-aliasing.php.type-errors @@
 
@@ -41,5 +41,4 @@ The typechecker doesn't understand aliasing trait methods. It actually believes 
 -  Arguments to `break` and `continue` (e.g, `break 2;`)
 -  Case-insensitive function calls and class lookups
 -  Mixing method call syntax (e.g., using `self` to call a non-static method)
--  Hack supports [argument unpacking](https://wiki.php.net/rfc/argument_unpacking), except for on arbitrary traversables.
-
+- [Argument unpacking](https://wiki.php.net/rfc/argument_unpacking) with things other than arrays and collections

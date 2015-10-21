@@ -2,7 +2,7 @@ In PHP, it is not uncommon to see PHP and HTML intermixed in the same file.
 
 @@ html-examples/html-php.php @@
 
-The above code will run just fine in HHVM. At the command line, the output will be the raw HTML with the proper date included.
+The above PHP code will run just fine in HHVM. At the command line, the output will be the raw HTML with the proper date included.
 
 ## No Typechecking, Runtime Errors
 
