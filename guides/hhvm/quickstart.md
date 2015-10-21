@@ -33,6 +33,8 @@ If you want the latest [LTS (long term support)](./installation/intro.md#lts-rel
 sudo apt-get-repository 'deb http://dl.hhvm.com/ubuntu-lts-3.9 vivid main'
 ```
 
+Generally, the `hhvm` executable is available in `/usr/bin`, and that will be in your `$PATH`, so you can type `hhvm` to run HHVM at the command-line. But, your distro could be different; so verify the location of `hhvm` on your distro.
+
 You can [build from source](./installation/intro.md) if you really want, but doing that doesn't include nice things like our init script or automatic updates via `apt-get`, and so isn't recommended until you get a basic install working and have a better feel for what you're doing.
 
 Installing HHVM will start it up now, but it won't be configured to start at next boot. `sudo update-rc.d hhvm defaults` will set that up.
