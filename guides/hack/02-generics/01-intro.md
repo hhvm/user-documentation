@@ -2,11 +2,7 @@
 
 Certain types (classes, interfaces, and traits) and their methods can be parameterized; that is, their declarations can have one or more placeholder names called *type parameters* that are associated with types via *type arguments* when a class is instantiated or a method is called. A type or method having such placeholder names is called a *generic type* or *generic method*, respectively. Top-level functions can also be parameterized giving rise to *generic functions*.
 
-An example of a generic class is `Vector<T>`, from the Hack collections
-implementation. `T` is called a _type parameter_, and it is what makes Vector
-generic. It can hold any type of value, from int to an instance of a class.
-However, for any instantiation of the class, once a type has been associated
-with `T`, it cannot be changed to hold any other type.
+An example of a generic class is `Vector<T>`, from the Hack collections implementation. `T` is called a _type parameter_, and it is what makes Vector generic. It can hold any type of value, from int to an instance of a class. However, for any instantiation of the class, once a type has been associated with `T`, it cannot be changed to hold any other type.
 
 @@ intro-examples/vector.php @@
 
@@ -21,13 +17,7 @@ manipulate generic classes:
 The above example shows a generic function `swap<T>()` operating on a generic
 `Box<T>` class.
 
-Generics allow developers to write one class or method with the ability to be
-parameterized to any type, all while preserving type safety. Without generics,
-accomplishing a similar model would require creating `BoxInt` and `BoxString`
-classes, and that quickly gets verbose. Alternatively, we could treat `$value`
-as a `mixed` type and doing `instanceof()` checks, which means that inserting
-a string into a box of int would not raise a typechecker error, but would only
-be discovered at runtime.
+Generics allow developers to write one class or method with the ability to be parameterized to any type, all while preserving type safety. Without generics, accomplishing a similar model would require creating `BoxInt` and `BoxString` classes, and that quickly gets verbose. Alternatively, we could treat `$value` as a `mixed` type and doing `instanceof()` checks, which means that inserting a string into a box of int would not raise a typechecker error, but would only be discovered at runtime.
 
 ## Arity
 
