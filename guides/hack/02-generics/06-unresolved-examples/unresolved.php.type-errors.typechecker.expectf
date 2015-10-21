@@ -1,0 +1,8 @@
+File "%sunresolved.php", line 44, characters 28-31:
+Invalid argument (Typing[4110])
+File "%sunresolved.php", line 18, characters 30-32:
+This is an int
+File "%sunresolved.php", line 38, characters 15-18:
+It is incompatible with a string
+File "%sunresolved.php", line 18, characters 30-32:
+Considering that this type argument is invariant with respect to Hack\UserDocumentation\Generics\Unresolved\Examples\Unresolved\Box

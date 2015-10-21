@@ -1,0 +1,8 @@
+File "%sclasses.php", line 34, characters 16-19:
+Invalid argument (Typing[4110])
+File "%sclasses.php", line 29, characters 28-30:
+This is an int
+File "%sclasses.php", line 16, characters 24-24:
+  via this generic T
+File "%sclasses.php", line 34, characters 16-19:
+It is incompatible with a float
