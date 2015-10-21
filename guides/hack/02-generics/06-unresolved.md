@@ -2,7 +2,7 @@
 
 Imagine the following usage of a generic `Box` class
 
-@@ unresolved-examples/unresolved.php @@
+@@ unresolved-examples/unresolved.php.type-errors @@
 
 We create a new `Box`. Store an `int`. Then store a `string`. 
 

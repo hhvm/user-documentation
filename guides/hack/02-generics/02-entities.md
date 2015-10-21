@@ -6,7 +6,7 @@ Generics can be used on many of the entities you are accustomed to in your progr
 
 Consider the following example in which `Stack` is a generic class having one type parameter, `T`:
 
-@@ entities-examples/classes.php @@
+@@ entities-examples/classes.php.type-errors @@
 
 As shown, the type parameter `T` is used in the declaration of the instance property `$stack`, as the parameter type of the instance method `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves generic methods. 
 
