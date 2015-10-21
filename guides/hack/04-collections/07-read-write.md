@@ -18,11 +18,11 @@ echo $coll[key];
 
 `Set`s do not have keys, so it is a bit strange to use the square bracket syntax for reading, although you can do it at runtime. The Hack typechecker will throw an error, however. You basically replace `key` above with the value in the set you are looking for. Since it is confusing, it is just better to use `contains()` instead.
 
-@@ read-write-examples/read-square-bracket-set.php @@
+@@ read-write-examples/read-square-bracket-set.php.type-errors @@
 
 If you use square brackets to read from a collection and the key does not exist in the collection (or the value in the case of a `Set`), then an `OutOfBoundsException` is thrown.
 
-@@ read-write-examples/read-out-of-bounds.php @@
+@@ read-write-examples/read-out-of-bounds.php.type-errors @@
 
 ### Containing Functions
 
@@ -55,7 +55,7 @@ $map[newKey] = value;
 $map[] = Pair {key, value};
 ```
 
-@@ read-write-examples/write-square-bracket.php @@
+@@ read-write-examples/write-square-bracket.php.type-errors @@
 
 ### Appending Methods
 

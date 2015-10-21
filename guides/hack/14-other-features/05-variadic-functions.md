@@ -14,7 +14,7 @@ In Hack, however, you cannot pass more arguments than are specified. A typecheck
 
 **NOTE**: HHVM will ignore the extra arguments and run the code as if two parameters were passed.
 
-@@ variadic-functions-examples/too-many.php @@
+@@ variadic-functions-examples/too-many.php.type-errors @@
 
 However, Hack has specific notation to make a function explicitly variadic. By putting `...` as the last argument to a function, you are telling the typechecker that the function can take a variable number of arguments.
 

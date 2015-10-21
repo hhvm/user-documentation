@@ -25,7 +25,7 @@ require extends <class name>;
 
 Here is an example of a trait forcing a class and interface requirement and shows a class that meets the requirement and a class that does not.
 
-@@ trait-and-interface-requirements-examples/trait.php @@
+@@ trait-and-interface-requirements-examples/trait.php.type-errors @@
 
 **NOTE**: `require extends` should be taken literally. The class must extend
 the required class; thus the actual required class **does not** meet that requirement.
@@ -34,4 +34,4 @@ the required class; thus the actual required class **does not** meet that requir
 
 Here is an example of an interface forcing a class requirement and shows a class that meets the requirement and a class that does not.
 
-@@ trait-and-interface-requirements-examples/interface.php @@
+@@ trait-and-interface-requirements-examples/interface.php.type-errors @@

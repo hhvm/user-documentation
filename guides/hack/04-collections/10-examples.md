@@ -12,7 +12,7 @@ The following example shows you a simple example on how to create, query, add it
 
 The following example shows you a simple example on how to create, query, add items to and remove items from a `Map`.
 
-@@ examples-examples/map.php @@
+@@ examples-examples/map.php.type-errors @@
 
 ## Using `filter()`
 

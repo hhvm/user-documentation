@@ -44,7 +44,7 @@ Outputting UI through string concatenation or interpolation can be a cause of bu
 
 Since XHP objects are first-class and not just strings, a whole slew of validation can occur to ensure that your UI does not have subtle bugs.
 
-@@ intro-examples/tag-matching-validation.php @@
+@@ intro-examples/tag-matching-validation.php.type-errors @@
 
 The above code won't typecheck or even run because the XHP validator will catch that `<span>` and `<naps>` tags are mismatched.
 

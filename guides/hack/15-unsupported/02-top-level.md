@@ -15,7 +15,7 @@ The above example will typecheck cleanly, but it will fail at runtime with a cat
 
 Unless your code is one of the few allowed at the top-level by strict mode, the typechecker will throw an error. Taking the same example as above, but making it strict, you will get typechecking error now.
 
-@@ top-level-examples/strict.php.notypecheck @@
+@@ top-level-examples/strict.php.type-errors @@
 
 The following are allowed at the top-level in strict mode
 

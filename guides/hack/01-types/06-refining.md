@@ -36,6 +36,6 @@ Sometimes you want to know whether an object is a child of a parent class or imp
 
 Take a look at this example.
 
-@@ refining-examples/unresolved.php
+@@ refining-examples/unresolved.php.type-errors
 
 Even though `bar()` was passed in a `Base`, and all children of `Base` implement `foo()`, once the `instanceof` check was done on `$b`, and the check returned `true`, the typechecker has to assume that `$b` is now an unresolved type of both `Base` and `I`. And since not all implementers of `I` have to be in the hierarchy of `Base`, we cannot guarantee that `foo()` is available any longer.

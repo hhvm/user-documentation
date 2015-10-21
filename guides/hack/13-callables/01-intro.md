@@ -6,7 +6,7 @@ The following is allowed in PHP:
 
 The Hack typechecker ***does not*** allow the callable type hint.
 
-@@ intro-examples/hack-callable-bad.php @@
+@@ intro-examples/hack-callable-bad.php.type-errors @@
 
 However, Hack does offer a powerful alternative to the `callable` type hint through the `function` keyword
 

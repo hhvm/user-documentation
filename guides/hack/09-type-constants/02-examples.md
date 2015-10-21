@@ -12,7 +12,7 @@ Referencing type constants is as easy as referencing a static class constant.
 
 For type constants declared in classes, it is possible provide a constraint as well as a concrete type. When a constraint is provided this allows the type constant to be overridden by child classes. This feature is not supported for interfaces.
 
-@@ examples-examples/overriding.php @@
+@@ examples-examples/overriding.php.type-errors @@
 
 ## Type Constants and Instance Methods
 

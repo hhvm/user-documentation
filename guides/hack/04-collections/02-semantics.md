@@ -24,7 +24,7 @@ So, if you had some automatic code modifier to convert `array` to `Vector`, your
 
 One way to help remedy this is to use `ImmVector` and Vector::immutable()` to make sure that you cannot modify the collection when you pass it to the function.
 
-@@ semantic-examples/converting-immutable.php @@
+@@ semantic-examples/converting-immutable.php.type-errors @@
 
 ## Equality on Collections `==`
 
@@ -62,7 +62,7 @@ You can use [`list()`](http://php.net/manual/en/function.list.php) with  `Vector
 
 While you can use `list()` with `Map` and `Set` at runtime, the Hack typechecker will throw an error. Note that you must have a zero integer key and subsequent ordered keys for `Map` and `Set`; otherwise you will get an `OutOfBoundsException`.
 
-@@ semantics-examples/list.php @@
+@@ semantics-examples/list.php.type-errors @@
 
 ## Using Array Built-In Functions
 

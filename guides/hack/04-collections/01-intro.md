@@ -42,7 +42,7 @@ Related to readability, the Hack typechecker cannot tell, for example, whether t
 
 However, if you take a similar style of code, but instead use `Vector` and `Map`, the typechecker can easily tell the intent.
 
-@@ intro-examples/map-typecheck.php @@
+@@ intro-examples/map-typecheck.php.type-errors @@
 
 Using Hack collections gives the typechecker more data to work with in trying to decide whether you have typing problems in your code.
 

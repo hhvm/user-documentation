@@ -10,4 +10,4 @@ The following example shows how you can use `ConstVector` to ensure that you are
 
 Now, if you know the function will only take an `ImmVector` for now and always, then type annotating it as `ImmVector` would be fine.
 
-@@ typing-examples/constvector.php @@ 
+@@ typing-examples/constvector.php.type-errors @@ 
