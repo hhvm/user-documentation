@@ -35,7 +35,7 @@ To preserve consistency and greppability, the typechecker doesn't allow aliasing
 ## Others
 
 - [Old style constructors](https://wiki.php.net/rfc/remove_php4_constructors)
-- `global` as they act lack references, which are already unsupported.
+- `global` as they act like references, which are already unsupported.
 - `goto`
 - `if...endif`
 -  Incrementing and decrementing strings with `++` and `--`
@@ -44,3 +44,4 @@ To preserve consistency and greppability, the typechecker doesn't allow aliasing
 -  Case-insensitive function calls and class lookups
 -  Mixing method call syntax (e.g., using `self` to call a non-static method)
 - [Argument unpacking](https://wiki.php.net/rfc/argument_unpacking) with things other than arrays and collections
+-  Array addition. Use [`array_merge`](http://php.net/manual/en/function.array-merge.php) or [`array_replace`](http://php.net/manual/en/function.array-replace.php) instead.
