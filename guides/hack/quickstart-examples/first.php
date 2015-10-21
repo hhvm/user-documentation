@@ -14,7 +14,9 @@ namespace Hack\UserDocumentation\Quickstart\Examples\First;
 // This is how you create a class in Hack
 class Complex {
   // These are class properties. They can be public (totally accessible),
-  // protected (this class and children), private (only this class)
+  // protected (this class and children), private (only this class).
+  // They also have an optional type annotation; in this case, both members
+  // are floating-point numbers.
   private float $real;
   private float $imag;
 
@@ -47,13 +49,13 @@ class Complex {
     // === checks for type and value equality; there is also == which just
     // checks for value equality. Normally === is safer.
     if ($this->imag === 0.0) {
-      // strval is a builtin function that converts numbers to strings
-      return strval($this->real);
+      // Make sure to cast the floating-point numbers to a string.
+      return (string)$this->real;
     } else if ($this->real === 0.0) {
       // The . is the string concatenation operator.
-      return strval($this->imag) . 'i';
+      return (string)$this->imag . 'i';
     } else {
-      return strval($this->real) . ' + ' . strval($this->imag) . 'i';
+      return (string)$this->real . ' + ' . (string)$this->imag . 'i';
     }
   }
 }

@@ -22,7 +22,7 @@ Check out the [HHVM quickstart guide](../hhvm/quickstart.md) on how to install H
 
 After you install HHVM, the Hack typechecker will be available to you to statically check your code before you run it. It is *not* a compiler; but rather a super-fast code analyzer that tries to catch dynamic programming errors before code is run instead of during or after.
 
-The typechecker `hh_client` is generally available in `/usr/bin/`, and that will be in your `$PATH`, so you can type `hh_client` to run the typechecker, when we get to that point. But, your distro could be different; so verify the location of `hh_client` on your distro. 
+The typechecker is called `hh_client` and is available by default alongside HHVM in all official packages supported by the HHVM team. If you are using a community-contributed package, `hh_client` is very likely available there too, but you should check with your package maintainer.
 
 ## Your First Hack Program
 
@@ -30,7 +30,7 @@ Let's dive right in and create your first Hack program.
 
 ### Setup for the Typechecker
 
-Choose a directory where you want to store your Hack code. For sake of simplicity, let's say we have a directory called `~/dev`. In `~/dev`, you will want to `touch .hhconfig`. This is an empty file that `hh_client` looks for as the *root* of your code to being typechecking. All code from this directory and recursively downward will be analyzed and checked by the typechecker.
+Choose a directory where you want to store your Hack code. In this directory, run `touch .hhconfig`. This creates an empty file that `hh_client` looks for as the *root* of your code to being typechecking. In order to properly analyze your code, the typechecker needs to do global analysis and be able to see all of your code. This means that it assumes a global autoloader for any code under this root, and checks all code recursively under this root together as one project.
 
 ### Write your first Hack program
 
@@ -45,10 +45,10 @@ This quickstart assumes some knowledge of programming (e.g., what a class is, wh
 
 ### Run the Typechecker
 
-If you are using an editor like Nuclide, you will be seeing typechecking information as you write the program. If you run the typechecker from the command line, the command is:
+If you are using an editor like Nuclide, you will be seeing typechecking information as you write the program. If you run the typechecker from the command line, the command is just:
 
 ```
-% hh_client first.php
+% hh_client
 ```
 
 You should see:
@@ -65,7 +65,7 @@ first.php:51:14,32: Invalid return type (Typing[4110])
   functions.hhi:40:22,27: It is incompatible with a string
 ```
 
-This is very powerful because it let's you know that you might not be returning what you think you are returning. And the typechecker will make these checks all over your codebase.
+This is very powerful because it let's you know that you might not be returning what you think you are returning. The typechecker makes these checks all over your codebase, for all your code, without having to run it.
 
 ### Run the code in HHVM
 
@@ -82,8 +82,6 @@ And here is the output:
 -9 + 10i
 -6 + 6i
 ```
-
-**IMPORTANT NOTE**: In many cases, HHVM will run your code just fine even if the typechecker issues errors. They are currently not 100% correlated. For example, if `toString()` was left to return `bool`, the typechecker would issue an error, but you could run the code successfully in HHVM. The problem is that even though HHVM would run the code, you may get unexpected results, which is why the typechecker is so important.
 
 ## Key Hack Features
 
