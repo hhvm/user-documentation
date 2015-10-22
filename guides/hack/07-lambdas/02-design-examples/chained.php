@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\Lambdas\Examples\Design\Introduction;
+namespace Hack\UserDocumentation\Lambdas\Examples\Design\Chained;
 
 function chainedLambdas(): void {
   $lambda = $x ==> $y ==> $x - $y;
