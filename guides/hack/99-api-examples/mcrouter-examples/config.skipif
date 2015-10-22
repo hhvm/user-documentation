@@ -9,6 +9,15 @@ if (!getenv('HHVM_TEST_MCROUTER')) {
   echo 'skip';
 }
 
+$memc = new Memcached();
+$memc->addServer('localhost', '11211');
+$version = $memc->getVersion();
+if (!$version) {
+  echo "SKIP No Memcached running";
+} else {
+  $memc->quit();
+}
+
 try {
   $servers = Vector { getenv('HHVM_TEST_MCROUTER') };
   $mc = \MCRouter::createSimple($servers);
