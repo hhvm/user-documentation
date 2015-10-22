@@ -35,6 +35,7 @@ function ts_generics_1(): array<string> {
   // can't do this because the typechecker knows by our return statement and
   // our return type that we are binding the Box to a string type. If we did
   // something like ": array<arraykey>", then it would work.
+  // This will work when running in HHVM though.
   gift($box, 3);
   return $box->get();
 }
@@ -47,5 +48,9 @@ function ts_generics_2(): array<arraykey> {
   return $box->get();
 }
 
-var_dump(ts_generics_1());
-var_dump(ts_generics_2());
+function run(): void {
+  var_dump(ts_generics_1());
+  var_dump(ts_generics_2());
+}
+
+run();

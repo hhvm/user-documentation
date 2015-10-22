@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\Types\Inference\Examples\LocalVariables;
 
 function foo(): int {
   $a = str_shuffle("ABCDEF"); // $a is a string
-  if (strpos($a, "A") === 0) {
+  if (strpos($a, "A") === false) {
     $a = 4; // $a is an int
   } else {
     $a = 2; // $a is an int
@@ -14,4 +14,8 @@ function foo(): int {
   return $a;
 }
 
-var_dump(foo());
+function run(): void {
+  var_dump(foo());
+}
+
+run();
