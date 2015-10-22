@@ -87,7 +87,7 @@ There are valid uses for `mixed`, but generally you want to be as specific as po
 
 ## `arraykey`
 
-`arraykey` is special union type of `int` and `string`. Arrays and [collection](../collections/intro.md) types can be keyed by `int` or `string`.Suppose, for example, an operation was performed on an array to extract the keys, but you didn't know the type of the key. You were left with using `mixed` or doing some sort of duplicative code. `arraykey` resolves that issue.
+`arraykey` is special union type of `int` and `string`. Arrays and [collection](../collections/intro.md) types can be keyed by `int` or `string`. Suppose, for example, an operation was performed on an array to extract the keys, but you didn't know the type of the key. You were left with using `mixed` or doing some sort of duplicative code. `arraykey` resolves that issue.
 
 @@ type-system-examples/arraykey.php @@
 
