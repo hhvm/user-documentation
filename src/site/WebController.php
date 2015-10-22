@@ -18,6 +18,13 @@ abstract class WebController {
     return $this->parameters[$key];
   }
 
+  protected function getOptionalStringParam(string $key): ?string {
+    return 
+      $this->parameters->containsKey($key) 
+        ? $this->parameters[$key] 
+        : NULL;
+  }
+  
   protected static function invariantTo404<T>(
     (function():T) $what,
   ) :T {

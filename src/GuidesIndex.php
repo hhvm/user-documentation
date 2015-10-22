@@ -2,10 +2,15 @@
 
 namespace HHVM\UserDocumentation;
 
-class GuidesIndex {
+class GuidesIndex {  
   private static function getIndex(
   ): Map<string, Map<string, Map<string, string>>> {
     return require(BuildPaths::GUIDES_INDEX);
+  }
+  
+  private static function getSummaries(
+  ): Map<string, Map<string, string>> {
+    return require(BuildPaths::GUIDES_SUMMARY);
   }
 
   public static function getProducts(): ImmVector<string> {
@@ -39,6 +44,25 @@ class GuidesIndex {
       $guide,
     );
     return self::getIndex()[$product][$guide]->keys()->toImmVector();
+  }
+
+  public static function getFileForSummary(
+    string $product,
+    string $guide,
+  ): string {
+    $summaries = self::getSummaries();
+    invariant(
+      $summaries->containsKey($product),
+      'Product %s does not exist',
+      $product,
+    );
+    invariant(
+      $summaries[$product]->containsKey($guide),
+      'Product %s does not contain summary %s',
+      $product,
+      $guide,
+    );
+    return __DIR__.'/../guides/'.$summaries[$product][$guide];
   }
 
   public static function getFileForPage(
