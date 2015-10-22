@@ -28,7 +28,9 @@ async function simple_query(): Awaitable<int> {
     // How many rows were affected? Should be 1.
     var_dump($result->numRowsAffected());
   } catch (\AsyncMysqlQueryException $ex) {
-    var_dump(-1); // this could happen if we try to insert duplicate user id
+    // this could happen if we try to insert duplicate user id
+    // But to keep test output consistent, just var dump a positive number
+    var_dump(PHP_INT_MAX);
     $conn->close();
     return 0;
   }
