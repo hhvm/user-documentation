@@ -2,7 +2,7 @@
 
 string(255) "Element `ul` was rendered with invalid children.
 
-%sallowed-tag-validation.php:13
+%sallowed-tag-validation.php:11
 
 Verified 0 children before failing.
 
@@ -10,4 +10,4 @@ Children expected:
 (:li)*
 
 Children received:
-:i[%flow,%phrase]"
+:i[%s,%s]"

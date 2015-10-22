@@ -8,7 +8,8 @@ function basic_usage_examples_basic_xhp(): void {
        My Text
        <strong>My Bold Text</strong>
        <i>My Italic Text</i>
-    </div>);
+    </div>
+  );
 }
 
 basic_usage_examples_basic_xhp();
