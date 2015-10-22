@@ -10,11 +10,33 @@ In the example above, the call to `curl_exec` in `curl_A()` is blocking any othe
 
 ![No Async](images/no-async.png)
 
-Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. While not true multithreading, this is the next best thing. It allows code that utilizes the async infrastructure to cede CPU time to one another in an explicit and knowing fashion. So, if you have code that has operations that involve some sort of waiting (e.g., network access), async minimizes the downtime your program has to be stalled because of it.
+Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. Async is **not multithreading**. It allows code that utilizes the async infrastructure to hide input/output (I/O) latency and data fetching. So, if you have code that has operations that involve some sort of waiting (e.g., network access, waiting for database queries), async minimizes the downtime your program has to be stalled because of it as the program will go do other things, most likely further I/O somewhere else.
+
+The following images should hopefully clear up any confusion you may have on what async is. Let's assume you have three distinct tasks to execute (don't worry about what the tasks are):
+
+** Synchronous Execution **
+
+This is just like PHP and Hack (without async) is executed today. Serial execution.
+
+![Synchronous](images/synchronous.png)
+
+** Parallel Execution **
+
+This is an optimum state. We have all tasks running at the same time, concurrently. But, PHP and Hack do not support more than one thread of execution.
+
+![Parallel](images/parallel.png)
+
+** Asynchronous Execution **
+
+This is what async does. Tasks are executed concurrently in the same execution thread, with respect to each other, interleaving instructions (e.g., I/O) for different tasks back and forth.
+
+![Asynchronous](images/asynchronous.png)
+
+**IMPORTANT**: It is important to reiterate that async is not multithreading. You are still bound to a single execution thread. Async works best when you have a lot of I/O codepaths that don't have to sit there waiting for other I/O requests to end to begin doing their requests.
 
 @@ intro-examples/async-curl.php @@
 
-In this example, we are calling an async-aware version of `curl_exec()`. Thus, in this case, our waiting state is explictly allowing control of the CPU to other tasks in the code.
+In this example, we are calling an async-aware version of `curl_exec()`. Thus, in this case, our waiting state is explicitly allowing other I/O operation tasks in the code to occur.
 
 When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, the network latency to retrieve results of the CURL, the async infrastructure (the scheduler) looks for other async tasks that could be run. It finds that `curl_B()` is available to execute, so it starts executing that code. When it hits its `HH\Asio\curl_exec()` call, the process is repeated again, and the scheduler will find that our `curl_exec()` call in `curl_B()` is ready for execution once again.
 

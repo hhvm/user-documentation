@@ -26,7 +26,7 @@ Facebook's entire site runs on HHVM (desktop, api and mobile), both in developme
 * Other information can be found in the references of [our Wikipedia page](http://en.wikipedia.org/wiki/HHVM).
 * Presentations from the [HACK Dev Days 2014](https://www.youtube.com/playlist?list=PLb0IAmt7-GS2fdbb1vVdP8Z8zx1l2L8YS)
 
-# Users
+## Users
 
 ### How do I install HHVM? Where are the binaries?
 
@@ -92,3 +92,11 @@ The HHVM wrapper provides a simpler interface to the HHVM binary for many common
 ### How do I resolve the "Failed to initialize central HHBC repository at `/var/www/.hhvm.hhbc` error"?
 
 Try deleting `/var/run/hhvm/hhvm.hhbc` and run your program again
+
+## Configuration and Deployment
+
+### HHVM keeps crashing. Why?
+
+There can be many reasons. And it is tough to diagnose that general question. It could be a bug in HHVM. It could be that you need to increase the size of your [translation cache](../configuration/ini-settings.md#jit-translation-cache-size). Or it could be other factors.
+
+The best thing to do is [file an issue](https://github.com/facebook/hhvm/issues) and at minimum give us the problem and a stack trace. You will get a much faster and more quality response if you also provide us as small as possible reproduction case with PHP or Hack code.
