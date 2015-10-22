@@ -18,7 +18,7 @@ module HHVM
 
         doc.search('p').each do |node|
           contents = node.inner_text.strip
-          if match = %r,^@@ (?<dir_name>[^/ ]+)/(?<file_name>[^/ ]+\.php(?:.type-errors)?) @@$,.match(contents)
+          if match = %r,^@@ (?<dir_name>[^/ ]+)/(?<file_name>[^/ ]+\.php(?:.type-errors)?(?:.(hhvm|typechecker).expect[f]?)?) @@$,.match(contents)
             next if match[:dir_name] != source_examples_dir
 
             full_path = File.expand_path(match[:file_name], base)

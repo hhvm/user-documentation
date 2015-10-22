@@ -34,4 +34,4 @@ Taking the example above and using this mechanism:
 
 And here is the output:
 
-@@ exceptions-examples/wrapping-exceptions.php.expectf @@
+@@ exceptions-examples/wrapping-exceptions.php.hhvm.expectf @@
