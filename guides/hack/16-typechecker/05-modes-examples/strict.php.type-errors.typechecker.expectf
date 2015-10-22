@@ -17,6 +17,3 @@ Unbound name: Hack\UserDocumentation\TypeChecker\Modes\Examples\NonHack\php_func
 
 File "%sstrict.php", line 45, characters 8-23:
 Unbound name: Hack\UserDocumentation\TypeChecker\Modes\Examples\NonHack\php_func (a global function) (Naming[2049])
-
-File "%sstrict.php", line 58, characters 1-3:
-Remove all toplevel statements except for requires (Parsing[1002])

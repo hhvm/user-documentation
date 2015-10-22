@@ -54,5 +54,8 @@ function bar(): int {
 }
 
 // This can't be in strict mode either. You need to put this in partial file
-// and include it from this file
+// and include it from this file. However, UNSAFE it so we can see more
+// interesting errors.
+
+/* HH_FIXME[1002] So we can get interesting type-checking errors */
 bar();
