@@ -11,7 +11,7 @@ function array_as_map(array<string, string> $arr): string {
 // array<int> is an array vector with integer keys and integer values
 function array_as_vector(array<int> $arr): int {
   $r = rand(0, 10);
-  return array_key_exists($r, $arr) ? $arr[$r] : -1;
+  return array_key_exists($r, $arr) ? $arr[$r] : PHP_INT_MAX;
 }
 
 function run(): void {

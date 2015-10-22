@@ -1,1 +1,6 @@
-No errors!
+File "%smap.php", line 10, characters 5-24:
+Invalid assignment (Typing[4110])
+File "%smap.php", line 10, characters 5-12:
+This is an object of type Pair because you can only append a Pair<Tkey, Tvalue> to an Map<Tkey, Tvalue>
+File "%smap.php", line 10, characters 16-24:
+It is incompatible with a string

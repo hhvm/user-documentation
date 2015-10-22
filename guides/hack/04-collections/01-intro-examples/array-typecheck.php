@@ -6,7 +6,7 @@ namespace Hack\UserDocumentation\Collections\Intro\Examples\ArrTypeCheck;
 // a vector.
 function array_as_map(array<int, int> $arr): int {
   $r = rand(0, 10); // random letter
-  return array_key_exists($r, $arr) ? $arr[$r] : -1;
+  return array_key_exists($r, $arr) ? $arr[$r] : PHP_INT_MAX;
 }
 
 function run(): void {
