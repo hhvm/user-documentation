@@ -18,17 +18,21 @@ class ClassMarkdownBuilder {
   }
 
   private function getHeading(): string {
-    $heading = 'The '.$this->getName().' '.$this->yaml['type'];
-    return $heading."\n".str_repeat('=', strlen($heading))."\n\n";
+    return '## The '.$this->getName().' '.$this->yaml['type']."\n\n";
   }
 
   private function getContents(): string {
     $prefix = $this->getName().'::';
-    $md =
-      "Interface synposis\n".
-      "------------------\n\n";
+    $md = "### Interface synopsis\n";
     foreach ($this->yaml['data']['methods'] as $method) {
-      $md .= ' * '.$prefix.self::nameFromData($method)."\n";
+      $method_url = sprintf(
+        "/hack/reference/%s/%s/%s/",
+        $this->yaml['type'],
+        str_replace('\\', '.', $this->yaml['data']['name']),
+        $method['name'],
+      );
+      $md .= 
+        ' * ['.$prefix.self::nameFromData($method).']('. $method_url .")\n";
     }
     return $md;
   }
@@ -48,7 +52,7 @@ class ClassMarkdownBuilder {
         $generic ==> $generic['name'],
         $generics,
       );
-      $name .= '<'.implode(',', $generics).'>';
+      $name .= '&lt;'.implode(',', $generics).'&gt;';
     }
     return $name;
   }

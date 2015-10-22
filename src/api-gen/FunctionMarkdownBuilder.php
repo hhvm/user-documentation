@@ -11,9 +11,13 @@ class FunctionMarkdownBuilder {
   private ?DocBlock $docblock;
 
   public function __construct(
-    string $file,
+    ?string $file = null,
+    ?FunctionDocumentation $method = null,
   ) {
     $this->yaml = \Spyc::YAMLLoad($file);
+    if ($method) {
+      $this->yaml['data'] = $method;
+    }
 
     $comment = $this->yaml['data']['docComment'];
     if ($comment !== null) {
@@ -32,17 +36,17 @@ class FunctionMarkdownBuilder {
     )."\n";
   }
 
-  private function getHeading(): string {
-    $name = $this->yaml['data']['name'];
-    $md = $name."\n".str_repeat('=', strlen($name))."\n\n";
-
-    $md .= $this->docblock?->getShortDescription();
-    return $md;
+  private function getHeading(): ?string {
+    if (
+      $this->docblock?->getText() !== $this->docblock?->getShortDescription()
+    ) {
+      return $this->docblock?->getShortDescription();
+    }
+    return null;
   }
 
   private function getDescription(): string {
-    $md = 'Description';
-    $md .= "\n".str_repeat('-', strlen($md))."\n\n";
+    $md = "### Description\n\n";
 
     $md .= "```Hack\n".$this->getSignature()."\n```\n\n";
 
@@ -54,8 +58,7 @@ class FunctionMarkdownBuilder {
   private function getParameters(): string {
     $tags = $this->getTagsByName('param', ParamTag::class);
 
-    $md = 'Parameters';
-    $md .= "\n".str_repeat('-', strlen($md))."\n\n";
+    $md = "### Parameters\n\n";
 
     foreach ($this->yaml['data']['parameters'] as $param) {
       $name = $param['name'];
