@@ -28,9 +28,11 @@ All class properties must be explicitly declared.
 
 ## Aliasing of methods in traits
 
-To preserve consistency and greppability, the typechecker doesn't allow aliasing trait methods.
+To preserve consistency and "greppability", the typechecker doesn't allow aliasing trait methods.
 
 @@ others-examples/trait-aliasing.php.type-errors @@
+
+The typechecker will issue a parsing error when you try this.
 
 ## Others
 
