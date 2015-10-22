@@ -25,3 +25,5 @@ class ChildOfChildOfChildWithNoConstraint extends ChildOfChildWithNoConstraint {
 function run(): void {
   echo "No real output!";
 }
+
+run();
