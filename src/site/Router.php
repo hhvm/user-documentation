@@ -9,6 +9,14 @@ class Router {
       '/' => HomePageController::class,
       '/{product:(?:hack|hhvm)}/'
         => GuidesListController::class,
+      '/{product:(?:hack)}/reference/'
+        => APIListController::class,
+      '/{product:(?:hack)}/reference/{type:(?:class|function|interface|trait)}/'
+        => APIListController::class,
+      '/{product:(?:hack)}/reference/{type:(?:class|function|interface|trait)}/{api}/'
+        => APIPageController::class,
+      '/{product:(?:hack)}/reference/{type:(?:class|function|interface|trait)}/{api}/{method}/'
+        => APIPageController::class,
       '/{product:(?:hack|hhvm)}/{guide}/'
         => RedirectToGuideFirstPageController::class,
       '/{product:(?:hack|hhvm)}/{guide}/{page}'

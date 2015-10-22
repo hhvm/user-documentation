@@ -79,3 +79,8 @@ type DocumentationIndexEntry = shape(
 type DocumentationIndex = shape(
   'types' => array<string,DocumentationIndexEntry>,
 );
+
+type APIClassIndexEntry = shape(
+  'path' => string,
+  'methods' => Map<string, string>,
+);
