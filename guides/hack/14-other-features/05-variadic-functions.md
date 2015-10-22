@@ -18,7 +18,7 @@ In Hack, however, you cannot pass more arguments than are specified. A typecheck
 
 However, Hack has specific notation to make a function explicitly variadic. By putting `...` as the last argument to a function, you are telling the typechecker that the function can take a variable number of arguments.
 
-@@ varadic-functions-examples/with-notation.php @@
+@@ variadic-functions-examples/with-notation.php @@
 
 The types of the variable arguments can be anything you want. Of course, the non-variadic arguments to the function must be of the type specified.
 

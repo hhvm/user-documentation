@@ -26,6 +26,7 @@ interface ResultOrExceptionWrapper<T> {
   public function getException(): \Exception;
 }
 }
+```
 
 Taking the example above and using this mechanism:
 

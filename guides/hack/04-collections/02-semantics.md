@@ -18,13 +18,13 @@ The above example shows the difference between reference and value semantics. Th
 
 The fact that arrays have value semantics and collections have reference semantics is actually very important when converting existing code using arrays to collections.
 
-@@ semantic-examples/converting.php @@
+@@ semantics-examples/converting.php @@
 
 So, if you had some automatic code modifier to convert `array` to `Vector`, your code could break as shown by the example above.
 
 One way to help remedy this is to use `ImmVector` and Vector::immutable()` to make sure that you cannot modify the collection when you pass it to the function.
 
-@@ semantic-examples/converting-immutable.php.type-errors @@
+@@ semantics-examples/converting-immutable.php.type-errors @@
 
 ## Equality on Collections `==`
 

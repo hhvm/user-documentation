@@ -2,19 +2,19 @@
 
 Imagine that you have a non-generic class, and some various `extends` to that class. 
 
-@@ type-constants/non-parameterized.php @@
+@@ intro-examples/non-parameterized.php @@
 
 Now imagine that you realize that sometimes the ID of a user could be a `string` as well as an `int`. But you know that the concrete classes of `User` will know exactly what type will be returned.
 
 [Generics](../generics/intro.md) introduces the notion of type parameters which basically allows you to associate a type placeholder to a class or method, which is then fully associated once the class is instantiated or the method is called.
 
-@@ type-constants/generics.php @@
+@@ intro-examples/generics.php @@
 
 Notice how we had to propagate the addition of a type parameter to the the class itself and *all* the extended it. Now think if we had hundreds and hundreds of places that used the traits and interfaces; we would have to update them as well.
 
 When it comes to class type parameterization, Hack introduces an alternative feature to generics called *type constants*. Instead of types being declared as parameters directly on the class itself, type constants allow the type to be declared as class member constants instead.
 
-@@ type-constants/type-constants.php @@
+@@ intro-examples/type-constants.php @@
 
 Notice the syntax `abstract const type <name> [ as <constraint> ];`. All type constants are `const` and use the keyword `type`. You specify a name for the constant, along with any possible constraints that must be adhered to. See [below](#syntax) for information about syntax.
 

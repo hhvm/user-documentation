@@ -33,7 +33,7 @@ You access an attribute within code just like a normal Hack property, but prefix
 
 You can specify an attribute as required with the `@required` declaration after the attribute name. If you try to render the XHP object and have not set the required attribute, then an `XHPAttributeRequiredException` will be thrown.
 
-@@ extending-exmaples/attributes.php @@
+@@ extending-examples/attributes.php @@
 
 ### Inheritance
 
