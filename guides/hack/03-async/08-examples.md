@@ -12,7 +12,7 @@ This example shows the basic tenants of async, particularly the keywords used, e
 
 To get the result of an awaitable in a non-async function, you can use `join()`.
 
-@@ guidelines-examples/join.php @@
+@@ examples-examples/join.php @@
 
 ## Closures
 
@@ -24,22 +24,22 @@ You can have async closures, including using the shorter [lambda](link to lambda
 
 This shows you a way to organize your async functions in such a way that we have a nice clean data dependency graph.
 
-@@ guidelines-examples/data-dependencies.php @@
+@@ examples-examples/data-dependencies.php @@
 
 ## Accessing MySQL
 
 Use the async mysql extension to perform database connection and queries.
 
-@@ extensions-examples/async-mysql.php @@
+@@ examples-examples/async-mysql.php @@
 
 ## Batching
 
 Use rescheduling (via `HH\Asio\later()`) to batch up operations to send multiple keys in a single request over a high latency network (for example purposes, the network isn't high latency, but just returns something random).
 
-@@ guidelines-examples/batching.php @@
+@@ examples-examples/batching.php @@
 
 ## Polling
 
 You can use rescheduling in a polling loop to allow other awaitables to run. You may need a polling loop in a case where a service does not have an async function to add to the scheduler.
 
-@@ examples-examples/polling.php
+@@ examples-examples/polling.php @@

@@ -9,7 +9,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
   public function buildAll(): void {
     $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
       ->filter($path ==> basename($path) !== 'README.md')
-      ->filter($path ==> strpos($path, '-examples') === false)
+      ->filter($path ==> strpos($path, '99-api-examples') === false)
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
     sort($sources);
 
