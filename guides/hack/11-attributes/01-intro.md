@@ -10,9 +10,9 @@ Unless they are [special](special.md), attributes are a syntactic entity. They l
 
 Some attributes have special meaning to both the Hack typechecker and HHVM. 
 
-- [`__Override`](special.md#__Override)
-- [`__ConsistentConstruct`](special.md#__ConsistentConstruct)
-- [`__Memoize`](special.md#__Memoize)
-- [`__Deprecated`](special.md#__Deprecated)
+- [`__Override`](special.md#__override)
+- [`__ConsistentConstruct`](special.md#__consistentconstruct)
+- [`__Memoize`](special.md#__memoize)
+- [`__Deprecated`](special.md#__deprecated)
 
-There are a few [other special attributes](special.md#Other) as well.
+There are a few [other special attributes](special.md#other) as well.
