@@ -8,7 +8,7 @@ One could easily expect that the following two calls are unrelated and could be 
 
 In the example above, the call to `curl_exec` in `curl_A()` is blocking any other processing. Thus, even though `curl_B()` is an independent call from `curl_A()`, it has to sit around waiting for `curl_A()` to finish before beginning its execution.
 
-![No Async](images/no-async.png)
+![No Async](/images/no-async.png)
 
 Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. Async is **not multithreading**. It allows code that utilizes the async infrastructure to hide input/output (I/O) latency and data fetching. So, if you have code that has operations that involve some sort of waiting (e.g., network access, waiting for database queries), async minimizes the downtime your program has to be stalled because of it as the program will go do other things, most likely further I/O somewhere else.
 
@@ -18,19 +18,19 @@ The following images should hopefully clear up any confusion you may have on wha
 
 This is just like PHP and Hack (without async) is executed today. Serial execution.
 
-![Synchronous](images/synchronous.png)
+![Synchronous](/images/synchronous.png)
 
 ** Parallel Execution **
 
 This is an optimum state. We have all tasks running at the same time, concurrently. But, PHP and Hack do not support more than one thread of execution.
 
-![Parallel](images/parallel.png)
+![Parallel](/images/parallel.png)
 
 ** Asynchronous Execution **
 
 This is what async does. Tasks are executed concurrently in the same execution thread, with respect to each other, interleaving instructions (e.g., I/O) for different tasks back and forth.
 
-![Asynchronous](images/asynchronous.png)
+![Asynchronous](/images/asynchronous.png)
 
 **IMPORTANT**: It is important to reiterate that async is not multithreading. You are still bound to a single execution thread. Async works best when you have a lot of I/O codepaths that don't have to sit there waiting for other I/O requests to end to begin doing their requests.
 
@@ -40,7 +40,7 @@ In this example, we are calling an async-aware version of `curl_exec()`. Thus, i
 
 When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, the network latency to retrieve results of the CURL, the async infrastructure (the scheduler) looks for other async tasks that could be run. It finds that `curl_B()` is available to execute, so it starts executing that code. When it hits its `HH\Asio\curl_exec()` call, the process is repeated again, and the scheduler will find that our `curl_exec()` call in `curl_B()` is ready for execution once again.
 
-![Async](images/async.png) 
+![Async](/images/async.png) 
 
 While this example may not always show a measurable time savings (there are some factors like network latency and possible caching involved), but you will not be slower than the non-async version overall and you may get results like this:
 

@@ -6,7 +6,7 @@ Hack collections and arrays are similar in some respects, with one generally bei
 
 The following flowchart provides a general guide on when you should use a Hack collection vs. an array. In general, new Hack code should make use of collections where possible; but arrays will still be supported in a first-class way as well.
 
-![Container Flow Chart](images/container-flow.png)
+![Container Flow Chart](/images/container-flow.png)
 
 ## Semantics
 

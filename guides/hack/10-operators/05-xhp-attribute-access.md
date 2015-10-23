@@ -14,6 +14,6 @@ This operator brings some conciseness, but more importantly, typechecking covera
 
 ## Namespaces
 
-![Don't use Namespaces](images/xhp-namespaces-play-nice.jpg)
+![Don't use Namespaces](/images/xhp-namespaces-play-nice.jpg)
 
 Currently, XHP doesn't handle namespaces very well. So, your XHP code should generally be in the global namespace. This problem is [known](https://github.com/facebook/xhp-lib/issues/64).
