@@ -23,7 +23,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
       BuildPaths::GUIDES_INDEX,
       '<?hh return '.var_export($index, true).";",
     );
-    
+
     $summaries = self::findSources(self::SOURCE_ROOT, Set{'txt'})
       ->filter($path ==> strpos($path, '-summary') !== false)
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
@@ -54,7 +54,17 @@ final class GuidesHTMLBuildStep extends BuildStep {
     $args = (Vector { self::RENDERER, $input, $output })
       ->map($raw ==> escapeshellarg($raw));
     shell_exec(sprintf("%s %s > %s", ...$args));
+    $this->fixInternalLinks($output);
     return $output;
+  }
+
+  private function fixInternalLinks(string $input_file): void {
+    $content = file_get_contents($input_file);
+    // Remove the .md from any internal links
+    // Be on the look out for bookmark references too via #
+    $href = '/(<a\s+(?:[^>]*?\s+)?href=".+?(?=\.md))(\.md)(#[^"]+)?(")/';
+    $replace = '$1$3$4'; // $2 is the (\.md)
+    file_put_contents($input_file, preg_replace($href, $replace, $content));
   }
 
   private function createIndex(
@@ -80,7 +90,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
     }
     return $out;
   }
-  
+
   private function createSummaryIndex(
     Iterable<string> $summaries,
   ): Map<string, Map<string, string>> {
@@ -93,7 +103,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
       if (count($parts) !== 3) {
         continue;
       }
-      list($product, $section, $page) = $parts;      
+      list($product, $section, $page) = $parts;
       if (!$out->contains($product)) {
         $out[$product] = Map {};
       }
