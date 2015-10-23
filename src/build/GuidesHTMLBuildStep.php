@@ -72,7 +72,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
       // id
       $one_whitespace_between = preg_replace('/\s+/', ' ', $heading->nodeValue);
       // Only appropriate characters, no things like &lt;, etc.
-      $normalized = preg_replace('/[^A-Za-z0-9_\-]/', '',
+      $normalized = preg_replace('/[^A-Za-z0-9_\- ]/', '',
                                  $one_whitespace_between);
       // markdown heading links are all lowercase
       $lower_value = strtolower($normalized);
