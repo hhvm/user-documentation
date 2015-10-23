@@ -53,6 +53,8 @@ that is needed:
 3. Adjust the `LocalConfig::HHVM_TREE` constant to point to your checkout of
    HHVM
 
+*NOTE*: The configuration and dependency process requires network access, so if you are behind a proxy, take any steps necessary to be able to get through it.
+
 ### PHP Dependencies: Composer
 
 We use Composer to manage our PHP library dependencies and to autoload classes.
