@@ -50,6 +50,12 @@ final class GuidesHTMLBuildStep extends BuildStep {
       mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
     }
 
+    // Check for an images directory for the guide
+    $images_dir = realpath(self::SOURCE_ROOT.'/'.dirname($input).'/images');
+    if (file_exists($images_dir)) {
+      shell_exec('cp -rf ' . $images_dir . ' ' . $output_dir);
+    }
+
     $input = realpath(self::SOURCE_ROOT.'/'.$input);
     $args = (Vector { self::RENDERER, $input, $output })
       ->map($raw ==> escapeshellarg($raw));
