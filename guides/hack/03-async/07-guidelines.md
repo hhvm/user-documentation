@@ -18,10 +18,10 @@ Just make sure you are following the rest of the guidelines. Async is great, but
 
 For the common cases where async would provide maximum benefit, HHVM provides convenient extension libraries to help make writing code much easier. Depending on your use case scenario, you should liberally use:
 
-* [MySQL](link to mysql) for database access and queries.
-* [Curl](link to curl) for web page data and transfer.
-* [McRouter](link to McRouter) for memcached-based operations.
-* [Streams](link to streams) for stream-based resource operations.
+* [MySQL](./extensions.md#mysql) for database access and queries.
+* [Curl](./extensions.md#curl) for web page data and transfer.
+* [McRouter](./extensions.md#mcrouter) for memcached-based operations.
+* [Streams](./extensions.md#streams) for stream-based resource operations.
 
 ## Do not use async in loops
 
@@ -38,7 +38,7 @@ In the above example, the loop is doing two things:
 1. Making the loop iterations the limiting factor on how this code is going to run. By the loop, you are guaranteed to get the users sequentially.
 2. You are creating false dependencies. Loading one user is not dependent on loading another user.
 
-Instead, you will want to use our async-aware mapping function, `vm()`.
+Instead, you will want to use our async-aware mapping function, [`vm()`](link to vm).
 
 @@ guidelines-examples/await-no-loop.php @@
 
@@ -46,7 +46,7 @@ Instead, you will want to use our async-aware mapping function, `vm()`.
 
 Possibly the most important aspect in learning how to structure async code is understanding data dependency patterns. Here is the general flow of how to make sure your async code is data dependency correct:
 
-1. Put each sequence of depenencies with no branching (chain) into its own `async` function.
+1. Put each sequence of dependencies with no branching (chain) into its own `async` function.
 2. Put each bundle of parallel chains into its own `async` function.
 3. Repeat to see if there are further reductions.
 
@@ -99,7 +99,7 @@ Basically, don't depend on the order of output between runs of the same code. i.
 
 Given that async is commonly used in operations that are time-consuming, memoizing (i.e., caching) the result of an async call can definitely be worthwhile.
 
-The [`<<__Memoize>>`](link to memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explicit control of the memoization, make sure you only //memoize the awaitable//.
+The [`<<__Memoize>>`](../attributes/special.md#__memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explicit control of the memoization, make sure you only //memoize the awaitable//.
 
 @@ guidelines-examples/memoize-result.php @@
 

@@ -4,7 +4,7 @@ Hack introduces a few new operators beyond which exists in PHP.
 
 ## `==>` ([Lambda operator](lambda.md))
 
-Allows for a more concise representation of [PHP closures](link to closures on php.net) with the benefit of capturing variables from the enclosing function body implicitly.
+Allows for a more concise representation of [PHP closures](http://php.net/manual/en/functions.anonymous.php) with the benefit of capturing variables from the enclosing function body implicitly.
 
 ## `?->` ([null-safe operator](null-safe.md))
 

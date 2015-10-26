@@ -9,7 +9,7 @@ A lambda is represented by the [lambada operator](../operators/lambda.md) `==>`.
 ## Difference From Traditional Closures
 
 This example shows you how to make use of the shorter lambda syntax.
-It also uses a [Vector](link to Vector) which is a [Collection](../collections/intro.md).
+It also uses a [Vector](../reference/class/Vector/) which is a [Collection](../collections/intro.md).
 
 @@ intro-examples/introduction.php @@
 

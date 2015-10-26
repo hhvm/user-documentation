@@ -15,7 +15,7 @@ The more type information you have, the more errors you can catch early.
 
 @@ design-examples/annotation.php @@
 
-Note that the definition of a function like[`Vector::filter`](link to Vector::filter) is:
+Note that the definition of a function like [`Vector::filter`](../reference/class/Vector/filter/) is:
 
      public function filter ( (function(Tv): bool) $callback ): Vector<Tv>
 

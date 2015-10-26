@@ -4,7 +4,7 @@ The [concrete Hack collection classes](./classes.md) are generally derived from 
 
 The general workflow will be that you will construct instances of the concrete classes, use either the concrete classes or interfaces in your parameter or return type annotations, and calls to methods on the concrete classes may likely return an interface.
 
-Descriptions of each of the interface methods can be found in the [API reference](link to API reference).
+Descriptions of each of the interface methods can be found in the [API reference](../reference/).
 
 ## Core Interfaces
 

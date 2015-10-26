@@ -1,6 +1,6 @@
 # Hack Attributes
 
-Attributes are essentially a holder of metadata for any [reflectable](link to reflection) piece of code. This includes functions, classes, interfaces, traits, etc. 
+Attributes are essentially a holder of metadata for any [reflectable](http://php.net/manual/en/intro.reflection.php) piece of code. This includes functions, classes, interfaces, traits, etc. 
 
 Unless they are [special](special.md), attributes are a syntactic entity. They lend themselves to tooling to accomplish tasks. For example, you can have documentation-based attributes, the contents of which are extracted by reflection.
 
