@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "32461570cb00d9eb2ac70b9341bbcef6",
+    "content-hash": "8fe3a616c6aebcb24b5617f0276fdb82",
     "packages": [
         {
             "name": "facebook/xhp-lib",
@@ -270,7 +271,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/4e61a268cd50341ff0fb249e7acaf8aba1c83fa3",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/864fab02b85867eeaa1c3118e764a1502f798d4d",
                 "reference": "4e61a268cd50341ff0fb249e7acaf8aba1c83fa3",
                 "shasum": ""
             },
