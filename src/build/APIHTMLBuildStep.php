@@ -45,7 +45,7 @@ final class APIHTMLBuildStep extends BuildStep {
     }
 
     $input = realpath(self::SOURCE_ROOT.'/'.$input);
-    shell_exec(sprintf("%s %s > %s", self::RENDERER, $input, $output));
+    shell_exec(sprintf("%s %s > %s &", self::RENDERER, $input, $output));
     return $output;
   }
 
