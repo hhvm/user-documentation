@@ -21,3 +21,17 @@ There are two main content sections for this repo. `hhvm` is for user content on
 ```
 @@ guidelines-examples/non-async-hello.php @@
 ```
+
+### Linking Between Content
+
+Images should be referenced in the user guide or example headers as `/public/images/imagename.png`
+
+References from the user guide to the API docs should be referenced as:
+
+- For classes: `../reference/class/classname/`
+- For interfaces: `../reference/interface/interfacename`
+- For traits: `../reference/trait/traitname`
+- For methods: `../reference/[class | interface | trait]/[class | interface | trait]name/methodname`
+- For functions: `../function/functionname`, where `functionname` is namespaced qualified with namespaces separated by a `.` (e.g., `HH.class_meth`)
+
+
