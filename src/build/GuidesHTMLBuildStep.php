@@ -7,6 +7,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
   const string RENDERER = __DIR__.'/../../md-render/render.rb';
 
   public function buildAll(): void {
+    Log::i("\nGuidesHTMLBuild");
     $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
       ->filter($path ==> basename($path) !== 'README.md')
       ->filter($path ==> strpos($path, '99-api-examples') === false)
@@ -15,6 +16,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
 
     $list = Vector { };
     foreach ($sources as $input) {
+      Log::v('.');
       $output = $this->renderFile($input);
       $list[] = $output;
     }

@@ -8,11 +8,12 @@ final class RawYAMLBuildStep extends BuildStep {
   public function buildAll(): void {
     $exts = Set { 'php', 'hhi' };
 
+    Log::i("\nRawYAMLBuild");
     $sources = (Vector { })
       ->addAll(self::findSources(LocalConfig::HHVM_TREE.'/hphp/system/php/', $exts))
       ->addAll(self::findSources(LocalConfig::HHVM_TREE.'/hphp/runtime/ext/', $exts));
     $this->buildSources(BuildPaths::SYSTEMLIB_YAML, $sources);
-    
+
     $this->buildSources(
       BuildPaths::HHI_YAML,
       self::findSources(LocalConfig::HHVM_TREE.'/hphp/hack/hhi/', $exts),
@@ -27,7 +28,10 @@ final class RawYAMLBuildStep extends BuildStep {
       mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
     }
 
+    Log::i("\nBuild sources for $output_dir");
+
     foreach ($sources as $filename) {
+      Log::v(".");
       $source = shape(
         'type' => DocumentationSourceType::FILE,
         'name' => $filename,

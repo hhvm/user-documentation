@@ -11,15 +11,17 @@ enum APIType: string {
 
 final class MergedMarkdownBuildStep extends BuildStep {
   public function buildAll(): void {
+    Log::i("\nMergedMarkdownBuild");
     $sources = (Vector { })
       ->addAll(self::findSources(BuildPaths::MERGED_YAML, Set{'yml'}));
     if (!is_dir(BuildPaths::MERGED_MD)) {
       mkdir(BuildPaths::MERGED_MD, /* mode = */ 0755, /* recursive = */ true);
     }
     foreach ($sources as $source) {
+      Log::v('.');
       $filename = pathinfo($source)['filename'];
-      $type = explode('.', $filename)[0];   
-      $output_path = BuildPaths::MERGED_MD.'/'.$filename.'.md'; 
+      $type = explode('.', $filename)[0];
+      $output_path = BuildPaths::MERGED_MD.'/'.$filename.'.md';
       switch ($type) {
         case "function":
           $builder = new FunctionMarkdownBuilder($source);

@@ -9,6 +9,7 @@ abstract class BuildStep {
     string $root,
     \ConstSet<string> $extensions,
   ): Vector<string> {
+    Log::i("\nFinding sources in $root");
     $rdi = new \RecursiveDirectoryIterator($root);
     $rii = new \RecursiveIteratorIterator(
       $rdi,
@@ -21,6 +22,7 @@ abstract class BuildStep {
       }
       if ($extensions->contains($info->getExtension())) {
         $files[] = $info->getPathname();
+        Log::v('.');
       }
     }
     return $files;

@@ -8,6 +8,7 @@ final class APIHTMLBuildStep extends BuildStep {
   const string METHOD_DELIM = "method";
 
   public function buildAll(): void {
+    Log::i("\nAPIHTMLBuild");
     $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
       ->filter($path ==> basename($path) !== 'README.md')
       ->filter($path ==> strpos($path, '-examples') === false)
@@ -16,10 +17,11 @@ final class APIHTMLBuildStep extends BuildStep {
 
     $list = Vector { };
     foreach ($sources as $input) {
+      Log::v('.');
       $output = $this->renderFile($input);
       $list[] = $output;
     }
-    
+
     $index = $this->createIndex($list);
     file_put_contents(
       BuildPaths::APIDOCS_INDEX,
@@ -50,17 +52,19 @@ final class APIHTMLBuildStep extends BuildStep {
   private function createIndex(
     Iterable<string> $list,
   ): Map<string, Map<string, Map<string, mixed>>> {
+    Log::i("\nCreate Index");
     $out = Map { };
     foreach ($list as $path) {
+      Log::v('.');
       $path = str_replace(BuildPaths::APIDOCS_HTML.'/', '', $path);
       $base_parts = explode('.', basename($path, '.html'), 2);
-      
-      list($type, $api) = $base_parts;    
+
+      list($type, $api) = $base_parts;
       if (!$out->contains($type)) {
         $out[$type] = Map {};
-      } 
+      }
       $api_parts = explode('.', $api);
-      
+
       if (in_array(self::METHOD_DELIM, $api_parts, TRUE)) {
         $method_sep_index = array_search(self::METHOD_DELIM, $api_parts, true);
         $method_index = $method_sep_index + 1;
@@ -72,7 +76,7 @@ final class APIHTMLBuildStep extends BuildStep {
         );
         $parent_api = rtrim(explode(self::METHOD_DELIM, $api)[0], ".");
         $method = $api_parts[$method_index];
-        
+
         if (!$out[$type]->contains($parent_api)) {
           $out[$type][$parent_api] = Map {"path" => "", "methods" => Map{}};
         }
