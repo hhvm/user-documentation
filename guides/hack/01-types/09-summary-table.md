@@ -4,21 +4,21 @@ The following table summarizes the type system available in Hack, examples of ho
 
 Type       |    Example Annotations  |Func?|Meth?|Prop?|Ret?|Param?|Nullable?
 -----------|-------------------------|-----|---- |-----|----|------|---------
-Primitive  |`int`, `array`           | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-`num`      |`num`                    | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-`arraykey` |`arraykey`               | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-`void`     |`void`                   | &#x2713;   |  &#x2713;  | &#x2717;   | &#x2717;  | &#x2717;    | &#x2717;
-`noreturn` |`noreturn`               | &#x2713;   |  &#x2713;\*| &#x2717;   | &#x2717;  | &#x2717;    | &#x2717;
-Object     |`Foo`, `IBar`            | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-`mixed`    |`mixed`                  | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2717;
-`this`     |`this`                   | &#x2717;   |  &#x2713;  | &#x2717;   | &#x2713;  | &#x2717;    | &#x2713; 
-XHP        |`XHPRoot`, `XHPChild`    | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-Nullable   |`?int`, `?Vector<string>`| &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-Generics   |`Box<T>`, `Map<string, int>`| &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-Enum       |`MyEnum`                 | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-Callable   |`(function(int, string): string)`|&#x2713; |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-Tuple      |`(int, string)`          | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-Type Alias |`MyAlias`                | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
-Shape      |`MyShape`                | &#x2713;   |  &#x2713;  | &#x2713;   | &#x2713;  | &#x2713;    | &#x2713;
+Primitive  |`int`, `array`           | y   |  y  | y   | y  | y    | y
+`num`      |`num`                    | y   |  y  | y   | y  | y    | y
+`arraykey` |`arraykey`               | y   |  y  | y   | y  | y    | y
+`void`     |`void`                   | y   |  y  | x   | x  | x    | x
+`noreturn` |`noreturn`               | y   |  y\*| x   | x  | x    | x
+Object     |`Foo`, `IBar`            | y   |  y  | y   | y  | y    | y
+`mixed`    |`mixed`                  | y   |  y  | y   | y  | y    | x
+`this`     |`this`                   | x   |  y  | x   | y  | x    | y 
+XHP        |`XHPRoot`, `XHPChild`    | y   |  y  | y   | y  | y    | y
+Nullable   |`?int`, `?Vector<string>`| y   |  y  | y   | y  | y    | y
+Generics   |`Box<T>`, `Map<string, int>`| y   |  y  | y   | y  | y    | y
+Enum       |`MyEnum`                 | y   |  y  | y   | y  | y    | y
+Callable   |`(function(int, string): string)`|y |  y  | y   | y  | y    | y
+Tuple      |`(int, string)`          | y   |  y  | y   | y  | y    | y
+Type Alias |`MyAlias`                | y   |  y  | y   | y  | y    | y
+Shape      |`MyShape`                | y   |  y  | y   | y  | y    | y
 
 \* Only static methods
