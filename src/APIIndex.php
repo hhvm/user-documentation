@@ -11,7 +11,7 @@ class APIIndex {
   public static function getProducts(): ImmVector<string> {
     return self::getIndex()->keys()->toImmVector();
   }
-  
+
   public static function getReferenceForType(
     string $type,
   ): Map<string, APIClassIndexEntry> {
@@ -55,7 +55,7 @@ class APIIndex {
         $type,
       );
       invariant(
-        $index[$type][$api]['methods'][$method],
+        $index[$type][$api]['methods']->containsKey($method),
         'API %s of type %s does not contain method %s',
         $api,
         $type,
@@ -65,7 +65,7 @@ class APIIndex {
     } else {
       $api_file = (string) $index[$type][$api]['path'];
     }
-    return 
+    return
       BuildPaths::APIDOCS_HTML.'/'. $api_file;
   }
 }
