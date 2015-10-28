@@ -13,9 +13,6 @@ final class MergedYAMLBuildStep extends BuildStep {
     }
     $builder = new MergedYAMLBuilder(BuildPaths::MERGED_YAML);
     foreach ($sources as $source) {
-      if (strpos($source, 'MCRouter') !== false) {
-        $x = 2;
-      }
       Log::v('.');
       $builder->addDefinition(\Spyc::YAMLLoad($source));
     }
