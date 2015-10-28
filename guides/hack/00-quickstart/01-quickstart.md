@@ -1,6 +1,6 @@
 # Quickstart to Hack
 
-If you are new to Hack, this quickstart guide should help you get familiar with the basics quickly; afterwards you can [dive deeper into](http://docs.hhvm.com/hack) topics of interest to gain more knowledge on what Hack has to offer. 
+If you are new to Hack, this quickstart guide should help you get familiar with the basics quickly; afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
 
 ## Get Started Now!
 
