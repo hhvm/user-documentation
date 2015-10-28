@@ -1,6 +1,6 @@
 # Advanced Typing Rules
 
-The type checking rules are generally straightforward (e.g. can't pass a `string` in something that expects an `int`). There are, however, some rules that have a bit more advanced semantics.
+The type checking rules are generally straightforward (e.g. can't pass a `string` to something that expects an `int`). There are, however, some rules that have a bit more advanced semantics.
 
 ## Soft Type Hints
 
@@ -27,8 +27,8 @@ The typechecker knows about the built-in superglobals.
 Hack supports [variadic arguments](http://php.net/manual/en/migration56.new-features.php). It supports two ways to declare them:
 
 ```
-function foo(...) // use func_get_args() to get the arguments
-function foo(int ...$args) // $args is a list of int arguments
+function foo(<any explicit arguments>, ...) // use func_get_args() to get the arguments
+function foo(<any explicit arguments>, int ...$args) // $args is a list of int arguments
 ```
 
 The second method is preferred since it is more expressive with the typehint. However, and **this is important**, HHVM does not support variadic parameters *with typehints*

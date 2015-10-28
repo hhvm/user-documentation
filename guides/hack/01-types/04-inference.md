@@ -6,7 +6,7 @@ Basically type inference is a deduction of what the type of a variable should be
 
 ## Local Variables
 
-Local variables are not type annotated. They are inferred based on the flow of the program. In fact, you can assign different values of different types to local variables. When a local variable is returned from the function or method, or when it is compared or somehow otherwise used against a variable of a known type, is the only point at which it matters what the type of a local variable is.
+Local variables are not type annotated. Their types are inferred based on the flow of the program. In fact, you can assign different values of different types to local variables. When a local variable is returned from the function or method, or when it is compared or somehow otherwise used against a variable of a known type, is the only point at which it matters what the type of a local variable is.
 
 @@ inference-examples/local-variables.php @@
 

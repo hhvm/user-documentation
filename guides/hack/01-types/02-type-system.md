@@ -1,10 +1,10 @@
 # The Hack Type System
 
-Describing types in Hack is largely done through explicit [annotations](annotations.md) in your Hack source code. Hack has a large list of possible annotation types. You can also check out a summary of each of these types in our [table](summary-table.md).
+Describing types in Hack is largely done through explicit [annotations](annotations.md) in your Hack source code. Hack has a large list of possible annotation types. You can check out a summary of each of these types in our [table](summary-table.md).
 
 ## Common Primitives
 
-The general primitive types available in PHP are available as explicit type annotations in Hack. These include:
+The main primitive types available in PHP are available as explicit type annotations in Hack. These include:
 
 - `bool`
 - `int`
@@ -40,7 +40,7 @@ It is relatively common for [async](../async/intro.md) functions to return `Awai
 
 ## `noreturn`
 
-`noreturn` is a special primitive type that means that a function or *static* method never returns a value. Similar to `void`, but you cannot even use `return;` in a function that returns `noreturn`. 
+`noreturn` is a special primitive type that means that a function or *static* method never returns a value. Similar to `void`, but you cannot even use `return;` in a function that has a return type of `noreturn`. 
 
 `noreturn` is used to indicate that a given function or *static* method always throws an exception or somehow terminates the program within the function itself.
 
@@ -113,7 +113,7 @@ A nullable type is represented by a `?` placed as a prefix to the type itself (e
 
 `void`, `noreturn` cannot be nullable because `null` is a valid and observable return value. 
 
-`mixed` cannot be nullable because it already includes `null` as part of its context.
+As `mixed` already allows for the value `null`, you cannot write `?mixed`.
 
 
 ## Generics
@@ -125,7 +125,7 @@ A nullable type is represented by a `?` placed as a prefix to the type itself (e
 
 ## Enums
 
-[Enums](../enums/intro.md) is a type made up of constants, usually related to each other. Unlike class constants, etc., enums are first-class types in the Hack type system. As such, they can be used as type annotations anywhere a primitive or object type can.
+An [enum](../enums/intro.md) is a type made up of constants, usually related to each other. Unlike class constants, etc., enums are first-class types in the Hack type system. As such, they can be used as type annotations anywhere a primitive or object type can.
 
 @@ type-system-examples/enum.php @@
 
@@ -134,7 +134,7 @@ A nullable type is represented by a `?` placed as a prefix to the type itself (e
 
 There is a `callable` typehint, but Hack does not allow it (HHVM accepts it, however if you don't care about the type checker errors).
 
-Instead, Hack provides a more expressive [callable](../callables/intro.md) type that can be used of the form:
+Instead, Hack provides a more expressive [callable](../callables/intro.md) type of the form:
 
 ```
 function(0..n parameter types): return type
@@ -145,7 +145,7 @@ function(0..n parameter types): return type
 
 ## Tuples
 
-Tuples provide a type specifying a fixed number of possibly varying-type values. The most common use of a tuple is to return more than one value from a function. 
+Tuples provide a type specifying a fixed number of possibly different type values. The most common use of a tuple is to return more than one value from a function. 
 
 ```
 (type1, ... ,type n)

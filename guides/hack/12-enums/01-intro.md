@@ -1,6 +1,6 @@
 # Enums
 
-If you are familiar with enums (enumerations) in languages like C#, C++ or Java, then Hack enums will feel right at home. Enums encapsulate a group of related constants, unlike just using global or class constants. Enums actually create a new type, annotatable by name. 
+If you are familiar with enums (enumerations) in languages like C#, C++ or Java, then Hack enums will make you feel right at home. Enums encapsulate a group of related constants, unlike just using global or class constants. Enums actually create a new type, annotatable by name. 
 
 **NOTE**: At this point, Hack only supports `int` and `string` enums.
 
@@ -34,7 +34,7 @@ To access a member value, you follow the similar syntax as class constants
 
 @@ intro-examples/member-values.php @@
 
-**NOTE**: There is no notion of sequential, implicit values to enum members. For example, if you set the first member to `0`, the next member doesn't, by default, have the value of `1`. All enum members must have an explicit value assigned to it. 
+**NOTE**: There is no notion of sequential, implicit values to enum members. For example, if you set the first member to `0`, the next member doesn't, by default, have the value of `1`. Each enum member must have an explicit value assigned to it. 
 
 ## Casting to underlying type
 
