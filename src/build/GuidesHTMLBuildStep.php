@@ -55,7 +55,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
     $input = realpath(self::SOURCE_ROOT.'/'.$input);
     $args = (Vector { self::RENDERER, $input, $output })
       ->map($raw ==> escapeshellarg($raw));
-    shell_exec(sprintf("%s %s > %s", ...$args));
+    shell_exec(sprintf("%s %s > %s &", ...$args));
     $this->addBookmarksToHeadings($output);
     $this->fixInternalLinks($output);
     return $output;

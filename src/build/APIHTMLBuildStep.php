@@ -7,8 +7,6 @@ final class APIHTMLBuildStep extends BuildStep {
   const string RENDERER = __DIR__.'/../../md-render/render.rb';
   const string METHOD_DELIM = "method";
 
-  private \Vector<resource> $renderprocs = Vector {};
-
   public function buildAll(): void {
     Log::i("\nAPIHTMLBuild");
     $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
@@ -17,19 +15,11 @@ final class APIHTMLBuildStep extends BuildStep {
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
     sort($sources);
 
-    Log::i("\nSpawning render processes");
     $list = Vector { };
     foreach ($sources as $input) {
       Log::v('.');
       $output = $this->renderFile($input);
       $list[] = $output;
-    }
-
-    Log::i("\nWait for render processes to finish");
-    $this->renderprocs = $this->renderprocs->filter($p ==> proc_close($p) != 0);
-    if ($this->renderprocs->count() > 0) {
-      Log::w(sprintf("\n%d render processes exited with an error",
-                $this->renderprocs->count()));
     }
 
     $index = $this->createIndex($list);
@@ -55,10 +45,7 @@ final class APIHTMLBuildStep extends BuildStep {
     }
 
     $input = realpath(self::SOURCE_ROOT.'/'.$input);
-    $unused = null;
-    $this->renderprocs[] =
-      proc_open(sprintf("%s %s > %s", self::RENDERER, $input, $output),
-                [], $unused);
+    shell_exec(sprintf("%s %s > %s &", self::RENDERER, $input, $output));
     return $output;
   }
 
