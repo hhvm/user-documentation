@@ -48,6 +48,13 @@ class Stringify {
 
     if ($param['isOptional']) {
       $default = $param['default'];
+      // TODO: It looked like @fredemmott's ScannedParameter class handled
+      // normalizing an empty string to "\"\"", but it gets lost somewhere
+      // before here. This allows default "" parameters to show up though. It
+      // just may be in a non-optimal place in the pipeline.
+      if ($default === "") {
+        $default = "\"\"";
+      }
       invariant(
         $default !== null,
         'optional parameter without a default',
