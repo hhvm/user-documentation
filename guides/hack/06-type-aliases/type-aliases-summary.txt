@@ -1,1 +1,1 @@
-Give a new name to an existing type.
+Create complex type structures with type aliases

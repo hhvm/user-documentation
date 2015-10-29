@@ -1,1 +1,1 @@
-Simplified closure syntax.
+A simplified closure syntax.

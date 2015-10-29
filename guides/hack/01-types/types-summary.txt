@@ -1,1 +1,3 @@
-The Hack type system.
+Introducing typing of parameters, variables, and 
+return values, to prevent errors and make code more
+readable.

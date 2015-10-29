@@ -1,1 +1,1 @@
-Type safe Hack-based UI objects.
+Use XML in Hack instead of strings to build your UI

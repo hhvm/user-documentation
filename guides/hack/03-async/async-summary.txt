@@ -1,1 +1,2 @@
-Cooperative multitasking in Hack.
+Hack introduces async programming to PHP, letting
+your apps scale better and reduce blocking.
