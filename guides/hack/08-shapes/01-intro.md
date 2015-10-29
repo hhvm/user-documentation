@@ -52,7 +52,7 @@ A shape does not have to have a type alias associated with it. Here is an exampl
 
 ## Caveats
 
-Shapes are arrays; i.e., a call to `to_array()` will return `true`. However there are some things you can do with arrays that you cannot do with shapes.
+Shapes are arrays; i.e., a call to `is_array()` will return `true`. However there are some things you can do with arrays that you cannot do with shapes.
 
 * You cannot read or write with unknown keys. e.g., `$shape[$var]` is invalid. The key must be a string literal or class constant.
 * You cannot use the array append `[]` operator on a shape.
