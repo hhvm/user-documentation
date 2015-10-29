@@ -1,52 +1,18 @@
-# HHVM Server Types
+# FastCGI
 
-HHVM comes with two server types built in:
+HHVM has built-in support for two server types: [Proxygen](../basic-usage/proxygen.md) and FastCGI.
 
-* The default is Proxygen and is generally the easiest to get up an running. It serves the equivalent puropse of both a web server and something like FastCGI all rolled into one. 
-* The other is FastCGI, which provides a high performance interface between your codebase and webserver (e.g., persistent processes between requests, etc.), but which will also obviously require a front-end compatible web server to serve the requests (e.g., nginx).
+FastCGI provides a high performance interface between your codebase and webserver (e.g., persistent processes between requests, etc.), but which will also obviously require a front-end compatible web server to serve the requests (e.g., [nginx](http://nginx.org/)).
 
+## How FastCGI Works
 
-## Proxygen
+HHVM-FastCGI works much the same way as [PHP-FPM](http://php-fpm.org/). HHVM, running in FastCGI mode, is started independently of the web server (Apache, nginx, etc). It listens on either a TCP socket (conventionally localhost:9000) or a UNIX socket. The web server listens on port 80 or port 443 like it normally would. When a new request comes in, the web server either makes a connection to the application server or reuses one of the previously open connections, and communicates using FastCGI protocol. Therefore, the web server continues to decode HTTP protocol, and supplies HHVM with information like the path of the file to be executed, request headers, and body. HHVM computes the response and sends it back to the web server using FastCGI again. Finally, the web server is in charge of sending the HTTP response to the client. 
 
-Proxygen is the default server for HHVM. So, if you run HHVM in server mode like:
+## Using FastCGI
 
-```
-hhvm -m server
-```
+**NOTE**: Currently FastCGI is the default server mode for HHVM (i.e., it is set as such in the default `server.ini` file). This is likely to change soon to [Proxygen](../basic-usage/proxygen.md); the examples below assume that FastCGI is not the default.
 
-you will be using Proxygen by default, listening on port 80. And in many cases, that should be just fine for most users.
-
-You can also be explicit and do something like:
-
-```
-hhvm -m server -d hhvm.server.type=proxygen -d hhvm.server.port=8080
-```
-
-Proxygen provides you a high performance web server that is equivalent to what something like the combination of FastCGI and nginx might provide. While not as configurable as a FastCGI/nginx combination, Proxygen does provide sensible defaults for many applications.
-
-Here is an example of a possible `server.ini` file using Proxygen:
-
-```
-; some of these are not necessary since they are the default value, but
-; they are good to show for illustration, and sometimes it is good for
-; documentation purposes to be explicit anyway.
-; hhvm.server.source_root and hhvm.server.port are the most likely ones
-; that need explicit values. 
-hhvm.server.port = 80
-hhvm.server.type = proxygen
-hhvm.server.default_document = index.php
-hhvm.server.error_document404 = index.php
-; default is the current directory where you launched the HHVM binary 
-hhvm.server.source_root=/var/www/public
-```
-
-## FastCGI
-
-HHVM-FastCGI works much the same way as [PHP-FPM](http://php-fpm.org/). HHVM, running in FastCGI mode, is started independently of the web server (Apache, Nginx, etc). It listens on either a TCP socket (conventionally localhost:9000) or a UNIX socket. The web server listens on port 80 or port 443 like it normally would. When a new request comes in, the web server either makes a connection to the application server or reuses one of the previously open connections, and communicates using FastCGI protocol. Therefore, the web server continues to decode HTTP protocol, and supplies HHVM with information like the path of the file to be executed, request headers, and body. HHVM computes the response and sends it back to the web server using FastCGI again. Finally, the web server is in charge of sending the HTTP response to the client. 
-
-### Running the server
-
-To run the server in FastCGI mode pass the following parameters to hhvm runtime:
+o run the server in FastCGI mode pass the following parameters to hhvm runtime:
 
     hhvm --mode server -vServer.Type=fastcgi -vServer.Port=9000
 

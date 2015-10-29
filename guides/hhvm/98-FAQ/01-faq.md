@@ -71,7 +71,7 @@ Other areas for discussion and support are on [#hhvm on IRC](http://webchat.free
 
 ### Should I use Proxygen or FastCGI?
 
-[Proxygen](../deployment/hhvm-servers#proxygen) is the default, and generally easier to get started with out of the box. [FastCGI](../deployment/hhvm-servers#fastcgi) is a bit more configurable. 
+[Proxygen](../basic-usage/proxygen.md) is full featured, very fast webserver and generally easier to get started with out of the box. [FastCGI](../advanced-usage/fastcgi.md) is a bit more configurable, but requires a separate webserver (e.g., nginx) on the front of it.
 
 ### When will HHVM support Apache or Nginx?
 
@@ -100,3 +100,14 @@ Try deleting `/var/run/hhvm/hhvm.hhbc` and run your program again
 There can be many reasons. And it is tough to diagnose that general question. It could be a bug in HHVM. It could be that you need to increase the size of your [translation cache](../configuration/ini-settings.md#jit-translation-cache-size). Or it could be other factors.
 
 The best thing to do is [file an issue](https://github.com/facebook/hhvm/issues) and at minimum give us the problem and a stack trace. You will get a much faster and more quality response if you also provide us as small as possible reproduction case with PHP or Hack code.
+
+## Why is my code slow at startup?
+
+The HHVM JIT needs time to warm up. The warmup usually occurs somewhere on the order of 10-11 requests, at which point the JIT has performed its optimizations and off we go at peak speed.
+
+So, in HHVM server mode, you start out by running the first couple requests in interp mode to get things primed. You don't really want to be optimizing the first few requests since that is when initialization is occurring, caches are being loaded, etc. Those code paths are generally cold later on.
+
+After the first few requests, the JIT is on its way to optimizing.
+
+It is *advisable, but not required* if you are running an HHVM server to send the server some explicit requests that are representative of what user requests will be coming through. You can use `curl`, for example, to send these requests. This way the JIT has the information necessary to make the best optimizations for your code before any requests are actually served.
+
