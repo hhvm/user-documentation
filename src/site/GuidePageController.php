@@ -7,7 +7,7 @@ use HHVM\UserDocumentation\HTMLFileRenderable;
 final class GuidePageController extends WebPageController {
   protected string $guide = '';
   protected string $page = '';
-  
+
   public function __construct(
     private ImmMap<string,string> $parameters,
   ) {
@@ -15,19 +15,24 @@ final class GuidePageController extends WebPageController {
     $this->guide = $this->getRequiredStringParam('guide');
     $this->page = $this->getRequiredStringParam('page');
   }
-  
+
   protected async function getTitle(): Awaitable<string> {
-    return 
-      ucwords(strtr($this->guide.': '.$this->page, '-', ' '));
+    // If the guide name and the page name are the same, only print one of them.
+    // If there is only one page in a guide, only print the guide name.
+    $ret = strcasecmp($this->guide, $this->page) === 0 ||
+           count(GuidesIndex::getPages($this->getProduct(), $this->guide)) === 1
+         ? ucwords($this->guide)
+         : ucwords(strtr($this->guide.': '.$this->page, '-', ' '));
+    return $ret;
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
-    return 
+    return
       <div class="guidePageWrapper">
           {$this->getInnerContent()}
       </div>;
   }
-  
+
   protected function getBreadcrumbs(): XHPRoot {
     $product = $this->getProduct();
     $guide = $this->guide;
@@ -40,7 +45,7 @@ final class GuidePageController extends WebPageController {
       $product,
       $guide,
     );
-    
+
     return
       <div class="breadcrumbNav">
         <div class="widthWrapper">
@@ -62,7 +67,7 @@ final class GuidePageController extends WebPageController {
         </div>
       </div>;
   }
-  
+
   protected function getSideNav(): XHPRoot {
     $product = $this->getProduct();
     $guides = GuidesIndex::getGuides($product);
@@ -79,26 +84,30 @@ final class GuidePageController extends WebPageController {
 
       $title = ucwords(strtr($guide, '-', ' '));
       $sub_list = <ul class="subList" />;
-      
-      foreach ($pages as $page) {
-        $page_url = sprintf(
-          "/%s/%s/%s",
-          $product,
-          $guide,
-          $page,
-        );
 
-        $page_title = ucwords(strtr($page, '-', ' '));
-        $sub_list_item =
-          <li class="subListItem">
-            <h5><a href={$page_url}>{$page_title}</a></h5>
-          </li>;
-          
-        if ($this->guide === $guide && $this->page === $page) {
-          $sub_list_item->addClass("itemActive");
+      // If there is only one page to a guide, just have the main
+      // guide heading above be the link to that page. Don't duplicate here.
+      if (count($pages) > 1) {
+        foreach ($pages as $page) {
+          $page_url = sprintf(
+            "/%s/%s/%s",
+            $product,
+            $guide,
+            $page,
+          );
+
+          $page_title = ucwords(strtr($page, '-', ' '));
+          $sub_list_item =
+            <li class="subListItem">
+              <h5><a href={$page_url}>{$page_title}</a></h5>
+            </li>;
+
+          if ($this->guide === $guide && $this->page === $page) {
+            $sub_list_item->addClass("itemActive");
+          }
+
+          $sub_list->appendChild($sub_list_item);
         }
-        
-        $sub_list->appendChild($sub_list_item);
       }
 
       $list->appendChild(
@@ -108,13 +117,13 @@ final class GuidePageController extends WebPageController {
         </li>
       );
     }
-    
+
     return
       <div class="navWrapper guideNav">
         {$list}
       </div>;
   }
-  
+
   protected function getInnerContent(): XHPRoot {
     return self::invariantTo404(() ==> {
       $path = GuidesIndex::getFileForPage(
