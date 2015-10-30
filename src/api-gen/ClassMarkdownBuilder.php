@@ -25,12 +25,13 @@ class ClassMarkdownBuilder {
   }
 
   private function getDescription(): string {
-    $desc = (new DocBlock($this->yaml['data']['docComment']))?->getText();
-    $md = $desc !== null &&
-          $desc !== "" &&
-          strpos($desc, 'Copyright (c)') !== 0
-        ? $desc . "\n"
-        : "";
+    $md = "";
+    if ($this->yaml['data']['docComment'] !== null) {
+      $desc = (new DocBlock($this->yaml['data']['docComment']))->getText();
+      if ($desc !== "" && strpos($desc, 'Copyright (c)') !== 0) {
+        $md .= $desc . "\n";
+      }
+    }
     return $md;
   }
 
@@ -46,9 +47,9 @@ class ClassMarkdownBuilder {
       );
       $md .=
         ' * ['.$prefix.self::nameFromData($method).']('. $method_url .")";
-      if (array_key_exists('docComment', $method)) {
-        $desc = (new DocBlock($method['docComment']))?->getShortDescription();
-        if ($desc !== null && $desc !== "") {
+      if ($method['docComment'] !== null) {
+        $desc = (new DocBlock($method['docComment']))->getShortDescription();
+        if ($desc !== "") {
           $md .= ': ' . $desc;
         }
       }
