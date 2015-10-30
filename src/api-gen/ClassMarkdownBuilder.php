@@ -45,7 +45,14 @@ class ClassMarkdownBuilder {
         $method['name'],
       );
       $md .=
-        ' * ['.$prefix.self::nameFromData($method).']('. $method_url .")\n";
+        ' * ['.$prefix.self::nameFromData($method).']('. $method_url .")";
+      if (array_key_exists('docComment', $method)) {
+        $desc = (new DocBlock($method['docComment']))?->getShortDescription();
+        if ($desc !== null && $desc !== "") {
+          $md .= ': ' . $desc;
+        }
+      }
+      $md .= "\n";
     }
     return $md;
   }
