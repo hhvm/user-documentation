@@ -2,6 +2,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use phpDocumentor\Reflection\DocBlock;
+
 class ClassMarkdownBuilder {
   private ClassYAML $yaml;
 
@@ -13,12 +15,23 @@ class ClassMarkdownBuilder {
 
   public function build(): string {
     $md = $this->getHeading();
+    $md .= $this->getDescription();
     $md .= $this->getContents();
     return $md;
   }
 
   private function getHeading(): string {
     return '## The '.$this->getName().' '.$this->yaml['type']."\n\n";
+  }
+
+  private function getDescription(): string {
+    $desc = (new DocBlock($this->yaml['data']['docComment']))?->getText();
+    $md = $desc !== null &&
+          $desc !== "" &&
+          strpos($desc, 'Copyright (c)') !== 0
+        ? $desc . "\n"
+        : "";
+    return $md;
   }
 
   private function getContents(): string {
@@ -31,7 +44,7 @@ class ClassMarkdownBuilder {
         str_replace('\\', '.', $this->yaml['data']['name']),
         $method['name'],
       );
-      $md .= 
+      $md .=
         ' * ['.$prefix.self::nameFromData($method).']('. $method_url .")\n";
     }
     return $md;
