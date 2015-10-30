@@ -3,7 +3,7 @@
 namespace HHVM\UserDocumentation;
 
 use phpDocumentor\Reflection\DocBlock;
-use phpDocumentor\Reflection\DocBlock\ParamTag;
+use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
 class FunctionMarkdownBuilder {
@@ -62,11 +62,17 @@ class FunctionMarkdownBuilder {
 
     foreach ($this->yaml['data']['parameters'] as $param) {
       $name = $param['name'];
-      $tag = idx($tags, $name);
+
+      // The keys in the $tags map are actually the parameter names with the
+      // $. Why? I don't know.
+      $tag = idx($tags, '$'.$name);
 
       $md .= '- `'.Stringify::parameter($param, $tag).'`';
       if ($tag) {
-        $md .= ' - '.$tag->getDescription();
+        // The '-' is generally included in the description. We can do something
+        // more fancy if we need to, like `: ` and a preg_match on the first
+        // position of a alphnumeric character, thus getting rid of any '-'
+        $md .= ' '.$tag->getDescription();
       }
       $md .= "\n";
     }
@@ -103,19 +109,19 @@ class FunctionMarkdownBuilder {
     string $name,
     classname<T> $type = Tag::class,
   ): Map<string,T> {
-    $tags = Map { };
-    $raw_tags = $this->docblock?->getTagsByName($name);
-    if ($raw_tags !== null) {
-      foreach ($tags as $tag) {
-        invariant(
-          $tag instanceof $type,
-          'Expected %s tags to be %s, got %s',
-          $name,
-          $type,
-          get_class($tag),
-        );
-        $tags[$tag->getVariableName()] = $tag;
-      }
+    $tags = Map {};
+    // If $this->docblock is null, passing null to Map constructor returns
+    // empty map
+    $raw_tags = new Map($this->docblock?->getTagsByName($name));
+    foreach ($raw_tags as $tag) {
+      invariant(
+        $tag instanceof $type,
+        'Expected %s tags to be %s, got %s',
+        $name,
+        $type,
+        get_class($tag),
+      );
+      $tags[$tag->getVariableName()] = $tag;
     }
     return $tags;
   }
