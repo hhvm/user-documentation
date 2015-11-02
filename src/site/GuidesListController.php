@@ -9,7 +9,7 @@ enum GuideProduct: string as string {
 }
 
 final class GuidesListController extends WebPageController {  
-  protected async function getTitle(): Awaitable<string> {
+  public async function getTitle(): Awaitable<string> {
     switch ($this->getProduct()) {
       case GuideProduct::HHVM:
         return 'HHVM Documentation';

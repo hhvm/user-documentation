@@ -3,7 +3,7 @@
 use HHVM\UserDocumentation\GuidesIndex;
 
 final class HomePageController extends WebPageController {
-  protected async function getTitle(): Awaitable<string> {
+  public async function getTitle(): Awaitable<string> {
     return 'HHVM and Hack Documentation';
   }
   

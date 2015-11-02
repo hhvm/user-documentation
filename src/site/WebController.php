@@ -1,15 +1,18 @@
 <?hh // strict
 
+use Psr\Http\Message\RequestInterface;
+
 <<__ConsistentConstruct>>
 abstract class WebController {
   public function __construct(
     private ImmMap<string,string> $parameters,
+    private RequestInterface $request,
   ) {
   }
 
   abstract public function respond(): Awaitable<void>;
 
-  protected function getRequiredStringParam(string $key): string {
+  final protected function getRequiredStringParam(string $key): string {
     invariant(
       $this->parameters->containsKey($key),
       'required parameter %s is not set',
@@ -18,7 +21,7 @@ abstract class WebController {
     return $this->parameters[$key];
   }
 
-  protected function getOptionalStringParam(string $key): ?string {
+  final protected function getOptionalStringParam(string $key): ?string {
     return 
       $this->parameters->containsKey($key) 
         ? $this->parameters[$key] 

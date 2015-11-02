@@ -8,7 +8,7 @@ final class HHVMDocumentationSite {
   ): Awaitable<void> {
     try {
       list($controller, $vars) = (new Router())->routeRequest($request);
-      await (new $controller($vars))->respond();
+      await (new $controller($vars, $request))->respond();
     } catch (HTTPException $e) {
       $e->respond();
     }

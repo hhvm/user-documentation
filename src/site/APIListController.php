@@ -7,14 +7,8 @@ enum APIProduct: string as string {
   HACK = 'hack';
 }
 
-final class APIListController extends WebPageController { 
-  public function __construct(
-    private ImmMap<string,string> $parameters,
-  ) {
-    parent::__construct($parameters);
-  }
-  
-  protected async function getTitle(): Awaitable<string> {
+final class APIListController extends WebPageController {
+  public async function getTitle(): Awaitable<string> {
     switch ($this->getProduct()) {
       case APIProduct::HACK:
         return 'Hack APIs';
@@ -22,8 +16,9 @@ final class APIListController extends WebPageController {
   }
   
   protected function getInnerContent(): XHPRoot {
-    if ($this->parameters->containsKey('type')) {
-      $api_type = $this->parameters['type'];
+    $type = $this->getOptionalStringParam('type');
+    if ($type !== null) {
+      $api_type = $type;
       $apis = Map {
         $api_type => APIIndex::getReferenceForType($api_type),
       };
@@ -94,7 +89,8 @@ final class APIListController extends WebPageController {
         </span>
       </x:frag>;
       
-    if ($this->parameters->containsKey('type')) {
+    $type = $this->getOptionalStringParam('type');
+    if ($type !== null) {
       $breadcrumbs->appendChild(
         <x:frag>
           <i class="breadcrumbSeparator" />
@@ -103,7 +99,7 @@ final class APIListController extends WebPageController {
           </span>
           <i class="breadcrumbSeparator" />
           <span class="breadcrumbTypeRoot breadcrumbCurrentPage">
-            {$this->parameters['type']}
+            {$type}
           </span>
         </x:frag>
       );

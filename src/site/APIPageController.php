@@ -5,21 +5,24 @@ use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APIType;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 
+use Psr\Http\Message\RequestInterface;
+
 final class APIPageController extends WebPageController {
-  protected string $type = '';
-  protected string $api = '';
+  protected string $type;
+  protected string $api;
   protected ?string $method;
   
   public function __construct(
     private ImmMap<string,string> $parameters,
+    RequestInterface $request,
   ) {
-    parent::__construct($parameters);
-    $this->type = $this->getRequiredStringParam('type');
-    $this->api = $this->getRequiredStringParam('api');
-    $this->method = $this->getOptionalStringParam('method');
+    parent::__construct($parameters, $request);
+    $this->type = $parameters->at('type');
+    $this->api = $parameters->at('api');
+    $this->method = $parameters->get('method');
   }
   
-  protected async function getTitle(): Awaitable<string> {
+  public async function getTitle(): Awaitable<string> {
     if ($this->method !== null) {
       return $this->getAPIName().'::'.$this->method;
     }

@@ -3,13 +3,13 @@
 use HHVM\UserDocumentation\BuildPaths;
 
 abstract class WebPageController extends WebController {
-  protected abstract function getTitle(): Awaitable<string>;
+  public abstract function getTitle(): Awaitable<string>;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
 
   final public async function respond(): Awaitable<void> {
-    list($title, $body) = await \HH\Asio\va2(
+    list($title, $content) = await \HH\Asio\va2(
       $this->getTitle(),
-      $this->getBody(),
+      $this->getContentPane(),
     );
     
     $body_class = 'bodyClass'.ucwords($this->getOptionalStringParam('product'));
@@ -44,20 +44,30 @@ abstract class WebPageController extends WebController {
           <body class={$body_class}>
             {$this->getHeader()}
             {$this->getSideNav()}
-            <div class="mainContainer">
-              {$this->getBreadcrumbs()}
-              {$this->getTitleContent($title)}
-              <div class="widthWrapper flexWrapper">
-                <div class="mainWrapper">
-                  {$body}
-                </div>
-              </div>
-            </div>
+            {$content}
           </body>
         </html>
       </x:doctype>;
     $string = await $xhp->asyncToString();
     print($string);
+  }
+
+  final public async function getContentPane(): Awaitable<XHPRoot> {
+    list($title, $body) = await \HH\Asio\va2(
+      $this->getTitle(),
+      $this->getBody(),
+    );
+    return (
+      <div class="mainContainer">
+        {$this->getBreadcrumbs()}
+        {$this->getTitleContent($title)}
+        <div class="widthWrapper flexWrapper">
+          <div class="mainWrapper">
+            {$body}
+          </div>
+        </div>
+      </div>
+    );
   }
   
   private function getTitleContent(string $title): XHPRoot {

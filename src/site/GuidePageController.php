@@ -4,19 +4,22 @@ use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 
+use Psr\Http\Message\RequestInterface;
+
 final class GuidePageController extends WebPageController {
-  protected string $guide = '';
-  protected string $page = '';
+  protected string $guide;
+  protected string $page;
 
   public function __construct(
     private ImmMap<string,string> $parameters,
+    RequestInterface $request,
   ) {
-    parent::__construct($parameters);
-    $this->guide = $this->getRequiredStringParam('guide');
-    $this->page = $this->getRequiredStringParam('page');
+    parent::__construct($parameters, $request);
+    $this->guide = $parameters->at('guide');
+    $this->page = $parameters->at('page');
   }
 
-  protected async function getTitle(): Awaitable<string> {
+  public async function getTitle(): Awaitable<string> {
     // If the guide name and the page name are the same, only print one of them.
     // If there is only one page in a guide, only print the guide name.
     $ret = strcasecmp($this->guide, $this->page) === 0 ||
