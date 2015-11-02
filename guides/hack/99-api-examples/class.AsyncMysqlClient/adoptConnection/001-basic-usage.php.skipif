@@ -1,0 +1,2 @@
+<?hh
+require(__DIR__ . '/../../__includes/async_mysql_require_env.inc.php');
