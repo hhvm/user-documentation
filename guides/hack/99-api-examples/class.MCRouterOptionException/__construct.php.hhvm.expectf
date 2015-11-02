@@ -1,8 +1,0 @@
-string(23) "Failure parsing options"
-array(1) {
-  [0]=>
-  array(1) {
-    ["format"]=>
-    string(18) "Need config string"
-  }
-}
