@@ -16,10 +16,40 @@ final class APIHTMLBuildStep extends BuildStep {
     sort($sources);
 
     $list = Vector { };
+    $bucket = Vector { };
+    $threads = 5;
+    // Prepare buckets which will contain the commands to be executed
+    // inside of a fork. Every fork gets its own bucket to work on.
+    for ($i = 0; $i < $threads; ++$i) {
+      $bucket[] = Vector { };
+    }
+    $i = 0;
     foreach ($sources as $input) {
-      Log::v('.');
-      $output = $this->renderFile($input);
+      list($output, $command) = $this->prepareRenderFile($input);
       $list[] = $output;
+      $bucket[$i++ % $threads][] = $command;
+    }
+    assert($bucket->count() == $threads);
+
+    $children = Vector { };
+    for ($i = 0; $i < $threads; ++$i) {
+      $pid = pcntl_fork();
+      if ($pid == -1) {
+        Log::e("Could not fork.");
+      } else if ($pid) { // parent
+        $children[] = $pid;
+      } else { // children
+        foreach ($bucket[$i] as $command) {
+          Log::v('.');
+          shell_exec($command);
+        }
+        exit();
+      }
+    }
+
+    Log::i("Waiting for render to finish.");
+    foreach ($children as $child) {
+      pcntl_wait($child);
     }
 
     $index = $this->createIndex($list);
@@ -29,7 +59,9 @@ final class APIHTMLBuildStep extends BuildStep {
     );
   }
 
-  private function renderFile(string $input): string {
+  private function prepareRenderFile(
+    string $input
+  ): Pair<string, string> {
     $parts = (new Vector(explode('/', $input)))
       ->map(
         $part ==> preg_match('/^[0-9]{2}-/', $part) ? substr($part, 3) : $part
@@ -45,8 +77,8 @@ final class APIHTMLBuildStep extends BuildStep {
     }
 
     $input = realpath(self::SOURCE_ROOT.'/'.$input);
-    shell_exec(sprintf("%s %s > %s", self::RENDERER, $input, $output));
-    return $output;
+    $command = sprintf("%s %s > %s", self::RENDERER, $input, $output);
+    return Pair {$output, $command};
   }
 
   private function createIndex(
