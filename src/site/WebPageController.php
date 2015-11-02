@@ -3,13 +3,11 @@
 use HHVM\UserDocumentation\BuildPaths;
 
 abstract class WebPageController extends WebController {
-  protected string $title = '';
-  
   protected abstract function getTitle(): Awaitable<string>;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
 
   final public async function respond(): Awaitable<void> {
-    list($this->title, $body) = await \HH\Asio\va2(
+    list($title, $body) = await \HH\Asio\va2(
       $this->getTitle(),
       $this->getBody(),
     );
@@ -20,7 +18,7 @@ abstract class WebPageController extends WebController {
       <x:doctype>
         <html>
           <head>
-            <title>{$this->title}</title>
+            <title>{$title}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1" />
             <link rel="shortcut icon" href="/favicon.png" />
             <x:comment>
@@ -48,7 +46,7 @@ abstract class WebPageController extends WebController {
             {$this->getSideNav()}
             <div class="mainContainer">
               {$this->getBreadcrumbs()}
-              {$this->getTitleContent()}
+              {$this->getTitleContent($title)}
               <div class="widthWrapper flexWrapper">
                 <div class="mainWrapper">
                   {$body}
@@ -62,13 +60,13 @@ abstract class WebPageController extends WebController {
     print($string);
   }
   
-  protected function getTitleContent(): XHPRoot {
+  private function getTitleContent(string $title): XHPRoot {
     $title_class = 
       "mainTitle mainTitle".$this->getOptionalStringParam('product');
     return
       <div class={$title_class}>
         <div class="widthWrapper">
-          <h2 class="pageTitle">{$this->title}</h2>
+          <h2 class="pageTitle">{$title}</h2>
         </div>
       </div>;
   }
