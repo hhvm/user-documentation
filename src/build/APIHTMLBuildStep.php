@@ -15,6 +15,7 @@ final class APIHTMLBuildStep extends BuildStep {
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
     sort($sources);
 
+    Log::i("\nRendering markdown");
     $list = Vector { };
     foreach ($sources as $input) {
       Log::v('.');
@@ -22,6 +23,7 @@ final class APIHTMLBuildStep extends BuildStep {
       $list[] = $output;
     }
 
+    Log::i("\nCreating index");
     $index = $this->createIndex($list);
     file_put_contents(
       BuildPaths::APIDOCS_INDEX,

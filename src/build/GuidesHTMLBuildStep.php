@@ -14,12 +14,14 @@ final class GuidesHTMLBuildStep extends BuildStep {
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
     sort($sources);
 
+    Log::i("\nRendering markdown");
     $list = Vector { };
     foreach ($sources as $input) {
       Log::v('.');
       $output = $this->renderFile($input);
       $list[] = $output;
     }
+    Log::i("\nCreating index");
     $index = $this->createIndex($list);
     file_put_contents(
       BuildPaths::GUIDES_INDEX,
