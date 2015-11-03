@@ -10,29 +10,35 @@ In the example above, the call to `curl_exec` in `curl_A()` is blocking any othe
 
 ![No Async](/images/no-async.png)
 
-Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. Async is **not multithreading**. It allows code that utilizes the async infrastructure to hide input/output (I/O) latency and data fetching. So, if you have code that has operations that involve some sort of waiting (e.g., network access, waiting for database queries), async minimizes the downtime your program has to be stalled because of it as the program will go do other things, most likely further I/O somewhere else.
+Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. It allows code that utilizes the async infrastructure to hide input/output (I/O) latency and data fetching. So, if you have code that has operations that involve some sort of waiting (e.g., network access, waiting for database queries), async minimizes the downtime your program has to be stalled because of it as the program will go do other things, most likely further I/O somewhere else.
+
+Async is **not multithreading**. You are still bound to a single execution thread. Async works best when you have a lot of I/O codepaths that don't have to sit there waiting for other I/O requests to end to begin doing their requests.
 
 The following images should hopefully clear up any confusion you may have on what async is. Let's assume you have three distinct tasks to execute (don't worry about what the tasks are):
 
-** Synchronous Execution **
+## Synchronous Execution
 
 This is just like PHP and Hack (without async) is executed today. Serial execution.
 
 ![Synchronous](/images/synchronous.png)
 
-** Parallel Execution **
+## Parallel Execution
 
 This is an optimum state. We have all tasks running at the same time, concurrently. But, PHP and Hack do not support more than one thread of execution.
 
 ![Parallel](/images/parallel.png)
 
-** Asynchronous Execution **
+## Asynchronous Execution
 
 This is what async does. Tasks are executed concurrently in the same execution thread, with respect to each other, interleaving instructions (e.g., I/O) for different tasks back and forth.
 
 ![Asynchronous](/images/asynchronous.png)
 
-**IMPORTANT**: It is important to reiterate that async is not multithreading. You are still bound to a single execution thread. Async works best when you have a lot of I/O codepaths that don't have to sit there waiting for other I/O requests to end to begin doing their requests.
+The reordering of different task instructions in this way allow you to hide I/O [latency](https://en.wikipedia.org/wiki/Latency_\(engineering\)). So while one task is currently sitting at an I/O instruction (e.g., waiting for data), another task's instruction, with hopefully less latency, can execute in the meantime.
+
+Async is not a panacea, however. While executing two async functions can utilize the task reordering mechanisms described here, if those async functions call blocking functions like [`curl_exec()`](php.net/manual/en/function.curl-exec.php) or `sleep()`[php.net/manual/en/function.sleep.php], those calls are not cooperatively multi-tasking and will be blocked as normal.
+
+## Async In Practice: cURL
 
 @@ intro-examples/async-curl.php @@
 
@@ -42,7 +48,7 @@ When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, t
 
 ![Async](/images/async.png) 
 
-While this example may not always show a measurable time savings (there are some factors like network latency and possible caching involved), but you will not be slower than the non-async version overall and you may get results like this:
+While this example may not always show a measurable time savings (there are some factors like network latency and possible caching involved), you will not be slower than the non-async version overall and you may get results like this:
 
 *Non-Async*
 ```
@@ -54,6 +60,8 @@ Total time taken: 3.3065688610077 seconds
 Total time taken: 2.3396739959717 seconds
 ```
 
-The keys to async are [awaitables](awaitables.md), which activate the internal HHVM async scheduler, and being able to organize your code to minimize data dependencies and follow general [guidelines](guidelines.md).
+## Keys to Async
 
-NOTE: While executing two async functions can utilize cooperative multi-tasking described here, if those async functions call blocking functions like [`curl_exec()`](php.net/manual/en/function.curl-exec.php) or `sleep()`[php.net/manual/en/function.sleep.php], those blocking calls are not cooperatively multi-tasking and will be blocked as normal.
+The keys to async from the HHVM side are [awaitables](awaitables.md), which activate the internal HHVM async scheduler, and the provided async [extensions](extensions.md), which provide common functionality (e.g., MySQL access), but built from the ground up to make use of async.
+
+The keys for you, the programmer, are to be able to organize your code to minimize data dependencies and following our general async [guidelines](guidelines.md).
