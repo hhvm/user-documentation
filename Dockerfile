@@ -1,4 +1,4 @@
-FROM fredemmott/hhvm-proxygen:3.10.0
+FROM fredemmott/hhvm-proxygen:3.10.1
 RUN apt-get update -y
 
 # We need a unicode-aware system to generate the docs
