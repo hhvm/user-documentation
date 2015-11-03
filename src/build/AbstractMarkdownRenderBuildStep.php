@@ -53,7 +53,12 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
       }
     }
 
-    proc_close($renderer);
+    $exit_code = proc_close($renderer);
+    invariant(
+      $exit_code === 0,
+      'Markdown renderer exited with error code %d!',
+      $exit_code,
+    );
     return $ret;
   }
   
