@@ -57,7 +57,6 @@ final class GuidesHTMLBuildStep extends BuildStep {
       ->map($raw ==> escapeshellarg($raw));
     shell_exec(sprintf("%s %s > %s", ...$args));
     $this->addBookmarksToHeadings($output);
-    $this->fixInternalLinks($output);
     return $output;
   }
 
@@ -84,15 +83,6 @@ final class GuidesHTMLBuildStep extends BuildStep {
       $heading->setAttribute('id', $with_dashes);
     }
     file_put_contents($input_file, $dom->saveHtml());
-  }
-
-  private function fixInternalLinks(string $input_file): void {
-    $content = file_get_contents($input_file);
-    // Remove the .md from any internal links
-    // Be on the look out for bookmark references too via #
-    $href = '/(<a\s+(?:[^>]*?\s+)?href=".+?(?=\.md))(\.md)(#[^"]+)?(")/';
-    $replace = '$1$3$4'; // $2 is the (\.md)
-    file_put_contents($input_file, preg_replace($href, $replace, $content));
   }
 
   private function createIndex(
