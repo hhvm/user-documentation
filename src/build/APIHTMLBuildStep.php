@@ -2,9 +2,9 @@
 
 namespace HHVM\UserDocumentation;
 
-final class APIHTMLBuildStep extends BuildStep {
+final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   const string SOURCE_ROOT = __DIR__.'/../../build/apidocs';
-  const string RENDERER = __DIR__.'/../../md-render/render.rb';
+  const string BUILD_ROOT = BuildPaths::APIDOCS_HTML;
   const string METHOD_DELIM = "method";
 
   public function buildAll(): void {
@@ -15,15 +15,8 @@ final class APIHTMLBuildStep extends BuildStep {
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
     sort($sources);
 
-    Log::i("\nRendering markdown");
-    $list = Vector { };
-    foreach ($sources as $input) {
-      Log::v('.');
-      $output = $this->renderFile($input);
-      $list[] = $output;
-    }
+    $list = $this->renderFiles($sources);
 
-    Log::i("\nCreating index");
     $index = $this->createIndex($list);
     file_put_contents(
       BuildPaths::APIDOCS_INDEX,

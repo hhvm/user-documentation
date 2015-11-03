@@ -2,9 +2,9 @@
 
 namespace HHVM\UserDocumentation;
 
-final class GuidesHTMLBuildStep extends BuildStep {
+final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   const string SOURCE_ROOT = __DIR__.'/../../guides';
-  const string RENDERER = __DIR__.'/../../md-render/render.rb';
+  const string BUILD_ROOT = BuildPaths::GUIDES_HTML;
 
   public function buildAll(): void {
     Log::i("\nGuidesHTMLBuild");
@@ -14,13 +14,8 @@ final class GuidesHTMLBuildStep extends BuildStep {
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
     sort($sources);
 
-    Log::i("\nRendering markdown");
-    $list = Vector { };
-    foreach ($sources as $input) {
-      Log::v('.');
-      $output = $this->renderFile($input);
-      $list[] = $output;
-    }
+    $list = $this->renderFiles($sources);
+
     Log::i("\nCreating index");
     $index = $this->createIndex($list);
     file_put_contents(
@@ -37,28 +32,6 @@ final class GuidesHTMLBuildStep extends BuildStep {
       BuildPaths::GUIDES_SUMMARY,
       '<?hh return '.var_export($summary_index, true).";",
     );
-  }
-
-  private function renderFile(string $input): string {
-    $parts = (new Vector(explode('/', $input)))
-      ->map(
-        $part ==> preg_match('/^[0-9]{2}-/', $part) ? substr($part, 3) : $part
-      );
-
-    $output = implode('/', $parts);
-    $output = dirname($output).'/'.basename($output, '.md').'.html';
-    $output = BuildPaths::GUIDES_HTML.'/'.$output;
-
-    $output_dir = dirname($output);
-    if (!is_dir($output_dir)) {
-      mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
-    }
-
-    $input = realpath(self::SOURCE_ROOT.'/'.$input);
-    $args = (Vector { self::RENDERER, $input, $output })
-      ->map($raw ==> escapeshellarg($raw));
-    shell_exec(sprintf("%s %s > %s", ...$args));
-    return $output;
   }
 
   private function createIndex(

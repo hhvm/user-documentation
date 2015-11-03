@@ -1,14 +1,6 @@
 #!/usr/bin/env ruby
 
-if ARGV[0].nil?
-  puts "Usage: #{$0} /path/to/input.md"
-  exit(1)
-end
-
 # Make relative file paths survive the chdir, which bundler needs :(
-FILE = File.realpath(ARGV[0])
-Dir.chdir(File.dirname(__FILE__))
-
 require 'bundler/setup'
 require 'html/pipeline'
 
@@ -25,7 +17,16 @@ pipeline = HTML::Pipeline.new(
     HHVM::UserDocumentation::InternalLinksFilter,
     HHVM::UserDocumentation::HeadingAnchors,
   ],
-  { file: FILE },
 )
 
-puts pipeline.call(File.read(FILE))[:output].to_s
+STDOUT.sync = true
+STDIN.each_line do |line|
+  in_file, out_file = line.strip.split ' -> '
+  out_text = pipeline.call(
+    File.read(in_file),
+    { file: in_file },
+  )[:output].to_s
+
+  File.open(out_file, 'w+') { |f| f.write out_text }
+  puts 'OK] '+line
+end

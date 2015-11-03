@@ -12,3 +12,5 @@ function hhvm_to_yaml(): void {
 }
 
 hhvm_to_yaml();
+
+echo "\n"; // Make the bash prompt nice after :p
