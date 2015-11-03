@@ -127,6 +127,6 @@ async function stream_await(resource $fp, int $events,
                             float $timeout = 0.0): Awaitable<int>;
 ```
 
-This example shows how you can use [`stream_await()`](../reference/function/stream_await/) to write to resources
+This example shows how you can use [`stream_await()`](../reference/function/stream_await/) to write to resources.
 
 @@ extensions-examples/async-stream.php @@

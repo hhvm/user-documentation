@@ -2,16 +2,31 @@
 
 namespace Hack\UserDocumentation\Async\Extensions\Examples\MySQLConnectionPool;
 
+require __DIR__ . '/async_mysql_connect.inc.php';
+
+use \Hack\UserDocumentation\Async\Extensions\Examples\AsyncMysql\ConnectionInfo as CI;
+
 function get_pool(): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool(
     array('pool_connection_limit' => 100)
   ); // See API for more pool options
 }
 
-async function get_connection(): Awaitable<?AsyncMysqlConnection> {
-  return await get_pool()->connect(
-    '127.0.0.1', 3306, 'mydb', 'myuser', 'mypassword'
+async function get_connection(): Awaitable<\AsyncMysqlConnection> {
+  $pool = get_pool();
+  $conn = await $pool->connect(
+    CI::$host,
+    CI::$port,
+    CI::$db,
+    CI::$user,
+    CI::$passwd,
   );
+  return $conn;
 }
 
-\HH\Asio\join(get_connection());
+async function run(): Awaitable<void> {
+  $conn = await get_connection();
+  var_dump($conn);
+}
+
+\HH\Asio\join(run());

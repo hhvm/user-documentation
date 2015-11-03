@@ -1,5 +1,0 @@
-// Skipping until we can decide how to do MCRouter and MySQL tests
-// properly
-if (true) {
-  print "skip";
-}
