@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "97773edd48af6d05782637165f551b37",
+    "content-hash": "c2645288e008ec186607a5003b0e4b40",
     "packages": [
         {
             "name": "facebook/xhp-lib",
