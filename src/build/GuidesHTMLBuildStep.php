@@ -56,33 +56,7 @@ final class GuidesHTMLBuildStep extends BuildStep {
     $args = (Vector { self::RENDERER, $input, $output })
       ->map($raw ==> escapeshellarg($raw));
     shell_exec(sprintf("%s %s > %s", ...$args));
-    $this->addBookmarksToHeadings($output);
     return $output;
-  }
-
-  private function addBookmarksToHeadings(string $input_file): void {
-    $content = file_get_contents($input_file);
-    /* HH_FIXME[2049] Need an hhi for DOMDocument */
-    $dom = new \DOMDocument();
-    @$dom->loadHTML($content);
-    /* HH_FIXME[2049] Need an hhi for DOMXPath */
-    $xpath = new \DOMXPath($dom);
-    $headings = $xpath->query('//h1|//h2|//h3');
-    foreach ($headings as $heading) {
-      // Only want one whitespace between any words in the heading for bookmark
-      // id
-      $one_whitespace_between = preg_replace('/\s+/', ' ', $heading->nodeValue);
-      // Only appropriate characters, no things like &lt;, etc.
-      $normalized = preg_replace('/[^A-Za-z0-9_\.\- ]/', '',
-                                 $one_whitespace_between);
-      // markdown heading links are all lowercase
-      $lower_value = strtolower($normalized);
-      // markdown replaces spaces in headings with - for links, so do the same
-      $with_dashes = str_replace(' ', '-', $lower_value);
-      // Set the id attribute which is for bookmarks
-      $heading->setAttribute('id', $with_dashes);
-    }
-    file_put_contents($input_file, $dom->saveHtml());
   }
 
   private function createIndex(

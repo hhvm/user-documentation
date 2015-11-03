@@ -34,7 +34,7 @@ To preserve consistency and "greppability", the typechecker doesn't allow aliasi
 
 The typechecker will issue a parsing error when you try this.
 
-## Others
+## Misc
 
 - [Old style constructors](https://wiki.php.net/rfc/remove_php4_constructors)
 - `global` as they act like references, which are already unsupported.
