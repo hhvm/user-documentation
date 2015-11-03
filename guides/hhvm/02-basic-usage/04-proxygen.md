@@ -6,15 +6,15 @@ Proxygen is a full webserver built directly into HHVM, and is recommended since 
 
 ## Using Proxygen
 
-**NOTE**: We are looking into making Proxygen the default webserver for HHVM out of the box (i.e., it will be set in the default `server.ini` file). This should hopefully come soon.
-
 To use Proxygen when running HHVM in server mode:
 
 ```
-hhvm -m server -d hhvm.server.type=proxygen -d hhvm.server.port=8080
+hhvm -m server -p 8080
 ```
 
-Your port can be whatever you want, of course.
+Your port can be whatever you want, of course, via either the following command line configuration setting that you would append to the command above: `-d hhvm.server.port=7777`, or putting `hhvm.server.port=7777` in your `server.ini` file.
+
+Since Proxygen is the default, you don't need to explicitly specify it as the server type, but you could, for verboseness, append the following to the command above as well: `-d hhvm.server.type=proxygen`.
 
 ## Example Proxygen Configuration
 
