@@ -4,7 +4,7 @@ use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class GuidePageController extends WebPageController {
   protected string $guide;
@@ -12,7 +12,7 @@ final class GuidePageController extends WebPageController {
 
   public function __construct(
     private ImmMap<string,string> $parameters,
-    RequestInterface $request,
+    ServerRequestInterface $request,
   ) {
     parent::__construct($parameters, $request);
     $this->guide = $parameters->at('guide');

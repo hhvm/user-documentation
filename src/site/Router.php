@@ -21,6 +21,8 @@ class Router {
         => RedirectToGuideFirstPageController::class,
       '/{product:(?:hack|hhvm)}/{guide}/{page}'
         => GuidePageController::class,
+      '/__content'
+        => WebPageContentController::class,
     };
   }
 

@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "32461570cb00d9eb2ac70b9341bbcef6",
-    "content-hash": "8fe3a616c6aebcb24b5617f0276fdb82",
+    "hash": "97773edd48af6d05782637165f551b37",
     "packages": [
         {
             "name": "facebook/xhp-lib",
@@ -100,16 +99,16 @@
         },
         {
             "name": "hack-psr/psr7-http-message-hhi",
-            "version": "v0.1",
+            "version": "v0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/psr7-http-message-hhi.git",
-                "reference": "923042655943fca039e0afd27eee383feca810da"
+                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/923042655943fca039e0afd27eee383feca810da",
-                "reference": "923042655943fca039e0afd27eee383feca810da",
+                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/31422ed7c566dd1cd481d95fd1d7e65798944fc9",
+                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9",
                 "shasum": ""
             },
             "require": {
@@ -131,7 +130,7 @@
                 "psr-7",
                 "psr7"
             ],
-            "time": "2015-08-28 02:04:45"
+            "time": "2015-11-02 23:49:05"
         },
         {
             "name": "hhvm/asio-utilities",

@@ -5,7 +5,7 @@ use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APIType;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class APIPageController extends WebPageController {
   protected string $type;
@@ -14,7 +14,7 @@ final class APIPageController extends WebPageController {
   
   public function __construct(
     private ImmMap<string,string> $parameters,
-    RequestInterface $request,
+    ServerRequestInterface $request,
   ) {
     parent::__construct($parameters, $request);
     $this->type = $parameters->at('type');

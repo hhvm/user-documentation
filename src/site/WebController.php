@@ -1,13 +1,23 @@
 <?hh // strict
 
-use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 <<__ConsistentConstruct>>
 abstract class WebController {
+  private ImmMap<string, string> $parameters;
+
   public function __construct(
-    private ImmMap<string,string> $parameters,
-    private RequestInterface $request,
+    ImmMap<string,string> $parameters,
+    private ServerRequestInterface $request,
   ) {
+    $combined_params = $parameters->toMap();
+    foreach ($request->getQueryParams() as $key => $value) {
+      if (is_array($value)) {
+        continue;
+      }
+      $combined_params[(string) $key] = (string) $value;
+    }
+    $this->parameters = $combined_params->toImmMap();
   }
 
   abstract public function respond(): Awaitable<void>;
