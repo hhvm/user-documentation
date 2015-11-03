@@ -2,18 +2,23 @@
 
 namespace Hack\UserDocumentation\Async\Extensions\Examples\MySQL;
 
-async function get_connection(): Awaitable<?\AsyncMysqlConnection> {
+async function get_connection(): Awaitable<\AsyncMysqlConnection> {
+  // Get a connection pool with default options
+  $pool = new \AsyncMysqlConnectionPool(array());
   // Change credentials to something that works in order to test this code
-  return await \AsyncMysqlClient::connect(
-    'localhost', 3306, 'db', 'user', 'password'
+  return await $pool->connect(
+    'localhost', 3306, 'testdb', 'testuser', 'testpassword'
   );
 }
 
 async function fetch_user_name(\AsyncMysqlConnection $conn,
-                               int $user_id) : Awaitable<?string> {
+                               int $user_id) : Awaitable<string> {
   // Your table and column may differ, of course
-  $result = await $conn->queryf('SELECT name from user_table WHERE id = %d',
-                                $user_id);
+  $result = await $conn->queryf(
+    'SELECT name from test_table WHERE userID = %d',
+    $user_id
+  );
+  // There shouldn't be more than one row returned for one user id
   invariant($result->numRows() === 1, 'one row exactly');
   // A vector of vector objects holding the string values of each column
   // in the query
@@ -21,11 +26,25 @@ async function fetch_user_name(\AsyncMysqlConnection $conn,
   return $vector[0][0]; // We had one column in our query
 }
 
+async function get_user_info(\AsyncMysqlConnection $conn,
+                             string $user): Awaitable<Vector> {
+  $result = await $conn->queryf(
+    'SELECT * from test_table WHERE name = %s',
+    $conn->escapeString($user)
+  );
+  // A vector of map objects holding the string values of each column
+  // in the query, and the keys being the column names
+  $map = $result->mapRows();
+  return $map;
+}
+
 async function async_mysql_tutorial(): Awaitable<void> {
   $conn = await get_connection();
   if ($conn !== null) {
     $result = await fetch_user_name($conn, 2);
     echo $result . PHP_EOL;
+    $info = await get_user_info($conn, 'Fred Emmott');
+    var_dump($info);
   }
 }
 

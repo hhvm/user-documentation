@@ -10,18 +10,24 @@ The async MySQL extension is similar to the [`mysqli`](http://php.net/manual/en/
 
 The [full API](../reference/class/AsyncMysqlConnection/) will contain all of the classes and methods available for accessing MySQL via async; we will cover a few of the more common scenarios here.
 
-The primary class for connecting to a MySQL database is [`AsyncMysqlClient`](../reference/class/AsyncMysqlClient/) and its primary method is the *async* [`connect()`](../reference/class/AsyncMysqlClient/connect/). The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the two main query methods, [`query()`](../reference/class/AsyncMysqlConnection/query/) and [`queryf()`](../reference/class/AsyncMysqlConnection/query/), both *async*. The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryResult/) and [`AsyncMysqlErrorResult`](../reference/class/AsyncMysqlErrorResult/). The main methods on these classes are [`vectorRows()`](../reference/class/AsyncMysqlQueryResult/vectorRows/) and [`mapRows()`](../reference/class/AsyncMysqlQueryResult/mapRows/), both *non-async*.
+The primary class for connecting to a MySQL database is [`AsyncMysqlConnectionPool`](../reference/class/AsyncMysqlClient/) and its primary method is the *async* [`connect()`](../reference/class/AsyncMysqlClient/connect/). 
+
+The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the two main query methods, [`query()`](../reference/class/AsyncMysqlConnection/query/) and [`queryf()`](../reference/class/AsyncMysqlConnection/query/), both *async*. There is also a function to ensure that queries to be executed are safe called [`escapeString()`](../reference/class/AsyncMysqlConnection/escapeString/). 
+
+The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryResult/) and [`AsyncMysqlErrorResult`](../reference/class/AsyncMysqlErrorResult/). The main methods on these classes are [`vectorRows()`](../reference/class/AsyncMysqlQueryResult/vectorRows/) and [`mapRows()`](../reference/class/AsyncMysqlQueryResult/mapRows/), both *non-async*.
 
 ```
 <?hh
-class AsyncMysqlClient {
+class AsyncMysqlConnectionPool {
+  public function __construct(array $pool_options): void;
   public static async function connect(
     string $host,
     int $port,
     string $dbname,
     string $user,
     string $password,
-    int $timeout_micros = -1): Awaitable<?AsyncMysqlConnection>;
+    int $timeout_micros = -1,
+    string $extra_key = ""): Awaitable<AsyncMysqlConnection>;
   // More methods in this class, of course
 }
 
@@ -30,6 +36,7 @@ class AsyncMysqlConnection {
     : Awaitable<AsyncMysqlResult>;
   public function queryf(string $pattern, ..$args)
     : Awaitable<AsyncMysqlResult>;
+  public function escapeString(string $data): string;
   // More methods in this class, of course
 }
 
@@ -62,6 +69,8 @@ The async MySQL extension **does not** support multiplexing -- each concurrent q
 The async MySQL extension provides a mechanism to pool connection objects so you don't have to create a new connection every time you want to make a query. The class is [`AsyncMysqlConnectionPool`](../reference/class/AsyncMysqlConnectionPool/) and one can be created like this:
 
 @@ extensions-examples/async-mysql-connection-pool.php @@
+
+It is ***highly recommended*** that you use connection pools for your MySQL connections; if for some reason you really need one, single asynchronous client, there is an [`AsyncMysqlClient`](../reference/class/AsyncMysqlClient) class that provides a [`connect()`](../reference/class/AsyncMysqlClient/connect) method. 
 
 ## MCRouter
 
