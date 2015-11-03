@@ -2,7 +2,7 @@
   "require": {
     "hhvm/asio-utilities": "~2.0",
     "fredemmott/definition-finder": "^0.3.0",
-    "mustangostang/spyc": "^0.5.1",
+    "mustangostang/spyc": "0.5.x-dev",
     "hhvm/systemlib-extractor": "^0.1.0",
     "facebook/xhp-lib": "^2.2",
     "hhvm": "~3.9",
