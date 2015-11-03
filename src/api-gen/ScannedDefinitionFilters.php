@@ -50,6 +50,101 @@ abstract final class ScannedDefinitionFilters {
   }
 
   public static function ShouldNotDocument(ScannedBase $def): bool {
-    return strpos($def->getName(), "__SystemLib\\") === 0;
+    return
+      (strpos($def->getName(), "__SystemLib\\") === 0)
+      || self::IsBlacklisted($def);
+  }
+
+  private static function IsBlacklisted(ScannedBase $def): bool {
+    // In an ideal world, everything in HH\ should be documented,
+    // nothing else should be. Things currently there that are internal
+    // should be moved to the __SystemLib\ namespace.
+    //
+    // That's long-term cleanup unlikely to be finished soon and we don't
+    // want to block the doc site rewrite on it, so, for now, we have
+    // this blacklist.
+    $blacklist = [
+      /////////////
+      // Classes //
+      /////////////
+
+      'AppendIterator',
+      'ArrayIterator',
+      'CallbackFilterIterator',
+      'EmptyIterator',
+      'FilterIterator',
+      'Generator',
+      'HH\BuiltinEnum', // Should be __SystemLib\BuiltinEnum
+      'InfiniteIterator',
+      'IntlIterator',
+      'IteratorIterator',
+      'LimitIterator',
+      'MultipleIterator',
+      'MySSLContextProvider',
+      'NoRewindIterator',
+      'ParentIterator',
+      'RecursiveArrayIterator',
+      'RecursiveCachingIterator',
+      'RecursiveCallbackFilterIterator',
+      'RecursiveFilterIterator',
+      'RecursiveIteratorIterator',
+      'RecursiveRegexIterator',
+      'RecursiveTreeIterator',
+      'ReflectionFunctionAbstract',
+      'RegexIterator',
+      'ResourceBundle',
+      'SessionHandler',
+      'SplDoublyLinkedList',
+      'SplFixedArray',
+      'SplHeap',
+      'SplMaxHeap',
+      'SplMinHeap',
+      'SplObjectStorage',
+      'SplPriorityQueue',
+      'SplQueue',
+      'SplStack',
+
+      ////////////////
+      // Interfaces //
+      ////////////////
+
+      'ArrayAccess',
+      'IndexAccess',
+      'IteratorAggregate',
+      'OuterIterator',
+      'RecursiveIterator',
+      'SeekableIterator',
+
+      ///////////////
+      // Functions //
+      ///////////////
+
+      'array_column',
+      'array_keys',
+      'call_use_func_array',
+      'ksort',
+      'lz4uncompress',
+      'uasort',
+      'array_fill',
+      'array_values',
+      'lz4_hccompress',
+      'snuncompress',
+      'uksort',
+      'array_filter',
+      'arsort',
+      'lz4compress',
+      'nzcompress',
+      'sort',
+      'usort',
+      'apache_get_config',
+      'array_key_exists',
+      'asort',
+      'krsort',
+      'lzhccompress',
+      'mysql_fetch_result',
+      'nzuncompress',
+      'rsort',
+    ];
+    return array_key_exists($def->getName(), array_flip($blacklist));
   }
 }
