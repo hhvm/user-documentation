@@ -181,11 +181,18 @@ user-documentation/public$ hhvm -m server \
    $ eb init
    ```
 
-4. After making one or more updates, you will want to push to AWS. From your checkout, you push with:
+4. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
 
    ```
-   # After some commits, from your user-documentation checkout directory
-   $ eb deploy
+   $ bin/deploy.sh
    ```
 
-   **NOTE**: Step 4 is the only step you will need to do for future pushes from the same checkout.
+   **NOTE**: This is first step you will need to do for future pushes from the same checkout.
+
+5. Test the staging site at http://hhvm-hack-docs-staging.elasticbeanstalk.com
+
+6. Swap staging and production
+
+  ```
+  $ eb swap
+  ```
