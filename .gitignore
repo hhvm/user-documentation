@@ -9,6 +9,8 @@ LocalConfig.php
 *.php.type-errors.out
 /build/
 /public/www.pid
+.scssc
+bourbon/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

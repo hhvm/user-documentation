@@ -67,6 +67,23 @@ final class APIListController extends WebPageController {
       </div>;
   }
   
+  protected function getSideNav(): XHPRoot {
+    $type = $this->getOptionalStringParam('type');
+    $guides = APIIndex::getIndex();
+    return 
+      <div class="navWrapper guideNav">
+        <div class="navLoader"></div>
+        <script>
+          var docnavData = {json_encode($guides)};
+          var currentMethod = "";
+          var currentAPI = "";
+          var currentType = "{$type}";
+          var baseRefURL = "/hack/reference";
+        </script>
+        <script type="text/babel" src="/js/APISideNav.js"></script>
+      </div>;
+  }
+  
   protected function getBreadcrumbs(): XHPRoot {
     $product = 'hack';
     $product_root_url = sprintf(
