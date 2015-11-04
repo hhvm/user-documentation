@@ -73,9 +73,10 @@ abstract final class ScannedDefinitionFilters {
 
       'AppendIterator',
       'ArrayIterator',
+      'AsyncGenerator', // (see below)... this showed up. Two different defs?
       'AsyncFunctionWaitHandle',
       'AsyncGeneratorWaitHandle',
-      'AwaitAllAwaitHandle',
+      'AwaitAllWaitHandle',
       'CallbackFilterIterator',
       'CachingIterator', // PHP class that we added type parameters on
       'ConditionWaitHandle',
@@ -85,7 +86,7 @@ abstract final class ScannedDefinitionFilters {
       'Generator',
       'GenMapWaitHandle',
       'GenVectorWaitHandle',
-      'HH\AsyncGenerator',
+      'HH\AsyncGenerator', // Funny, we blacklist this and then... (see above)
       'HH\Client\TypecheckResult',
       'HH\BuiltinEnum', // Should be __SystemLib\BuiltinEnum
       'InfiniteIterator',
