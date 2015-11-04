@@ -124,10 +124,27 @@ Bundle complete! 3 Gemfile dependencies, 16 gems now installed.
 Use `bundle show [gemname]` to see where a bundled gem is installed.
 ```
 
+### Ruby Dependencies: Sass and Bourbon
+
+Sass and Bourbon are used to generate the CSS for the site, both can be used 
+with minimal setup:
+
+```
+$ sudo gem install sass bourbon
+```
+
+Once the gems are installed, you'll need to also install the Bourbon scss files:
+
+```
+cd user-documentation/scss
+user-documentation/scss$ bourbon install
+```
+
 ### Build The Site
 
 ```
-$ hhvm bin/build.php
+cd user-documentation
+user-documentation$ hhvm bin/build.php
 ```
 
 This will:
@@ -137,6 +154,15 @@ This will:
  - create canonical definitions, combining the data obtained from Hack and HHVM
  - generate Markdown files for the API documentation based on these YAML files
  - render all Markdown (API reference and written guides) to HTML
+
+Then, generate the CSS files from the source .scss files:
+
+```
+cd user-documentation
+user-documenation$ sass scss/main.scss:public/main.css --style compressed
+```
+
+You might want to use `--style nested` or `--style expanded` while debugging any CSS problems as the compressed version will put everything into a single line of CSS, making it hard to narrow down rules.
 
 ### Running The Site
 

@@ -8,7 +8,7 @@ ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
 
 # Install Ruby and Bundler (Ruby package manager)
-RUN apt-get install -y ruby1.9.3 bundler
+RUN apt-get install -y ruby1.9.3 bundler rubygems
 # we depend on a recent version of the Nokogiri gem, which bundler will install
 # for us later; this needs to build it's own libxml so we need to install the
 # -dev versions of some dependencies
@@ -18,6 +18,9 @@ RUN apt-get install -y build-essential zlib1g-dev
 # use this, but this is a handy way to make sure all the dependencies are
 # installed.
 RUN apt-get install -y python-pygments
+
+# Install Sass dependencies
+RUN gem install sass bourbon
 
 # Install Composer (PHP dependency manager)
 RUN apt-get install -y curl
@@ -39,9 +42,11 @@ RUN cd /var/www && sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example > 
 # Install direct dependencies
 RUN cd /var/www/md-render && bundle --path vendor/
 RUN cd /var/www && hhvm /opt/composer/composer.phar install
+RUN bourbon install --path /var/www/scss/
 
 # Build
 RUN cd /var/www && hhvm bin/build.php
+RUN sass /var/www/scss/main.scss:/var/www/public/main.css --style compressed
 
 # Make the webserver port accessible outside the container
 EXPOSE 80
