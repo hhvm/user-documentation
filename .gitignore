@@ -10,6 +10,7 @@ LocalConfig.php
 *.css.map
 /build/
 /public/www.pid
+/.sass-cache/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

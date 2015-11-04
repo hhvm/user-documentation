@@ -7,6 +7,7 @@ class Router {
   ): KeyedIterable<string, classname<WebController>> {
     return ImmMap {
       '/' => HomePageController::class,
+      '/search' => SearchController::class,
       '/{product:(?:hack|hhvm)}/'
         => GuidesListController::class,
       '/{product:(?:hack)}/reference/'
