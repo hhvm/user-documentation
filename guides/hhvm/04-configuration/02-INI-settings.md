@@ -397,7 +397,7 @@ The translation cache stores the JIT'd code. It's split into several sections de
 | hhvm.source_root | | |
 | hhvm.spin_on_crash | | |
 | hhvm.stack_args | | |
-| hhvm.static_file.extensions[ ] | Map of filename extensions to content types for use by the proxygen server | see [runtime-option.cpp](https://gist.github.com/JoelMarcey/29601dc033af31390fc6) for defaults |
+| hhvm.static_file.extensions[ ] | Map of filename extensions to content types for use by the Proxygen server | see [runtime-option.cpp](https://gist.github.com/JoelMarcey/29601dc033af31390fc6) for defaults |
 | hhvm.stats.enable | | |
 | hhvm.stats.apc | | |
 | hhvm.stats.enable_hot_profiler | | |

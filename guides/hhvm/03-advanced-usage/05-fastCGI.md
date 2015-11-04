@@ -2,7 +2,7 @@
 
 HHVM has built-in support for two server types: [Proxygen](../basic-usage/proxygen.md) and FastCGI.
 
-FastCGI provides a high performance interface between your codebase and webserver (e.g., persistent processes between requests, etc.), but which will also obviously require a front-end compatible web server to serve the requests (e.g., [nginx](http://nginx.org/)).
+FastCGI provides a high performance interface between your codebase and web server (e.g., persistent processes between requests, etc.), but which will also obviously require a front-end compatible web server to serve the requests (e.g., [nginx](http://nginx.org/)).
 
 ## How FastCGI Works
 
