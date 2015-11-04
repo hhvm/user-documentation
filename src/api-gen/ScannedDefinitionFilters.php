@@ -88,7 +88,6 @@ abstract final class ScannedDefinitionFilters {
       'HH\AsyncGenerator',
       'HH\Client\TypecheckResult',
       'HH\BuiltinEnum', // Should be __SystemLib\BuiltinEnum
-      'HH\Shapes', // Should be __SystemLib\Shapes
       'InfiniteIterator',
       'IntlIterator',
       'IteratorIterator',
