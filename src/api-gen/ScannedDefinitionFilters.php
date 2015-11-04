@@ -64,8 +64,11 @@ abstract final class ScannedDefinitionFilters {
     // want to block the doc site rewrite on it, so, for now, we have
     // this blacklist.
     //
-    // As a meta point, WaitHandle classes should not be exposed. Awaitable
-    // is all that a user should need for async.
+    // As meta points:
+    //  - WaitHandle classes should not be exposed. Awaitable is all that a user
+    //    should need for async.
+    //  - The xxxAccess interfaces for collections are covered by things like
+    //    ConstSet, ConstMap, etc. The others are implementation details.
     $blacklist = [
       /////////////
       // Classes //
@@ -130,11 +133,18 @@ abstract final class ScannedDefinitionFilters {
       ////////////////
 
       'ArrayAccess',
+      'ConstIndexAccess',
+      'ConstMapAccess',
+      'ConstSetAccess',
       'IndexAccess',
+      'HH\SQLListFormatter',
+      'HH\SQLScalarFormatter',
       'IteratorAggregate',
+      'MapAccess',
       'OuterIterator',
       'RecursiveIterator',
       'SeekableIterator',
+      'SetAccess',
 
       ///////////////
       // Functions //
