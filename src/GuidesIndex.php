@@ -8,18 +8,6 @@ class GuidesIndex {
     return require(BuildPaths::GUIDES_INDEX);
   }
   
-  public static function getProductIndex(
-    string $product
-  ): Map<string, Map<string, string>> {
-    $index = self::getIndex();
-    invariant(
-      $index->containsKey($product),
-      '%s is not in the guide index',
-      $product,
-    );
-    return $index[$product];
-  }
-  
   private static function getSummaries(
   ): Map<string, Map<string, string>> {
     return require(BuildPaths::GUIDES_SUMMARY);

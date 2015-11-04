@@ -3,7 +3,7 @@
 namespace HHVM\UserDocumentation;
 
 class APIIndex {
-  public static function getIndex(
+  private static function getIndex(
   ): Map<string, Map<string, APIClassIndexEntry>> {
     return require(BuildPaths::APIDOCS_INDEX);
   }

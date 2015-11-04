@@ -70,20 +70,60 @@ final class GuidePageController extends WebPageController {
         </div>
       </div>;
   }
-  
+
   protected function getSideNav(): XHPRoot {
     $product = $this->getProduct();
-    $guides = GuidesIndex::getProductIndex($product);
-    return 
+    $guides = GuidesIndex::getGuides($product);
+
+    $list = <ul class="navList" />;
+    foreach ($guides as $guide) {
+      $pages = GuidesIndex::getPages($product, $guide);
+      $url = sprintf(
+        "/%s/%s/%s",
+        $product,
+        $guide,
+        $pages[0],
+      );
+
+      $title = ucwords(strtr($guide, '-', ' '));
+      $sub_list = <ul class="subList" />;
+
+      // If there is only one page to a guide, just have the main
+      // guide heading above be the link to that page. Don't duplicate here.
+      if (count($pages) > 1) {
+        foreach ($pages as $page) {
+          $page_url = sprintf(
+            "/%s/%s/%s",
+            $product,
+            $guide,
+            $page,
+          );
+
+          $page_title = ucwords(strtr($page, '-', ' '));
+          $sub_list_item =
+            <li class="subListItem">
+              <h5><a href={$page_url}>{$page_title}</a></h5>
+            </li>;
+
+          if ($this->guide === $guide && $this->page === $page) {
+            $sub_list_item->addClass("itemActive");
+          }
+
+          $sub_list->appendChild($sub_list_item);
+        }
+      }
+
+      $list->appendChild(
+        <li>
+          <h4><a href={$url}>{$title}</a></h4>
+          {$sub_list}
+        </li>
+      );
+    }
+
+    return
       <div class="navWrapper guideNav">
-        <div class="navLoader"></div>
-        <script>
-          var docnavData = {json_encode($guides)};
-          var thisDoc = "{$this->page}";
-          var thisGroup = "{$this->guide}";
-          var thisProduct = "{$product}";
-        </script>
-        <script type="text/babel" src="/js/SideNav.js"></script>
+        {$list}
       </div>;
   }
 
