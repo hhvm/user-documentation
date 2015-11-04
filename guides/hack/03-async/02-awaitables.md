@@ -1,6 +1,6 @@
 # Awaitables
 
-An *awaitable* is the key construct in `async` code. An awaitable is a first-class Hack object that represents a possibly asynchronous operation that may or may not have completed. You get a concrete result if the operation has completed. Or you `await` the awaitable until the operation has completed. 
+An *awaitable* is the key construct in `async` code. An awaitable is a first-class Hack object that represents a possibly asynchronous operation that may or may not have completed. You `await` the awaitable until the operation has completed. 
 
 ## `Awaitable`
 
@@ -17,21 +17,21 @@ $x = await foo(); // $x will be an int
 
 @@ awaitables-examples/awaitable-return.php @@
 
-## Two types of awaitables
+## Awaiting
 
-There are two types of awaitables. Single and collection.
+All `async` functions must return an `Awaitable<T>`. When you call an `async` function, you will get back that `Awaitable`, at which point, you can `await` that `Awaitable` to wait for a result from the operation. When you `await`, you are blocking until the operation associated with the `Awaitable` is complete.
 
-### Single
+### Batching Awaitables
 
-One is the usual `Awaitable` that is returned from an `async` function.
+Many times you will `await` on one `Awaitable`, get the result and move on. 
 
 @@ awaitables-examples/single-awaitable.php @@
 
-Note that normally you will see something like `await f();` which combines the retrieving of the awaitable with the retrieving of the result of the awaitable. The example above separates it out for illustration purposes.
+You will normally see something like `await f();` which combines the retrieving of the awaitable with the waiting and retrieving of the result of that awaitable. The example above separates it out for illustration purposes.
 
-### Collection
+Other times, you will gather up a bunch of awaitables and `await` them all before moving on.
 
-The other is an awaitable representing a collection of other awaitables. To represent this type of awaitable you use one of the two built-in async helper functions in the `HH\Asio` namespace:
+Here we are using one of the two built-in async helper functions in the `HH\Asio` namespace in order to batch a bunch of awaitables together to then `await` upon:
 
 * `HH\Asio\v()`: Indexed list of awaitables with consecutive integer keys
 * `HH\Asio\m()`: Associative map of awaitables with integer or string keys

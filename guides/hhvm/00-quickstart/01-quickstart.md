@@ -44,23 +44,27 @@ Installing HHVM will start it up, but it won't be configured to start at upon re
 After installing HHVM, it should automatically be running in server mode. If it is not, you can start it up using:
 
 ```
-hhvm -m server -d hhvm.server.port=8080 -d hhvm.server.source_root=/var/www/public
+hhvm -m server -p 8080
 ```
 
-The `-m` indicates that HHVM is running in a server mode, and additional configuration items are passed in with `-d` entries.
+`-m` represents the [mode](../basic-usage/intro.md) and here indicates that HHVM is running in server mode.
 
-You can choose any port you want (80 is the default when not specified), and you can choose any source root as the directory where the server finds PHP or Hack files and other web assets. The default directory for Proxygen is the current directory where the `hhvm` process was launched; generally you will want to give it an explicit value to your web root, as above.
+`-p` configures the TCP port that HHVM uses to listen to HTTP requests (80 is the default when not specified). Here we are using 8080 - which is more likely to be available if you have another web server already installed and listening to port 80.
 
-Proxygen is the default web server which means we do not need to specify that to be the case on this command line. (If other web servers are being used in front of HHVM running in FastCGI mode, you would specify the server type accordingly: `-d hhvm.server.type=fastcgi`).
+Additional configuration items are passed in with `-d` entries. More details are in [the basic usage guide](../basic-usage/server.md).
 
-Write a simple "Hello World" program named `hello.php`:
+For example, above. HHVM will use [Proxygen](../basic-usage/proxygen.md) as the default server type. If other web servers are being used in front of HHVM running in FastCGI mode, you would specify the server type accordingly: `-d hhvm.server.type=fastcgi`.
+
+You can also choose any source root as the directory where the server finds PHP (`<?php`) or Hack (`<?hh`) files and other web assets. The default directory for Proxygen is the current directory where the `hhvm` process was launched, but generally you will want to give it an explicit value to your web root with an option like `-d hhvm.server.source_root=/var/www/public`.
+
+Once you have HHVM running, write a simple "Hello World" program named `hello.php`:
 
 ```
 <?php
 echo "Hello World!";
 ```
 
-Save this `hello.php` in `/var/www/public` or whichever folder you specified in `hhvm.server.source_root`.
+Save this `hello.php` in the same directory that you ran the `hhvm` command from above or whichever folder you specified in `hhvm.server.source_root`.
 
 Now load [http://localhost/hello.php](http://localhost:8080/hello.php) in your browser or `curl http://localhost:8080/hello.php` and verify you see "Hello World!" appear.
 

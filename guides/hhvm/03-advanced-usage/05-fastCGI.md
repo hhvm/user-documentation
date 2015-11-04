@@ -10,21 +10,19 @@ HHVM-FastCGI works much the same way as [PHP-FPM](http://php-fpm.org/). HHVM, ru
 
 ## Using FastCGI
 
-**NOTE**: Currently FastCGI is the default server mode for HHVM (i.e., it is set as such in the default `server.ini` file). This is likely to change soon to [Proxygen](../basic-usage/proxygen.md); the examples below assume that FastCGI is not the default.
+To run the server in FastCGI mode pass the following parameters to hhvm runtime:
 
-o run the server in FastCGI mode pass the following parameters to hhvm runtime:
-
-    hhvm --mode server -vServer.Type=fastcgi -vServer.Port=9000
+    hhvm --mode server -d hhvm.server.type=fastcgi -d hhvm.server.port=9000
 
 The server will now accept connections on localhost:9000. To use a UNIX socket, use the `Server.FileSocket` option instead:
 
-    hhvm --mode server -vServer.Type=fastcgi -vServer.FileSocket=/var/run/hhvm/sock
+    hhvm --mode server -d hhvm.server.type=fastcgi -d hhvm.server.file_socket=/var/run/hhvm/sock
 
 To turn the server into a daemon, change the value of mode:
 
-    hhvm --mode daemon -vServer.Type=fastcgi -vServer.FileSocket=/var/run/hhvm/sock
+    hhvm --mode daemon -d hhvm.server.type=fastcgi -d hhvm.server.file_socket=/var/run/hhvm/sock
 
-Note, all the usual options that are accepted by hhvm runtime can be used in FastCGI mode as well. In particular, `-vAdminServer.Port=9001` will create an additional "admin" server listening on a port 9001.
+Note, all the usual options that are accepted by hhvm runtime can be used in FastCGI mode as well. In particular, `-d hhvm.admin_server.port=9001` will create an additional "admin" server listening on a port 9001.
 
 ### Making it work with Apache 2.4
 

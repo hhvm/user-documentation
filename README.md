@@ -68,7 +68,7 @@ $ cd user-documentation
 user-documentation$ hhvm /path/to/composer.phar install
 ```
 
-**NOTE**: We try to keep this entire repo typechecker clean. i.e., if you run `hh_client`, you should see `No errors!`. If you are seeing errors in `vendor/`, then first try to run `hhvm composer.phar update` or `hhvm composer update` in the repo to make sure all dependencies are up to date.
+**NOTE**: We try to keep this entire repo typechecker clean. i.e., if you run `hh_client`, you should see `No errors!`. If you are seeing errors in `vendor/`, then first try to run `hhvm composer.phar install` or `hhvm composer install` in the repo to make sure all dependencies are up to date.
 
 ### Ruby Dependencies: Bundler
 
