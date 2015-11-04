@@ -31,6 +31,7 @@ RUN cd /var && git clone --depth=1 --branch HHVM-3.10 https://github.com/faceboo
 # Copy the app into the container
 RUN rm -rf /var/www
 ADD . /var/www
+RUN cd /var/www && git clean -fdx
 
 # Configure
 ADD hhvm.prod.ini /etc/hhvm/site.ini
