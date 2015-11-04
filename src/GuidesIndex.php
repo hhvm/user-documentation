@@ -25,6 +25,24 @@ class GuidesIndex {
     return require(BuildPaths::GUIDES_SUMMARY);
   }
 
+  public static function search(string $term, SearchResultSet &$results): void {
+    $index = self::getIndex();
+    foreach ($index as $type => $value) {
+        foreach ($value as $category => $entry) {
+            foreach ($entry as $name => $filepath) {
+                if (
+                    strtolower($category) === strtolower($term) ||
+                    strpos(strtolower($category), strtolower($term)) ||
+                    strtolower($name) === strtolower($term) ||
+                    strpos(strtolower($name), strtolower($term))
+                ) {
+                    $results->addGuideResult($type, $category, $name);
+                }
+            }
+        }
+    }
+  }
+
   public static function getProducts(): ImmVector<string> {
     return self::getIndex()->keys()->toImmVector();
   }

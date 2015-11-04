@@ -1,8 +1,0 @@
-<?hh // strict
-
-namespace HHVM\UserDocumentation;
-
-abstract final class LocalConfig {
-  const string BUILD_DIR = __DIR__.'/build';
-  const string HHVM_TREE = '/home/fred/hhvm';
-}

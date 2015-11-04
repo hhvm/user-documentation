@@ -24,6 +24,17 @@ class APIIndex {
     return $index[$type];
   }
 
+  public static function search(string $term, SearchResultSet &$results): void {
+    $index = self::getIndex();
+    foreach ($index as $key => $value) {
+        foreach ($value as $name => $entry) {
+            if (strtolower($name) === strtolower($term) || strpos(strtolower($name), strtolower($term))) {
+                $results->addAPIResult($key, $name);
+            }
+        }
+    }
+  }
+
   public static function getFileForAPI(
     string $type,
     string $api,
