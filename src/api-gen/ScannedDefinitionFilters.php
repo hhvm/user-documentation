@@ -63,6 +63,9 @@ abstract final class ScannedDefinitionFilters {
     // That's long-term cleanup unlikely to be finished soon and we don't
     // want to block the doc site rewrite on it, so, for now, we have
     // this blacklist.
+    //
+    // As a meta point, WaitHandle classes should not be exposed. Awaitable
+    // is all that a user should need for async.
     $blacklist = [
       /////////////
       // Classes //
@@ -70,15 +73,27 @@ abstract final class ScannedDefinitionFilters {
 
       'AppendIterator',
       'ArrayIterator',
+      'AsyncFunctionWaitHandle',
+      'AsyncGeneratorWaitHandle',
+      'AwaitAllAwaitHandle',
       'CallbackFilterIterator',
+      'CachingIterator', // PHP class that we added type parameters on
+      'ConditionWaitHandle',
       'EmptyIterator',
+      'ExternalThreadEventWaitHandle',
       'FilterIterator',
       'Generator',
+      'GenMapWaitHandle',
+      'GenVectorWaitHandle',
+      'HH\AsyncGenerator',
+      'HH\Client\TypecheckResult',
       'HH\BuiltinEnum', // Should be __SystemLib\BuiltinEnum
+      'HH\Shapes', // Should be __SystemLib\Shapes
       'InfiniteIterator',
       'IntlIterator',
       'IteratorIterator',
       'LimitIterator',
+      'MapIterator',
       'MultipleIterator',
       'MySSLContextProvider',
       'NoRewindIterator',
@@ -93,7 +108,9 @@ abstract final class ScannedDefinitionFilters {
       'ReflectionFunctionAbstract',
       'RegexIterator',
       'ResourceBundle',
+      'ResumableWaitHandle',
       'SessionHandler',
+      'SetIterator',
       'SplDoublyLinkedList',
       'SplFixedArray',
       'SplHeap',
@@ -103,6 +120,10 @@ abstract final class ScannedDefinitionFilters {
       'SplPriorityQueue',
       'SplQueue',
       'SplStack',
+      'StaticWaitHandle',
+      'VectorIterator',
+      'WaitHandle',
+      'WaitableWaitHandle',
 
       ////////////////
       // Interfaces //
