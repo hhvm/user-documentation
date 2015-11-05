@@ -83,7 +83,7 @@ final class GuidePageController extends WebPageController {
           var thisGroup = "{$this->guide}";
           var thisProduct = "{$product}";
         </script>
-        <script type="text/babel" src="/js/SideNav.js"></script>
+        <script type="text/javascript" src="/js/SideNav.js"></script>
       </div>;
   }
 

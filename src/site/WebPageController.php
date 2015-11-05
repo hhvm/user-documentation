@@ -46,7 +46,6 @@ abstract class WebPageController extends WebController {
             />
             <script src="/js/react.min.js"></script>
             <script src="/js/react-dom.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
           </head>
           <body class={$body_class}>
             {$this->getHeader()}
