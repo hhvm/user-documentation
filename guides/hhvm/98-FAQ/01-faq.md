@@ -71,7 +71,7 @@ Other areas for discussion and support are on [#hhvm on IRC](http://webchat.free
 
 ### Should I use Proxygen or FastCGI?
 
-[Proxygen](../basic-usage/proxygen.md) is full featured, very fast webserver and generally easier to get started with out of the box. [FastCGI](../advanced-usage/fastcgi.md) is a bit more configurable, but requires a separate webserver (e.g., nginx) on the front of it.
+[Proxygen](../basic-usage/proxygen.md) is full featured, very fast web server and generally easier to get started with out of the box. [FastCGI](../advanced-usage/fastcgi.md) is a bit more configurable, but requires a separate web server (e.g., nginx) on the front of it.
 
 ### When will HHVM support Apache or Nginx?
 
