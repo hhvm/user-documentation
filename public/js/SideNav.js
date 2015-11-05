@@ -1,3 +1,12 @@
+var transEndEventName = ('WebkitTransition' in document.documentElement.style) ? 'webkitTransitionEnd' : 'transitionend';
+
+function scrollToActive() {
+  var navList = document.getElementsByClassName('navList')[0];
+  navList.scrollTop = 
+    document.getElementsByClassName('navGroupActive')[0].offsetTop - 20;
+  document.removeEventListener(transEndEventName, scrollToActive, false);
+}
+
 var DocNav = React.createClass({displayName: "DocNav",
   getInitialState: function() {
     return {
@@ -17,17 +26,18 @@ var DocNav = React.createClass({displayName: "DocNav",
       toggleActive: !this.state.toggleActive,
     });
   },
+  componentWillUpdate: function() {
+    // TODO: Replace with ReactCSSTransitionGroup
+    document.addEventListener(transEndEventName, scrollToActive, false);
+  },
   componentDidUpdate: function() {
-    var navList = document.getElementsByClassName('navList')[0];
-    navList.scrollTop = 
-      document.getElementById(this.props.currentGroup).offsetTop - 80;
     var navWrapper = document.getElementsByClassName('navWrapper')[0];
     navWrapper.dataset.active = this.state.toggleActive;
   },
   componentDidMount: function() {
     var navList = document.getElementsByClassName('navList')[0];
-    navList.scrollTop = 
-      document.getElementById(this.props.currentGroup).offsetTop - 80;
+    var activeGroup = document.getElementsByClassName('navGroupActive')[0];
+    navList.scrollTop = activeGroup.offsetTop - 20;
   },
   render: function() {
     var navChildren = [];

@@ -367,6 +367,10 @@ h4 {
   margin-bottom: 30px;
 }
 
+.navList {
+  position: relative;
+}
+
 .navWrapper .navList .subListItem h5 a {
   color: #505050;
   font-weight: 400;
@@ -410,11 +414,15 @@ h4 {
   height: 0;
   left: -12px;
   position: absolute;
-  top: 0px;
+  top: 8px;
   -webkit-transition: border-color 0.5s;
   -moz-transition: border-color 0.5s;
   transition: border-color 0.5s;
   width: 0;
+}
+
+.apiNavList .subListItem h5::before {
+  top: 0;
 }
 
 .subListItem:hover h5::before {
@@ -544,11 +552,15 @@ h4 {
     font-size: 60%;
   }
 
-  .apiList {
+  .apiList, .navWrapper .navLoader .navList {
     display: block;
   }
 
-  .apiList li {
+  .navToggletrue .navList {
+    display: block;
+  }
+
+  .apiList li, .navWrapper .navLoader .navList li {
     width: 100%;
   }
 
@@ -557,8 +569,16 @@ h4 {
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 1020px) {
-  .apiList li {
+  .navWrapper .navLoader .navList {
+    display: flex;
+  }
+
+  .apiList li, .navWrapper .navLoader .navList li {
     width: 50%;
+  }
+
+  .navToggletrue .navList {
+    display: flex;
   }
 }
 @media only screen and (max-width: 1020px) {
@@ -580,28 +600,25 @@ h4 {
   .navWrapper {
     background: none;
     box-sizing: border-box;
-    height: 0%;
-    left: 0px;
+    height: 60px;
     overflow-x: hidden;
     position: fixed;
+    right: 0;
     top: 0;
     -webkit-transition: height 0.3s;
     -moz-transition: height 0.3s;
     transition: height 0.3s;
-    width: 100%;
+    width: 60px;
     z-index: 999;
   }
   .navWrapper[data-active="true"] {
     height: 100%;
+    left: 0px;
     padding-top: 60px;
+    width: 100%;
   }
   .navWrapper .navTogglefalse .navList {
     display: none;
-    opacity: 0;
-  }
-  .navWrapper .navToggletrue .navList {
-    display: flex;
-    opacity: 1;
   }
   .navWrapper .toggleNav {
     color: #505050;
@@ -700,6 +717,10 @@ h4 {
   }
 
   .subListItem h5::before {
+    top: 12px;
+  }
+
+  .apiNavList .subListItem h5::before {
     top: 10px;
   }
 
