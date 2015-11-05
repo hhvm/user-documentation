@@ -73,7 +73,7 @@ There are valid uses for `mixed`, but generally you want to be as specific as po
 
 ## `this`
 
-`this` means that a class method returns an object of the same class as the calling method. You can use it to return an instance of an object from a `static` class method where you are returning something lke `new static()`.
+`this` means that a class method returns an object of the same class as the calling method. You can use it to return an instance of an object from a `static` class method where you are returning something like `new static()`.
 
 @@ type-system-examples/this.php @@
 

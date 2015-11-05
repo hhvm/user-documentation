@@ -48,6 +48,6 @@ However, you can use simple casting to convert a member value of an enum to its 
 
 ### Implicit Casting
 
-By using the `as` constraint operator, you can make it so casting to the underlying type is implict.
+By using the `as` constraint operator, you can make it so casting to the underlying type is implicit.
 
 @@ intro-examples/implicit-casting.php @@

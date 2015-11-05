@@ -25,6 +25,6 @@ PHP provides the keyword `use` to capture variables from the enclosing scope. Ha
 
 @@ intro-examples/capture-variables.php @@
 
-Notice in `addLastName()` we are using the passed in parameter `$lastname` directly wihtin the lambda whereas in `addLastNameTraditional`, the parameter `$lastName` must be explictly captured and called out in a `use`.
+Notice in `addLastName()` we are using the passed in parameter `$lastname` directly within the lambda whereas in `addLastNameTraditional`, the parameter `$lastName` must be explicitly captured and called out in a `use`.
 
 **NOTE**: All captured variables are captured by value; capturing by reference is *not supported*. 

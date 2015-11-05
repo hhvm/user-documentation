@@ -27,7 +27,7 @@ Here are the types allowed for attributes. Note if there is a problem with using
 * Hack [enum](../enums/intro.md) names, checked by [`Enum::isValid()`](../enums/functions.md) at runtime.
 * Custom enums inline with the attribute in the form of `enum {item, item...}`. All values must be scalar so they can be converted to strings. These enums are not Hack enums.
 * Class or interface names, checked by `instanceof()`. 
-* [Generic](../generics/intro.md) types, with type arguements, although they are not enforced at runtime.
+* [Generic](../generics/intro.md) types, with type arguments, although they are not enforced at runtime.
 
 You access an attribute within code just like a normal Hack property, but prefixed with a colon `:`. 
 
@@ -83,7 +83,7 @@ The `XHPHelpers` trait implements three behaviors:
 
 * Transferring attributes from one object to the object returned from its `render()` method.
 * Giving each object a unique `id` attribute.
-* Manging the `class` attribute.
+* Managing the `class` attribute.
 
 ### Attribute Transfer
 

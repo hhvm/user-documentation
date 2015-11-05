@@ -1,6 +1,6 @@
 # Async General Guidelines
 
-It might be tempting to just throw `async`, `await` and `Awaitable` on all your code and go on with your life. And while it is ok to have more `async` functions than not -- in fact, you should generally not be afraid to make a function `async` since there is no performance penalty for doing so -- there are some guidelines you should follow in order to make the most efficient use of `async`.
+It might be tempting to just throw `async`, `await` and `Awaitable` on all your code and go on with your life. And while it is OK to have more `async` functions than not -- in fact, you should generally not be afraid to make a function `async` since there is no performance penalty for doing so -- there are some guidelines you should follow in order to make the most efficient use of `async`.
 
 ## Be liberal, but careful, with async
 
@@ -75,7 +75,7 @@ In the example above, we reduce the number of roundtrips to the server containin
 
 The `await HH\Asio\later()` in `Batcher::go()` basically allows `Batcher::go()` to be deferred until other pending awaitables have run.
 
-So, `await HH\Asio\v(array(b_one..., b_two...));` has two pending awaitables. If `b_one()` is called first, it calls `Batcher::lookup()`, which calls `Batcher::go()`, which reschdules via `later()`. Then HHVM looks for other pending awaitables. `b_two()` is also pending. It calles `Batcher::lookup()` and then it gets suspended via `await self::$aw` because `Batcher::$aw` is not `null` any longer. Now `Batcher::go()` resumes, fetches and returns the result.
+So, `await HH\Asio\v(array(b_one..., b_two...));` has two pending awaitables. If `b_one()` is called first, it calls `Batcher::lookup()`, which calls `Batcher::go()`, which reschedules via `later()`. Then HHVM looks for other pending awaitables. `b_two()` is also pending. It calls `Batcher::lookup()` and then it gets suspended via `await self::$aw` because `Batcher::$aw` is not `null` any longer. Now `Batcher::go()` resumes, fetches and returns the result.
 
 ## Don't forget to await an awaitable
 

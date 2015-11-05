@@ -52,7 +52,7 @@ There are seven collections in Hack:
 
 Type | Description
 -----|------------
-**Vector** | Mutable, `int`eger-indexed, ordered sequence of values. Values can be of any type. The indecies start at `0` and end at `n-1`, where `n` is the number of elements.
+**Vector** | Mutable, `int`eger-indexed, ordered sequence of values. Values can be of any type. The indicies start at `0` and end at `n-1`, where `n` is the number of elements.
 **ImmVector** | A immutable version of `Vector`. Once the `ImmVector` is created, elements cannot be changed, removed or added.
 **Map** | Mutable, `string` or `int`eger-indexed, ordered sequence of values. Values can be of any type. Order is remembered. This is most similar to the `array` in usage.
 **ImmMap** | A immutable version of `Map`. Once the `ImmMap` is created, elements cannot be changed, removed or added.

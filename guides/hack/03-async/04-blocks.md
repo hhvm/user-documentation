@@ -11,7 +11,7 @@ The syntax for an async block is:
 ```
 async {
   // grouped together calls, usually await.
-  < satements >
+  < statements >
 }
 ```
 
