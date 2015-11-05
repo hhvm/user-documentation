@@ -1,6 +1,6 @@
 # Collection Semantics
 
-In general, Hack collections should be your first choice when deciding between them and arrays for new code. They provide the readability, performance and type-checkablity needed, without sacrificing much in terms of flexibility.
+In general, Hack collections should be your first choice when deciding between them and arrays for new code. They provide the readability, performance and type-checkability needed, without sacrificing much in terms of flexibility.
 
 That said, there is one key area where you must be cognizant of the differences between collections and arrays.
 
