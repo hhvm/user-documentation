@@ -11,7 +11,7 @@ The infrastructure you need to run code with HHVM is pretty simple:
 
 HHVM includes a highly functional and performant web server called [Proxygen](../deployment/hhvm-servers#proxygen) that is available by default out-of-the-box, so no installation of a third-party web server like `nginx` is required. However, if you are migrating to HHVM from a PHP runtime engine, and you were already using `nginx` or `apache`, perhaps with FastCGI, there are [detailed instructions](../deployment/hhvm-servers#fastcgi) on getting those configurations set up as well.
 
-For simplicity, this overview will talk only about Proxygen (since it is built-in to HHVM). When a user makes a request for a PHP script on your server, Proxygen will proxy the request to HHVM, which will process the request and return a response via Proxygen to the original client, just as a [`php-fpm`](http://php-fpm.org/) configuration would work with other web servers.
+For simplicity, this overview will talk only about Proxygen (since it is built-in to HHVM). When a user makes a request for a PHP script on your server, Proxygen will serve the request to HHVM, which will process the request and return a response via Proxygen to the original client, just as a [`php-fpm`](http://php-fpm.org/) configuration would work with other web servers.
 
 For this setup, although various flavors of Debian and Ubuntu are supported with [official packages](../installation/intro.md#prebuilt-packages), the most recent [Ubuntu LTS](../installation/linux.md#obtaining-lts-releases) and the most recent [Ubuntu stable release](../installation/linux.md#ubuntu-15.04-vivid) are likely to be the *best* supported and easiest to install.
 
