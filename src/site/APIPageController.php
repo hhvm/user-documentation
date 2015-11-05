@@ -41,64 +41,20 @@ final class APIPageController extends WebPageController {
   }
   
   protected function getSideNav(): XHPRoot {
-    $type = (string) $this->getType();
-    $title = ucwords($type.' Reference');    
-    $apis = APIIndex::getReferenceForType($type);
-    $sub_list = <ul class="subList" />;
-    $parent_type_url = sprintf(
-      "/hack/reference/%s/",
-      $type,
-    );
-    
-    foreach ($apis as $api => $page) {
-      $item_url = sprintf(
-        "/hack/reference/%s/%s/",
-        $type,
-        $api,
-      );
-
-      $sub_list_item =
-        <li class="subListItem">
-          <h5 id={$api}>
-            <a href={$item_url}>
-              {str_replace('.', '\\', $api)}
-            </a>
-          </h5>
-        </li>;
-          
-      if ($this->api === $api) {
-        $sub_list_item->addClass("itemActive");
-      }
-      
-      $sub_list->appendChild($sub_list_item);
-    }
-    
-    $type_list = <x:frag />;
-    
-    foreach (APIType::getValues() as $api_type) {    
-      $type_url = sprintf(
-        "/hack/reference/%s/",
-        $api_type,
-      );
-      $type_title = ucwords($api_type.' Reference');    
-      if ($api_type !== $type) {
-        $type_list->appendChild(
-          <li><h4><a href={$type_url}>{$type_title}</a></h4></li>
-        );
-      }
-    }
-
-    return
+    $type = $this->getType();
+    $guides = APIIndex::getIndex();
+    return 
       <div class="navWrapper guideNav">
-        <ul class="navList apiNavList">
-          <li>
-            <h4><a href={$parent_type_url}>{$title}</a></h4>
-            {$sub_list}
-          </li>
-          {$type_list}
-        </ul>
+        <div class="navLoader"></div>
+        <script>
+          var docnavData = {json_encode($guides)};
+          var currentMethod = "{$this->method}";
+          var currentAPI = "{$this->api}";
+          var currentType = "{$type}";
+          var baseRefURL = "/hack/reference";
+        </script>
+        <script type="text/babel" src="/js/APISideNav.js"></script>
       </div>;
-    return <x:frag />;
   }
   
   protected function getInnerContent(): XHPRoot {

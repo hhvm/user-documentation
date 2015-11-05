@@ -40,6 +40,13 @@ abstract class WebPageController extends WebController {
              type="text/css" 
              href="//cdn.jsdelivr.net/font-hack/2.015/css/hack-extended.min.css"
             />
+            <link 
+              rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
+            />
+            <script src="/js/react.min.js"></script>
+            <script src="/js/react-dom.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
           </head>
           <body class={$body_class}>
             {$this->getHeader()}

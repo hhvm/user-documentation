@@ -7,8 +7,12 @@ LocalConfig.php
 *.php.out
 *.php.type-errors.diff
 *.php.type-errors.out
+*.css.map
 /build/
 /public/www.pid
+.sass-cache/
+bourbon/
+/scss/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

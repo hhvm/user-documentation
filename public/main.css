@@ -1,10 +1,78 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+@-ms-viewport {
+  width: device-width;
+}
+@viewport {
+  width: device-width;
+}
+@media (max-width: 400px) {
+  @-ms-viewport {
+    width: 320px;
+  }
+}
+/* http://meyerweb.com/eric/tools/css/reset/
+ * v2.0 | 20110126
+ * License: none (public domain) */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
 
 body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+/** Fonts **/
+/* Colors */
+body {
   background: #ffffff;
-  color:#505050;
+  color: #505050;
   font: 500 14px/26px "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
-  text-rendering:optimizeLegibility;
+  text-rendering: optimizeLegibility;
   word-wrap: break-word;
 }
 
@@ -19,7 +87,7 @@ a {
 }
 
 h1, h2, h3, h4 {
-  font-family: "Knockout 31 A", "Knockout 31 B", Arial, Helvetica, sans-serif;
+  font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
   font-weight: 400;
   line-height: 1.3em;
 }
@@ -56,7 +124,7 @@ h4 {
   height: 60px;
   position: fixed;
   width: 100%;
-  z-index: 9999;
+  z-index: 999;
 }
 
 .header .widthWrapper {
@@ -177,7 +245,7 @@ h4 {
 }
 
 .headerTypehhvm .hackLogo {
-  left: 110px;
+  left: 130px;
 }
 
 .bodyClassHack .hhvmLogo, .bodyClassHhvm .hackLogo {
@@ -192,7 +260,7 @@ h4 {
 .headerLogo a {
   color: white;
   display: block;
-  font-family: "Knockout 31 A", "Knockout 31 B", 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
   font-size: 25px;
   font-weight: 400;
   height: 100%;
@@ -205,7 +273,7 @@ h4 {
   display: block;
   height: 40px;
   left: 0;
-  position: absolute; 
+  position: absolute;
   top: 10px;
   width: 40px;
 }
@@ -273,6 +341,9 @@ h4 {
   box-sizing: border-box;
   order: 1;
 }
+.navWrapper .navLoader, .navWrapper .navToggle {
+  height: 100%;
+}
 
 .navWrapper h3 {
   font-size: 19px;
@@ -288,6 +359,9 @@ h4 {
   margin-bottom: 10px;
   text-transform: uppercase;
 }
+.navWrapper .navList li h4 a {
+  color: #fd8724;
+}
 
 .navWrapper .subList {
   margin-bottom: 30px;
@@ -296,10 +370,12 @@ h4 {
 .navWrapper .navList .subListItem h5 a {
   color: #505050;
   font-weight: 400;
+  text-transform: capitalize;
 }
 
 .navWrapper .navList.apiNavList .subListItem h5 {
-  margin-bottom: -5px;
+  line-height: 0.7em;
+  margin-bottom: 15px;
 }
 
 .navWrapper .navList.apiNavList .subListItem h5 a {
@@ -309,11 +385,24 @@ h4 {
   word-wrap: break-word;
 }
 
-.navWrapper .navList .subListItem {
+.navWrapper .navList.apiNavList .subMethodListItem h6 {
+  line-height: 0.7em;
+  margin-bottom: 15px;
+  padding-left: 15px;
+}
+
+.navWrapper .navList.apiNavList .subMethodListItem h6 a {
+  font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  word-wrap: break-word;
+}
+
+.navWrapper .navList .subListItem h5 {
   position: relative;
 }
 
-.subListItem::before {
+.subListItem h5::before {
   border-color: transparent transparent transparent transparent;
   border-style: solid;
   border-width: 5px 0 5px 8.7px;
@@ -321,21 +410,46 @@ h4 {
   height: 0;
   left: -12px;
   position: absolute;
-  top: 8px;
+  top: 0px;
+  -webkit-transition: border-color 0.5s;
+  -moz-transition: border-color 0.5s;
   transition: border-color 0.5s;
   width: 0;
 }
 
-.subListItem:hover::before {
+.subListItem:hover h5::before {
   border-color: transparent transparent transparent #505050;
 }
 
-.navWrapper .navList .subListItem.itemActive h5 a {
+.navWrapper .navList .subListItem.itemActive h5 a,
+.navWrapper .navList .subMethodListItem.methodActive h6 a {
   font-weight: 700;
 }
 
-.subListItem.itemActive::before {
+.navWrapper .navList .subMethodListItem.methodActive h6 a {
+  color: #303030;
+}
+
+.subListItem.itemActive h5::before {
   border-color: transparent transparent transparent #fd8724;
+}
+
+.subMethodList {
+  display: none;
+}
+.itemActive .subMethodList {
+  display: block;
+}
+
+.apiNavType .subList {
+  display: none;
+}
+.apiNavType.apiNavTypeActive .subList {
+  display: block;
+}
+
+.innerContent img {
+  max-width: 100%;
 }
 
 .innerContent ul {
@@ -415,6 +529,8 @@ h4 {
   left: 0px;
   position: absolute;
   top: 5px;
+  -webkit-transition: border-color 0.5s;
+  -moz-transition: border-color 0.5s;
   transition: border-color 0.5s;
   width: 0;
 }
@@ -439,46 +555,82 @@ h4 {
   .breadcrumbNav {
     line-height: 1.6em;
   }
-} 
-
+}
 @media only screen and (min-width: 480px) and (max-width: 1020px) {
   .apiList li {
     width: 50%;
   }
 }
-
 @media only screen and (max-width: 1020px) {
   body {
     display: flex;
     flex-flow: column wrap;
     font-size: 15px;
   }
-  
+
   .flexWrapper {
     display: block;
   }
-  
+
   .mainContainer {
     width: 100%;
     overflow-x: hidden;
   }
-  
+
   .navWrapper {
-    margin-right: 0;
-    margin-top: 50px;
-    position: relative;
+    background: none;
+    box-sizing: border-box;
+    height: 0%;
+    left: 0px;
     overflow-x: hidden;
+    position: fixed;
+    top: 0;
+    -webkit-transition: height 0.3s;
+    -moz-transition: height 0.3s;
+    transition: height 0.3s;
     width: 100%;
+    z-index: 999;
   }
-  
+  .navWrapper[data-active="true"] {
+    height: 100%;
+    padding-top: 60px;
+  }
+  .navWrapper .navTogglefalse .navList {
+    display: none;
+    opacity: 0;
+  }
+  .navWrapper .navToggletrue .navList {
+    display: flex;
+    opacity: 1;
+  }
+  .navWrapper .toggleNav {
+    color: #505050;
+    cursor: pointer;
+    font-size: 24px;
+    line-height: 60px;
+    position: fixed;
+    top: 0;
+    right: 15px;
+    z-index: 9999;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
+  }
+  .navWrapper .toggleNav.toggleNavtrue {
+    color: white;
+  }
   .navWrapper .navList {
+    align-items: stretch;
+    background: #f8f8f8;
+    box-sizing: border-box;
     display: flex;
     flex-flow: row wrap;
-    align-items: stretch;
+    height: 100%;
+    overflow-y: scroll;
     padding: 10px;
     width: 100%;
   }
-  
+
   .navWrapper .navList > li {
     box-sizing: border-box;
     flex: 1;
@@ -488,12 +640,11 @@ h4 {
     padding: 10px;
     width: 50%;
   }
-  
+
   .widthWrapper {
     margin: 0 10px;
-  } 
-} 
-
+  }
+}
 @media only screen and (min-width: 1020px) {
   .navWrapper {
     height: 100vh;
@@ -503,36 +654,37 @@ h4 {
     left: 0px;
     top: 0px;
     width: 300px;
-    z-index: 999;
+    z-index: 99;
   }
-  
+  .navWrapper .toggleNav {
+    display: none;
+  }
+
   .navWrapper + .mainContainer {
     margin-left: 300px;
   }
-  
+
   .navWrapper h3 {
     font-size: 19px;
   }
-  
-  .navWrapper > .navList {
+
+  .navWrapper .navList, .navWrapper .navToggle > .navList {
     box-sizing: border-box;
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     padding: 20px 30px;
   }
-}
 
+  .navList.apiNavList .subListItem h5::before {
+    top: 0px;
+  }
+}
 @media only screen and (min-width: 1200px) {
   body {
     font-size: 15px;
   }
-
-  .navList.apiNavList .subListItem::before {
-    top: 9px;
-  }
 }
-
 @media only screen and (min-width: 1400px) {
   body {
     font-size: 18px;
@@ -542,17 +694,18 @@ h4 {
   .mainTitle .widthWrapper {
     max-width: 1200px;
   }
-  
+
   .mainWrapper {
     max-width: 1200px;
   }
 
-  .subListItem::before {
+  .subListItem h5::before {
     top: 10px;
   }
 
-  .navList.apiNavList .subListItem::before {
-    top: 13px;
+  .navList.apiNavList .subListItem h5::before {
+    top: 2px;
   }
 }
 
+/*# sourceMappingURL=main.css.map */
