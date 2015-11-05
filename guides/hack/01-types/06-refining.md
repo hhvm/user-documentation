@@ -12,7 +12,7 @@ There is also a special function:
 
 - `invariant(<bool expression of fact>, "Message if not")`
 
-that can be used outside control-flow situation. It is essentially an assert to the typecheker that what you claim in the boolean statement is fact and true.
+that can be used outside control-flow situation. It is essentially an assert to the typechecker that what you claim in the boolean statement is fact and true.
 
 In any of the refining scenarios below, you can use `invariant()` as opposed to the conditional check.
 

@@ -5,7 +5,7 @@ Async can be used effectively with the built-in infrastructure in HHVM. This inf
 * `async`, `await`, `Awaitable`
 * `HH\Asio\v()`, `HH\Asio\m()`
 
-However, there are cases when you want to convert some collection of values to awaitables or you want to filter some awaitables out of a collection of awaiables. These type of scenarios come up when you are creating multiple awaitables to await in parallel. 
+However, there are cases when you want to convert some collection of values to awaitables or you want to filter some awaitables out of a collection of awaitables. These type of scenarios come up when you are creating multiple awaitables to await in parallel. 
 
 You can use functions like `array_filter()`, or the methods on the Hack collection classes, etc. to do this mapping and filtering. But there exists a whole collection of concise and simply named utility functions that will make your code more streamlined. 
 
@@ -89,7 +89,7 @@ That is because `HH\Asio\v()` takes an `Traversable<Awaitable<T>>` and return an
 
 However, when you want to return the `tuple($a, $b)`, `$a` is an `X`, `b` is an `int`, but the type-checker doesn't realize that since it thinks these should be the hybrid union type it created above.
 
-So we need to explictly assert what we know to be true in order to make the type checker happy.
+So we need to explicitly assert what we know to be true in order to make the type checker happy.
 
 ```
 assert ($a instanceof X);

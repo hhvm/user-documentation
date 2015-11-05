@@ -6,7 +6,7 @@ XHP is a syntax to create actual Hack objects, called XHP objects. They are mean
 
 * you can call methods on XHP objects
 * you can call the `is_xxx` methods on them (e.g. `is_object()`).
-* they are instances of XHP clases, with names starting with `:` and all are children of `:xhp`.
+* they are instances of XHP classes, with names starting with `:` and all are children of `:xhp`.
 
 You create the XHP objects with XHP tags instead of `new`.
 

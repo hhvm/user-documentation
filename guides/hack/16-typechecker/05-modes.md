@@ -34,7 +34,7 @@ means that the typechecker is checking everything. If at all possible, start new
 -- From strict mode, you *can* call into Hack code in partial and decl mode.
 - The only code allowed at the top-level are `require`, `require_once`, `include`, `include_once`, `namespace`, `use`, and statements that define classes, functions, constants (e.g., using `const`), etc.
 - No by-reference `&` anywhere.
-- No accessing super globals.
+- No accessing superglobals.
 
 Strict is actually the mode you want to strive to. The entire typechecker goodness is at your disposal and should ensure zero runtime type errors.
 
