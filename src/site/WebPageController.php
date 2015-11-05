@@ -44,8 +44,8 @@ abstract class WebPageController extends WebController {
               rel="stylesheet"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
             />
-            <script src="/js/react.min.js"></script>
-            <script src="/js/react-dom.min.js"></script>
+            <script src="https://fb.me/react-0.14.2.min.js"></script>
+            <script src="https://fb.me/react-dom-0.14.2.min.js"></script>
           </head>
           <body class={$body_class}>
             {$this->getHeader()}
