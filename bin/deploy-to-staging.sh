@@ -34,7 +34,7 @@ echo "** About to deploy to $STAGING_ENV (eb deploy $STAGING_ENV -m \"$DEPLOY_ME
 
 eb status $STAGING_ENV
 
-DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV) ($IMAGE_TAG)"
+DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
 echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
 echo "** Press enter to continue, or hit Ctrl-C to cancel"
 read _
