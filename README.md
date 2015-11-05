@@ -184,7 +184,7 @@ user-documentation/public$ hhvm -m server \
 4. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
 
    ```
-   $ bin/deploy.sh
+   $ bin/deploy-to-staging.sh
    ```
 
    **NOTE**: This is first step you will need to do for future pushes from the same checkout.
