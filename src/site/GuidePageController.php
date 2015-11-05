@@ -24,7 +24,7 @@ final class GuidePageController extends WebPageController {
     // If there is only one page in a guide, only print the guide name.
     $ret = strcasecmp($this->guide, $this->page) === 0 ||
            count(GuidesIndex::getPages($this->getProduct(), $this->guide)) === 1
-         ? ucwords($this->guide)
+         ? ucwords(strtr($this->guide, '-', ' '))
          : ucwords(strtr($this->guide.': '.$this->page, '-', ' '));
     return $ret;
   }

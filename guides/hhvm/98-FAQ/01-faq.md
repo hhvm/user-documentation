@@ -30,7 +30,7 @@ Facebook's entire site runs on HHVM (desktop, api and mobile), both in developme
 
 ### How do I install HHVM? Where are the binaries?
 
-New users may want to try our high-level overview [quickstart guide](../../quickstart.md).
+New users may want to try our high-level overview [getting started guide](../getting-started/getting-started.md).
 
 You can find more detailed installation information [here](../installation/intro.md)
 

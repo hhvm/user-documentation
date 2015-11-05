@@ -1,6 +1,6 @@
-# Quickstart to HHVM
+# Getting Started with HHVM
 
-If you are new to HHVM, this quickstart guide should help get you up an running quickly. Of course, as this is meant to be a quickstart, not every detail will be provided here. The main [HHVM user guide](..) will be your resource for full information.
+If you are new to HHVM, this getting started guide should help get you up an running quickly. Of course, as this is meant to be a getting started, not every detail will be provided here. The main [HHVM user guide](..) will be your resource for full information.
 
 ## Overview
 
@@ -76,12 +76,12 @@ One notable option for new users is `hhvm.log.file` in `server.ini`, which contr
 
 ## Running Hack files
 
-HHVM runs both PHP and [Hack](../../guides/hack/quickstart/quickstart.md). Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack). We created a simple Hack program above when testing HHVM. 
+HHVM runs both PHP and [Hack](../../guides/hack/getting-started/getting-started.md). Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack). We created a simple Hack program above when testing HHVM. 
 
 To test and run a Hack file, make sure you are [running the `hh_client` typechecker](../../guides/hack/typechecker/intro.md) otherwise you'll be missing out on a lot of your type errors in your Hack code. The simplest way to make a PHP program a Hack program is to simply change the prolog of the file to `<?hh` to indicate it's Hack. Then you can immediately start benefiting from these features.
 
 ## Learning Hack and PHP
 
-Learning to program in PHP or Hack is beyond the scope of this guide. The best resource for doing so is the [official Hack documentation](../../guides/hack/quickstart.md) and we highly recommend the [O'Reilly book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team at Facebook. Hack has an [online interactive tutorial](http://hacklang.org/tutorial/) as well.
+Learning to program in PHP or Hack is beyond the scope of this guide. The best resource for doing so is the [official Hack documentation](../../guides/hack/getting-started/getting-started.md) and we highly recommend the [O'Reilly book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team at Facebook. Hack has an [online interactive tutorial](http://hacklang.org/tutorial/) as well.
 
 For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online.

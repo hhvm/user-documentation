@@ -1,10 +1,12 @@
-If you are new to Hack, this quickstart guide should help you get familiar with the basics quickly; afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
+# Getting Started with Hack
+
+If you are new to Hack, this getting started guide should help you get familiar with the basics quickly; afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
 
 ## Overview
 
 The prerequisites you need to write and execute Hack code is pretty straightforward:
 
-* The [HHVM runtime](../../hhvm/quickstart/quickstart.md)
+* The [HHVM runtime](../../hhvm/getting-started/getting-started.md)
 * The Hack [typechecker](../typechecker/intro.md) (included as part of the build of the HHVM runtime)
 * Optionally, a Hack-aware editor. We recommend [Nuclide](https://github.com/facebook/nuclide), with its [`nuclide-hack` package](https://github.com/facebook/nuclide/blob/master/pkg/nuclide/hack/README.md).
 
@@ -20,7 +22,7 @@ Let's dive right in and create your first Hack program in five simple steps.
 
 ### 1. Install HHVM and the Typechecker
 
-Check out the [HHVM quickstart guide](../../hhvm/quickstart/quickstart.md) on how to install HHVM. 
+Check out the [HHVM getting started guide](../../hhvm/getting-started/getting-started.md) on how to install HHVM. 
 
 After you install HHVM, the Hack typechecker will be available to you to statically check your code before you run it. It is *not* a compiler; but rather a super-fast code analyzer that tries to catch dynamic programming errors before code is run instead of during or after.
 
@@ -34,9 +36,9 @@ Choose a directory where you want to store your Hack code. In this directory, ru
 
 Using the editor of your choice (e.g., Nuclide, vim, Sublime Text), let's create a file called `first.php` with the following code:
 
-@@ quickstart-examples/first.php @@
+@@ getting-started-examples/first.php @@
 
-This quickstart assumes some knowledge of programming (e.g., what a class is, what a function or method is, etc.). If you are familiar with [PHP](http://php.net), Hack has a similar look and feel. If you are not familiar with PHP, then all of this is new, but hopefully the generally constructs are familiar to you. The comments provide various details, but here are the key points:
+This getting started guide assumes some knowledge of programming (e.g., what a class is, what a function or method is, etc.). If you are familiar with [PHP](http://php.net), Hack has a similar look and feel. If you are not familiar with PHP, then all of this is new, but hopefully the generally constructs are familiar to you. The comments provide various details, but here are the key points:
 
 * This example created a class, methods on the class, and a standalone function.
 * [Type annotations](../types/annotations.md) were used on class properties, method parameters and returns from functions and methods.
@@ -90,7 +92,7 @@ Now that you have gotten your feet wet with a simple Hack program, it's time to 
 * [Async](../async/intro.md)
 * [Collections](../collections/intro.md)
 
-Of course, there are [plenty of others](http://docs.hhvm.com/hack), but since this a quickstart guide, we will not go into detail here. The [documentation](http://docs.hhvm.com/hack) will give you deep information about each one.
+Of course, there are [plenty of others](http://docs.hhvm.com/hack), but since this a getting started guide, we will not go into detail here. The [documentation](http://docs.hhvm.com/hack) will give you deep information about each one.
 
 ## Converting Existing PHP Code
 
