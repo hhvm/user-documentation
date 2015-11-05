@@ -9,9 +9,9 @@ The infrastructure you need to run code with HHVM is pretty simple:
 * HHVM itself
 * Some Hack or PHP code
 
-HHVM includes a highly functional and performant web server called [Proxygen](../deployment/hhvm-servers#proxygen) that is availble by default out-of-the-box, so no installation of a third-party web server like `nginx` is required. However, if you are migrating to HHVM from a PHP runtime engine, and you were already using `nginx` or `apache`, perhaps with FastCGI, there are [detailed instructions](../deployment/hhvm-servers#fastcgi) on getting those configurations set up as well.
+HHVM includes a highly functional and performant web server called [Proxygen](../deployment/hhvm-servers#proxygen) that is available by default out-of-the-box, so no installation of a third-party web server like `nginx` is required. However, if you are migrating to HHVM from a PHP runtime engine, and you were already using `nginx` or `apache`, perhaps with FastCGI, there are [detailed instructions](../deployment/hhvm-servers#fastcgi) on getting those configurations set up as well.
 
-For simplicity this overview will talk only about Proxygen (since it is built-in to HHVM). When a user makes a request for a PHP script on your server, Proxygen will proxy the request to HHVM, which will process the request and return a response via Proxygen to the original client, just as a `php-fpm` configuration would work with other web servers.
+For simplicity, this overview will talk only about Proxygen (since it is built-in to HHVM). When a user makes a request for a PHP script on your server, Proxygen will proxy the request to HHVM, which will process the request and return a response via Proxygen to the original client, just as a [`php-fpm`](http://php-fpm.org/) configuration would work with other web servers.
 
 For this setup, although various flavors of Debian and Ubuntu are supported with [official packages](../installation/intro.md#prebuilt-packages), the most recent [Ubuntu LTS](../installation/linux.md#obtaining-lts-releases) and the most recent [Ubuntu stable release](../installation/linux.md#ubuntu-15.04-vivid) are likely to be the *best* supported and easiest to install.
 
@@ -33,11 +33,11 @@ If you want the latest [LTS (long term support)](../installation/intro.md#lts-re
 sudo apt-get-repository 'deb http://dl.hhvm.com/ubuntu-lts-3.9 vivid main'
 ```
 
-Generally, the `hhvm` executable will available in `/usr/bin`, and that will be in your `$PATH`, so following installation, you should be able to type `hhvm` to run HHVM at the command-line. But different distros may use different paths, so prior to proceeding verify the installation location of `hhvm`.
+Generally, the `hhvm` executable will be available in `/usr/bin`, and that will be in your `$PATH`, so, following installation, you should be able to type `hhvm` to run HHVM at the command-line. But different distros may use different paths, so, prior to proceeding, verify the installation location of `hhvm`.
 
 It is of course possible to [build HHVM from source](../installation/intro.md), but you will sacrifice things like the `init` script and automatic updates via `apt-get`. For this reason, building from source isn't recommended until you get a basic install working and have a better feel for what you're doing.
 
-Installing HHVM will start it up, but it won't be configured to start at upon reboot. To have HHVM start automatically when your system does, use `sudo update-rc.d hhvm defaults`.
+Installing HHVM will start it up, but it won't be configured to start upon reboot. To have HHVM start automatically when your system does, use `sudo update-rc.d hhvm defaults`.
 
 ## Test HHVM
 
@@ -53,14 +53,14 @@ hhvm -m server -p 8080
 
 Additional configuration items are passed in with `-d` entries. More details are in [the basic usage guide](../basic-usage/server.md).
 
-For example, above. HHVM will use [Proxygen](../basic-usage/proxygen.md) as the default server type. If other web servers are being used in front of HHVM running in FastCGI mode, you would specify the server type accordingly: `-d hhvm.server.type=fastcgi`.
+For example our simple startup sequence above, HHVM will use [Proxygen](../basic-usage/proxygen.md) as the default server type. However, if other web servers are being used in front of HHVM running in FastCGI mode, you would specify the server type accordingly: `-d hhvm.server.type=fastcgi`.
 
-You can also choose any source root as the directory where the server finds PHP (`<?php`) or Hack (`<?hh`) files and other web assets. The default directory for Proxygen is the current directory where the `hhvm` process was launched, but generally you will want to give it an explicit value to your web root with an option like `-d hhvm.server.source_root=/var/www/public`.
+You can also choose any source root as the directory where the server finds PHP (`<?php`) or Hack (`<?hh`) files and other web assets. The default directory for Proxygen is the *current directory* where the `hhvm` process was launched. Generally, however, you will want to give it an explicit value to your web root with an option like `-d hhvm.server.source_root=/var/www/public`.
 
 Once you have HHVM running, write a simple "Hello World" program named `hello.php`:
 
 ```
-<?php
+<?hh
 echo "Hello World!";
 ```
 
@@ -76,9 +76,9 @@ One notable option for new users is `hhvm.log.file` in `server.ini`, which contr
 
 ## Running Hack files
 
-We created a standard PHP file above. But HHVM equally easily allows you to run Hack code. Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous additional language features.
+HHVM runs both PHP and [Hack](../../guides/hack/quickstart/quickstart.md). Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack). We created a simple Hack program above when testing HHVM. 
 
-To test and run a Hack file, make sure you are [running the `hh_client` typechecker](../../guides/hack/typechecker/intro.md) otherwise you'll be missing out on a lot of your type errors in your Hack code - and simply change the prolog of the file above to `<?hh` to indicate it's Hack and start benefitting from these features.
+To test and run a Hack file, make sure you are [running the `hh_client` typechecker](../../guides/hack/typechecker/intro.md) otherwise you'll be missing out on a lot of your type errors in your Hack code. The simplest way to make a PHP program a Hack program is to simply change the prolog of the file to `<?hh` to indicate it's Hack. Then you can immediately start benefiting from these features.
 
 ## Learning Hack and PHP
 
