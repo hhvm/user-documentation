@@ -45,6 +45,31 @@ final class MergedDataBuilder {
     }
 
     $value = $new[$key];
+
+    if ($key === 'methods') {
+      $builders = Map { };
+      $methods = [];
+
+      foreach ((array) $value as $method) {
+        $builders[$method['name']] = (new MergedDataBuilder(new Map($method)));
+      }
+      foreach ((array) idx($this->data, 'methods', []) as $method) {
+        $name = $method['name'];
+        if ($builders->containsKey($name)) {
+          $builders[$name]->addData(new Map($method));
+        } else {
+          $methods[] = $method;
+        }
+      }
+
+      foreach ($builders as $name => $builder) {
+        var_dump("Merged method: ".((string) $this->data['name'])." $name");
+        $methods[] = $builder->build()->toArray();
+      }
+      $this->data['methods'] = $methods;
+      return;
+    }
+
     if ($value !== null && $value != []) {
       $this->data[$key] = $value;
     }
