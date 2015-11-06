@@ -54,7 +54,6 @@ abstract final class ScannedDefinitionFilters {
     return (
       (strpos($def->getName(), "__SystemLib\\") === 0)
       || self::IsBlacklisted($def)
-      || ($def instanceof HasScannedVisibility && $def->isPrivate())
     );
   }
 

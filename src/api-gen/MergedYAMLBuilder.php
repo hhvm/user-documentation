@@ -25,8 +25,27 @@ final class MergedYAMLBuilder {
   public function build(): void {
     $writer = new YAMLWriter($this->destination);
     foreach ($this->definitions as $def) {
+      // UNSAFE ($def['data']['methods'] is not defined on the shape)
+      if ($methods = idx($def['data'], 'methods')) {
+        $def['data']['methods'] =
+          $this->removePrivateMethods(/*UNSAFE_EXPR*/ $methods);
+      }
       $writer->write($def);
     }
+  }
+
+  private function removePrivateMethods(
+    array<shape('visibility' => string)> $methods,
+  ): array<shape()> {
+    // We filter out private methods at this late stage as occassionally we have
+    // inconsistent ideas of what the visibility is and we want to go for the
+    // most restrictive - if we filter out before merge, we'll end up with public
+    // or protected, but if it says private anywhere we want to ignore those and
+    // just not document the method
+    return array_filter(
+      $methods,
+      $method ==> $method['visibility'] !== 'private',
+    );
   }
 
   public function addDefinition(BaseYAML $def): this {
@@ -50,7 +69,8 @@ final class MergedYAMLBuilder {
     $merged['data'] = (new MergedDataBuilder($merged_data))
       ->addData($new_data)
       ->build()->toArray();
-     // UNSAFE array to shape conversion
+
+    // UNSAFE array to shape conversion
     $this->definitions[$key] = $merged;
     return $this;
   }

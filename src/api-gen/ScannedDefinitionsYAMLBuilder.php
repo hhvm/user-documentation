@@ -82,8 +82,8 @@ class ScannedDefinitionsYAMLBuilder {
   ): ClassDocumentation {
     return shape(
       'name' => $class->getName(),
-      'methods' =>
-        $this->filtered($class->getMethods())
+      'methods' => $class
+        ->getMethods()
         ->map($m ==> $this->getFunctionDocumentation($m))
         ->toArray(),
       'generics' => $class
