@@ -6,6 +6,7 @@ use FredEmmott\DefinitionFinder\FileParser;
 use FredEmmott\DefinitionFinder\ScannedClass;
 use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
+use FredEmmott\DefinitionFinder\ScannedMethod;
 use FredEmmott\DefinitionFinder\ScannedTypehint;
 use FredEmmott\DefinitionFinder\ScannedGeneric;
 use FredEmmott\DefinitionFinder\ScannedParameter;
@@ -102,7 +103,7 @@ class ScannedDefinitionsYAMLBuilder {
   private static function GetFunctionDocumentation(
     ScannedFunctionAbstract $function,
   ): FunctionDocumentation {
-    return shape(
+    $ret = shape(
       'name' => $function->getName(),
       'returnType' =>
         self::GetNullableTypehintDocumentation($function->getReturnType()),
@@ -115,7 +116,26 @@ class ScannedDefinitionsYAMLBuilder {
         ->getParameters()
         ->map($p ==> self::GetParameterDocumentation($p))
         ->toArray(),
+      'visibility' => null,
     );
+
+    if (!$function instanceof ScannedMethod) {
+      return $ret;
+    }
+
+    if ($function->isPublic()) {
+      $ret['visibility'] = MemberVisibility::PUBLIC;
+    } else if ($function->isPrivate()) {
+      $ret['visibility'] = MemberVisibility::PRIVATE;
+    } else {
+      invariant(
+        $function->isProtected(),
+        'method with no visibility: %s',
+        var_export($function, true),
+      );
+      $ret['visibility'] = MemberVisibility::PROTECTED;
+    }
+    return $ret;
   }
 
   private static function GetParameterDocumentation(
