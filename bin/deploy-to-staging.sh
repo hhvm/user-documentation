@@ -43,5 +43,5 @@ read _
 
 set +e
 eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
-echo "** You can test at http://hhvm-hack-docs-staging.elasticbeanstalk.com"
+echo "** You can test at http://staging.docs.hhvm.com"
 echo "** To switch over prod, run 'eb swap'"
