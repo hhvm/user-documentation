@@ -1,11 +1,14 @@
 FROM fredemmott/hhvm-proxygen:3.10.1
-RUN apt-get update -y
+ENV TZ UTC
 
 # We need a unicode-aware system to generate the docs
 RUN locale-gen en_US.UTF-8
-ENV LANG en_us.UTF-8
+ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update -y
 
 # Install Ruby and Bundler (Ruby package manager)
 RUN apt-get install -y ruby1.9.3 bundler
@@ -26,7 +29,6 @@ RUN curl -sS https://getcomposer.org/installer | hhvm --php -- --install-dir=/op
 
 # We need an HHVM checkout to generate the API docs
 RUN apt-get install -y git
-RUN cd /var && git clone --depth=1 --branch HHVM-3.10 https://github.com/facebook/hhvm.git
 
 # Copy the app into the container
 RUN rm -rf /var/www
@@ -41,8 +43,8 @@ RUN cd /var/www && sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example > 
 RUN cd /var/www/md-render && bundle --path vendor/
 RUN cd /var/www && hhvm /opt/composer/composer.phar install
 
-# Build
-RUN cd /var/www && hhvm bin/build.php
+# Build (all in one so that we don't end up with +/var/hhvm and -/var/hhvm images)
+RUN cd /var && git clone --depth=1 --branch HHVM-3.10 https://github.com/facebook/hhvm.git && cd /var/www && hhvm bin/build.php && rm -rf /var/hhvm
 
 # Make the webserver port accessible outside the container
 EXPOSE 80
