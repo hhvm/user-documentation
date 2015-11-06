@@ -52,7 +52,7 @@ class FunctionMarkdownBuilder {
   private function getDescription(): string {
     $md = "### Description\n\n";
 
-    $md .= "```Hack\n".$this->getSignature()."\n```\n\n";
+    $md .= "```Hack\n<?hh\n".$this->getSignature()."\n```\n\n";
 
     $md .= $this->docblock?->getText();
 
@@ -100,10 +100,14 @@ class FunctionMarkdownBuilder {
 
     $tags = $this->getParamTags();
     $params = array_map(
-        $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
-        $this->yaml['data']['parameters'],
-        );
-    $ret .= '('.implode(', ', $params).')';
+      $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
+      $this->yaml['data']['parameters'],
+    );
+    if (!$params) {
+      $ret .= '()';
+    } else {
+      $ret .= "(\n".implode("\n", array_map($x ==> '  '.$x.',', $params))."\n)";
+    }
 
     $return_type = $this->yaml['data']['returnType'];
     if ($return_type !== null) {
