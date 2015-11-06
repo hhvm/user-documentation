@@ -85,28 +85,27 @@ class FunctionMarkdownBuilder {
   }
 
   private function getSignature(): string {
-    $tags = $this->getTagsByName('param', ParamTag::class);
+    $ret = '';
 
+    $visibility = $this->yaml['data']['visibility'];
+    if ($visibility !== null) {
+      $ret .= $visibility.' ';
+    }
+    $ret .= 'function '.$this->yaml['data']['name'];
+
+    $tags = $this->getTagsByName('param', ParamTag::class);
     $params = array_map(
       $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
       $this->yaml['data']['parameters'],
     );
+    $ret .= '('.implode(', ', $params).')';
+
     $return_type = $this->yaml['data']['returnType'];
-    if ($return_type === null) {
-      // TODO: log warning for this once we have a good logging system
-      return sprintf(
-        "function %s(%s)",
-        $this->yaml['data']['name'],
-        implode(', ', $params),
-      );
+    if ($return_type !== null) {
+      $ret .= ': '.Stringify::typehint($return_type);
     }
 
-    return sprintf(
-      "function %s(%s): %s",
-      $this->yaml['data']['name'],
-      implode(', ', $params),
-      Stringify::typehint($return_type),
-    );
+    return $ret;
   }
 
   <<__Memoize>>
