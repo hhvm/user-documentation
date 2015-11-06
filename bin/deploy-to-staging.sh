@@ -16,6 +16,7 @@ docker build -t $IMAGE_NAME $(pwd)
 docker tag -f $IMAGE_NAME hhvm/user-documentation:latest # add an alias
 echo "** Pushing image to dockerhub"
 docker push $IMAGE_NAME
+docker push hhvm/user-documentation:latest # push the alias too
 
 echo "** Updating AWS config"
 ## Update AWS config file
