@@ -132,6 +132,10 @@ class FunctionMarkdownBuilder {
 
     $ret = "### Examples";
     foreach ($examples as $example) {
+      $preamble = dirname($example).'/'.basename($example, '.php').'.md';
+      if (file_exists($preamble)) {
+        $ret .= "\n\n".file_get_contents($preamble)."\n\n";
+      }
       $ret .= "\n\n@@ ".$example." @@";
     }
     return $ret;
