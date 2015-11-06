@@ -13,7 +13,7 @@ IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 
 echo "** Building image"
 docker build -t $IMAGE_NAME $(pwd)
-docker tag $IMAGE_NAME hhvm/user-documentation:latest # add an alias
+docker tag -f $IMAGE_NAME hhvm/user-documentation:latest # add an alias
 echo "** Pushing image to dockerhub"
 docker push $IMAGE_NAME
 
