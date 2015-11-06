@@ -6,6 +6,7 @@ use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedClass;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
 use FredEmmott\DefinitionFinder\HasScannedGenerics;
+use FredEmmott\DefinitionFinder\HasScannedVisibility;
 
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {
@@ -50,9 +51,11 @@ abstract final class ScannedDefinitionFilters {
   }
 
   public static function ShouldNotDocument(ScannedBase $def): bool {
-    return
+    return (
       (strpos($def->getName(), "__SystemLib\\") === 0)
-      || self::IsBlacklisted($def);
+      || self::IsBlacklisted($def)
+      || ($def instanceof HasScannedVisibility && $def->isPrivate())
+    );
   }
 
   private static function IsBlacklisted(ScannedBase $def): bool {

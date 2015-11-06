@@ -31,22 +31,22 @@ class ScannedDefinitionsYAMLBuilder {
     $this->buildDefinitions(
       'class',
       $this->parser->getClasses(),
-      $x ==> self::GetClassDocumentation($x),
+      $x ==> $this->getClassDocumentation($x),
     );
     $this->buildDefinitions(
       'interface',
       $this->parser->getInterfaces(),
-      $x ==> self::GetClassDocumentation($x),
+      $x ==> $this->getClassDocumentation($x),
     );
     $this->buildDefinitions(
       'trait',
       $this->parser->getTraits(),
-      $x ==> self::GetClassDocumentation($x),
+      $x ==> $this->getClassDocumentation($x),
     );
     $this->buildDefinitions(
       'function',
       $this->parser->getFunctions(),
-      $x ==> self::GetFunctionDocumentation($x),
+      $x ==> $this->getFunctionDocumentation($x),
     );
   }
 
@@ -77,14 +77,14 @@ class ScannedDefinitionsYAMLBuilder {
     return $list;
   }
 
-  private static function GetClassDocumentation(
+  private function getClassDocumentation(
     ScannedClass $class,
   ): ClassDocumentation {
     return shape(
       'name' => $class->getName(),
-      'methods' => $class
-        ->getMethods()
-        ->map($m ==> self::GetFunctionDocumentation($m))
+      'methods' =>
+        $this->filtered($class->getMethods())
+        ->map($m ==> $this->getFunctionDocumentation($m))
         ->toArray(),
       'generics' => $class
         ->getGenericTypes()
@@ -100,7 +100,7 @@ class ScannedDefinitionsYAMLBuilder {
     );
   }
 
-  private static function GetFunctionDocumentation(
+  private function getFunctionDocumentation(
     ScannedFunctionAbstract $function,
   ): FunctionDocumentation {
     $ret = shape(
