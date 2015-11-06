@@ -68,6 +68,53 @@ html, body {
 
 /** Fonts **/
 /* Colors */
+.innerContent table {
+  background: #F8F8F8;
+  border: 1px solid #B0B0B0;
+  display: block;
+  overflow-x: auto;
+  margin: 20px 0;
+}
+.innerContent table thead {
+  border-bottom: 1px solid #B0B0B0;
+  display: block;
+  min-width: 800px;
+}
+.innerContent table tbody {
+  display: block;
+  min-width: 800px;
+}
+.innerContent table tr {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.innerContent table tr:nth-of-type(odd) {
+  background: #E8E8E8;
+}
+.innerContent table tr th, .innerContent table tr td {
+  border-right: 1px dotted #B0B0B0;
+  display: block;
+  flex: 1 0 0px;
+  font-size: 14px;
+  line-height: 1.3em;
+  padding: 10px;
+  text-align: left;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.innerContent table tr th:last-of-type, .innerContent table tr td:last-of-type {
+  border-right: 0;
+}
+.innerContent table tr th code, .innerContent table tr td code {
+  color: #2db04b;
+  font-size: 12px;
+}
+.innerContent table tr th {
+  color: #505050;
+  font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
+  text-transform: uppercase;
+}
+
 body {
   background: #ffffff;
   color: #505050;
@@ -480,10 +527,9 @@ h4 {
 }
 
 .innerContent p > code {
-  background: #faf0e7;
+  background: #DFF7E5;
   border-radius: 2px;
-  color: #82ba70;
-  font-weight: bold;
+  color: #2db04b;
   padding: 1px 3px;
 }
 
