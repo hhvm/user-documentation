@@ -58,6 +58,11 @@ class FunctionMarkdownBuilder {
   private function getParameters(): string {
     $tags = $this->getTagsByName('param', ParamTag::class);
 
+    // If no parameters for the function, then move on
+    if (count($this->yaml['data']['parameters']) === 0) {
+      return "";
+    }
+
     $md = "### Parameters\n\n";
 
     foreach ($this->yaml['data']['parameters'] as $param) {
