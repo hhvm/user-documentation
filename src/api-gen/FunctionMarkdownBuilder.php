@@ -7,8 +7,10 @@ use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
 class FunctionMarkdownBuilder {
+  use DocblockTagReader;
+
   private FunctionYAML $yaml;
-  private ?DocBlock $docblock;
+  protected ?DocBlock $docblock;
 
   public function __construct(
       ?string $file = null,
@@ -58,12 +60,13 @@ class FunctionMarkdownBuilder {
   }
 
   private function getParameters(): string {
-    $tags = $this->getTagsByName('param', ParamTag::class);
 
     // If no parameters for the function, then move on
     if (count($this->yaml['data']['parameters']) === 0) {
       return "";
     }
+
+    $tags = $this->getParamTags();
 
     $md = "### Parameters\n\n";
 
@@ -95,7 +98,7 @@ class FunctionMarkdownBuilder {
     }
     $ret .= 'function '.$this->yaml['data']['name'];
 
-    $tags = $this->getTagsByName('param', ParamTag::class);
+    $tags = $this->getParamTags();
     $params = array_map(
         $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
         $this->yaml['data']['parameters'],
@@ -134,26 +137,12 @@ class FunctionMarkdownBuilder {
     return $ret;
   }
 
-  <<__Memoize>>
-  private function getTagsByName<T as Tag>(
-    string $name,
-    classname<T> $type = Tag::class,
-  ): Map<string,T> {
-    $tags = Map {};
-    // If $this->docblock is null, passing null to Map constructor returns
-    // empty map
-    $raw_tags = new Map($this->docblock?->getTagsByName($name));
-    foreach ($raw_tags as $tag) {
-      invariant(
-        $tag instanceof $type,
-        'Expected %s tags to be %s, got %s',
-        $name,
-        $type,
-        get_class($tag),
-      );
+  private function getParamTags(): Map<string, ParamTag> {
+    $tags_vec = $this->getTagsByName('param', ParamTag::class);
+    $tags = Map { };
+    foreach ($tags_vec as $tag) {
       $tags[$tag->getVariableName()] = $tag;
     }
-    
     return $tags;
   }
 }
