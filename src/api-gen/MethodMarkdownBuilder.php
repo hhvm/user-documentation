@@ -14,17 +14,24 @@ class MethodMarkdownBuilder {
   }
 
   public function buildAll(): void {
+    $classname = $this->yaml['data']['name'];
     foreach ($this->yaml['data']['methods'] as $method) {
       $filename = pathinfo($this->classfile)['filename'];
       $type = explode('.', $filename)[0];
       $output_path = 
         BuildPaths::MERGED_MD.'/'.$filename.'.method.'.$method['name'].'.md';
-      file_put_contents($output_path, $this->build($method));
+      file_put_contents(
+        $output_path,
+        $this->build($classname, $method),
+      );
     }
   }
 
-  private function build(FunctionDocumentation $method): string {
-    $md = new FunctionMarkdownBuilder($this->classfile, $method);
+  private function build(
+    string $classname,
+    FunctionDocumentation $method,
+  ): string {
+    $md = new FunctionMarkdownBuilder($this->classfile, $method, $classname);
     return $md->build();
   }
 }

@@ -11,9 +11,10 @@ class FunctionMarkdownBuilder {
   private ?DocBlock $docblock;
 
   public function __construct(
-    ?string $file = null,
-    ?FunctionDocumentation $method = null,
-  ) {
+      ?string $file = null,
+      ?FunctionDocumentation $method = null,
+      private ?string $class = null,
+      ) {
     $this->yaml = \Spyc::YAMLLoad($file);
     if ($method) {
       $this->yaml['data'] = $method;
@@ -32,14 +33,15 @@ class FunctionMarkdownBuilder {
         $this->getHeading(),
         $this->getDescription(),
         $this->getParameters(),
+        $this->getExamples(),
       ],
     )."\n";
   }
 
   private function getHeading(): ?string {
     if (
-      $this->docblock?->getText() !== $this->docblock?->getShortDescription()
-    ) {
+        $this->docblock?->getText() !== $this->docblock?->getShortDescription()
+       ) {
       return $this->docblock?->getShortDescription();
     }
     return null;
@@ -95,9 +97,9 @@ class FunctionMarkdownBuilder {
 
     $tags = $this->getTagsByName('param', ParamTag::class);
     $params = array_map(
-      $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
-      $this->yaml['data']['parameters'],
-    );
+        $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
+        $this->yaml['data']['parameters'],
+        );
     $ret .= '('.implode(', ', $params).')';
 
     $return_type = $this->yaml['data']['returnType'];
@@ -105,6 +107,30 @@ class FunctionMarkdownBuilder {
       $ret .= ': '.Stringify::typehint($return_type);
     }
 
+    return $ret;
+  }
+
+  private function getExamples(): ?string {
+    $path = LocalConfig::ROOT.'/guides/hack/99-api-examples/';
+
+    if ($this->class === null) {
+      $path .= 'function.';
+    } else {
+      $path .= 'class.'.$this->class.'/';
+    }
+
+    $path .= $this->yaml['data']['name'];
+    $path = strtr($path, "\\", '.');
+    $examples = glob($path.'/*.php');
+    if (count($examples) === 0) {
+      return null;
+    }
+    sort($examples);
+
+    $ret = "### Examples";
+    foreach ($examples as $example) {
+      $ret .= "\n\n@@ ".$example." @@";
+    }
     return $ret;
   }
 
@@ -127,6 +153,7 @@ class FunctionMarkdownBuilder {
       );
       $tags[$tag->getVariableName()] = $tag;
     }
+    
     return $tags;
   }
 }
