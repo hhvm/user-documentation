@@ -44,7 +44,7 @@ RUN cd /var/www/md-render && bundle --path vendor/
 RUN cd /var/www && hhvm /opt/composer/composer.phar install
 
 # Build (all in one so that we don't end up with +/var/hhvm and -/var/hhvm images)
-RUN cd /var && git clone --depth=1 --branch HHVM-3.10 https://github.com/facebook/hhvm.git && cd /var/www && hhvm bin/build.php && rm -rf /var/hhvm
+RUN cd /var && git clone --depth=1 https://github.com/facebook/hhvm.git && cd /var/www && hhvm bin/build.php && rm -rf /var/hhvm
 
 # Make the webserver port accessible outside the container
 EXPOSE 80
