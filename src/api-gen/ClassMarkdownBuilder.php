@@ -85,7 +85,10 @@ EOF;
   private function getContents(): string {
     $prefix = $this->getName().'::';
     $md = "### Interface synopsis\n";
-    foreach ($this->yaml['data']['methods'] as $method) {
+    $methods = $this->yaml['data']['methods'];
+    sort($methods);
+
+    foreach ($methods as $method) {
       $method_url = sprintf(
         "/hack/reference/%s/%s/%s/",
         $this->yaml['type'],
