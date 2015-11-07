@@ -59,11 +59,11 @@ class FunctionMarkdownBuilder {
     return $md;
   }
 
-  private function getParameters(): string {
+  private function getParameters(): ?string {
 
     // If no parameters for the function, then move on
     if (count($this->yaml['data']['parameters']) === 0) {
-      return "";
+      return null;
     }
 
     $tags = $this->getParamTags();
