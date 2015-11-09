@@ -19,7 +19,7 @@ class MethodMarkdownBuilder {
       $filename = pathinfo($this->classfile)['filename'];
       $type = explode('.', $filename)[0];
       $output_path = 
-        BuildPaths::MERGED_MD.'/'.$filename.'.method.'.$method['name'].'.md';
+        BuildPaths::APIDOCS_MARKDOWN.'/'.$filename.'.method.'.$method['name'].'.md';
       file_put_contents(
         $output_path,
         $this->build($classname, $method),

@@ -3,7 +3,7 @@
 namespace HHVM\UserDocumentation;
 
 final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
-  const string SOURCE_ROOT = __DIR__.'/../../build/apidocs';
+  const string SOURCE_ROOT = BuildPaths::APIDOCS_MARKDOWN;
   const string BUILD_ROOT = BuildPaths::APIDOCS_HTML;
   const string METHOD_DELIM = "method";
 

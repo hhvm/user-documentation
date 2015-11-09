@@ -14,14 +14,14 @@ final class MergedMarkdownBuildStep extends BuildStep {
     Log::i("\nMergedMarkdownBuild");
     $sources = (Vector { })
       ->addAll(self::findSources(BuildPaths::MERGED_YAML, Set{'yml'}));
-    if (!is_dir(BuildPaths::MERGED_MD)) {
-      mkdir(BuildPaths::MERGED_MD, /* mode = */ 0755, /* recursive = */ true);
+    if (!is_dir(BuildPaths::APIDOCS_MARKDOWN)) {
+      mkdir(BuildPaths::APIDOCS_MARKDOWN, /* mode = */ 0755, /* recursive = */ true);
     }
     foreach ($sources as $source) {
       Log::v('.');
       $filename = pathinfo($source)['filename'];
       $type = explode('.', $filename)[0];
-      $output_path = BuildPaths::MERGED_MD.'/'.$filename.'.md';
+      $output_path = BuildPaths::APIDOCS_MARKDOWN.'/'.$filename.'.md';
       switch ($type) {
         case "function":
           $builder = new FunctionMarkdownBuilder($source);
