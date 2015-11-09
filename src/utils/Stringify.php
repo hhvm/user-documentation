@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
+use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 
 class Stringify {
   public static function typehint(TypehintDocumentation $typehint): string {
@@ -23,7 +23,7 @@ class Stringify {
 
   public static function parameter(
     ParameterDocumentation $param,
-    ?ParamTag $tag,
+    ?ReturnTag $tag,
   ): string {
     $name = $param['name'];
 

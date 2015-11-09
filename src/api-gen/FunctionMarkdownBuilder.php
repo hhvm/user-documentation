@@ -4,6 +4,7 @@ namespace HHVM\UserDocumentation;
 
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
+use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
 class FunctionMarkdownBuilder {
@@ -35,6 +36,7 @@ class FunctionMarkdownBuilder {
         $this->getHeading(),
         $this->getDescription(),
         $this->getParameters(),
+        $this->getReturnValues(),
         $this->getExamples(),
       ],
     )."\n";
@@ -87,6 +89,31 @@ class FunctionMarkdownBuilder {
       $md .= "\n";
     }
     return $md;
+  }
+
+  private function getReturnValues(): ?string {
+    $tags = $this->getTagsByName('return', ReturnTag::class);
+    if (!$tags) {
+      return null;
+    }
+
+    $ret = "### Return Values\n";
+    foreach ($tags as $tag) {
+      $ret .= "\n - ";
+      $types = $tag->getTypes();
+      $types = array_filter($types, $type ==> $type !== '\-' && $type !== '-');
+      if ($types) {
+        $ret .= '`'.implode('|', $types).'` - ';
+      } else {
+        $ret_th = $this->yaml['data']['returnType'];
+        if ($ret_th !== null) {
+          $ret .= '`'.Stringify::typehint($ret_th).'` - ';
+        }
+      }
+
+      $ret .= $tag->getDescription();
+    }
+    return $ret;
   }
 
   private function getSignature(): string {
