@@ -20,7 +20,12 @@ docker push hhvm/user-documentation:latest # push the alias too
 
 echo "** Updating AWS config"
 ## Update AWS config file
-sed -i 's_"hhvm/user-documentation:[^"]\+"_"'$IMAGE_NAME'"_' Dockerrun.aws.json
+# mac sed doesn't support -i
+SEDTEMP=$(mktemp)
+sed 's_"hhvm/user-documentation:[^"]\+"_"'$IMAGE_NAME'"_' Dockerrun.aws.json > $SEDTEMP
+cat $SEDTEMP > Dockerrun.aws.json
+rm $SEDTEMP
+
 git commit \
   -m "[autocommit] AWS deploy $IMAGE_TAG" \
   Dockerrun.aws.json
