@@ -92,7 +92,7 @@ Now that you have gotten your feet wet with a simple Hack program, it's time to 
 * [Async](../async/intro.md)
 * [Collections](../collections/intro.md)
 
-Of course, there are [plenty of others](http://docs.hhvm.com/hack), but since this a getting started guide, we will not go into detail here. The [documentation](http://docs.hhvm.com/hack) will give you deep information about each one.
+Of course, there are [plenty of others](/hack/), but since this a getting started guide, we will not go into detail here. The [documentation](/hack/) will give you deep information about each one.
 
 ## Converting Existing PHP Code
 
@@ -100,5 +100,5 @@ If you have existing PHP code that you would like to convert to Hack, there are 
 
 ## Other Learning Resources
 
-The best resource to learn Hack is the [official Hack documentation](/hack). There is also an awesome [book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team. For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online. [Hack has an online interactive tutorial](http://hacklang.org/tutorial/) as well.
+The best resource to learn Hack is the [official Hack documentation](/hack/). There is also an awesome [book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team. For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online. [Hack has an online interactive tutorial](http://hacklang.org/tutorial/) as well.
 
