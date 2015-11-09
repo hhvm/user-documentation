@@ -38,7 +38,7 @@ Using the editor of your choice (e.g., Nuclide, vim, Sublime Text), let's create
 
 @@ getting-started-examples/first.php @@
 
-This getting started guide assumes some knowledge of programming (e.g., what a class is, what a function or method is, etc.). If you are familiar with [PHP](http://php.net), Hack has a similar look and feel. If you are not familiar with PHP, then all of this is new, but hopefully the generally constructs are familiar to you. The comments provide various details, but here are the key points:
+This getting started guide assumes some knowledge of programming (e.g., what a class is, what a function or method is, etc.). If you are familiar with [PHP](http://php.net), Hack has a similar look and feel. If you are not familiar with PHP, then all of this is new, but hopefully the general constructs are familiar to you. The comments provide various details, but here are the key points:
 
 * This example created a class, methods on the class, and a standalone function.
 * [Type annotations](../types/annotations.md) were used on class properties, method parameters and returns from functions and methods.
