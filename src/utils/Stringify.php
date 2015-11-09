@@ -30,11 +30,11 @@ class Stringify {
     $s = '';
     $types = $tag?->getTypes();
     if ($types !== null && $types !== []) {
-      $s .= '['.implode('|',$types).'] ';
+      $s .= implode('|',$types).' ';
     } else {
       $th = $param['typehint'];
       if ($th !== null) {
-        $s .= '['.Stringify::typehint($th).'] ';
+        $s .= Stringify::typehint($th).' ';
       }
     }
 
