@@ -2,9 +2,7 @@
 
 Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. It allows code that utilizes the async infrastructure to hide input/output (I/O) latency and data fetching. So, if you have code that has operations that involve some sort of waiting (e.g., network access, waiting for database queries), async minimizes the downtime your program has to be stalled because of it as the program will go do other things, most likely further I/O somewhere else.
 
-Async is **not multithreading** - HHVM still executes all of your PHP/Hack code
-in one main request thread - but other operations (eg MySQL queries) can now
-execute without taking up time in that thread that your code could be using.
+Async is **not multithreading** - HHVM still executes all of your PHP/Hack code in one main request thread - but other operations (eg MySQL queries) can now execute without taking up time in that thread that your code could be using.
 
 ## A Page As A Dependency Tree
 
@@ -16,23 +14,17 @@ Code structured like this gets the most benefit from async.
 
 ## Synchronous/Blocking IO: Sequential Execution
 
-If (like most PHP code) you do not use asynchronous programming, each step will
-be executed one-after-the-other:
+If (like most PHP code) you do not use asynchronous programming, each step will be executed one-after-the-other:
 
 ![Sequential Execution](/images/async/async-sequential.png)
 
 ## Asynchronous Execution
 
-This is what Hack's async functionality is. All PHP/Hack code executes in the
-main request thread, but I/O does not block it, and multiple I/O or other async
-tasks can execute concurrently. If your code is constructed as a dependency tree,
-this will lead to various parts of your code transparently interleaving with each
-other instead of blocking each other:
+This is what Hack's async functionality is. All PHP/Hack code executes in the main request thread, but I/O does not block it, and multiple I/O or other async tasks can execute concurrently. If your code is constructed as a dependency tree, this will lead to various parts of your code transparently interleaving with each other instead of blocking each other:
 
 ![Asynchronous](/images/async/async-always-busy.png)
 
-Importantly, the order your code executes is not guaranteed - for example, if the
-CuRL request for Component A is slow, execution of the same code could look more like this:
+Importantly, the order your code executes is not guaranteed - for example, if the CuRL request for Component A is slow, execution of the same code could look more like this:
 
 ![Asynchronous with slow curl](/images/async/async-slow-curl.png)
 
