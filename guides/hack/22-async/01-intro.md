@@ -21,16 +21,6 @@ be executed one-after-the-other:
 
 ![Sequential Execution](/images/async/async-sequential.png)
 
-## Parallel Execution/Multithreading
-
-**This is not supported by HHVM**. In environments that support multithreading,
-components A and B can be rendered at the same time - reducing the number of
-sequential steps from 11 for sequential execution to just 6:
-
-![Parallel Execution](/images/async/async-multithreaded.png)
-
-Naively, this is the optimal solution.
-
 ## Asynchronous Execution
 
 This is what Hack's async functionality is. All PHP/Hack code executes in the
