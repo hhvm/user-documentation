@@ -9,7 +9,7 @@ However, there are cases when you want to convert some collection of values to a
 
 You can use functions like `array_filter()`, or the methods on the Hack collection classes, etc. to do this mapping and filtering. However, there is a set of utility functions, specifically created for async, that will make your code more streamlined. 
 
-Note: These functions are built in to HHVM 3.11 and greater. If you are using a version of HHVM less than 3.11, you can find these function in the [`hhvm/asio-utilities` Github repo](https://github.com/hhvm/asio-utilities).
+Note: These functions are built in to HHVM 3.11 and greater. If you are using a version of HHVM less than 3.11, you can add `hhvm/asio-utilities` to your `composer.json` file as these functions are available in the [`hhvm/asio-utilities` Github repo](https://github.com/hhvm/asio-utilities).
 
 Name    | Returns             | Mapped | Filtered | Has Key | Wrapped Exception
 --------|---------------------|--------|----------|---------|------------------
@@ -95,15 +95,21 @@ assert (is_int($b);
 return tuple($a, $b);
 ```
 
-In the future there will be function `HH\Asio\va()` that will better support this paradigm. e.g, `va(Awaitable<T1>, Awaitable<T2>)` instead of the hybrid union that messed us up above.
+In the future there will be a [variadic]() function `HH\Asio\va()` that will better support this paradigm. e.g, 
 
-### Create your own VarArgs Function
+```
+va(Awaitable<T1>, Awaitable<T2>, ..., Awaitable<Tn>): Awaitable<(T1, T2, T3)>
+```
 
-Until `HH\Asio\va()` is fully supported, you could create your own version of a variadic type function. This one takes two `Awaitable`s of possibly different types and, like above, returns a `tuple` of those two types. In this case you do not need any `assert`s, etc.
+instead of the hybrid union that messed us up above.
+
+### Create your own workaround function
+
+Until `HH\Asio\va()` is fully supported, you could create your own version of a helper function that acts similarly. The following example takes two `Awaitable`s of possibly different types and, like above, returns a `tuple` of those two types. In this case you do not need any `assert`s, etc.
 
 ```
 <?hh // strict
-namespace HH\Asio;
+
 // Replace calls to these with calls to HH\Asio\va() when that is implemented
 async function va2<Ta,Tb>(
   Awaitable<Ta> $a,
@@ -116,4 +122,3 @@ async function va2<Ta,Tb>(
 ```
 
 Interestingly enough, the above function was actually implemented in the [code](https://github.com/hhvm/user-documentation/blob/7568764b587b24f3a8441bee1f1ac6940cb5de7e/src/utils/async_funcs.php) that generates the Hack and HHVM documentation site.
-
