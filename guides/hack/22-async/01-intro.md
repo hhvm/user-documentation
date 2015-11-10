@@ -1,38 +1,50 @@
 # Async
 
-Hack and PHP do not natively support multithreaded programming. However, one can envision many scenarios where such a capability might be useful. Common examples being executing two or more heavy computations; or making two or more web or database queries. 
-
-One could easily expect that the following two calls are unrelated and could be run independent of each other. 
-
-@@ intro-examples/non-async-curl.php @@
-
-In the example above, the call to `curl_exec` in `curl_A()` is blocking any other processing. Thus, even though `curl_B()` is an independent call from `curl_A()`, it has to sit around waiting for `curl_A()` to finish before beginning its execution.
-
-![No Async](/images/no-async.png)
-
 Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. It allows code that utilizes the async infrastructure to hide input/output (I/O) latency and data fetching. So, if you have code that has operations that involve some sort of waiting (e.g., network access, waiting for database queries), async minimizes the downtime your program has to be stalled because of it as the program will go do other things, most likely further I/O somewhere else.
 
-Async is **not multithreading**. You are still bound to a single execution thread. Async works best when you have a lot of I/O codepaths that don't have to sit there waiting for other I/O requests to end to begin doing their requests.
+Async is **not multithreading** - HHVM still executes all of your PHP/Hack code
+in one main request thread - but other operations (eg MySQL queries) can now
+execute without taking up time in that thread that your code could be using.
 
-The following images should hopefully clear up any confusion you may have on what async is. Let's assume you have three distinct tasks to execute (don't worry about what the tasks are):
+## A Page As A Dependency Tree
 
-## Synchronous Execution
+Imagine you have a page that contains two components; one stores data in MySQL, the other fetches from an API via CuRL - and both cache results in Memcached. The dependencies could be modeled like this:
 
-This is just like PHP and Hack (without async) is executed today. Serial execution.
+![Dependency Tree](/images/async/async-dependency.png)
 
-![Synchronous](/images/synchronous.png)
+Code structured like this gets the most benefit from async.
 
-## Parallel Execution
+## Synchronous/Blocking IO: Sequential Execution
 
-This is an optimum state. We have all tasks running at the same time, concurrently. But, PHP and Hack do not support more than one thread of execution.
+If (like most PHP code) you do not use asynchronous programming, each step will
+be executed one-after-the-other:
 
-![Parallel](/images/parallel.png)
+![Sequential Execution](/images/async/async-sequential.png)
+
+## Parallel Execution/Multithreading
+
+**This is not supported by HHVM**. In environments that support multithreading,
+components A and B can be rendered at the same time - reducing the number of
+sequential steps from 11 for sequential execution to just 6:
+
+![Parallel Execution](/images/async/async-multithreaded.png)
+
+Naively, this is the optimal solution.
 
 ## Asynchronous Execution
 
-This is what async does. Tasks are executed concurrently in the same execution thread, with respect to each other, interleaving instructions (e.g., I/O) for different tasks back and forth.
+This is what Hack's async functionality is. All PHP/Hack code executes in the
+main request thread, but I/O does not block it, and multiple I/O or other async
+tasks can execute concurrently. If your code is constructed as a dependency tree,
+this will lead to various parts of your code transparently interleaving with each
+other instead of blocking each other:
 
-![Asynchronous](/images/asynchronous.png)
+![Asynchronous](/images/async/async-always-busy.png)
+
+Importantly, the order your code executes is not guaranteed - for example, if the
+CuRL request for Component A is slow, execution of the same code could look more like this:
+
+![Asynchronous with slow curl](/images/async/async-slow-curl.png)
 
 The reordering of different task instructions in this way allow you to hide I/O [latency](https://en.wikipedia.org/wiki/Latency_\(engineering\)). So while one task is currently sitting at an I/O instruction (e.g., waiting for data), another task's instruction, with hopefully less latency, can execute in the meantime.
 
@@ -40,13 +52,19 @@ Async is not a panacea, however. While executing two async functions can utilize
 
 ## Async In Practice: cURL
 
+@@ intro-examples/non-async-curl.php @@
+
+In the example above, the call to `curl_exec` in `curl_A()` is blocking any other processing. Thus, even though `curl_B()` is an independent call from `curl_A()`, it has to sit around waiting for `curl_A()` to finish before beginning its execution.
+
+![No Async](/images/async/curl-synchronous.png)
+
 @@ intro-examples/async-curl.php @@
 
 In this example, we are calling an async-aware version of `curl_exec()`. Thus, in this case, our waiting state is explicitly allowing other I/O operation tasks in the code to occur.
 
 When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, the network latency to retrieve results of the CURL, the async infrastructure (the scheduler) looks for other async tasks that could be run. It finds that `curl_B()` is available to execute, so it starts executing that code. When it hits its `HH\Asio\curl_exec()` call, the process is repeated again, and the scheduler will find that our `curl_exec()` call in `curl_B()` is ready for execution once again.
 
-![Async](/images/async.png) 
+![Async](/images/async/curl-async.png) 
 
 While this example may not always show a measurable time savings (there are some factors like network latency and possible caching involved), you will not be slower than the non-async version overall and you may get results like this:
 
