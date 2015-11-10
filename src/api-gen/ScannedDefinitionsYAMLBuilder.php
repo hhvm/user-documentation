@@ -117,11 +117,14 @@ class ScannedDefinitionsYAMLBuilder {
         ->map($p ==> self::GetParameterDocumentation($p))
         ->toArray(),
       'visibility' => null,
+      'static' => null,
     );
 
     if (!$function instanceof ScannedMethod) {
       return $ret;
     }
+
+    $ret['static'] = $function->isStatic();
 
     if ($function->isPublic()) {
       $ret['visibility'] = MemberVisibility::PUBLIC;

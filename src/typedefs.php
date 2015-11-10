@@ -75,6 +75,7 @@ type FunctionDocumentation = shape(
   'docComment' => ?string,
   'parameters' => array<ParameterDocumentation>,
   'visibility' => ?MemberVisibility,
+  'static' => ?bool,
 );
 
 type DocumentationIndexEntry = shape(

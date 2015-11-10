@@ -123,6 +123,9 @@ class FunctionMarkdownBuilder {
     if ($visibility !== null) {
       $ret .= $visibility.' ';
     }
+    if ($this->yaml['data']['static'] === true) {
+      $ret .= 'static ';
+    }
     $ret .= 'function '.$this->yaml['data']['name'];
 
     $tags = $this->getParamTags();

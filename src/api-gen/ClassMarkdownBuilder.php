@@ -33,7 +33,7 @@ class ClassMarkdownBuilder {
   }
 
   private function getHeading(): string {
-    return '## The '.$this->getName().' '.$this->yaml['type'];
+    return '## The '.htmlspecialchars($this->getName()).' '.$this->yaml['type'];
   }
 
   private function getDescription(): string {
@@ -83,7 +83,6 @@ EOF;
   }
 
   private function getContents(): string {
-    $prefix = $this->getName().'::';
     $md = "### Interface synopsis\n";
     $methods = $this->yaml['data']['methods'];
     sort($methods);
@@ -95,8 +94,13 @@ EOF;
         str_replace('\\', '.', $this->yaml['data']['name']),
         $method['name'],
       );
+      if ($method['static']) {
+        $prefix = '::';
+      } else {
+        $prefix = '->';
+      }
       $md .=
-        ' * ['.$prefix.self::nameFromData($method).']('. $method_url .")";
+        ' * [`'.$prefix.self::nameFromData($method).'`]('. $method_url .")";
       if ($method['docComment'] !== null) {
         $desc = (new DocBlock($method['docComment']))->getShortDescription();
         if ($desc !== "") {
@@ -123,7 +127,7 @@ EOF;
         $generic ==> $generic['name'],
         $generics,
       );
-      $name .= '&lt;'.implode(',', $generics).'&gt;';
+      $name .= '<'.implode(',', $generics).'>';
     }
     return $name;
   }
