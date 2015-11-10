@@ -53,7 +53,10 @@ class APIIndex {
         $type,
       );
       invariant(
-        $index[$type][$api]['methods']->containsKey($method),
+        array_key_exists(
+          $method,
+          $index[$type][$api]['methods'],
+        ),
         'API %s of type %s does not contain method %s',
         $api,
         $type,
