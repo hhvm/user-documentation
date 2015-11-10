@@ -71,7 +71,6 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [sockets](http://php.net/manual/en/book.sockets.php)
 * [spl](http://php.net/manual/en/book.spl.php)
 * [sqlite3](http://php.net/manual/en/book.sqlite.php)
-* [standard](http://php.net/manual/en/book.standard.php)
 * [stream](http://php.net/manual/en/book.stream.php)
 * [string](http://php.net/manual/en/book.string.php)
 * sysvmsg
