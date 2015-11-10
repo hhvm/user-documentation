@@ -89,5 +89,12 @@ type DocumentationIndex = shape(
 
 type APIClassIndexEntry = shape(
   'path' => string,
-  'methods' => Map<string, string>,
+  'methods' => array<string, string>,
+);
+
+type APIIndexShape = shape(
+  'class' => array<string, APIClassIndexEntry>,
+  'interface' => array<string, APIClassIndexEntry>,
+  'trait' => array<string, APIClassIndexEntry>,
+  'function' => array<string, APIClassIndexEntry>,
 );
