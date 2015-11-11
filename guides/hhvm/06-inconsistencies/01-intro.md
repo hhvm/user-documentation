@@ -4,7 +4,7 @@ For the most part, HHVM is quite compatible with the PHP engine. In other words,
 
 However, there are some noted inconsistencies. They are listed here.
 
-*Note*: This list may not be exhaustive; feel free to submit a pull request or issue on any other inconsistencies you may find.
+*Note*: This list may not be exhaustive; feel free to submit a [pull request](https://github.com/facebook/hhvm/pulls) or [file an issue](https://github.com/facebook/hhvm/issues) on any other inconsistencies you may find.
 
 ## Arrays
 
