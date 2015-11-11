@@ -20,7 +20,7 @@ If (like most PHP code) you do not use asynchronous programming, each step will 
 
 ## Asynchronous Execution
 
-This is what Hack's async functionality is. All PHP/Hack code executes in the main request thread, but I/O does not block it, and multiple I/O or other async tasks can execute concurrently. If your code is constructed as a dependency tree, this will lead to various parts of your code transparently interleaving with each other instead of blocking each other:
+All PHP/Hack code executes in the main request thread, but I/O does not block it, and multiple I/O or other async tasks can execute concurrently. If your code is constructed as a dependency tree and uses async I/O, this will lead to various parts of your code transparently interleaving instead of blocking each other:
 
 ![Asynchronous](/images/async/async-always-busy.png)
 
