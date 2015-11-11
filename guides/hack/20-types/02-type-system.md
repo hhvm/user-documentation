@@ -35,7 +35,7 @@ Alias primitives are **not supported** in Hack. So the following are not valid t
 
 ### In Async
 
-It is relatively common for [async](../async/intro.md) functions to return `Awaitable<void>`. This means that while the function itself is returning an awaitable, the result of that awaitable will have no value. This, in essence, means the async function did some operation asynchronously that did not require a return value to the caller. 
+It is relatively common for [async](../async/introduction.md) functions to return `Awaitable<void>`. This means that while the function itself is returning an awaitable, the result of that awaitable will have no value. This, in essence, means the async function did some operation asynchronously that did not require a return value to the caller. 
 
 
 ## `noreturn`
@@ -87,14 +87,14 @@ There are valid uses for `mixed`, but generally you want to be as specific as po
 
 ## `arraykey`
 
-`arraykey` is special union type of `int` and `string`. Arrays and [collection](../collections/intro.md) types can be keyed by `int` or `string`. Suppose, for example, an operation was performed on an array to extract the keys, but you didn't know the type of the key. You were left with using `mixed` or doing some sort of duplicative code. `arraykey` resolves that issue.
+`arraykey` is special union type of `int` and `string`. Arrays and [collection](../collections/introduction.md) types can be keyed by `int` or `string`. Suppose, for example, an operation was performed on an array to extract the keys, but you didn't know the type of the key. You were left with using `mixed` or doing some sort of duplicative code. `arraykey` resolves that issue.
 
 @@ type-system-examples/arraykey.php @@
 
 
 ## XHP
 
-There are two [XHP](../xhp/intro.md) interfaces that are used when typing XHP objects: `XHPChild` and `XHPRoot`.
+There are two [XHP](../xhp/introduction.md) interfaces that are used when typing XHP objects: `XHPChild` and `XHPRoot`.
 
 `XHPRoot` is any object that is an instance of an XHP class. 
 
@@ -118,14 +118,14 @@ As `mixed` already allows for the value `null`, you cannot write `?mixed`.
 
 ## Generics
 
-[Generics](../generics/intro.md) allows a specific piece code to work against multiple types in a type-safe way. Depending on the type parameter specified, a generic type can work against one type or many. `Box<T>` for example is the most permissive for types that can be passed to it. `array<int>` is the least permissive as `int`s are only allowed to be placed in the array.
+[Generics](../generics/introduction.md) allows a specific piece code to work against multiple types in a type-safe way. Depending on the type parameter specified, a generic type can work against one type or many. `Box<T>` for example is the most permissive for types that can be passed to it. `array<int>` is the least permissive as `int`s are only allowed to be placed in the array.
 
 @@ type-system-examples/generics.php.type-errors @@
 
 
 ## Enums
 
-An [enum](../enums/intro.md) is a type made up of constants, usually related to each other. Unlike class constants, etc., enums are first-class types in the Hack type system. As such, they can be used as type annotations anywhere a primitive or object type can.
+An [enum](../enums/introduction.md) is a type made up of constants, usually related to each other. Unlike class constants, etc., enums are first-class types in the Hack type system. As such, they can be used as type annotations anywhere a primitive or object type can.
 
 @@ type-system-examples/enum.php @@
 
@@ -134,7 +134,7 @@ An [enum](../enums/intro.md) is a type made up of constants, usually related to 
 
 There is a `callable` typehint, but Hack does not allow it (HHVM accepts it, however if you don't care about the type checker errors).
 
-Instead, Hack provides a more expressive [callable](../callables/intro.md) type of the form:
+Instead, Hack provides a more expressive [callable](../callables/introduction.md) type of the form:
 
 ```
 function(0..n parameter types): return type
@@ -167,7 +167,7 @@ In HHVM, tuples are implemented as arrays, and you can call `is_array()` on them
 
 ## Type Aliases
 
-[Type aliases](../type-aliases/intro.md) allow you to give a new name to an existing type. They can be used just like those existing types in annotations.
+[Type aliases](../type-aliases/introduction.md) allow you to give a new name to an existing type. They can be used just like those existing types in annotations.
 
 @@ type-system-examples/type-alias.php @@
 
@@ -183,6 +183,6 @@ Hack introduces a special type aliases called [`classname<T>`](../type-aliases/o
 
 ## Shapes
 
-[Shapes](../shapes/intro.md) are a specific type alias representing a structured array, with a deterministic name and type of keys. They can be used as type annotations as well.
+[Shapes](../shapes/introduction.md) are a specific type alias representing a structured array, with a deterministic name and type of keys. They can be used as type annotations as well.
 
 @@ type-system-examples/shape.php @@

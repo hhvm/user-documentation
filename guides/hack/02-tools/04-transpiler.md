@@ -78,17 +78,17 @@ $GLOBALS['HACKLIB_ROOT'] = __DIR__ . '/hacklib/hacklib.php';
 The Hack transpiler will examine any file with `<?hh` in the hopes of converting it to a non-Hack `<?php`. It will try to perform the following conversions:
 
 * Remove type annotations.
-* [Lambdas](../lambdas/intro.md) are changed to closures.
-* [Shapes](../shapes/intro.md) are changed to arrays.
-* [Enums](../enums/intro.md) are converted to classes.
-* [Attributes](../attributes/intro.md) are removed.
-* [Collection](../collections/intro.md) are supported via the Hack library in PHP. Any collection literal syntax is replaced with `new`.
+* [Lambdas](../lambdas/introduction.md) are changed to closures.
+* [Shapes](../shapes/introduction.md) are changed to arrays.
+* [Enums](../enums/introduction.md) are converted to classes.
+* [Attributes](../attributes/introduction.md) are removed.
+* [Collection](../collections/introduction.md) are supported via the Hack library in PHP. Any collection literal syntax is replaced with `new`.
 
 ### Unsupported Conversions
 
 The following conversions are unsupported:
 
-* [Async](../async/intro.md) functions require Hack-aware runtime support (e.g., HHVM) and thus are not converted.
+* [Async](../async/introduction.md) functions require Hack-aware runtime support (e.g., HHVM) and thus are not converted.
 * The [`__Memoize`](../attributes/special.md#__memoize) attribute requires a Hack-aware runtime and are not converted. 
 * Traits that implement interfaces.
 * Collection literals that have initial values for non-static properties since we have to convert those literals to `new`, and `new` is not supported on property initializers. Static properties can be moved outside the class.

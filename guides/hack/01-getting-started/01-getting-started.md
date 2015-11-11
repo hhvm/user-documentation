@@ -7,7 +7,7 @@ If you are new to Hack, this getting started guide should help you get familiar 
 The prerequisites you need to write and execute Hack code is pretty straightforward:
 
 * The [HHVM runtime](../../hhvm/getting-started/getting-started.md)
-* The Hack [typechecker](../typechecker/intro.md) (included as part of the build of the HHVM runtime)
+* The Hack [typechecker](../typechecker/introduction.md) (included as part of the build of the HHVM runtime)
 * Optionally, a Hack-aware editor. We recommend [Nuclide](https://github.com/facebook/nuclide), with its [`nuclide-hack` package](https://github.com/facebook/nuclide/blob/master/pkg/nuclide/hack/README.md).
 
 The HHVM runtime is required for both (1) executing Hack code (2) to run the Hack typechecker, which is the cornerstone benefit of using the Hack language -- to make sure your code is well written, safe and consistent.
@@ -88,15 +88,15 @@ And here is the output:
 Now that you have gotten your feet wet with a simple Hack program, it's time to discuss what are considered the key features of the Hack language. There are many, but the following features are considered by many to be what make Hack standout as a great language.
 
 * [Type System](../types/type-system.md)
-* [Generics](../generics/intro.md)
-* [Async](../async/intro.md)
-* [Collections](../collections/intro.md)
+* [Generics](../generics/introduction.md)
+* [Async](../async/introduction.md)
+* [Collections](../collections/introduction.md)
 
 Of course, there are [plenty of others](/hack/), but since this a getting started guide, we will not go into detail here. The [documentation](/hack/) will give you deep information about each one.
 
 ## Converting Existing PHP Code
 
-If you have existing PHP code that you would like to convert to Hack, there are [tools like the Hackificator](../tools/intro.md) available to help you accomplish that so you don't have to do an entire conversion by hand.
+If you have existing PHP code that you would like to convert to Hack, there are [tools like the Hackificator](../tools/introduction.md) available to help you accomplish that so you don't have to do an entire conversion by hand.
 
 ## Other Learning Resources
 

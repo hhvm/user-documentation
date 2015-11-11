@@ -124,7 +124,7 @@ This may seem unintuitive, because the function `await`s every time it’s execu
 
 ## Use lambdas where possible
 
-[Lambdas](../lambdas/intro.md) can cut down on code verbosity that comes with writing full closure syntax. They are quite useful in conjunction with the [async utility helpers](utility-functions.md). 
+[Lambdas](../lambdas/introduction.md) can cut down on code verbosity that comes with writing full closure syntax. They are quite useful in conjunction with the [async utility helpers](utility-functions.md). 
 
 For example, look how the following three ways to accomplish the same thing can be shortened using lambdas.
 

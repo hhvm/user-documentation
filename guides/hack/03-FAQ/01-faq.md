@@ -6,13 +6,13 @@ This will contain some helpful hints and frequently asked questions re: Hack. Th
 
 ### Is async the same as multithreading?
 
-No. And this is important. Multithreading allows for tasks to execute in different threads of execution. Hack (and PHP) code can only run in one thread of execution. [Async](../async/intro.md) utilizes that thread to better capacity by allowing for tasks that are stalled by some sort of process (I/O, data fetching, network) to cede control to other tasks to minimize lag. 
+No. And this is important. Multithreading allows for tasks to execute in different threads of execution. Hack (and PHP) code can only run in one thread of execution. [Async](../async/introduction.md) utilizes that thread to better capacity by allowing for tasks that are stalled by some sort of process (I/O, data fetching, network) to cede control to other tasks to minimize lag. 
 
 Normally you will have a bunch of I/O tasks batched up when using async, with results coming back faster than if they were executed one after the other in sequence. 
 
 ### Should I implement my own `Awaitable` class?
 
-No. No. And no. [`Awaitable`](../async/awaitables.md) is not meant to be user-implemented. You should use `Awaitable` liberally when writing [`async`](../async/intro.md) and let the runtime handle how it deals with awaitables.
+No. No. And no. [`Awaitable`](../async/awaitables.md) is not meant to be user-implemented. You should use `Awaitable` liberally when writing [`async`](../async/introduction.md) and let the runtime handle how it deals with awaitables.
 
 ## Collections
  

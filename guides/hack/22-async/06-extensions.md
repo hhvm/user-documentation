@@ -112,7 +112,7 @@ namespace HH\Asio {
 }
 ```
 
-Here is an example of getting a vector of URL contents, using a [lambda](../lambdas/intro.md) to cut down on the code verbosity that would come with full closure syntax.
+Here is an example of getting a vector of URL contents, using a [lambda](../lambdas/introduction.md) to cut down on the code verbosity that would come with full closure syntax.
 
 @@ extensions-examples/async-curl.php @@
 

@@ -1,3 +1,0 @@
-int(34)
-
-Catchable fatal error: Argument 3 passed to Hack\UserDocumentation\Types\Intro\Examples\Hack\bar() must be an instance of int, string given in %s on line 22

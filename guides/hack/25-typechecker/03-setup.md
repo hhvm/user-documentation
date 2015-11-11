@@ -34,7 +34,7 @@ Normally, if the typechecker encounters a name (e.g., a class name) that it cann
 **Default value**: empty
 **Usage**: `user_attributes = CustomAttribute1 CustomAttribute2`
 
-You can populate the `user_attributes` configuration settings with all of your [custom attributes](../attributes/intro.md). The primary use of this setting is to help ensure that you are not misspelling any attributes within your codebase. It also ensures that you can keep track of what attributes should be used to avoid any rogue attributes from being added to your code.
+You can populate the `user_attributes` configuration settings with all of your [custom attributes](../attributes/introduction.md). The primary use of this setting is to help ensure that you are not misspelling any attributes within your codebase. It also ensures that you can keep track of what attributes should be used to avoid any rogue attributes from being added to your code.
 
 
 ### Memory

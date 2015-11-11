@@ -18,7 +18,7 @@ And the root for your program files will be the current directory from where you
 
 ## Configuration Overrides
 
-`-d` specifies command-line [configuration](../configuration/intro.md) overrides. 
+`-d` specifies command-line [configuration](../configuration/introduction.md) overrides. 
 
 In our example above, we are using the default HHVM built-in [proxygen](./proxygen.md) web server on port 8080.
 
@@ -26,7 +26,7 @@ We could have removed the `-p 8080` and explicitly appended:
 
 `-d hhvm.server.type=proxygen -d hhvm.server.port=8080 -d hhvm.server.source_root=./`
 
-to the command above. While this is a more verbose way to accomplish the same command, there might be reasons to be explicit. And, of course, you can change various [other settings](../configuration/intro.md) with `-d` as well.
+to the command above. While this is a more verbose way to accomplish the same command, there might be reasons to be explicit. And, of course, you can change various [other settings](../configuration/introduction.md) with `-d` as well.
 
 HHVM will also use the default INI configuration `server.ini` (normally found in `/etc/hhvm/` in [Linux](../installation/linux.md) distros).
 

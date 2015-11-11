@@ -32,7 +32,7 @@ Facebook's entire site runs on HHVM (desktop, api and mobile), both in developme
 
 New users may want to try our high-level overview [getting started guide](../getting-started/getting-started.md).
 
-You can find more detailed installation information [here](../installation/intro.md)
+You can find more detailed installation information [here](../installation/introduction.md)
 
 ### When does HHVM release a new version?
 
@@ -44,7 +44,7 @@ Many times, HHVM can be run directly from the command line without any additiona
 
 However, we understand that more fine tuned configuration may be necessary, particularly in server mode.
 
-HHVM allows for many [runtime option variations](../configuration/intro.md). For some configuration options, they can be set at the command line (e.g., `hhvm -m server -d hhvm.log.level=Error`). However, many times you will use a `config.ini` file and run HHVM with a command similar to: `hhvm -m server -c config.ini`.
+HHVM allows for many [runtime option variations](../configuration/introduction.md). For some configuration options, they can be set at the command line (e.g., `hhvm -m server -d hhvm.log.level=Error`). However, many times you will use a `config.ini` file and run HHVM with a command similar to: `hhvm -m server -c config.ini`.
 
 For other options that can be given to HHVM, type `hhvm --help` at the command line.
 

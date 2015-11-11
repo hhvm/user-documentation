@@ -24,10 +24,10 @@ attribute <type> <name> [= default value];
 Here are the types allowed for attributes. Note if there is a problem with using an attribute, normally an `XHPInvalidAttributeException` will be thrown.
 
 * `bool`, `int`, `float`, `string`, `array`, `mixed` (with **no coercion** ... a `int` is not coerced into `float`, for example. You will get an `XHPInvalidAttributeException` if you try this).
-* Hack [enum](../enums/intro.md) names, checked by [`Enum::isValid()`](../enums/functions.md) at runtime.
+* Hack [enum](../enums/introduction.md) names, checked by [`Enum::isValid()`](../enums/functions.md) at runtime.
 * Custom enums inline with the attribute in the form of `enum {item, item...}`. All values must be scalar so they can be converted to strings. These enums are not Hack enums.
 * Class or interface names, checked by `instanceof()`. 
-* [Generic](../generics/intro.md) types, with type arguments, although they are not enforced at runtime.
+* [Generic](../generics/introduction.md) types, with type arguments, although they are not enforced at runtime.
 
 You access an attribute within code just like a normal Hack property, but prefixed with a colon `:`. 
 
@@ -70,7 +70,7 @@ The categories are taken from the HTML specification (e.g., `%flow`, `%phrase`).
 
 ## Async
 
-XHP and [async](../async/intro.md) co-exist well together. When defining your XHP class, and you want to use `async`, do these two things:
+XHP and [async](../async/introduction.md) co-exist well together. When defining your XHP class, and you want to use `async`, do these two things:
 
 * Your class must `use XHPAsync;`, the XHP async trait.
 * You render with `asyncRender()` instead of `render()`, returning an `Awaitable<XHPRoot>`

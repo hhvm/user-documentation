@@ -2,7 +2,7 @@ var transEndEventName = ('WebkitTransition' in document.documentElement.style) ?
 
 function scrollToActive() {
   var navList = document.getElementsByClassName('navList')[0];
-  navList.scrollTop = 
+  navList.scrollTop =
     document.getElementsByClassName('navGroupActive')[0].offsetTop - 20;
   document.removeEventListener(transEndEventName, scrollToActive, false);
 }
@@ -47,8 +47,8 @@ var DocNav = React.createClass({displayName: "DocNav",
     var navClass = 'navToggle navToggle'+this.state.toggleActive;
     var toggleClass = 'toggleNav toggleNav'+this.state.toggleActive;
     return (
-      React.createElement("div", {className: navClass}, 
-        React.createElement("div", 
+      React.createElement("div", {className: navClass},
+        React.createElement("div",
           {className: toggleClass, onClick: this.handleSlide},
           React.createElement("i", {className: "fa fa-th-list"})
         ),
@@ -58,13 +58,13 @@ var DocNav = React.createClass({displayName: "DocNav",
   },
   renderNavGroups: function(group, index) {
     var navGroupChildren = [];
-    
+
     // If there is only one page to a guide, just have the main
     // guide heading be the link to that page. Don't duplicate here.
     if (Object.keys(group).length > 1) {
       for (var child in group) {
-        // Drop 'intro' links as the guide headings will link there anyway
-        if (child !== 'intro') {
+        // Drop 'introduction' links as the guide headings will link there anyway
+        if (child !== 'introduction') {
           navGroupChildren.push(this.renderNavItems(group[child], child, index));
         }
       }
@@ -75,11 +75,11 @@ var DocNav = React.createClass({displayName: "DocNav",
     }
     var groupHref = '/'+this.props.currentProduct+'/'+index+'/';
     return (
-      React.createElement("li", {className: groupClass, key: index}, 
-        React.createElement("h4", {id: index}, 
+      React.createElement("li", {className: groupClass, key: index},
+        React.createElement("h4", {id: index},
           React.createElement("a", {className: 'navItem', href: groupHref}, formatTitle(index))
-        ), 
-        React.createElement("ul", {className: 'subList'}, 
+        ),
+        React.createElement("ul", {className: 'subList'},
           navGroupChildren
         )
       )
@@ -95,8 +95,8 @@ var DocNav = React.createClass({displayName: "DocNav",
       itemClass += ' itemActive';
     }
     return (
-      React.createElement("li", {className: itemClass, key: index},       
-        React.createElement("h5", null, 
+      React.createElement("li", {className: itemClass, key: index},
+        React.createElement("h5", null,
           React.createElement("a", {className: 'navItem', href: itemHref}, formatTitle(index))
         )
       )
@@ -113,8 +113,8 @@ var navLoader = document.getElementsByClassName('navLoader')[0];
 ReactDOM.render(
   React.createElement(
     DocNav, {
-      data: docnavData, 
-      currentDoc: thisDoc, 
+      data: docnavData,
+      currentDoc: thisDoc,
       currentGroup: thisGroup,
       currentProduct: thisProduct
     }

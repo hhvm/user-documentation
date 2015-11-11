@@ -1,6 +1,6 @@
 # XHP Attribute Access
 
-XHP is such a big topic that it is [discussed in detail](../xhp/intro.md) elsewhere, but there is a special operator provided for XHP in order to access the attributes of an XHP object. 
+XHP is such a big topic that it is [discussed in detail](../xhp/introduction.md) elsewhere, but there is a special operator provided for XHP in order to access the attributes of an XHP object. 
 
 The operator is:
 

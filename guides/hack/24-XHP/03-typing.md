@@ -1,6 +1,6 @@
 # Type Annotations and Interfaces
 
-Like other [types](../types/intro.md) in Hack, you can annotate functions and properties with XHP as well.
+Like other [types](../types/introduction.md) in Hack, you can annotate functions and properties with XHP as well.
 
 There is also a list of methods available to XHP objects that you can call to help inspect the object itself, as well as modify its attributes and/or children.
 
