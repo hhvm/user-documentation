@@ -20,7 +20,7 @@ We are focusing on a few key areas for this revamp:
 
 Our strategy to create better documentation begins with a re-thinking of our doc infrastructure.
 
-* Markdown instead of docbook provides an easier path for documentation source readabibility and updates.
+* Markdown instead of docbook provides an easier path for documentation source readability and updates.
     - Have extensions to support things like cross-references, etc.
 * Token scan our HNI documentation (instead of reflection) so that rebuilding HHVM isn't necessary to update the documentation.
 * Have some sort of reusable, semantic format created from our API documentation. This has the potential to provide reusability to documentation projects beyond Hack and HHVM.
@@ -37,11 +37,9 @@ Follow along with our progress. We have made this repo open from the start and y
 
 If you see anything egregious, you can [file an issue](https://github.com/hhvm/user-documentation/issues/new) or ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
 
-## Contribute
+## Local Site Installation
 
-If you would like to contribute content, checkout the [contributing information](CONTRIBUTING.md)
-
-## Installation
+If you would like to build the site locally (e.g., to test your [content contributions](#contributing-content)), you will need to install and configure your system to be able to build and run the site locally.
 
 ### Configuration
 
@@ -196,3 +194,25 @@ user-documentation/public$ hhvm -m server \
   ```
   $ eb swap
   ```
+
+## Contributing Content
+
+In order to contribute to the site, first make sure you understand the [contribution guidelines](CONTRIBUTING.md).
+
+You can contribute to the site through [pull requests](https://github.com/hhvm/user-documentation/pulls).
+
+If you want to test your changes locally, the make sure you have followed the [installation instructions](#local-site-installation) for locally building the site.
+
+## Local Snapshot of Site
+
+If you don't have any desire to [build the site](#local-site-installation) (e.g., to test [content changes](#contributing-content)), but want to run a snapshot copy of the site locally, offline, then you can use Docker to do this.
+
+- First, install the [Docker Engine](https://docs.docker.com/) on your platform
+- Then:
+
+```
+% docker pull hhvm/user-documentation # get the latest version of the site.
+% docker run -p 1234:80 hhvm/user-documentation # run web server
+```
+
+-. Finally, open `http://localhost:1234` in your browser.
