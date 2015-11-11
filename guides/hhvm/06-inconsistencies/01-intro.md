@@ -12,6 +12,10 @@ However, there are some noted inconsistencies. They are listed here.
 
 Under PHP5, if an array's internal cursor points to the position past the last element and then a copy of the array is made, the copy will have its internal cursor reset to point at the first element. Under HHVM, when a copy of an array is made, the copy's internal cursor will always point to the same position that the original array's internal cursor pointed to.
 
+@@ intro-examples/array-internal-cursors.php @@
+
+Difference: [https://3v4l.org/QOOGA](https://3v4l.org/QOOGA)
+
 ## Foreach 
 
 ### Foreach by value
@@ -35,54 +39,41 @@ Fatals thrown from destructors will log an error, and prevent further PHP code f
 
 PHP5 does not allow exceptions to be thrown from `__toString()`. HHVM does.
 
+@@ intro-examples/toString-exception.php @@
+
+Difference: [https://3v4l.org/XHDP8](https://3v4l.org/XHDP8)
+
 ### `__call`/`__callStatic()` handling
 
-This example gives inconsistent results in PHP5:
+Take the following example:
 
-```
-  <?php
-  class B {
-  }
-  class G extends B {
-    function __call($name, $arguments) { var_dump('G');}
-    function f4missing($a) {
-      B::f4missing(5); // __call checking happened at B
-    }
-  }
-  $g = new G();
-  $g->f4missing(3);
-```
+@@ intro-examples/call.php @@
 
-Under HHVM, both checking and invocation of `__call()` happen on class G.
+Under HHVM, both checking and invocation of `__call()` happen on class G. In PHP, you will get a fatal error. 
+
+Difference: [https://3v4l.org/t9pba](https://3v4l.org/t9pba)
 
 ### Object internal cursors
 
 Under PHP5, objects have an internal cursor (similar to the array internal cursor) that can be used to iterate over the object's properties. Under HHVM, objects do not have internal cursors, and the `next()`, `prev()`, `current()`, `key()`, `reset()`, `end()`, and `each()` builtin functions do not support objects.
 
-### Suppressing errors for params to default constructors
+### Suppressing errors for parameters to default constructors
 
-If a class doesn't define a constructor then you construct that object passing whatever you want, including things that would fatal the runtime. HHVM doesn't allow this, and will always evaluate the args whether the class has a constructor or not.
+If a class doesn't define a constructor then you construct that object passing whatever you want, including things that would fatal the runtime. HHVM doesn't allow this, and will always evaluate the arguments whether the class has a constructor or not.
 
-```
-  <?php
-  class A {}
-  var_dump(new A(undefined_function())); // Works in PHP5 but not HHVM
+@@ intro-examples/default-constructor-param.php @@
 
-  class B {
-    public function __construct() {
-    }
-  }
-  var_dump(new B(undefined_function())); // Doesn't work in neither HHVM nor PHP5
-```
+Difference: [https://3v4l.org/FDpj0](https://3v4l.org/FDpj0)
 
 ## Misc
 
 ### Case-insensitive constants
 
 HHVM does not support case-insensitive constants, for example:
-```
-  define('FOO', 123, true);
-```
+
+@@ intro-examples/case-insensitive-constants.php @@
+
+Difference: [https://3v4l.org/nCBh1](https://3v4l.org/nCBh1)
 
 ### `get_defined_vars()` and `get_declared_classes()`
 
@@ -90,19 +81,9 @@ HHVM may return variables/classes in a different order than PHP5.
 
 Under different builds of HHVM, they will be consistent though.
 
-### HHVM only supports `preg_replace /e` in limited cases.
+### `preg_replace /e`.
 
-### Under PHP5, you can assign to `$GLOBALS`:
-
-```
-  $GLOBALS = 0;
-  $x = $GLOBALS - 5;
-
-  $g = $GLOBALS;
-  $g['x'] = 3;
-```
-
-Under HHVM, this is not allowed or not working at present.
+HHVM and PHP 5.5+ has deprecated support for `preg_replace()` with the `/e` modifier. PHP 7 removes support of it completely. Use `preg_replace_callback()` instead.
 
 ### Converting $GLOBALS to bool 
 
@@ -121,21 +102,17 @@ Loading of external entities in the libxml extension is disabled by default for 
 
 ### Local Variables containing a parameter
 
-If the value of a local variable containing a parameter changes, `func_get_args()` returns the new value. This behavior matches PHP7, but not PHP5.
+If the value of a local variable containing a parameter changes, `func_get_args()` returns the new value. This behavior matches PHP7, but not PHP5 (in PHP5, the original parameter value is used). 
 
-```
-  class Foo {
-    function bar($baz) {
-      $baz = 'herpderp';
-      // Always outputs array('herpderp')
-      var_dump(func_get_args());
-    }
-  }
-```
+Differences: [https://3v4l.org/OgFts](https://3v4l.org/OgFts)
+
+@@ intro-examples/local-var-param.php @@
 
 ### PharData
 
 Under HHVM, `PharData` will extract symlinks from tar files. PHP5 will create empty files instead.
 
-(10) XDebug defaults to using the time for naming the output file. PHP5 uses the
+### XDebug
+
+XDebug defaults to using the time for naming the output file. PHP5 uses the
 PID instead.
