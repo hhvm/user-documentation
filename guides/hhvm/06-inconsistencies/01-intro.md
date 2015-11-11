@@ -6,12 +6,7 @@ However, there are some noted inconsistencies. They are listed here.
 
 *Note*: This list may not be exhaustive; feel free to submit a pull request or issue on any other inconsistencies you may find.
 
-
 ## Arrays
-
-## Next free integer key for arrays
-
-Arrays contain a hidden field called the `NextFreeElement` field that tracks what integer key should be used when a new element is appended. Under PHP5, when an array is copied the `NextFreeElement` field of the new array will be recomputed based on the keys it currently contains. Under HHVM, when an array is copied the new array's `NextFreeElement` field is set to the same value as the original array's `NextFreeElement` field.
 
 ## Array internal cursors
 
