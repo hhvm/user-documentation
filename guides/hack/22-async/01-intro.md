@@ -6,7 +6,7 @@ Async is **not multithreading** - HHVM still executes all of your PHP/Hack code 
 
 ## A Page As A Dependency Tree
 
-Imagine you have a page that contains two components; one stores data in MySQL, the other fetches from an API via CuRL - and both cache results in Memcached. The dependencies could be modeled like this:
+Imagine you have a page that contains two components; one stores data in MySQL, the other fetches from an API via cURL - and both cache results in Memcached. The dependencies could be modeled like this:
 
 ![Dependency Tree](/images/async/async-dependency.png)
 
@@ -24,15 +24,17 @@ This is what Hack's async functionality is. All PHP/Hack code executes in the ma
 
 ![Asynchronous](/images/async/async-always-busy.png)
 
-Importantly, the order your code executes is not guaranteed - for example, if the CuRL request for Component A is slow, execution of the same code could look more like this:
+Importantly, the order your code executes is not guaranteed - for example, if the cURL request for Component A is slow, execution of the same code could look more like this:
 
-![Asynchronous with slow curl](/images/async/async-slow-curl.png)
+![Asynchronous with slow cURL](/images/async/async-slow-curl.png)
 
 The reordering of different task instructions in this way allow you to hide I/O [latency](https://en.wikipedia.org/wiki/Latency_\(engineering\)). So while one task is currently sitting at an I/O instruction (e.g., waiting for data), another task's instruction, with hopefully less latency, can execute in the meantime.
 
 Async is not a panacea, however. While executing two async functions can utilize the task reordering mechanisms described here, if those async functions call blocking functions like [`curl_exec()`](php.net/manual/en/function.curl-exec.php) or `sleep()`[php.net/manual/en/function.sleep.php], those calls are not cooperatively multi-tasking and will be blocked as normal.
 
 ## Async In Practice: cURL
+
+A naive way to make two cURL requests without async could look like this:
 
 @@ intro-examples/non-async-curl.php @@
 
@@ -44,7 +46,7 @@ In the example above, the call to `curl_exec` in `curl_A()` is blocking any othe
 
 In this example, we are calling an async-aware version of `curl_exec()`. Thus, in this case, our waiting state is explicitly allowing other I/O operation tasks in the code to occur.
 
-When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, the network latency to retrieve results of the CURL, the async infrastructure (the scheduler) looks for other async tasks that could be run. It finds that `curl_B()` is available to execute, so it starts executing that code. When it hits its `HH\Asio\curl_exec()` call, the process is repeated again, and the scheduler will find that our `curl_exec()` call in `curl_B()` is ready for execution once again.
+When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, the network latency to retrieve results of the cURL, the async infrastructure (the scheduler) looks for other async tasks that could be run. It finds that `curl_B()` is available to execute, so it starts executing that code. When it hits its `HH\Asio\curl_exec()` call, the process is repeated again, and the scheduler will find that our `curl_exec()` call in `curl_B()` is ready for execution once again.
 
 ![Async](/images/async/curl-async.png) 
 
