@@ -2,23 +2,23 @@
 
 The following table summarizes the type system available in Hack, examples of how they are used in annotations, where they can be annotated (function, class method, class property, function/method return, parameter), and if they can be nullable. Remember, a return type is always preceded by a `:`.
 
-Type       |    Example Annotations  |Func?|Meth?|Prop?|Ret?|Param?|Nullable?
+Type       |    Example Annotations  |Function|Class Method|Class Property|Function Return|Parameter|Nullable
 -----------|-------------------------|-----|---- |-----|----|------|---------
-Primitive  |`int`, `array`           | y   |  y  | y   | y  | y    | y
-`num`      |`num`                    | y   |  y  | y   | y  | y    | y
-`arraykey` |`arraykey`               | y   |  y  | y   | y  | y    | y
-`void`     |`void`                   | y   |  y  | **x**   | **x**  | **x**    | **x**
-`noreturn` |`noreturn`               | y   |  y\*| **x**   | **x**  | **x**    | **x**
-Object     |`Foo`, `IBar`            | y   |  y  | y   | y  | y    | y
-`mixed`    |`mixed`                  | y   |  y  | y   | y  | y    | **x**
-`this`     |`this`                   | **x**   |  y  | **x**   | y  | **x**    | y 
-XHP        |`XHPRoot`, `XHPChild`    | y   |  y  | y   | y  | y    | y
-Nullable   |`?int`, `?Vector<string>`| y   |  y  | y   | y  | y    | y
-Generics   |`Box<T>`, `Map<string, int>`| y   |  y  | y   | y  | y    | y
-Enum       |`MyEnum`                 | y   |  y  | y   | y  | y    | y
-Callable   |`(function(int, string): string)`|y |  y  | y   | y  | y    | y
-Tuple      |`(int, string)`          | y   |  y  | y   | y  | y    | y
-Type Alias |`MyAlias`                | y   |  y  | y   | y  | y    | y
-Shape      |`MyShape`                | y   |  y  | y   | y  | y    | y
+Primitive  |`int`, `array`           | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+`num`      |`num`                    | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+`arraykey` |`arraykey`               | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+`void`     |`void`                   | Yes   |  Yes  | **No**   | **No**  | **No**    | **No**
+`noreturn` |`noreturn`               | Yes   |  Yes\*| **No**   | **No**  | **No**    | **No**
+Object     |`Foo`, `IBar`            | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+`mixed`    |`mixed`                  | Yes   |  Yes  | Yes   | Yes  | Yes    | **No**
+`this`     |`this`                   | **No**   |  Yes  | **No**   | Yes  | **No**    | Yes 
+XHP        |`XHPRoot`, `XHPChild`    | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+Nullable   |`?int`, `?Vector<string>`| Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+Generics   |`Box<T>`, `Map<string, int>`| Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+Enum       |`MyEnum`                 | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+Callable   |`(function(int, string): string)`|Yes |  Yes  | Yes   | Yes  | Yes    | Yes
+Tuple      |`(int, string)`          | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+Type Alias |`MyAlias`                | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
+Shape      |`MyShape`                | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
 
 \* Only static methods
