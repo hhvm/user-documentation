@@ -1,0 +1,1 @@
+Five simple steps to installing Hack, and making your first program.
