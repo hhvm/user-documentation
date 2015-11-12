@@ -153,7 +153,7 @@ var DocNav = React.createClass({displayName: "DocNav",
 });
 
 function formatTitle(title) {
-  return title.replace('-', ' ');
+  return (title.replace('-', ' ')).replace('.', '\\');
 }
 
 var navLoader = document.getElementsByClassName('navLoader')[0];
