@@ -42,7 +42,7 @@ The two most important limitations are:
 
 For example, given this code:
 
-@@ intro-examples/limitations.php @@
+@@ introduction-examples/limitations.php @@
 
 New users often think of async as multithreading, so expect `do_cpu_work()` and `do_sleep()` to execute in parallel - however, this will not happen because there are no operations that can be moved to the background:
 
