@@ -59,19 +59,20 @@ A naive way to make two cURL requests without async could look like this:
 
 @@ introduction-examples/non-async-curl.php @@
 
-In the example above, the call to `curl_exec` in `curl_A()` is blocking any other processing. Thus, even though `curl_B()` is an independent call from `curl_A()`, it has to sit around waiting for `curl_A()` to finish before beginning its execution.
+In the example above, the call to `curl_exec()` in `curl_A()` is blocking any other processing. Thus, even though `curl_B()` is an independent call from `curl_A()`, it has to sit around waiting for `curl_A()` to finish before beginning its execution:
 
 ![No Async](/images/async/curl-synchronous.png)
 
+Fortunately, HHVM provides an async version of `curl_exec()`:
+
 @@ introduction-examples/async-curl.php @@
 
-In this example, we are calling an async-aware version of `curl_exec()`. Thus, in this case, our waiting state is explicitly allowing other I/O operation tasks in the code to occur.
+The async version of `curl_exec()` allows the scheduler to run other code while waiting for a response from cURL. As we're also awaiting a call to `curl_B()`, it is likely that the scheduler will choose to call it, which in turn starts another async `curl_exec()`. If `curl_A()`'s HTTP request has finished, the scheduler will resume execution of the `curl_A()` function - but it's likely that the HTTP requests will take longer than that, so the main thread will be idle, and waiting for either of the HTTP requests to finish:
 
-When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, the network latency to retrieve results of the cURL, the async infrastructure (the scheduler) looks for other async tasks that could be run. It finds that `curl_B()` is available to execute, so it starts executing that code. When it hits its `HH\Asio\curl_exec()` call, the process is repeated again, and the scheduler will find that our `curl_exec()` call in `curl_B()` is ready for execution once again.
 
 ![Async](/images/async/curl-async.png)
 
-While this example may not always show a measurable time savings (there are some factors like network latency and possible caching involved), you will not be slower than the non-async version overall and you may get results like this:
+The amount that async speeds up this example can vary greatly (eg depending on network conditions and DNS caching), but can be significant:
 
 *Non-Async*
 ```
