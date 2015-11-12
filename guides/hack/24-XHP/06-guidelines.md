@@ -16,7 +16,7 @@ This validation is on by default. You can turn it off by running the following c
 :xhp::$ENABLE_VALIDATION=false
 ```
 
-## Use Contexts To Access Higher Level Information
+## Use Contexts to Access Higher Level Information
 
 If you have a parent object, and you want to give information to some object further down the UI tree (e.g., <ul> to <li>), you can set a context for those lower objects and the lower objects can retrieve them. You use `setContext()` and `getContext()`
 
@@ -27,7 +27,7 @@ If you have a parent object, and you want to give information to some object fur
 Context is only passed down the tree at render time. In general, you should only call `getContext()` in the `render()` method of the child.
 
 
-## Don't Add Public Methods To Your XHP Components
+## Don't Add Public Methods to Your XHP Components
 
 Basically, your XHP classes should consist of children, attributes and a `protected render()` / `protected async renderAsync()` function. Basically, a user should be able to use tags, `toString()` and the [XHP object interfaces](./typing.md#xhp-object-interfaces) only to deal with your object.
 
