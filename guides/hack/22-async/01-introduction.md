@@ -49,7 +49,7 @@ New users often think of async as multithreading, so expect `do_cpu_work()` and 
  - `do_cpu_work()` only contains PHP code with no builtins, so executes
    in and blocks the main request thread
  - while `do_sleep()` does call a builtin, it is not an async builtin - so it
-   also must execute and block the main request thread
+   also must block the main request thread
 
 ![multithreaded model vs async model](/images/async/limitations.png)
 
