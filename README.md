@@ -217,3 +217,110 @@ If you don't have any desire to [build the site](#local-site-installation) (e.g.
 ```
 
 -. Finally, open `http://localhost:1234` in your browser.
+
+## Running the Examples
+
+Nearly all of the code examples you see in the guides and API documentation are actual Hack or PHP source files that are embedded at site build time into the content itself.
+
+As opposed to embedded the code examples directly within the markdown itself, this provides the flexibility of actually having running examples within this repo.
+
+You must have HHVM installed in order to run these examples since most of them are written in Hack (e.g., `<?hh`), and HHVM is the only runtime to currently support Hack.
+
+You will find the examples in directories named with the pattern:
+
+```
+guides/[hhvm | hack]/##-topic/##-subtopic-examples
+```
+
+e.g.,
+
+```
+guides/hack/23-collections/06-constructing-examples
+```
+
+### Standalone
+
+You can run any example standalone. For example:
+
+```
+# Assuming you are in the user-documentation repo directory
+% cd guides/hack/23-collections/10-examples-examples/
+% hhvm lazy.php
+```
+
+And you will see output like:
+
+```
+object(HH\Vector)#4 (5) {
+  [0]=>
+  int(0)
+  [1]=>
+  int(2)
+  [2]=>
+  int(4)
+  [3]=>
+  int(6)
+  [4]=>
+  int(8)
+}
+Time non lazy: 0.10859489440918
+object(HH\Vector)#10 (5) {
+  [0]=>
+  int(0)
+  [1]=>
+  int(2)
+  [2]=>
+  int(4)
+  [3]=>
+  int(6)
+  [4]=>
+  int(8)
+}
+Time non lazy: 0.0096559524536133
+```
+
+### Using the HHVM Test Runner
+
+Each example is structured to be run with the [HHVM test runner](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md). We use the test runner internally to ensure that any changes made to HHVM do not cause a regression. The examples in the documentation here can be used for that purpose as well.
+
+You can run the HHVM test runner on the entire suite of examples, on one directory of examples or just one example itself. 
+
+Assuming you have installed and **compiled** HHVM from source, here is how you can run the examples with the test runner:
+
+```
+# Assuming you are in the user-documentation repo root
+
+# This runs every example in the test runner
+% hhvm /path/to/hhvm/source/hphp/test/run .
+# This runs every example in the test runner in typechecker mode
+% hhvm /path/to/hhvm/source/hphp/test/run --typechecker .
+
+# This runs all collections topic examples in the test runner
+% hhvm /path/to/hhvm/source/hphp/test/run guides/hack/23-collections
+# This runs all collections topic examples in test runner in typechecker mode
+% hhvm /path/to/hhvm/source/hphp/test/run guides/hack/23-collections --typechecker .
+```
+
+Here is the output you should see when you run the test runner. Assume we are running the examples in the collections topic:
+
+```
+$ hhvm ~/hhvm/hphp/test/run guides/hack/23-collections/
+Running 32 tests in 32 threads (0 in serial)
+
+All tests passed.
+              |    |    |
+             )_)  )_)  )_)
+            )___))___))___)\
+           )____)____)_____)\
+         _____|____|____|____\\__
+---------\      SHIP IT      /---------
+  ^^^^^ ^^^^^^^^^^^^^^^^^^^^^
+    ^^^^      ^^^^     ^^^    ^^
+         ^^^^      ^^^
+
+Total time for all executed tests as run: 11.57s
+```
+
+You can use `--verbose` to see all the tests that are running.
+
+**NOTE** that due to some discovered bugs in HHVM and/or third-party libraries, running the test runner on *all* the examples may not give you a 100% pass rate. These bugs are being looked at.
