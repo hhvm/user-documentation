@@ -2,22 +2,14 @@
 
 Async (synchronous) programming is a way to have pieces of code that involve waiting (such as making a GET request to a remote web server, or database queries) to run without blocking other parts of the code from executing. 
 
-Here's some non-async code that fetches two URLs:
+Imagine you need the result of two functions, `foo()` and `bar()`; `foo()` requires data from a web page or HTTP API, and `bar()` needs data from MySQL.
 
-@@ async-examples/non-async-curl.php @@
+Traditionally, the execution flow will look like this:
 
-The execution flow will look like this:
+![Synchronous execution](/images/async/feature-advert-sync.png) 
 
-![No async](/images/async/curl-synchronous.png)
+Async allows performance improvements by changing the flow to look like this instead:
 
-This example can be modified to use Hack's async functionality:
-
-@@ async-examples/async-curl.php @@
-
-This leads to an execution flow like this:
-
-![Async](/images/async/curl-async.png)
-
-As the two HTTP requests are executing simultaneously, the total time spent can be much lower.
+![Asynchronous execution](/images/async/feature-advert-async.png)
 
 Our [Async Documentation](../async/introduction.md) provides more information about this feature.
