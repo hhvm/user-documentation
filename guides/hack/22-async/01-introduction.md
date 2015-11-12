@@ -61,9 +61,3 @@ Total time taken: 3.3065688610077 seconds
 ```
 Total time taken: 2.3396739959717 seconds
 ```
-
-## Keys to Async
-
-The keys to async from the HHVM side are [awaitables](awaitables.md), which activate the internal HHVM async scheduler, and the provided async [extensions](extensions.md), which provide common functionality (e.g., MySQL access), but built from the ground up to make use of async.
-
-The keys for you, the programmer, are to be able to organize your code to minimize data dependencies and following our general async [guidelines](guidelines.md).
