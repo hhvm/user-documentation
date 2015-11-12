@@ -1,0 +1,6 @@
+File "%smap-typecheck.php", line 18, characters 25-26:
+Invalid argument (Typing[4110])
+File "%smap-typecheck.php", line 6, characters 23-25:
+This is an object of type Map
+File "%smap-typecheck.php", line 12, characters 8-36:
+It is incompatible with an object of type Vector

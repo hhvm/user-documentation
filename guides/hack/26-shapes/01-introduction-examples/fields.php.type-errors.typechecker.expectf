@@ -1,0 +1,6 @@
+File "%sfields.php", line 11, characters 12-16:
+Invalid return type (Typing[4057])
+File "%sfields.php", line 10, characters 5-21:
+The field 'name' is missing
+File "%sfields.php", line 8, characters 62-65:
+The field 'name' is defined

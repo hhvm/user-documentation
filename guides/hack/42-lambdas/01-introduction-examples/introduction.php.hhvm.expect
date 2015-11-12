@@ -1,0 +1,8 @@
+object(HH\Vector)#3 (3) {
+  [0]=>
+  string(13) "Carlton Banks"
+  [1]=>
+  string(10) "Will Banks"
+  [2]=>
+  string(10) "Phil Banks"
+}
