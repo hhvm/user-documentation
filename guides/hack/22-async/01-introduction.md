@@ -67,10 +67,11 @@ Fortunately, HHVM provides an async version of `curl_exec()`:
 
 @@ introduction-examples/async-curl.php @@
 
-The async version of `curl_exec()` allows the scheduler to run other code while waiting for a response from cURL. As we're also awaiting a call to `curl_B()`, it is likely that the scheduler will choose to call it, which in turn starts another async `curl_exec()`. If `curl_A()`'s HTTP request has finished, the scheduler will resume execution of the `curl_A()` function - but it's likely that the HTTP requests will take longer than that, so the main thread will be idle, and waiting for either of the HTTP requests to finish:
-
+The async version of `curl_exec()` allows the scheduler to run other code while waiting for a response from cURL. The most likely behavior is that as we're also awaiting a call to `curl_B()`, it scheduler will choose to call it, which in turn starts another async `curl_exec()`. As HTTP requests are generally slow, the main thread will then be idle until one of the requests completes:
 
 ![Async](/images/async/curl-async.png)
+
+This execution order is the most likely, but not guaranteed; for example, if the `curl_B()` request is much faster than the `curl_A()` HTTP request, `curl_B()` may complete before `curl_A()` completes.
 
 The amount that async speeds up this example can vary greatly (eg depending on network conditions and DNS caching), but can be significant:
 
