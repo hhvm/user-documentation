@@ -8,8 +8,10 @@ Traditionally, the execution flow will look like this:
 
 ![Synchronous execution](/images/async/feature-advert-sync.png) 
 
-Async allows performance improvements by changing the flow to look like this instead:
+Async can lead to performance improvements by changing the flow to look like this instead:
 
 ![Asynchronous execution](/images/async/feature-advert-async.png)
+
+### Further Reading
 
 Our [Async Documentation](../async/introduction.md) provides more information about this feature.
