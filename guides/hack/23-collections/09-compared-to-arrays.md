@@ -11,7 +11,6 @@ Use `array`s when:
 - You are interacting with built-in functions that modify arrays *except* for [`array_push()`](http://php.net/manual/en/function.array-push.php), [`array_pop()`](http://php.net/manual/en/function.array-pop.php), [`array_shift()`](http://php.net/manual/en/function.array-shift.php), [`array_unshift()`](http://php.net/manual/en/function.array-unshift.php).
 - You are interacting with built-in functions that modify an array's internal pointer like [`current()`](http://php.net/manual/en/function.current.php) and [`next()`](http://php.net/manual/en/function.current.php).
 - You are interacting with built-in functions that have different behavior based on the type of parameter you pass it, like [`apc_store()`](http://php.net/manual/en/function.apc-store.php).
-- You are passing the container around by reference `&`.
 - You are passing the container to a *non built-in* function that takes an `array` as a parameter (e.g. in a custom framework).
 - You need [value semantics](./semantics.md).
 
