@@ -51,7 +51,7 @@ This example shows you how to use `lazy()` on a rather large collection and the 
 
 @@ examples-examples/indexish.php @@
 
-## Creating a new collection
+## Creating a New Collection
 
 The current [concrete](./04-classes.md) collection classes are marked as final. That is, they cannot be directly extended and sub-classed. However, you can create new collection classes by using the [interfaces](./03-interfaces.md) provided. This example won't create a full-blown new collection since so many methods would have to be implemented from [`Iterable<T>`](./semantics.md#core-interfaces) with much more scrutiny and detail than what is presented here.
 

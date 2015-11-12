@@ -2,7 +2,7 @@
 
 It might be tempting to just throw `async`, `await` and `Awaitable` on all your code and go on with your life. And while it is OK to have more `async` functions than not -- in fact, you should generally not be afraid to make a function `async` since there is no performance penalty for doing so -- there are some guidelines you should follow in order to make the most efficient use of `async`.
 
-## Be liberal, but careful, with async
+## Be Liberal, but Careful, with Async
 
 If you are struggling as to whether your code should be async or not, you can generally start with the answer //yes// and find a reason to say //no//. For example, a simple //hello world// program can be made async with no performance penalty. You will likely not get any gain, but you will not get any loss -- and it is setup for any future changes that may require async.
 
@@ -14,7 +14,7 @@ These two programs are, for all intents and purposes, equivalent.
 
 Just make sure you are following the rest of the guidelines. Async is great, but you still have to consider things like caching, batching and efficiency.
 
-## Use async extensions
+## Use Async Extensions
 
 For the common cases where async would provide maximum benefit, HHVM provides convenient extension libraries to help make writing code much easier. Depending on your use case scenario, you should liberally use:
 
@@ -23,7 +23,7 @@ For the common cases where async would provide maximum benefit, HHVM provides co
 * [McRouter](./extensions.md#mcrouter) for memcached-based operations.
 * [Streams](./extensions.md#streams) for stream-based resource operations.
 
-## Do not use async in loops
+## Do Not Use Async in Loops
 
 If you only remember one rule, remember this:
 
@@ -42,7 +42,7 @@ Instead, you will want to use our async-aware mapping function, [`vm()`](link to
 
 @@ guidelines-examples/await-no-loop.php @@
 
-## Considering data dependencies is important
+## Considering Data Dependencies Is Important
 
 Possibly the most important aspect in learning how to structure async code is understanding data dependency patterns. Here is the general flow of how to make sure your async code is data dependency correct:
 
@@ -65,7 +65,7 @@ The above example follows our flow:
 2. One function for the bundle of data operations (post text and comment count).
 3. One top function that coordinates everything.
 
-## Consider batching
+## Consider Batching
 
 Wait handles can be rescheduled. This means that it will be sent back to the queue of the scheduler, waiting until other awaitables have run. Batching can be a good use of rescheduling. For example, say you have high latency lookup of data, but you can send multiple keys for the lookup in a single request.
 
@@ -77,7 +77,7 @@ The `await HH\Asio\later()` in `Batcher::go()` basically allows `Batcher::go()` 
 
 So, `await HH\Asio\v(array(b_one..., b_two...));` has two pending awaitables. If `b_one()` is called first, it calls `Batcher::lookup()`, which calls `Batcher::go()`, which reschedules via `later()`. Then HHVM looks for other pending awaitables. `b_two()` is also pending. It calls `Batcher::lookup()` and then it gets suspended via `await self::$aw` because `Batcher::$aw` is not `null` any longer. Now `Batcher::go()` resumes, fetches and returns the result.
 
-## Don't forget to await an awaitable
+## Don't Forget to Await an Awaitable
 
 What do you think happens here?
 
@@ -85,7 +85,7 @@ What do you think happens here?
 
 The answer is undefined. You might get all three echoes. You might only get the first echo. You might get nothing at all. The only way to guarantee that `speak()` will run to completion is to `await` it. `await` is the trigger to the async scheduler that allows HHVM to appropriately suspend and resume `speak()`; otherwise, the async scheduler will be provide no guarantees with respect to `speak()`.
 
-## Minimize undesired side effects
+## Minimize Undesired Side Effects
 
 In order to minimize any unwanted side effects (e.g., ordering disparities), your creation and awaiting of awaitables should happen as close as possible.
 
@@ -95,7 +95,7 @@ In the above example, `possible_side_effects()` could cause some undesired behav
 
 Basically, don't depend on the order of output between runs of the same code. i.e, don't write async code where ordering is important and instead use dependencies via awaitables and `await`.
 
-## Memoization may be good. But only awaitables
+## Memoization May Be Good. But Only Awaitables
 
 Given that async is commonly used in operations that are time-consuming, memoizing (i.e., caching) the result of an async call can definitely be worthwhile.
 
@@ -122,7 +122,7 @@ Instead, memoize the awaitable
 
 This may seem unintuitive, because the function `await`s every time it’s executed, even on the cache-hit path. But that’s fine: on every execution except the first, `$handle` is not `null`, so a new instance of `time_consuming()` will not be started. The result of the one existing instance will be shared.
 
-## Use lambdas where possible
+## Use Lambdas Where Possible
 
 [Lambdas](../lambdas/introduction.md) can cut down on code verbosity that comes with writing full closure syntax. They are quite useful in conjunction with the [async utility helpers](utility-functions.md). 
 
@@ -130,7 +130,7 @@ For example, look how the following three ways to accomplish the same thing can 
 
 @@ guidelines-examples/lambdas.php @@
 
-## Use `join` in non-async functions
+## Use `join` in Non-async Functions
 
 Imagine you are making a call to an `async` function `join_async()` from a non-async scope. In order to obtain your desired results, you must `join()` in order to get the result from an awaitable. 
 
@@ -138,11 +138,11 @@ Imagine you are making a call to an `async` function `join_async()` from a non-a
 
 This scenario normally occurs in the global scope (but can occur anywhere).
 
-## Remember async is NOT multi-threading
+## Remember Async Is NOT Multi-threading
 
 Async functions are not running at the same time. They are CPU sharing via changes in wait state in executing code (i.e., preemptive multitasking). Async still lives in the single-threaded world of normal PHP and Hack.
 
-## `await` is not an expression
+## `await` Is Not an Expression
 
 You can use `await` in three places:
 

@@ -28,7 +28,7 @@ Remember that `mixed` represent any annotatable type (except a nullable type). `
 
 @@ refining-examples/mixed.php @@
 
-## Object instance checks
+## Object Instance Checks
 
 Sometimes you want to know whether an object is a child of a parent class or implements a particular interface. You can use the `instanceof` check to help make this determination. 
 
