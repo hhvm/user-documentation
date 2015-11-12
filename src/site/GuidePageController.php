@@ -70,11 +70,11 @@ final class GuidePageController extends WebPageController {
         </div>
       </div>;
   }
-  
+
   protected function getSideNav(): XHPRoot {
     $product = $this->getProduct();
     $guides = GuidesIndex::getProductIndex($product);
-    return 
+    return
       <div class="navWrapper guideNav">
         <div class="navLoader"></div>
         <script>
