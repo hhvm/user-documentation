@@ -1,6 +1,6 @@
 <ul><i>Item 1</i></ul>
 
-string(255) "Element `ul` was rendered with invalid children.
+string(%d) "Element `ul` was rendered with invalid children.
 
 %sallowed-tag-validation.php:11
 
