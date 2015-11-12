@@ -30,7 +30,28 @@ Importantly, the order your code executes is not guaranteed - for example, if th
 
 The reordering of different task instructions in this way allow you to hide I/O [latency](https://en.wikipedia.org/wiki/Latency_\(engineering\)). So while one task is currently sitting at an I/O instruction (e.g., waiting for data), another task's instruction, with hopefully less latency, can execute in the meantime.
 
-Async is not a panacea, however. While executing two async functions can utilize the task reordering mechanisms described here, if those async functions call blocking functions like [`curl_exec()`](php.net/manual/en/function.curl-exec.php) or `sleep()`[php.net/manual/en/function.sleep.php], those calls are not cooperatively multi-tasking and will be blocked as normal.
+## Limitations
+
+The two most important limitations are:
+
+ - all PHP/Hack code executes in the main request thread
+ - blocking APIs (eg `mysql_query()`, `sleep()`) do not get automatically
+   converted to async functions  - this would be unsafe as it could change the
+   execution order of unrelated code that might not be designed for that
+   possibility.
+
+For example, given this code:
+
+@@ intro-examples/limitations.php @@
+
+New users often think of async as multithreading, so expect `do_cpu_work()` and `do_sleep()` to execute in parallel - however, this will not happen because there are no operations that can be moved to the background:
+
+ - `do_cpu_work()` only contains PHP code with no builtins, so executes
+   in and blocks the main request thread
+ - while `do_sleep()` does call a builtin, it is not an async builtin - so it
+   also must block the main request thread
+
+![multithreaded model vs async model](/images/async/limitations.png)
 
 ## Async In Practice: cURL
 
@@ -48,7 +69,7 @@ In this example, we are calling an async-aware version of `curl_exec()`. Thus, i
 
 When `curl_A()` hits a call to `HH\Asio\curl_exec`, depending on, for example, the network latency to retrieve results of the cURL, the async infrastructure (the scheduler) looks for other async tasks that could be run. It finds that `curl_B()` is available to execute, so it starts executing that code. When it hits its `HH\Asio\curl_exec()` call, the process is repeated again, and the scheduler will find that our `curl_exec()` call in `curl_B()` is ready for execution once again.
 
-![Async](/images/async/curl-async.png) 
+![Async](/images/async/curl-async.png)
 
 While this example may not always show a measurable time savings (there are some factors like network latency and possible caching involved), you will not be slower than the non-async version overall and you may get results like this:
 
