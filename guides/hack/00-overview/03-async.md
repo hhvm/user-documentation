@@ -4,32 +4,29 @@ Async (or asynchronous to give the full title) programming is, at the very basic
 
 #### A Basic Example
 
-Here's a really simple piece of code that would fetch the content of a URL and then does something with the result:
+Here's a really simple piece of code that would involve a function that includes some input/output instruction that forces the code execution to wait until it is finished (sometimes also called blocking):
 
 ```
-$x = makeGetRequest('http://example.com/a/');
-$y = makeGetRequest('http://example.com/b/');
+$x = makeBlockingRequest('foo');
+$y = makeBlockingRequest('bar');
 
 echo $x;
 
-function makeGetRequest(string $url): string {
-  $ch = curl_init($url);
-  curl_setopt($ch, CURLOPT_HEADER, 0);
-  $content = curl_exec($ch);
-  curl_close($ch);
-  return $content;
+function makeBlockingRequest(string $a): string {
+  // do something blocking
+  return $value;
 }
 
 ```
 
 In PHP this would proceed like this:
 
-* First `makeGetRequest()` call for `$x`
-* `makeGetRequest` reaches the `curl_exec()` step (which is where the actual web request is made) and waits for the web request to complete
-* Return the content to `$x`
-* Second `makeGetRequest()` call for `$y`
-* `curl_exec()` causes another wait for web request to complete
-* Return the content to `$y`
+* First `makeBlockingRequest()` call for `$x`
+* `makeBlockingRequest` reaches a point where it has to wait until some I/O instruction completes before continuing. 
+* Return the result to `$x`
+* Second `makeBlockingRequest()` call for `$y`
+* This reaches the same I/O instruction that causes it to have to wait.  
+* Return the result to `$y`
 * Prints out `$x`
 
 You can see how that even though the values of `$x` and `$y` do not depend on each other, the first `makeGetRequest` call has to fully complete before the second can even begin. This is pretty inefficient from an execution perspective. 
@@ -39,27 +36,24 @@ You can see how that even though the values of `$x` and `$y` do not depend on ea
 Let's take that same simple example and add in some of Hack's async magic:
 
 ```
-$x = makeGetRequest('http://example.com/a/');
-$y = makeGetRequest('http://example.com/b/');
+$x = makeBlockingRequest('foo');
+$y = makeBlockingRequest('bar');
 
 $result_x = await $x;
 echo $result_x;
 
-function async makeGetRequest(string $url): Awaitable<string> {
-  $ch = curl_init($url);
-  curl_setopt($ch, CURLOPT_HEADER, 0);
-  $content = curl_exec($ch);
-  curl_close($ch);
-  return $content;
+function async makeBlockingRequest(string $a): Awaitable<string> {
+  // do something blocking
+  return $value;
 }
 
 ```
 
-What have we added here? First let's take a look at the `makeGetRequest` function - we've added the `async` access modifier to the function declaration, and we've changed the return type to `Awaitable<string>`. 
+What have we added here? First let's take a look at the `makeBlockingRequest` function - we've added the `async` access modifier to the function declaration, and we've changed the return type to `Awaitable<string>`. 
 
-Together these changes tell Hack that this function is asynchronous, and that it will return a string after 'awaiting' the execution of some long-running code. After the function executes, `$x` and `$y` will be of type `Awaitable<string>`, and cannot be accessed as strings would be.
+These changes tell Hack that this function is asynchronous, and that it will return a string after 'awaiting' the execution of some long-running code. After the function executes, `$x` and `$y` will be of type `Awaitable<string>`, and cannot be accessed as strings would be.
 
-The other thing we've done is to add a `$result_x` variable which equals `await $x` - this means `$result_x` will be equal to the string value of the complete `makeGetRequest` call that `$x` made, after waiting for the entire execution. 
+The other thing we've done is to add a `$result_x` variable which equals `await $x` - this means `$result_x` will be equal to the string value of the complete `makeBlockingRequest` call that `$x` made, after waiting for the entire execution. 
 
 When Hack encounters an `await`, it knows that it needs to stop and wait for an async function to finish before proceeding, but will keep going first. 
 
@@ -67,19 +61,19 @@ When Hack encounters an `await`, it knows that it needs to stop and wait for an 
 
 So how do we expect this modified code to proceed? Like this:
 
-* First `makeGetRequest()` call for `$x`
-* Second `makeGetRequest()` call for `$y`
+* First `makeBlockingRequest()` call for `$x`
+* Second `makeBlockingRequest()` call for `$y`
 * Await the completion of the `$x` call
 * Print out the result of that call, `$result_x`
 * `$y` call completes separately
 
-Here are the important things to note:
+Here are the main things to notice:
 
-* Both async calls for `$x` and `$y` can overlap and while the first is stuck on `curl_exec` the second might be executing other lines of code.
+* Both `makeBlockingRequest` calls can overlap and while the first is stuck on the I/O instruction, the second might be executing other lines of code - it is very important to note that this is **not** multithreading, please read the [Async Documentation](../async/introduction.md) where we explain this more.
 * `$x` can be handled *as soon as* it completes, rather than waiting for the unrelated `$y` call to finish.
 
 To put it plainly then, **Async allows your code to execute potentially much more quickly**.
 
 #### Further Reading
 
-Our [Async Documentation](../async/introduction.md) provides much more detailed information about this feature.
+Our [Async Documentation](../async/introduction.md) provides much more detailed information about this feature, and important points about the limitations that need to be taken into consideration.
