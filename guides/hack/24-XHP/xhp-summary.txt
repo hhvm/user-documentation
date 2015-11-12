@@ -1,1 +1,1 @@
-Use XML in Hack instead of strings to build your UI
+Build your UI with components, automatic escaping, and XSS protection.
