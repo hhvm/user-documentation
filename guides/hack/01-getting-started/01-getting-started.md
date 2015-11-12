@@ -1,6 +1,6 @@
 # Getting Started with Hack
 
-If you are new to Hack, this getting started guide should help you get familiar with the basics quickly; afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
+If you are new to Hack, this getting started guide should help you get familiar with the basics quickly; if you haven't yet please read our [introduction to Hack's main features](../overview/introduction.md) and afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
 
 ## Overview
 
@@ -83,22 +83,16 @@ And here is the output:
 -6 + 6i
 ```
 
-## Key Hack Features
+## Learn More
 
-Now that you have gotten your feet wet with a simple Hack program, it's time to discuss what are considered the key features of the Hack language. There are many, but the following features are considered by many to be what make Hack standout as a great language.
+Now that you have gotten your feet wet with a simple Hack program, the best resource for continuing to learn Hack is to keep reading our [official Hack documentation](/hack/). Here are the best places to start:
 
-* [Type System](../types/type-system.md)
-* [Generics](../generics/introduction.md)
-* [Async](../async/introduction.md)
-* [Collections](../collections/introduction.md)
+* [Introduction to Hack's features](../overview/introduction.md)
+* [Tools to help you write Hack](../tools/introduction.md)
+* [Your frequent questions about Hack](../faq/faq.md)
+* [Hack's strong typing system](../types/type-system.md)
+* [Asynchronous Programming with Hack](../async/introduction.md)
+* [Collections in Hack](../collections/introduction.md)
 
-Of course, there are [plenty of others](/hack/), but since this a getting started guide, we will not go into detail here. The [documentation](/hack/) will give you deep information about each one.
-
-## Converting Existing PHP Code
-
-If you have existing PHP code that you would like to convert to Hack, there are [tools like the Hackificator](../tools/introduction.md) available to help you accomplish that so you don't have to do an entire conversion by hand.
-
-## Other Learning Resources
-
-The best resource to learn Hack is the [official Hack documentation](/hack/). There is also an awesome [book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team. For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online. [Hack has an online interactive tutorial](http://hacklang.org/tutorial/) as well.
+There is also an awesome [book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team. For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online. [Hack has an online interactive tutorial](http://hacklang.org/tutorial/) as well.
 
