@@ -6,7 +6,7 @@ This will contain some helpful hints and frequently asked questions re: HHVM. Th
 
 ### What is the history of HHVM?
 
-For a history of what is now HHVM, please visit [our Wikipedia page](http://en.wikipedia.org/wiki/HHVM)
+For a history of what is now HHVM, please visit [our Wikipedia page](http://en.wikipedia.org/wiki/HHVM).
 
 ### How does Facebook use and run HHVM?
 
@@ -21,10 +21,10 @@ Facebook's entire site runs on HHVM (desktop, api and mobile), both in developme
 ### Are there are any videos, presentations, etc. about HHVM?
 
 * For a discussion about HHVM and its benefits, please see [this PHP UK Conference 2013 presentation]
- (http://www.youtube.com/watch?v=Dwek7dZDFN0)
+ (http://www.youtube.com/watch?v=Dwek7dZDFN0).
 * For a deep dive into the HHVM internals, please see [this QCon 2012 presentation](http://www.infoq.com/presentations/PHP-HHVM-Facebook).
 * Other information can be found in the references of [our Wikipedia page](http://en.wikipedia.org/wiki/HHVM).
-* Presentations from the [HACK Dev Days 2014](https://www.youtube.com/playlist?list=PLb0IAmt7-GS2fdbb1vVdP8Z8zx1l2L8YS)
+* Presentations from the [HACK Dev Days 2014](https://www.youtube.com/playlist?list=PLb0IAmt7-GS2fdbb1vVdP8Z8zx1l2L8YS).
 
 ## Users
 
@@ -32,7 +32,7 @@ Facebook's entire site runs on HHVM (desktop, api and mobile), both in developme
 
 New users may want to try our high-level overview [getting started guide](../getting-started/getting-started.md).
 
-You can find more detailed installation information [here](../installation/introduction.md)
+You can find more detailed installation information [here](../installation/introduction.md).
 
 ### When does HHVM release a new version?
 
@@ -83,7 +83,7 @@ The list of supported extensions can be found in the extensions directory of the
  
 ### What is the HHVM Wrapper?
 
-The HHVM wrapper provides a simpler interface to the HHVM binary for many common options (e.g., running in server or interp mode, compiling a repo-authoritative repo, dumping bytecode, run gdb). It is located at `hphp/tools/hhvm_wrapper.php`. You can see all of the available options by running:
+The HHVM wrapper provides a simpler interface to the HHVM binary for many common options (e.g., running in server or interp mode, compiling a repo-authoritative repo, dumping bytecode, running gdb). It is located at `hphp/tools/hhvm_wrapper.php`. You can see all of the available options by running:
 
 ```
 ./hphp/tools/hhvm_wrapper.php --help

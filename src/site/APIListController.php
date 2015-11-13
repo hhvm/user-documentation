@@ -1,7 +1,7 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\APIIndex;
-use HHVM\UserDocumentation\APIType;
+use HHVM\UserDocumentation\APIDefinitionType;
 
 enum APIProduct: string as string {
   HACK = 'hack';
@@ -15,6 +15,10 @@ final class APIListController extends WebPageController {
     }
   }
   
+  public function getExtraBodyClass(): ?string {
+    return null;
+  }
+  
   protected function getInnerContent(): XHPRoot {
     $type = $this->getOptionalStringParam('type');
     if ($type !== null) {
@@ -24,7 +28,7 @@ final class APIListController extends WebPageController {
       };
     } else {
       $apis = Map {};
-      foreach (APIType::getValues() as $api_key => $api_type) {
+      foreach (APIDefinitionType::getValues() as $api_key => $api_type) {
         $apis[$api_type] = APIIndex::getReferenceForType((string) $api_type);
       }
     }

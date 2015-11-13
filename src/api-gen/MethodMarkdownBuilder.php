@@ -4,34 +4,49 @@ namespace HHVM\UserDocumentation;
 
 class MethodMarkdownBuilder {
   private ClassYAML $yaml;
-  private string $classfile;
   
   public function __construct(
-    string $file,
+    private string $file,
   ) {
-    $this->classfile = $file;
     $this->yaml = \Spyc::YAMLLoad($file);
   }
 
-  public function buildAll(): void {
+  public function build(): void {
     $classname = $this->yaml['data']['name'];
     foreach ($this->yaml['data']['methods'] as $method) {
-      $filename = pathinfo($this->classfile)['filename'];
-      $type = explode('.', $filename)[0];
-      $output_path = 
-        BuildPaths::APIDOCS_MARKDOWN.'/'.$filename.'.method.'.$method['name'].'.md';
-      file_put_contents(
-        $output_path,
-        $this->build($classname, $method),
-      );
+      $this->buildOne($method);
     }
   }
 
-  private function build(
-    string $classname,
+  private function buildOne(
+    FunctionDocumentation $method,
+  ): void {
+    $classname = $this->yaml['data']['name'];
+    $md = (new FunctionMarkdownBuilder($this->file, $method, $classname))
+      ->getMarkdown();
+
+    $filename = self::getOutputFileName(
+      APIDefinitionType::assert($this->yaml['type']),
+      $this->yaml['data'],
+      $method,
+    );
+
+    file_put_contents($filename, $md);
+  }
+
+  public static function getOutputFileName(
+    APIDefinitionType $class_type,
+    ClassDocumentation $class,
     FunctionDocumentation $method,
   ): string {
-    $md = new FunctionMarkdownBuilder($this->classfile, $method, $classname);
-    return $md->build();
+    $class_file_name = ClassMarkdownBuilder::getOutputFileName(
+      $class_type,
+      $class
+    );
+    return str_replace(
+      '.md',
+      sprintf('.method.%s.md', $method['name']),
+      $class_file_name,
+    );
   }
 }

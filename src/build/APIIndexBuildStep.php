@@ -1,18 +1,13 @@
-<?hh // strict
+<?hh
 
 namespace HHVM\UserDocumentation;
 
 final class APIIndexBuildStep extends BuildStep {
-  const string METHOD_DELIM = "method";
-
   public function buildAll(): void {
     Log::i("\nAPIIndexBuild");
-    $sources = (self::findSources(BuildPaths::APIDOCS_MARKDOWN, Set{'md'})
-      ->filter($path ==> basename($path) !== 'README.md')
-      ->filter($path ==> strpos($path, '-examples') === false)
-      ->map($path ==> substr($path, strlen(BuildPaths::APIDOCS_MARKDOWN) + 1))
-      ->map($path ==> APIHTMLBuildStep::getOutputFileName($path))
-    );
+
+    $sources = self::findSources(BuildPaths::MERGED_YAML, Set{'yml'});
+    sort($sources);
 
     $this->createIndex($sources);
   }
@@ -44,43 +39,98 @@ final class APIIndexBuildStep extends BuildStep {
   private function generateIndexData(
     Iterable<string> $list,
   ): APIIndexShape {
+
     Log::i("\nCreate Index");
-    $out = [];
-    foreach ($list as $path) {
+    $out = shape(
+      'class' => [],
+      'interface' => [],
+      'trait' => [],
+      'function' => [],
+    );
+    foreach ($list as $yaml_path) {
       Log::v('.');
-      $path = str_replace(BuildPaths::APIDOCS_HTML.'/', '', $path);
-      $base_parts = explode('.', basename($path, '.html'), 2);
+      $data = ((): BaseYAML ==> \Spyc::YAMLLoad($yaml_path))(); // cast :p
 
-      list($type, $api) = $base_parts;
-      if (!array_key_exists($type, $out)) {
-        $out[$type] = [];
-      }
-      $api_parts = explode('.', $api);
+      $type = $data['type'];
+      switch ($type) {
+        case APIDefinitionType::FUNCTION_DEF:
+          $docs = (
+            (): FunctionDocumentation ==> /* UNSAFE_EXPR */ $data['data']
+          )();
 
-      if (in_array(self::METHOD_DELIM, $api_parts, TRUE)) {
-        $method_sep_index = array_search(self::METHOD_DELIM, $api_parts, true);
-        $method_index = $method_sep_index + 1;
-        invariant(
-          array_key_exists($method_index, $api_parts),
-          "Method at key %s does not exist in %s filename",
-          $method_index,
-          $path,
-        );
-        $parent_api = rtrim(explode(self::METHOD_DELIM, $api)[0], ".");
-        $method = $api_parts[$method_index];
+          $idx = strtr($docs['name'], "\\", '.');
+          $md_path = FunctionMarkdownBuilder::getOutputFileName($docs);
+          $html_path = self::markdownPathToHTMLPath($md_path);
 
-        if (!array_key_exists($parent_api, $out[$type])) {
-          $out[$type][$parent_api] = ["path" => "", "methods" => []];
-        }
-        $out[$type][$parent_api]["methods"][$method] = $path;
-      } else {
-        if (!array_key_exists($api, $out[$type])) {
-          $out[$type][$api] = ["path" => "", "methods" => []];
-        }
-        $out[$type][$api]["path"] = $path;
+          $out['function'][$idx] = shape(
+            'path' => $html_path,
+            'methods' => [],
+          );
+          break;
+        case APIDefinitionType::CLASS_DEF:
+        case APIDefinitionType::INTERFACE_DEF:
+        case APIDefinitionType::TRAIT_DEF:
+          $docs = (
+            (): ClassDocumentation ==> /* UNSAFE_EXPR */ $data['data']
+          )();
+
+
+          $methods = [];
+          foreach ($docs['methods'] as $method) {
+            $idx = strtr($method['name'], "\\", '.');
+            $md_path = MethodMarkdownBuilder::getOutputFileName(
+              $type,
+              $docs,
+              $method,
+            );
+            $html_path = self::markdownPathToHTMLPath($md_path);
+            $methods[$idx] = $html_path;
+          }
+
+          $md_path = ClassMarkdownBuilder::getOutputFileName(
+            $type,
+            $docs,
+          );
+          $html_path = self::markdownPathToHTMLPath($md_path);
+
+      
+          $idx = strtr($docs['name'], "\\", '.');
+          $entry = shape(
+            'path' => $html_path,
+            'methods' => $methods,
+          );
+
+          switch ($type) {
+            case APIDefinitionType::CLASS_DEF:
+              $out['class'][$idx] = $entry;
+              break;
+            case APIDefinitionType::INTERFACE_DEF:
+              $out['interface'][$idx] = $entry;
+              break;
+            case APIDefinitionType::TRAIT_DEF:
+              $out['trait'][$idx] = $entry;
+              break;
+            case APIDefinitionType::FUNCTION_DEF:
+              invariant_violation('unreachable');
+          }
+          break;
       }
     }
-    // UNSAFE
+
     return $out;
+  }
+
+  private static function markdownPathToHTMLPath(string $md_path): string {
+    $md_relative = substr(
+      $md_path,
+      strlen(BuildPaths::APIDOCS_MARKDOWN) + 1,
+    );
+    $html_absolute = APIHTMLBuildStep::getOutputFileName($md_relative);
+    $html_relative = str_replace(
+      BuildPaths::APIDOCS_HTML.'/',
+      '',
+      $html_absolute,
+    );
+    return $html_relative;
   }
 }

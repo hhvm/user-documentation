@@ -42,7 +42,7 @@ Option | Type | Default | Description
 `hhvm.log.file` | string | standard error | The location of the HHVM error log file. 
 `hhvm.repo.authoritative` | boolean | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
 `hhvm.repo.central.path` | string | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
-`hhvm.server.type` | string | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
+`hhvm.server.type` | string | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
 `hhvm.server.port` | integer | 80 | The port on which the HHVM server will listen for requests.
 `hhvm.server.default_document` | string | `"index.php"` | The default document that will be served if a page is not explicitly specified.
 `hhvm.server.error_document404` | string | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
