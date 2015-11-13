@@ -1,0 +1,13 @@
+<ul><i>Item 1</i></ul>
+
+string(262) "Element `ul` was rendered with invalid children.
+
+/data/users/joelm/user-documentation/guides/hack/24-XHP/01-introduction-examples/allowed-tag-validation.php:11
+
+Verified 0 children before failing.
+
+Children expected:
+(:li)*
+
+Children received:
+:i[%flow,%phrase]"

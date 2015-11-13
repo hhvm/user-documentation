@@ -1,0 +1,11 @@
+array(1) {
+  [0]=>
+  array(3) {
+    ["option"]=>
+    string(16) "asynclog_disable"
+    ["value"]=>
+    string(6) "purple"
+    ["error"]=>
+    string(99) "couldn't convert value to integer. Exception: folly/Conv.cpp(262): Invalid value for bool: 'purple'"
+  }
+}

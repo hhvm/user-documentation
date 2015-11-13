@@ -1,0 +1,3 @@
+int(34)
+
+Catchable fatal error: Argument 3 passed to Hack\UserDocumentation\Types\Intro\Examples\Hack\bar() must be an instance of int, string given in /data/users/joelm/user-documentation/guides/hack/20-types/01-introduction-examples/hack.php.type-errors on line 22

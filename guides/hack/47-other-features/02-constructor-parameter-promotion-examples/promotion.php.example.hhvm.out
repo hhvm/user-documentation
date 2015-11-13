@@ -1,0 +1,38 @@
+array(4) {
+  [0]=>
+  object(Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User)#4 (3) {
+    ["id":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    int(4)
+    ["name":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    string(7) "Matthew"
+    ["preferred":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    bool(true)
+  }
+  [1]=>
+  object(Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User)#2 (3) {
+    ["id":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    int(2)
+    ["name":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    string(4) "Fred"
+    ["preferred":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    bool(true)
+  }
+  [2]=>
+  object(Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User)#1 (3) {
+    ["id":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    int(1)
+    ["name":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    string(4) "Joel"
+    ["preferred":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    bool(false)
+  }
+  [3]=>
+  object(Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User)#3 (3) {
+    ["id":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    int(3)
+    ["name":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    string(3) "Sam"
+    ["preferred":"Hack\UserDocumentation\OtherFeatures\CPP\Examples\Promotion\User":private]=>
+    bool(false)
+  }
+}

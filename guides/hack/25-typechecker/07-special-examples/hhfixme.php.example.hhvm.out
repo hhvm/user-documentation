@@ -1,0 +1,1 @@
+Catchable fatal error: Argument 1 to Hack\UserDocumentation\TypeChecker\Special\Examples\HHFixMe\annotating() must be of type ?string, int given in /data/users/joelm/user-documentation/guides/hack/25-typechecker/07-special-examples/hhfixme.php on line 17

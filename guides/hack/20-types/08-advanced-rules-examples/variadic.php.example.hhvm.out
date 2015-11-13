@@ -1,0 +1,1 @@
+Fatal error: Parameter $args is variadic and has a type constraint (HH\int); variadic params with type constraints are not supported in /data/users/joelm/user-documentation/guides/hack/20-types/08-advanced-rules-examples/variadic.php on line 6

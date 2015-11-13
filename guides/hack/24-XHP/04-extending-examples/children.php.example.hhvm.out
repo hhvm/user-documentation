@@ -1,0 +1,13 @@
+string(240) "Element `my-br` was rendered with invalid children.
+
+/data/users/joelm/user-documentation/guides/hack/24-XHP/04-extending-examples/children.php:33
+
+Verified 0 children before failing.
+
+Children expected:
+empty
+
+Children received:
+:ul[%flow]"
+<ul><li></li><li></li></ul>
+<html><head></head><body></body></html>

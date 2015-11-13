@@ -1,0 +1,6 @@
+string(2) "Hi"
+
+Fatal error: Uncaught exception 'MCRouterException' with message 'delete failed with result mc_res_notfound' in /data/users/joelm/user-documentation/guides/hack/99-api-examples/class.MCRouter/del/001-basic-usage.php:38
+Stack trace:
+#0 /data/users/joelm/user-documentation/guides/hack/99-api-examples/class.MCRouter/del/001-basic-usage.php(38): HH\Asio\join()
+#1 {main}
