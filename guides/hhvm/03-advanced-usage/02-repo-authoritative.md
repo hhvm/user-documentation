@@ -17,7 +17,7 @@ hhvm --hphp -t hhbc -v AllVolatile=true --input-dir /path/to/code/to/compile/
 
 Flag | Description
 -----|------------
-`--hphp` | Signals to HHVM that we are doing an offline operation instead of executing PHP or Hack code
+`--hphp` | Signals to HHVM that we are doing an offline operation instead of executing PHP or Hack code.
 `-t hhbc` | `t` is for target. `hhbc` is for HHVM Bytecode. So the output of the repo will be HHVM bytecode.
 `AllVolatile` | Setting this to `true` disables an aggressive optimization that has the possibility to break code. This should be the default value, but we have not gotten around to making that happen yet.
 `--input-dir` | The directory containing the source files to compile into the repo.
@@ -45,7 +45,7 @@ where you generally specify the root files and all the files in directories unde
 
 ### Deploying the Repo
 
-After you build the repo, a SQLite3 database file called `hhvm.hhbc` is created. You copy this file to your production server. And HHVM will use this file when serving requests and will not need the physical source files. 
+After you build the repo, an SQLite3 database file called `hhvm.hhbc` is created. You copy this file to your production server. HHVM will use this file when serving requests and will not need the physical source files. 
 
 You must use the same HHVM binary to run from the repo as you did to build the repo. In other words, a repo is mapped to the binary that built it.
 
@@ -60,7 +60,7 @@ hhvm.repo.central.path=/path/to/hhvm.hhbc
 
 The benefits of repo-authoritative mode are:
 
-* No continuous check for source file changes, increasing performance
+* No continuous check for source file changes, increasing performance.
 * The ability for HHVM to do specialized optimizations knowing that the source files are not changing, again increasing performance.
 
 ### Downsides
