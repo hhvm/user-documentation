@@ -55,7 +55,20 @@ abstract final class ScannedDefinitionFilters {
       (strpos($def->getName(), "__SystemLib\\") === 0)
       || strpos($def->getName(), 'WaitHandle')
       || self::IsBlacklisted($def)
+      || self::IsUndefinedFunction($def)
     );
+  }
+
+  private static function IsUndefinedFunction(ScannedBase $def): bool {
+    if (!$def instanceof ScannedFunctionAbstract) {
+      return false;
+    }
+    $name = $def->getName();
+    if (function_exists($name) || function_exists("HH\\".$name)) {
+      return false;
+    }
+    Log::w("\nUndefined function: ".$def->getName());
+    return true;
   }
 
   private static function IsBlacklisted(ScannedBase $def): bool {
