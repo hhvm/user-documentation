@@ -10,7 +10,7 @@ final class HHVMDocumentationSite {
       list($controller, $vars) = (new Router())->routeRequest($request);
       await (new $controller($vars, $request))->respond();
     } catch (HTTPException $e) {
-      $e->respond();
+      await $e->respond($request);
     }
   }
 }

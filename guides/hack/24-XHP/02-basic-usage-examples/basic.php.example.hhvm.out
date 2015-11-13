@@ -1,0 +1,53 @@
+object(xhp_div)#5 (5) {
+  ["tagName":protected]=>
+  string(3) "div"
+  ["attributes":"xhp_x__composable_element":private]=>
+  object(HH\Map)#6 (0) {
+  }
+  ["children":"xhp_x__composable_element":private]=>
+  object(HH\Vector)#7 (3) {
+    [0]=>
+    string(9) " My Text "
+    [1]=>
+    object(xhp_strong)#12 (5) {
+      ["tagName":protected]=>
+      string(6) "strong"
+      ["attributes":"xhp_x__composable_element":private]=>
+      object(HH\Map)#13 (0) {
+      }
+      ["children":"xhp_x__composable_element":private]=>
+      object(HH\Vector)#14 (1) {
+        [0]=>
+        string(12) "My Bold Text"
+      }
+      ["context":"xhp_x__composable_element":private]=>
+      object(HH\Map)#15 (0) {
+      }
+      ["source"]=>
+      string(91) "/data/users/joelm/user-documentation/guides/hack/24-XHP/02-basic-usage-examples/basic.php:9"
+    }
+    [2]=>
+    object(xhp_i)#19 (5) {
+      ["tagName":protected]=>
+      string(1) "i"
+      ["attributes":"xhp_x__composable_element":private]=>
+      object(HH\Map)#20 (0) {
+      }
+      ["children":"xhp_x__composable_element":private]=>
+      object(HH\Vector)#21 (1) {
+        [0]=>
+        string(14) "My Italic Text"
+      }
+      ["context":"xhp_x__composable_element":private]=>
+      object(HH\Map)#22 (0) {
+      }
+      ["source"]=>
+      string(92) "/data/users/joelm/user-documentation/guides/hack/24-XHP/02-basic-usage-examples/basic.php:10"
+    }
+  }
+  ["context":"xhp_x__composable_element":private]=>
+  object(HH\Map)#8 (0) {
+  }
+  ["source"]=>
+  string(92) "/data/users/joelm/user-documentation/guides/hack/24-XHP/02-basic-usage-examples/basic.php:11"
+}

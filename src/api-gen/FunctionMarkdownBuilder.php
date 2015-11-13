@@ -4,16 +4,20 @@ namespace HHVM\UserDocumentation;
 
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
+use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
 class FunctionMarkdownBuilder {
+  use DocblockTagReader;
+
   private FunctionYAML $yaml;
-  private ?DocBlock $docblock;
+  protected ?DocBlock $docblock;
 
   public function __construct(
-    ?string $file = null,
-    ?FunctionDocumentation $method = null,
-  ) {
+      ?string $file = null,
+      ?FunctionDocumentation $method = null,
+      private ?string $class = null,
+      ) {
     $this->yaml = \Spyc::YAMLLoad($file);
     if ($method) {
       $this->yaml['data'] = $method;
@@ -32,14 +36,16 @@ class FunctionMarkdownBuilder {
         $this->getHeading(),
         $this->getDescription(),
         $this->getParameters(),
+        $this->getReturnValues(),
+        $this->getExamples(),
       ],
     )."\n";
   }
 
   private function getHeading(): ?string {
     if (
-      $this->docblock?->getText() !== $this->docblock?->getShortDescription()
-    ) {
+        $this->docblock?->getText() !== $this->docblock?->getShortDescription()
+       ) {
       return $this->docblock?->getShortDescription();
     }
     return null;
@@ -48,15 +54,21 @@ class FunctionMarkdownBuilder {
   private function getDescription(): string {
     $md = "### Description\n\n";
 
-    $md .= "```Hack\n".$this->getSignature()."\n```\n\n";
+    $md .= "```Hack\n<?hh\n".$this->getSignature()."\n```\n\n";
 
     $md .= $this->docblock?->getText();
 
     return $md;
   }
 
-  private function getParameters(): string {
-    $tags = $this->getTagsByName('param', ParamTag::class);
+  private function getParameters(): ?string {
+
+    // If no parameters for the function, then move on
+    if (count($this->yaml['data']['parameters']) === 0) {
+      return null;
+    }
+
+    $tags = $this->getParamTags();
 
     $md = "### Parameters\n\n";
 
@@ -79,48 +91,94 @@ class FunctionMarkdownBuilder {
     return $md;
   }
 
-  private function getSignature(): string {
-    $tags = $this->getTagsByName('param', ParamTag::class);
+  private function getReturnValues(): ?string {
+    $tags = $this->getTagsByName('return', ReturnTag::class);
+    if (!$tags) {
+      return null;
+    }
 
+    $ret = "### Return Values\n";
+    foreach ($tags as $tag) {
+      $ret .= "\n - ";
+      $types = $tag->getTypes();
+      $types = array_filter($types, $type ==> $type !== '\-' && $type !== '-');
+      if ($types) {
+        $ret .= '`'.implode('|', $types).'` - ';
+      } else {
+        $ret_th = $this->yaml['data']['returnType'];
+        if ($ret_th !== null) {
+          $ret .= '`'.Stringify::typehint($ret_th).'` - ';
+        }
+      }
+
+      $ret .= $tag->getDescription();
+    }
+    return $ret;
+  }
+
+  private function getSignature(): string {
+    $ret = '';
+
+    $visibility = $this->yaml['data']['visibility'];
+    if ($visibility !== null) {
+      $ret .= $visibility.' ';
+    }
+    if ($this->yaml['data']['static'] === true) {
+      $ret .= 'static ';
+    }
+    $ret .= 'function '.$this->yaml['data']['name'];
+
+    $tags = $this->getParamTags();
     $params = array_map(
       $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
       $this->yaml['data']['parameters'],
     );
-    $return_type = $this->yaml['data']['returnType'];
-    if ($return_type === null) {
-      // TODO: log warning for this once we have a good logging system
-      return sprintf(
-        "function %s(%s)",
-        $this->yaml['data']['name'],
-        implode(', ', $params),
-      );
+    if (!$params) {
+      $ret .= '()';
+    } else {
+      $ret .= "(\n".implode("\n", array_map($x ==> '  '.$x.',', $params))."\n)";
     }
 
-    return sprintf(
-      "function %s(%s): %s",
-      $this->yaml['data']['name'],
-      implode(', ', $params),
-      Stringify::typehint($return_type),
-    );
+    $return_type = $this->yaml['data']['returnType'];
+    if ($return_type !== null) {
+      $ret .= ': '.Stringify::typehint($return_type);
+    }
+
+    return $ret;
   }
 
-  <<__Memoize>>
-  private function getTagsByName<T as Tag>(
-    string $name,
-    classname<T> $type = Tag::class,
-  ): Map<string,T> {
-    $tags = Map {};
-    // If $this->docblock is null, passing null to Map constructor returns
-    // empty map
-    $raw_tags = new Map($this->docblock?->getTagsByName($name));
-    foreach ($raw_tags as $tag) {
-      invariant(
-        $tag instanceof $type,
-        'Expected %s tags to be %s, got %s',
-        $name,
-        $type,
-        get_class($tag),
-      );
+  private function getExamples(): ?string {
+    $path = LocalConfig::ROOT.'/guides/hack/99-api-examples/';
+
+    if ($this->class === null) {
+      $path .= 'function.';
+    } else {
+      $path .= 'class.'.$this->class.'/';
+    }
+
+    $path .= $this->yaml['data']['name'];
+    $path = strtr($path, "\\", '.');
+    $examples = glob($path.'/*.php');
+    if (count($examples) === 0) {
+      return null;
+    }
+    sort($examples);
+
+    $ret = "### Examples";
+    foreach ($examples as $example) {
+      $preamble = dirname($example).'/'.basename($example, '.php').'.md';
+      if (file_exists($preamble)) {
+        $ret .= "\n\n".file_get_contents($preamble)."\n\n";
+      }
+      $ret .= "\n\n@@ ".$example." @@";
+    }
+    return $ret;
+  }
+
+  private function getParamTags(): Map<string, ParamTag> {
+    $tags_vec = $this->getTagsByName('param', ParamTag::class);
+    $tags = Map { };
+    foreach ($tags_vec as $tag) {
       $tags[$tag->getVariableName()] = $tag;
     }
     return $tags;

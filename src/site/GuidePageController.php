@@ -24,7 +24,7 @@ final class GuidePageController extends WebPageController {
     // If there is only one page in a guide, only print the guide name.
     $ret = strcasecmp($this->guide, $this->page) === 0 ||
            count(GuidesIndex::getPages($this->getProduct(), $this->guide)) === 1
-         ? ucwords($this->guide)
+         ? ucwords(strtr($this->guide, '-', ' '))
          : ucwords(strtr($this->guide.': '.$this->page, '-', ' '));
     return $ret;
   }
@@ -70,11 +70,11 @@ final class GuidePageController extends WebPageController {
         </div>
       </div>;
   }
-  
+
   protected function getSideNav(): XHPRoot {
     $product = $this->getProduct();
     $guides = GuidesIndex::getProductIndex($product);
-    return 
+    return
       <div class="navWrapper guideNav">
         <div class="navLoader"></div>
         <script>
@@ -83,7 +83,7 @@ final class GuidePageController extends WebPageController {
           var thisGroup = "{$this->guide}";
           var thisProduct = "{$product}";
         </script>
-        <script type="text/babel" src="/js/SideNav.js"></script>
+        <script type="text/javascript" src="/js/SideNav.js"></script>
       </div>;
   }
 

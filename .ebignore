@@ -1,0 +1,12 @@
+# If present, the Dockerrun.aws.json is ignored
+Dockerfile
+# They're all in the Docker image anyway :) let's save some space
+bin/
+guides/
+md-render/
+public/
+src/
+
+.git/
+build/
+vendor/

@@ -11,39 +11,47 @@ module HHVM
         # ... but to make reordering easier, the references to it in the
         # markdown skip the '01-' prefix.
         match = /^[0-9]+-(?<source_dir>.+)/.match(examples_dir)
-        return(doc) if match.nil?
-        source_examples_dir = match['source_dir']
-
-        base = File.expand_path(examples_dir, File.dirname(file))
+        if match.nil?
+          base = nil
+          source_examples_dir = nil
+        else
+          source_examples_dir = match['source_dir']
+          base = File.expand_path(examples_dir, File.dirname(file))
+        end
 
         doc.search('p').each do |node|
           contents = node.inner_text.strip
+          full_path = nil
           if match = %r,^@@ (?<dir_name>[^/ ]+)/(?<file_name>[^/ ]+\.php(?:.type-errors)?(?:.(hhvm|typechecker).expect[f]?)?) @@$,.match(contents)
             next if match[:dir_name] != source_examples_dir
 
             full_path = File.expand_path(match[:file_name], base)
-
-            if ! File.exists? full_path
-              text = "Missing example: #{full_path}"
-              STDERR.write(
-                text.red.bold + "\n"
-              )
-              warning = doc.document.create_element(
-                'h1',
-                text,
-                style: 'color: red',
-              )
-              node.replace(warning)
-              next
-            end
-
-            code = doc.document.create_element(
-              'pre',
-              File.read(full_path),
-              language: 'Hack',
-            );
-            node.replace(code)
+          elsif match = %r,^@@ (?<absolute_path>/[^@ ]+\.php(?:.type-errors)?(?:.(hhvm|typechecker).expect[f]?)?) @@$,.match(contents)
+            full_path = match[:absolute_path]
           end
+
+          next if full_path.nil?
+
+          if ! File.exists? full_path
+            text = "Missing example: #{full_path}"
+            STDERR.write(
+              text.red.bold + "\n"
+            )
+            warning = doc.document.create_element(
+              'h1',
+              text,
+              style: 'color: red',
+            )
+            node.replace(warning)
+            next
+          end
+
+          code = doc.document.create_element(
+            'pre',
+            File.read(full_path),
+            language: 'Hack',
+          );
+          node.replace(code)
         end
         doc
       end

@@ -19,7 +19,8 @@ abstract class WebPageController extends WebController {
         <html>
           <head>
             <title>{$title}</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <link rel="shortcut icon" href="/favicon.png" />
             <x:comment>
               Build ID: {file_get_contents(BuildPaths::BUILD_ID)}
@@ -44,9 +45,8 @@ abstract class WebPageController extends WebController {
               rel="stylesheet"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
             />
-            <script src="/js/react.min.js"></script>
-            <script src="/js/react-dom.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+            <script src="https://fb.me/react-0.14.2.min.js"></script>
+            <script src="https://fb.me/react-dom-0.14.2.min.js"></script>
           </head>
           <body class={$body_class}>
             {$this->getHeader()}

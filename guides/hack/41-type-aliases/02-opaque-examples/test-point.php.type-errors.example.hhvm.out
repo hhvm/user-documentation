@@ -1,0 +1,14 @@
+array(2) {
+  [0]=>
+  int(5)
+  [1]=>
+  int(3)
+}
+array(2) {
+  [0]=>
+  int(9)
+  [1]=>
+  int(-5)
+}
+distance between points is 8.9442719099992
+distance between points is 1.4142135623731

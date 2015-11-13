@@ -1,0 +1,1 @@
+Catchable fatal error: Value returned from function Hack\UserDocumentation\Generics\Unresolved\Examples\Unresolved\add_box_of_ints() must be of type int, float given in /data/users/joelm/user-documentation/guides/hack/40-generics/06-unresolved-examples/unresolved.php.type-errors on line 19

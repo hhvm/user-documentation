@@ -8,6 +8,7 @@ require_relative 'HHVM/UserDocumentation/SyntaxHighlightFilter.rb'
 require_relative 'HHVM/UserDocumentation/IncludeExamplesFilter.rb'
 require_relative 'HHVM/UserDocumentation/InternalLinksFilter.rb'
 require_relative 'HHVM/UserDocumentation/HeadingAnchors.rb'
+require_relative 'HHVM/UserDocumentation/ResponsiveTables.rb'
 
 pipeline = HTML::Pipeline.new(
   [
@@ -16,6 +17,7 @@ pipeline = HTML::Pipeline.new(
     HHVM::UserDocumentation::SyntaxHighlightFilter,
     HHVM::UserDocumentation::InternalLinksFilter,
     HHVM::UserDocumentation::HeadingAnchors,
+    HHVM::UserDocumentation::ResponsiveTables,
   ],
 )
 

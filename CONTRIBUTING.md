@@ -22,10 +22,6 @@ There are two main content sections for this repo. `hhvm` is for user content on
 @@ guidelines-examples/non-async-hello.php @@
 ```
 
-### SCSS over CSS
-
-Any changes to CSS should be made in the scss/ files rather than in the generated main.css file. 
-
 ### Linking Between Content
 
 Images should be referenced in the user guide or example headers as `/public/images/imagename.png`

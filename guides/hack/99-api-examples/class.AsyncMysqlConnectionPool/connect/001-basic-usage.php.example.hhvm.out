@@ -1,0 +1,14 @@
+int(31)
+int(31)
+array(5) {
+  ["created_pool_connections"]=>
+  int(1)
+  ["destroyed_pool_connections"]=>
+  int(0)
+  ["connections_requested"]=>
+  int(2)
+  ["pool_hits"]=>
+  int(1)
+  ["pool_misses"]=>
+  int(1)
+}

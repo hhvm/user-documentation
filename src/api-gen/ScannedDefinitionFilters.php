@@ -6,6 +6,7 @@ use FredEmmott\DefinitionFinder\ScannedBase;
 use FredEmmott\DefinitionFinder\ScannedClass;
 use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
 use FredEmmott\DefinitionFinder\HasScannedGenerics;
+use FredEmmott\DefinitionFinder\HasScannedVisibility;
 
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {
@@ -50,9 +51,10 @@ abstract final class ScannedDefinitionFilters {
   }
 
   public static function ShouldNotDocument(ScannedBase $def): bool {
-    return
+    return (
       (strpos($def->getName(), "__SystemLib\\") === 0)
-      || self::IsBlacklisted($def);
+      || self::IsBlacklisted($def)
+    );
   }
 
   private static function IsBlacklisted(ScannedBase $def): bool {
@@ -64,8 +66,11 @@ abstract final class ScannedDefinitionFilters {
     // want to block the doc site rewrite on it, so, for now, we have
     // this blacklist.
     //
-    // As a meta point, WaitHandle classes should not be exposed. Awaitable
-    // is all that a user should need for async.
+    // As meta points:
+    //  - WaitHandle classes should not be exposed. Awaitable is all that a user
+    //    should need for async.
+    //  - The xxxAccess interfaces for collections are covered by things like
+    //    ConstSet, ConstMap, etc. The others are implementation details.
     $blacklist = [
       /////////////
       // Classes //
@@ -73,9 +78,10 @@ abstract final class ScannedDefinitionFilters {
 
       'AppendIterator',
       'ArrayIterator',
+      'AsyncGenerator', // (see below)... this showed up. Two different defs?
       'AsyncFunctionWaitHandle',
       'AsyncGeneratorWaitHandle',
-      'AwaitAllAwaitHandle',
+      'AwaitAllWaitHandle',
       'CallbackFilterIterator',
       'CachingIterator', // PHP class that we added type parameters on
       'ConditionWaitHandle',
@@ -85,7 +91,7 @@ abstract final class ScannedDefinitionFilters {
       'Generator',
       'GenMapWaitHandle',
       'GenVectorWaitHandle',
-      'HH\AsyncGenerator',
+      'HH\AsyncGenerator', // Funny, we blacklist this and then... (see above)
       'HH\Client\TypecheckResult',
       'HH\BuiltinEnum', // Should be __SystemLib\BuiltinEnum
       'InfiniteIterator',
@@ -129,11 +135,18 @@ abstract final class ScannedDefinitionFilters {
       ////////////////
 
       'ArrayAccess',
+      'ConstIndexAccess',
+      'ConstMapAccess',
+      'ConstSetAccess',
       'IndexAccess',
+      'HH\SQLListFormatter',
+      'HH\SQLScalarFormatter',
       'IteratorAggregate',
+      'MapAccess',
       'OuterIterator',
       'RecursiveIterator',
       'SeekableIterator',
+      'SetAccess',
 
       ///////////////
       // Functions //

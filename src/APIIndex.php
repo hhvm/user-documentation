@@ -1,26 +1,29 @@
 <?hh
-
 namespace HHVM\UserDocumentation;
+
+require(BuildPaths::APIDOCS_INDEX);
 
 class APIIndex {
   public static function getIndex(
-  ): Map<string, Map<string, APIClassIndexEntry>> {
-    return require(BuildPaths::APIDOCS_INDEX);
+  ): APIIndexShape {
+    return APIIndexData::getIndex();
   }
 
-  public static function getProducts(): ImmVector<string> {
-    return self::getIndex()->keys()->toImmVector();
+  public static function getProducts(): Traversable<string> {
+    return array_keys(StringKeyedShapes::toArray(self::getIndex()));
   }
+
 
   public static function getReferenceForType(
     string $type,
-  ): Map<string, APIClassIndexEntry> {
-    $index = self::getIndex();
+  ): KeyedTraversable<string, APIClassIndexEntry> {
+    $index = Shapes::toArray(self::getIndex());
     invariant(
-      $index->containsKey($type),
+      array_key_exists($type, $index),
       '%s is not in the index',
       $type,
     );
+    // UNSAFE
     return $index[$type];
   }
 
@@ -40,23 +43,18 @@ class APIIndex {
     string $api,
     ?string $method,
   ) {
+    // UNSAFE
     $index = self::getIndex();
     invariant(
-      $index->containsKey($type),
+      array_key_exists($type, $index),
       'Type %s does not exist',
       $type,
     );
     invariant(
-      $index[$type]->containsKey($api),
+      array_key_exists($api, $index[$type]),
       'Type %s does not contain reference %s',
       $type,
       $api,
-    );
-    invariant(
-      isset($index[$type][$api]['path']),
-      'API %s of type %s does not contain a path',
-      $api,
-      $type,
     );
     if ($method !== null) {
       invariant(
@@ -66,7 +64,10 @@ class APIIndex {
         $type,
       );
       invariant(
-        $index[$type][$api]['methods']->containsKey($method),
+        array_key_exists(
+          $method,
+          $index[$type][$api]['methods'],
+        ),
         'API %s of type %s does not contain method %s',
         $api,
         $type,

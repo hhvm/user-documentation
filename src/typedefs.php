@@ -11,6 +11,12 @@ enum DocumentationSourceType: string {
   ELF_SECTION = 'elf_section';
 };
 
+enum MemberVisibility: string {
+  PRIVATE = 'private';
+  PROTECTED = 'protected';
+  PUBLIC = 'public';
+};
+
 type DocumentationSource = shape(
   'type' => DocumentationSourceType,
   'name' => string,
@@ -68,6 +74,8 @@ type FunctionDocumentation = shape(
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
   'parameters' => array<ParameterDocumentation>,
+  'visibility' => ?MemberVisibility,
+  'static' => ?bool,
 );
 
 type DocumentationIndexEntry = shape(
@@ -82,5 +90,12 @@ type DocumentationIndex = shape(
 
 type APIClassIndexEntry = shape(
   'path' => string,
-  'methods' => Map<string, string>,
+  'methods' => array<string, string>,
+);
+
+type APIIndexShape = shape(
+  'class' => array<string, APIClassIndexEntry>,
+  'interface' => array<string, APIClassIndexEntry>,
+  'trait' => array<string, APIClassIndexEntry>,
+  'function' => array<string, APIClassIndexEntry>,
 );

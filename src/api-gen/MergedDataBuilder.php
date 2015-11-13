@@ -13,6 +13,7 @@ final class MergedDataBuilder {
   public function addData(\ConstMap<string, mixed> $new): this {
     $this->mergeField($new, 'generics');
     $this->mergeField($new, 'methods');
+    $this->mergeField($new, 'visibility');
     $this->mergeField($new, 'docComment');
 
     $p1 = idx($this->data, 'parent');
@@ -36,6 +37,7 @@ final class MergedDataBuilder {
   }
 
   public function build(): Map<string, mixed> {
+    $data = clone $this->data;
     return $this->data;
   }
 
@@ -45,6 +47,45 @@ final class MergedDataBuilder {
     }
 
     $value = $new[$key];
+
+    if ($key === 'methods') {
+      $builders = Map { };
+      $methods = [];
+
+      foreach ((array) $value as $method) {
+        $builders[$method['name']] = (new MergedDataBuilder(new Map($method)));
+      }
+      foreach ((array) idx($this->data, 'methods', []) as $method) {
+        $name = $method['name'];
+        if ($builders->containsKey($name)) {
+          $builders[$name]->addData(new Map($method));
+        } else {
+          $methods[] = $method;
+        }
+      }
+
+      foreach ($builders as $name => $builder) {
+        $methods[] = $builder->build()->toArray();
+      }
+      $this->data['methods'] = $methods;
+      return;
+    }
+
+    $old_value = idx($this->data, $key);
+    if ($key === 'visibility' && $value !== null && $old_value !== null) {
+      $map = Map {
+        'public' => 0,
+        'protected' => 1,
+        'private' => 2,
+      };
+
+      // Pick the most restrictive
+      $old_value = $map[$old_value];
+      $value = max($old_value, $map[$value]);
+      $value = $map->keys()[$value];
+    }
+
+
     if ($value !== null && $value != []) {
       $this->data[$key] = $value;
     }

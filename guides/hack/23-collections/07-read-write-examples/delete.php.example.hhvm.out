@@ -1,0 +1,7 @@
+string(1) "C"
+bool(false)
+object(HH\Set)#3 (3) {
+  int(1000)
+  int(2000)
+  int(4000)
+}

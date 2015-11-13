@@ -16,7 +16,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
     foreach ($files as $source) {
       $input = realpath(static::SOURCE_ROOT.'/'.$source);
-      $output = $this->getOutputFileName($source);
+      $output = self::getOutputFileName($source);
       $jobs[$input] = $output;
     }
 
@@ -73,7 +73,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     return $out;
   }
 
-  private function getOutputFileName(string $input): string {
+  public static function getOutputFileName(string $input): string {
     $parts = (new Vector(explode('/', $input)))
       ->map(
         $part ==> preg_match('/^[0-9]{2}-/', $part) ? substr($part, 3) : $part

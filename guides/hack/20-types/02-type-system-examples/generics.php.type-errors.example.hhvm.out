@@ -1,0 +1,16 @@
+array(3) {
+  [0]=>
+  string(5) "Hello"
+  [1]=>
+  string(7) "Goodbye"
+  [2]=>
+  int(3)
+}
+array(3) {
+  [0]=>
+  string(5) "Hello"
+  [1]=>
+  string(7) "Goodbye"
+  [2]=>
+  int(3)
+}

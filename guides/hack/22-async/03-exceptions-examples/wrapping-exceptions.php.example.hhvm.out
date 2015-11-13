@@ -1,0 +1,52 @@
+object(HH\Vector)#11 (2) {
+  [0]=>
+  object(HH\Asio\WrappedException)#4 (1) {
+    ["exception":"HH\Asio\WrappedException":private]=>
+    object(Exception)#2 (7) {
+      ["message":protected]=>
+      string(0) ""
+      ["string":"Exception":private]=>
+      string(0) ""
+      ["code":protected]=>
+      int(0)
+      ["file":protected]=>
+      string(104) "/data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/wrapping-exceptions.php"
+      ["line":protected]=>
+      int(8)
+      ["trace":"Exception":private]=>
+      array(2) {
+        [0]=>
+        array(4) {
+          ["file"]=>
+          string(104) "/data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/wrapping-exceptions.php"
+          ["line"]=>
+          int(16)
+          ["function"]=>
+          string(75) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\exception_thrower"
+          ["args"]=>
+          array(0) {
+          }
+        }
+        [1]=>
+        array(4) {
+          ["file"]=>
+          string(104) "/data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/wrapping-exceptions.php"
+          ["line"]=>
+          int(24)
+          ["function"]=>
+          string(77) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\wrapping_exceptions"
+          ["args"]=>
+          array(0) {
+          }
+        }
+      }
+      ["previous":"Exception":private]=>
+      NULL
+    }
+  }
+  [1]=>
+  object(HH\Asio\WrappedResult)#7 (1) {
+    ["result":"HH\Asio\WrappedResult":private]=>
+    int(2)
+  }
+}

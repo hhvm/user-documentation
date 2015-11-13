@@ -53,7 +53,7 @@ final class APIPageController extends WebPageController {
           var currentType = "{$type}";
           var baseRefURL = "/hack/reference";
         </script>
-        <script type="text/babel" src="/js/APISideNav.js"></script>
+        <script type="text/javascript" src="/js/APISideNav.js"></script>
       </div>;
   }
   

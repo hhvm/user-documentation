@@ -30,9 +30,9 @@ Facebook's entire site runs on HHVM (desktop, api and mobile), both in developme
 
 ### How do I install HHVM? Where are the binaries?
 
-New users may want to try our high-level overview [quickstart guide](../../quickstart.md).
+New users may want to try our high-level overview [getting started guide](../getting-started/getting-started.md).
 
-You can find more detailed installation information [here](../installation/intro.md)
+You can find more detailed installation information [here](../installation/introduction.md)
 
 ### When does HHVM release a new version?
 
@@ -44,7 +44,7 @@ Many times, HHVM can be run directly from the command line without any additiona
 
 However, we understand that more fine tuned configuration may be necessary, particularly in server mode.
 
-HHVM allows for many [runtime option variations](../configuration/intro.md). For some configuration options, they can be set at the command line (e.g., `hhvm -m server -d hhvm.log.level=Error`). However, many times you will use a `config.ini` file and run HHVM with a command similar to: `hhvm -m server -c config.ini`.
+HHVM allows for many [runtime option variations](../configuration/introduction.md). For some configuration options, they can be set at the command line (e.g., `hhvm -m server -d hhvm.log.level=Error`). However, many times you will use a `config.ini` file and run HHVM with a command similar to: `hhvm -m server -c config.ini`.
 
 For other options that can be given to HHVM, type `hhvm --help` at the command line.
 
@@ -71,7 +71,7 @@ Other areas for discussion and support are on [#hhvm on IRC](http://webchat.free
 
 ### Should I use Proxygen or FastCGI?
 
-[Proxygen](../basic-usage/proxygen.md) is full featured, very fast webserver and generally easier to get started with out of the box. [FastCGI](../advanced-usage/fastcgi.md) is a bit more configurable, but requires a separate webserver (e.g., nginx) on the front of it.
+[Proxygen](../basic-usage/proxygen.md) is full featured, very fast web server and generally easier to get started with out of the box. [FastCGI](../advanced-usage/fastcgi.md) is a bit more configurable, but requires a separate web server (e.g., nginx) on the front of it.
 
 ### When will HHVM support Apache or Nginx?
 
