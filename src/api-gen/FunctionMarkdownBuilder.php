@@ -7,7 +7,7 @@ use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-class FunctionMarkdownBuilder {
+final class FunctionMarkdownBuilder {
   use DocblockTagReader;
 
   private FunctionYAML $yaml;
@@ -29,7 +29,13 @@ class FunctionMarkdownBuilder {
     }
   }
 
-  public function build(): string {
+  public function build(): void {
+    $md = $this->getMarkdown();
+    $filename = self::getOutputFileName($this->yaml['data']);
+    file_put_contents($filename, $md);
+  }
+
+  public function getMarkdown(): string {
     return implode(
       "\n\n",
       [
@@ -40,6 +46,16 @@ class FunctionMarkdownBuilder {
         $this->getExamples(),
       ],
     )."\n";
+  }
+
+  public static function getOutputFileName(
+    FunctionDocumentation $docs,
+  ): string {
+    return sprintf(
+      '%s/function.%s.md',
+      BuildPaths::APIDOCS_MARKDOWN,
+      strtr($docs['name'], "\\", '.'),
+    );
   }
 
   private function getHeading(): ?string {

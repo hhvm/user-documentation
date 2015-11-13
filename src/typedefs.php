@@ -17,6 +17,13 @@ enum MemberVisibility: string {
   PUBLIC = 'public';
 };
 
+enum APIDefinitionType: string {
+  CLASS_DEF = 'class';
+  TRAIT_DEF = 'trait';
+  INTERFACE_DEF = 'interface';
+  FUNCTION_DEF = 'function';
+}
+
 type DocumentationSource = shape(
   'type' => DocumentationSourceType,
   'name' => string,

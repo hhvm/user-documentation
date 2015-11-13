@@ -21,7 +21,28 @@ class ClassMarkdownBuilder {
     }
   }
 
-  public function build(): string {
+  public function build(): void {
+    $md = $this->getMarkdown();
+    $filename = self::getOutputFileName(
+      APIDefinitionType::assert($this->yaml['type']),
+      $this->yaml['data'],
+    );
+    file_put_contents($filename, $md);
+  }
+
+  public static function getOutputFileName(
+    APIDefinitionType $type,
+    ClassDocumentation $docs,
+  ): string {
+    return sprintf(
+      '%s/%s.%s.md',
+      BuildPaths::APIDOCS_MARKDOWN,
+      $type,
+      strtr($docs['name'], "\\", '.'),
+    );
+  }
+
+  public function getMarkdown(): string {
     $parts = (Vector {
       $this->getHeading(),
       $this->getGuides(),

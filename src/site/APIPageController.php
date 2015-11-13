@@ -2,7 +2,7 @@
 
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\APIIndex;
-use HHVM\UserDocumentation\APIType;
+use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 
 use Psr\Http\Message\ServerRequestInterface;
@@ -140,8 +140,8 @@ final class APIPageController extends WebPageController {
   }
 
   <<__Memoize>>
-  private function getType(): APIType {
-    return APIType::assert(
+  private function getType(): APIDefinitionType {
+    return APIDefinitionType::assert(
       $this->getRequiredStringParam('type')
     );
   }
