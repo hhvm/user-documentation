@@ -1,6 +1,16 @@
 <?hh // strict
 
+use Psr\Http\Message\ServerRequestInterface;
+use HHVM\UserDocumentation\BuildPaths;
+
 final class HTTP404Controller extends WebPageController {
+  public function __construct(
+    ImmMap<string,string> $parameters,
+    private ServerRequestInterface $request,
+  ) {
+    parent::__construct($parameters, $request);
+  }
+
   public async function getTitle(): Awaitable<string> {
     return 'Page Not Found';
   }
@@ -10,6 +20,42 @@ final class HTTP404Controller extends WebPageController {
   }
 
   public async function getBody(): Awaitable<\XHPRoot> {
+    $build_id = trim(file_get_contents(BuildPaths::BUILD_ID));
+    $request_time = (new DateTime())
+      ->setTimezone(new DateTimeZone('Etc/UTC'))
+      ->format(DateTime::RFC2822);
+    $request_path = $this->request->getUri()->getPath();
+
+    $issue_title = '404: '.$request_path;
+    $issue_body = <<<EOF
+Please complete the information below:
+
+# How I got to this page:
+
+- - - eg "I clicked a link on <address of other site>" - - - 
+
+# What I expected to find here:
+
+- - - eg "Documentation tell me how to <do something>" - - -
+
+--------------------------------
+
+Please don't change anything below this point.
+
+--------------------------------
+
+ - Build ID: $build_id
+ - Page requested: $request_path
+ - Page requested at: $request_time
+EOF;
+
+    $new_issue_prefill_url = sprintf(
+      '%s?title=%s&body=%s',
+      'https://github.com/hhvm/user-documentation/issues/new',
+      urlencode($issue_title),
+      urlencode($issue_body),
+    );
+
     return
       <x:frag>
         <div class="notFoundIcon">
@@ -49,7 +95,7 @@ final class HTTP404Controller extends WebPageController {
         </p>
         <p class="notFoundMessage">
           If you think you're seeing this page in error, please 
-          <a href="https://github.com/hhvm/user-documentation/issues" target="_blank">
+          <a href={$new_issue_prefill_url} target="_blank">
             file an issue.
           </a>
         </p>
