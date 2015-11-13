@@ -53,6 +53,7 @@ abstract final class ScannedDefinitionFilters {
   public static function ShouldNotDocument(ScannedBase $def): bool {
     return (
       (strpos($def->getName(), "__SystemLib\\") === 0)
+      || strpos($def->getName(), 'WaitHandle')
       || self::IsBlacklisted($def)
     );
   }
@@ -67,10 +68,11 @@ abstract final class ScannedDefinitionFilters {
     // this blacklist.
     //
     // As meta points:
-    //  - WaitHandle classes should not be exposed. Awaitable is all that a user
-    //    should need for async.
     //  - The xxxAccess interfaces for collections are covered by things like
     //    ConstSet, ConstMap, etc. The others are implementation details.
+
+    // Do not include "HH\" in the blacklist - we automatically strip it.
+
     $blacklist = [
       /////////////
       // Classes //
@@ -78,22 +80,14 @@ abstract final class ScannedDefinitionFilters {
 
       'AppendIterator',
       'ArrayIterator',
-      'AsyncGenerator', // (see below)... this showed up. Two different defs?
-      'AsyncFunctionWaitHandle',
-      'AsyncGeneratorWaitHandle',
-      'AwaitAllWaitHandle',
+      'AsyncGenerator',
+      'BuiltinEnum',
+      'CachingIterator',
       'CallbackFilterIterator',
-      'CachingIterator', // PHP class that we added type parameters on
-      'ConditionWaitHandle',
+      'Client\TypecheckResult',
       'EmptyIterator',
-      'ExternalThreadEventWaitHandle',
       'FilterIterator',
       'Generator',
-      'GenMapWaitHandle',
-      'GenVectorWaitHandle',
-      'HH\AsyncGenerator', // Funny, we blacklist this and then... (see above)
-      'HH\Client\TypecheckResult',
-      'HH\BuiltinEnum', // Should be __SystemLib\BuiltinEnum
       'InfiniteIterator',
       'IntlIterator',
       'IteratorIterator',
@@ -113,7 +107,6 @@ abstract final class ScannedDefinitionFilters {
       'ReflectionFunctionAbstract',
       'RegexIterator',
       'ResourceBundle',
-      'ResumableWaitHandle',
       'SessionHandler',
       'SetIterator',
       'SplDoublyLinkedList',
@@ -125,10 +118,7 @@ abstract final class ScannedDefinitionFilters {
       'SplPriorityQueue',
       'SplQueue',
       'SplStack',
-      'StaticWaitHandle',
       'VectorIterator',
-      'WaitHandle',
-      'WaitableWaitHandle',
 
       ////////////////
       // Interfaces //
@@ -139,12 +129,12 @@ abstract final class ScannedDefinitionFilters {
       'ConstMapAccess',
       'ConstSetAccess',
       'IndexAccess',
-      'HH\SQLListFormatter',
-      'HH\SQLScalarFormatter',
       'IteratorAggregate',
       'MapAccess',
       'OuterIterator',
       'RecursiveIterator',
+      'SQLListFormatter',
+      'SQLScalarFormatter',
       'SeekableIterator',
       'SetAccess',
 
@@ -178,6 +168,13 @@ abstract final class ScannedDefinitionFilters {
       'uksort',
       'usort',
     ];
-    return array_key_exists($def->getName(), array_flip($blacklist));
+    $keyed = array_flip($blacklist);
+
+    $name = $def->getName();
+    if (strpos($name, "HH\\") === 0) {
+      $name = substr($name, 3);
+    }
+
+    return array_key_exists($name, $keyed);
   }
 }
