@@ -114,5 +114,4 @@ Under HHVM, `PharData` will extract symlinks from tar files. PHP5 will create em
 
 ### XDebug
 
-XDebug defaults to using the time for naming the output file. PHP5 uses the
-PID instead.
+XDebug defaults to using the time for naming the output file. PHP5 uses the PID instead.
