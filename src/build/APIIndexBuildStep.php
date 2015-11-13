@@ -13,6 +13,7 @@ final class APIIndexBuildStep extends BuildStep {
       ->map($path ==> substr($path, strlen(BuildPaths::APIDOCS_MARKDOWN) + 1))
       ->map($path ==> APIHTMLBuildStep::getOutputFileName($path))
     );
+    sort($sources);
 
     $this->createIndex($sources);
   }
