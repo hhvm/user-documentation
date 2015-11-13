@@ -378,6 +378,7 @@ h4 {
 .logoCSS .a {
   border-width: 0 0 12px 12px;
   border-color: transparent transparent grey transparent;
+  left: 0px;
   top: 15px;
 }
 
@@ -424,6 +425,119 @@ h4 {
 .logoCSS .b.b4 {
   top: 29px;
   left: 14px;
+}
+
+.notFoundMessage {
+  text-align: center;
+}
+
+.notFoundIcon {
+  margin: 50px 0;
+  text-align: center;
+}
+.notFoundIcon .notFoundIconCSS {
+  display: inline-block;
+  height: 25.5vw;
+  margin: 0 1vw;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  width: 17vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .a {
+  border-color: transparent transparent #B0B0B0 transparent;
+  border-width: 0 0 8vw 8vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .a.a1 {
+  border-color: transparent transparent #B0B0B0 transparent;
+  left: 0px;
+  top: 1px;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .a.a2 {
+  left: 9vw;
+  top: 0px;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .a.a3 {
+  border-width: 0px 0px 7vw 7vw;
+  left: 1vw;
+  top: 9vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .a.a4 {
+  border-width: 0px 0px 8.35vw 8.35vw;
+  left: 8.55vw;
+  top: 8.6vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .b {
+  border-color: #B0B0B0 transparent transparent transparent;
+  border-width: 8vw 8vw 0 0;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .b.b1 {
+  border-color: #B0B0B0 transparent transparent transparent;
+  left: 0px;
+  top: 8vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .b.b2 {
+  border-width: 7.4vw 7.4vw 0px 0px;
+  left: 8.6vw;
+  top: 8.6vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .b.b3 {
+  border-width: 8.35vw 8.35vw 0px 0px;
+  left: 8.55vw;
+  top: 16.89vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS {
+  width: 16vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .a {
+  border-color: transparent transparent #fd8724 transparent;
+  border-width: 0 0 8vw 8vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .a.a1 {
+  border-color: transparent transparent #fd8724 transparent;
+  left: 0px;
+  top: 1px;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .a.a2 {
+  border-width: 0 0 7.5vw 7.5vw;
+  left: 8.55vw;
+  top: 1.1vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .a.a3 {
+  border-width: 0px 0px 7vw 7vw;
+  left: 1vw;
+  top: 9vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .b {
+  border-color: #fd8724 transparent transparent transparent;
+  border-width: 8vw 8vw 0 0;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .b.b1 {
+  border-color: #fd8724 transparent transparent transparent;
+  left: 0px;
+  top: 8vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .b.b2 {
+  border-width: 7.4vw 7.4vw 0px 0px;
+  left: 8.6vw;
+  top: 0vw;
+}
+.notFoundIcon .notFoundIconCSS.notFound_0_IconCSS .b.b3 {
+  border-width: 7.5vw 7.5vw 0px 0px;
+  left: 8.6vw;
+  top: 8.5vw;
+}
+
+.notFoundErrorPage {
+  background: #303030;
+  color: white;
+  text-align: center;
+}
+.notFoundErrorPage .pageTitle {
+  display: none;
+}
+.notFoundErrorPage .mainWrapper {
+  margin: 0 auto;
 }
 
 .navWrapper {
@@ -749,6 +863,11 @@ h4 {
 
   .widthWrapper {
     margin: 0 10px;
+  }
+
+  .notFoundIcon .notFoundIconCSS.notFound_4_IconCSS .b.b3 {
+    left: 8.65vw;
+    top: 16.75vw;
   }
 }
 @media only screen and (min-width: 1020px) {

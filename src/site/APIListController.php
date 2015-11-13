@@ -15,6 +15,10 @@ final class APIListController extends WebPageController {
     }
   }
   
+  public function getExtraBodyClass(): ?string {
+    return null;
+  }
+  
   protected function getInnerContent(): XHPRoot {
     $type = $this->getOptionalStringParam('type');
     if ($type !== null) {

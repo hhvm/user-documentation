@@ -18,6 +18,10 @@ final class GuidesListController extends WebPageController {
     }
   }
   
+  public function getExtraBodyClass(): ?string {
+    return null;
+  }
+  
   protected function getInnerContent(): XHPRoot {
     $product = $this->getProduct();
     $guides = GuidesIndex::getGuides($product);

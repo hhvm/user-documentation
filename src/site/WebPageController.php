@@ -4,15 +4,18 @@ use HHVM\UserDocumentation\BuildPaths;
 
 abstract class WebPageController extends WebController {
   public abstract function getTitle(): Awaitable<string>;
+  public abstract function getExtraBodyClass(): ?string;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
 
   final public async function respond(): Awaitable<void> {
     list($title, $content) = await \HH\Asio\va2(
       $this->getTitle(),
-      $this->getContentPane(),
+      $this->getContentPane()
     );
     
-    $body_class = 'bodyClass'.ucwords($this->getOptionalStringParam('product'));
+    $extra_class = $this->getExtraBodyClass();
+    
+    $body_class = $this->getBodyClass($extra_class);
 
     $xhp =
       <x:doctype>
@@ -75,6 +78,14 @@ abstract class WebPageController extends WebController {
         </div>
       </div>
     );
+  }
+  
+  private function getBodyClass(?string $extra_class): string {
+    $class = 'bodyClass'.ucwords($this->getOptionalStringParam('product'));
+    if ($extra_class !== null) {
+      $class = $class.' '.$extra_class;
+    }
+    return $class;
   }
   
   private function getTitleContent(string $title): XHPRoot {

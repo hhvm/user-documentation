@@ -7,6 +7,10 @@ final class HomePageController extends WebPageController {
     return 'HHVM and Hack Documentation';
   }
   
+  public function getExtraBodyClass(): ?string {
+    return null;
+  }
+  
   protected function getInnerContent(string $product): XHPRoot {
     $guides = GuidesIndex::getGuides($product);
 

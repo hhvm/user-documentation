@@ -28,6 +28,10 @@ final class GuidePageController extends WebPageController {
          : ucwords(strtr($this->guide.': '.$this->page, '-', ' '));
     return $ret;
   }
+  
+  public function getExtraBodyClass(): ?string {
+    return null;
+  }
 
   protected async function getBody(): Awaitable<XHPRoot> {
     return
