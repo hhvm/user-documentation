@@ -13,6 +13,10 @@ final class SearchController extends WebPageController {
     return 'Search for shit!';
   }
 
+  public function getExtraBodyClass(): ?string {
+    return null;
+  }
+
   private function getListFromResultSet(Map<string, string> $result_set): XHPRoot {
     if (count($result_set) === 0) {
         $list = <div><p><em>No Results Found</em></p></div>;
