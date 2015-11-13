@@ -3,19 +3,11 @@
 namespace HHVM\UserDocumentation;
 
 final class SearchResultSet {
-    private Map<string, string> $classes;
-    private Map<string, string> $functions;
-    private Map<string, string> $interfaces;
-    private Map<string, string> $hhvm_guides;
-    private Map<string, string> $hack_guides;
-
-    public function __construct() {
-        $this->classes = Map {};
-        $this->functions = Map {};
-        $this->interfaces = Map {};
-        $this->hhvm_guides = Map {};
-        $this->hack_guides = Map {};
-    }
+    private Map<string, string> $classes = Map {};
+    private Map<string, string> $functions = Map {};
+    private Map<string, string> $interfaces = Map {};
+    private Map<string, string> $hhvm_guides = Map {};
+    private Map<string, string> $hack_guides = Map {};
 
     public function addAPIResult(string $type, string $name): void {
         if ($type === "class") {

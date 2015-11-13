@@ -28,14 +28,19 @@ class APIIndex {
   }
 
   public static function search(string $term, SearchResultSet &$results): void {
-    $index = self::getIndex();
+    // This whole method is UNSAFE
+    $index = Shapes::toArray(self::getIndex());
     foreach ($index as $key => $value) {
-        foreach ($value as $name => $entry) {
-            if (strtolower($name) === strtolower($term) || strpos(strtolower($name), strtolower($term))) {
-                $results->addAPIResult($key, $name);
+        if (is_array($value)) {
+            foreach ($value as $name => $entry) {
+                if (is_string($name) && is_string($key)) {
+                    if (strtolower($name) === strtolower($term) || strpos(strtolower($name), strtolower($term))) {
+                        $results->addAPIResult($key, $name);
+                    }
+                }
             }
         }
-    }
+     }
   }
 
   public static function getFileForAPI(
