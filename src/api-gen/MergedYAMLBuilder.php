@@ -9,9 +9,15 @@ final class MergedYAMLBuilder {
   ) {
   }
 
-  private static function GetMergeKey(string $type, string $name): string {
-    if ($type === 'interface' || $type === 'trait') {
-      $type === 'class';
+  private static function GetMergeKey(
+    APIDefinitionType $type,
+    string $name,
+  ): string {
+    if (
+      $type === APIDefinitionType::INTERFACE_DEF
+      || $type === APIDefinitionType::TRAIT_DEF
+    ) {
+      $type === APIDefinitionType::CLASS_DEF;
     }
 
     $last_ns = strrpos($name, "\\");

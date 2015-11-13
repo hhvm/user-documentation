@@ -29,29 +29,29 @@ class ScannedDefinitionsYAMLBuilder {
 
   public function build(): void {
     $this->buildDefinitions(
-      'class',
+      APIDefinitionType::CLASS_DEF,
       $this->parser->getClasses(),
       $x ==> $this->getClassDocumentation($x),
     );
     $this->buildDefinitions(
-      'interface',
+      APIDefinitionType::INTERFACE_DEF,
       $this->parser->getInterfaces(),
       $x ==> $this->getClassDocumentation($x),
     );
     $this->buildDefinitions(
-      'trait',
+      APIDefinitionType::TRAIT_DEF,
       $this->parser->getTraits(),
       $x ==> $this->getClassDocumentation($x),
     );
     $this->buildDefinitions(
-      'function',
+      APIDefinitionType::FUNCTION_DEF,
       $this->parser->getFunctions(),
       $x ==> $this->getFunctionDocumentation($x),
     );
   }
 
   private function buildDefinitions<T as ScannedBase>(
-    string $prefix,
+    APIDefinitionType $type,
     \ConstVector<T> $defs,
     (function(T):shape('name' => string)) $converter,
   ): void {
@@ -60,7 +60,7 @@ class ScannedDefinitionsYAMLBuilder {
     foreach ($defs as $def) {
       $data = shape(
         'sources' => [$this->source],
-        'type' => $prefix,
+        'type' => $type,
         'data' => $converter($def),
       );
       $writer->write($data);

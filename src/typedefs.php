@@ -32,13 +32,13 @@ type DocumentationSource = shape(
 
 type BaseYAML = shape(
   'sources' => array<DocumentationSource>,
-  'type' => string,
+  'type' => APIDefinitionType,
   'data' => shape('name' => string),
 );
 
 type ClassYAML = shape(
   'sources' => array<DocumentationSource>,
-  'type' => string,
+  'type' => APIDefinitionType,
   'data' => ClassDocumentation,
 );
 
