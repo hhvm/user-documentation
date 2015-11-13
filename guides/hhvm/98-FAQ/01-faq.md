@@ -83,7 +83,7 @@ The list of supported extensions can be found in the extensions directory of the
  
 ### What is the HHVM Wrapper?
 
-The HHVM wrapper provides a simpler interface to the HHVM binary for many common options (e.g., running in server or interp mode, compiling a repo-authoritative repo, dumping bytecode, run gdb). It is located at `hphp/tools/hhvm_wrapper.php`. You can see all of the available options by running:
+The HHVM wrapper provides a simpler interface to the HHVM binary for many common options (e.g., running in server or interp mode, compiling a repo-authoritative repo, dumping bytecode, running gdb). It is located at `hphp/tools/hhvm_wrapper.php`. You can see all of the available options by running:
 
 ```
 ./hphp/tools/hhvm_wrapper.php --help
