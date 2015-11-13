@@ -35,3 +35,6 @@ DEPENDENCIES
   github-markdown
   html-pipeline (~> 1.0)
   pygments.rb
+
+BUNDLED WITH
+   1.10.6
