@@ -25,7 +25,7 @@ class GuidesIndex {
     return require(BuildPaths::GUIDES_SUMMARY);
   }
 
-  public static function search(string $term, SearchResultSet &$results): void {
+  public static function search(string $term, SearchResultSet $results): SearchResultSet {
     $index = self::getIndex();
     foreach ($index as $type => $value) {
         foreach ($value as $category => $entry) {
@@ -41,6 +41,7 @@ class GuidesIndex {
             }
         }
     }
+    return $results;
   }
 
   public static function getProducts(): ImmVector<string> {

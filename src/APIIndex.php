@@ -27,7 +27,7 @@ class APIIndex {
     return $index[$type];
   }
 
-  public static function search(string $term, SearchResultSet &$results): void {
+  public static function search(string $term, SearchResultSet $results): SearchResultSet {
     // This whole method is UNSAFE
     $index = Shapes::toArray(self::getIndex());
     foreach ($index as $key => $value) {
@@ -41,6 +41,7 @@ class APIIndex {
             }
         }
      }
+     return $results;
   }
 
   public static function getFileForAPI(

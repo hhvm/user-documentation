@@ -51,14 +51,14 @@ final class SearchController extends WebPageController {
         return $this->term;
     }
 
-    $this->term = ParamGetter::getGet('term');
+    $this->term = $this->getRequiredStringParam('term');
     return $this->term;
   }
 
   private function getSearchResults(): SearchResultSet {
     $results = new SearchResultSet();
-    APIIndex::search($this->getSearchTerm(), $results);
-    GuidesIndex::search($this->getSearchTerm(), $results);
+    $results = APIIndex::search($this->getSearchTerm(), $results);
+    $results = GuidesIndex::search($this->getSearchTerm(), $results);
     return $results;
   }
 }
