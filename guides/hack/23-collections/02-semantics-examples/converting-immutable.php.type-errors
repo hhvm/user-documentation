@@ -7,7 +7,7 @@ function foo_with_vector(ImmVector<int> $vec): void {
     // The type checker actually won't allow this, but you can run this
     // and catch the exception
     $vec[] = 5;
-  } catch (\InvalidOperationException $ex) {
+  } catch (InvalidOperationException $ex) {
     echo "Cannot modify immutable collection. Create copy first\n";
     $cp_vec = new Vector($vec);
     $cp_vec[] = 5;

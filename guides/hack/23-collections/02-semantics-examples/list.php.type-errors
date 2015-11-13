@@ -16,7 +16,7 @@ function run(): void {
     // Exception will be thrown since there is no 0 and 1 value in the Set
     // to serve as a key-like value
     list($x, $y) = $setB;
-  } catch (\OutOfBoundsException $ex) {
+  } catch (OutOfBoundsException $ex) {
     var_dump($ex->getMessage());
   }
   var_dump($v1);
