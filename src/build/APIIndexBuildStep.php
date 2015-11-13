@@ -121,11 +121,7 @@ final class APIIndexBuildStep extends BuildStep {
   }
 
   private static function markdownPathToHTMLPath(string $md_path): string {
-    $md_relative = substr(
-      $md_path,
-      strlen(BuildPaths::APIDOCS_MARKDOWN) + 1,
-    );
-    $html_absolute = APIHTMLBuildStep::getOutputFileName($md_relative);
+    $html_absolute = APIHTMLBuildStep::getOutputFileName($md_path);
     $html_relative = str_replace(
       BuildPaths::APIDOCS_HTML.'/',
       '',

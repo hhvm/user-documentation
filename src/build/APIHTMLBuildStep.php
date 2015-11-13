@@ -8,16 +8,18 @@ final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
 
   public function buildAll(): void {
     Log::i("\nAPIHTMLBuild");
-    $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
+    $sources = (
+      self::findSources(self::SOURCE_ROOT, Set{'md'})
       ->filter($path ==> basename($path) !== 'README.md')
       ->filter($path ==> strpos($path, '-examples') === false)
-      ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
+    );
     sort($sources);
 
     $this->renderFiles($sources);
   }
 
   private function renderFile(string $input): string {
+    $input = str_replace(self::SOURCE_ROOT.'/', '', $input);
     $parts = (new Vector(explode('/', $input)))
       ->map(
         $part ==> preg_match('/^[0-9]{2}-/', $part) ? substr($part, 3) : $part

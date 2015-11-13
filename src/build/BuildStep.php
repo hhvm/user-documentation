@@ -9,6 +9,7 @@ abstract class BuildStep {
     string $root,
     \ConstSet<string> $extensions,
   ): Vector<string> {
+    $root = realpath($root);
     Log::i("\nFinding sources in $root");
     $rdi = new \RecursiveDirectoryIterator($root);
     $rii = new \RecursiveIteratorIterator(

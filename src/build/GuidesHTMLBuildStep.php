@@ -3,15 +3,16 @@
 namespace HHVM\UserDocumentation;
 
 final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
-  const string SOURCE_ROOT = __DIR__.'/../../guides';
+  const string SOURCE_ROOT = LocalConfig::ROOT.'/guides';
   const string BUILD_ROOT = BuildPaths::GUIDES_HTML;
 
   public function buildAll(): void {
     Log::i("\nGuidesHTMLBuild");
-    $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
+    $sources = (
+      self::findSources(self::SOURCE_ROOT, Set{'md'})
       ->filter($path ==> basename($path) !== 'README.md')
       ->filter($path ==> strpos($path, '99-api-examples') === false)
-      ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
+    );
     sort($sources);
 
     $list = $this->renderFiles($sources);
