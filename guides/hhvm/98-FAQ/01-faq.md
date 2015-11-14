@@ -111,3 +111,21 @@ After the first few requests, the JIT is on its way to optimizing.
 
 It is *advisable, but not required* if you are running an HHVM server to send the server some explicit requests that are representative of what user requests will be coming through. You can use `curl`, for example, to send these requests. This way the JIT has the information necessary to make the best optimizations for your code before any requests are actually served.
 
+## Enabling Hack mode on PHP files in repo mode
+
+Have you seen an error like this?
+
+```
+Fatal error: Syntax only allowed in Hack files (<?hh) or with -v Eval.EnableHipHopSyntax=true
+```
+
+If you have a `<?php` file where you want to enable Hack syntax in [repo mode](), you have to make sure that you specify `hhvm.force_hh=true` in both the *repo compilation stage* and when *running code from the repo*.
+
+For example, if you have a file named `enable-hack-in-php.php` and you wanted to create a repo from that file and run it,  you would need to do something like the following:
+
+```
+# compilation of repo stage
+% hhvm --hphp -t hhbc -v AllVolatile=true -dhhvm.force_hh=true `enable-hack-in-php.php`
+
+# execution stage; hhvm.hhbc file location will vary
+% hhvm -dhhvm.force_hh=true  --file 'enable-hack-in-php.php' -vRepo.Authoritative=true -vRepo.Central.Path="/tmp/hphp_RdsESQ/hhvm.hhbc"
