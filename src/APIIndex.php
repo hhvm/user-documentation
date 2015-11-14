@@ -9,64 +9,74 @@ class APIIndex {
     return APIIndexData::getIndex();
   }
 
-  public static function getProducts(): Traversable<string> {
-    return array_keys(StringKeyedShapes::toArray(self::getIndex()));
+  public static function getIndexForType(
+    APIDefinitionType $type,
+  ): array<string, APIIndexEntry> {
+    // UNSAFE
+    return self::getIndex()[$type];
   }
 
+  public static function getFunctionIndex(
+  ): array<string, APIFunctionIndexEntry> {
+    return self::getIndex()['function'];
+  }
 
-  public static function getReferenceForType(
-    string $type,
-  ): KeyedTraversable<string, APIClassIndexEntry> {
-    $index = Shapes::toArray(self::getIndex());
+  public static function getClassIndex(
+    APIDefinitionType $type,
+  ): array<string, APIClassIndexEntry> {
     invariant(
-      array_key_exists($type, $index),
-      '%s is not in the index',
-      $type,
+      $type !== APIDefinitionType::FUNCTION_DEF,
+      'functions are not classes',
     );
     // UNSAFE
-    return $index[$type];
+    return self::getIndex()[$type];
   }
+    
 
-  public static function getFileForAPI(
-    string $type,
-    string $api,
-    ?string $method,
-  ) {
-    // UNSAFE
+  public static function getDataForFunction(
+    string $name,
+  ): APIFunctionIndexEntry {
     $index = self::getIndex();
     invariant(
-      array_key_exists($type, $index),
-      'Type %s does not exist',
-      $type,
+      array_key_exists($name, $index['function']),
+      'function %s does not exist',
+      $name,
     );
+    return $index['function'][$name];
+  }
+
+  public static function getDataForClass(
+    APIDefinitionType $class_type,
+    string $class_name,
+  ): APIClassIndexEntry {
+    $index = self::getClassIndex($class_type);
     invariant(
-      array_key_exists($api, $index[$type]),
-      'Type %s does not contain reference %s',
-      $type,
-      $api,
+      array_key_exists($class_name, $index),
+      'class %s does not exist',
+      $class_name,
     );
-    if ($method !== null) {
-      invariant(
-        isset($index[$type][$api]['methods']),
-        'API %s of type %s does not contain any methods',
-        $api,
-        $type,
-      );
-      invariant(
-        array_key_exists(
-          $method,
-          $index[$type][$api]['methods'],
-        ),
-        'API %s of type %s does not contain method %s',
-        $api,
-        $type,
-        $method,
-      );
-      $api_file = (string) $index[$type][$api]['methods'][$method];
-    } else {
-      $api_file = (string) $index[$type][$api]['path'];
-    }
-    return
-      BuildPaths::APIDOCS_HTML.'/'. $api_file;
+    return $index[$class_name];
+  }
+
+  public static function getDataForMethod(
+    APIDefinitionType $class_type,
+    string $class_name,
+    string $method_name,
+  ): APIMethodIndexEntry {
+    $index = self::getClassIndex($class_type);
+    invariant(
+      array_key_exists($class_name, $index),
+      'class %s does not exist',
+      $class_name,
+    );
+    $class = $index[$class_name];
+    $methods = $class['methods'];
+    invariant(
+      array_key_exists($method_name, $methods),
+      'Method %s::%s does not exist',
+      $class_name,
+      $method_name,
+    );
+    return $methods[$method_name];
   }
 }

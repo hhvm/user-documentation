@@ -18,14 +18,14 @@ final class APIListController extends WebPageController {
   protected function getInnerContent(): XHPRoot {
     $type = $this->getOptionalStringParam('type');
     if ($type !== null) {
-      $api_type = $type;
+      $api_type = APIDefinitionType::assert($type);
       $apis = Map {
-        $api_type => APIIndex::getReferenceForType($api_type),
+        $api_type => APIIndex::getIndexForType($api_type),
       };
     } else {
       $apis = Map {};
       foreach (APIDefinitionType::getValues() as $api_key => $api_type) {
-        $apis[$api_type] = APIIndex::getReferenceForType((string) $api_type);
+        $apis[$api_type] = APIIndex::getIndexForType($api_type);
       }
     }
 

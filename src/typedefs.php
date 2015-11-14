@@ -17,7 +17,7 @@ enum MemberVisibility: string {
   PUBLIC = 'public';
 };
 
-enum APIDefinitionType: string {
+enum APIDefinitionType: string as string {
   CLASS_DEF = 'class';
   TRAIT_DEF = 'trait';
   INTERFACE_DEF = 'interface';
@@ -95,14 +95,44 @@ type DocumentationIndex = shape(
   'types' => array<string,DocumentationIndexEntry>,
 );
 
+type APIIndexEntry = shape(
+  'name' => string,
+  'htmlPath' => string,
+);
+
+type APIFunctionIndexEntry = shape(
+  'name' => string,
+  'htmlPath' => string,
+);
+
+type APIMethodIndexEntry = shape(
+  'name' => string,
+  'className' => string,
+  'htmlPath' => string,
+);
+
 type APIClassIndexEntry = shape(
-  'path' => string,
-  'methods' => array<string, string>,
+  'name' => string,
+  'htmlPath' => string,
+  'methods' => array<string, APIMethodIndexEntry>,
 );
 
 type APIIndexShape = shape(
   'class' => array<string, APIClassIndexEntry>,
   'interface' => array<string, APIClassIndexEntry>,
   'trait' => array<string, APIClassIndexEntry>,
-  'function' => array<string, APIClassIndexEntry>,
+  'function' => array<string, APIFunctionIndexEntry>,
+);
+
+// TEMPORARY WORKAROUND FOR REACT NAV COMPATIBILITY
+type APILegacyIndexEntry = shape(
+  'path' => string,
+  'methods' => array<string, string>,
+);
+
+type APILegacyIndexShape = shape(
+  'class' => array<string, APILegacyIndexEntry>,
+  'interface' => array<string, APILegacyIndexEntry>,
+  'trait' => array<string, APILegacyIndexEntry>,
+  'function' => array<string, APILegacyIndexEntry>,
 );

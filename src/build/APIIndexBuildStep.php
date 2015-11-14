@@ -60,43 +60,47 @@ final class APIIndexBuildStep extends BuildStep {
 
           $idx = strtr($docs['name'], "\\", '.');
           $md_path = FunctionMarkdownBuilder::getOutputFileName($docs);
-          $html_path = self::markdownPathToHTMLPath($md_path);
+          $html_path = APIHTMLBuildStep::getOutputFileName($md_path);
 
           $out['function'][$idx] = shape(
-            'path' => $html_path,
-            'methods' => [],
+            'name' => $docs['name'],
+            'htmlPath' => $html_path,
           );
           break;
         case APIDefinitionType::CLASS_DEF:
         case APIDefinitionType::INTERFACE_DEF:
         case APIDefinitionType::TRAIT_DEF:
-          $docs = (
+          $class = (
             (): ClassDocumentation ==> /* UNSAFE_EXPR */ $data['data']
           )();
 
 
           $methods = [];
-          foreach ($docs['methods'] as $method) {
+          foreach ($class['methods'] as $method) {
             $idx = strtr($method['name'], "\\", '.');
             $md_path = MethodMarkdownBuilder::getOutputFileName(
               $type,
-              $docs,
+              $class,
               $method,
             );
-            $html_path = self::markdownPathToHTMLPath($md_path);
-            $methods[$idx] = $html_path;
+            $html_path = APIHTMLBuildStep::getOutputFileName($md_path);
+            $methods[$idx] = shape(
+              'name' => $method['name'],
+              'className' => $class['name'],
+              'htmlPath' => $html_path,
+            );
           }
 
           $md_path = ClassMarkdownBuilder::getOutputFileName(
             $type,
-            $docs,
+            $class,
           );
-          $html_path = self::markdownPathToHTMLPath($md_path);
-
+          $html_path = APIHTMLBuildStep::getOutputFileName($md_path);
       
-          $idx = strtr($docs['name'], "\\", '.');
+          $idx = strtr($class['name'], "\\", '.');
           $entry = shape(
-            'path' => $html_path,
+            'name' => $class['name'],
+            'htmlPath' => $html_path,
             'methods' => $methods,
           );
 
@@ -118,15 +122,5 @@ final class APIIndexBuildStep extends BuildStep {
     }
 
     return $out;
-  }
-
-  private static function markdownPathToHTMLPath(string $md_path): string {
-    $html_absolute = APIHTMLBuildStep::getOutputFileName($md_path);
-    $html_relative = str_replace(
-      BuildPaths::APIDOCS_HTML.'/',
-      '',
-      $html_absolute,
-    );
-    return $html_relative;
   }
 }
