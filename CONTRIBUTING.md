@@ -51,6 +51,8 @@ While we aren't 100% rigid on how we want contributions to come to us (we want t
 
 The [examples associated with the async introduction](https://github.com/hhvm/user-documentation/tree/master/guides/hack/22-async/01-introduction-examples) will give you a guide on how to structure these files.
 
+We have provided a [simple shell script](https://github.com/hhvm/user-documentation/tree/master/bin/exskel.sh) that you can run to create skeletons of all the files above for your example.
+
 ### Code For APIs 
 
 In addition to [all the files for a guide example](#code-for-guides) above, all API examples should also have an `.md` file associated with it that serves as a header (e.g., summary) to the example itself. 
