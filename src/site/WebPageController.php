@@ -4,8 +4,11 @@ use HHVM\UserDocumentation\BuildPaths;
 
 abstract class WebPageController extends WebController {
   public abstract function getTitle(): Awaitable<string>;
-  public abstract function getExtraBodyClass(): ?string;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
+
+  protected function getExtraBodyClass(): ?string {
+    return null;
+  }
 
   final public async function respond(): Awaitable<void> {
     list($title, $content) = await \HH\Asio\va2(

@@ -29,10 +29,6 @@ final class APIPageController extends WebPageController {
     return $this->getAPIName();
   }
   
-  public function getExtraBodyClass(): ?string {
-    return null;
-  }
-  
   protected function getAPIName(): string {
     return str_replace('.', '\\', $this->api);
   }
