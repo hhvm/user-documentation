@@ -555,6 +555,12 @@ h4 {
 
 .navWrapper .navList li a {
   color: #B0B0B0;
+  display: block;
+}
+
+.navWrapper .navList li a:hover {
+  background-color: #DADADA;
+  color: #303030;
 }
 
 .navWrapper .navList li h4 {
@@ -565,6 +571,7 @@ h4 {
 }
 .navWrapper .navList li h4 a {
   color: #fd8724;
+  padding-left: 30px;
 }
 
 .navWrapper .subList {
@@ -583,40 +590,40 @@ h4 {
 
 .navWrapper .navList.apiNavList .subListItem h5 {
   line-height: 0.7em;
-  margin-bottom: 15px;
 }
 
 .navWrapper .navList.apiNavList .subListItem h5 a {
   font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
+  padding: 7.5px 30px;
   word-wrap: break-word;
 }
 
 .navWrapper .navList.apiNavList .secondLevelListItem h6 {
   line-height: 0.7em;
-  margin-bottom: 15px;
-  padding-left: 15px;
 }
 
 .navWrapper .navList.apiNavList .secondLevelListItem h6 a {
   font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
+  padding: 7.5px 0 7.5px 45px;
   word-wrap: break-word;
 }
 
-.navWrapper .navList .subListItem h5 {
+.navWrapper .navList .subListItem h5 a {
   position: relative;
+  padding-left: 30px;
 }
 
-.subListItem h5::before {
+.subListItem h5 a::before {
   border-color: transparent transparent transparent transparent;
   border-style: solid;
   border-width: 5px 0 5px 8.7px;
   content: "";
   height: 0;
-  left: -12px;
+  left: 12px;
   position: absolute;
   top: 8px;
   -webkit-transition: border-color 0.5s;
@@ -625,7 +632,11 @@ h4 {
   width: 0;
 }
 
-.subListItem:hover h5::before {
+.apiNavList .subListItem h5 a::before {
+  top: 7.5px;
+}
+
+.subListItem:hover h5 a::before {
   border-color: transparent transparent transparent #505050;
 }
 
@@ -638,7 +649,7 @@ h4 {
   color: #303030;
 }
 
-.subListItem.itemActive h5::before {
+.subListItem.itemActive h5 a::before {
   border-color: transparent transparent transparent #fd8724;
 }
 
@@ -896,7 +907,7 @@ h4 {
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    padding: 20px 30px;
+    padding: 20px 0;
   }
 
   .navList.apiNavList .subListItem h5::before {
