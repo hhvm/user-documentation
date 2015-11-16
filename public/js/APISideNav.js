@@ -1,17 +1,5 @@
 var transEndEventName = ('WebkitTransition' in document.documentElement.style) ? 'webkitTransitionEnd' : 'transitionend';
 
-function scrollToActiveItem() {
-  var navList = document.getElementsByClassName('navList')[0];
-  var navList = document.getElementsByClassName('navList')[0];
-  var activeItemID = currentType+'.'+currentAPI;
-  if (currentMethod) {
-    activeItemID += '.'+currentMethod;
-  }
-  navList.scrollTop = 
-    document.getElementById(activeItemID.replace('.', '/')).offsetTop - 20;
-  document.removeEventListener(transEndEventName, scrollToActiveItem, false);
-}
-
 var DocNav = React.createClass({displayName: "DocNav",
   getInitialState: function() {
     return {
@@ -20,42 +8,41 @@ var DocNav = React.createClass({displayName: "DocNav",
   },
   getDefaultProps: function() {
     return {
-      currentType: currentType,
-      currentAPI: currentAPI,
-      currentMethod: currentMethod,
-      data: docnavData,
-      baseRefURL: '/hack/reference',
-    }
+      className: {
+        'api' : 'apiNavList',
+      }
+    };
   },
   handleSlide: function(id) {
     this.setState({
       toggleActive: !this.state.toggleActive,
     });
   },
+  handleScrollToActive: function() {
+    var navList = document.getElementsByClassName('navList')[0];
+    navList.scrollTop = 
+      document.getElementById(this.props.current.activeItem).offsetTop - 10;
+    window.removeEventListener(transEndEventName, this.handleScrollToActive, false);
+  },
   componentWillUpdate: function() {
     // TODO: Replace with ReactCSSTransitionGroup
-    document.addEventListener(transEndEventName, scrollToActiveItem, false);
+    window.addEventListener(transEndEventName, this.handleScrollToActive, false);
   },
   componentDidUpdate: function() {
     var navWrapper = document.getElementsByClassName('navWrapper')[0];
     navWrapper.dataset.active = this.state.toggleActive;
   },
   componentDidMount: function() {
-    var navList = document.getElementsByClassName('navList')[0];
-    var activeItemID = this.props.currentType+'.'+this.props.currentAPI;
-    if (this.props.currentMethod) {
-      activeItemID += '.'+this.props.currentMethod;
-    }
-    navList.scrollTop = 
-      document.getElementById(activeItemID.replace('.', '/')).offsetTop - 80;
+    this.handleScrollToActive();
   },
   render: function() {
     var navChildren = [];
-    for (var apitype in this.props.data) {
-      navChildren.push(this.renderNavAPIType(apitype));
+    for (var group in this.props.data) {
+      navChildren.push(this.renderNavGroup(group));
     }
     var navClass = 'navToggle navToggle'+this.state.toggleActive;
     var toggleClass = 'toggleNav toggleNav'+this.state.toggleActive;
+    
     return (
       React.createElement("div", {className: navClass}, 
         React.createElement("div", 
@@ -64,112 +51,92 @@ var DocNav = React.createClass({displayName: "DocNav",
         ),
         React.createElement(
           "ul", 
-          {className: 'navList apiNavList'}, 
+          {className: 'navList '+this.props.className[this.props.loadType]}, 
           navChildren
         )
       )
     );
   },
-  renderNavAPIType: function(currentType) {
-    var navTypeChildren = [];
-    var apiType = this.props.data[currentType];
+  renderNavGroup: function(currentGroup) {
+    var navGroupChildren = [];
+    var group = this.props.data[currentGroup];
         
-    if (Object.keys(apiType).length > 1) {
-      for (var api in apiType) {
-        navTypeChildren.push(this.renderNavAPIItem(apiType, currentType, api));
+    if (Object.keys(group).length > 1) {
+      for (var item in group) {
+        navGroupChildren.push(this.renderNavFirstLevelItem(group[item], currentGroup));
       }
     }
-    var typeClass = 'apiNavType';
-    if (currentType.toUpperCase() === this.props.currentType.toUpperCase()) {
-      typeClass += ' apiNavTypeActive';
+    var groupClass = 'navGroup';
+    if (currentGroup.toUpperCase() === this.props.current.group.toUpperCase()) {
+      groupClass += ' navGroupActive';
     }
-    var typeHref = this.props.baseRefURL+'/'+currentType+'/';
+    var groupHref = this.props.base+'/'+currentGroup+'/';
     return (
-      React.createElement("li", {className: typeClass, key: currentType}, 
-        React.createElement("h4", {id: currentType}, 
-          React.createElement("a", {className: 'navItem', href: typeHref}, formatTitle(currentType))
+      React.createElement("li", {className: groupClass, key: currentGroup}, 
+        React.createElement("h4", {id: currentGroup}, 
+          React.createElement("a", {className: 'navItem', href: groupHref}, currentGroup)
         ), 
         React.createElement("ul", {className: 'subList'}, 
-          navTypeChildren
+          navGroupChildren
         )
       )
     );
   },
-  renderNavAPIItem: function(parentTypeItems, parentType, item) {
-    var itemHref = this.props.baseRefURL+'/'+parentType+'/'+item+'/';
+  renderNavFirstLevelItem: function(item, parentGroup) {
+    var itemHref = this.props.base+'/'+parentGroup+'/'+item.name+'/';
     var itemClass = 'subListItem';
-    var itemID = parentType+'.'+item;
-    var activeAPIID = this.props.currentType+'.'+this.props.currentAPI;
-    if (itemID.toUpperCase() === activeAPIID.toUpperCase()) {
+    var itemID = parentGroup+'/'+item.name;
+    if (itemID.toUpperCase() === this.props.current.activeFirstLevel.toUpperCase()) {
       itemClass += ' itemActive';
     }
-    var itemMethods = parentTypeItems[item].methods;
-    var navApiChildren = [];
-    if (Object.keys(itemMethods).length > 0) {
-      for (var method in itemMethods) {
-        navApiChildren.push(
-          this.renderNavAPIMethod(itemMethods[method], itemHref, itemID, method)
-        )
+
+    var navItemChildren = [];
+    // TODO: Generalise 'methods' and merge with guide SideNav.js
+    if (item.hasOwnProperty('methods')) {
+      var itemChildren = item.methods;
+      if (Object.keys(itemChildren).length > 0) {
+        for (var child in itemChildren) {
+          navItemChildren.push(
+            this.renderNavSecondLevelItem(itemChildren[child], itemHref, itemID)
+          )
+        }
       }
     }
     return (
       React.createElement("li", {
           className: itemClass, 
-          key: item, 
-          id: itemID.replace('.', '/')
+          key: item.name, 
+          id: itemID
         },       
         React.createElement("h5", null, 
-          React.createElement("a", {className: 'navItem', href: itemHref}, formatTitle(item))
+          React.createElement("a", {className: 'navItem', href: itemHref}, item.name)
         ), 
-        React.createElement("ul", {className: 'subMethodList'}, 
-          navApiChildren
+        React.createElement("ul", {className: 'secondLevelList'}, 
+          navItemChildren
         )
       )
     );
   },
-  renderNavAPIMethod: function(method, parentHref, parentID, item) {
-    var itemHref = parentHref+item+'/';
-    var itemClass = 'subMethodListItem';
-    var itemID = parentID+'.'+item;
-    var activeAPIMethodID = this.props.currentType+'.'+this.props.currentAPI;
-    if (this.props.currentMethod) {
-      activeAPIMethodID += '.'+this.props.currentMethod;
-    }
-    if (itemID.toUpperCase() === activeAPIMethodID.toUpperCase()) {
-      itemClass += ' methodActive';
+  renderNavSecondLevelItem: function(item, parentHref, parentID) {
+    var itemHref = parentHref+item.name+'/';
+    var itemClass = 'secondLevelListItem';
+    var itemID = parentID+'/'+item.name;
+    if (itemID.toUpperCase() === this.props.current.activeItem.toUpperCase()) {
+      itemClass += ' secondLevelItemActive';
     }
     return (
       React.createElement("li", {
           className: itemClass, 
-          key: item, 
-          id: itemID.replace('.', '/')
+          key: item.name, 
+          id: itemID
         },       
         React.createElement("h6", null, 
-          React.createElement("a", {className: 'navItem', href: itemHref}, formatTitle(item))
+          React.createElement("a", {className: 'navItem', href: itemHref}, item.name)
         )
       )
     );
   },
 });
-
-function formatTitle(title) {
-  return (title.replace('-', ' ')).replace('.', '\\');
-}
-
-var navLoader = document.getElementsByClassName('navLoader')[0];
-
-ReactDOM.render(
-  React.createElement(
-    DocNav, {
-      data: docnavData, 
-      currentType: currentType,
-      currentAPI: currentAPI,
-      currentMethod: currentMethod,
-      baseRefURL: '/hack/reference'
-    }
-  ),
-  navLoader
-);
 
 
 

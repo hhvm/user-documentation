@@ -593,13 +593,13 @@ h4 {
   word-wrap: break-word;
 }
 
-.navWrapper .navList.apiNavList .subMethodListItem h6 {
+.navWrapper .navList.apiNavList .secondLevelListItem h6 {
   line-height: 0.7em;
   margin-bottom: 15px;
   padding-left: 15px;
 }
 
-.navWrapper .navList.apiNavList .subMethodListItem h6 a {
+.navWrapper .navList.apiNavList .secondLevelListItem h6 a {
   font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -625,20 +625,16 @@ h4 {
   width: 0;
 }
 
-.apiNavList .subListItem h5::before {
-  top: 0;
-}
-
 .subListItem:hover h5::before {
   border-color: transparent transparent transparent #505050;
 }
 
 .navWrapper .navList .subListItem.itemActive h5 a,
-.navWrapper .navList .subMethodListItem.methodActive h6 a {
+.navWrapper .navList.apiNavList .secondLevelListItem.secondLevelItemActive h6 a {
   font-weight: 700;
 }
 
-.navWrapper .navList .subMethodListItem.methodActive h6 a {
+.navWrapper .navList.apiNavList .secondLevelListItem.secondLevelItemActive h6 a {
   color: #303030;
 }
 
@@ -646,17 +642,19 @@ h4 {
   border-color: transparent transparent transparent #fd8724;
 }
 
-.subMethodList {
+.apiNavList .subListItem h5::before {
+  top: 0;
+}
+.apiNavList .secondLevelList {
   display: none;
 }
-.itemActive .subMethodList {
+.apiNavList .itemActive .secondLevelList {
   display: block;
 }
-
-.apiNavType .subList {
+.apiNavList .navGroup .subList {
   display: none;
 }
-.apiNavType.apiNavTypeActive .subList {
+.apiNavList .navGroup.navGroupActive .subList {
   display: block;
 }
 

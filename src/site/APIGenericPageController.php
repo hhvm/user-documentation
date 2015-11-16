@@ -39,56 +39,33 @@ class APIGenericPageController extends WebPageController {
     return null;
   }
 
-  private static function makeLegacyIndex(): APILegacyIndexShape {
-    return shape(
-      'class' =>
-        array_map(
-          $class ==> self::makeLegacyIndexEntryForClass($class),
-          APIIndex::getClassIndex(APIDefinitionType::CLASS_DEF),
-        ),
-      'interface' =>
-        array_map(
-          $class ==> self::makeLegacyIndexEntryForClass($class),
-          APIIndex::getClassIndex(APIDefinitionType::INTERFACE_DEF),
-        ),
-      'trait' =>
-        array_map(
-          $class ==> self::makeLegacyIndexEntryForClass($class),
-          APIIndex::getClassIndex(APIDefinitionType::TRAIT_DEF),
-        ),
-      'function' =>
-        array_map(
-          $fun ==> shape('path' => basename($fun['htmlPath']), 'methods' => []),
-          APIIndex::getFunctionIndex(),
-        ),
-    );
-  }
-
-  private static function makeLegacyIndexEntryForClass(
-    APIClassIndexEntry $class,
-  ): APILegacyIndexEntry {
-    return shape(
-      'path' => basename($class['htmlPath']),
-      'methods' => array_map($m ==> basename($m['htmlPath']), $class['methods']),
-    );
-  }
-
   protected function getSideNav(): XHPRoot {
     $method = $this->getMethodDefinition();
-
-    $index = self::makeLegacyIndex();
+    $active_first_level_id = $this->getDefinitionType().'/'.$this->getRootDefinition()['name'];
+    $active_item_id = $method ? ($active_first_level_id.'/'.$method['name']) : $active_first_level_id;
+    $navArgs = Map {
+      'data' => APIIndex::getIndex(),
+      'current' => Map {
+        'group' => $this->getDefinitionType(),
+        'firstLevel' => $this->getRootDefinition()['name'],
+        'secondLevel' => $method ? $method['name'] : '',
+        'activeFirstLevel' => $active_first_level_id,
+        'activeItem' => $active_item_id,
+      },
+      'loadType' => 'api',
+      'base' => "/hack/reference",
+    };
     return 
       <div class="navWrapper guideNav">
         <div class="navLoader"></div>
-        <script>
-          var docnavData = {json_encode($index)};
-          var currentMethod = {json_encode($method ? $method['name'] : '')};
-          var currentAPI = {json_encode(
-            strtr($this->getRootDefinition()['name'], "\\", "."))};
-          var currentType = {json_encode($this->getDefinitionType())};
-          var baseRefURL = "/hack/reference";
-        </script>
         <script type="text/javascript" src="/js/APISideNav.js"></script>
+        <script>
+          var navLoader = document.getElementsByClassName('navLoader')[0];
+          ReactDOM.render(
+            React.createElement(DocNav, {json_encode($navArgs)}), 
+            navLoader
+          );
+        </script>
       </div>;
   }
 
