@@ -35,6 +35,11 @@ final class MergedYAMLBuilder {
       if ($methods = idx($def['data'], 'methods')) {
         $def['data']['methods'] =
           $this->removePrivateMethods(/*UNSAFE_EXPR*/ $methods);
+        usort(
+          $def['data']['methods'],
+          // ($a, $b) ==> $a['name'] <=> $b['name'], - SOON :D
+          ($a, $b) ==> strcmp($a['name'], $b['name'])
+        );
       }
       $writer->write($def);
     }

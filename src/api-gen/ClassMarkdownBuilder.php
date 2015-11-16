@@ -106,7 +106,6 @@ EOF;
   private function getContents(): string {
     $md = "### Interface synopsis\n";
     $methods = $this->yaml['data']['methods'];
-    sort($methods);
 
     foreach ($methods as $method) {
       $method_url = sprintf(
