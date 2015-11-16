@@ -79,9 +79,9 @@ var DocNav = React.createClass({displayName: "DocNav",
         React.createElement("h4", {id: index},
           React.createElement("a", {className: 'navItem', href: groupHref}, formatTitle(index))
         ),
-        React.createElement("ul", {className: 'subList'},
-          navGroupChildren
-        )
+        navGroupChildren.length > 0
+          ? React.createElement("ul", {className: 'subList'}, navGroupChildren)
+          : null
       )
     );
   },
