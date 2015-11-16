@@ -79,6 +79,7 @@ final class APIIndexBuildStep extends BuildStep {
             $methods[$idx] = shape(
               'name' => $method['name'],
               'className' => $class['name'],
+              'classType' => $type,
               'htmlPath' => $html_path,
             );
           }
@@ -92,6 +93,7 @@ final class APIIndexBuildStep extends BuildStep {
           $idx = strtr($class['name'], "\\", '.');
           $entry = shape(
             'name' => $class['name'],
+            'type' => $type,
             'htmlPath' => $html_path,
             'methods' => $methods,
           );

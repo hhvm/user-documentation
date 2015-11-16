@@ -5,6 +5,7 @@ use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APIIndexEntry;
 use HHVM\UserDocumentation\APIMethodIndexEntry;
+use HHVM\UserDocumentation\APINavData;
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 
@@ -38,29 +39,28 @@ class APIGenericPageController extends WebPageController {
   }
 
   protected function getSideNav(): XHPRoot {
+    $path = [
+      APINavData::getRootNameForType($this->getDefinitionType()),
+      $this->getRootDefinition()['name'],
+    ];
     $method = $this->getMethodDefinition();
-    $active_first_level_id = $this->getDefinitionType().'/'.$this->getRootDefinition()['name'];
-    $active_item_id = $method ? ($active_first_level_id.'/'.$method['name']) : $active_first_level_id;
-    $navArgs = Map {
-      'data' => APIIndex::getIndex(),
-      'current' => Map {
-        'group' => $this->getDefinitionType(),
-        'firstLevel' => $this->getRootDefinition()['name'],
-        'secondLevel' => $method ? $method['name'] : '',
-        'activeFirstLevel' => $active_first_level_id,
-        'activeItem' => $active_item_id,
-      },
-      'loadType' => 'api',
-      'base' => "/hack/reference",
-    };
+    if ($method !== null) {
+      $path[] = $method['name'];
+    }
+    $nav_args = [
+      'data' => APINavData::getNavData(),
+      'activePath' => $path,
+      'extraNavListClass' => 'apiNavList',
+    ];
+
     return 
       <div class="navWrapper guideNav">
-        <div class="navLoader"></div>
-        <static:script path="/js/APISideNav.js" />
+        <div class="navLoader" />
+        <static:script path="/js/UnifiedSideNav.js" />
         <script>
           var navLoader = document.getElementsByClassName('navLoader')[0];
           ReactDOM.render(
-            React.createElement(DocNav, {json_encode($navArgs)}), 
+            React.createElement(DocNav, {json_encode($nav_args)}), 
             navLoader
           );
         </script>

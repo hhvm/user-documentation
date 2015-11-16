@@ -31,7 +31,6 @@ class APIIndex {
     // UNSAFE
     return self::getIndex()[$type];
   }
-    
 
   public static function getDataForFunction(
     string $name,

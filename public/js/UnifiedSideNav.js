@@ -6,13 +6,6 @@ var DocNav = React.createClass({displayName: "DocNav",
       toggleActive: false,
     };
   },
-  getDefaultProps: function() {
-    return {
-      className: {
-        'api' : 'apiNavList',
-      }
-    };
-  },
   handleSlide: function(id) {
     this.setState({
       toggleActive: !this.state.toggleActive,
@@ -20,8 +13,11 @@ var DocNav = React.createClass({displayName: "DocNav",
   },
   handleScrollToActive: function() {
     var navList = document.getElementsByClassName('navList')[0];
-    navList.scrollTop = 
-      document.getElementById(this.props.current.activeItem).offsetTop - 10;
+    var id = this.props.activePath.join('/');
+    if (id !== '') {
+      navList.scrollTop = 
+       document.getElementById(id).offsetTop - 10;
+    }
     window.removeEventListener(transEndEventName, this.handleScrollToActive, false);
   },
   componentWillUpdate: function() {
@@ -51,30 +47,45 @@ var DocNav = React.createClass({displayName: "DocNav",
         ),
         React.createElement(
           "ul", 
-          {className: 'navList '+this.props.className[this.props.loadType]}, 
+          {className: 'navList '+this.props.extraNavListClass}, 
           navChildren
         )
       )
     );
   },
-  renderNavGroup: function(currentGroup) {
-    var navGroupChildren = [];
-    var group = this.props.data[currentGroup];
+  activeGroup: function() {
+    return this.props.activePath[0];
+  },
+  activeFirstLevel: function() {
+    return this.props.activePath[1];
+  },
+  activeSecondLevel: function() {
+    return this.props.activePath[2];
+  },
+  renderNavGroup: function(groupName) {
+    var group = this.props.data[groupName];
         
-    if (Object.keys(group).length > 1) {
-      for (var item in group) {
-        navGroupChildren.push(this.renderNavFirstLevelItem(group[item], currentGroup));
-      }
-    }
     var groupClass = 'navGroup';
-    if (currentGroup.toUpperCase() === this.props.current.group.toUpperCase()) {
+    if (groupName === this.activeGroup()) {
       groupClass += ' navGroupActive';
     }
-    var groupHref = this.props.base+'/'+currentGroup+'/';
+    var groupHref = group.urlPath;
+
+    var navGroupChildren = [];
+    if (Object.keys(group).length > 1) {
+      for (var itemName in group.children) {
+        navGroupChildren.push(this.renderNavFirstLevelItem(
+          groupName,
+          itemName,
+          group.children[itemName]
+        ));
+      }
+    }
+
     return (
-      React.createElement("li", {className: groupClass, key: currentGroup}, 
-        React.createElement("h4", {id: currentGroup}, 
-          React.createElement("a", {className: 'navItem', href: groupHref}, currentGroup)
+      React.createElement("li", {className: groupClass, key: groupName}, 
+        React.createElement("h4", {id: groupName}, 
+          React.createElement("a", {className: 'navItem', href: groupHref}, groupName)
         ), 
         navGroupChildren.length > 0
           ? React.createElement("ul", {className: 'subList'}, navGroupChildren)
@@ -82,34 +93,34 @@ var DocNav = React.createClass({displayName: "DocNav",
       )
     );
   },
-  renderNavFirstLevelItem: function(item, parentGroup) {
-    var itemHref = this.props.base+'/'+parentGroup+'/'+item.name+'/';
+  renderNavFirstLevelItem: function(groupName, itemName, item) {
+    var itemHref = item.urlPath;
     var itemClass = 'subListItem';
-    var itemID = parentGroup+'/'+item.name;
-    if (itemID.toUpperCase() === this.props.current.activeFirstLevel.toUpperCase()) {
+    var itemID = groupName+'/'+itemName;
+
+    if (groupName === this.activeGroup() && itemName === this.activeFirstLevel()) {
       itemClass += ' itemActive';
     }
 
     var navItemChildren = [];
-    // TODO: Generalise 'methods' and merge with guide SideNav.js
-    if (item.hasOwnProperty('methods')) {
-      var itemChildren = item.methods;
-      if (Object.keys(itemChildren).length > 0) {
-        for (var child in itemChildren) {
-          navItemChildren.push(
-            this.renderNavSecondLevelItem(itemChildren[child], itemHref, itemID)
-          )
-        }
-      }
+    for (var childName in item.children) {
+      navItemChildren.push(
+        this.renderNavSecondLevelItem(
+          groupName,
+          itemName,
+          childName,
+          item.children[childName]
+        )
+      );
     }
     return (
       React.createElement("li", {
           className: itemClass, 
-          key: item.name, 
+          key: itemName, 
           id: itemID
         },       
         React.createElement("h5", null, 
-          React.createElement("a", {className: 'navItem', href: itemHref}, item.name)
+          React.createElement("a", {className: 'navItem', href: itemHref}, itemName)
         ), 
         React.createElement("ul", {className: 'secondLevelList'}, 
           navItemChildren
@@ -117,26 +128,32 @@ var DocNav = React.createClass({displayName: "DocNav",
       )
     );
   },
-  renderNavSecondLevelItem: function(item, parentHref, parentID) {
-    var itemHref = parentHref+item.name+'/';
+  renderNavSecondLevelItem: function(
+    groupName,
+    parentName,
+    itemName,
+    item
+  ) {
+    var itemHref = item.urlPath;
     var itemClass = 'secondLevelListItem';
-    var itemID = parentID+'/'+item.name;
-    if (itemID.toUpperCase() === this.props.current.activeItem.toUpperCase()) {
-      itemClass += ' secondLevelItemActive';
+    var itemID = groupName+'/'+parentName+'/'+itemName;
+    if (groupName === this.activeGroup() && parentName === this.activeFirstLevel()) {
+      itemClass += ' itemActive';
+      if (itemName === this.activeSecondLevel()) {
+        itemClass += ' secondLevelItemActive';
+      }
     }
+
     return (
       React.createElement("li", {
           className: itemClass, 
-          key: item.name, 
+          key: itemName, 
           id: itemID
         },       
         React.createElement("h6", null, 
-          React.createElement("a", {className: 'navItem', href: itemHref}, item.name)
+          React.createElement("a", {className: 'navItem', href: itemHref}, itemName)
         )
       )
     );
   },
 });
-
-
-

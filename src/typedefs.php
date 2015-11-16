@@ -17,6 +17,11 @@ enum MemberVisibility: string {
   PUBLIC = 'public';
 };
 
+enum GuidesProduct: string as string {
+  HHVM = 'hhvm';
+  HACK = 'hack';
+}
+
 enum APIDefinitionType: string as string {
   CLASS_DEF = 'class';
   TRAIT_DEF = 'trait';
@@ -49,7 +54,8 @@ type FunctionYAML = shape(
 
 type ClassDocumentation = shape(
   'name' => string,
-  'methods' => array<FunctionDocumentation>,
+  'type' => APIDefinitionType,
+  'methods' => array<MethodDocumentation>,
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
   'parent' => ?TypehintDocumentation,
@@ -81,8 +87,22 @@ type FunctionDocumentation = shape(
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
   'parameters' => array<ParameterDocumentation>,
+  'className' => ?string,
+  'classType' => ?APIDefinitionType,
   'visibility' => ?MemberVisibility,
   'static' => ?bool,
+);
+
+type MethodDocumentation = shape(
+  'name' => string,
+  'returnType' => ?TypehintDocumentation,
+  'generics' => array<GenericDocumentation>,
+  'docComment' => ?string,
+  'parameters' => array<ParameterDocumentation>,
+  'className' => string,
+  'classType' => APIDefinitionType,
+  'visibility' => MemberVisibility,
+  'static' => bool,
 );
 
 type DocumentationIndexEntry = shape(
@@ -108,10 +128,12 @@ type APIFunctionIndexEntry = shape(
 type APIMethodIndexEntry = shape(
   'name' => string,
   'className' => string,
+  'classType' => APIDefinitionType,
   'htmlPath' => string,
 );
 
 type APIClassIndexEntry = shape(
+  'type' => APIDefinitionType,
   'name' => string,
   'htmlPath' => string,
   'methods' => array<string, APIMethodIndexEntry>,
@@ -129,4 +151,14 @@ type StaticResourceMapEntry = shape(
   'checksum' => string,
   'mtime' => int,
   'mimeType' => string,
+);
+
+type NavDataNode = shape(
+  'urlPath' => string,
+  /*
+   * This is actually array<string, NavDataNode> but recursive shapes aren't
+   * allowed. Given we only read this from JS, not a big deal, just be careful
+   * writing it.
+   */
+  'children' => array<string, mixed>,
 );
