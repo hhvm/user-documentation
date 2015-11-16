@@ -566,16 +566,15 @@ h4 {
 .navWrapper .navList li h4 {
   font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
   font-size: 12px;
-  margin-bottom: 10px;
   text-transform: uppercase;
 }
 .navWrapper .navList li h4 a {
   color: #fd8724;
-  padding-left: 30px;
+  padding: 10px 0 10px 30px;
 }
 
 .navWrapper .subList {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .navList {
@@ -910,7 +909,7 @@ h4 {
     padding: 20px 0;
   }
 
-  .navList.apiNavList .subListItem h5::before {
+  .navList.apiNavList .subListItem h5 a::before {
     top: 0px;
   }
 }
@@ -933,15 +932,15 @@ h4 {
     max-width: 1200px;
   }
 
-  .subListItem h5::before {
+  .subListItem h5 a::before {
     top: 12px;
   }
 
-  .apiNavList .subListItem h5::before {
+  .apiNavList .subListItem h5 a::before {
     top: 10px;
   }
 
-  .navList.apiNavList .subListItem h5::before {
+  .navList.apiNavList .subListItem h5 a::before {
     top: 2px;
   }
 }
