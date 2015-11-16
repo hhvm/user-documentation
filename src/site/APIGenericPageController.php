@@ -4,8 +4,6 @@ use HHVM\UserDocumentation\APIClassIndexEntry;
 use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APIIndexEntry;
-use HHVM\UserDocumentation\APILegacyIndexEntry;
-use HHVM\UserDocumentation\APILegacyIndexShape;
 use HHVM\UserDocumentation\APIMethodIndexEntry;
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\HTMLFileRenderable;

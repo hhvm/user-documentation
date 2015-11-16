@@ -123,16 +123,3 @@ type APIIndexShape = shape(
   'trait' => array<string, APIClassIndexEntry>,
   'function' => array<string, APIFunctionIndexEntry>,
 );
-
-// TEMPORARY WORKAROUND FOR REACT NAV COMPATIBILITY
-type APILegacyIndexEntry = shape(
-  'path' => string,
-  'methods' => array<string, string>,
-);
-
-type APILegacyIndexShape = shape(
-  'class' => array<string, APILegacyIndexEntry>,
-  'interface' => array<string, APILegacyIndexEntry>,
-  'trait' => array<string, APILegacyIndexEntry>,
-  'function' => array<string, APILegacyIndexEntry>,
-);
