@@ -570,7 +570,8 @@ h4 {
 }
 .navWrapper .navList li h4 a {
   color: #fd8724;
-  padding: 10px 0 10px 30px;
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 .navWrapper .subList {
@@ -595,7 +596,8 @@ h4 {
   font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
-  padding: 7.5px 30px;
+  padding-bottom: 7.5px;
+  padding-top: 7.5px;
   word-wrap: break-word;
 }
 
@@ -607,13 +609,13 @@ h4 {
   font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
-  padding: 7.5px 0 7.5px 45px;
+  padding-bottom: 7.5px;
+  padding-top: 7.5px;
   word-wrap: break-word;
 }
 
 .navWrapper .navList .subListItem h5 a {
   position: relative;
-  padding-left: 30px;
 }
 
 .subListItem h5 a::before {
@@ -869,6 +871,10 @@ h4 {
     width: 50%;
   }
 
+  .subListItem h5 a::before {
+    left: -12px;
+  }
+
   .widthWrapper {
     margin: 0 10px;
   }
@@ -909,8 +915,20 @@ h4 {
     padding: 20px 0;
   }
 
+  .navWrapper .navList li h4 a {
+    padding-left: 30px;
+  }
+
+  .navWrapper .navList .subListItem h5 a {
+    padding-left: 30px;
+  }
+
+  .navWrapper .navList.apiNavList .secondLevelListItem h6 a {
+    padding-left: 45px;
+  }
+
   .navList.apiNavList .subListItem h5 a::before {
-    top: 0px;
+    top: 7.5px;
   }
 }
 @media only screen and (min-width: 1200px) {
@@ -938,10 +956,6 @@ h4 {
 
   .apiNavList .subListItem h5 a::before {
     top: 10px;
-  }
-
-  .navList.apiNavList .subListItem h5 a::before {
-    top: 2px;
   }
 }
 
