@@ -152,7 +152,7 @@ user-documentation/public$ hhvm -m server \
 ```
 
 
-### Deploying The Site
+### Deploying The Site (for admins only)
 
 
 1. Login in to AWS and create an access key (click on your name in the top
@@ -163,6 +163,7 @@ user-documentation/public$ hhvm -m server \
    ```
    # On Ubuntu
    $ sudo apt-get install python-dev
+   $ sudo apt-get install python-pip
    $ sudo pip install awsebcli
    ```
 
