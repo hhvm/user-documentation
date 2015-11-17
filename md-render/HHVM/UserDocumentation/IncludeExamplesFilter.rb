@@ -51,7 +51,21 @@ module HHVM
             File.read(full_path),
             language: 'Hack',
           );
-          node.replace(code)
+          code_node = node.replace(code)
+          # If the example has HHVM output associated with it, then print it
+          # after the code example
+          if File.exists? (full_path + ".example.hhvm.out")
+            output_header = doc.document.create_element(
+              'em',
+              "Output",
+            );
+            output = doc.document.create_element(
+              'pre',
+              File.read(full_path + ".example.hhvm.out"),
+              language: 'Bash',
+            );
+            code_node.after(output).after(output_header)
+          end
         end
         doc
       end
