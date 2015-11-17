@@ -123,3 +123,10 @@ type APIIndexShape = shape(
   'trait' => array<string, APIClassIndexEntry>,
   'function' => array<string, APIFunctionIndexEntry>,
 );
+
+type StaticResourceMapEntry = shape(
+  'localPath' => string,
+  'checksum' => string,
+  'mtime' => int,
+  'mimeType' => string,
+);

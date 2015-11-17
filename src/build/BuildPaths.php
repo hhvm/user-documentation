@@ -15,5 +15,10 @@ abstract final class BuildPaths {
   const string GUIDES_INDEX = self::GUIDES_HTML.'/index.php';
   const string GUIDES_SUMMARY = self::GUIDES_HTML.'/summary.php';
 
+  const string STATIC_RESOURCES_MAP =
+   LocalConfig::BUILD_DIR.'/static_resources.php';
+  const string STATIC_RESOURCES_MAP_JSON =
+   LocalConfig::BUILD_DIR.'/static_resources.json';
+
   const string BUILD_ID = LocalConfig::BUILD_DIR.'/build_id.txt';
 }

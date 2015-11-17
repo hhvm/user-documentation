@@ -56,7 +56,7 @@ class APIGenericPageController extends WebPageController {
     return 
       <div class="navWrapper guideNav">
         <div class="navLoader"></div>
-        <script type="text/javascript" src="/js/APISideNav.js"></script>
+        <static:script path="/js/APISideNav.js" />
         <script>
           var navLoader = document.getElementsByClassName('navLoader')[0];
           ReactDOM.render(

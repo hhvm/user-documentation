@@ -23,6 +23,8 @@ class Router {
         => GuidePageController::class,
       '/__content'
         => WebPageContentController::class,
+      '/s/{checksum}{file:/.+}'
+        => StaticResourcesController::class,
     };
   }
 

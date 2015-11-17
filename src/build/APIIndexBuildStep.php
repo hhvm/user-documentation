@@ -3,6 +3,8 @@
 namespace HHVM\UserDocumentation;
 
 final class APIIndexBuildStep extends BuildStep {
+  use CodegenBuildStep;
+
   public function buildAll(): void {
     Log::i("\nAPIIndexBuild");
 
@@ -16,20 +18,10 @@ final class APIIndexBuildStep extends BuildStep {
     Iterable<string> $list,
   ): void {
     $index = $this->generateIndexData($list);
-    /* TODO: Use hack-codegen once
-     * https://github.com/facebook/hack-codegen/issues/7 is addressed? */
-    $code = file_get_contents(__DIR__.'/../APIIndexData.hhi');
-
-    $re = $s ==> '/'.preg_quote($s, '/').'/';
-
-    $replacements = [
-      $re('<?hh // decl') => '<?php',
-      '/\): [^{]+{/' => ') {',
-      $re('/* CODEGEN GOES HERE */') => 'return '.var_export($index, true).';',
-    ];
-    foreach ($replacements as $pattern => $replacement) {
-      $code = preg_replace($pattern, $replacement, $code);
-    }
+    $code = $this->writeCode(
+      'APIIndexData.hhi',
+      $index,
+    );
     file_put_contents(
       BuildPaths::APIDOCS_INDEX,
       $code,
