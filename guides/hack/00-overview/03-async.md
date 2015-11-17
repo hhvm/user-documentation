@@ -1,6 +1,6 @@
 ### Async Programming in Hack
 
-Async (synchronous) programming is a way to have pieces of code that involve waiting (such as making a GET request to a remote web server, or database queries) to run without blocking other parts of the code from executing. 
+Async (asynchronous) programming is a way to have pieces of code that involve waiting (such as making a GET request to a remote web server, or database queries) run without blocking other parts of the code from executing. 
 
 Imagine you need the result of two functions, `foo()` and `bar()`; `foo()` requires data from a web page or HTTP API, and `bar()` needs data from MySQL.
 
