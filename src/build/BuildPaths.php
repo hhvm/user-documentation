@@ -11,6 +11,7 @@ abstract final class BuildPaths {
   const string APIDOCS_HTML = LocalConfig::BUILD_DIR.'/api-html';
   const string APIDOCS_INDEX = LocalConfig::BUILD_DIR.'/api-index.php';
 
+  const string GUIDES_MARKDOWN = LocalConfig::ROOT.'/guides';
   const string GUIDES_HTML = LocalConfig::BUILD_DIR.'/guides-html';
   const string GUIDES_INDEX = LocalConfig::BUILD_DIR.'/guides-index.php';
   const string GUIDES_SUMMARY = LocalConfig::BUILD_DIR.'/guides-summary.php';
