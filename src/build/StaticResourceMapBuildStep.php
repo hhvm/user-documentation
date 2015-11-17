@@ -10,6 +10,9 @@ final class StaticResourceMapBuildStep extends BuildStep {
       'css' => 'text/css',
       'js' => 'application/javascript',
       'png' => 'image/png',
+      // FIXME: NEEDS LESS JPEG (#81)
+      'jpg' => 'image/jpeg',
+      'jpeg' => 'image/jpeg',
     };
   }
 

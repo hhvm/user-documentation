@@ -9,6 +9,7 @@ require_relative 'HHVM/UserDocumentation/IncludeExamplesFilter.rb'
 require_relative 'HHVM/UserDocumentation/InternalLinksFilter.rb'
 require_relative 'HHVM/UserDocumentation/HeadingAnchorsFilter.rb'
 require_relative 'HHVM/UserDocumentation/ResponsiveTablesFilter.rb'
+require_relative 'HHVM/UserDocumentation/VersionedImagesFilter.rb'
 
 pipeline = HTML::Pipeline.new(
   [
@@ -18,6 +19,7 @@ pipeline = HTML::Pipeline.new(
     HHVM::UserDocumentation::InternalLinksFilter,
     HHVM::UserDocumentation::HeadingAnchorsFilter,
     HHVM::UserDocumentation::ResponsiveTablesFilter,
+    HHVM::UserDocumentation::VersionedImagesFilter,
   ],
 )
 
