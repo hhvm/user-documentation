@@ -9,11 +9,11 @@ abstract final class BuildPaths {
   
   const string APIDOCS_MARKDOWN = LocalConfig::BUILD_DIR.'/api-markdown';
   const string APIDOCS_HTML = LocalConfig::BUILD_DIR.'/api-html';
-  const string APIDOCS_INDEX = self::APIDOCS_HTML.'/index.php';
+  const string APIDOCS_INDEX = LocalConfig::BUILD_DIR.'/api-index.php';
 
   const string GUIDES_HTML = LocalConfig::BUILD_DIR.'/guides-html';
-  const string GUIDES_INDEX = self::GUIDES_HTML.'/index.php';
-  const string GUIDES_SUMMARY = self::GUIDES_HTML.'/summary.php';
+  const string GUIDES_INDEX = LocalConfig::BUILD_DIR.'/guides-index.php';
+  const string GUIDES_SUMMARY = LocalConfig::BUILD_DIR.'/guides-summary.php';
 
   const string STATIC_RESOURCES_MAP =
    LocalConfig::BUILD_DIR.'/static_resources.php';
