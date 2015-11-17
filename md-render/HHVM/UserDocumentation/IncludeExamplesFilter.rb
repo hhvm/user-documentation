@@ -68,7 +68,7 @@ module HHVM
             output = doc.document.create_element(
               'pre',
               File.read(output_path),
-              language: 'Bash',
+              language: 'Text',
             );
             code_node.after(output).after(output_header)
           elsif (File.exists? (full_path + ".hhvm.expect")) && (File.exists? (full_path + ".example.hhvm.out"))
