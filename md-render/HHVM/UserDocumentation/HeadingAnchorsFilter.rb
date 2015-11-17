@@ -2,7 +2,7 @@ module HHVM
   module UserDocumentation
     # - <h1>Foo Bar</h1>
     # + <h1 id="foo-bar">Foo Bar</h1>
-    class HeadingAnchors < HTML::Pipeline::Filter
+    class HeadingAnchorsFilter < HTML::Pipeline::Filter
       PARENTS = {
         'h1' => nil,
         'h2' => nil,

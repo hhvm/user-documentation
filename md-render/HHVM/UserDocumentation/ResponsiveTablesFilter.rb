@@ -1,6 +1,6 @@
 module HHVM
   module UserDocumentation
-    class ResponsiveTables < HTML::Pipeline::Filter
+    class ResponsiveTablesFilter < HTML::Pipeline::Filter
       def call
         doc.search('table').each do |node|
           headers = []
