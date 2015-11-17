@@ -1,0 +1,25 @@
+object(Hack\UserDocumentation\Tuples\Introduction\Examples\Initializers\A)#2 (1) {
+  ["inst":"Hack\UserDocumentation\Tuples\Introduction\Examples\Initializers\A":private]=>
+  array(2) {
+    [0]=>
+    int(2)
+    [1]=>
+    string(2) "hi"
+  }
+}
+array(2) {
+  [0]=>
+  array(2) {
+    [0]=>
+    int(1)
+    [1]=>
+    int(2)
+  }
+  [1]=>
+  object(HH\Vector)#1 (2) {
+    [0]=>
+    int(3)
+    [1]=>
+    int(4)
+  }
+}

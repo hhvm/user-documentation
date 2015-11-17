@@ -145,7 +145,7 @@ function(0..n parameter types): return type
 
 ## Tuples
 
-Tuples provide a type specifying a fixed number of possibly different type values. The most common use of a tuple is to return more than one value from a function. 
+[Tuples](/hack/tuples/introduction) provide a type specifying a fixed number of values of possibly different types. The most common use of a tuple is to return more than one value from a function. 
 
 ```
 (type1, ... ,type n)
