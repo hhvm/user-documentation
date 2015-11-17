@@ -31,10 +31,9 @@ function foo(<any explicit arguments>, ...) // use func_get_args() to get the ar
 function foo(<any explicit arguments>, int ...$args) // $args is a list of int arguments
 ```
 
-The second method is preferred since it is more expressive with the typehint. However, and **this is important**, HHVM does not support variadic parameters *with typehints*
+The second method is preferred since it is more expressive with the typehint. However, and **this is important**, HHVM does not support variadic parameters *with typehints*.
 
-So, use the second method, but you will have to leave off the typehint and have your code in [partial mode](../typechecker/modes.md#partial-mode) or use `HH_FIXME` or `UNSAFE` in [strict mode](../typechecker/modes.md#strict-mode) in order to make both the
-typechecker and HHVM happy.
+So, use the second method, but you will have to leave off the typehint and have your code in [partial mode](../typechecker/modes.md#partial-mode) or use `HH_FIXME` or `UNSAFE` in [strict mode](../typechecker/modes.md#strict-mode) in order to make both the typechecker and HHVM happy.
 
 @@ advanced-rules-examples/variadic.php @@
 

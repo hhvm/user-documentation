@@ -14,7 +14,7 @@ Local variables are not type annotated. Their types are inferred based on the fl
 
 The above example showed a case where a variable was assigned to an `int ` in both branches of the `if/else`. This makes it easy for the typechecker to determine that a variable can and only will be an `int` when it encounters the `return`.
 
-However what happens if instead of assigning a variable to the same type in both branches of a conditional, you decide to assign it to a different type in each branch. 
+However what happens if instead of assigning a variable to the same type in both branches of a conditional, you decide to assign it to a different type in each branch?
 
 @@ inference-examples/unresolved.php.type-errors @@
 
