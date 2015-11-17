@@ -8,15 +8,7 @@ This is the process of assigning explicit types to member variables, parameters,
 
 For example, in regular PHP you can create function parameters without any type defined:
 
-```
-function bar($a, $b) {
-  if $a > 0 {
-    echo '0' . $b;
-  } else {
-    echo (5 . $b);
-  }
-}
-```
+@@ typing-examples/php-function.php @@
 
 While the `$b` might be a `string` in the developer's mind, some of this code will try to use this parameter as if it were an `int`, or an `array` or any other type. 
 
@@ -26,15 +18,7 @@ This is a very over-simplified example, but when you expand this up to much bigg
 
 Hack introduces the concept of typing in order to protect against these kinds of run-time errors. So now you can explicitly tell Hack that what type you intend a variable to be:
 
-```
-function bar(int $a, string $b) {
-  if $a > 0 {
-    echo '0' . $b;
-  } else {
-    echo (5 . $b);
-  }
-}
-```
+@@ typing-examples/hack-function.php @@
 
 And immediately a type-checker will be able to catch the fact that `echo (5 . $b)` is operating on two different types, and will prevent this erroneous code from compiling, and potentially being pushed live. 
 
@@ -48,7 +32,7 @@ Hack lets you use the strong typing features of a statically typed language when
 
 Let's be clear here - if you're writing code, the chances are it is at the very least implicitly typed, that is - when you create a line of code, you have in your mind what type the variables, parameters, etc. are supposed to be. 
 
-What typing does, and by extension what Hack does, is to help developers make less mistakes and **introduce fewer errors** by:
+What typing does, and by extension what Hack does, is to help developers make fewer mistakes and **introduce fewer errors** by:
 
 * Catching bugs at compile-time.
 * Allowing for IDEs that can autocomplete with type-aware functions, and provide inline error notifications. 
