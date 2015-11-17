@@ -9,3 +9,6 @@ function bar($a, $b) {
     echo (5 . $b);
   }
 }
+
+echo bar(3, 'Hello');
+echo bar(-100, 'Bye');
