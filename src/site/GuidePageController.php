@@ -2,43 +2,56 @@
 
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\GuidesIndex;
+use HHVM\UserDocumentation\GuidesNavData;
+use HHVM\UserDocumentation\GuidesProduct;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 
 use Psr\Http\Message\ServerRequestInterface;
 
 final class GuidePageController extends WebPageController {
-  protected string $guide;
-  protected string $page;
 
-  public function __construct(
-    private ImmMap<string,string> $parameters,
-    ServerRequestInterface $request,
-  ) {
-    parent::__construct($parameters, $request);
-    $this->guide = $parameters->at('guide');
-    $this->page = $parameters->at('page');
+  <<__Memoize>>
+  private function getProduct(): GuidesProduct {
+    return GuidesProduct::assert(
+      $this->getRequiredStringParam('product')
+    );
+  }
+
+  <<__Memoize>>
+  private function getGuide(): string {
+    return $this->getRequiredStringParam('guide');
+  }
+
+  <<__Memoize>>
+  private function getPage(): string {
+    return $this->getRequiredStringParam('page');
   }
 
   public async function getTitle(): Awaitable<string> {
+    list($product, $guide, $page) = tuple(
+      $this->getProduct(),
+      $this->getGuide(),
+      $this->getPage(),
+    );
     // If the guide name and the page name are the same, only print one of them.
     // If there is only one page in a guide, only print the guide name.
-    $ret = strcasecmp($this->guide, $this->page) === 0 ||
-           count(GuidesIndex::getPages($this->getProduct(), $this->guide)) === 1
-         ? ucwords(strtr($this->guide, '-', ' '))
-         : ucwords(strtr($this->guide.': '.$this->page, '-', ' '));
+    $ret = strcasecmp($guide, $page) === 0 ||
+           count(GuidesIndex::getPages($product, $guide)) === 1
+         ? ucwords(strtr($guide, '-', ' '))
+         : ucwords(strtr($guide.': '.$page, '-', ' '));
     return $ret;
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
     return
       <div class="guidePageWrapper">
-          {$this->getInnerContent()}
+        {$this->getInnerContent()}
       </div>;
   }
 
   protected function getBreadcrumbs(): XHPRoot {
     $product = $this->getProduct();
-    $guide = $this->guide;
+    $guide = $this->getGuide();
     $product_root_url = sprintf(
       "/%s/",
       $product,
@@ -65,7 +78,7 @@ final class GuidePageController extends WebPageController {
           </span>
           <i class="breadcrumbSeparator" />
           <span class="breadcrumbCurrentPage">
-            {ucwords(strtr($guide.': '.$this->page, '-', ' '))}
+            {ucwords(strtr($guide.': '.$this->getPage(), '-', ' '))}
           </span>
         </div>
       </div>;
@@ -73,36 +86,37 @@ final class GuidePageController extends WebPageController {
 
   protected function getSideNav(): XHPRoot {
     $product = $this->getProduct();
-    $guides = GuidesIndex::getProductIndex($product);
+    $nav_args = [
+      'data' => GuidesNavData::getNavData()[$product]['children'],
+      'activePath' => [
+        GuidesNavData::pathToName($this->getGuide()),
+        GuidesNavData::pathToName($this->getPage()),
+      ],
+      'extraNavListClass' => '',
+    ];
     return
       <div class="navWrapper guideNav">
-        <div class="navLoader"></div>
+        <div class="navLoader" />
+        <static:script path="/js/UnifiedSideNav.js" />
         <script>
-          var docnavData = {json_encode($guides)};
-          var thisDoc = "{$this->page}";
-          var thisGroup = "{$this->guide}";
-          var thisProduct = "{$product}";
+          var navLoader = document.getElementsByClassName('navLoader')[0];
+          ReactDOM.render(
+            React.createElement(DocNav, {json_encode($nav_args)}), 
+            navLoader
+          );
         </script>
-        <static:script path="/js/SideNav.js" />
       </div>;
   }
 
   protected function getInnerContent(): XHPRoot {
     return self::invariantTo404(() ==> {
       $path = GuidesIndex::getFileForPage(
-        $this->getRequiredStringParam('product'),
+        GuidesProduct::assert($this->getRequiredStringParam('product')),
         $this->getRequiredStringParam('guide'),
         $this->getRequiredStringParam('page'),
       );
       return
         <div class="innerContent">{new HTMLFileRenderable($path)}</div>;
     });
-  }
-
-  <<__Memoize>>
-  private function getProduct(): GuideProduct {
-    return GuideProduct::assert(
-      $this->getRequiredStringParam('product')
-    );
   }
 }

@@ -3,13 +3,13 @@
 namespace HHVM\UserDocumentation;
 
 class GuidesIndex {  
-  private static function getIndex(
-  ): Map<string, Map<string, Map<string, string>>> {
+  public static function getIndex(
+  ): Map<GuidesProduct, Map<string, Map<string, string>>> {
     return require(BuildPaths::GUIDES_INDEX);
   }
   
   public static function getProductIndex(
-    string $product
+    GuidesProduct $product,
   ): Map<string, Map<string, string>> {
     $index = self::getIndex();
     invariant(
@@ -29,7 +29,7 @@ class GuidesIndex {
     return self::getIndex()->keys()->toImmVector();
   }
 
-  public static function getGuides(string $product): ImmVector<string> {
+  public static function getGuides(GuidesProduct $product): ImmVector<string> {
     $index = self::getIndex();
     invariant(
       $index->containsKey($product),
@@ -40,7 +40,7 @@ class GuidesIndex {
   }
 
   public static function getPages(
-    string $product,
+    GuidesProduct $product,
     string $guide,
   ): ImmVector<string> {
     $index = self::getIndex();
@@ -78,7 +78,7 @@ class GuidesIndex {
   }
 
   public static function getFileForPage(
-    string $product,
+    GuidesProduct $product,
     string $guide,
     string $page,
   ): string {

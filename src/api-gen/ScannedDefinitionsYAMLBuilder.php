@@ -80,8 +80,16 @@ class ScannedDefinitionsYAMLBuilder {
   private function getClassDocumentation(
     ScannedClass $class,
   ): ClassDocumentation {
+    $type = APIDefinitionType::CLASS_DEF;
+    if ($class->isInterface()) {
+      $type = APIDefinitionType::INTERFACE_DEF;
+    } else if ($class->isTrait()) {
+      $type = APIDefinitionType::TRAIT_DEF;
+    }
+
     return shape(
       'name' => $class->getName(),
+      'type' => $type,
       'methods' => $class
         ->getMethods()
         ->map($m ==> $this->getFunctionDocumentation($m))

@@ -1,19 +1,15 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\GuidesIndex;
+use HHVM\UserDocumentation\GuidesProduct;
 use HHVM\UserDocumentation\HTMLFileRenderable;
-
-enum GuideProduct: string as string {
-  HHVM = 'hhvm';
-  HACK = 'hack';
-}
 
 final class GuidesListController extends WebPageController {  
   public async function getTitle(): Awaitable<string> {
     switch ($this->getProduct()) {
-      case GuideProduct::HHVM:
+      case GuidesProduct::HHVM:
         return 'HHVM Documentation';
-      case GuideProduct::HACK:
+      case GuidesProduct::HACK:
         return 'Hack Documentation';
     }
   }
@@ -102,8 +98,8 @@ final class GuidesListController extends WebPageController {
   }
 
   <<__Memoize>>
-  private function getProduct(): GuideProduct {
-    return GuideProduct::assert(
+  private function getProduct(): GuidesProduct {
+    return GuidesProduct::assert(
       $this->getRequiredStringParam('product')
     );
   }
