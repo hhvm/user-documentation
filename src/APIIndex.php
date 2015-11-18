@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 namespace HHVM\UserDocumentation;
 
 require(BuildPaths::APIDOCS_INDEX);
