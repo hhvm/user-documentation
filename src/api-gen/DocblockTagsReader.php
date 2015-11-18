@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 namespace HHVM\UserDocumentation;
 
 use phpDocumentor\Reflection\DocBlock;
@@ -7,10 +7,19 @@ use phpDocumentor\Reflection\DocBlock\Tag;
 trait DocblockTagReader {
   protected ?DocBlock $docblock;
 
-  <<__Memoize>>
-  protected function getTagsByName<T as Tag>(
+  protected function getTagsByName(
     string $name,
-    classname<T> $type = Tag::class,
+  ): Vector<Tag> {
+    return $this->getTypedTagsByName(
+      $name,
+      Tag::class,
+    );
+  }
+
+  <<__Memoize>>
+  protected function getTypedTagsByName<T as Tag>(
+    string $name,
+    classname<T> $type,
   ): Vector<T> {
     $tags = Vector {};
     // If $this->docblock is null, passing null to Map constructor returns

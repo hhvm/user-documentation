@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace HHVM\UserDocumentation;
 
@@ -117,8 +117,9 @@ EOF;
       }
       $md .=
         ' * [`'.$prefix.self::nameFromData($method).'`]('. $method_url .")";
-      if ($method['docComment'] !== null) {
-        $desc = (new DocBlock($method['docComment']))->getShortDescription();
+      $comment = $method['docComment'];
+      if ($comment !== null) {
+        $desc = (new DocBlock($comment))->getShortDescription();
         if ($desc !== "") {
           $md .= ': ' . $desc;
         }

@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace HHVM\UserDocumentation;
 
@@ -49,13 +49,17 @@ final class MergedDataBuilder {
     $value = $new[$key];
 
     if ($key === 'methods') {
+      assert(is_array($value));
+
       $builders = Map { };
       $methods = [];
 
-      foreach ((array) $value as $method) {
+      foreach ($value as $method) {
         $builders[$method['name']] = (new MergedDataBuilder(new Map($method)));
       }
-      foreach ((array) idx($this->data, 'methods', []) as $method) {
+      $methods = idx($this->data, 'methods', []);
+      assert(is_array($methods));
+      foreach ($methods as $method) {
         $name = $method['name'];
         if ($builders->containsKey($name)) {
           $builders[$name]->addData(new Map($method));
