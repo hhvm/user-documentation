@@ -48,12 +48,12 @@ You can append values to `Vector`s and `Set`s using an empty `[]`.
 
 For `Map`s you have two ways to append a value using `[]`. 
 
-You cannot append a value to a `Pair`. An `InvalidOperationException` will be thrown and the Hack typechecker will throw an error.
-
 ```
 $map[newKey] = value;
 $map[] = Pair {key, value};
 ```
+
+You cannot append a value to a `Pair`. An `InvalidOperationException` will be thrown and the Hack typechecker will throw an error.
 
 @@ read-write-examples/write-square-bracket.php.type-errors @@
 
