@@ -27,10 +27,6 @@ namespace HH\Asio {
 }
 ```
 
-Taking the example above and using this mechanism:
+Taking the example above and using the wrapping mechanism, this is what the code looks like:
 
 @@ exceptions-examples/wrapping-exceptions.php @@
-
-Here is the output:
-
-@@ exceptions-examples/wrapping-exceptions.php.hhvm.expectf @@
