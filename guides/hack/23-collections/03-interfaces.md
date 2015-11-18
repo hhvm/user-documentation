@@ -8,7 +8,7 @@ Descriptions of each of the interface methods can be found in the [API reference
 
 ## Core Interfaces
 
-These are the interfaces that allow for iteration, conversion (e.g., [`toVector()`](/hack/reference/class/Map/toVector/) and manipulation (e.g., [`filter`](/hack/reference/class/Vector/filter/)).
+These are the interfaces that allow for iteration, conversion (e.g., [`toVector`](/hack/reference/class/Map/toVector/)) and manipulation (e.g., [`filter`](/hack/reference/class/Vector/filter/)).
 
 Interface | Description | Key Methods
 ----------|-------------|------------

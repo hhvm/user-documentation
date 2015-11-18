@@ -1,6 +1,6 @@
 # Reading and Writing Hack Collections
 
-Like arrays, you use the square bracket syntax (`[]`) to read and write from Hack collections. 
+Like arrays, you can use the square bracket syntax (`[]`) to read and write from Hack collections. 
 
 ## Reading
 
@@ -34,7 +34,7 @@ For a `Set`, use `contains()` to check if a value exists in the set.
 
 **Note**: Using `contains()` on a `Vector`, `Map` or `Pair` is synonymous with `containsKey()`.
 
-You can also use [`isset()`](http://php.net/manual/en/function.isset.php) or [`empty()`](http://php.net/manual/en/function.empty.php) for key (or value for sets) testing as well. Just note that these functions are not supported in [Hack's strict mode](../typechecker/modes.md)
+You can also use [`isset()`](http://php.net/manual/en/function.isset.php) or [`empty()`](http://php.net/manual/en/function.empty.php) for key (or value for sets) testing as well. Just note that these functions are not supported in [Hack's strict mode](../typechecker/modes.md).
 
 @@ read-write-examples/read-isset.php @@
 
@@ -63,13 +63,13 @@ You can also use `add()` to pass a value to be added to a `Vector` or `Set`. And
 
 ### Deleting Methods
 
-To remove a value from a `Vector`, use `removeKey`(), passing in the index `n` to remove. This will remove that index, the value associated with that index, and finally shift down one all indices `n + 1` to the final index.
+To remove a value from a `Vector`, use `removeKey()`, passing in the index `n` to remove. This will remove that index, the value associated with that index, and finally shift down one all indices `n + 1` to the final index.
 
 To remove a value from a `Map`, you also use `removeKey()`, passing in the key to remove.
 
 To remove a value from a `Set`, use `remove()`, passing in the value in the set to remove.
 
-You cannot remove from a `Pair`.
+You cannot remove values from a `Pair`.
 
 @@ read-write-examples/delete.php @@
 

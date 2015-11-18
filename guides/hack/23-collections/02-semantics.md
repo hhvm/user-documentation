@@ -22,7 +22,7 @@ The fact that arrays have value semantics and collections have reference semanti
 
 So, if you had some automatic code modifier to convert `array` to `Vector`, your code could break as shown by the example above.
 
-One way to help remedy this is to use `ImmVector` and Vector::immutable()` to make sure that you cannot modify the collection when you pass it to the function.
+One way to help remedy this is to use `ImmVector` and `Vector::immutable()` to make sure that you cannot modify the collection when you pass it to the function.
 
 @@ semantics-examples/converting-immutable.php.type-errors @@
 
@@ -139,4 +139,4 @@ Method | Valid Collection
 
 ## Extending
 
-All of the concrete collection classes are `final` (i.e., they cannot be sub-classed). However, you can create new concrete collection classes from the various [interfaces](./interfaces.md) provided by the collections infrastructure
+All of the concrete collection classes are `final` (i.e., they cannot be sub-classed). However, you can create new concrete collection classes from the various [interfaces](./interfaces.md) provided by the collections infrastructure.
