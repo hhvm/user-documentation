@@ -109,6 +109,22 @@ The translation cache stores the JIT'd code. It's split into several sections de
 | hhvm.server.apc.purge_frequency | Expired items will be purged every this many APC sets | 4096 |
 | hhvm.server.apc.purge_rate | Evict at most this many items on each purge. No limit if -1. | -1 |
 
+## PHP 7 Settings
+
+For changes from PHP 5 to PHP 7 which are backwards incompatible, INI options are available to choose which behavior HHVM respects. (Features which are not backwards incompatible are always available.)
+
+The vast majority of users will want to just set `hhvm.php7.all = 1` to fully enable PHP 7 mode and can ignore the rest of the options in this section. They are available primarily for advanced users who want to do a more gradual migration or otherwise track down compatibility issues.
+
+| INI Setting | Documentation | Default | PHP 7 RFC |
+|-------------|---------------|---------|-----------|
+| hhvm.php7.all | Default value for all of the below | _False_ | N/A |
+| hhvm.php7.deprecate_old_style_ctors | Disallow and warn when using old PHP 4 constructors | hhvm.php7.all | [Remove PHP 4 Constructors](https://wiki.php.net/rfc/remove_php4_constructors) |
+| hhvm.php7.int_semantics | Change some edge-case int and float behavior, such as divide/mod by zero | hhvm.php7.all | [Integer semantics](https://wiki.php.net/rfc/integer_semantics) with some changes due to [engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
+| hhvm.php7.ltr_assign | Make order of assignment in `list()` lvalues consistent | hhvm.php7.all | [Abstract syntax tree](https://wiki.php.net/rfc/abstract_syntax_tree) |
+| hhvm.php7.no_hex_numerics | Don't consider hex strings to be numeric | hhvm.php7.all | [Remove hex support in numeric strings](https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings) |
+| hhvm.php7.scalar_types | Enable PHP 7-style scalar type annotations (NB: not the same as Hack's) | hhvm.php7.all | [Scalar type declarations](https://wiki.php.net/rfc/scalar_type_hints_v5) |
+| hhvm.php7.uvs | Fix some odd precedence and order of evaluation issues | hhvm.php7.all | [Uniform variable syntax](https://wiki.php.net/rfc/uniform_variable_syntax) |
+
 ## Other
 
 | INI Setting | Documentation | Default |
