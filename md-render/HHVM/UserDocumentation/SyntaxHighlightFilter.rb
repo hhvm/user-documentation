@@ -28,9 +28,6 @@ module HHVM
   module UserDocumentation
     class SyntaxHighlightFilter < HTML::Pipeline::Filter
       def call
-        style = doc.document.create_element('style', Pygments.css('.highlight'))
-        doc.prepend_child style
-
         doc.search('pre').each do |node|
           lang = node['lang'] || 'hack'
 

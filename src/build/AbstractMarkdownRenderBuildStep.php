@@ -6,7 +6,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   abstract const string SOURCE_ROOT;
   abstract const string BUILD_ROOT;
 
-  const string RENDERER = __DIR__.'/../../md-render/render.rb';
+  const string RENDERER = LocalConfig::ROOT.'/md-render/render.rb';
   const int MAX_JOBS = 20;
 
   protected function renderFiles(Vector<string> $files): Vector<string> {

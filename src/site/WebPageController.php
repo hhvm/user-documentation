@@ -33,8 +33,11 @@ abstract class WebPageController extends WebController {
               Build ID: {file_get_contents(BuildPaths::BUILD_ID)}
             </x:comment>
             <static:stylesheet
-              path="/main.css"
+              path="/css/main.css"
               media="screen"
+            />
+            <static:stylesheet
+              path="/css/syntax-highlighting.css"
             />
             <link 
               rel="stylesheet" 
