@@ -7,7 +7,7 @@ async function foo(): Awaitable<int> {
 }
 
 async function single_awaitable_main(): Awaitable<void> {
-  $aw = foo(); // awaitable of type Awatiable<int>
+  $aw = foo(); // awaitable of type Awaitable<int>
   $result = await $aw; // an int after $aw completes
   var_dump($result);
 }

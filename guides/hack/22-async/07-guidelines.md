@@ -4,7 +4,7 @@ It might be tempting to just throw `async`, `await` and `Awaitable` on all your 
 
 ## Be Liberal, but Careful, with Async
 
-If you are struggling as to whether your code should be async or not, you can generally start with the answer //yes// and find a reason to say //no//. For example, a simple //hello world// program can be made async with no performance penalty. You will likely not get any gain, but you will not get any loss -- and it is setup for any future changes that may require async.
+If you are struggling as to whether your code should be async or not, you can generally start with the answer *yes* and find a reason to say *no*. For example, a simple *hello world* program can be made async with no performance penalty. You will likely not get any gain, but you will not get any loss -- and it is setup for any future changes that may require async.
 
 These two programs are, for all intents and purposes, equivalent.
 
@@ -50,7 +50,7 @@ Possibly the most important aspect in learning how to structure async code is un
 2. Put each bundle of parallel chains into its own `async` function.
 3. Repeat to see if there are further reductions.
 
-Let's say we are getting blog posts of an author. This would involve the following of steps:
+Let's say we are getting blog posts of an author. This would involve the following steps:
 
 1. Get the post ids for an author.
 2. Get the post text for each post id.
@@ -99,7 +99,7 @@ Basically, don't depend on the order of output between runs of the same code. i.
 
 Given that async is commonly used in operations that are time-consuming, memoizing (i.e., caching) the result of an async call can definitely be worthwhile.
 
-The [`<<__Memoize>>`](../attributes/special.md#__memoize) attribute does the right thing. So, if you can, use that. However, if you are needing explicit control of the memoization, make sure you only //memoize the awaitable//.
+The [`<<__Memoize>>`](../attributes/special.md#__memoize) attribute does the right thing. So, if you can, use that. However, if you need explicit control of the memoization, make sure you *memoize the awaitable* and not the result of awaiting it.
 
 @@ guidelines-examples/memoize-result.php @@
 
@@ -116,7 +116,7 @@ awaits `time_consuming()` again. Now the time-consuming operation will be done t
 
 If `time_consuming()` has side effects (e.g. a database write), then this could end up being a serious bug. Even if there are no side effects, it’s still a bug; the time-consuming operation is being done multiple times when it only needs to be done once.
 
-Instead, memoize the awaitable
+Instead, memoize the awaitable:
 
 @@ guidelines-examples/memoize-awaitable.php @@
 
