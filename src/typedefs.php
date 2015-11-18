@@ -118,11 +118,13 @@ type DocumentationIndex = shape(
 type APIIndexEntry = shape(
   'name' => string,
   'htmlPath' => string,
+  'urlPath' => string,
 );
 
 type APIFunctionIndexEntry = shape(
   'name' => string,
   'htmlPath' => string,
+  'urlPath' => string,
 );
 
 type APIMethodIndexEntry = shape(
@@ -130,12 +132,14 @@ type APIMethodIndexEntry = shape(
   'className' => string,
   'classType' => APIDefinitionType,
   'htmlPath' => string,
+  'urlPath' => string,
 );
 
 type APIClassIndexEntry = shape(
   'type' => APIDefinitionType,
   'name' => string,
   'htmlPath' => string,
+  'urlPath' => string,
   'methods' => array<string, APIMethodIndexEntry>,
 );
 

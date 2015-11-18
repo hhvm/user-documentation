@@ -87,12 +87,14 @@ class ScannedDefinitionsYAMLBuilder {
       $type = APIDefinitionType::TRAIT_DEF;
     }
 
+    $name = $class->getName();
+
     return shape(
-      'name' => $class->getName(),
+      'name' => $name,
       'type' => $type,
       'methods' => $class
         ->getMethods()
-        ->map($m ==> $this->getFunctionDocumentation($m))
+        ->map($m ==> $this->getMethodDocumentation($type, $name, $m))
         ->toArray(),
       'generics' => $class
         ->getGenericTypes()
@@ -111,7 +113,7 @@ class ScannedDefinitionsYAMLBuilder {
   private function getFunctionDocumentation(
     ScannedFunctionAbstract $function,
   ): FunctionDocumentation {
-    $ret = shape(
+    return shape(
       'name' => $function->getName(),
       'returnType' =>
         self::GetNullableTypehintDocumentation($function->getReturnType()),
@@ -127,25 +129,33 @@ class ScannedDefinitionsYAMLBuilder {
       'visibility' => null,
       'static' => null,
     );
+  }
 
-    if (!$function instanceof ScannedMethod) {
-      return $ret;
-    }
+  private function getMethodDocumentation(
+    APIDefinitionType $class_type,
+    string $class_name,
+    ScannedMethod $method,
+  ): MethodDocumentation {
+    $ret = $this->getFunctionDocumentation($method);
 
-    $ret['static'] = $function->isStatic();
+    $ret['static'] = $method->isStatic();
 
-    if ($function->isPublic()) {
+    if ($method->isPublic()) {
       $ret['visibility'] = MemberVisibility::PUBLIC;
-    } else if ($function->isPrivate()) {
+    } else if ($method->isPrivate()) {
       $ret['visibility'] = MemberVisibility::PRIVATE;
     } else {
       invariant(
-        $function->isProtected(),
+        $method->isProtected(),
         'method with no visibility: %s',
-        var_export($function, true),
+        var_export($method, true),
       );
       $ret['visibility'] = MemberVisibility::PROTECTED;
     }
+
+    $ret['className'] = $class_name;
+    $ret['classType'] = $class_type;
+
     return $ret;
   }
 

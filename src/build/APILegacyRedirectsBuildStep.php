@@ -85,16 +85,14 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
       $old_id = idx($old_classes, $class['name']);
 
       if ($old_id) {
-        $old_ids_to_new_urls[$old_id] =
-          URLBuilder::getPathForClass($class);
+        $old_ids_to_new_urls[$old_id] = $class['urlPath'];
       }
 
       foreach ($class['methods'] as $method) {
         $name = $class['name'].'::'.$method['name'];
         $old_id = idx($old_methods, $class['name'].'::'.$method['name']);
         if ($old_id) {
-          $old_ids_to_new_urls[$old_id] =
-            URLBuilder::getPathForMethod($method);
+          $old_ids_to_new_urls[$old_id] = $method['urlPath'];
         }
       }
     }
@@ -103,8 +101,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
       Log::v('.');
       $old_id = idx($old_functions, $function['name']);
       if ($old_id) {
-        $old_ids_to_new_urls[$old_id] =
-          URLBuilder::getPathForFunction($function);
+        $old_ids_to_new_urls[$old_id] = $function['urlPath'];
       } 
     }
 

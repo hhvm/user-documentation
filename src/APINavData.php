@@ -37,7 +37,7 @@ final class APINavData {
 
     foreach ($classes as $class) {
       $nav_data[$class['name']] = shape(
-        'urlPath' => URLBuilder::getPathForClass($class),
+        'urlPath' => $class['urlPath'],
         'children' => self::getNavDataForMethods($class['methods']),
       );
     }
@@ -53,7 +53,7 @@ final class APINavData {
     $nav_data = [];
     foreach ($methods as $method) {
       $nav_data[$method['name']] = shape(
-        'urlPath' => URLBuilder::getPathForMethod($method),
+        'urlPath' => $method['urlPath'],
         'children' => [],
       );
     }
@@ -67,7 +67,7 @@ final class APINavData {
     $nav_data = [];
     foreach ($functions as $function) {
       $nav_data[$function['name']] = shape(
-        'urlPath' => URLBuilder::getPathForFunction($function),
+        'urlPath' => $function['urlPath'],
         'children' => [],
       );
     }

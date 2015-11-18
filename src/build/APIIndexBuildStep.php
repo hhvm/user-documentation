@@ -67,6 +67,7 @@ final class APIIndexBuildStep extends BuildStep {
           $out['function'][$idx] = shape(
             'name' => $docs['name'],
             'htmlPath' => $html_path,
+            'urlPath' => URLBuilder::getPathForFunction($docs),
           );
           break;
         case APIDefinitionType::CLASS_DEF:
@@ -91,6 +92,7 @@ final class APIIndexBuildStep extends BuildStep {
               'className' => $class['name'],
               'classType' => $type,
               'htmlPath' => $html_path,
+              'urlPath' => URLBuilder::getPathForMethod($method),
             );
           }
 
@@ -105,6 +107,7 @@ final class APIIndexBuildStep extends BuildStep {
             'name' => $class['name'],
             'type' => $type,
             'htmlPath' => $html_path,
+            'urlPath' => URLBuilder::getPathForClass($class),
             'methods' => $methods,
           );
 
