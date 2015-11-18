@@ -1,22 +1,12 @@
 # Refining Types
 
-Suppose you want to take a given type and refine (upcast) that type to another type. Hack allows this through using the following in control-flow situations:
+Refining a type basically establishes that a value of one type is also of another type.
+
+Suppose you want to take a given type and refine that particular type to another, compatible type. Hack allows this through the use of three constructs in control-flow situations:
 
 - checking for `null`
 - type-querying (e.g., via `is_float()`)
 - using `instanceof`
-
-## Invariant
-
-There is also a special function:
-
-```
-invariant(<bool expression of fact>, "Message if not")
-```
-
-that can be used outside control-flow situation. It is essentially an assert to the typechecker that what you claim in the boolean statement is fact and true.
-
-In any of the refining scenarios below, you can use `invariant()` as opposed to the conditional check.
 
 ## Nullable to Non-Nullable
 
@@ -43,3 +33,15 @@ Take a look at this example.
 @@ refining-examples/unresolved.php.type-errors @@
 
 Even though `bar()` was passed in a `Base`, and all children of `Base` implement `foo()`, once the `instanceof` check was done on `$b`, and the check returned `true`, the typechecker has to assume that `$b` is now an unresolved type of both `Base` and `I`. And since not all implementers of `I` have to be in the hierarchy of `Base`, we cannot guarantee that `foo()` is available any longer.
+
+## Invariant
+
+There is also a special function:
+
+```
+invariant(<bool expression of fact>, "Message if not")
+```
+
+that can be used outside control-flow situation. It is essentially an assert to the typechecker that what you claim in the boolean statement is fact and true.
+
+In any of the refining scenarios above, you can use `invariant()` as opposed to the conditional check.
