@@ -20,7 +20,7 @@ The following example shows you a simple example on how to create, query, add it
 
 @@ examples-examples/filter-method.php @@
 
-Note that we are using a [lambda](../../lambdas/introduction.md) to create the filtering operation. We could have also use a normal closure as well.
+Note that we are using a [lambda](../../lambdas/introduction.md) to create the filtering operation. We could have also used a normal closure as well.
 
 ## Using `map()`
 
@@ -29,7 +29,7 @@ each element.
 
 @@ examples-examples/map-method.php @@
 
-Note that we are using a [lambda](../../lambdas/introduction.md) to create the mapping operation. We could have also use a normal closure as well.
+Note that we are using a [lambda](../../lambdas/introduction.md) to create the mapping operation. We could have also used a normal closure as well.
 
 ## Reference Semantics
 
