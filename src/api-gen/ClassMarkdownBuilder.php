@@ -108,12 +108,8 @@ EOF;
     $methods = $this->yaml['data']['methods'];
 
     foreach ($methods as $method) {
-      $method_url = sprintf(
-        "/hack/reference/%s/%s/%s/",
-        $this->yaml['type'],
-        str_replace('\\', '.', $this->yaml['data']['name']),
-        $method['name'],
-      );
+      $method_url = URLBuilder::getPathForMethod($method);
+
       if ($method['static']) {
         $prefix = '::';
       } else {
