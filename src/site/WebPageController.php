@@ -1,6 +1,7 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\BuildPaths;
+use Psr\Http\Message\ServerRequestInterface;
 
 abstract class WebPageController extends WebController {
   public abstract function getTitle(): Awaitable<string>;
@@ -147,4 +148,17 @@ abstract class WebPageController extends WebController {
       </div>;
   }
 
+  /* If you're reading this, you probably want to remove 'final' so that you
+   * can pull stuff out of $request or $parameters. Instead:
+   *
+   * - use getRequiredStringParam() and friends to get the data you need in a
+   *   safe and abstracted way
+   * - if there isn't an existing abstraction that fits your needs, add one
+   */
+  final public function __construct(
+    ImmMap<string,string> $parameters,
+    private ServerRequestInterface $request,
+  ) {
+    parent::__construct($parameters, $request);
+  }
 }

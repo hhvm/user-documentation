@@ -37,6 +37,10 @@ abstract class WebController {
         ? $this->parameters[$key] 
         : NULL;
   }
+
+  final protected function getRequestedPath(): string {
+    return $this->request->getUri()->getPath();
+  }
   
   protected static function invariantTo404<T>(
     (function():T) $what,

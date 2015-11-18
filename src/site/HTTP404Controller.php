@@ -4,13 +4,6 @@ use Psr\Http\Message\ServerRequestInterface;
 use HHVM\UserDocumentation\BuildPaths;
 
 final class HTTP404Controller extends WebPageController {
-  public function __construct(
-    ImmMap<string,string> $parameters,
-    private ServerRequestInterface $request,
-  ) {
-    parent::__construct($parameters, $request);
-  }
-
   public async function getTitle(): Awaitable<string> {
     return 'Page Not Found';
   }
@@ -24,7 +17,7 @@ final class HTTP404Controller extends WebPageController {
     $request_time = (new DateTime())
       ->setTimezone(new DateTimeZone('Etc/UTC'))
       ->format(DateTime::RFC2822);
-    $request_path = $this->request->getUri()->getPath();
+    $request_path = $this->getRequestedPath();
 
     $issue_title = '404: '.$request_path;
     $issue_body = <<<EOF
