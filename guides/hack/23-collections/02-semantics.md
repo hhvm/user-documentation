@@ -66,7 +66,7 @@ While you can use `list()` with `Map` and `Set` at runtime, the Hack typechecker
 
 ## Using Array Built-In Functions
 
-Hack collections can some built-in functions that take arrays.
+Hack collections support some built-in functions that take arrays.
 
 ### Sorting
 
