@@ -42,7 +42,7 @@ Here we are using one of the two built-in async helper functions in the `HH\Asio
 
 Sometimes you want to get a result out of an awaitable when the function you are in **is not** `async`. For this there is `HH\Asio\join()`. Pass an `Awaitable` to `join()`.
 
-Note: that global function calls (e.g., `main()`) require a join if that function is `async`). For example:
+Note: that global function calls (e.g., `main()`) require a join if that function is `async`. For example:
 
 ```
 HH\Asio\join(main());
