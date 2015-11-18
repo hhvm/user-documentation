@@ -19,7 +19,7 @@ You can use literal syntax anywhere `array()` can be used, including initializin
 
 @@ constructing-examples/class-property.php @@
 
-There are no type arguments for literal syntax (e.g., `$v = Vector<int> {1};` is a syntax error). The typechecker will keep track of the type internally.
+There are no type arguments for literal syntax (e.g., `$v = Vector<int> {1};` is a syntax error). The typechecker will [infer](../types/inference.md) and keep track of the type internally.
 
 ## Using `new`
 
