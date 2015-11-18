@@ -28,4 +28,4 @@ Array | Collection
 `array (X, Y)` | This is similar to a `Pair`, assuming you add nothing more to the array
 Nothing built-in similar to an immutable collection |  `ImmVector`, `ImmMap`, `ImmSet`
 Nothing built-in similar to a `Set` since all arrays are indexable by key and can have duplicate values | `Set`
-value semantics (copy of array do not reflect changes to original array) | reference semantics (copy of collection does reflect changes to original collection) 
+value semantics (copy of array does not reflect changes to original array) | reference semantics (copy of collection does reflect changes to original collection) 
