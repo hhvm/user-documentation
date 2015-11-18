@@ -30,7 +30,12 @@ Change | Commit | Author
 EOF
   COMMIT_URL_ROOT=https://github.com/hhvm/user-documentation/commit
   FORMAT="%s | [%h]($COMMIT_URL_ROOT/%H) | %an"
-  git --no-pager log --format="$FORMAT" ${PREVIOUS_RELEASE}..${RELEASE}^
+  git \
+    --no-pager \
+    log \
+    --no-merges \
+    --format="$FORMAT" \
+    ${PREVIOUS_RELEASE}..${RELEASE}^
 
   DOCKER_TAG=$(git log -1 $RELEASE --format=%s | awk '{print $NF}')
   echo "Docker image tag: \`${DOCKER_TAG}\`"
