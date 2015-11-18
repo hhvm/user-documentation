@@ -47,8 +47,8 @@ class APIGenericPageController extends WebPageController {
     if ($method !== null) {
       $path[] = $method['name'];
     }
-    $nav_args = [
-      'data' => APINavData::getNavData(),
+
+    $nav_props = [
       'activePath' => $path,
       'extraNavListClass' => 'apiNavList',
     ];
@@ -56,11 +56,14 @@ class APIGenericPageController extends WebPageController {
     return 
       <div class="navWrapper guideNav">
         <div class="navLoader" />
+        <static:script path="/js/APINavData.js" />
         <static:script path="/js/UnifiedSideNav.js" />
         <script>
           var navLoader = document.getElementsByClassName('navLoader')[0];
+          var props = {json_encode($nav_props)};
+          props.data = APINavData;
           ReactDOM.render(
-            React.createElement(DocNav, {json_encode($nav_args)}), 
+            React.createElement(DocNav, props),
             navLoader
           );
         </script>

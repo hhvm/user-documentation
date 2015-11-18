@@ -12,11 +12,14 @@ final class APIIndexBuildStep extends BuildStep {
     sort($sources);
 
     $this->createIndex($sources);
+    $this->createNavData();
   }
 
   private function createIndex(
     Iterable<string> $list,
   ): void {
+    Log::i("\nCreate Index");
+
     $index = $this->generateIndexData($list);
     $code = $this->writeCode(
       'APIIndexData.hhi',
@@ -28,11 +31,18 @@ final class APIIndexBuildStep extends BuildStep {
     );
   }
 
+  private function createNavData(): void {
+    Log::i("\nCreate NavBar Data");
+    $data = APINavData::getNavData();
+    file_put_contents(
+      BuildPaths::APIDOCS_NAV_DATA,
+      'var APINavData = '.json_encode($data).';',
+    );
+  }
+
   private function generateIndexData(
     Iterable<string> $list,
   ): APIIndexShape {
-
-    Log::i("\nCreate Index");
     $out = shape(
       'class' => [],
       'interface' => [],
