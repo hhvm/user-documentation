@@ -10,6 +10,8 @@ abstract final class BuildPaths {
   const string APIDOCS_MARKDOWN = LocalConfig::BUILD_DIR.'/api-markdown';
   const string APIDOCS_HTML = LocalConfig::BUILD_DIR.'/api-html';
   const string APIDOCS_INDEX = LocalConfig::BUILD_DIR.'/api-index.php';
+  const string APIDOCS_LEGACY_REDIRECTS
+    = LocalConfig::BUILD_DIR.'/api-legacy-redirects.php';
   const string APIDOCS_NAV_DATA = LocalConfig::BUILD_DIR.'/api-nav.js';
 
   const string GUIDES_MARKDOWN = LocalConfig::ROOT.'/guides';

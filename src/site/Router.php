@@ -21,6 +21,9 @@ class Router {
         => RedirectToGuideFirstPageController::class,
       '/{product:(?:hack|hhvm)}/{guide}/{page}'
         => GuidePageController::class,
+      '/manual/en/{legacy_id}.php'
+        => APILegacyRedirectController::class,
+
       '/__content'
         => WebPageContentController::class,
       '/s/{checksum}{file:/.+}'
