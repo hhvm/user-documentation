@@ -6,7 +6,7 @@ In general, async follows this pattern:
 * get an awaitable back
 * `await` the awaitable to get a result
 
-However, sometimes an async function can throw an exception. The good news is that the same exception object that would be thrown in the non-async version of the code is the same that will be returned when you `await` the awaitable.
+However, sometimes an async function can throw an exception. The good news is that the exception object that would be thrown in the non-async version of the code is the same that will be returned when you `await` the awaitable.
 
 @@ exceptions-examples/basic-exception.php @@
 
