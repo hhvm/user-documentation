@@ -1,0 +1,1 @@
+Catchable fatal error: Argument 1 passed to Hack\UserDocumentation\TypeChecker\Running\Examples\Simple\a() must be an instance of int, string given in /data/users/joelm/user-documentation/guides/hack/25-typechecker/04-running-examples/simple-check.php.type-errors on line 7
