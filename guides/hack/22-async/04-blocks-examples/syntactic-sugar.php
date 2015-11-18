@@ -19,7 +19,7 @@ async function gen_call<Tv>((function (): Awaitable<Tv>) $gen): Awaitable<Tv> {
 }
 
 async function use_async_lambda(): Awaitable<void> {
-  // To use an async lambda with no arguments, you would to have a helper
+  // To use an async lambda with no arguments, you would need to have a helper
   // function to return an actual Awaitable for you.
   $x = await gen_call(
     async () ==> {

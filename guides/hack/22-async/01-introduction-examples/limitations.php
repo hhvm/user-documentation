@@ -29,7 +29,7 @@ async function main(): Awaitable<void> {
   await \HH\Asio\v([
     do_cpu_work(),
     do_sleep(),
- ]);
+  ]);
   print("End of main()\n");
 }
 

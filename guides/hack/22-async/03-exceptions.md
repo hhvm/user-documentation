@@ -6,7 +6,7 @@ In general, async follows this pattern:
 * get an awaitable back
 * `await` the awaitable to get a result
 
-However, sometimes an async function can throw an exception. The good news is that the same exception object that would be thrown in the non-async version of the code is the same that will be returned when you `await` the awaitable.
+However, sometimes an async function can throw an exception. The good news is that the same exception object that would be thrown in the non-async version of the code will be returned when you `await` the awaitable.
 
 @@ exceptions-examples/basic-exception.php @@
 
@@ -14,17 +14,16 @@ Using the basic utility functions [`v()`](utility-functions.md) or [`m()`](utili
 
 @@ exceptions-examples/multiple-awaitable-exception.php @@
 
-To get around this, and get the successful results as well, we can use the `asio-utilities` function called [`HH\Asio\wrap()`](link to wrap). It takes an awaitable and returns the expected result or the exception if one was thrown. The exception is gives back is of the type `ResultOrExceptionWrapper`.
+To get around this, and get the successful results as well, we can use the `asio-utilities` function called [`HH\Asio\wrap()`](utility-functions.md). It takes an awaitable and returns the expected result or the exception if one was thrown. The exception it gives back is of the type `ResultOrExceptionWrapper`.
 
 ```
 namespace HH\Asio {
-
-interface ResultOrExceptionWrapper<T> {
-  public function isSucceeded(): bool;
-  public function isFailed(): bool;
-  public function getResult(): T;
-  public function getException(): \Exception;
-}
+  interface ResultOrExceptionWrapper<T> {
+    public function isSucceeded(): bool;
+    public function isFailed(): bool;
+    public function getResult(): T;
+    public function getException(): \Exception;
+  }
 }
 ```
 
@@ -32,6 +31,6 @@ Taking the example above and using this mechanism:
 
 @@ exceptions-examples/wrapping-exceptions.php @@
 
-And here is the output:
+Here is the output:
 
 @@ exceptions-examples/wrapping-exceptions.php.hhvm.expectf @@
