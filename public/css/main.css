@@ -720,10 +720,19 @@ h4 {
 .innerContent img {
   max-width: 100%;
 }
+.innerContent ol {
+  list-style: decimal inside;
+  margin: 0.5em 0 2em;
+  padding-left: 1em;
+}
+.innerContent p {
+  padding-bottom: 1.5em;
+}
 
 .innerContent ul {
   list-style: disc inside;
-  padding-left: 10px;
+  margin: 0.5em 0 2em;
+  padding-left: 1em;
 }
 
 .innerContent strong {
