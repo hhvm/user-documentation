@@ -29,11 +29,6 @@ enum APIDefinitionType: string as string {
   FUNCTION_DEF = 'function';
 }
 
-enum GuideDefinitionType: string {
-    HHVM_DEF = 'hhvm';
-    HACK_DEF = 'hack';
-}
-
 type DocumentationSource = shape(
   'type' => DocumentationSourceType,
   'name' => string,

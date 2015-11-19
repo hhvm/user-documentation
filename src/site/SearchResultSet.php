@@ -27,12 +27,16 @@ final class SearchResultSet {
     }
   }
 
-  public function addGuideResult(string $type, string $category, string $name): void {
-    switch (GuideDefinitionType::assert($type)) {
-      case GuideDefinitionType::HHVM_DEF:
+  public function addGuideResult(
+    GuidesProduct $type,
+    string $category,
+    string $name,
+  ): void {
+    switch ($type) {
+      case GuidesProduct::HHVM:
         $this->hhvm_guides[ucwords("{$category} {$name}")] = "/hhvm/{$category}/{$name}";
         break;
-      case GuideDefinitionType::HACK_DEF:
+      case GuidesProduct::HACK:
         $this->hack_guides[ucwords("{$category} {$name}")] = "/hack/{$category}/{$name}";
         break;
     }
