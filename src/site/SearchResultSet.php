@@ -3,12 +3,12 @@
 namespace HHVM\UserDocumentation;
 
 final class SearchResultSet {
-  private Map<DocumentedAPIDefinitionName, SiteURLPath> $classes = Map {};
-  private Map<DocumentedAPIDefinitionName, SiteURLPath> $functions = Map {};
-  private Map<DocumentedAPIDefinitionName, SiteURLPath> $interfaces = Map {};
-  private Map<DocumentedAPIDefinitionName, SiteURLPath> $traits = Map {};
-  private Map<DocumentedAPIDefinitionName, SiteURLPath> $hhvm_guides = Map {};
-  private Map<DocumentedAPIDefinitionName, SiteURLPath> $hack_guides = Map {};
+  private Map<string, string> $classes = Map {};
+  private Map<string, string> $functions = Map {};
+  private Map<string, string> $interfaces = Map {};
+  private Map<string, string> $traits = Map {};
+  private Map<string, string> $hhvm_guides = Map {};
+  private Map<string, string> $hack_guides = Map {};
 
   public function addAPIResult(string $type, string $name): void {
     switch (APIDefinitionType::assert($type)) {

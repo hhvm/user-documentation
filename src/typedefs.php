@@ -6,9 +6,6 @@ use FredEmmott\DefinitionFinder\ScannedBase;
 
 type ScannedDefinitionFilter = (function(ScannedBase): bool);
 
-type DocumentedAPIDefinitionName = string;
-type SiteURLPath = string;
-
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';
