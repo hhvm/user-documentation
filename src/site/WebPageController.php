@@ -40,11 +40,6 @@ abstract class WebPageController extends WebController {
               path="/css/syntax-highlighting.css"
             />
             <link 
-              rel="stylesheet" 
-              type="text/css" 
-              href="//cloud.typography.com/7491092/608288/css/fonts.css" 
-            />
-            <link 
 	           rel="stylesheet" 
              type="text/css" 
              href="//cdn.jsdelivr.net/font-hack/2.015/css/hack-extended.min.css"
