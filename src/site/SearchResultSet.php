@@ -3,35 +3,47 @@
 namespace HHVM\UserDocumentation;
 
 final class SearchResultSet {
-    private Map<string, string> $classes = Map {};
-    private Map<string, string> $functions = Map {};
-    private Map<string, string> $interfaces = Map {};
-    private Map<string, string> $hhvm_guides = Map {};
-    private Map<string, string> $hack_guides = Map {};
+    private Map<DocumentedAPIDefinitionName, SiteURLPath> $classes = Map {};
+    private Map<DocumentedAPIDefinitionName, SiteURLPath> $functions = Map {};
+    private Map<DocumentedAPIDefinitionName, SiteURLPath> $interfaces = Map {};
+    private Map<DocumentedAPIDefinitionName, SiteURLPath> $traits = Map {};
+    private Map<DocumentedAPIDefinitionName, SiteURLPath> $hhvm_guides = Map {};
+    private Map<DocumentedAPIDefinitionName, SiteURLPath> $hack_guides = Map {};
 
     public function addAPIResult(string $type, string $name): void {
-        if ($type === "class") {
-            $this->classes[$name] = sprintf("/hack/reference/class/%s/", $name);
-        }
-        if ($type === "function") {
-            $this->functions[$name] = sprintf("/hack/reference/function/%s/", $name);
-        }
-        if ($type === "interface") {
-            $this->interfaces[$name] = sprintf("/hack/reference/interface/%s/", $name);
+        switch (APIDefinitionType::assert($type)) {
+            case APIDefinitionType::TRAIT_DEF:
+                $this->traits[$name] = sprintf("/hack/reference/trait/%s/", $name);
+                break;
+            case APIDefinitionType::INTERFACE_DEF:
+                $this->interfaces[$name] = sprintf("/hack/reference/interface/%s/", $name);
+                break;
+            case APIDefinitionType::FUNCTION_DEF:
+                $this->functions[$name] = sprintf("/hack/reference/function/%s/", $name);
+                break;
+            case APIDefinitionType::CLASS_DEF:
+                $this->classes[$name] = sprintf("/hack/reference/class/%s/", $name);
+                break;
         }
     }
 
     public function addGuideResult(string $type, string $category, string $name): void {
-        if ($type === "hhvm") {
-            $this->hhvm_guides[ucwords("{$category} {$name}")] = "/hhvm/{$category}/{$name}";
-        }
-        if ($type === "hack") {
-            $this->hack_guides[ucwords("{$category} {$name}")] = "/hack/{$category}/{$name}";
+        switch (GuideDefinitionType::assert($type)) {
+            case GuideDefinitionType::HHVM_DEF:
+                $this->hhvm_guides[ucwords("{$category} {$name}")] = "/hhvm/{$category}/{$name}";
+                break;
+            case GuideDefinitionType::HACK_DEF:
+                $this->hack_guides[ucwords("{$category} {$name}")] = "/hack/{$category}/{$name}";
+                break;
         }
     }
 
     public function getClasses(): Map<string, string> {
         return $this->classes;
+    }
+
+    public function getTraits(): Map<string, string> {
+        return $this->traits;
     }
 
     public function getInterfaces(): Map<string, string> {

@@ -6,6 +6,9 @@ use FredEmmott\DefinitionFinder\ScannedBase;
 
 type ScannedDefinitionFilter = (function(ScannedBase): bool);
 
+type DocumentedAPIDefinitionName = string;
+type SiteURLPath = string;
+
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';
@@ -22,6 +25,11 @@ enum APIDefinitionType: string {
   TRAIT_DEF = 'trait';
   INTERFACE_DEF = 'interface';
   FUNCTION_DEF = 'function';
+}
+
+enum GuideDefinitionType: string {
+    HHVM_DEF = 'hhvm';
+    HACK_DEF = 'hack';
 }
 
 type DocumentationSource = shape(

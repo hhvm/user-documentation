@@ -10,7 +10,7 @@ final class SearchController extends WebPageController {
   private ?string $term = null;
 
   public async function getTitle(): Awaitable<string> {
-    return 'Search for shit!';
+    return "Search results for '{$this->getSearchTerm()}':";
   }
 
   public function getExtraBodyClass(): ?string {
@@ -34,7 +34,6 @@ final class SearchController extends WebPageController {
     $results = $this->getSearchResults();
     return 
       <x:frag>
-        You searched for "{$this->getSearchTerm()}"
         <h2>Guides</h2>
         <h3>Hack</h3>
         {$this->getListFromResultSet($results->getHackGuides())}
@@ -43,6 +42,8 @@ final class SearchController extends WebPageController {
         <h2>API</h2>
         <h3>Classes</h3>
         {$this->getListFromResultSet($results->getClasses())}
+        <h3>Traits</h3>
+        {$this->getListFromResultSet($results->getTraits())}
         <h3>Interfaces</h3>
         {$this->getListFromResultSet($results->getInterfaces())}
         <h3>Functions</h3>

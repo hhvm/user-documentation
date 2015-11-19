@@ -32,9 +32,9 @@ class GuidesIndex {
             foreach ($entry as $name => $filepath) {
                 if (
                     strtolower($category) === strtolower($term) ||
-                    strpos(strtolower($category), strtolower($term)) ||
+                    strpos(strtolower($category), strtolower($term)) !== false ||
                     strtolower($name) === strtolower($term) ||
-                    strpos(strtolower($name), strtolower($term))
+                    strpos(strtolower($name), strtolower($term)) !== false
                 ) {
                     $results->addGuideResult($type, $category, $name);
                 }
