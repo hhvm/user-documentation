@@ -1,79 +1,55 @@
 <?hh
 
-// This double slash is a comment, just like PHP, C++, C#, etc. You can also
-// use /* ... */ as well.
-// All Hack programs start with <?hh
-
-// This namespace is here for purposes of keeping the examples in the
-// documentation orderly. Bascically it is an organization tool for your code.
-// So users of the class below that are not in the same namespace, will preface
-// instantitations of the class with:
-// Hack\UserDocumentation\Quickstart\Examples\First\Complex
 namespace Hack\UserDocumentation\Quickstart\Examples\First;
 
-// This is how you create a class in Hack
-class Complex {
-  // These are class properties. They can be public (totally accessible),
-  // protected (this class and children), private (only this class).
-  // They also have an optional type annotation; in this case, both members
-  // are floating-point numbers.
-  private float $real;
-  private float $imag;
+enum Food : string {
+  VEGETABLE = 'Vegetable';
+  MEAT = 'Meat';
+}
 
-  // This is a special function on the class called a constructor.
-  // __construct is builtin and has that special meaning -- to construct
-  // an instance of the class. Here, to construct an instance of
-  // ComplexNumber, you pass in two float values, one for the real, one for
-  // the imaginary. And then those are assinged to the class properties above
-  // for use in other methods of this class.
-  public function __construct(float $real, float $imag) {
-    // $this is how you access the instance of the class from within the class
-    // itself
-    $this->real = $real;
-    $this->imag = $imag;
+interface Animal {
+  // You can eat and move at the same time so allow them to be async by
+  // returning an Awaitable
+  public function eat(Food $type): Awaitable<(Food, int, bool)>;
+  public function move(int $distance): Awaitable<void>;
+}
+
+class Human implements Animal {
+  const ONE_SECOND = 1000000; // usleep takes microseconds
+  // constructor parameter promotion
+  public function __construct(private string $name) {}
+
+  public async function eat(Food $type): Awaitable<(Food, int, bool)> {
+    // pretend 3 seconds is the human eating time for vegetables and 5 for meat
+    $eat_time = $type === Food::VEGETABLE ? 3 : 5;
+    await \HH\Asio\usleep(self::ONE_SECOND * $eat_time);
+    // I am not going to finish all my vegetables!!
+    $finished = $type !== Food::VEGETABLE;
+    return tuple($type, $eat_time, $finished);
   }
 
-  // This is a static method of the class. You call this not by creating
-  // an instance of the class, but rather on the class itself.
-  // It is taking two parameters, each of type Complex and is returning
-  // a Complex.
-  public static function add(Complex $c1, Complex $c2): Complex {
-    return new Complex($c1->real + $c2->real, $c1->imag + $c2->imag);
+  public async function move(int $distance_in_feet): Awaitable<void> {
+    // pretend it takes a second to move one foot
+    await \HH\Asio\usleep($distance_in_feet * self::ONE_SECOND);
   }
 
-  // This is an instance method of the class. You call this when you have
-  // created an instance of the class. It takes no parameters and returns
-  // a string.
-  public function toString(): string {
-    // This is an if/else statement.
-    // === checks for type and value equality; there is also == which just
-    // checks for value equality. Normally === is safer.
-    if ($this->imag === 0.0) {
-      // Make sure to cast the floating-point numbers to a string.
-      return (string)$this->real;
-    } else if ($this->real === 0.0) {
-      // The . is the string concatenation operator.
-      return (string)$this->imag . 'i';
-    } else {
-      return (string)$this->real . ' + ' . (string)$this->imag . 'i';
-    }
+  public function getName(): string {
+    return $this->name;
   }
 }
 
-// This is regular function. It is not in a class. So you just call it by
-// its name. It takes no parameters and returns no value.
-function run(): void {
-  // Create an instance of Complex with new, passing in the appropriate
-  // parameters to the constructor
-  $c1 = new Complex(3.0, -4.0);
-  // Call toString() on the instance of $c1
-  // PHP_EOL is the platform independent newline character.
-  echo $c1->toString() . PHP_EOL;
-  $c2 = new Complex(-9.0, 10.0);
-  echo $c2->toString() . PHP_EOL;
-  // Calling the static class method via Class::method syntax.
-  $c3 = Complex::add($c1, $c2);
-  echo $c3->toString() . PHP_EOL;
+async function typical_day(): Awaitable<void> {
+  $start = time();
+  $human = new Human('Jane');
+  list($what, $eat_time, $finished) = await $human->eat(Food::VEGETABLE);
+  await $human->move(2);
+  $end = time();
+  echo 'Daily diary of ' . $human->getName() . "\n";
+  echo 'Ate: ' . $what . "\n";
+  echo 'Eat time: ' . $eat_time . " seconds\n";
+  echo 'Finished eating? ' . var_export($finished, true) . "\n";
+  echo "Moved 2 feet\n";
+  echo 'My day lasted: ' . strval($end - $start) . " seconds\n";
 }
 
-run();
+\HH\Asio\join(typical_day());

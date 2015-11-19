@@ -40,8 +40,13 @@ Using the editor of your choice (e.g., Nuclide, vim, Sublime Text), let's create
 
 This getting started guide assumes some knowledge of programming (e.g., what a class is, what a function or method is, etc.). If you are familiar with [PHP](http://php.net), Hack has a similar look and feel. If you are not familiar with PHP, then all of this is new, but hopefully the general constructs are familiar to you. The comments provide various details, but here are the key points:
 
-* This example created a class, methods on the class, and a standalone function.
-* [Type annotations](../types/annotations.md) were used on class properties, method parameters and returns from functions and methods.
+* This example creates a [namespace](http://php.net/manual/en/language.namespaces.php), an [enumeration](/hack/enums/introduction), [interface](http://php.net/manual/en/language.oop5.interfaces.php), [class](http://php.net/manual/en/language.oop5.basic.php), methods on the class, and a standalone function.
+* [Type annotations](/hack/types/annotations) were used on class properties, method parameters and returns from functions and methods.
+* A [tuple](/hack/tuples/introduction) was returned from `eat()`.
+* [Async](/hack/async/introduction) was used on some methods where the execution of those methods are able to switch back and forth with other async methods.
+* [Constructor Parameter Promotion](/hack/other-features/constructor-parameter-promotion) was used on the class constructor.
+
+While the implementation of many of the `Human` methods are contrived, the key is to see how features like [`async`](/hack/async/introduction) may be used in a real world situation.
 
 ### 4. Run the Typechecker
 
