@@ -40,7 +40,6 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
     Log::v("\nProcessing old site index");
     foreach ($old_index as $entry) {
-      Log::v('.');
       list ($name, $id, $type) = $entry;
 
       $name = html_entity_decode($name);
