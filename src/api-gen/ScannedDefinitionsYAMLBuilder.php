@@ -188,6 +188,7 @@ class ScannedDefinitionsYAMLBuilder {
   ): TypehintDocumentation {
     return shape(
       'typename' => $typehint->getTypeName(),
+      'nullable' => $typehint->isNullable(),
       'genericTypes' =>
         $typehint
         ->getGenericTypes()

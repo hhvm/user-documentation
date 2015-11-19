@@ -6,7 +6,9 @@ use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 
 class Stringify {
   public static function typehint(TypehintDocumentation $typehint): string {
-    $s = $typehint['typename'];
+    $s = $typehint['nullable'] ? '?' : '';
+    $s .= $typehint['typename'];
+
     if ($typehint['genericTypes']) {
       $s .= '<';
       $s .= implode(

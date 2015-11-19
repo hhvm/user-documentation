@@ -64,6 +64,7 @@ type ClassDocumentation = shape(
 
 type TypehintDocumentation = shape(
   'typename' => string,
+  'nullable' => bool,
   'genericTypes' => array<mixed /* cyclic: TypehintDocumentation*/>,
 );
 

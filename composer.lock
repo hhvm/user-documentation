@@ -59,12 +59,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "5aa2efd1da569938a3246ce20f8291ebf905803d"
+                "reference": "9c3efbbb04e5a86445cee1a361052f644ed4b0ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/5aa2efd1da569938a3246ce20f8291ebf905803d",
-                "reference": "5aa2efd1da569938a3246ce20f8291ebf905803d",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/9c3efbbb04e5a86445cee1a361052f644ed4b0ba",
+                "reference": "9c3efbbb04e5a86445cee1a361052f644ed4b0ba",
                 "shasum": ""
             },
             "require": {
@@ -96,7 +96,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-11-06 18:21:45"
+            "time": "2015-11-19 23:40:11"
         },
         {
             "name": "hack-psr/psr7-http-message-hhi",

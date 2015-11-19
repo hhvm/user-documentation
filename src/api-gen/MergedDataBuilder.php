@@ -119,6 +119,7 @@ final class MergedDataBuilder {
 
     return shape(
       'typename' => $name,
+      'nullable' => $a['nullable'] && $b['nullable'],
       'genericTypes' => $generics,
     );
   }
