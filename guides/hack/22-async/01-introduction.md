@@ -77,10 +77,10 @@ The amount that async speeds up this example can vary greatly (eg depending on n
 
 *Non-Async*
 ```
-Total time taken: 3.3065688610077 seconds
+Total time taken: 0.74790596961975 seconds
 ```
 
 *Async*
 ```
-Total time taken: 2.3396739959717 seconds
+Total time taken: 1.050155878067 seconds
 ```
