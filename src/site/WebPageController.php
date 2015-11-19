@@ -147,6 +147,12 @@ abstract class WebPageController extends WebController {
               <strong>HHVM</strong>
             </a>
           </div>
+          <div class="searchBar headerElement">
+            <form method="get" action="/search">
+                <input type="text" name="term" class="searchInput" />
+                <input type="submit" value="Search" class="searchSubmit" />
+            </form>
+          </div>
         </div>
       </div>;
   }
