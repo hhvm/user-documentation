@@ -17,7 +17,7 @@ manipulate generic classes:
 The above example shows a generic function `swap<T>()` operating on a generic
 `Box<T>` class.
 
-Generics allow developers to write one class or method with the ability to be parameterized to any type, all while preserving type safety. Without generics, accomplishing a similar model would require creating `BoxInt` and `BoxString` classes, and that quickly gets verbose. Alternatively, we could treat `$value` as a `mixed` type and doing `instanceof()` checks, which means that inserting a string into a box of int would not raise a typechecker error, but would only be discovered at runtime.
+Generics allow developers to write one class or method with the ability to be parameterized by any type, all while preserving type safety. Without generics, accomplishing a similar model would require creating `BoxInt` and `BoxString` classes, and that quickly gets verbose. Alternatively, we could treat `$value` as a `mixed` type and do `instanceof()` checks, which means that inserting a string into a box of int would not raise a typechecker error, but would only be discovered at runtime.
 
 ## Arity
 
@@ -28,7 +28,7 @@ Within a generic parameter list, the parameter names must
   * all begin with the letter T
   * not be the same as that used for a generic parameter for an enclosing class, interface, or trait.
 
-In the following case, class `Vector` has one type parameter, `Tv`, so has arity 1). Method `map` also has one type parameter, `Tu`, so has arity 1.
+In the following case, class `Vector` has one type parameter, `Tv`, so has arity 1. Method `map` also has one type parameter, `Tu`, so has arity 1.
 
 ```hack
 final class Vector<Tv> implements MutableVector<Tv> {
