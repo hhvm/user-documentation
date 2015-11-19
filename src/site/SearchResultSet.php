@@ -10,8 +10,8 @@ final class SearchResultSet {
   private Map<string, string> $hhvm_guides = Map {};
   private Map<string, string> $hack_guides = Map {};
 
-  public function addAPIResult(string $type, string $name): void {
-    switch (APIDefinitionType::assert($type)) {
+  public function addAPIResult(APIDefinitionType $type, string $name): void {
+    switch ($type) {
       case APIDefinitionType::TRAIT_DEF:
         $this->traits[$name] = sprintf("/hack/reference/trait/%s/", $name);
         break;
