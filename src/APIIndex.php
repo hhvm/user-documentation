@@ -37,7 +37,8 @@ class APIIndex {
     $index = Shapes::toArray(self::getIndex());
     foreach ($index as $key => $value) {
       if (is_array($value)) {
-        foreach ($value as $name => $entry) {
+        foreach ($value as $_ => $entry) {
+          $name = $entry['name'];
           if (is_string($name) && is_string($key)) {
             if (strtolower($name) === strtolower($term) || strpos(strtolower($name), strtolower($term)) !== false) {
               $results->addAPIResult($key, $name);
