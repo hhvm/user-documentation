@@ -10,7 +10,7 @@ Consider the following example in which `Stack` is a generic class having one ty
 
 As shown, the type parameter `T` is used in the declaration of the instance property `$stack`, as the parameter type of the instance method `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves generic methods. 
 
-The line `$stInt->push(10.5);`, attempts to call `push` with a non-`int` argument. This is rejected, because `$stInt` is a stack of `int`, and we are trying to push a `float`.
+The line `$stInt->push(10.5);` attempts to call `push` with a non-`int` argument. This is rejected, because `$stInt` is a stack of `int`, and we are trying to push a `float`.
 
 ## Functions
 
@@ -19,8 +19,6 @@ Here is an example of a generic function, `maxVal`, having one type parameter, `
 @@ entities-examples/functions.php @@
 
 The function returns the larger of the two arguments passed to it. In the case of the call `maxVal(10, 20)`, given that the type of both arguments is `int`, that is inferred as the type corresponding to the type parameter `T`, and an `int` value is returned. In the case of the call `maxVal(15.6, -20.78)`, `T` is inferred as `float`, while in `maxVal('red', 'green')`, `T` is inferred as `string`.
-
-The ty
 
 ## Methods
 
@@ -43,32 +41,6 @@ As we can see, methods `map` and `zip` each take a generic parameter, `Tu`, whos
 Like a class, an interface can have type parameters; for example:
 
 @@ entities-examples/interfaces.php @@
-
-```hack
-interface MyCollection<T> {
-  public function put(T $item): void;
-  public function get(): T;
-}
-
-class MyList<T> implements MyCollection<T> {
-  public function put(T $item): void {  /* ... */ }
-  public function get(): T {            /* ... */ }
-  // …
-}
-
-class MyQueue<T> implements MyCollection<T> {
-  public function put(T $item): void {  /* ... */ }
-  public function get(): T {            /* ... */ }
-  // …
-}
-
-function processCollection<T>(MyCollection<T> $p1): void {
-  /* can process any object whose class implements MyCollection */
-}
-
-processCollection(new MyList(/* … */));
-processCollection(new MyQueue(/* … */));
-```
 
 Here, we have generic stack and queue classes each of which implements the same generic interface, enabling those classes to store and retrieve elements in a consistent manner. 
 
