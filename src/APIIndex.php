@@ -32,22 +32,28 @@ class APIIndex {
     return self::getIndex()[$type];
   }
 
-  public static function search(string $term, SearchResultSet $results): SearchResultSet {
-    // This whole method is UNSAFE
-    $index = Shapes::toArray(self::getIndex());
-    foreach ($index as $key => $value) {
-      if (is_array($value)) {
-        foreach ($value as $_ => $entry) {
-          $name = $entry['name'];
-          if (is_string($name) && is_string($key)) {
-            if (strtolower($name) === strtolower($term) || strpos(strtolower($name), strtolower($term)) !== false) {
-              $results->addAPIResult($key, $name);
-            }
-          }
-        }
-      }
+  public static function search(
+    string $term,
+    SearchResultSet $results,
+  ): SearchResultSet {
+    foreach (APIDefinitionType::getValues() as $type) {
+      self::searchEntries($term, $results, $type);
     }
     return $results;
+  }
+
+  private static function searchEntries (
+    string $term,
+    SearchResultSet $results,
+    APIDefinitionType $type,
+  ): void {
+    $entries = self::getIndexForType($type);
+    foreach ($entries as $_ => $entry) {
+      $name = $entry['name'];
+      if (stripos($name, $term) !== false) {
+        $results->addAPIResult($type, $name);
+      }
+    }
   }
 
   public static function getDataForFunction(
