@@ -73,9 +73,15 @@ There are valid uses for `mixed`, but generally you want to be as specific as po
 
 ## `this`
 
-`this` means that a class method returns an object of the same class as the calling method. You can use it to return an instance of an object from a `static` class method where you are returning something like `new static()`.
+`this` can only be used as a *return type* annotation on a *method of a class*. `this` signifies that the method returns an object of the same class on which the method is defined.
 
-@@ type-system-examples/this.php @@
+The primary purpose of return `this` is to allow chaining of method calls on the instance of the class itself or its subclasses.
+
+@@ type-system-examples/this-chaining.php @@
+
+`this` on a `static` method means that a class method returns an object of the same class as the calling method. You can use it to return an instance of an object from a `static` class method where you are returning something like `new static()`.
+
+@@ type-system-examples/this-static.php @@
 
 
 ## `num`
