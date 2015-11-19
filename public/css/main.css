@@ -158,6 +158,57 @@ html, body {
     text-transform: uppercase;
   }
 }
+.paginationLinks {
+  display: flex;
+  margin: 0 -10px;
+  padding-top: 20px;
+}
+.paginationLinks .paginationLink {
+  flex-basis: 50%;
+  margin: 10px;
+  position: relative;
+}
+.paginationLinks .paginationLink a {
+  border-top: 2px solid #fd8724;
+  display: block;
+  font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
+  font-size: 150%;
+  font-weight: 400;
+  padding: 10px;
+  position: relative;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  transition: color 0.3s;
+  z-index: 90;
+}
+.paginationLinks .paginationLink::before {
+  content: "";
+  display: block;
+  background-color: transparent;
+  height: 100%;
+  position: absolute;
+  -webkit-transition: background-color 0.3s, width 0.3s;
+  -moz-transition: background-color 0.3s, width 0.3s;
+  transition: background-color 0.3s, width 0.3s;
+  width: 0px;
+}
+.paginationLinks .paginationLink.next {
+  text-align: right;
+}
+.paginationLinks .paginationLink.previous::before {
+  right: 0px;
+}
+.paginationLinks .paginationLink:hover::before {
+  background-color: #fd8724;
+  width: 100%;
+}
+.paginationLinks .paginationLink:hover.previous::before {
+  right: 0px;
+}
+.paginationLinks .paginationLink:hover a {
+  color: white;
+}
+
 body {
   background: #ffffff;
   color: #505050;
@@ -614,6 +665,7 @@ h4 {
 }
 
 .navWrapper .navList .subListItem h5 a {
+  padding-left: 30px;
   position: relative;
 }
 
@@ -630,10 +682,6 @@ h4 {
   -moz-transition: border-color 0.5s;
   transition: border-color 0.5s;
   width: 0;
-}
-
-.apiNavList .subListItem h5 a::before {
-  top: 7.5px;
 }
 
 .subListItem:hover h5 a::before {
@@ -653,8 +701,8 @@ h4 {
   border-color: transparent transparent transparent #fd8724;
 }
 
-.apiNavList .subListItem h5::before {
-  top: 0;
+.apiNavList .subListItem h5 a::before {
+  top: 7.5px;
 }
 .apiNavList .secondLevelList {
   display: none;
@@ -807,6 +855,8 @@ h4 {
   .mainContainer {
     width: 100%;
     overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   .navWrapper {
@@ -856,6 +906,7 @@ h4 {
     flex-flow: row wrap;
     height: 100%;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     padding: 10px;
     width: 100%;
   }
@@ -957,7 +1008,6 @@ h4 {
     top: 10px;
   }
 }
-
 .warning {
   color: red;
 }

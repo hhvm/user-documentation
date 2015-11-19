@@ -166,3 +166,8 @@ type NavDataNode = shape(
    */
   'children' => array<string, mixed>,
 );
+
+type PaginationDataNode = shape(
+  'page' => array<?string, mixed>,
+  'guide' => array<?string, mixed>,
+);
