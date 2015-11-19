@@ -22,7 +22,7 @@ Covariance cannot be used as the type of a parameter on any method, or as the ty
 
 ## Contravariant
 
-If `Foo<num>` is a subtype of `Foo<int>`, then `Foo` is contravariant on `T`. "contra" means "against"; and the subtype relationship of the generic type goes with the subtype relationship of arguments to a covariant type parameter.
+If `Foo<num>` is a subtype of `Foo<int>`, then `Foo` is contravariant on `T`. "contra" means "against"; and the subtype relationship of the generic type goes against the subtype relationship of arguments to a contravariant type parameter.
 
 Here is an example of contravariance:
 
