@@ -59,19 +59,21 @@ final class MergedDataBuilder {
       }
       $methods = idx($this->data, 'methods', []);
       assert(is_array($methods));
+
+      $merged_methods = [];
       foreach ($methods as $method) {
         $name = $method['name'];
         if ($builders->containsKey($name)) {
           $builders[$name]->addData(new Map($method));
         } else {
-          $methods[] = $method;
+          $merged_methods[] = $method;
         }
       }
 
       foreach ($builders as $name => $builder) {
-        $methods[] = $builder->build()->toArray();
+        $merged_methods[] = $builder->build()->toArray();
       }
-      $this->data['methods'] = $methods;
+      $this->data['methods'] = $merged_methods;
       return;
     }
 
