@@ -7,14 +7,8 @@ use HHVM\UserDocumentation\SearchResultSet;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class SearchController extends WebPageController {
-  private ?string $term = null;
-
   public async function getTitle(): Awaitable<string> {
     return "Search results for '{$this->getSearchTerm()}':";
-  }
-
-  public function getExtraBodyClass(): ?string {
-    return null;
   }
 
   private function getListFromResultSet(Map<string, string> $result_set): XHPRoot {
@@ -51,13 +45,9 @@ final class SearchController extends WebPageController {
       </x:frag>;
   }
 
+  <<__Memoize>>
   private function getSearchTerm(): string {
-    if ($this->term !== null) {
-      return $this->term;
-    }
-
-    $this->term = $this->getRequiredStringParam('term');
-    return $this->term;
+    return $this->getRequiredStringParam('term');
   }
 
   private function getSearchResults(): SearchResultSet {
