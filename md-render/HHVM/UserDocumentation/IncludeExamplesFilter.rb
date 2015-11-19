@@ -40,7 +40,7 @@ module HHVM
             warning = doc.document.create_element(
               'h1',
               text,
-              style: 'color: red',
+              :class => "warning",
             )
             node.replace(warning)
             next
@@ -79,7 +79,7 @@ module HHVM
             warning = doc.document.create_element(
               'h1',
               text,
-              style: 'color: red',
+              :class => "warning",
             )
             code_node.after(warning).after(output_header)
           elsif File.exists? (full_path + ".hhconfig") # We have some include .php files that we don't want output for. Files that are test run have a .hhconfig
@@ -90,7 +90,7 @@ module HHVM
             warning = doc.document.create_element(
               'h1',
               text,
-              style: 'color: red',
+              :class => "warning",
             )
             code_node.after(warning).after(output_header)
           end
