@@ -3,28 +3,21 @@
 namespace HHVM\UserDocumentation;
 
 final class SearchResultSet {
-  private Map<string, string> $classes = Map {};
-  private Map<string, string> $functions = Map {};
-  private Map<string, string> $interfaces = Map {};
-  private Map<string, string> $traits = Map {};
-  private Map<string, string> $hhvm_guides = Map {};
-  private Map<string, string> $hack_guides = Map {};
+  private Map<APIDefinitionType, Map<string, APIIndexEntry>> $apiDefs = Map { };
+  private Map<string, string> $hhvmGuides = Map {};
+  private Map<string, string> $hackGuides = Map {};
 
-  public function addAPIResult(APIDefinitionType $type, string $name): void {
-    switch ($type) {
-      case APIDefinitionType::TRAIT_DEF:
-        $this->traits[$name] = sprintf("/hack/reference/trait/%s/", $name);
-        break;
-      case APIDefinitionType::INTERFACE_DEF:
-        $this->interfaces[$name] = sprintf("/hack/reference/interface/%s/", $name);
-        break;
-      case APIDefinitionType::FUNCTION_DEF:
-        $this->functions[$name] = sprintf("/hack/reference/function/%s/", $name);
-        break;
-      case APIDefinitionType::CLASS_DEF:
-        $this->classes[$name] = sprintf("/hack/reference/class/%s/", $name);
-        break;
+  public function __construct() {
+    foreach (APIDefinitionType::getValues() as $type) {
+      $this->apiDefs[$type] = Map { };
     }
+  }
+
+  public function addAPIResult(
+    APIDefinitionType $type,
+    APIIndexEntry $entry,
+  ): void {
+    $this->apiDefs[$type][$entry['name']] = $entry;
   }
 
   public function addGuideResult(
@@ -34,35 +27,53 @@ final class SearchResultSet {
   ): void {
     switch ($type) {
       case GuidesProduct::HHVM:
-        $this->hhvm_guides[ucwords("{$category} {$name}")] = "/hhvm/{$category}/{$name}";
+        $this->hhvmGuides[ucwords("{$category} {$name}")] = "/hhvm/{$category}/{$name}";
         break;
       case GuidesProduct::HACK:
-        $this->hack_guides[ucwords("{$category} {$name}")] = "/hack/{$category}/{$name}";
+        $this->hackGuides[ucwords("{$category} {$name}")] = "/hack/{$category}/{$name}";
         break;
     }
   }
 
+  public function addAll(SearchResultSet $other): this {
+    foreach (APIDefinitionType::getValues() as $type) {
+      $this->apiDefs[$type]->setAll($other->apiDefs[$type]);
+    }
+    $this->hhvmGuides->setAll($other->hhvmGuides);
+    $this->hackGuides->setAll($other->hackGuides);
+
+    return $this;
+  }
+
   public function getClasses(): Map<string, string> {
-    return $this->classes;
+    return $this->apiDefs[APIDefinitionType::CLASS_DEF]->map(
+      $entry ==> $entry['urlPath'],
+    );
   }
 
   public function getTraits(): Map<string, string> {
-    return $this->traits;
+    return $this->apiDefs[APIDefinitionType::TRAIT_DEF]->map(
+      $entry ==> $entry['urlPath'],
+    );
   }
 
   public function getInterfaces(): Map<string, string> {
-    return $this->interfaces;
+    return $this->apiDefs[APIDefinitionType::INTERFACE_DEF]->map(
+      $entry ==> $entry['urlPath'],
+    );
   }
 
   public function getFunctions(): Map<string, string> {
-    return $this->functions;
+    return $this->apiDefs[APIDefinitionType::FUNCTION_DEF]->map(
+      $entry ==> $entry['urlPath'],
+    );
   }
 
   public function getHackGuides(): Map<string, string> {
-    return $this->hack_guides;
+    return $this->hackGuides;
   }
 
   public function getHHVMGuides(): Map<string, string> {
-    return $this->hhvm_guides;
+    return $this->hhvmGuides;
   }
 }

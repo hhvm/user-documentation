@@ -34,26 +34,31 @@ class APIIndex {
 
   public static function search(
     string $term,
-    SearchResultSet $results,
   ): SearchResultSet {
+    $results = new SearchResultSet();
     foreach (APIDefinitionType::getValues() as $type) {
-      self::searchEntries($term, $results, $type);
+      $results->addAll(
+        self::searchEntries($term, $type)
+      );
     }
     return $results;
   }
 
   private static function searchEntries (
     string $term,
-    SearchResultSet $results,
     APIDefinitionType $type,
-  ): void {
+  ): SearchResultSet {
+    $results = new SearchResultSet();
+
     $entries = self::getIndexForType($type);
     foreach ($entries as $_ => $entry) {
       $name = $entry['name'];
       if (stripos($name, $term) !== false) {
-        $results->addAPIResult($type, $name);
+        $results->addAPIResult($type, $entry);
       }
     }
+
+    return $results;
   }
 
   public static function getDataForFunction(

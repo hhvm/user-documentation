@@ -61,9 +61,9 @@ final class SearchController extends WebPageController {
   }
 
   private function getSearchResults(): SearchResultSet {
-    $results = new SearchResultSet();
-    $results = APIIndex::search($this->getSearchTerm(), $results);
-    $results = GuidesIndex::search($this->getSearchTerm(), $results);
-    return $results;
+    return ((new SearchResultSet())
+      ->addAll(APIIndex::search($this->getSearchTerm()))
+      ->addAll(GuidesIndex::search($this->getSearchTerm()))
+    );
   }
 }
