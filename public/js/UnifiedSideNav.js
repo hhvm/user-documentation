@@ -15,7 +15,7 @@ var DocNav = React.createClass({displayName: "DocNav",
     var navList = document.getElementsByClassName('navList')[0];
     var id = this.props.activePath.join('/');
     if (id !== '') {
-      navList.scrollTop = 
+      navList.scrollTop =
        document.getElementById(id).offsetTop - 10;
     }
     window.removeEventListener(transEndEventName, this.handleScrollToActive, false);
@@ -38,16 +38,16 @@ var DocNav = React.createClass({displayName: "DocNav",
     }
     var navClass = 'navToggle navToggle'+this.state.toggleActive;
     var toggleClass = 'toggleNav toggleNav'+this.state.toggleActive;
-    
+
     return (
-      React.createElement("div", {className: navClass}, 
-        React.createElement("div", 
+      React.createElement("div", {className: navClass},
+        React.createElement("div",
           {className: toggleClass, onClick: this.handleSlide},
           React.createElement("i", {className: "fa fa-th-list"})
         ),
         React.createElement(
-          "ul", 
-          {className: 'navList '+this.props.extraNavListClass}, 
+          "ul",
+          {className: 'navList '+this.props.extraNavListClass},
           navChildren
         )
       )
@@ -64,7 +64,7 @@ var DocNav = React.createClass({displayName: "DocNav",
   },
   renderNavGroup: function(groupName) {
     var group = this.props.data[groupName];
-        
+
     var groupClass = 'navGroup';
     if (groupName === this.activeGroup()) {
       groupClass += ' navGroupActive';
@@ -83,10 +83,10 @@ var DocNav = React.createClass({displayName: "DocNav",
     }
 
     return (
-      React.createElement("li", {className: groupClass, key: groupName}, 
-        React.createElement("h4", {id: groupName}, 
+      React.createElement("li", {className: groupClass, key: groupName},
+        React.createElement("h4", {id: groupName},
           React.createElement("a", {className: 'navItem', href: groupHref}, groupName)
-        ), 
+        ),
         navGroupChildren.length > 0
           ? React.createElement("ul", {className: 'subList'}, navGroupChildren)
           : null
@@ -115,14 +115,14 @@ var DocNav = React.createClass({displayName: "DocNav",
     }
     return (
       React.createElement("li", {
-          className: itemClass, 
-          key: itemName, 
+          className: itemClass,
+          key: itemName,
           id: itemID
-        },       
-        React.createElement("h5", null, 
+        },
+        React.createElement("h5", null,
           React.createElement("a", {className: 'navItem', href: itemHref}, itemName)
-        ), 
-        React.createElement("ul", {className: 'secondLevelList'}, 
+        ),
+        React.createElement("ul", {className: 'secondLevelList'},
           navItemChildren
         )
       )
@@ -146,11 +146,11 @@ var DocNav = React.createClass({displayName: "DocNav",
 
     return (
       React.createElement("li", {
-          className: itemClass, 
-          key: itemName, 
+          className: itemClass,
+          key: itemName,
           id: itemID
-        },       
-        React.createElement("h6", null, 
+        },
+        React.createElement("h6", null,
           React.createElement("a", {className: 'navItem', href: itemHref}, itemName)
         )
       )

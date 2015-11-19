@@ -16,9 +16,9 @@ abstract class WebPageController extends WebController {
       $this->getTitle(),
       $this->getContentPane()
     );
-    
+
     $extra_class = $this->getExtraBodyClass();
-    
+
     $body_class = $this->getBodyClass($extra_class);
 
     $xhp =
@@ -39,12 +39,12 @@ abstract class WebPageController extends WebController {
             <static:stylesheet
               path="/css/syntax-highlighting.css"
             />
-            <link 
-	           rel="stylesheet" 
-             type="text/css" 
+            <link
+             rel="stylesheet"
+             type="text/css"
              href="//cdn.jsdelivr.net/font-hack/2.015/css/hack-extended.min.css"
             />
-            <link 
+            <link
               rel="stylesheet"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
             />
@@ -79,7 +79,7 @@ abstract class WebPageController extends WebController {
       </div>
     );
   }
-  
+
   private function getBodyClass(?string $extra_class): string {
     $class = 'bodyClass'.ucwords($this->getOptionalStringParam('product'));
     if ($extra_class !== null) {
@@ -87,9 +87,9 @@ abstract class WebPageController extends WebController {
     }
     return $class;
   }
-  
+
   private function getTitleContent(string $title): XHPRoot {
-    $title_class = 
+    $title_class =
       "mainTitle mainTitle".$this->getOptionalStringParam('product');
     return
       <div class={$title_class}>
@@ -98,19 +98,19 @@ abstract class WebPageController extends WebController {
         </div>
       </div>;
   }
-  
+
   protected function getSideNav(): XHPRoot {
     return <x:frag />;
   }
-  
+
   protected function getBreadcrumbs(): XHPRoot {
     return <x:frag />;
   }
-  
+
   protected function getHeader(): XHPRoot {
-    $header_class = 
+    $header_class =
       "header headerType".$this->getOptionalStringParam('product');
-    return 
+    return
       <div class={$header_class}>
         <div class="widthWrapper">
           <div class="headerLogo hackLogo">
