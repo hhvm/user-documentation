@@ -3,26 +3,21 @@
 namespace HHVM\UserDocumentation;
 
 final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
-  const string SOURCE_ROOT = __DIR__.'/../../guides';
+  const string SOURCE_ROOT = BuildPaths::GUIDES_MARKDOWN;
   const string BUILD_ROOT = BuildPaths::GUIDES_HTML;
 
   public function buildAll(): void {
     Log::i("\nGuidesHTMLBuild");
-    $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
+    $sources = (
+      self::findSources(self::SOURCE_ROOT, Set{'md'})
       ->filter($path ==> basename($path) !== 'README.md')
       ->filter($path ==> strpos($path, '99-api-examples') === false)
-      ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
+    );
     sort($sources);
 
     $list = $this->renderFiles($sources);
 
-    Log::i("\nCreating index");
-    $index = $this->createIndex($list);
-    file_put_contents(
-      BuildPaths::GUIDES_INDEX,
-      '<?hh return '.var_export($index, true).";",
-    );
-
+    Log::i("\nCreating summaries");
     $summaries = self::findSources(self::SOURCE_ROOT, Set{'txt'})
       ->filter($path ==> strpos($path, '-summary') !== false)
       ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
@@ -32,30 +27,6 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
       BuildPaths::GUIDES_SUMMARY,
       '<?hh return '.var_export($summary_index, true).";",
     );
-  }
-
-  private function createIndex(
-    Iterable<string> $list,
-  ): Map<string, Map<string, Map<string, string>>> {
-    $out = Map { };
-    foreach ($list as $path) {
-      $path = str_replace(BuildPaths::GUIDES_HTML.'/', '', $path);
-      $parts = explode('/', $path);
-      if (count($parts) !== 3) {
-        continue;
-      }
-
-      list($product, $section, $page) = $parts;
-      $page = basename($page, '.html');
-      if (!$out->contains($product)) {
-        $out[$product] = Map {};
-      }
-      if (!$out[$product]->contains($section)) {
-        $out[$product][$section] = Map { };
-      }
-      $out[$product][$section][$page] = $path;
-    }
-    return $out;
   }
 
   private function createSummaryIndex(

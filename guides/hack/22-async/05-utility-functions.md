@@ -5,7 +5,7 @@ Async can be used effectively with the built-in infrastructure in HHVM. This inf
 * `async`, `await`, `Awaitable`
 * `HH\Asio\v()`, `HH\Asio\m()`
 
-However, there are cases when you want to convert some collection of values to awaitables or you want to filter some awaitables out of a collection of awaitables. These type of scenarios come up when you are creating multiple awaitables to await in parallel. 
+However, there are cases when you want to convert some collection of values to awaitables or you want to filter some awaitables out of a collection of awaitables. These types of scenarios come up when you are creating multiple awaitables to await in parallel. 
 
 You can use functions like `array_filter()`, or the methods on the Hack collection classes, etc. to do this mapping and filtering. However, there is a set of utility functions, specifically created for async, that will make your code more streamlined. 
 
@@ -62,15 +62,12 @@ Let's say you have the following:
 
 ```
 function baz(): Awaitable<(X, int)> {
-:
-:
   list ($a, $b) = 
     await \HH\Asio\v(array(
       returns_an_X($foo), 
       returns_an_int($bar),
     ));
-:
-:
+
   return tuple($a, $b);
 }
 ```
@@ -83,7 +80,7 @@ example.php:60:12,44: Invalid return type (Typing[4110])
   example.php:25:61,63: It is incompatible with an int
 ```
 
-That is because `HH\Asio\v()` takes an `Traversable<Awaitable<T>>` and returns an `Awaitable<Vector<T>>`. There is no `T` that can be both an `X` and an `int`. So the type checker basically throws its hands up and creates a some sort of union type for `T` that tries to represent both of those.
+That is because `HH\Asio\v()` takes a `Traversable<Awaitable<T>>` and returns an `Awaitable<Vector<T>>`. There is no `T` that can be both an `X` and an `int`. So the type checker basically throws its hands up and creates some sort of union type for `T` that tries to represent both of those.
 
 However, when you want to return the `tuple($a, $b)`, `$a` is an `X`, `b` is an `int`, but the type-checker doesn't realize that since it thinks these should be the hybrid union type it created above.
 

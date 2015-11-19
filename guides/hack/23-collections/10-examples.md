@@ -4,13 +4,13 @@ The following are various examples on how to use Hack collections.
 
 ## Simple Vector Usage
 
-The following example shows you a simple example on how to create, query, add items to and remove items from a `Vector`.
+This simple example shows you how to create, query, add items to and remove items from a `Vector`.
 
 @@ examples-examples/vector.php @@
 
 ## Simple Map Usage
 
-The following example shows you a simple example on how to create, query, add items to and remove items from a `Map`.
+This simple example shows you how to create, query, add items to and remove items from a `Map`.
 
 @@ examples-examples/map.php.type-errors @@
 
@@ -20,16 +20,15 @@ The following example shows you a simple example on how to create, query, add it
 
 @@ examples-examples/filter-method.php @@
 
-Note that we are using a [lambda](../../lambdas/introduction.md) to create the filtering operation. We could have also use a normal closure as well.
+Note that we are using a [lambda](../../lambdas/introduction.md) to create the filtering operation. We could have also used a normal closure as well.
 
 ## Using `map()`
 
-`map()` allows you to create a collection that has the same elements as the collection on which `map()` is called, but with some operation applied to 
-each element.
+`map()` allows you to create a collection that has the same elements as the collection on which `map()` is called, but with some operation applied to each element.
 
 @@ examples-examples/map-method.php @@
 
-Note that we are using a [lambda](../../lambdas/introduction.md) to create the mapping operation. We could have also use a normal closure as well.
+Note that we are using a [lambda](../../lambdas/introduction.md) to create the mapping operation. We could have also used a normal closure as well.
 
 ## Reference Semantics
 
@@ -41,7 +40,7 @@ Hack collections have [reference semantics](./semantics.md#reference-semantics) 
 
 Hack collections provide a Scala-like *view* with the `lazy()` method. Normally, when you create an instance of a collection, you are creating a *strict* version of the collection. So, when you create a collection that contains one million elements, memory is allocated for all one million of those elements immediately. However, with a *view* via `lazy()`, you can create a *non-strict* collection such that when you use a method like `map()` or `filter()` on the collection (i.e., a transformer method), the elements are only calculated when they are accessed.
 
-This example shows you how to use `lazy()` on a rather large collection and the time for both a *strict* and *non-strict* version of the collection. Since we are only needing 5 of the elements in the end, the lazy view actually allows us to go stop after we met our required 5 without having to actually allocate all 10000000 elements a priori.
+This example shows you how to use `lazy()` on a rather large collection and the time for both a *strict* and *non-strict* version of the collection. Since we only need 5 of the elements in the end, the lazy view actually allows us to stop after we meet our required 5 without having to actually allocate all 10000000 elements up front.
 
 @@ examples-examples/lazy.php @@
 
@@ -53,7 +52,7 @@ This example shows you how to use `lazy()` on a rather large collection and the 
 
 ## Creating a New Collection
 
-The current [concrete](./04-classes.md) collection classes are marked as final. That is, they cannot be directly extended and sub-classed. However, you can create new collection classes by using the [interfaces](./03-interfaces.md) provided. This example won't create a full-blown new collection since so many methods would have to be implemented from [`Iterable<T>`](./semantics.md#core-interfaces) with much more scrutiny and detail than what is presented here.
+The current [concrete](./classes.md) collection classes are marked as final. That is, they cannot be directly extended and sub-classed. However, you can create new collection classes by using the [interfaces](./interfaces.md) provided. This example won't create a full-blown new collection since so many methods would have to be implemented from [`Iterable<T>`](./semantics.md#core-interfaces) with much more scrutiny and detail than what is presented here.
 
 However, this example does show all the methods that would have to be implemented if you wanted to create a new set collection.
 

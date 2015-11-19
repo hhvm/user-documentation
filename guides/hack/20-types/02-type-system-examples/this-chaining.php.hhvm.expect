@@ -1,0 +1,10 @@
+object(Hack\UserDocumentation\Types\TypeSystem\Examples\ThisChaining\Hybrid)#1 (4) {
+  ["pluggable":"Hack\UserDocumentation\Types\TypeSystem\Examples\ThisChaining\Hybrid":private]=>
+  bool(true)
+  ["autoTransmission":"Hack\UserDocumentation\Types\TypeSystem\Examples\ThisChaining\Car":private]=>
+  bool(true)
+  ["numWheels":"Hack\UserDocumentation\Types\TypeSystem\Examples\ThisChaining\Vehicle":private]=>
+  int(4)
+  ["make":"Hack\UserDocumentation\Types\TypeSystem\Examples\ThisChaining\Vehicle":private]=>
+  string(5) "Tesla"
+}

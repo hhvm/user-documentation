@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace HHVM\UserDocumentation;
 
@@ -14,7 +14,7 @@ final class FunctionMarkdownBuilder {
   protected ?DocBlock $docblock;
 
   public function __construct(
-      ?string $file = null,
+      string $file,
       ?FunctionDocumentation $method = null,
       private ?string $class = null,
       ) {
@@ -108,7 +108,7 @@ final class FunctionMarkdownBuilder {
   }
 
   private function getReturnValues(): ?string {
-    $tags = $this->getTagsByName('return', ReturnTag::class);
+    $tags = $this->getTypedTagsByName('return', ReturnTag::class);
     if (!$tags) {
       return null;
     }
@@ -192,7 +192,7 @@ final class FunctionMarkdownBuilder {
   }
 
   private function getParamTags(): Map<string, ParamTag> {
-    $tags_vec = $this->getTagsByName('param', ParamTag::class);
+    $tags_vec = $this->getTypedTagsByName('param', ParamTag::class);
     $tags = Map { };
     foreach ($tags_vec as $tag) {
       $tags[$tag->getVariableName()] = $tag;

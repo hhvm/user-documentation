@@ -43,17 +43,21 @@ public int $x;
 A class in Hack can be marked both `abstract` and `final`. This means the class can only have static methods and properties, and no constructor. A property is annotated with `static`, in addition to the data type.
 
 ```
-abstrct final class X {
+abstract final class X {
   public static array<int> $a = array();
 }
 ```
 
 ### Abstract class constants
 
-In addition to typing properties with their data type, you can also declare constants abstract in an abstract class
+In addition to typing properties with their data type, you can also declare constants abstract in an abstract class or interface.
 
 ```
 interface I {
+  abstract const int MY_CONST;
+}
+
+abstract class Y {
   abstract const int MY_CONST;
 }
 ```

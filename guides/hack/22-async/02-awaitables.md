@@ -10,7 +10,7 @@ The type returned from an async function is `Awatiable<T>`, where `T` is the fin
 
 ```
 async function foo(): Awaitable<int> {...}
-:
+
 $x = foo(); // $x will be an Awaitable<int>
 $x = await foo(); // $x will be an int
 ```
@@ -42,7 +42,7 @@ Here we are using one of the two built-in async helper functions in the `HH\Asio
 
 Sometimes you want to get a result out of an awaitable when the function you are in **is not** `async`. For this there is `HH\Asio\join()`. Pass an `Awaitable` to `join()`.
 
-Note: that global function calls (e.g., `main()`) require a join if that function is `async`). For example:
+Note: that global function calls (e.g., `main()`) require a join if that function is `async`. For example:
 
 ```
 HH\Asio\join(main());
@@ -50,4 +50,4 @@ HH\Asio\join(main());
 
 @@ awaitables-examples/join.php @@
 
-You should not call `join()` inside an `async` function. This would defeat the purpose of `async` as the the awaitable and any dependencies will run to completion synchronously, stopping any other awaitables in their tracks from running. Just `await` in an `async` function.
+You should not call `join()` inside an `async` function. This would defeat the purpose of `async` as the awaitable and any dependencies will run to completion synchronously, stopping any other awaitables in their tracks from running. Just `await` in an `async` function.

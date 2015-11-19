@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace HHVM\UserDocumentation;
 
@@ -106,15 +106,10 @@ EOF;
   private function getContents(): string {
     $md = "### Interface synopsis\n";
     $methods = $this->yaml['data']['methods'];
-    sort($methods);
 
     foreach ($methods as $method) {
-      $method_url = sprintf(
-        "/hack/reference/%s/%s/%s/",
-        $this->yaml['type'],
-        str_replace('\\', '.', $this->yaml['data']['name']),
-        $method['name'],
-      );
+      $method_url = URLBuilder::getPathForMethod($method);
+
       if ($method['static']) {
         $prefix = '::';
       } else {
@@ -122,8 +117,9 @@ EOF;
       }
       $md .=
         ' * [`'.$prefix.self::nameFromData($method).'`]('. $method_url .")";
-      if ($method['docComment'] !== null) {
-        $desc = (new DocBlock($method['docComment']))->getShortDescription();
+      $comment = $method['docComment'];
+      if ($comment !== null) {
+        $desc = (new DocBlock($comment))->getShortDescription();
         if ($desc !== "") {
           $md .= ': ' . $desc;
         }

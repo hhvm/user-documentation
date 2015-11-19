@@ -1,0 +1,1 @@
+Bundle together values of possibly different types.

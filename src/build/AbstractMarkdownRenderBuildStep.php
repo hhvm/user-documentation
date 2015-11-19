@@ -6,7 +6,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   abstract const string SOURCE_ROOT;
   abstract const string BUILD_ROOT;
 
-  const string RENDERER = __DIR__.'/../../md-render/render.rb';
+  const string RENDERER = LocalConfig::ROOT.'/md-render/render.rb';
   const int MAX_JOBS = 20;
 
   protected function renderFiles(Vector<string> $files): Vector<string> {
@@ -14,9 +14,8 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     $ret = Vector { };
     $jobs = Map { };
 
-    foreach ($files as $source) {
-      $input = realpath(static::SOURCE_ROOT.'/'.$source);
-      $output = self::getOutputFileName($source);
+    foreach ($files as $input) {
+      $output = self::getOutputFileName($input);
       $jobs[$input] = $output;
     }
 
@@ -74,14 +73,20 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   }
 
   public static function getOutputFileName(string $input): string {
+    $input = str_replace(static::SOURCE_ROOT.'/', '', $input);
     $parts = (new Vector(explode('/', $input)))
       ->map(
         $part ==> preg_match('/^[0-9]{2}-/', $part) ? substr($part, 3) : $part
       );
 
     $output = implode('/', $parts);
-    $output = dirname($output).'/'.basename($output, '.md').'.html';
-    $output = static::BUILD_ROOT.'/'.$output;
+
+    $dir = dirname($output);
+    $output =
+      static::BUILD_ROOT.'/'.
+      ($dir === '.' ? '' : $dir.'/').
+      basename($output, '.md').
+      '.html';
 
     $output_dir = dirname($output);
     if (!is_dir($output_dir)) {

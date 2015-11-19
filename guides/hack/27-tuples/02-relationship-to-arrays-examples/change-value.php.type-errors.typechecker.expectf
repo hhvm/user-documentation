@@ -1,0 +1,6 @@
+File "%schange-value.php", line 11, characters 3-13:
+Invalid assignment (Typing[4110])
+File "%schange-value.php", line 6, characters 18-22:
+This is a string
+File "%schange-value.php", line 11, characters 11-13:
+It is incompatible with an int

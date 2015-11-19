@@ -53,11 +53,11 @@ There are seven collections in Hack:
 Type | Description
 -----|------------
 **Vector** | Mutable, `int`eger-indexed, ordered sequence of values. Values can be of any type. The indicies start at `0` and end at `n-1`, where `n` is the number of elements.
-**ImmVector** | A immutable version of `Vector`. Once the `ImmVector` is created, elements cannot be changed, removed or added.
+**ImmVector** | An immutable version of `Vector`. Once the `ImmVector` is created, elements cannot be changed, removed or added.
 **Map** | Mutable, `string` or `int`eger-indexed, ordered sequence of values. Values can be of any type. Order is remembered. This is most similar to the `array` in usage.
-**ImmMap** | A immutable version of `Map`. Once the `ImmMap` is created, elements cannot be changed, removed or added.
+**ImmMap** | An immutable version of `Map`. Once the `ImmMap` is created, elements cannot be changed, removed or added.
 **Set** | Mutable, ordered set of unique values. The values can be only `int` or `string`. There are no keys in a `Set`.
-**ImmSet** | A immutable version of `Set`. Once the `SetMap` is created, elements cannot be changed, removed or added.
+**ImmSet** | An immutable version of `Set`. Once the `SetMap` is created, elements cannot be changed, removed or added.
 **Pair** | An immutable sequence of exactly two values. The keys are `0` and `1`. They are similar to [tuples](../types/type-system.md), but less flexible.
 
 ## Most Commonly Used Hack Collections

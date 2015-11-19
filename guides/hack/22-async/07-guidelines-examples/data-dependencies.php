@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Async\Guidelines\Examples\DataDependencies;
 
 // So we can use asio-utilities function vm()
-require __DIR__ . "/../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/autoload.php";
 
 class PostData {
   // using constructor argument promotion

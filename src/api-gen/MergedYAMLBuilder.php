@@ -33,8 +33,17 @@ final class MergedYAMLBuilder {
     foreach ($this->definitions as $def) {
       // UNSAFE ($def['data']['methods'] is not defined on the shape)
       if ($methods = idx($def['data'], 'methods')) {
-        $def['data']['methods'] =
-          $this->removePrivateMethods(/*UNSAFE_EXPR*/ $methods);
+        $methods = $this->removePrivateMethods(/*UNSAFE_EXPR*/ $methods);
+        foreach ($methods as $k => $method) {
+          $method['className'] = $def['data']['name'];
+          $methods[$k] = $method;
+        }
+        usort(
+          $methods,
+          // ($a, $b) ==> $a['name'] <=> $b['name'], - SOON :D
+          ($a, $b) ==> strcmp($a['name'], $b['name']),
+        );
+        $def['data']['methods'] = $methods;
       }
       $writer->write($def);
     }

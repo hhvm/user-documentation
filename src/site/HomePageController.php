@@ -1,17 +1,14 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\GuidesIndex;
+use HHVM\UserDocumentation\GuidesProduct;
 
 final class HomePageController extends WebPageController {
   public async function getTitle(): Awaitable<string> {
     return 'HHVM and Hack Documentation';
   }
   
-  public function getExtraBodyClass(): ?string {
-    return null;
-  }
-  
-  protected function getInnerContent(string $product): XHPRoot {
+  protected function getInnerContent(GuidesProduct $product): XHPRoot {
     $guides = GuidesIndex::getGuides($product);
 
     $root = <ul class="guideList" />;
@@ -55,7 +52,7 @@ final class HomePageController extends WebPageController {
         <div class="guideListWrapper">
           <h2 class="listTitle">Hack</h2>
           <h3 class="listTitle">Learn</h3>
-          {$this->getInnerContent('hack')}
+          {$this->getInnerContent(GuidesProduct::HACK)}
           <h3 class="listTitle">
             <a href="/hack/reference/">Hack API Reference</a>
           </h3> 
@@ -64,7 +61,7 @@ final class HomePageController extends WebPageController {
         <div class="guideListWrapper">
           <h2 class="listTitle">HHVM</h2>
           <h3 class="listTitle">Learn</h3>
-          {$this->getInnerContent('hhvm')}
+          {$this->getInnerContent(GuidesProduct::HHVM)}
         </div>
       </x:frag>;
   }

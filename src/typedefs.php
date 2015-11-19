@@ -20,7 +20,12 @@ enum MemberVisibility: string {
   PUBLIC = 'public';
 };
 
-enum APIDefinitionType: string {
+enum GuidesProduct: string as string {
+  HHVM = 'hhvm';
+  HACK = 'hack';
+}
+
+enum APIDefinitionType: string as string {
   CLASS_DEF = 'class';
   TRAIT_DEF = 'trait';
   INTERFACE_DEF = 'interface';
@@ -57,7 +62,8 @@ type FunctionYAML = shape(
 
 type ClassDocumentation = shape(
   'name' => string,
-  'methods' => array<FunctionDocumentation>,
+  'type' => APIDefinitionType,
+  'methods' => array<MethodDocumentation>,
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
   'parent' => ?TypehintDocumentation,
@@ -89,8 +95,22 @@ type FunctionDocumentation = shape(
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
   'parameters' => array<ParameterDocumentation>,
+  'className' => ?string,
+  'classType' => ?APIDefinitionType,
   'visibility' => ?MemberVisibility,
   'static' => ?bool,
+);
+
+type MethodDocumentation = shape(
+  'name' => string,
+  'returnType' => ?TypehintDocumentation,
+  'generics' => array<GenericDocumentation>,
+  'docComment' => ?string,
+  'parameters' => array<ParameterDocumentation>,
+  'className' => string,
+  'classType' => APIDefinitionType,
+  'visibility' => MemberVisibility,
+  'static' => bool,
 );
 
 type DocumentationIndexEntry = shape(
@@ -103,14 +123,54 @@ type DocumentationIndex = shape(
   'types' => array<string,DocumentationIndexEntry>,
 );
 
+type APIIndexEntry = shape(
+  'name' => string,
+  'htmlPath' => string,
+  'urlPath' => string,
+);
+
+type APIFunctionIndexEntry = shape(
+  'name' => string,
+  'htmlPath' => string,
+  'urlPath' => string,
+);
+
+type APIMethodIndexEntry = shape(
+  'name' => string,
+  'className' => string,
+  'classType' => APIDefinitionType,
+  'htmlPath' => string,
+  'urlPath' => string,
+);
+
 type APIClassIndexEntry = shape(
-  'path' => string,
-  'methods' => array<string, string>,
+  'type' => APIDefinitionType,
+  'name' => string,
+  'htmlPath' => string,
+  'urlPath' => string,
+  'methods' => array<string, APIMethodIndexEntry>,
 );
 
 type APIIndexShape = shape(
   'class' => array<string, APIClassIndexEntry>,
   'interface' => array<string, APIClassIndexEntry>,
   'trait' => array<string, APIClassIndexEntry>,
-  'function' => array<string, APIClassIndexEntry>,
+  'function' => array<string, APIFunctionIndexEntry>,
+);
+
+type StaticResourceMapEntry = shape(
+  'localPath' => string,
+  'checksum' => string,
+  'mtime' => int,
+  'mimeType' => string,
+);
+
+type NavDataNode = shape(
+  'urlPath' => string,
+  /*
+   * This is actually array<string, NavDataNode> but recursive shapes aren't
+   * allowed. Given we only read this from JS, not a big deal, just be careful
+   * writing it.
+   */
+  'children' => array<string, mixed>,
 );

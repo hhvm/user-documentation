@@ -1,11 +1,15 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\BuildPaths;
+use Psr\Http\Message\ServerRequestInterface;
 
 abstract class WebPageController extends WebController {
   public abstract function getTitle(): Awaitable<string>;
-  public abstract function getExtraBodyClass(): ?string;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
+
+  protected function getExtraBodyClass(): ?string {
+    return null;
+  }
 
   final public async function respond(): Awaitable<void> {
     list($title, $content) = await \HH\Asio\va2(
@@ -28,11 +32,12 @@ abstract class WebPageController extends WebController {
             <x:comment>
               Build ID: {file_get_contents(BuildPaths::BUILD_ID)}
             </x:comment>
-            <link 
-              rel="stylesheet" 
-              type="text/css" 
-              media="screen" 
-              href="/main.css"
+            <static:stylesheet
+              path="/css/main.css"
+              media="screen"
+            />
+            <static:stylesheet
+              path="/css/syntax-highlighting.css"
             />
             <link 
               rel="stylesheet" 
@@ -48,8 +53,8 @@ abstract class WebPageController extends WebController {
               rel="stylesheet"
               href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
             />
-            <script src="https://fb.me/react-0.14.2.min.js"></script>
-            <script src="https://fb.me/react-dom-0.14.2.min.js"></script>
+            <script src="https://fb.me/react-0.14.2.min.js" />
+            <script src="https://fb.me/react-dom-0.14.2.min.js" />
           </head>
           <body class={$body_class}>
             {$this->getHeader()}
@@ -152,4 +157,17 @@ abstract class WebPageController extends WebController {
       </div>;
   }
 
+  /* If you're reading this, you probably want to remove 'final' so that you
+   * can pull stuff out of $request or $parameters. Instead:
+   *
+   * - use getRequiredStringParam() and friends to get the data you need in a
+   *   safe and abstracted way
+   * - if there isn't an existing abstraction that fits your needs, add one
+   */
+  final public function __construct(
+    ImmMap<string,string> $parameters,
+    private ServerRequestInterface $request,
+  ) {
+    parent::__construct($parameters, $request);
+  }
 }
