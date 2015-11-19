@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-# Make relative file paths survive the chdir, which bundler needs :(
 require 'bundler/setup'
 require 'html/pipeline'
 
