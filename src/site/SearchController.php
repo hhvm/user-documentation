@@ -19,13 +19,13 @@ final class SearchController extends WebPageController {
 
   private function getListFromResultSet(Map<string, string> $result_set): XHPRoot {
     if (count($result_set) === 0) {
-        $list = <div><p><em>No Results Found</em></p></div>;
+      $list = <div><p><em>No Results Found</em></p></div>;
     } else {
-        $list = <ul />;
-        foreach ($result_set as $name => $path) {
-            $item = <li><a href={$path}>{$name}</a></li>;
-            $list->appendChild($item);
-        }
+      $list = <ul />;
+      foreach ($result_set as $name => $path) {
+        $item = <li><a href={$path}>{$name}</a></li>;
+        $list->appendChild($item);
+      }
     }
     return $list;
   }
@@ -53,7 +53,7 @@ final class SearchController extends WebPageController {
 
   private function getSearchTerm(): string {
     if ($this->term !== null) {
-        return $this->term;
+      return $this->term;
     }
 
     $this->term = $this->getRequiredStringParam('term');

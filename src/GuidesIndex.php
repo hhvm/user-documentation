@@ -28,18 +28,18 @@ class GuidesIndex {
   public static function search(string $term, SearchResultSet $results): SearchResultSet {
     $index = self::getIndex();
     foreach ($index as $type => $value) {
-        foreach ($value as $category => $entry) {
-            foreach ($entry as $name => $filepath) {
-                if (
-                    strtolower($category) === strtolower($term) ||
-                    strpos(strtolower($category), strtolower($term)) !== false ||
-                    strtolower($name) === strtolower($term) ||
-                    strpos(strtolower($name), strtolower($term)) !== false
-                ) {
-                    $results->addGuideResult($type, $category, $name);
-                }
-            }
+      foreach ($value as $category => $entry) {
+        foreach ($entry as $name => $filepath) {
+          if (
+              strtolower($category) === strtolower($term) ||
+              strpos(strtolower($category), strtolower($term)) !== false ||
+              strtolower($name) === strtolower($term) ||
+              strpos(strtolower($name), strtolower($term)) !== false
+             ) {
+            $results->addGuideResult($type, $category, $name);
+          }
         }
+      }
     }
     return $results;
   }
