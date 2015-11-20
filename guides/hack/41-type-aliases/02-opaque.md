@@ -1,6 +1,6 @@
 # Opaque Type Aliases
 
-An *opaque type alias* is created using `newtype`. Unlike with [transparent type aliases](./03-transparent.md), with care in organizing source code, the compiler can make sure that general-purpose code cannot access an opaque alias's underlying type directly.
+An *opaque type alias* is created using `newtype`. Unlike with [transparent type aliases](./transparent.md), with care in organizing source code, the compiler can make sure that general-purpose code cannot access an opaque alias's underlying type directly.
 
 ## Aliases without Type Constraints
 

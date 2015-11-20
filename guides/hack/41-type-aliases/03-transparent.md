@@ -13,7 +13,7 @@ If the compiler *never* distinguishes between a type alias name and the type to 
 
 Consider the case in which some type T is used throughout a lot of source modules. The decision is made to (eventually) hide that type's implementation from most higher-level code, but it is not possible to convert all the usage code at once; instead, it is to be done one module at a time. We can do this by defining a transparent type alias TTA for type T. Then new modules can be written that reference TTA, and existing modules can be changed to use TTA one at a time.
 
-Compare this kind of alias with [Opaque Type Aliases](./02-opaque.md).
+Compare this kind of alias with [Opaque Type Aliases](./opaque.md).
 
 @@ transparent-examples/transparent.php @@
 
