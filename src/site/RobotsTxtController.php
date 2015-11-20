@@ -14,7 +14,7 @@ final class RobotsTxtController extends WebController {
     } else {
       $source = self::DEFAULT_FILE;
     }
-
+    header('Content-type: text/plain');
     print file_get_contents($source);
   }
 }
