@@ -76,7 +76,6 @@ var DocNav = React.createClass({displayName: "DocNav",
       for (var itemName in group.children) {
         navGroupChildren.push(this.renderNavFirstLevelItem(
           groupName,
-          itemName,
           group.children[itemName]
         ));
       }
@@ -93,7 +92,8 @@ var DocNav = React.createClass({displayName: "DocNav",
       )
     );
   },
-  renderNavFirstLevelItem: function(groupName, itemName, item) {
+  renderNavFirstLevelItem: function(groupName, item) {
+    var itemName = item.name;
     var itemHref = item.urlPath;
     var itemClass = 'subListItem';
     var itemID = groupName+'/'+itemName;
@@ -108,7 +108,6 @@ var DocNav = React.createClass({displayName: "DocNav",
         this.renderNavSecondLevelItem(
           groupName,
           itemName,
-          childName,
           item.children[childName]
         )
       );
@@ -131,9 +130,9 @@ var DocNav = React.createClass({displayName: "DocNav",
   renderNavSecondLevelItem: function(
     groupName,
     parentName,
-    itemName,
     item
   ) {
+    var itemName = item.name;
     var itemHref = item.urlPath;
     var itemClass = 'secondLevelListItem';
     var itemID = groupName+'/'+parentName+'/'+itemName;
