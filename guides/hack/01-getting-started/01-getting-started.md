@@ -83,9 +83,12 @@ After you get your Hack program to typecheck clean with no errors, you can then 
 And here is the output:
 
 ```
-3 + -4i
--9 + 10i
--6 + 6i
+Daily diary of Jane
+Ate: Vegetable
+Eat time: 3 seconds
+Finished eating? false
+Moved 2 feet
+My day lasted: 5 seconds
 ```
 
 ## Learn More
