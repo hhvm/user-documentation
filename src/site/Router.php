@@ -24,7 +24,8 @@ class Router {
         => GuidePageController::class,
       '/manual/en/{legacy_id}.php'
         => APILegacyRedirectController::class,
-
+      '/robots.txt'
+        => RobotsTxtController::class,
       '/__content'
         => WebPageContentController::class,
       '/s/{checksum}{file:/.+}'
