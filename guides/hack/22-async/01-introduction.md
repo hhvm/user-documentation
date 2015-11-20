@@ -75,12 +75,12 @@ This execution order is the most likely, but not guaranteed; for example, if the
 
 The amount that async speeds up this example can vary greatly (eg depending on network conditions and DNS caching), but can be significant:
 
-*Non-Async*
+*Async*
 ```
 Total time taken: 0.74790596961975 seconds
 ```
 
-*Async*
+*Non-Async*
 ```
 Total time taken: 1.050155878067 seconds
 ```
