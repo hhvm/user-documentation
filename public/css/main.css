@@ -98,7 +98,7 @@ html, body {
     color: #505050;
     content: attr(data-heading);
     display: block;
-    font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
     float: left;
     height: 100%;
     text-transform: uppercase;
@@ -154,7 +154,7 @@ html, body {
   }
   .tableWrapper table tr th {
     color: #505050;
-    font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
+    font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
     text-transform: uppercase;
   }
 }
@@ -171,7 +171,7 @@ html, body {
 .paginationLinks .paginationLink a {
   border-top: 2px solid #fd8724;
   display: block;
-  font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 150%;
   font-weight: 400;
   padding: 10px;
@@ -209,10 +209,21 @@ html, body {
   color: white;
 }
 
+.headerElement {
+  bottom: 0px;
+  left: 110px;
+  line-height: 60px;
+  position: absolute;
+}
+
+.searchBar {
+  left: 250px;
+}
+
 body {
   background: #ffffff;
   color: #505050;
-  font: 500 14px/26px "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
+  font: 500 14px/26px "Open Sans", Arial, Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
   word-wrap: break-word;
 }
@@ -228,8 +239,8 @@ a {
 }
 
 h1, h2, h3, h4 {
-  font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
-  font-weight: 400;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
   line-height: 1.3em;
 }
 
@@ -361,12 +372,12 @@ h4 {
 }
 
 .apiList li h4 a {
-  font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
 }
 
-.headerLogo, .headerElement {
+.headerLogo {
   bottom: 0px;
   line-height: 60px;
   position: absolute;
@@ -375,10 +386,6 @@ h4 {
 
 .hhvmLogo {
   left: 110px;
-}
-
-.searchBar {
-  left: 250px;
 }
 
 .hackLogo {
@@ -405,9 +412,9 @@ h4 {
 .headerLogo a {
   color: white;
   display: block;
-  font-family: "Knockout 31 A", "Knockout 31 B", "Helvetica Neue", Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 25px;
-  font-weight: 400;
+  font-weight: 700;
   height: 100%;
   padding-left: 35px;
   position: relative;
@@ -619,7 +626,7 @@ h4 {
 }
 
 .navWrapper .navList li h4 {
-  font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 12px;
   text-transform: uppercase;
 }
@@ -647,7 +654,7 @@ h4 {
 }
 
 .navWrapper .navList.apiNavList .subListItem h5 a {
-  font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
   padding-bottom: 7.5px;
@@ -660,7 +667,7 @@ h4 {
 }
 
 .navWrapper .navList.apiNavList .secondLevelListItem h6 a {
-  font-family: "Whitney SSm A", "Whitney SSm B", Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 12px;
   font-weight: 400;
   padding-bottom: 7.5px;

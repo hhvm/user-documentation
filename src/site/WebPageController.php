@@ -39,6 +39,11 @@ abstract class WebPageController extends WebController {
             <static:stylesheet
               path="/css/syntax-highlighting.css"
             />
+            <link 
+              href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700" 
+              rel="stylesheet" 
+              type="text/css"
+            />
             <link
              rel="stylesheet"
              type="text/css"
