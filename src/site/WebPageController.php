@@ -63,6 +63,7 @@ abstract class WebPageController extends WebController {
           </body>
         </html>
       </x:doctype>;
+    $xhp->setContext('ServerRequestInterface', $this->request);
     $string = await $xhp->asyncToString();
     print($string);
   }
