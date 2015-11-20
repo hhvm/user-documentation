@@ -52,7 +52,7 @@ module HHVM
             language: 'Hack',
           );
           code_node = node.replace(code)
-          # If there the stopper file exists, we don't give the output. Use
+          # If the stopper file exists, we don't give the output. Use
           # case was in the Hack getting started guide where we were doing
           # a step by step tutorial of how to write and run code.
           if not (File.exists? (full_path + ".no.auto.output"))
