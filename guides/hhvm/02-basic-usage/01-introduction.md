@@ -1,5 +1,3 @@
-# Basic HHVM Usage
-
 After [installing](../installing/introduction.md), you are ready to start using HHVM.
 
 For a majority of cases, you will run HHVM in one of two different ways:

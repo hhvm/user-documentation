@@ -1,5 +1,3 @@
-# Type Constants Examples
-
 Here are some examples of where type constants may be useful when trying to decide whether to use them or [generics](../generics/introduction.md) type parameterization.
 
 ## Referencing Type Constants

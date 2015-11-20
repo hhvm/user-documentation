@@ -1,5 +1,3 @@
-# Admin Server
-
 The admin server allows the administrator of the HHVM server to query and control the HHVM server process. It is different and separate than the primary HHVM server that you specified with `-m server` or `-m daemon`.
 
 To turn on the admin server, you specify the following options at the command line via `-d` or within your `server.ini` (or equivalent).

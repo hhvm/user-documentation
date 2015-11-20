@@ -1,5 +1,3 @@
-# Refining Types
-
 Refining a type basically establishes that a value of one type is also of another type.
 
 Suppose you want to take a given type and refine that particular type to another, compatible type. Hack allows this through the use of three constructs in control-flow situations:

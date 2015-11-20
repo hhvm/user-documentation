@@ -1,5 +1,3 @@
-# The Hackificator
-
 While you should always start new projects with Hack (`<?hh`), we realize that there is a whole vast PHP codebase out there that cannot be thrown away or rewritten from scratch. 
 
 The Hackificator is the *first* tool to use to begin converting your PHP codebase to Hack. 

@@ -1,5 +1,3 @@
-# Generic Entities
-
 Generics can be used on many of the entities you are accustomed to in your programming with Hack, including classes, functions, methods, interfaces, type aliases and traits.
 
 ## Classes

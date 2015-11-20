@@ -1,5 +1,3 @@
-# Hack Collections vs. Arrays
-
 Hack collections and arrays are similar in some respects, with one generally being more specific than the other. There are also some differences as well.
 
 ## Choosing

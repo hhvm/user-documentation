@@ -1,5 +1,3 @@
-## What is XHP?
-
 XHP allows you to represent an HTML tree as Hack objects. In other words, it gives you type safe UI. 
 
 Compare the following:

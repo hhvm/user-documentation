@@ -1,5 +1,3 @@
-# The Hack Type System
-
 Describing types in Hack is largely done through explicit [annotations](annotations.md) in your Hack source code. Hack has a large list of possible annotation types. You can check out a summary of each of these types in our [table](summary-table.md).
 
 ## Common Primitives

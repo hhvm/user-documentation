@@ -1,5 +1,3 @@
-# Installing
-
 There are two ways to get the typechecker: automatically when you install HHVM or by compiling it.
 
 ## Installed with HHVM

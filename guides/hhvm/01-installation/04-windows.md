@@ -1,5 +1,3 @@
-# HHVM Windows Support
-
 There was a time when we were going down a path for HHVM building and installing via Cygwin. Technically, you can still try to build HHVM this way, but don't unless you want a lot of pain.
 
 So, right now, we have no official Windows support for HHVM. But there is **great news**....

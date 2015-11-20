@@ -1,5 +1,3 @@
-# Installing HHVM on Mac
-
 We currently have **experimental support** for HHVM installations on Mac OS X 10.10 and greater. We use [Homebrew](http://brew.sh/), with both an official formula and hand-install option. There is also a [Macports](https://www.macports.org/) option.
 
 We **reiterate** ... this support should work, but is experimental.

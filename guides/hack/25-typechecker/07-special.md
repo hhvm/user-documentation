@@ -1,5 +1,3 @@
-# Special Typechecker Markers
-
 There are times when you might want to just tell the typechecker to be quiet and move on. The most common case is when you know there is a typechecker error, you are not going to fix it for whatever reason, but you still want your code to be clean from typechecker errors when running `hh_client` ... e.g., you want the `No errors!` output.
 
 There are two ways to silence the typechecker. One is more action-focused than the other.

@@ -1,5 +1,3 @@
-# Typechecker Modes
-
 When you are writing type-checkable Hack code, a common idiom is to start your file with `<?hh` and start writing code. However, that one top line is actually quite important in how the typechecker interprets your code.
 
 ## Partial Mode

@@ -1,5 +1,3 @@
-# Type Annotations
-
 There are three (and only three) places where types can be explicitly annotated in Hack:
 
 - Function/method returns

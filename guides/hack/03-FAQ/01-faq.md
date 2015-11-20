@@ -1,5 +1,3 @@
-# Hack FAQ
-
 This will contain some helpful hints and frequently asked questions re: Hack. This is a living document and may be molded into something more user-interactive in the future.
 
 ## Async

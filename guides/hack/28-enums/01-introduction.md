@@ -1,5 +1,3 @@
-# Enums
-
 If you are familiar with enums (enumerations) in languages like C#, C++ or Java, then Hack enums will make you feel right at home. Enums encapsulate a group of related constants, unlike just using global or class constants. Enums actually create a new type, annotatable by name. 
 
 **NOTE**: At this point, Hack only supports `int` and `string` enums.

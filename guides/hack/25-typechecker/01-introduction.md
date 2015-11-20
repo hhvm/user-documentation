@@ -1,5 +1,3 @@
-# The Hack Typechecker
-
 The Hack typechecker is the primary tool that makes Hack such a unique language. Before run time, the typechecker analyzes all the code associated with your program for various typing errors, thus preventing nasty bugs that may only have been exposed at run time. 
 
 Without the typechecker, this simple example would fail at runtime.

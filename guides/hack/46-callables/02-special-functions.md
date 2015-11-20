@@ -1,5 +1,3 @@
-# Special Callable Functions
-
 In order to effectively use callables in Hack, there are some special functions that are part of the Hack library in order for the typechecker to correctly handle callables that are instance methods, static methods and functions.
 
 These functions signal to the typechecker to look up the appropriate parameter and return types of the function/method, and the typechecker treats the call to them as if they return a callable of the appropriate type.

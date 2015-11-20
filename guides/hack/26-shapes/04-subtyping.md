@@ -1,5 +1,3 @@
-# Shape Subtyping
-
 Consider two shape types having a common initial sequence of fields. For example:
 
 ```

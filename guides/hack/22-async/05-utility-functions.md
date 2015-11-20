@@ -1,5 +1,3 @@
-# Async Utility Functions
-
 Async can be used effectively with the built-in infrastructure in HHVM. This infrastructure includes:
 
 * `async`, `await`, `Awaitable`

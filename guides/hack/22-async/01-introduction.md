@@ -1,5 +1,3 @@
-# Async
-
 Hack provides a feature called **async** that provides your program the benefit of cooperative multi-tasking. It allows code that utilizes the async infrastructure to hide input/output (I/O) latency and data fetching. So, if you have code that has operations that involve some sort of waiting (e.g., network access, waiting for database queries), async minimizes the downtime your program has to be stalled because of it as the program will go do other things, most likely further I/O somewhere else.
 
 Async is **not multithreading** - HHVM still executes all of your PHP/Hack code in one main request thread - but other operations (eg MySQL queries) can now execute without taking up time in that thread that your code could be using.

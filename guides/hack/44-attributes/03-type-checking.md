@@ -1,5 +1,3 @@
-# Typechecking Attributes
-
 The type checker can check user attributes by their listing in the typechecker's `.hhconfig` file
 
 If you put the following line in your `.hhconfig` file:

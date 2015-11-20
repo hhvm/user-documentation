@@ -1,5 +1,3 @@
-# Introduction to Installing HHVM
-
 HHVM is officially supported on most major [linux platforms](./linux.md). There is experimental, hope-to-be official support on [Mac OS X 10.10](./mac.md). And work is being done to support [HHVM on Windows](./windows.md). 
 
 There is a [wiki of unsupported HHVM platforms](LINK HERE) as well.

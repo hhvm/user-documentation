@@ -1,5 +1,3 @@
-# Unresolved Types
-
 Imagine the following usage of a generic `Box` class
 
 @@ unresolved-examples/unresolved.php.type-errors @@

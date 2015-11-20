@@ -1,5 +1,3 @@
-# Examples
-
 Here you can find some more variants of lambda expressions.
 
 ## Parenthesis

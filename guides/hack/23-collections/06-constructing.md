@@ -1,5 +1,3 @@
-# Constructing Collections
-
 Using Hack collections is quite similar to using arrays. In fact, you can use Hack collections in regular `<?php` files given they are built directly into the HHVM runtime (the only caveat is that in `<?php` files, you have to prefix the collections with `HH\`). 
 
 Constructing a Hack collection can be done using `new` or what we call *literal syntax*. Both of these are essentially a hybrid of how you create arrays.

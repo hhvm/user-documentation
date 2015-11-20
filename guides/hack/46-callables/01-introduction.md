@@ -1,5 +1,3 @@
-# Callables
-
 The following is allowed in PHP:
 
 @@ introduction-examples/php-callable.php @@

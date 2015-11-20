@@ -1,5 +1,3 @@
-# Shape-Specific Methods
-
 The internal, `abstract final class Shapes` provides some static methods that can operate on a shape of any type. These methods are described below:
 
 ## `idx()`

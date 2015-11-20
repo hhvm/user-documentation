@@ -1,5 +1,3 @@
-# Introduction
-
 A *shape* consists of a group of zero or more data *field*s taken together as a whole; it is an array whose keys are tracked by the Hack typechecker. 
 
 For example:

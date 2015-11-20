@@ -1,5 +1,3 @@
-# Other Hack Features
-
 In addition to the primary topics covered in this user guide, Hack has other noteworthy features that deserve attention. 
 
 * [Constructor parameter promotion](./constructor-parameter-promotion.md) allows you to reduce class property boilerplate in your code.

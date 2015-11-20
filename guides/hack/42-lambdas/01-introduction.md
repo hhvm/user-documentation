@@ -1,5 +1,3 @@
-# Lambdas
-
 Hack supports the creation of closures through a construct called lambda. Lambdas are generally less verbose than [PHP closures](http://php.net/manual/en/functions.anonymous.php) and are often used in conjunction with functions like [`array-filter()`](http://php.net/manual/en/function.array-filter.php) or [`array-map()`](http://php.net/manual/en/function.array-map.php).
 
 ## Syntax

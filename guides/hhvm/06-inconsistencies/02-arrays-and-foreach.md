@@ -1,5 +1,3 @@
-## Array internal cursors
-
 Under PHP5, if an array's internal cursor points to the position past the last element and then a copy of the array is made, the copy will have its internal cursor reset to point at the first element. Under HHVM, when a copy of an array is made, the copy's internal cursor will always point to the same position that the original array's internal cursor pointed to.
 
 @@ arrays-and-foreach-examples/array-internal-cursors.php @@

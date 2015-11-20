@@ -1,5 +1,3 @@
-# Intrinsic Expressions
-
 There are three main intrinsic expressions in PHP that are unsupported in Hack; that is, they are not typechecked in [partial mode](../typechecker/modes.md#partial-mode) and the typechecker errors in strict mode.
 
 - [`isset()`](http://php.net/manual/en/function.isset.php)

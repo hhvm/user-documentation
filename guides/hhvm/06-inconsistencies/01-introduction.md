@@ -1,5 +1,3 @@
-# HHVM Inconsistencies with PHP Engine
-
 For the most part, HHVM is quite compatible with the PHP engine. In other words, PHP code that runs on the PHP engine will run unmodified with the exact output on HHVM.
 
 However, there are some noted inconsistencies. They are listed here by category.

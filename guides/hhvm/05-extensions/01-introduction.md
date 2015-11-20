@@ -1,5 +1,3 @@
-# HHVM Extensions
-
 HHVM provides dozens of built-in, integrated extensions and allows for other extensions to be dynamically loaded. Since this is an HHVM user's guide, this does not discuss how to build your own extension, but there are resources for that listed below.
 
 ## Integrated Extensions

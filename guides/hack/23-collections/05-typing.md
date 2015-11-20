@@ -1,5 +1,3 @@
-# Typing Collections
-
 You will generally instantiate Hack collection objects through the [concrete classes](./classes.md). However, what parameter type is accepted by or returned from a method could indeed be one of the [interfaces](./interfaces.md).
 
 The following example shows how you can pass any of the concrete classes to a function that takes an `Iterable<T>`. In these cases `T` is representing the types of the values of each collection. So `int` for `$v` and `string` for `$m`. For the maps, the types of the keys don't matter in this case.

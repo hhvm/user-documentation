@@ -1,5 +1,3 @@
-# Iterating Collections
-
 Collections are iterated via `foreach`.
 
 @@ iterating-examples/foreach.php @@

@@ -1,5 +1,3 @@
-# Constructor Parameter Promotion
-
 If you have create a class in Hack or PHP, you probably have seen a pattern like this:
 
 @@ constructor-parameter-promotion-examples/duplication.php @@

@@ -1,5 +1,3 @@
-# Birth
-
 ![Yeah, lambdas](/images/lambdaop.jpg)
 
 ## Double Arrow

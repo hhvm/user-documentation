@@ -1,5 +1,3 @@
-# Nullsafe 
-
 The null-safe operator allows you to avoid the tedious checks for object `null`-ness before calling a method or property on that object. 
 
 The operator is:

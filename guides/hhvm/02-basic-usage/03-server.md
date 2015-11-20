@@ -1,5 +1,3 @@
-# Server Mode
-
 Server mode is how you will use HHVM to serve web requests. The HHVM process starts up and continuously waits to serve web requests.
 
 Multiple requests can, of course, be served simultaneously, and HHVM also caches code to be shared across requests as well.

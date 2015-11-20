@@ -1,5 +1,3 @@
-# Transparent Type Aliases
-
 A *transparent type alias* is one created using `type`. 
 
 ```

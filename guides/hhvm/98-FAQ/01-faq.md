@@ -1,5 +1,3 @@
-# HHVM FAQ
-
 This will contain some helpful hints and frequently asked questions re: HHVM. This is a living document and may be molded into something more user-interactive in the future.
 
 ## General

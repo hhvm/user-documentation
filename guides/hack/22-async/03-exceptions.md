@@ -1,5 +1,3 @@
-# Async Exceptions
-
 In general, async follows this pattern:
 
 * call an `async` function

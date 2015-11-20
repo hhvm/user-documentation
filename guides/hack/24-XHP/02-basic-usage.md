@@ -1,5 +1,3 @@
-# Basic XHP Usage
-
 **NOTE**: Make sure that you have the [XHP Library](../introduction.md#xhp-library) available when using XHP. Otherwise you will get a lot of `Fatal error: Class undefined: xhp_xxxx` type of errors.
 
 XHP is a syntax to create actual Hack objects, called XHP objects. They are meant to be a tree-based object, with each child as text or another XHP object.They are first-class, meaning that:

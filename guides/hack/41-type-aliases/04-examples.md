@@ -1,5 +1,3 @@
-# Type Alias Examples
-
 ## Complex Number
 
 You can use type aliases to represent a complex number.

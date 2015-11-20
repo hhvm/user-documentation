@@ -1,5 +1,3 @@
-# Getting Started with HHVM
-
 If you are new to HHVM, this getting started guide should help get you up an running quickly. Of course, as this is meant to be a getting started, not every detail will be provided here. The main [HHVM user guide](..) will be your resource for full information.
 
 ## Overview

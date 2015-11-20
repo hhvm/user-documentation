@@ -1,5 +1,3 @@
-# Running the Typechecker
-
 Running the typechecker is simple. For most users and most purposes, it is a one-line command, called `hh_client`.
 
 ## `hh_client`

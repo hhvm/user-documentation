@@ -1,5 +1,3 @@
-# Shape Literals
-
 A *shape literal* creates an unnamed shape with fields having values as specified by a list of field-initializers. The order of the field-initializers in that list need not be the same as the order of the field specifiers in the shape type's definition. For example:
 
 @@ literals-examples/literals.php.type-errors @@

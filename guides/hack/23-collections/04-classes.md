@@ -1,5 +1,3 @@
-# Concrete Collection Classes
-
 There are currently seven (7) Hack concrete collection classes that are available to instantiate. All of these classes derive from various levels of the [collection interfaces](./interfaces.md). 
 
 Descriptions of each of the methods can be found in the [API reference](../reference/).

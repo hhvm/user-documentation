@@ -1,5 +1,3 @@
-# Async Examples
-
 Here some code examples representing a slew of possible async scenarios. Obviously this does not cover all possible situations, but they should give you an idea of how and where async can be used effectively. Some of these examples are found spread out through the rest of the async documentation; they are added here again for consolidation purposes.
 
 ## Basic

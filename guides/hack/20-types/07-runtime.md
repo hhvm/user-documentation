@@ -1,5 +1,3 @@
-# Types and the HHVM Runtime
-
 There are cases when the typechecker will report an error, but the program will run perfectly fine in HHVM.
 
 @@ runtime-examples/type-error-but-runs.php.type-errors @@

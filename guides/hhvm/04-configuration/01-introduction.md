@@ -1,5 +1,3 @@
-# Configuring HHVM
-
 After [installing HHVM](../installation/introduction.md), you will want to configure it to run scripts from the command line and/or serve web traffic.
 
 ## Configuration Options

@@ -1,5 +1,3 @@
-# Generic Type Constraints
-
 A generic type-constraint indicates a requirement that a type must fulfill in order to be accepted as a type argument for a given type parameter. (For example, it might have to be a given class type or a subtype of that class type, or it might have to implement a given interface.) 
 
 There are two kinds of generic type constraints, specified by the `as` and `super` keywords, respectively. Each is discussed below. 

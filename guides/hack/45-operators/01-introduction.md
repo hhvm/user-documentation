@@ -1,5 +1,3 @@
-# Hack Operators
-
 Hack introduces a few new operators beyond those which exists in PHP.
 
 ## `==>` ([Lambda operator](lambda.md))

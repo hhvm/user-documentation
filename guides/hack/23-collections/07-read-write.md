@@ -1,5 +1,3 @@
-# Reading and Writing Hack Collections
-
 Like arrays, you can use the square bracket syntax (`[]`) to read and write from Hack collections. 
 
 All the links to methods in this guide will generally link to [`Vector`](/hack/reference/class/Vector/), but they apply to [`Map`](/hack/reference/class/Map/), [`Pair`](/hack/reference/class/Pair/) and [`Set`](/hack/reference/class/Set/) too, unless otherwise specified.

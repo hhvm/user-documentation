@@ -1,5 +1,3 @@
-# Variadic Functions
-
 A variadic function can take a variable number of arguments. In PHP, all functions are variadic, even if they don't explicitly say so. So a function that looks like:
 
 ```

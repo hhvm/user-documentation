@@ -1,5 +1,3 @@
-## Exceptions thrown from destructors
-
 Under HHVM, PHP exceptions thrown from destructors will be swallowed while logging an error. Effectively, there is a `try/catch` enclosing the body of the `__destruct` method. These exceptions are catchable under the PHP engine outside of the `__destruct` method.
 
 Fatals thrown from destructors will log an error, and prevent further PHP code from executing as the fatal propagates. This includes other `__destruct` methods.

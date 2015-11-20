@@ -1,5 +1,3 @@
-# Repo-Authoritative
-
 In normal server mode, HHVM continuously checks whether your PHP or Hack files have changed since the last request. This can be a performance hit since most of the time your files *have not* changed, but they still need to be checked anyway.
 
 Repo-authoritative mode allows you to avoid this overhead if you know a priori that your codebase will never change during the lifetime of your HHVM server and the incoming requests. This has *extreme* performance implications since HHVM will *always* know what the layout of your code is and can optimize aggressively with that information.

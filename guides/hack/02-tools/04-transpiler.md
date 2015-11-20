@@ -1,5 +1,3 @@
-# The Hack Transpiler
-
 The Hack transpiler, `h2tp`, allows you to write code in Hack and then off your code to folks who only deploy on an engine that doesn't support Hack, but rather supports only PHP. This gives you the benefits of writing your code in Hack, allowing users who run code on an Hack supported runtime like HHVM to use Hack code, while also allowing users who haven't made the switch to something like HHVM to use your code as well.
 
 ```

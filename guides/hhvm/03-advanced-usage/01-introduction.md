@@ -1,5 +1,3 @@
-# Advanced HHVM Usage
-
 Normally, after installing HHVM, you can use the [sensible defaults](../basic-usage/introduction.md) provided to [run Hack and PHP scripts](../basic-usage/command-line.md) or [run HHVM as a server](../basic-usage/server.md).
 
 While a majority of the time you will not need to tweak the default settings or use the more advanced modes available with HHVM, they are available:

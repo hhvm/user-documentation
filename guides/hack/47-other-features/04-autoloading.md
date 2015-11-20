@@ -1,5 +1,3 @@
-# Hack and HHVM Autoloading
-
 PHP has an [autoloading](http://php.net/manual/en/language.oop5.autoload.php) mechanism, via `spl_autoload_register()` to where classes can be automatically loaded at runtime, reducing the need for a bunch of `require` and `include` statements at the beginning of a script.
 
 The HHVM runtime enhances this autoloading by being able to autoload functions, constants, and traits, in addition to classes.

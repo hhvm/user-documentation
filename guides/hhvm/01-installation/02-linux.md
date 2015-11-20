@@ -1,5 +1,3 @@
-# Supported Linux Distributions
-
 We support prebuilt packages and compiling from source on variety of Ubuntu and Debian platforms. It is generally advisable for ease of installation and stability to use a prebuilt package.
 
 Here are the supported distributions:

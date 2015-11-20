@@ -1,5 +1,3 @@
-# Examples of Using Configuration Options
-
 This provides some examples of how some of the HHVM configuration options can be used to affect how a program is run. This is a work in progress and more examples will be added.
 
 ## Forcing Hack Mode

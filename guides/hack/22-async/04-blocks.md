@@ -1,5 +1,3 @@
-# Async Blocks
-
 Inside a lengthy async function, it's generally a good idea to group together data fetches that are independent of the rest of the function. This reduces unneeded waiting for I/O. 
 
 To express this grouping inline, you would usually have to use a helper function. Async blocks allow for the immediate execution of a grouping of code, possibly within zero-argument, async lambdas.

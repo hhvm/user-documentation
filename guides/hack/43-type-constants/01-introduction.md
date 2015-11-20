@@ -1,5 +1,3 @@
-# Type Constants
-
 Imagine that you have a non-generic class, and some various `extends` to that class. 
 
 @@ introduction-examples/non-parameterized.php @@

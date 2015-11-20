@@ -1,5 +1,3 @@
-# Type Parameter Variance
-
 Hack supports both generic *covariance* and *contravariance*. This is a fairly advanced topic, so we will not go into much detail; we will cover enough about the basics. 
 
 Each generic parameter can optionally be marked separately with a variance indicator:

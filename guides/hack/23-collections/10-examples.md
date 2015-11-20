@@ -1,5 +1,3 @@
-# Hack Collection Examples
-
 The following are various examples on how to use Hack collections.
 
 ## Simple Vector Usage

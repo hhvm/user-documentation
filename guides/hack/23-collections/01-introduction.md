@@ -1,5 +1,3 @@
-# Collections Introduction
-
 In addition to supporting the one-size-fits-all `array` collection type, Hack also provides container types for specialized collections such as a vector, map and set. 
 
 ## Arrays

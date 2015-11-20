@@ -1,5 +1,3 @@
-# Trait and Interface Requirements
-
 [Traits](http://php.net/manual/en/language.oop5.traits.php) provides a method of code reuse. A trait is essentially a piece of code that describes properties and methods that it doesn't actually define. The classes that use the traits define them.
 
 [Interfaces](http://php.net/manual/en/language.oop5.interfaces.php) provide a way encapsulate common operations that will be implemented by classes that implement the interface.

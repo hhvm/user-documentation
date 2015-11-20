@@ -1,5 +1,3 @@
-# Getting Started with Hack
-
 If you are new to Hack, this getting started guide should help you get familiar with the basics quickly; if you haven't yet please read our [introduction to Hack's main features](../overview/introduction.md) and afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
 
 ## Overview

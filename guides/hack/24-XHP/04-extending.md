@@ -1,5 +1,3 @@
-# Extending XHP With Your Own Classes
-
 XHP comes with classes for all standard HTML tags, but since these are first-class objects, you can create your own XHP classes to for rendering items that are not in the standard HTML specification.
 
 ## Basics

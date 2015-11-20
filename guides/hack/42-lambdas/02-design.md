@@ -1,5 +1,3 @@
-# Design
-
 A lambda expression is denoted by using the lambda arrow `==>`. Left of the arrow are arguments to the anonymous function and on the right hand side is either an expression or a list of statements enclosed in curly braces `{}`.
 
 @@ design-examples/introduction.php @@

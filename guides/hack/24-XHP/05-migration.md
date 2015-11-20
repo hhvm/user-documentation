@@ -1,5 +1,3 @@
-# Migrating to XHP
-
 It is definitely possible that you have code that you would like to convert to XHP. You can do this piece mail in a few different ways.
 
 The basis for all these possibilities is this function:

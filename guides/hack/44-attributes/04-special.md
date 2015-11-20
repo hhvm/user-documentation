@@ -1,5 +1,3 @@
-# Special Attributes
-
 Attributes usually don't have any special runtime or typechecking semantics by default. However, there are attributes starting with `__` (double underscore) that are specially recognized by HHVM and/or the typechecker.
 
 ## `<<__Override>>`
