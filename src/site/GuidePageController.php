@@ -93,6 +93,12 @@ final class GuidePageController extends WebPageController {
       
       $class = "paginationLink ";
       $class = $class.($next ? "next" : "previous");
+
+      if ($next) {
+        $title = $title.' »';
+      } else {
+        $title = '« '.$title;
+      }
       
       return 
         <div class={$class}>
