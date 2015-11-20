@@ -37,7 +37,7 @@ else
   STAGING_ENV=hhvm-hack-docs-b
 fi
 
-echo "** About to deploy to $STAGING_ENV (eb deploy $STAGING_ENV -m \"$DEPLOY_MESSAGE\")"
+echo "** About to deploy to $STAGING_ENV"
 
 eb status $STAGING_ENV
 
