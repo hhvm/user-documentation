@@ -11,9 +11,19 @@ abstract class WebPageController extends WebController {
     return null;
   }
 
-  protected function getGithubIssueTitle(): string {
-    $request_path = $this->getRequestedPath();
-    return 'Issue with '.$request_path;
+  protected function getGithubIssueTitle(): ?string {
+    /* Bad automatic title: "Issue with /foo/bar"
+     * Good automatic title: "404: /foo/bar"
+     *
+     * There isn't a general way to create a good title, so leave it blank and
+     * hope the user picks something decent. We get the URL in the
+     * automatically-appended metadata anyway.
+     *
+     * "Issue with /foo/bar" is 'bad' because we will want to rename any issues
+     * with that title during triage to something more descriptive.
+     */
+
+    return null;
   }
 
   protected function getGithubIssueBody(): string {

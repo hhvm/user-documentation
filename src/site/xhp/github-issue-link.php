@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class :github-issue-link extends :x:element {
   attribute
-    string issueTitle @required,
+    string issueTitle,
     string issueBody @required;
 
   children (pcdata);
