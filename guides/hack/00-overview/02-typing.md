@@ -1,8 +1,6 @@
-### Introducing Hack's Typing System
-
 Probably the headline feature of Hack is the introduction of typing capabilities to PHP. 
 
-#### What is typing?
+## What is typing?
 
 This is the process of assigning explicit types to member variables, parameters, return values, and other components of code. 
 
@@ -28,7 +26,7 @@ And immediately a type-checker will be able to catch the fact that `echo (5 . $b
 
 Hack lets you use the strong typing features of a statically typed language when you want, but still gives you the flexibility of a dynamically typed language. 
 
-#### Why Is This Useful?
+## Why Is This Useful?
 
 Let's be clear here - if you're writing code, the chances are it is at the very least implicitly typed, that is - when you create a line of code, you have in your mind what type the variables, parameters, etc. are supposed to be. 
 
@@ -39,6 +37,6 @@ What typing does, and by extension what Hack does, is to help developers make fe
 * Improving clarity of intent for other developers.
 * Preventing unsafe coding practices like sketchy null checks. 
 
-#### Further Reading
+## Further Reading
 
-Our [Types Documentation](../types/introduction.md) provides much more detailed information about this feature.
+Our [Types Documentation](/hack/types/introduction) provides much more detailed information about this feature.

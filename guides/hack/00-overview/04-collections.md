@@ -1,8 +1,6 @@
-### Bringing Collections, Enums, and Shapes to PHP
+[Collections](/hack/collections/introduction), [shapes](/hack/shapes/introduction), and [enums](/hack/enums/introduction) together encapsulate a number of features from other languages that have long been desired in PHP, and in Hack you can use them all.
 
-Collections, Shapes, and Enums together encapsulate a number of features from other languages that have long been desired in PHP, and in Hack you can use them all.
-
-#### What are Collections?
+## What are Collections?
 
 When you're developing PHP code, you have one choice for storing a collection of data - arrays. The problem with arrays is that they are very ambiguous about indexing and traversal, and they don't provide enough code clarity for other developers to modify existing work. 
 
@@ -58,7 +56,7 @@ You can't modify the `Pair` itself after it has been created (it is immutable), 
 `Vector`, `Map`, and `Set` objects also have immutable equivalents called `ImmVector`, `ImmMap`, and `ImmSet` where elements of the objects cannot be added, removed, or overwritten once the object has been created. 
 
 
-#### What are Enums?
+## What are Enums?
 
 Enums are a way to create a type that is composed of a set of potential constant values:
 
@@ -77,7 +75,7 @@ These `enum` objects have the same benefits of regular constants, such as being 
 Notice how much easier it is in the first example to read exactly what the intention of the code is, and how the opportunity to supply an out of bounds index to `$opening_hours` is significantly reduced.
 
 
-#### What are Shapes?
+## What are Shapes?
 
 Many languages have a concept of structures or records, but PHP does not. Instead arrays are often co-opted for this purpose:
 
@@ -89,6 +87,6 @@ Shapes were added to Hack in order to bring some structure and type-checking san
 
 Notice how `foo` can depend strongly upon expecting to have a parameter `$x` with a very predictable structure in the Hack example, whereas in the PHP example we are depending on the developer's implicit mental typing. The scope for errors here is significantly reduced, and the code is far more readable and clear.
 
-#### Further Reading
+## Further Reading
 
-Please read the documentation on [Collections](../collections/introduction.md), [Shapes](../shapes/introduction.md), and [Enums](../enums/introduction.md) for much more detailed information about these features.
+Please read the documentation on [Collections](/hack/collections/introduction), [Shapes](/hack/shapes/introduction), and [Enums](/hack/enums/introduction) for much more detailed information about these features.

@@ -1,5 +1,3 @@
-### Hack's Features
-
 Hack introduces many new features to the base PHP language, however there are some features we think are the real standouts:
 
 * [Type System and the Typechecker](../overview/typing.md)
