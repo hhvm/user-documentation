@@ -159,6 +159,7 @@ type StaticResourceMapEntry = shape(
 );
 
 type NavDataNode = shape(
+  'name' => string,
   'urlPath' => string,
   /*
    * This is actually array<string, NavDataNode> but recursive shapes aren't

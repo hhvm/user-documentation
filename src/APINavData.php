@@ -8,6 +8,7 @@ final class APINavData {
       'Interfaces' => self::getNavDataForClasses(APIDefinitionType::INTERFACE_DEF),
       'Traits' => self::getNavDataForClasses(APIDefinitionType::TRAIT_DEF),
       'Functions' => shape(
+        'name' => 'Functions',
         'urlPath' => '/hack/reference/function/',
         'children' => self::getNavDataForFunctions(),
       ),
@@ -37,11 +38,13 @@ final class APINavData {
 
     foreach ($classes as $class) {
       $nav_data[$class['name']] = shape(
+        'name' => $class['name'],
         'urlPath' => $class['urlPath'],
         'children' => self::getNavDataForMethods($class['methods']),
       );
     }
     return shape(
+      'name' => self::getRootNameForType($class_type),
       'urlPath' => '/hack/reference/'.$class_type.'/',
       'children' => $nav_data,
     );
@@ -53,6 +56,7 @@ final class APINavData {
     $nav_data = [];
     foreach ($methods as $method) {
       $nav_data[$method['name']] = shape(
+        'name' => $method['name'],
         'urlPath' => $method['urlPath'],
         'children' => [],
       );
@@ -67,6 +71,7 @@ final class APINavData {
     $nav_data = [];
     foreach ($functions as $function) {
       $nav_data[$function['name']] = shape(
+        'name' => $function['name'],
         'urlPath' => $function['urlPath'],
         'children' => [],
       );

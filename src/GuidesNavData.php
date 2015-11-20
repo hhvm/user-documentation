@@ -6,6 +6,7 @@ final class GuidesNavData {
     $nav_data = [];
     foreach (GuidesIndex::getIndex() as $name => $product_guides) {
       $nav_data[$name] = shape(
+        'name' => $name,
         'urlPath' => URLBuilder::getPathForProductGuides($name),
         'children' => self::getNavDataForProduct(
           GuidesProduct::assert($name),
@@ -22,7 +23,9 @@ final class GuidesNavData {
   ): array<string, NavDataNode> {
     $nav_data = [];
     foreach ($product_guides as $topic => $pages) {
-      $nav_data[self::pathToName($topic)] = shape(
+      $name = self::pathToName($topic);
+      $nav_data[$name] = shape(
+        'name' => $name,
         'urlPath' => URLBuilder::getPathForGuide($product, $topic),
         'children' => self::getNavDataForGuide(
           $product,
@@ -41,7 +44,9 @@ final class GuidesNavData {
   ): array<string, NavDataNode> {
     $nav_data = [];
     foreach ($pages as $title => $html_file) {
-      $nav_data[self::pathToName($title)] = shape(
+      $name = self::pathToName($title);
+      $nav_data[$name] = shape(
+        'name' => $name,
         'urlPath' => URLBuilder::getPathForGuidePage($product, $topic, $title),
         'children' => [],
       );
