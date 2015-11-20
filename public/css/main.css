@@ -66,6 +66,12 @@ html, body {
   height: 100%;
 }
 
+footer {
+  font-size: x-small;
+  text-align: center;
+}
+
+
 /** Fonts **/
 /* Colors */
 @media only screen and (max-width: 640px) {

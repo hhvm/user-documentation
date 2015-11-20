@@ -7,26 +7,12 @@ final class HTTP404Controller extends WebPageController {
   public async function getTitle(): Awaitable<string> {
     return 'Page Not Found';
   }
-  
+
   public function getExtraBodyClass(): ?string {
     return 'notFoundErrorPage';
   }
 
   public async function getBody(): Awaitable<\XHPRoot> {
-    $request_path = $this->getRequestedPath();
-    $issue_title = '404: '.$request_path;
-    $issue_body = <<<EOF
-Please complete the information below:
-
-# How I got to this page:
-
-- - - eg "I clicked a link on <address of other site>" - - - 
-
-# What I expected to find here:
-
-- - - eg "Documentation tell me how to <do something>" - - -
-EOF;
-
     return
       <x:frag>
         <div class="notFoundIcon">
@@ -61,16 +47,35 @@ EOF;
           The page you requested can't be found.
         </p>
         <p class="notFoundMessage">
-          You might want to try finding it from <a href="/">the front page</a> 
+          You might want to try finding it from <a href="/">the front page</a>
           or the Hack or HHVM links above.
         </p>
         <p class="notFoundMessage">
-          If you think you're seeing this page in error, please 
+          If you think you're seeing this page in error, please
           <github-issue-link
-            issueTitle={$issue_title}
-            issueBody={$issue_body}
+            issueTitle={$this->getGithubIssueTitle()}
+            issueBody={$this->getGithubIssueBody()}
           >file an issue</github-issue-link>.
         </p>
       </x:frag>;
+  }
+
+  protected function getGithubIssueTitle(): string {
+    $request_path = $this->getRequestedPath();
+    return '404: '.$request_path;
+  }
+
+  protected function getGithubIssueBody(): string {
+    return <<<EOF
+Please complete the information below:
+
+# How I got to this page:
+
+- - - eg "I clicked a link on <address of other site>" - - -
+
+# What I expected to find here:
+
+- - - eg "Documentation tell me how to <do something>" - - -
+EOF;
   }
 }

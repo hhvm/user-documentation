@@ -11,11 +11,31 @@ abstract class WebPageController extends WebController {
     return null;
   }
 
+  protected function getGithubIssueTitle(): string {
+    $request_path = $this->getRequestedPath();
+    return 'Issue with '.$request_path;
+  }
+
+  protected function getGithubIssueBody(): string {
+    return <<<EOF
+Please complete the information below:
+
+# Where is the problem?
+
+- - - eg "The section describing how widgets work" - - -
+
+# What is the problem?
+
+- - - eg "It doesn't explain that widgets are singletons" - - -
+EOF;
+  }
+
   final public async function respond(): Awaitable<void> {
     list($title, $content) = await \HH\Asio\va2(
       $this->getTitle(),
       $this->getContentPane()
     );
+    $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();
 
@@ -170,5 +190,18 @@ abstract class WebPageController extends WebController {
     private ServerRequestInterface $request,
   ) {
     parent::__construct($parameters, $request);
+  }
+
+  private function getFooter(): :footer {
+    return (
+      <footer>
+        <div class="footerGithubLink footerElement">
+          <github-issue-link
+            issueTitle={$this->getGithubIssueTitle()}
+            issueBody={$this->getGithubIssueBody()}
+          >Report a problem or make a suggestion</github-issue-link>
+        </div>
+      </footer>
+    );
   }
 }
