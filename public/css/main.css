@@ -71,6 +71,10 @@ footer {
   text-align: center;
 }
 
+form.postLink {
+  display: inline;
+}
+
 
 /** Fonts **/
 /* Colors */

@@ -3,7 +3,7 @@
 use HHVM\UserDocumentation\ArgAssert;
 
 class Router {
-  private function getRoutes(
+  private function getReadOnlyRoutes(
   ): KeyedIterable<string, classname<WebController>> {
     return ImmMap {
       '/' => HomePageController::class,
@@ -33,11 +33,25 @@ class Router {
     };
   }
 
+  private function getWriteRoutes(
+  ): KeyedIterable<string, classname<WebController>> {
+    return ImmMap {
+      '/__survey/go'
+        => SurveyRedirectController::class,
+      '/__survey/nothanks'
+        => SurveyNoThanksController::class,
+    };
+  }
+
   private function getDispatcher(): \FastRoute\Dispatcher {
     return \FastRoute\simpleDispatcher(
       function(\FastRoute\RouteCollector $r): void {
-        foreach ($this->getRoutes() as $route => $classname) {
+        foreach ($this->getReadOnlyRoutes() as $route => $classname) {
           $r->addRoute('GET', $route, $classname);
+        }
+
+        foreach ($this->getWriteRoutes() as $route => $classname) {
+          $r->addRoute('POST', $route, $classname);
         }
       }
     );

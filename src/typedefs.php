@@ -29,6 +29,18 @@ enum APIDefinitionType: string as string {
   FUNCTION_DEF = 'function';
 }
 
+enum SurveyMode: string {
+  ACTIVE = 'active';
+  DISABLED = 'disabled';
+  ALWAYS = 'always';
+}
+
+enum SurveyUserState: string {
+  ACTIVE = 'active';
+  TAKEN = 'taken';
+  NO_THANKS = 'no_thanks';
+}
+
 type DocumentationSource = shape(
   'type' => DocumentationSourceType,
   'name' => string,

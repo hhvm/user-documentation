@@ -45,6 +45,7 @@ EOF;
       $this->getTitle(),
       $this->getContentPane()
     );
+    $content->prependChild(<user-survey />);
     $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();

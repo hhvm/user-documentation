@@ -2,3 +2,4 @@ User-agent: *
 Disallow: /manual/en/
 Disallow: /__content
 Disallow: /s/
+Disallow: /__survey/

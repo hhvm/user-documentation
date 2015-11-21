@@ -1,7 +1,6 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\BuildPaths;
-use Psr\Http\Message\ServerRequestInterface;
 
 final class :github-issue-link extends :x:element {
   attribute
@@ -9,6 +8,8 @@ final class :github-issue-link extends :x:element {
     string issueBody @required;
 
   children (pcdata);
+
+  use XHPGetRequest;
 
   protected function render(): XHPRoot {
     $body = $this->:issueBody."\n\n".$this->getMetadataForBody();
@@ -44,15 +45,5 @@ Please don't change anything below this point.
  - Page requested: $request_path
  - Page requested at: $request_time
 EOF;
-  }
-
-  private function getRequest(): ServerRequestInterface {
-    $x = $this->getContext('ServerRequestInterface');
-    invariant(
-      $x instanceof ServerRequestInterface,
-      '%s is not a ServerRequestInterface',
-      gettype($x).' ('.get_class($x).')',
-    );
-    return $x;
   }
 }
