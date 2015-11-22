@@ -45,7 +45,7 @@ function classReferenceSkeletons(int $argc, array<int, string> $argv): void {
   foreach ($class_entry['methods'] as $method_entry) {
     $method_dir = sprintf('%s/%s', $class_dir, $method_entry['name']);
 
-    if (count(glob($method_dir.'*')) > 0) {
+    if (count(glob($method_dir.'/*')) > 0) {
       printf(
         "Skipping method %s (folder already contains files). \n",
         $method_entry['name'],
@@ -94,21 +94,16 @@ final class AutogenClassMethod {
   }
 
   private function writeCodeFile(): this {
-    $code = implode(
-      "\n",
-      Vector {
-        '<?hh',
-        '',
-        sprintf(
-          'namespace Hack\UserDocumentation\API\Examples\%s\%s;',
-          $this->className,
-          ucfirst($this->methodName),
-        ),
-        '',
-        '// TODO: Add example code',
-        '',
-      },
-    );
+    $classNS = $this->className;
+    $methodNS = ucfirst($this->methodName);
+    $code = <<<CODE
+<?hh
+
+namespace Hack\UserDocumentation\API\Examples\\{$classNS}\\{$methodNS};
+
+// TODO: Add example code
+
+CODE;
     return $this->writeFile('.php', $code);
   }
 
