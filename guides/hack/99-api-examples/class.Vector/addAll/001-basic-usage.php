@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\API\Examples\Vector\AddAll;
+
 $v = Vector {};
 
 // Add all the values in a Set
@@ -18,4 +20,4 @@ $v->addAll(array('g', 'h'));
 $v->addAll(ImmSet {'i', 'j'})
   ->addAll(ImmVector {'k', 'l'});
 
-var_dump($v); // $v contains 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'
+var_dump($v);

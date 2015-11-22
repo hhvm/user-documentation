@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\API\Examples\Vector\AddAllKeysOf\Ints;
+
 $uploaders_by_id = Map {
   4993063 => 'Amy Smith',
   9361760 => 'John Doe',
@@ -18,5 +20,4 @@ $all_ids->addAllKeysOf($uploaders_by_id);
 // Add the keys from an associative array
 $all_ids->addAllKeysOf($commenters_by_id);
 
-// Vector contains 4993063, 9361760, 7424854, 5740542
 var_dump($all_ids);

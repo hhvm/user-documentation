@@ -1,7 +1,9 @@
 <?hh
 
+namespace Hack\UserDocumentation\API\Examples\Vector\FirstValue;
+
 $v = Vector {'red', 'green', 'blue', 'yellow'};
-var_dump($v->firstValue()); // 'red'
+var_dump($v->firstValue());
 
 $v = Vector {};
-var_dump($v->firstValue()); // NULL
+var_dump($v->firstValue());

@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\API\Examples\Vector\Splice;
+
 // Remove the element at index 2:
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 $v->splice(2, 1);
