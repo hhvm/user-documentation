@@ -19,8 +19,18 @@ Once you have set up your admin server, you can query it via `curl`.
 curl http://localhost:9001/
 ```
 
-will bring up a list of commands you can use to control and query your admin server. Use one of these command with your password.
+will bring up a list of commands you can use to control and query your admin server. 
+
+The port associated with the `curl` command is the `hhvm.admin_server` port set above if you are using [Proxygen](/hhvm/basic-usage/proxygen). *If you are using [FastCGI](/hhvm/advanced-usage/fastCGI)*, then the port will be the webserver port that is the front end to FastCGI.
+
+### Sending a Command
+
+Use one of the commands listed with the `curl` sequence above, along with your password, to send a command to the admin server.
 
 ```
 curl http://localhost:9001/compiler-id?auth=SomePassword
 ```
+
+## Further Reference
+
+There is a good [blog post](http://hhvm.com/blog/521/the-adminserver) discussing the admin server even further.
