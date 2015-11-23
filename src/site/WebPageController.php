@@ -1,5 +1,7 @@
 <?hh // strict
 
+include_once("./include/ga.inc");
+
 use HHVM\UserDocumentation\BuildPaths;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -71,7 +73,7 @@ EOF;
               path="/css/syntax-highlighting.css"
             />
             <link
-              href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700" 
+              href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700"
               rel="stylesheet"
               type="text/css"
             />
