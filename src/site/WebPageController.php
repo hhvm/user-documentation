@@ -131,7 +131,7 @@ EOF;
     return
       <div class={$title_class}>
         <div class="widthWrapper">
-          <h2 class="pageTitle">{$title}</h2>
+          <h1 class="pageTitle">{$title}</h1>
         </div>
       </div>;
   }
