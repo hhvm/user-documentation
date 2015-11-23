@@ -23,7 +23,8 @@ final class :user-survey extends :x:element {
 
     return (
       <div class="userSurvey">
-        We'd appreciate your feedback; if you can spare a few seconds, we have a
+        We'd appreciate your feedback &mdash; if you can spare a few seconds, we
+        have a
         <a:post href="/__survey/go" target="_blank">5-question survey</a:post>.
         {$no_thanks}
       </div>
