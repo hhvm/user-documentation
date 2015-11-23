@@ -3,6 +3,11 @@ namespace HHVM\UserDocumentation;
 
 require(__DIR__.'/../vendor/autoload.php');
 function hhvm_to_yaml(): void {
+  if (!is_dir(LocalConfig::BUILD_DIR)) {
+    mkdir(LocalConfig::BUILD_DIR);
+  }
+  (new FetchPHPDotNetIndexBuildStep())->buildAll();
+
   (new RawYAMLBuildStep())->buildAll();
   (new MergedYAMLBuildStep())->buildAll();
 

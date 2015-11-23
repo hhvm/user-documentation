@@ -12,6 +12,8 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
    * be taken down soon.
    */
   const string LEGACY_INDEX = LocalConfig::ROOT.'/legacy-docs-site-index.json';
+  const string PHP_DOT_NET_PATTERN =
+    'http://php.net/manual/en/%s.php';
 
   public function buildAll(): void {
     Log::i("\nAPILegacyRedirectsBuild");
@@ -20,7 +22,13 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
   private function createIndex(
   ): void {
-    $index = $this->generateIndexData();
+    $old_hack_docs_data = $this->generateOldHackDocsData();
+    $php_dot_net_data = $this->generatePHPDotNetData();
+
+    $index = $old_hack_docs_data;
+    foreach ($php_dot_net_data as $id => $url) {
+      $index[$id] = $url;
+    }
 
     $code = $this->writeCode(
       'APILegacyRedirectData.hhi',
@@ -32,7 +40,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
     );
   }
 
-  private function generateIndexData(): array<string, string> {
+  private function generateOldHackDocsData(): array<string, string> {
     Log::v("\nProcessing old site index");
     $reader = new PHPDocsIndexReader(file_get_contents(self::LEGACY_INDEX));
     $old_classes = $reader->getClasses();
@@ -70,9 +78,27 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
       $old_id = idx($old_functions, $function['name']);
       if ($old_id) {
         $old_ids_to_new_urls[$old_id] = $function['urlPath'];
-      } 
+      }
     }
 
     return $old_ids_to_new_urls;
+  }
+
+  private function generatePHPDotNetData(): array<string, string> {
+    Log::v("\nProcessing PHP.net index");
+    $reader = new PHPDocsIndexReader(
+      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX)
+    );
+    $defs = Map { };
+    $defs->setAll($reader->getClasses());
+    $defs->setAll($reader->getMethods());
+    $defs->setAll($reader->getFunctions());
+
+    $index = [];
+    foreach ($defs as $_ => $id) {
+      $url = sprintf('http://php.net/manual/en/%s.php', $id);
+      $index[$id] = $url;
+    }
+    return $index;
   }
 }
