@@ -3,8 +3,9 @@
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\GuidesProduct;
 use HHVM\UserDocumentation\HTMLFileRenderable;
+use HHVM\UserDocumentation\URLBuilder;
 
-final class GuidesListController extends WebPageController {  
+final class GuidesListController extends WebPageController {
   public async function getTitle(): Awaitable<string> {
     switch ($this->getProduct()) {
       case GuidesProduct::HHVM:
@@ -13,7 +14,7 @@ final class GuidesListController extends WebPageController {
         return 'Hack Documentation';
     }
   }
-  
+
   protected function getInnerContent(): XHPRoot {
     $product = $this->getProduct();
     $guides = GuidesIndex::getGuides($product);
@@ -21,8 +22,7 @@ final class GuidesListController extends WebPageController {
     $root = <ul class="guideList" />;
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
-      $url = sprintf(
-        "/%s/%s/%s",
+      $url = URLBuilder::getPathForGuidePage(
         $product,
         $guide,
         $pages[0],
@@ -43,7 +43,7 @@ final class GuidesListController extends WebPageController {
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
-    $body = 
+    $body =
       <x:frag>
         <div class="guideListWrapper">
           <h3 class="listTitle">Learn</h3>
@@ -55,14 +55,17 @@ final class GuidesListController extends WebPageController {
         <div class="guideListWrapper">
           <h3 class="listTitle">
             <a href="/hack/reference/">API Reference</a>
-          </h3> 
-          <p>Full reference docs for all functions, classes, interfaces, and traits in the Hack language.</p>
+          </h3>
+          <p>
+            Full reference docs for all functions, classes, interfaces, and
+            traits in the Hack language.
+          </p>
         </div>
       );
     }
     return $body;
   }
-  
+
   protected function getGuideSummary(string $guide): ?XHPRoot {
     $path = GuidesIndex::getFileForSummary(
       $this->getRequiredStringParam('product'),
@@ -73,14 +76,14 @@ final class GuidesListController extends WebPageController {
     }
     return NULL;
   }
-  
+
   protected function getBreadcrumbs(): XHPRoot {
     $product = $this->getProduct();
     $product_root_url = sprintf(
       "/%s/",
       $product,
     );
-    
+
     return
       <div class="breadcrumbNav">
         <div class="widthWrapper">

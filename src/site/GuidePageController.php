@@ -1,6 +1,7 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\BuildPaths;
+use HHVM\UserDocumentation\Guides;
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\GuidesNavData;
 use HHVM\UserDocumentation\GuidesProduct;
@@ -35,13 +36,7 @@ final class GuidePageController extends WebPageController {
       $this->getGuide(),
       $this->getPage(),
     );
-    // If the guide name and the page name are the same, only print one of them.
-    // If there is only one page in a guide, only print the guide name.
-    $ret = strcasecmp($guide, $page) === 0 ||
-           count(GuidesIndex::getPages($product, $guide)) === 1
-         ? ucwords(strtr($guide, '-', ' '))
-         : ucwords(strtr($guide.': '.$page, '-', ' '));
-    return $ret;
+    return Guides::normalizeName($product, $guide, $page);
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
@@ -51,28 +46,28 @@ final class GuidePageController extends WebPageController {
         {$this->getPaginationLinks()}
       </div>;
   }
-  
+
   protected function getPaginationLinks(): XHPRoot {
     list($product, $guide, $page) = tuple(
       $this->getProduct(),
       GuidesNavData::pathToName($this->getGuide()),
       GuidesNavData::pathToName($this->getPage()),
     );
-    
+
     $paging = <div class="paginationLinks" />;
     $nav_data = GuidesNavData::getNavData()[$product]['children'];
-    
-    if (is_array($nav_data)) {      
+
+    if (is_array($nav_data)) {
       $paging->appendChild(
         $this->getPaginationLink($nav_data, $guide, $page, false)
-      );     
+      );
       $paging->appendChild(
         $this->getPaginationLink($nav_data, $guide, $page, true)
       );
     }
     return $paging;
   }
-  
+
   protected function getPaginationLink(
     array<string, NavDataNode> $guides,
     string $guide,
@@ -80,17 +75,17 @@ final class GuidePageController extends WebPageController {
     bool $next = false,
   ): XHPRoot {
     $adjacent_page = $this->getAdjacentPage($guides, $guide, $page, $next);
-    
+
     if (is_array($adjacent_page)) {
       $page = $adjacent_page['page'];
       $guide = $adjacent_page['guide'];
-      
+
       $title = sprintf(
         "%s: %s",
         array_keys($guide)[0],
         array_keys($page)[0],
       );
-      
+
       $class = "paginationLink ";
       $class = $class.($next ? "next" : "previous");
 
@@ -99,18 +94,18 @@ final class GuidePageController extends WebPageController {
       } else {
         $title = '« '.$title;
       }
-      
-      return 
+
+      return
         <div class={$class}>
           <a href={array_values($page)[0]['urlPath']}>
             {$title}
           </a>
         </div>;
     }
-    
+
     return <x:frag />;
   }
-  
+
   protected function getAdjacentPage(
     array<string, NavDataNode> $guides,
     string $guide,
@@ -120,17 +115,17 @@ final class GuidePageController extends WebPageController {
     $sibling_pages = $guides[$guide]['children'];
     $sibling_pages = $next ? array_reverse($sibling_pages) : $sibling_pages;
     $adjacent_page = null;
-    
+
     // Gets last page if next = true, first page if previous (next = false)
     reset($sibling_pages);
     $head_page = key($sibling_pages);
-    
+
     if ($page === $head_page) {
-      list($adjacent_guide, $adjacent_guide_data) = 
+      list($adjacent_guide, $adjacent_guide_data) =
         $this->getAdjacentGuide($guides, $guide, $next);
       if ($adjacent_guide_data !== null) {
         $guide_pages = $adjacent_guide_data['children'];
-        $guide_pages = $next ? $guide_pages : array_reverse($guide_pages); 
+        $guide_pages = $next ? $guide_pages : array_reverse($guide_pages);
         $adjacent_data = reset($guide_pages);
         $adjacent_page = shape(
           'page' => array(key($guide_pages) => $adjacent_data),
@@ -150,7 +145,7 @@ final class GuidePageController extends WebPageController {
     }
     return $adjacent_page;
   }
-  
+
   protected function getAdjacentGuide(
     array<string, NavDataNode> $guides,
     string $current_guide,
@@ -196,7 +191,11 @@ final class GuidePageController extends WebPageController {
           </span>
           <i class="breadcrumbSeparator" />
           <span class="breadcrumbCurrentPage">
-            {ucwords(strtr($guide.': '.$this->getPage(), '-', ' '))}
+            {Guides::normalizeName(
+              $this->getProduct(),
+              $guide,
+              $this->getPage(),
+            )}
           </span>
         </div>
       </div>;
@@ -219,7 +218,7 @@ final class GuidePageController extends WebPageController {
         <script>
           var navLoader = document.getElementsByClassName('navLoader')[0];
           ReactDOM.render(
-            React.createElement(DocNav, {json_encode($nav_args)}), 
+            React.createElement(DocNav, {json_encode($nav_args)}),
             navLoader
           );
         </script>

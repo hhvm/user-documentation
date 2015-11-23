@@ -11,9 +11,11 @@ final class SearchController extends WebPageController {
     return "Search results for '{$this->getSearchTerm()}':";
   }
 
-  private function getListFromResultSet(Map<string, string> $result_set): XHPRoot {
+  private function getListFromResultSet(
+    Map<string, string> $result_set,
+  ): ?XHPRoot {
     if (count($result_set) === 0) {
-      $list = <div><p><em>No Results Found</em></p></div>;
+      return null;
     } else {
       $list = <ul />;
       foreach ($result_set as $name => $path) {
@@ -26,23 +28,32 @@ final class SearchController extends WebPageController {
 
   protected async function getBody(): Awaitable<XHPRoot> {
     $results = $this->getSearchResults();
-    return 
-      <x:frag>
-        <h2>Guides</h2>
-        <h3>Hack</h3>
-        {$this->getListFromResultSet($results->getHackGuides())}
-        <h3>HHVM</h3>
-        {$this->getListFromResultSet($results->getHHVMGuides())}
-        <h2>API</h2>
-        <h3>Classes</h3>
-        {$this->getListFromResultSet($results->getClasses())}
-        <h3>Traits</h3>
-        {$this->getListFromResultSet($results->getTraits())}
-        <h3>Interfaces</h3>
-        {$this->getListFromResultSet($results->getInterfaces())}
-        <h3>Functions</h3>
-        {$this->getListFromResultSet($results->getFunctions())}
-      </x:frag>;
+
+    $result_lists = (Map {
+      'Hack Guides' => $results->getHackGuides(),
+      'HHVM Guides' => $results->getHackGuides(),
+      'Hack Classes' => $results->getClasses(),
+      'Hack Traits' => $results->getTraits(),
+      'Hack Interfaces' => $results->getInterfaces(),
+      'Hack Functions' => $results->getFunctions(),
+    })
+      ->map($defs ==>$this->getListFromResultSet($defs))
+      ->filter($xhp ==> $xhp !== null);
+
+    if (!$result_lists) {
+      return <p>No results found.</p>;
+    }
+
+    $root = <div class="innerContent" />;
+    foreach ($result_lists as $type => $list) {
+      $root->appendChild(
+        <x:frag>
+          <h1>{$type}</h1>
+          {$list}
+        </x:frag>
+      );
+    }
+    return $root;
   }
 
   <<__Memoize>>

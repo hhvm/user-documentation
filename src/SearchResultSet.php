@@ -21,16 +21,18 @@ final class SearchResultSet {
   }
 
   public function addGuideResult(
-    GuidesProduct $type,
-    string $category,
-    string $name,
+    GuidesProduct $product,
+    string $guide,
+    string $page,
   ): void {
-    switch ($type) {
+    $name = Guides::normalizeName($product, $guide, $page);
+    $url = URLBuilder::getPathForGuidePage($product, $guide, $page);
+    switch ($product) {
       case GuidesProduct::HHVM:
-        $this->hhvmGuides[ucwords("{$category} {$name}")] = "/hhvm/{$category}/{$name}";
+        $this->hhvmGuides[$name] = $url;
         break;
       case GuidesProduct::HACK:
-        $this->hackGuides[ucwords("{$category} {$name}")] = "/hack/{$category}/{$name}";
+        $this->hackGuides[$name] = $url;
         break;
     }
   }
