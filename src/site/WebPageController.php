@@ -1,7 +1,5 @@
 <?hh // strict
 
-include_once("./include/ga.inc");
-
 use HHVM\UserDocumentation\BuildPaths;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -54,6 +52,11 @@ EOF;
 
     $body_class = $this->getBodyClass($extra_class);
 
+    $google_analytics = null;
+    if ($this->getRequestedHost() === 'beta.docs.hhvm.com') {
+      $google_analytics = <script:google-analytics trackingID="UA-70527006-1" />;
+    }
+
     $xhp =
       <x:doctype>
         <html>
@@ -88,6 +91,7 @@ EOF;
             />
             <script src="https://fb.me/react-0.14.2.min.js" />
             <script src="https://fb.me/react-dom-0.14.2.min.js" />
+            {$google_analytics}
           </head>
           <body class={$body_class}>
             {$this->getHeader()}
