@@ -8,6 +8,6 @@ Allows for a more concise representation of [PHP closures](http://php.net/manual
 
 Allows for method and property calls without explicit checks to ensure that the object being referenced is non-`null`
 
-## `->:` ([XHP attribute access operator](xhp-attributes-access.md))
+## `->:` ([XHP attribute access operator](XHP-attribute-access.md))
 
 Allows for accessing XHP attributes without explicitly having to call `getAttribute()` on the XHP object.
