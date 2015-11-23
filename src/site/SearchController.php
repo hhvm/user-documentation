@@ -31,7 +31,7 @@ final class SearchController extends WebPageController {
 
     $result_lists = (Map {
       'Hack Guides' => $results->getHackGuides(),
-      'HHVM Guides' => $results->getHackGuides(),
+      'HHVM Guides' => $results->getHHVMGuides(),
       'Hack Classes' => $results->getClasses(),
       'Hack Traits' => $results->getTraits(),
       'Hack Interfaces' => $results->getInterfaces(),
