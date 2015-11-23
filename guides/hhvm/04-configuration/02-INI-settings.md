@@ -412,7 +412,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | hhvm.source_root | For server mode, this will hold the path to the root of the directory of the code being served up. This setting is _useless_ in repo-authoritative mode. | working directory of HHVM process |
 | hhvm.spin_on_crash | | |
 | hhvm.stack_args | | |
-| hhvm.static_file.extensions[ ] | Map of filename extensions to content types for use by the proxygen server | see [runtime-option.cpp](https://github.com/facebook/hhvm/blob/master/hphp/runtime/base/runtime-option.cpp#L1510-L1520) for defaults |
+| hhvm.static_file.extensions[ ] | Map of filename extensions to content types for use by the proxygen server | see [runtime-option.cpp](https://gist.github.com/JoelMarcey/29601dc033af31390fc6) for defaults |
 | hhvm.stats.enable | enable stats collection | _False_ |
 | hhvm.stats.apc | | _False_|
 | hhvm.stats.enable_hot_profiler | enable xhprof | _True_ |
