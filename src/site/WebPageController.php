@@ -70,9 +70,9 @@ EOF;
             <static:stylesheet
               path="/css/syntax-highlighting.css"
             />
-            <link 
+            <link
               href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700" 
-              rel="stylesheet" 
+              rel="stylesheet"
               type="text/css"
             />
             <link
@@ -181,8 +181,12 @@ EOF;
           </div>
           <div class="searchBar headerElement">
             <form method="get" action="/search">
-                <input type="text" name="term" class="searchInput" />
-                <input type="submit" value="Search" class="searchSubmit" />
+              <input
+                type="search"
+                name="term"
+                class="searchInput"
+                placeholder="Search"
+              />
             </form>
           </div>
         </div>

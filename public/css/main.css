@@ -239,8 +239,11 @@ form.postLink {
   position: absolute;
 }
 
-.searchBar {
-  left: 250px;
+.headerElement.searchBar {
+  position: absolute;
+  right: 0px;
+  margin-right: 10px;
+  left: auto;
 }
 
 body {
