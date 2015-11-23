@@ -33,42 +33,11 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
   }
 
   private function generateIndexData(): array<string, string> {
-    $old_index = json_decode(file_get_contents(self::LEGACY_INDEX));
-    $old_classes = [];
-    $old_methods = [];
-    $old_functions = [];
-
     Log::v("\nProcessing old site index");
-    foreach ($old_index as $entry) {
-      list ($name, $id, $type) = $entry;
-
-      $name = html_entity_decode($name);
-
-      if ($type === 'phpdoc:classref') {
-        $name = explode('<', $name)[0]; // remove generics
-        $old_classes[$name] = $id;
-        continue;
-      }
-      if ($type !== 'refentry') {
-        continue;
-      }
-      $parts = (new Vector(explode('::', $name)))
-        ->map($x ==> explode('<', $x)[0]);
-
-      if (count($parts) === 1) {
-        $old_functions[$parts[0]] = $id;
-        continue;
-      }
-
-      invariant(
-        count($parts) === 2,
-        "Definition %s has %d parts",
-        $name,
-        count($parts),
-      );
-
-      $old_methods[implode('::', $parts)] = $id;
-    }
+    $reader = new PHPDocsIndexReader(file_get_contents(self::LEGACY_INDEX));
+    $old_classes = $reader->getClasses();
+    $old_methods = $reader->getMethods();
+    $old_functions = $reader->getFunctions();
 
     Log::v("\nCross-referencing with current site index");
 
