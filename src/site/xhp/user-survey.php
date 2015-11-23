@@ -15,27 +15,17 @@ final class :user-survey extends :x:element {
     if ($config->shouldShowNoThanks()) {
       $no_thanks = (
         <x:frag>
-          <a:post class="noButton" href="/__survey/nothanks">No Thanks</a:post>
+          You can also
+          <a:post href="/__survey/nothanks">hide this message</a:post>.
         </x:frag>
       );
     }
 
     return (
-      <div class="widthWrapper surveyWrapper">
-        <div class="userSurvey mainWrapper">
-          <div class="surveyTitle">Feedback</div>
-          <div class="surveyMessage">
-            <p>
-              We'd appreciate your feedback on this documentation - if you can spare a few seconds, we have a 5-question survey.
-            </p>
-            <div class="surveyButtons">
-              <a:post class="yesButton" href="/__survey/go" target="_blank">
-                Take Survey
-              </a:post>
-              {$no_thanks}
-            </div>
-          </div>
-        </div>
+      <div class="userSurvey">
+        We'd appreciate your feedback; if you can spare a few seconds, we have a
+        <a:post href="/__survey/go" target="_blank">5-question survey</a:post>.
+        {$no_thanks}
       </div>
     );
   }
