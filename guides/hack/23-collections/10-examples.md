@@ -38,7 +38,7 @@ Hack collections have [reference semantics](./semantics.md#reference-semantics) 
 
 Hack collections provide a Scala-like *view* with the `lazy()` method. Normally, when you create an instance of a collection, you are creating a *strict* version of the collection. So, when you create a collection that contains one million elements, memory is allocated for all one million of those elements immediately. However, with a *view* via `lazy()`, you can create a *non-strict* collection such that when you use a method like `map()` or `filter()` on the collection (i.e., a transformer method), the elements are only calculated when they are accessed.
 
-This example shows you how to use `lazy()` on a rather large collection and the time for both a *strict* and *non-strict* version of the collection. Since we only need 5 of the elements in the end, the lazy view actually allows us to stop after we meet our required 5 without having to actually allocate all 10000000 elements up front.
+This example shows you how to use `lazy()` on a rather large collection and the time for both a *strict* and *non-strict* version of the collection. Since we only need 5 of the elements in the end, the lazy view actually allows us to stop after we meet our required 5 without having to actually allocate all 1000000 elements up front.
 
 @@ examples-examples/lazy.php @@
 
