@@ -66,29 +66,6 @@ html, body {
   height: 100%;
 }
 
-footer {
-  font-size: x-small;
-  text-align: center;
-}
-
-form.postLink {
-  display: inline;
-}
-
-.userSurvey {
-  border-style: dashed;
-  border-color: #fd8724;
-  border-width: 2px;
-  border-radius: 3px;
-  margin: 30px;
-  padding: 10px;
-  text-align:center;
-}
-
-.userSurvey a {
-  font-weight: 400;
-}
-
 /** Fonts **/
 /* Colors */
 @media only screen and (max-width: 640px) {
@@ -188,6 +165,7 @@ form.postLink {
 }
 .paginationLinks .paginationLink {
   flex-basis: 50%;
+  flex-grow: 1;
   margin: 10px;
   position: relative;
 }
@@ -244,6 +222,65 @@ form.postLink {
   right: 0px;
   margin-right: 10px;
   left: auto;
+}
+
+footer {
+  font-size: x-small;
+  text-align: center;
+}
+
+.surveyWrapper {
+  padding: 20px 0 5px;
+}
+
+.userSurvey {
+  background: #F8F8F8;
+  border: 1px solid #2db04b;
+  border-radius: 3px;
+  color: #303030;
+  text-align: left;
+}
+.userSurvey .surveyTitle {
+  border-bottom: 1px dotted #B0B0B0;
+  color: black;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 0 20px;
+  text-transform: uppercase;
+}
+.userSurvey .surveyMessage {
+  display: flex;
+  flex-wrap: wrap;
+}
+.userSurvey .surveyMessage p {
+  font-size: 14px;
+  flex-basis: 60%;
+  min-width: 300px;
+  line-height: 1.2em;
+  padding: 20px;
+}
+.userSurvey .surveyMessage .surveyButtons {
+  align-self: center;
+  flex-basis: 300px;
+  min-width: 300px;
+}
+.userSurvey .postLink {
+  display: inline-block;
+  width: 50%;
+}
+.userSurvey .postLink a {
+  border: 1px solid #2db04b;
+  border-radius: 2px;
+  color: #303030;
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0 20px 10px;
+  line-height: 1.2em;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
 body {
