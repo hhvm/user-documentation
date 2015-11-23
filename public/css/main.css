@@ -224,6 +224,11 @@ html, body {
   left: auto;
 }
 
+@media only screen and (max-width: 480px) {
+  .searchBar {
+    display: none;
+  }
+}
 footer {
   font-size: x-small;
   text-align: center;
