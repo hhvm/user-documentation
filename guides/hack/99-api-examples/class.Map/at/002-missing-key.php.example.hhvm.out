@@ -1,0 +1,4 @@
+Fatal error: Uncaught exception 'OutOfBoundsException' with message 'String key "blurple" is not defined' in /user-documentation/guides/hack/99-api-examples/class.Map/at/002-missing-key.php:13
+Stack trace:
+#0 /user-documentation/guides/hack/99-api-examples/class.Map/at/002-missing-key.php(13): HH\Map->at()
+#1 {main}

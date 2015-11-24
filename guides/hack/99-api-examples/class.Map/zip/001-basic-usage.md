@@ -1,0 +1,1 @@
+This example shows how `zip` combines the values of the `Map` and another `Traversable`. The resulting `Map` `$labeled_colors` has three elements because `$labels` doesn't have a fourth element to pair with `$m`.
