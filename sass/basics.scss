@@ -1,0 +1,49 @@
+body {
+  background: #ffffff;
+  color:$grey;
+  font: 500 14px/26px $base-font;
+  text-rendering: optimizeLegibility;
+  word-wrap: break-word;
+}
+
+p {
+  padding-bottom: 10px;
+}
+
+a {
+  color: $orange;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.guideListWrapper {
+  border-bottom: 2px solid $orange;
+}
+
+.notFoundErrorPage {
+  background: $midgrey;
+  color: white;
+}
+
+.warning {
+  color: red;
+}
+
+@media only screen and (max-width: 1020px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  body {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  body {
+    font-size: 18px;
+    line-height: 1.8em;
+  }
+}

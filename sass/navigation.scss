@@ -1,0 +1,389 @@
+.navWrapper {
+  background: $lightergrey;
+  box-sizing: border-box;
+  order: 1;
+  
+  .navLoader, .navToggle {
+    height: 100%;
+  }
+
+  h3 {
+    font-size: 19px;
+  }
+
+  .navList {
+    position: relative;
+    
+    li {
+      a {
+        color: $lightgrey;
+        display: block;
+      
+        &:hover {
+          background-color: #DADADA;
+          color: #303030;
+        }
+      }
+      
+      h4 {
+        font-family: $base-font;
+        font-size: 12px;
+        text-transform: uppercase;
+        
+        a {
+          color: $orange;
+          padding-bottom: 10px;
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+  
+  .subList {
+    margin-bottom: 20px;
+    
+    .subListItem {
+      h5 {
+        a {
+          color: $grey;
+          font-weight: 400;
+          padding-left: 30px;
+          position: relative;
+          
+          &::before {
+            border-color: transparent transparent transparent transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 8.7px;
+            content: "";
+            height: 0;
+            left: 12px;
+            position: absolute;
+            top: 8px;
+            @include transition(border-color 0.5s);
+            width: 0;
+          }
+        }
+      }
+      
+      &:hover {
+        h5 {
+          a {
+            &::before {
+              border-color: transparent transparent transparent $grey;
+            }
+          }
+        }
+      }
+      
+      &.itemActive {
+        h5 {
+          a {
+            font-weight: 700;
+            
+            &::before {
+              border-color: transparent transparent transparent $orange;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .apiNavList {
+    .navGroup {
+      .subList {
+        display: none;
+      }
+      
+      &.navGroupActive {
+        .subList {
+          display: block;
+        }
+      }
+    }
+    
+    .subList {
+      .subListItem {
+        h5 {
+          line-height: 0.7em;
+          
+          a {
+            @include apinavlink;
+            
+            &::before {
+              top: 7.5px;
+            }
+          }
+        }
+        
+        .secondLevelList {
+          display: none;
+          
+          .secondLevelListItem {
+            h6 {
+              line-height: 0.7em;
+              
+              a {
+                @include apinavlink;
+                font-weight: 400;
+                padding-left: 45px;
+              }
+            }
+            
+            &.secondLevelItemActive {
+              h6 {
+                a {
+                  color: $midgrey;
+                  font-weight: 700;
+                }
+              }
+            }
+          }
+        }
+        
+        &.itemActive {
+          .secondLevelList {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+.breadcrumbNav {
+  line-height: 1.2em;
+  padding-top: 10px;
+  word-wrap: break-word;
+}
+
+.breadcrumbNav, .breadcrumbNav a {
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.breadcrumbSeparator {
+  margin: 0 10px;
+  padding-left: 6px;
+  position: relative;
+}
+
+.breadcrumbSeparator::before {
+  border-color: transparent transparent transparent $lightgrey;
+  border-style: solid;
+  border-width: 3px 0px 3px 5.5px;
+  content: "";
+  height: 0;
+  left: 0px;
+  position: absolute;
+  top: 5px;
+  @include transition(border-color 0.5s);
+  width: 0;
+}
+
+@media only screen and (max-width: 480px) {
+  .navWrapper {
+    .navLoader {
+      .navList {
+        display: block;
+        
+        li {
+          width: 100%;
+        }
+      }
+    
+      .navToggletrue {
+        .navList {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .breadcrumbNav {
+    line-height: 1.6em;
+  }
+} 
+
+@media only screen and (min-width: 480px) and (max-width: 1020px) {
+  .navWrapper {
+    .navLoader {
+      .navList {
+        display: flex;
+        
+        & > li {
+          width: 50%;
+        }
+      }
+    
+      .navToggletrue {
+        .navList {
+          display: flex;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  .navWrapper {
+    background: none;
+    box-sizing: border-box;
+    height: 60px;
+    overflow-x: hidden;
+    position: fixed;
+    right: 0;
+    top: 0;
+    @include transition(height 0.3s);
+    width: 60px;
+    z-index: 999;
+    
+    &[data-active="true"] {
+      height: 100%;
+      left: 0px;
+      padding-top: 60px;
+      width: 100%;
+    }
+    
+    .navTogglefalse {
+      .navList {
+        display: none;
+      }
+    }
+    
+    .toggleNav {
+      color: $grey;
+      cursor: pointer;
+      font-size: 24px;
+      line-height: 60px;
+      position: fixed;
+      top: 0;
+      right: 15px;
+      z-index: 9999;
+      @include transition(color 0.3s);
+      
+      &.toggleNavtrue {
+        color: white;
+      }
+    }
+    
+    .navList {
+      align-items: stretch;
+      background: #f8f8f8;
+      box-sizing: border-box;
+      display: flex;
+      flex-flow: row wrap;
+      height: 100%;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px;
+      width: 100%;
+      
+      & > li {
+        box-sizing: border-box;
+        flex: 1;
+        flex-basis: 50%;
+        flex-shrink: 0;
+        flex-flow: 1;
+        padding: 10px;
+        width: 50%;
+      }
+    }
+    
+    .subList {
+      .subListItem h5 a::before {
+        left: -12px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1020px) {
+  .navWrapper {
+    height: 100vh;
+    order: 1;
+    padding: 60px 0 0;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 300px;
+    z-index: 99;
+    
+    .toggleNav {
+      display: none;
+    }
+    
+    & + .mainContainer {
+      margin-left: 300px;
+    }
+    
+    h3 {
+      font-size: 19px;
+    }
+    
+    .navList {
+      box-sizing: border-box;
+      height: 100%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      padding: 20px 0;
+      
+      li {
+        h4 {
+          a {
+            padding-left: 30px;
+          }
+        }
+      }
+      
+      .subList {
+        .subListItem {
+          h5 {
+            a {
+              padding-left: 30px;
+            }
+          }
+        }
+      }
+    }
+    
+    .navToggle {
+      & > .navList {
+        box-sizing: border-box;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        padding: 20px 0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .navWrapper {  
+    .subList {      
+      .subListItem {
+        h5 {
+          a {            
+            &::before {
+              top: 12px;
+            }
+          }
+        }
+      }
+    }
+    
+    .apiNavList {
+      .subList {
+        .subListItem {
+          h5 {
+            a::before {
+              top: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

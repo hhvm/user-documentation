@@ -22,6 +22,7 @@ abstract final class BuildPaths {
   const string GUIDES_INDEX = LocalConfig::BUILD_DIR.'/guides-index.php';
   const string GUIDES_SUMMARY = LocalConfig::BUILD_DIR.'/guides-summary.php';
 
+  const string CORE_CSS = LocalConfig::BUILD_DIR.'/main.css';
   const string SYNTAX_HIGHLIGHT_CSS =
     LocalConfig::BUILD_DIR.'/syntax-highlighting.css';
 
