@@ -10,7 +10,7 @@ object(HH\Vector)#4 (5) {
   [4]=>
   int(8)
 }
-Time non-lazy: 0.27819204330444
+Time non-lazy: 0.27172183990479
 object(HH\Vector)#9 (5) {
   [0]=>
   int(0)
@@ -23,4 +23,4 @@ object(HH\Vector)#9 (5) {
   [4]=>
   int(8)
 }
-Time lazy: 0.015102863311768
+Time lazy: 0.015867948532104

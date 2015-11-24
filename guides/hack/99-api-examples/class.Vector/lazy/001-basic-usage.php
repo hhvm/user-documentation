@@ -2,12 +2,20 @@
 
 namespace Hack\UserDocumentation\API\Examples\Vector\Lazy;
 
-$v = Vector {'red', 'green', 'blue', 'yellow'};
+$vector = new Vector(range(0, 1000000));
 
-// Get a lazy iterable view into the Vector $v
-$lazy_iterable = $v->lazy();
+$s = microtime(true);
+$non_lazy = $vector->filter($x ==> $x % 2 === 0)->take(5);
+$e = microtime(true);
 
-// Print each color by consuming $lazy_iterable
-foreach ($lazy_iterable as $color) {
-  echo $color."\n";
-}
+var_dump($non_lazy);
+echo "Time non-lazy: " . strval($e - $s) . PHP_EOL;
+
+// Using a lazy view of the vector can save us a bunch of time, possibly even
+// cutting this call time by 90%.
+$s = microtime(true);
+$lazy = $vector->lazy()->filter($x ==> $x % 2 === 0)->take(5);
+$e = microtime(true);
+
+var_dump($lazy->toVector());
+echo "Time lazy: " . strval($e - $s) . PHP_EOL;
