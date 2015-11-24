@@ -1,4 +1,5 @@
 vendor
+vendor-rb
 composer.phar
 .commit-template
 *.swp

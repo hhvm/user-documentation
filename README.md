@@ -102,7 +102,7 @@ You can then install the dependencies for this project:
 
 ```
 $ cd user-documentation
-user-documentation$ bundle --path vendor/
+user-documentation$ bundle --path vendor-rb/
 Using i18n 0.7.0
 Using json 1.8.2
 Using minitest 5.5.1
