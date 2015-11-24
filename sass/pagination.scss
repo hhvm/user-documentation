@@ -1,0 +1,61 @@
+.paginationLinks {
+  .paginationLink {
+    a {
+      border-top: 2px solid $orange;
+      display: block;
+      font-family: $header-font;
+      font-size: 150%;
+      font-weight: 400;
+      padding: 10px;
+      position: relative;
+      @include transition(color 0.3s);
+      z-index: 90;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      background-color: transparent;
+      height: 100%;
+      position: absolute;
+      @include transition(background-color 0.3s, width 0.3s);
+      width: 0px;
+    }
+
+    &.next {
+      text-align: right;
+    }
+
+    &.previous {
+      &::before {
+        right: 0px;
+      }
+    }
+
+    &:hover {
+      &::before {
+        background-color: $orange;
+        width: 100%;
+      }
+
+      &.previous {
+        &::before {
+          right: 0px;
+        }
+      }
+
+      a {
+        color: white;
+      }
+    }
+
+    flex-basis: 50%;
+    flex-grow: 1;
+    margin: 10px;
+    position: relative;
+  }
+
+  display: flex;
+  margin: 0 -10px;
+  padding-top: 20px;
+}

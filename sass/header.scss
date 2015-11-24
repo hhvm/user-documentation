@@ -1,0 +1,57 @@
+.header {
+  background: $midgrey;
+  border-bottom: 2px solid $orange;
+  color: white;
+  height: 60px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+
+  .widthWrapper {
+    height: 100%;
+    position: relative;
+  }
+
+  .headerLogo {
+    bottom: 0px;
+    line-height: 60px;
+    position: absolute;
+    top: 0px;
+
+    &.hhvmLogo {
+      left: 110px;
+
+      .bodyClassHack & {
+        @include headerfade;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.hackLogo {
+      left: 0px;
+
+      .bodyClassHhvm & {
+        @include headerfade;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    a {
+      color: white;
+      display: block;
+      font-family: $header-font;
+      font-size: 25px;
+      font-weight: 700;
+      height: 100%;
+      padding-left: 35px;
+      position: relative;
+      text-decoration: none;
+    }
+  }
+}

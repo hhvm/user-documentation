@@ -1,0 +1,106 @@
+@media only screen and (max-width: 640px) {
+  .tableWrapper {
+    margin: 20px 0;
+
+    table {
+      display: block;
+
+      thead {
+        display: none;
+      }
+
+      tbody {
+        display: block;
+
+        tr {
+          background: $lightergrey;
+          border: 1px solid $lightgrey;
+          display: block;
+          margin: 15px 0;
+          padding: 15px;
+
+          td {
+            border-bottom: 1px dotted $lightgrey;
+            display: block;
+            padding: 5px 0;
+            text-align: right;
+
+            &::before {
+              color: $grey;
+              content: attr(data-heading);
+              display: block;
+              font-family: $header-font;
+              float: left;
+              height: 100%;
+              text-transform: uppercase;
+            }
+
+            &:last-of-type {
+              border-bottom: none;
+            }
+
+            code {
+              color: $green;
+              display: inline-block;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 640px) {
+  .tableWrapper {
+    margin: 20px 0;
+    overflow-x: auto;
+
+    table {
+      background: $lightergrey;
+      border: 1px solid $lightgrey;
+      display: table;
+      min-width: 600px;
+
+      thead {
+        border-bottom: 1px solid $lightgrey;
+        display: table-header-group;
+      }
+
+      tbody {
+        display: table-row-group;
+      }
+
+      tr {
+        display: table-row;
+        &:nth-of-type(odd) {
+          background: #E8E8E8;
+        }
+
+        th, td {
+          border-right: 1px dotted $lightgrey;
+          display: table-cell;
+          font-size: 14px;
+          line-height: 1.3em;
+          padding: 10px;
+          text-align: left;
+
+          &:last-of-type {
+            border-right: 0;
+          }
+
+          code {
+            color: $green;
+            display: inline-block;
+            font-size: 12px;
+          }
+        }
+
+        th {
+          color: $grey;
+          font-family: $header-font;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}

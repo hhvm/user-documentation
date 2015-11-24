@@ -71,8 +71,8 @@ user-documentation$ hhvm /path/to/composer.phar install
 
 ### Ruby Dependencies: Bundler
 
-We use the GitHub-Flavored-Markdown pipeline to provide a familiar syntax.
-As this is written in Ruby, dependencies aren't managed by Composer: the
+We use the GitHub-Flavored-Markdown pipeline to provide a familiar syntax, and SASS to provide CSS files from structured SCSS source.
+As these are written in Ruby, dependencies aren't managed by Composer: the
 similar Bundler tool is used instead.
 
 If you do not already have a `bundle` executable in your path, either install
@@ -101,8 +101,8 @@ directory mentioned in the error.
 You can then install the dependencies for this project:
 
 ```
-$ cd user-documentation/md-render
-user-documentation/md-render$ bundle --path vendor/
+$ cd user-documentation
+user-documentation$ bundle --path vendor-rb/
 Using i18n 0.7.0
 Using json 1.8.2
 Using minitest 5.5.1
@@ -134,6 +134,7 @@ This will:
  - parse the API definitions in HHVM and Hack, storing machine-readable
    data and documentation in YAML files
  - create canonical definitions, combining the data obtained from Hack and HHVM
+ - generate CSS files from the SCSS source
  - generate Markdown files for the API documentation based on these YAML files
  - render all Markdown (API reference and written guides) to HTML
 

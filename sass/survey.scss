@@ -1,0 +1,22 @@
+footer {
+  font-size: x-small;
+  text-align: center;
+}
+
+form.postLink {
+  display: inline;
+}
+
+.userSurvey {
+  border-style: dashed;
+  border-color: $orange;
+  border-width: 2px;
+  border-radius: 3px;
+  margin: 30px;
+  padding: 10px;
+  text-align:center;
+
+  a {
+    font-weight: 400;
+  }
+}

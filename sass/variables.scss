@@ -1,0 +1,41 @@
+/** Fonts **/
+
+$base-font: "Open Sans", Arial, Helvetica, sans-serif;
+$header-font: "Roboto", 'Helvetica Neue', Arial, sans-serif;
+
+/* Colors */
+$orange: #fd8724;
+$lighterorange: #faf0e7;
+
+$grey: #505050;
+$midgrey: #303030;
+$lightgrey: #B0B0B0;
+$lightergrey: #F8F8F8;
+
+$green: #2db04b;
+$lightergreen: #DFF7E5;
+
+$lightblue: #6A87CB;
+$blue: #274EA9;
+$darkblue: #113790;
+
+/* Mixins */
+
+@mixin codetext {
+  font-family: Hack, monospace;
+  font-size: 90%;
+  line-height: 1.4em;
+}
+
+@mixin headerfade {
+  opacity: 0.3;
+  @include transition(opacity 0.3s);
+}
+
+@mixin apinavlink {
+  font-family: $base-font;
+  font-size: 12px;
+  padding-bottom: 7.5px;
+  padding-top: 7.5px;
+  word-wrap: break-word;
+}

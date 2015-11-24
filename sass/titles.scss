@@ -1,0 +1,54 @@
+h1, h2, h3, h4 {
+  font-family: $header-font;
+  font-weight: 700;
+  line-height: 1.3em;
+}
+
+h1 a, h2 a, h3 a, h4 a {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 300%;
+}
+
+h2 {
+  font-size: 250%;
+}
+
+h3 {
+  font-size: 200%;
+}
+
+h4 {
+  font-size: 140%;
+}
+
+.mainTitle {
+  .pageTitle {
+    border-bottom: 2px solid $orange;
+    color: $grey;
+    margin: 40px 0 10px;
+    padding-bottom: 10px;
+  }
+
+  & + .flexWrapper {
+    padding-top: 10px;
+  }
+
+  .widthWrapper {
+    max-width: 1000px;
+  }
+}
+
+.guideListWrapper {
+  .listTitle {
+    margin-bottom: 25px;
+  }
+
+  .guideList + .listTitle {
+    border-top: 1px dotted $lightgrey;
+    margin-top: 50px;
+    padding-top: 50px;
+  }
+}

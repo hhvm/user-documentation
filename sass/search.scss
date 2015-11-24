@@ -1,0 +1,19 @@
+.headerElement {
+	bottom: 0px;
+	left: 110px;
+	line-height: 60px;
+	position: absolute;
+}
+
+.headerElement.searchBar {
+  position: absolute;
+  right: 0px;
+  margin-right: 10px;
+  left: auto;
+}
+
+@media only screen and (max-width: 480px) {
+	.searchBar {
+		display: none;
+	}
+}
