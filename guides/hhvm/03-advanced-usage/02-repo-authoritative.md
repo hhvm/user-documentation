@@ -30,7 +30,7 @@ hhvm --hphp -t hhbc -v AllVolatile=true file1.php file2.php
 hhvm --hphp -t hhbc -v AllVolatile=true --input-list master-file-list.txt
 ```
 
-The `master-file-list.txt` should like like this:
+The `master-file-list.txt` should look like this:
 
 ```
 index.php
