@@ -1,0 +1,1 @@
+This example creates new `Set`s by concatenating other `Traversable`s. Unlike `Set::addAll()` this method returns a new `Set` (not a [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy)).

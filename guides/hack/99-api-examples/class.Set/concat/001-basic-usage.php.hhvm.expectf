@@ -1,0 +1,23 @@
+object(HH\Set)#%d (1) {
+  string(3) "red"
+}
+object(HH\Vector)#%d (3) {
+  [0]=>
+  string(3) "red"
+  [1]=>
+  string(5) "green"
+  [2]=>
+  string(4) "blue"
+}
+object(HH\Vector)#%d (5) {
+  [0]=>
+  string(3) "red"
+  [1]=>
+  string(5) "green"
+  [2]=>
+  string(4) "blue"
+  [3]=>
+  string(6) "yellow"
+  [4]=>
+  string(6) "purple"
+}

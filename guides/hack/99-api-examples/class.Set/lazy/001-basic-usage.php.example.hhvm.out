@@ -1,0 +1,16 @@
+object(HH\Set)#4 (5) {
+  int(0)
+  int(2)
+  int(4)
+  int(6)
+  int(8)
+}
+Time non-lazy: 0.3235170841217
+object(HH\Set)#9 (5) {
+  int(0)
+  int(2)
+  int(4)
+  int(6)
+  int(8)
+}
+Time lazy: 0.015014886856079
