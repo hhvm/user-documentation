@@ -3,12 +3,12 @@
 namespace Hack\UserDocumentation\Async\Intro\Examples\Curl;
 
 async function curl_A(): Awaitable<string> {
-  $x = await \HH\Asio\curl_exec("http://www.immigration.govt.nz/");
+  $x = await \HH\Asio\curl_exec("http://example.com/");
   return $x;
 }
 
 async function curl_B(): Awaitable<string> {
-  $y = await \HH\Asio\curl_exec("http://www.gov.za/");
+  $y = await \HH\Asio\curl_exec("http://example.net/");
   return $y;
 }
 

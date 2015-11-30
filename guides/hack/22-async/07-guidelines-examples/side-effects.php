@@ -13,7 +13,7 @@ function possible_side_effects(): int {
 }
 
 async function proximity(): Awaitable<void> {
-  $handle = get_curl_data("http://cnn.com");
+  $handle = get_curl_data("http://example.com");
   possible_side_effects();
   await $handle; // instead you should await get_curl_data("....") here
 }

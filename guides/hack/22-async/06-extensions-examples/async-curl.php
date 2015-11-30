@@ -3,9 +3,11 @@
 namespace Hack\UserDocumentation\Async\Extensions\Examples\Curl;
 
 function get_urls(): Vector<string> {
-  $urls = Vector {"http://google.com", "http://facebook.com",
-                  "http://www.immigration.govt.nz/"};
-  return $urls;
+  return Vector {
+    "http://example.com",
+    "http://example.net",
+    "http://example.org",
+  };
 }
 
 async function get_combined_contents(Vector $urls): Awaitable<Vector<string>> {
