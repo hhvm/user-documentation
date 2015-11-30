@@ -73,17 +73,18 @@ Method | Valid Collection
 [`sort()`](http://php.net/manual/en/function.sort.php) | `Vector`
 [`rsort()`](http://php.net/manual/en/function.rsort.php) | `Vector`
 [`usort()`](http://php.net/manual/en/function.usort.php) | `Vector`
-[`asort()`](http://php.net/manual/en/function.asort.php) | `Map`, `Set`
-[`arsort()`](http://php.net/manual/en/function.arsort.php) | `Map`, `Set`
-[`ksort()`](http://php.net/manual/en/function.ksort.php) | `Map`, `Set`
-[`krsort()`](http://php.net/manual/en/function.krsort.php) | `Map`, `Set`
-[`usort()`](http://php.net/manual/en/function.usort.php) | `Map`, `Set`
-[`uasort()`](http://php.net/manual/en/function.uasort.php) | `Map`, `Set`
-[`uksort()`](http://php.net/manual/en/function.uksort.php) | `Map`, `Set`
-[`natsort()`](http://php.net/manual/en/function.natsort.php) | `Map`, `Set`
-[`natcasesort()`](http://php.net/manual/en/function.natcasesort.php) | `Map`, `Set`
+[`asort()`](http://php.net/manual/en/function.asort.php) | `Map`
+[`arsort()`](http://php.net/manual/en/function.arsort.php) | `Map`
+[`ksort()`](http://php.net/manual/en/function.ksort.php) | `Map`
+[`krsort()`](http://php.net/manual/en/function.krsort.php) | `Map`
+[`uasort()`](http://php.net/manual/en/function.uasort.php) | `Map`
+[`uksort()`](http://php.net/manual/en/function.uksort.php) | `Map`
+[`natsort()`](http://php.net/manual/en/function.natsort.php) | `Map`
+[`natcasesort()`](http://php.net/manual/en/function.natcasesort.php) | `Map`
 
 `Pair`s do not support sorting since they are immutable. You can convert the `Pair` to a mutable collection and then do a sort.
+
+There is currently a contradiction with sorting `Set`s to where the [Hack typechecker](/hack/typechecker/introduction) and [HHVM](/hhvm/) do not agree. For example, the typechecker is ok with a call to `sort()` on a `Set`, but HHVM is not; and HHVM is ok with a call to `asort()` on a `Set`, but the typechecker is no. We are working on fixing this issue. 
 
 ### Querying
 
