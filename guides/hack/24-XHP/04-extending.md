@@ -4,34 +4,61 @@ XHP comes with classes for all standard HTML tags, but since these are first-cla
 
 All XHP class names start with a colon `:` and may include other `:` as well, as long as they are not adjacent. Note that this is an exception to the Hack rule where you cannot have `:` in class names.
 
-To create a custom XHP class, you need to do the following two things:
+A custom XHP class needs to do two things:
 
-* Your class extends `:x:element`.
-* You implement the `render()` method to return an XHP Object via `XHPRoot`.
+* extends `:x:element`.
+* implement the `render()` method to return an XHP Object via `XHPRoot`.
 
 @@ extending-examples/basic.php @@
 
 ## Attributes
 
-Your custom class may have attributes. You declare each attribute with the keyword `attribute`, followed by a type and finally the attribute name (possibly with a default value).
+### Syntax
+
+Your custom class may have attributes in a similar form to XML attributes, using the `attribute` keyword:
 
 ```
-attribute <type> <name> [= default value];
+attribute <type> <name> [= default value|@required];
 ```
 
-Here are the types allowed for attributes. Note if there is a problem with using an attribute, normally an `XHPInvalidAttributeException` will be thrown.
+Additionally, multiple declarations can be combined:
 
-* `bool`, `int`, `float`, `string`, `array`, `mixed` (with **no coercion** ... a `int` is not coerced into `float`, for example. You will get an `XHPInvalidAttributeException` if you try this).
-* Hack [enum](../enums/introduction.md) names, checked by [`Enum::isValid()`](../enums/functions.md) at runtime.
-* Custom enums inline with the attribute in the form of `enum {item, item...}`. All values must be scalar so they can be converted to strings. These enums are not Hack enums.
-* Class or interface names, checked by `instanceof()`. 
-* [Generic](../generics/introduction.md) types, with type arguments, although they are not enforced at runtime.
+```
+attribute
+  int foo,
+  string bar @required;
+```
 
-You access an attribute within code just like a normal Hack property, but prefixed with a colon `:`. 
+### Types
+
+XHP attributes support the following types:
+
+* `bool`, `int`, `float`, `string`, `array`, `mixed` (with **no coercion** ... an `int` is not coerced into `float`, for example. You will get an `XHPInvalidAttributeException` if you try this).
+* Hack [enum](../enums/introduction.md) names
+* XHP-specific enums inline with the attribute in the form of `enum {item, item...}`. All values must be scalar so they can be converted to strings. These enums are not Hack enums.
+* Class or interface names
+* [Generic](../generics/introduction.md) types, with type arguments
+
+The typechecker will raise errors if attributes are incorrect when instantiating an element (e.g. `<a href={true} />`; because XHP allows attributes to be set in other ways (e.g. `setAttribute()`) ot all probelms will be caught by the typechecker, and an `XHPInvalidAttributeException` will be thrown.
+
+The [`->:` operator](../operators/attribute-access.md) can be used to retrieve the value of an attribute, and Hack will understand it's type.
+
+### Required Attributes
 
 You can specify an attribute as required with the `@required` declaration after the attribute name. If you try to render the XHP object and have not set the required attribute, then an `XHPAttributeRequiredException` will be thrown.
 
-@@ extending-examples/attributes.php @@
+@@ extending-examples/required-attributes.php @@
+
+### Nullable Attributes
+
+For historical reasons, nullable types are inferred instead of explicitly stated. An attribute is nullable if it is not `@required` and does not have a default value. For example:
+
+```
+attribute
+  string iAmNotNullable @required,
+  string iAmNotNullableEither = "foo",
+  string butIAmNullable;
+```
 
 ### Inheritance
 
@@ -48,7 +75,7 @@ children empty; // no children allowed
 
 If you don't explicitly declare using the `children` attribute, then your class can have any child. If you try to add a child to an object that doesn't allow one or doesn't exist in its declaration list, then an `XHPInvalidChildrenException` will be thrown.
 
-You can use some standard regex operators like `*` (zero or more), `+` (one or more) `|` (this or that) when declaring your children.
+You can use the standard regex operators `*` (zero or more), `+` (one or more) `|` (this or that) when declaring your children.
 
 @@ extending-examples/children.php @@
 
@@ -62,19 +89,17 @@ category %name1, %name2,...., %$nameN;
 
 The categories are taken from the HTML specification (e.g., `%flow`, `%phrase`).
 
-**NOTE**: Generally you will not be adding categories to your custom classes.
-
 @@ extending-examples/categories.php @@
 
 ## Async
 
-XHP and [async](../async/introduction.md) co-exist well together. When defining your XHP class, and you want to use `async`, do these two things:
+XHP and [async](../async/introduction.md) co-exist well together. An async XHP class must do two additional things:
 
-* Your class must `use XHPAsync;`, the XHP async trait.
-* You render with `asyncRender()` instead of `render()`, returning an `Awaitable<XHPRoot>`
+* use the `XHPAsync` trait
+* implement `asyncRender(): Awaitable<XHPRoot>` instead of `render(): XHPRoot`
 
 @@ extending-examples/xhp-async.php @@
-  
+
 ## XHP Helpers
 
 The `XHPHelpers` trait implements three behaviors:
