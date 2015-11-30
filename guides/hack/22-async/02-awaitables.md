@@ -15,9 +15,11 @@ $x = await foo(); // $x will be an int
 
 @@ awaitables-examples/awaitable-return.php @@
 
+All `async` functions must return an `Awaitable<T>`. Calling an `async` function will therefore yield an object implementing the `Awaitable` interface, and you must `await` or `join` it to obtain an end result from the operation. When you `await`, you are pausing the current task until the operation associated with the `Awaitable` handle is complete, leaving other tasks free to continue executing. `join` is similar, however it blocks all other operations from completing until the `Awaitable` has returned.
+
 ## Awaiting
 
-All `async` functions must return an `Awaitable<T>`. When you call an `async` function, you will get back that `Awaitable`, at which point, you can `await` that `Awaitable` to wait for a result from the operation. When you `await`, you are blocking until the operation associated with the `Awaitable` is complete.
+In most cases, you will prefer to `await` an `Awaitable` so that other tasks can execute while your blocking operation completes.  Note however, that only `async` functions can yield control to other asyncs, so `await` may therefore only be used in an `async` function.  For other locations, such as a `main` block, you will need to use `join`, outlined later in this section.
 
 ### Batching Awaitables
 
@@ -38,13 +40,9 @@ Here we are using one of the two built-in async helper functions in the `HH\Asio
 
 ## Join
 
-Sometimes you want to get a result out of an awaitable when the function you are in **is not** `async`. For this there is `HH\Asio\join()`. Pass an `Awaitable` to `join()`.
+Sometimes you want to get a result out of an awaitable when the function you are in **is not** `async`. For this there is `HH\Asio\join()` which takes an `Awaitable` and blocks until it resolves into a result.
 
-Note: that global function calls (e.g., `main()`) require a join if that function is `async`. For example:
-
-```
-HH\Asio\join(main());
-```
+This means that invocations of async functions from the global scope (aka psuedomain) cannot be awaited, and must be joined.
 
 @@ awaitables-examples/join.php @@
 
