@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\API\Examples\HH\Asio\vf;
+
 $times = ImmVector {
   100000000, // Sat, 03 Mar 1973 09:46:40
   200000000, // Mon, 03 May 1976 19:33:20
