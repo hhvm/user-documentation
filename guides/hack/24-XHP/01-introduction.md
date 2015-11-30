@@ -59,17 +59,13 @@ At this point, the new element can be used like any built-in element:
 
 ### Runtime Validation
 
-Since XHP objects are first-class and not just strings, a whole slew of validation can occur to ensure that your UI does not have subtle bugs.
+Since XHP objects are first-class and not just strings, a whole slew of validation can occur to ensure that your UI does not have subtle bugs:
 
 @@ introduction-examples/tag-matching-validation.php.type-errors @@
 
-The above code won't typecheck or even run because the XHP validator will catch that `<span>` and `<naps>` tags are mismatched.
+The above code won't typecheck or run because the XHP validator will see that `<span>` and `<naps>` tags are mismatched - however the following code will typecheck correctly but fail to run, because while the tags are matched, they are not nested correctly (according to the HTML specification), and nesting verification only happens at runtime:
 
 @@ introduction-examples/allowed-tag-validation.php @@
-
-The above code *will* typecheck correctly. Tag nesting rule validation is only done at runtime.
-
-**NOTE**: The Hack typechecker and HHVM as built in syntax checking for XHP. But most of the validation is done at runtime and requires the `xhp-lib` to be included/autoloaded in your source.
 
 ### Security
 
