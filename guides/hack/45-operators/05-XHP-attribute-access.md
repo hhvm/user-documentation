@@ -1,14 +1,16 @@
-XHP is such a big topic that it is [discussed in detail](/hack/XHP/introduction.md) elsewhere, but there is a special operator provided for XHP in order to access the attributes of an XHP object. 
+XHP is such a big topic that it is [discussed in detail](/hack/XHP/introduction.md) elsewhere, but a special operator (`->:`) is provided for XHP in order to access the attributes of an XHP object:
 
-The operator is:
 
 ```
-->:<XHP attribute>
+// Without the operator:
+$variable = $xhp_object->getAttribute('attributeName');
+// With the operator:
+$variable = $xhp_object->:attributeName;
 ```
 
-This operator brings some conciseness, but more importantly, typechecking coverage is improved over the call it replaces `getAttribute("XHPAttributeName")`. Plumbing has been added to the typechecker with first-class support for XHP attributes and this operator.
+As well as making the code more concise, the typechecker understands the operator and is able to make sure the attribute value is used in a type-safe manner:
 
-@@ xhp-attribute-access-examples/comparison.php @@
+@@ XHP-attribute-access-examples/comparison.php @@
 
 ## Namespaces
 
