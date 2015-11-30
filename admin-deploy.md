@@ -64,15 +64,22 @@
 
    **NOTE**: This is first step you will need to do for future pushes from the same checkout.
 
-9. Once the deploy script is finished and you have successfully deployed, push the AWS commit to the `user-documentation` repo
+9. Once the deploy script is finished and you have successfully deployed, do a fetch and merge via `git pull` and then push the AWS commit to the `user-documentation` repo. **Do not** `rebase`, so that the history before that commit keeps on matching what was actually pushed.
 
    ```
+   $ git pull
    $ git push
    ```
 
-10. Test the staging site at http://staging.docs.hhvm.com
+10. Create a changelog, ideally piping it to a markdown file via [gist](https://github.com/defunkt/gist)
 
-11. Swap staging and production
+   ```
+   $ bin/changelog.sh | gist --type md
+   ```
+
+11. Test the staging site at http://staging.docs.hhvm.com
+
+12. Swap staging and production
 
   ```
   $ eb swap
