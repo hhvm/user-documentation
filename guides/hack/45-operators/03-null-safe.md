@@ -14,7 +14,7 @@ Let's say you have a call like this:
 $obj?->foo($x, $y);
 ```
 
-If `$obj` is `null`, then instead of throwing a fatal error, the call site will return `null`, instead; otherwise, things work the same as if you used the normal `->` operator.
+If `$obj` is `null`, then instead of throwing a fatal error, the call site will return `null`; otherwise, things work the same as if you used the normal `->` operator.
 
 ## Calling Methods
 
