@@ -10,7 +10,7 @@ It is impossible to accurately analyze type information statically with these fu
 
 ## `extract()`
 
-You will get no typechecker errors, even in [strict mode](../typechecker/modes.md#strict-mode), but all local variable guarantees are removed as the typechecker will just assume the values are the same as before the call.
+This is permitted and functional, even in [strict mode](../typechecker/modes.md#strict-mode), but it hides problems: Hack will not be able to check that any later uses of local variables is correct, as it is unable to know if they were affected by the `extract()` call. It is also frequently a security issue.
 
 ## Variable Variables
 
