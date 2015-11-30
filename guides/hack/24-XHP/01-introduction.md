@@ -24,7 +24,7 @@ The first example uses string interpolation to output the HTML, while the second
  - Remove all HTML/attribute escaping - e.g. you don't need to call `htmlspecialchars()` before including a variable in your XHP output; and if you do, it will be double-escaped.
 
 **IMPORTANT NOTE**: In many cases, XHP does not work in namespaced code. We are aware of this, but take note that you may not be able to use XHP if your code is in a namespace.
- 
+
 ## Using XHP with Hack
 
 For most things you do with XHP, you must have the [XHP library `xhp-lib`](https://github.com/facebook/xhp-lib) included or somehow autoloaded into your codebase.
@@ -39,7 +39,23 @@ You can add the `xhp-lib` via composer:
 
 ## Why use XHP?
 
-Outputting UI through string concatenation or interpolation can be a cause of bugs and security holes. XHP allows you to avoid this type of programming by providing first-class UI objects that can be organized in an object-oriented way.
+The initial reason for most users is because it is 'safe by default': all variables are automatically escaped in a context-appropriate way (e.g. there are different rules for escaping attribute values vs text nodes). In addition, XHP is understood by the typechecker, making sure that you don't pass attribute values. A common example of this is `border="3"`, but `border` is an on/off attribute, so a value of 3 doesn't make sense.
+
+For users experienced with XHP, the biggest advantage is that it is easy to add custom 'elements' with your own behavior, which can then be used like plain HTML elements. For example, this site defines an `<a:post>` tag that has the same interface as a standard `<a>` tag, but makes a POST request instead of a GET request:
+
+@@ introduction-examples/a_post.php @@
+
+A little CSS is needed so the `<form>` doesn't create a block element:
+
+```
+form.postLink {
+  display: inline;
+}
+```
+
+At this point, the new element can be used like any built-in element:
+
+@@ introduction-examples/a_post_usage.php @@
 
 ### Runtime Validation
 
