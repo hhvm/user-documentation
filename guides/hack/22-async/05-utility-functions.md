@@ -50,10 +50,6 @@ From left to right in the function name, here is what the letters represent:
 
 * `w`: result or exception wrapper. 
 
-If there is also an `f` that means:
-
-* If filter function returns `true`, wrapped element is returned; `false`, the element is omitted; `throw`s, the wrapped exception is returned.
-
 ## Type Checking Gotcha
 
 Let's say you have the following:
@@ -86,7 +82,7 @@ So we need to explicitly assert what we know to be true in order to make the typ
 
 ```
 assert ($a instanceof X);
-assert (is_int($b);
+assert (is_int($b));
 return tuple($a, $b);
 ```
 
