@@ -1,0 +1,4 @@
+Fatal error: Uncaught exception 'OutOfBoundsException' with message 'Integer key 2 is out of bounds' in %s:%d
+Stack trace:
+#0 %s(%d): HH\Pair->at()
+#1 {main}

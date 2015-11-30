@@ -1,0 +1,4 @@
+Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Only integer values and string values may be used with Sets' in /user-documentation/guides/hack/99-api-examples/class.Pair/toSet/002-runtime-fatal.php:8
+Stack trace:
+#0 /user-documentation/guides/hack/99-api-examples/class.Pair/toSet/002-runtime-fatal.php(8): HH\Pair->toSet()
+#1 {main}
