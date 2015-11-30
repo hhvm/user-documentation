@@ -3,6 +3,10 @@ require 'colorize'
 module HHVM
   module UserDocumentation
     class IncludeExamplesFilter < HTML::Pipeline::Filter
+      def remove_boilerplate code
+        return code.gsub(%r<^require[^\n]+vendor/autoload.php['"]\)?;\n\n>, '')
+      end
+
       def call
         file = context[:file]
 
@@ -46,9 +50,12 @@ module HHVM
             next
           end
 
+          content = File.read(full_path)
+          content = self.remove_boilerplate(content)
+
           code = doc.document.create_element(
             'pre',
-            File.read(full_path),
+            content,
             language: 'Hack',
           );
           code_node = node.replace(code)
