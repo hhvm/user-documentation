@@ -9,4 +9,4 @@ class B {
   public function __construct() {
   }
 }
-var_dump(new B(undefined_function())); // Doesn't work in neither HHVM nor PHP5
+var_dump(new B(undefined_function())); // Doesn't work in HHVM or PHP5
