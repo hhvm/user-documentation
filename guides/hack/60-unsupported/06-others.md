@@ -12,6 +12,9 @@ It is impossible to accurately analyze type information statically with these fu
 
 This is permitted and functional, even in [strict mode](../typechecker/modes.md#strict-mode), but it hides problems: Hack will not be able to check that any later uses of local variables is correct, as it is unable to know if they were affected by the `extract()` call. It is also frequently a security issue.
 
+The typechecker will also raise undefined variable errors for any locals that
+`extract()` defines that were not previously used.
+
 ## Variable Variables
 
 @@ others-examples/varvars.php.type-errors @@
