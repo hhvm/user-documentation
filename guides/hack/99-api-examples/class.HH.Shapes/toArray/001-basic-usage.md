@@ -1,0 +1,1 @@
+This example shows that `toArray` will return the underlying array of a `Shape`. The result will be loosely typed because a single `Shape` can contain arbitrary different types (e.g. `string`, `int`, `float`).
