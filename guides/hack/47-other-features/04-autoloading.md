@@ -52,4 +52,4 @@ We tried to use the autoloaded function so we got both the message that the auto
 
 * For functions, the name in the autoload map is *lowercase sensitive*. This may be a bug, but it is that way right now. So if you have a function called `Foo` that you are autoloading, the map needs to have `foo`.
 * If your failure callback returns `?bool` , and you are autoloading a class, returning `false` will raise a fatal error as normal when trying to use the class (just like a function). If you return `null`, then it falls back to normal `spl_autoload_register` autoloading.
-* The failure callback should be used primarily as a logger.
+* The failure callback should be used primarily as a logging mechanism.

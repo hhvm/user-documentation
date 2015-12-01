@@ -2,7 +2,7 @@ If you have created a class in Hack or PHP, you probably have seen a pattern lik
 
 @@ constructor-parameter-promotion-examples/duplication.php @@
 
-Basically, you are essentially repeating the class properties multiple times: at declaration, in the constructor parameters, and in the assignment. This can be quite cumbersome.
+Code like this repeats the class properties multiple times: at declaration, in the constructor parameters, and in the assignment. This can be quite cumbersome.
 
 With constructor parameter promotion, all that repetitive boilerplate is removed.
 

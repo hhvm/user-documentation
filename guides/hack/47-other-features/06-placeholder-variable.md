@@ -6,7 +6,7 @@ This is the placeholder variable operator:
 $_
 ```
 
-You can use the placeholder variable operator when iterating over a key/value pair, but you don't care, for example, about the value of that pair.
+You can use the placeholder variable when iterating over a key/value pair, but you don't care, for example, about the value of that pair.
 
 @@ placeholder-variable-examples/iteration.php.type-errors @@
 
@@ -17,7 +17,3 @@ Another common case for the placeholder variable is when you are using `list()` 
 ## Typechecker Semantics
 
 The type of `$_` is `void`. This allows the typechecker to treat this operator with the same rules as it would for anything of type `void`. This is how the typechecker can ensure that the value associated with the placeholder is not actually being used.
-
-## Runtime Semantics
-
-Use of `$_` at runtime (e.g., like in `var_dump($_)`) will cause a fatal syntax error. 
