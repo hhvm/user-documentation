@@ -18,7 +18,7 @@ Note that this operator cannot be used in a write context. That is, the followin
 $xhp_object->:attributeName = 1;
 ```
 
-We may implement support for this in the future.
+We may implement support for this in the future; in the mean time, you need to use the `setAttribute()` method (which is not typechecked).
 
 ## Namespaces
 
