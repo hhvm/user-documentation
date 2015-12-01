@@ -27,6 +27,13 @@ $darkblue: #113790;
   line-height: 1.4em;
 }
 
+@mixin codeemph {
+  background: $lightergreen;
+  border-radius: 2px;
+  color: $green;
+  padding: 1px 3px;
+}
+
 @mixin headerfade {
   opacity: 0.3;
   @include transition(opacity 0.3s);
