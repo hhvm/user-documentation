@@ -18,11 +18,12 @@ If you know HTML or XML, the structure of XHP is quite similar. The most basic X
 
 where `xhp_class_name` is an XHP class *without* the prepending `:`.
 
-@@ basic-usage-examples/basic.php @@
-
 The following example utilizes three XHP classes: `:div`, `:strong`, `:i`. Whitespace is insignificant so you can create a readable tree structure in your code.
 
-We are using `var_dump()` on the XHP object, and you will notice that the output is full of XHP and other Hack objects.
+@@ basic-usage-examples/basic.php @@
+
+
+The `var_dump()` shows that the output is a tree of objects - not an HTML/XML string.
 
 ## HTML Character References
 
