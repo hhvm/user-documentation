@@ -1,6 +1,6 @@
 XHP provides a native XML-like representation of your output (usually HTML). This allows your UI code to be typechecked, and automatically avoids several common issues such as cross-site scripting (XSS) and double-escaping. It also applies other validation rules, e.g. `<head>` must contain `<title>`.
 
-Compare the following:
+Using traditional interpolation, a simple page could look like this:
 
 ```
 <?hh
@@ -8,7 +8,7 @@ $user_name = 'Fred';
 echo "<tt>Hello <strong>$user_name</strong></tt>";
 ```
 
-vs.
+However, with XHP, it looks like this:
 
 ```
 <?hh
@@ -16,26 +16,33 @@ $user_name = 'Fred';
 echo <tt>Hello <strong>{$user_name}</strong></tt>;
 ```
 
-The first example uses string interpolation to output the HTML, while the second has no quotation marks, meaning that we have first-class objects that are part of the Hack grammar &mdash; this does not mean that all you need to do is remove quotation marks. Other steps needed include:
+The first example uses string interpolation to output the HTML, while the second has no quotation marks &mdash;  meaning that the syntax is fully understood by Hack &mdash; but this does not mean that all you need to do is remove quotation marks. Other steps needed include:
 
  - Use curly braces to include variables - e.g. `"<a>$foo</a>"` becomes `<a>{$foo}</a>`.
  - As XHP is XML-like, all elements must be closed - e.g. `"<br>"` becomes `<br />`.
  - Make sure your HTML is properly nested.
  - Remove all HTML/attribute escaping - e.g. you don't need to call `htmlspecialchars()` before including a variable in your XHP output; and if you do, it will be double-escaped.
 
-**IMPORTANT NOTE**: In many cases, XHP does not work in namespaced code. We are aware of this, but take note that you may not be able to use XHP if your code is in a namespace.
+## About Namespaces
 
-## Using XHP with Hack
+XHP currently has several issues with namespaces; we recommend that:
 
-For most things you do with XHP, you must have the [XHP library `xhp-lib`](https://github.com/facebook/xhp-lib) included or somehow autoloaded into your codebase.
+ - XHP classes are not declared in namespaces
+ - code that use XHP classes is not namespaced.
 
-You can add the `xhp-lib` via composer:
+We [plan to support namespaces](https://github.com/facebook/xhp-lib/issues/64) in the future.
+
+## The XHP-Lib Library
+
+While the XHP syntax is part of Hack, a large part of the implementation is in a normal library called XHP-Lib that needs to be installed via composer:
 
 ```
 "require": {
   "facebook/xhp-lib": "~2.2"
 }
 ```
+
+This includes the base classes and interfaces, and definitions of standard HTML elements.
 
 ## Why use XHP?
 
@@ -45,7 +52,7 @@ For users experienced with XHP, the biggest advantage is that it is easy to add 
 
 @@ introduction-examples/a_post.php @@
 
-A little CSS is needed so the `<form>` doesn't create a block element:
+A little CSS is needed so that the `<form>` doesn't create a block element:
 
 ```
 form.postLink {
@@ -72,5 +79,3 @@ The above code won't typecheck or run because the XHP validator will see that `<
 String-based entry and validation are prime candidates for cross-site scripting (XSS). You can get around this by using special functions like [`htmlspecialchars()`](http://php.net/manual/en/function.htmlspecialchars.php), but then you have to actually remember to use those functions. XHP automatically escapes reserved HTML characters to HTML entities before output.
 
 @@ introduction-examples/avoid-xss.php @@
-
-If you are using strings, they will be output as-is since the base Hack language makes no distinction between raw strings and HTML. XHP helps bring some sanity to this problem by understanding what strings should be escaped.
