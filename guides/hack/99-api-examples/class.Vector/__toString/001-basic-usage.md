@@ -1,1 +1,1 @@
-The string version of a `Vector` is always `"Vector"`:
+The string version of an `ImmVector` is always `"ImmVector"`:

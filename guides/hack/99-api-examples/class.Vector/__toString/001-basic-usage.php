@@ -1,12 +1,12 @@
 <?hh
 
-namespace Hack\UserDocumentation\API\Examples\Vector\__toString;
+namespace Hack\UserDocumentation\API\Examples\ImmVector\__toString;
 
-$v = Vector {1, 2, 3};
-echo $v."\n";
+$iv = ImmVector {1, 2, 3};
+echo $iv."\n";
 
-$v2 = Vector {'a', 'b', 'c'};
-echo $v2."\n";
+$iv2 = ImmVector {'a', 'b', 'c'};
+echo $iv2."\n";
 
-$v3 = Vector {};
-echo $v3."\n";
+$iv3 = ImmVector {};
+echo $iv3."\n";
