@@ -46,6 +46,7 @@ EOF;
       $this->getContentPane()
     );
     $content->prependChild(<user-survey />);
+    $content->appendChild($this->getFeedbackFooter());
     $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();
@@ -212,17 +213,21 @@ EOF;
   ) {
     parent::__construct($parameters, $request);
   }
-
-  private function getFooter(): :footer {
-    return (
-      <footer>
-        <div class="footerGithubLink footerElement">
+  
+  private function getFeedbackFooter(): XHPRoot {
+    return
+      <div class="feedbackWrapper widthWrapper">
+        <div class="mainWrapper">
           <github-issue-link
             issueTitle={$this->getGithubIssueTitle()}
-            issueBody={$this->getGithubIssueBody()}
-          >Report a problem or make a suggestion</github-issue-link>
+            issueBody={$this->getGithubIssueBody()}>
+            Report a problem or make a suggestion
+          </github-issue-link>
         </div>
-      </footer>
-    );
+      </div>;
+  }
+
+  private function getFooter(): :footer {
+    return (<footer />);
   }
 }

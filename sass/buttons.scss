@@ -1,0 +1,68 @@
+.buttonHolder{
+  display: block;
+
+	a, span {
+    @include buttonhover($buttondefault);
+    border-radius: 2px;
+		display: inline-block;
+    line-height: 1.2em;
+		font-weight: 400;
+    position: relative;
+		text-transform: uppercase;
+
+		.glyphIcon {
+      align-items: center;
+      bottom: 0px;
+      display: flex;
+      font-size: 14px;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 40px;
+      
+      &::before {
+        margin: 0 auto;
+      }
+		}
+    
+    &.buttonSmall {
+      font-size: 12px;
+      padding: 5px 20px;
+    }
+    
+    &.buttonMedium {
+      font-size: 14px;
+      padding: 10px 20px;
+    }
+    
+    &.buttonLarge {
+      font-size: 16px;
+      padding: 15px 20px;
+    }
+    
+    &.buttonConfirm {
+      @include buttonhover($buttonconfirm);
+      color: white;
+    }
+    
+    &.buttonSpecial {
+      @include buttonhover($buttonspecial);
+      color: white;
+    }
+    
+    &.buttonDelete {
+      @include buttonhover($buttondelete);
+      color: white;
+    }
+	}
+  
+  &.buttonWithGlyph {
+    a, span {
+      padding-left: 60px;
+    }
+  }
+  
+  &.buttonInlineHolder {
+    display: inline-block;
+  }
+}

@@ -15,9 +15,16 @@ $lightergrey: #F8F8F8;
 $green: #2db04b;
 $lightergreen: #DFF7E5;
 
-$lightblue: #6A87CB;
-$blue: #274EA9;
-$darkblue: #113790;
+$blue: #1b7fbf;
+$lightblue: lighten($blue, 10%);
+$darkblue: darken($blue, 10%);
+
+$red: #d64932;
+
+$buttondefault: $grey;
+$buttonconfirm: $green;
+$buttonspecial: $orange;
+$buttondelete: $red;
 
 /* Mixins */
 
@@ -45,4 +52,28 @@ $darkblue: #113790;
   padding-bottom: 7.5px;
   padding-top: 7.5px;
   word-wrap: break-word;
+}
+
+@mixin buttonhover($color) {
+  background-color: $color;
+  box-shadow: 0px 3px darken($color, 10%);
+  color: white;
+  @include transition(background-color 0.2s, box-shadow 0.2s, top 0.2s);
+  overflow: hidden;
+  top: 0px;
+  
+  .glyphIcon {
+    background: lighten($color, 10%);
+    color: darken($color, 25%);
+  }
+  
+  &:hover, &:focus {
+    box-shadow: 0px 1px darken($color, 10%);
+    top: 2px;
+  }
+  
+  &:active {
+    box-shadow: 0px 0px darken($color, 10%);
+    top: 3px;
+  }
 }

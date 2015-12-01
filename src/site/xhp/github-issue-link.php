@@ -21,12 +21,18 @@ final class :github-issue-link extends :x:element {
       urlencode($body),
     );
     return (
-      <a href={$new_issue_prefill_url} target="_blank">
+      <ui:button
+        className="gitHubIssueButton"
+        href={$new_issue_prefill_url}
+        glyph="bug"
+        size="small"
+        target="_blank"
+        use="confirm">
         {$this->getChildren()}
-      </a>
+      </ui:button>
     );
   }
-  
+
   private function getMetadataForBody(): string {
     $build_id = trim(file_get_contents(BuildPaths::BUILD_ID));
     $request_time = (new DateTime())
