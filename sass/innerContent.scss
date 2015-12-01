@@ -31,6 +31,10 @@
     max-width: 100%;
   }
 
+  li > code {
+    @include codeemph;
+  }
+
   ol {
     list-style: decimal inside;
     margin: 0.5em 0 2em;
@@ -41,10 +45,7 @@
     padding-bottom: 1.5em;
 
     & > code {
-      background: $lightergreen;
-      border-radius: 2px;
-      color: $green;
-      padding: 1px 3px;
+      @include codeemph;
     }
   }
 
