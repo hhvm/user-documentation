@@ -14,7 +14,7 @@ Let's say you have a call like this:
 $obj?->foo($x, $y);
 ```
 
-If `$obj` is `null`, then instead of throwing a fatal error, the call site will return `null`; otherwise, things work the same as if you used the normal `->` operator.
+If `$obj` is `null`, then instead of throwing a fatal error, the above expression will evaluate to `null`; otherwise, things work the same as if you used the normal `->` operator.
 
 ## Calling Methods
 
@@ -26,7 +26,7 @@ You can use the null-safe operator to call methods on a class.
 
 You can use the null-safe operator to access properties.
 
-**IMPORTANT NOTE**: The null-safe operator can only be used for **read** access to properties. Write access is forbidden
+**IMPORTANT NOTE**: The null-safe operator can only be used for **read** access to properties. Write access is forbidden.
 
 @@ null-safe-examples/accessing-properties.php @@
 
