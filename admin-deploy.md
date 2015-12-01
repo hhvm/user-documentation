@@ -56,7 +56,13 @@
    $ eb init
    ```
 
-8. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
+8. Rebase your repo to get the lastest and greatest changes
+
+   ```
+   $ git fetch && git rebase origin/master # or another branch name instead of origin/master, if applicable
+   ```
+   
+9. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
 
    ```
    $ bin/deploy-to-staging.sh
@@ -64,22 +70,22 @@
 
    **NOTE**: This is first step you will need to do for future pushes from the same checkout.
 
-9. Once the deploy script is finished and you have successfully deployed, do a fetch and merge via `git pull` and then push the AWS commit to the `user-documentation` repo. **Do not** `rebase`, so that the history before that commit keeps on matching what was actually pushed.
+10. Once the deploy script is finished and you have successfully deployed, do a fetch and merge via `git pull` and then push the AWS commit to the `user-documentation` repo. **Do not** `rebase`, so that the history before that commit keeps on matching what was actually pushed.
 
    ```
    $ git pull
    $ git push
    ```
 
-10. Create a changelog, ideally piping it to a markdown file via [gist](https://github.com/defunkt/gist)
+11. Create a changelog, ideally piping it to a markdown file via [gist](https://github.com/defunkt/gist)
 
    ```
    $ bin/changelog.sh | gist --type md
    ```
 
-11. Test the staging site at http://staging.docs.hhvm.com
+12. Test the staging site at http://staging.docs.hhvm.com
 
-12. Swap staging and production
+13. Swap staging and production
 
   ```
   $ eb swap
