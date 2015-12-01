@@ -7,7 +7,7 @@ If you are familiar with enums (enumerations) in languages like C#, C++ or Java,
 The syntax of an enum is relatively straightforward, with a similar feel to other languages supporting enums.
 
 ```
-enum <NameOfEnum> : <string | int> {
+enum <NameOfEnum>: <string | int> {
   <Member1> = <value>;
   <Member2> = <value>;
   :

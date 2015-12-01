@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Types\TypeSystem\Examples\Enum;
 
-enum Color : string {
+enum Color: string {
   BLUE = "blue";
   RED = "red";
   GREEN = "green";

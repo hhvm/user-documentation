@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\mfk;
 
-enum COLOR : int {
+enum COLOR: int {
   RED = 1;
   ORANGE = 2;
   YELLOW = 3;

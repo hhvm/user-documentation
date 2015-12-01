@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Enums\Intro\Examples\MemberValues;
 
-enum Size : string {
+enum Size: string {
   SMALL = "small" ;
   MEDIUM = "medium";
   LARGE = "large";

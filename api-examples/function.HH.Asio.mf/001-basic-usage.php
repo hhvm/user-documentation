@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\mf;
 
-enum COLOR : int {
+enum COLOR: int {
   RED = 1;
   ORANGE = 2;
   YELLOW = 3;
@@ -18,7 +18,7 @@ $fruits = ImmMap {
   'Grape' => COLOR::GREEN,
   'Orange' => COLOR::ORANGE,
   'Pineapple' => COLOR::YELLOW,
-  'Tangerine' => COLOR::ORANGE, 
+  'Tangerine' => COLOR::ORANGE,
 };
 
 // Similar to $times->filter(...)

@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Enums\GetValues;
 
-enum Day : int {
+enum Day: int {
   SUNDAY = 1;
   MONDAY = 2;
   TUESDAY = 3;

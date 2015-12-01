@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Enums\Intro\Examples\Casting;
 
-enum Size : string {
+enum Size: string {
   SMALL = "small" ;
   MEDIUM = "medium";
   LARGE = "large";
