@@ -17,7 +17,7 @@
 .mainWrapper {
   flex: 1;
   order: 2;
-  max-width: 1000px;
+  max-width: $default-max-width;
 }
 
 .guideListWrapper {
@@ -63,12 +63,8 @@
   }
 }
 
-@media only screen and (min-width: 1400px) {
-  .mainTitle .widthWrapper {
-    max-width: 1200px;
-  }
-
+@media only screen and (min-width: $large-screen-cutoff) {
   .mainWrapper {
-    max-width: 1200px;
+    max-width: $large-screen-max-width;
   }
 }

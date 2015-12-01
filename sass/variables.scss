@@ -26,6 +26,10 @@ $buttonconfirm: $green;
 $buttonspecial: $orange;
 $buttondelete: $red;
 
+$large-screen-cutoff: 1400px;
+$large-screen-max-width: 1200px;
+$default-max-width: 1000px;
+
 /* Mixins */
 
 @mixin codetext {

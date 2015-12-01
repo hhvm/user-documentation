@@ -37,7 +37,13 @@ h4 {
   }
 
   .widthWrapper {
-    max-width: 1000px;
+    max-width: $default-max-width;
+  }
+
+  @media only screen and (min-width: $large-screen-cutoff) {
+    .widthWrapper {
+      max-width: $large-screen-max-width;
+    }
   }
 }
 
