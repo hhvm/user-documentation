@@ -2,11 +2,11 @@
 
 namespace Hack\UserDocumentation\Async\Generators\Examples\Raise;
 
-const SECOND = 1000000; // microseconds
+const HALF_SECOND = 500000; // microseconds
 
 async function get_name_string(int $id): Awaitable<string> {
   // simulate fetch to database where we would actually use $id
-  await \HH\Asio\usleep(SECOND / 2);
+  await \HH\Asio\usleep(HALF_SECOND);
   return str_shuffle("ABCDEFG");
 }
 
