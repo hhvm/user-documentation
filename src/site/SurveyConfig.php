@@ -17,7 +17,7 @@ final class SurveyConfig {
   const int ACTIVE_BUCKET_MIN = 1;
   const int ACTIVE_BUCKET_MAX = 30;
 
-  const int MIN_VISITS_BEFORE_SHOW = 5;
+  const int MIN_VISITS_BEFORE_SHOW = 3;
   const int MIN_SHOWS = 5;
   const int MAX_SHOWS = 20;
 
@@ -25,7 +25,7 @@ final class SurveyConfig {
     private ServerRequestInterface $request,
   ) {
   }
-  
+
   public function shouldShowSurvey(): bool {
     switch (self::MODE) {
       case SurveyMode::ALWAYS:
