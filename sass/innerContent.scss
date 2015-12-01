@@ -1,0 +1,60 @@
+.innerContent {
+  code {
+    @include codetext;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  h1 {
+    font-size: 200%;
+    padding: 20px 0;
+  } 
+  
+  h2 {
+    font-size: 150%;
+    padding: 20px 0;
+  }
+
+  h3 {
+    font-size: 130%;
+    padding: 10px 0;
+  }
+  
+  h4 {
+    font-size: 115%;
+    padding: 10px 0;
+  }
+  
+  img {
+    max-width: 100%;
+  }
+  
+  ol {
+    list-style: decimal inside;
+    margin: 0.5em 0 2em;
+    padding-left: 1em;
+  }
+  
+  p {
+    padding-bottom: 1.5em;
+    
+    & > code {
+      background: $lightergreen;
+      border-radius: 2px;
+      color: $green;
+      padding: 1px 3px;
+    }
+  }
+
+  strong {
+    font-weight: 700;
+  }
+  
+  ul {
+    list-style: disc inside;
+    margin: 0.5em 0 2em;
+    padding-left: 1em;
+  }
+}

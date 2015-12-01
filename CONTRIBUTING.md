@@ -16,6 +16,7 @@ While we aren't 100% rigid on how we want contributions to come to us (we want t
 - Focus on the user of Hack and HHVM; particularly, don't necessarily assume knowledge of a particular topic.
 - Get your content reviewed by peers for accuracy and feedback. This only helps make better documentation for everyone.
 - [Code examples](#code-examples) are awesome.
+- Edit the SCSS source, instead of the generated `build/main.css` file.
 
 ## Document Structure
 

@@ -16,6 +16,7 @@ function hhvm_to_yaml(): void {
 
   (new APILegacyRedirectsBuildStep())->buildAll();
 
+  (new SASSBuildStep())->buildAll();
   (new SyntaxHighlightCSSBuildStep())->buildAll();
   (new StaticResourceMapBuildStep())->buildAll();
 

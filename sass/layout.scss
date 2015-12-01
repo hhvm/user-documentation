@@ -1,0 +1,74 @@
+.widthWrapper {
+  margin: 0 30px;
+  position: relative;
+}
+
+.flexWrapper {
+  align-items: flex-start;
+  display: flex;
+  flex-flow: row no-wrap;
+  padding: 50px 0px;
+}
+
+.mainContainer {
+  padding-top: 62px;
+}
+
+.mainWrapper {
+  flex: 1;
+  order: 2;
+  max-width: 1000px;
+}
+
+.guideListWrapper {
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+}
+
+.notFoundMessage {
+  text-align: center;
+}
+
+.notFoundErrorPage {
+  text-align: center;
+  
+  .pageTitle {
+    display: none;
+  }
+  
+  .mainWrapper {
+    margin: 0 auto;
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  body {
+    display: flex;
+    flex-flow: column wrap;
+  }
+  
+  .flexWrapper {
+    display: block;
+  }
+  
+  .mainContainer {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .widthWrapper {
+    margin: 0 10px;
+  } 
+}
+
+@media only screen and (min-width: 1400px) {
+  .mainTitle .widthWrapper {
+    max-width: 1200px;
+  }
+  
+  .mainWrapper {
+    max-width: 1200px;
+  }
+}

@@ -1,4 +1,5 @@
 vendor
+vendor-rb
 composer.phar
 .commit-template
 *.swp
@@ -10,7 +11,9 @@ LocalConfig.php
 *.css.map
 /build/
 /public/www.pid
-/.sass-cache/
+.sass-cache
+.bundle
+bourbon/
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
