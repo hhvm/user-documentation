@@ -11,24 +11,24 @@ Note: These functions are built in to HHVM 3.11 and greater. If you are using a 
 
 Name    | Returns             | Mapped | Filtered | Has Key | Wrapped Exception
 --------|---------------------|--------|----------|---------|------------------
-[`HH\Asio\v()`](/hack/reference/function/HH.Asio.v/)   | `Vector<T>`         | x      | x        | x       | x
-[`HH\Asio\vm()`](/hack/reference/function/HH.Asio.vm/)  | `Vector<Tr>`        | ✓      | x        | x       | x
-[`HH\Asio\vmk()`](/hack/reference/function/HH.Asio.vmk/) | `Vector<Tr>`        | ✓      | x        | ✓       | x
+[`HH\Asio\v()`](/hack/reference/function/HH.Asio.v/)   | `Vector<Tv>`         | x      | x        | x       | x
+[`HH\Asio\vm()`](/hack/reference/function/HH.Asio.vm/)  | `Vector<Tv>`        | ✓      | x        | x       | x
+[`HH\Asio\vmk()`](/hack/reference/function/HH.Asio.vmk/) | `Vector<Tv>`        | ✓      | x        | ✓       | x
 [`HH\Asio\vf()`](/hack/reference/function/HH.Asio.vf/)  | `Vector<Tv>`        | x      | ✓        | x       | x
 [`HH\Asio\vfk()`](/hack/reference/function/HH.Asio.vfk/) | `Vector<Tv>`        | x      | ✓        | ✓       | x
-[`HH\Asio\vw()`](/hack/reference/function/HH.Asio.vw/)  | `Vector<ResultOrExceptionWrapper<T>>` | x      | x        | x       | ✓
-[`HH\Asio\vmw()`](/hack/reference/function/HH.Asio.vmw/) | `Vector<ResultOrExceptionWrapper<Tr>>`| ✓      | x        | x       | ✓
-[`HH\Asio\vmkw()`](/hack/reference/function/HH.Asio.vmkw/)| `Vector<ResultOrExceptionWrapper<Tr>>`| ✓      | x        | ✓       | ✓
+[`HH\Asio\vw()`](/hack/reference/function/HH.Asio.vw/)  | `Vector<ResultOrExceptionWrapper<Tv>>` | x      | x        | x       | ✓
+[`HH\Asio\vmw()`](/hack/reference/function/HH.Asio.vmw/) | `Vector<ResultOrExceptionWrapper<Tv>>`| ✓      | x        | x       | ✓
+[`HH\Asio\vmkw()`](/hack/reference/function/HH.Asio.vmkw/)| `Vector<ResultOrExceptionWrapper<Tv>>`| ✓      | x        | ✓       | ✓
 [`HH\Asio\vfw()`](/hack/reference/function/HH.Asio.vfw/) | `Vector<ResultOrExceptionWrapper<Tv>>`| x      | ✓        | x       | ✓
 [`HH\Asio\vfkw()`](/hack/reference/function/HH.Asio.vfkw/)| `Vector<ResultOrExceptionWrapper<Tv>>`| x      | ✓        | ✓       | ✓
 [`HH\Asio\m()`](/hack/reference/function/HH.Asio.m/)   | `Map<Tk, Tv>`        | x      | x        | x       | x
-[`HH\Asio\mm()`](/hack/reference/function/HH.Asio.mm/)  | `Map<Tk, Tr>`        | ✓      | x        | x       | x
-[`HH\Asio\mmk()`](/hack/reference/function/HH.Asio.mmk/) | `Map<Tk, Tr>`        | ✓      | x        | ✓       | x
+[`HH\Asio\mm()`](/hack/reference/function/HH.Asio.mm/)  | `Map<Tk, Tv>`        | ✓      | x        | x       | x
+[`HH\Asio\mmk()`](/hack/reference/function/HH.Asio.mmk/) | `Map<Tk, Tv>`        | ✓      | x        | ✓       | x
 [`HH\Asio\mf()`](/hack/reference/function/HH.Asio.mf/)  | `Map<Tk, Tv>`        | x      | ✓        | x       | x
 [`HH\Asio\mfk()`](/hack/reference/function/HH.Asio.mfk/) | `Map<Tk, Tv>`        | x      | ✓        | ✓       | x
-[`HH\Asio\mw()`](/hack/reference/function/HH.Asio.mw/)  | `Map<Tk, ResultOrExceptionWrapper<T>>` | ✓      | x        | x       | ✓
-[`HH\Asio\mmw()`](/hack/reference/function/HH.Asio.mmw/) | `Map<Tk, ResultOrExceptionWrapper<Tr>>`| ✓      | x        | x       | ✓
-[`HH\Asio\mmkw()`](/hack/reference/function/HH.Asio.mmkw/)| `Map<Tk, ResultOrExceptionWrapper<Tr>>`| ✓      | x        | ✓       | ✓
+[`HH\Asio\mw()`](/hack/reference/function/HH.Asio.mw/)  | `Map<Tk, ResultOrExceptionWrapper<Tv>>` | ✓      | x        | x       | ✓
+[`HH\Asio\mmw()`](/hack/reference/function/HH.Asio.mmw/) | `Map<Tk, ResultOrExceptionWrapper<Tv>>`| ✓      | x        | x       | ✓
+[`HH\Asio\mmkw()`](/hack/reference/function/HH.Asio.mmkw/)| `Map<Tk, ResultOrExceptionWrapper<Tv>>`| ✓      | x        | ✓       | ✓
 [`HH\Asio\mfw()`](/hack/reference/function/HH.Asio.mfw/) | `Map<Tk, ResultOrExceptionWrapper<Tv>>`| x      | ✓        | x       | ✓
 [`HH\Asio\mfkw()`](/hack/reference/function/HH.Asio.mfkw/)| `Map<Tk, ResultOrExceptionWrapper<Tv>>`| x      | ✓        | ✓       | ✓
 
