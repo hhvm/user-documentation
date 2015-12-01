@@ -26,8 +26,11 @@ module HHVM
           last = nil
           target = PARENTS[node.name]
           if (target) then
-            node.parent.search(target, node.name).each do |sibling|
+            node.parent.search(target).each do |sibling|
               break if sibling === node
+              # ignore headings that appear after this node in the document
+              # since they can't be a 'parent' of this heading
+              break if sibling.line > node.line
               last = sibling[:id]
             end
           end
