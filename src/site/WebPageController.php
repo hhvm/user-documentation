@@ -213,7 +213,7 @@ EOF;
   ) {
     parent::__construct($parameters, $request);
   }
-  
+
   private function getFeedbackFooter(): XHPRoot {
     return
       <div class="feedbackWrapper widthWrapper">

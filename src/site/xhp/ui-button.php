@@ -13,10 +13,10 @@ final class :ui:button extends :x:element {
   children (pcdata);
 
   protected function render(): XHPRoot {
-    $holder_class = ($this->:className !== null) 
+    $holder_class = ($this->:className !== null)
       ? "buttonHolder ".$this->:className
       : "buttonHolder";
-    $button_class = 
+    $button_class =
       "button button".ucfirst($this->:use)." button".ucfirst($this->:size);
     $button =
         <span

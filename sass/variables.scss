@@ -61,17 +61,17 @@ $buttondelete: $red;
   @include transition(background-color 0.2s, box-shadow 0.2s, top 0.2s);
   overflow: hidden;
   top: 0px;
-  
+
   .glyphIcon {
     background: lighten($color, 10%);
     color: darken($color, 25%);
   }
-  
+
   &:hover, &:focus {
     box-shadow: 0px 1px darken($color, 10%);
     top: 2px;
   }
-  
+
   &:active {
     box-shadow: 0px 0px darken($color, 10%);
     top: 3px;
