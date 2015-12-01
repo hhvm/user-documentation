@@ -8,9 +8,13 @@ No. And this is important. Multithreading allows for tasks to execute in differe
 
 Normally you will have a bunch of I/O tasks batched up when using async, with results coming back faster than if they were executed one after the other in sequence. 
 
+You are encourage to re-read the [Async introduction](/hack/async/introduction) for further clarification.
+
 ### Should I implement my own `Awaitable` class?
 
-No. No. And no. [`Awaitable`](../async/awaitables.md) is not meant to be user-implemented. You should use `Awaitable` liberally when writing [`async`](../async/introduction.md) and let the runtime handle how it deals with awaitables.
+No. No. And no. [`Awaitable`](../async/awaitables.md) is not meant to be user-implemented. Implementing your own `Awaitable` class should only be used by the [HHVM runtime](/hhvm/) itself and those writing native extensions for HHVM.
+
+You should, however, use `Awaitable` liberally when writing [`async`](../async/introduction.md) and let the runtime handle how it deals with awaitables.
 
 ## Collections
  
@@ -22,4 +26,4 @@ Depends, but generally not. You should use [*literal syntax*](../collections/con
 
 ### I am getting `Fatal error: Class undefined` errors?
 
-Make sure your XHP code is not in namespace. We have issues, in many cases, using XHP in namespaced code. The issue is known and we are trying to figure out a solution.
+Make sure your XHP code is not in a namespace. We have issues, in many cases, using XHP in code belonging to a namespace. The issue is known and we are trying to figure out a solution.
