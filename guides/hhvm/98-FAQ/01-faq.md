@@ -1,4 +1,4 @@
-This will contain some helpful hints and frequently asked questions re: HHVM. This is a living document and may be molded into something more user-interactive in the future.
+This contains some helpful hints and frequently asked questions about HHVM.
 
 ## General
 
@@ -8,7 +8,7 @@ For a history of what is now HHVM, please visit [our Wikipedia page](http://en.w
 
 ### How does Facebook use and run HHVM?
 
-Facebook's entire site runs on HHVM (desktop, api and mobile), both in development and production.
+Facebook's entire site runs on HHVM (desktop, API and mobile), both in development and production.
 
 ### What platforms is HHVM supported on?
 
@@ -22,7 +22,7 @@ Facebook's entire site runs on HHVM (desktop, api and mobile), both in developme
  (http://www.youtube.com/watch?v=Dwek7dZDFN0).
 * For a deep dive into the HHVM internals, please see [this QCon 2012 presentation](http://www.infoq.com/presentations/PHP-HHVM-Facebook).
 * Other information can be found in the references of [our Wikipedia page](http://en.wikipedia.org/wiki/HHVM).
-* Presentations from the [HACK Dev Days 2014](https://www.youtube.com/playlist?list=PLb0IAmt7-GS2fdbb1vVdP8Z8zx1l2L8YS).
+* Presentations from the [Hack Dev Day 2014](https://www.youtube.com/playlist?list=PLb0IAmt7-GS2fdbb1vVdP8Z8zx1l2L8YS).
 
 ## Users
 
@@ -36,22 +36,12 @@ You can find more detailed installation information [here](../installation/intro
 
 [Every 8 weeks](https://github.com/facebook/hhvm/wiki/Release%20Schedule).
 
-### How do I configure HHVM? What are my options?
-
-Many times, HHVM can be run directly from the command line without any additional configuration: `hhvm file.php` or, for a server, `sudo hhvm -m server`.
-
-However, we understand that more fine tuned configuration may be necessary, particularly in server mode.
-
-HHVM allows for many [runtime option variations](../configuration/introduction.md). For some configuration options, they can be set at the command line (e.g., `hhvm -m server -d hhvm.log.level=Error`). However, many times you will use a `config.ini` file and run HHVM with a command similar to: `hhvm -m server -c config.ini`.
-
-For other options that can be given to HHVM, type `hhvm --help` at the command line.
-
 ### What code does HHVM currently run?
 
-* **Facebook**: HHVM runs Facebook.com in production. 
+* **Facebook**: HHVM has run [www.facebook.com](https://www.facebook.com) in production since 2013. 
 * **WordPress**: [hhvm.com](http://hhvm.com), a WordPress blog, is running on HHVM.
-* **MediaWiki**: MediaWiki installations can run on HHVM.
-* All the top 20 PHP frameworks. See the [frameworks test page](http://hhvm.com/frameworks/) to see what % of their unit tests we pass. Most frameworks will run perfectly fine even if we don't pass every test, as the tests might be verifying error message matching, etc.
+* **MediaWiki**: MediaWiki installations can run on HHVM, and [Wikipedia](http://wikipedia.org) has run on HHVM since 2014.
+* All the top 20 PHP frameworks. See the [frameworks test page](http://hhvm.com/frameworks/) to see what percent of their unit tests we pass. Most frameworks will run perfectly fine even if we don't pass every test, as the tests might be verifying error message matching, etc.
 
 Here are some other places HHVM is being used: https://github.com/facebook/hhvm/wiki/Users
 
@@ -65,7 +55,7 @@ The HHVM team is working really hard to enhance functionality and fix bugs that 
 
 Please [submit an issue](https://github.com/facebook/hhvm/wiki/How-to-Report-Issues).
 
-Other areas for discussion and support are on [#hhvm on IRC](http://webchat.freenode.net/?channels=hhvm), [HHVM on Facebook](https://www.facebook.com/hphp)
+For real-time discussion, the team tends to hang out in [#hhvm on IRC](http://webchat.freenode.net/?channels=hhvm) during working hours US Pacific time (and knowledgeable community members are often around at other times too).
 
 ### Should I use Proxygen or FastCGI?
 
@@ -87,7 +77,7 @@ The HHVM wrapper provides a simpler interface to the HHVM binary for many common
 ./hphp/tools/hhvm_wrapper.php --help
 ```
 
-### How do I resolve the "Failed to initialize central HHBC repository at `/var/www/.hhvm.hhbc` error"?
+### How do I resolve the "Failed to initialize central HHBC repository at `/var/www/.hhvm.hhbc`" error?
 
 Try deleting `/var/run/hhvm/hhvm.hhbc` and run your program again
 
@@ -107,7 +97,7 @@ So, in HHVM server mode, you start out by running the first couple requests in i
 
 After the first few requests, the JIT is on its way to optimizing.
 
-It is *advisable, but not required* if you are running an HHVM server to send the server some explicit requests that are representative of what user requests will be coming through. You can use `curl`, for example, to send these requests. This way the JIT has the information necessary to make the best optimizations for your code before any requests are actually served.
+It is advisable, but not required, if you are running an HHVM server to send the server some explicit requests that are representative of what user requests will be coming through. You can use `curl`, for example, to send these requests. This way the JIT has the information necessary to make the best optimizations for your code before any requests are actually served.
 
 ## Enabling Hack mode on PHP files in repo mode
 
@@ -117,7 +107,7 @@ Have you seen an error like this?
 Fatal error: Syntax only allowed in Hack files (<?hh) or with -v Eval.EnableHipHopSyntax=true
 ```
 
-If you have a `<?php` file where you want to enable Hack syntax in [repo mode](), you have to make sure that you specify `hhvm.force_hh=true` in both the *repo compilation stage* and when *running code from the repo*.
+If you have a `<?php` file where you want to enable Hack syntax in [repo authoritative mode](/hhvm/advanced-usage/repo-authoritative), you have to make sure that you specify `hhvm.force_hh=true` in both the *repo compilation stage* and when *running code from the repo*.
 
 For example, if you have a file named `enable-hack-in-php.php` and you wanted to create a repo from that file and run it,  you would need to do something like the following:
 
@@ -127,3 +117,5 @@ For example, if you have a file named `enable-hack-in-php.php` and you wanted to
 
 # execution stage; hhvm.hhbc file location will vary
 % hhvm -dhhvm.force_hh=true  --file 'enable-hack-in-php.php' -vRepo.Authoritative=true -vRepo.Central.Path="/tmp/hphp_RdsESQ/hhvm.hhbc"
+
+This isn't necessary when using Hack syntax in Hack (`<?hh`) files, only when wanting to use Hack syntax in PHP (`<?php`) files, which is unusual.
