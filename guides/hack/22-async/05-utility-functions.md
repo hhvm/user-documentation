@@ -50,6 +50,16 @@ From left to right in the function name, here is what the letters represent:
 
 * `w`: result or exception wrapper. 
 
+## Other Convenience Functions
+
+In addition to the collections-based utility functions above, there are three other convenience functions specifically tailored to be used with async.
+
+Name | Returns | Description
+-----|---------|------------
+[`HH\Asio\usleep(int)`](/hack/reference/function/HH.Asio.usleep/) | `Awaitable<void>` | Wait a provided length of time before an async function does more work.
+[`HH\Asio\later()`](/hack/reference/function/HH.Asio.later/) | `Awaitable<void>` | Reschedule the work of an async function until some undetermined point in the future.
+[`HH\Asio\wrap(Awaitable<Tv>)`](/hack/reference/function/HH.Asio.wrap/) | `Awaitable<ResultOrExceptionWrapper<Tv>>` | Wrap an `Awaitable` into an `Awaitable` of `ResultOrExceptionWrapper`.
+
 ## Type Checking Gotcha
 
 Let's say you have the following:
