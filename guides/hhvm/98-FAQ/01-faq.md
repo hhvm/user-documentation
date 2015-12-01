@@ -117,5 +117,6 @@ For example, if you have a file named `enable-hack-in-php.php` and you wanted to
 
 # execution stage; hhvm.hhbc file location will vary
 % hhvm -dhhvm.force_hh=true  --file 'enable-hack-in-php.php' -vRepo.Authoritative=true -vRepo.Central.Path="/tmp/hphp_RdsESQ/hhvm.hhbc"
+```
 
 This isn't necessary when using Hack syntax in Hack (`<?hh`) files, only when wanting to use Hack syntax in PHP (`<?php`) files, which is unusual.
