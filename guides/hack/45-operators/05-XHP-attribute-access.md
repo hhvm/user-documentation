@@ -12,6 +12,14 @@ As well as making the code more concise, the typechecker understands the operato
 
 @@ XHP-attribute-access-examples/comparison.php @@
 
+Note that this operator cannot be used in a write context. That is, the following is an error:
+
+```
+$xhp_object->:attributeName = 1;
+```
+
+We may implement support for this in the future.
+
 ## Namespaces
 
 ![Don't use Namespaces](/images/xhp-namespaces-play-nice.jpg)
