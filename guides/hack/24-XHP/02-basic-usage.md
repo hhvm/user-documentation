@@ -27,7 +27,7 @@ The `var_dump()` shows that the output is a tree of objects - not an HTML/XML st
 
 ## HTML Character References
 
-In order to encode a reserved HTML character or a character that is not readily available to you, you can use HTML character references in XHP. 
+In order to encode a reserved HTML character or a character that is not readily available to you, you can use HTML character references in XHP.
 
 ```
 <?hh
@@ -53,9 +53,15 @@ Some attributes are required, and XHP will throw an error if you use an XHP obje
 You can use Hack expressions directly within XHP. To do this, you enclose the Hack expression in curly braces:
 
 ```
-<xhp_class>{Hack expression}</xhp_class>
+<xhp_class>{$some_expression}</xhp_class>
 ```
 
-@@ basic-usage-examples/hack-xhp.php @@
+This also works for attributes:
 
-Notice how we are calling class methods, functions and embedding one XHP object into the other.
+```
+<xhp_class attribute={$some_expression} />
+```
+
+More complicated expressions are also supported - for example:
+
+@@ basic-usage-examples/hack-xhp.php @@
