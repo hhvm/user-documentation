@@ -174,19 +174,28 @@ final class FunctionMarkdownBuilder {
 
     $path .= $this->yaml['data']['name'];
     $path = strtr($path, "\\", '.');
-    $examples = glob($path.'/*.php');
+    $examples = (new Vector(glob($path.'/*.php')))
+      ->addAll(glob($path.'/*.md'))
+      ->map($filename ==> pathinfo($filename, PATHINFO_FILENAME))
+      ->toSet()
+      ->toVector(); // Work around issue that Sets can't be sorted
+
     if (count($examples) === 0) {
       return null;
     }
     sort($examples);
 
-    $ret = "### Examples";
+    $ret = "### Examples\n";
     foreach ($examples as $example) {
-      $preamble = dirname($example).'/'.basename($example, '.php').'.md';
+      $preamble = $path.'/'.$example.'.md';
+      $code = $path.'/'.$example.'.php';
       if (file_exists($preamble)) {
-        $ret .= "\n\n".file_get_contents($preamble)."\n\n";
+        $ret .= "\n\n".file_get_contents($preamble);
       }
-      $ret .= "\n\n@@ ".$example." @@";
+      if (file_exists($code)) {
+        $ret .= "\n\n@@ ".$code." @@";
+      }
+      $ret .= "\n\n";
     }
     return $ret;
   }
