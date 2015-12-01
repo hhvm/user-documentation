@@ -55,7 +55,7 @@ From left to right in the function name, here is what the letters represent:
 Let's say you have the following:
 
 ```
-function baz(): Awaitable<(X, int)> {
+async function baz(): Awaitable<(X, int)> {
   list ($a, $b) = 
     await \HH\Asio\v(array(
       returns_an_X($foo), 
