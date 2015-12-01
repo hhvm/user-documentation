@@ -93,7 +93,6 @@ abstract final class ScannedDefinitionFilters {
 
       'AppendIterator',
       'ArrayIterator',
-      'AsyncGenerator',
       'BuiltinEnum',
       'CachingIterator',
       'CallbackFilterIterator',
