@@ -8,7 +8,7 @@ Take a look at this example.
 
 What does the "@" in front of the type mean? This causes HHVM to trigger a warning (thus always continuing execution) instead of a catchable fatal error when the passed parameter does not match. It is used to allow you to slowly add types to your code.
 
-**NOTE**: Soft type hints have *no affect* on the typechecker behavior. The typechecker will still throw an error if a type is mismatched.
+Soft type hints have *no effect* on the typechecker behavior. The typechecker will still throw an error if a type is mismatched.
 
 ## Superglobals
 
@@ -18,7 +18,9 @@ What does the "@" in front of the type mean? This causes HHVM to trigger a warni
 
 The typechecker knows about the built-in superglobals.
 
-**NOTE**: In Hack's [strict mode](../typechecker/modes.md#strict-mode), superglobals are not supported. So you will have to create functions in something like [partial mode](../typechecker/modes.md#partial-mode) to call from a strict mode file.
+In Hack's [strict mode](../typechecker/modes.md#strict-mode), superglobals are not supported. So you will have to create functions in something like [partial mode](../typechecker/modes.md#partial-mode) to call from a strict mode file.
+
+A not perfect, but possibly viable, alternative to using superglobals can be accomplished using a [repository](https://github.com/fredemmott/psr7-http-message-hhi) that exposes [PSR-7](https://github.com/php-fig/http-message) to Hack. The HHI files in this repo give the Hack typechecker information about interfaces.
 
 ## Variadic Arguments
 
