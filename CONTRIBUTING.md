@@ -5,7 +5,7 @@ Whether you have direct push access to the repo or are planning to submit a [pul
 There are three main content sections for this repo, including two guides and one API reference:
 - [`hhvm`](https://github.com/hhvm/user-documentation/tree/master/guides/hhvm) is for user content on how to install, configure and use the HHVM runtime.
 - [`hack`](https://github.com/hhvm/user-documentation/tree/master/guides/hack) is for user content the features and tools associated with the Hack language.
-- There is a separate subsection for `hack` that is the API reference. This API reference is generated directly from the HHVM source code. But we also have the ability to provide [examples](https://github.com/hhvm/user-documentation/tree/master/guides/hack/99-api-examples) for each API.
+- There is a separate subsection for `hack` that is the API reference. This API reference is generated directly from the HHVM source code. But we also have the ability to provide [examples](https://github.com/hhvm/user-documentation/tree/master/api-examples) for each API.
 
 ## General Guidelines
 
@@ -25,7 +25,7 @@ While we aren't 100% rigid on how we want contributions to come to us (we want t
     + The `00-` topics are the more getting started topics.
     + The `20-` topics are the key feature topics.
     + The `40-` topics are additional topics.
-    + There are two specialty numberings of `60-` and `99-`, for unsupported features and API reference respectively.
+    + There is one specialty numbering of `60-` for unsupported features.
 
 ## Code Examples
 
@@ -59,7 +59,7 @@ We have provided a [simple shell script](https://github.com/hhvm/user-documentat
 
 In addition to [all the files for a guide example](#code-for-guides) above, all API examples should also have an `.md` file associated with it that serves as a header (e.g., summary) to the example itself. 
 
-In general, follow the structure with what we did with [`Vector::splice`](https://github.com/hhvm/user-documentation/tree/master/guides/hack/99-api-examples/class.Vector/splice).
+In general, follow the structure with what we did with [`Vector::splice`](https://github.com/hhvm/user-documentation/tree/master/api-examples/class.Vector/splice).
 
 ## Linking Between Content
 

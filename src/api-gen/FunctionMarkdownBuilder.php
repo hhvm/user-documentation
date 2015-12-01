@@ -164,7 +164,7 @@ final class FunctionMarkdownBuilder {
   }
 
   private function getExamples(): ?string {
-    $path = LocalConfig::ROOT.'/guides/hack/99-api-examples/';
+    $path = LocalConfig::ROOT.'/api-examples/';
 
     if ($this->class === null) {
       $path .= 'function.';

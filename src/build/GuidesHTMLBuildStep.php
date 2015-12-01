@@ -11,7 +11,6 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
     $sources = (
       self::findSources(self::SOURCE_ROOT, Set{'md'})
       ->filter($path ==> basename($path) !== 'README.md')
-      ->filter($path ==> strpos($path, '99-api-examples') === false)
     );
     sort($sources);
 

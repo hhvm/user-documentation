@@ -1,4 +1,0 @@
-Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Only integer values and string values may be used with Sets' in /user-documentation/guides/hack/99-api-examples/class.Set/zip/002-nonempty-exception.php:6
-Stack trace:
-#0 /user-documentation/guides/hack/99-api-examples/class.Set/zip/002-nonempty-exception.php(6): HH\Set->zip()
-#1 {main}

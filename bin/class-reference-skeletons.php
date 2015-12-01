@@ -11,7 +11,7 @@ namespace HHVM\UserDocumentation;
 
 require __DIR__.'/../vendor/autoload.php';
 
-const string EXAMPLES_DIRECTORY = __DIR__.'/../guides/hack/99-api-examples';
+const string EXAMPLES_DIRECTORY = __DIR__.'/../api-examples';
 
 /* HH_FIXME[1002] This is a script that has toplevel statements */
 classReferenceSkeletons($argc, $argv);

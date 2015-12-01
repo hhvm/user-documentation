@@ -1,4 +1,0 @@
-Fatal error: Uncaught exception 'OutOfBoundsException' with message 'Integer key 2 is out of bounds' in /user-documentation/guides/hack/99-api-examples/class.Pair/at/002-missing-key.php:8
-Stack trace:
-#0 /user-documentation/guides/hack/99-api-examples/class.Pair/at/002-missing-key.php(8): HH\Pair->at()
-#1 {main}
