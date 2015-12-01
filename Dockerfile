@@ -40,7 +40,7 @@ ADD hhvm.prod.ini /etc/hhvm/site.ini
 RUN cd /var/www && sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example > LocalConfig.php
 
 # Install direct dependencies
-RUN cd /var/www/md-render && bundle --path vendor/
+RUN cd /var/www && bundle --path vendor-rb/
 RUN cd /var/www && hhvm /opt/composer/composer.phar install
 
 # Build (all in one so that we don't end up with +/var/hhvm and -/var/hhvm images)

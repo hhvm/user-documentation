@@ -10,3 +10,5 @@ src/
 .git/
 build/
 vendor/
+vendor-rb/
+.bundle/
