@@ -1,8 +1,8 @@
-We currently have **experimental support** for HHVM installations on Mac OS X 10.10 and greater. We use [Homebrew](http://brew.sh/), with both an official formula and hand-install option. There is also a [Macports](https://www.macports.org/) option.
-
-We **reiterate** ... this support should work, but is experimental.
+We currently have experimental support for HHVM installations on Mac OS X 10.10 and greater. We use [Homebrew](http://brew.sh/), with both an official formula and hand-install option. There is also a [Macports](https://www.macports.org/) option.
 
 ## Homebrew Formula
+
+This is an officially-maintained formula, and the easiest and recommended way to install HHVM on a Mac.
 
 ```
 brew tap hhvm/hhvm
@@ -13,9 +13,11 @@ And then wait a long time for it to compile since [we don't provide bottles yet]
 
 ## Homebrew Install By Hand
 
+If you need to build from source.
+
 ### Install compiler
 
-The only supported compiler for HHVM on OS X right now is clang, and the version Apple ships doesn't support TLS.
+The only supported compiler for HHVM on OS X right now is clang, and the version Apple ships doesn't support TLS, so we need to build our own.
 
 ```
 brew install llvm --with-clang
@@ -80,6 +82,7 @@ cmake . \
     -DOPENSSL_SSL_LIBRARY=$(brew --prefix openssl)/lib/libssl.dylib \
     -DOPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include \
     -DOPENSSL_CRYPTO_LIBRARY=$(brew --prefix openssl)/lib/libcrypto.dylib \
+    -DCRYPT_LIB=$(brew --prefix openssl)/lib/libcrypto.dylib \
     -DTBB_INSTALL_DIR=$(brew --prefix tbb) \
     -DLIBSQLITE3_INCLUDE_DIR=$(brew --prefix sqlite)/include \
     -DLIBSQLITE3_LIBRARY=$(brew --prefix sqlite)/lib/libsqlite3.0.dylib \
@@ -102,6 +105,8 @@ cd hphp
 ```
 
 ## Macports: Install by Hand
+
+Using Macports is unsupported, but should work.
 
 ### Dependencies
 
