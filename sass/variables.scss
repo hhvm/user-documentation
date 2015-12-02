@@ -81,13 +81,3 @@ $default-max-width: 1000px;
     top: 3px;
   }
 }
-
-@mixin searchplaceholderfocus {
-  & + .inputLabel {
-    left: -30px;
-
-    .searchPlaceholder {
-      color: rgba(white, 0);
-    }
-  }
-}
