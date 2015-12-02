@@ -1,40 +1,41 @@
-**NOTE**: Make sure that you have the [XHP Library](../introduction.md#xhp-library) available when using XHP. Otherwise you will get a lot of `Fatal error: Class undefined: xhp_xxxx` type of errors.
+First, make sure that you have the [XHP Library](introduction.md#the-xhp-lib-library) installed a dependency of your project &mdash; this defines the various core classes of XHP, and the standard HTML components.
 
-XHP is a syntax to create actual Hack objects, called XHP objects. They are meant to be a tree-based object, with each child as text or another XHP object.They are first-class, meaning that:
-
-* you can call methods on XHP objects
-* you can call the `is_xxx` methods on them (e.g. `is_object()`).
-* they are instances of XHP classes, with names starting with `:` and all are children of `:xhp`.
-
-You create the XHP objects with XHP tags instead of `new`.
+XHP is a syntax to create actual Hack objects, called XHP objects. They are meant to be used as a tree, where children can either be other XHP objects, or text nodes.
 
 ## Creating a Simple XHP Object
 
-If you know HTML or XML, the structure of XHP is quite similar. The most basic XHP object consists of:
+Instead of using the `new` operator, creating XHP looks very much like XML:
 
 ```
-<xhp_class_name></xhp_class_name>
+$my_xhp_object = <p>Hello, world</p>;
 ```
 
-where `xhp_class_name` is an XHP class *without* the prepending `:`.
+`$my_xhp_object` now contains an instance of the `:p` class - the initial `:` marks it as an XHP class, but is not needed when instantiating it. It is a real object, meaning that `is_object()` will return `true` and you can call methods on it.
 
 The following example utilizes three XHP classes: `:div`, `:strong`, `:i`. Whitespace is insignificant so you can create a readable tree structure in your code.
 
 @@ basic-usage-examples/basic.php @@
 
 
-The `var_dump()` shows that the output is a tree of objects - not an HTML/XML string.
+The `var_dump()` shows that the a tree of objects has been created &mdash; not an HTML/XML string. An HTML string can be produced either by simply using `echo`/`print()`, or by calling `$xhp_obect->toString()`.
 
-## HTML Character References
+## Dynamic Content
 
-In order to encode a reserved HTML character or a character that is not readily available to you, you can use HTML character references in XHP.
+The examples so far have only shown static content, but usually you'll need to include something that's generated at runtime; for this, you can use Hack expressions directly within XHP with curly braces:
 
 ```
-<?hh
-echo <span>&hearts; &#9829; &#x2665;</span>;
+<xhp_class>{$some_expression}</xhp_class>
 ```
 
-The above uses HTML character reference encoding to print out the heart symbol using the explicit name, decimal notation and hex notation.
+This also works for attributes:
+
+```
+<xhp_class attribute={$some_expression} />
+```
+
+More complicated expressions are also supported, for example:
+
+@@ basic-usage-examples/hack-xhp.php @@
 
 ## Attributes
 
@@ -48,20 +49,13 @@ Here the `:input` class has the attributes `type`, `name` and `value` as part of
 
 Some attributes are required, and XHP will throw an error if you use an XHP object with a required attribute without the attribute.
 
-## Mixing Hack with XHP
+## HTML Character References
 
-You can use Hack expressions directly within XHP. To do this, you enclose the Hack expression in curly braces:
-
-```
-<xhp_class>{$some_expression}</xhp_class>
-```
-
-This also works for attributes:
+In order to encode a reserved HTML character or a character that is not readily available to you, you can use HTML character references in XHP.
 
 ```
-<xhp_class attribute={$some_expression} />
+<?hh
+echo <span>&hearts; &#9829; &#x2665;</span>;
 ```
 
-More complicated expressions are also supported - for example:
-
-@@ basic-usage-examples/hack-xhp.php @@
+The above uses HTML character reference encoding to print out the heart symbol using the explicit name, decimal notation and hex notation.
