@@ -58,6 +58,3 @@ Type | Description
 [`ImmSet`](/hack/reference/class/ImmSet/) | An immutable version of `Set`. Once the `SetMap` is created, elements cannot be changed, removed or added.
 [`Pair`](/hack/reference/class/Pair/) | An immutable sequence of exactly two values. The keys are `0` and `1`. They are similar to [tuples](../types/type-system.md), but less flexible.
 
-## Most Commonly Used Hack Collections
-
-By far, the most commonly used Hack collections are `Vector`, `Map` and `Set` since they most mimic the `array` type.
