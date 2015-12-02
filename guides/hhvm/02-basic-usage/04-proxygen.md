@@ -33,3 +33,28 @@ hhvm.server.error_document404 = index.php
 ; default is the current directory where you launched the HHVM binary
 hhvm.server.source_root=/var/www/public
 ```
+
+## Automatic Service Startup
+
+The HHVM Debian prebuilt packages ship with init scripts that start in FastCGI mode by default, so if you want to automatically start HHVM as a service, you need to do some configuration tweaking. Note that this setup is optional; you can manually run HHVM as above, and it will work just fine.
+
+The configuration we need to edit is in `/etc/hhvm/server.ini`. We first need to remove the following line which is in that file by default:
+
+```
+hhvm.server.type = fastcgi
+```
+
+We also need to add a line that looks like this, to tell HHVM where our code is. Replace `/var/www` with your code's location, of course:
+
+```
+hhvm.server.source_root = /var/www
+```
+
+You may also want to change `hhvm.server.port` option; it's set to `9000` by default, but `80` or `8080` makes more sense. Finally, note the value of `hhvm.log.file`, which is where error messages will go. It's set to `/var/log/hhvm/error.log` by default, which is just fine unless you'd rather they go elsewhere.
+
+Then, you can run these commands to set HHVM to start up at boot, and to start it as a service now:
+
+```
+sudo update-rc.d hhvm defaults
+sudo service hhvm restart
+```
