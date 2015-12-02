@@ -24,6 +24,7 @@ enum GuidesProduct: string as string {
 
 enum UIGlyphIcon: string {
   BUG = 'bug';
+  SEARCH = 'search';
 }
 
 enum APIDefinitionType: string as string {

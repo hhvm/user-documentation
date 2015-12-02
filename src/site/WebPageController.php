@@ -186,16 +186,10 @@ EOF;
               <strong>HHVM</strong>
             </a>
           </div>
-          <div class="searchBar headerElement">
-            <form method="get" action="/search">
-              <input
-                type="search"
-                name="term"
-                class="searchInput"
-                placeholder="Search"
-              />
-            </form>
-          </div>
+          <search-bar
+            class="headerElement"
+            placeholder="Search our Documentation"
+          />
         </div>
       </div>;
   }
