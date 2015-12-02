@@ -19,11 +19,11 @@ final class :ui:button extends :x:element {
     $button_class =
       "button button".ucfirst($this->:use)." button".ucfirst($this->:size);
     $button =
-        <span
-          class={$button_class}
-          role="button">
-          {$this->getChildren()}
-        </span>;
+      <span
+        class={$button_class}
+        role="button">
+        {$this->getChildren()}
+      </span>;
     if ($this->:href !== null) {
       $button =
         <a
