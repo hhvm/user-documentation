@@ -32,10 +32,13 @@ class :ui-mychild extends :x:element {
 }
 
 function guidelines_examples_context_run(string $s): void {
-  $child = <ui-mychild text="Go" />;
-  $parent = <ui-myparent text={$s}>{$child}</ui-myparent>;
-  $parent->setContext('hint', $s);
-  echo $parent;
+  $xhp = (
+    <ui-myparent text={$s}>
+      <ui-mychild text="Go" />
+    </ui-myparent>
+  );
+  $xhp->setContext('hint', $s);
+  echo $xhp;
 }
 
 guidelines_examples_context_run('No');
