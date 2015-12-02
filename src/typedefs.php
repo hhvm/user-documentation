@@ -22,6 +22,10 @@ enum GuidesProduct: string as string {
   HACK = 'hack';
 }
 
+enum UIGlyphIcon: string {
+  BUG = 'bug';
+}
+
 enum APIDefinitionType: string as string {
   CLASS_DEF = 'class';
   TRAIT_DEF = 'trait';

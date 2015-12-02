@@ -1,11 +1,13 @@
 <?hh // strict
 
+use HHVM\UserDocumentation\UIGlyphIcon;
+
 final class :ui:button extends :x:element {
   attribute
     string className,
     string href,
     bool inline = false,
-    string glyph,
+    UIGlyphIcon glyph,
     enum {'small', 'medium', 'large'} size = 'medium',
     string target = "_self",
     enum {'default', 'confirm', 'special', 'delete'} use = 'default';
@@ -18,12 +20,7 @@ final class :ui:button extends :x:element {
       : "buttonHolder";
     $button_class =
       "button button".ucfirst($this->:use)." button".ucfirst($this->:size);
-    $button =
-      <span
-        class={$button_class}
-        role="button">
-        {$this->getChildren()}
-      </span>;
+
     if ($this->:href !== null) {
       $button =
         <a
@@ -33,16 +30,25 @@ final class :ui:button extends :x:element {
           target={$this->:target}>
           {$this->getChildren()}
         </a>;
+    } else {
+      $button =
+        <span
+          class={$button_class}
+          role="button">
+          {$this->getChildren()}
+        </span>;
     }
-    if ($this->:glyph !== null) {
+
+    $glyph = $this->:glyph;
+    if ($glyph !== null) {
       $holder_class .= " buttonWithGlyph";
-      $button->prependChild(
-        <ui:glyph icon={$this->:glyph} />
-      );
+      $button->prependChild(<ui:glyph icon={$glyph} />);
     }
+
     if ($this->:inline) {
       $holder_class .= " buttonInlineHolder";
     }
+
     return
       <div class={$holder_class}>
         {$button}
