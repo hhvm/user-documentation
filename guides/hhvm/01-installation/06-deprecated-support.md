@@ -1,18 +1,5 @@
 The following distributions are only supported for [LTS releases](./intro#lts-releases) up to 3.6.
 
-### Ubuntu 10.04 Lucid
-
-*HHVM 3.3 only*
-
-```
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-wget -O - http://dl.hhvm.com/conf/hhvm.gpg.key | sudo apt-key add -
-echo deb http://dl.hhvm.com/ubuntu lucid main | sudo tee /etc/apt/sources.list.d/hhvm.list
-sudo apt-get update
-sudo apt-get install gcc-4.8 g++-4.8 gcc-4.8-base
-sudo apt-get install hhvm
-```
-
 ### Ubuntu 12.04 Precise
 
 *HHVM 3.6 only*
