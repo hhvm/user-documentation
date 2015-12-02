@@ -7,20 +7,8 @@ Here are the supported distributions:
 * [Ubuntu 14.04](#ubuntu-14.04-trusty)
 * [Ubuntu 14.10](#ubuntu-14.10-utopic)
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
-* [Debian 8](#debian-8-wheezy)
 * [Debian 7](#debian-7-jessie)
-
-## Obtaining LTS Releases
-
-The prebuilt packages below will get you the latest stable point release of HHVM. If you want an [LTS release](./intro#lts-releases), then append `-lts` and the LTS version in the `deb` line.
-
-e.g., the following `deb` line in `/etc/apt/sources.list` will get all stable updates on Ubuntu 14.04 "trusty":
-
-    deb http://dl.hhvm.com/ubuntu trusty main
-
-In order to get only LTS updates in the 3.3 series, change that to:
-
-    deb http://dl.hhvm.com/ubuntu trusty-lts-3.3 main
+* [Debian 8](#debian-8-wheezy)
 
 ## Ubuntu 14.04 Trusty
 
@@ -33,15 +21,6 @@ sudo add-apt-repository "deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
 sudo apt-get update
 sudo apt-get install hhvm
 ```
-```
-# If you are getting segfaults
-sudo apt-get install hhvm-dbg
-# Living on the edge (rebuilt everyday, unstable)
-sudo apt-get install hhvm-nightly
-# Segfaults in the nightly
-sudo apt-get install hhvm-nightly-dbg
-```
-
 
 ## Ubuntu 14.10 Utopic
 
@@ -50,17 +29,9 @@ sudo apt-get install hhvm-nightly-dbg
 sudo apt-get install software-properties-common
 
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu utopic main'
+sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main'
 sudo apt-get update
 sudo apt-get install hhvm
-```
-```
-# If you are getting segfaults
-sudo apt-get install hhvm-dbg
-# Living on the edge (rebuilt everyday, unstable)
-sudo apt-get install hhvm-nightly
-# Segfaults in the nightly
-sudo apt-get install hhvm-nightly-dbg
 ```
 
 ## Ubuntu 15.04 Vivid
@@ -70,34 +41,9 @@ sudo apt-get install hhvm-nightly-dbg
 sudo apt-get install software-properties-common
 
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu vivid main'
+sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main'
 sudo apt-get update
 sudo apt-get install hhvm
-```
-```
-# If you are getting segfaults
-sudo apt-get install hhvm-dbg
-# Living on the edge (rebuilt everyday, unstable)
-sudo apt-get install hhvm-nightly
-# Segfaults in the nightly
-sudo apt-get install hhvm-nightly-dbg
-```
-
-## Debian 8 Wheezy
-
-```
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-echo deb http://dl.hhvm.com/debian jessie main | sudo tee /etc/apt/sources.list.d/hhvm.list
-sudo apt-get update
-sudo apt-get install hhvm
-```
-```
-# If you are getting segfaults
-sudo apt-get install hhvm-dbg
-# Living on the edge (rebuilt everyday, unstable)
-sudo apt-get install hhvm-nightly
-# Segfaults in the nightly
-sudo apt-get install hhvm-nightly-dbg
 ```
 
 ## Debian 7 Jessie
@@ -108,11 +54,39 @@ echo deb http://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.
 sudo apt-get update
 sudo apt-get install hhvm
 ```
+
+## Debian 8 Wheezy
+
+```
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
+echo deb http://dl.hhvm.com/debian jessie main | sudo tee /etc/apt/sources.list.d/hhvm.list
+sudo apt-get update
+sudo apt-get install hhvm
+```
+
+## Obtaining LTS Releases
+
+The commands above will get you the latest stable point release of HHVM. If you want an [LTS release](./intro#lts-releases), then append `-lts` and the LTS version in the `deb` line.
+
+e.g., the following `deb` line in `/etc/apt/sources.list` will get all stable updates on Ubuntu 14.04 "trusty":
+
+    deb http://dl.hhvm.com/ubuntu trusty main
+
+In order to get only LTS updates in the 3.9 series, change that to:
+
+    deb http://dl.hhvm.com/ubuntu trusty-lts-3.9 main
+
+## Other Packages
+
+The above commands all install the standard `hhvm` package, which is the stable, release configuration. We have a few other packages available in the repo as well:
+
 ```
 # If you are getting segfaults
 sudo apt-get install hhvm-dbg
+
 # Living on the edge (rebuilt everyday, unstable)
 sudo apt-get install hhvm-nightly
+
 # Segfaults in the nightly
 sudo apt-get install hhvm-nightly-dbg
 ```

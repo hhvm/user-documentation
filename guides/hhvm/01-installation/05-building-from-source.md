@@ -382,7 +382,9 @@ Using Macports is unsupported, but should work and require Mac OS X 10.10 or hig
 ### Dependencies
 
 ```
-sudo port -v install autoconf automake binutils bison boost clang-3.6 cmake elftoolchain gawk google-glog jemalloc libelf libjpeg-turbo libmcrypt libmemcached libpng md5sha1sum ocaml oniguruma5 readline tbb
+sudo port -v install autoconf automake binutils bison boost clang-3.6 cmake \
+  elftoolchain gawk google-glog jemalloc libelf libjpeg-turbo libmcrypt \
+  libmemcached libpng md5sha1sum ocaml oniguruma5 readline tbb
 ```
 
 ### Clone HHVM
