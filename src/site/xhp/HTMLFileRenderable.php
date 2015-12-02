@@ -8,9 +8,9 @@ class HTMLFileRenderable implements \XHPUnsafeRenderable {
     private string $htmlRoot = BuildPaths::GUIDES_HTML,
   ) {
     invariant(file_exists($htmlFile), 'html file does not exist');
-    
+
     $root = realpath($htmlRoot).'/';
-    
+
     invariant(
       (substr(realpath($htmlFile), 0, strlen($root)) === $root),
       'html file %s is not a build artifact',
