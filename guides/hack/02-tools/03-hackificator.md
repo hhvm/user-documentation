@@ -41,7 +41,7 @@ function foo(?A $a = null) {
 }
 ```
 
-Note we did not add any type annotations for the return type of `foo`. This will come later with [`hh_server --convert`](./hhserver.md#automatic-type-annotations).
+Note we did not add any type annotations for the return type of `foo`. This will come later with [`hh_server --convert`](./hh_server.md#automatic-type-annotations).
 
 Also, it is important to note that if you already have any Hack files in the project that you are trying to hackify, they must be typechecker clean. i.e., running `hh_client` must produce `No errors!`.
 
