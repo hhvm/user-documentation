@@ -1,36 +1,40 @@
-In addition to supporting the one-size-fits-all `array` collection type, Hack also provides container types for specialized collections such as a vector, map and set. 
+In addition to fully supporting the one-size-fits-all PHP [`array`](http://php.net/types.array) container type, Hack allows additional typing to be placed on arrays, and provides a number of classes which implement more specialized collecion patterns.
 
-## Arrays
+## Array Typing
 
-Hack supports the traditional PHP mechanism for expressing containers of elements: the array. Traditionally, the term "array" in programming languages is thought of as a collection of elements, indexed using consecutive integers (starting at 0 or 1). Hack arrays are significantly more flexible than the traditional concept of arrays. 
+Arrays in Hack behave similarly to [`Generics`](/hack/generics/) in that additional type information may be provided about how they are specialized.  For example, an unindexed array of strings takes the form `array<string>`.  Similarly, for indexed arrays, the key type (`int` or `string`) may be specified first, followed by the value type.  So a dictionary with string keys and floating point values might look like `array<string, float>`.
 
-A Hack array is essentially a dictionary-style collection associating keys with values that maintains insertion order. The keys can be either integers or strings; the values can be of any type. Arrays are dynamically-sized and grow as needed without requiring a function call to increase their size/capacity.
-
-In summary, a Hack array is a general purpose container for many different data structures. An array is also type-checkable, particularly when you associate a [type argument](../generics/introduction.md) with the array.
+Since the value side of an array may itself be an array (or a `Generic` class), type specialization may be nested as with `array<int, array<string, string>>` which is a numerically indexed array containing string dictionaries.
 
 @@ introduction-examples/array.php @@
 
 ## Hack Collections 
 
-While arrays provide maximum container flexibility, Hack collections provide maximum readability, along with possible performance benefits and better type-checkability as well.
+While PHP Arrays are extremely versatile, that flexibility occaisionally comes at a cost either in terms of performance, correctness, or readability.  Hack Collection classes seek to resolve those issues by providing deeply specialized object versions of arrays in the form of common container patterns: [`Vector`](/hack/reference/class/Vector/), [`Map`](/hack/reference/class/Map/), and [`Set`](/hack/reference/class/Set/).
 
 ### Readability
 
 Imagine a 3rd party function declared like:
 
-`function foo(array $arr): void {}`
+`function foo(array<int, string> $arr): void {}`
 
-Is this `array` a vector-style array with sequential integer keys? Is it a `map`-style array with maybe non-sequential integer keys, or string keys? What type of values is this array holding?
+Is this `array` a vector-style array with sequential integer keys? Or maybe a `map`-style array with potentially non-sequential integer keys? Are the values in this array unique?
 
 Now imagine this function declaration:
 
 `function bar(Vector<string> $vec): void {}`
 
-By looking at the function signature, we know that this function takes a Vector (sequential integer keys) with string values. 
+By looking at the function signature, we know those integer keys are ordered and sequential.  That the actual key number is probably much less relevant that the thing its holding.
+
+Similarly, if the function declaration were:
+
+`function bar(Set<string> $set): void {}`
+
+Then we realize that those integer keys were irrelevant, and that the strings contained in this parameter will all have unique values.
 
 ### Performance
 
-By knowing that the container is a vector or map, the runtime can make certain assumptions that allow for possible performance benefits when they are used. Also, by providing such constructs as immutable containers, the runtime can save memory by not having to allocate more memory than needed for the container.
+The obvious benefit in `Vectors` and `Sets` are that the keys can be ignored by the runtime.  For `Vector`s that means layouting out the values contiguously and having fast lookup and iteration based on index.  In the case of `Set`s it actually means (as an implementation detail) turning the internal structure inside out, using the values as keys (which must be unique), and ignoring the other half of the array pair.  This is a pattern already available to PHP code, but it removes the cognitive overhead of having to remember that the array is inside out, and does it in a more efficient way than script code is able to do.
 
 ### Type Checking
 
