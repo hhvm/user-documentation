@@ -1,0 +1,11 @@
+                          | XHPRoot | XHPChild
+--------------------------|---------|----------
+                  <div /> | yes     | yes
+               <x:frag /> | yes     | yes
+                    "foo" | no      | yes
+                        3 | no      | yes
+                     true | no      | no
+                     null | no      | no
+           new stdClass() | no      | no
+ [<li />, <li />, <li />] | no      | yes
+         XHPUnsafeExample | no      | yes

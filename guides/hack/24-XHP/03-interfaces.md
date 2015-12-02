@@ -16,16 +16,38 @@ XHP presents a tree structure, and this interface defines what can be valid chil
  - strings, integers, floats
  - arrays of any of the above
 
-Despite strings, integers, floats, and arrays not being objects, both the typechecker and HHVM consider them to implement this interface, as shown by `instanceof()` checks:
+Despite strings, integers, floats, and arrays not being objects, both the typechecker and HHVM consider them to implement this interface &mdash; both for parameter/return types, and for `instanceof` checks.
 
-TODO: implement this example.
+## Advanced Interfaces
 
-@@ interfaces/xhpchild.php @@
+While XHP's safe-by-default features are usually beneficial, occasionally they need to be bypassed; the most common cases are:
 
-## XHPUnsafeRenderable
+ - Needing to embed the output from another template system when migrating to XHP.
+ - Needing to embed HTML from another source, for example, Markdown or BBCode renderers.
 
-XHP automatically escapes all content passed to it, but occassionally you have an HTML string that must be rendered exactly as-is, without escaping. the `XHPUnsafeRenderable` interface provides a way to do that by implementing a `toHTMLString(): string` method.
+XHP usually gets in the way of this by:
 
-## XHPAlwaysValidChild
+ - Escaping all variables, including your HTML code.
+ - Enforcing child relationships - and XHP objects can not be marked as allowing HTML string children.
 
-TODO
+The `XHPUnsafeRenderable` and `XHPAlwaysValidChild` interfaces allow bypassing these safety mechanisms.
+
+### XHPUnsafeRenderable
+
+If you need to render raw HTML strings, wrap them in a class that implements this interface and provides a `toHTMLString(): string` method:
+
+@@ interfaces-examples/xss-security-hole.php @@
+
+We do not provide an implementation of this interface as a generic implementation tends to be overused &mdash; instead, consider making more specific implementations:
+
+@@ interfaces-examples/markdown-wrapper.php @@
+
+### XHPAlwaysValidChild
+
+XHP's child validation can be bypassed by implementing this interface. Most classes that implement this interface are also implementations of `XHPUnsafeRenderable`, as the most common need is when a child is produced by another rendering or template system.
+
+This can also be implemented by XHP objects, but this usually indicates that a child class specification should be replaced with a category. This interface is intentionally breaking part of XHP's safety, so should be used as sparingly as possible.
+
+## Example
+
+@@ interfaces-examples/all-in-one.php @@
