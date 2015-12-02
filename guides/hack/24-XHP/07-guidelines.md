@@ -20,9 +20,13 @@ If you have a parent object, and you want to give information to some object fur
 
 @@ guidelines-examples/context.php @@
 
-**NOTE**: There seems to be a bug with the above example; the propagation of the context to the child is not working correctly.
+Context is only passed down the tree at render time; this allows you to construct a tree without having to thread through data. In general, you should only call `getContext()` in the `render()` method of the child.
 
-Context is only passed down the tree at render time. In general, you should only call `getContext()` in the `render()` method of the child.
+Common uses include:
+
+ - current user ID
+ - current theme in multi-theme sites
+ - current browser/device type
 
 
 ## Don't Add Public Methods to Your XHP Components
