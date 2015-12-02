@@ -1,1 +1,3 @@
-There seems to be a bug here. This should work, I think. But, the child context is not getting set via propagation.There seems to be a bug here. This should work, I think. But, the child context is not getting set via propagation.
+<dl><dt>Text</dt><dd>No</dd><dt>Child</dt><dd>Go</dd></dl>
+
+<dl><dt>Text</dt><dd>Yes</dd><dt>Child</dt><dd>Go...and more</dd></dl>
