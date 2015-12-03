@@ -54,4 +54,4 @@ These are for advanced tweaking of how the typechecker uses memory. Unless your 
 **Default value**: `false`
 **Usage**: `unsafe_xhp = true`
 
-Setting this option to `true` seriously cripples the typechecker's analysis of XHP files, completely hiding certain large classes of errors when working with XHP. This is only useful if you manually added Hack types to certain ancient versions of the XHP library, before Hack support was added directly into the library, and then haven't upgraded in the ensuring 4 years. (If you are wondering if you fall into this category, you do not.)
+Setting this option to `true` seriously cripples the typechecker's analysis of XHP files, completely hiding certain large classes of errors when working with XHP. This is only useful if you manually added Hack types to certain ancient versions of the XHP library, before Hack support was added directly into the library, and then haven't upgraded in the ensuing 4 years. (If you are wondering if you fall into this category, you do not.)
