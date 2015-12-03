@@ -2,6 +2,8 @@
 
 namespace HHVM\UserDocumentation\Async\Examples\AsyncVsAwaitables;
 
+require_once "interface.php";
+
 class VolkswagenDiesel implements Car {
   public function drive(): Awaitable<void> {
     $being_tested = class_exists(

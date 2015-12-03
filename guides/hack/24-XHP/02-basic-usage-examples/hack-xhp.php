@@ -2,6 +2,12 @@
 
 require __DIR__ . "/../../../../vendor/autoload.php";
 
+class MyBasicUsageExampleClass {
+  public function getInt(): int {
+    return 4;
+  }
+}
+
 function basic_usage_examples_get_string(): string {
   return "Hello";
 }
