@@ -4,11 +4,11 @@ namespace Hack\UserDocumentation\Overview\Typing\Examples\PHPFunction;
 
 function bar($a, $b) {
   if ($a > 0) {
-    echo '0' . $b;
+    return true;
   } else {
-    echo (5 . $b);
+    return $b < 0;
   }
 }
 
-echo bar(3, 'Hello');
-echo bar(-100, 'Bye');
+var_dump(bar(3, -1));
+var_dump(bar(-1, 10));
