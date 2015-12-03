@@ -1,3 +1,2 @@
 string(2) "Hi"
-string(67) "append failed with result mc_res_local_error: Command not supported"
-string(2) "Hi"
+string(4) "HiOh"

@@ -28,9 +28,9 @@ async function run(): Awaitable<void> {
   try {
     await append_to_value($mc, $unique_key, 'Oh');
     $val = await $mc->get($unique_key);
+    var_dump($val);
   } catch (\MCRouterException $ex) {
-    var_dump($ex->getMessage()); // append is not supported
-    var_dump($val); // "Hi"
+    var_dump($ex->getMessage());
   }
 }
 
