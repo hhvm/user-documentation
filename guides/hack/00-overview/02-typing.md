@@ -1,4 +1,4 @@
-Probably the headline feature of Hack is the introduction of typing capabilities to PHP. 
+Hack's most well-known feature is strict typing, with fast ahead-of-time static verification.
 
 ## What is typing?
 
@@ -35,7 +35,7 @@ What typing does, and by extension what Hack does, is to help developers make fe
 * Catching bugs at compile-time.
 * Allowing for IDEs that can autocomplete with type-aware functions, and provide inline error notifications. 
 * Improving clarity of intent for other developers.
-* Preventing unsafe coding practices like sketchy null checks. 
+* Preventing unsafe coding practices like sketchy null checks.
 
 ## Further Reading
 
