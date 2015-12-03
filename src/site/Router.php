@@ -23,7 +23,7 @@ class Router {
       '/{product:(?:hack|hhvm)}/{guide}/{page}'
         => GuidePageController::class,
       '/manual/en/{legacy_id}.php'
-        => APILegacyRedirectController::class,
+        => LegacyRedirectController::class,
       '/robots.txt'
         => RobotsTxtController::class,
       '/__content'
