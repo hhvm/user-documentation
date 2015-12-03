@@ -4,7 +4,7 @@ module HHVM
   module UserDocumentation
     class IncludeExamplesFilter < HTML::Pipeline::Filter
       def remove_boilerplate code
-        return code.gsub(%r<^require[^\n]+vendor/autoload.php['"]\)?;\n\n>, '')
+        return code.gsub(%r<^require(_once)?[^\n]+;\n\n>, '')
       end
 
       def call
