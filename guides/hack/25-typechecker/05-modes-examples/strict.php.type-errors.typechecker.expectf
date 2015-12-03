@@ -1,19 +1,19 @@
-File "%sstrict.php", line 28, characters 3-6:
+File "%sstrict.php", line 13, characters 3-6:
 an int does not allow array append (Typing[4006])
-File "%sstrict.php", line 25, characters 8-8:
+File "%sstrict.php", line 10, characters 8-8:
 You might want to check this out
 
-File "%sstrict.php", line 41, characters 19-28:
+File "%sstrict.php", line 43, characters 19-28:
 Was expecting a class (Typing[4026])
 
-File "%sstrict.php", line 41, characters 8-16:
+File "%sstrict.php", line 43, characters 8-16:
 Unbound name: Hack\UserDocumentation\TypeChecker\Modes\Examples\NonHack\B (an object type) (Naming[2049])
 
-File "%sstrict.php", line 45, characters 8-23:
+File "%sstrict.php", line 47, characters 8-23:
 Unbound name (typing): Hack\UserDocumentation\TypeChecker\Modes\Examples\NonHack\php_func (Typing[4107])
 
-File "%sstrict.php", line 45, characters 8-23:
+File "%sstrict.php", line 47, characters 8-23:
 Unbound name: Hack\UserDocumentation\TypeChecker\Modes\Examples\NonHack\php_func (a global constant) (Naming[2049])
 
-File "%sstrict.php", line 45, characters 8-23:
+File "%sstrict.php", line 47, characters 8-23:
 Unbound name: Hack\UserDocumentation\TypeChecker\Modes\Examples\NonHack\php_func (a global function) (Naming[2049])
