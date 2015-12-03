@@ -53,15 +53,13 @@ EOF;
     $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();
-
     $body_class = $this->getBodyClass($extra_class);
-
     $google_analytics = null;
     switch ($this->getRequestedHost()) {
       case 'beta.docs.hhvm.com':
-        $google_analytics =
-          <script:google-analytics trackingID="UA-70527006-1" />;
-        break;
+        throw new RedirectException(
+          'http://docs.hhvm.com'.$this->getRequestedPath()
+        );
       case 'docs.hhvm.com':
         $google_analytics =
           <script:google-analytics trackingID="UA-49208336-3" />;
