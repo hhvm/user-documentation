@@ -9,10 +9,10 @@ final class RobotsTxtController extends WebController {
     LocalConfig::ROOT.'/public/robots.txt-default';
 
   public async function respond(): Awaitable<void> {
-    if ($this->getRequestedHost() === 'staging.docs.hhvm.com') {
-      $source = self::DO_NOT_CRAWL_FILE;
-    } else {
+    if ($this->getRequestedHost() === 'docs.hhvm.com') {
       $source = self::DEFAULT_FILE;
+    } else {
+      $source = self::DO_NOT_CRAWL_FILE;
     }
     header('Content-type: text/plain');
     print file_get_contents($source);

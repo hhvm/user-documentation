@@ -54,8 +54,15 @@ EOF;
     $body_class = $this->getBodyClass($extra_class);
 
     $google_analytics = null;
-    if ($this->getRequestedHost() === 'beta.docs.hhvm.com') {
-      $google_analytics = <script:google-analytics trackingID="UA-70527006-1" />;
+    switch ($this->getRequestedHost()) {
+      case 'beta.docs.hhvm.com':
+        $google_analytics =
+          <script:google-analytics trackingID="UA-70527006-1" />;
+        break;
+      case 'docs.hhvm.com':
+        $google_analytics =
+          <script:google-analytics trackingID="UA-49208336-3" />;
+        break;
     }
 
     $xhp =
