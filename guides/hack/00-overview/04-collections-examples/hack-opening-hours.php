@@ -16,7 +16,9 @@ function getOpeningHours(DayOfWeek $x): ?string {
     "9-6",
     "12-5",
   };
-  return $opening_hours->get($x); 
+  // Since Vector::get() takes an int, we need to convert the enum to
+  // the underlying value
+  return $opening_hours->get(DayOfWeek::assert($x));
 }
 
 echo getOpeningHours(DayOfWeek::Wednesday);
