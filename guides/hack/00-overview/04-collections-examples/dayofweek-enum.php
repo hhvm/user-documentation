@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Overview\Collections\Examples;
 
-enum DayOfWeek: int {
+enum DayOfWeek: int as int {
   Sunday = 0;
   Monday = 1;
   Tuesday = 2;
