@@ -8,6 +8,7 @@ use HHVM\UserDocumentation\GuidesProduct;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\NavDataNode;
 use HHVM\UserDocumentation\PaginationDataNode;
+use HHVM\UserDocumentation\UIGlyphIcon;
 
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -90,16 +91,23 @@ final class GuidePageController extends WebPageController {
       $class = $class.($next ? "next" : "previous");
 
       if ($next) {
-        $title = $title.' »';
+        $align = 'right';
+        $glyph = UIGlyphIcon::RIGHT;
       } else {
-        $title = '« '.$title;
+        $align = 'left';
+        $glyph = UIGlyphIcon::LEFT;
       }
 
       return
         <div class={$class}>
-          <a href={array_values($page)[0]['urlPath']}>
+          <ui:button
+            align={$align}
+            href={array_values($page)[0]['urlPath']}
+            glyph={$glyph}
+            size="large"
+            use="special">
             {$title}
-          </a>
+          </ui:button>
         </div>;
     }
 

@@ -24,6 +24,8 @@ enum GuidesProduct: string as string {
 
 enum UIGlyphIcon: string {
   BUG = 'bug';
+  LEFT = 'angle-double-left fa-2x';
+  RIGHT = 'angle-double-right fa-2x';
   SEARCH = 'search';
 }
 

@@ -4,6 +4,7 @@ use HHVM\UserDocumentation\UIGlyphIcon;
 
 final class :ui:button extends :x:element {
   attribute
+    enum {'left', 'right'} align = 'left',
     string className,
     string href,
     bool inline = false,
@@ -47,6 +48,10 @@ final class :ui:button extends :x:element {
 
     if ($this->:inline) {
       $holder_class .= " buttonInlineHolder";
+    }
+    
+    if ($this->:align === 'right') {
+      $holder_class .= " buttonAlignRight";
     }
 
     return
