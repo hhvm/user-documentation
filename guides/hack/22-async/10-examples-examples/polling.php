@@ -7,8 +7,9 @@ require __DIR__ . "/../../../../vendor/autoload.php";
 
 // Of course, this is all made up :)
 class Polling {
+  private int $count = 0;
   public function isReady(): bool {
-    if (rand(0, 25) === 23) {
+    if ($this->count++ === 10) {
       return true;
     }
     return false;
@@ -25,12 +26,12 @@ async function do_polling(Polling $p): Awaitable<int> {
   while (!$p->isReady()) {
     await \HH\Asio\later();
   }
-  echo "do polling 2" . PHP_EOL;
+  echo "\ndo polling 2" . PHP_EOL;
   return $p->getResult();
 }
 
 async function no_polling(): Awaitable<string> {
-  echo "no polling" . PHP_EOL;
+  echo '.';
   return str_shuffle("ABCDEFGH");
 }
 
