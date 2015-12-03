@@ -44,12 +44,15 @@ It is relatively common for [async](../async/introduction.md) functions to retur
 
 @@ type-system-examples/noreturn.php.type-errors @@
 
-**NOTE**: `noreturn` can only be used in *static* method or function returns. It is not applicable to properties or parameters.
+**NOTE**: 
 
-### Not Instance Methods
+### Only Static Methods and Functions
 
-Given that a `noreturn` is a essentially a "terminal" type, you cannot use `noreturn` on a class instance method. A "terminal" call like this cannot be checked without knowing more about the type of the instance; and the type of the instance may be dependent on factors that are used in determining the "terminality" calculations of the function.
+`noreturn` can only be used in function or *static* method returns.
 
+Instance methods *cannot* be `noreturn`. This is due to the order in which the typechecker's analysis phases happen. The return type of an instance method call cannot be determined during control flow analysis because it needs to know the type on the left-hand side of the `->`, and the results of type inference aren't available yet. This isn't an issue for calls to static methods, since those can be resolved before types have been inferred.
+
+`noreturn` is not applicable to properties or parameters.
 
 ## Objects
 
