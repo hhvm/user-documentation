@@ -7,12 +7,12 @@ async function time_consuming(): Awaitable<string> {
   return "Not really time consuming but sleep."; // For type-checking purposes
 }
 
-async function memoize_handle(): Awaitable<string> {
+function memoize_handle(): Awaitable<string> {
   static $handle = null;
   if ($handle === null) {
     $handle = time_consuming(); // memoize the awaitable
   }
-  return await $handle;
+  return $handle;
 }
 
 function runMe(): void {

@@ -118,7 +118,11 @@ Instead, memoize the awaitable:
 
 @@ guidelines-examples/memoize-awaitable.php @@
 
-This may seem unintuitive, because the function `await`s every time it’s executed, even on the cache-hit path. But that’s fine: on every execution except the first, `$handle` is not `null`, so a new instance of `time_consuming()` will not be started. The result of the one existing instance will be shared.
+This simply caches the handle and returns it verbatim - [Async Vs Awaitable](async-vs-awaitable.md) explains this in more detail.
+
+This would also work if it were an async function that awaited the handle after caching. This may seem unintuitive, because the function `await`s every time it’s executed, even on the cache-hit path. But that’s fine: on every execution except the first, `$handle` is not `null`, so a new instance of `time_consuming()` will not be started. The result of the one existing instance will be shared.
+
+Either approach works, but the non-async caching wrapper can be easier to reason about.
 
 ## Use Lambdas Where Possible
 
