@@ -3,13 +3,82 @@
 	left: 110px;
 	line-height: 60px;
 	position: absolute;
+
+  &.searchBar {
+    margin-right: 10px;
+    left: auto;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
 }
 
-.headerElement.searchBar {
-  position: absolute;
-  right: 0px;
-  margin-right: 10px;
-  left: auto;
+.searchBar {
+  align-items: center;
+  display: flex;
+
+  form {
+    box-sizing: border-box;
+    color: white;
+    display: flex;
+
+    .searchInput {
+      -webkit-appearance: none;
+      background: none;
+      border: 0px;
+      border-bottom: 2px solid $grey;
+      border-radius: 0;
+      font-size: 14px;
+      height: 40px;
+      min-width: 200px;
+      outline: none;
+      padding: 10px;
+      position: relative;
+      z-index: 9;
+      @include transition(background-color 0.3s);
+      
+      &:required:invalid {
+        box-shadow: none;
+      }
+      
+      &:required:valid {
+        background: $grey;
+        @include searchplaceholderfocus;
+      }
+    }
+
+    .inputLabel {
+      align-items: center;
+      display: flex;
+      left: 10px;
+      right: 10px;
+      top: 20px;
+      @include transition(left 0.3s);
+      position: absolute;
+
+      .glyphIcon {
+        cursor: default;
+        flex-basis: 30px;
+      }
+
+      .searchPlaceholder {
+        color: rgba(white, 0.5);
+        font-size: 12px;
+        line-height: 1.2em;
+        @include transition(color 0.3s);
+      }
+    }
+
+    .searchInput, .searchPlaceholder {
+      color: white;
+      font-family: $header-font;
+    }
+
+    .searchInput:focus {
+      background: $grey;
+      @include searchplaceholderfocus;
+    }
+  }
 }
 
 @media only screen and (max-width: 480px) {
