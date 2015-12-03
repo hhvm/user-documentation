@@ -31,11 +31,11 @@ Common uses include:
 
 ## Don't Add Public Methods to Your XHP Components
 
-Basically, your XHP classes should consist of children, attributes and a `protected render()` / `protected async renderAsync()` function. Basically, a user should be able to use tags, `toString()` and the [XHP object interfaces](./typing.md#xhp-object-interfaces) only to deal with your object.
+XHP objects should only be interacted with by their attributes, contexts, position in the tree, and rendering them. At Facebook, we haven't yet came across any situations where public methods are a better solution than these interfaces.
 
-## Use Composition
+## Use Inheritance Minimally
 
-Do not inherit XHP objects from each other. Use [attributes](./extending.md#attribute-transfer) for inheritance.
+If you need an XHP object to act like another, but slightly modified, use composition. Categories and attribute cloning can be used to provide a common interface.
 
 ## Remember No Dollar Signs
 
