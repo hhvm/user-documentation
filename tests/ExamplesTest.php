@@ -12,6 +12,12 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testExamplesTypecheck(): void {
+    $hh_server = LocalConfig::HHVM_TREE.'/hphp/hack/bin/hh_server';
+    if (!file_exists($hh_server)) {
+      $this->markTestSkipped(
+        "hphp/test/run --typechecker needs a built hack tree"
+      );
+    }
     $this->runExamples(Vector { '--typechecker' });
   }
 
