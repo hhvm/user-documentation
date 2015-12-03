@@ -2,6 +2,8 @@
 
 namespace Hack\UserDocumentation\Async\Generators\Examples\Send;
 
+require __DIR__ . "/../../../../vendor/autoload.php";
+
 const HALF_SECOND = 500000; // microseconds
 
 async function get_name_string(int $id): Awaitable<string> {

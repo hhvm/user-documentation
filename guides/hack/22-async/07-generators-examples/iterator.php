@@ -2,6 +2,8 @@
 
 namespace Hack\UserDocumentation\Async\Generators\Examples\Iterate;
 
+require __DIR__ . "/../../../../vendor/autoload.php";
+
 const SECOND = 1000000; // microseconds
 
 async function countdown(int $from): AsyncIterator<int> {
