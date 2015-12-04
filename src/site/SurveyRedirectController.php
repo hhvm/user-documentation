@@ -1,7 +1,9 @@
 <?hh // strict
 
+use Psr\Http\Message\ResponseInterface;
+
 final class SurveyRedirectController extends WebController {
-  public async function respond(): Awaitable<void> {
+  public function getResponse(): Awaitable<ResponseInterface> {
     HHVM\UserDocumentation\SurveyConfig::redirect();
   }
 }

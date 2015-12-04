@@ -3,9 +3,10 @@
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\GuidesProduct;
 use HHVM\UserDocumentation\URLBuilder;
+use Psr\Http\Message\ResponseInterface;
 
 final class RedirectToGuideFirstPageController extends WebController {
-  public async function respond(): Awaitable<void> {
+  public async function getResponse(): Awaitable<ResponseInterface> {
     $product = GuidesProduct::assert($this->getRequiredStringParam('product'));
     $guide = $this->getRequiredStringParam('guide');
     $path = self::invariantTo404(() ==> {

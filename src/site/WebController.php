@@ -1,5 +1,6 @@
 <?hh // strict
 
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 <<__ConsistentConstruct>>
@@ -20,7 +21,7 @@ abstract class WebController {
     $this->parameters = $combined_params->toImmMap();
   }
 
-  abstract public function respond(): Awaitable<void>;
+  abstract public function getResponse(): Awaitable<ResponseInterface>;
 
   final protected function getRequiredStringParam(string $key): string {
     invariant(
@@ -32,9 +33,9 @@ abstract class WebController {
   }
 
   final protected function getOptionalStringParam(string $key): ?string {
-    return 
-      $this->parameters->containsKey($key) 
-        ? $this->parameters[$key] 
+    return
+      $this->parameters->containsKey($key)
+        ? $this->parameters[$key]
         : NULL;
   }
 
@@ -45,7 +46,7 @@ abstract class WebController {
   final protected function getRequestedHost(): string {
     return $this->request->getUri()->getHost();
   }
-  
+
   protected static function invariantTo404<T>(
     (function():T) $what,
   ) :T {

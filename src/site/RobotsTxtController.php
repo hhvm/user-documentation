@@ -1,6 +1,7 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\LocalConfig;
+use Psr\Http\Message\ResponseInterface;
 
 final class RobotsTxtController extends WebController {
   const string DO_NOT_CRAWL_FILE =
@@ -8,13 +9,14 @@ final class RobotsTxtController extends WebController {
   const string DEFAULT_FILE =
     LocalConfig::ROOT.'/public/robots.txt-default';
 
-  public async function respond(): Awaitable<void> {
+  public async function getResponse(): Awaitable<ResponseInterface> {
     if ($this->getRequestedHost() === 'docs.hhvm.com') {
       $source = self::DEFAULT_FILE;
     } else {
       $source = self::DO_NOT_CRAWL_FILE;
     }
-    header('Content-type: text/plain');
-    print file_get_contents($source);
+
+    return Response::newWithStringBody(file_get_contents($source))
+      ->withAddedHeader('Content-Type', 'text/plain');
   }
 }

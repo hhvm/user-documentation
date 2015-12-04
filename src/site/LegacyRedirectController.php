@@ -2,11 +2,12 @@
 
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\APILegacyRedirectData;
+use Psr\Http\Message\ResponseInterface;
 
 require_once(BuildPaths::APIDOCS_LEGACY_REDIRECTS);
 
 final class LegacyRedirectController extends WebController {
-  public async function respond(): Awaitable<void> {
+  public async function getResponse(): Awaitable<ResponseInterface> {
     $id = $this->getRequiredStringParam('legacy_id');
     // Since the API redirects are quite specific, see if we are redirecting
     // from there first.

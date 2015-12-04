@@ -1,7 +1,9 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\BuildPaths;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactaros\HtmlResponse;
 
 abstract class WebPageController extends WebController {
   public abstract function getTitle(): Awaitable<string>;
@@ -40,7 +42,7 @@ Please complete the information below:
 EOF;
   }
 
-  final public async function respond(): Awaitable<void> {
+  final public async function getResponse(): Awaitable<ResponseInterface> {
     list($title, $content) = await \HH\Asio\va2(
       $this->getTitle(),
       $this->getContentPane()
@@ -109,8 +111,8 @@ EOF;
         </html>
       </x:doctype>;
     $xhp->setContext('ServerRequestInterface', $this->request);
-    $string = await $xhp->asyncToString();
-    print($string);
+    $html = await $xhp->asyncToString();
+    return Response::newWithStringBody($html);
   }
 
   final public async function getContentPane(): Awaitable<XHPRoot> {

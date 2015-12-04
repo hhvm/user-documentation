@@ -1,6 +1,7 @@
 <?hh // strict
 
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 final class WebPageContentController extends WebController {
   public function __construct(
@@ -9,8 +10,8 @@ final class WebPageContentController extends WebController {
   ) {
     parent::__construct($parameters, $request);
   }
-    
-  final public async function respond(): Awaitable<void> {
+
+  final public async function getResponse(): Awaitable<ResponseInterface> {
     $path = $this->getRequiredStringParam('path');
     $controller = $this->getDelegateControllerForPath($path);
     invariant(
@@ -25,11 +26,14 @@ final class WebPageContentController extends WebController {
     );
     // https://github.com/facebook/xhp-lib/issues/152
     $content = await (<x:frag>{$content_xhp}</x:frag>)->asyncToString();
-    header('Content-type: application/json');
-    print json_encode([
+
+    $json = json_encode([
       'title' => $title,
       'content' => $content,
     ]);
+
+    return Response::newWithStringBody($json)
+      ->withAddedHeader('Content-Type', 'application/json');
   }
 
   protected function getDelegateControllerForPath(string $path): WebController {
