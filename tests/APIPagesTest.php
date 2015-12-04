@@ -18,6 +18,8 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       $node['children'] = []; // make failure output easier to read
       $out[] = tuple($node['urlPath'], $node);
     }
+
+    $this->assertGreaterThan(100, count($out));
     return $out;
   }
 
