@@ -28,6 +28,7 @@ final class LegacyRedirectController extends WebController {
 
   private function getManualRedirectData(): Map<string, string> {
     return Map {
+      'index' => '/',
       'hacklangref' => '/hack/',
       'hack.intro' => '/hack/overview/introduction',
       'hack.arrays' => '/hack/collections/introduction',
