@@ -2,6 +2,44 @@ Here is the raw list of all possible ini settings that can go in your `/etc/hhvm
 
 The lists below are just the HHVM-specific options. Many [standard PHP options](http://php.net/manual/en/ini.list.php) are also supported by HHVM, meaning the same thing that they do in PHP5 or PHP 7.
 
+## Common Options
+
+These are the options that are probably the most commonly used on a day-to-day basis by users of HHVM.
+
+Option | Type | Default | Description
+-------|------|---------|------------
+`hhvm.server_variables` | array | `$_SERVER` | Sets the contents of the `$_SERVER` variable. 
+`hhvm.enable_obj_destruct_call` | boolean | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
+`hhvm.hack.lang.look_for_typechecker` | boolean | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../deployment/modes.md).
+`hhvm.jit_enable_rename_function` | boolean | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
+`hhvm.server.thread_count` | integer | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](./deployment/modes.md). The number to set here is really quite experimental. If you use [`async`](../../guides/hack/async/introduction.md), then this number can be the default. Otherwise, you might want a higher number.
+`hhvm.source_root` | string | working directory of HHVM process | For [server mode](./deployment/modes.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in repo-authoritative mode.
+`hhvm.force_hh` | boolean | `false` | If `true`, treat all code as Hack code, even if it starts with `<?php`.
+`hhvm.log.file` | string | standard error | The location of the HHVM error log file. 
+`hhvm.repo.authoritative` | boolean | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
+`hhvm.repo.central.path` | string | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
+`hhvm.server.type` | string | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
+`hhvm.server.port` | integer | 80 | The port on which the HHVM server will listen for requests.
+`hhvm.server.default_document` | string | `"index.php"` | The default document that will be served if a page is not explicitly specified.
+`hhvm.server.error_document404` | string | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
+
+## PHP 7 Settings
+
+For changes from PHP 5 to PHP 7 which are backwards incompatible, INI options are available to choose which behavior HHVM respects. (Features which are not backwards incompatible are always available.)
+
+The vast majority of users will want to just set `hhvm.php7.all = 1` to fully enable PHP 7 mode and can ignore the rest of the options in this section. They are available primarily for advanced users who want to do a more gradual migration or otherwise track down compatibility issues.
+
+| INI Setting | Documentation | Default | PHP 7 RFC |
+|-------------|---------------|---------|-----------|
+| hhvm.php7.all | Default value for all of the below | _False_ | N/A |
+| hhvm.php7.deprecate_old_style_ctors | Disallow and warn when using old PHP 4 constructors | hhvm.php7.all | [Remove PHP 4 constructors](https://wiki.php.net/rfc/remove_php4_constructors) |
+| hhvm.php7.engine_exceptions | Enable throwing the new `Error` heirarchy of exceptions | hhvm.php7.all | [Engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
+| hhvm.php7.int_semantics | Change some edge-case int and float behavior, such as divide/mod by zero | hhvm.php7.all | [Integer semantics](https://wiki.php.net/rfc/integer_semantics) with some changes due to [engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
+| hhvm.php7.ltr_assign | Make order of assignment in `list()` lvalues consistent | hhvm.php7.all | [Abstract syntax tree](https://wiki.php.net/rfc/abstract_syntax_tree) |
+| hhvm.php7.no_hex_numerics | Don't consider hex strings to be numeric | hhvm.php7.all | [Remove hex support in numeric strings](https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings) |
+| hhvm.php7.scalar_types | Enable PHP 7-style scalar type annotations (NB: not the same as Hack's) | hhvm.php7.all | [Scalar type declarations](https://wiki.php.net/rfc/scalar_type_hints_v5) |
+| hhvm.php7.uvs | Fix some odd precedence and order of evaluation issues | hhvm.php7.all | [Uniform variable syntax](https://wiki.php.net/rfc/uniform_variable_syntax) |
+
 ## Admin Server
 
 | INI Setting | Documentation | Default |
@@ -106,23 +144,6 @@ The translation cache stores the JIT'd code. It's split into several sections de
 | hhvm.server.apc.expire_on_sets | Enables item purging on expiration | _False_ |
 | hhvm.server.apc.purge_frequency | Expired items will be purged every this many APC sets | 4096 |
 | hhvm.server.apc.purge_rate | Evict at most this many items on each purge. No limit if -1. | -1 |
-
-## PHP 7 Settings
-
-For changes from PHP 5 to PHP 7 which are backwards incompatible, INI options are available to choose which behavior HHVM respects. (Features which are not backwards incompatible are always available.)
-
-The vast majority of users will want to just set `hhvm.php7.all = 1` to fully enable PHP 7 mode and can ignore the rest of the options in this section. They are available primarily for advanced users who want to do a more gradual migration or otherwise track down compatibility issues.
-
-| INI Setting | Documentation | Default | PHP 7 RFC |
-|-------------|---------------|---------|-----------|
-| hhvm.php7.all | Default value for all of the below | _False_ | N/A |
-| hhvm.php7.deprecate_old_style_ctors | Disallow and warn when using old PHP 4 constructors | hhvm.php7.all | [Remove PHP 4 constructors](https://wiki.php.net/rfc/remove_php4_constructors) |
-| hhvm.php7.engine_exceptions | Enable throwing the new `Error` heirarchy of exceptions | hhvm.php7.all | [Engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
-| hhvm.php7.int_semantics | Change some edge-case int and float behavior, such as divide/mod by zero | hhvm.php7.all | [Integer semantics](https://wiki.php.net/rfc/integer_semantics) with some changes due to [engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
-| hhvm.php7.ltr_assign | Make order of assignment in `list()` lvalues consistent | hhvm.php7.all | [Abstract syntax tree](https://wiki.php.net/rfc/abstract_syntax_tree) |
-| hhvm.php7.no_hex_numerics | Don't consider hex strings to be numeric | hhvm.php7.all | [Remove hex support in numeric strings](https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings) |
-| hhvm.php7.scalar_types | Enable PHP 7-style scalar type annotations (NB: not the same as Hack's) | hhvm.php7.all | [Scalar type declarations](https://wiki.php.net/rfc/scalar_type_hints_v5) |
-| hhvm.php7.uvs | Fix some odd precedence and order of evaluation issues | hhvm.php7.all | [Uniform variable syntax](https://wiki.php.net/rfc/uniform_variable_syntax) |
 
 ## Other
 
