@@ -116,7 +116,8 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | INI Setting | Documentation | Default | PHP 7 RFC |
 |-------------|---------------|---------|-----------|
 | hhvm.php7.all | Default value for all of the below | _False_ | N/A |
-| hhvm.php7.deprecate_old_style_ctors | Disallow and warn when using old PHP 4 constructors | hhvm.php7.all | [Remove PHP 4 Constructors](https://wiki.php.net/rfc/remove_php4_constructors) |
+| hhvm.php7.deprecate_old_style_ctors | Disallow and warn when using old PHP 4 constructors | hhvm.php7.all | [Remove PHP 4 constructors](https://wiki.php.net/rfc/remove_php4_constructors) |
+| hhvm.php7.engine_exceptions | Enable throwing the new `Error` heirarchy of exceptions | hhvm.php7.all | [Engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
 | hhvm.php7.int_semantics | Change some edge-case int and float behavior, such as divide/mod by zero | hhvm.php7.all | [Integer semantics](https://wiki.php.net/rfc/integer_semantics) with some changes due to [engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
 | hhvm.php7.ltr_assign | Make order of assignment in `list()` lvalues consistent | hhvm.php7.all | [Abstract syntax tree](https://wiki.php.net/rfc/abstract_syntax_tree) |
 | hhvm.php7.no_hex_numerics | Don't consider hex strings to be numeric | hhvm.php7.all | [Remove hex support in numeric strings](https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings) |
