@@ -1,6 +1,6 @@
 There are times when you are using a paradigm that returns multiple values (e.g., `list()` or `foreach`) where you don't care about one or more of those values. The placeholder variable operator allows you to use these paradigms without having to create dummy variables that will never be used.
 
-This is the placeholder variable operator:
+This is the placeholder variable:
 
 ```
 $_
