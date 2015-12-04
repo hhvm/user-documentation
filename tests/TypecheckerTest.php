@@ -2,6 +2,9 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+/**
+ * @small
+ */
 class TypecheckerTest extends \PHPUnit_Framework_TestCase {
   public function testTypecheckerPasses(): void {
     $output = array();

@@ -5,6 +5,9 @@ namespace HHVM\UserDocumentation\Tests;
 use HHVM\UserDocumentation\APINavData;
 use HHVM\UserDocumentation\NavDataNode;
 
+/**
+ * @small
+ */
 class APINavDataTest extends \PHPUnit_Framework_TestCase {
   public function testNamespacedDefinitionName(): void {
     $classes = APINavData::getNavData()['Classes']['children'];
