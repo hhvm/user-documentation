@@ -10,13 +10,17 @@ Here is an example of using the [async utility function](/hack/async/utility-fun
 
 @@ generators-examples/iterator.php @@
 
-You have to `await` calls to `next()` (or when using `await as`); otherwise you will not get the iterated value. And unlike the `next()` method on normal iterators, a call to `next()` on an async iterator actually returns a value (instead of `void`).
+You have to use `await as`; otherwise you will not get the iterated value. 
+
+Note that `await as` is just like calling `await $gen->next()`; however, you should always use `await as` if possible. Calling the [`AsyncGenerator`](/hack/reference/class/HH.AsyncGenerator/) methods directly is rarely needed. Also note that on async iterators, `await as` or a call to [`next()`](/hack/reference/class/HH.AsyncGenerator/next/) actually returns a value (instead of `void` like in a normal iterator).
 
 ## Sending and Raising
 
-You can send a value to a generator using `send()` and raise an exception upon a generator using `raise()`. 
+**Calling these methods directly should be rarely needed. `await as` should be the most common usage to access values returned by your iterator.**
 
-If you are doing either of these two things, your generator must return `AsyncGenerator`. An `AsyncGenenator` has three type parameters. The first is the key. The second is the value. The third is the type being passed to `send()`.
+You can send a value to a generator using [`send()`](/hack/reference/class/HH.AsyncGenerator/send/) and raise an exception upon a generator using [`raise()`](/hack/reference/class/HH.AsyncGenerator/raise/). 
+
+If you are doing either of these two things, your generator must return `AsyncGenerator`. An `AsyncGenenator` has three type parameters. The first is the key. The second is the value. The third is the type being passed to [`send()`](/hack/reference/class/HH.AsyncGenerator/send/).
 
 @@ generators-examples/send.php @@
 
