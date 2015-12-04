@@ -16,7 +16,10 @@ final class RemotePageLoader extends PageLoader {
     $url = 'http://'.$host.$path;
 
     $ch = curl_init($url);
-    $body = await \HH\Asio\curl_exec($ch);
+    curl_setopt($ch, CURLOPT_HEADER, 1);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $response = await \HH\Asio\curl_exec($ch);
     $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
     invariant(
@@ -24,7 +27,24 @@ final class RemotePageLoader extends PageLoader {
       curl_error($ch),
     );
 
-    return Response::newWithStringBody($body)
-      ->withStatus($status);
+    $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+    $header_blob = substr($response, 0, $header_size);
+    $header_lines = explode("\r\n", trim($header_blob));
+    array_shift($header_lines); // status code and http ver
+
+    if ($header_size === strlen($response)) {
+      $body = '';
+    } else {
+      $body = substr($response, $header_size);
+    }
+
+    $response = Response::newWithStringBody($body)->withStatus($status);
+
+    foreach ($header_lines as $header_line) {
+      list($name, $value) = explode(": ", $header_line);
+      $response = $response->withAddedHeader($name, $value);
+    }
+
+    return $response;
   }
 }

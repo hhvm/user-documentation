@@ -22,4 +22,38 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     $this->assertSame(404, $response->getStatusCode());
     $this->assertContains("can't be found", (string) $response->getBody());
   }
+
+  public function redirectProvider(): array<string, (string, string)> {
+    return [
+      'Hack class documentation' => tuple(
+        '/manual/en/class.hack.maptktv.php',
+        '/hack/reference/class/Map/',
+      ),
+      'Hack function reference' => tuple(
+        '/manual/en/hackfuncref.php',
+        '/hack/reference/',
+      ),
+      'Guide dir => first page of guide' => tuple(
+        '/hack/overview/',
+        '/hack/overview/introduction',
+      ),
+      'PHP function documentation' => tuple(
+        '/manual/en/function.parse-url.php',
+        'http://php.net/manual/en/function.parse-url.php',
+      ),
+    ];
+  }
+
+  /**
+   * @dataProvider redirectProvider
+   */
+  public function testRedirects(string $from, string $to) {
+    $response = \HH\Asio\join(PageLoader::getPage($from));
+    $this->assertSame(301, $response->getStatusCode());
+
+    $target = $response->getHeaderLine('Location');
+    $this->assertNotEmpty($target, 'no location header');
+
+    $this->assertSame($to, $target);
+  }
 }
