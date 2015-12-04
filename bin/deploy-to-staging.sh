@@ -43,12 +43,7 @@ eb status $STAGING_ENV
 
 DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
 echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
-echo "** Press enter to continue, or hit Ctrl-C to cancel"
-read _
-
-set +e
 eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
-set -e
 echo "** Running test suite against staging:"
 echo "**     ./bin/test-staging.sh"
 ./bin/test-staging.sh
