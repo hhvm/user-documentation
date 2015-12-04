@@ -1,7 +1,6 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\BuildPaths;
-use HHVM\UserDocumentation\UIGlyphIcon;
 
 final class :github-issue-link extends :x:element {
   attribute
@@ -23,15 +22,9 @@ final class :github-issue-link extends :x:element {
     );
 
     return (
-      <ui:button
-        className="gitHubIssueButton"
-        href={$new_issue_prefill_url}
-        glyph={UIGlyphIcon::BUG}
-        size="small"
-        target="_blank"
-        use="confirm">
+      <a href={$new_issue_prefill_url}>
         {$this->getChildren()}
-      </ui:button>
+      </a>
     );
   }
 

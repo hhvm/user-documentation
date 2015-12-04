@@ -2,32 +2,14 @@
   display: block;
 
 	a, span {
-    @include buttonhover($buttondefault);
     border-radius: 0px;
 		display: inline-block;
     line-height: 1.2em;
 		font-weight: 400;
     position: relative;
 		text-transform: uppercase;
-
-		.glyphIcon {
-      align-items: center;
-      bottom: 0px;
-      display: flex;
-      font-size: 14px;
-      left: 0px;
-      position: absolute;
-      top: 0px;
-      width: 40px;
-      
-      &.fa-2x {
-        font-size: 18px;
-      }
-
-      &::before {
-        margin: 0 auto;
-      }
-		}
+    @include buttonhover($buttondefault);
+    @include glyphblock;
 
     &.buttonSmall {
       font-size: 12px;
@@ -64,13 +46,13 @@
     a, span {
       padding-left: 60px;
     }
-    
+
     &.buttonAlignRight {
       a, span {
         padding-left: 20px;
         padding-right: 60px;
         text-align: right;
-        
+
         .glyphIcon {
           left: auto;
           right: 0px;

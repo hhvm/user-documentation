@@ -1,0 +1,53 @@
+.noticeHolder {
+  .notice {
+    border: 2px solid $lightgrey;
+    line-height: 1.2em;
+    padding: 10px;
+    position: relative;
+
+    @include notice($blue);
+    @include glyphblock;
+
+    &.noticeSmall {
+      font-size: 12px;
+      padding: 10px 5px;
+    }
+
+    &.noticeMedium {
+      font-size: 14px;
+      padding: 10px;
+    }
+
+    &.noticeLarge {
+      font-size: 16px;
+      padding: 15px 20px;
+    }
+
+    &.noticeSuccess {
+      @include notice($green);
+    }
+
+    &.noticeSpecial {
+      @include notice($orange);
+    }
+
+    &.noticeWarning {
+      @include notice($red);
+    }
+  }
+
+  &.noticeWithGlyph {
+    .notice {
+      padding-left: 60px;
+      
+      &.noticeLarge {
+        padding-left: 80px;
+        
+        .glyphIcon {
+          font-size: 18px;
+          width: 60px;
+        }
+      }
+    }
+  }
+}

@@ -15,7 +15,7 @@ $lightergrey: #F8F8F8;
 $green: #2db04b;
 $lightergreen: #DFF7E5;
 
-$blue: #1b7fbf;
+$blue: #6986a6;
 $lightblue: lighten($blue, 10%);
 $darkblue: darken($blue, 10%);
 
@@ -82,12 +82,47 @@ $default-max-width: 1000px;
   }
 }
 
+@mixin notice($color) {
+  background: lighten($color, 30%);
+  border-color: $color;
+
+  .glyphIcon {
+    background: $color;
+    color: white;
+  }
+
+  a {
+    color: darken($color, 25%);
+  }
+}
+
 @mixin searchplaceholderfocus {
   & + .inputLabel {
     left: -30px;
 
     .searchPlaceholder {
       color: rgba(white, 0);
+    }
+  }
+}
+
+@mixin glyphblock {
+  .glyphIcon {
+    align-items: center;
+    bottom: 0px;
+    display: flex;
+    font-size: 14px;
+    left: 0px;
+    position: absolute;
+    top: 0px;
+    width: 40px;
+
+    &.fa-2x {
+      font-size: 18px;
+    }
+
+    &::before {
+      margin: 0 auto;
     }
   }
 }

@@ -49,7 +49,7 @@ final class :ui:button extends :x:element {
     if ($this->:inline) {
       $holder_class .= " buttonInlineHolder";
     }
-    
+
     if ($this->:align === 'right') {
       $holder_class .= " buttonAlignRight";
     }

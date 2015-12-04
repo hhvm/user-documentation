@@ -1,6 +1,7 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\BuildPaths;
+use HHVM\UserDocumentation\UIGlyphIcon;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactaros\HtmlResponse;
@@ -221,11 +222,16 @@ EOF;
     return
       <div class="feedbackWrapper widthWrapper">
         <div class="mainWrapper">
-          <github-issue-link
-            issueTitle={$this->getGithubIssueTitle()}
-            issueBody={$this->getGithubIssueBody()}>
-            Report a problem or make a suggestion
-          </github-issue-link>
+          <ui:notice
+            className="gitHubIssueButton"
+            glyph={UIGlyphIcon::BUG}>
+            See something wrong?
+            <github-issue-link
+              issueTitle={$this->getGithubIssueTitle()}
+              issueBody={$this->getGithubIssueBody()}>
+              Report a problem or make a suggestion.
+            </github-issue-link>
+          </ui:notice>
         </div>
       </div>;
   }
