@@ -12,10 +12,11 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     $out = [];
 
     while ($node = array_pop($to_visit)) {
-      $out[] = tuple($node['urlPath'], $node);
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }
+      $node['children'] = []; // make failure output easier to read
+      $out[] = tuple($node['urlPath'], $node);
     }
     return $out;
   }
