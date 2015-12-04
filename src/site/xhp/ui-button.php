@@ -29,15 +29,15 @@ final class :ui:button extends :x:element {
           href={$this->:href}
           role="button"
           target={$this->:target}>
-          {$this->getChildren()}
+          <span class="buttonText">{$this->getChildren()}</span>
         </a>;
     } else {
       $button =
-        <span
+        <div
           class={$button_class}
           role="button">
-          {$this->getChildren()}
-        </span>;
+          <span class="buttonText">{$this->getChildren()}</span>
+        </div>;
     }
 
     $glyph = $this->:glyph;

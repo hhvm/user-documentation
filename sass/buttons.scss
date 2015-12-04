@@ -1,57 +1,65 @@
 .buttonHolder{
   display: block;
 
-	a, span {
+	.button {
     border-radius: 0px;
 		display: inline-block;
     line-height: 1.2em;
-		font-weight: 400;
+		font-weight: 700;
+    padding: 0;
     position: relative;
-		text-transform: uppercase;
-    @include buttonhover($buttondefault);
+    @include buttonhover($blue);
     @include glyphblock;
 
-    &.buttonSmall {
+    .buttonText {
+      box-sizing: border-box;
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+    }
+
+    &.buttonSmall .buttonText {
       font-size: 12px;
       padding: 5px 20px;
     }
 
-    &.buttonMedium {
+    &.buttonMedium .buttonText {
       font-size: 14px;
       padding: 10px 20px;
     }
 
-    &.buttonLarge {
+    &.buttonLarge .buttonText {
       font-size: 16px;
       padding: 15px 20px;
     }
 
     &.buttonConfirm {
-      @include buttonhover($buttonconfirm);
-      color: white;
+      @include buttonhover($green);
     }
 
     &.buttonSpecial {
-      @include buttonhover($buttonspecial);
-      color: white;
+      @include buttonhover($orange);
     }
 
     &.buttonDelete {
-      @include buttonhover($buttondelete);
-      color: white;
+      @include buttonhover($red);
     }
 	}
 
   &.buttonWithGlyph {
-    a, span {
-      padding-left: 60px;
+    .button {
+      .buttonText {
+        padding-left: 60px;
+      }
     }
 
     &.buttonAlignRight {
-      a, span {
-        padding-left: 20px;
-        padding-right: 60px;
-        text-align: right;
+      .button {
+        .buttonText {
+          padding-left: 20px;
+          padding-right: 60px;
+          text-align: right;
+        }
 
         .glyphIcon {
           left: auto;

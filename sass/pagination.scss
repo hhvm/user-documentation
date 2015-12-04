@@ -2,20 +2,12 @@
   .paginationLink {
     a {
       display: block;
-      padding: 10px;
       position: relative;
-      @include transition(color 0.3s);
       z-index: 90;
     }
 
     &.next {
       text-align: right;
-    }
-
-    &:hover {
-      a {
-        color: white;
-      }
     }
 
     flex-basis: 50%;

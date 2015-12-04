@@ -21,11 +21,6 @@ $darkblue: darken($blue, 10%);
 
 $red: #d64932;
 
-$buttondefault: $grey;
-$buttonconfirm: $green;
-$buttonspecial: $orange;
-$buttondelete: $red;
-
 $large-screen-cutoff: 1400px;
 $large-screen-max-width: 1200px;
 $default-max-width: 1000px;
@@ -59,26 +54,38 @@ $default-max-width: 1000px;
 }
 
 @mixin buttonhover($color) {
-  background-color: $color;
-  box-shadow: 0px 3px darken($color, 10%);
-  color: white;
-  @include transition(background-color 0.2s, box-shadow 0.2s, top 0.2s);
+  background-color: lighten($color, 30%);
+  color: darken($color, 20%);
+  @include transition(background-color 0.3s, color 0.3s);
   overflow: hidden;
-  top: 0px;
+
+  .buttonText {
+    border-bottom: 2px solid lighten($color, 25%);
+    @include transition(border-color 0.3s);
+  }
 
   .glyphIcon {
-    background: lighten($color, 10%);
-    color: darken($color, 25%);
+    background: $color;
+    border-bottom: 2px solid darken($color, 5%);
+    color: white;
   }
 
   &:hover, &:focus {
-    box-shadow: 0px 1px darken($color, 10%);
-    top: 2px;
+    background-color: lighten($color, 15%);
+    color: darken($color, 30%);
+
+    .buttonText {
+      border-color: darken($color, 10%);
+    }
   }
 
   &:active {
-    box-shadow: 0px 0px darken($color, 10%);
-    top: 3px;
+    background-color: lighten($color, 5%);
+    color: white;
+
+    .buttonText {
+      border-color: $color;
+    }
   }
 }
 
