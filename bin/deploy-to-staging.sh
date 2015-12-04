@@ -48,5 +48,8 @@ read _
 
 set +e
 eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
-echo "** You can test at http://staging.docs.hhvm.com"
+set -e
+echo "** Running test suite against staging:"
+echo "**     ./bin/test-staging.sh"
+./bin/test-staging.sh
 echo "** To switch over prod, run 'eb swap'"

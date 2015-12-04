@@ -2,6 +2,10 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+/**
+ * @group remote
+ * @small
+ */
 class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
   public function notFoundPathProvider(): array<array<string>> {
     return [
