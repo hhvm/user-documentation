@@ -60,6 +60,10 @@ final class HTTP404Controller extends WebPageController {
       </x:frag>;
   }
 
+  protected function getStatusCode(): int {
+    return 404;
+  }
+
   protected function getGithubIssueTitle(): string {
     $request_path = $this->getRequestedPath();
     return '404: '.$request_path;

@@ -113,7 +113,12 @@ EOF;
       </x:doctype>;
     $xhp->setContext('ServerRequestInterface', $this->request);
     $html = await $xhp->asyncToString();
-    return Response::newWithStringBody($html);
+    return Response::newWithStringBody($html)
+      ->withStatus($this->getStatusCode());
+  }
+
+  protected function getStatusCode(): int {
+    return 200;
   }
 
   final public async function getContentPane(): Awaitable<XHPRoot> {
