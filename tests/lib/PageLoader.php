@@ -15,12 +15,12 @@ abstract class PageLoader {
     }
   }
 
-  public static function getPage(string $path): Awaitable<ResponseInterface> {
-    return self::get()->getPageImpl($path);
+  public static function getPage(string $url): Awaitable<ResponseInterface> {
+    return self::get()->getPageImpl($url);
   }
 
   abstract protected function getPageImpl(
-    string $path,
+    string $url,
   ): Awaitable<ResponseInterface>;
 
   <<__Memoize>>

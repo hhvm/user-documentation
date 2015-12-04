@@ -9,12 +9,12 @@ final class LocalPageLoader extends PageLoader {
   protected function __construct() {}
 
   protected async function getPageImpl(
-    string $path,
+    string $url,
   ): Awaitable<ResponseInterface> {
     $request = new ServerRequest(
       /* server = */ [],
       /* file = */ [],
-      $path,
+      $url,
       'GET',
       /* body = */ '/dev/null',
       /* headers = */ [],

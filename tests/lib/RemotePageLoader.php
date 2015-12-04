@@ -10,14 +10,21 @@ final class RemotePageLoader extends PageLoader {
   protected function __construct() {}
 
   protected async function getPageImpl(
-    string $path,
+    string $url,
   ): Awaitable<ResponseInterface> {
-    $host = ArgAssert::isNotNull(self::getHost());
-    $url = 'http://'.$host.$path;
+    $host_header = parse_url($url, PHP_URL_HOST);
+    $path = parse_url($url, PHP_URL_PATH);
+
+    $test_host = ArgAssert::isNotNull(self::getHost());
+    $url = 'http://'.$test_host.$path;
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HEADER, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    if ($host_header) {
+      curl_setopt($ch, CURLOPT_HTTPHEADER, ['Host: '.$host_header]);
+    }
 
     $response = await \HH\Asio\curl_exec($ch);
     $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
