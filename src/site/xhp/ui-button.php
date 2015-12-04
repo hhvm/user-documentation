@@ -13,7 +13,7 @@ final class :ui:button extends :x:element {
     string target = "_self",
     enum {'default', 'confirm', 'special', 'delete'} use = 'default';
 
-  children (pcdata);
+  children (pcdata | :span+);
 
   protected function render(): XHPRoot {
     $holder_class = ($this->:className !== null)

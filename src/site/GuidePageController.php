@@ -81,11 +81,15 @@ final class GuidePageController extends WebPageController {
       $page = $adjacent_page['page'];
       $guide = $adjacent_page['guide'];
 
-      $title = sprintf(
-        "%s: %s",
-        array_keys($guide)[0],
-        array_keys($page)[0],
-      );
+      $guide_title = array_keys($guide)[0];
+      $page_title = <x:frag />;
+      if ($guide_title !== array_keys($page)[0]) {
+        $guide_title .= ':';
+        $page_title =
+          <span class="paginationPageTitle">
+            {array_keys($page)[0]}
+          </span>;
+      }
 
       $class = "paginationLink ";
       $class = $class.($next ? "next" : "previous");
@@ -104,9 +108,11 @@ final class GuidePageController extends WebPageController {
             align={$align}
             href={array_values($page)[0]['urlPath']}
             glyph={$glyph}
-            size="large"
-            use="special">
-            {$title}
+            size="medium">
+            {$page_title}
+            <span class="paginationGuideTitle">
+              {$guide_title}
+            </span>
           </ui:button>
         </div>;
     }

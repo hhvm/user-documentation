@@ -14,6 +14,36 @@
     flex-grow: 1;
     margin: 10px;
     position: relative;
+
+    .buttonHolder {
+      height: 100%;
+
+      .button {
+        height: 100%;
+      }
+
+      .buttonText {
+        display: flex;
+        flex-wrap: wrap;
+
+        .paginationGuideTitle, .paginationPageTitle {
+          display: block;
+          flex-basis: 100%;
+        }
+
+        .paginationPageTitle {
+          flex-basis: 100%;
+          order: 2;
+        }
+
+        .paginationPageTitle + .paginationGuideTitle {
+          font-size: 80%;
+          opacity: 0.8;
+          order: 1;
+        }
+
+      }
+    }
   }
 
   display: flex;
