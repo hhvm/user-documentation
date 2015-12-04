@@ -5,7 +5,6 @@ While you can [build from source](/hhvm/installation/building-from-source), it i
 Here are the supported distributions:
 
 * [Ubuntu 14.04](#ubuntu-14.04-trusty)
-* [Ubuntu 14.10](#ubuntu-14.10-utopic)
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
 * [Debian 7](#debian-7-jessie)
 * [Debian 8](#debian-8-wheezy)
@@ -18,18 +17,6 @@ sudo apt-get install software-properties-common
 
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
 sudo add-apt-repository "deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
-sudo apt-get update
-sudo apt-get install hhvm
-```
-
-## Ubuntu 14.10 Utopic
-
-```
-# installs add-apt-repository
-sudo apt-get install software-properties-common
-
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-sudo add-apt-repository 'deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main'
 sudo apt-get update
 sudo apt-get install hhvm
 ```
