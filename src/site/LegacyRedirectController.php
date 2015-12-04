@@ -77,6 +77,7 @@ final class LegacyRedirectController extends WebController {
       'install-intro' => '/hhvm/installation/introduction',
       'install-xhp' => '/hack/XHP/introduction#the-xhp-lib-library',
       'install-hack' => '/hack/typechecker/install',
+      'install.hack.bootstrapping' => '/hack/getting-started/getting-started',
     };
   }
 }
