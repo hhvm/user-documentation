@@ -96,7 +96,7 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [mongodb](http://github.com/mongodb-labs/mongo-hhvm-driver-prototype): Official MongoDB driver as HNI extension
 * [mongofill](https://github.com/mongofill/mongofill-hhvm): Implementation of legacy MongoDB driver in pure PHP
 * [pgsql](https://github.com/PocketRent/hhvm-pgsql)
-* [shp"](https://github.com/skyfms/hhvm-ext_shape)
+* [shp](https://github.com/skyfms/hhvm-ext_shape)
 * [ssdeep](https://github.com/treffynnon/hhvm-ssdeep)
 * [uuid](https://github.com/vipsoft/hhvm-ext-uuid)
 * [uv](https://github.com/chobie/hhvm-uv)
