@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
 
@@ -55,7 +55,7 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
   /**
    * @dataProvider redirectProvider
    */
-  public function testRedirects(string $from, string $to) {
+  public function testRedirects(string $from, string $to): void {
     $response = \HH\Asio\join(PageLoader::getPage($from));
     $this->assertSame(301, $response->getStatusCode());
 

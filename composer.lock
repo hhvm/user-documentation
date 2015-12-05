@@ -4,9 +4,44 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6d5e7c921cb9c56dad3a09c329a26f2e",
-    "content-hash": "ff66461a31f93745dbcf35dc0a9dd3fb",
+    "hash": "963dbdca38e3bbb92b13114b12d2ab87",
+    "content-hash": "969fa0252bad3d9c8cf74897fd40da06",
     "packages": [
+        {
+            "name": "91carriage/phpunit-hhi",
+            "version": "5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.simon.geek.nz/91-carriage/phpunit-hhi.git",
+                "reference": "873dd55114b70e3a87d6a927997ad2c5ed6a50c4"
+            },
+            "require": {
+                "hhvm": ">=3.9.0",
+                "phpunit/phpunit": "~5.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.2.x-dev",
+                    "dev-phpunit-5.1": "5.1.x-dev",
+                    "dev-phpunit-5.0": "5.0.x-dev",
+                    "dev-phpunit-4.8": "4.8.x-dev"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "HHI definitions for PHPUnit",
+            "homepage": "https://git.simon.geek.nz/91-carriage/phpunit-hhi",
+            "keywords": [
+                "hack",
+                "hhvm",
+                "phpunit",
+                "testing"
+            ],
+            "time": "2015-12-04 08:27:15"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
@@ -113,20 +148,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "9c3efbbb04e5a86445cee1a361052f644ed4b0ba"
+                "reference": "651ecc60ef6a4c11cecd40086faf9dd758032ab6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/9c3efbbb04e5a86445cee1a361052f644ed4b0ba",
-                "reference": "9c3efbbb04e5a86445cee1a361052f644ed4b0ba",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/651ecc60ef6a4c11cecd40086faf9dd758032ab6",
+                "reference": "651ecc60ef6a4c11cecd40086faf9dd758032ab6",
                 "shasum": ""
             },
             "require": {
                 "hhvm": "~3.9"
             },
             "require-dev": {
+                "91carriage/phpunit-hhi": "~5.1.0",
                 "hhvm/systemlib-extractor": "^0.1.0",
-                "phpunit/phpunit": "4.8.*"
+                "phpunit/phpunit": "~5.1.0"
             },
             "type": "library",
             "autoload": {
@@ -150,7 +186,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-11-19 23:40:11"
+            "time": "2015-12-05 00:19:34"
         },
         {
             "name": "hack-psr/psr7-http-message-hhi",
