@@ -3,8 +3,10 @@
 namespace HHVM\UserDocumentation;
 
 use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
+use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 
 class Stringify {
+
   public static function typehint(TypehintDocumentation $typehint): string {
     $s = $typehint['nullable'] ? '?' : '';
     $s .= $typehint['typename'];
@@ -64,5 +66,57 @@ class Stringify {
       $s .= ' = '.$default;
     }
     return $s;
+  }
+
+  public static function signature(
+    FunctionDocumentation $func,
+    StringifyFormat $format = StringifyFormat::MULTI_LINE,
+  ): string {
+    $ret = '';
+
+    $visibility = $func['visibility'];
+    if ($visibility !== null) {
+      $ret .= $visibility.' ';
+    }
+    if ($func['static'] === true) {
+      $ret .= 'static ';
+    }
+    $ret .= 'function '.$func['name'];
+
+    $ret .= Stringify::parameters($func, $format);
+
+    $return_type = $func['returnType'];
+    if ($return_type !== null) {
+      $ret .= ': '.Stringify::typehint($return_type);
+    }
+
+    return $ret;
+  }
+
+  private static function parameters(
+    FunctionDocumentation $func,
+    StringifyFormat $format = StringifyFormat::MULTI_LINE,
+  ): string {
+    $tags = DocblockTagReader::newFromString($func['docComment'])
+      ->getParamTags();
+
+    $params = array_map(
+      $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
+      $func['parameters'],
+    );
+
+    if (!$params) {
+      return '()';
+    }
+
+    switch($format) {
+      case StringifyFormat::MULTI_LINE:
+        return
+          "(\n".
+          implode("\n", array_map($x ==> '  '.$x.',', $params)).
+          "\n)";
+      case StringifyFormat::ONE_LINE:
+        return '('.implode(', ', $params).')';
+    }
   }
 }

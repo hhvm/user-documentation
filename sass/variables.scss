@@ -47,6 +47,15 @@ $side-padding-mob: 10px;
   padding: 1px 3px;
 }
 
+@mixin codemethodsignature {
+  @include codeemph;
+  background: $lightergrey;
+  color: $lightgrey;
+  font-size: 60%;
+  vertical-align: middle;
+  margin-left: 1em;
+}
+
 @mixin headerfade {
   opacity: 0.3;
   @include transition(opacity 0.3s);

@@ -8,10 +8,9 @@ use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
 final class FunctionMarkdownBuilder {
-  use DocblockTagReader;
-
   private FunctionYAML $yaml;
-  protected ?DocBlock $docblock;
+  private ?DocBlock $docblock;
+  private DocblockTagReader $tagReader;
 
   public function __construct(
       string $file,
@@ -27,6 +26,7 @@ final class FunctionMarkdownBuilder {
     if ($comment !== null) {
       $this->docblock = new DocBlock($comment);
     }
+    $this->tagReader = DocblockTagReader::newFromObject($this->docblock);
   }
 
   public function build(): void {
@@ -70,7 +70,10 @@ final class FunctionMarkdownBuilder {
   private function getDescription(): string {
     $md = "### Description\n\n";
 
-    $md .= "```Hack\n<?hh\n".$this->getSignature()."\n```\n\n";
+    $md .=
+      "```Hack\n<?hh\n".
+      Stringify::signature($this->yaml['data']).
+      "\n```\n\n";
 
     $md .= $this->docblock?->getText();
 
@@ -84,7 +87,7 @@ final class FunctionMarkdownBuilder {
       return null;
     }
 
-    $tags = $this->getParamTags();
+    $tags = $this->tagReader->getParamTags();
 
     $md = "### Parameters\n\n";
 
@@ -108,7 +111,7 @@ final class FunctionMarkdownBuilder {
   }
 
   private function getReturnValues(): ?string {
-    $tags = $this->getTypedTagsByName('return', ReturnTag::class);
+    $tags = $this->tagReader->getTypedTagsByName('return', ReturnTag::class);
     if (!$tags) {
       return null;
     }
@@ -129,37 +132,6 @@ final class FunctionMarkdownBuilder {
 
       $ret .= $tag->getDescription();
     }
-    return $ret;
-  }
-
-  private function getSignature(): string {
-    $ret = '';
-
-    $visibility = $this->yaml['data']['visibility'];
-    if ($visibility !== null) {
-      $ret .= $visibility.' ';
-    }
-    if ($this->yaml['data']['static'] === true) {
-      $ret .= 'static ';
-    }
-    $ret .= 'function '.$this->yaml['data']['name'];
-
-    $tags = $this->getParamTags();
-    $params = array_map(
-      $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
-      $this->yaml['data']['parameters'],
-    );
-    if (!$params) {
-      $ret .= '()';
-    } else {
-      $ret .= "(\n".implode("\n", array_map($x ==> '  '.$x.',', $params))."\n)";
-    }
-
-    $return_type = $this->yaml['data']['returnType'];
-    if ($return_type !== null) {
-      $ret .= ': '.Stringify::typehint($return_type);
-    }
-
     return $ret;
   }
 
@@ -198,14 +170,5 @@ final class FunctionMarkdownBuilder {
       $ret .= "\n\n";
     }
     return $ret;
-  }
-
-  private function getParamTags(): Map<string, ParamTag> {
-    $tags_vec = $this->getTypedTagsByName('param', ParamTag::class);
-    $tags = Map { };
-    foreach ($tags_vec as $tag) {
-      $tags[$tag->getVariableName()] = $tag;
-    }
-    return $tags;
   }
 }

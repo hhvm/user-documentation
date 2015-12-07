@@ -5,11 +5,10 @@ namespace HHVM\UserDocumentation;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-class ClassMarkdownBuilder {
-  use DocblockTagReader;
-
+final class ClassMarkdownBuilder {
   private ClassYAML $yaml;
-  protected ?DocBlock $docblock;
+  private ?DocBlock $docblock;
+  private DocblockTagReader $tagReader;
 
   public function __construct(
     string $file,
@@ -19,6 +18,7 @@ class ClassMarkdownBuilder {
     if ($doc !== null) {
       $this->docblock = new DocBlock($doc);
     }
+    $this->tagReader = DocblockTagReader::newFromObject($this->docblock);
   }
 
   public function build(): void {
@@ -69,7 +69,9 @@ class ClassMarkdownBuilder {
   }
 
   private function getGuides(): ?string {
-    $guides = $this->getTagsByName('guide')->map($tag ==> $tag->getContent());
+    $guides = $this->tagReader
+      ->getTagsByName('guide')
+      ->map($tag ==> $tag->getContent());
     if (!$guides) {
       return null;
     }
@@ -111,17 +113,27 @@ EOF;
       $method_url = URLBuilder::getPathForMethod($method);
 
       if ($method['static']) {
-        $prefix = '::';
+        $name = '::';
       } else {
-        $prefix = '->';
+        $name = '->';
       }
+      $name .= self::nameFromData($method).'()';
+
       $md .=
-        ' * [`'.$prefix.self::nameFromData($method).'`]('. $method_url .")";
+        ' * [`'.$name.'`]('. $method_url .') ';
+
+      $ret_type = $method['returnType'];
+      $md .=
+        '<code class="methodSignature">'.
+        Stringify::signature($method, StringifyFormat::ONE_LINE).
+        '</code>';
+
+
       $comment = $method['docComment'];
       if ($comment !== null) {
         $desc = (new DocBlock($comment))->getShortDescription();
         if ($desc !== "") {
-          $md .= ': ' . $desc;
+          $md .= '<br />'.$desc;
         }
       }
       $md .= "\n";

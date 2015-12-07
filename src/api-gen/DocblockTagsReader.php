@@ -2,12 +2,31 @@
 namespace HHVM\UserDocumentation;
 
 use phpDocumentor\Reflection\DocBlock;
+use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-trait DocblockTagReader {
-  protected ?DocBlock $docblock;
+final class DocblockTagReader {
+  private function __construct(
+    private ?DocBlock $docblock,
+  ) {
+  }
 
-  protected function getTagsByName(
+  public static function newFromObject(
+    ?DocBlock $docblock,
+  ): DocblockTagReader {
+    return new DocblockTagReader($docblock);
+  }
+
+  public static function newFromString(
+    ?string $docblock,
+  ): DocblockTagReader {
+    if ($docblock === null) {
+      return new DocblockTagReader(null);
+    }
+    return new DocblockTagReader(new DocBlock($docblock));
+  }
+
+  public function getTagsByName(
     string $name,
   ): Vector<Tag> {
     return $this->getTypedTagsByName(
@@ -17,7 +36,7 @@ trait DocblockTagReader {
   }
 
   <<__Memoize>>
-  protected function getTypedTagsByName<T as Tag>(
+  public function getTypedTagsByName<T as Tag>(
     string $name,
     classname<T> $type,
   ): Vector<T> {
@@ -35,7 +54,16 @@ trait DocblockTagReader {
       );
       $tags[] = $tag;
     }
-    
+
+    return $tags;
+  }
+
+  public function getParamTags(): Map<string, ParamTag> {
+    $tags_vec = $this->getTypedTagsByName('param', ParamTag::class);
+    $tags = Map { };
+    foreach ($tags_vec as $tag) {
+      $tags[$tag->getVariableName()] = $tag;
+    }
     return $tags;
   }
 }

@@ -11,6 +11,11 @@ enum DocumentationSourceType: string {
   ELF_SECTION = 'elf_section';
 };
 
+enum StringifyFormat: string {
+  ONE_LINE = 'oneline';
+  MULTI_LINE = 'multiline';
+};
+
 enum MemberVisibility: string {
   PRIVATE = 'private';
   PROTECTED = 'protected';

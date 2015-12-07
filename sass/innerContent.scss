@@ -37,6 +37,10 @@
     @include codeemph;
   }
 
+  li > code.methodSignature {
+    @include codemethodsignature;
+  }
+
   ol {
     list-style: decimal inside;
     margin: 0.5em 0 2em;
