@@ -2,7 +2,7 @@ Hack's most basic feature is type annotations. Typing of objects have been aroun
 
 ## What are type annotations?
 
-Type annotations allow the explicit types to member variables, parameters, return values, and other components of code.
+Type annotations allow explicit types (e.g., `int`) to be added to class properties, method and function parameters, method and function return values, and other components of code.
 
 For example, consider the following code, written in regular PHP, without any types:
 
