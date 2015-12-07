@@ -1,0 +1,45 @@
+footer {
+  &.footerWrapper {
+    background: $footer-bg;
+    border-top: 2px solid $orange;
+    box-sizing: border-box;
+    padding: $side-padding;
+    position: relative;
+    width: 100%;
+
+    .mainWrapper {
+      display: flex;
+      flex-flow: row wrap;
+      margin: 0 -20px;
+
+      .footerPanel {
+        box-sizing: border-box;
+        flex-basis: 200px;
+        flex-grow: 1;
+        flex-shrink: 0;
+        font-size: 14px;
+        padding: 20px;
+
+        h2 {
+          color: $orange;
+          font-size: 18px;
+          padding-bottom: 10px;
+        }
+
+        ul {
+          a {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1020px) {
+  footer {
+    &.footerWrapper {
+      padding: $side-padding-mob;
+    }
+  }
+}

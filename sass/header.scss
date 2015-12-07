@@ -19,7 +19,7 @@
     top: 0px;
 
     &.hhvmLogo {
-      left: 110px;
+      left: 110px + $side-padding;
 
       .bodyClassHack & {
         @include headerfade;
@@ -31,7 +31,7 @@
     }
 
     &.hackLogo {
-      left: 0px;
+      left: $side-padding;
 
       .bodyClassHhvm & {
         @include headerfade;
@@ -62,4 +62,18 @@
   display: block;
   height: $header-height + 20px;
   margin: -($header-height + 20px) 0 0;
+}
+
+@media only screen and (max-width: 1020px) {
+  .header {
+    .headerLogo {
+      &.hackLogo {
+        left: $side-padding-mob;
+      }
+      
+      &.hhvmLogo {
+        left: 110px + $side-padding-mob;
+      }
+    }
+  }
 }

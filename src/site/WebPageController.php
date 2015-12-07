@@ -240,6 +240,50 @@ EOF;
   }
 
   private function getFooter(): :footer {
-    return (<footer />);
+    return
+      <footer class="footerWrapper">
+        <div class="mainWrapper">
+          <div class="footerPanel">
+            <h2>Hack</h2>
+            <ul>
+              <li><a href="/hack/overview/">Overview</a></li>
+              <li><a href="/hack/getting-started/">Getting Started</a></li>
+              <li><a href="/hack/tools/">Tools</a></li>
+              <li><a href="/hack/FAQ/">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footerPanel">
+            <h2>HHVM</h2>
+            <ul>
+              <li><a href="/hhvm/getting-started/">Getting Started</a></li>
+              <li><a href="/hhvm/installation/">Installation</a></li>
+              <li><a href="/hhvm/basic-usage/">Basic Usage</a></li>
+              <li><a href="/hhvm/configuration/">Configuration</a></li>
+            </ul>
+          </div>
+          <div class="footerPanel">
+            <h2>Hack Community</h2>
+            <ul>
+              <li><a href="http://hacklang.org/">Website</a></li>
+              <li><a href="https://twitter.com/hacklang">Twitter</a></li>
+              <li>
+                <a
+                  href="https://github.com/facebook/hhvm/tree/master/hphp/hack">
+                  GitHub
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="footerPanel">
+            <h2>HHVM Community</h2>
+            <ul>
+              <li><a href="http://hhvm.com">Website</a></li>
+              <li><a href="http://hhvm.com/blog">Blog</a></li>
+              <li><a href="https://www.facebook.com/hhvm">Facebook</a></li>
+              <li><a href="https://twitter.com/HipHopVM">Twitter</a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>;
   }
 }

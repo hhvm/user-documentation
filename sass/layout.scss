@@ -1,5 +1,6 @@
 .widthWrapper {
-  margin: 0 30px;
+  padding-left: $side-padding;
+  padding-right: $side-padding;
   position: relative;
 }
 
@@ -7,11 +8,20 @@
   align-items: flex-start;
   display: flex;
   flex-flow: row no-wrap;
-  padding: 50px 0px;
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 .mainContainer {
+  background: $footer-bg;
+  box-sizing: border-box;
+  height: 100%;
   padding-top: 62px;
+
+  & > div {
+    background: white;
+    overflow: auto;
+  }
 }
 
 .mainWrapper {
@@ -59,7 +69,8 @@
   }
 
   .widthWrapper {
-    margin: 0 10px;
+    padding-left: $side-padding-mob;
+    padding-right: $side-padding-mob;
   }
 }
 

@@ -21,11 +21,15 @@ $darkblue: darken($blue, 10%);
 
 $red: #d64932;
 
+$footer-bg: $midgrey;
+
 $large-screen-cutoff: 1400px;
 $large-screen-max-width: 1200px;
 $default-max-width: 1000px;
 
 $header-height: 60px;
+$side-padding: 30px;
+$side-padding-mob: 10px;
 
 /* Mixins */
 
