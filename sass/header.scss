@@ -2,7 +2,7 @@
   background: $midgrey;
   border-bottom: 2px solid $orange;
   color: white;
-  height: 60px;
+  height: $header-height;
   position: fixed;
   width: 100%;
   z-index: 999;
@@ -54,4 +54,12 @@
       text-decoration: none;
     }
   }
+}
+
+/* Fix for anchors being hidden under fixed top header */
+:target:before {
+  content: "";
+  display: block;
+  height: $header-height + 20px;
+  margin: -($header-height + 20px) 0 0;
 }
