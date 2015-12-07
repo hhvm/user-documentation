@@ -17,7 +17,7 @@ Just make sure you are following the rest of the guidelines. Async is great, but
 For the common cases where async would provide maximum benefit, HHVM provides convenient extension libraries to help make writing code much easier. Depending on your use case scenario, you should liberally use:
 
 * [MySQL](./extensions.md#mysql) for database access and queries.
-* [Curl](./extensions.md#curl) for web page data and transfer.
+* [cURL](./extensions.md#curl) for web page data and transfer.
 * [McRouter](./extensions.md#mcrouter) for memcached-based operations.
 * [Streams](./extensions.md#streams) for stream-based resource operations.
 
