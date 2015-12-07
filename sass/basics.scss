@@ -25,6 +25,14 @@ a {
   color: white;
 }
 
+.notFoundErrorPage .mainContainer {
+  background: inherit;
+}
+
+.notFoundErrorPage .mainContainer > div {
+  background: inherit;
+}
+
 .warning {
   color: red;
 }
