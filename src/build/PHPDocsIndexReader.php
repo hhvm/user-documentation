@@ -11,6 +11,13 @@ final class PHPDocsIndexReader {
   public function __construct(
     string $content,
   ) {
+    $article_types = Set {
+      'book',
+      'preface',
+      'reference',
+      'section',
+    };
+
     $old_index = json_decode($content);
 
     foreach ($old_index as $entry) {
@@ -24,8 +31,9 @@ final class PHPDocsIndexReader {
         continue;
       }
 
-      if ($type === 'section') {
+      if ($article_types->contains($type)) {
         $this->articles[$id] = $id;
+        continue;
       }
 
       if ($type !== 'refentry') {

@@ -41,9 +41,21 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/manual/en/function.parse-url.php',
         'http://php.net/manual/en/function.parse-url.php',
       ),
-      'PHP article' => tuple(
+      'PHP refentry article' => tuple(
         '/manual/en/mail.configuration.php',
         'http://php.net/manual/en/mail.configuration.php',
+      ),
+      'PHP book' => tuple(
+        '/manual/en/book.apc.php',
+        'http://php.net/manual/en/book.apc.php',
+      ),
+      'PHP topic reference' => tuple(
+        '/manual/en/ref.array.php',
+        'http://php.net/manual/en/ref.array.php',
+      ),
+      'PHP book section' => tuple(
+        '/manual/en/classkit.configuration.php',
+        'http://php.net/manual/en/classkit.configuration.php',
       ),
       'Beta redirect root' => tuple(
         'http://beta.docs.hhvm.com/',
