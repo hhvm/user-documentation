@@ -41,6 +41,10 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/manual/en/function.parse-url.php',
         'http://php.net/manual/en/function.parse-url.php',
       ),
+      'PHP article' => tuple(
+        '/manual/en/mail.configuration.php',
+        'http://php.net/manual/en/mail.configuration.php',
+      ),
       'Beta redirect root' => tuple(
         'http://beta.docs.hhvm.com/',
         'http://docs.hhvm.com/',

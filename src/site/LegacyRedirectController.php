@@ -2,19 +2,31 @@
 
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\APILegacyRedirectData;
+use HHVM\UserDocumentation\PHPDotNetArticleRedirectData;
 use Psr\Http\Message\ResponseInterface;
 
 require_once(BuildPaths::APIDOCS_LEGACY_REDIRECTS);
+require_once(BuildPaths::PHP_DOT_NET_ARTICLE_REDIRECTS);
 
 final class LegacyRedirectController extends WebController {
   public async function getResponse(): Awaitable<ResponseInterface> {
     $id = $this->getRequiredStringParam('legacy_id');
+
     // Since the API redirects are quite specific, see if we are redirecting
     // from there first.
     $url = idx(APILegacyRedirectData::getIndex(), $id);
     if ($url) {
       throw new RedirectException($url);
     }
+
+    // Ditto for the articles; Ideally we'd give the HHVM/Hack list below
+    // priority in case we gave more specific articles, but this is safer
+    // given that we need a substring match for the manual list.
+    $url = idx(PHPDotNetArticleRedirectData::getIndex(), $id);
+    if ($url) {
+      throw new RedirectException($url);
+    }
+
     // If not, iterate through our manual redirects and see if we have
     // $from being a string part of $id. If so, then we can redirect to the
     // appropriate place.
@@ -23,6 +35,7 @@ final class LegacyRedirectController extends WebController {
         throw new RedirectException($to);
       }
     }
+
     throw new HTTPNotFoundException();
   }
 

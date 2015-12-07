@@ -12,8 +12,6 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
    * be taken down soon.
    */
   const string LEGACY_INDEX = LocalConfig::ROOT.'/legacy-docs-site-index.json';
-  const string PHP_DOT_NET_PATTERN =
-    'http://php.net/manual/en/%s.php';
 
   public function buildAll(): void {
     Log::i("\nAPILegacyRedirectsBuild");

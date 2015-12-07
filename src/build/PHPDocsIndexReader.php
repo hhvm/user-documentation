@@ -6,6 +6,7 @@ final class PHPDocsIndexReader {
   private Map<string, string> $classes = Map { };
   private Map<string, string> $functions = Map { };
   private Map<string, string> $methods = Map { };
+  private Map<string, string> $articles = Map { };
 
   public function __construct(
     string $content,
@@ -22,6 +23,11 @@ final class PHPDocsIndexReader {
         $this->classes[$name] = $id;
         continue;
       }
+
+      if ($type === 'section') {
+        $this->articles[$id] = $id;
+      }
+
       if ($type !== 'refentry') {
         continue;
       }
@@ -53,5 +59,13 @@ final class PHPDocsIndexReader {
 
   public function getMethods(): ImmMap<string, string> {
     return $this->methods->toImmMap();
+  }
+
+  public function getArticles(): ImmMap<string, string> {
+    $defs = $this->classes->values()->toSet();
+    $defs->addAll($this->functions->values());
+    $defs->addAll($this->methods->values());
+
+    return $this->articles->filter($x ==> !$defs->contains($x))->toImmMap();
   }
 }
