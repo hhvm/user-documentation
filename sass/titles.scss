@@ -24,6 +24,16 @@ h4 {
   font-size: 140%;
 }
 
+.headingWithAnchor .glyphIcon {
+  color: $lightgrey;
+  margin-left: 0.5em;
+  display: none;
+}
+
+.headingWithAnchor:hover .glyphIcon {
+  display: inline-block;
+}
+
 .mainTitle {
   .pageTitle {
     border-bottom: 2px solid $orange;

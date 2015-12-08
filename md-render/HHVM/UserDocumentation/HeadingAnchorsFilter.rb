@@ -18,7 +18,7 @@ module HHVM
           # normalize
           id.downcase!
           id.gsub! ' ', '-'
-  
+
           # prefix with preceding higher-level heading id
           # to avoid duplicates - eg:
           # - <h2>Foo</h2><h3>Bar</h3>
@@ -35,9 +35,17 @@ module HHVM
             end
           end
           if last then
-            id = last+'__'+ id
+            id = last+'__'+id
           end
-          
+
+          link = Nokogiri::XML::Node.new 'a', doc
+          link[:href] = '#'+id
+          glyph = Nokogiri::XML::Node.new 'i', doc
+          glyph[:class] = 'glyphIcon fa fa-link'
+          glyph.parent = link
+          link.parent = node
+          node[:class] = 'headingWithAnchor'
+
           # Set the ID
           node[:id] = id
         end
