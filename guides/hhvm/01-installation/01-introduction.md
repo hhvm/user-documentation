@@ -9,8 +9,8 @@ The easiest way to get going with HHVM is to use one of our supported prebuilt p
 * [Ubuntu 15.04 (Vivid)](./linux.md#ubuntu-15.04-vivid)
 * [Ubuntu 14.10 (Utopic)](./linux.md#ubuntu-14.10-utopic)
 * [Ubuntu 14.04 (Trusty)](./linux.md#ubuntu-14.04-trusty)
-* [Debian 8 (Wheezy)](./linux.md#debian-8-wheezy)
-* [Debian 7 (Jessie)](./linux.md#debian-7-jessie)
+* [Debian 8 (Jessie)](./linux.md#debian-8-jessie)
+* [Debian 7 (Wheezy)](./linux.md#debian-7-wheezy)
 
 ### LTS Releases
 
