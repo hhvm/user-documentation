@@ -14,7 +14,7 @@ for RELEASE in $RELEASES; do
     exit
   fi
 
-  RELEASE_TIMESTAMP=$(git log -1 $RELEASE --format=%ct)
+  RELEASE_TIMESTAMP=$(git log -1 $RELEASE --format=%at)
   RELEASE_TITLE=$(
     TZ=America/Los_Angeles \
     date "+%-d %B %Y %H:%M %Z (%A)" -d "@${RELEASE_TIMESTAMP}"
