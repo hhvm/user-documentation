@@ -6,8 +6,8 @@ Here are the supported distributions:
 
 * [Ubuntu 14.04](#ubuntu-14.04-trusty)
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
-* [Debian 7](#debian-7-jessie)
-* [Debian 8](#debian-8-wheezy)
+* [Debian 7](#debian-7-wheezy)
+* [Debian 8](#debian-8-jessie)
 
 ## Ubuntu 14.04 Trusty
 
@@ -33,7 +33,7 @@ sudo apt-get update
 sudo apt-get install hhvm
 ```
 
-## Debian 7 Jessie
+## Debian 7 Wheezy
 
 ```
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
@@ -42,7 +42,7 @@ sudo apt-get update
 sudo apt-get install hhvm
 ```
 
-## Debian 8 Wheezy
+## Debian 8 Jessie
 
 ```
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449

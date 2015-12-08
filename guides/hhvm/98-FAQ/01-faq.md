@@ -12,9 +12,9 @@ Facebook's entire site runs on HHVM (desktop, API and mobile), both in developme
 
 ### What platforms is HHVM supported on?
 
-* **Linux**: HHVM has official [Linux](../installation/linux.md) support on flavors of Ubuntu and Debian.
-* **Mac OS X**: HHVM has [experimental support](../installation/mac.md) on Mac OS X.
-* **Windows**: HHVM is currently being ported over to [Windows](../installation/windows.md).
+* **Linux**: HHVM has official [Linux](/hhvm/installation/linux) support on flavors of Ubuntu and Debian.
+* **Mac OS X**: HHVM has [experimental support](/hhvm/installation/mac) on Mac OS X.
+* **Windows**: HHVM is currently being ported over to [Windows](/hhvm/installation/windows).
 
 ### Are there are any videos, presentations, etc. about HHVM?
 
@@ -28,9 +28,9 @@ Facebook's entire site runs on HHVM (desktop, API and mobile), both in developme
 
 ### How do I install HHVM? Where are the binaries?
 
-New users may want to try our high-level overview [getting started guide](../getting-started/getting-started.md).
+New users may want to try our high-level overview [getting started guide](/hhvm/getting-started/getting-started).
 
-You can find more detailed installation information [here](../installation/introduction.md).
+You can find more detailed installation information [here](/hhvm/installation/introduction).
 
 ### When does HHVM release a new version?
 
@@ -43,7 +43,7 @@ You can find more detailed installation information [here](../installation/intro
 * **MediaWiki**: MediaWiki installations can run on HHVM, and [Wikipedia](http://wikipedia.org) has run on HHVM since 2014.
 * All the top 20 PHP frameworks. See the [frameworks test page](http://hhvm.com/frameworks/) to see what percent of their unit tests we pass. Most frameworks will run perfectly fine even if we don't pass every test, as the tests might be verifying error message matching, etc.
 
-Here are some other places HHVM is being used: https://github.com/facebook/hhvm/wiki/Users
+Here are some other places HHVM is being used: [https://github.com/facebook/hhvm/wiki/Users](https://github.com/facebook/hhvm/wiki/Users)
 
 ### What is known to be broken with HHVM?
 
@@ -59,15 +59,15 @@ For real-time discussion, the team tends to hang out in [#hhvm on IRC](http://we
 
 ### Should I use Proxygen or FastCGI?
 
-[Proxygen](../basic-usage/proxygen.md) is full featured, very fast web server and generally easier to get started with out of the box. [FastCGI](../advanced-usage/fastcgi.md) is a bit more configurable, but requires a separate web server (e.g., nginx) on the front of it.
+[Proxygen](/hhvm/basic-usage/proxygen) is full featured, very fast web server and generally easier to get started with out of the box. [FastCGI](/hhvm/advanced-usage/fastCGI) is a bit more configurable, but requires a separate web server (e.g., nginx) on the front of it.
 
 ### When will HHVM support Apache or Nginx?
 
-[We do.](../deployment/hhvm-servers#fastcgi)
+[We do.](/hhvm/advanced-usage/fastCGI)
 
 ### What PHP extensions does HHVM currently support?
 
-The list of supported extensions can be found in the extensions directory of the hhvm codebase: https://github.com/facebook/hhvm/tree/master/hphp/runtime/ext
+[Here is the list](/hhvm/extensions/introduction) of supported extensions.
  
 ### What is the HHVM Wrapper?
 
@@ -85,7 +85,7 @@ Try deleting `/var/run/hhvm/hhvm.hhbc` and run your program again
 
 ### HHVM keeps crashing. Why?
 
-There can be many reasons. And it is tough to diagnose that general question. It could be a bug in HHVM. It could be that you need to increase the size of your [translation cache](../configuration/ini-settings.md#jit-translation-cache-size). Or it could be other factors.
+There can be many reasons. And it is tough to diagnose that general question. It could be a bug in HHVM. It could be that you need to increase the size of your [translation cache](/hhvm/configuration/ini-settings.md#jit-translation-cache-size). Or it could be other factors.
 
 The best thing to do is [file an issue](https://github.com/facebook/hhvm/issues) and at minimum give us the problem and a stack trace. You will get a much faster and more quality response if you also provide us as small as possible reproduction case with PHP or Hack code.
 

@@ -5,7 +5,7 @@ You must be running a 64-bit OS to compile & install HHVM. Here are the supporte
 * [Ubuntu 14.04](#ubuntu-14.04-trusty)
 * [Ubuntu 14.10](#ubuntu-14.10-utopic)
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
-* [Debian 8](#debian-8-wheezy)
+* [Debian 8](#debian-8-jessie)
 * [Mac OS X Homebrew](#mac-os-x-homebrew)
 * [Mac OS X Macports](#mac-os-x-macports)
 
@@ -229,7 +229,7 @@ There are 2 families of regression tests. There are about 5000 tests in all. All
   popd
 ```
 
-## Debian 8 Wheezy
+## Debian 8 Jessie
 
 ### Packages installation
 
