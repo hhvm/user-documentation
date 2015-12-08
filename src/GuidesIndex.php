@@ -2,12 +2,12 @@
 
 namespace HHVM\UserDocumentation;
 
-class GuidesIndex {  
+class GuidesIndex {
   public static function getIndex(
   ): Map<GuidesProduct, Map<string, Map<string, string>>> {
     return require(BuildPaths::GUIDES_INDEX);
   }
-  
+
   public static function getProductIndex(
     GuidesProduct $product,
   ): Map<string, Map<string, string>> {
@@ -19,7 +19,7 @@ class GuidesIndex {
     );
     return $index[$product];
   }
-  
+
   private static function getSummaries(
   ): Map<string, Map<string, string>> {
     return require(BuildPaths::GUIDES_SUMMARY);
@@ -36,6 +36,14 @@ class GuidesIndex {
         foreach ($entry as $name => $filepath) {
           if (stripos($name, $term) !== false) {
             $results->addGuideResult($type, $category, $name);
+          } else {
+            $content = file_get_contents(BuildPaths::GUIDES_HTML.'/'.$filepath);
+            if ($content !== false) {
+              $content = strip_tags($content);
+              if (stripos(html_entity_decode($content), $term) !== false) {
+                $results->addGuideResult($type, $category, $name);
+              }
+            }
           }
         }
       }
