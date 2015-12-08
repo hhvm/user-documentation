@@ -56,7 +56,14 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
     foreach ($classes as $class) {
       Log::v('.');
-      $old_id = idx($old_classes, $class['name']);
+      $raw_name = $class['name'];
+      $old_id = idx($old_classes, $raw_name);
+
+      if ($old_id === null) {
+        $name_parts = explode("\\", $raw_name);
+        $no_ns_name = $name_parts[count($name_parts) - 1];
+        $old_id = idx($old_classes, $no_ns_name);
+      }
 
       if ($old_id) {
         $old_ids_to_new_urls[$old_id] = $class['urlPath'];

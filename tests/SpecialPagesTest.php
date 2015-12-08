@@ -29,9 +29,17 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/manual/en/class.hack.maptktv.php',
         '/hack/reference/class/Map/',
       ),
+      'Hack interface reference with added namespace' => tuple(
+        '/manual/en/class.hack.iterabletv.php',
+        '/hack/reference/interface/HH.Iterable/',
+      ),
       'Hack function reference' => tuple(
         '/manual/en/hackfuncref.php',
         '/hack/reference/',
+      ),
+      'Hack function reference with preserved namespace' => tuple(
+        '/manual/en/hack.asio.function.v.php',
+        '/hack/reference/function/HH.Asio.v/',
       ),
       'Guide dir => first page of guide' => tuple(
         '/hack/overview/',
