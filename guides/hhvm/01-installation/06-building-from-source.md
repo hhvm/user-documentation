@@ -6,7 +6,6 @@ You must be running a 64-bit OS to compile & install HHVM. Here are the supporte
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
 * [Debian 8](#debian-8-jessie)
 * [Mac OS X Homebrew](#mac-os-x-homebrew)
-* [Mac OS X Macports](#mac-os-x-macports)
 * [Unsupported](#unsupported)
 
 ## Ubuntu 14.04 Trusty
@@ -301,44 +300,6 @@ cd hphp
 ./hhvm/hhvm test/run test/quick
 ```
 
-## Mac OS X Macports
-
-Using Macports is unsupported, but should work and require Mac OS X 10.10 or higher.
-
-### Dependencies
-
-```
-sudo port -v install autoconf automake binutils bison boost clang-3.6 cmake \
-  elftoolchain gawk google-glog jemalloc libelf libjpeg-turbo libmcrypt \
-  libmemcached libpng md5sha1sum ocaml oniguruma5 readline tbb
-```
-
-### Clone HHVM
-
-```
-git clone https://github.com/facebook/hhvm.git
-cd hhvm
-git submodule update --init --recursive
-```
-
-### Build
-
-```
-cmake \
- -DCMAKE_C_COMPILER=clang-mp-3.6 -DCMAKE_CXX_COMPILER=clang++-mp-3.6 -DCMAKE_ASM_COMPILER=clang-mp-3.6 \
- -DCMAKE_C_FLAGS="-isystem/opt/local/include" -DCMAKE_CXX_FLAGS="-isystem/opt/local/include" \
- -DENABLE_MCROUTER=0 -DENABLE_EXTENSION_MCROUTER=Off -DENABLE_EXTENSION_IMAGICK=Off \
- -DMYSQL_UNIX_SOCK_ADDR=/dev/null \
- -DLIBDWARF_LIBRARIES="/opt/local/lib/elftoolchain/libdwarf.3.dylib" \
- -DLIBDWARF_INCLUDE_DIRS="/opt/local/include/elftoolchain/"
-```
-
-### Run
-
-```
-./hphp/hhvm/hhvm --version
-```
-
 ## Unsupported
 
-There is a [wiki](https://github.com/facebook/hhvm/wiki/Building-and-Installing-HHVM) on the HHVM source code GitHub repo that discusses unsupported distributions on which you may be able to compile HHVM.
+There is a [wiki](https://github.com/facebook/hhvm/wiki/Building-and-Installing-HHVM) on the HHVM source code GitHub repo that discusses unsupported distributions on which you may be able to compile HHVM, including various flavors of Linux and Mac OS X using [MacPorts](https://github.com/facebook/hhvm/wiki/Building-and-installing-HHVM-on-OSX-10.10-with-MacPorts).
