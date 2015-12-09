@@ -10,6 +10,7 @@ require_relative 'HHVM/UserDocumentation/HeadingAnchorsFilter.rb'
 require_relative 'HHVM/UserDocumentation/ResponsiveTablesFilter.rb'
 require_relative 'HHVM/UserDocumentation/VersionedImagesFilter.rb'
 require_relative 'HHVM/UserDocumentation/IgnoreNewlinesFilter.rb'
+require_relative 'HHVM/UserDocumentation/AutoLinkifyAPIFilter.rb'
 
 pipeline = HTML::Pipeline.new(
   [
@@ -21,6 +22,7 @@ pipeline = HTML::Pipeline.new(
     HHVM::UserDocumentation::ResponsiveTablesFilter,
     HHVM::UserDocumentation::VersionedImagesFilter,
     HHVM::UserDocumentation::IgnoreNewlinesFilter,
+    HHVM::UserDocumentation::AutoLinkifyAPIFilter,
   ],
 )
 

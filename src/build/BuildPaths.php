@@ -22,6 +22,9 @@ abstract final class BuildPaths {
   const string GUIDES_INDEX = LocalConfig::BUILD_DIR.'/guides-index.php';
   const string GUIDES_SUMMARY = LocalConfig::BUILD_DIR.'/guides-summary.php';
 
+  const string UNIFIED_INDEX_JSON
+    = LocalConfig::BUILD_DIR.'/unified-index.json';
+
   const string PHP_DOT_NET_ARTICLE_REDIRECTS
     = LocalConfig::BUILD_DIR.'/php-dot-net-article-redirects.php';
 

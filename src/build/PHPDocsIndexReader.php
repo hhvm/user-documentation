@@ -69,6 +69,14 @@ final class PHPDocsIndexReader {
     return $this->methods->toImmMap();
   }
 
+  public function getAllAPIDefinitions(): ImmMap<string, string> {
+    $defs = Map { };
+    $defs->setAll($this->getClasses());
+    $defs->setAll($this->getMethods());
+    $defs->setAll($this->getFunctions());
+    return $defs->toImmMap();
+  }
+
   public function getArticles(): ImmMap<string, string> {
     $defs = $this->classes->values()->toSet();
     $defs->addAll($this->functions->values());

@@ -94,10 +94,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
     $reader = new PHPDocsIndexReader(
       file_get_contents(BuildPaths::PHP_DOT_NET_INDEX)
     );
-    $defs = Map { };
-    $defs->setAll($reader->getClasses());
-    $defs->setAll($reader->getMethods());
-    $defs->setAll($reader->getFunctions());
+    $defs = $reader->getAllAPIDefinitions();
 
     $index = [];
     foreach ($defs as $_ => $id) {

@@ -14,6 +14,8 @@ function hhvm_to_yaml(): void {
   (new GuidesIndexBuildStep())->buildAll();
   (new APIIndexBuildStep())->buildAll();
 
+  (new UnifiedAPIIndexBuildStep())->buildAll();
+
   (new APILegacyRedirectsBuildStep())->buildAll();
   (new PHPDotNetArticleRedirectsBuildStep())->buildAll();
 

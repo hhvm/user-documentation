@@ -5,7 +5,7 @@ Async can be used effectively with the basic, built in infrastructure in HHVM. T
 
 However, there are cases when you want to convert some collection of values to awaitables or you want to filter some awaitables out of a collection of awaitables. These types of scenarios come up when you are creating multiple awaitables to await in parallel. 
 
-You can use functions like [`array_filter()`](http://php.net/manual/en/function.array-filter.php), or the methods on the Hack collection classes, etc. to do this mapping and filtering. However, there is a set of utility functions, specifically created for async, that will make your code more streamlined. 
+You can use functions like `array_filter()`, or the methods on the Hack collection classes, etc. to do this mapping and filtering. However, there is a set of utility functions, specifically created for async, that will make your code more streamlined. 
 
 Note: These functions are built in to HHVM 3.11 and greater. If you are using a version of HHVM less than 3.11, you can add `hhvm/asio-utilities` to your `composer.json` file as these functions are available in the [`hhvm/asio-utilities` Github repo](https://github.com/hhvm/asio-utilities).
 
