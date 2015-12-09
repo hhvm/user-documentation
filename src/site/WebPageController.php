@@ -49,7 +49,6 @@ EOF;
       $this->getContentPane()
     );
     $content->prependChild(<user-survey />);
-    $content->appendChild($this->getFeedbackFooter());
     $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();
@@ -223,19 +222,19 @@ EOF;
 
   private function getFeedbackFooter(): XHPRoot {
     return
-      <div class="feedbackWrapper widthWrapper">
-        <div class="mainWrapper">
-          <ui:notice
-            className="gitHubIssueButton"
-            glyph={UIGlyphIcon::BUG}>
-            See something wrong?
+      <div class="footerPanel footerPanelFullWidth">
+        <h2>See something wrong?</h2>
+        <ui:button
+          className="gitHubIssueButton"
+          glyph={UIGlyphIcon::BUG}>
+          <span>
             <github-issue-link
               issueTitle={$this->getGithubIssueTitle()}
               issueBody={$this->getGithubIssueBody()}>
               Report a problem or make a suggestion.
             </github-issue-link>
-          </ui:notice>
-        </div>
+          </span>
+        </ui:button>
       </div>;
   }
 
@@ -243,6 +242,7 @@ EOF;
     return
       <footer class="footerWrapper">
         <div class="mainWrapper">
+          {$this->getFeedbackFooter()}
           <div class="footerPanel">
             <h2>Hack</h2>
             <ul>

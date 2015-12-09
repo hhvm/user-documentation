@@ -78,6 +78,10 @@ $side-padding-mob: 10px;
   .buttonText {
     border-bottom: 2px solid lighten($color, 25%);
     @include transition(border-color 0.3s);
+
+    a {
+      color: darken($color, 20%);
+    }
   }
 
   .glyphIcon {

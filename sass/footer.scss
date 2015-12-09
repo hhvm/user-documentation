@@ -31,6 +31,10 @@ footer {
             color: white;
           }
         }
+
+        &.footerPanelFullWidth {
+          flex-basis: 100%;
+        }
       }
     }
   }
