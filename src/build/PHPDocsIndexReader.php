@@ -16,6 +16,7 @@ final class PHPDocsIndexReader {
       'preface',
       'reference',
       'section',
+      'sect1',
     };
 
     $old_index = json_decode($content);
