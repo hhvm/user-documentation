@@ -30,6 +30,8 @@ class Router {
         => WebPageContentController::class,
       '/s/{checksum}{file:/.+}'
         => StaticResourcesController::class,
+      '/j/{keyword}'
+        => JumpController::class,
     };
   }
 
@@ -73,7 +75,9 @@ class Router {
       case \FastRoute\Dispatcher::FOUND:
         return tuple(
           ArgAssert::isClassname($route[1], WebController::class),
-          new ImmMap($route[2]),
+          (new Map($route[2]))
+            ->map($encoded ==> urldecode($encoded))
+            ->toImmMap(),
         );
     }
 

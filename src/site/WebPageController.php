@@ -54,6 +54,7 @@ EOF;
     $extra_class = $this->getExtraBodyClass();
     $body_class = $this->getBodyClass($extra_class);
     $google_analytics = null;
+    $open_search = null;
     switch ($this->getRequestedHost()) {
       case 'beta.docs.hhvm.com':
         throw new RedirectException(
@@ -62,6 +63,12 @@ EOF;
       case 'docs.hhvm.com':
         $google_analytics =
           <script:google-analytics trackingID="UA-49208336-3" />;
+        $open_search =
+          <link
+            rel="search"
+            type="application/opensearchdescription+xml"
+            href="/search.xml"
+          />;
         break;
     }
 
@@ -73,6 +80,7 @@ EOF;
             <meta charset="utf-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <link rel="shortcut icon" href="/favicon.png" />
+            {$open_search}
             <x:comment>
               Build ID: {file_get_contents(BuildPaths::BUILD_ID)}
             </x:comment>

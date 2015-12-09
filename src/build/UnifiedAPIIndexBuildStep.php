@@ -5,14 +5,31 @@ namespace HHVM\UserDocumentation;
 // Index of all definitions, so that markdown processing can
 // automatically linkify them
 final class UnifiedAPIIndexBuildStep extends BuildStep {
+  use CodegenBuildStep;
+
   public function buildAll(): void {
     Log::i("\nUnifiedAPIIndexBuildStep");
 
     $defs = new Map($this->getPHPAPILinks());
     $defs->setAll($this->getHackAPILinks());
+
     file_put_contents(
       BuildPaths::UNIFIED_INDEX_JSON,
       json_encode($defs, JSON_PRETTY_PRINT)
+    );
+
+    $jump_index = [];
+    foreach ($defs as $name => $url) {
+      $jump_index[strtolower($name)] = $url;
+    }
+
+    $code = $this->writeCode(
+      'JumpIndexData.hhi',
+      $jump_index,
+    );
+    file_put_contents(
+      BuildPaths::JUMP_INDEX,
+      $code,
     );
   }
 
