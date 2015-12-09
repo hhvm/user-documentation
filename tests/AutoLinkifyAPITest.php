@@ -28,11 +28,23 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
           'HH\Asio\curl_exec()',
           '/hack/reference/function/HH.Asio.curl_exec/',
         ),
-      'Hack method' =>
+      'Hack fully-qualified method' =>
         tuple(
           '/hack/reference/class/AsyncMysqlConnectResult/elapsedMicros/',
           'AsyncMysqlConnection::connectResult',
           '/hack/reference/class/AsyncMysqlConnection/connectResult/',
+        ),
+      'Hack method with incomplete name from class doc' =>
+        tuple(
+          '/hack/reference/class/AsyncMysqlClient/',
+          'connect()',
+          '/hack/reference/class/AsyncMysqlClient/connect/',
+        ),
+      'Hack method with incomplete name from method doc' =>
+        tuple(
+          '/hack/reference/class/AsyncMysqlConnection/query/',
+          'escapeString()',
+          '/hack/reference/class/AsyncMysqlConnection/escapeString/',
         ),
     ];
   }
