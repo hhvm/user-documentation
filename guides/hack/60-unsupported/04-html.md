@@ -16,4 +16,4 @@ In Hack, `<?hh` must always be the first 4 characters seen.
 
 ## Use XHP
 
-If you really want to mix HTML-like elements with your Hack code, [XHP](xhp/introduction.md) was made especially for that. And, it is typecheckable.
+If you really want to mix HTML-like elements with your Hack code, [XHP](../XHP/introduction.md) was made especially for that. And, it is typecheckable.
