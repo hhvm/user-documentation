@@ -1,7 +1,5 @@
 HHVM is officially supported on most major [linux platforms](./linux.md). There is experimental, hope-to-be official support on [Mac OS X 10.10](./mac.md). And work is being done to support [HHVM on Windows](./windows.md). 
 
-There is are wikis of unsupported HHVM platforms for [packages](https://github.com/facebook/hhvm/wiki/Prebuilt-Packages-for-HHVM) and [compilation](https://github.com/facebook/hhvm/wiki/Building-and-Installing-HHVM) as well.
-
 ## Prebuilt Packages
 
 The easiest way to get going with HHVM is to use one of our supported prebuilt packages. Currently prebuilt packages are available for:
@@ -42,3 +40,7 @@ If we support a prebuilt package for a distribution, we support [compiling](/hhv
 ### Hack Typechecker
 
 Whether you are using a [prebuilt package](#prebuilt-packages) or compiling from source, the [Hack Typechecker](../../guides/hack/typechecker/introduction.md) is also part of the installation of HHVM, provided that you have **OCaml 3.12** or greater installed on your distribution. In general, you should be able to `apt-get` or `yum` install OCaml for your distribution.
+
+## Unsupported Distributions
+
+There are wikis of unsupported HHVM platforms for [packages](https://github.com/facebook/hhvm/wiki/Prebuilt-Packages-for-HHVM) and [compilation](https://github.com/facebook/hhvm/wiki/Building-and-Installing-HHVM) as well.
