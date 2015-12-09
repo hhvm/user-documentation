@@ -22,13 +22,17 @@ LTS Version | Release Date | End of Support
 3.9 | 14 Aug 2015 | 15 July 2016
 3.12 | 29 Jan 2016 | 30 Dec 2016 
 
-In addition to the above [prebuilt packages](#prebuilt-packages), there are currently LTS releases for:
+In addition to the normal stable packages, there are supported [LTS releases](/hhvm/installation/linux#obtaining-lts-releases) for the above distributions.
+
+Also, there are currently LTS releases for:
 
 * [Ubuntu 10.04 (Lucid)](./linux.md#ubuntu-10.04-lucid)
 * [Ubuntu 12.04 (Precise)](./linux.md#ubuntu-12.04-precise)
 * [Mint 16 (Preta)](./linux.md#mint-16-preta)
 
 However, LTS support for these three distributions will end on January 28, 2016, when support for HHVM 3.6 LTS ends.
+
+See our [blog post](http://hhvm.com/blog/6083/hhvm-long-term-support) regarding LTS releases.
 
 ## Compiling HHVM
 
