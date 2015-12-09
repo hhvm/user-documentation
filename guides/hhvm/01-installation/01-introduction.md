@@ -35,9 +35,9 @@ See our [blog post](http://hhvm.com/blog/6083/hhvm-long-term-support) regarding 
 
 ## Compiling HHVM
 
-For normal usage, using a [prebuilt package](#prebuilt-packages) is the best course of action for ease of installation and stability. However, if you want to live on the bleeding edge and get the latest and greatest code as it is checked into [GitHub](https://github.com/facebook/hhvm/), you can compile HHVM straight from source. Check the [supported Linux distributions](./linux.md) or the [Mac Homebrew instructions](./mac.md#homebrew-install-by-hand) for compilation instructions.
+For normal usage, using a [prebuilt package](#prebuilt-packages) is the best course of action for ease of installation and stability. However, if you want to live on the bleeding edge and get the latest and greatest code as it is checked into [GitHub](https://github.com/facebook/hhvm/), you can compile HHVM straight from source. Check the [compilation instructions](/hhvm/installation/building-from-source) for both the supported Linux and Mac OS X distros.
 
-If we support a prebuilt package for a distribution, we support compiling it from source as well.
+If we support a prebuilt package for a distribution, we support [compiling](/hhvm/installation/building-from-source) it from source as well.
 
 ### Hack Typechecker
 
