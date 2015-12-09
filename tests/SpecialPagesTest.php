@@ -61,6 +61,10 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/manual/en/language.oop5.constants.php',
         'http://php.net/manual/en/language.oop5.constants.php',
       ),
+      'PHP book chapter' => tuple(
+        '/manual/en/oci8.connection.php',
+        'http://php.net/manual/en/oci8.connection.php',
+      ),
       'PHP topic reference' => tuple(
         '/manual/en/ref.array.php',
         'http://php.net/manual/en/ref.array.php',

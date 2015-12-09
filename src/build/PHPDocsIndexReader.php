@@ -13,6 +13,7 @@ final class PHPDocsIndexReader {
   ) {
     $article_types = Set {
       'book',
+      'chapter',
       'preface',
       'reference',
       'section',
