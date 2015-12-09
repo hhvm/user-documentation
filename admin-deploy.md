@@ -56,19 +56,19 @@
    $ eb init
    ```
 
-8. Rebase your repo to get the lastest and greatest changes
+8. Rebase your repo to get the lastest and greatest changes; re-create the autoloader information, just in case new classes were added.
 
    ```
    $ git fetch && git rebase origin/master # or another branch name instead of origin/master, if applicable
+   $ hhvm composer.phar dump-autoload
    ```
-   
+   **NOTE**: This is first step you will need to do for future pushes from the same checkout.
+      
 9. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
 
    ```
    $ bin/deploy-to-staging.sh
    ```
-
-   **NOTE**: This is first step you will need to do for future pushes from the same checkout.
 
 10. Once the deploy script is finished and you have successfully deployed, do a fetch and merge via `git pull` and then push the AWS commit to the `user-documentation` repo. **Do not** `rebase`, so that the history before that commit keeps on matching what was actually pushed.
 
