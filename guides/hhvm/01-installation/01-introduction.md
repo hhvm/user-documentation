@@ -1,6 +1,6 @@
 HHVM is officially supported on most major [linux platforms](./linux.md). There is experimental, hope-to-be official support on [Mac OS X 10.10](./mac.md). And work is being done to support [HHVM on Windows](./windows.md). 
 
-There is a [wiki of unsupported HHVM platforms](https://github.com/facebook/hhvm/wiki/Prebuilt%20Packages%20for%20HHVM) as well.
+There is are wikis of unsupported HHVM platforms for [packages](https://github.com/facebook/hhvm/wiki/Prebuilt-Packages-for-HHVM) and [compilation](https://github.com/facebook/hhvm/wiki/Building-and-Installing-HHVM) as well.
 
 ## Prebuilt Packages
 
