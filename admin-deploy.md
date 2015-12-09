@@ -56,11 +56,11 @@
    $ eb init
    ```
 
-8. Rebase your repo to get the lastest and greatest changes; re-create the autoloader information, just in case new classes were added.
+8. Rebase your repo to get the lastest and greatest changes; do a full composer rebuild... e.g., just in case new classes were added for testing.
 
    ```
    $ git fetch && git rebase origin/master # or another branch name instead of origin/master, if applicable
-   $ hhvm composer.phar dump-autoload
+   $ hhvm composer.phar install
    ```
    **NOTE**: This is first step you will need to do for future pushes from the same checkout.
       
