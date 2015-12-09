@@ -33,7 +33,6 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
 
         $def = Shapes::toArray($def);
         $children = idx($def, 'methods');
-        var_dump($children);
         if (!is_array($children)) {
           continue;
         }
