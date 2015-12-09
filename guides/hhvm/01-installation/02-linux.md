@@ -53,7 +53,7 @@ sudo apt-get install hhvm
 
 ## Obtaining LTS Releases
 
-The commands above will get you the latest stable point release of HHVM. If you want an [LTS release](./intro#lts-releases), then append `-lts` and the LTS version in the `deb` line.
+The commands above will get you the latest stable point release of HHVM. If you want an [LTS release](/hhvm/installation/introduction#prebuilt-packages__lts-releases), then append `-lts` and the LTS version in the `deb` line.
 
 e.g., the following `deb` line in `/etc/apt/sources.list` will get all stable updates on Ubuntu 14.04 "trusty":
 
