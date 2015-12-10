@@ -98,6 +98,26 @@ The topics and subtopics *do not* have their directory named numerical prefixes 
 
 e.g., `/hack/lambdas/creation-story`
 
+## Testing Changes
+
+We use PHPUnit to ensure consistency across the changes we make to the guides, API references, and examples.
+
+### Large Changes
+
+If you make a larger scale change such as adding a new guide, adding or modifying code examples, etc., you should run the entire PHPUnit test suite:
+
+```
+$ hhvm vendor/bin/phpunit tests/
+```
+
+### Small Changes
+
+If you make a small change such as modifying some wording in a guide, fixing a link, etc., you can run the smaller group of PHPUnit tests:
+
+```
+$ hhvm vendor/bin/phpunit --group small tests/
+```
+
 ## Running the Examples
 
 Nearly all of the code examples you see in the guides and API documentation are actual Hack or PHP source files that are embedded at site build time into the content itself.
@@ -115,7 +135,7 @@ guides/[hhvm | hack]/##-topic/##-subtopic-examples
 e.g.,
 
 ```
-guides/hack/23-collections/06-constructing-examples
+$ guides/hack/23-collections/06-constructing-examples
 ```
 
 ### Standalone
@@ -165,20 +185,30 @@ Each example is structured to be run with the [HHVM test runner](https://github.
 
 You can run the HHVM test runner on the entire suite of examples, on one directory of examples or just one example itself. 
 
+*Normally you will use our PHPUnit testing described [above](#testing-changes) to test any changes you make (because it tests our examples as well). However, sometimes it is actually faster and more explicit to test one example directly with the HHVM test runner.*
+
 Assuming you have installed and **compiled** HHVM from source, here is how you can run the examples with the test runner:
 
 ```
 # Assuming you are in the user-documentation repo root
 
-# This runs every example in the test runner
+# This runs every example in the test runner.
+# Won't normally need to do this; just use our PHPUnit testing instead.
 % hhvm /path/to/hhvm/source/hphp/test/run .
+
 # This runs every example in the test runner in typechecker mode
+# Won't normally need to do this; just use our PHPUnit testing instead.
 % hhvm /path/to/hhvm/source/hphp/test/run --typechecker .
 
 # This runs all collections topic examples in the test runner
 % hhvm /path/to/hhvm/source/hphp/test/run guides/hack/23-collections
 # This runs all collections topic examples in test runner in typechecker mode
-% hhvm /path/to/hhvm/source/hphp/test/run guides/hack/23-collections --typechecker .
+% hhvm /path/to/hhvm/source/hphp/test/run --typechecker guides/hack/23-collections
+
+# This runs the specific lazy.php example in the test runner
+% hhvm /path/to/hhvm/source/hphp/test/run guides/hack/23-collections/10-examples-examples/lazy.php
+# This runs the specific lazy.php example in the test runner in typechecker mode
+% hhvm /path/to/hhvm/source/hphp/test/run --typechecker guides/hack/23-collections/10-examples-examples/lazy.php
 ```
 
 Here is the output you should see when you run the test runner. Assume we are running the examples in the collections topic:
