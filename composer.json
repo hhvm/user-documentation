@@ -1,11 +1,10 @@
 {
   "require": {
-    "hhvm/asio-utilities": "~2.0",
     "fredemmott/definition-finder": "dev-master",
     "mustangostang/spyc": "0.5.x-dev",
     "hhvm/systemlib-extractor": "^0.1.0",
     "facebook/xhp-lib": "^2.2",
-    "hhvm": "~3.9",
+    "hhvm": "~3.11",
     "phpdocumentor/reflection-docblock": "^2.0",
     "hack-psr/psr7-http-message-hhi": "^0.2.0",
     "zendframework/zend-diactoros": "^1.1",

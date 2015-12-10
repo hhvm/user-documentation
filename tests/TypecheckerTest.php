@@ -14,6 +14,13 @@ class TypecheckerTest extends \PHPUnit_Framework_TestCase {
       $output,
       $exit_code,
     );
+    if ($exit_code === 77) {
+      // Server already running - 3.10 => 3.11 regression:
+      // https://github.com/facebook/hhvm/issues/6646
+      exec('hh_client stop 2>/dev/null');
+      $this->testTypecheckerPasses();
+      return;
+    }
     $this->assertSame(0, $exit_code, implode("\n", $output));
   }
 }

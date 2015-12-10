@@ -1,4 +1,4 @@
-FROM fredemmott/hhvm-proxygen:3.10.1
+FROM hhvm/hhvm-proxygen:3.11.0
 ENV TZ UTC
 
 # We need a unicode-aware system to generate the docs
