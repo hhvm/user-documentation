@@ -14,7 +14,6 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     string $target,
     array<string> $sources,
   ): void {
-    $this->markTestSkipped("We still have 404 for now :'(");
     $response = \HH\Asio\join(
       PageLoader::getPage($target)
     );
