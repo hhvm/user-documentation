@@ -89,7 +89,7 @@ Try deleting `/var/run/hhvm/hhvm.hhbc` and run your program again
 
 ### HHVM keeps crashing. Why?
 
-There can be many reasons. And it is tough to diagnose that general question. It could be a bug in HHVM. It could be that you need to increase the size of your [translation cache](/hhvm/configuration/ini-settings.md#jit-translation-cache-size). Or it could be other factors.
+There can be many reasons. And it is tough to diagnose that general question. It could be a bug in HHVM. It could be that you need to increase the size of your [translation cache](/hhvm/configuration/INI-settings#jit-translation-cache-size). Or it could be other factors.
 
 The best thing to do is [file an issue](https://github.com/facebook/hhvm/issues) and at minimum give us the problem and a stack trace. You will get a much faster and more quality response if you also provide us as small as possible reproduction case with PHP or Hack code.
 

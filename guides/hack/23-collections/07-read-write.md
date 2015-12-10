@@ -4,7 +4,7 @@ All the links to methods in this guide will generally link to [`Vector`](/hack/r
 
 ## Reading
 
-There are a few ways to read from a collection. You can use `[]`, call methods like [`contains()`](/hack/reference/class/Vector/contains/) and [`containsKey()`](/hack/reference/class/Vector/containsKey/) or use functions like [`isset()`](http://php.net/manual/en/function.isset.php) and [`empty()`](http://php.net/manual/en/function.empty.php).
+There are a few ways to read from a collection. You can use `[]`, call methods like [`contains()`](/hack/reference/class/Set/contains/) and [`containsKey()`](/hack/reference/class/Vector/containsKey/) or use functions like [`isset()`](http://php.net/manual/en/function.isset.php) and [`empty()`](http://php.net/manual/en/function.empty.php).
 
 ### Square bracket Syntax  `[]`
 
