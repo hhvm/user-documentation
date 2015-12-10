@@ -137,18 +137,12 @@ abstract final class ScannedDefinitionFilters {
       ////////////////
 
       'ArrayAccess',
-      'ConstIndexAccess',
-      'ConstMapAccess',
-      'ConstSetAccess',
-      'IndexAccess',
       'IteratorAggregate',
-      'MapAccess',
       'OuterIterator',
       'RecursiveIterator',
       'SQLListFormatter',
       'SQLScalarFormatter',
       'SeekableIterator',
-      'SetAccess',
 
       ///////////////
       // Functions //
