@@ -24,11 +24,7 @@ class APIGenericPageController extends WebPageController {
   <<__Memoize>>
   protected function getRootDefinition(): APIIndexEntry {
     $definition_name = $this->getRequiredStringParam('name');
-    $index = APIIndex::getIndexForType($this->getDefinitionType());
-    if (!array_key_exists($definition_name, $index)) {
-      throw new HTTPNotFoundException();
-    }
-    return $index[$definition_name];
+    return APIIndex::getIndexForType($this->getDefinitionType())[$definition_name];
   }
 
   final protected async function getBody(): Awaitable<XHPRoot> {
@@ -106,12 +102,7 @@ class APIGenericPageController extends WebPageController {
 
     $method = $this->getMethodDefinition();
     if ($method !== null) {
-      $api_root_url = sprintf(
-        "/%s/reference/%s/%s/",
-        $product,
-        $this->getDefinitionType(),
-        str_replace('\\', '.', $this->getRootDefinition()['name']),
-      );
+      $api_root_url = $this->getRootDefinition()['urlPath'];
       $bottom_level =
         <x:frag>
           <span class="breadcrumbTertiaryRoot">
