@@ -91,7 +91,7 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 ## Dynamically Loaded Extensions
 
 * [dbase](https://github.com/skyfms/hhvm-ext_dbase)
-* [geoip](https://github.com/vipsoft/hhvm-ext-geoi)
+* [geoip](https://github.com/vipsoft/hhvm-ext-geoip)
 * [msgpack](https://github.com/reeze/msgpack-hhvm)
 * [mongodb](http://github.com/mongodb-labs/mongo-hhvm-driver-prototype): Official MongoDB driver as HNI extension
 * [mongofill](https://github.com/mongofill/mongofill-hhvm): Implementation of legacy MongoDB driver in pure PHP
