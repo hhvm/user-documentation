@@ -11,7 +11,7 @@ Note: These functions are built in to HHVM 3.11 and greater. If you are using a 
 
 Name    | Returns             | Mapped | Filtered | Has Key | Wrapped Exception
 --------|---------------------|--------|----------|---------|------------------
-[`HH\Asio\v()`](/hack/reference/function/HH.Asio.v/)   | `Vector<Tv>`         | x      | x        | x       | x
+`HH\Asio\curl_exec()`   | `Vector<Tv>`         | x      | x        | x       | x
 [`HH\Asio\vm()`](/hack/reference/function/HH.Asio.vm/)  | `Vector<Tv>`        | ✓      | x        | x       | x
 [`HH\Asio\vmk()`](/hack/reference/function/HH.Asio.vmk/) | `Vector<Tv>`        | ✓      | x        | ✓       | x
 [`HH\Asio\vf()`](/hack/reference/function/HH.Asio.vf/)  | `Vector<Tv>`        | x      | ✓        | x       | x

@@ -6,7 +6,7 @@ module HHVM
       DEFINITIONS = JSON.parse(File.read(File.dirname(__FILE__)+'/../../../build/unified-index.json'))
       CLASS_REGEXP = /^(?<type>class|interface|trait)\.(?<name>[^.]+)/
       def call
-        doc.search('p code, li code').each do |node|
+        doc.search('p code, li code, td code').each do |node|
           content = node.inner_text
 
           if content =~ /\(\)$/ then
