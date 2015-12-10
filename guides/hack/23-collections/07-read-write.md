@@ -39,7 +39,7 @@ For a [`Set`](/hack/reference/class/Set/), use [`contains()`](/hack/reference/cl
 
 @@ read-write-examples/read-contains.php @@
 
-**Note**: Using [`contains()`](/hack/reference/class/Vector/contains/) on a [`Vector`](/hack/reference/class/Vector/), [`Map`](/hack/reference/class/Map/) or [`Pair`](/hack/reference/class/Pair/) is synonymous with [`containsKey()`](/hack/reference/class/Vector/containsKey/).
+**Note**: Using [`contains()`](/hack/reference/class/Map/contains/) on a [`Map`](/hack/reference/class/Map/) is synonymous with [`containsKey()`](/hack/reference/class/Map/containsKey/).
 
 You can also use [`isset()`](http://php.net/manual/en/function.isset.php) or [`empty()`](http://php.net/manual/en/function.empty.php) for key (or value for sets) testing as well. Just note that these functions are not supported in [Hack's strict mode](../typechecker/modes.md).
 
