@@ -81,6 +81,10 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         'http://beta.docs.hhvm.com/hack/reference/',
         'http://docs.hhvm.com/hack/reference/',
       ),
+      'Old Hack collection class overview' => tuple(
+        '/manual/en/hack.collections.vector.php',
+        '/hack/reference/class/Vector/',
+      ),
     ];
   }
 
