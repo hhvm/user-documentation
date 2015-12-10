@@ -26,9 +26,9 @@ class APIGenericPageController extends WebPageController {
     $definition_name = $this->getRequiredStringParam('name');
     return APIIndex::getIndexForType($this->getDefinitionType())[$definition_name];
   }
-  
+
   final protected async function getBody(): Awaitable<XHPRoot> {
-    return 
+    return
       <div class="referencePageWrapper">
           {$this->getInnerContent()}
       </div>;
@@ -53,7 +53,7 @@ class APIGenericPageController extends WebPageController {
       'extraNavListClass' => 'apiNavList',
     ];
 
-    return 
+    return
       <div class="navWrapper guideNav">
         <div class="navLoader" />
         <static:script path="/js/APINavData.js" />
@@ -73,17 +73,17 @@ class APIGenericPageController extends WebPageController {
   protected function getHTMLFilePath(): string {
     return $this->getRootDefinition()['htmlPath'];
   }
-  
+
   final protected function getInnerContent(): XHPRoot {
     return self::invariantTo404(() ==> {
       $path = $this->getHTMLFilePath();
-      return 
+      return
         <div class="innerContent">
           {new HTMLFileRenderable($path, BuildPaths::APIDOCS_HTML)}
         </div>;
     });
   }
-  
+
   protected function getBreadcrumbs(): XHPRoot {
     $product = 'hack';
     $product_root_url = sprintf(
@@ -106,9 +106,9 @@ class APIGenericPageController extends WebPageController {
         "/%s/reference/%s/%s/",
         $product,
         $this->getDefinitionType(),
-        $this->getRootDefinition()['name'],
+        str_replace('\\', '.', $this->getRootDefinition()['name']),
       );
-      $bottom_level = 
+      $bottom_level =
         <x:frag>
           <span class="breadcrumbTertiaryRoot">
             <a href={$api_root_url}>{$this->getRootDefinition()['name']}</a>
@@ -117,14 +117,14 @@ class APIGenericPageController extends WebPageController {
           <span class="breadcrumbCurrentPage">
             {$method['name']}
           </span>
-        </x:frag>;  
+        </x:frag>;
     } else {
-      $bottom_level = 
+      $bottom_level =
         <span class="breadcrumbCurrentPage">
           {$this->getRootDefinition()['name']}
-        </span>;  
+        </span>;
     }
-    
+
     return
       <div class="breadcrumbNav">
         <div class="widthWrapper">
