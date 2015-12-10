@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace HHVM\UserDocumentation\Tests;
 
@@ -7,7 +7,7 @@ use HHVM\UserDocumentation\NavDataNode;
 use HHVM\UserDocumentation\APIDefinitionType;
 
 class APIPagesTest extends \PHPUnit_Framework_TestCase {
-  public function allAPIPages(): array<(string, NavDataNode)> {
+  public static function allAPIPages(): array<(string, NavDataNode)> {
     $to_visit = array_values(APINavData::getNavData());
     $out = [];
 
@@ -18,8 +18,6 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       $node['children'] = []; // make failure output easier to read
       $out[] = tuple($node['urlPath'], $node);
     }
-
-    $this->assertGreaterThan(100, count($out));
     return $out;
   }
 
@@ -31,7 +29,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       '/hack/reference/function/hphp_array_idx/', // function
       '/hack/reference/class/HH.Asio.WrappedResult/', // namespaced
     };
-    $all = $this->allAPIPages();
+    $all = self::allAPIPages();
     $out = [];
     foreach ($all as $tuple) {
       list($_, $node) = $tuple;

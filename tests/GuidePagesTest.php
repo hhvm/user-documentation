@@ -6,7 +6,7 @@ use HHVM\UserDocumentation\GuidesNavData;
 use HHVM\UserDocumentation\NavDataNode;
 
 class GuidePagesTest extends \PHPUnit_Framework_TestCase {
-  public function allGuidePages(): array<(string, string)> {
+  public static function allGuidePages(): array<(string, string)> {
     $to_visit = array_values(GuidesNavData::getNavData());
     $out = [];
 
@@ -17,7 +17,6 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
       $out[] = tuple($node['name'], $node['urlPath']);
     }
 
-    $this->assertGreaterThan(100, count($out));
     return $out;
   }
 

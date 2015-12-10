@@ -8,7 +8,11 @@ final class APIMethodPageController extends APIGenericPageController {
   <<__Memoize>>
   protected function getRootDefinition(): APIClassIndexEntry {
     $definition_name = $this->getRequiredStringParam('class');
-    return APIIndex::getClassIndex($this->getDefinitionType())[$definition_name];
+    $index = APIIndex::getClassIndex($this->getDefinitionType());
+    if (!array_key_exists($definition_name, $index)) {
+      throw new HTTPNotFoundException();
+    }
+    return $index[$definition_name];
   }
 
   <<__Memoize>>

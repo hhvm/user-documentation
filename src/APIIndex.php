@@ -12,8 +12,14 @@ class APIIndex {
   public static function getIndexForType(
     APIDefinitionType $type,
   ): array<string, APIIndexEntry> {
+    $index = Shapes::toArray(self::getIndex());
+    invariant(
+      array_key_exists($type, $index),
+      'invalid type: %s',
+      (string) $type,
+    );
     // UNSAFE
-    return self::getIndex()[$type];
+    return $index[$type];
   }
 
   public static function getFunctionIndex(

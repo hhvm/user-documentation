@@ -17,7 +17,7 @@
   "autoload": {
     "classmap": [
       "src/",
-      "tests/lib/"
+      "tests/"
     ],
     "files": [
       "src/utils/async_funcs.php",
