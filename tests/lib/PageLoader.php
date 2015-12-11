@@ -31,4 +31,12 @@ abstract class PageLoader {
     }
     return (string) $host;
   }
+
+  public static function assertLocal(): void {
+    // Work around sebastianbergmann/phpunit#2007
+    invariant(
+      self::getHost() === null,
+      'Local only test running against remote server',
+    );
+  }
 }

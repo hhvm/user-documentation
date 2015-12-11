@@ -44,6 +44,8 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
   <<__Memoize>>
   public function internalLinksList(
   ): array<(string, array<string>)> {
+    PageLoader::assertLocal();
+
     $loaders = Map { };
 
     $api_pages = APIPagesTest::allAPIPages();
