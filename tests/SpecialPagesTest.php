@@ -11,6 +11,8 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     return [
       ['/_I_DO_NOT_EXIST_FOR_TESTING_'],
       ['/manual/en/_I_DO_NOT_EXIST_FOR_TESTING_.php'],
+      ['/hack/reference/_BAD_DEFINITION_TYPE_FOR_TESTING_/'],
+      ['/hack/reference/class/_BAD_CLASS_NAME_FOR_TESTING_/'],
     ];
   }
 
