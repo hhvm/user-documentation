@@ -42,5 +42,8 @@ abstract final class BuildPaths {
   const string STATIC_RESOURCES_MAP_JSON =
    LocalConfig::BUILD_DIR.'/static_resources.json';
 
+  const string FASTROUTE_CACHE =
+    LocalConfig::BUILD_DIR.'/route.cache';
+
   const string BUILD_ID = LocalConfig::BUILD_DIR.'/build_id.txt';
 }

@@ -1,6 +1,8 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\ArgAssert;
+use HHVM\UserDocumentation\BuildPaths;
+use HHVM\UserDocumentation\LocalConfig;
 
 class Router {
   private function getReadOnlyRoutes(
@@ -46,7 +48,7 @@ class Router {
   }
 
   private function getDispatcher(): \FastRoute\Dispatcher {
-    return \FastRoute\simpleDispatcher(
+    return \FastRoute\cachedDispatcher(
       function(\FastRoute\RouteCollector $r): void {
         foreach ($this->getReadOnlyRoutes() as $route => $classname) {
           $r->addRoute('GET', $route, $classname);
@@ -55,7 +57,12 @@ class Router {
         foreach ($this->getWriteRoutes() as $route => $classname) {
           $r->addRoute('POST', $route, $classname);
         }
-      }
+      },
+      /* HH_FIXME[4110] nikic/fastroute#83*/
+      shape(
+        'cacheFile' => BuildPaths::FASTROUTE_CACHE,
+        'cacheDisabled' => !LocalConfig::CACHE_ROUTES,
+      ),
     );
   }
 

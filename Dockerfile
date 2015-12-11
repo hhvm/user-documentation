@@ -37,14 +37,26 @@ RUN cd /var/www && git clean -fdx
 
 # Configure
 ADD hhvm.prod.ini /etc/hhvm/site.ini
-RUN cd /var/www && sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example > LocalConfig.php
+RUN cd /var/www \
+  && sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example \
+  | sed 's,CACHE_ROUTES = false,CACHE_ROUTES = true,' \
+  > LocalConfig.php
 
 # Install direct dependencies
 RUN cd /var/www && bundle --path vendor-rb/
-RUN cd /var/www && hhvm /opt/composer/composer.phar install --optimize-autoloader
+RUN cd /var/www \
+  && hhvm /opt/composer/composer.phar install --optimize-autoloader
 
 # Build (all in one so that we don't end up with +/var/hhvm and -/var/hhvm images)
-RUN cd /var && git clone --depth=1 https://github.com/facebook/hhvm.git && cd /var/www && hhvm bin/build.php && hhvm vendor/bin/phpunit tests/ && rm -rf /var/hhvm
+RUN cd /var \
+  && git clone --depth=1 https://github.com/facebook/hhvm.git \
+  && cd /var/www \
+  && hhvm bin/build.php \
+  && hhvm vendor/bin/phpunit tests/ \
+  && rm -rf /var/hhvm
+
+# Debug output
+RUN hhvm --version && cat /var/www/LocalConfig.php
 
 # Make the webserver port accessible outside the container
 EXPOSE 80
