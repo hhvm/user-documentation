@@ -140,9 +140,6 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     string $in,
     ?string $expected,
   ): void {
-    $this->markTestSkipped(
-      'https://github.com/hhvm/user-documentation/issues/200'
-    );
     $out = $this->normalizePath($context, $in);
     $this->assertSame($expected, $out);
   }
@@ -155,9 +152,6 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     if ($path[0] === '/') {
       return $path;
     }
-
-    // FIXME: https://github.com/hhvm/user-documentation/issues/200
-    return null;
 
     $in_dir = substr($source, -1) === '/';
 
