@@ -18,11 +18,13 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       PageLoader::getPage($target)
     );
     if ($response->getStatusCode() === 301) {
-      $location = $response->getHeaderLine('Location');
+      $target = $response->getHeaderLine('Location');
       $response = \HH\Asio\join(
-        PageLoader::getPage($location),
+        PageLoader::getPage($target),
       );
     }
+
+    $sources = new Set($sources);
 
     $this->assertSame(
       200,
@@ -30,7 +32,7 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       sprintf(
         ">>> 404: %s\n>>> Linked from:\n%s",
         $target,
-        implode("\n", array_map($x ==> '>>>  - '.$x, $sources)),
+        implode("\n", $sources->map($x ==> '>>>  - '.$x)),
       ),
     );
   }
@@ -83,9 +85,8 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     $response = await PageLoader::getPage($page);
 
     if ($response->getStatusCode() === 301) {
-      $response = await PageLoader::getPage(
-        $response->getHeaderLine('Location')
-      );
+      $page = $response->getHeaderLine('Location');
+      $response = await PageLoader::getPage($page);
     }
 
     $this->assertSame(200, $response->getStatusCode(), $page);
@@ -105,18 +106,34 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       if ($host !== null) {
         continue;
       }
-      $path = parse_url($url, PHP_URL_PATH);
+
+      $path = $this->normalizePath($page, parse_url($url, PHP_URL_PATH));
       if ($path === null) {
         continue;
       }
 
-      // TODO: deal with relative paths
-      if (substr($path, 0, 1) !== '/') {
-        continue;
-      }
-
-      $links[] = $url;
+      $links[] = $path;
     }
     return $links;
+  }
+
+  private function normalizePath(string $source, ?string $path): ?string {
+    if ($path === null) {
+      return $path;
+    }
+
+    if ($path[0] === '/') {
+      return $path;
+    }
+
+    /** FIXME: https://github.com/hhvm/user-documentation/issues/200
+    $context = dirname($source);
+    if (substr($path, 0, 2) === './') {
+      $path = $context.substr($path, 1);
+      return $path;
+    }
+    */
+
+    return null;
   }
 }
