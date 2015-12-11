@@ -1,0 +1,16 @@
+array(3) {
+  [0]=>
+  string(13) "Carlton Smith"
+  [1]=>
+  string(10) "Will Smith"
+  [2]=>
+  string(10) "Phil Smith"
+}
+object(HH\Vector)#8 (3) {
+  [0]=>
+  string(13) "Carlton Smith"
+  [1]=>
+  string(10) "Will Smith"
+  [2]=>
+  string(10) "Phil Smith"
+}
