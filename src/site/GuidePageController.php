@@ -37,7 +37,9 @@ final class GuidePageController extends WebPageController {
       $this->getGuide(),
       $this->getPage(),
     );
-    return Guides::normalizeName($product, $guide, $page);
+    return self::invariantTo404(
+      () ==> Guides::normalizeName($product, $guide, $page)
+    );
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
