@@ -2,38 +2,62 @@
 namespace HHVM\UserDocumentation;
 
 require(__DIR__.'/../vendor/autoload.php');
-function build_site(): void {
+function build_site(?string $filter = null): void {
   if (!is_dir(LocalConfig::BUILD_DIR)) {
     mkdir(LocalConfig::BUILD_DIR);
   }
 
-  (new FetchPHPDotNetIndexBuildStep())->buildAll();
+  $steps = ImmVector {
+    // No Dependencies
+    RawYAMLBuildStep::class,
+    MergedYAMLBuildStep::class,
+    FetchPHPDotNetIndexBuildStep::class,
 
-  (new RawYAMLBuildStep())->buildAll();
-  (new MergedYAMLBuildStep())->buildAll();
+    // Needs the YAML
+    GuidesIndexBuildStep::class,
+    APIIndexBuildStep::class,
 
-  (new GuidesIndexBuildStep())->buildAll();
-  (new APIIndexBuildStep())->buildAll();
+    // Needs the indices
+    UnifiedAPIIndexBuildStep::class,
+    SiteMapBuildStep::class,
 
-  (new UnifiedAPIIndexBuildStep())->buildAll();
-  (new SiteMapBuildStep())->buildAll();
+    APILegacyRedirectsBuildStep::class,
+    PHPDotNetArticleRedirectsBuildStep::class,
 
-  (new APILegacyRedirectsBuildStep())->buildAll();
-  (new PHPDotNetArticleRedirectsBuildStep())->buildAll();
+    // Static Resources
+    SASSBuildStep::class,
+    SyntaxHighlightCSSBuildStep::class,
+    StaticResourceMapBuildStep::class,
 
-  (new SASSBuildStep())->buildAll();
-  (new SyntaxHighlightCSSBuildStep())->buildAll();
-  (new StaticResourceMapBuildStep())->buildAll();
+    // Needs the static resources
+    MergedMarkdownBuildStep::class,
 
-  (new MergedMarkdownBuildStep())->buildAll();
+    // Needs the Markdown
+    GuidesHTMLBuildStep::class,
+    APIHTMLBuildStep::class,
 
-  (new GuidesHTMLBuildStep())->buildAll();
-  (new APIHTMLBuildStep())->buildAll();
+    // Build ID
+    BuildIDBuildStep::class,
+  };
 
-  (new BuildIDBuildStep())->buildAll();
+  if ($filter === null) {
+    foreach ($steps as $step) {
+      (new $step())->buildAll();
+    }
+    return;
+  }
 
+  foreach ($steps as $step) {
+    if (stripos($step, $filter) !== false) {
+      (new $step())->buildAll();
+    }
+  }
 }
 
-build_site();
+if (array_key_exists(1, $argv)) {
+  build_site($argv[1]);
+} else {
+  build_site();
+}
 
 echo "\n"; // Make the bash prompt nice after :p
