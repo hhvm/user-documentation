@@ -101,7 +101,7 @@ The primary purpose of return `this` is to allow chaining of method calls on the
 
 ## XHP
 
-There are two [XHP](../xhp/introduction.md) interfaces that are used when typing XHP objects: `XHPChild` and `XHPRoot`.
+There are two [XHP](../XHP/introduction.md) interfaces that are used when typing XHP objects: `XHPChild` and `XHPRoot`.
 
 `XHPRoot` is any object that is an instance of an XHP class. 
 

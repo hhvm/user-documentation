@@ -2,7 +2,7 @@ After [installing HHVM](../installation/introduction.md), you will want to confi
 
 ## Configuration Options
 
-HHVM has a very large set of [configuration options](./ini-settings.md). Many are not meant for the end HHVM user, but there are some key options that will be useful for anyone deploying HHVM.
+HHVM has a very large set of [configuration options](./INI-settings.md). Many are not meant for the end HHVM user, but there are some key options that will be useful for anyone deploying HHVM.
 
 ### INI Format
 

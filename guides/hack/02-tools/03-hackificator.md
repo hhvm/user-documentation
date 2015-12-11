@@ -47,7 +47,7 @@ Also, it is important to note that if you already have any Hack files in the pro
 
 ## Upgrading Hack Typechecker Modes
 
-You can also use the hackificator to upgrade current Hack files (*not PHP files*) to the strictest [mode](./typechecker/modes.md) possible. So, for example, you can use it to go from `partial` to `strict` mode, assuming a conversion to `strict` mode won't cause any typechecker errors.
+You can also use the hackificator to upgrade current Hack files (*not PHP files*) to the strictest [mode](../typechecker/modes.md) possible. So, for example, you can use it to go from `partial` to `strict` mode, assuming a conversion to `strict` mode won't cause any typechecker errors.
 
 ```
 hackificator --upgrade <directory or file path>

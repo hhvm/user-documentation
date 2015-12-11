@@ -87,7 +87,7 @@ Now that you have gotten your feet wet with a simple Hack program, the best reso
 
 * [Introduction to Hack's features](../overview/introduction.md)
 * [Tools to help you write Hack](../tools/introduction.md)
-* [Your frequent questions about Hack](../faq/faq.md)
+* [Your frequent questions about Hack](../FAQ/faq.md)
 * [Hack's strong typing system](../types/type-system.md)
 * [Asynchronous Programming with Hack](../async/introduction.md)
 * [Collections in Hack](../collections/introduction.md)

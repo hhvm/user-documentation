@@ -9,4 +9,4 @@ While a majority of the time you will not need to tweak the default settings or 
 
 ## Custom Configuration
 
-There are also a plethora of custom [configuration options](./configuration/introduction.md) that you can set to tweak how HHVM operates when running scripts or running as a server.
+There are also a plethora of custom [configuration options](../configuration/introduction.md) that you can set to tweak how HHVM operates when running scripts or running as a server.

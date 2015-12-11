@@ -26,7 +26,7 @@ hh_server --convert <path to files to convert> <path to top level of project>
 
 Many times the two paths are the same. However, this does give you the flexibility of converting only a subset of a project. Normally, the path to the top level of the project has the `.hhconfig`.
 
-This process annotates with [*soft type hints*](../types/advanced#soft-type-hints) via `@`. This is because the annotation is far from perfect and we would rather have warnings thrown rather than fatal at runtime.
+This process annotates with [*soft type hints*](../types/advanced-rules#soft-type-hints) via `@`. This is because the annotation is far from perfect and we would rather have warnings thrown rather than fatal at runtime.
 
 For example, the following unannotated Hack file:
 

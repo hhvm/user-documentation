@@ -1,4 +1,4 @@
-Here are some general guidelines to know and follow when using XHP. In addition to its [basic usage](./basic-usage.md), [typing and available methods](./typing.md) and [extending XHP with your own objects](./extending.md), these are other tips to make the best use of XHP.
+Here are some general guidelines to know and follow when using XHP. In addition to its [basic usage](./basic-usage.md), [available methods](./methods.md) and [extending XHP with your own objects](./extending.md), these are other tips to make the best use of XHP.
 
 ## Validation of Attributes and Children
 

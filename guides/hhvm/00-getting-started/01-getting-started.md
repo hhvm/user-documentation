@@ -44,9 +44,9 @@ Running HHVM automatically at boot as a service (instead of just on the command 
 
 ## Running Hack files
 
-HHVM runs both PHP and [Hack](../../guides/hack/getting-started/getting-started.md). Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack/). We created a simple Hack program above when testing HHVM. 
+HHVM runs both PHP and [Hack](/hack/getting-started/getting-started). Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack/). We created a simple Hack program above when testing HHVM. 
 
-To test and run a Hack file, make sure you are [running the `hh_client` typechecker](../../guides/hack/typechecker/introduction.md) otherwise you'll be missing out on a lot of your type errors in your Hack code. The simplest way to make a PHP program a Hack program is to simply change the prologue of the file to `<?hh` to indicate it's Hack. Then you can immediately start benefiting from these features.
+To test and run a Hack file, make sure you are [running the `hh_client` typechecker](/hack/typechecker/introduction) otherwise you'll be missing out on a lot of your type errors in your Hack code. The simplest way to make a PHP program a Hack program is to simply change the prologue of the file to `<?hh` to indicate it's Hack. Then you can immediately start benefiting from these features.
 
 ## Learning Hack and PHP
 

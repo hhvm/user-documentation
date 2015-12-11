@@ -18,7 +18,7 @@ This simple example shows you how to create, query, add items to and remove item
 
 @@ examples-examples/filter-method.php @@
 
-Note that we are using a [lambda](../../lambdas/introduction.md) to create the filtering operation. We could have also used a normal closure as well.
+Note that we are using a [lambda](../lambdas/introduction.md) to create the filtering operation. We could have also used a normal closure as well.
 
 ## Using `map()`
 

@@ -1,4 +1,4 @@
-The following distributions are only supported for [LTS releases](./intro#lts-releases) up to 3.6.
+The following distributions are only supported for [LTS releases](./introduction#lts-releases) up to 3.6.
 
 ### Ubuntu 12.04 Precise
 
