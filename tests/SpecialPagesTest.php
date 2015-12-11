@@ -85,6 +85,10 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/manual/en/hack.collections.vector.php',
         '/hack/reference/class/Vector/',
       ),
+      'Missing trailing /' => tuple(
+        '/hack/reference/class/Map',
+        '/hack/reference/class/Map/',
+      ),
     ];
   }
 
