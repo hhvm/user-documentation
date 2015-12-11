@@ -6,7 +6,7 @@ array(3) {
   [2]=>
   string(10) "Phil Smith"
 }
-object(HH\Vector)#3 (3) {
+object(HH\Vector)#%d (3) {
   [0]=>
   string(13) "Carlton Smith"
   [1]=>
