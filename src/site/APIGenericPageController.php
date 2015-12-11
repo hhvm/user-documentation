@@ -106,12 +106,7 @@ class APIGenericPageController extends WebPageController {
 
     $method = $this->getMethodDefinition();
     if ($method !== null) {
-      $api_root_url = sprintf(
-        "/%s/reference/%s/%s/",
-        $product,
-        $this->getDefinitionType(),
-        str_replace('\\', '.', $this->getRootDefinition()['name']),
-      );
+      $api_root_url = $this->getRootDefinition()['urlPath'];
       $bottom_level =
         <x:frag>
           <span class="breadcrumbTertiaryRoot">
