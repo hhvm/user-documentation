@@ -41,7 +41,7 @@ RUN cd /var/www && sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example > 
 
 # Install direct dependencies
 RUN cd /var/www && bundle --path vendor-rb/
-RUN cd /var/www && hhvm /opt/composer/composer.phar install
+RUN cd /var/www && hhvm /opt/composer/composer.phar install --optimize-autoloader
 
 # Build (all in one so that we don't end up with +/var/hhvm and -/var/hhvm images)
 RUN cd /var && git clone --depth=1 https://github.com/facebook/hhvm.git && cd /var/www && hhvm bin/build.php && hhvm vendor/bin/phpunit tests/ && rm -rf /var/hhvm
