@@ -117,6 +117,36 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     return $links;
   }
 
+  public function pathNormalizationTestCases(
+  ): array<(string, string, string)> {
+    return [
+      tuple('/foo/bar', '/baz', '/baz'),
+      tuple('/foo/bar', './baz', '/foo/baz'),
+      tuple('/foo/bar/', './baz', '/foo/bar/baz'),
+      tuple('/foo/bar', '../baz', '/baz'),
+      tuple('/foo/bar/', '../baz', '/foo/baz'),
+      tuple('/foo/bar/baz/', '../../herp', '/foo/herp'),
+      tuple('/foo/bar/baz', '../../herp', '/herp'),
+    ];
+  }
+
+  /**
+   * @dataProvider pathNormalizationTestCases
+   *
+   * Testing the test...
+   */
+  public function testPathNormalization(
+    string $context,
+    string $in,
+    ?string $expected,
+  ): void {
+    $this->markTestSkipped(
+      'https://github.com/hhvm/user-documentation/issues/200'
+    );
+    $out = $this->normalizePath($context, $in);
+    $this->assertSame($expected, $out);
+  }
+
   private function normalizePath(string $source, ?string $path): ?string {
     if ($path === null) {
       return $path;
@@ -126,13 +156,45 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       return $path;
     }
 
-    /** FIXME: https://github.com/hhvm/user-documentation/issues/200
-    $context = dirname($source);
+    // FIXME: https://github.com/hhvm/user-documentation/issues/200
+    return null;
+
+    $in_dir = substr($source, -1) === '/';
+
     if (substr($path, 0, 2) === './') {
-      $path = $context.substr($path, 1);
+      if ($in_dir) {
+        // /foo/bar/ + ./baz => /foo/bar/baz
+        $context = $source;
+      } else {
+        // /foo/bar + ./baz => /foo/baz
+        $context = dirname($source);
+        if ($context !== '/') {
+          $context .= '/';
+        }
+      }
+      return $context.substr($path, 2);
+    }
+
+    if (substr($path, 0, 3) === '../') {
+      $orig_path = $path;
+
+      if ($in_dir) {
+        // /foo/bar/ + ../baz => /foo/baz
+        $context = dirname($source);
+      } else {
+        // /foo/bar + ../baz => /baz
+        $context = dirname(dirname($source));
+      }
+      if ($context !== '/') {
+        $context .= '/';
+      }
+      $path = $context.substr($path, 3);
+
+      while (strpos($path, '/../') !== false) {
+        $path = preg_replace('_/[^/]+/\.\./_', '/', $path);
+      }
       return $path;
     }
-    */
 
     return null;
   }
