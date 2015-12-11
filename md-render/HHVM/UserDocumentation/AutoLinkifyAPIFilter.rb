@@ -9,7 +9,7 @@ module HHVM
         doc.search('p code, li code, td code').each do |node|
           content = node.inner_text
 
-          if content =~ /\(\)$/ then
+          if content =~ /\([A-Za-z0-9\<\>\$]*\)$/ then
             content = content[/^[^(]+/]
           end
 

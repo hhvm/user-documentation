@@ -46,6 +46,12 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
           'escapeString()',
           '/hack/reference/class/AsyncMysqlConnection/escapeString/',
         ),
+      'Hack function with parameter information' =>
+        tuple(
+          '/hack/async/utility-functions',
+          'HH\Asio\wrap(Awaitable<Tv>)',
+          '/hack/reference/function/HH.Asio.wrap/',
+        ),
     ];
   }
 
