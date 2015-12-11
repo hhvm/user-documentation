@@ -2,10 +2,11 @@
 namespace HHVM\UserDocumentation;
 
 require(__DIR__.'/../vendor/autoload.php');
-function hhvm_to_yaml(): void {
+function build_site(): void {
   if (!is_dir(LocalConfig::BUILD_DIR)) {
     mkdir(LocalConfig::BUILD_DIR);
   }
+
   (new FetchPHPDotNetIndexBuildStep())->buildAll();
 
   (new RawYAMLBuildStep())->buildAll();
@@ -15,6 +16,7 @@ function hhvm_to_yaml(): void {
   (new APIIndexBuildStep())->buildAll();
 
   (new UnifiedAPIIndexBuildStep())->buildAll();
+  (new SiteMapBuildStep())->buildAll();
 
   (new APILegacyRedirectsBuildStep())->buildAll();
   (new PHPDotNetArticleRedirectsBuildStep())->buildAll();
@@ -29,8 +31,9 @@ function hhvm_to_yaml(): void {
   (new APIHTMLBuildStep())->buildAll();
 
   (new BuildIDBuildStep())->buildAll();
+
 }
 
-hhvm_to_yaml();
+build_site();
 
 echo "\n"; // Make the bash prompt nice after :p

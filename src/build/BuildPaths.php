@@ -35,6 +35,7 @@ abstract final class BuildPaths {
   const string CORE_CSS = LocalConfig::BUILD_DIR.'/main.css';
   const string SYNTAX_HIGHLIGHT_CSS =
     LocalConfig::BUILD_DIR.'/syntax-highlighting.css';
+  const string SITE_MAP = LocalConfig::BUILD_DIR.'/sitemap.txt';
 
   const string STATIC_RESOURCES_MAP =
    LocalConfig::BUILD_DIR.'/static_resources.php';
