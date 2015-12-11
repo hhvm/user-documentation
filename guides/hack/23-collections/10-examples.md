@@ -26,7 +26,7 @@ Note that we are using a [lambda](../lambdas/introduction.md) to create the filt
 
 @@ examples-examples/map-method.php @@
 
-Note that we are using a [lambda](../../lambdas/introduction.md) to create the mapping operation. We could have also used a normal closure as well.
+Note that we are using a [lambda](../lambdas/introduction.md) to create the mapping operation. We could have also used a normal closure as well.
 
 ## Reference Semantics
 

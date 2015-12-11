@@ -14,7 +14,7 @@ To get the result of an awaitable in a non-async function, you can use `join()`.
 
 ## Closures
 
-You can have async closures, including using the shorter [lambda](../lambda/introduction.md) syntax.
+You can have async closures, including using the shorter [lambda](../lambdas/introduction.md) syntax.
 
 @@ examples-examples/closures.php @@
 

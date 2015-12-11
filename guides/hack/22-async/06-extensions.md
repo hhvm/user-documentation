@@ -68,7 +68,7 @@ The async MySQL extension provides a mechanism to pool connection objects so you
 
 @@ extensions-examples/async-mysql-connection-pool.php @@
 
-It is ***highly recommended*** that you use connection pools for your MySQL connections; if for some reason you really need one, single asynchronous client, there is an [`AsyncMysqlClient`](../reference/class/AsyncMysqlClient) class that provides a [`connect()`](../reference/class/AsyncMysqlClient/connect/) method. 
+It is ***highly recommended*** that you use connection pools for your MySQL connections; if for some reason you really need one, single asynchronous client, there is an [`AsyncMysqlClient`](../reference/class/AsyncMysqlClient/) class that provides a [`connect()`](../reference/class/AsyncMysqlClient/connect/) method. 
 
 ## MCRouter
 
