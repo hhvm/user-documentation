@@ -27,3 +27,17 @@ Depends, but generally not. You should use [*literal syntax*](../collections/con
 ### I am getting `Fatal error: Class undefined` errors?
 
 Make sure your XHP code is not in a namespace. We have issues, in many cases, using XHP in code belonging to a namespace. The issue is known and we are trying to figure out a solution.
+
+## Other
+
+### I am getting `Invalid argument` passing a named function as a callable?
+
+You are probably passing it as a string, like this:
+
+```
+array_map('my-named-function', .....);
+```
+
+On its own, the Hack typechecker cannot understand what to do with a function that is referred to by its string name only. It needs some help.
+
+In this case, you want to help the typechecker by using [`fun()`](/hack/callables/special-functions#fun) which tells the typechejcer to lookup the actual function associated with that name and typecheck that. 
