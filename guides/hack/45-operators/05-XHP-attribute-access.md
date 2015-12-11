@@ -22,6 +22,6 @@ We may implement support for this in the future; in the mean time, you need to u
 
 ## Namespaces
 
-![Don't use Namespaces](/images/xhp-namespaces-play-nice.jpg)
+![Don't use Namespaces](/images/xhp-namespaces-play-nice.png)
 
 Currently, XHP doesn't handle namespaces very well. So, your XHP code should generally be in the global namespace. This problem is [known](https://github.com/facebook/xhp-lib/issues/64).
