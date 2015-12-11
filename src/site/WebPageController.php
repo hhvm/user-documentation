@@ -258,6 +258,7 @@ EOF;
               <li><a href="/hack/getting-started/">Getting Started</a></li>
               <li><a href="/hack/tools/">Tools</a></li>
               <li><a href="/hack/FAQ/">FAQ</a></li>
+              <li><a href="/hack/reference/">API Reference</a></li>
             </ul>
           </div>
           <div class="footerPanel">
