@@ -107,7 +107,14 @@ EOF;
 
   private function getContents(): string {
     $md = "### Interface synopsis\n";
+
+    $md .=
+      '<code class="code">'.
+      Stringify::interfaceSignature($this->yaml['data']).
+      '</code>';
     $methods = $this->yaml['data']['methods'];
+
+    $md .= "\n";
 
     foreach ($methods as $method) {
       $method_url = URLBuilder::getPathForMethod($method);

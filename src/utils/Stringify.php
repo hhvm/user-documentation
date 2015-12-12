@@ -93,6 +93,35 @@ class Stringify {
     return $ret;
   }
 
+  public static function interfaceSignature(
+    ClassDocumentation $iface,
+  ): string {
+    $ret = '';
+    $ns = $iface['namespace'];
+    if ($ns !== '') {
+      $ret .= 'namespace ' . $ns . " { ";
+    }
+    $ret .= $iface['type'] . ' ' . $iface['shortName'] . ' ';
+    $parent = $iface['parent'];
+    if ($parent !== null) {
+      $ret .= 'extends ' . $parent['typename'] . ' ';
+    }
+    $implInterfaces = $iface['interfaces'];
+    if (count($implInterfaces) > 0) {
+      $ret .= 'implements ';
+      foreach ($implInterfaces as $implInterface) {
+        $ret .= $implInterface['typename'] . ', ';
+      }
+      $ret = substr($ret, 0, -2); // remove trailing ', ''
+    }
+    $ret .= ' {...}';
+    if ($ns !== null) {
+      $ret .= ' }';
+    }
+    $ret .= "\n";
+    return $ret;
+  }
+
   private static function parameters(
     FunctionDocumentation $func,
     StringifyFormat $format = StringifyFormat::MULTI_LINE,
