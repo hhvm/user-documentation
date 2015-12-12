@@ -148,7 +148,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "651ecc60ef6a4c11cecd40086faf9dd758032ab6"
+                "reference": "e9ebd0c4bdaf1d5a90d2274fedb767af04d5cdb2"
             },
             "dist": {
                 "type": "zip",

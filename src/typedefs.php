@@ -78,6 +78,8 @@ type FunctionYAML = shape(
 
 type ClassDocumentation = shape(
   'name' => string,
+  'namespace' => string,
+  'shortName' => string,
   'type' => APIDefinitionType,
   'methods' => array<MethodDocumentation>,
   'generics' => array<GenericDocumentation>,

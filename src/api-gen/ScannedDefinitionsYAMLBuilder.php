@@ -88,9 +88,13 @@ class ScannedDefinitionsYAMLBuilder {
     }
 
     $name = $class->getName();
+    $namespace = $class->getNamespaceName();
+    $shortName = $class->getShortName();
 
     return shape(
       'name' => $name,
+      'namespace' => $namespace,
+      'shortName' => $shortName,
       'type' => $type,
       'methods' => $class
         ->getMethods()
