@@ -152,8 +152,8 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/651ecc60ef6a4c11cecd40086faf9dd758032ab6",
-                "reference": "651ecc60ef6a4c11cecd40086faf9dd758032ab6",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/e9ebd0c4bdaf1d5a90d2274fedb767af04d5cdb2",
+                "reference": "e9ebd0c4bdaf1d5a90d2274fedb767af04d5cdb2",
                 "shasum": ""
             },
             "require": {
@@ -186,7 +186,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-12-05 00:19:34"
+            "time": "2015-12-12 00:03:39"
         },
         {
             "name": "hack-psr/psr7-http-message-hhi",
