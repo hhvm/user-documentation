@@ -75,6 +75,10 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/manual/en/classkit.configuration.php',
         'http://php.net/manual/en/classkit.configuration.php',
       ),
+      'PHP appendix' => tuple(
+        '/manual/en/stream.constants.php',
+        'http://php.net/manual/en/stream.constants.php'
+      ),
       'Beta redirect root' => tuple(
         'http://beta.docs.hhvm.com/',
         'http://docs.hhvm.com/',
