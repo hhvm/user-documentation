@@ -99,6 +99,8 @@ final class LegacyRedirectController extends WebController {
       'install-hack' => '/hack/typechecker/install',
       'install.hack.bootstrapping' => '/hack/getting-started/getting-started',
       'install.hack.conversion' => '/hack/tools/introduction',
+      'install.hack' => '/hack/getting-started/getting-started',
+      'hack' => '/hack/',
     };
   }
 }
