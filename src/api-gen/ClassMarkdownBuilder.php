@@ -107,26 +107,6 @@ EOF;
 
   private function getContents(): string {
     $md = "### Interface synopsis\n";
-
-    // Display the class signature, including any namespace.
-    $csig = '';
-    if ($this->yaml['data']['namespace'] !== '') {
-      $csig .= 'namespace ' . $this->yaml['data']['namespace'] . " {\n  ";
-    }
-    $csig .= $this->yaml['type'] . ' ' . $this->yaml['data']['shortName'];
-    if ($this->yaml['data']['parent'] !== null) {
-      $csig .= 'extends ' . $this->yaml['data']['parent']['shortName'] . ' ';
-    }
-    foreach ($this->yaml['data']['interfaces'] as $interface) {
-      $csig .= 'implements ' . $interface['shortName'] . "\n";
-    }
-    $csig .= "{ ... }\n";
-
-    $md .=
-      '<code class="interfaceSignature">'.
-      $csig.
-      '</code>';
-
     $methods = $this->yaml['data']['methods'];
 
     foreach ($methods as $method) {

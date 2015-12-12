@@ -41,10 +41,6 @@
     @include codemethodsignature;
   }
 
-  li > code.interfaceSignature {
-    @include codeinterfacesignature
-  }
-
   ol {
     list-style: decimal inside;
     margin: 0.5em 0 2em;
