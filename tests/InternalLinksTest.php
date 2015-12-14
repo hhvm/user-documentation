@@ -6,7 +6,6 @@ namespace HHVM\UserDocumentation\Tests;
  * @large
  */
 final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
-
   /**
    * @dataProvider internalLinksList
    */
@@ -41,10 +40,15 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     $_ = $this->internalLinksList();
   }
 
-  <<__Memoize>>
+  private static ?array<(string, array<string>)> $linksCache = null;
+
   public function internalLinksList(
   ): array<(string, array<string>)> {
     PageLoader::assertLocal();
+    $cached = self::$linksCache;
+    if ($cached !== null) {
+      return $cached;
+    }
 
     $loaders = Map { };
 
@@ -78,17 +82,22 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       $ret[] = tuple($target, $sources);
     }
 
+    self::$linksCache = $ret;
     return $ret;
   }
 
+  <<__Memoize>>
   private async function getInternalLinksOnPage(
     string $page,
   ): Awaitable<Vector<string>> {
+    PageLoader::assertLocal();
+
     $response = await PageLoader::getPage($page);
 
     if ($response->getStatusCode() === 301) {
-      $page = $response->getHeaderLine('Location');
-      $response = await PageLoader::getPage($page);
+      return await $this->getInternalLinksOnPage(
+        $response->getHeaderLine('Location')
+      );
     }
 
     $this->assertSame(200, $response->getStatusCode(), $page);
