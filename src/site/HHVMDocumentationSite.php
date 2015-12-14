@@ -18,8 +18,8 @@ final class HHVMDocumentationSite {
     try {
       try {
         list($controller, $vars) = (new Router())->routeRequest($request);
-        return await (new $controller($vars, $request))->getResponse();
       } catch (HTTPNotFoundException $e) {
+        // Try to add trailing if we couldn't find a controller
         $orig_uri = $request->getUri();
         $with_trailing_slash = $request
           ->withUri($orig_uri->withPath($orig_uri->getPath().'/'));
@@ -35,6 +35,10 @@ final class HHVMDocumentationSite {
           throw $e; // original exception, not the new one
         }
       }
+
+      // This is outside of the try so that we don't try adding a trailing
+      // slash if the controller itself throws a 404
+      return await (new $controller($vars, $request))->getResponse();
     } catch (HTTPException $e) {
       return await $e->getResponse($request);
     }

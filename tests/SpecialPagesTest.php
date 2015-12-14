@@ -110,4 +110,9 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertSame($to, $target);
   }
+
+  public function testStaticResource404(): void {
+    $response = \HH\Asio\join(PageLoader::getPage('/s/deadbeef/notfound'));
+    $this->assertSame(404, $response->getStatusCode());
+  }
 }
