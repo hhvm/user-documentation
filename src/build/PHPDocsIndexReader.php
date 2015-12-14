@@ -11,20 +11,17 @@ final class PHPDocsIndexReader {
   public function __construct(
     string $content,
   ) {
-    $article_types = Set {
-      'book',
-      'chapter',
-      'preface',
-      'reference',
-      'section',
-      'sect1',
-      'appendix',
-    };
-
     $old_index = json_decode($content);
 
     foreach ($old_index as $entry) {
       list ($name, $id, $type) = $entry;
+      if (!$type) {
+        continue;
+      }
+
+      if ($type === 'example') {
+        continue;
+      }
 
       $name = html_entity_decode($name);
 
@@ -34,29 +31,26 @@ final class PHPDocsIndexReader {
         continue;
       }
 
-      if ($article_types->contains($type)) {
-        $this->articles[$id] = $id;
+      if ($type === 'refentry') {
+        $parts = (new Vector(explode('::', $name)))
+          ->map($x ==> explode('<', $x)[0]);
+
+        if (count($parts) === 1) {
+          $this->functions[$parts[0]] = $id;
+          continue;
+        }
+
+        invariant(
+          count($parts) === 2,
+          "Definition %s has %d parts",
+          $name,
+          count($parts),
+        );
+        $this->methods[implode('::', $parts)] = $id;
         continue;
       }
 
-      if ($type !== 'refentry') {
-        continue;
-      }
-      $parts = (new Vector(explode('::', $name)))
-        ->map($x ==> explode('<', $x)[0]);
-
-      if (count($parts) === 1) {
-        $this->functions[$parts[0]] = $id;
-        continue;
-      }
-
-      invariant(
-        count($parts) === 2,
-        "Definition %s has %d parts",
-        $name,
-        count($parts),
-      );
-      $this->methods[implode('::', $parts)] = $id;
+      $this->articles[$id] = $id;
     }
   }
 
