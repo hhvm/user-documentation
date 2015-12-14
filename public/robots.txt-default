@@ -3,3 +3,5 @@ Disallow: /__content
 Disallow: /__survey/
 Disallow: /search
 Disallow: /j/
+
+Sitemap: /sitemap.txt
