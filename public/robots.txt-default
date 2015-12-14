@@ -1,6 +1,5 @@
 User-agent: *
 Disallow: /__content
-Disallow: /s/
 Disallow: /__survey/
 Disallow: /search
 Disallow: /j/
