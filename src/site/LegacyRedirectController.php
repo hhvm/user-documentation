@@ -43,6 +43,18 @@ final class LegacyRedirectController extends WebController {
     return Map {
       'index' => '/',
       'hacklangref' => '/hack/',
+      'async.mysql.asyncmysqlclient' => '/hack/reference/class/AsyncMysqlClient/',
+      'async.mysql.asyncmysqlclientstats' => '/hack/reference/class/AsyncMysqlClientStats/',
+      'async.mysql.asyncmysqlconnectresult' => '/hack/reference/class/AsyncMysqlConnectResult/',
+      'async.mysql.asyncmysqlconnection' => '/hack/reference/class/AsyncMysqlConnection/',
+      'async.mysql.asyncmysqlconnectionpool' => '/hack/reference/class/AsyncMysqlConnectionPool/',
+      'async.mysql.asyncmysqlerrorresult' => '/hack/reference/class/AsyncMysqlErrorResult/',
+      'async.mysql.asyncmysqlqueryerrorresult' => '/hack/reference/class/AsyncQueryErrorResult/',
+      'async.mysql.asyncmysqlqueryresult' => '/hack/reference/class/AsyncMysqlQueryResult/',
+      'async.mysql.asyncmysqlrow' => '/hack/reference/class/AsyncMysqlRow/',
+      'async.mysql.asyncmysqlrowblock' => '/hack/reference/class/AsyncMysqlRowBlock/',
+      'async.mysql.asyncmysqlrowblockiterator' => '/hack/reference/class/AsyncMysqlRowBlockIterator/',
+      'async.mysql.asyncmysqlrowiterator' => '/hack/reference/class/AsyncMysqlRowIterator/',
       'hack.intro' => '/hack/overview/introduction',
       'hack.arrays' => '/hack/collections/introduction',
       'hack.async' => '/hack/async/introduction',
@@ -94,6 +106,9 @@ final class LegacyRedirectController extends WebController {
       'intro.asio' => '/hack/async/utility-functions',
       'hack.ref.asio' => '/hack/async/utility-functions',
       'hack.asio.function' => '/hack/async/utility-functions',
+      'migrationhhvm' => '/hhvm/inconsistencies/introduction',
+      'install.fastcgi' => '/hhvm/advanced-usage/fastCGI',
+      'install.extensions' => '/hhvm/extensions/introduction',
       'install-intro' => '/hhvm/installation/introduction',
       'install-xhp' => '/hack/XHP/introduction#the-xhp-lib-library',
       'install-hack' => '/hack/typechecker/install',
@@ -101,6 +116,7 @@ final class LegacyRedirectController extends WebController {
       'install.hack.conversion' => '/hack/tools/introduction',
       'install.hack' => '/hack/getting-started/getting-started',
       'hack' => '/hack/',
+      'docshhvmimprovedsearch' => '/',
     };
   }
 }
