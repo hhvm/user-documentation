@@ -95,6 +95,14 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/hack/reference/class/Map',
         '/hack/reference/class/Map/',
       ),
+      'PHP bad punctuation' => tuple(
+        '/manual/en/debugger.about.php',
+        'http://php.net/manual/en/debugger-about.php',
+      ),
+      'PHP good punctuation' => tuple(
+        '/manual/en/debugger-about.php',
+        'http://php.net/manual/en/debugger-about.php',
+      ),
     ];
   }
 

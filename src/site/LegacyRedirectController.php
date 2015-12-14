@@ -12,6 +12,14 @@ final class LegacyRedirectController extends WebController {
   public async function getResponse(): Awaitable<ResponseInterface> {
     $id = $this->getRequiredStringParam('legacy_id');
 
+    $this->tryRedirect($id);
+    $this->tryRedirect(strtr($id, '.', '-'));
+    $this->tryRedirect(strtr($id, '-', '.'));
+
+    throw new HTTPNotFoundException();
+  }
+
+  private function tryRedirect(string $id): void {
     // Since the API redirects are quite specific, see if we are redirecting
     // from there first.
     $url = idx(APILegacyRedirectData::getIndex(), $id);
@@ -35,8 +43,6 @@ final class LegacyRedirectController extends WebController {
         throw new RedirectException($to);
       }
     }
-
-    throw new HTTPNotFoundException();
   }
 
   private function getManualRedirectData(): Map<string, string> {
