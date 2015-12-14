@@ -2,6 +2,9 @@
 
 use Psr\Http\Message\ServerRequestInterface;
 use HHVM\UserDocumentation\BuildPaths;
+use HHVM\UserDocumentation\JumpIndexData;
+
+require_once(BuildPaths::JUMP_INDEX);
 
 final class HTTP404Controller extends WebPageController {
   public async function getTitle(): Awaitable<string> {
@@ -43,12 +46,10 @@ final class HTTP404Controller extends WebPageController {
             <i class="logoPolygon b b3" />
           </span>
         </div>
+        {$this->getNotFoundMessage()}
         <p class="notFoundMessage">
-          The page you requested can't be found.
-        </p>
-        <p class="notFoundMessage">
-          You might want to try finding it from <a href="/">the front page</a>
-          or the Hack or HHVM links above.
+          You might want to try finding what you need from <a href="/">the
+          front page</a> or the Hack or HHVM links above.
         </p>
         <p class="notFoundMessage">
           If you think you're seeing this page in error, please
@@ -58,6 +59,30 @@ final class HTTP404Controller extends WebPageController {
           >file an issue</github-issue-link>.
         </p>
       </x:frag>;
+  }
+
+  protected function getNotFoundMessage(): XHPRoot {
+    $path = $this->getRequestedPath();
+    $parts = explode('/', $path);
+
+    if (count($parts) === 2) {
+      list($_, $id) = $parts;
+      $url = idx(JumpIndexData::getIndex(), strtolower($id));
+      if ($url) {
+        return (
+          <p class="notFoundMessage">
+            The page you requested does not exist; maybe you want
+            <a href={$url}>{$url}</a> instead?
+          </p>
+        );
+      }
+    }
+
+    return (
+      <p class="notFoundMessage">
+        The page you requested does not exist.
+      </p>
+    );
   }
 
   protected function getStatusCode(): int {

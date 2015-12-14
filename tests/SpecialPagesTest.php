@@ -22,7 +22,7 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
   public function testNotFoundPages(string $path): void {
     $response = \HH\Asio\join(PageLoader::getPage($path));
     $this->assertSame(404, $response->getStatusCode());
-    $this->assertContains("can't be found", (string) $response->getBody());
+    $this->assertContains("does not exist", (string) $response->getBody());
   }
 
   public function redirectProvider(): array<string, (string, string)> {
@@ -122,5 +122,16 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
   public function testStaticResource404(): void {
     $response = \HH\Asio\join(PageLoader::getPage('/s/deadbeef/notfound'));
     $this->assertSame(404, $response->getStatusCode());
+  }
+
+  public function test404Suggestion(): void {
+    $response = \HH\Asio\join(PageLoader::getPage('/map'));
+    $this->assertSame(404, $response->getStatusCode());
+
+    $body = (string) $response->getBody();
+    $this->assertContains(
+      '/hack/reference/class/Map/',
+      $body,
+    );
   }
 }
