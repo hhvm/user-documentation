@@ -85,7 +85,7 @@ abstract final class LegacyRedirects {
       'hack.constructorargumentpromotion' => '/hack/other-features/constructor-parameter-promotion',
       'hack.enums' => '/hack/enums/introduction',
       'hack.generics' => '/hack/generics/introduction',
-      'hack.modes' => '/hack/typechecker/modes',
+      'modes' => '/hack/typechecker/modes',
       'hack.lambda' => '/hack/lambdas/introduction',
       'hack.methoddispatch' => '/hack/',
       'hack.nullable' => '/hack/types/type-system#nullable',
