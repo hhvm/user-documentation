@@ -8,9 +8,8 @@ final class StaticResourcesController extends WebController {
     $checksum = $this->getRequiredStringParam('checksum');
     $file = $this->getRequiredStringParam('file');
 
-    // Throws exception if not in the map
-    $entry = StaticResourceMap::getEntryForFile(
-      $file,
+    $entry = self::invariantTo404(
+      () ==> StaticResourceMap::getEntryForFile($file)
     );
 
     if ($checksum !== $entry['checksum'] && $checksum !== 'local-changes') {
