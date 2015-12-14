@@ -1,8 +1,11 @@
 <?hh // strict
 
 use Psr\Http\Message\ServerRequestInterface;
+use HHVM\UserDocumentation\APILegacyRedirectData;
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\JumpIndexData;
+use HHVM\UserDocumentation\LegacyRedirects;
+use HHVM\UserDocumentation\PHPDotNetArticleRedirectData;
 
 require_once(BuildPaths::JUMP_INDEX);
 
@@ -13,6 +16,52 @@ final class HTTP404Controller extends WebPageController {
 
   public function getExtraBodyClass(): ?string {
     return 'notFoundErrorPage';
+  }
+
+  private function getSuggestedUrl(
+    string $path,
+  ): ?string {
+    $url = idx(JumpIndexData::getIndex(), strtolower($path));
+    if ($url !== null) {
+      return $url;
+    }
+
+    $url = LegacyRedirects::getUrlForId($path);
+    if ($url !== null) {
+      return $url;
+    }
+
+    $candidates = [];
+    foreach (APILegacyRedirectData::getIndex() as $id => $url) {
+      if (stripos($id, $path) !== false) {
+        $candidates[$url] = $url;
+      }
+    }
+
+    foreach (PHPDotNetArticleRedirectData::getIndex() as $id => $url) {
+      if (stripos($id, $path) !== false) {
+        $candidates[$url] = $url;
+      }
+    }
+
+    if ($candidates) {
+      uksort(
+        $candidates,
+        function (string $a, string $b): int {
+          $a = strlen($a);
+          $b = strlen($b);
+          if ($a > $b) {
+            return 1;
+          } else if ($a < $b) {
+            return -1;
+          }
+          return 0;
+        },
+      );
+      return key($candidates);
+    }
+
+    return null;
   }
 
   public async function getBody(): Awaitable<\XHPRoot> {
@@ -67,8 +116,8 @@ final class HTTP404Controller extends WebPageController {
 
     if (count($parts) === 2) {
       list($_, $id) = $parts;
-      $url = idx(JumpIndexData::getIndex(), strtolower($id));
-      if ($url) {
+      $url = $this->getSuggestedUrl($id);
+      if ($url !== null) {
         return (
           <p class="notFoundMessage">
             The page you requested does not exist; maybe you want

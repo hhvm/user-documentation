@@ -124,14 +124,24 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     $this->assertSame(404, $response->getStatusCode());
   }
 
-  public function test404Suggestion(): void {
-    $response = \HH\Asio\join(PageLoader::getPage('/map'));
+  public function notFoundSuggestions(): array<(string, string)> {
+    return [
+      tuple('/map', '/hack/reference/class/Map/'),
+      tuple('/maptktv.filter', '/hack/reference/class/Map/filter/'),
+    ];
+  }
+
+  /**
+   * @dataProvider notFoundSuggestions
+   */
+  public function testNotFoundSuggestion(
+    string $notfound,
+    string $suggestion,
+  ): void {
+    $response = \HH\Asio\join(PageLoader::getPage($notfound));
     $this->assertSame(404, $response->getStatusCode());
 
     $body = (string) $response->getBody();
-    $this->assertContains(
-      '/hack/reference/class/Map/',
-      $body,
-    );
+    $this->assertContains($suggestion, $body);
   }
 }
