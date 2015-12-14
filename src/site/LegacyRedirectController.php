@@ -43,6 +43,10 @@ final class LegacyRedirectController extends WebController {
     return Map {
       'index' => '/',
       'hacklangref' => '/hack/',
+      'asio.wrappedexception' => '/hack/reference/class/HH.Asio.WrappedException/',
+      'asio.wrappedresult' => '/hack/reference/class/HH.Asio.WrappedResult/',
+      'asio.resultexceptionwrapper' => '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',
+      'asio.resultorexceptionwrapper' => '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',
       'async.mysql.asyncmysqlclient' => '/hack/reference/class/AsyncMysqlClient/',
       'async.mysql.asyncmysqlclientstats' => '/hack/reference/class/AsyncMysqlClientStats/',
       'async.mysql.asyncmysqlconnectresult' => '/hack/reference/class/AsyncMysqlConnectResult/',
@@ -107,6 +111,7 @@ final class LegacyRedirectController extends WebController {
       'hack.ref.asio' => '/hack/async/utility-functions',
       'hack.asio.function' => '/hack/async/utility-functions',
       'migrationhhvm' => '/hhvm/inconsistencies/introduction',
+      'ini.list' => '/hhvm/configuration/INI-settings',
       'install.fastcgi' => '/hhvm/advanced-usage/fastCGI',
       'install.extensions' => '/hhvm/extensions/introduction',
       'install-intro' => '/hhvm/installation/introduction',
