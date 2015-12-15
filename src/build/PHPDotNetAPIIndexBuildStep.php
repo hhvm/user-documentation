@@ -8,11 +8,9 @@ final class PHPDotNetAPIIndexBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nPHPDotNetAPIIndex");
 
-    $defs = new Map($this->getIndexData());
-
     $code = $this->writeCode(
       'PHPDotNetAPIIndex.hhi',
-      $defs,
+      $this->getIndexData(),
     );
     file_put_contents(
       BuildPaths::PHP_DOT_NET_API_INDEX,
