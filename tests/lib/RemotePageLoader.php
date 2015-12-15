@@ -14,9 +14,13 @@ final class RemotePageLoader extends PageLoader {
   ): Awaitable<ResponseInterface> {
     $host_header = parse_url($url, PHP_URL_HOST);
     $path = parse_url($url, PHP_URL_PATH);
+    $query = parse_url($url, PHP_URL_QUERY);
 
     $test_host = ArgAssert::isNotNull(self::getHost());
     $url = 'http://'.$test_host.$path;
+    if ($query !== null) {
+      $url .= '?'.$query;
+    }
 
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_HEADER, 1);

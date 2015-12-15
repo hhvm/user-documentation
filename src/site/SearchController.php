@@ -1,7 +1,8 @@
 <?hh // strict
 
-use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\APIIndex;
+use HHVM\UserDocumentation\GuidesIndex;
+use HHVM\UserDocumentation\PHPAPIIndex;
 use HHVM\UserDocumentation\SearchResultSet;
 
 use Psr\Http\Message\ServerRequestInterface;
@@ -32,10 +33,12 @@ final class SearchController extends WebPageController {
     $result_lists = (Map {
       'Hack Guides' => $results->getHackGuides(),
       'HHVM Guides' => $results->getHHVMGuides(),
-      'Hack Classes' => $results->getClasses(),
-      'Hack Traits' => $results->getTraits(),
-      'Hack Interfaces' => $results->getInterfaces(),
-      'Hack Functions' => $results->getFunctions(),
+      'Hack Classes' => $results->getHackClasses(),
+      'Hack Traits' => $results->getHackTraits(),
+      'Hack Interfaces' => $results->getHackInterfaces(),
+      'Hack Functions' => $results->getHackFunctions(),
+      'PHP Classes' => $results->getPHPClasses(),
+      'PHP Functions' => $results->getPHPFunctions(),
     })
       ->map($defs ==>$this->getListFromResultSet($defs))
       ->filter($xhp ==> $xhp !== null);
@@ -65,6 +68,7 @@ final class SearchController extends WebPageController {
     return ((new SearchResultSet())
       ->addAll(APIIndex::search($this->getSearchTerm()))
       ->addAll(GuidesIndex::search($this->getSearchTerm()))
+      ->addAll(PHPAPIIndex::search($this->getSearchTerm()))
     );
   }
 }

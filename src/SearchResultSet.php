@@ -11,6 +11,7 @@ final class SearchResultSet {
   public function __construct() {
     foreach (APIDefinitionType::getValues() as $type) {
       $this->apiDefs[$type] = Map { };
+      $this->phpApiDefs[$type] = Map { };
     }
   }
 
@@ -57,25 +58,25 @@ final class SearchResultSet {
     return $this;
   }
 
-  public function getClasses(): Map<string, string> {
+  public function getHackClasses(): Map<string, string> {
     return $this->apiDefs[APIDefinitionType::CLASS_DEF]->map(
       $entry ==> $entry['urlPath'],
     );
   }
 
-  public function getTraits(): Map<string, string> {
+  public function getHackTraits(): Map<string, string> {
     return $this->apiDefs[APIDefinitionType::TRAIT_DEF]->map(
       $entry ==> $entry['urlPath'],
     );
   }
 
-  public function getInterfaces(): Map<string, string> {
+  public function getHackInterfaces(): Map<string, string> {
     return $this->apiDefs[APIDefinitionType::INTERFACE_DEF]->map(
       $entry ==> $entry['urlPath'],
     );
   }
 
-  public function getFunctions(): Map<string, string> {
+  public function getHackFunctions(): Map<string, string> {
     return $this->apiDefs[APIDefinitionType::FUNCTION_DEF]->map(
       $entry ==> $entry['urlPath'],
     );
@@ -87,5 +88,13 @@ final class SearchResultSet {
 
   public function getHHVMGuides(): Map<string, string> {
     return $this->hhvmGuides;
+  }
+
+  public function getPHPClasses(): Map<string, string> {
+    return $this->phpApiDefs[APIDefinitionType::CLASS_DEF];
+  }
+
+  public function getPHPFunctions(): Map<string, string> {
+    return $this->phpApiDefs[APIDefinitionType::FUNCTION_DEF];
   }
 }
