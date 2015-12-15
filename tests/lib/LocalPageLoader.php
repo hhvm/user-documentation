@@ -11,16 +11,13 @@ final class LocalPageLoader extends PageLoader {
   protected async function getPageImpl(
     string $url,
   ): Awaitable<ResponseInterface> {
-    $path = parse_url($url, PHP_URL_PATH);
-    $query = parse_url($url, PHP_URL_QUERY);
-
     $query_params = [];
-    parse_str($query, $query_params);
+    parse_str(parse_url($url, PHP_URL_QUERY), $query_params);
 
     $request = (new ServerRequest(
       /* server = */ [],
       /* file = */ [],
-      $path,
+      $url,
       'GET',
       /* body = */ '/dev/null',
       /* headers = */ [],
