@@ -4,6 +4,9 @@ namespace HHVM\UserDocumentation\Tests;
 
 use HHVM\UserDocumentation\LocalConfig;
 
+/**
+ * @large
+ */
 class ExamplesTest extends \PHPUnit_Framework_TestCase {
   const string TEST_RUNNER = LocalConfig::HHVM_TREE.'/hphp/test/run';
 
