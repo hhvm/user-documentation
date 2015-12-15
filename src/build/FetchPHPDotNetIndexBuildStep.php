@@ -26,6 +26,6 @@ final class FetchPHPDotNetIndexBuildStep extends BuildStep {
         self::SOURCE,
       );
     }
-    file_put_contents(BuildPaths::PHP_DOT_NET_INDEX, $json);
+    file_put_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON, $json);
   }
 }

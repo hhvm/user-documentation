@@ -92,7 +92,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
   private function generatePHPDotNetData(): array<string, string> {
     Log::v("\nProcessing PHP.net index");
     $reader = new PHPDocsIndexReader(
-      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX)
+      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
     );
     $defs = $reader->getAllAPIDefinitions();
 

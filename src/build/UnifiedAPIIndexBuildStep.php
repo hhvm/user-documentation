@@ -67,7 +67,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     Log::v("\nProcessing PHP.net API Index");
 
     $reader = new PHPDocsIndexReader(
-      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX)
+      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
     );
     $defs = $reader->getAllAPIDefinitions();
 

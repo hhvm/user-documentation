@@ -8,7 +8,7 @@ final class PHPDotNetArticleRedirectsBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nPHPDotNetArticleRedirectsBuild");
     $reader = new PHPDocsIndexReader(
-      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX)
+      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
     );
 
     $index = [];
