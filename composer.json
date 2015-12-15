@@ -1,8 +1,7 @@
 {
   "require": {
-    "fredemmott/definition-finder": "dev-master",
+    "fredemmott/definition-finder": "~1.0.0",
     "mustangostang/spyc": "0.5.x-dev",
-    "hhvm/systemlib-extractor": "^0.1.0",
     "facebook/xhp-lib": "^2.2",
     "hhvm": "~3.11",
     "phpdocumentor/reflection-docblock": "^2.0",

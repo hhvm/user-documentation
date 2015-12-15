@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38d3b37ed676886a3d3b2e239b61933f",
-    "content-hash": "bae16a4fb9dcd2716caaffed63d404a8",
+    "hash": "e405aefede178fb715ec24abda255c32",
+    "content-hash": "4f6b19c5acc784f7f63a8640681204d0",
     "packages": [
         {
             "name": "91carriage/phpunit-hhi",
@@ -144,16 +144,16 @@
         },
         {
             "name": "fredemmott/definition-finder",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definitions-finder.git",
-                "reference": "e9ebd0c4bdaf1d5a90d2274fedb767af04d5cdb2"
+                "reference": "2550fd6a836f8aa2a53264033b6c8edad7b63353"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/e9ebd0c4bdaf1d5a90d2274fedb767af04d5cdb2",
-                "reference": "e9ebd0c4bdaf1d5a90d2274fedb767af04d5cdb2",
+                "url": "https://api.github.com/repos/fredemmott/definitions-finder/zipball/2550fd6a836f8aa2a53264033b6c8edad7b63353",
+                "reference": "2550fd6a836f8aa2a53264033b6c8edad7b63353",
                 "shasum": ""
             },
             "require": {
@@ -186,7 +186,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-12-12 00:03:39"
+            "time": "2015-12-15 03:20:01"
         },
         {
             "name": "hack-psr/psr7-http-message-hhi",
@@ -222,44 +222,6 @@
                 "psr7"
             ],
             "time": "2015-11-02 23:49:05"
-        },
-        {
-            "name": "hhvm/systemlib-extractor",
-            "version": "v0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hhvm/systemlib-extractor.git",
-                "reference": "70840d4423901874f58e637cc03cf0600d226c39"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/systemlib-extractor/zipball/70840d4423901874f58e637cc03cf0600d226c39",
-                "reference": "70840d4423901874f58e637cc03cf0600d226c39",
-                "shasum": ""
-            },
-            "require": {
-                "hhvm": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Extract the PHP, Hack, and HNI files embedded in HHVM",
-            "homepage": "https://github.com/hhvm/systemlib-extractor",
-            "keywords": [
-                "hack",
-                "hhvm"
-            ],
-            "time": "2015-08-12 21:57:53"
         },
         {
             "name": "mustangostang/spyc",
@@ -1441,7 +1403,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "fredemmott/definition-finder": 20,
         "mustangostang/spyc": 20,
         "nikic/fast-route": 20
     },
