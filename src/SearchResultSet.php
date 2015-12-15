@@ -6,6 +6,7 @@ final class SearchResultSet {
   private Map<APIDefinitionType, Map<string, APIIndexEntry>> $apiDefs = Map { };
   private Map<string, string> $hhvmGuides = Map {};
   private Map<string, string> $hackGuides = Map {};
+  private Map<APIDefinitionType, Map<string, string>> $phpApiDefs= Map { };
 
   public function __construct() {
     foreach (APIDefinitionType::getValues() as $type) {
@@ -18,6 +19,14 @@ final class SearchResultSet {
     APIIndexEntry $entry,
   ): void {
     $this->apiDefs[$type][$entry['name']] = $entry;
+  }
+
+  public function addPHPAPIResult(
+    APIDefinitionType $type,
+    string $name,
+    string $url,
+  ): void {
+    $this->phpApiDefs[$type][$name] = $url;
   }
 
   public function addGuideResult(
@@ -40,6 +49,7 @@ final class SearchResultSet {
   public function addAll(SearchResultSet $other): this {
     foreach (APIDefinitionType::getValues() as $type) {
       $this->apiDefs[$type]->setAll($other->apiDefs[$type]);
+      $this->phpApiDefs[$type]->setAll($other->phpApiDefs[$type]);
     }
     $this->hhvmGuides->setAll($other->hhvmGuides);
     $this->hackGuides->setAll($other->hackGuides);

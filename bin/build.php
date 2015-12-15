@@ -18,6 +18,7 @@ function build_site(?string $filter = null): void {
     APIIndexBuildStep::class,
 
     // Needs the indices
+    PHPDotNetAPIIndexBuildStep::class,
     UnifiedAPIIndexBuildStep::class,
     SiteMapBuildStep::class,
 

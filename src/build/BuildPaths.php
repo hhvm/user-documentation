@@ -29,6 +29,8 @@ abstract final class BuildPaths {
   const string JUMP_INDEX
     = LocalConfig::BUILD_DIR.'/jump-index.php';
 
+  const string PHP_DOT_NET_API_INDEX
+    = LocalConfig::BUILD_DIR.'/php-dot-net-api-index.php';
   const string PHP_DOT_NET_ARTICLE_REDIRECTS
     = LocalConfig::BUILD_DIR.'/php-dot-net-article-redirects.php';
 

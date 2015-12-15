@@ -66,14 +66,11 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
   private function getPHPAPILinks(): ImmMap<string, string> {
     Log::v("\nProcessing PHP.net API Index");
 
-    $reader = new PHPDocsIndexReader(
-      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
-    );
-    $defs = $reader->getAllAPIDefinitions();
+    $index = PHPAPIIndex::getIndex();
 
     $out = Map { };
-    foreach ($defs as $name => $id) {
-      $url = sprintf('http://php.net/manual/en/%s.php', $id);
+    foreach ($index as $name => $data) {
+      list($type, $url) = $data;
       $out[$name] = $url;
     }
 
