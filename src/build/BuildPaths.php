@@ -33,7 +33,8 @@ abstract final class BuildPaths {
     = LocalConfig::BUILD_DIR.'/php-dot-net-api-index.php';
   const string PHP_DOT_NET_ARTICLE_REDIRECTS
     = LocalConfig::BUILD_DIR.'/php-dot-net-article-redirects.php';
-
+  const string PHP_INI_SUPPORT_IN_HHVM
+    = LocalConfig::BUILD_DIR.'/php-ini-support-in-hhvm.php';
   const string CORE_CSS = LocalConfig::BUILD_DIR.'/main.css';
   const string SYNTAX_HIGHLIGHT_CSS =
     LocalConfig::BUILD_DIR.'/syntax-highlighting.css';
