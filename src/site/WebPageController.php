@@ -171,8 +171,8 @@ EOF;
     return <x:frag />;
   }
 
-  protected function getBreadcrumbs(): XHPRoot {
-    return <x:frag />;
+  protected function getBreadcrumbs(): ?:ui:breadcrumbs {
+    return null;
   }
 
   protected function getHeader(): XHPRoot {

@@ -77,7 +77,7 @@ final class GuidesListController extends WebPageController {
     return NULL;
   }
 
-  protected function getBreadcrumbs(): XHPRoot {
+  protected function getBreadcrumbs(): :ui:breadcrumbs {
     $product = $this->getProduct();
 
     $parents = Map {

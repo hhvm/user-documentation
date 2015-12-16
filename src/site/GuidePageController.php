@@ -179,7 +179,7 @@ final class GuidePageController extends WebPageController {
     return $adj_guide;
   }
 
-  protected function getBreadcrumbs(): XHPRoot {
+  protected function getBreadcrumbs(): :ui:breadcrumbs {
     $product = $this->getProduct();
     $product_url = URLBuilder::getPathForProductGuides($product);
     $guide = $this->getGuide();

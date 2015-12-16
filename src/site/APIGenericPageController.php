@@ -88,7 +88,7 @@ class APIGenericPageController extends WebPageController {
     });
   }
 
-  protected function getBreadcrumbs(): XHPRoot {
+  protected function getBreadcrumbs(): :ui:breadcrumbs {
     $type = $this->getDefinitionType();
     $parents = Map {
       'Hack' => '/hack/',

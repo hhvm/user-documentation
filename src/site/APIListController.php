@@ -66,7 +66,7 @@ final class APIListController extends WebPageController {
       </div>;
   }
 
-  protected function getBreadcrumbs(): XHPRoot {
+  protected function getBreadcrumbs(): :ui:breadcrumbs {
     $parents = Map {
       'Hack' => '/hack/',
     };
