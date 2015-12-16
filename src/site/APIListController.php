@@ -42,11 +42,9 @@ final class APIListController extends WebPageController {
         );
         $type_list->appendChild(
           <li>
-            <h4>
-              <a href={$url}>
-                {str_replace('.', '\\', $api)}
-              </a>
-            </h4>
+            <a href={$url}>
+              {str_replace('.', '\\', $api)}
+            </a>
           </li>
         );
       }
@@ -62,12 +60,12 @@ final class APIListController extends WebPageController {
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
-    return 
+    return
       <div class="apiListWrapper">
         {$this->getInnerContent()}
       </div>;
   }
-  
+
   protected function getBreadcrumbs(): XHPRoot {
     $product = 'hack';
     $product_root_url = sprintf(
@@ -78,7 +76,7 @@ final class APIListController extends WebPageController {
       "/%s/reference/",
       $product,
     );
-    
+
     $breadcrumbs =
       <x:frag>
         <span class="breadcrumbRoot">
@@ -89,7 +87,7 @@ final class APIListController extends WebPageController {
           <a href={$product_root_url}>{$product}</a>
         </span>
       </x:frag>;
-      
+
     $type = $this->getOptionalStringParam('type');
     if ($type !== null) {
       $breadcrumbs->appendChild(
@@ -114,8 +112,8 @@ final class APIListController extends WebPageController {
         </x:frag>
       );
     }
-    
-    return 
+
+    return
       <div class="breadcrumbNav">
         <div class="widthWrapper">
           {$breadcrumbs}

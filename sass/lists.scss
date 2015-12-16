@@ -28,18 +28,17 @@
     flex-shrink: 0;
     padding: 0px 10px;
     width: 25%;
-  }
 
-  li h4 {
     line-height: 0.8em;
     margin-bottom: 5px;
     word-wrap: break-word;
-  }
+    font-size: 140%;
 
-  li h4 a {
-    font-family: $base-font;
-    font-size: 12px;
-    font-weight: 400;
+    a {
+      font-family: $base-font;
+      font-size: 12px;
+      font-weight: 400;
+    }
   }
 }
 
