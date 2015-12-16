@@ -16,30 +16,35 @@ final class APIListController extends WebPageController {
     }
   }
 
+  protected function getDefinitions(
+  ): Map<APIDefinitionType, Map<string, string>> {
+    $out = Map {};
+    foreach (APIDefinitionType::getValues() as $type) {
+       $index = APIIndex::getIndexForType($type);
+       $out[$type] = Map { };
+       foreach ($index as $node) {
+         $out[$type][$node['name']] = $node['urlPath'];
+       }
+    }
+    return $out;
+  }
+
   protected function getInnerContent(): XHPRoot {
+    $defs = $this->getDefinitions();
     $type = $this->getOptionalStringParam('type');
     if ($type !== null) {
-      $api_type = APIDefinitionType::assert($type);
-      $apis = Map {
-        $api_type => APIIndex::getIndexForType($api_type),
-      };
-    } else {
-      $apis = Map {};
-      foreach (APIDefinitionType::getValues() as $api_key => $api_type) {
-        $apis[$api_type] = APIIndex::getIndexForType($api_type);
-      }
+      $type = APIDefinitionType::assert($type);
+      $defs = Map { $type => $defs[$type] };
     }
 
     $root = <div class="referenceList" />;
-    foreach ($apis as $type => $api_references) {
+    foreach ($defs as $type => $api_references) {
       $title = ucwords($type.' Reference');
       $type_list = <ul class="apiList" />;
-      foreach ($api_references as $_ => $node) {
+      foreach ($api_references as $name => $url) {
         $type_list->appendChild(
           <li>
-            <a href={$node['urlPath']}>
-              {$node['name']}
-            </a>
+            <a href={$url}>{$name}</a>
           </li>
         );
       }
