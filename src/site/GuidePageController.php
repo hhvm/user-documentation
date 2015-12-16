@@ -9,6 +9,7 @@ use HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\NavDataNode;
 use HHVM\UserDocumentation\PaginationDataNode;
 use HHVM\UserDocumentation\UIGlyphIcon;
+use HHVM\UserDocumentation\URLBuilder;
 
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -180,41 +181,19 @@ final class GuidePageController extends WebPageController {
 
   protected function getBreadcrumbs(): XHPRoot {
     $product = $this->getProduct();
+    $product_url = URLBuilder::getPathForProductGuides($product);
     $guide = $this->getGuide();
-    $product_root_url = sprintf(
-      "/%s/",
-      $product,
-    );
-    $guide_root_url = sprintf(
-      "/%s/%s/",
-      $product,
-      $guide,
-    );
 
-    return
-      <div class="breadcrumbNav">
-        <div class="widthWrapper">
-          <span class="breadcrumbRoot">
-            <a href="/">Documentation</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbProductRoot">
-            <a href={$product_root_url}>{$product}</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbSecondaryRoot">
-            <a href={$product_root_url}>Learn</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbCurrentPage">
-            {Guides::normalizeName(
-              $this->getProduct(),
-              $guide,
-              $this->getPage(),
-            )}
-          </span>
-        </div>
-      </div>;
+    $parents = Map {
+      $product => $product_url,
+      'Learn' => $product_url,
+      Guides::normalizePart($guide)
+        => URLBuilder::getPathForGuide($product, $guide),
+    };
+
+    $page = Guides::normalizePart($this->getPage());
+
+    return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
   }
 
   protected function getSideNav(): XHPRoot {

@@ -18,4 +18,10 @@ final class Guides {
         ? ucwords(strtr($guide, '-', ' '))
         : ucwords(strtr($guide.': '.$page, '-', ' '));
   }
+
+  public static function normalizePart(
+    string $part,
+  ): string {
+    return ucwords(strtr($part, '-', ' '));
+  }
 }

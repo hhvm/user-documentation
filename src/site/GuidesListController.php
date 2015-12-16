@@ -79,25 +79,12 @@ final class GuidesListController extends WebPageController {
 
   protected function getBreadcrumbs(): XHPRoot {
     $product = $this->getProduct();
-    $product_root_url = sprintf(
-      "/%s/",
-      $product,
-    );
 
-    return
-      <div class="breadcrumbNav">
-        <div class="widthWrapper">
-          <span class="breadcrumbRoot">
-            <a href="/">Documentation</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbProductRoot">
-            <a href={$product_root_url}>{$product}</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbCurrentPage">Learn</span>
-        </div>
-      </div>;
+    $parents = Map {
+      $product => URLBuilder::getPathForProductGuides($product),
+    };
+
+    return <ui:breadcrumbs parents={$parents} currentPage="Learn" />;
   }
 
   <<__Memoize>>
