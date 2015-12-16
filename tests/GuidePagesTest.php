@@ -76,4 +76,18 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
     // Namespace declaration
     $this->assertContains('Hack\UserDocumentation\Async\Intro\Examples', $body);
   }
+
+  /**
+   * @group remote
+   * @small
+   */
+  public function testGeneratedGuidesRender(): void {
+    $response = \HH\Asio\join(
+      PageLoader::getPage('/hhvm/configuration/INI-settings')
+    );
+    $this->assertSame(200, $response->getStatusCode());
+
+    $body = (string) $response->getBody();
+    $this->assertContains('allow_url_fopen</a></td>', $body);
+  }
 }

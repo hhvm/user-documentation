@@ -14,6 +14,9 @@ function build_site(?string $filter = null): void {
     FetchPHPDotNetIndexBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
 
+    // Needs getting the PHP ini settings HHVM supports
+    PHPIniSupportInHHVMMarkdownBuildStep::class,
+
     // Needs the YAML
     GuidesIndexBuildStep::class,
     APIIndexBuildStep::class,

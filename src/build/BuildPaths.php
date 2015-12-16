@@ -18,6 +18,8 @@ abstract final class BuildPaths {
     LocalConfig::BUILD_DIR.'/php-dot-net-index.json';
 
   const string GUIDES_MARKDOWN = LocalConfig::ROOT.'/guides';
+  const string GUIDES_GENERATED_MARKDOWN
+    = LocalConfig::BUILD_DIR.'/guides-generated-markdown';
   const string GUIDES_HTML = LocalConfig::BUILD_DIR.'/guides-html';
   const string GUIDES_INDEX = LocalConfig::BUILD_DIR.'/guides-index.php';
   const string GUIDES_SUMMARY = LocalConfig::BUILD_DIR.'/guides-summary.php';
@@ -35,6 +37,7 @@ abstract final class BuildPaths {
     = LocalConfig::BUILD_DIR.'/php-dot-net-article-redirects.php';
   const string PHP_INI_SUPPORT_IN_HHVM
     = LocalConfig::BUILD_DIR.'/php-ini-support-in-hhvm.php';
+
   const string CORE_CSS = LocalConfig::BUILD_DIR.'/main.css';
   const string SYNTAX_HIGHLIGHT_CSS =
     LocalConfig::BUILD_DIR.'/syntax-highlighting.css';

@@ -1,6 +1,12 @@
-Here is the raw list of all possible ini settings that can go in your `/etc/hhvm/php.ini`, `/etc/hhvm/server.ini` or any custom `.ini` file. Not all of them are useful to the HHVM end user. There is lots of cleanup work to do here, but for now you get sorted lists.
+Here is the raw list of all possible ini settings that can go in your `/etc/hhvm/php.ini`, `/etc/hhvm/server.ini` or any custom `.ini` file. Not all of them are useful to the HHVM end user. There is lots of cleanup work to do here, but for now you get sorted lists. 
 
-The lists below are just the HHVM-specific options. Many [standard PHP options](http://php.net/manual/en/ini.list.php) are also supported by HHVM, meaning the same thing that they do in PHP5 or PHP 7.
+Any setting prefixed with `hhvm.` are HHVM-specific options.
+
+## Supported PHP INI Settings
+
+Here is the supported list of [PHP INI settings](http://php.net/manual/en/ini.list.php) for HHVM:
+
+@@ guides-generated-markdown/php_ini_support_in_hhvm.md @@
 
 ## Common Options
 
