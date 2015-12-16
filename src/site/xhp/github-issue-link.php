@@ -7,7 +7,7 @@ final class :github-issue-link extends :x:element {
     string issueTitle,
     string issueBody @required;
 
-  children (pcdata);
+  children (:ui:glyph?,pcdata);
 
   use XHPGetRequest;
 

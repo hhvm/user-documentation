@@ -210,6 +210,14 @@ EOF;
               <strong>HHVM</strong>
             </a>
           </div>
+          <div class="headerElement githubIssueLink">
+            <github-issue-link
+              issueTitle={$this->getGithubIssueTitle()}
+              issueBody={$this->getGithubIssueBody()}>
+              <ui:glyph icon={UIGlyphIcon::BUG} />
+              report a problem or make a suggestion
+            </github-issue-link>
+          </div>
           <search-bar
             class="headerElement"
             placeholder="Search our Documentation"
