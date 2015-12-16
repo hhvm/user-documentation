@@ -2,7 +2,7 @@ For the most part, HHVM is quite compatible with the PHP engine. In other words,
 
 However, there are some noted inconsistencies. They are listed here by category.
 
-*Note*: This list may not be exhaustive; feel free to submit a [pull request](https://github.com/facebook/hhvm/pulls) or [file an issue](https://github.com/facebook/hhvm/issues) on any other inconsistencies you may find.
+*Note*: This list may not be exhaustive; If you are using HHVM and come across an inconsistency not listed in these docs, please report a documentation issue.
 
 - [Arrays and `foreach`](./arrays-and-foreach.md)
 - [Classes and Objects](./classes-and-objects.md)

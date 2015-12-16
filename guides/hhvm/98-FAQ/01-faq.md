@@ -44,8 +44,8 @@ At Facebook, HHVM is pushed every 2 weeks (as you can see from the [NEWS](https:
 
 * **Facebook**: HHVM has run [www.facebook.com](https://www.facebook.com) in production since 2013. 
 * **WordPress**: [hhvm.com](http://hhvm.com), a WordPress blog, is running on HHVM.
-* **MediaWiki**: MediaWiki installations can run on HHVM, and [Wikipedia](http://wikipedia.org) has run on HHVM since 2014.
-* All the top 20 PHP frameworks. See the [frameworks test page](http://hhvm.com/frameworks/) to see what percent of their unit tests we pass. Most frameworks will run perfectly fine even if we don't pass every test, as the tests might be verifying error message matching, etc.
+* **MediaWiki**: MediaWiki installations can run on HHVM, and [Wikipedia](http://wikipedia.org) has run on [HHVM since 2014](http://hhvm.com/blog/7205/wikipedia-on-hhvm).
+* Most other PHP frameworks. We run internal regression testing on 20 of the most popular ones to ensure continued compatibility. 
 
 Here are some other places HHVM is being used: [https://github.com/facebook/hhvm/wiki/Users](https://github.com/facebook/hhvm/wiki/Users)
 
@@ -124,3 +124,9 @@ For example, if you have a file named `enable-hack-in-php.php` and you wanted to
 ```
 
 This isn't necessary when using Hack syntax in Hack (`<?hh`) files, only when wanting to use Hack syntax in PHP (`<?php`) files, which is unusual.
+
+## Running Code
+
+### Why are there sometimes array sorting differences between HHVM and PHP?
+
+You may have hit the [sorting inconsistency](/hhvm/inconsistencies/arrays-and-foreach#sorting).
