@@ -70,6 +70,8 @@ rm -rf /var/hhvm /var/www/.git /tmp/hh_server
 apt-get remove -y \
   build-essential ruby1.9.3 bundler zlib1g-dev python-pygments curl
 apt-get autoremove -y
+apt-get clean
+rm -rf /var/lib/apt/lists/*
 
 # Debug output
 hhvm --version
