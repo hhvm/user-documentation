@@ -1,0 +1,5 @@
+.bundle/
+.elasticbeanstalk/
+build/
+vendor/
+vendor-rb/
