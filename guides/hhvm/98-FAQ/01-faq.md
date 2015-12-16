@@ -124,3 +124,9 @@ For example, if you have a file named `enable-hack-in-php.php` and you wanted to
 ```
 
 This isn't necessary when using Hack syntax in Hack (`<?hh`) files, only when wanting to use Hack syntax in PHP (`<?php`) files, which is unusual.
+
+## Running Code
+
+### Why are there sometimes array sorting differences between HHVM and PHP?
+
+You may have hit the [sorting inconsistency](/hhvm/inconsistencies/arrays-and-foreach#sorting).

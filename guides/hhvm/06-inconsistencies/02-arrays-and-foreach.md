@@ -11,3 +11,16 @@ Under PHP5, `foreach` by value will modify the array's internal cursor under cer
 ## Foreach by reference
 
 Under PHP5, the behavior of a `foreach` by reference loop can be unpredictable if during iteration the next element of the array is unset, or if the array variable is assigned to directly or through a reference, or if copy-on-write causes the array to be copied. For such cases, HHVM's behavior may differ from PHP5.
+
+## Sorting
+
+There are cases when sorting functions in HHVM and PHP may not match (or may be unpredictable in output comparison). The primary cases are as follows:
+
+- When any sorting values compare as equal. (See https://3v4l.org/hMirb)
+- When the sorting keys are of mixed type. (See https://3v4l.org/g5G3T)
+
+In general, you shouldn't rely on this implementation-defined behavior, but if you need to, and it must match PHP, there is a runtime INI option you can specify to HHVM
+
+```
+hhvm.enable_zend_sorting=1
+```
