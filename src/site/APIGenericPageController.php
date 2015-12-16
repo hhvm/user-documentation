@@ -89,62 +89,22 @@ class APIGenericPageController extends WebPageController {
   }
 
   protected function getBreadcrumbs(): XHPRoot {
-    $product = 'hack';
-    $product_root_url = sprintf(
-      "/%s/",
-      $product,
-    );
-    $reference_root_url = sprintf(
-      "/%s/reference/",
-      $product,
-    );
-    $type_root_url = sprintf(
-      "/%s/reference/%s/",
-      $product,
-      $this->getDefinitionType(),
-    );
+    $type = $this->getDefinitionType();
+    $parents = Map {
+      'Hack' => '/hack/',
+      'Reference' => '/hack/reference/',
+      ucwords($type) => '/hack/reference/'.$type.'/',
+    };
 
+    $root = $this->getRootDefinition();
     $method = $this->getMethodDefinition();
-    if ($method !== null) {
-      $api_root_url = $this->getRootDefinition()['urlPath'];
-      $bottom_level =
-        <x:frag>
-          <span class="breadcrumbTertiaryRoot">
-            <a href={$api_root_url}>{$this->getRootDefinition()['name']}</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbCurrentPage">
-            {$method['name']}
-          </span>
-        </x:frag>;
+    if ($method === null) {
+      $page = $root['name'];
     } else {
-      $bottom_level =
-        <span class="breadcrumbCurrentPage">
-          {$this->getRootDefinition()['name']}
-        </span>;
+      $page = $method['name'];
+      $parents[$root['name']] = $root['urlPath'];
     }
 
-    return
-      <div class="breadcrumbNav">
-        <div class="widthWrapper">
-          <span class="breadcrumbRoot">
-            <a href="/">Documentation</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbProductRoot">
-            <a href={$product_root_url}>{$product}</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbSecondaryRoot">
-            <a href={$reference_root_url}>Reference</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbTypeRoot">
-            <a href={$type_root_url}>{$this->getDefinitionType()}</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          {$bottom_level}
-        </div>
-      </div>;
+    return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
   }
 }
