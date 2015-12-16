@@ -5,7 +5,8 @@ use HHVM\UserDocumentation\BuildPaths;
 final class :github-issue-link extends :x:element {
   attribute
     string issueTitle,
-    string issueBody @required;
+    string issueBody @required,
+    classname<WebController> controller;
 
   children (:ui:glyph?,pcdata);
 
@@ -35,6 +36,19 @@ final class :github-issue-link extends :x:element {
       ->format(DateTime::RFC2822);
     $request_path = $this->getRequest()->getUri()->getPath();
 
+    $rows = Vector {
+      'Build ID: '.$build_id,
+      'Page requested: '.$request_path,
+      'Page requested at: '.$request_time,
+    };
+
+    $controller = $this->:controller;
+    if ($controller) {
+      $rows[] = 'Controller: '.$controller;
+    }
+
+    $rows = implode("\n", $rows->map($x ==> ' - '.$x));
+
     return <<<EOF
 --------------------------------
 
@@ -42,9 +56,7 @@ Please don't change anything below this point.
 
 --------------------------------
 
- - Build ID: $build_id
- - Page requested: $request_path
- - Page requested at: $request_time
+$rows
 EOF;
   }
 }

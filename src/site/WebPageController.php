@@ -213,7 +213,8 @@ EOF;
           <div class="headerElement githubIssueLink">
             <github-issue-link
               issueTitle={$this->getGithubIssueTitle()}
-              issueBody={$this->getGithubIssueBody()}>
+              issueBody={$this->getGithubIssueBody()}
+              controller={static::class}>
               <ui:glyph icon={UIGlyphIcon::BUG} />
               report a problem or make a suggestion
             </github-issue-link>
@@ -250,7 +251,8 @@ EOF;
           <span>
             <github-issue-link
               issueTitle={$this->getGithubIssueTitle()}
-              issueBody={$this->getGithubIssueBody()}>
+              issueBody={$this->getGithubIssueBody()}
+              controller={static::class}>
               Report a problem or make a suggestion.
             </github-issue-link>
           </span>
