@@ -12,6 +12,7 @@ function build_site(?string $filter = null): void {
     RawYAMLBuildStep::class,
     MergedYAMLBuildStep::class,
     FetchPHPDotNetIndexBuildStep::class,
+    PHPIniSupportInHHVMBuildStep::class,
 
     // Needs the YAML
     GuidesIndexBuildStep::class,
