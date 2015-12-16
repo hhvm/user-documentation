@@ -69,6 +69,10 @@ EOF;
             type="application/opensearchdescription+xml"
             href="/search.xml"
           />;
+        $this->requireSecureConnection();
+        break;
+      case 'staging.docs.hhvm.com':
+        $this->requireSecureConnection();
         break;
     }
 

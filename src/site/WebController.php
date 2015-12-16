@@ -60,4 +60,11 @@ abstract class WebController {
       );
     }
   }
+
+  protected function requireSecureConnection(): void {
+    $uri = $this->request->getUri();
+    if ($uri->getScheme() !== 'https') {
+      throw new RedirectException((string) $uri->withScheme('https'));
+    }
+  }
 }
