@@ -4,12 +4,15 @@ You must be running a 64-bit OS to compile & install HHVM. Here are the supporte
 
 * [Ubuntu 14.04](#ubuntu-14.04-trusty)
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
+* [Ubuntu 15.10](#ubuntu-15.10-wily-werewolf)
 * [Debian 8](#debian-8-jessie)
 * [Mac OS X Homebrew](#mac-os-x-homebrew)
 * [Unsupported](#unsupported)
 
 ## Ubuntu 14.04 Trusty
 
+> **Please Note:** You must be running a 64-bit OS to compile & install HHVM.
+> 
 ### Packages Installation
 
 Using sudo or as root user: (it is recommended that you run `sudo apt-get update` and `sudo apt-get upgrade` first, or you may receive errors)
@@ -82,77 +85,11 @@ There are 2 families of regression tests. There are about 5000 tests in all. All
 
 ## Ubuntu 15.04 Vivid
 
-### Packages Installation
+Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 
-> **Please Note:** You must be running a 64-bit OS to compile & install HHVM.
+## Ubuntu 15.10 Wily Werewolf
 
-Using sudo or as root user: (it is recommended that you run `sudo apt-get update` and `sudo apt-get upgrade` first, or you may receive errors)
-
-```
-sudo apt-get install autoconf automake binutils-dev build-essential cmake g++ gawk git \
-  libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-regex-dev \
-  libboost-system-dev libboost-thread-dev libboost-context-dev libbz2-dev libc-client-dev libldap2-dev \
-  libc-client2007e-dev libcap-dev libcurl4-openssl-dev libdwarf-dev libelf-dev \
-  libexpat-dev libgd2-xpm-dev libgoogle-glog-dev libgoogle-perftools-dev libicu-dev \
-  libjemalloc-dev libmcrypt-dev libmemcached-dev libmysqlclient-dev libncurses-dev \
-  libonig-dev libpcre3-dev libreadline-dev libtbb-dev libtool libxml2-dev zlib1g-dev \
-  libevent-dev libmagickwand-dev libinotifytools0-dev libiconv-hook-dev libedit-dev \
-  libiberty-dev libxslt1-dev ocaml-native-compilers libsqlite3-dev libyaml-dev libgmp3-dev \
-  gperf libkrb5-dev libnotify-dev
-```
-
-### Downloading the HHVM source-code
-
-```
-git clone git://github.com/facebook/hhvm.git --depth=1
-cd hhvm
-git submodule update --init --recursive
-```
-
-### Building HHVM
-
-Please ensure that your machine has more than 1GB of RAM. Expect a long compilation time if you are compiling on a virtual machine with one virtual core.
-
-```
-cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock .
-make -j [number_of_processor_cores] # eg. make -j 4
-sudo make install
-```
-
-### Running programs
-
-The installed hhvm binary can be found in `/usr/local/bin`.
-
-### Errors
-
-If any errors occur, you may have to remove the `CMakeCache.txt` file in the checkout. 
-
-If your failure was on the `make` command, try to correct the error and run `make` again, it should restart from the point it stops. If the error persists, try to remove as explained above.
-
-### Running Tests
-
-If you want to run the regression tests, you will first need to install some locales.  These locales should be sufficient, although may be more than are actually needed:
-
-```
-  sudo locale-gen en_EN
-  sudo locale-gen en_UK
-  sudo locale-gen en_US
-  sudo locale-gen en_GB
-  sudo locale-gen de_DE
-  sudo locale-gen fr_FR
-  sudo locale-gen fa_IR
-  sudo locale-gen zh_CN.utf8
-  sudo locale-gen zh_CN
-```
-
-There are 2 families of regression tests. There are about 5000 tests in all. All tests should pass. It takes about 100 CPU minutes to run them all, but the test runner will run them in parallel, using 1 thread per core:
-
-```
-  pushd hphp
-    test/run quick
-    test/run slow
-  popd
-```
+Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 
 ## Debian 8 Jessie
 

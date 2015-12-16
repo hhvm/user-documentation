@@ -4,6 +4,7 @@ HHVM is officially supported on most major [linux platforms](./linux.md). There 
 
 The easiest way to get going with HHVM is to use one of our supported prebuilt packages. Currently prebuilt packages are available for:
 
+* [Ubuntu 15.10 (Wily Werewolf)](./linux.md#ubuntu-15.10-wily-werewolf)
 * [Ubuntu 15.04 (Vivid)](./linux.md#ubuntu-15.04-vivid)
 * [Ubuntu 14.04 (Trusty)](./linux.md#ubuntu-14.04-trusty)
 * [Debian 8 (Jessie)](./linux.md#debian-8-jessie)
