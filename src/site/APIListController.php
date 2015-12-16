@@ -34,16 +34,11 @@ final class APIListController extends WebPageController {
     foreach ($apis as $type => $api_references) {
       $title = ucwords($type.' Reference');
       $type_list = <ul class="apiList" />;
-      foreach ($api_references as $api => $reference) {
-        $url = sprintf(
-          "/hack/reference/%s/%s/",
-          $type,
-          $api,
-        );
+      foreach ($api_references as $_ => $node) {
         $type_list->appendChild(
           <li>
-            <a href={$url}>
-              {str_replace('.', '\\', $api)}
+            <a href={$node['urlPath']}>
+              {$node['name']}
             </a>
           </li>
         );
