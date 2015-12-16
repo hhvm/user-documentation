@@ -67,6 +67,19 @@ In addition to [all the files for a guide example](#code-for-guides) above, all 
 
 In general, follow the structure with what we did with [`Vector::splice`](https://github.com/hhvm/user-documentation/tree/master/api-examples/class.Vector/splice).
 
+## Generated Markdown
+
+This should be rare, but if you need to generate markdown on the fly (e.g., we do this for generating the HHVM Supported PHP INI Settings at http://docs.hhvm.com/hhvm/configuration/INI-settings#supported-php-ini-settings. 
+
+- Create a `BuildStep` ([PHP INI setting table example](https://github.com/hhvm/user-documentation/blob/master/src/build/PHPIniSupportInHHVMBuildStep.php)) for any data you might need to generate the markdown.
+- Create a `BuildStep` ([PHP INI setting table example](https://github.com/hhvm/user-documentation/blob/master/src/build/PHPIniSupportInHHVMMarkdownBuildStep.php))for manually creating the markdown to be rendered.
+  + The rendered markdown should be put in the [`GUIDES_GENERATED_MARKDOWN`](https://github.com/hhvm/user-documentation/blob/master/src/build/BuildPaths.php) directory.
+- Create a symlink ([example](https://github.com/hhvm/user-documentation/blob/master/guides/hhvm/04-configuration/guides-generated-markdown)) in the directory of the guide where the generated markdown will be rendered into. The symlink should point to [`GUIDES_GENERATED_MARKDOWN`](https://github.com/hhvm/user-documentation/blob/master/src/build/BuildPaths.php) directory.
+- Update the actual guide that will have the generated markdown in it using the similar example syntax `@@`, but instead pointing to the `.md` file that will be inserted in the guide (as opposed to a `.php`) file. ([example](https://github.com/hhvm/user-documentation/blob/master/guides/hhvm/04-configuration/02-INI-settings.md))
+- Add any test necessary ([example](https://github.com/hhvm/user-documentation/blob/master/tests/GuidePagesTest.php#L84)).
+
+Then our rendering process will add your generated markdown to your guide.
+
 ## Linking Between Content
 
 There are plenty of guide-to-guide links, guide-to-api links, etc. For internal links, we have a way to reference areas below. For external links, just use the absolute URL.
