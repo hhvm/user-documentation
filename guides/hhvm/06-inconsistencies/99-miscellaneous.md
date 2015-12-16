@@ -1,3 +1,7 @@
+There are few other miscellaneous inconsistencies that you may run into as well.
+
+## Case-insensitive constants
+
 HHVM does not support case-insensitive constants, for example:
 
 @@ miscellaneous-examples/case-insensitive-constants.php @@
