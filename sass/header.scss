@@ -17,6 +17,7 @@
     line-height: 60px;
     position: absolute;
     top: 0px;
+    z-index: 1;
 
     &.hhvmLogo {
       left: 110px + $side-padding;
