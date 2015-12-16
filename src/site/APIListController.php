@@ -67,58 +67,17 @@ final class APIListController extends WebPageController {
   }
 
   protected function getBreadcrumbs(): XHPRoot {
-    $product = 'hack';
-    $product_root_url = sprintf(
-      "/%s/",
-      $product,
-    );
-    $reference_root_url = sprintf(
-      "/%s/reference/",
-      $product,
-    );
-
-    $breadcrumbs =
-      <x:frag>
-        <span class="breadcrumbRoot">
-          <a href="/">Documentation</a>
-        </span>
-        <i class="breadcrumbSeparator" />
-        <span class="breadcrumbProductRoot">
-          <a href={$product_root_url}>{$product}</a>
-        </span>
-      </x:frag>;
-
+    $parents = Map {
+      'Hack' => '/hack/',
+    };
     $type = $this->getOptionalStringParam('type');
-    if ($type !== null) {
-      $breadcrumbs->appendChild(
-        <x:frag>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbSecondaryRoot">
-            <a href={$reference_root_url}>Reference</a>
-          </span>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbTypeRoot breadcrumbCurrentPage">
-            {$type}
-          </span>
-        </x:frag>
-      );
+    if ($type === null) {
+      $page = 'Reference';
     } else {
-      $breadcrumbs->appendChild(
-        <x:frag>
-          <i class="breadcrumbSeparator" />
-          <span class="breadcrumbSecondaryRoot breadcrumbCurrentPage">
-            Reference
-          </span>
-        </x:frag>
-      );
+      $parents['Reference'] = '/hack/reference/';
+      $page = ucwords($type);
     }
-
-    return
-      <div class="breadcrumbNav">
-        <div class="widthWrapper">
-          {$breadcrumbs}
-        </div>
-      </div>;
+    return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
   }
 
   <<__Memoize>>
