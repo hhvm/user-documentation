@@ -17,32 +17,30 @@ final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
     );
   }
 
-  public function testEnforcedOnProd(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPage('http://docs.hhvm.com/hack/reference/')
-    );
-    $this->assertSame(
-      301,
-      $response->getStatusCode(),
-    );
-    $this->assertSame(
-      'https://docs.hhvm.com/hack/reference/',
-      $response->getHeaderLine('Location'),
-    );
+  public function httpsDomains(): array<array<string>> {
+    return [
+      ['docs.hhvm.com'],
+      ['staging.docs.hhvm.com'],
+    ];
   }
 
-  public function testEnforcedOnStaging(): void {
+  /**
+   * @dataProvider httpsDomains
+   */
+  public function testEnforcedOnDomain(string $domain): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('http://staging.docs.hhvm.com/hack/reference/')
+      PageLoader::getPage('http://'.$domain.'/hack/reference/')
     );
+    $this->assertSame(301, $response->getStatusCode());
+
+    $location = $response->getHeaderLine('Location');
     $this->assertSame(
-      301,
-      $response->getStatusCode(),
+      'https://'.$domain.'/hack/reference/',
+      $location,
     );
-    $this->assertSame(
-      'https://staging.docs.hhvm.com/hack/reference/',
-      $response->getHeaderLine('Location'),
-    );
+
+    $response = \HH\Asio\join(PageLoader::getPage($location));
+    $this->assertSame(200, $response->getStatusCode());
   }
 
   public function testNotEnforcedOnRobotsTxt(): void {

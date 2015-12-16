@@ -13,11 +13,22 @@ final class RemotePageLoader extends PageLoader {
     string $url,
   ): Awaitable<ResponseInterface> {
     $host_header = parse_url($url, PHP_URL_HOST);
+    $scheme = parse_url($url, PHP_URL_SCHEME);
     $path = parse_url($url, PHP_URL_PATH);
     $query = parse_url($url, PHP_URL_QUERY);
 
     $test_host = ArgAssert::isNotNull(self::getHost());
-    $url = 'http://'.$test_host.$path;
+    if ($scheme === null) {
+      switch ($test_host) {
+        case 'docs.hhvm.com':
+        case 'staging.docs.hhvm.com':
+          $scheme = 'https';
+          break;
+        default:
+          $scheme = 'http';
+      }
+    }
+    $url = $scheme.'://'.$test_host.$path;
     if ($query !== null) {
       $url .= '?'.$query;
     }
