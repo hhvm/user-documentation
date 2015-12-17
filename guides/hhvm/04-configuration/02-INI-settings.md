@@ -48,11 +48,11 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 
 ## Admin Server
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.admin_server.password | A password required for all requests to the admin server, other than the index. Is passed to the request as the `auth` request var. | _empty string_ |
-| hhvm.admin_server.port | The port the admin server should listen on. If set to 0, the admin server is not started. | 0 |
-| hhvm.admin_server.thread_count | The number of threads the admin server should use. | 1 |
+| Setting | Type | Default | Description
+|---------|------|---------|--------------
+| `hhvm.admin_server.password` | `string` | `''` | A password required for all requests to the admin server, other than the index. Is passed to the request as the `auth` request var.
+| `hhvm.admin_server.port` | `int` | `0` | The port the admin server should listen on. If set to 0, the admin server is not started.
+| `hhvm.admin_server.thread_count` | `int` | `1` | The number of threads the admin server should use.
 
 ## Debugger
 
