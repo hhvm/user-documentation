@@ -9,11 +9,24 @@ module HHVM
         doc.search('p code, li code, td code').each do |node|
           content = node.inner_text
 
-          if content =~ /\([A-Za-z0-9_\(\)\<\>\$]*\)$/ then
+          # remove parens e.g., Set::map() or HH\Asio\curl_exec($hello)
+          # , for e.g., multiple params, tuples and <x, y>
+          # = for default parameters
+          if content =~ /\([A-Za-z0-9_?=, \(\)\<\>\$]*\)$/ then
             content = content[/^[^(]+/]
           end
 
+          # remove type parameters e.g. ConstSet<Tm> or ConstSet<ConstSet<Tm>>
+          # comma for e.g., tuples and <x, y>
+          if content =~ /\<[A-Za-z0-9_?, \(\)\<\>\$]*\>$/ then
+            content = content[/^[^<]+/]
+          end
+
           url = DEFINITIONS[content]
+          if url.nil?
+            # try appending an HH namespace
+            url = DEFINITIONS['HH\\' + content.to_s] # to_s in case content nil
+          end
           if url.nil?
             file = File.basename(context[:file])
             match = CLASS_REGEXP.match file

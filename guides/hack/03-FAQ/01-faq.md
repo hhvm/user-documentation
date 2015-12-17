@@ -24,7 +24,7 @@ Depends, but generally not. You should use [*literal syntax*](../collections/con
 
 ### Why does `Set::values()` return a `Vector<Tv>`, but `Set::keys()` return a `Vector<mixed>`?
 
-It is because `ConstSet` (from which `Set` ultimately derives) implements `HH\KeyedIterable<mixed, T>`. And it does this because of the `HH\KeyedIterable::map()` method. `HH\KeyedIterable::map()` specifies that it return a `KeyedIterable<Tk, Tm>`, implying different types for the keys and values. But a `Set` cannot have keys and values of different types (technically a `Set` doesn't have keys, even though it does under the covers). Since `KeyedIterable<Tk, Tm>` is not compatible with `ConstSet<Tm>`, you have to make the key aspects of `Set` be as wide as possible. 
+It is because `ConstSet` (from which `Set` ultimately derives) implements `KeyedIterable<mixed, T>`. `KeyedIterable::map()` specifies that it return a `KeyedIterable<Tk, Tm>`, implying different types for the keys and values. But a `Set` cannot have keys and values of different types (technically a `Set` doesn't have keys, even though it does under the covers). Since `KeyedIterable<Tk, Tm>` is not compatible with `ConstSet<Tm>`, you have to make the key aspects of `Set` be as wide as possible. 
 
 This could be fixed in the future with changes to our collections interfaces or with advances in the typechecker.
 

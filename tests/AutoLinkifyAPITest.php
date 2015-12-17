@@ -52,6 +52,24 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
           'HH\Asio\wrap(Awaitable<Tv>)',
           '/hack/reference/function/HH.Asio.wrap/',
         ),
+      'Hack class with type parameter' =>
+        tuple(
+          '/hack/collections/classes',
+          'ImmSet<T>',
+          '/hack/reference/class/ImmSet/',
+        ),
+      'Hack class with a class with type parameter as its type parameter' =>
+        tuple(
+          '/hack/collections/interfaces',
+          'ConstCollection<Pair<Tk, Tv>>',
+          '/hack/reference/interface/ConstCollection/',
+        ),
+      'Hack class method with missing HH namespace' =>
+        tuple(
+          '/hack/FAQ/faq',
+          'KeyedIterable::map()',
+          '/hack/reference/interface/HH.KeyedIterable/map/',
+        ),
     ];
   }
 
