@@ -140,3 +140,13 @@ This should be fixed in HHVM 3.12+ with [this commit](https://github.com/faceboo
 ```
 date.timezone=America/Los_Angeles # or your appropriate timezone
 ```
+
+### How do I fix the not running the Hack typechecker fatal error?
+
+> Fatal error: /home/user/sites/www/index.php appears to be a Hack file, but you do not appear to be running the Hack typechecker.....You can also set hhvm.hack.lang.look_for_typechecker=0 to disable this check (not recommended).
+
+This means you are trying to run files with HHVM, either local or via server requests, that are `<?hh` files, but are not being typechecked by `hh_client`. 
+
+Ensure that you have the [installed](/hack/typechecker/install) and [setup](/hack/typechecker/setup) as well.
+
+Make sure there is an `.hhconfig` somewhere in the root of your project.
