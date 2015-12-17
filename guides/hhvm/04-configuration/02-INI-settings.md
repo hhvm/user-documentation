@@ -14,20 +14,20 @@ These are the options that are probably the most commonly used on a day-to-day b
 
 Setting | Type | Default | Description
 -------|------|---------|------------
-`hhvm.server_variables` | array | `$_SERVER` | Sets the contents of the `$_SERVER` variable. 
-`hhvm.enable_obj_destruct_call` | boolean | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
-`hhvm.hack.lang.look_for_typechecker` | boolean | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../advanced-usage/repo-authoritative.md).
-`hhvm.jit_enable_rename_function` | boolean | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
-`hhvm.server.thread_count` | integer | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
-`hhvm.source_root` | string | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in repo-authoritative mode.
-`hhvm.force_hh` | boolean | `false` | If `true`, treat all code as Hack code, even if it starts with `<?php`.
-`hhvm.log.file` | string | standard error | The location of the HHVM error log file. 
-`hhvm.repo.authoritative` | boolean | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
-`hhvm.repo.central.path` | string | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
-`hhvm.server.type` | string | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
-`hhvm.server.port` | integer | 80 | The port on which the HHVM server will listen for requests.
-`hhvm.server.default_document` | string | `"index.php"` | The default document that will be served if a page is not explicitly specified.
-`hhvm.server.error_document404` | string | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
+`hhvm.server_variables` | `array` | `$_SERVER` | Sets the contents of the `$_SERVER` variable. 
+`hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
+`hhvm.hack.lang.look_for_typechecker` | `bool` | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../advanced-usage/repo-authoritative.md).
+`hhvm.jit_enable_rename_function` | `bool` | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
+`hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
+`hhvm.server.source_root` | `string` | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in repo-authoritative mode.
+`hhvm.force_hh` | `bool` | `false` | If `true`, treat all code as Hack code, even if it starts with `<?php`.
+`hhvm.log.file` | `string` | standard error | The location of the HHVM error log file. 
+`hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
+`hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
+`hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
+`hhvm.server.port` | `int` | 80 | The port on which the HHVM server will listen for requests.
+`hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
+`hhvm.server.error_document404` | `string` | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
 
 ## PHP 7 Settings
 
@@ -56,22 +56,33 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 
 ## Debugger
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.debugger.default_sandbox_path | | |
-| hhvm.debugger.disable_ipv6 | | |
-| hhvm.debugger.enable_debugger | | |
-| hhvm.debugger.enable_debugger_color | | |
-| hhvm.debugger.enable_debugger_prompt | | |
-| hhvm.debugger.enable_debugger_server | | |
-| hhvm.debugger.enable_debugger_usage_log | | |
-| hhvm.debugger.port | | |
-| hhvm.debugger.rpc.default_auth | | |
-| hhvm.debugger.rpc.default_port | | |
-| hhvm.debugger.rpc.default_timeout | | |
-| hhvm.debugger.rpc.host_domain | | |
-| hhvm.debugger.signal_timeout | | |
-| hhvm.debugger.startup_document | | |
+These options are used to allow you to use the `hphpd` debugger remotely via a sandbox. HHVM must be running in [server mode](/hhvm/basic-usage/server), as there needs to be a server process on which to attach.
+
+The common options to set to enable HHVM to start a debugger in server mode.:
+
+```
+hhvm.sandbox.sandbox_mode = 1
+hhvm.debugger.enable_debugger = 1
+hhvm.debugger.enable_debugger_server = 1
+hhvm.debugger.default_sandbox_path = /path/to/your/sandbox
+```
+
+| Setting | Type | Default | Description
+|---------|------|---------|--------------
+| hhvm.debugger.default_sandbox_path | `string` | `''` | Path to source files; similar to [`hhvm.server.source_root`](#common-options).
+| hhvm.debugger.disable_ipv6 | `bool` | `false` | If enabled, the debugger will only be able to communicate with ipv4 addresses (AF_INET).
+| hhvm.debugger.enable_debugger | `bool` | `false` | You must set this to try in order for HHVM to listen to connections from the debugger.
+| hhvm.debugger.enable_debugger_color | `bool` | `true` | Disable this if you do not want color in the debugger.
+| hhvm.debugger.enable_debugger_prompt | `bool` | `true` | Disable this if you do not want a debugger prompt to be shown.
+| hhvm.debugger.enable_debugger_server | `bool` | `false` | This option is generally set in conjunction with `hhvm.debugger.enable_debugger` and actually allows for the listening to connections and remote debugging.
+| hhvm.debugger.enable_debugger_usage_log | `bool` | `false` | *Currently this is only an internal setting*.
+| hhvm.debugger.port | `int` | `8089` | The port on which debugger clients may connect.
+| hhvm.debugger.rpc.default_auth | `string` | `''` | The password to be able to debug the HHVM server in RPC mode.
+| hhvm.debugger.rpc.default_port | `int` | `8083` | The port on which commands will be sent to the server via RPC.
+| hhvm.debugger.rpc.default_timeout | `int` | `30`| The timeout for commands to be available on the RPC port.
+| hhvm.debugger.rpc.host_domain | `string` | `''` | The domain where your RPC server is hosted.
+| hhvm.debugger.signal_timeout | `int` | `1` | The amount of time the debugger waits for a signal from the client before sending to a default dummy sandbox.
+| hhvm.debugger.startup_document | `string` | `''` | The file that is executed before any other, when the server starts. Does not have to be the same your [default document](#common-options). Similar to `hhvm.server.startup_document`.
 
 ## Feature flags
 
