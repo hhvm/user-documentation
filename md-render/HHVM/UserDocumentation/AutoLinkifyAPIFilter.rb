@@ -9,6 +9,12 @@ module HHVM
         doc.search('p code, li code, td code').each do |node|
           content = node.inner_text
 
+          # Keep code null; Otherwise we would go to HH\Asio\null
+          # This will still allow null() and HH\Asio\null() to be linked
+          if content == 'null'
+            next
+          end
+
           # remove parens e.g., Set::map() or HH\Asio\curl_exec($hello)
           # , for e.g., multiple params, tuples and <x, y>
           # = for default parameters
