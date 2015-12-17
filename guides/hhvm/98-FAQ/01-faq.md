@@ -130,3 +130,13 @@ This isn't necessary when using Hack syntax in Hack (`<?hh`) files, only when wa
 ### Why are there sometimes array sorting differences between HHVM and PHP?
 
 You may have hit the [sorting inconsistency](/hhvm/inconsistencies/arrays-and-foreach#sorting).
+
+### How do I fix these timezone warnings?
+
+> It is not safe to rely on the system's timezone settings. Please use the date.timezone setting....
+
+This should be fixed in HHVM 3.12+ with [this commit](https://github.com/facebook/hhvm/commit/90509bc46a3ded9e6a95d4d406715ff0c059576d), but if you are using an earlier version, then update your `/etc/hhvm/php.ini` file to add:
+
+```
+date.timezone=America/Los_Angeles # or your appropriate timezone
+```
