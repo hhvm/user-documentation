@@ -54,6 +54,20 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.admin_server.port` | `int` | `0` | The port the admin server should listen on. If set to 0, the admin server is not started.
 | `hhvm.admin_server.thread_count` | `int` | `1` | The number of threads the admin server should use.
 
+## Sandbox
+
+| Setting | Type | Default | Description
+|---------|------|---------|--------------
+| `hhvm.sandbox.conf_file` | `string` | `''` |
+| `hhvm.sandbox.directories_root` | `string` | `''` |
+| `hhvm.sandbox.fallback` | `string` | `''` |
+| `hhvm.sandbox.from_common_root` | `string` | `''` |
+| `hhvm.sandbox.home` | `string` | `''` |
+| `hhvm.sandbox.logs_root` | `string` | `''` |
+| `hhvm.sandbox.sandbox_mode` | `bool` | `false` |
+| `hhvm.sandbox.pattern` | `string` | `''` | 
+| `hhvm.sandobx.server_variables` | `map` | *empty* | 
+
 ## Debugger
 
 These options are used to allow you to use the `hphpd` debugger remotely via a sandbox. HHVM must be running in [server mode](/hhvm/basic-usage/server), as there needs to be a server process on which to attach.
@@ -330,13 +344,6 @@ The translation cache stores the JIT'd code. It's split into several sections de
 | hhvm.resource_limit.string_offset_limit | | |
 | hhvm.runtime_type_profile | | |
 | hhvm.runtime_type_profile_logging_freq | | |
-| hhvm.sandbox.conf_file | | |
-| hhvm.sandbox.directories_root | | |
-| hhvm.sandbox.fallback | | |
-| hhvm.sandbox.from_common_root | | |
-| hhvm.sandbox.home | | |
-| hhvm.sandbox.logs_root | | |
-| hhvm.sandbox.sandbox_mode | | |
 | hhvm.script_mode | | |
 | hhvm.server_variables | Set the contents of the `$_SERVER` variable  | `$_SERVER` |
 | hhvm.server.allow_duplicate_cookies | | |
