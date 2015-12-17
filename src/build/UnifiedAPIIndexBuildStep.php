@@ -12,6 +12,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
 
     $defs = new Map($this->getPHPAPILinks());
     $defs->setAll($this->getHackAPILinks());
+    $defs->setAll($this->getSpecialAttributeLinks());
 
     file_put_contents(
       BuildPaths::UNIFIED_INDEX_JSON,
@@ -75,5 +76,20 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     }
 
     return $out->toImmMap();
+  }
+
+  // For special attributes that don't exist in our API reference, but can be
+  // used in APIs, manually add special /j/search capability
+  private function getSpecialAttributeLinks(): ImmMap<string, string> {
+    return ImmMap {
+      '__memoize' => '/hack/attributes/special#__memoize',
+      '__consistentconstruct' =>
+        '/hack/attributes/special#__consistentconstruct',
+      '__override' => '/hack/attributes/special#__override',
+      '__deprecated' => '/hack/attributes/special#__deprecated',
+      '__mockclass' => '/hack/attributes/special#__mockclass',
+      '__isfoldable' => '/hack/attributes/special#__isfoldable',
+      '__native' => '/hack/attributes/special#__native',
+    };
   }
 }
