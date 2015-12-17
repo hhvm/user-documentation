@@ -4,7 +4,7 @@ Any setting prefixed with `hhvm.` are HHVM-specific options.
 
 ## Supported PHP INI Settings
 
-Here is the supported list of [PHP INI settings](http://php.net/manual/en/ini.list.php) for HHVM:
+Here is the supported list of [PHP INI settings](http://php.net/manual/en/ini.list.php) for HHVM. The documentation for each is available when you click the option.
 
 @@ guides-generated-markdown/php_ini_support_in_hhvm.md @@
 
@@ -12,7 +12,7 @@ Here is the supported list of [PHP INI settings](http://php.net/manual/en/ini.li
 
 These are the options that are probably the most commonly used on a day-to-day basis by users of HHVM.
 
-Option | Type | Default | Description
+Setting | Type | Default | Description
 -------|------|---------|------------
 `hhvm.server_variables` | array | `$_SERVER` | Sets the contents of the `$_SERVER` variable. 
 `hhvm.enable_obj_destruct_call` | boolean | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
@@ -35,16 +35,16 @@ For changes from PHP 5 to PHP 7 which are backwards incompatible, INI options ar
 
 The vast majority of users will want to just set `hhvm.php7.all = 1` to fully enable PHP 7 mode and can ignore the rest of the options in this section. They are available primarily for advanced users who want to do a more gradual migration or otherwise track down compatibility issues.
 
-| INI Setting | Documentation | Default | PHP 7 RFC |
-|-------------|---------------|---------|-----------|
-| hhvm.php7.all | Default value for all of the below | _False_ | N/A |
-| hhvm.php7.deprecate_old_style_ctors | Disallow and warn when using old PHP 4 constructors | hhvm.php7.all | [Remove PHP 4 constructors](https://wiki.php.net/rfc/remove_php4_constructors) |
-| hhvm.php7.engine_exceptions | Enable throwing the new `Error` heirarchy of exceptions | hhvm.php7.all | [Engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
-| hhvm.php7.int_semantics | Change some edge-case int and float behavior, such as divide/mod by zero | hhvm.php7.all | [Integer semantics](https://wiki.php.net/rfc/integer_semantics) with some changes due to [engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7) |
-| hhvm.php7.ltr_assign | Make order of assignment in `list()` lvalues consistent | hhvm.php7.all | [Abstract syntax tree](https://wiki.php.net/rfc/abstract_syntax_tree) |
-| hhvm.php7.no_hex_numerics | Don't consider hex strings to be numeric | hhvm.php7.all | [Remove hex support in numeric strings](https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings) |
-| hhvm.php7.scalar_types | Enable PHP 7-style scalar type annotations (NB: not the same as Hack's) | hhvm.php7.all | [Scalar type declarations](https://wiki.php.net/rfc/scalar_type_hints_v5) |
-| hhvm.php7.uvs | Fix some odd precedence and order of evaluation issues | hhvm.php7.all | [Uniform variable syntax](https://wiki.php.net/rfc/uniform_variable_syntax) |
+| Setting | Type | Default | Description | PHP 7 RFC 
+|---------|------|---------|-------------|----------
+| `hhvm.php7.all` | `bool` | `false` | Default value for all of the below | N/A
+| `hhvm.php7.deprecate_old_style_ctors` | `bool` | `hhvm.php7.all` | Disallow and warn when using old PHP 4 constructors | [Remove PHP 4 constructors](https://wiki.php.net/rfc/remove_php4_constructors)
+| `hhvm.php7.engine_exceptions` | `bool` | `hhvm.php7.all` | Enable throwing the new `Error` heirarchy of exceptions | [Engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7)
+| `hhvm.php7.int_semantics` | `bool` | `hhvm.php7.all` | Change some edge-case int and float behavior, such as divide/mod by zero | [Integer semantics](https://wiki.php.net/rfc/integer_semantics) with some changes due to [engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7)
+| `hhvm.php7.ltr_assign` | `bool` | `hhvm.php7.all` | Make order of assignment in `list()` lvalues consistent | [Abstract syntax tree](https://wiki.php.net/rfc/abstract_syntax_tree)
+| `hhvm.php7.no_hex_numerics` | `bool` |`hhvm.php7.all` | Don't consider hex strings to be numeric | [Remove hex support in numeric strings](https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings)
+| `hhvm.php7.scalar_types` | `bool` | `hhvm.php7.all` | Enable PHP 7-style scalar type annotations (NB: not the same as Hack's) | [Scalar type declarations](https://wiki.php.net/rfc/scalar_type_hints_v5)
+| `hhvm.php7.uvs` | `bool` | `hhvm.php7.all` |  Fix some odd precedence and order of evaluation issues | [Uniform variable syntax](https://wiki.php.net/rfc/uniform_variable_syntax)
 
 ## Admin Server
 
