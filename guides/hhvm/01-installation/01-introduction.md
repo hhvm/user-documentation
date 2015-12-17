@@ -12,7 +12,7 @@ The easiest way to get going with HHVM is to use one of our supported prebuilt p
 
 ### LTS Releases
 
-HHVM releases a point (stable) release on the order of every 8 weeks. Every third major point release of HHVM (e.g, 3.6, 3.9) is considered a long-term stable (LTS) release. These releases are supported for nearly one year (48 weeks), and are backported with critical bug fixes and security patches. At any given time, there will be two supported LTS releases.
+HHVM releases a point (stable) release on the order of every 8 weeks. Every third major point release of HHVM (e.g, 3.6, 3.9) is considered a long-term support (LTS) release. These releases are supported for nearly one year (48 weeks), and are backported with critical bug fixes and security patches. At any given time, there will be two supported LTS releases.
 
 LTS Version | Release Date | End of Support
 ------------|--------------|---------------
