@@ -47,6 +47,10 @@ final class OpenSearchTest extends \PHPUnit_Framework_TestCase {
         '=>foobar',
         '/search?term=%3D%3Efoobar',
       ),
+      'Special attribute' => tuple(
+        '__memoize',
+        '/hack/attributes/special#__memoize',
+      ),
     ];
   }
 
