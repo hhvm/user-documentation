@@ -56,39 +56,117 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 
 ## Sandbox
 
-| Setting | Type | Default | Description
-|---------|------|---------|--------------
-| `hhvm.sandbox.conf_file` | `string` | `''` |
-| `hhvm.sandbox.directories_root` | `string` | `''` |
-| `hhvm.sandbox.fallback` | `string` | `''` |
-| `hhvm.sandbox.from_common_root` | `string` | `''` |
-| `hhvm.sandbox.home` | `string` | `''` |
-| `hhvm.sandbox.logs_root` | `string` | `''` |
-| `hhvm.sandbox.sandbox_mode` | `bool` | `false` |
-| `hhvm.sandbox.pattern` | `string` | `''` | 
-| `hhvm.sandobx.server_variables` | `map` | *empty* | 
+A sandbox in HHVM is a set of configuration options (document root, log file path, etc.) that can be used to serve your web application. 
 
-## Debugger
+Here are a few **important** points:
 
-These options are used to allow you to use the `hphpd` debugger remotely via a sandbox. HHVM must be running in [server mode](/hhvm/basic-usage/server), as there needs to be a server process on which to attach.
+- The sandbox configuration file must end in `.hdf` or `.hphp`. Most people name it `.hphp`. 
+- Having a configuration file end in `.ini` is currently broken, but a fix is being worked on now. When HDF is removed in favor of INI, this wil be fixed.
+- A user is always appended to `hhvm.sandbox.home`. So if you set that setting to `/home`, it will end up being `/home/user`. Thus the `hhvm.sandbox.conf_file` will end up having an absolute path of `/home/user/.hphp`.
+- The sandbox pattern assumes that you have valid URLs that can be associated with that pattern. You would need to have those URLs bound in something like `/etc/hosts` (e.g., `127.0.0.1 user-another_site.localhost.com`).
+- If you do not specify a sandbox name in the URL, it assumes the default sandbox. e.g., if you type or `curl` `user.localhost.com`, that will assume your default sandbox.
+- If you enable `hhvm.sandbox.from_common_root`, make sure you have running code available from that root, or that root prepended by the value of `hhvm.sandbox.directories_root`, if you have that set as well.
+- If you are using the HHVM builtin webserver [proxygen](/hhvm/basic-usage/proxygen), as long as you are running the server from a location where there is access to your sandbox (e.g., the root of a sandbox directory), all of your sandboxes URLs should be available to you for testing.
 
-The common options to set to enable HHVM to start a debugger in server mode.:
+Below is a general configuration setup for a sandbox that you can use as a template. 
+
+*ini file*
+
+`user-another_site.localhost.com` would fit the `hhvm.sandbox.pattern` pattern.
 
 ```
 hhvm.sandbox.sandbox_mode = 1
+hhvm.sandbox.home=/home
+hhvm.sandbox.conf_file=.hphp
+hhvm.sandbox.pattern=([^-]*(-[^-]*)?).localhost.com
+```
+
+*Sandbox configuration file ~/.hphp*
+
+If you have `hhvm.sandbox.home set`, `default.xxx` can be relative to that directory (remembering that a `user` is appended to what you set as `hhvm.sandbox.home`). For example, below, if we had `hhvm.sandbox.home = /home`, then we could set `default.path` to `sites/www`.
+
+The `default.ServerVars.ANY_SERVER_VARIABLE=1` is just an example.
+
+```
+default.path = /home/user/sites/www
+default.log = /home/user/sites//error_log
+default.accesslog = /home/user/logs/access_log
+default.ServerVars.ANY_SERVER_VARIABLE=1
+
+another_site.path = /home/user/sites/another-site
+another_site.log = /home/user/sites/another-site/logs/error_log
+another_site.accesslog = /home/user/sites/another-site/logs/access_log
+```
+
+| Setting | Type | Default | Description
+|---------|------|---------|--------------
+| `hhvm.sandbox.sandbox_mode` | `bool` | `false` | If enabled, sandbox mode is turned on; generally coincides with turning on [HHVM server debugging](#debugger).
+| `hhvm.sandbox.home` | `string` | `''` | The home directory of your sandbox. e.g., If this is set to `/home`, then your sandbox path will be something like `/home/joelm/`.
+| `hhvm.sandbox.conf_file` | `string` | `''` | The file which contains sandbox information like the path to the default sandbox, the path to other sandboxes, log paths, etc. You can use this file in conjunction with some of some of the other specific sandbox options. For example, if `hhvm.sandbox.home` is set, then this setting is *relative* to that path. 
+| `hhvm.sandbox.pattern` | `string` | `''` | The URL pattern of your sandbox host. It is a generally a regex pattern with at least one capture group. For example `www.[user]-[sandbox].[machine].yourdomain.com` or `www.([^-]*(-[^-]*)?).yourdomain.com`
+| `hhvm.sandbox.from_common_root` | `bool` | `false` | If enabled, your sandboxes will be created from a common root path. This root path is based upon the `hhvm.sandbox.pattern` that you specify and the value of it will be the root string before the first `.` in the pattern. If you have a pattern like `([^-]*(-[^-]*)?).localhost.com` which maps to a sandbox at `user-another_site.localhost.com`, the root that is established by enabling this setting is `/joelm-another_site`. This setting as `true` supercedes any setting you have for `hhvm.sandbox.conf_file`.
+| `hhvm.sandbox.directories_root` | `string` | `''` | If you have `hhvm.sandbox.from_common_root` enabled, this value will be prepended to your common root.
+| `hhvm.sandbox.logs_root` | `string` | `''` | If you have `hhvm.sandbox.from_common_root` enabled, this value will be prepended to your common root.
+| `hhvm.sandbox.fallback` | `string` | `''` | If for some reason your home path in `hhvm.sandbox.home` cannot be accessed, this will be your fallback to set as your home path.
+| `hhvm.sandbox.server_variables` | `map` | *empty* | Any server variables that you want accessible when running your sandbox.
+
+## Debugger
+
+A sandbox is commonly used in conjunction with [debugging](#debugger) to debug HHVM in [server mode](/hhvm/basic-usage/server). When you connect the debugger to a server mode process, you will be given the option of a sandbox on which to attach the debugger. The first option you will always see (and attach to by default) is the dummy sandbox, which has no document root. It is primarily used for real-time evaluation of code from the debugger prompt.
+
+These options are used to allow you to use the `hphpd` debugger remotely via a sandbox. HHVM must be running in [server mode](/hhvm/basic-usage/server), as there needs to be a server process on which to attach.
+
+These are the common `.ini` file options to set to enable HHVM to start a debugger in server mode. 
+
+```
+hhvm.sandbox.sandbox_mode=1
+hhvm.sandbox.home=/home
+hhvm.sandbox.conf_file=.hphp
+hhvm.sandbox.pattern="([^-]*(-[^-]*)?)\.localhost\.com"
 hhvm.debugger.enable_debugger = 1
 hhvm.debugger.enable_debugger_server = 1
 hhvm.debugger.default_sandbox_path = /path/to/your/sandbox
 ```
 
+If you run your server as `hhvm -m server -c this.ini` and in another terminal, type `hhvm -m debug -h localhost`, you will see:
+
+```
+Welcome to HipHop Debugger!
+Type "help" or "?" for a complete list of commands.
+
+Connecting to localhost:8089...
+Attaching to user's default sandbox and pre-loading, please wait...
+localhost> m l
+  1 user's default sandbox at /home/user/sites/www/
+```
+
+To start debugging:
+
+```
+localhost> break start
+break start
+Breakpoint 1 set start of request
+localhost> continue
+continue
+```
+
+Then you can make a web request via your browser or `curl` to your sandbox URL. You can set breakpoints in your sandbox code to stop at certain places of execution as well.
+
+If you want to debug another sandbox instead of the default, you can explicitly specify the sandbox:
+
+```
+hhvm -m debug -h localhost --debug-sandbox another_site
+```
+
+
 | Setting | Type | Default | Description
 |---------|------|---------|--------------
+| hhvm.debugger.enable_debugger | `bool` | `false` | You must set this to try in order for HHVM to listen to connections from the debugger.
+| hhvm.debugger.enable_debugger_server | `bool` | `false` | This option is generally set in conjunction with `hhvm.debugger.enable_debugger` and actually allows for the listening to connections and remote debugging.
 | hhvm.debugger.default_sandbox_path | `string` | `''` | Path to source files; similar to [`hhvm.server.source_root`](#common-options).
 | hhvm.debugger.disable_ipv6 | `bool` | `false` | If enabled, the debugger will only be able to communicate with ipv4 addresses (AF_INET).
-| hhvm.debugger.enable_debugger | `bool` | `false` | You must set this to try in order for HHVM to listen to connections from the debugger.
 | hhvm.debugger.enable_debugger_color | `bool` | `true` | Disable this if you do not want color in the debugger.
 | hhvm.debugger.enable_debugger_prompt | `bool` | `true` | Disable this if you do not want a debugger prompt to be shown.
-| hhvm.debugger.enable_debugger_server | `bool` | `false` | This option is generally set in conjunction with `hhvm.debugger.enable_debugger` and actually allows for the listening to connections and remote debugging.
 | hhvm.debugger.enable_debugger_usage_log | `bool` | `false` | *Currently this is only an internal setting*.
 | hhvm.debugger.port | `int` | `8089` | The port on which debugger clients may connect.
 | hhvm.debugger.rpc.default_auth | `string` | `''` | The password to be able to debug the HHVM server in RPC mode.
