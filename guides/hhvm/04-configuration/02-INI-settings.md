@@ -24,7 +24,7 @@ These are the options that are probably the most commonly used on a day-to-day b
 | `hhvm.log.file` | `string` | standard error | The location of the HHVM error log file. 
 | `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
 | `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
-| `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
+| `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`.
 | `hhvm.server.port` | `int` | 80 | The port on which the HHVM server will listen for requests.
 | `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
 | `hhvm.server.error_document404` | `string` | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
@@ -48,118 +48,123 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 
 ## Server Mode
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.server_variables | Set the contents of the `$_SERVER` variable  | `$_SERVER` |
-| hhvm.static_file.extensions[ ] | Map of filename extensions to content types for use by the proxygen server | see [runtime-option.cpp](https://gist.github.com/JoelMarcey/29601dc033af31390fc6) for defaults |
-| hhvm.server.allow_duplicate_cookies | | |
-| hhvm.server.allowed_exec_cmds | Only effective if `hhvm.server.whitelist_exec` is true. | |
-| hhvm.server.always_populate_raw_post_data | | |
-| hhvm.server.always_use_relative_path | | |
-| hhvm.server.backlog | | |
-| hhvm.server.connection_limit | | 0 |
-| hhvm.server.connection_timeout_seconds | | -1 |
-| hhvm.server.dangling_wait | | |
-| hhvm.server.default_charset_name | | |
-| hhvm.server.default_document | The default document that will be served if a page is not explicitly specified. | `"index.php"` |
-| hhvm.server.default_server_name_suffix | | |
-| hhvm.server.dns_cache.enable | Whether HHVM should cache DNS lookups. | _False_ |
-| hhvm.server.dns_cache.ttl | TTL for DNS cache entries. | 600 |
-| hhvm.server.enable_cuf_async | | |
-| hhvm.server.enable_early_flush | allows chunked encoding responses | _True_ |
-| hhvm.server.enable_keep_alive | | |
-| hhvm.server.enable_magic_quotes_gpc | | |
-| hhvm.server.enable_on_demand_uncompress | | |
-| hhvm.server.enable_output_buffering | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer. | _False_ |
-| hhvm.server.enable_ssl | | |
-| hhvm.server.enable_static_content_from_disk | | |
-| hhvm.server.enable_static_content_m_map | | |
-| hhvm.server.error_document404 | The default 404 error document that will be served when a 404 error occurs. | `"index.php"` |
-| hhvm.server.error_document500 | | |
-| hhvm.server.evil_shutdown | | |
-| hhvm.server.exit_on_bind_fail | | |
-| hhvm.server.expires_active | | |
-| hhvm.server.expires_default | | |
-| hhvm.server.expose_hphp | add `X-Powered-By` header | _True_ |
-| hhvm.server.expose_xfb_debug | | |
-| hhvm.server.expose_xfb_server | | |
-| hhvm.server.fatal_error_message | | |
-| hhvm.server.file_cache | | |
-| hhvm.server.file_socket | | |
-| hhvm.server.fix_path_info | change fastcgi path from SCRIPT_FILENAME to PATH_TRANSLATED | _False_ |
-| hhvm.server.forbidden_as404 | | |
-| hhvm.server.force_chunked_encoding | | |
-| hhvm.server.force_compression.cookie | | |
-| hhvm.server.force_compression.param | | |
-| hhvm.server.force_compression.url | | |
-| hhvm.server.force_server_name_to_header | | |
-| hhvm.server.graceful_shutdown_wait | | |
-| hhvm.server.gzip_compression_level | | |
-| hhvm.server.harsh_shutdown | | |
-| hhvm.server.host | | |
-| hhvm.server.http_safe_mode | | |
-| hhvm.server.image_memory_max_bytes | | |
-| hhvm.server.implicit_flush | | |
-| hhvm.server.ip | | |
-| hhvm.server.kill_on_sigterm | | |
-| hhvm.server.lib_event_sync_send | | |
-| hhvm.server.light_process_count | | |
-| hhvm.server.light_process_file_prefix | | |
-| hhvm.server.lock_code_memory | | |
-| hhvm.server.max_array_chain | | |
-| hhvm.server.max_post_size | | |
-| hhvm.server.memory_head_room | | |
-| hhvm.server.output_handler | | |
-| hhvm.server.path_debug | | |
-| hhvm.server.port | The port on which the HHVM server will listen for requests. | 80 |
-| hhvm.server.prod_server_port | | |
-| hhvm.server.psp_timeout_seconds | | |
-| hhvm.server.request_body_read_limit | | |
-| hhvm.server.request_init_document | | |
-| hhvm.server.request_init_function | | |
-| hhvm.server.request_memory_max_bytes | | |
-| hhvm.server.request_timeout_seconds | | |
-| hhvm.server.response_queue_count | | |
-| hhvm.server.safe_file_access | | |
-| hhvm.server.shutdown_listen_no_work | | |
-| hhvm.server.shutdown_listen_wait | | |
-| hhvm.server.ssl_certificate_dir | | |
-| hhvm.server.ssl_certificate_file | | |
-| hhvm.server.ssl_certificate_key_file | | |
-| hhvm.server.ssl_port | | |
-| hhvm.server.startup_document | | |
-| hhvm.server.stat_cache | Cache calls to stat | _False_ |
-| hhvm.server.takeover_filename | for port takeover between server instances | |
-| hhvm.server.thread_count | Number of worker threads serving web requests | 2 * number of CPUs |
-| hhvm.server.thread_drop_cache_timeout_seconds | | |
-| hhvm.server.thread_drop_stack | | |
-| hhvm.server.thread_job_lifo_switch_threshold | | |
-| hhvm.server.thread_job_max_queuing_milli_seconds | | |
-| hhvm.server.thread_round_robin | Last thread serves next | _False_ |
-| hhvm.server.tls_client_cipher_spec | | |
-| hhvm.server.tls_disable_tls1_2 | | |
-| hhvm.server.type | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"` | `"Proxygen" |
-| hhvm.server.unserialization_whitelist_check | | |
-| hhvm.server.unserialization_whitelist_check_warning_only | | |
-| hhvm.server.upload.enable_file_uploads | | |
-| hhvm.server.upload.enable_upload_progress | | |
-| hhvm.server.upload.rfc1867freq | | |
-| hhvm.server.upload.rfc1867name | | |
-| hhvm.server.upload.rfc1867prefix | | |
-| hhvm.server.upload.upload_max_file_size | | |
-| hhvm.server.upload.upload_tmp_dir | | |
-| hhvm.server.use_direct_copy | | |
-| hhvm.server.user | | |
-| hhvm.server.utf8ize_replace | | |
-| hhvm.server.warmup_document | path to document that lists requests to warm up with | |
-| hhvm.server.warmup_throttle_request_count | | |
-| hhvm.server.warn_on_collection_to_array | | |
-| hhvm.server.whitelist_exec | | |
-| hhvm.server.whitelist_exec_warning_only | | |
-| hhvm.server.xfb_debug_ssl_key | | |
-| hhvm.http.default_timeout | HTTP default timeout, in seconds | 30 |
-| hhvm.http.slow_query_threshold | | 1000 |
-| hhvm.pid_file | | |
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.server_variables` | `Map` | *empty* | Set the contents of the `$_SERVER` variable. You set them in the form of `hhvm.server_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.env_variables` | `Map` | *empty* | Set the contents of the `$_ENV` variable. You set them in the form of `hhvm.env_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.static_file.extensions` | `Map` | https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32 | Map of filename extensions to content types for use by the proxygen server. You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.php_file.extensions` | `Map` | *empty* | Normally, `.php` and `.hh` are treated as source code. With this setting you can add other file extensions to be treated as source code. You set them in the form of `hhvm.php_file.extensions["pp"]=".pp"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.server.forbidden_file_extensions` | `Set` | *empty* | Map of filename extensions that will not be loaded by the server. You set them in the form of `hhvm.server.forbidden_file_extensions[]=".exe"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.server.allow_duplicate_cookies` | | |
+| `hhvm.server.allowed_exec_cmds` | | | Only effective if `hhvm.server.whitelist_exec` is true.
+| `hhvm.server.always_populate_raw_post_data` | | |
+| `hhvm.server.always_use_relative_path` | | |
+| `hhvm.server.backlog` | | |
+| `hhvm.server.connection_limit` | | 0 |
+| `hhvm.server.connection_timeout_seconds` | | -1 |
+| `hhvm.server.dangling_wait` | | |
+| `hhvm.server.default_charset_name` | | |
+| `hhvm.server.default_document` |  | `"index.php"` | The default document that will be served if a page is not explicitly specified.
+| `hhvm.server.default_server_name_suffix` | | |
+| `hhvm.server.dns_cache.enable` | | *False* | Whether HHVM should cache DNS lookups. 
+| `hhvm.server.dns_cache.ttl` | | 600 | TTL for DNS cache entries.
+| `hhvm.server.enable_cuf_async` | | |
+| `hhvm.server.enable_early_flush` | | *true* | Allows chunked encoding responses.
+| `hhvm.server.enable_keep_alive` | | |
+| `hhvm.server.enable_magic_quotes_gpc` | | |
+| `hhvm.server.enable_on_demand_uncompress` | | |
+| `hhvm.server.enable_output_buffering` | | *false* | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer.
+| `hhvm.server.enable_ssl` | | |
+| `hhvm.server.enable_static_content_from_disk` | | |
+| `hhvm.server.enable_static_content_m_map` | | |
+| `hhvm.server.error_document404` | | `"index.php"` | The default 404 error document that will be served when a 404 error occurs. 
+| `hhvm.server.error_document500` | | |
+| `hhvm.server.evil_shutdown` | | |
+| `hhvm.server.exit_on_bind_fail` | | |
+| `hhvm.server.expires_active` | | |
+| `hhvm.server.expires_default` | | |
+| `hhvm.server.expose_hphp` | | *true* | add `X-Powered-By` header 
+| `hhvm.server.expose_xfb_debug` | | |
+| `hhvm.server.expose_xfb_server` | | |
+| `hhvm.server.fatal_error_message` | | |
+| `hhvm.server.file_cache` | | |
+| `hhvm.server.file_socket` | | |
+| `hhvm.server.fix_path_info` | | *false* | change fastcgi path from SCRIPT_FILENAME to PATH_TRANSLATED.
+| `hhvm.server.forbidden_as404` | | |
+| `hhvm.server.force_chunked_encoding` | | |
+| `hhvm.server.force_compression.cookie` | | |
+| `hhvm.server.force_compression.param` | | |
+| `hhvm.server.force_compression.url` | | |
+| `hhvm.server.force_server_name_to_header` | | |
+| `hhvm.server.graceful_shutdown_wait` | | |
+| `hhvm.server.gzip_compression_level` | | |
+| `hhvm.server.harsh_shutdown` | | |
+| `hhvm.server.host` | | |
+| `hhvm.server.http_safe_mode` | | |
+| `hhvm.server.image_memory_max_bytes` | | |
+| `hhvm.server.implicit_flush` | | |
+| `hhvm.server.ip` | | |
+| `hhvm.server.kill_on_sigterm` | | |
+| `hhvm.server.lib_event_sync_send` | | |
+| `hhvm.server.light_process_count` | | |
+| `hhvm.server.light_process_file_prefix` | | |
+| `hhvm.server.lock_code_memory` | | |
+| `hhvm.server.max_array_chain`| | |
+| `hhvm.server.max_post_size` | | |
+| `hhvm.server.memory_head_room` | | |
+| `hhvm.server.output_handler` | | |
+| `hhvm.server.path_debug`| | |
+| `hhvm.server.port` | `int` | 80 | The port on which the HHVM server will listen for requests.
+| `hhvm.server.prod_server_port` | | |
+| `hhvm.server.psp_timeout_seconds` | | |
+| `hhvm.server.request_body_read_limit` | | |
+| `hhvm.server.request_init_document` | | |
+| `hhvm.server.request_init_function` | | |
+| `hhvm.server.request_memory_max_bytes` | | |
+| `hhvm.server.request_timeout_seconds` | | |
+| `hhvm.server.response_queue_count` | | |
+| `hhvm.server.safe_file_access` | | |
+| `hhvm.server.shutdown_listen_no_work` | | |
+| `hhvm.server.shutdown_listen_wait` | | |
+| `hhvm.server.ssl_certificate_dir` | | |
+| `hhvm.server.ssl_certificate_file` | | |
+| `hhvm.server.ssl_certificate_key_file` | | |
+| `hhvm.server.ssl_port` | | |
+| `hhvm.server.startup_document` | | |
+| `hhvm.server.stat_cache` | | *false* | Cache calls to stat.
+| `hhvm.server.takeover_filename` | | | for port takeover between server instances.
+| `hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
+| `hhvm.server.thread_drop_cache_timeout_seconds` | | |
+| `hhvm.server.thread_drop_stack` | | |
+| `hhvm.server.thread_job_lifo_switch_threshold` | | |
+| `hhvm.server.thread_job_max_queuing_milli_seconds` | | |
+| `hhvm.server.thread_round_robin` | | _False_ | Last thread serves next.
+| `hhvm.server.tls_client_cipher_spec` | | |
+| `hhvm.server.tls_disable_tls1_2` | | |
+| `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`.
+| `hhvm.server.unserialization_whitelist_check` | | |
+| `hhvm.server.unserialization_whitelist_check_warning_only` | | |
+| `hhvm.server.upload.enable_file_uploads` | | |
+| `hhvm.server.upload.enable_upload_progress` | | |
+| `hhvm.server.upload.rfc1867freq` | | |
+| `hhvm.server.upload.rfc1867name` | | |
+| `hhvm.server.upload.rfc1867prefix` | | |
+| `hhvm.server.upload.upload_max_file_size` | | |
+| `hhvm.server.upload.upload_tmp_dir` | | |
+| `hhvm.server.use_direct_copy` | | |
+| `hhvm.server.user` | | |
+| `hhvm.server.utf8ize_replace` | | |
+| `hhvm.server.warmup_document` | | | path to document that lists requests to warm up with.
+| `hhvm.server.warmup_throttle_request_count` | | |
+| `hhvm.server.warn_on_collection_to_array` | | |
+| `hhvm.server.whitelist_exec` | | |
+| `hhvm.server.whitelist_exec_warning_only` | | |
+| `hhvm.server.xfb_debug_ssl_key` | | |
+| `hhvm.http.default_timeout` | | 30 | HTTP default timeout, in seconds.
+| `hhvm.http.slow_query_threshold` | | 1000 |
+| `hhvm.pid_file` | | |
+| `hhvm.static_file.generators` | `Set` | *empty* | Dynamic files that serve up static content. This is not normally set. You set them in the form of `hhvm.static_file.generators[]="/path/to"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.static_file.files_match` | `Vector` | *empty* | A list of file extensions that will have http transport headers added to them. **This setting is currently not retrievable via `ini_get()`**. This is not normally set. You set them in and `.ini` file with the form of `hhvm.static_file.files_match[pattern]="[regex](here)*"`, `hhvm.static_file.files_match[headers][]="header1"`, `hhvm.static_file.files_match[headers][]="header2"`. You need a `pattern` and at least one `header`.
 
 ## Feature flags
 
