@@ -1,6 +1,6 @@
 object(HH\Vector)#%d (%d) {
   [0]=>
-  object(HH\Asio\WrappedException)#4 (1) {
+  object(HH\Asio\WrappedException)#%d (1) {
     ["exception":"HH\Asio\WrappedException":private]=>
     object(Exception)#%d (%d) {
       ["message":protected]=>
