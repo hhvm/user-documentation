@@ -8,4 +8,4 @@ if [ ! -e Dockerrun.aws.json ]; then
 fi
 
 export REMOTE_TEST_HOST=staging.docs.hhvm.com
-exec hhvm vendor/bin/phpunit --group remote tests/
+exec hhvm vendor/bin/phpunit --group remote

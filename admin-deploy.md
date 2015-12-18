@@ -64,7 +64,7 @@
 
    ```
    # or another branch name instead of origin/master, if applicable
-   $ git fetch && git rebase origin/master 
+   $ git fetch && git rebase origin/master
    $ hhvm composer.phar install
    ```
 
@@ -72,7 +72,7 @@
 
    ```
    $ hhvm bin/build.php
-   $ hhvm vendor/bin/phpunit tests/
+   $ hhvm vendor/bin/phpunit
    ```
 
 3. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:

@@ -115,21 +115,65 @@ e.g., `/hack/lambdas/creation-story`
 
 We use PHPUnit to ensure consistency across the changes we make to the guides, API references, and examples.
 
-### Large Changes
+### Full Test Suite
 
-If you make a larger scale change such as adding a new guide, adding or modifying code examples, etc., you should run the entire PHPUnit test suite:
-
-```
-$ hhvm vendor/bin/phpunit tests/
-```
-
-### Small Changes
-
-If you make a small change such as modifying some wording in a guide, fixing a link, etc., you can run the smaller group of PHPUnit tests:
+If you change any content or want to thoroughly test the code, run the full test suite:
 
 ```
-$ hhvm vendor/bin/phpunit --group small tests/
+$ hhvm vendor/bin/phpunit
 ```
+
+### Small Test Suite
+
+If you make a small change to the Hack code (excluding examples), you can run a smaller set of tests:
+
+```
+$ hhvm vendor/bin/phpunit --group small
+```
+
+Almost none of the content tests will run - eg internal links and examples will not be tested.
+
+It is still good practice to run the full test suite before commit, but the small suite is handy when iterating.
+
+### Running against an HTTP server
+
+A subset of the tests can be ran against an HTTP server instead of locally:
+
+```
+$ REMOTE_TEST_HOST=staging.docs.hhvm.com hhvm vendor/bin/phpunit --group remote
+```
+
+### Adding new tests
+
+Follow the examples in the other tests. Please annotate your tests with:
+
+```
+ /**
+  * @large
+  *
+  * Add this annotation if your test takes a long time to run.
+  */
+
+ /**
+  * @small
+  *
+  * Add this annotation if your test is quick
+  */
+
+ /**
+  * @group remote
+  *
+  * Add this if:
+  *  - your test only checks the output of page loads
+  *  - your test only loads a few pages
+  *
+  * This will make your test automatically run against staging during the deploy process.
+  *
+  * If you don't want @small, you don't want this.
+  */
+```
+
+These attributes can be applied to entire classes or specific methods. You might want to use `@large` for a class, but mark a specific method as `@small` `@group remote`. If you only have a `@large` test, consider making a `@group remote` test that only checks a small amount of this data. The data should be intentionally chosen, not random, as we hate intermittent failures.
 
 ## Running the Examples
 
