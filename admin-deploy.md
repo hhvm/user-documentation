@@ -1,6 +1,8 @@
 # Deploying The Site (for admins only)
 
-> If you have installed Docker and AWS Elastic Beanstalk, you will probably be starting from step 8.
+> If you have installed Docker and AWS Elastic Beanstalk, you will probably be starting from the [general starting point](#general-starting-point).
+
+## Only Do This Once
 
 1. You have probably already done this, but make sure you have `git` installed and you have set up your email and name configuration. Also make sure your server has a working IPv6.
 
@@ -56,9 +58,9 @@
    $ eb init
    ```
 
-8. Rebase your repo to get the lastest and greatest changes; do a full composer rebuild... e.g., just in case new classes were added for testing.
+## General Starting Point
 
-**NOTE**: This is first step you will need to do for future pushes from the same checkout.
+1. Rebase your repo to get the lastest and greatest changes; do a full composer rebuild... e.g., just in case new classes were added for testing.
 
    ```
    # or another branch name instead of origin/master, if applicable
@@ -66,34 +68,35 @@
    $ hhvm composer.phar install
    ```
 
-9. To save you time, you may want to run the PHPUnit test suite before starting the deploy, just in case there is a problem that needs fixing.
+2. To save you time, you may want to run the PHPUnit test suite before starting the deploy, just in case there is a problem that needs fixing.
 
    ```
+   $ hhvm bin/build.php
    $ hhvm vendor/bin/phpunit tests/
    ```
 
-10. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
+3. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
 
    ```
    $ bin/deploy-to-staging.sh
    ```
 
-11. Once the deploy script is finished and you have successfully deployed, do a fetch and merge via `git pull` and then push the AWS commit to the `user-documentation` repo. **Do not** `rebase`, so that the history before that commit keeps on matching what was actually pushed.
+4. Once the deploy script is finished and you have successfully deployed, do a fetch and merge via `git pull` and then push the AWS commit to the `user-documentation` repo. **Do not** `rebase`, so that the history before that commit keeps on matching what was actually pushed.
 
    ```
    $ git pull
    $ git push
    ```
 
-12. Create a changelog, ideally piping it to a markdown file via [gist](https://github.com/defunkt/gist)
+5. Create a changelog, ideally piping it to a markdown file via [gist](https://github.com/defunkt/gist)
 
    ```
    $ bin/changelog.sh | gist --type md
    ```
 
-13. Test the staging site at http://staging.docs.hhvm.com
+6. Test the staging site at http://staging.docs.hhvm.com
 
-14. Swap staging and production
+7. Swap staging and production
 
   ```
   $ eb swap
