@@ -4,10 +4,10 @@
     "hhvm": "~3.11",
     "zendframework/zend-diactoros": "^1.1",
     "nikic/fast-route": "dev-master#4e61a268cd50341ff0fb249e7acaf8aba1c83fa3",
-    "hhvm/systemlib-extractor": "^0.1.0"
+    "hhvm/systemlib-extractor": "^0.1.0",
+    "fredemmott/hhvm-autoload": "dev-master"
   },
   "require-dev": {
-    "fredemmott/hhvm-autoload": "dev-master",
     "fredemmott/definition-finder": "^1.1.0",
     "phpdocumentor/reflection-docblock": "^2.0",
     "mustangostang/spyc": "0.5.x-dev",
