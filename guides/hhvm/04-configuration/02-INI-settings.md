@@ -12,22 +12,22 @@ Here is the supported list of [PHP INI settings](http://php.net/manual/en/ini.li
 
 These are the options that are probably the most commonly used on a day-to-day basis by users of HHVM.
 
-Setting | Type | Default | Description
--------|------|---------|------------
-`hhvm.server_variables` | `array` | `$_SERVER` | Sets the contents of the `$_SERVER` variable. 
-`hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
-`hhvm.hack.lang.look_for_typechecker` | `bool` | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../advanced-usage/repo-authoritative.md).
-`hhvm.jit_enable_rename_function` | `bool` | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
-`hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
-`hhvm.server.source_root` | `string` | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in repo-authoritative mode.
-`hhvm.force_hh` | `bool` | `false` | If `true`, treat all code as Hack code, even if it starts with `<?php`.
-`hhvm.log.file` | `string` | standard error | The location of the HHVM error log file. 
-`hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
-`hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
-`hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
-`hhvm.server.port` | `int` | 80 | The port on which the HHVM server will listen for requests.
-`hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
-`hhvm.server.error_document404` | `string` | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.server_variables` | `array` | `$_SERVER` | Sets the contents of the `$_SERVER` variable. 
+| `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
+| `hhvm.hack.lang.look_for_typechecker` | `bool` | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../advanced-usage/repo-authoritative.md).
+| `hhvm.jit_enable_rename_function` | `bool` | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
+| `hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
+| `hhvm.server.source_root` | `string` | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in repo-authoritative mode.
+| `hhvm.force_hh` | `bool` | `false` | If `true`, all code is treated as Hack code, even if it starts with `<?php`.  This setting affects `hhvm.enable_xhp` by forcing it to be `true` as well. This setting affects `hhvm.hack.lang.ints_overflows_to_ints` and `hhvm.log.always_log_unhandled_exceptions` by being the default value for them when they is not explicitly set. This setting affects `hhvm.server.allow_duplicate_cookies` by being the opposite value for a default when it is not explicitly set.
+| `hhvm.log.file` | `string` | standard error | The location of the HHVM error log file. 
+| `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
+| `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
+| `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`
+| `hhvm.server.port` | `int` | 80 | The port on which the HHVM server will listen for requests.
+| `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
+| `hhvm.server.error_document404` | `string` | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
 
 ## PHP 7 Settings
 
@@ -46,10 +46,30 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.php7.scalar_types` | `bool` | `hhvm.php7.all` | Enable PHP 7-style scalar type annotations (NB: not the same as Hack's) | [Scalar type declarations](https://wiki.php.net/rfc/scalar_type_hints_v5)
 | `hhvm.php7.uvs` | `bool` | `hhvm.php7.all` |  Fix some odd precedence and order of evaluation issues | [Uniform variable syntax](https://wiki.php.net/rfc/uniform_variable_syntax)
 
-## Admin Server
+## Feature flags
+
+These settings enable various features in the runtime.
 
 | Setting | Type | Default | Description
-|---------|------|---------|--------------
+|---------|------|---------|------------
+| `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
+| `hhvm.force_hh` | `bool` | `false` | If `true`, all code is treated as Hack code, even if it starts with `<?php`.  This setting affects `hhvm.enable_xhp` by forcing it to be `true` as well. This setting affects `hhvm.hack.lang.ints_overflows_to_ints` and `hhvm.log.always_log_unhandled_exceptions` by being the default value for them when they is not explicitly set. This setting affects `hhvm.server.allow_duplicate_cookies` by being the opposite value for a default when it is not explicitly set.
+| `hhvm.enable_args_in_backtraces` | `bool` | `true` | If disabled, then arguments are not shown in PHP backtraces.
+| `hhvm.enable_asp_tags` | `bool` | `false` | If enabled, then you can use `<% %>`.
+| `hhvm.enable_hip_hop_experimental_syntax` | `bool` | `false` | Enables experimental syntax, including type hints for local variables and global variables.
+| `hhvm.enable_numa` | `bool` | `false` | Enable [NUMA](https://en.wikipedia.org/wiki/Non-uniform_memory_access) integration.
+| `hhvm.enable_numa_local` | `bool` | `false` | This causes all allocations from threads to be allocated on the local node (except for a few that have been explicitly marked interleaved). `hhvm.enable_numa` must be set to `true` for this to take affect.
+| `hhvm.enable_short_tags` | `bool` | `false` | If enabled, this allows the `<?` tag.
+| `hhvm.enable_xhp` | `bool` | `false` | If `true`, this will enable XHP support in PHP files. (XHP is always enabled in Hack files.) If `hhvm.force_hh` is set to `true`, then this setting is automatically `true`.
+| `hhvm.enable_zend_compat` | `bool` | `false` | If `true`, this enable the support layer for Zend PHP extensions that we have directly [migrated to HHVM](https://github.com/facebook/hhvm/tree/master/hphp/runtime/ext_zend_compat) (e.g. FTP).
+| `hhvm.enable_zend_sorting` | `bool` | `false` | If `true`, support is enabled for Zend PHP sort stability. There are [cases](/hhvm/inconsistencies/arrays-and-foreach#sorting) where sorting output is indeterministic between HHVM and PHP.
+
+## Admin Server
+
+The [admin server](/hhvm/advanced-usage/admin-server) allows the administrator of the HHVM server to query and control the HHVM server process. 
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
 | `hhvm.admin_server.password` | `string` | `''` | A password required for all requests to the admin server, other than the index. Is passed to the request as the `auth` request var.
 | `hhvm.admin_server.port` | `int` | `0` | The port the admin server should listen on. If set to 0, the admin server is not started.
 | `hhvm.admin_server.thread_count` | `int` | `1` | The number of threads the admin server should use.
@@ -99,7 +119,7 @@ another_site.accesslog = /home/user/sites/another-site/logs/access_log
 ```
 
 | Setting | Type | Default | Description
-|---------|------|---------|--------------
+|---------|------|---------|------------
 | `hhvm.sandbox.sandbox_mode` | `bool` | `false` | If enabled, sandbox mode is turned on; generally coincides with turning on [HHVM server debugging](#debugger).
 | `hhvm.sandbox.home` | `string` | `''` | The home directory of your sandbox. e.g., If this is set to `/home`, then your sandbox path will be something like `/home/joelm/`.
 | `hhvm.sandbox.conf_file` | `string` | `''` | The file which contains sandbox information like the path to the default sandbox, the path to other sandboxes, log paths, etc. You can use this file in conjunction with some of some of the other specific sandbox options. For example, if `hhvm.sandbox.home` is set, then this setting is *relative* to that path. 
@@ -160,40 +180,21 @@ hhvm -m debug -h localhost --debug-sandbox another_site
 
 
 | Setting | Type | Default | Description
-|---------|------|---------|--------------
-| hhvm.debugger.enable_debugger | `bool` | `false` | You must set this to try in order for HHVM to listen to connections from the debugger.
-| hhvm.debugger.enable_debugger_server | `bool` | `false` | This option is generally set in conjunction with `hhvm.debugger.enable_debugger` and actually allows for the listening to connections and remote debugging.
-| hhvm.debugger.default_sandbox_path | `string` | `''` | Path to source files; similar to [`hhvm.server.source_root`](#common-options).
-| hhvm.debugger.disable_ipv6 | `bool` | `false` | If enabled, the debugger will only be able to communicate with ipv4 addresses (AF_INET).
-| hhvm.debugger.enable_debugger_color | `bool` | `true` | Disable this if you do not want color in the debugger.
-| hhvm.debugger.enable_debugger_prompt | `bool` | `true` | Disable this if you do not want a debugger prompt to be shown.
-| hhvm.debugger.enable_debugger_usage_log | `bool` | `false` | *Currently this is only an internal setting*.
-| hhvm.debugger.port | `int` | `8089` | The port on which debugger clients may connect.
-| hhvm.debugger.rpc.default_auth | `string` | `''` | The password to be able to debug the HHVM server in RPC mode.
-| hhvm.debugger.rpc.default_port | `int` | `8083` | The port on which commands will be sent to the server via RPC.
-| hhvm.debugger.rpc.default_timeout | `int` | `30`| The timeout for commands to be available on the RPC port.
-| hhvm.debugger.rpc.host_domain | `string` | `''` | The domain where your RPC server is hosted.
-| hhvm.debugger.signal_timeout | `int` | `1` | The amount of time the debugger waits for a signal from the client before sending to a default dummy sandbox.
-| hhvm.debugger.startup_document | `string` | `''` | The file that is executed before any other, when the server starts. Does not have to be the same your [default document](#common-options). Similar to `hhvm.server.startup_document`.
-
-## Feature flags
-
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.enable_alternative | | |
-| hhvm.enable_args_in_backtraces | show arguments in PHP backtraces | _True_ |
-| hhvm.enable_asp_tags | is `<% %>` allowed | _False_ |
-| hhvm.enable_emit_switch | | |
-| hhvm.enable_emitter_stats | | |
-| hhvm.enable_hip_hop_experimental_syntax | | |
-| hhvm.enable_numa | Enable [NUMA](https://en.wikipedia.org/wiki/Non-uniform_memory_access) Integration | _False_ |
-| hhvm.enable_numa_local | | |
-| hhvm.enable_obj_destruct_call | If false, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If true, then HHVM will run all `__destruct()` methods in the usual way | _False_ |
-| hhvm.enable_short_tags | allow `<?` | _True_ |
-| hhvm.enable_xhp | Enable XHP support in PHP files. (XHP is always enabled in Hack files.) | _False_ |
-| hhvm.enable_zend_compat | Enable the support layer for Zend PHP extensions. | _False_ |
-| hhvm.enable_zend_sorting | Enable the support for Zend PHP alike sort stability | _False_ |
-| hhvm.force_hh | Treat all code as Hack, even if it starts with `<?php`. This is a sort of "master option" -- several other behavioral options have their defaults to be whatever this option is set to. See below. | _False_ |
+|---------|------|---------|------------
+| `hhvm.debugger.enable_debugger` | `bool` | `false` | You must set this to try in order for HHVM to listen to connections from the debugger.
+| `hhvm.debugger.enable_debugger_server` | `bool` | `false` | This option is generally set in conjunction with `hhvm.debugger.enable_debugger` and actually allows for the listening to connections and remote debugging.
+| `hhvm.debugger.default_sandbox_path` | `string` | `''` | Path to source files; similar to [`hhvm.server.source_root`](#common-options).
+| `hhvm.debugger.disable_ipv6` | `bool` | `false` | If enabled, the debugger will only be able to communicate with ipv4 addresses (AF_INET).
+| `hhvm.debugger.enable_debugger_color` | `bool` | `true` | Disable this if you do not want color in the debugger.
+| `hhvm.debugger.enable_debugger_prompt` | `bool` | `true` | Disable this if you do not want a debugger prompt to be shown.
+| `hhvm.debugger.enable_debugger_usage_log` | `bool` | `false` | *Currently this is only an internal setting*.
+| `hhvm.debugger.port` | `int` | `8089` | The port on which debugger clients may connect.
+| `hhvm.debugger.rpc.default_auth` | `string` | `''` | The password to be able to debug the HHVM server in RPC mode.
+| `hhvm.debugger.rpc.default_port` | `int` | `8083` | The port on which commands will be sent to the server via RPC.
+| `hhvm.debugger.rpc.default_timeout` | `int` | `30`| The timeout for commands to be available on the RPC port.
+| `hhvm.debugger.rpc.host_domain` | `string` | `''` | The domain where your RPC server is hosted.
+| `hhvm.debugger.signal_timeout` | `int` | `1` | The amount of time the debugger waits for a signal from the client before sending to a default dummy sandbox.
+| `hhvm.debugger.startup_document` | `string` | `''` | The file that is executed before any other, when the server starts. Does not have to be the same your [default document](#common-options). Similar to `hhvm.server.startup_document`.
 
 ## JIT Translation Cache Size
 
@@ -579,3 +580,20 @@ The translation cache stores the JIT'd code. It's split into several sections de
 | hhvm.xenon.period | Configure Xenon to gather PHP and async stacks every this many seconds. | _0.0_ |
 | hhvm.zend_executable | | |
 | pid | PID file path | |
+
+## Advanced Settings
+
+These are setting that generally won't be used by most users of HHVM
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.emit_switch` | `bool` | `true` | Use when mangling the unit cache.
+| `hhvm.enable_emitter_stats` | `bool` | `true` | Enable incrementing the emitter stat counter.
+
+## Unused Settings
+
+These are settings that are currently not used in the codebase.
+
+| Setting | Type | Default |
+|---------|------|---------|
+| `hhvm.enable_alternative` | `int` | 0
