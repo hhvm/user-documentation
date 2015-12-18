@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Async\Generators\Examples\Iterate;
 
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 const SECOND = 1000000; // microseconds
 

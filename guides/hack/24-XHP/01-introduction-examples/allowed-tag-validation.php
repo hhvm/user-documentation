@@ -1,6 +1,6 @@
 <?hh
 
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 function intro_examples_allowed_tag_validation_using_string(): void {
   echo '<ul><i>Item 1</i></ul>';

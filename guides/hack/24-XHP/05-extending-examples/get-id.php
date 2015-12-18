@@ -1,6 +1,6 @@
 <?hh
 
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 class :my-id extends :x:element {
   attribute string id;

@@ -1,6 +1,6 @@
 <?hh
 
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 function basic_usage_examples_basic_xhp(): void {
   var_dump(

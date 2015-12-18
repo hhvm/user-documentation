@@ -1,6 +1,6 @@
 <?hh
 
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 class :ui:get-status extends :x:element {
 

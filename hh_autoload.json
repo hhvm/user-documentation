@@ -1,0 +1,9 @@
+{
+  "roots": [
+    "src/",
+    "tests/"
+  ],
+  "extraFiles": [
+    "LocalConfig.php"
+  ]
+}

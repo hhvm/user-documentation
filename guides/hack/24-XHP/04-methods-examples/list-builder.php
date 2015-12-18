@@ -1,6 +1,6 @@
 <?hh
 
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 function xhp_object_methods_build_list(Vector<string> $names): XHPRoot {
   $list = <ul id="names" />;

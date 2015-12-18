@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Async\Extensions\Examples\MCRouter;
 
-require __DIR__ . "/../../../../vendor/autoload.php"; // For wrap()
+require __DIR__ . "/../../../../vendor/hh_autoload.php"; // For wrap()
 
 function get_mcrouter_object(): \MCRouter {
   $servers = Vector { getenv('HHVM_TEST_MCROUTER') };
