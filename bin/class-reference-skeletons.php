@@ -9,7 +9,7 @@
 
 namespace HHVM\UserDocumentation;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__.'/../vendor/hh_autoload.php';
 
 const string EXAMPLES_DIRECTORY = __DIR__.'/../api-examples';
 

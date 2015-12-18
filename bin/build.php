@@ -1,7 +1,7 @@
 <?hh
 namespace HHVM\UserDocumentation;
 
-require(__DIR__.'/../vendor/autoload.php');
+require(__DIR__.'/../vendor/hh_autoload.php');
 function build_site(?string $filter = null): void {
   if (!is_dir(LocalConfig::BUILD_DIR)) {
     mkdir(LocalConfig::BUILD_DIR);
