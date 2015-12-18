@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "10e8a94d55875596794a3d10c3f5a10f",
-    "content-hash": "ad25131cfba21b4ff8d5485c69a8ca8d",
+    "hash": "87aef78d55a505e5ae895014897f0717",
+    "content-hash": "4c7581913d9c6821ac465c0f3b3d3629",
     "packages": [
         {
             "name": "91carriage/phpunit-hhi",
@@ -225,44 +225,6 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "time": "2015-12-18 01:42:06"
-        },
-        {
-            "name": "hhvm/systemlib-extractor",
-            "version": "v0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hhvm/systemlib-extractor.git",
-                "reference": "70840d4423901874f58e637cc03cf0600d226c39"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/systemlib-extractor/zipball/70840d4423901874f58e637cc03cf0600d226c39",
-                "reference": "70840d4423901874f58e637cc03cf0600d226c39",
-                "shasum": ""
-            },
-            "require": {
-                "hhvm": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Extract the PHP, Hack, and HNI files embedded in HHVM",
-            "homepage": "https://github.com/hhvm/systemlib-extractor",
-            "keywords": [
-                "hack",
-                "hhvm"
-            ],
-            "time": "2015-08-12 21:57:53"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1425,6 +1387,44 @@
                 "psr7"
             ],
             "time": "2015-11-02 23:49:05"
+        },
+        {
+            "name": "hhvm/systemlib-extractor",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/systemlib-extractor.git",
+                "reference": "70840d4423901874f58e637cc03cf0600d226c39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/systemlib-extractor/zipball/70840d4423901874f58e637cc03cf0600d226c39",
+                "reference": "70840d4423901874f58e637cc03cf0600d226c39",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.5.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Extract the PHP, Hack, and HNI files embedded in HHVM",
+            "homepage": "https://github.com/hhvm/systemlib-extractor",
+            "keywords": [
+                "hack",
+                "hhvm"
+            ],
+            "time": "2015-08-12 21:57:53"
         },
         {
             "name": "mustangostang/spyc",
