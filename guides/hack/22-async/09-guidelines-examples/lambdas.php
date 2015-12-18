@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Async\Guidelines\Examples\Lambdas;
 
 // For asio-utilities that we installed via composer
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 async function fourth_root(num $n): Awaitable<float> {
   return sqrt(sqrt($n));

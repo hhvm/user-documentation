@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Async\Examples\Examples\Polling;
 
 // For asio-utilities function later(), etc.
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 // Of course, this is all made up :)
 class Polling {

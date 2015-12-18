@@ -1,5 +1,5 @@
 <?hh
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 function intro_examples_a_a_post() {
   $get_link =

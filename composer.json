@@ -3,25 +3,16 @@
     "facebook/xhp-lib": "^2.2",
     "hhvm": "~3.11",
     "zendframework/zend-diactoros": "^1.1",
-    "nikic/fast-route": "dev-master#4e61a268cd50341ff0fb249e7acaf8aba1c83fa3"
+    "nikic/fast-route": "dev-master#4e61a268cd50341ff0fb249e7acaf8aba1c83fa3",
+    "hhvm/systemlib-extractor": "^0.1.0"
   },
   "require-dev": {
-    "fredemmott/definition-finder": "~1.0.0",
+    "fredemmott/hhvm-autoload": "dev-master",
+    "fredemmott/definition-finder": "^1.1.0",
     "phpdocumentor/reflection-docblock": "^2.0",
     "mustangostang/spyc": "0.5.x-dev",
     "hack-psr/psr7-http-message-hhi": "^0.2.0",
     "phpunit/phpunit": "^5.1",
     "91carriage/phpunit-hhi": "^5.1"
-  },
-  "autoload": {
-    "classmap": [
-      "src/",
-      "tests/"
-    ],
-    "files": [
-      "src/utils/async_funcs.php",
-      "src/typedefs.php",
-      "LocalConfig.php"
-    ]
   }
 }

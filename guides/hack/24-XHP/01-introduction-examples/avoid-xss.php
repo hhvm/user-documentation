@@ -1,6 +1,6 @@
 <?hh
 
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 function intro_examples_avoid_xss_using_string(string $could_be_bad): void {
   // Could call htmlspecialchars() here

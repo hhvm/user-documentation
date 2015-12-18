@@ -1,5 +1,5 @@
 <?hh
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 final class XHPUnsafeExample implements XHPUnsafeRenderable {
   public function toHTMLString(): string {

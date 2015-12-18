@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Async\Guidelines\Examples\Batching;
 
 // For asio-utilities function later(), etc.
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);

@@ -1,7 +1,7 @@
 <?hh
 
 // For XHP library, etc.
-require __DIR__ . "/../../../../vendor/autoload.php";
+require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 class :comparison:greeting extends :x:element {
   attribute string first = "Good";
