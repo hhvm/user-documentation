@@ -55,13 +55,13 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.static_file.extensions` | `Map` | (see description) | Map of filename extensions to content types for use by the proxygen server. The defaults are [https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32](https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32). You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.php_file.extensions` | `Map` | *empty* | Normally, `.php` and `.hh` are treated as source code. With this setting you can add other file extensions to be treated as source code. You set them in the form of `hhvm.php_file.extensions["pp"]=".pp"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.server.forbidden_file_extensions` | `Set` | *empty* | Map of filename extensions that will not be loaded by the server. You set them in the form of `hhvm.server.forbidden_file_extensions[]=".exe"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.server.allow_duplicate_cookies` | | |
-| `hhvm.server.allowed_exec_cmds` | | | Only effective if `hhvm.server.whitelist_exec` is true.
-| `hhvm.server.always_populate_raw_post_data` | | |
-| `hhvm.server.always_use_relative_path` | | |
-| `hhvm.server.backlog` | | |
-| `hhvm.server.connection_limit` | | 0 |
-| `hhvm.server.connection_timeout_seconds` | | -1 |
+| `hhvm.server.allow_duplicate_cookies` | `bool` | `!hhvm.force_hh` | If enabled, this allows duplicate cookies for a name-domain-path triplet.
+| `hhvm.server.allowed_exec_cmds` | `Vector` | *empty* | A whitelist of acceptable process commands for something like `pcntl_exec`. This setting is only effective if `hhvm.server.whitelist_exec` is `true`. You set them in the form of `hhvm.server.allowed_exec_cmds[]="cmd"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.server.always_populate_raw_post_data` | `bool` | `false` | Generally, if the content type is multipart/form-data, `$HTTP_RAW_POST_DATA` should not always be available. If this is enabled, then that data will always be available.
+| `hhvm.server.always_use_relative_path` | `bool` | `false` | If enabled, files will be looked up and invoked via a relative path. In [sandbox](#sandbox) mode, files always use a relative path.
+| `hhvm.server.backlog` | `int` | 128 | The maximum queue length for incoming connections.
+| `hhvm.server.connection_limit` | `int` | 0 | The maximum number of connections the server (e.g., [Proxygen](/hhvm/basic-usage/proxygen)) can accept. The default is `0`, which is unlimited.
+| `hhvm.server.connection_timeout_seconds` | `int` | -1 | The maximum number of seconnds a connection is allowed to stand idle after its previous read or write. If `-1`, this defaults to the server default (e.g., for Proxygen](/hhvm/basic-usage/proxygen) this is 50 seconds).
 | `hhvm.server.dangling_wait` | | |
 | `hhvm.server.default_charset_name` | | |
 | `hhvm.server.default_document` |  | `"index.php"` | The default document that will be served if a page is not explicitly specified.
