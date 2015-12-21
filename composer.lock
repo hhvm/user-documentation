@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "87aef78d55a505e5ae895014897f0717",
-    "content-hash": "4c7581913d9c6821ac465c0f3b3d3629",
+    "hash": "b806b67433fab0f8ce99ec5f1d736066",
+    "content-hash": "c80c4447073c4f682a5d7ca9be7372bb",
     "packages": [
         {
             "name": "91carriage/phpunit-hhi",
@@ -270,16 +270,16 @@
         },
         {
             "name": "nikic/fast-route",
-            "version": "dev-master",
+            "version": "v0.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "4e61a268cd50341ff0fb249e7acaf8aba1c83fa3"
+                "reference": "8164b4a0d8afde4eae5f1bfc39084972ba23ad36"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/nikic/FastRoute/zipball/8164b4a0d8afde4eae5f1bfc39084972ba23ad36",
-                "reference": "4e61a268cd50341ff0fb249e7acaf8aba1c83fa3",
+                "reference": "8164b4a0d8afde4eae5f1bfc39084972ba23ad36",
                 "shasum": ""
             },
             "require": {
@@ -309,7 +309,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2015-10-02 08:59:26"
+            "time": "2015-12-20 19:50:12"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -1480,7 +1480,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "nikic/fast-route": 20,
         "fredemmott/hhvm-autoload": 20,
         "mustangostang/spyc": 20
     },
