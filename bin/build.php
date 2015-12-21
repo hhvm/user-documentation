@@ -2,7 +2,7 @@
 namespace HHVM\UserDocumentation;
 
 require(__DIR__.'/../vendor/hh_autoload.php');
-function build_site(?string $filter = null): void {
+function build_site(?Traversable<string> $filters = null): void {
   if (!is_dir(LocalConfig::BUILD_DIR)) {
     mkdir(LocalConfig::BUILD_DIR);
   }
@@ -45,7 +45,7 @@ function build_site(?string $filter = null): void {
     BuildIDBuildStep::class,
   };
 
-  if ($filter === null) {
+  if ($filters === null) {
     foreach ($steps as $step) {
       (new $step())->buildAll();
     }
@@ -53,14 +53,17 @@ function build_site(?string $filter = null): void {
   }
 
   foreach ($steps as $step) {
-    if (stripos($step, $filter) !== false) {
-      (new $step())->buildAll();
+    foreach ($filters as $filter) {
+      if (stripos($step, $filter) !== false) {
+        (new $step())->buildAll();
+        break;
+      }
     }
   }
 }
 
 if (array_key_exists(1, $argv)) {
-  build_site($argv[1]);
+  build_site(array_slice($argv, 1));
 } else {
   build_site();
 }
