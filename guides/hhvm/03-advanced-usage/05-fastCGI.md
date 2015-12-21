@@ -58,7 +58,7 @@ Ensure that you have nginx installed via something like:
 sudo apt-get install nginx
 ```
 
-Now nginx is needs to be configured to know where your PHP files are and how to forward them to HHVM to execute. The relevant bit of nginx config lives at `/etc/nginx/sites-available/default` -- by default, it's looking in `/usr/share/nginx/html` for files to serve, but it doesn't know what to do with PHP.
+Now nginx needs to be configured to know where your PHP files are and how to forward them to HHVM to execute. The relevant bit of nginx config lives at `/etc/nginx/sites-available/default` -- by default, it's looking in `/usr/share/nginx/html` for files to serve, but it doesn't know what to do with PHP.
 
 Our included script `sudo /usr/share/hhvm/install_fastcgi.sh` will configure nginx correctly for stock installs. The important part is that it adds `include hhvm.conf` near the top of of the nginx config mentioned above -- this will direct nginx to take any file that ends in `.hh` or `.php` and send it to HHVM via fastcgi.
 
@@ -67,7 +67,7 @@ The default FastCGI configuration from Nginx should work just fine with HHVM-Fas
 ```
 root /path/to/your/www/root/goes/here;
 fastcgi_pass   127.0.0.1:9000;
-# or if you used a unix socket 
+# or if you used a unix socket
 # fastcgi_pass   unix:/var/run/hhvm/sock;
 fastcgi_index  index.php;
 fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
