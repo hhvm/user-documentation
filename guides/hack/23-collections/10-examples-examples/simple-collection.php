@@ -82,7 +82,7 @@ final class AbsurdSet<Tv> implements \MutableSet<Tv> {
      return $this->cs->count();
   }
   public function contains<Tu super Tv>(Tu $value): bool {
-    return $this->cs->contains(value);
+    return $this->cs->contains($value);
   }
   public function add(Tv $value): AbsurdSet<Tv> {
     return new AbsurdSet($this->cs->add($value));

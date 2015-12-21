@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\API\Examples\Vector\Immutable;
 
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
-function expects_immutable(\HH\ImmVector $iv): void {
+function expects_immutable(ImmVector $iv): void {
   var_dump($iv);
 }
 

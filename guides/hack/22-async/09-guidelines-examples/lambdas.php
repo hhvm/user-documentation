@@ -13,7 +13,7 @@ async function normal_call(): Awaitable<Vector<float>> {
   $nums = Vector {64, 81};
   return await \HH\Asio\vm(
     $nums,
-    fun('Hack\UserDocumentation\Async\Guidelines\Examples\Lambdas\fourth_root')
+    fun('\Hack\UserDocumentation\Async\Guidelines\Examples\Lambdas\fourth_root')
   );
 }
 

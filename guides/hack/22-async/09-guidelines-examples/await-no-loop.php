@@ -23,7 +23,7 @@ async function load_user(int $id): Awaitable<User> {
 async function load_users_no_loop(array<int> $ids): Awaitable<Vector<User>> {
   return await \HH\Asio\vm(
     $ids,
-    fun('Hack\UserDocumentation\Async\Guidelines\Examples\NoLoop\load_user')
+    fun('\Hack\UserDocumentation\Async\Guidelines\Examples\NoLoop\load_user')
   );
 }
 

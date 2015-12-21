@@ -26,7 +26,7 @@ async function get_user_name(\MCRouter $mcr, int $user_id): Awaitable<string> {
       return $res->getResult();
     }
     return "";
-  } catch (MCRouterException $ex) {
+  } catch (\MCRouterException $ex) {
     echo $ex->getKey() . PHP_EOL . $ex->getOp();
     return "";
   }

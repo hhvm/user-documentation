@@ -11,6 +11,7 @@ function get_resources(): array<resource> {
 }
 
 async function write_all(array<resource> $resources): Awaitable<void> {
+  // UNSAFE : the typechecker isn't aware of stream_await until 3.12 :(
   $write_single_resource = async function(resource $r) {
     $status = await stream_await($r, STREAM_AWAIT_WRITE, 1.0);
     if ($status === STREAM_AWAIT_READY) {
