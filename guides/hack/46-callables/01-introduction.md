@@ -2,11 +2,8 @@ The following is allowed in PHP:
 
 @@ introduction-examples/php-callable.php @@
 
-The Hack typechecker ***does not*** allow the callable type hint.
-
-@@ introduction-examples/hack-callable-bad.php.type-errors @@
-
-However, Hack does offer a powerful alternative to the `callable` type hint through the `function` keyword
+The Hack typechecker ***does not*** allow the callable type hint as it does not
+specify any information on parameter types or return types - however, Hack does offer a powerful alternative to the `callable` type hint through the `function` keyword:
 
 @@ introduction-examples/hack-callable-good.php @@
 
@@ -15,15 +12,15 @@ However, Hack does offer a powerful alternative to the `callable` type hint thro
 The syntax for Hack callables is:
 
 ```
-(function (<param type 1>,..., <param type n): <return type>) $<callback_name>
+(function (<param type 1>,..., <param type n>): <return type>)
 ```
 
 Since a callable is really a function, the syntax above should look like a function signature without the function and parameter names.
 
-e.g., here is a callable that takes a `bool` and `int` and returns a `string`:
+e.g., This function takes a callable parameter: that takes a `bool` and `int` and returns a `string`:
 
 ```
-(function(bool, int): string) $callback;
+function foo((function(bool, int): string) $callback) { ... }
 ```
 
 ## Allowed Callables
