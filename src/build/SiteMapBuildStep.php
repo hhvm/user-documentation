@@ -3,7 +3,7 @@
 namespace HHVM\UserDocumentation;
 
 final class SiteMapBuildStep extends BuildStep {
-  const string ROOT = 'http://docs.hhvm.com';
+  const string ROOT = 'https://docs.hhvm.com';
 
   public function buildAll(): void {
     Log::i("\nBuilding Google Site Map");
