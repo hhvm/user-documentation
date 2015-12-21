@@ -55,6 +55,8 @@ EOF;
     $body_class = $this->getBodyClass($extra_class);
     $google_analytics = null;
     $open_search = null;
+    $require_secure = false;
+
     switch ($this->getRequestedHost()) {
       case 'beta.docs.hhvm.com':
         throw new RedirectException(
@@ -69,11 +71,15 @@ EOF;
             type="application/opensearchdescription+xml"
             href="/search.xml"
           />;
-        $this->requireSecureConnection();
+          $require_secure = true;
         break;
       case 'staging.docs.hhvm.com':
-        $this->requireSecureConnection();
+        $require_secure = true;
         break;
+    }
+
+    if ($require_secure) {
+      $this->requireSecureConnection();
     }
 
     $xhp =
@@ -122,8 +128,17 @@ EOF;
       </x:doctype>;
     $xhp->setContext('ServerRequestInterface', $this->request);
     $html = await $xhp->asyncToString();
-    return Response::newWithStringBody($html)
+
+    $response = Response::newWithStringBody($html)
       ->withStatus($this->getStatusCode());
+
+    if ($require_secure) {
+      $response = $response->withHeader(
+        'Strict-Transport-Security', 'max-age='.(60 * 60  * 24 * 28), // 4 weeks
+      );
+    }
+
+    return $response;
   }
 
   protected function getStatusCode(): int {

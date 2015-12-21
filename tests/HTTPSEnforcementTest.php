@@ -41,6 +41,16 @@ final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
 
     $response = \HH\Asio\join(PageLoader::getPage($location));
     $this->assertSame(200, $response->getStatusCode());
+
+    $hsts = $response->getHeaderLine('Strict-Transport-Security');
+    $this->assertContains(
+      'max-age=',
+      $hsts,
+    );
+    $this->assertNotSame(
+      'max-age=0',
+      $hsts,
+    );
   }
 
   public function testNotEnforcedOnRobotsTxt(): void {
