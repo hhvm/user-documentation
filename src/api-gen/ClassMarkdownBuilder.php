@@ -124,17 +124,25 @@ EOF;
       } else {
         $name = '->';
       }
-      $name .= self::nameFromData($method).'()';
+      $name .= $method['name'];
+      $generics = htmlspecialchars(
+        Stringify::generics($method['generics'])
+      );
+      $params = htmlspecialchars(
+        Stringify::parameters($method, StringifyFormat::ONE_LINE)
+      );
+      $return_type = $method['returnType'];
+      $return_type =
+        $return_type === null
+        ? ''
+        : ': '.htmlspecialchars(Stringify::typehint($return_type));
 
       $md .=
-        ' * [`'.$name.'`]('. $method_url .') ';
-
-      $ret_type = $method['returnType'];
-      $md .=
-        '<code class="methodSignature">'.
-        Stringify::signature($method, StringifyFormat::ONE_LINE).
-        '</code>';
-
+        ' * [`'.
+        $name.
+        '`<code class="methodListSignature">'.
+        $generics.$params.$return_type.
+        '</span>]('.$method_url.') ';
 
       $comment = $method['docComment'];
       if ($comment !== null) {
@@ -157,14 +165,7 @@ EOF;
     shape('name' => string, 'generics' => array<GenericDocumentation>) $data,
   ): string {
     $name = $data['name'];
-    $generics = $data['generics'];
-    if (count($generics) !== 0) {
-      $generics = array_map(
-        $generic ==> $generic['name'],
-        $generics,
-      );
-      $name .= '<'.implode(',', $generics).'>';
-    }
+    $name .= Stringify::generics($data['generics']);
     return $name;
   }
 }

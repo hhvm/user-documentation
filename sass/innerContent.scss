@@ -37,8 +37,9 @@
     @include codeemph;
   }
 
-  li > code.methodSignature {
-    @include codemethodsignature;
+  li code.methodListSignature {
+    color: $lightorange;
+    font-weight: 400;
   }
 
   ol {

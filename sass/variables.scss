@@ -5,6 +5,7 @@ $header-font: "Roboto", 'Helvetica Neue', Arial, sans-serif;
 
 /* Colors */
 $orange: #fd8724;
+$lightorange: #fda052;
 $lighterorange: #faf0e7;
 
 $grey: #505050;
@@ -46,15 +47,6 @@ $side-padding-mob: 10px;
   border-radius: 2px;
   color: $green;
   padding: 1px 3px;
-}
-
-@mixin codemethodsignature {
-  @include codeemph;
-  background: $lightergrey;
-  color: $lightgrey;
-  font-size: 60%;
-  vertical-align: middle;
-  margin-left: 1em;
 }
 
 @mixin headerfade {

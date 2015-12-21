@@ -122,7 +122,7 @@ class Stringify {
     return $ret;
   }
 
-  private static function parameters(
+  public static function parameters(
     FunctionDocumentation $func,
     StringifyFormat $format = StringifyFormat::MULTI_LINE,
   ): string {
@@ -147,5 +147,17 @@ class Stringify {
       case StringifyFormat::ONE_LINE:
         return '('.implode(', ', $params).')';
     }
+  }
+
+  public static function generics(array<GenericDocumentation> $generics): string {
+    if (count($generics) === 0) {
+      return '';
+    }
+
+    $generics = array_map(
+      $generic ==> $generic['name'],
+      $generics,
+    );
+    return '<'.implode(',', $generics).'>';
   }
 }
