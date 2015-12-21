@@ -102,10 +102,12 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertSame(200, $response->getStatusCode(), $page);
 
+    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
     libxml_use_internal_errors(true); // No support for HTML5 tags
     $dom->loadHTML($response->getBody());
     libxml_clear_errors();
+    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $xpath = new \DOMXPath($dom);
     $hrefs = $xpath->query('//a/@href');
 

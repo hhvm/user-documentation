@@ -14,6 +14,7 @@ final class LocalPageLoader extends PageLoader {
     $query_params = [];
     parse_str(parse_url($url, PHP_URL_QUERY), $query_params);
 
+    /* HH_IGNORE_ERROR[2049] no HHI for diactoros */
     $request = (new ServerRequest(
       /* server = */ [],
       /* file = */ [],

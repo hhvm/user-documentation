@@ -84,8 +84,10 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
     $page = \HH\Asio\join(PageLoader::getPage($source));
     $body = (string) $page->getBody();
 
+    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
     $dom->loadHTML($body);
+    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $xpath = new \DOMXPath($dom);
 
     $nodes = $xpath->query(

@@ -9,6 +9,7 @@ final class HHVMDocumentationSite {
     ServerRequestInterface $request,
   ): Awaitable<void> {
     $response = await self::getResponseForRequest($request);
+    /* HH_IGNORE_ERROR[2049] no HHI for Diactoros */
     (new SapiEmitter())->emit($response);
   }
 
