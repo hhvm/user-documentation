@@ -3,9 +3,11 @@
 use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APINavData;
 use HHVM\UserDocumentation\APIDefinitionType;
+use HHVM\UserDocumentation\PHPAPIIndex;
 
 enum APIProduct: string as string {
   HACK = 'hack';
+  PHP = 'php';
 }
 
 final class APIListController extends WebPageController {
@@ -13,20 +15,50 @@ final class APIListController extends WebPageController {
     switch ($this->getProduct()) {
       case APIProduct::HACK:
         return 'Hack APIs';
+      case APIProduct::PHP:
+        return 'Supported PHP APIs';
     }
   }
 
-  protected function getDefinitions(
+  private function getDefinitions(
+  ): Map<APIDefinitionType, Map<string, string>> {
+    switch ($this->getProduct()) {
+      case APIProduct::HACK:
+        return $this->getHackDefinitions();
+      case APIProduct::PHP:
+        return $this->getPHPDefinitions();
+    }
+  }
+
+  private function getHackDefinitions(
   ): Map<APIDefinitionType, Map<string, string>> {
     $out = Map {};
     foreach (APIDefinitionType::getValues() as $type) {
-       $index = APIIndex::getIndexForType($type);
-       $out[$type] = Map { };
-       foreach ($index as $node) {
-         $out[$type][$node['name']] = $node['urlPath'];
-       }
+      $index = APIIndex::getIndexForType($type);
+      $out[$type] = Map { };
+      foreach ($index as $node) {
+        $out[$type][$node['name']] = $node['urlPath'];
+      }
     }
     return $out;
+  }
+
+  private function getPHPDefinitions(
+  ): Map<APIDefinitionType, Map<string, string>> {
+    $out = Map { };
+
+    foreach (APIDefinitionType::getValues() as $type) {
+      $out[$type] = Map { };
+    }
+
+    $index = PHPAPIIndex::getIndex();
+    foreach ($index as $name => $data) {
+      if (!$data['supportedInHHVM']) {
+        continue;
+      }
+      $out[$data['type']][$name] = $data['url'];
+    }
+    return $out->filter($map ==> $map->count() !== 0);
   }
 
   protected function getInnerContent(): XHPRoot {
@@ -56,6 +88,19 @@ final class APIListController extends WebPageController {
         </div>
       );
     }
+
+    if ($this->getProduct() === APIProduct::HACK) {
+      return (
+        <x:frag>
+          <p>
+            The following APIs are supported in addition to
+            <a href="/php/reference/">most PHP APIs</a>.
+          </p>
+          {$root}
+        </x:frag>
+      );
+    }
+
     return $root;
   }
 

@@ -4,6 +4,12 @@ namespace HHVM\UserDocumentation;
 
 use FredEmmott\DefinitionFinder\ScannedBase;
 
+type PHPDotNetAPIIndexEntry = shape(
+  'type' => APIDefinitionType,
+  'url' => string,
+  'supportedInHHVM' => bool,
+);
+
 type ScannedDefinitionFilter = (function(ScannedBase): bool);
 
 enum DocumentationSourceType: string {

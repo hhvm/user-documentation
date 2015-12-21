@@ -19,7 +19,7 @@ final class PHPDotNetAPIIndexBuildStep extends BuildStep {
   }
 
 
-  private function getIndexData(): array<string, (APIDefinitionType, string)> {
+  private function getIndexData(): array<string, PHPDotNetAPIIndexEntry> {
     $reader = new PHPDocsIndexReader(
       file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
     );
@@ -34,8 +34,24 @@ final class PHPDotNetAPIIndexBuildStep extends BuildStep {
       }
 
       $url = sprintf('http://php.net/manual/en/%s.php', $id);
-      $out[$name] = tuple($type, $url);
+
+      $supported =
+        $type === APIDefinitionType::FUNCTION_DEF
+        ? function_exists($name)
+        : (
+            class_exists($name)
+            || trait_exists($name)
+            || interface_exists($name)
+          );
+
+      $out[$name] = shape(
+        'type' => $type,
+        'url' => $url,
+        'supportedInHHVM' => $supported,
+      );
     }
+
+    ksort($out);
 
     return $out;
   }

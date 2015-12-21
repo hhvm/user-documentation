@@ -12,11 +12,11 @@ class Router {
       '/search' => SearchController::class,
       '/{product:(?:hack|hhvm)}/'
         => GuidesListController::class,
-      '/{product:(?:hack)}/reference/'
+      '/{product:(?:hack|php)}/reference/'
         => APIListController::class,
-      '/{product:(?:hack)}/reference/{type:(?:class|function|interface|trait)}/'
+      '/{product:(?:hack|php)}/reference/{type:(?:class|function|interface|trait)}/'
         => APIListController::class,
-      '/{product:(?:hack)}/reference/{type:(?:class|function|interface|trait)}/{name}/'
+      '/{product:(?:hack|php)}/reference/{type:(?:class|function|interface|trait)}/{name}/'
         => APIGenericPageController::class,
       '/{product:(?:hack)}/reference/{type:(?:class|interface|trait)}/{class}/{method}/'
         => APIMethodPageController::class,

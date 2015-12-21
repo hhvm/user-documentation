@@ -71,8 +71,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
 
     $out = Map { };
     foreach ($index as $name => $data) {
-      list($type, $url) = $data;
-      $out[$name] = $url;
+      $out[$name] = $data['url'];
     }
 
     return $out->toImmMap();
