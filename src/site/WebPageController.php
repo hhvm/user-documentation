@@ -322,7 +322,7 @@ EOF;
             </ul>
           </div>
           <div class="footerPanel">
-            <h2>Language Specifications</h2>
+            <h2>Language Specs</h2>
             <ul>
               <li><a href={$php_spec_link}>PHP</a></li>
               <li><a href={$hack_spec_link}>Hack</a></li>
