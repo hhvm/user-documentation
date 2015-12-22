@@ -1,0 +1,8 @@
+object(Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box)#1 (1) {
+  ["x":"Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box":private]=>
+  int(4)
+}
+object(Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box)#2 (1) {
+  ["x":"Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box":private]=>
+  string(2) "hi"
+}
