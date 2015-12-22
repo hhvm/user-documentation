@@ -17,7 +17,7 @@ The error code is retrieved from the actual error message you receive when runni
 
 @@ special-examples/hhfixme.php @@
 
-Let's assume that we were in [partial](05-modes.md#partial) mode and now we want to make this file [strict](05-modes.md#strict), but we know that call sites will be affected by the annotation of the function because we did some questionable type conversions. We don't want to fix this yet or we don't know how to fix it (although you should fix before runtime since it will now be a runtime error). So we apply `HH_FIXME` to all the call sites that were affected by the change so that you or someone else knows that they need to be fixed. 
+Let's assume that we were in [partial](./modes.md#partial) mode and now we want to make this file [strict](./modes.md#strict), but we know that call sites will be affected by the annotation of the function because we did some questionable type conversions. We don't want to fix this yet or we don't know how to fix it (although you should fix before runtime since it will now be a runtime error). So we apply `HH_FIXME` to all the call sites that were affected by the change so that you or someone else knows that they need to be fixed. 
 
 Without `HH_FIXME`, you would have seen something like:
 

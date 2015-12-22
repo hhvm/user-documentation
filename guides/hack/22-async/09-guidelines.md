@@ -36,7 +36,7 @@ In the above example, the loop is doing two things:
 1. Making the loop iterations the limiting factor on how this code is going to run. By the loop, you are guaranteed to get the users sequentially.
 2. You are creating false dependencies. Loading one user is not dependent on loading another user.
 
-Instead, you will want to use our async-aware mapping function, [`vm()`](link to vm).
+Instead, you will want to use our async-aware mapping function, `vm()`.
 
 @@ guidelines-examples/await-no-loop.php @@
 

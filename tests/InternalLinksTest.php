@@ -140,6 +140,8 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       tuple('/foo/bar/', '../baz', '/foo/baz'),
       tuple('/foo/bar/baz/', '../../herp', '/foo/herp'),
       tuple('/foo/bar/baz', '../../herp', '/herp'),
+      tuple('/foo/bar', 'herp/derp', '/foo/herp/derp'),
+      tuple('/foo/bar/', 'herp/derp', '/foo/bar/herp/derp'),
     ];
   }
 
@@ -201,6 +203,14 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
         $path = preg_replace('_/[^/]+/\.\./_', '/', $path);
       }
       return $path;
+    }
+
+    if ($path[0] !== '.') {
+      if ($in_dir) {
+        return $source.$path;
+      } else {
+        return dirname($source).'/'.$path;
+      }
     }
 
     return null;

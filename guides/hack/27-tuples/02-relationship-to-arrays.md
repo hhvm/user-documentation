@@ -4,7 +4,7 @@ Under the covers, in [HHVM](/hhvm/), tuples are really just restricted arrays.
 
 You cannot change a tuple's number of elements. You *can* change a value of a tuple **if and only if** the new value is of the *same type* as the current value.
 
-If you try to change a value to a value of a different type, [the Hack typechecker](hack/typechecker/introduction) will raise an error (however, HHVM will run without complaint since tuples are just arrays under the covers).
+If you try to change a value to a value of a different type, [the Hack typechecker](/hack/typechecker/introduction) will raise an error (however, HHVM will run without complaint since tuples are just arrays under the covers).
 
 @@ relationship-to-arrays-examples/change-value.php.type-errors @@
 

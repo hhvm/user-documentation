@@ -29,7 +29,7 @@ hh_client [OPTION]
 
 ## `--list-modes`
 
-`--list-modes` will print a list of all the files monitored by the Hack server and let you know which of the [three modes](05-modes.md) (or `<?php`) each file is in.
+`--list-modes` will print a list of all the files monitored by the Hack server and let you know which of the [three modes](./modes.md) (or `<?php`) each file is in.
 
 ```
 :
