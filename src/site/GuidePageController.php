@@ -197,27 +197,18 @@ final class GuidePageController extends WebPageController {
   }
 
   protected function getSideNav(): XHPRoot {
-    $product = $this->getProduct();
-    $nav_args = [
-      'data' => GuidesNavData::getNavData()[$product]['children'],
-      'activePath' => [
-        GuidesNavData::pathToName($this->getGuide()),
-        GuidesNavData::pathToName($this->getPage()),
-      ],
-      'extraNavListClass' => '',
-    ];
-    return
-      <div class="navWrapper guideNav">
-        <div class="navLoader" />
-        <static:script path="/js/UnifiedSideNav.js" />
-        <script>
-          var navLoader = document.getElementsByClassName('navLoader')[0];
-          ReactDOM.render(
-            React.createElement(DocNav, {json_encode($nav_args)}),
-            navLoader
-          );
-        </script>
-      </div>;
+    return (
+      <ui:navbar
+        data={
+          /* UNSAFE_EXPR */
+          GuidesNavData::getNavData()[$this->getProduct()]['children']
+        }
+        activePath={[
+          GuidesNavData::pathToName($this->getGuide()),
+          GuidesNavData::pathToName($this->getPage()),
+        ]}
+      />
+    );
   }
 
   protected function getInnerContent(): XHPRoot {
