@@ -272,6 +272,10 @@ EOF;
   }
 
   private function getFooter(): :footer {
+    $php_spec_link = 'https://github.com/php/php-langspec/' .
+      'blob/master/spec/00-specification-for-php.md';
+    $hack_spec_link = 'https://github.com/hhvm/hack-langspec/' .
+      'blob/master/spec/00-specification-for-hack.md';
     return
       <footer class="footerWrapper">
         <div class="mainWrapper">
@@ -315,6 +319,13 @@ EOF;
               <li><a href="http://hhvm.com/blog">Blog</a></li>
               <li><a href="https://www.facebook.com/hhvm">Facebook</a></li>
               <li><a href="https://twitter.com/HipHopVM">Twitter</a></li>
+            </ul>
+          </div>
+          <div class="footerPanel">
+            <h2>Language Specifications</h2>
+            <ul>
+              <li><a href={$php_spec_link}>PHP</a></li>
+              <li><a href={$hack_spec_link}>Hack</a></li>
             </ul>
           </div>
         </div>
