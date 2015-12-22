@@ -52,26 +52,13 @@ class APIGenericPageController extends WebPageController {
       $path[] = $method['name'];
     }
 
-    $nav_props = [
-      'activePath' => $path,
-      'extraNavListClass' => 'apiNavList',
-    ];
-
-    return
-      <div class="navWrapper guideNav">
-        <div class="navLoader" />
-        <static:script path="/js/APINavData.js" />
-        <static:script path="/js/UnifiedSideNav.js" />
-        <script>
-          var navLoader = document.getElementsByClassName('navLoader')[0];
-          var props = {json_encode($nav_props)};
-          props.data = APINavData;
-          ReactDOM.render(
-            React.createElement(DocNav, props),
-            navLoader
-          );
-        </script>
-      </div>;
+    return (
+      <ui:navbar
+        data={APINavData::getNavData()}
+        activePath={$path}
+        extraNavListClass="apiNavList"
+      />
+    );
   }
 
   protected function getHTMLFilePath(): string {

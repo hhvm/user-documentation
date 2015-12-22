@@ -12,7 +12,6 @@ final class APIIndexBuildStep extends BuildStep {
     sort($sources);
 
     $this->createIndex($sources);
-    $this->createNavData();
   }
 
   private function createIndex(
@@ -28,15 +27,6 @@ final class APIIndexBuildStep extends BuildStep {
     file_put_contents(
       BuildPaths::APIDOCS_INDEX,
       $code,
-    );
-  }
-
-  private function createNavData(): void {
-    Log::i("\nCreate NavBar Data");
-    $data = APINavData::getNavData();
-    file_put_contents(
-      BuildPaths::APIDOCS_NAV_DATA,
-      'var APINavData = '.json_encode($data).';',
     );
   }
 

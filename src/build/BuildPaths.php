@@ -12,7 +12,6 @@ abstract final class BuildPaths {
   const string APIDOCS_INDEX = LocalConfig::BUILD_DIR.'/api-index.php';
   const string APIDOCS_LEGACY_REDIRECTS
     = LocalConfig::BUILD_DIR.'/api-legacy-redirects.php';
-  const string APIDOCS_NAV_DATA = LocalConfig::BUILD_DIR.'/api-nav.js';
 
   const string PHP_DOT_NET_INDEX_JSON =
     LocalConfig::BUILD_DIR.'/php-dot-net-index.json';
