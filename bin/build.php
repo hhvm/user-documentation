@@ -30,9 +30,9 @@ function build_site(?Traversable<string> $filters = null): void {
     PHPDotNetArticleRedirectsBuildStep::class,
 
     // Static Resources
-    SASSBuildStep::class,
     SyntaxHighlightCSSBuildStep::class,
     StaticResourceMapBuildStep::class,
+    SASSBuildStep::class,
 
     // Needs the static resources
     MergedMarkdownBuildStep::class,

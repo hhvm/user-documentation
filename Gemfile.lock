@@ -11,6 +11,8 @@ GEM
       sass (~> 3.4)
       thor (~> 0.19)
     colorize (0.7.7)
+    font-awesome-sass (4.5.0)
+      sass (>= 3.2)
     github-markdown (0.6.9)
     html-pipeline (1.11.0)
       activesupport (>= 2)
@@ -38,7 +40,11 @@ PLATFORMS
 DEPENDENCIES
   bourbon (= 4.2.6)
   colorize
+  font-awesome-sass
   github-markdown
   html-pipeline (~> 1.0)
   pygments.rb
   sass (= 3.4.19)
+
+BUNDLED WITH
+   1.10.6

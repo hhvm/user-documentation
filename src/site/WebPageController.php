@@ -111,10 +111,6 @@ EOF;
              type="text/css"
              href="//cdn.jsdelivr.net/font-hack/2.015/css/hack-extended.min.css"
             />
-            <link
-              rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
-            />
             <script src="https://fb.me/react-0.14.2.min.js" />
             <script src="https://fb.me/react-dom-0.14.2.min.js" />
             {$google_analytics}

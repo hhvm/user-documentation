@@ -12,7 +12,11 @@ final class StaticResourcesController extends WebController {
       () ==> StaticResourceMap::getEntryForFile($file)
     );
 
-    if ($checksum !== $entry['checksum'] && $checksum !== 'local-changes') {
+    if (
+      $checksum !== $entry['checksum']
+      && $checksum !== 'local-changes'
+      && $checksum !== 'evergreen'
+    ) {
       throw new HTTPNotFoundException();
     }
 
