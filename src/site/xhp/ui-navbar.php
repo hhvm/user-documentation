@@ -20,16 +20,37 @@ class :ui:navbar extends :x:element {
       $nav_list_class .= ' '.$extra;
     }
 
+    $list = (
+      <ul class={$nav_list_class}>
+        {$roots}
+      </ul>
+    );
+
     return (
       <div class="navWrapper guideNav">
         <div class="navLoader">
           <!-- TODO: toggle -->
-          <!-- TODO: active items -->
-          <ul class={$nav_list_class}>
-            {$roots}
-          </ul>
+          {$list}
         </div>
+        {$this->getScrollToActiveScript($list)}
       </div>
+    );
+  }
+
+  private function getScrollToActiveScript(:ul $list): ?:script {
+    $path = $this->:activePath;
+    if (!$path) {
+      return null;
+    }
+
+    $id = implode('/', $path);
+
+    return (
+      <script language="javascript">
+        var navList = document.getElementById({json_encode($list->getID())});
+        var activeNav = document.getElementById({json_encode($id)});
+        navList.scrollTop = activeNav.offsetTop - 10;
+      </script>
     );
   }
 
