@@ -1,9 +1,9 @@
-.navWrapper {
+.navOuterContainer {
   background: $lightergrey;
   box-sizing: border-box;
   order: 1;
 
-  .navLoader, .navToggle {
+  .navInnerContainer {
     height: 100%;
   }
 
@@ -183,8 +183,8 @@
 }
 
 @media only screen and (max-width: 480px) {
-  .navWrapper {
-    .navLoader {
+  .navOuterContainer {
+    .navInnerContainer {
       .navList {
         display: block;
 
@@ -193,7 +193,7 @@
         }
       }
 
-      .navToggletrue {
+      .navToggleOn {
         .navList {
           display: block;
         }
@@ -207,8 +207,8 @@
 }
 
 @media only screen and (min-width: 480px) and (max-width: 1020px) {
-  .navWrapper {
-    .navLoader {
+  .navOuterContainer {
+    .navInnerContainer {
       .navList {
         display: flex;
 
@@ -217,7 +217,7 @@
         }
       }
 
-      .navToggletrue {
+      .navToggleOn {
         .navList {
           display: flex;
         }
@@ -227,7 +227,7 @@
 }
 
 @media only screen and (max-width: 1020px) {
-  .navWrapper {
+  .navOuterContainer {
     background: none;
     box-sizing: border-box;
     height: 60px;
@@ -239,21 +239,28 @@
     width: 60px;
     z-index: 999;
 
-    &[data-active="true"] {
+     &.navToggleOn {
       height: 100%;
       left: 0px;
       padding-top: 60px;
       width: 100%;
-    }
 
-    .navTogglefalse {
-      .navList {
-        display: none;
+      .navToggleButton {
+        color: white;
       }
     }
 
-    .toggleNav {
-      color: $grey;
+    &.navToggleOff {
+      .navList {
+        display: none;
+      }
+
+      .navToggleButton {
+        color: $grey;
+      }
+    }
+
+    .navToggleButton {
       cursor: pointer;
       font-size: 24px;
       line-height: 60px;
@@ -262,10 +269,6 @@
       right: 15px;
       z-index: 9999;
       @include transition(color 0.3s);
-
-      &.toggleNavtrue {
-        color: white;
-      }
     }
 
     .navList {
@@ -300,7 +303,7 @@
 }
 
 @media only screen and (min-width: 1020px) {
-  .navWrapper {
+  .navOuterContainer {
     height: 100vh;
     order: 1;
     padding: 60px 0 0;
@@ -310,7 +313,7 @@
     width: 300px;
     z-index: 99;
 
-    .toggleNav {
+    .navToggleButton {
       display: none;
     }
 
@@ -348,7 +351,7 @@
       }
     }
 
-    .navToggle {
+    .navInnerContainer {
       & > .navList {
         box-sizing: border-box;
         height: 100%;
@@ -361,7 +364,7 @@
 }
 
 @media only screen and (min-width: 1400px) {
-  .navWrapper {
+  .navOuterContainer {
     .subList {
       .subListItem {
         h5 {

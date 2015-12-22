@@ -1,6 +1,7 @@
 <?hh // strict
 
 use HHVM\UserDocumentation\NavDataNode;
+use HHVM\UserDocumentation\UIGlyphIcon;
 
 class :ui:navbar extends :x:element {
   attribute
@@ -20,24 +21,53 @@ class :ui:navbar extends :x:element {
       $nav_list_class .= ' '.$extra;
     }
 
+    $toggle_button =
+      <div class="navToggleButton">
+         <ui:glyph icon={UIGlyphIcon::LIST} />
+      </div>;
+
     $list = (
       <ul class={$nav_list_class}>
         {$roots}
       </ul>
     );
 
-    return (
-      <div class="navWrapper guideNav">
-        <div class="navLoader">
-          <!-- TODO: toggle -->
+    $container = (
+      <div class="navOuterContainer navToggleOff">
+        {$toggle_button}
+        <div class="navInnerContainer">
           {$list}
         </div>
-        {$this->getScrollToActiveScript($list)}
       </div>
+    );
+
+    $container->appendChild([
+      $this->getToggleScript($toggle_button, $container),
+      $this->getScrollToActiveScript($list),
+    ]);
+
+    return $container;
+  }
+
+  private function getToggleScript(:div $button, :div $container): :script {
+    $button_id = json_encode($button->getID());
+    $container_id = json_encode($container->getID());
+    return (
+      <script language="javascript">
+        var toggleButton = document.getElementById({$button_id});
+        toggleButton.addEventListener(
+          'click',
+          function() {"{"}
+            var toggleContainer = document.getElementById({$container_id});
+            toggleContainer.classList.toggle('navToggleOff');
+            toggleContainer.classList.toggle('navToggleOn');
+          {"}"}
+        );
+      </script>
     );
   }
 
-  private function getScrollToActiveScript(:ul $list): ?:script {
+  private function getScrollToActiveScript(:ul $list): ? :script {
     $path = $this->:activePath;
     if (!$path) {
       return null;

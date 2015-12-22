@@ -38,6 +38,7 @@ enum UIGlyphIcon: string {
   LEFT = 'angle-double-left fa-2x';
   RIGHT = 'angle-double-right fa-2x';
   SEARCH = 'search';
+  LIST = "th-list";
 }
 
 enum APIDefinitionType: string as string {
