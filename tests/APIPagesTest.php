@@ -55,7 +55,17 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
    * @dataProvider allAPIPages
    * @large
    */
-  public function testAPIPage(string $_, NavDataNode $node): void {
+  public function testAPIPage(string $name, NavDataNode $node): void {
+    $guard = new XHPValidationGuard();
+    $this->testAPIPageQuick($name, $node);
+  }
+
+  /**
+   * @group remote
+   * @dataProvider shortListOfAPIPages
+   * @small
+   */
+  public function testAPIPageQuick(string $_, NavDataNode $node): void {
     $response = \HH\Asio\join(PageLoader::getPage($node['urlPath']));
     $this->assertSame(200, $response->getStatusCode());
 
@@ -66,14 +76,5 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     if (!$blacklist->contains($node['name'])) {
       $this->assertContains($node['name'], (string) $response->getBody());
     }
-  }
-
-  /**
-   * @group remote
-   * @dataProvider shortListOfAPIPages
-   * @small
-   */
-  public function testAPIPageQuick(string $name, NavDataNode $node): void {
-    $this->testAPIPage($name, $node);
   }
 }

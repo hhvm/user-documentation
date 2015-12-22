@@ -6,6 +6,14 @@ namespace HHVM\UserDocumentation\Tests;
  * @large
  */
 final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
+  public static function setUpBeforeClass(): void {
+    XHPValidation::disable();
+  }
+
+  public static function tearDownAfterClass(): void {
+    XHPValidation::enable();
+  }
+
   /**
    * @dataProvider internalLinksList
    */
@@ -43,6 +51,11 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
   private static ?array<(string, array<string>)> $linksCache = null;
 
   public function internalLinksList(
+  ): array<(string, array<string>)> {
+    $guard = new XHPValidationGuard();
+    return $this->internalLinksListImpl();
+  }
+  public function internalLinksListImpl(
   ): array<(string, array<string>)> {
     PageLoader::assertLocal();
     $cached = self::$linksCache;

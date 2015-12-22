@@ -67,10 +67,10 @@ class :ui:navbar extends :x:element {
     );
   }
 
-  private function getScrollToActiveScript(:ul $list): ? :script {
+  private function getScrollToActiveScript(:ul $list): :script {
     $path = $this->:activePath;
     if (!$path) {
-      return null;
+      return <script />;
     }
 
     $id = implode('/', $path);
@@ -147,7 +147,6 @@ class :ui:navbar extends :x:element {
     if ($this->isActive($parent, $node)) {
       $class .= ' itemActive';
     }
-
 
     return
       <li class={$class} id={$id}>

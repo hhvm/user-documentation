@@ -25,17 +25,8 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
    * @large
    */
   public function testGuidePage(string $name, string $path): void {
-    $response = \HH\Asio\join(PageLoader::getPage($path));
-
-    // /hack/foo/ => /hack/foo/introduction
-    if ($response->getStatusCode() === 301) {
-      $response = \HH\Asio\join(
-        PageLoader::getPage($response->getHeaderLine('Location'))
-      );
-    }
-
-    $this->assertSame(200, $response->getStatusCode());
-    $this->assertContains($name, (string) $response->getBody());
+    $guard = new XHPValidationGuard();
+    $this->testGuidePageQuick($name, $path);
   }
 
   public function shortListOfGuidePages(): array<(string, string)> {
@@ -60,7 +51,17 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
    * @small
    */
   public function testGuidePageQuick(string $name, string $path): void {
-    $this->testGuidePage($name, $path);
+    $response = \HH\Asio\join(PageLoader::getPage($path));
+
+    // /hack/foo/ => /hack/foo/introduction
+    if ($response->getStatusCode() === 301) {
+      $response = \HH\Asio\join(
+        PageLoader::getPage($response->getHeaderLine('Location'))
+      );
+    }
+
+    $this->assertSame(200, $response->getStatusCode());
+    $this->assertContains($name, (string) $response->getBody());
   }
 
   /**
