@@ -77,9 +77,16 @@ class :ui:navbar extends :x:element {
 
     return (
       <script language="javascript">
-        var navList = document.getElementById({json_encode($list->getID())});
-        var activeNav = document.getElementById({json_encode($id)});
-        navList.scrollTop = activeNav.offsetTop - 10;
+        var scrollToActive = function() {"{"}
+          var navList = document.getElementById({json_encode($list->getID())});
+          var activeNav = document.getElementById({json_encode($id)});
+          navList.scrollTop = activeNav.offsetTop - 10;
+        {"}"};
+        scrollToActive();
+        window.addEventListener(
+          'transitioned',
+          scrollToActive
+        );
       </script>
     );
   }
