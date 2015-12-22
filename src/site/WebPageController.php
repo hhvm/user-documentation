@@ -98,9 +98,6 @@ EOF;
               path="/css/main.css"
               media="screen"
             />
-            <static:stylesheet
-              path="/css/syntax-highlighting.css"
-            />
             <link
               href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700"
               rel="stylesheet"
