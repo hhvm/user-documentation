@@ -31,8 +31,8 @@ function build_site(?Traversable<string> $filters = null): void {
 
     // Static Resources
     SyntaxHighlightCSSBuildStep::class,
-    StaticResourceMapBuildStep::class,
     SASSBuildStep::class,
+    StaticResourceMapBuildStep::class,
 
     // Needs the static resources
     MergedMarkdownBuildStep::class,
