@@ -106,7 +106,7 @@ EOF;
             <link
              rel="stylesheet"
              type="text/css"
-             href="//cdn.jsdelivr.net/font-hack/2.015/css/hack-extended.min.css"
+             href="//cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css"
             />
             <script src="https://fb.me/react-0.14.2.min.js" />
             <script src="https://fb.me/react-dom-0.14.2.min.js" />
