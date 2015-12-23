@@ -1,5 +1,7 @@
 <?hh // strict
 
+use HHVM\UserDocumentation\BuildPaths;
+
 class APCCachedRenderable implements \XHPUnsafeRenderable, \XHPAlwaysValidChild {
   private function __construct(
     private string $str,
@@ -26,6 +28,13 @@ class APCCachedRenderable implements \XHPUnsafeRenderable, \XHPAlwaysValidChild 
   }
 
   private static function makeKey(string $key): string {
-    return $key.'!!!'.__CLASS__.'!!!';
+    // Might seem overkill for a non-user-controlled cache key, but I don't want
+    // to worry about forgetting about it if user input ever ends up in here.
+    return hash('sha256', $key.'!!!'.__CLASS__.'!!!'.self::getBuildID());
+  }
+
+  <<__Memoize>>
+  private static function getBuildID(): string {
+    return trim(file_get_contents(BuildPaths::BUILD_ID));
   }
 }

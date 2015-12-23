@@ -7,7 +7,7 @@ function build_site(?Traversable<string> $filters = null): void {
     mkdir(LocalConfig::BUILD_DIR);
   }
 
-  $steps = ImmVector {
+  $steps = Vector {
     // No Dependencies
     RawYAMLBuildStep::class,
     MergedYAMLBuildStep::class,
@@ -41,24 +41,25 @@ function build_site(?Traversable<string> $filters = null): void {
     GuidesHTMLBuildStep::class,
     APIHTMLBuildStep::class,
 
-    // Build ID
-    BuildIDBuildStep::class,
   };
 
-  if ($filters === null) {
-    foreach ($steps as $step) {
-      (new $step())->buildAll();
-    }
-    return;
+  if ($filters !== null) {
+    $steps = $steps->filter(
+      function (classname<BuildStep> $step): bool use ($filters) {
+        foreach ($filters as $filter) {
+          if (stripos($step, $filter) !== false) {
+            return true;
+          }
+        }
+        return false;
+      }
+    );
   }
 
+  $steps[] = BuildIDBuildStep::class;
+
   foreach ($steps as $step) {
-    foreach ($filters as $filter) {
-      if (stripos($step, $filter) !== false) {
-        (new $step())->buildAll();
-        break;
-      }
-    }
+    (new $step())->buildAll();
   }
 }
 

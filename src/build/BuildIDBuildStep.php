@@ -4,6 +4,7 @@ namespace HHVM\UserDocumentation;
 
 final class BuildIDBuildStep extends BuildStep {
   public function buildAll(): void {
+    Log::i("\nBuildID");
     $docsite_rev = $this->getHead(__DIR__.'/../../');
     $hhvm_rev = $this->getHead(LocalConfig::HHVM_TREE);
 
