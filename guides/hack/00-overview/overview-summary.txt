@@ -1,1 +1,1 @@
-Let us guide you through the main features of the Hack language, and why you would want to use it.
+A quick introduction to some of Hack's major features.

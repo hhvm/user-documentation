@@ -32,9 +32,9 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
   public function shortListOfGuidePages(): array<(string, string)> {
     return [
       // Root of a guide
-      tuple('Overview: Introduction', '/hack/overview/'),
+      tuple('Overview: Typing', '/hack/overview/'),
       // First page of a guide
-      tuple('Overview: Introduction', '/hack/overview/introduction'),
+      tuple('Overview: Typing', '/hack/overview/typing'),
       // Last page of a guide
       tuple('Async: Exceptions', '/hack/async/exceptions'),
       // Spaces

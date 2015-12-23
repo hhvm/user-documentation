@@ -44,8 +44,8 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/hack/reference/function/HH.Asio.v/',
       ),
       'Guide dir => first page of guide' => tuple(
-        '/hack/overview/',
-        '/hack/overview/introduction',
+        '/hack/getting-started/',
+        '/hack/getting-started/getting-started',
       ),
       'PHP function documentation' => tuple(
         '/manual/en/function.parse-url.php',

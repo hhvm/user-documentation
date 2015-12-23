@@ -1,4 +1,4 @@
-If you are new to Hack, this getting started guide should help you get familiar with the basics quickly; if you haven't yet please read our [introduction to Hack's main features](../overview/introduction.md) and afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
+If you are new to Hack, this getting started guide should help you get familiar with the basics quickly; if you haven't yet please read our [introduction to Hack's main features](../overview/) and afterwards you can [dive deeper into](/hack/) topics of interest to gain more knowledge on what Hack has to offer. 
 
 ## Overview
 
@@ -85,7 +85,7 @@ int(42)
 
 Now that you have gotten your feet wet with a simple Hack program, the best resource for continuing to learn Hack is to keep reading our [official Hack documentation](/hack/). Here are the best places to start:
 
-* [Introduction to Hack's features](../overview/introduction.md)
+* [Introduction to Hack's features](../overview/)
 * [Tools to help you write Hack](../tools/introduction.md)
 * [Your frequent questions about Hack](../FAQ/faq.md)
 * [Hack's strong typing system](../types/type-system.md)
