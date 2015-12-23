@@ -34,7 +34,7 @@ class AirBus extends Machine implements Fliers {
 }
 
 // Having this will not only cause a typechecker error, but also cause a fatal
-// error in HHVM since we did not meet the trait requiement.
+// error in HHVM since we did not meet the trait requirement.
 class Paper implements Fliers {
   use Plane;
 

@@ -28,7 +28,7 @@ class AirBus extends Machine implements Fliers {
 }
 
 // Having this will not only cause a typechecker error, but also cause a fatal
-// error in HHVM since we did not meet the interface requiement (extending
+// error in HHVM since we did not meet the interface requirement (extending
 // Machine).
 class Paper implements Fliers {
   public function fly(): bool {
