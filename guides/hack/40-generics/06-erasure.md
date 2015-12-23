@@ -6,9 +6,9 @@ However, with the exception of the return type for [async](/hack/async/introduct
 
  While having the generic parameterization is certainly a great benefit, there are some limitations you need to be aware of because of type erasure at runtime. A type parameter T cannot be used in the following situations:
 
- * Creating instances using `new` (e.g., `new T()`).
- * Casting (e.g., `(T) $value`).
+ * Creating instances using `new` (e.g., `new Box<int>()`).
+ * Casting (e.g., `(Box<int>) $value`).
  * In a class scope, e.g., `T::aStaticMethod()`.
- * As the right-hand side of an [`instanceof`](http://php.net/manual/en/language.operators.type.php) check.
+ * As the right-hand side of an [`instanceof Box<int>`](http://php.net/manual/en/language.operators.type.php) check.
  * As the type of a static property.
  * As the type of the exception in a catch block (e.g., `catch (T $execption)`).
