@@ -109,6 +109,7 @@ EOF;
             {$this->getHeader()}
             {$this->getSideNav()}
             {$content}
+            {$this->getEagerFetchScript()}
           </body>
         </html>
       </x:doctype>;
@@ -116,7 +117,8 @@ EOF;
     $html = await $xhp->asyncToString();
 
     $response = Response::newWithStringBody($html)
-      ->withStatus($this->getStatusCode());
+      ->withStatus($this->getStatusCode())
+      ->withHeader('Cache-Control', 'max-age=60'); // enough for pre-fetching :)
 
     if ($require_secure) {
       $response = $response->withHeader(
@@ -320,5 +322,36 @@ EOF;
           </div>
         </div>
       </footer>;
+  }
+
+  private function getEagerFetchScript(): :script {
+    $code = <<<EOF
+// Prefetch pages on this site for performance
+if (document.querySelectorAll) {
+  var links = document.querySelectorAll(
+    '.mainContainer a, .navOuterContainer a'
+  );
+
+  for (var i = 0; i < links.length; i++) {
+    var link = links[i];
+    if (link.pathname == window.location.pathname) {
+      continue;
+    }
+    if (link.hostname !== window.location.hostname) {
+      continue;
+    }
+
+    link.addEventListener(
+      'mouseover',
+      function() {
+        var req = new XMLHttpRequest();
+        req.open('GET', this.href, /* async = */ true);
+        req.send();
+      }.bind(link)
+    );
+  }
+}
+EOF;
+    return <script language="javascript">{$code}</script>;
   }
 }
