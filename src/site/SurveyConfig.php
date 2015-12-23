@@ -18,8 +18,8 @@ final class SurveyConfig {
   const int ACTIVE_BUCKET_MAX = 100;
 
   const int MIN_VISITS_BEFORE_SHOW = 3;
-  const int MIN_SHOWS = 5;
-  const int MAX_SHOWS = 20;
+  const int MIN_SHOWS = 1;
+  const int MAX_SHOWS = 10;
 
   public function __construct(
     private ServerRequestInterface $request,
