@@ -103,11 +103,6 @@ EOF;
               rel="stylesheet"
               type="text/css"
             />
-            <link
-             rel="stylesheet"
-             type="text/css"
-             href="//cdn.jsdelivr.net/font-hack/2.015/css/hack.min.css"
-            />
             {$google_analytics}
           </head>
           <body class={$body_class}>

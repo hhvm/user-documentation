@@ -24,7 +24,10 @@ final class StaticResourcesController extends WebController {
       file_get_contents($entry['localPath'])
     )->withAddedHeader('Content-Type', $entry['mimeType']);
 
-    if ($checksum === 'local-changes') {
+    if (
+      $checksum === 'local-changes'
+      && $this->getOptionalStringParam('mtime') === null
+    ) {
       $response = $response->withAddedHeader(
         'Cache-Control',
         'max-age=0, no-cache, no-store',
