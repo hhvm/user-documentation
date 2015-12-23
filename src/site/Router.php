@@ -28,8 +28,6 @@ class Router {
         => LegacyRedirectController::class,
       '/robots.txt'
         => RobotsTxtController::class,
-      '/__content'
-        => WebPageContentController::class,
       '/s/{checksum}{file:/.+}'
         => StaticResourcesController::class,
       '/j/{keyword}'

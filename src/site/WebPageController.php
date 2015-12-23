@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactaros\HtmlResponse;
 
 abstract class WebPageController extends WebController {
-  public abstract function getTitle(): Awaitable<string>;
+  protected abstract function getTitle(): Awaitable<string>;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
 
   protected function getExtraBodyClass(): ?string {
@@ -131,7 +131,7 @@ EOF;
     return 200;
   }
 
-  final public async function getContentPane(): Awaitable<XHPRoot> {
+  final protected async function getContentPane(): Awaitable<XHPRoot> {
     list($title, $body) = await \HH\Asio\va2(
       $this->getTitle(),
       $this->getBody(),
