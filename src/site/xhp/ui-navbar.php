@@ -106,7 +106,18 @@ class :ui:navbar extends :x:element {
     return true;
   }
 
-  private function renderLevel1Item(NavDataNode $node): :li {
+  /* Caching: the uncached performance is completely fine for prod, but much too
+   * slow when opening every possible page in the test suite.
+   */
+  private function renderLevel1Item(NavDataNode $node): XHPRoot {
+    return $this->cachedRender(
+      $node['name'],
+      $this->isActive($node),
+      () ==> $this->renderLevel1ItemImpl($node),
+    );
+  }
+
+  private function renderLevel1ItemImpl(NavDataNode $node): XHPRoot {
     $children = $this->renderChildren(
       'subList',
       $node,
@@ -131,10 +142,25 @@ class :ui:navbar extends :x:element {
       </li>;
   }
 
+  /* Caching: the uncached performance is completely fine for prod, but much too
+   * slow when opening every possible page in the test suite.
+   */
   private function renderLevel2Item(
     NavDataNode $parent,
     NavDataNode $node,
-  ): :li {
+  ): XHPRoot {
+    return $this->cachedRender(
+      $parent['name'].$node['name'],
+      $this->isActive($parent, $node),
+      () ==> $this->renderLevel2ItemImpl($parent, $node),
+    );
+  }
+
+
+  private function renderLevel2ItemImpl(
+    NavDataNode $parent,
+    NavDataNode $node,
+  ): XHPRoot {
     $id = $parent['name'].'/'.$node['name'];
 
     $children = $this->renderChildren(
@@ -148,7 +174,7 @@ class :ui:navbar extends :x:element {
       $class .= ' itemActive';
     }
 
-    return
+    return (
       <li class={$class} id={$id}>
         <h5>
           <a
@@ -158,7 +184,8 @@ class :ui:navbar extends :x:element {
           </a>
         </h5>
         {$children}
-      </li>;
+      </li>
+    );
   }
 
   private function renderLevel3Item(
@@ -187,8 +214,8 @@ class :ui:navbar extends :x:element {
   private function renderChildren(
     string $list_class,
     NavDataNode $parent,
-    (function(NavDataNode): :li) $render_func,
-  ): ?:ul {
+    (function(NavDataNode): XHPRoot) $render_func,
+  ): ?XHPRoot {
     if (!$parent['children']) {
       return null;
     }
@@ -200,5 +227,25 @@ class :ui:navbar extends :x:element {
       );
     }
     return $root;
+  }
+
+  private function cachedRender(
+    string $cache_key,
+    bool $is_active,
+    (function():XHPRoot) $callback,
+  ): XHPRoot  {
+    if ($is_active) {
+      return $callback();
+    }
+
+    $cache_key = $cache_key.'!!!'.__CLASS__.'!!!';
+    $stored = APCCachedRenderable::get($cache_key);
+    if ($stored) {
+      return $stored;
+    }
+
+    $result = $callback();
+    APCCachedRenderable::store($cache_key, $result);
+    return $result;
   }
 }
