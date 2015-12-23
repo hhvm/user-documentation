@@ -2,11 +2,11 @@ The HHVM release cadence tries for every 8 weeks on Fridays. The branch for a pa
 
 ## Dates
 
-* 3.11.0 -- December 4th 2015 (cut on November 23rd 2015) -- will be delayed to ensure PHP 7 stability
 * 3.12.0 -- January 29th 2016 (cut on January 18 2016)
 
 ## Previous Releases
 
+* 3.11.0 December 9 2015
 * [3.10.0](http://hhvm.com/blog/10379/hhvm-3-10-0) October 15 2015
 * [3.9.0](http://hhvm.com/blog/9995/hhvm-3-9-0) August 18 2015
 * [3.8.0](http://hhvm.com/blog/9803/hhvm-3-8-0) July 13 2015
