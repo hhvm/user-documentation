@@ -59,4 +59,11 @@ final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
     );
     $this->assertSame(200, $response->getStatusCode());
   }
+
+  public function test404DoesNot500(): void {
+    $response = \HH\Asio\join(
+      PageLoader::getPage('http://docs.hhvm.com/__idonotexist_fortesting')
+    );
+    $this->assertNotSame(500, $response->getStatusCode());
+  }
 }

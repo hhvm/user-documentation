@@ -156,4 +156,12 @@ Please complete the information below:
 - - - eg "Documentation tell me how to <do something>" - - -
 EOF;
   }
+
+  protected function requireSecureConnection(): void {
+    /* No-op implementation so that the 404 handler doesn't throw a redirect
+     * exception. If you need something similar, maybe add a
+     * 'BypassHTTPSEnforcement' interface or similar, and check for that in the
+     * superclass implementation.
+     */
+  }
 }
