@@ -21,10 +21,8 @@ callable:
 
 @@ special-functions-examples/inst_meth.php @@
 
-Class names must be fully-qualified; this is easiest to do by using the
-`Foo::class` constants. For private/protected methods, use
-[a lambda](/hack/lambdas/introduction) instead.
-
+For private/protected methods, use [a lambda](/hack/lambdas/introduction)
+instead.
 
 ## `class_meth()`
 
@@ -33,20 +31,22 @@ a typed callable:
 
 @@ special-functions-examples/class_meth.php @@
 
-For private/protected methods, use [a lambda](/hack/lambdas/introduction)
-instead.
-
+Class names must be fully-qualified; this is easiest to do by using the
+`Foo::class` constants. For private/protected methods, use
+[a lambda](/hack/lambdas/introduction) instead.
 ## `meth_caller()`
 
 This takes:
 
- - a class name or constant (like `class_meth()`)
+ - a fully qualified class name or constant (like `class_meth()`)
  - a `public` method name (like `inst_meth()`)
 
 The callable it produces takes an instance of the class as an additional
 parameter.
 
 @@ special-functions-examples/meth_caller.php @@
+
+For private/protected methods, use a lambda instead.
 
 ## About Lambdas
 
