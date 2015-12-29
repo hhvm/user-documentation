@@ -50,6 +50,8 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
+| `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
+| `hhvm.server.error_document404` | `string` | `''` | The default 404 error document that will be served when a 404 error occurs. 
 | `hhvm.server_variables` | `Map` | *empty* | Set the contents of the `$_SERVER` variable. You set them in the form of `hhvm.server_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.env_variables` | `Map` | *empty* | Set the contents of the `$_ENV` variable. You set them in the form of `hhvm.env_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.static_file.extensions` | `Map` | (see description) | Map of filename extensions to content types for use by the proxygen server. The defaults are [https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32](https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32). You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
@@ -60,24 +62,17 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.always_populate_raw_post_data` | `bool` | `false` | Generally, if the content type is multipart/form-data, `$HTTP_RAW_POST_DATA` should not always be available. If this is enabled, then that data will always be available.
 | `hhvm.server.always_use_relative_path` | `bool` | `false` | If enabled, files will be looked up and invoked via a relative path. In [sandbox](#sandbox) mode, files always use a relative path.
 | `hhvm.server.backlog` | `int` | 128 | The maximum queue length for incoming connections.
-| `hhvm.server.connection_limit` | `int` | 0 | The maximum number of connections the server (e.g., [Proxygen](/hhvm/basic-usage/proxygen)) can accept. The default is `0`, which is unlimited.
-| `hhvm.server.connection_timeout_seconds` | `int` | -1 | The maximum number of seconnds a connection is allowed to stand idle after its previous read or write. If `-1`, this defaults to the server default (e.g., for Proxygen](/hhvm/basic-usage/proxygen) this is 50 seconds).
-| `hhvm.server.dangling_wait` | | |
-| `hhvm.server.default_charset_name` | | |
-| `hhvm.server.default_document` |  | `"index.php"` | The default document that will be served if a page is not explicitly specified.
-| `hhvm.server.default_server_name_suffix` | | |
-| `hhvm.server.dns_cache.enable` | | *False* | Whether HHVM should cache DNS lookups. 
-| `hhvm.server.dns_cache.ttl` | | 600 | TTL for DNS cache entries.
-| `hhvm.server.enable_cuf_async` | | |
-| `hhvm.server.enable_early_flush` | | *true* | Allows chunked encoding responses.
-| `hhvm.server.enable_keep_alive` | | |
-| `hhvm.server.enable_magic_quotes_gpc` | | |
-| `hhvm.server.enable_on_demand_uncompress` | | |
-| `hhvm.server.enable_output_buffering` | | *false* | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer.
-| `hhvm.server.enable_ssl` | | |
-| `hhvm.server.enable_static_content_from_disk` | | |
-| `hhvm.server.enable_static_content_m_map` | | |
-| `hhvm.server.error_document404` | | `"index.php"` | The default 404 error document that will be served when a 404 error occurs. 
+| `hhvm.server.connection_limit` | `int` | `0` | The maximum number of connections the server (e.g., [Proxygen](/hhvm/basic-usage/proxygen)) can accept. The default is `0`, which is unlimited.
+| `hhvm.server.connection_timeout_seconds` | `int` | `-1` | The maximum number of seconds a connection is allowed to stand idle after its previous read or write. If `-1`, this defaults to the server default (e.g., for Proxygen](/hhvm/basic-usage/proxygen) this is 50 seconds).
+| `hhvm.server.dangling_wait` | `int` | `0` | The number of seconds to wait for a dangling server to respond. A [dangling server](https://github.com/facebook/hhvm/blob/master/hphp/doc/server.dangling_server) allows the possibility for an older version of a server to run on a different port in case a page needs to be served from that old version.
+| `hhvm.server.default_charset_name` | `string` | `''` | This is used for PHP responses in case no other charset has been set explicitly. `"UTF-8"` is an example of a possible setting.
+| `hhvm.server.default_server_name_suffix` | `string` | `''` | If a server name is not specified for a virtual host, then the virtual prefix is prepended to this setting to create a server name. 
+| `hhvm.server.enable_early_flush` | `bool` | `true` | Allows chunked encoding responses.
+| `hhvm.server.enable_keep_alive` | `bool` | `true` | If enabled, the server will remain open for connection until `hhvm.server.connection_timeout_seconds` timeout.
+| `hhvm.server.enable_on_demand_uncompress` | `bool` | `true` | If enabled, this allows on-demand uncompress when reading from the file cache to avoid storing the uncompressed contents for compressible files.
+| `hhvm.server.enable_output_buffering` | `bool` | `false` | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer.
+| `hhvm.server.enable_ssl` | `bool` | `false` | If enabled, HHVM will allow SSL connections to come through. Related to `hhvm.server.ssl_port`, `hhvm.server.ssl_certificate_file`, `hhvm.server.ssl.certificate_key_file`, `hhvm.server.ssl_certificate_dir`.
+| `hhvm.server.enable_static_content_from_disk` | `bool` | `true` | A static content cache creates one single file from all static contents, including css, js, html, images and any other non-PHP files. Normally this is prepared by the compiler at compilation time, but it can also be prepared at run-time, if `hhvm.server.source_root` points to real file directory and this setting is `true`. Otherwise, use `hhvm.server.file_cache` to point to the static content cache file created by the compiler. 
 | `hhvm.server.error_document500` | | |
 | `hhvm.server.evil_shutdown` | | |
 | `hhvm.server.exit_on_bind_fail` | | |
@@ -690,4 +685,6 @@ These are settings that are currently not used in the codebase.
 
 | Setting | Type | Default |
 |---------|------|---------|
-| `hhvm.enable_alternative` | `int` | 0
+| `hhvm.enable_alternative` | `int` | `0`
+| `hhvm.server.enable_cuf_async` | `bool` | `false`
+| `hhvm.server.enable_static_content_m_map` | `bool` | `true`
