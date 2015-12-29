@@ -45,6 +45,3 @@ DEPENDENCIES
   html-pipeline (~> 1.0)
   pygments.rb
   sass (= 3.4.19)
-
-BUNDLED WITH
-   1.10.6
