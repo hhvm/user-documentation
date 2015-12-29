@@ -53,3 +53,21 @@ Using the example similar to `HH_FIXME`, we replaced two of the three with `UNSA
 Try not to use `UNSAFE`, opting for `HH_FIXME` instead. `UNSAFE` is less verbose and detailed than `HH_FIXME`, which might cause an issue for anyone maybe wanting to try to fix the problem later.
 
 **NOTE**: It is very possible that `UNSAFE` may be deprecated or removed in the future. So all new silencing should be done with `HH_FIXME`.
+
+## UNSAFE_EXPR
+
+`UNSAFE_EXPR` is similar to [`UNSAFE`](#unsafe), except turns off the typechecker on a single expression rather than an entire block of code. 
+
+THe syntax for `UNSAFE_EXPR` is:
+
+```
+/* UNSAFE_EXPR */ <expression>
+```
+
+e.g.,
+
+```
+$foo = /* UNSAFE_EXPR */ $bar::baz();
+```
+
+Note the `/* */` style comments for `UNSAFE_EXPR` as opposed to the `//` for [`UNSAFE`](#unsafe). This is important because `// UNSAFE_EXPR` will acutally be parsed as `// UNSAFE`, and may give you unexpected results.
