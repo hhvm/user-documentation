@@ -37,7 +37,7 @@ In this example, you could have also placed the `HH_FIXME` comment on the functi
 
 ## `UNSAFE`
 
-`UNSAFE` silences the typechecker too. But it isn't an action-to-be-taken silencing mechanism. When using `UNSAFE`, you are basically saying that you know this is a problem, and you are just going to leave it that way. 
+`UNSAFE` (or synonymously `UNSAFE_BLOCK`) silences the typechecker too. But it isn't an action-to-be-taken silencing mechanism. When using `UNSAFE`, you are basically saying that you know this *block of code* is a problem, and you are just going to leave it that way. 
 
 The syntax for `UNSAFE` is:
 
