@@ -70,4 +70,6 @@ e.g.,
 $foo = /* UNSAFE_EXPR */ $bar::baz();
 ```
 
+@@ special-examples/unsafe_expr.php @@
+
 Note the `/* */` style comments for `UNSAFE_EXPR` as opposed to the `//` for [`UNSAFE`](#unsafe). This is important because `// UNSAFE_EXPR` will acutally be parsed as `// UNSAFE`, and may give you unexpected results.
