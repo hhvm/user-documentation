@@ -2,7 +2,7 @@ Running the typechecker is simple. For most users and most purposes, it is a one
 
 ## `hh_client`
 
-`hh_client`, for all intents and purposes, is the typechecker. Assuming you have [installed](install.md) everything properly and you have added a [`.hh_config`](setup.md) file to the root of your codebase, then to get typechecking started:
+`hh_client`, for all intents and purposes, is the typechecker. Assuming you have [installed](install.md) everything properly and you have added a [`.hhconfig`](setup.md) file to the root of your codebase, then to get typechecking started:
 
 ```
 %(root of codebase) hh_client
