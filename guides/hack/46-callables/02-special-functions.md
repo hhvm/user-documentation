@@ -7,7 +7,7 @@ An alternative is to [use lambdas](#about_lambdas).
 
 ## `fun()`
 
-This function converts a string function name into a typed callable:
+`fun()` converts a string function name into a typed callable:
 
 @@ special-functions-examples/fun.php @@
 
@@ -16,7 +16,7 @@ If the function is in a namespace, then the fully qualified function name
 
 ## `inst_meth()`
 
-This functions converts an object and a public method name into a typed
+`inst_meth()` converts an object and a public method name into a typed
 callable:
 
 @@ special-functions-examples/inst_meth.php @@
@@ -26,7 +26,7 @@ instead.
 
 ## `class_meth()`
 
-This function converts a class name and a public static method name into
+`class_meth()` converts a class name and a public static method name into
 a typed callable:
 
 @@ special-functions-examples/class_meth.php @@
@@ -34,9 +34,10 @@ a typed callable:
 Class names must be fully-qualified; this is easiest to do by using the
 `Foo::class` constants. For private/protected methods, use
 [a lambda](/hack/lambdas/introduction) instead.
+
 ## `meth_caller()`
 
-This takes:
+`meth_caller()` takes:
 
  - a fully qualified class name or constant (like `class_meth()`)
  - a `public` method name (like `inst_meth()`)
