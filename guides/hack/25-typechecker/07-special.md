@@ -1,6 +1,6 @@
 There are times when you might want to just tell the typechecker to be quiet and move on. The most common case is when you know there is a typechecker error, you are not going to fix it for whatever reason, but you still want your code to be clean from typechecker errors when running `hh_client` ... e.g., you want the `No errors!` output.
 
-There are two ways to silence the typechecker. One is more action-focused than the other.
+There are a few ways to silence the typechecker. Some are more action-focused than the others.
 
 ## `HH_FIXME`
 
@@ -34,6 +34,19 @@ hhfixme.php:29:1,15: Remove all toplevel statements except for requires (Parsing
 In this example, you could have also placed the `HH_FIXME` comment on the function itself, with the same effect. But usually it is best to place `HH_FIXME` on the most specific block possible.
 
 **NOTE**: You can have multiple `HH_FIXME` comments on a single line of code, representing the silencing of multiple Hack errors. 
+
+## `HH_IGNORE_ERROR`
+
+`HH_IGNORE_ERROR` is technically an alias of [`HH_FIXME`](#hh_fixme), but can be used to provide better context to anyone looking at your code. While, `HH_FIXME` signals that some action will be taken to fix the Hack error you are silencing (either because of a bug in the Hack typechecker or your Hack code), `HH_IGNORE_ERROR` specifies that you are intentionally ignoring the error and do not plan to take any action.
+
+The syntax for `HH_IGNORE_ERROR` is:
+
+```
+/* HH_IGNORE_ERROR[error #] string comment */
+<block of code>
+```
+
+For example, `HH_IGNORE_ERROR` is useful in the context of ignoring Hack typechecker errors that arise because the typechecker has no information for a third-party library because it is written in PHP, but you still want to use Hack's [strict](/hack/typechecker/modes#strict-mode) mode. It could also be useful to ignore any lint errors that the Hack typechecker might look for in your code. 
 
 ## `UNSAFE`
 
