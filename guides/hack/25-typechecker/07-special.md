@@ -37,7 +37,7 @@ In this example, you could have also placed the `HH_FIXME` comment on the functi
 
 ## `HH_IGNORE_ERROR`
 
-`HH_IGNORE_ERROR` is technically an alias of [`HH_FIXME`](#hh_fixme), but can be used to provide better context to anyone looking at your code. While, `HH_FIXME` signals that some action will be taken to fix the Hack error you are silencing (either because of a bug in the Hack typechecker or your Hack code), `HH_IGNORE_ERROR` specifies that you are intentionally ignoring the error and do not plan to take any action.
+`HH_IGNORE_ERROR` is technically an alias of [`HH_FIXME`](#hh_fixme), but can be used to provide better context to anyone looking at your code. While, `HH_FIXME` signals that some action will be taken to fix the Hack error you are silencing (either because of a bug in the Hack typechecker or your Hack code), `HH_IGNORE_ERROR` specifies that you are intentionally ignoring the error and do not plan to take any action to fix the error.
 
 The syntax for `HH_IGNORE_ERROR` is:
 
@@ -45,8 +45,6 @@ The syntax for `HH_IGNORE_ERROR` is:
 /* HH_IGNORE_ERROR[error #] string comment */
 <block of code>
 ```
-
-For example, `HH_IGNORE_ERROR` is useful in the context of ignoring Hack typechecker errors that arise because the typechecker has no information for a third-party library because it is written in PHP, but you still want to use Hack's [strict](/hack/typechecker/modes#strict-mode) mode. It could also be useful to ignore any lint errors that the Hack typechecker might look for in your code. 
 
 ## `UNSAFE`
 
