@@ -107,6 +107,10 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/manual/en/debugger-about.php',
         'http://php.net/manual/en/debugger-about.php',
       ),
+      'Case insensitve redirect' => tuple(
+        '/manual/en/HaCk.LAMbda.php',
+        '/hack/lambdas/introduction',
+      ),
     ];
   }
 
