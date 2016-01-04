@@ -43,7 +43,7 @@ abstract final class LegacyRedirects {
     // $from being a string part of $id. If so, then we can redirect to the
     // appropriate place.
     foreach (self::getManualRedirectData() as $from => $to) {
-      if (strpos($id, $from) !== false) {
+      if (stripos($id, $from) !== false) {
         return $to;
       }
     }
