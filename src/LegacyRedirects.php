@@ -149,6 +149,9 @@ abstract final class LegacyRedirects {
       'install.hack.conversion' => '/hack/tools/introduction',
       'install.hack' => '/hack/getting-started/getting-started',
       'hack' => '/hack/',
+      'configuration.zend.compat'
+        => '/hhvm/configuration/INI-settings#feature-flags',
+      'intro-what-can-hhvm-do' => '/hhvm/getting-started/getting-started',
       'docshhvmimprovedsearch' => '/',
     };
   }
