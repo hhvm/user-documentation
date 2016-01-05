@@ -4,7 +4,7 @@ An *awaitable* is the key construct in `async` code. An awaitable is a first-cla
 
 Awaitables are represented through the Hack interface called `Awaitable`. While there are several classes that implement `Awaitable`, there is no need to concern yourself with their implementation details. `Awaitable` is the only interface you need. 
 
-The type returned from an async function is `Awatiable<T>`, where `T` is the final result type (e.g., `int`) of the awaited value.
+The type returned from an async function is `Awaitable<T>`, where `T` is the final result type (e.g., `int`) of the awaited value.
 
 ```
 async function foo(): Awaitable<int> {...}
