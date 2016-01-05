@@ -9,7 +9,7 @@ The following example will be used in discussion of these options:
 **NOTE**: Many of these options support namespaced classes and function as their symbols. Just make sure you quote the string. e.g.,
 
 ```
-hh_client --find-class-refs "\Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass"
+% hh_client --find-class-refs "\Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass"
 ```
 
 ## `--check`
@@ -19,8 +19,8 @@ hh_client --find-class-refs "\Hack\UserDocumentation\TypeChecker\Options\Example
 All of the options below (except the starting and stopping of the server) are actually options to this `--check` command. The following are equivalent
 
 ```
-hh_client --check [OPTION]
-hh_client [OPTION]
+% hh_client --check [OPTION]
+% hh_client [OPTION]
 ```
 
 ## `--start`
@@ -50,7 +50,8 @@ strict  user-documentation/hack/16-typechecker/modes-examples/strict.php
 If you provide this option with a string representing a symbol, then `hh_client` will search for files it knows about for that symbol, and annotate the results with whether it found a function, class, etc.
 
 ```
-hh_client --search VeryUnique
+% hh_client --search VeryUnique
+
 File "options.php", line 5, characters 7-21: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass, class
 File "options.php", line 18, characters 10-27: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueFunction, function
 File "options.php", line 11, characters 7-28: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueGenericClass, class
@@ -63,7 +64,8 @@ You can refine the search with the sister options `--search-class`, `--search-fu
 `--find-refs` and its sister `--find-class-refs` find references to a named function or class, respectively.
 
 ```
-hh_client --find-class-refs "\Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass"
+% hh_client --find-class-refs "\Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass"
+
 File "options.php", line 19, characters 12-26: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass::__construct
 File "options.php", line 13, characters 36-50: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass
 2 total results
@@ -74,8 +76,9 @@ File "options.php", line 13, characters 36-50: Hack\UserDocumentation\TypeChecke
 `--inheritance-children` and its sister `inheritance-ancestor` prints, given a class name, prints inheritance information.
 
 ```
-hh_client --inheritance-children "\Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass"
-File "options.php", line 5, characters 7-21: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass
+% hh_client --inheritance-children "\Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass"
+
+ile "options.php", line 5, characters 7-21: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClass
     inherited by File "options.php", line 26, characters 7-26: Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueClassChild
 ```
 
@@ -84,13 +87,14 @@ File "options.php", line 5, characters 7-21: Hack\UserDocumentation\TypeChecker\
 `--type-at-pos` tells `hh_client` to try to determine the type of a specific expression. It takes the following form:
 
 ```
-hh_client --type-at-pos options.php:22:3
+% hh_client --type-at-pos options.php:22:3
 ```
 
 where you provide a filename, line number and column number separated by colons. The column number is the hardest part to determine. A variable, for example, is the column of the actual start of the name of the variable, not including the `$`.
 
 ```
-hh_client --type-at-pos options.php:22:3
+% hh_client --type-at-pos options.php:22:3
+
 Hack\UserDocumentation\TypeChecker\Options\Examples\Options\VeryUniqueGenericClass
 ```
 
@@ -103,10 +107,28 @@ This will list all of the files monitored by the Hack server that have typing er
 This will provide a json-based representation of the internal statistics regarding the Hack server, particularly around the area of memory.
 
 ```
-hh_client --stats
+% hh_client --stats
+
 {
   "init_parsing_heap_size":3375552,
   "init_heap_size":10226176,
   "max_heap_size":12275072
 }
+```
+
+## `--lint`
+
+The Hack typechecker has a limited linter. Currently it checks to see if you are using the uppercase `TRUE`, `FALSE` and `NULL` and  suggests you use the lowercase `true`, `false` and `null` instead. Other linter features may be added in the future.
+
+This option is currently available on a specific file basis. You must specify a single file to be linted.
+
+```
+% hh_client --lint a.php
+
+File "/tmp/test/a.php", line 4, characters 21-24:
+Please use 'true' instead of 'TRUE' (Lint[5001])
+File "/tmp/test/a.php", line 7, characters 24-27:
+Please use 'true' instead of 'TRUE' (Lint[5001])
+File "/tmp/test/a.php", line 12, characters 8-11:
+Please use 'true' instead of 'TRUE' (Lint[5001])
 ```
