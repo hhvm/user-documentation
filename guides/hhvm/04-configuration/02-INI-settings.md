@@ -25,7 +25,7 @@ These are the options that are probably the most commonly used on a day-to-day b
 | `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
 | `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
 | `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`.
-| `hhvm.server.port` | `int` | 80 | The port on which the HHVM server will listen for requests.
+| `hhvm.server.port` | `int` | `80` | The port on which the HHVM server will listen for requests.
 | `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
 | `hhvm.server.error_document404` | `string` | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
 
@@ -85,31 +85,30 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.file_cache` | `string` | `''` | An absolute path to where the static content (e.g., css, html, etc.) created during compilation should be loaded. `hhvm.server.enable_static_content_from_disk` needs to be enabled for this setting to take effect.
 | `hhvm.server.file_socket` | `string` | `''` | If this string is not empty, then a file socket is used instead of an IP address for the server.
 | `hhvm.server.fix_path_info` | `bool` | `false` | If enabled, this changes [fastcgi](/hhvm/advanced-usage/fastCGI) path from `SCRIPT_FILENAME` to `PATH_TRANSLATED`.
-| `hhvm.server.forbidden_as404` | | |
-| `hhvm.server.force_chunked_encoding` | | |
-| `hhvm.server.force_compression.cookie` | | |
-| `hhvm.server.force_compression.param` | | |
-| `hhvm.server.force_compression.url` | | |
-| `hhvm.server.force_server_name_to_header` | | |
-| `hhvm.server.graceful_shutdown_wait` | `int` | 0 | The amount of time to wait for a graceful shutdown of a server. If it doesn't shutdown during that period of time, then `hhvm.server.harsh_shutdown` may be invoked.
-| `hhvm.server.gzip_compression_level` | | |
+| `hhvm.server.forbidden_as404` | `bool` | `false` | If the extension of a URI is in the ``hhvm.server.forbidden_file_extensions` map, and this option is enabled, then that extension cannot be used as a 404 option either.
+| `hhvm.server.force_chunked_encoding` | `bool` | `false` | If enabled, the server will only send chunked encoding responses for uncompressed payloads.
+| `hhvm.server.force_compression.cookie` | `string` | `''` | For compression, if this string is set and the cookie is present in the request, then compression should happen.
+| `hhvm.server.force_compression.param` | `string` | `''` | For compression, if this string is set and the parameter is present in the request, then compression should happen.
+| `hhvm.server.force_compression.url` | `string` | `''` | For compression, if this URL is set and the request matches exactly, then compression has to happen.
+| `hhvm.server.force_server_name_to_header` | `bool` | `false` | If enabled, then `$_SERVER['SERVER_NAME']` must come from the request header.
+| `hhvm.server.graceful_shutdown_wait` | `int` | `0` | The amount of time to wait for a graceful shutdown of a server. If it doesn't shutdown during that period of time, then `hhvm.server.harsh_shutdown` may be invoked.
+| `hhvm.server.gzip_compression_level` | `int` | `3` | When compression with gzip, this is the level of compression that will be used. `1` is fastest. `9` is best.  
 | `hhvm.server.harsh_shutdown` | `bool` | `true` | When stopping a server, HHVM first tries to gracefully shutdown any previous incarnation of the server. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file associated with the server process.
-| `hhvm.server.host` | | |
-| `hhvm.server.http_safe_mode` | | |
-| `hhvm.server.image_memory_max_bytes` | | |
-| `hhvm.server.implicit_flush` | | |
-| `hhvm.server.ip` | | |
-| `hhvm.server.kill_on_sigterm` | | |
-| `hhvm.server.lib_event_sync_send` | | |
-| `hhvm.server.light_process_count` | | |
-| `hhvm.server.light_process_file_prefix` | | |
-| `hhvm.server.lock_code_memory` | | |
-| `hhvm.server.max_array_chain`| | |
-| `hhvm.server.max_post_size` | | |
-| `hhvm.server.memory_head_room` | | |
-| `hhvm.server.output_handler` | | |
-| `hhvm.server.path_debug`| | |
-| `hhvm.server.port` | `int` | 80 | The port on which the HHVM server will listen for requests.
+| `hhvm.server.host` | `string` | `''` | The default host for the server. 
+| `hhvm.server.http_safe_mode` | `bool` | `false` | If enabled, then you cannot open an HTTP stream.
+| `hhvm.server.image_memory_max_bytes` | `int` | `0` | The maximum memory size for image process. If `0`, then it will be set to `hhvm.server.upload.upload_max_file_size` * 2.
+| `hhvm.server.implicit_flush` | `bool` | `false` | If set to true, then the output buffer will be set to implicitly flush when executing requests.
+| `hhvm.server.ip` | `string` | `''`| The default ip address for the server.
+| `hhvm.server.kill_on_sigterm` | `bool` | `false` | If enabled, and the server receives a SIGTERM signal, then server will be stopped.
+| `hhvm.server.light_process_count` | `int` | `0` | The number of light processes to turn on. Light processes have very little forking cost because they are pre-forked. They can provide for faster shell command execution.
+| `hhvm.server.light_process_file_prefix` | `string` | `./lightprocess` | The file prefix for a light process.
+| `hhvm.server.lock_code_memory` | `bool` | `false` | Unless this is enabled, during paging the server into memory, the binary is `munlock()`ed.
+| `hhvm.server.max_array_chain`| `int` | `INT_MAX` | For balancing arrays. Normally this is best left as the default.
+| `hhvm.server.max_post_size` | `int` | `100` | The maximum POST content-length. This is 100 MB.
+| `hhvm.server.memory_head_room` | `int` | `0` | How much memory headroom is allowed. If kept at the default, then the active memory limit is `std::numeric_limits<size_t>::max()`.
+| `hhvm.server.output_handler` | `string` | `''` | A custom output buffer handler. If left empty, then the default is used.
+| `hhvm.server.path_debug`| `bool` | `false` | If a 404 is returned, and this is enabled, then the URL paths examined will be displayed.
+| `hhvm.server.port` | `int` | `80` | The port on which the HHVM server will listen for requests.
 | `hhvm.server.prod_server_port` | | |
 | `hhvm.server.psp_timeout_seconds` | | |
 | `hhvm.server.request_body_read_limit` | | |
@@ -688,3 +687,4 @@ These are settings that are currently not used in the codebase.
 | `hhvm.enable_alternative` | `int` | `0`
 | `hhvm.server.enable_cuf_async` | `bool` | `false`
 | `hhvm.server.enable_static_content_m_map` | `bool` | `true`
+| `hhvm.server.lib_event_sync_send` | `bool` | `true` 
