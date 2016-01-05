@@ -46,6 +46,10 @@ The syntax for `HH_IGNORE_ERROR` is:
 <block of code>
 ```
 
+A canonical use case for `HH_IGNORE_ERROR` is for linting. If you are using [`hh_client --lint`](/hack/typechecker/options#--lint), for example, you can suppress the linter errors as shown below.
+
+@@ special-examples/hh_ignore_error.php @@
+
 ## `UNSAFE`
 
 `UNSAFE` (or synonymously `UNSAFE_BLOCK`) silences the typechecker too. But it isn't an action-to-be-taken silencing mechanism. When using `UNSAFE`, you are basically saying that you know this *block of code* is a problem, and you are just going to leave it that way. 
