@@ -73,27 +73,27 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.enable_output_buffering` | `bool` | `false` | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer.
 | `hhvm.server.enable_ssl` | `bool` | `false` | If enabled, HHVM will allow SSL connections to come through. Related to `hhvm.server.ssl_port`, `hhvm.server.ssl_certificate_file`, `hhvm.server.ssl.certificate_key_file`, `hhvm.server.ssl_certificate_dir`.
 | `hhvm.server.enable_static_content_from_disk` | `bool` | `true` | A static content cache creates one single file from all static contents, including css, js, html, images and any other non-PHP files. Normally this is prepared by the compiler at compilation time, but it can also be prepared at run-time, if `hhvm.server.source_root` points to real file directory and this setting is `true`. Otherwise, use `hhvm.server.file_cache` to point to the static content cache file created by the compiler. 
-| `hhvm.server.error_document500` | | |
-| `hhvm.server.evil_shutdown` | | |
-| `hhvm.server.exit_on_bind_fail` | | |
-| `hhvm.server.expires_active` | | |
-| `hhvm.server.expires_default` | | |
-| `hhvm.server.expose_hphp` | | *true* | add `X-Powered-By` header 
-| `hhvm.server.expose_xfb_debug` | | |
-| `hhvm.server.expose_xfb_server` | | |
-| `hhvm.server.fatal_error_message` | | |
-| `hhvm.server.file_cache` | | |
-| `hhvm.server.file_socket` | | |
-| `hhvm.server.fix_path_info` | | *false* | change fastcgi path from SCRIPT_FILENAME to PATH_TRANSLATED.
+| `hhvm.server.error_document500` | `string` | `''` | The default 500 error document that will be served when a 500 error occurs. 
+| `hhvm.server.evil_shutdown` | `bool` | `true` | Kill anything listening on the server port. This is enabled by default. When stopping a server, HHVM first tries to gracefully shut it down. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file. If that doesn't work, then `hhvm.server.evil_shutdown` is invoked. 
+| `hhvm.server.exit_on_bind_fail` | `bool` | `false` | If the HHVM server cannot start because there is an older HHVM server running, if this flag is enabled, then the current HHVM just quits trying to start the server. If this is not enabled, HHVM try harsher measures to stop the older server so the current one can start up again.
+| `hhvm.server.expires_active` | `bool` | `true` | If enabled, then cached static content will expire after the duration of `hhvm.server.expires_default`.
+| `hhvm.server.expires_default` | `int` | 2592000 | If `hhvm.server.expires_active` is enabled, then cached static content will expire after this amount of time. The default is `2592000` seconds (or 30 days).
+| `hhvm.server.expose_hphp` | `bool` | `true` | Expose the `X-Powered-By HHVM` version header. 
+| `hhvm.server.expose_xfb_debug` | `bool` | `false` | If enabled, Facebook specific debugging information is exposed.
+| `hhvm.server.expose_xfb_server` | `bool` | `false` | Facebook specific debugging information is exposed.
+| `hhvm.server.fatal_error_message` | `string` | `''` | If this string is not empty, then when you encounter a 500, the message associated with the string is shown.
+| `hhvm.server.file_cache` | `string` | `''` | An absolute path to where the static content (e.g., css, html, etc.) created during compilation should be loaded. `hhvm.server.enable_static_content_from_disk` needs to be enabled for this setting to take effect.
+| `hhvm.server.file_socket` | `string` | `''` | If this string is not empty, then a file socket is used instead of an IP address for the server.
+| `hhvm.server.fix_path_info` | `bool` | `false` | If enabled, this changes [fastcgi](/hhvm/advanced-usage/fastCGI) path from `SCRIPT_FILENAME` to `PATH_TRANSLATED`.
 | `hhvm.server.forbidden_as404` | | |
 | `hhvm.server.force_chunked_encoding` | | |
 | `hhvm.server.force_compression.cookie` | | |
 | `hhvm.server.force_compression.param` | | |
 | `hhvm.server.force_compression.url` | | |
 | `hhvm.server.force_server_name_to_header` | | |
-| `hhvm.server.graceful_shutdown_wait` | | |
+| `hhvm.server.graceful_shutdown_wait` | `int` | 0 | The amount of time to wait for a graceful shutdown of a server. If it doesn't shutdown during that period of time, then `hhvm.server.harsh_shutdown` may be invoked.
 | `hhvm.server.gzip_compression_level` | | |
-| `hhvm.server.harsh_shutdown` | | |
+| `hhvm.server.harsh_shutdown` | `bool` | `true` | When stopping a server, HHVM first tries to gracefully shutdown any previous incarnation of the server. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file associated with the server process.
 | `hhvm.server.host` | | |
 | `hhvm.server.http_safe_mode` | | |
 | `hhvm.server.image_memory_max_bytes` | | |
