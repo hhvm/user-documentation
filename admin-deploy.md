@@ -75,7 +75,7 @@
    $ hhvm vendor/bin/phpunit
    ```
 
-3. After making one or more updates, you will want to push to AWS. From your checkout, push to staging with:
+3. Assuming there are no issues with the build or tests, from your checkout, push to staging on AWS with:
 
    ```
    $ bin/deploy-to-staging.sh
