@@ -135,7 +135,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.thread_round_robin` | | _False_ | Last thread serves next.
 | `hhvm.server.tls_client_cipher_spec` | | |
 | `hhvm.server.tls_disable_tls1_2` | | |
-| `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`.
+| `hhvm.server.type` | `string` | `"proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"proxygen"`, but you can also specify `"fastcgi"`.
 | `hhvm.server.unserialization_whitelist_check` | | |
 | `hhvm.server.unserialization_whitelist_check_warning_only` | | |
 | `hhvm.server.upload.enable_file_uploads` | | |
