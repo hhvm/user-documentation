@@ -16,7 +16,7 @@ And the root for your program files will be the current directory from where you
 
 ## Configuration Overrides
 
-`-d` specifies command-line [configuration](../configuration/introduction.md) overrides. 
+`-d` specifies command-line [configuration](../configuration/introduction.md) overrides.
 
 In our example above, we are using the default HHVM built-in [proxygen](./proxygen.md) web server on port 8080.
 
@@ -37,3 +37,10 @@ http://your.site:8080/index.php
 ```
 
 You can also use `curl` and other programs to access the HHVM server as well.
+
+### Possible Fatal Error
+
+If the code you are running is written in [Hack (<?hh)](/hack/) and you run into a [fatal error regarding not running the typechecker](/hhvm/FAQ/faq#running-code__how-do-i-fix-the-not-running-the-hack-typechecker-fatal-error), then you must do one of the following:
+
+- Create an empty file named `.hhconfig` in the root directory of your source code.
+- Or pass `-d hhvm.hack.lang.look_for_typechecker=0` to the `hhvm -m server...` command you used above.
