@@ -1,4 +1,4 @@
-Here is the raw list of all possible ini settings that can go in your `/etc/hhvm/php.ini`, `/etc/hhvm/server.ini` or any custom `.ini` file. Not all of them are useful to the HHVM end user. There is lots of cleanup work to do here, but for now you get sorted lists. 
+Here is the raw list of all possible ini settings that can go in your `/etc/hhvm/php.ini`, `/etc/hhvm/server.ini` or any custom `.ini` file. Not all of them are useful to the HHVM end user. There is lots of cleanup work to do here, but for now you get sorted lists.
 
 Any setting prefixed with `hhvm.` are HHVM-specific options.
 
@@ -14,17 +14,17 @@ These are the options that are probably the most commonly used on a day-to-day b
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| `hhvm.server_variables` | `array` | `$_SERVER` | Sets the contents of the `$_SERVER` variable. 
-| `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
+| `hhvm.server_variables` | `array` | `$_SERVER` | Sets the contents of the `$_SERVER` variable.
+| `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way.
 | `hhvm.hack.lang.look_for_typechecker` | `bool` | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../advanced-usage/repo-authoritative.md).
 | `hhvm.jit_enable_rename_function` | `bool` | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
 | `hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
 | `hhvm.server.source_root` | `string` | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in [repo-authoritative mode](/hhvm/advanced-usage/repo-authoritative).
 | `hhvm.force_hh` | `bool` | `false` | If `true`, all code is treated as Hack code, even if it starts with `<?php`.  This setting affects `hhvm.enable_xhp` by forcing it to be `true` as well. This setting affects `hhvm.hack.lang.ints_overflows_to_ints` and `hhvm.log.always_log_unhandled_exceptions` by being the default value for them when they is not explicitly set. This setting affects `hhvm.server.allow_duplicate_cookies` by being the opposite value for a default when it is not explicitly set.
-| `hhvm.log.file` | `string` | standard error | The location of the HHVM error log file. 
+| `hhvm.log.file` | `string` | standard error | The location of the HHVM error log file.
 | `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
 | `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
-| `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"Proxygen"`, but you can also specify `"fastcgi"`.
+| `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you want to serve up requests for the HHVM server. The default is `"proxygen"`, but you can also specify `"fastcgi"`.
 | `hhvm.server.port` | `int` | `80` | The port on which the HHVM server will listen for requests.
 | `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
 | `hhvm.server.error_document404` | `string` | `"index.php"` | The default 404 error document that will be served when a 404 error occurs.
@@ -35,7 +35,7 @@ For changes from PHP 5 to PHP 7 which are backwards incompatible, INI options ar
 
 The vast majority of users will want to just set `hhvm.php7.all = 1` to fully enable PHP 7 mode and can ignore the rest of the options in this section. They are available primarily for advanced users who want to do a more gradual migration or otherwise track down compatibility issues.
 
-| Setting | Type | Default | Description | PHP 7 RFC 
+| Setting | Type | Default | Description | PHP 7 RFC
 |---------|------|---------|-------------|----------
 | `hhvm.php7.all` | `bool` | `false` | Default value for all of the below | N/A
 | `hhvm.php7.deprecate_old_style_ctors` | `bool` | `hhvm.php7.all` | Disallow and warn when using old PHP 4 constructors | [Remove PHP 4 constructors](https://wiki.php.net/rfc/remove_php4_constructors)
@@ -51,7 +51,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | Setting | Type | Default | Description
 |---------|------|---------|------------
 | `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
-| `hhvm.server.error_document404` | `string` | `''` | The default 404 error document that will be served when a 404 error occurs. 
+| `hhvm.server.error_document404` | `string` | `''` | The default 404 error document that will be served when a 404 error occurs.
 | `hhvm.server_variables` | `Map` | *empty* | Set the contents of the `$_SERVER` variable. You set them in the form of `hhvm.server_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.env_variables` | `Map` | *empty* | Set the contents of the `$_ENV` variable. You set them in the form of `hhvm.env_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.static_file.extensions` | `Map` | (see description) | Map of filename extensions to content types for use by the proxygen server. The defaults are [https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32](https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32). You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
@@ -66,19 +66,19 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.connection_timeout_seconds` | `int` | `-1` | The maximum number of seconds a connection is allowed to stand idle after its previous read or write. If `-1`, this defaults to the server default (e.g., for Proxygen](/hhvm/basic-usage/proxygen) this is 50 seconds).
 | `hhvm.server.dangling_wait` | `int` | `0` | The number of seconds to wait for a dangling server to respond. A [dangling server](https://github.com/facebook/hhvm/blob/master/hphp/doc/server.dangling_server) allows the possibility for an older version of a server to run on a different port in case a page needs to be served from that old version.
 | `hhvm.server.default_charset_name` | `string` | `''` | This is used for PHP responses in case no other charset has been set explicitly. `"UTF-8"` is an example of a possible setting.
-| `hhvm.server.default_server_name_suffix` | `string` | `''` | If a server name is not specified for a virtual host, then the virtual prefix is prepended to this setting to create a server name. 
+| `hhvm.server.default_server_name_suffix` | `string` | `''` | If a server name is not specified for a virtual host, then the virtual prefix is prepended to this setting to create a server name.
 | `hhvm.server.enable_early_flush` | `bool` | `true` | Allows chunked encoding responses.
 | `hhvm.server.enable_keep_alive` | `bool` | `true` | If enabled, the server will remain open for connection until `hhvm.server.connection_timeout_seconds` timeout.
 | `hhvm.server.enable_on_demand_uncompress` | `bool` | `true` | If enabled, this allows on-demand uncompress when reading from the file cache to avoid storing the uncompressed contents for compressible files.
 | `hhvm.server.enable_output_buffering` | `bool` | `false` | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer.
 | `hhvm.server.enable_ssl` | `bool` | `false` | If enabled, HHVM will allow SSL connections to come through. Related to `hhvm.server.ssl_port`, `hhvm.server.ssl_certificate_file`, `hhvm.server.ssl.certificate_key_file`, `hhvm.server.ssl_certificate_dir`.
-| `hhvm.server.enable_static_content_from_disk` | `bool` | `true` | A static content cache creates one single file from all static contents, including css, js, html, images and any other non-PHP files. Normally this is prepared by the compiler at compilation time, but it can also be prepared at run-time, if `hhvm.server.source_root` points to real file directory and this setting is `true`. Otherwise, use `hhvm.server.file_cache` to point to the static content cache file created by the compiler. 
-| `hhvm.server.error_document500` | `string` | `''` | The default 500 error document that will be served when a 500 error occurs. 
-| `hhvm.server.evil_shutdown` | `bool` | `true` | Kill anything listening on the server port. This is enabled by default. When stopping a server, HHVM first tries to gracefully shut it down. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file. If that doesn't work, then `hhvm.server.evil_shutdown` is invoked. 
+| `hhvm.server.enable_static_content_from_disk` | `bool` | `true` | A static content cache creates one single file from all static contents, including css, js, html, images and any other non-PHP files. Normally this is prepared by the compiler at compilation time, but it can also be prepared at run-time, if `hhvm.server.source_root` points to real file directory and this setting is `true`. Otherwise, use `hhvm.server.file_cache` to point to the static content cache file created by the compiler.
+| `hhvm.server.error_document500` | `string` | `''` | The default 500 error document that will be served when a 500 error occurs.
+| `hhvm.server.evil_shutdown` | `bool` | `true` | Kill anything listening on the server port. This is enabled by default. When stopping a server, HHVM first tries to gracefully shut it down. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file. If that doesn't work, then `hhvm.server.evil_shutdown` is invoked.
 | `hhvm.server.exit_on_bind_fail` | `bool` | `false` | If the HHVM server cannot start because there is an older HHVM server running, if this flag is enabled, then the current HHVM just quits trying to start the server. If this is not enabled, HHVM try harsher measures to stop the older server so the current one can start up again.
 | `hhvm.server.expires_active` | `bool` | `true` | If enabled, then cached static content will expire after the duration of `hhvm.server.expires_default`.
 | `hhvm.server.expires_default` | `int` | 2592000 | If `hhvm.server.expires_active` is enabled, then cached static content will expire after this amount of time. The default is `2592000` seconds (or 30 days).
-| `hhvm.server.expose_hphp` | `bool` | `true` | Expose the `X-Powered-By HHVM` version header. 
+| `hhvm.server.expose_hphp` | `bool` | `true` | Expose the `X-Powered-By HHVM` version header.
 | `hhvm.server.expose_xfb_debug` | `bool` | `false` | If enabled, Facebook specific debugging information is exposed.
 | `hhvm.server.expose_xfb_server` | `bool` | `false` | Facebook specific debugging information is exposed.
 | `hhvm.server.fatal_error_message` | `string` | `''` | If this string is not empty, then when you encounter a 500, the message associated with the string is shown.
@@ -92,9 +92,9 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.force_compression.url` | `string` | `''` | For compression, if this URL is set and the request matches exactly, then compression has to happen.
 | `hhvm.server.force_server_name_to_header` | `bool` | `false` | If enabled, then `$_SERVER['SERVER_NAME']` must come from the request header.
 | `hhvm.server.graceful_shutdown_wait` | `int` | `0` | The amount of time to wait for a graceful shutdown of a server. If it doesn't shutdown during that period of time, then `hhvm.server.harsh_shutdown` may be invoked.
-| `hhvm.server.gzip_compression_level` | `int` | `3` | When compression with gzip, this is the level of compression that will be used. `1` is fastest. `9` is best.  
+| `hhvm.server.gzip_compression_level` | `int` | `3` | When compression with gzip, this is the level of compression that will be used. `1` is fastest. `9` is best.
 | `hhvm.server.harsh_shutdown` | `bool` | `true` | When stopping a server, HHVM first tries to gracefully shutdown any previous incarnation of the server. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file associated with the server process.
-| `hhvm.server.host` | `string` | `''` | The default host for the server. 
+| `hhvm.server.host` | `string` | `''` | The default host for the server.
 | `hhvm.server.http_safe_mode` | `bool` | `false` | If enabled, then you cannot open an HTTP stream.
 | `hhvm.server.image_memory_max_bytes` | `int` | `0` | The maximum memory size for image process. If `0`, then it will be set to `hhvm.server.upload.upload_max_file_size` * 2.
 | `hhvm.server.implicit_flush` | `bool` | `false` | If set to true, then the output buffer will be set to implicitly flush when executing requests.
@@ -109,33 +109,31 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.output_handler` | `string` | `''` | A custom output buffer handler. If left empty, then the default is used.
 | `hhvm.server.path_debug`| `bool` | `false` | If a 404 is returned, and this is enabled, then the URL paths examined will be displayed.
 | `hhvm.server.port` | `int` | `80` | The port on which the HHVM server will listen for requests.
-| `hhvm.server.prod_server_port` | | |
-| `hhvm.server.psp_timeout_seconds` | | |
-| `hhvm.server.request_body_read_limit` | | |
-| `hhvm.server.request_init_document` | | |
-| `hhvm.server.request_init_function` | | |
-| `hhvm.server.request_memory_max_bytes` | | |
-| `hhvm.server.request_timeout_seconds` | | |
-| `hhvm.server.response_queue_count` | | |
-| `hhvm.server.safe_file_access` | | |
-| `hhvm.server.shutdown_listen_no_work` | | |
-| `hhvm.server.shutdown_listen_wait` | | |
-| `hhvm.server.ssl_certificate_dir` | | |
-| `hhvm.server.ssl_certificate_file` | | |
-| `hhvm.server.ssl_certificate_key_file` | | |
-| `hhvm.server.ssl_port` | | |
-| `hhvm.server.startup_document` | | |
-| `hhvm.server.stat_cache` | | *false* | Cache calls to stat.
-| `hhvm.server.takeover_filename` | | | for port takeover between server instances.
+| `hhvm.server.psp_cpu_timeout_seconds` | `int` | `0` | The length of CPU time a post-send processing request (PSP) is allocated. If `0`, the timer is reset to the last one. If negative, the timeout is set to that value if there is less than that value remaining. If positive, the timeout is set to that value.
+| `hhvm.server.psp_timeout_seconds` | `int` | `0` | The length of time a post-send processing request (PSP) is allocated. If `0`, the timer is reset to the last one. If negative, the timeout is set to that value if there is less than that value remaining. If positive, the timeout is set to that value.
+| `hhvm.server.request_body_read_limit` | `int` | `-1` | Only valid for a [proxygen](/hhvm/basic-usage/proxygen) server, if set to something other than `-1`, a limit is set on the request buffer and new data won't be added to the buffer until that part of the request is processed.
+| `hhvm.server.request_init_document` | `string` | `''` | The document that is loaded and executed upon the server receiving a request.
+| `hhvm.server.request_init_function` | `string` | `''` | The function that is executed upon the server receiving a request. If both `hhvm.server.request_init_function` and this is specified, the former is executed first.
+| `hhvm.server.request_memory_max_bytes` | `int` | `0` | The maximum number of bytes for a request. If not explicitly set (i.e., remains the default of `0`), this value is set to 16GB or the system's memory limit, which ever is less.
+| `hhvm.server.request_timeout_seconds` | `int` | `0` | The amount of time provided for a request to process before the server times out. If `0` (default), there is no explicit request timeout.
+| `hhvm.server.safe_file_access` | `bool` | `false` | If enabled, then when a file is accessed it ensures that the file is in an allowed directory, is not an absolute path, and is resolvable.
+| `hhvm.server.shutdown_listen_wait` | `int` | `0` | When the [proxygen](/hhvm/basic-usage/proxygen) server is stopped, if this value is set to something positive, then it will continue to listen that number of seconds before actually shutting down.
+| `hhvm.server.ssl_certificate_dir` | `string` | `''` | The directory where your SSL certificate information is located. `hhvm.server.enable_ssl` must be enabled for this to take effect.
+| `hhvm.server.ssl_certificate_file` | `string` | `''` | The file that contains your SSL certificate. `hhvm.server.enable_ssl` must be enabled for this to take effect.
+| `hhvm.server.ssl_certificate_key_file` | `string` | `''` | The file that contains your SSL certificate key. `hhvm.server.enable_ssl` must be enabled for this to take effect.
+| `hhvm.server.ssl_port` | `int` | `443` | The port for SSL connections. `hhvm.server.enable_ssl` must be enabled for this to take effect.
+| `hhvm.server.startup_document` | `string` | `''` | The document that is loaded and executed when the server starts up. This is different than `hhvm.server.default_document`, which is the page that is loaded on a request when a page is not explicitly specified.
+| `hhvm.server.stat_cache` | `bool` | `false` | If enabled, the server will cache calls to [stat()](https://en.wikipedia.org/wiki/Stat_(system_call)).
+| `hhvm.server.takeover_filename` | `string` | `''` | Between server instances port takeover, this is the file that is used.
 | `hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
-| `hhvm.server.thread_drop_cache_timeout_seconds` | | |
-| `hhvm.server.thread_drop_stack` | | |
-| `hhvm.server.thread_job_lifo_switch_threshold` | | |
-| `hhvm.server.thread_job_max_queuing_milli_seconds` | | |
-| `hhvm.server.thread_round_robin` | | _False_ | Last thread serves next.
-| `hhvm.server.tls_client_cipher_spec` | | |
-| `hhvm.server.tls_disable_tls1_2` | | |
-| `hhvm.server.type` | `string` | `"proxygen"` | The type of server you are planning to use to help server up requests for the HHVM server. The default is `"proxygen"`, but you can also specify `"fastcgi"`.
+| `hhvm.server.thread_drop_cache_timeout_seconds` | `int` | `0` | The amount of time for a server thread to drop its cache.
+| `hhvm.server.thread_drop_stack` | `bool` | `false` | If we have timed out via `hhvm.server.thread_drop_cache_timeout_seconds`, if this is enabled, then we also flush the thread stack itself.
+| `hhvm.server.thread_job_lifo_switch_threshold` | `int` | `INT_MAX` | An option where the request processing order can flip between FIFO or LIFO based on the length of the queue. If the job queue is configured to be in FIFO mode, and the current queue length exceeds lifoSwitchThreshold, then the workers will begin work on requests in LIFO order until the queue size is below the threshold in which case we resume in FIFO order.
+| `hhvm.server.thread_job_max_queuing_milli_seconds` | `int` | `-1` | If set to a positive number, this will be the number of milliseconds that will be waited for a job before it expires.
+| `hhvm.server.thread_round_robin` | `bool` | `false` | By default, the last thread serves next. If this setting is enabled, then serving is done round robin style.
+| `hhvm.server.tls_client_cipher_spec` | `string` | `''` | If not empty, then the [SSL ciphers](https://www.openssl.org/docs/manmaster/ssl/SSL_CTX_set_cipher_list.html) are set with the control string provided.
+| `hhvm.server.tls_disable_tls1_2` | `bool` | `false` | If enabled, then the [TLSv1.2 protocol](https://www.openssl.org/docs/manmaster/ssl/SSL_CTX_set_options.html) is disabled.
+| `hhvm.server.type` | `string` | `"proxygen"` | The type of server you want to serve up requests for the HHVM server. The default is `"proxygen"`, but you can also specify `"fastcgi"`.
 | `hhvm.server.unserialization_whitelist_check` | | |
 | `hhvm.server.unserialization_whitelist_check_warning_only` | | |
 | `hhvm.server.upload.enable_file_uploads` | | |
@@ -166,7 +164,7 @@ These settings enable various features in the runtime, including [Hack](/hack/)-
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way. 
+| `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way.
 | `hhvm.force_hh` | `bool` | `false` | If `true`, all code is treated as Hack code, even if it starts with `<?php`.  This setting affects `hhvm.enable_xhp` by forcing it to be `true` as well. This setting affects `hhvm.hack.lang.ints_overflows_to_ints` and `hhvm.log.always_log_unhandled_exceptions` by being the default value for them when they are not explicitly set. This setting affects `hhvm.hack.lang.look_for_typechecker` and `hhvm.server.allow_duplicate_cookies` by being the opposite value for a default when they are not explicitly set.
 | `hhvm.hack.lang.ints_overflow_to_ints` | `bool` | Value of `hhvm.force_hh` | Value of `hhvm.force_hh` | Don't check if integer arithmetic might overflow, just use asm intrinsics and do whatever the underlying processor would do, most likely a twos-complement wraparound. If disabled, then check for integer overflow, and promote up to a float if so. (Skipping the check is considerably faster.)
 | `hhvm.hack.lang.look_for_typechecker` | `bool` | Opposite value of `hhvm.force_hh` | If enabled, make sure that Hack code is under a directory with a `.hhconfig` file, and error otherwise.
@@ -209,7 +207,7 @@ These settings enable various features in the runtime, including [Hack](/hack/)-
 
 ## Admin Server
 
-The [admin server](/hhvm/advanced-usage/admin-server) allows the administrator of the HHVM server to query and control the HHVM server process. 
+The [admin server](/hhvm/advanced-usage/admin-server) allows the administrator of the HHVM server to query and control the HHVM server process.
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
@@ -248,11 +246,11 @@ The [admin server](/hhvm/advanced-usage/admin-server) allows the administrator o
 
 ## Sandbox
 
-A sandbox in HHVM is a set of configuration options (document root, log file path, etc.) that can be used to serve your web application. 
+A sandbox in HHVM is a set of configuration options (document root, log file path, etc.) that can be used to serve your web application.
 
 Here are a few **important** points:
 
-- The sandbox configuration file must end in `.hdf` or `.hphp`. Most people name it `.hphp`. 
+- The sandbox configuration file must end in `.hdf` or `.hphp`. Most people name it `.hphp`.
 - Having a configuration file end in `.ini` is currently broken, but a fix is being worked on now. When HDF is removed in favor of INI, this wil be fixed.
 - A user is always appended to `hhvm.sandbox.home`. So if you set that setting to `/home`, it will end up being `/home/user`. Thus the `hhvm.sandbox.conf_file` will end up having an absolute path of `/home/user/.hphp`.
 - The sandbox pattern assumes that you have valid URLs that can be associated with that pattern. You would need to have those URLs bound in something like `/etc/hosts` (e.g., `127.0.0.1 user-another_site.localhost.com`).
@@ -260,7 +258,7 @@ Here are a few **important** points:
 - If you enable `hhvm.sandbox.from_common_root`, make sure you have running code available from that root, or that root prepended by the value of `hhvm.sandbox.directories_root`, if you have that set as well.
 - If you are using the HHVM builtin webserver [proxygen](/hhvm/basic-usage/proxygen), as long as you are running the server from a location where there is access to your sandbox (e.g., the root of a sandbox directory), all of your sandboxes URLs should be available to you for testing.
 
-Below is a general configuration setup for a sandbox that you can use as a template. 
+Below is a general configuration setup for a sandbox that you can use as a template.
 
 *ini file*
 
@@ -294,7 +292,7 @@ another_site.accesslog = /home/user/sites/another-site/logs/access_log
 |---------|------|---------|------------
 | `hhvm.sandbox.sandbox_mode` | `bool` | `false` | If enabled, sandbox mode is turned on; generally coincides with turning on [HHVM server debugging](#debugger).
 | `hhvm.sandbox.home` | `string` | `''` | The home directory of your sandbox. e.g., If this is set to `/home`, then your sandbox path will be something like `/home/joelm/`.
-| `hhvm.sandbox.conf_file` | `string` | `''` | The file which contains sandbox information like the path to the default sandbox, the path to other sandboxes, log paths, etc. You can use this file in conjunction with some of some of the other specific sandbox options. For example, if `hhvm.sandbox.home` is set, then this setting is *relative* to that path. 
+| `hhvm.sandbox.conf_file` | `string` | `''` | The file which contains sandbox information like the path to the default sandbox, the path to other sandboxes, log paths, etc. You can use this file in conjunction with some of some of the other specific sandbox options. For example, if `hhvm.sandbox.home` is set, then this setting is *relative* to that path.
 | `hhvm.sandbox.pattern` | `string` | `''` | The URL pattern of your sandbox host. It is a generally a regex pattern with at least one capture group. For example `www.[user]-[sandbox].[machine].yourdomain.com` or `www.([^-]*(-[^-]*)?).yourdomain.com`
 | `hhvm.sandbox.from_common_root` | `bool` | `false` | If enabled, your sandboxes will be created from a common root path. This root path is based upon the `hhvm.sandbox.pattern` that you specify and the value of it will be the root string before the first `.` in the pattern. If you have a pattern like `([^-]*(-[^-]*)?).localhost.com` which maps to a sandbox at `user-another_site.localhost.com`, the root that is established by enabling this setting is `/joelm-another_site`. This setting as `true` supercedes any setting you have for `hhvm.sandbox.conf_file`.
 | `hhvm.sandbox.directories_root` | `string` | `''` | If you have `hhvm.sandbox.from_common_root` enabled, this value will be prepended to your common root.
@@ -308,7 +306,7 @@ A sandbox is commonly used in conjunction with [debugging](#debugger) to debug H
 
 These options are used to allow you to use the `hphpd` debugger remotely via a sandbox. HHVM must be running in [server mode](/hhvm/basic-usage/server), as there needs to be a server process on which to attach.
 
-These are the common `.ini` file options to set to enable HHVM to start a debugger in server mode. 
+These are the common `.ini` file options to set to enable HHVM to start a debugger in server mode.
 
 ```
 hhvm.sandbox.sandbox_mode=1
@@ -687,4 +685,6 @@ These are settings that are currently not used in the codebase.
 | `hhvm.enable_alternative` | `int` | `0`
 | `hhvm.server.enable_cuf_async` | `bool` | `false`
 | `hhvm.server.enable_static_content_m_map` | `bool` | `true`
-| `hhvm.server.lib_event_sync_send` | `bool` | `true` 
+| `hhvm.server.lib_event_sync_send` | `bool` | `true`
+| `hhvm.server.response_queue_count` | `int` | `0`
+| `hhvm.server.shutdown_listen_no_work` | `int` | `-1`
