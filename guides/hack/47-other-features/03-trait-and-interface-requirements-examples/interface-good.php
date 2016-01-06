@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReq;
+namespace Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqGood;
 
 abstract class Machine {
   public function openDoors(): void {
@@ -27,25 +27,10 @@ class AirBus extends Machine implements Fliers {
   }
 }
 
-// Having this will not only cause a typechecker error, but also cause a fatal
-// error in HHVM since we did not meet the interface requirement (extending
-// Machine).
-class Paper implements Fliers {
-  public function fly(): bool {
-    return false;
-  }
-}
-
 function run(): void {
-  // This code will actually not run in HHVM because of the fatal mentioned
-  // above.
   $ab = new AirBus();
   var_dump($ab);
   var_dump($ab->takeOff());
-  $p = new AirBus();
-  var_dump($p);
-  var_dump($p->takeOff());
 }
 
 run();
-

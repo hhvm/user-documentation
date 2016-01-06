@@ -1,0 +1,4 @@
+File "%strait-bad.php", line 31, characters 7-11:
+Failure to satisfy requirement: Hack\UserDocumentation\OtherFeatures\TIR\Examples\TraitReqBad\Machine (Typing[4111])
+File "%strait-bad.php", line 18, characters 19-25:
+Required here

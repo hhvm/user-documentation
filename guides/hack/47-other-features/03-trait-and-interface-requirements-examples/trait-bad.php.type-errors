@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\OtherFeatures\TIR\Examples\TraitReq;
+namespace Hack\UserDocumentation\OtherFeatures\TIR\Examples\TraitReqBad;
 
 abstract class Machine {
   public function openDoors(): void {
@@ -25,14 +25,6 @@ trait Plane {
   }
 }
 
-class AirBus extends Machine implements Fliers {
-  use Plane;
-
-  public function fly(): bool {
-    return true;
-  }
-}
-
 // Having this will not only cause a typechecker error, but also cause a fatal
 // error in HHVM since we did not meet the trait requirement.
 class Paper implements Fliers {
@@ -46,10 +38,7 @@ class Paper implements Fliers {
 function run(): void {
   // This code will actually not run in HHVM because of the fatal mentioned
   // above.
-  $ab = new AirBus();
-  var_dump($ab);
-  var_dump($ab->takeOff());
-  $p = new AirBus();
+  $p = new Paper();
   var_dump($p);
   var_dump($p->takeOff());
 }

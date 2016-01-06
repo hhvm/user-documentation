@@ -21,14 +21,22 @@ require extends <class name>;
 
 ## Traits
 
-Here is an example of a trait introducing a class and interface requirement and shows a class that meets the requirement and a class that does not.
+Here is an example of a trait introducing a class and interface requirement and shows a class that meets the requirement.
 
-@@ trait-and-interface-requirements-examples/trait.php.type-errors @@
+@@ trait-and-interface-requirements-examples/trait-good.php @@
+
+Here is an example of a trait introducing a class and interface requirement and shows a class that *does not* meet the requirement.
+
+@@ trait-and-interface-requirements-examples/trait-bad.php.type-errors @@
 
 **NOTE**: `require extends` should be taken literally. The class must extend the required class; thus the actual required class **does not** meet that requirement. This is to avoid some subtle circular dependencies when checking requirements.
 
 ## Interfaces
 
-Here is an example of an interface introducing a class requirement and shows a class that meets the requirement and a class that does not.
+Here is an example of an interface introducing a class requirement and shows a class that meets the requirement.
 
-@@ trait-and-interface-requirements-examples/interface.php.type-errors @@
+@@ trait-and-interface-requirements-examples/interface-good.php @@
+
+Here is an example of an interface introducing a class requirement and shows a class that *does not* meet the requirement.
+
+@@ trait-and-interface-requirements-examples/interface-bad.php.type-errors @@
