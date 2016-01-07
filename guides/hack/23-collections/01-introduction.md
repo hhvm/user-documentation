@@ -59,6 +59,6 @@ Type | Description
 [`Map`](/hack/reference/class/Map/) | Mutable, `string` or `int`eger-indexed, ordered sequence of values. Values can be of any type. Order is remembered. This is most similar to the `array` in usage.
 [`ImmMap`](/hack/reference/class/ImmMap/) | An immutable version of `Map`. Once the `ImmMap` is created, elements cannot be changed, removed or added.
 [`Set`](/hack/reference/class/Set/) | Mutable, ordered set of unique values. The values can be only `int` or `string`. There are no keys in a `Set`.
-[`ImmSet`](/hack/reference/class/ImmSet/) | An immutable version of `Set`. Once the `SetMap` is created, elements cannot be changed, removed or added.
+[`ImmSet`](/hack/reference/class/ImmSet/) | An immutable version of `Set`. Once the `ImmSet` is created, elements cannot be changed, removed or added.
 [`Pair`](/hack/reference/class/Pair/) | An immutable sequence of exactly two values. The keys are `0` and `1`. They are similar to [tuples](../types/type-system.md), but less flexible.
 
