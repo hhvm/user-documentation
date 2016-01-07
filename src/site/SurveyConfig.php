@@ -4,7 +4,7 @@ namespace HHVM\UserDocumentation;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class SurveyConfig {
-  const SurveyMode MODE = SurveyMode::ACTIVE;
+  const SurveyMode MODE = SurveyMode::DISABLED;
 
   const string STATE_COOKIE = 'user_survey_state';
   const string BUCKET_COOKIE = 'user_survey_bucket';
