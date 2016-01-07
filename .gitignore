@@ -14,6 +14,7 @@ LocalConfig.php
 .sass-cache
 .bundle
 bourbon/
+.DS_Store
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
