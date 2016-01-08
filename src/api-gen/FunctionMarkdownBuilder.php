@@ -71,7 +71,7 @@ final class FunctionMarkdownBuilder {
     $md = "### Description\n\n";
 
     $md .=
-      "```Hack\n<?hh\n".
+      "```HackSignature\n<?hh\n".
       Stringify::signature($this->yaml['data']).
       "\n```\n\n";
 

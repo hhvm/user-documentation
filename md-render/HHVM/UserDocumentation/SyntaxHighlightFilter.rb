@@ -29,11 +29,13 @@ module HHVM
     class SyntaxHighlightFilter < HTML::Pipeline::Filter
       def call
         doc.search('pre').each do |node|
-          lang = node['lang'] || 'hack'
+          orig_lang = node['lang'] || 'hack'
+          lang = orig_lang
 
-          if lang.downcase == 'hack'
+          if lang.downcase == 'hack' || lang.downcase == 'hacksignature'
             lang = 'php'
           end
+
           lexer = Pygments::Lexer[lang]
           next unless lexer
 
@@ -44,6 +46,19 @@ module HHVM
             klass = node['class']
             klass = "#{klass} highlight highlight-#{lang}"
             node["class"] = klass
+          end
+
+          if orig_lang.downcase == 'hacksignature'
+            node = node.children[0] # pre
+
+            # strip out the '<?hh' and any whitespace
+            node.children.each do |child|
+              if child.text =~ /^(<\?|hh|\s*)$/
+                child.remove
+                next
+              end
+              break
+            end
           end
         end
         doc
