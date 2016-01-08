@@ -53,13 +53,13 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 |---------|------|---------|------------
 | `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
 | `hhvm.server.error_document404` | `string` | `''` | The default 404 error document that will be served when a 404 error occurs.
-| `hhvm.server_variables` | `Map` | *empty* | Set the contents of the `$_SERVER` variable. You set them in the form of `hhvm.server_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.server_variables` | `Map<string>` | *empty* | Set the contents of the `$_SERVER` variable. You set them in the form of `hhvm.server_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.env_variables` | `Map` | *empty* | Set the contents of the `$_ENV` variable. You set them in the form of `hhvm.env_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.static_file.extensions` | `Map` | (see description) | Map of filename extensions to content types for use by the proxygen server. The defaults are [https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32](https://gist.github.com/JoelMarcey/6ce7acda06a475afcb32). You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.php_file.extensions` | `Map` | *empty* | Normally, `.php` and `.hh` are treated as source code. With this setting you can add other file extensions to be treated as source code. You set them in the form of `hhvm.php_file.extensions["pp"]=".pp"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.server.forbidden_file_extensions` | `Set` | *empty* | Map of filename extensions that will not be loaded by the server. You set them in the form of `hhvm.server.forbidden_file_extensions[]=".exe"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.static_file.extensions` | `Map<string>` | (see description) | Map of filename extensions to content types for use by the proxygen server. The defaults are [below](#static-file-extension-defaults). You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.php_file.extensions` | `Map<string>` | *empty* | Normally, `.php` and `.hh` are treated as source code. With this setting you can add other file extensions to be treated as source code. You set them in the form of `hhvm.php_file.extensions["pp"]=".pp"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.server.forbidden_file_extensions` | `Set<string>` | *empty* | Map of filename extensions that will not be loaded by the server. You set them in the form of `hhvm.server.forbidden_file_extensions[]=".exe"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.server.allow_duplicate_cookies` | `bool` | `!hhvm.force_hh` | If enabled, this allows duplicate cookies for a name-domain-path triplet.
-| `hhvm.server.allowed_exec_cmds` | `Vector` | *empty* | A whitelist of acceptable process commands for something like `pcntl_exec`. This setting is only effective if `hhvm.server.whitelist_exec` is `true`. You set them in the form of `hhvm.server.allowed_exec_cmds[]="cmd"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.server.allowed_exec_cmds` | `Vector<string>` | *empty* | A whitelist of acceptable process commands for something like `pcntl_exec`. This setting is only effective if `hhvm.server.whitelist_exec` is `true`. You set them in the form of `hhvm.server.allowed_exec_cmds[]="cmd"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.server.always_populate_raw_post_data` | `bool` | `false` | Generally, if the content type is multipart/form-data, `$HTTP_RAW_POST_DATA` should not always be available. If this is enabled, then that data will always be available.
 | `hhvm.server.always_use_relative_path` | `bool` | `false` | If enabled, files will be looked up and invoked via a relative path. In [sandbox](#sandbox) mode, files always use a relative path.
 | `hhvm.server.backlog` | `int` | 128 | The maximum queue length for incoming connections.
@@ -155,8 +155,217 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.http.default_timeout` | `int` | 30 | HTTP default timeout, in seconds.
 | `hhvm.http.slow_query_threshold` | `int` | 5000 | If a query takes longer than this setting, it is logged as a slow query.
 | `hhvm.pid_file` | `string` | `www.pid` | The location of the server process id file.
-| `hhvm.static_file.generators` | `Set` | *empty* | Dynamic files that serve up static content. This is not normally set. You set them in the form of `hhvm.static_file.generators[]="/path/to"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.static_file.files_match` | `Vector` | *empty* | A list of file extensions that will have http transport headers added to them. **This setting is currently not retrievable via `ini_get()`**. This is not normally set. You set them in and `.ini` file with the form of `hhvm.static_file.files_match[pattern]="[regex](here)*"`, `hhvm.static_file.files_match[headers][]="header1"`, `hhvm.static_file.files_match[headers][]="header2"`. You need a `pattern` and at least one `header`.
+| `hhvm.static_file.generators` | `Set<string>` | *empty* | Dynamic files that serve up static content. This is not normally set. You set them in the form of `hhvm.static_file.generators[]="/path/to"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.static_file.files_match` | `Vector<string>` | *empty* | A list of file extensions that will have http transport headers added to them. The format of this setting is [below](#static-file-files-match-format). You need a `pattern` and at least one `header`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
+| `hhvm.server.high_priority_end_points` | `Set<string>` | *empty* | A list of http endpoints that will be given request priority. The form is `/endpoint`.
+| `hhvm.ip_block_map`| `Object` | *empty* | A set of IP information that will be blocked or allowed per endpoint. The format for this setting is [below](#ip-block-map-format). You need a `location` and at least one `allow` or `deny`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
+| `hhvm.satellites` | `Object` | *empty* | If you have various ports for different types of servers, such as an RPC server. The format for this setting is [below](#satellite-format). You need at least a `type` and a `port`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
+| `hhvm.virtual_host`| `Object` | *empty* | You can map server domains as various [virtual hosts](https://en.wikipedia.org/wiki/Virtual_hosting) with a lot of settings described [below](#virtual-host-format). You need at least a `prefix` or a `pattern`. **This setting is currently not retrievable via `ini_get()`**.
+| `hhvm.tiers` | `Object` | *empty* | COMING SOON to ini. Allows you to override settings based on various tier settings like CPU, machine name, etc.
+
+### Static File Extension Defaults
+
+These are the default file extensions for `hhvm.static_file.extensions`:
+
+```
+array(11) {
+  ["zip"]=>
+  string(15) "application/zip"
+  ["jpeg"]=>
+  string(10) "image/jpeg"
+  ["html"]=>
+  string(9) "text/html"
+  ["css"]=>
+  string(8) "text/css"
+  ["gif"]=>
+  string(9) "image/gif"
+  ["mp3"]=>
+  string(10) "audio/mpeg"
+  ["png"]=>
+  string(9) "image/png"
+  ["tif"]=>
+  string(10) "image/tiff"
+  ["jpg"]=>
+  string(10) "image/jpeg"
+  ["tiff"]=>
+  string(10) "image/tiff"
+  ["txt"]=>
+  string(10) "text/plain"
+}
+```
+
+### Static File Files Match Format
+
+This the ini format for `hhvm.static_file.files_match`:
+
+```
+hhvm.static_file.files_match[pattern]   = "[regex](here)*"
+hhvm.static_file.files_match[headers][] = "header1"
+hhvm.static_file.files_match[headers][] = "header2"
+```
+
+### IP Block Map Format
+
+This is an example of the ini format for `hhvm.ip_block_map`.
+
+```
+hhvm.ip_block_map[0][location]     = /endpoint
+hhvm.ip_block_map[0][allow_first]  = true
+hhvm.ip_block_map[0][ip][allow][0] = 127.0.0.1
+hhvm.ip_block_map[0][ip][deny][0]  = 8.32.0.0/24
+hhvm.ip_block_map[0][ip][deny][1]  = aaaa:bbbb:cccc:dddd:eeee:ffff:1111::/80
+```
+
+allow_first` basically says whether you allow an ip by default or not. You can then have other endpoints with `[1]`, `[2]`, etc.
+
+### Satellite Format
+
+The options you can give for `hhvm.satellites` are:
+
+```
+Satellites {
+  NAME {
+    Type = RPCServer | InternalPageServer | DanglingPageServer
+
+    Port = 0  # disabled
+    ThreadCount = 5
+
+    # only for RPCServer
+    MaxRequest = 500
+    MaxDuration = 120    # in seconds
+    TimeoutSeconds = 30  # default to RequestTimeoutSeconds
+    RequestInitFunction = on_init
+    RequestInitDocument = filename
+    Password = authentication
+    Passwords {
+      * = password
+    }
+    # only for InternalPageServer
+    BlockMainServer = true
+    URLs {
+      * = pattern
+    }
+  }
+}
+```
+
+This is an example of the ini format for `hhvm.satellites`.
+
+```
+hhvm.satellites[rpc][type] = RPCServer
+hhvm.satellites[rpc][port] = 9999
+hhvm.satellites[rpc][request_init_document] = my/rpc/rpc.php
+hhvm.satellites[rpc][request_init_function] = init_me
+hhvm.satellites[rpc][password] = abcd0987
+hhvm.satellites[rpc][passwords][] = abcd0987
+hhvm.satellites[ips][type] = InternalPageServer
+hhvm.satellites[ips][block_main_server] = false
+hhvm.satellites[ips][urls][] = url/here
+```
+
+### Virtual Host Format
+
+The options you can give to `hhvm.virtual_host` are:
+
+
+```
+VirtualHost {
+  NAME {
+    Disabled = false
+    Prefix = prefix.
+    Pattern = regex pattern
+    PathTranslation = html
+    CheckExistenceBeforeRewrite = true
+    ServerName =
+    ServerVariables {
+      name = value
+    }
+    Overwrite = {
+      [default][setting] = new value
+    }
+
+    RewriteRules {
+      * {
+        pattern = regex pattern same as Apache's
+        to = target format same as Apache's
+        qsa = false
+        redirect = 0 (default: off) | 302 | 301 | other status code
+
+        conditions {
+          * {
+            pattern = regex pattern to match
+            type = host | request
+            negate = false
+          }
+        }
+      }
+    }
+
+    IpBlockMap {
+      # in same format as the IpBlockMap example above
+    }
+
+    # Remove certain query string parameters from access log.
+    LogFilters {
+      * {
+        # regex pattern to match a URL
+        url = (empty means matching all URLs)
+
+        # names of parameters to remove from query string
+        params = {
+          * = parameter name
+        }
+
+        # alternatively, use regex pattern to replace with empty string.
+        pattern = (empty means hiding entire query string)
+
+        # optionally, specify what values to replace with
+        value = (by default it's empty, removing the query parameter)
+      }
+    }
+  }
+}
+```
+
+This is an example of the ini format for `hhvm.virtual_hosts`:
+
+```
+hhvm.server.allowed_directories[] =/ var/www
+hhvm.server.allowed_directories[] = /usr/bin
+hhvm.virtual_host[flibtest][prefix] = my.
+hhvm.virtual_host[flibtest][path_translation] = flib/_bin
+hhvm.virtual_host[flibtest][server_name] = my.example.org
+hhvm.virtual_host[flibtest][log_filters][0][url] = function/searchme
+hhvm.virtual_host[flibtest][log_filters][0][params][0] = v
+hhvm.virtual_host[flibtest][log_filters][0][params][1] = t
+hhvm.virtual_host[flibtest][log_filters][0][params][2] = btoken
+hhvm.virtual_host[flibtest][log_filters][0][params][3] = ptoken
+hhvm.virtual_host[flibtest][log_filters][0][value] = INSERTED
+hhvm.virtual_host[flibtest][log_filters][1][url] = property/searchme
+hhvm.virtual_host[flibtest][log_filters][1][pattern] = #thePattern#
+hhvm.virtual_host[flibtest][log_filters][1][value] = BETWEEN
+hhvm.virtual_host[upload][prefix] = upload.
+hhvm.virtual_host[upload][server_variables][TFBENV] = 8
+hhvm.virtual_host[upload][overwrite][server][allowed_directories][0] = /var/www
+hhvm.virtual_host[upload][overwrite][server][allowed_directories][1] = /mnt
+hhvm.virtual_host[upload][overwrite][server][allowed_directories][2] = /tmp
+hhvm.virtual_host[upload][overwrite][server][allowed_directories][3] = /var/tmp/tap
+hhvm.virtual_host[upload][overwrite][server][max_post_size] = 100MB
+hhvm.virtual_host[upload][overwrite][server][upload][upload_max_file_size] = 100MB
+hhvm.virtual_host[upload][overwrite][server][request_timeout_seconds] = 120
+hhvm.virtual_host[upload][path_translation] = html
+hhvm.virtual_host[default][path_translation] = htm
+hhvm.virtual_host[default][log_filters][0][url] = method/searchme
+hhvm.virtual_host[default][log_filters][0][params][0] = q
+hhvm.virtual_host[default][log_filters][0][params][1] = s
+hhvm.virtual_host[default][log_filters][0][params][2] = atoken
+hhvm.virtual_host[default][log_filters][0][params][3] = otoken
+hhvm.virtual_host[default][log_filters][0][value] = REMOVED
+hhvm.virtual_host[default][rewrite_rules][common][pattern] = /html/common/
+hhvm.virtual_host[default][rewrite_rules][common][to] = http://example.org
+hhvm.virtual_host[default][rewrite_rules][common][qsa] = true
+hhvm.virtual_host[default][rewrite_rules][common][redirect] = 301
+```
 
 ## Feature flags
 
