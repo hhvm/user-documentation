@@ -1,4 +1,4 @@
-We support prebuilt packages on variety of Ubuntu and Debian platforms. 
+We support prebuilt packages on variety of Ubuntu and Debian platforms.
 
 While you can [build from source](/hhvm/installation/building-from-source), it is generally advisable for ease of installation and stability to use a prebuilt package.
 
@@ -81,17 +81,24 @@ In order to get only LTS updates in the 3.9 series, change that to:
 The above commands all install the standard `hhvm` package, which is the stable, release configuration. We have a few other packages available in the repo as well:
 
 ```
-# If you are getting segfaults
+# Stable debug build that is suitable for debuggers like gdb
 sudo apt-get install hhvm-dbg
 
-# Living on the edge (rebuilt everyday, unstable)
+# Stable developer package that contains the headers so you can create extensions, etc.
+sudo apt-get install hhvm-dev
+
+# Nightly build (Living on the edge, rebuilt everyday, possibly unstable)
 sudo apt-get install hhvm-nightly
 
-# Segfaults in the nightly
+# Nightly debug build
 sudo apt-get install hhvm-nightly-dbg
+
+# Nightly developer build
+sudo apt-get install hhvm-dev-nightly
+
 ```
 
-## Mirrors 
+## Mirrors
 
 There are a variety of volunteered owned mirrors to get the packages, if the default one shown in these instructions are slow. Just change the prefix in your `/etc/apt/sources.list.d/hhvm.list` (still leave the subdirectory of your distro).
 
