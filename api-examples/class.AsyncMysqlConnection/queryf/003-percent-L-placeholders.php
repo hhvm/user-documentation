@@ -1,6 +1,6 @@
 <?hh
 
-namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Conn\Queryf\Basic;
+namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Conn\Queryf\PerL;
 
 require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
 
@@ -17,27 +17,25 @@ async function connect(\AsyncMysqlConnectionPool $pool):
   );
 }
 
-async function get_data(\AsyncMysqlConnection $conn, string $col, int $id):
+async function get_data(\AsyncMysqlConnection $conn, Vector<int> $ids):
   Awaitable<\AsyncMysqlQueryResult> {
   return await $conn->queryf(
-    'SELECT %C FROM test_table where userID = %d',
-    $col,
-    $id
+    'SELECT name FROM test_table where userID IN (%Ld)',
+    $ids
   );
 }
 
-async function simple_queryf(): Awaitable<int> {
+async function percent_L_queryf(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
-  $result = await get_data($conn, 'name', 1);
-  $x = $result->numRows();
-  $result = await get_data($conn, 'name', 2);
+  $ids = Vector {1, 2};
+  $result = await get_data($conn, $ids);
   $conn->close();
-  return $x + $result->numRows();
+  return $result->numRows();
 }
 
 function run(): void {
-  $r = \HH\Asio\join(simple_queryf());
+  $r = \HH\Asio\join(percent_L_queryf());
   var_dump($r);
 }
 
