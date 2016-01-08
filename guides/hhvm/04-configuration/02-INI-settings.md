@@ -21,7 +21,7 @@ These are the options that are probably the most commonly used on a day-to-day b
 | `hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
 | `hhvm.server.source_root` | `string` | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in [repo-authoritative mode](/hhvm/advanced-usage/repo-authoritative).
 | `hhvm.force_hh` | `bool` | `false` | If `true`, all code is treated as Hack code, even if it starts with `<?php`.  This setting affects `hhvm.enable_xhp` by forcing it to be `true` as well. This setting affects `hhvm.hack.lang.ints_overflows_to_ints` and `hhvm.log.always_log_unhandled_exceptions` by being the default value for them when they is not explicitly set. This setting affects `hhvm.server.allow_duplicate_cookies` by being the opposite value for a default when it is not explicitly set.
-| `hhvm.log.file` | `string` | standard error | The location of the HHVM error log file.
+| `hhvm.log.file` | `string` | standard error (`stderr`) | The location of the HHVM error log file. If `hhvm.log.use_cronolog` is set, then this setting will be used as the cron output file.
 | `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
 | `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
 | `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you want to serve up requests for the HHVM server. The default is `"proxygen"`, but you can also specify `"fastcgi"`.
@@ -392,29 +392,69 @@ These settings enable various features in the runtime, including [Hack](/hack/)-
 
 ## Logging
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.log.access_log_default_format | default access log format if not specified, uses Apache access log formatting | `%h %l %u %t \"%r\" %>s %b` |
-| hhvm.log.admin_log.file | | |
-| hhvm.log.admin_log.format | | |
-| hhvm.log.admin_log.sym_link | | |
-| hhvm.log.always_escape_log | whether to escape characters in error log | _True_ |
-| hhvm.log.always_log_unhandled_exceptions | Unhandled exceptions are PHP fatal errors, and AlwaysLogUnhandledExceptions will make sure they get logged even if a user’s error handler is installed for them. | true |
-| hhvm.log.drop_cache_chunk_size | | |
-| hhvm.log.file | The location of the HHVM error log file | stderr |
-| hhvm.log.header | Header includes timestamp, process id, 34 thread id, request id (counted from 1 since server starts), message id (counted from 1 since request started) and extra header text from command line option (see util/logger.cpp for implementation). | _False_ |
-| hhvm.log.header_mangle | This setting controls logging of potentially malicious headers.  If HeaderMangle is greater than 0, then HipHop will log one in every n requests where a header collision has occurred.  Such collisions almost certainly indicate a malicious attempt to set headers which are either set or filtered by a proxy. | _False_ |
-| hhvm.log.level | | |
-| hhvm.log.max_messages_per_request | Controls maximum number of messages each request can log | -1 |
-| hhvm.log.native_stack_trace | | |
-| hhvm.log.no_silencer | even when silencer (`@`) operator is used, still output errors | _False_ |
-| hhvm.log.runtime_error_reporting_level | (numeric) corresponds to "error_reporting" in PHP | 8191 = E_ALL |
-| hhvm.log.sym_link | if using cronolog, create a symlink to the current log specified by `hhvm.log.file` | _False_ |
-| hhvm.log.use_cronolog | whether to switch logging to a new file every X time, useful for rotating logs | _False_ |
-| hhvm.log.use_log_file | | |
-| hhvm.log.use_request_log | | |
-| hhvm.log.use_syslog | log to syslog | _False_ |
-| hhvm.log.access | | |
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.log.access_log_default_format` | `string` | `%h %l %u %t \"%r\" %>s %b` | The access log format. if not specified, the default uses Apache access log formatting.
+| `hhvm.log.admin_log.file` | `string` | `''` |  For the admin server, this will be the location and name for its log file.
+| `hhvm.log.admin_log.format` | `string` | `%h %t %s %U` | The admin access log format.
+| `hhvm.log.admin_log.sym_link` | `string` | `''` | You can provide a symlink to the `hhvm.log.admin_log.file`.
+| `hhvm.log.always_escape_log` | `bool` | `true` | By default, escape characters in the logs are escaped. Disable this to not escape them.
+| `hhvm.log.always_log_unhandled_exceptions` | `bool` | `hhvm.force_hh` | Unhandled exceptions are HHVM fatal errors, and AlwaysLogUnhandledExceptions will make sure they get logged even if a user’s error handler is installed for them. The default value is equivalent to what you set for `hhvm.force_hh`.
+| `hhvm.log.drop_cache_chunk_size` | `int` | `1 << 20` (1 MB) | When dropping the cache, logging will happen after this many bytes have been written.
+| `hhvm.log.file` | `string` | standard error (`stderr`) | The location of the HHVM error log file. If `hhvm.log.use_cronolog` is set, then this setting will be used as the cron output file.
+| `hhvm.log.force_error_reporting_level` | `int` | `0` | A bitmask that will be ORed (`|`) with `hhvm.log.runtime_error_reporting_level` to determine the actual error reporting level.
+| `hhvm.log.header` | `bool` | `false` | If enabled, the request header is logged. Header includes timestamp, process id, 34 thread id, request id (counted from 1 since the server started), message id (counted from 1 since request started) and extra header text from command line option.
+| `hhvm.log.header_mangle` | `int` | `0` | This setting controls the logging of potentially malicious headers.  If set to a value greater than 0, then HHVM will log one in every `n` (where `n` is the value of the setting) requests where a header collision has occurred.  Such collisions almost certainly indicate a malicious attempt to set headers which are either set or filtered by a proxy.
+| `hhvm.log.level` | `string` | `Warning` | The level of output to the log. From least to most verbose: `None`, `Error`, `Warning`, `Info`, `Verbose`.
+| `hhvm.log.max_messages_per_request` | `int` | `-1` | Controls maximum number of messages each request can log. If positive, then that number will be the threshold. Otherwise, unlimited messages per request can be logged.
+| `hhvm.log.native_stack_trace` | `bool` | `true` | Turn off to disable the logging of the native stack trace. There are two kinds of stacktraces: (1) C++ stacktrace, which is hex-encoded and printed on every line of logging right after header. These stacktraces can be translated into human readable frames by running "-m translate" with the compiled program. (2) PHP stacktrace from code injection. Generated C++ code injects stacktrace preparation code into every frame of functions and methods.
+| `hhvm.log.no_silencer` | `bool` | `false` | If enabled, even when silencer (`@`) operator is used, still output errors.
+| `hhvm.log.runtime_error_reporting_level` | `int` | `HPHP_ALL` | A numeric setting similar to [error_reporting](http://php.net/manual/en/errorfunc.constants.php) in PHP. See [below](#logging_error-reporting-levels) for the possible settings.
+| `hhvm.log.sym_link` | `string` | `''` | You can provide a symlink to the `hhvm.log.file`. If `hhvm.log.use_cronolog` is set, then this setting will be used to create a symlink to the cron output file.
+| `hhvm.log.use_cronolog` | `bool` | `false` | If enabled, this will switch to a rotating log paradigm via [`cronolog`](http://linux.die.net/man/1/cronolog).
+| `hhvm.log.use_log_file` | `bool` | `true` | The default logging mechanism via the log file specified by `hhvm.log.file`.
+| `hhvm.log.use_request_log` | `bool` | `false` | If enabled, requests are logged into a special file where the root of that file is specified `hhvm.sandbox.logs_root`.
+| `hhvm.log.use_syslog` | `bool` | `false` | Also log to the system log (syslog).
+| `hhvm.log.access` | `Map<string>` | *empty* | The location and format of explicit access logs. You set them in the form of `hhvm.log.access["file"]="format"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file. **This setting is currently not retrievable via `ini_get()`**
+
+### Error Reporting Levels
+
+Here are the error reporting levels you can provide to `hhvm.log.runtime_error_reporting_level`.
+
+```
+ERROR = 1,
+WARNING = 2,
+PARSE = 4, // not supported
+NOTICE = 8,
+CORE_ERROR = 16, // not supported
+CORE_WARNING = 32, // not supported
+COMPILE_ERROR = 64, // not supported
+COMPILE_WARNING = 128, // not supported
+USER_ERROR = 256,
+USER_WARNING = 512,
+USER_NOTICE = 1024,
+STRICT = 2048,
+RECOVERABLE_ERROR = 4096,
+PHP_DEPRECATED = 8192, // DEPRECATED conflicts with macro definitions
+USER_DEPRECATED = 16384,
+
+/*
+ * PHP's fatal errors cannot be fed into error handler. HipHop can. We
+ * still need "ERROR" bit, so old PHP error handler can see this error.
+ * The extra 24th bit will help people who want to find out if it's
+ * a fatal error only HipHop throws or not.
+ */
+FATAL_ERROR = ERROR | (1 << 24), // 16777217
+
+PHP_ALL = ERROR | WARNING | PARSE | NOTICE | CORE_ERROR | CORE_WARNING |
+  COMPILE_ERROR | COMPILE_WARNING | USER_ERROR | USER_WARNING |
+  USER_NOTICE | RECOVERABLE_ERROR | PHP_DEPRECATED | USER_DEPRECATED,
+
+HPHP_ALL = PHP_ALL | FATAL_ERROR,
+
+/* Errors that can be upgraded to E_USER_ERROR. */
+UPGRADEABLE_ERROR = WARNING | USER_WARNING | NOTICE | USER_NOTICE
+```
 
 ## Admin Server
 
