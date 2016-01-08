@@ -49,15 +49,18 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 
 ## Server Mode
 
+These are settings that are available to you when running HHVM in [server mode](/hhvm/basic-usage/server). In normal, everyday usage, you will not use many of these settings. They are described here for completeness, and in case you might ever need them.
+
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
-| `hhvm.server.error_document404` | `string` | `''` | The default 404 error document that will be served when a 404 error occurs.
-| `hhvm.server_variables` | `Map<string>` | *empty* | Set the contents of the `$_SERVER` variable. You set them in the form of `hhvm.server_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.env_variables` | `Map` | *empty* | Set the contents of the `$_ENV` variable. You set them in the form of `hhvm.env_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.static_file.extensions` | `Map<string>` | (see description) | Map of filename extensions to content types for use by the proxygen server. The defaults are [below](#static-file-extension-defaults). You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.http.default_timeout` | `int` | 30 | HTTP default timeout, in seconds.
+| `hhvm.http.slow_query_threshold` | `int` | 5000 | If a query takes longer than this setting, it is logged as a slow query.
 | `hhvm.php_file.extensions` | `Map<string>` | *empty* | Normally, `.php` and `.hh` are treated as source code. With this setting you can add other file extensions to be treated as source code. You set them in the form of `hhvm.php_file.extensions["pp"]=".pp"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.server.forbidden_file_extensions` | `Set<string>` | *empty* | Map of filename extensions that will not be loaded by the server. You set them in the form of `hhvm.server.forbidden_file_extensions[]=".exe"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.pid_file` | `string` | `www.pid` | The location of the server process id file.
+| `hhvm.ip_block_map`| `Object` | *empty* | A set of IP information that will be blocked or allowed per endpoint. The format for this setting is [below](#server-mode__ip-block-map-format). You need a `location` and at least one `allow` or `deny`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
+| `hhvm.satellites` | `Object` | *empty* | If you have various ports for different types of servers, such as an RPC server. The format for this setting is [below](#server-mode__satellite-format). You need at least a `type` and a `port`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
+| `hhvm.server_variables` | `Map<string>` | *empty* | Set the contents of the `$_SERVER` variable. You set them in the form of `hhvm.server_variables[X]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.server.allow_duplicate_cookies` | `bool` | `!hhvm.force_hh` | If enabled, this allows duplicate cookies for a name-domain-path triplet.
 | `hhvm.server.allowed_exec_cmds` | `Vector<string>` | *empty* | A whitelist of acceptable process commands for something like `pcntl_exec`. This setting is only effective if `hhvm.server.whitelist_exec` is `true`. You set them in the form of `hhvm.server.allowed_exec_cmds[]="cmd"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.server.always_populate_raw_post_data` | `bool` | `false` | Generally, if the content type is multipart/form-data, `$HTTP_RAW_POST_DATA` should not always be available. If this is enabled, then that data will always be available.
@@ -67,6 +70,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.connection_timeout_seconds` | `int` | `-1` | The maximum number of seconds a connection is allowed to stand idle after its previous read or write. If `-1`, this defaults to the server default (e.g., for Proxygen](/hhvm/basic-usage/proxygen) this is 50 seconds).
 | `hhvm.server.dangling_wait` | `int` | `0` | The number of seconds to wait for a dangling server to respond. A [dangling server](https://github.com/facebook/hhvm/blob/master/hphp/doc/server.dangling_server) allows the possibility for an older version of a server to run on a different port in case a page needs to be served from that old version.
 | `hhvm.server.default_charset_name` | `string` | `''` | This is used for PHP responses in case no other charset has been set explicitly. `"UTF-8"` is an example of a possible setting.
+| `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
 | `hhvm.server.default_server_name_suffix` | `string` | `''` | If a server name is not specified for a virtual host, then the virtual prefix is prepended to this setting to create a server name.
 | `hhvm.server.enable_early_flush` | `bool` | `true` | Allows chunked encoding responses.
 | `hhvm.server.enable_keep_alive` | `bool` | `true` | If enabled, the server will remain open for connection until `hhvm.server.connection_timeout_seconds` timeout.
@@ -74,6 +78,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.enable_output_buffering` | `bool` | `false` | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer.
 | `hhvm.server.enable_ssl` | `bool` | `false` | If enabled, HHVM will allow SSL connections to come through. Related to `hhvm.server.ssl_port`, `hhvm.server.ssl_certificate_file`, `hhvm.server.ssl.certificate_key_file`, `hhvm.server.ssl_certificate_dir`.
 | `hhvm.server.enable_static_content_from_disk` | `bool` | `true` | A static content cache creates one single file from all static contents, including css, js, html, images and any other non-PHP files. Normally this is prepared by the compiler at compilation time, but it can also be prepared at run-time, if `hhvm.server.source_root` points to real file directory and this setting is `true`. Otherwise, use `hhvm.server.file_cache` to point to the static content cache file created by the compiler.
+| `hhvm.server.error_document404` | `string` | `''` | The default 404 error document that will be served when a 404 error occurs.
 | `hhvm.server.error_document500` | `string` | `''` | The default 500 error document that will be served when a 500 error occurs.
 | `hhvm.server.evil_shutdown` | `bool` | `true` | Kill anything listening on the server port. This is enabled by default. When stopping a server, HHVM first tries to gracefully shut it down. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file. If that doesn't work, then `hhvm.server.evil_shutdown` is invoked.
 | `hhvm.server.exit_on_bind_fail` | `bool` | `false` | If the HHVM server cannot start because there is an older HHVM server running, if this flag is enabled, then the current HHVM just quits trying to start the server. If this is not enabled, HHVM try harsher measures to stop the older server so the current one can start up again.
@@ -87,6 +92,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.file_socket` | `string` | `''` | If this string is not empty, then a file socket is used instead of an IP address for the server.
 | `hhvm.server.fix_path_info` | `bool` | `false` | If enabled, this changes [fastcgi](/hhvm/advanced-usage/fastCGI) path from `SCRIPT_FILENAME` to `PATH_TRANSLATED`.
 | `hhvm.server.forbidden_as404` | `bool` | `false` | If the extension of a URI is in the ``hhvm.server.forbidden_file_extensions` map, and this option is enabled, then that extension cannot be used as a 404 option either.
+| `hhvm.server.forbidden_file_extensions` | `Set<string>` | *empty* | Map of filename extensions that will not be loaded by the server. You set them in the form of `hhvm.server.forbidden_file_extensions[]=".exe"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
 | `hhvm.server.force_chunked_encoding` | `bool` | `false` | If enabled, the server will only send chunked encoding responses for uncompressed payloads.
 | `hhvm.server.force_compression.cookie` | `string` | `''` | For compression, if this string is set and the cookie is present in the request, then compression should happen.
 | `hhvm.server.force_compression.param` | `string` | `''` | For compression, if this string is set and the parameter is present in the request, then compression should happen.
@@ -95,6 +101,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.graceful_shutdown_wait` | `int` | `0` | The amount of time to wait for a graceful shutdown of a server. If it doesn't shutdown during that period of time, then `hhvm.server.harsh_shutdown` may be invoked.
 | `hhvm.server.gzip_compression_level` | `int` | `3` | When compression with gzip, this is the level of compression that will be used. `1` is fastest. `9` is best.
 | `hhvm.server.harsh_shutdown` | `bool` | `true` | When stopping a server, HHVM first tries to gracefully shutdown any previous incarnation of the server. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file associated with the server process.
+| `hhvm.server.high_priority_end_points` | `Set<string>` | *empty* | A list of http endpoints that will be given request priority. The form is `/endpoint`.
 | `hhvm.server.host` | `string` | `''` | The default host for the server.
 | `hhvm.server.http_safe_mode` | `bool` | `false` | If enabled, then you cannot open an HTTP stream.
 | `hhvm.server.image_memory_max_bytes` | `int` | `0` | The maximum memory size for image process. If `0`, then it will be set to `hhvm.server.upload.upload_max_file_size` * 2.
@@ -152,16 +159,11 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 | `hhvm.server.whitelist_exec` | `bool` | `false` | If enabled, then this sets a whitelist of commands that will be executed, given by `hhvm.server.allowed_exec_cmds`.
 | `hhvm.server.whitelist_exec_warning_only` | `bool` | `false` | If enabled, and `hhvm.server.whitelist_exec` is enabled, if you try to execute a command outside the whitelist, you will only get a warning.
 | `hhvm.server.xfb_debug_ssl_key` | `string` | `bool` | If `hhvm.expose_xfb_debug` or `hhvm.expose_xfb_server` is enabled, this will be the SSL key that will be used.
-| `hhvm.http.default_timeout` | `int` | 30 | HTTP default timeout, in seconds.
-| `hhvm.http.slow_query_threshold` | `int` | 5000 | If a query takes longer than this setting, it is logged as a slow query.
-| `hhvm.pid_file` | `string` | `www.pid` | The location of the server process id file.
+| `hhvm.static_file.extensions` | `Map<string>` | (see description) | Map of filename extensions to content types for use by the proxygen server. The defaults are [below](#server-mode__static-file-extension-defaults). You set them in the form of `hhvm.static_file.extensions[]=Y`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.static_file.files_match` | `Vector<string>` | *empty* | A list of file extensions that will have http transport headers added to them. The format of this setting is [below](#server-mode__static-file-files-match-format). You need a `pattern` and at least one `header`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
 | `hhvm.static_file.generators` | `Set<string>` | *empty* | Dynamic files that serve up static content. This is not normally set. You set them in the form of `hhvm.static_file.generators[]="/path/to"`. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
-| `hhvm.static_file.files_match` | `Vector<string>` | *empty* | A list of file extensions that will have http transport headers added to them. The format of this setting is [below](#static-file-files-match-format). You need a `pattern` and at least one `header`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
-| `hhvm.server.high_priority_end_points` | `Set<string>` | *empty* | A list of http endpoints that will be given request priority. The form is `/endpoint`.
-| `hhvm.ip_block_map`| `Object` | *empty* | A set of IP information that will be blocked or allowed per endpoint. The format for this setting is [below](#ip-block-map-format). You need a `location` and at least one `allow` or `deny`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
-| `hhvm.satellites` | `Object` | *empty* | If you have various ports for different types of servers, such as an RPC server. The format for this setting is [below](#satellite-format). You need at least a `type` and a `port`. **This setting is currently not retrievable via `ini_get()`**. This is not normally set.
-| `hhvm.virtual_host`| `Object` | *empty* | You can map server domains as various [virtual hosts](https://en.wikipedia.org/wiki/Virtual_hosting) with a lot of settings described [below](#virtual-host-format). You need at least a `prefix` or a `pattern`. **This setting is currently not retrievable via `ini_get()`**.
 | `hhvm.tiers` | `Object` | *empty* | COMING SOON to ini. Allows you to override settings based on various tier settings like CPU, machine name, etc.
+| `hhvm.virtual_host`| `Object` | *empty* | You can map server domains as various [virtual hosts](https://en.wikipedia.org/wiki/Virtual_hosting) with a lot of settings described [below](#server-mode__virtual-host-format). You need at least a `prefix` or a `pattern`. **This setting is currently not retrievable via `ini_get()`**.
 
 ### Static File Extension Defaults
 
