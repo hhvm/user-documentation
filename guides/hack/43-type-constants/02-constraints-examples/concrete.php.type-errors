@@ -1,0 +1,35 @@
+<?hh
+
+namespace Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass;
+
+class ParentWithConstraint {
+  const type Foo as arraykey = arraykey;
+}
+
+class Child extends ParentWithConstraint {
+  // good since string is arraykey and parent constrained to arraykey.
+  const type Foo = string;
+}
+
+class ParentWithoutConstraint {
+  const type Foo = arraykey;
+}
+
+class BadChild extends ParentWithoutConstraint {
+  // Although int is an arraykey, parent not constrained to arraykey, so this
+  // is a typechecker error.
+  const type Foo = int;
+}
+
+
+/***
+
+concrete-type-errors.php:18:7,14: This object is of type Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\BadChild (Typing[4110])
+  concrete-type-errors.php:18:24,46: It is incompatible with this object of type Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\ParentWithoutConstraint
+because some declarations are incompatible.
+Read the following to see why:
+  concrete-type-errors.php:21:14,16: The assigned type of this type constant is inconsistent with its parent
+  concrete-type-errors.php:15:20,27: This is an array key (int/string)
+  concrete-type-errors.php:21:20,22: It is incompatible with an int
+
+***/

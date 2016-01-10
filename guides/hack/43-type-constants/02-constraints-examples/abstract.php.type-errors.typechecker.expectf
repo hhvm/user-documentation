@@ -1,0 +1,12 @@
+File "%sabstract.php", line 13, characters 7-17:
+This object is of type Hack\UserDocumentation\TypeConstants\Constraints\Examples\AbsClass\SecondChild (Typing[4110])
+File "%sabstract.php", line 13, characters 27-35:
+It is incompatible with this object of type Hack\UserDocumentation\TypeConstants\Constraints\Examples\AbsClass\AbsParent
+because some declarations are incompatible.
+Read the following to see why:
+File "%sabstract.php", line 6, characters 23-25:
+Unable to satisfy constraint on this type constant
+File "%sabstract.php", line 6, characters 30-37:
+This is an array key (int/string)
+File "%sabstract.php", line 14, characters 20-24:
+It is incompatible with a float

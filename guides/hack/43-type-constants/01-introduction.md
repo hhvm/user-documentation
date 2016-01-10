@@ -8,15 +8,17 @@ Now imagine that you realize that sometimes the ID of a user could be a `string`
 
 @@ introduction-examples/generics.php @@
 
-Notice how we had to propagate the addition of a type parameter to the the class itself and *all* the extended it. Now think if we had hundreds and hundreds of places that used the traits and interfaces; we would have to update them as well.
+Notice how we had to propagate the addition of a type parameter to the the class itself and *all* that extended it. Now think if we had hundreds and hundreds of places that used the traits and interfaces; we would have to update them as well.
 
 When it comes to class type parameterization, Hack introduces an alternative feature to generics called *type constants*. Instead of types being declared as parameters directly on the class itself, type constants allow the type to be declared as class member constants instead.
 
 @@ introduction-examples/type-constants.php @@
 
-Notice the syntax `abstract const type <name> [ as <constraint> ];`. All type constants are `const` and use the keyword `type`. You specify a name for the constant, along with any possible constraints that must be adhered to. See [below](#syntax) for information about syntax.
+Notice the syntax `abstract const type <name> [ as <constraint> ];`. All type constants are `const` and use the keyword `type`. You specify a name for the constant, along with any possible [constraints](/hack/type-constants/constraints) that must be adhered to. See [below](#syntax) for information about syntax.
 
 Notice too that only the class itself and direct children needed to be updated with the new type information.
+
+Type constants are a bit analogous to [abstract methods](http://php.net/manual/en/language.oop5.abstract.php), where base classes define method signatures without bodies, and subclasses provide the actual implementations.
 
 ## Syntax
 
