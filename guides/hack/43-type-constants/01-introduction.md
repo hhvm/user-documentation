@@ -1,4 +1,4 @@
-Imagine that you have a non-generic class, and some various `extends` to that class. 
+Imagine that you have a non-generic class, and some various `extends` to that class.
 
 @@ introduction-examples/non-parameterized.php @@
 
@@ -33,7 +33,7 @@ abstract const type <name> [as <constraint>]; // constraint optional
 For example:
 
 ```
-class A {
+abstract class A {
   abstract const type Foo;
   abstract const type Bar as arraykey;
 }
@@ -45,33 +45,31 @@ Then in concrete children of that subclass:
 class C extends A {
   const type Foo = string;
   // Has to be int or string since was constrained to arraykey
-  const type Bar = int; 
+  const type Bar = int;
 }
 ```
 
 ### Concrete class
 
-You can declare a type constant in a concrete class, but it requires a special type of syntax:
+You can declare a type constant in a concrete class, but it requires different syntax:
 
 ```
-const type <name> as mixed = mixed;
+const type <name> [as <constraint>] = <type>; // constraint optional
 ```
-
-Basically you are declaring that the type constant can be pretty much any type. And in any child class, if no type constraint is specified, then `mixed` will be the default.
 
 For example:
 
 ```
-class NA {
-  const type Foo as mixed = mixed;
+class NoChild {
+  const type Foo = ?string;
 }
 
-class C1 extends NA {
-  const type Foo = int;
+class Parent {
+  const type Foo as arraykey = arraykey; // need constraint for child override
 }
 
-class C2 extends NA {
-  const type Foo; // defaults to mixed
+class Child extends Parent {
+  const type Foo = string; // a string is an arraykey, so ok
 }
 ```
 
@@ -86,5 +84,5 @@ this::<name>
 e.g.,
 
 ```
-this::T;
+this::T
 ```
