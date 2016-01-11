@@ -468,32 +468,29 @@ The [admin server](/hhvm/advanced-usage/admin-server) allows the administrator o
 
 ## Debug Settings
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.debug.clear_input_on_success | automatically delete requests that had a 200 response code when recording input | _True_ |
-| hhvm.debug.core_dump_email | email address to email core dump to | |
-| hhvm.debug.core_dump_report | whether or not to generate a core dump report | _True_ |
-| hhvm.debug.core_dump_report_directory | where to put the core dump report | `/tmp` |
-| hhvm.debug.full_backtrace | | |
-| hhvm.debug.local_memcache | | |
-| hhvm.debug.memcache_read_only | | |
-| hhvm.debug.native_stack_trace | | |
-| hhvm.debug.profiler_output_dir | Building with GOOGLE_CPU_PROFILER set lets you collect profiles from the server or from the command line, this option lets you control where profiles get created | |
-| hhvm.debug.record_input | whether to record bad HTTP requests to a file `/tmp/hphp_request_XXXXXX"` | _False_ |
-| hhvm.debug.server_error_message | send the error message to the output stream - corresponds to "display_errors" in PHP | |
-| hhvm.debug.simple_counter.sample_stack_count | | |
-| hhvm.debug.simple_counter.sample_stack_depth | | |
-| hhvm.debug.translate_leak_stack_trace | | |
-| hhvm.debug.translate_source | translate C++ file and line numbers into original PHP file and line numbers | _False_ |
-| hhvm.dump_ast | | |
-| hhvm.dump_bytecode | Before executing a PHP file, dump out its HHBC along with some interesting metadata, then continue executing the file. Useful only for debugging. | _False_ |
-| hhvm.dump_hhas | Instead of executing a PHP file, dump out an hhas file and exit. Useful for debugging, or if you need to directly write some hhas and need an easy way to get started. | _False_ |
-| hhvm.dump_ring_buffer_on_crash | | |
-| hhvm.dump_tc | dump contents of translation cache when executing program from the command line | _False_ |
-| hhvm.dump_tc_anchors | | |
-| hhvm.keep_perf_pid_map | don't delete the perf pid map | _False_ |
-| hhvm.perf_data_map | | |
-| hhvm.perf_pid_map | whether to generate a perf pid map | _True_ |
+These settings are useful when you are debugging actual HHVM issues.
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.debug.clear_input_on_success` | `bool` | `true` | Automatically delete requests that had a 200 response code when recording input. This allows for the capturing of error-prone requests without cluttering up with good ones.
+| `hhvm.debug.core_dump_email` | `string` | `''` | When HHVM produces a core dump, if this is set to an email address, then an email will be sent with the core dump information.
+| `hhvm.debug.core_dump_report` | `bool` | `true` | If enabled, HHVM will generate a core dump report as necessary.
+| `hhvm.debug.core_dump_report_directory` | `string` | `/tmp` | When a core dump is produced, it will be put in this directory.
+| `hhvm.debug.native_stack_trace` | `bool` | `false` | If enabled, a native static trace will be produced.
+| `hhvm.debug.profiler_output_dir` | `string` | `/tmp` | Building with GOOGLE_CPU_PROFILER set lets you collect profiles from the server or from the command line. This option lets you control where the profiles get created.
+| `hhvm.debug.record_input` | `bool` | `false` | If enabled, record bad HTTP requests to a file `/tmp/hphp_request_XXXXXX`.
+| `hhvm.debug.server_error_message` | `bool` | `false` | If enabled, turn on error messages in HTTP responses with detailed stacktrace information. Send the error message to the output stream - corresponds to `display_errors` in PHP.
+| `hhvm.debug.simple_counter.sample_stack_count` | `int` | `0` | HHVM has an implementation of a set of [request-local named counters](https://github.com/facebook/hhvm/commit/e3896255cb329bfe09dee9e0e9f3fa19fcd7abd3). This setting controls how many samples of the named counter should there be.
+| `hhvm.debug.simple_counter.sample_stack_depth` | `int` | `5` | For each sample stack from `hhvm.debug.simple_counter.sample_stack_count`, this controls the depth of each sample.
+| `hhvm.dump_ast` | `bool` | `false` | If enabled, the AST will be dumped to `stdout`.
+| `hhvm.dump_bytecode` | `int` | `0` | If positive, before executing a PHP file, dump out its HHBC along with some interesting metadata, then continue executing the file. If `1` then the user PHP bytecode is dumpted. If `2` then user PHP and System library information is dumped. Useful only for debugging.
+| `hhvm.dump_hhas` | `bool` | `false` | If enabled, instead of executing a PHP file, dump out an hhas (HHVM Assembly) file and exit. Useful for debugging, or if you need to directly write some hhas and need an easy way to get started.
+| `hhvm.dump_ring_buffer_on_crash` | `int` | `0` | If positive, then when HHVM crashes, the ring buffer will be dumped.
+| `hhvm.dump_tc` | `bool` | `false` | If enabled, dump contents of translation cache when executing program from the command line.
+| `hhvm.dump_tc_anchors` | `bool` | `false` | If enabled, dump the translation cache anchors.
+| `hhvm.keep_perf_pid_map` | `bool` | `false` | If enabled, don't delete the perf pid map.
+| `hhvm.perf_data_map` | `bool` | `false` | If enabled, generate a perf data map.
+| `hhvm.perf_pid_map` | `bool` | `true` | If enabled, generate a perf pid map.
 
 ## Sandbox
 
@@ -939,3 +936,8 @@ These are settings that are currently not used in the codebase.
 | `hhvm.server.lib_event_sync_send` | `bool` | `true`
 | `hhvm.server.response_queue_count` | `int` | `0`
 | `hhvm.server.shutdown_listen_no_work` | `int` | `-1`
+| `hhvm.debug.full_backtrace` | `bool` | `false`
+| `hhvm.debug.local_memcache` | `bool` | `false`
+| `hhvm.debug.memcache_read_only` | `bool` | `false`
+| `hhvm.debug.translate_leak_stack_trace` | `bool` | `false`
+| `hhvm.debug.translate_source` | `bool` | `false` | Used to translate C++ file and line numbers into original PHP file and line numbers.
