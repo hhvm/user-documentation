@@ -75,9 +75,9 @@ class Child extends Parent {
 }
 ```
 
-### Referencing the Type Constant
+## Using Type Constants
 
-Given that the type constant is a first-class constant of the class, you can reference it using `this`, like the normal way you would reference a static constant.
+Given that the type constant is a first-class constant of the class, you can reference it using `this`. As a [type annotation](/hack/types/annotations), you annotate a type constant like:
 
 ```
 this::<name>
@@ -88,3 +88,17 @@ e.g.,
 ```
 this::T
 ```
+
+You can think of `this::` in a similar manner as the [`this` return type](/hack/types/type-system#this).
+
+This example shows the real benefit of type constants. The property is defined in `Base`, but can have different types depending on the context of where it is being used.
+
+@@ introduction-examples/annotation.php @@
+
+## Other Rules
+
+There are some other rules with respect to type constants:
+
+- Like [class constants](http://php.net/manual/en/language.oop5.constants.php), type constants have `public` visibility.
+- Outside the immediate class hierarchy of where a type constant is declared, you can refer to them via `classname::typeConstantName` (e.g., `Foo::T`).
+- Like [generics](/hack/generics/erasure), type constants can only be used in [type annotations](/hack/types/annotations). They cannot be used in other language constructs like `new`, `instanceof()`.
