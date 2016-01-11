@@ -3,15 +3,14 @@ Async can be used effectively with the basic, built in infrastructure in HHVM. T
 * [`async`](/hack/async/introduction), [`await`](/hack/async/awaitables), [`Awaitable`](/hack/async/awaitables)
 * `HH\Asio\v()`, `HH\Asio\m()`
 
-However, there are cases when you want to convert some collection of values to awaitables or you want to filter some awaitables out of a collection of awaitables. These types of scenarios come up when you are creating multiple awaitables to await in parallel. 
+However, there are cases when you want to convert some collection of values to awaitables or you want to filter some awaitables out of a collection of awaitables. These types of scenarios come up when you are creating multiple awaitables to await in parallel.
 
-You can use functions like `array_filter()`, or the methods on the Hack collection classes, etc. to do this mapping and filtering. However, there is a set of utility functions, specifically created for async, that will make your code more streamlined. 
+You can use functions like `array_filter()`, or the methods on the Hack collection classes, etc. to do this mapping and filtering. However, there is a set of utility functions, specifically created for async, that will make your code more streamlined.
 
 Note: These functions are built in to HHVM 3.11 and greater. If you are using a version of HHVM less than 3.11, you can add `hhvm/asio-utilities` to your `composer.json` file as these functions are available in the [`hhvm/asio-utilities` Github repo](https://github.com/hhvm/asio-utilities).
 
 Name    | Returns             | Mapped | Filtered | Has Key | Wrapped Exception
 --------|---------------------|--------|----------|---------|------------------
-`HH\Asio\curl_exec()`   | `Vector<Tv>`         | x      | x        | x       | x
 `HH\Asio\vm()` | `Vector<Tv>`        | ✓      | x        | x       | x
 `HH\Asio\vmk()` | `Vector<Tv>`        | ✓      | x        | ✓       | x
 `HH\Asio\vf()`  | `Vector<Tv>`        | x      | ✓        | x       | x
@@ -48,7 +47,7 @@ From left to right in the function name, here is what the letters represent:
 
 *Fourth*
 
-* `w`: result or exception wrapper. 
+* `w`: result or exception wrapper.
 
 ## Other Convenience Functions
 
@@ -66,9 +65,9 @@ Let's say you have the following:
 
 ```
 async function baz(): Awaitable<(X, int)> {
-  list ($a, $b) = 
+  list ($a, $b) =
     await \HH\Asio\v(array(
-      returns_an_X($foo), 
+      returns_an_X($foo),
       returns_an_int($bar),
     ));
 
@@ -96,7 +95,7 @@ assert (is_int($b));
 return tuple($a, $b);
 ```
 
-In the future there will be a [variadic](/hack/other-features/variadic-functions) function `HH\Asio\va()` that will better support this paradigm. e.g, 
+In the future there will be a [variadic](/hack/other-features/variadic-functions) function `HH\Asio\va()` that will better support this paradigm. e.g,
 
 ```
 va(Awaitable<T1>, Awaitable<T2>, ..., Awaitable<Tn>): Awaitable<(T1, T2, T3)>
