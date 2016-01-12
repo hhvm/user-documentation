@@ -618,14 +618,14 @@ hhvm -m debug -h localhost --debug-sandbox another_site
 | `hhvm.tutorial` | `bool` | `false` | If enabled, you can go through the debugger tutorial.
 | `hhvm.tutorial.visited` | `bool` | `false` | If enabled, this will tell the debugger you have already seen the tutorial.
 | `hhvm.print_level` | `int` | `5` | The amount of printing you want in the debugger.
-| `hhvm.source_root` | `string` | `` | If explicitly set, then the debugger will look for source code there. Otherwise, it is where the debugger is running from.
-| `hhvm.small_step` | | |
-| `hhvm.stack_args` | | |
-| `hhvm.max_code_lines` | | |
-| `hhvm.utf8` | | |
-| `hhvm.short_print_char_count` | | |
-| `hhvm.macros` | | |
-| `hhvm.never_save_config` | | |
+| `hhvm.source_root` | `string` | `''` | If explicitly set, then the debugger will look for source code there. Otherwise, it is where the debugger is running from.
+| `hhvm.small_step` | `bool` | `false` | If enabled, small steps will be used instead of entire lines.
+| `hhvm.stack_args` | `bool` | `true` | If disabled, then stack arguments will not be shown in the debugger.
+| `hhvm.max_code_lines` | `int` | `-1` | If positive, then limit the code shown after a step to that number of code lines. If `0`, then do not show any code after a step or next. If `-1`, then just show the default number of lines.
+| `hhvm.utf8` | `bool` | `true` | If enabled, then use UTF8 by default.
+| `hhvm.short_print_char_count` | `int` | `200` | Display at most count characters when doing `= command`.
+| `hhvm.macros` | `Map` | *empty* | A custom list of macros that you want to be able to run in the debugger. You set them in the form of `hhvm.macros[name][]="cmd1"`, `hhvm.macros[name][]="cmd2"`, etc.. If you are setting just one, command line `-d` is fine. Otherwise, for multiple settings, use a `.ini` file.
+| `hhvm.never_save_config` | `bool` | `false` | If enabled, then your debugger configuration settings will not be saved.
 
 ## Error Handling
 
