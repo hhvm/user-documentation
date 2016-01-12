@@ -115,7 +115,7 @@ class Stringify {
       $ret = substr($ret, 0, -2); // remove trailing ', ''
     }
     $ret .= ' {...}';
-    if ($ns !== null) {
+    if ($ns !== '') {
       $ret .= ' }';
     }
     $ret .= "\n";
