@@ -629,20 +629,17 @@ hhvm -m debug -h localhost --debug-sandbox another_site
 
 ## Error Handling
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.error_handling.assert_active | enable `assert()` evaluation | _False_ |
-| hhvm.error_handling.assert_warning | issue a PHP warning for each failed assertion | _False_ |
-| hhvm.error_handling.call_user_handler_on_fatals | Call a callback installed via `set_error_handler` when a fatal error occurs. | _False_ |
-| hhvm.error_handling.enable_hip_hop_errors | | |
-| hhvm.error_handling.max_loop_count | | |
-| hhvm.error_handling.max_serialized_string_size | throw exception if unserializing a string greater than this amount | `64 * 1024 * 1024` (64 MB) |
-| hhvm.error_handling.no_infinite_recursion_detection | do not raise error if infinite recursion is detected | _False_ |
-| hhvm.error_handling.notice_frequency | log every N notices, where N is this number | 1 |
-| hhvm.error_handling.throw_exception_on_bad_method_call | throw an error if calling a method on a non-object | _True_ |
-| hhvm.error_handling.warn_too_many_arguments | | |
-| hhvm.error_handling.warning_frequency | log every N warnings, where N is this number | 1 |
-| hhvm.hack_array_warn_frequency | | |
+These settings are used to help set or throttle certain errors/warnings/etc. that may arise in your PHP or Hack code.
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.error_handling.call_user_handler_on_fatals` | `bool` | `false` | Call a callback installed via `set_error_handler()` when a fatal error occurs.
+| `hhvm.error_handling.max_serialized_string_size` | throw exception if unserializing a string greater than this amount | `64 * 1024 * 1024` (64 MB) |
+| `hhvm.error_handling.no_infinite_recursion_detection` | `bool` | `false` | If enabled, do not raise an error if infinite recursion is detected.
+| `hhvm.error_handling.notice_frequency` | `int` | `1` | Log every N notices, where N is this number. If the value is `<=0`, then no notices are logged.
+| `hhvm.error_handling.throw_exception_on_bad_method_call` | `bool` | `true` | If enabled, throw an error if calling a method on a non-object.
+| `hhvm.error_handling.upgrade_level` | `int` | `0` | Bitmask of errors to upgrade to `E_USER_ERROR`. Only `E_WARNING`, `E_USER_WARNING`, `E_NOTICE`, and `E_USER_NOTICE` are supported.
+| `hhvm.error_handling.warning_frequency` | `int` | `1` | Log every N warnings, where N is this number. If the value is `<=0`, then no warnings are logged.
 
 ## XML
 
@@ -941,3 +938,7 @@ These are settings that are currently not used in the codebase.
 | `hhvm.debug.memcache_read_only` | `bool` | `false`
 | `hhvm.debug.translate_leak_stack_trace` | `bool` | `false`
 | `hhvm.debug.translate_source` | `bool` | `false` | Used to translate C++ file and line numbers into original PHP file and line numbers.
+| `hhvm.error_handling.enable_hip_hop_errors` | `bool` | `true`
+| `hhvm.error_handling.max_loop_count` | `int` | `0`
+| `hhvm.error_handling.warn_too_many_arguments` | `bool` | `false`
+| `hhvm.hack_array_warn_frequency` | `int` | `0` | 
