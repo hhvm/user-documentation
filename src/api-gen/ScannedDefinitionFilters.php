@@ -131,6 +131,7 @@ abstract final class ScannedDefinitionFilters {
       'SplQueue',
       'SplStack',
       'VectorIterator',
+      'WaitHandle',
 
       ////////////////
       // Interfaces //
