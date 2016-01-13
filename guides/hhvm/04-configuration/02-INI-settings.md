@@ -17,6 +17,7 @@ These are the options that are probably the most commonly used on a day-to-day b
 | `hhvm.server_variables` | `array` | `$_SERVER` | Sets the contents of the `$_SERVER` variable.
 | `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way.
 | `hhvm.hack.lang.look_for_typechecker` | `bool` | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../advanced-usage/repo-authoritative.md).
+| hhvm.jit | `bool` | `true` | Enables the [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation) [compiler](http://hhvm.com/blog/2027/faster-and-cheaper-the-evolution-of-the-hhvm-jit). This is turned on by default for all supported distributions. Times when you might want to turn this off is for a [short running script](/hhvm/FAQ/faq#why-is-my-code-slow-at-startup) that may not make use of the JIT.
 | `hhvm.jit_enable_rename_function` | `bool` | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
 | `hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
 | `hhvm.server.source_root` | `string` | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in [repo-authoritative mode](/hhvm/advanced-usage/repo-authoritative).
@@ -652,56 +653,65 @@ The following are settings that you can use for `libxml` or `simplexml`, as spec
 
 ## JIT Settings
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.jit | Enables the JIT | _False_ on Windows, _True_ elsewhere |
-| hhvm.jit_always_interp_one | | |
-| hhvm.jit_disabled_by_hphpd | | |
-| hhvm.jit_enable_rename_function | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance. | _False_ |
-| hhvm.jit_global_data_size | | |
-| hhvm.jit_global_translation_limit | | |
-| hhvm.jit_keep_dbg_files | | |
-| hhvm.jit_llvm | Experimental LLVM backend, see [this blog post](http://hhvm.com/blog/10205/llvm-code-generation-in-hhvm) for more information | _False_ |
-| hhvm.jit_loops | | |
-| hhvm.jit_max_translations | Limits the number of translations allowed per `srckey`, and once this limit is hit any further retranslation requests will result in a call out to the interpreter. | 12 |
-| hhvm.jit_no_gdb | | |
-| hhvm.jit_pgo | | |
-| hhvm.jit_pgo_hot_only | | |
-| hhvm.jit_pgo_region_selector | | |
-| hhvm.jit_pgo_release_vv_min_percent | | |
-| hhvm.jit_pgo_threshold | | |
-| hhvm.jit_pgo_use_post_conditions | | |
-| hhvm.jit_profile_interp_requests | | |
-| hhvm.jit_profile_path | | |
-| hhvm.jit_profile_record | | |
-| hhvm.jit_profile_requests | | |
-| hhvm.jit_pseudomain | Whether or not to JIT pseudomains (code that doesn't exist inside a class) | _True_ |
-| hhvm.jit_region_selector | | |
-| hhvm.jit_relocation_size | | |
-| hhvm.jit_require_write_lease | | |
-| hhvm.jit_stress_lease | | |
-| hhvm.jit_stress_type_pred_percent | | |
-| hhvm.jit_target_cache_size | | |
-| hhvm.jit_timer | | |
-| hhvm.jit_trans_counters | | |
-| hhvm.jit_type_prediction | | |
-| hhvm.jit_unlikely_dec_ref_percent | | |
-| hhvm.jit_use_vtune_api | | |
+These settings can allow fine-grain tuning of HHVM's [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation) [compiler](http://hhvm.com/blog/2027/faster-and-cheaper-the-evolution-of-the-hhvm-jit).
 
-## JIT Translation Cache Size
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.jit` | `bool` | `true` | Enables the JIT compiler. This is turned on by default for all supported distributions. Times when you might want to turn this off is for a [short running script](/hhvm/FAQ/faq#why-is-my-code-slow-at-startup) that may not make use of the JIT.
+| `hhvm.jit_always_interp_one` | `bool` | `false` |
+| `hhvm.jit_disabled_by_hphpd` | `bool` | `false` | If enabled, the JIT is disabled in the debugger.
+| `hhvm.jit_enable_rename_function` | `bool` | `false` | If `false`, `rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
+| `hhvm.jit_global_translation_limit` | `int` | `-1` | How often the JIT does translation before falling back to interpreted code. The default is to always JIT.
+| `hhvm.jit_keep_dbg_files` | `bool` | `false` | If enabled, elf writer based debug files will be kept.
+| `hhvm.jit_llvm` | `int` | `0` | If enabled, then use the experimental LLVM backend, see [this blog post](http://hhvm.com/blog/10205/llvm-code-generation-in-hhvm) for more information. If `0`, LLVM is not used. If `1`, LLVM is used for TransOptimize translations. If `2`, LLVM is used for all translations.
+| `hhvm.jit_loops` | `bool` | `true` | Disable this if you don't want loops to be compiled by the JIT, but rather interpreted.
+| `hhvm.jit_max_translations` | `int` | `12` | Limits the number of translations allowed per `srckey`, and once this limit is hit any further retranslation requests will result in a call out to the interpreter.
+| `hhvm.jit_no_gdb` | `bool` | `true` | If set to `false`, the the JIT will be enabled when running HHVM in GDB.
+| `hhvm.jit_profile_interp_requests` | `int` | `1` or `11` | Profile interpreted requests per this number of times. If HHVM was compiled in debug mode, then `1`. Otherwise (e.g., release mode) `11`.
+| `hhvm.jit_profile_path` | | |
+| `hhvm.jit_profile_record` | | |
+| `hhvm.jit_profile_requests` | | |
+| `hhvm.jit_pseudomain` | `bool` | `true | Whether or not to JIT pseudomains (code that doesn't exist inside a class). This is `false` by default on ARM.
+| `hhvm.jit_region_selector` | | |
+| `hhvm.jit_relocation_size` | | |
+| `hhvm.jit_require_write_lease` | | |
+| `hhvm.jit_stress_lease` | | |
+| `hhvm.jit_stress_type_pred_percent` | | |
+| `hhvm.jit_target_cache_size` | | |
+| `hhvm.jit_timer` | | |
+| `hhvm.jit_trans_counters` | | |
+| `hhvm.jit_type_prediction` | | |
+| `hhvm.jit_unlikely_dec_ref_percent` | | |
+| `hhvm.jit_use_vtune_api` | | |
+
+### JIT Translation Cache Size
 
 The translation cache stores the JIT'd code. It's split into several sections depending on how often the code is (or is expected to be) executed. The sum of all the bits has to be less than 2GB.
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.jit_a_size | Size in bytes of main translation cache. | 62914560 (60 MB) |
-| hhvm.jit_a_cold_size | Size of cold code cache. Code that is unlikely to be executed is deemed cold. (Recommended: 0.5x hhvm.jit_a_size) | 25165824 (24 MB) |
-| hhvm.jit_a_frozen_size | Size of extremely cold code cache. Code that is almost never executed, or executed once and then freed up, is deemed frozen. (Recommended: 1x hhvm.jit_a_size) | 41943040 (40 MB)|
-| hhvm.jit_a_hot_size | Size of hot code cache. (Enabled only in RepoAuthoritative mode) | 0 |
-| hhvm.jit_a_prof_size | Size of profiling code cache. (Recommended: 1x hhvm.jit_a_size) | 67108864 (64 MB) |
-| hhvm.jit_a_max_usage | Maximum amount of code to generate. (Recommended: 1x hhvm.jit_a_size)| 62914560 (60 MB) |
-| hhvm.tc_num_huge_cold_mb | | |
-| hhvm.tc_num_huge_hot_mb | | |
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.jit_a_size` | `int` | `62914560 (60 MB)` | Size in bytes of main translation cache.
+| `hhvm.jit_a_cold_size` | `int` | `25165824 (24 MB)` | Size of cold code cache. Code that is unlikely to be executed is deemed cold. (Recommended: 0.5x `hhvm.jit_a_size`).
+| `hhvm.jit_a_frozen_size` | `int` | `41943040 (40 MB)` | Size of extremely cold code cache. Code that is almost never executed, or executed once and then freed up, is deemed frozen. (Recommended: 1x `hhvm.jit_a_size`).
+| `hhvm.jit_a_hot_size` | `int` | `0` | Size of hot code cache. (Enabled only in [RepoAuthoritative mode](/hhvm/advanced-usage/repo-authoritative) when `hhvm.repo.authoritative` is `true`).
+| `hhvm.jit_a_prof_size` | `int` | `67108864 (64 MB)` | Size of profiling code cache. (Recommended: 1x `hhvm.jit_a_size`).
+| `hhvm.jit_a_max_usage` | `int` | `62914560 (60 MB)` | Maximum amount of code to generate. (Recommended: 1x `hhvm.jit_a_size`).
+| `hhvm.jit_global_data_size` | `int` | `15728640` (15 MB) | Size of the global data cache.
+| `hhvm.tc_num_huge_cold_mb` | | |
+| `hhvm.tc_num_huge_hot_mb` | | |
+
+### PGO
+
+These are settings of the JIT for [Profile Guided Optimizations](https://en.wikipedia.org/wiki/Profile-guided_optimization).
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.jit_pgo` | `bool` | `true` | Turn on PGO in the JIT. This is disabled by default for ARM.
+| `hhvm.jit_pgo_hot_only` | | |
+| `hhvm.jit_pgo_region_selector` | | |
+| `hhvm.jit_pgo_release_vv_min_percent` | | |
+| `hhvm.jit_pgo_threshold` | | |
+| `hhvm.jit_pgo_use_post_conditions` | | |
 
 ## APC Settings
 
