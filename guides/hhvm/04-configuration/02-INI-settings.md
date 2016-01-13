@@ -643,10 +643,12 @@ These settings are used to help set or throttle certain errors/warnings/etc. tha
 
 ## XML
 
+The following are settings that you can use for `libxml` or `simplexml`, as specified.
+
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| `hhvm.libxml.ext_entity_whitelist` | | |
-| `hhvm.simple_xml.empty_namespace_matches_all` | | |
+| `hhvm.libxml.ext_entity_whitelist` | `string` | `'data'` | Loading of external entities in the libxml extension is disabled by default for security reasons. It can be re-enabled on a per-protocal basis with this setting. It is a comma separated list of protocols. The common ones are `file`, `http`, `compress.zlib`. An example of how the setting is set is: `hhvm._libxml.ext_entity.whitelist=file,http`. **This setting is currently not retrievable via `ini_get()`**.
+| `hhvm.simple_xml.empty_namespace_matches_all` | `bool` | `false` | If enabled, an empty XML namespace matches all namespaces.
 
 ## JIT Settings
 
@@ -941,4 +943,4 @@ These are settings that are currently not used in the codebase.
 | `hhvm.error_handling.enable_hip_hop_errors` | `bool` | `true`
 | `hhvm.error_handling.max_loop_count` | `int` | `0`
 | `hhvm.error_handling.warn_too_many_arguments` | `bool` | `false`
-| `hhvm.hack_array_warn_frequency` | `int` | `0` | 
+| `hhvm.hack_array_warn_frequency` | `int` | `0` |
