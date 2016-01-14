@@ -17,7 +17,7 @@ The error code is retrieved from the actual error message you receive when runni
 
 @@ special-examples/hhfixme.php @@
 
-Let's assume that we were in [partial](./modes.md#partial) mode and now we want to make this file [strict](./modes.md#strict), but we know that call sites will be affected by the annotation of the function because we did some questionable type conversions. We don't want to fix this yet or we don't know how to fix it (although you should fix before runtime since it will now be a runtime error). So we apply `HH_FIXME` to all the call sites that were affected by the change so that you or someone else knows that they need to be fixed. 
+Let's assume that we were in [partial](./modes.md#partial) mode and now we want to make this file [strict](./modes.md#strict), but we know that call sites will be affected by the annotation of the function because we did some questionable type conversions. We don't want to fix this yet or we don't know how to fix it (although you should fix before runtime since it will now be a runtime error). So we apply `HH_FIXME` to all the call sites that were affected by the change so that you or someone else knows that they need to be fixed.
 
 Without `HH_FIXME`, you would have seen something like:
 
@@ -33,7 +33,7 @@ hhfixme.php:29:1,15: Remove all toplevel statements except for requires (Parsing
 
 In this example, you could have also placed the `HH_FIXME` comment on the function itself, with the same effect. But usually it is best to place `HH_FIXME` on the most specific block possible.
 
-**NOTE**: You can have multiple `HH_FIXME` comments on a single line of code, representing the silencing of multiple Hack errors. 
+**NOTE**: You can have multiple `HH_FIXME` comments on a single line of code, representing the silencing of multiple Hack errors.
 
 ## `HH_IGNORE_ERROR`
 
@@ -52,7 +52,7 @@ A canonical use case for `HH_IGNORE_ERROR` is for linting. If you are using [`hh
 
 ## `UNSAFE`
 
-`UNSAFE` (or synonymously `UNSAFE_BLOCK`) silences the typechecker too. But it isn't an action-to-be-taken silencing mechanism. When using `UNSAFE`, you are basically saying that you know this *block of code* is a problem, and you are just going to leave it that way. 
+`UNSAFE` (or synonymously `UNSAFE_BLOCK`) silences the typechecker too. But it isn't an action-to-be-taken silencing mechanism. When using `UNSAFE`, you are basically saying that you know this *block of code* is a problem, and you are just going to leave it that way.
 
 The syntax for `UNSAFE` is:
 
@@ -71,7 +71,7 @@ Try not to use `UNSAFE`, opting for `HH_FIXME` instead. `UNSAFE` is less verbose
 
 ## UNSAFE_EXPR
 
-`UNSAFE_EXPR` is similar to [`UNSAFE`](#unsafe), except turns off the typechecker on a single expression rather than an entire block of code. 
+`UNSAFE_EXPR` is similar to [`UNSAFE`](#unsafe), except turns off the typechecker on a single expression rather than an entire block of code.
 
 THe syntax for `UNSAFE_EXPR` is:
 
@@ -85,6 +85,12 @@ e.g.,
 $foo = /* UNSAFE_EXPR */ $bar::baz();
 ```
 
+Here is a somewhat convoluted, example showing the use of `UNSAFE_EXPR`. You probably wouldn't want to do this in the real world, but hopefully it is straightforward enough to hopefully get the point across.
+
 @@ special-examples/unsafe_expr.php @@
 
 Note the `/* */` style comments for `UNSAFE_EXPR` as opposed to the `//` for [`UNSAFE`](#unsafe). This is important because `// UNSAFE_EXPR` will acutally be parsed as `// UNSAFE`, and may give you unexpected results.
+
+Here is a more real-world example around dynamic property access. In Hack's [strict mode](/hack/typechecker/modes#strict-mode), dynamic property access is not allowed. You can use `UNSAFE_EXPR` to get around that.
+
+@@ special-examples/unsafe_expr_dynamic_prop.php @@
