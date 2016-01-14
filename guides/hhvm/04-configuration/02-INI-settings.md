@@ -655,6 +655,8 @@ The following are settings that you can use for `libxml` or `simplexml`, as spec
 
 These settings can allow fine-grain tuning of HHVM's [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation) [compiler](http://hhvm.com/blog/2027/faster-and-cheaper-the-evolution-of-the-hhvm-jit).
 
+The [hacker's guide](https://github.com/facebook/hhvm/blob/master/hphp/doc/hackers-guide/jit-core.md) goes more in depth nin how the JIT works as well.
+
 | Setting | Type | Default | Description
 |---------|------|---------|------------
 | `hhvm.jit` | `bool` | `true` | Enables the JIT compiler. This is turned on by default for all supported distributions. Times when you might want to turn this off is for a [short running script](/hhvm/FAQ/faq#why-is-my-code-slow-at-startup) that may not make use of the JIT.
@@ -667,22 +669,19 @@ These settings can allow fine-grain tuning of HHVM's [JIT](https://en.wikipedia.
 | `hhvm.jit_loops` | `bool` | `true` | Disable this if you don't want loops to be compiled by the JIT, but rather interpreted.
 | `hhvm.jit_max_translations` | `int` | `12` | Limits the number of translations allowed per `srckey`, and once this limit is hit any further retranslation requests will result in a call out to the interpreter.
 | `hhvm.jit_no_gdb` | `bool` | `true` | If set to `false`, the the JIT will be enabled when running HHVM in GDB.
-| `hhvm.jit_profile_interp_requests` | `int` | `1` or `11` | Profile interpreted requests per this number of times. If HHVM was compiled in debug mode, then `1`. Otherwise (e.g., release mode) `11`.
-| `hhvm.jit_profile_path` | | |
-| `hhvm.jit_profile_record` | | |
-| `hhvm.jit_profile_requests` | | |
+| `hhvm.jit_profile_interp_requests` | `int` | `1` or `11` | Profile interpreted requests per this number of times. For the defaults, if HHVM was compiled in debug mode, then `1`. Otherwise (e.g., release mode) `11`.
+| `hhvm.jit_profile_record` | `bool` | `false` | If enabled, HHVM will record a profile of requests.
+| `hhvm.jit_profile_requests` | `int` | `2147483648` or `500` | The number of requests to profile. For the defaults, if HHVM was compiled in debug mode, then `2147483648`; otherwise (e.g., release mode) `500`.
 | `hhvm.jit_pseudomain` | `bool` | `true` | Whether or not to JIT pseudomains (code that doesn't exist inside a class). This is `false` by default on ARM.
-| `hhvm.jit_region_selector` | | |
-| `hhvm.jit_relocation_size` | | |
-| `hhvm.jit_require_write_lease` | | |
-| `hhvm.jit_stress_lease` | | |
-| `hhvm.jit_stress_type_pred_percent` | | |
-| `hhvm.jit_target_cache_size` | | |
-| `hhvm.jit_timer` | | |
-| `hhvm.jit_trans_counters` | | |
-| `hhvm.jit_type_prediction` | | |
-| `hhvm.jit_unlikely_dec_ref_percent` | | |
-| `hhvm.jit_use_vtune_api` | | |
+| `hhvm.jit_region_selector` | `string` | `tracelet` | The regions of code that will be translating the bytecode to machine code. The default is is single basic blocks, or tracelets. Other options are `method` and `none`.
+| `hhvm.jit_relocation_size` | `int` | `1048576` (1 MB) | The size of code relocation.
+| `hhvm.jit_require_write_lease` | `bool` | `false` |  The write Lease guards write access to the translation caches, srcDB, and TransDB. The term "lease" is meant to indicate that the right of ownership is conferred for a long, variable time: often the entire length of a request. If a request is not actively translating, it will perform a "hinted drop" of the lease: the lease is unlocked but all calls to `acquire(false)`` from other threads will fail for a short period of time.
+| `hhvm.jit_stress_lease` | `bool` | `false` | If HHVM was compiled in debug mode, the you can enable this setting to cede the write lease half the time.
+| `hhvm.jit_target_cache_size` | `int` | `67108864` | The size, in bytes, of the target cache.
+| `hhvm.jit_timer` | `bool` | `true` | Timer is used to track how much CPU time we spend in the different stages of the jit. Typical usage starts and stops timing with construction/destruction of the object, respectively. The stop() function may be called to stop timing early, in case it's not reasonable to add a new scope just for timing.
+| `hhvm.jit_trans_counters` | `bool` | `false` | If enabled, JIT translation profiling counters will be enabled.
+| `hhvm.jit_unlikely_dec_ref_percent` | `int` | `10` | The percentage of ref counted types to destroy.
+| `hhvm.jit_use_vtune_api` | `bool` | `false` | If enabled, the VTune API will be used for profiling.
 
 ### JIT Translation Cache Size
 
@@ -697,8 +696,8 @@ The translation cache stores the JIT'd code. It's split into several sections de
 | `hhvm.jit_a_prof_size` | `int` | `67108864` (64 MB) | Size of profiling code cache. (Recommended: 1x `hhvm.jit_a_size`).
 | `hhvm.jit_a_max_usage` | `int` | `62914560` (60 MB) | Maximum amount of code to generate. (Recommended: 1x `hhvm.jit_a_size`).
 | `hhvm.jit_global_data_size` | `int` | `15728640` (15 MB) | Size of the global data cache.
-| `hhvm.tc_num_huge_cold_mb` | | |
-| `hhvm.tc_num_huge_hot_mb` | | |
+| `hhvm.tc_num_huge_cold_mb` | `int` | `4` | The number of megabytes of cold regions to hold in the translation cache.
+| `hhvm.tc_num_huge_hot_mb` | `int` | `16` | The number of megabytes of hot regions to hold in the tranlsation cache.
 
 ### PGO
 
@@ -707,11 +706,11 @@ These are settings of the JIT for [Profile Guided Optimizations](https://en.wiki
 | Setting | Type | Default | Description
 |---------|------|---------|------------
 | `hhvm.jit_pgo` | `bool` | `true` | Turn on PGO in the JIT. This is disabled by default for ARM.
-| `hhvm.jit_pgo_hot_only` | | |
-| `hhvm.jit_pgo_region_selector` | | |
-| `hhvm.jit_pgo_release_vv_min_percent` | | |
-| `hhvm.jit_pgo_threshold` | | |
-| `hhvm.jit_pgo_use_post_conditions` | | |
+| `hhvm.jit_pgo_hot_only` | `bool` | `false` | If enabled, only profile hot sections of code.
+| `hhvm.jit_pgo_region_selector` | `string` | `hotcfg` | The regions to translate during PGO. The default are hot sections of code.
+| `hhvm.jit_pgo_release_vv_min_percent` | `int` | `10` | The minimum percentage of extra args, varenvs and locals that will be released.
+| `hhvm.jit_pgo_threshold` | `int` | `2` or `5000` | The maximum amount of PGO transacations. For the defaults, `2` when HHVM is compiled in debug mode; `5000` otherwise.
+| `hhvm.jit_pgo_use_post_conditions` | `bool` | `true` | For profiling translations, grab the postconditions to be used for region selection whenever we decide to retranslate.
 
 ## APC Settings
 
