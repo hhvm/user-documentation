@@ -741,25 +741,25 @@ When using HHVM's [Repo-Authoritative](/hhvm/advanced-usage/repo-authoritative) 
 
 ## Statistics
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.stats.enable | enable stats collection | _False_ |
-| hhvm.stats.apc | | _False_|
-| hhvm.stats.enable_hot_profiler | enable xhprof | _True_ |
-| hhvm.stats.max_slot | | _False_ |
-| hhvm.stats.memcache | | _False_ |
-| hhvm.stats.memcache_key | | |
-| hhvm.stats.memory | | _False_ |
-| hhvm.stats.network_io | | _False_ |
-| hhvm.stats.profiler_max_trace_buffer | | |
-| hhvm.stats.profiler_trace_buffer | | |
-| hhvm.stats.profiler_trace_expansion | | |
-| hhvm.stats.slot_duration | in seconds | 600 |
-| hhvm.stats.sql | | _False_ |
-| hhvm.stats.sql_table | | _False_ |
-| hhvm.stats.web | | _False_ |
-| hhvm.stats.xsl | | _False_ |
-| hhvm.stats.xsl_proxy | | |
+These settings allow you to collect various statistics for various parts of the runtime, from web statistics and mysql to memory and the [profiler](https://github.com/facebook/hhvm/blob/master/hphp/doc/profiling.md).
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.stats.enable` | `bool` | `false` | Set this to `true` in order to enable stats collection.
+| `hhvm.stats.apc` | `bool` | `false` | Set this to `true` to enable collection APC statistics.
+| `hhvm.stats.enable_hot_profiler` | `bool` | `true` | Enable the hot profiler and [xhprof](http://php.net/manual/en/book.xhprof.php).
+| `hhvm.stats.max_slot` | `int` | `72` (12 hours) | For each page, we collect stats by time slots. Each time slot is configured as `hhvm.stats.slot_duration` seconds and server internally keeps the number of slots specified by this setting. Inside each slot, we keep a set of stats by page or URL. These stats include 3 built-in ones ("url", "code" and "hit") and many key-value pairs defined by different parts of the system.
+| `hhvm.stats.memory `| `bool` | `false` | Set this to `true` to enable memory statistics.
+| `hhvm.stats.network_io` | `bool` | `false` | Set this to `true` to enable network I/O statistics and status.
+| `hhvm.stats.profiler_max_trace_buffer` | `int` | `0` | The maximum size of a trace buffer in the profiler; if `0`, there is no maximum.
+| `hhvm.stats.profiler_trace_buffer` | `int`| `2000000` | The size of the profiler trace buffer array.
+| `hhvm.stats.profiler_trace_expansion` | `double` | `1.2` | How much bigger to make the profiler trace buffer array when it gets full. `hhvm.stats.profiler_trace_buffer` * this setting.
+| `hhvm.stats.slot_duration` | `int` | `600` (seconds) | How long each slot described in `hhvm.stats.max_slot` is kept.
+| `hhvm.stats.sql` | `bool` | `false` | If set to `true`, this will enable the collection of MySQL connection statistics.
+| `hhvm.stats.sql_table` | `bool` | `false` | If set to `true`, this will enable the collection of MySQL table statistics.
+| `hhvm.stats.web` | `bool` | `false` | If set to `true`, this will enable the collection of web/server statistics.
+| `hhvm.stats.xsl` | `string` | `''` | Stats are written as XML. If this is set to something non-empty, the XSL used for the XML is referred to by that setting.
+| `hhvm.stats.xsl_proxy` | `string` | `''` | Stats are written as XML. If this is set to somehing non-empty, the XSL proxy used for the XML is referred to by that setting.
 
 ## Advanced Settings
 
