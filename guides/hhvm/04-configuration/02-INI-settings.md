@@ -831,31 +831,33 @@ An xbox server provides cross-machine communication, similar to a message queuin
 
 | Setting | Type | Default
 |---------|------|--------
-| hhvm.xbox.default_local_timeout_milli_seconds | `int` | `500`
-| hhvm.xbox.default_remote_timeout_seconds | `int` | `5`
-| hhvm.xbox.process_message_func | `string` | `xbox_process_message`
-| hhvm.xbox.server_info.always_reset | `bool` | `false`
-| hhvm.xbox.server_info.log_info | `bool` | `false`
-| hhvm.xbox.server_info.max_duration | `int` | `120`
-| hhvm.xbox.server_info.max_queue_length | `int` | `INT_MAX`
-| hhvm.xbox.server_info.max_request | `int` | `500`
-| hhvm.xbox.server_info.port | `int` | `0`
-| hhvm.xbox.server_info.request_init_document | `string` | `''`
-| hhvm.xbox.server_info.request_init_function | `string` | `''`
-| hhvm.xbox.server_info.thread_count | `int` | `10`
-| hhvm.xbox.server_info.warmup_document | `string` | `''`
-| hhvm.xbox.password | `string` | `''` (not `ini_get()` enabled)
-| hhvm.xbox.passwords | `Set<string>` | `''` (not `ini_get()` enabled)
+| `hhvm.xbox.default_local_timeout_milli_seconds` | `int` | `500`
+| `hhvm.xbox.default_remote_timeout_seconds` | `int` | `5`
+| `hhvm.xbox.process_message_func` | `string` | `xbox_process_message`
+| `hhvm.xbox.server_info.always_reset` | `bool` | `false`
+| `hhvm.xbox.server_info.log_info `| `bool` | `false`
+| `hhvm.xbox.server_info.max_duration` | `int` | `120`
+| `hhvm.xbox.server_info.max_queue_length` | `int` | `INT_MAX`
+| `hhvm.xbox.server_info.max_request` | `int` | `500`
+| `hhvm.xbox.server_info.port` | `int` | `0`
+| `hhvm.xbox.server_info.request_init_document` | `string` | `''`
+| `hhvm.xbox.server_info.request_init_function` | `string` | `''`
+| `hhvm.xbox.server_info.thread_count` | `int` | `10`
+| `hhvm.xbox.server_info.warmup_document` | `string` | `''`
+| `hhvm.xbox.password` | `string` | `''` (not `ini_get()` enabled)
+| `hhvm.xbox.passwords` | `Set<string>` | `''` (not `ini_get()` enabled)
 
 ### Pagelet Server
 
-| Setting | Type | Default | Description
-|---------|------|---------|------------
-| hhvm.pagelet_server.queue_limit | | |
-| hhvm.pagelet_server.thread_count | This specifies the number of worker threads used to server web traffic in server mode. The number to set here is really quite experimental. If you use async, then this number can be the default. Otherwise, you might want a higher number. | 2x the number of CPU cores |
-| hhvm.pagelet_server.thread_drop_cache_timeout_seconds | | |
-| hhvm.pagelet_server.thread_drop_stack | | |
-| hhvm.pagelet_server.thread_round_robin | | |
+A pagelet server is essentially the same as local CURL, except it's more efficient. This allows parallel execution of a web page, preparing two panels or iframes at the same time.
+
+| Setting | Type | Default
+|---------|------|--------
+| `hhvm.pagelet_server.queue_limit` | `int` | `0`
+| `hhvm.pagelet_server.thread_count` | `int` | `0`
+| `hhvm.pagelet_server.thread_drop_cache_timeout_seconds` | `int` | `0`
+| `hhvm.pagelet_server.thread_drop_stack` | `bool` | `false`
+| `hhvm.pagelet_server.thread_round_robin` | `bool` | `false`
 
 ### Emitter
 
