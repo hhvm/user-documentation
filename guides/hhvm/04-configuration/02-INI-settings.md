@@ -79,6 +79,7 @@ These are settings that are available to you when running HHVM in [server mode](
 | `hhvm.server.enable_output_buffering` | `bool` | `false` | Turn output buffering on. While output buffering is active no output is sent from the script (other than headers), instead the output is stored in an internal buffer.
 | `hhvm.server.enable_ssl` | `bool` | `false` | If enabled, HHVM will allow SSL connections to come through. Related to `hhvm.server.ssl_port`, `hhvm.server.ssl_certificate_file`, `hhvm.server.ssl.certificate_key_file`, `hhvm.server.ssl_certificate_dir`.
 | `hhvm.server.enable_static_content_from_disk` | `bool` | `true` | A static content cache creates one single file from all static contents, including css, js, html, images and any other non-PHP files. Normally this is prepared by the compiler at compilation time, but it can also be prepared at run-time, if `hhvm.server.source_root` points to real file directory and this setting is `true`. Otherwise, use `hhvm.server.file_cache` to point to the static content cache file created by the compiler.
+| `hhvm.server.enable_static_content_m_map` | `bool` | `true` | This setting being `true` overrides whatever is set for `hhvm.server.enable_on_demand_uncompress`.
 | `hhvm.server.error_document404` | `string` | `''` | The default 404 error document that will be served when a 404 error occurs.
 | `hhvm.server.error_document500` | `string` | `''` | The default 500 error document that will be served when a 500 error occurs.
 | `hhvm.server.evil_shutdown` | `bool` | `true` | Kill anything listening on the server port. This is enabled by default. When stopping a server, HHVM first tries to gracefully shut it down. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file. If that doesn't work, then `hhvm.server.evil_shutdown` is invoked.
@@ -976,7 +977,6 @@ These are settings that are currently not used in the codebase.
 |---------|------|---------|
 | `hhvm.enable_alternative` | `int` | `0`
 | `hhvm.server.enable_cuf_async` | `bool` | `false`
-| `hhvm.server.enable_static_content_m_map` | `bool` | `true`
 | `hhvm.server.lib_event_sync_send` | `bool` | `true`
 | `hhvm.server.response_queue_count` | `int` | `0`
 | `hhvm.server.shutdown_listen_no_work` | `int` | `-1`
