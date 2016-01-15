@@ -867,21 +867,25 @@ Settings for the HHVM compiler code emitter.
 |---------|------|--------
 | `hhvm.emit_switch` | `bool` | `true`
 | `hhvm.enable_emitter_stats` | `bool` | `true`
-| `hhvm.random_hot_funcs` | `bool` | `false` |
+| `hhvm.random_hot_funcs` | `bool` | `false`
 
 ### Xenon
 
+Settings for the Xenon server, which snapshots server activity at regular intervals, showing which code is on CPU.
+
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| hhvm.xenon.force_always_on | Gather PHP and async stacks at every function enter/exit. This will gather potentially large amounts of data and is mostly useful for small script debugging. | _False_ |
-| hhvm.xenon.period | Configure Xenon to gather PHP and async stacks every this many seconds. | _0.0_ |
+| `hhvm.xenon.force_always_on` | `bool` | `false` | Gather PHP and async stacks at every function enter/exit. This will gather potentially large amounts of data and is mostly useful for small script debugging.
+| `hhvm.xenon.period` | `double` | `0.0` | Configure Xenon to gather PHP and async stacks every this many seconds.
 
 ### Mail
 
+These are settings for the Mail extension.
+
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| hhvm.mail.force_extra_parameters | | |
-| hhvm.mail.sendmail_path | | |
+| hhvm.mail.force_extra_parameters | `string` | `''`
+| hhvm.mail.sendmail_path | `string` | `sendmail -t -i`
 
 ### Code Checks
 
