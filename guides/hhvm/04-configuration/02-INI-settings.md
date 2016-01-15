@@ -761,7 +761,7 @@ These settings allow you to collect various statistics for various parts of the 
 | `hhvm.stats.xsl` | `string` | `''` | Stats are written as XML. If this is set to something non-empty, the XSL used for the XML is referred to by that setting.
 | `hhvm.stats.xsl_proxy` | `string` | `''` | Stats are written as XML. If this is set to somehing non-empty, the XSL proxy used for the XML is referred to by that setting.
 
-### Resource Limits
+## Resource Limits
 
 These are resource limit settings such as how often to check maximum memory and the default socket timeout.
 
@@ -775,18 +775,21 @@ These are resource limit settings such as how often to check maximum memory and 
 | hhvm.resource_limit.serialization_size_limit | `int` | `2146435072` (~2 MB) | The maximum size of a serialized string.
 | hhvm.resource_limit.socket_default_timeout | `int` | `60` | The amount of time (in seconds) before an unused socket times out.
 
-## Advanced Settings
+## Regular Expressions
 
-These are settings that generally won't be used by most users of HHVM.
-
-### Regular Expressions
+These are the settings you can toggle for HHVM's [PCRE](http://www.pcre.org/) implementation.
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| hhvm.preg.backtrace_limit | | |
-| hhvm.preg.error_log | | |
-| hhvm.preg.recursion_limit | | |
-| hhvm.pcre_table_size | | |
+| hhvm.preg.backtrace_limit | `int` | `1000000` | The maximum bind length a call to something like `preg_replace_callback()` can make.
+| hhvm.preg.error_log | `bool` | `true` | If a PRCE error occurs, then it will be logged if this is enabled.
+| hhvm.preg.recursion_limit | `int` | `100000` | The maximum recursion limit for PCRE. Setting this value too high could cause the utilization of all of the process stack.
+| hhvm.pcre_cache_type | `string` | `static` | May be `static`, for a very fast cache which never evicts, `lru`, for a cache which evicts the least-recently used item when full, or `scalable` for a cache which is slightly slower than `lru` at low concurrency but much faster for a high-concurrency tight-loop workload.
+| hhvm.pcre_table_size | `int` | `0` | The number of patterns which can be stored in the PCRE cache.
+
+## Advanced Settings
+
+These are settings that generally won't be used by most users of HHVM.
 
 ### HHIR
 
