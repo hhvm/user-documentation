@@ -23,7 +23,7 @@ These are the options that are probably the most commonly used on a day-to-day b
 | `hhvm.server.source_root` | `string` | working directory of HHVM process | For [server mode](../basic-usage/server.md), this will hold the path to the root of the directory of the code being served up. This setting is *useless* in [repo-authoritative mode](/hhvm/advanced-usage/repo-authoritative).
 | `hhvm.force_hh` | `bool` | `false` | If `true`, all code is treated as Hack code, even if it starts with `<?php`.  This setting affects `hhvm.enable_xhp` by forcing it to be `true` as well. This setting affects `hhvm.hack.lang.ints_overflows_to_ints` and `hhvm.log.always_log_unhandled_exceptions` by being the default value for them when they is not explicitly set. This setting affects `hhvm.server.allow_duplicate_cookies` by being the opposite value for a default when it is not explicitly set.
 | `hhvm.log.file` | `string` | standard error (`stderr`) | The location of the HHVM error log file. If `hhvm.log.use_cronolog` is set, then this setting will be used as the cron output file.
-| `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests.
+| `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's [repo-authoritative mode](/hhvm/advanced-usage/repo-authoritative) to serve requests.
 | `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
 | `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you want to serve up requests for the HHVM server. The default is `"proxygen"`, but you can also specify `"fastcgi"`.
 | `hhvm.server.port` | `int` | `80` | The port on which the HHVM server will listen for requests.
@@ -724,19 +724,20 @@ These are custom HHVM settings to the [Alternative PHP Cache (APC)](http://php.n
 
 ## Repo Authoritative
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.repo.authoritative | If `true`, you are specifying that you will be using HHVM's repo-authoritative mode to serve requests. | _False_ |
-| hhvm.repo.central.path | The path to the hhvm.hhbc file created when you compiled a repo-authoritative repo. | `""` |
-| hhvm.repo.commit | | |
-| hhvm.repo.debug_info | | |
-| hhvm.repo.journal | | |
-| hhvm.repo.local.mode | | |
-| hhvm.repo.local.path | | |
-| hhvm.repo.mode | | |
-| hhvm.repo.preload | | |
-| hhvm.check_repo_auth_deserialize | | |
-| hhvm.disable_some_repo_auth_notices | | |
+When using HHVM's [Repo-Authoritative](/hhvm/advanced-usage/repo-authoritative) mode, these are the settings that help configure its use.
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo- authoritative mode to serve requests.
+| `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
+| `hhvm.repo.commit` | `bool` | `true` | If enabled, this will commit newly emmited units to the repo.
+| `hhvm.repo.debug_info` | `bool` | `true` | If enabled, the full source locations will be stored in the repo; otherwise, only line numbers will be stored.
+| `hhvm.repo.journal` | `string` | `delete` | If `delete`, then delete the on-disk SQLite journal upon each successful transaction commit. If `memory`, then store the SQLite journal in memory. `delete` is the safer mode to use.
+| `hhvm.repo.local.mode` | `string` | `r-` | `rw` to use the local repo for reading and writing (if file permissions allow). `r-` to use the local repo for reading (if it exists and is readable). `--`` to completely ignore the local repo, even if it exists.
+| `hhvm.repo.local.path` | `string` | `''` | `hhvm.repo.loca.path`or the environment variable `HHVM_REPO_LOCAL_PATH` (the former takes precedence) can be used to specify where the local repo is. If unspecified, then the local repo is `path/to/cli.php.hhbc` in [cli](/hhvm/basic-usage/command-line) mode or `<cwd>/hhvm.hhbc` in [server](/hhvm/basic-usage/server) mode.
+| `hhvm.repo.mode` | `string` | `readonly` | `local` to write eval units to the local repo if it is writeable; otherwise write to the central repo. `central` to write eval units to the central repo. `readonly` to not write eval units to a repo, but still search for them in repos.
+| `hhvm.repo.preload` | `bool` | `false` | If enabled, preload all units from the repo in parallel during startup.
+| `hhvm.disable_some_repo_auth_notices` | `bool` | `true` | Make the repo authoritative notices you receive less verbose.
 
 ## Statistics
 
