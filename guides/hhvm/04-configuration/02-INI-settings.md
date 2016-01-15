@@ -761,22 +761,23 @@ These settings allow you to collect various statistics for various parts of the 
 | `hhvm.stats.xsl` | `string` | `''` | Stats are written as XML. If this is set to something non-empty, the XSL used for the XML is referred to by that setting.
 | `hhvm.stats.xsl_proxy` | `string` | `''` | Stats are written as XML. If this is set to somehing non-empty, the XSL proxy used for the XML is referred to by that setting.
 
-## Advanced Settings
+### Resource Limits
 
-These are settings that generally won't be used by most users of HHVM.
-
-### Resources
+These are resource limit settings such as how often to check maximum memory and the default socket timeout.
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| hhvm.resource_limit.drop_cache_cycle | | |
-| hhvm.resource_limit.max_memcache_key_count | | |
-| hhvm.resource_limit.max_rss | | |
-| hhvm.resource_limit.max_rss_polling_cycle | | |
-| hhvm.resource_limit.max_sql_row_count | | |
-| hhvm.resource_limit.serialization_size_limit | | |
-| hhvm.resource_limit.socket_default_timeout | | |
-| hhvm.resource_limit.string_offset_limit | | |
+| hhvm.resource_limit.core_file_size | `int` | `0` | If set to something `> 0`, then this is the maximum size of a core dump file. If `0`, the no core dumps are created.
+| hhvm.resource_limit.drop_cache_cycle | `int` | `0` | If set to something `> 0`, then this is how often the disk cache is dropped.
+| hhvm.resource_limit.max_rss | `int` | `0` | If set to something `> 0`, then this is the maximum amount of memory (in bytes) of the HHVM process should get.
+| hhvm.resource_limit.max_rss_polling_cycle | `int` | `0` | If set to something `> 0`, then this is how often to check whether we are hitting our `hhvm.resource_limit.max_rss` limit.
+| hhvm.resource_limit.max_sql_row_count | `int` | `0` | If set to something `> 0`, then this is the maximum number of rows that will be fetched at any given time.
+| hhvm.resource_limit.serialization_size_limit | `int` | `2146435072` (~2 MB) | The maximum size of a serialized string.
+| hhvm.resource_limit.socket_default_timeout | `int` | `60` | The amount of time (in seconds) before an unused socket times out.
+
+## Advanced Settings
+
+These are settings that generally won't be used by most users of HHVM.
 
 ### Regular Expressions
 
@@ -955,4 +956,6 @@ These are settings that are currently not used in the codebase.
 | `hhvm.error_handling.enable_hip_hop_errors` | `bool` | `true`
 | `hhvm.error_handling.max_loop_count` | `int` | `0`
 | `hhvm.error_handling.warn_too_many_arguments` | `bool` | `false`
-| `hhvm.hack_array_warn_frequency` | `int` | `0` |
+| `hhvm.hack_array_warn_frequency` | `int` | `0`
+| hhvm.resource_limit.max_memcache_key_count | `int` | `0`
+| hhvm.resource_limit.string_offset_limit | `int` | `10 * 1024 * 1024` (10 MB)
