@@ -897,24 +897,22 @@ These are settings for the Mail extension.
 
 ### Profiling
 
-| Setting | Type | Default | Description
-|---------|------|---------|------------
-| hhvm.profile_bc | | |
-| hhvm.profile_heap_across_requests | | |
-| hhvm.profile_hw_enable | | |
-| hhvm.profile_hw_events | | |
-| hhvm.hh_prof_server.allocation_profile | | |
-| hhvm.hh_prof_server.enabled | | |
-| hhvm.hh_prof_server.filter.min_alloc_per_req | | |
-| hhvm.hh_prof_server.filter.min_bytes_per_req | | |
-| hhvm.hh_prof_server.port | | |
-| hhvm.hh_prof_server.profile_client_mode | | |
-| hhvm.hh_prof_server.threads | | |
-| hhvm.hh_prof_server.timeout_seconds | | |
-| hhvm.record_code_coverage | turn on code coverage recording | _False_ |
-| hhvm.code_coverage_output_file | specify an output file to store code coverage results at end of a script run | |
-| hhvm.hot_func_count | | |
-| hhvm.num_single_jit_requests | | |
+These are additional settings for the HHVM profiler. HHProf uses jemalloc per heap profiling.
+
+| Setting | Type | Default
+|---------|------|--------
+| `hhvm.profile_bc` | `bool` | `false`
+| `hhvm.profile_heap_across_requests` | `bool` | `false`
+| `hhvm.profile_hw_enable` | `bool` | `true`
+| `hhvm.profile_hw_events` | `string` | `''`
+| `hhvm.hh_prof.enabled` | `bool` | `false`
+| `hhvm.hh_prof.active` | `bool` | `false`
+| `hhvm.hh_prof.accum` | `bool` | `false`
+| `hhvm.hh_prof.request` | `bool` | `false`
+| `hhvm.record_code_coverage` | `bool`| `false` |
+| `hhvm.code_coverage_output_file` | `bool` | `false`
+| `hhvm.hot_func_count` | `int` | `4100`
+| `hhvm.num_single_jit_requests` | `int` | `5` (in server mode); `0` otherwise
 
 ### Proxies
 
