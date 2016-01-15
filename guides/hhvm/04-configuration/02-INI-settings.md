@@ -845,7 +845,7 @@ An xbox server provides cross-machine communication, similar to a message queuin
 | `hhvm.xbox.server_info.thread_count` | `int` | `10`
 | `hhvm.xbox.server_info.warmup_document` | `string` | `''`
 | `hhvm.xbox.password` | `string` | `''` (not `ini_get()` enabled)
-| `hhvm.xbox.passwords` | `Set<string>` | `''` (not `ini_get()` enabled)
+| `hhvm.xbox.passwords` | `Set<string>` | *empty* (not `ini_get()` enabled)
 
 ### Pagelet Server
 
@@ -889,6 +889,8 @@ These are settings for the Mail extension.
 
 ### Code Checks
 
+These settings are for toggling various code checks (e.g., typehints).
+
 | Setting | Type | Default | Description
 |---------|------|---------|------------
 | `hhvm.check_flush_on_user_close` | `bool` | `true` | Determines whether or not close() for user streams (registered by `stream_wrapper_register()`) will consider the return value of the implicit call to `flush()`` when calculating its return value.
@@ -917,13 +919,16 @@ These are additional settings for the HHVM profiler. HHProf uses jemalloc per he
 
 ### Proxies
 
-| Setting | Type | Default | Description
-|---------|------|---------|------------
-| hhvm.proxy.origin | | |
-| hhvm.proxy.percentage | | |
-| hhvm.proxy.proxy_urls | | |
-| hhvm.proxy.retry | | |
-| hhvm.proxy.serve_urls | | |
+These are settings for reverse proxying.
+
+| Setting | Type | Default
+|---------|------|--------
+| hhvm.proxy.origin | `string` | `''`
+| hhvm.proxy.percentage | `int` | `0`
+| hhvm.proxy.proxy_patterns | `Vector<string>` | *empty*
+| hhvm.proxy.proxy_urls | `Set<string>` | *empty*
+| hhvm.proxy.retry | `int` | 3
+| hhvm.proxy.serve_urls | `Set<string>` | *empty*
 
 ### MySQL
 
