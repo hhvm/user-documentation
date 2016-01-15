@@ -949,24 +949,24 @@ These are settings for reverse proxying.
 
 ### Other
 
+Here are some other HHVM settings that may be useful in an advanced situation.
+
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| hhvm.allow_hhas | Allow executing "hhas" files -- code written directly in HHBC. Directly writing HHBC can easily crash HHVM, and is rarely a useful thing to do anyways. | _False_ |
-| hhvm.spin_on_crash | | |
-| hhvm.simulate_arm | | |
-| hhvm.timeouts_use_wall_time | Use walltime instead of cputime for timeouts | _False_|
-| hhvm.dynamic_extension_path | path to look for extensions if a fully qualified path is not provided | |
-| hhvm.gdb_sync_chunks | | |
-| hhvm.hhbc_arena_chunk_size | | |
-| hhvm.initial_named_entity_table_size | | |
-| hhvm.initial_static_string_table_size | | |
-| hhvm.map_hot_text_huge | | |
-| hhvm.map_tc_huge | | |
-| hhvm.map_tgt_cache_huge | | |
-| hhvm.max_low_mem_huge_pages | | |
-| hhvm.max_user_function_id | | |
-| hhvm.vm_initial_global_table_size | | |
-| hhvm.vm_stack_elms | | |
+| `hhvm.allow_hhas` | `bool` | `false` | Allow executing HHVM Assembly (hhas) files, which is code written directly in [HHVM Bytecode (HHBC)](https://github.com/facebook/hhvm/blob/master/hphp/doc/bytecode.specification). Directly writing HHBC can easily crash HHVM, and is rarely a useful thing to do anyways.
+| `hhvm.spin_on_crash` | `bool` | `false` | If enabled, when HHVM crashes, this will wait for the debugger to attach to the pid.
+| `hhvm.simulate_arm` | `bool` | `false` | If enabled, this will allow HHVM to simulate running on ARM architecture.
+| `hhvm.timeouts_use_wall_time` | `bool` | `true` | Determines whether or not to interpret set_time_limit timeouts as wall time or CPU time.
+| `hhvm.dynamic_extension_path` | `string` | `.` | path to look for extensions if a fully qualified path is not provided. The current path is the default.
+| `hhvm.gdb_sync_chunks` | `int` | `128` | This forces the VM to sync debug info synchronously with gdb, this many chunks at a time.
+| `hhvm.hhbc_arena_chunk_size` | `int` | `10485760` (1 MB) | The chunk size for the HHBC arena.
+| `hhvm.initial_named_entity_table_size` | `int` | `30000` | The initial size of the named entity table.
+| `hhvm.initial_static_string_table_size` | `int` | `500000` | The intial size of the static string table.
+| `hhvm.map_tc_huge` | `bool` | `false`
+| `hhvm.map_tgt_cache_huge` | `bool` | `false`
+| `hhvm.max_low_mem_huge_pages` | `int` | `0`
+| `hhvm.vm_initial_global_table_size` | `int` | `512` | The initial global table size.s
+| `hhvm.vm_stack_elms` | `int` | `16384` | The maximum stack size.
 
 ## Unused Settings
 
@@ -989,5 +989,5 @@ These are settings that are currently not used in the codebase.
 | `hhvm.error_handling.max_loop_count` | `int` | `0`
 | `hhvm.error_handling.warn_too_many_arguments` | `bool` | `false`
 | `hhvm.hack_array_warn_frequency` | `int` | `0`
-| hhvm.resource_limit.max_memcache_key_count | `int` | `0`
-| hhvm.resource_limit.string_offset_limit | `int` | `10 * 1024 * 1024` (10 MB)
+| `hhvm.resource_limit.max_memcache_key_count` | `int` | `0`
+| `hhvm.resource_limit.string_offset_limit` | `int` | `10 * 1024 * 1024` (10 MB)
