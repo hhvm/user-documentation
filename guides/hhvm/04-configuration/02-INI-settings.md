@@ -787,6 +787,23 @@ These are the settings you can toggle for HHVM's [PCRE](http://www.pcre.org/) im
 | `hhvm.pcre_cache_type` | `string` | `static` | May be `static`, for a very fast cache which never evicts, `lru`, for a cache which evicts the least-recently used item when full, or `scalable` for a cache which is slightly slower than `lru` at low concurrency but much faster for a high-concurrency tight-loop workload.
 | `hhvm.pcre_table_size` | `int` | `0` | The number of patterns which can be stored in the PCRE cache.
 
+## MySQL
+
+These setting control the behavior of the HHVM MySQL extension.
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.mysql.typed_results`| `bool` | `true` | Zend returns strings and `null` only for MySQL results, not integers or floats. HHVM return ints (and, sometimes, actual doubles). This behavior can be disabled by setting this to `false`.
+| `hhvm.mysql.slow_query_threshold` | `int` | `1000` | In milliseconds, log slow queries as errors.
+| `hhvm.mysql.read_only` | `bool` | `false` | If enabled, the database is read only.
+| `hhvm.mysql.read_timeout` | `int` | `60000` | How long, in milliseconds, before a read query times out.
+| `hhvm.mysql.connect_timeout` | `int` | `1000` | How long, in milliseconds, before a connection times out.
+| `hhvm.mysql.wait_timeout` | `int` | `-1` | If positive, how long, in milliseconds, before a wait timeout.
+| `hhvm.mysql.kill_on_timeout` | `bool` | `false` | If enabled, when a query takes long time to execute on server, client has a chance to kill it to avoid extra server cost.
+| `hhvm.mysql.max_retry_open_on_fail` | `int` | `1` | How many times to retry opening a connection if the first time failed.
+| `hhvm.mysql.max_retry_query_on_fail` | `int` | `1` | How many times to retry a query if the first time failed.
+| `hhvm.mysql.socket` | `string` | `''` | Default location to look for `mysql.sock`.
+
 ## Advanced Settings
 
 These are settings that generally won't be used by most users of HHVM. Some won't be documented, other than the type and default value.
@@ -923,19 +940,12 @@ These are settings for reverse proxying.
 
 | Setting | Type | Default
 |---------|------|--------
-| hhvm.proxy.origin | `string` | `''`
-| hhvm.proxy.percentage | `int` | `0`
-| hhvm.proxy.proxy_patterns | `Vector<string>` | *empty*
-| hhvm.proxy.proxy_urls | `Set<string>` | *empty*
-| hhvm.proxy.retry | `int` | 3
-| hhvm.proxy.serve_urls | `Set<string>` | *empty*
-
-### MySQL
-
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.mysql.typed_results | Zend returns strings and NULL only for MySQL results, not integers or floats. HHVM return ints (and, sometimes, actual doubles). This behavior can be disabled by setting TypedResults to false. | _True_ |
-| hhvm.mysql.slow_query_threshold | | |
+| `hhvm.proxy.origin` | `string` | `''`
+| `hhvm.proxy.percentage` | `int` | `0`
+| `hhvm.proxy.proxy_patterns` | `Vector<string>` | *empty*
+| `hhvm.proxy.proxy_urls` | `Set<string>` | *empty*
+| `hhvm.proxy.retry` | `int` | 3
+| `hhvm.proxy.serve_urls` | `Set<string>` | *empty*
 
 ### Other
 
