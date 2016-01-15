@@ -861,11 +861,13 @@ A pagelet server is essentially the same as local CURL, except it's more efficie
 
 ### Emitter
 
-| Setting | Type | Default | Description
-|---------|------|---------|------------
-| `hhvm.emit_switch` | `bool` | `true` | Use when mangling the unit cache.
-| `hhvm.enable_emitter_stats` | `bool` | `true` | Enable incrementing the emitter stat counter.
-| `hhvm.random_hot_funcs` | | |
+Settings for the HHVM compiler code emitter.
+
+| Setting | Type | Default
+|---------|------|--------
+| `hhvm.emit_switch` | `bool` | `true`
+| `hhvm.enable_emitter_stats` | `bool` | `true`
+| `hhvm.random_hot_funcs` | `bool` | `false` |
 
 ### Xenon
 
