@@ -882,18 +882,19 @@ Settings for the Xenon server, which snapshots server activity at regular interv
 
 These are settings for the Mail extension.
 
-| Setting | Type | Default | Description
-|---------|------|---------|------------
+| Setting | Type | Default
+|---------|------|--------
 | hhvm.mail.force_extra_parameters | `string` | `''`
 | hhvm.mail.sendmail_path | `string` | `sendmail -t -i`
 
 ### Code Checks
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.check_flush_on_user_close | Return error code is closing a stream in PHP did not flush the streams well | _True_ |
-| hhvm.check_return_type_hints | Whether to check return type hints at runtime, and if so how. 0 means no return type checking. 1 - Raises E_WARNING if a return type hint fails.  2 - Raises E_RECOVERABLE_ERROR if regular return type hint fails, raises E_WARNING if soft return type hint fails. If a regular return type hint fails, it's possible for execution to resume normally if the user error handler doesn't throw and returns something other than boolean false. 3 - Same as 2, except if a regular type hint fails the runtime will not allow execution to resume normally; if the user error handler returns something other than boolean false, the runtime will throw a fatal error (this goes together with Option::HardReturnTypeHints) | 2 |
-| hhvm.check_sym_link | Whether to follow symlinks when looking up units in the bytecode cache | _True_ |
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.check_flush_on_user_close` | `bool` | `true` | Determines whether or not close() for user streams (registered by `stream_wrapper_register()`) will consider the return value of the implicit call to `flush()`` when calculating its return value.
+| `hhvm.check_return_type_hints` | `int` | `2` | Whether to check return type hints at runtime, and if so how. `0` means no return type checking. `1` - Raises `E_WARNING` if a return type hint fails.  `2` - Raises `E_RECOVERABLE_ERROR` if regular return type hint fails, raises `E_WARNING` if soft return type hint fails. If a regular return type hint fails, it's possible for execution to resume normally if the user error handler doesn't throw and returns something other than boolean `false`. `3` - Same as `2`, except if a regular type hint fails the runtime will not allow execution to resume normally; if the user error handler returns something other than boolean `false`, the runtime will throw a fatal error (this goes together with `hhvm.hard_return_type_hints`).
+| `hhvm.hard_return_type_hints` | `bool` | `false` | Check hard return type hints. Only used when compiling.
+| `hhvm.check_sym_link` | `bool` | `true` | Whether to follow symlinks when looking up units in the bytecode cache.
 
 ### Profiling
 
