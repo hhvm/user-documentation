@@ -767,13 +767,13 @@ These are resource limit settings such as how often to check maximum memory and 
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| hhvm.resource_limit.core_file_size | `int` | `0` | If set to something `> 0`, then this is the maximum size of a core dump file. If `0`, the no core dumps are created.
-| hhvm.resource_limit.drop_cache_cycle | `int` | `0` | If set to something `> 0`, then this is how often the disk cache is dropped.
-| hhvm.resource_limit.max_rss | `int` | `0` | If set to something `> 0`, then this is the maximum amount of memory (in bytes) of the HHVM process should get.
-| hhvm.resource_limit.max_rss_polling_cycle | `int` | `0` | If set to something `> 0`, then this is how often to check whether we are hitting our `hhvm.resource_limit.max_rss` limit.
-| hhvm.resource_limit.max_sql_row_count | `int` | `0` | If set to something `> 0`, then this is the maximum number of rows that will be fetched at any given time.
-| hhvm.resource_limit.serialization_size_limit | `int` | `2146435072` (~2 MB) | The maximum size of a serialized string.
-| hhvm.resource_limit.socket_default_timeout | `int` | `60` | The amount of time (in seconds) before an unused socket times out.
+| `hhvm.resource_limit.core_file_size` | `int` | `0` | If set to something `> 0`, then this is the maximum size of a core dump file. If `0`, the no core dumps are created.
+| `hhvm.resource_limit.drop_cache_cycle` | `int` | `0` | If set to something `> 0`, then this is how often the disk cache is dropped.
+| `hhvm.resource_limit.max_rss` | `int` | `0` | If set to something `> 0`, then this is the maximum amount of memory (in bytes) of the HHVM process should get.
+| `hhvm.resource_limit.max_rss_polling_cycle` | `int` | `0` | If set to something `> 0`, then this is how often to check whether we are hitting our `hhvm.resource_limit.max_rss` limit.
+| `hhvm.resource_limit.max_sql_row_count` | `int` | `0` | If set to something `> 0`, then this is the maximum number of rows that will be fetched at any given time.
+| `hhvm.resource_limit.serialization_size_limit` | `int` | `2146435072` (~2 MB) | The maximum size of a serialized string.
+| `hhvm.resource_limit.socket_default_timeout` | `int` | `60` | The amount of time (in seconds) before an unused socket times out.
 
 ## Regular Expressions
 
@@ -781,46 +781,49 @@ These are the settings you can toggle for HHVM's [PCRE](http://www.pcre.org/) im
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| hhvm.preg.backtrace_limit | `int` | `1000000` | The maximum bind length a call to something like `preg_replace_callback()` can make.
-| hhvm.preg.error_log | `bool` | `true` | If a PRCE error occurs, then it will be logged if this is enabled.
-| hhvm.preg.recursion_limit | `int` | `100000` | The maximum recursion limit for PCRE. Setting this value too high could cause the utilization of all of the process stack.
-| hhvm.pcre_cache_type | `string` | `static` | May be `static`, for a very fast cache which never evicts, `lru`, for a cache which evicts the least-recently used item when full, or `scalable` for a cache which is slightly slower than `lru` at low concurrency but much faster for a high-concurrency tight-loop workload.
-| hhvm.pcre_table_size | `int` | `0` | The number of patterns which can be stored in the PCRE cache.
+| `hhvm.preg.backtrace_limit` | `int` | `1000000` | The maximum bind length a call to something like `preg_replace_callback()` can make.
+| `hhvm.preg.error_log` | `bool` | `true` | If a PRCE error occurs, then it will be logged if this is enabled.
+| `hhvm.preg.recursion_limit` | `int` | `100000` | The maximum recursion limit for PCRE. Setting this value too high could cause the utilization of all of the process stack.
+| `hhvm.pcre_cache_type` | `string` | `static` | May be `static`, for a very fast cache which never evicts, `lru`, for a cache which evicts the least-recently used item when full, or `scalable` for a cache which is slightly slower than `lru` at low concurrency but much faster for a high-concurrency tight-loop workload.
+| `hhvm.pcre_table_size` | `int` | `0` | The number of patterns which can be stored in the PCRE cache.
 
 ## Advanced Settings
 
-These are settings that generally won't be used by most users of HHVM.
+These are settings that generally won't be used by most users of HHVM. Some won't be documented, other than the type and default value.
 
 ### HHIR
 
-| Setting | Type | Default | Description
-|---------|------|---------|------------
-| hhvm.hhir_alloc_simd_regs | | |
-| hhvm.hhir_bytecode_control_flow | | |
-| hhvm.hhir_cse | | |
-| hhvm.hhir_dead_code_elim | | |
-| hhvm.hhir_direct_exit | | |
-| hhvm.hhir_enable_callee_saved_opt | | |
-| hhvm.hhir_enable_coalescing | | |
-| hhvm.hhir_enable_gen_time_inlining | | |
-| hhvm.hhir_enable_pre_coloring | | |
-| hhvm.hhir_extra_opt_pass | | |
-| hhvm.hhir_gen_opts | | |
-| hhvm.hhir_generate_asserts | | |
-| hhvm.hhir_inline_frame_opts | | |
-| hhvm.hhir_inline_singletons | | |
-| hhvm.hhir_inlining_max_cost | | |
-| hhvm.hhir_inlining_max_depth | | |
-| hhvm.hhir_inlining_max_return_dec_refs | | |
-| hhvm.hhir_jump_opts | | |
-| hhvm.hhir_num_free_regs | | |
-| hhvm.hhir_prediction_opts | | |
-| hhvm.hhir_refcount_opts | | |
-| hhvm.hhir_refcount_opts_always_sink | | |
-| hhvm.hhir_relax_guards | | |
-| hhvm.hhir_simplification | | |
-| hhvm.hhir_stress_codegen_blocks | | |
-| hhvm.hhir_validate_ref_count | | |
+These settings control various aspects of the [HHVM Intermediate Representation](https://github.com/facebook/hhvm/blob/master/hphp/doc/hackers-guide/jit-core.md#hhir) (HHIR).
+
+| Setting | Type | Default
+|---------|------|--------
+| `hhvm.hhir_alloc_simd_regs` | `bool` | `true`
+| `hhvm.hhir_licm` | `bool` | `false`
+| `hhvm.hhir_dead_code_elim` | `bool` | `true`
+| `hhvm.hhir_direct_exit` | `bool` | `true`
+| `hhvm.hhir_enable_coalescing` | `bool` | `true`
+| `hhvm.hhir_enable_gen_time_inlining` | `bool` | `true`
+| `hhvm.hhir_enable_pre_coloring` | `bool` | `true`
+| `hhvm.hhir_gen_opts` | `bool` | `true`
+| `hhvm.hhir_generate_asserts` | `bool` | `true` (if HHVM was compiled in debug mode); `false` otherwise.
+| `hhvm.hhir_global_value_numbering` | `bool` | `true`
+| `hhvm.hhir_inline_frame_opts` | `bool` | `true`
+| `hhvm.hhir_inline_singletons` | `bool` | `true`
+| `hhvm.hhir_inline_region_mode` | `string` | `"both"`
+| `hhvm.hhir_inlining_max_bind_jmps` | `int` | `0`
+| `hhvm.hhir_inlining_max_cost` | `int` | `13`
+| `hhvm.hhir_pgo_inlining_max_cost` | `int` | `6`
+| `hhvm.hhir_inlining_max_depth` | `int` | `4`
+| `hhvm.hhir_inlining_max_return_dec_refs` | `int` | `6`
+| `hhvm.hhir_inlining_max_returns` | `int` | `3`
+| `hhvm.hhir_memory_opts` | `bool` | `true`
+| `hhvm.hhir_outline_generic_inc_dec_ref` | `bool` | `true`
+| `hhvm.hhir_prediction_opts` | `bool` | `true`
+| `hhvm.hhir_refcount_opts` | `bool` | `true`
+| `hhvm.hhir_simplification` | `bool` | `true`
+| `hhvm.hhir_store_pre` | `bool` | `true`
+| `hhvm.hhir_stress_spill` | `bool` | `true`
+| `hhvm.hhir_type_check_hoisting` | `bool` | `false`
 
 ### Xbox Server
 
