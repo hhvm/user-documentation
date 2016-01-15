@@ -714,11 +714,13 @@ These are settings of the JIT for [Profile Guided Optimizations](https://en.wiki
 
 ## APC Settings
 
-| INI Setting | Documentation | Default |
-|-------------|---------------|---------|
-| hhvm.server.apc.expire_on_sets | Enables item purging on expiration | _False_ |
-| hhvm.server.apc.purge_frequency | Expired items will be purged every this many APC sets | 4096 |
-| hhvm.server.apc.purge_rate | Evict at most this many items on each purge. No limit if -1. | -1 |
+These are custom HHVM settings to the [Alternative PHP Cache (APC)](http://php.net/manual/en/book.apc.php).
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.server.apc.expire_on_sets` | `bool` | `false` | If enabled, this will turn on item purging on expiration. And it is done once per `hhvm.server.apc.purge_frequency` of sets.
+| `hhvm.server.apc.purge_frequency` | `int` | `4096` | Expired items will be purged every this many APC sets.
+| `hhvm.server.apc.purge_rate` | `int` | `-1` | Evict at most this many items on each purge. No limit if `-1`.
 
 ## Repo Authoritative
 
