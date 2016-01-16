@@ -13,6 +13,8 @@ final class MergedDataBuilder {
   public function addData(\ConstMap<string, mixed> $new): this {
     $this->mergeField($new, 'generics');
     $this->mergeField($new, 'methods');
+    $this->mergeField($new, 'parameters');
+    $this->mergeField($new, 'returnType');
     $this->mergeField($new, 'visibility');
     $this->mergeField($new, 'docComment');
 
@@ -91,6 +93,24 @@ final class MergedDataBuilder {
       $value = $map->keys()[$value];
     }
 
+    if ($key === 'parameters' && $value !== null && $old_value !== null) {
+      assert(is_array($value));
+      assert(is_array($old_value));
+      if (count($value) !== count($old_value)) {
+        Log::w("\nParameter Number Mismatch When Merging");
+        $num = min(count($value), count($old_value));
+      } else {
+        $num = count($value);
+      }
+      for ($i = 0; $i < $num; $i++) {
+        self::MergedParameter($value[$i], $old_value[$i]);
+      }
+    }
+
+    if ($key === 'returnType' && $value !== null && $old_value !== null) {
+      // UNSAFE array to shape coercion
+      $value = self::MergedTypehint($value, $old_value);
+    }
 
     if ($value !== null && $value != []) {
       $this->data[$key] = $value;
@@ -109,9 +129,18 @@ final class MergedDataBuilder {
     }
 
     $name = $a['typename'];
-    if (strpos($name, "\\") === false) {
+    // Try to make the type as specific as possible. object or mixed could
+    // be used in something like HNI to represent what might be an int.
+    if (Shapes::idx($b, 'typename') !== null) {
+      if (strpos($name, 'object') === 0 ||
+          strpos($name, 'mixed') === 0) {
+        $name = $b['typename'];
+      }
+    } else if (strpos($b['typename'], $name) !== false &&
+               strpos($name, "\\") === false) { // Namespace like \ or HH\
       $name = $b['typename'];
     }
+
     $generics = $a['genericTypes'];
     if (count($generics) === 0) {
       $generics = $b['genericTypes'];
@@ -121,6 +150,32 @@ final class MergedDataBuilder {
       'typename' => $name,
       'nullable' => $a['nullable'] && $b['nullable'],
       'genericTypes' => $generics,
+    );
+  }
+
+  private static function MergedParameter(
+    ?ParameterDocumentation $a,
+    ?ParameterDocumentation $b,
+  ): ?ParameterDocumentation {
+    if ($a === null) {
+      return $b;
+    }
+    if ($b === null) {
+      return $a;
+    }
+
+    $a_typehint = Shapes::idx($a, 'typehint');
+    $b_typehint = Shapes::idx($b, 'typehint');
+
+    $merged_typehint = self::MergedTypehint($a_typehint, $b_typehint);
+    return shape(
+      'name' => $a['name'],
+      'typehint' => $merged_typehint,
+      'isVariadic' => $a['isVariadic'] && $b['isVariadic'],
+      'isPassedByReference' =>
+        $a['isPassedByReference'] && $b['isPassedByReference'],
+      'isOptional' => $a['isOptional'] && $b['isOptional'],
+      'default' => $a['default'] ?? $b['default'],
     );
   }
 
