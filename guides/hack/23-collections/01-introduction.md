@@ -8,9 +8,23 @@ Since the value side of an array may itself be an array (or a `Generic` class), 
 
 @@ introduction-examples/array.php @@
 
-## Hack Collections 
+## Hack Collections
 
 While PHP Arrays are extremely versatile, that flexibility occaisionally comes at a cost either in terms of performance, correctness, or readability.  Hack Collection classes seek to resolve those issues by providing deeply specialized object versions of arrays in the form of common container patterns: [`Vector`](/hack/reference/class/Vector/), [`Map`](/hack/reference/class/Map/), and [`Set`](/hack/reference/class/Set/).
+
+### Type of Collections
+
+There are seven collections in Hack:
+
+Type | Description
+-----|------------
+[`Vector`](/hack/reference/class/Vector/) | Mutable, `int`eger-indexed, ordered sequence of values. Values can be of any type. The indicies start at `0` and end at `n-1`, where `n` is the number of elements.
+[`ImmVector`](/hack/reference/class/ImmVector/) | An immutable version of `Vector`. Once the `ImmVector` is created, elements cannot be changed, removed or added.
+[`Map`](/hack/reference/class/Map/) | Mutable, `string` or `int`eger-indexed, ordered sequence of values. Values can be of any type. Order is remembered. This is most similar to the `array` in usage.
+[`ImmMap`](/hack/reference/class/ImmMap/) | An immutable version of `Map`. Once the `ImmMap` is created, elements cannot be changed, removed or added.
+[`Set`](/hack/reference/class/Set/) | Mutable, ordered set of unique values. The values can be only `int` or `string`. There are no keys in a `Set`.
+[`ImmSet`](/hack/reference/class/ImmSet/) | An immutable version of `Set`. Once the `ImmSet` is created, elements cannot be changed, removed or added.
+[`Pair`](/hack/reference/class/Pair/) | An immutable sequence of exactly two values. The keys are `0` and `1`. They are similar to [tuples](../types/type-system.md), but less flexible.
 
 ### Readability
 
@@ -36,6 +50,17 @@ Then we realize that those integer keys were irrelevant, and that the strings co
 
 The obvious benefit in `Vectors` and `Sets` are that the keys can be ignored by the runtime.  For `Vector`s that means layouting out the values contiguously and having fast lookup and iteration based on index.  In the case of `Set`s it actually means (as an implementation detail) turning the internal structure inside out, using the values as keys (which must be unique), and ignoring the other half of the array pair.  This is a pattern already available to PHP code, but it removes the cognitive overhead of having to remember that the array is inside out, and does it in a more efficient way than script code is able to do.
 
+Here is the typical-case [amortized](https://en.wikipedia.org/wiki/Amortized_analysis) time complexity for operations on the key collection classes and `array`:
+
+Class | Access | Iteration | Insert | Removal
+------|--------|-----------|--------|--------
+**`Vector`** | `O(1)` | `O(n)` | `O(n)` | `O(n)`
+**`Map`** | `O(1)` | `O(n)` | `O(1)` | `O(1)`
+**`Set`** | `O(1)` | `O(n)` | `O(1)` | `O(1)`
+**`Pair`** | `O(1)` | `O(1)` | N/A | N/A
+**`array`** | `O(1)` | `O(n)` | `O(1)` | `O(1)`
+
+
 ### Type Checking
 
 Related to readability, the Hack typechecker cannot tell, for example, whether the context of your code is passing an `array` used like a vector to a function with a parameter of an `array` used like a map. For example, the following code passes the typechecker.
@@ -47,18 +72,3 @@ However, if you take a similar style of code, but instead use `Vector` and `Map`
 @@ introduction-examples/map-typecheck.php.type-errors @@
 
 Using Hack collections gives the typechecker more data to work with in trying to decide whether you have typing problems in your code.
-
-### Type of Collections
-
-There are seven collections in Hack:
-
-Type | Description
------|------------
-[`Vector`](/hack/reference/class/Vector/) | Mutable, `int`eger-indexed, ordered sequence of values. Values can be of any type. The indicies start at `0` and end at `n-1`, where `n` is the number of elements.
-[`ImmVector`](/hack/reference/class/ImmVector/) | An immutable version of `Vector`. Once the `ImmVector` is created, elements cannot be changed, removed or added.
-[`Map`](/hack/reference/class/Map/) | Mutable, `string` or `int`eger-indexed, ordered sequence of values. Values can be of any type. Order is remembered. This is most similar to the `array` in usage.
-[`ImmMap`](/hack/reference/class/ImmMap/) | An immutable version of `Map`. Once the `ImmMap` is created, elements cannot be changed, removed or added.
-[`Set`](/hack/reference/class/Set/) | Mutable, ordered set of unique values. The values can be only `int` or `string`. There are no keys in a `Set`.
-[`ImmSet`](/hack/reference/class/ImmSet/) | An immutable version of `Set`. Once the `ImmSet` is created, elements cannot be changed, removed or added.
-[`Pair`](/hack/reference/class/Pair/) | An immutable sequence of exactly two values. The keys are `0` and `1`. They are similar to [tuples](../types/type-system.md), but less flexible.
-
