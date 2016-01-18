@@ -23,7 +23,7 @@ class APIGenericPageController extends WebPageController {
 
   <<__Memoize>>
   protected function getRootDefinition(): APIIndexEntry {
-    $definition_name = $this->getNameChanges(
+    $definition_name = $this->getPossibleAPINameChange(
       $this->getRequiredStringParam('name')
     );
     $index = APIIndex::getIndexForType($this->getDefinitionType());
@@ -98,11 +98,12 @@ class APIGenericPageController extends WebPageController {
   }
 
   // For any changes to the current docs APIs. e.g., Pair ==> HH.Pair
-  protected function getNameChanges(string $old): string {
-    // Maybe this map should be in a file? 
+  protected function getPossibleAPINameChange(string $old): string {
+    // Maybe this map should be in a file?
     $change_map = Map {
       'Pair' => 'HH.Pair',
     };
+    // If no change, just returned what was passed in.
     return idx($change_map, $old, $old);
   }
 }

@@ -7,7 +7,7 @@ use HHVM\UserDocumentation\APIMethodIndexEntry;
 final class APIMethodPageController extends APIGenericPageController {
   <<__Memoize>>
   protected function getRootDefinition(): APIClassIndexEntry {
-    $definition_name = $this->getNameChanges(
+    $definition_name = $this->getPossibleAPINameChange(
       $this->getRequiredStringParam('class')
     );
     $index = APIIndex::getClassIndex($this->getDefinitionType());
