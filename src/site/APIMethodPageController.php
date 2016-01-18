@@ -7,7 +7,9 @@ use HHVM\UserDocumentation\APIMethodIndexEntry;
 final class APIMethodPageController extends APIGenericPageController {
   <<__Memoize>>
   protected function getRootDefinition(): APIClassIndexEntry {
-    $definition_name = $this->getRequiredStringParam('class');
+    $definition_name = $this->getNameChanges(
+      $this->getRequiredStringParam('class')
+    );
     $index = APIIndex::getClassIndex($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();

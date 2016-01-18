@@ -23,7 +23,9 @@ class APIGenericPageController extends WebPageController {
 
   <<__Memoize>>
   protected function getRootDefinition(): APIIndexEntry {
-    $definition_name = $this->getRequiredStringParam('name');
+    $definition_name = $this->getNameChanges(
+      $this->getRequiredStringParam('name')
+    );
     $index = APIIndex::getIndexForType($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();
@@ -93,5 +95,14 @@ class APIGenericPageController extends WebPageController {
     }
 
     return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
+  }
+
+  // For any changes to the current docs APIs. e.g., Pair ==> HH.Pair
+  protected function getNameChanges(string $old): string {
+    // Maybe this map should be in a file? 
+    $change_map = Map {
+      'Pair' => 'HH.Pair',
+    };
+    return idx($change_map, $old, $old);
   }
 }
