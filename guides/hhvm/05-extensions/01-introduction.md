@@ -60,7 +60,7 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [phar](http://php.net/manual/en/book.phar.php)
 * [posix](http://php.net/manual/en/book.posix.php)
 * [readline](http://php.net/manual/en/book.readline.php)
-* [redis](http://php.net/manual/en/book.redis.php)
+* [redis](https://pecl.php.net/package/redis)
 * [reflection](http://php.net/manual/en/book.reflection.php)
 * server
 * [session](http://php.net/manual/en/book.session.php)
