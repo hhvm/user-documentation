@@ -147,6 +147,6 @@ date.timezone=America/Los_Angeles # or your appropriate timezone
 
 This means you are trying to run files with HHVM, either local or via server requests, that are `<?hh` files, but are not being typechecked by `hh_client`. 
 
-Ensure that you have the [installed](/hack/typechecker/install) and [setup](/hack/typechecker/setup) as well.
+Ensure that you have the typechecker [installed](/hack/typechecker/install) and [setup](/hack/typechecker/setup) as well.
 
 Make sure there is an `.hhconfig` somewhere in the root of your project.
