@@ -9,5 +9,3 @@ Work is being done by a [community member](https://github.com/facebook/hhvm/pull
 The first step will be getting HHVM to build on Windows. We have a [wiki of information](https://github.com/facebook/hhvm/wiki/Building-and-installing-HHVM-on-Windows-with-MSVC) about this. The next step is being able to run code in interpretive (interp) mode. Then JIT support would be the next step after that.
 
 [Here is a list](https://gist.github.com/Orvid/5c9bc8c54e960a604968) of the areas where solutions are being found to make this happen.
-
-Stay tuned here for updates on when we instructions on how to get HHVM building and running on Windows.
