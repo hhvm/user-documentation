@@ -16,9 +16,9 @@ HHVM releases a point (stable) release on the order of every 8 weeks. Every thir
 
 LTS Version | Release Date | End of Support
 ------------|--------------|---------------
-3.6 | 11 March 2015 | 28 Jan 2016
-3.9 | 14 Aug 2015 | 15 July 2016
-3.12 | 29 Jan 2016 | 30 Dec 2016 
+3.6 | 11 March 2015 | 1 March 2016
+3.9 | 14 August 2015 | 15 July 2016
+3.12 | 29 January 2016 | 30 December 2016
 
 In addition to the normal stable packages, there are supported [LTS releases](/hhvm/installation/linux#obtaining-lts-releases) for the above distributions.
 
