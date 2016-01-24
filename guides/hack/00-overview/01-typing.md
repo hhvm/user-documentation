@@ -10,7 +10,7 @@ For example, consider the following code, written in regular PHP, without any ty
 
 The author of this code clearly intended for both `$a` and `$b` to be `int`s, since the code is using arithmetic operations to manipulate them. But nothing is actually enforcing that, to make sure it's really the case.
 
-Imagine that you're testing this code, and every time you see it work because the value of `$a` is always and `int`, and always greater than 0. You might assume that this is a bug-free piece of code, when this might not be the case: unintended behavior will result if `$b` is ever not an `int`, but that will only show up when `$a <= 0` as well!
+Imagine that you're testing this code, and every time you see it work because the value of `$a` is always an `int`, and always greater than 0. You might assume that this is a bug-free piece of code, when this might not be the case: unintended behavior will result if `$b` is ever not an `int`, but that will only show up when `$a <= 0` as well!
 
 Hack's type annotation mechanism helps protect against these kinds of run-time errors. So now you can explicitly tell Hack that what type you intend a variable to be:
 
