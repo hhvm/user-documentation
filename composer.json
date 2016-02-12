@@ -1,7 +1,7 @@
 {
   "require": {
-    "facebook/xhp-lib": "^2.2",
-    "hhvm": "~3.11",
+    "facebook/xhp-lib": "^2.2.4",
+    "hhvm": "~3.12",
     "zendframework/zend-diactoros": "^1.1",
     "nikic/fast-route": "^0.7",
     "fredemmott/hhvm-autoload": "dev-master"

@@ -46,6 +46,7 @@ else
 fi
 
 # Install direct dependencies
+touch /opt/composer/.hhconfig
 hhvm /opt/composer/composer.phar install
 bundle --path vendor-rb/
 

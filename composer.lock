@@ -4,25 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b806b67433fab0f8ce99ec5f1d736066",
-    "content-hash": "c80c4447073c4f682a5d7ca9be7372bb",
+    "hash": "001830427a77f743c3328a8c0c6f68c2",
+    "content-hash": "bf1044f46e0980f042d5b431b5f82af6",
     "packages": [
         {
             "name": "91carriage/phpunit-hhi",
-            "version": "5.1.0",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.simon.geek.nz/91-carriage/phpunit-hhi.git",
-                "reference": "873dd55114b70e3a87d6a927997ad2c5ed6a50c4"
+                "reference": "2e829576a30f7d583cfb32d29359cb8e1c51c0ca"
             },
             "require": {
-                "hhvm": ">=3.9.0",
-                "phpunit/phpunit": "~5.1.0"
+                "hhvm": ">=3.9.0"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<5.2.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.2.x-dev",
+                    "dev-master": "5.3.x-dev",
+                    "dev-phpunit-5.2": "5.2.x-dev",
                     "dev-phpunit-5.1": "5.1.x-dev",
                     "dev-phpunit-5.0": "5.0.x-dev",
                     "dev-phpunit-4.8": "4.8.x-dev"
@@ -40,8 +43,282 @@
                 "phpunit",
                 "testing"
             ],
-            "time": "2015-12-04 08:27:15"
+            "time": "2016-02-05 22:31:32"
         },
+        {
+            "name": "facebook/xhp-lib",
+            "version": "2.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/xhp-lib.git",
+                "reference": "8b770c8c0a7f59bbd7244a52d5044effa84ddf91"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/8b770c8c0a7f59bbd7244a52d5044effa84ddf91",
+                "reference": "8b770c8c0a7f59bbd7244a52d5044effa84ddf91",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "~3.6"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "^5.1.0",
+                "phpunit/phpunit": "^5.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Class library for XHP",
+            "homepage": "https://github.com/facebook/xhp-lib",
+            "keywords": [
+                "facebook",
+                "hack",
+                "hhvm",
+                "xhp"
+            ],
+            "time": "2016-01-20 18:48:31"
+        },
+        {
+            "name": "fredemmott/definition-finder",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fredemmott/definition-finder.git",
+                "reference": "04bec8273b6b1dc33312a9497d639d344bda6ae4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fredemmott/definition-finder/zipball/04bec8273b6b1dc33312a9497d639d344bda6ae4",
+                "reference": "04bec8273b6b1dc33312a9497d639d344bda6ae4",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "~3.9"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "~5.1.0",
+                "hhvm/systemlib-extractor": "^0.1.0",
+                "phpunit/phpunit": "~5.1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "files": [
+                    "src/typedefs.php",
+                    "src/utils.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Find definitions in PHP or Hack files. Useful for autoloaders.",
+            "homepage": "https://github.com/fredemmott/definitions-finder",
+            "keywords": [
+                "autoload",
+                "definitions",
+                "hack",
+                "hhvm"
+            ],
+            "time": "2015-12-17 06:59:42"
+        },
+        {
+            "name": "fredemmott/hhvm-autoload",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fredemmott/hhvm-autoload.git",
+                "reference": "e8d763ccc7f8911d1ae7afade987182d66825608"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fredemmott/hhvm-autoload/zipball/e8d763ccc7f8911d1ae7afade987182d66825608",
+                "reference": "e8d763ccc7f8911d1ae7afade987182d66825608",
+                "shasum": ""
+            },
+            "require": {
+                "91carriage/phpunit-hhi": "^5.1",
+                "composer-plugin-api": "^1.0",
+                "fredemmott/definition-finder": "^1.0",
+                "hhvm": "~3.11"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": [
+                    "FredEmmott\\AutoloadMap\\ComposerPlugin"
+                ]
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "files": [
+                    "src/AutoloadMap.php",
+                    "src/Config.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2016-01-14 19:35:53"
+        },
+        {
+            "name": "nikic/fast-route",
+            "version": "v0.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nikic/FastRoute.git",
+                "reference": "8164b4a0d8afde4eae5f1bfc39084972ba23ad36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/8164b4a0d8afde4eae5f1bfc39084972ba23ad36",
+                "reference": "8164b4a0d8afde4eae5f1bfc39084972ba23ad36",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FastRoute\\": "src/"
+                },
+                "files": [
+                    "src/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Nikita Popov",
+                    "email": "nikic@php.net"
+                }
+            ],
+            "description": "Fast request router for PHP",
+            "keywords": [
+                "router",
+                "routing"
+            ],
+            "time": "2015-12-20 19:50:12"
+        },
+        {
+            "name": "psr/http-message",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/http-message.git",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Http\\Message\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for HTTP messages",
+            "keywords": [
+                "http",
+                "http-message",
+                "psr",
+                "psr-7",
+                "request",
+                "response"
+            ],
+            "time": "2015-05-04 20:22:00"
+        },
+        {
+            "name": "zendframework/zend-diactoros",
+            "version": "1.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-diactoros.git",
+                "reference": "4d54fde709664562eb63356f0250d527824d05de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/4d54fde709664562eb63356f0250d527824d05de",
+                "reference": "4d54fde709664562eb63356f0250d527824d05de",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4",
+                "psr/http-message": "~1.0"
+            },
+            "provide": {
+                "psr/http-message-implementation": "~1.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.6",
+                "squizlabs/php_codesniffer": "^2.3.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev",
+                    "dev-develop": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Diactoros\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "PSR HTTP Message implementations",
+            "homepage": "https://github.com/zendframework/zend-diactoros",
+            "keywords": [
+                "http",
+                "psr",
+                "psr-7"
+            ],
+            "time": "2016-01-04 21:37:32"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
@@ -97,134 +374,89 @@
             "time": "2015-06-14 21:17:01"
         },
         {
-            "name": "facebook/xhp-lib",
-            "version": "2.2.3",
+            "name": "hack-psr/psr7-http-message-hhi",
+            "version": "v0.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/xhp-lib.git",
-                "reference": "75bd37a0aaf9f3e39bac7102aa5ecc8b083d136a"
+                "url": "https://github.com/fredemmott/psr7-http-message-hhi.git",
+                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/75bd37a0aaf9f3e39bac7102aa5ecc8b083d136a",
-                "reference": "75bd37a0aaf9f3e39bac7102aa5ecc8b083d136a",
+                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/31422ed7c566dd1cd481d95fd1d7e65798944fc9",
+                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "~3.6"
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Typechecker definitions for PSR-7",
+            "homepage": "https://github.com/fredemmott/psr7-http-message-hhi",
+            "keywords": [
+                "hack",
+                "hhi",
+                "hhvm",
+                "http-message",
+                "psr",
+                "psr-7",
+                "psr7"
+            ],
+            "time": "2015-11-02 23:49:05"
+        },
+        {
+            "name": "mustangostang/spyc",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mustangostang/spyc.git",
+                "reference": "699184c170688363ab82f97afb8085e39d7a1769"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mustangostang/spyc/zipball/699184c170688363ab82f97afb8085e39d7a1769",
+                "reference": "699184c170688363ab82f97afb8085e39d7a1769",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.1"
             },
             "require-dev": {
-                "91carriage/phpunit-hhi": "^5.1.0",
-                "phpunit/phpunit": "^5.1.0"
+                "phpunit/phpunit": "4.3.*@dev"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "0.5.x-dev"
                 }
             },
             "autoload": {
-                "classmap": [
-                    "src/"
+                "files": [
+                    "Spyc.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD-3-Clause"
+                "MIT"
             ],
-            "description": "Class library for XHP",
-            "homepage": "https://github.com/facebook/xhp-lib",
+            "authors": [
+                {
+                    "name": "mustangostang",
+                    "email": "vlad.andersen@gmail.com"
+                }
+            ],
+            "description": "A simple YAML loader/dumper class for PHP",
+            "homepage": "https://github.com/mustangostang/spyc/",
             "keywords": [
-                "facebook",
-                "hack",
-                "hhvm",
-                "xhp"
+                "spyc",
+                "yaml",
+                "yml"
             ],
-            "time": "2015-12-21 17:42:41"
-        },
-        {
-            "name": "fredemmott/definition-finder",
-            "version": "v1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fredemmott/definition-finder.git",
-                "reference": "04bec8273b6b1dc33312a9497d639d344bda6ae4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definition-finder/zipball/04bec8273b6b1dc33312a9497d639d344bda6ae4",
-                "reference": "04bec8273b6b1dc33312a9497d639d344bda6ae4",
-                "shasum": ""
-            },
-            "require": {
-                "hhvm": "~3.9"
-            },
-            "require-dev": {
-                "91carriage/phpunit-hhi": "~5.1.0",
-                "hhvm/systemlib-extractor": "^0.1.0",
-                "phpunit/phpunit": "~5.1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ],
-                "files": [
-                    "src/typedefs.php",
-                    "src/utils.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Find definitions in PHP or Hack files. Useful for autoloaders.",
-            "homepage": "https://github.com/fredemmott/definitions-finder",
-            "keywords": [
-                "autoload",
-                "definitions",
-                "hack",
-                "hhvm"
-            ],
-            "time": "2015-12-17 06:59:42"
-        },
-        {
-            "name": "fredemmott/hhvm-autoload",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fredemmott/hhvm-autoload.git",
-                "reference": "b685a640ca5e7faa20f7228cbca6cc833cd9260d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/hhvm-autoload/zipball/a3275dbcf72337f34c1273a1f1caca82f865f895",
-                "reference": "b685a640ca5e7faa20f7228cbca6cc833cd9260d",
-                "shasum": ""
-            },
-            "require": {
-                "91carriage/phpunit-hhi": "^5.1",
-                "composer-plugin-api": "^1.0",
-                "fredemmott/definition-finder": "^1.0|dev-master",
-                "hhvm": "~3.11"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": [
-                    "FredEmmott\\AutoloadMap\\ComposerPlugin"
-                ]
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ],
-                "files": [
-                    "src/AutoloadMap.php",
-                    "src/Config.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "time": "2015-12-18 01:42:06"
+            "time": "2015-08-13 21:51:08"
         },
         {
             "name": "myclabs/deep-copy",
@@ -267,49 +499,6 @@
                 "object graph"
             ],
             "time": "2015-11-07 22:20:37"
-        },
-        {
-            "name": "nikic/fast-route",
-            "version": "v0.7.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/FastRoute.git",
-                "reference": "8164b4a0d8afde4eae5f1bfc39084972ba23ad36"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/FastRoute/zipball/8164b4a0d8afde4eae5f1bfc39084972ba23ad36",
-                "reference": "8164b4a0d8afde4eae5f1bfc39084972ba23ad36",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "FastRoute\\": "src/"
-                },
-                "files": [
-                    "src/functions.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov",
-                    "email": "nikic@php.net"
-                }
-            ],
-            "description": "Fast request router for PHP",
-            "keywords": [
-                "router",
-                "routing"
-            ],
-            "time": "2015-12-20 19:50:12"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -422,16 +611,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "3.0.2",
+            "version": "3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "f7bb5cddf4ffe113eeb737b05241adb947b43f9d"
+                "reference": "92f5c61b5c64159faec5298325ffab0c7e59dcc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f7bb5cddf4ffe113eeb737b05241adb947b43f9d",
-                "reference": "f7bb5cddf4ffe113eeb737b05241adb947b43f9d",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/92f5c61b5c64159faec5298325ffab0c7e59dcc8",
+                "reference": "92f5c61b5c64159faec5298325ffab0c7e59dcc8",
                 "shasum": ""
             },
             "require": {
@@ -440,7 +629,7 @@
                 "phpunit/php-text-template": "~1.2",
                 "phpunit/php-token-stream": "~1.3",
                 "sebastian/environment": "^1.3.2",
-                "sebastian/version": "~1.0"
+                "sebastian/version": "~1.0|~2.0"
             },
             "require-dev": {
                 "ext-xdebug": ">=2.1.4",
@@ -454,7 +643,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-master": "3.1.x-dev"
                 }
             },
             "autoload": {
@@ -480,7 +669,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-11-12 21:08:20"
+            "time": "2016-02-04 13:05:19"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -662,16 +851,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.1.3",
+            "version": "5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c047ff05d2279404af9a7e89e2a7151c32c88022"
+                "reference": "ebde9bac26b1138eb99e1aa841feaa51b4a08314"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c047ff05d2279404af9a7e89e2a7151c32c88022",
-                "reference": "c047ff05d2279404af9a7e89e2a7151c32c88022",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ebde9bac26b1138eb99e1aa841feaa51b4a08314",
+                "reference": "ebde9bac26b1138eb99e1aa841feaa51b4a08314",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +883,7 @@
                 "sebastian/exporter": "~1.2",
                 "sebastian/global-state": "~1.0",
                 "sebastian/resource-operations": "~1.0",
-                "sebastian/version": "~1.0",
+                "sebastian/version": "~1.0|~2.0",
                 "symfony/yaml": "~2.1|~3.0"
             },
             "suggest": {
@@ -706,7 +895,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "5.1.x-dev"
+                    "dev-master": "5.2.x-dev"
                 }
             },
             "autoload": {
@@ -732,7 +921,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-12-10 07:54:54"
+            "time": "2016-02-11 14:58:25"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -789,55 +978,6 @@
                 "xunit"
             ],
             "time": "2015-12-08 08:47:06"
-        },
-        {
-            "name": "psr/http-message",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Message\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP messages",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr",
-                "psr-7",
-                "request",
-                "response"
-            ],
-            "time": "2015-05-04 20:22:00"
         },
         {
             "name": "sebastian/comparator",
@@ -1219,19 +1359,27 @@
         },
         {
             "name": "sebastian/version",
-            "version": "1.0.6",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/version.git",
-                "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6"
+                "reference": "c829badbd8fdf16a0bad8aa7fa7971c029f1b9c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
-                "reference": "58b3a85e7999757d6ad81c787a1fbf5ff6c628c6",
+                "url": "https://api.github.com/repos/sebastianbergmann/version/zipball/c829badbd8fdf16a0bad8aa7fa7971c029f1b9c5",
+                "reference": "c829badbd8fdf16a0bad8aa7fa7971c029f1b9c5",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=5.6"
+            },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
             "autoload": {
                 "classmap": [
                     "src/"
@@ -1250,20 +1398,20 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2015-06-21 13:59:46"
+            "time": "2016-02-04 12:56:52"
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.0.0",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002"
+                "reference": "3cf0709d7fe936e97bee9e954382e449003f1d9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
-                "reference": "177a015cb0e19ff4a49e0e2e2c5fc1c1bee07002",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/3cf0709d7fe936e97bee9e954382e449003f1d9a",
+                "reference": "3cf0709d7fe936e97bee9e954382e449003f1d9a",
                 "shasum": ""
             },
             "require": {
@@ -1299,182 +1447,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-30 12:36:17"
-        },
-        {
-            "name": "zendframework/zend-diactoros",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-diactoros.git",
-                "reference": "08284cfe5b5d91f64d87911902acaca1b6cff11e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-diactoros/zipball/08284cfe5b5d91f64d87911902acaca1b6cff11e",
-                "reference": "08284cfe5b5d91f64d87911902acaca1b6cff11e",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4",
-                "psr/http-message": "~1.0"
-            },
-            "provide": {
-                "psr/http-message-implementation": "~1.0.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.6",
-                "squizlabs/php_codesniffer": "^2.3.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev",
-                    "dev-develop": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Diactoros\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-2-Clause"
-            ],
-            "description": "PSR HTTP Message implementations",
-            "homepage": "https://github.com/zendframework/zend-diactoros",
-            "keywords": [
-                "http",
-                "psr",
-                "psr-7"
-            ],
-            "time": "2015-12-15 17:59:11"
-        }
-    ],
-    "packages-dev": [
-        {
-            "name": "hack-psr/psr7-http-message-hhi",
-            "version": "v0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fredemmott/psr7-http-message-hhi.git",
-                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/31422ed7c566dd1cd481d95fd1d7e65798944fc9",
-                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9",
-                "shasum": ""
-            },
-            "require": {
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Typechecker definitions for PSR-7",
-            "homepage": "https://github.com/fredemmott/psr7-http-message-hhi",
-            "keywords": [
-                "hack",
-                "hhi",
-                "hhvm",
-                "http-message",
-                "psr",
-                "psr-7",
-                "psr7"
-            ],
-            "time": "2015-11-02 23:49:05"
-        },
-        {
-            "name": "hhvm/systemlib-extractor",
-            "version": "v0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hhvm/systemlib-extractor.git",
-                "reference": "70840d4423901874f58e637cc03cf0600d226c39"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/systemlib-extractor/zipball/70840d4423901874f58e637cc03cf0600d226c39",
-                "reference": "70840d4423901874f58e637cc03cf0600d226c39",
-                "shasum": ""
-            },
-            "require": {
-                "hhvm": "*"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.5.*"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Extract the PHP, Hack, and HNI files embedded in HHVM",
-            "homepage": "https://github.com/hhvm/systemlib-extractor",
-            "keywords": [
-                "hack",
-                "hhvm"
-            ],
-            "time": "2015-08-12 21:57:53"
-        },
-        {
-            "name": "mustangostang/spyc",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mustangostang/spyc.git",
-                "reference": "699184c170688363ab82f97afb8085e39d7a1769"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mustangostang/spyc/zipball/699184c170688363ab82f97afb8085e39d7a1769",
-                "reference": "699184c170688363ab82f97afb8085e39d7a1769",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.3.*@dev"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.5.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "Spyc.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "mustangostang",
-                    "email": "vlad.andersen@gmail.com"
-                }
-            ],
-            "description": "A simple YAML loader/dumper class for PHP",
-            "homepage": "https://github.com/mustangostang/spyc/",
-            "keywords": [
-                "spyc",
-                "yaml",
-                "yml"
-            ],
-            "time": "2015-08-13 21:51:08"
+            "time": "2016-02-02 13:44:19"
         }
     ],
     "aliases": [],
@@ -1486,7 +1459,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "~3.11"
+        "hhvm": "~3.12"
     },
     "platform-dev": []
 }
