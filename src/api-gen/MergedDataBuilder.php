@@ -97,7 +97,8 @@ final class MergedDataBuilder {
       assert(is_array($value));
       assert(is_array($old_value));
       if (count($value) !== count($old_value)) {
-        Log::w("\nParameter Number Mismatch When Merging");
+        $name = (string) idx($this->data, 'name', '<unknown>');
+        Log::w("\nParameter number mismatch when merging ".$name);
         $num = min(count($value), count($old_value));
       } else {
         $num = count($value);
