@@ -2,7 +2,7 @@ Hack supports the creation of closures through a construct called lambda. Lambda
 
 ## Syntax
 
-A lambda is introduced by the [lambada operator](../operators/lambda.md) `==>`. To the left of `==>` is the list of arguments to the closure. To the right, is an expression or list of statements enclosed by braces `{}`. See [lambda design](./design.md) for more information.
+A lambda is introduced by the [lambda operator](../operators/lambda.md) `==>`. To the left of `==>` is the list of arguments to the closure. To the right, is an expression or list of statements enclosed by braces `{}`. See [lambda design](./design.md) for more information.
 
 ## Difference From Traditional Closures
 
