@@ -220,7 +220,7 @@ hhvm.ip_block_map[0][ip][deny][0]  = 8.32.0.0/24
 hhvm.ip_block_map[0][ip][deny][1]  = aaaa:bbbb:cccc:dddd:eeee:ffff:1111::/80
 ```
 
-allow_first` basically says whether you allow an ip by default or not. You can then have other endpoints with `[1]`, `[2]`, etc.
+`allow_first` basically says whether you allow an ip by default or not. You can then have other endpoints with `[1]`, `[2]`, etc.
 
 ### Satellite Format
 
