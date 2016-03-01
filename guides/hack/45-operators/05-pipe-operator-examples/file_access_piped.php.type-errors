@@ -1,0 +1,10 @@
+<?hh
+
+function open_files_piped($names, $prefix): array {
+  return $prefix
+    |> strtolower($$)
+    |> ucfirst($$)
+    |> array_map($name ==>
+      (new SplFileInfo($$.$name))->open_file('a'), $names)
+}
+

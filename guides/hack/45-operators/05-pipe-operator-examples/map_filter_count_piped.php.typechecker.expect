@@ -1,0 +1,22 @@
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:4:11,60: Typing error (Typing[4110])
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:5:7,45: This is an int because this is used in a bitwise operation
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:5:7,45: It is incompatible with a bool because this is the result of a comparison
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:4:11,85: Typing error (Typing[4110])
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:6:7,24: This is an int because this is used in a bitwise operation
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:6:7,24: It is incompatible with a bool because this is the result of a comparison
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:5:7,7: Expected expression (Parsing[1002])
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:5:45,45: Invalid argument (Typing[4110])
+  /tmp/hh_server/hhi_220a96fe/stdlib/builtins_array.hhi:117:10,18: This is an object of type Container
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:5:45,45: It is incompatible with a nullable type
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:6:24,24: Invalid argument (Typing[4110])
+  /tmp/hh_server/hhi_220a96fe/stdlib/builtins_array.hhi:86:27,35: This is an object of type Container
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:6:24,24: It is incompatible with a nullable type
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:6,17: Typing error (Typing[4110])
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:7,17: This is an int because this is used in a bitwise operation
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:7,17: It is incompatible with a bool because this is the result of a comparison
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:6,17: Typing error (Typing[4110])
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:6,6: This is an int because this is used in a bitwise operation
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:6,6: It is incompatible with a nullable type
+guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:7,17: Typing error (Typing[4110])
+  guides/hack/45-operators/05-pipe-operator-examples/map_filter_count_piped.php:7:7,7: This is a nullable type
+  /tmp/hh_server/hhi_220a96fe/functions.hhi:28:53,55: It is incompatible with an int
