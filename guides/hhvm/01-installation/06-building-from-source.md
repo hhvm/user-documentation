@@ -27,7 +27,7 @@ sudo apt-get install autoconf automake binutils-dev build-essential cmake g++ ga
   libonig-dev libpcre3-dev libreadline-dev libtbb-dev libtool libxml2-dev zlib1g-dev \
   libevent-dev libmagickwand-dev libinotifytools0-dev libiconv-hook-dev libedit-dev \
   libiberty-dev libxslt1-dev ocaml-native-compilers libsqlite3-dev libyaml-dev libgmp3-dev \
-  gperf libkrb5-dev libnotify-dev
+  gperf libkrb5-dev libnotify-dev libpq-dev
 ```
 
 ### Downloading the HHVM source-code
@@ -113,7 +113,7 @@ apt-get install git-core cmake gawk libmysqlclient-dev \
   pkg-config libboost-system1.55-dev libboost-context1.55-dev \
   libboost-program-options1.55-dev libboost-filesystem1.55-dev libboost-regex1.55-dev \
   libmagickwand-dev libiberty-dev libevent-dev libxslt-dev libgoogle-glog-dev \
-  automake libldap2-dev libkrb5-dev libyaml-dev gperf ocaml-native-compilers
+  automake libldap2-dev libkrb5-dev libyaml-dev gperf ocaml-native-compilers libpq-dev
 ```
 
 ### Getting HHVM source-code
