@@ -18,7 +18,7 @@ class A {
 // This function can return either a string or an int since it is typed to
 // return an arraykey
 function bar(): arraykey {
-  // local variables are inferred, not explictly typed
+  // local variables are inferred, not explicitly typed
   $a = new A(0.9);
   if ($a->foo(true) > 8.0) {
     return "Good " . $a->y;

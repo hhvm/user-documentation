@@ -27,7 +27,7 @@ function baz(Z $z): A {
 }
 
 function bar(): string {
-  // local variables are inferred, not explictly typed
+  // local variables are inferred, not explicitly typed
   $z = new Z();
   $a = baz($z);
   if ($a->foo(true) > 8.0) {
