@@ -28,7 +28,7 @@ class A {
 }
 
 function bar(): string {
-  // local variables are inferred, not explictly typed
+  // local variables are inferred, not explicitly typed
   // There is no public constructor, so call A's create() method
   $a = A::create(2);
   if ($a->foo(true) > 8.0) {

@@ -27,7 +27,7 @@ function check(A $a): string {
 }
 
 function bar(): string {
-  // local variables are inferred, not explictly typed
+  // local variables are inferred, not explicitly typed
   // Setting the $x property in A to an int
   $a = new A(4);
   $ret = check($a);

@@ -20,7 +20,7 @@ class A {
 
 // The ? means that the function can return null in addition to the string
 function bar(): ?string {
-  // local variables are inferred, not explictly typed
+  // local variables are inferred, not explicitly typed
   $a = new A();
   if ($a->foo(null) === null) {
     return null;

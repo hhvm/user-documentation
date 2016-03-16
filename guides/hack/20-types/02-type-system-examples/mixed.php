@@ -17,7 +17,7 @@ class A {
 }
 
 function bar(): string {
-  // local variables are inferred, not explictly typed
+  // local variables are inferred, not explicitly typed
   $a = new A();
   $v = $a->foo(false);
   // Since A::foo() returns a mixed, we need to do various checks to make sure

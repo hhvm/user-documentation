@@ -16,7 +16,7 @@ class A {
 }
 
 function bar(): string {
-  // local variables are inferred, not explictly typed
+  // local variables are inferred, not explicitly typed
   $a = new A();
   if ($a->foo(true) > 8.0) {
     return "Good " . $a->y;
