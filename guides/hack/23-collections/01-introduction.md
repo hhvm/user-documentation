@@ -1,4 +1,4 @@
-In addition to fully supporting the one-size-fits-all PHP [`array`](http://php.net/types.array) container type, Hack allows additional typing to be placed on arrays, and provides a number of classes which implement more specialized collecion patterns.
+In addition to fully supporting the one-size-fits-all PHP [`array`](http://php.net/types.array) container type, Hack allows additional typing to be placed on arrays, and provides a number of classes which implement more specialized collection patterns.
 
 ## Array Typing
 
