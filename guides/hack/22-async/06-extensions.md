@@ -8,7 +8,7 @@ The [full API](../reference/class/AsyncMysqlConnection/) will contain all of the
 
 The primary class for connecting to a MySQL database is [`AsyncMysqlConnectionPool`](../reference/class/AsyncMysqlClient/) and its primary method is the *async* [`connect()`](../reference/class/AsyncMysqlClient/connect/).
 
-The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the two main query methods, [`query()`](../reference/class/AsyncMysqlConnection/query/) and [`queryf()`](../reference/class/AsyncMysqlConnection/query/), both *async*. There is also a function to ensure that queries to be executed are safe called [`escapeString()`](../reference/class/AsyncMysqlConnection/escapeString/).
+The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the two main query methods, [`query()`](../reference/class/AsyncMysqlConnection/query/) and [`queryf()`](../reference/class/AsyncMysqlConnection/queryf/), both *async*. There is also a function to ensure that queries to be executed are safe called [`escapeString()`](../reference/class/AsyncMysqlConnection/escapeString/).
 
 The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryResult/) and [`AsyncMysqlErrorResult`](../reference/class/AsyncMysqlErrorResult/). The main methods on these classes are [`vectorRows()`](../reference/class/AsyncMysqlQueryResult/vectorRows/) and [`mapRows()`](../reference/class/AsyncMysqlQueryResult/mapRows/), both *non-async*.
 
