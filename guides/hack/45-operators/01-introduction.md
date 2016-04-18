@@ -15,3 +15,7 @@ Allows for method and property calls without explicit checks to ensure that the 
 ## `->:` ([XHP attribute access operator](XHP-attribute-access.md))
 
 Allows for accessing XHP attributes without explicitly having to call `getAttribute()` on the XHP object.
+
+## `|>` ([Pipe operator](pipe-operator.md))
+
+Allows for a fluid, concise syntax for chaining expressions.
