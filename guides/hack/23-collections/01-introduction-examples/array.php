@@ -16,7 +16,7 @@ function array_as_vector(array<int> $arr): int {
 
 function run(): void {
   $v = array(100, 200, 300, 400);
-  $v[] = 500; // index 4, value 500
+  $v[] = 500; // element 5, value 500
   var_dump($v);
   var_dump(array_as_vector($v));
 
