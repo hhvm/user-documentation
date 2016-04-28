@@ -1,4 +1,4 @@
-FROM hhvm/hhvm-proxygen:3.12.1
+FROM hhvm/hhvm-proxygen:3.13.1
 ARG COMPOSER_GITHUB_OAUTH_TOKEN
 ENV TZ UTC
 
