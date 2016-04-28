@@ -44,6 +44,22 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     );
   }
 
+  public function testDoesNotBreakExternalMarkdownLinks(): void {
+    $response = \HH\Asio\join(
+      PageLoader::getPage('/hack/typechecker/editors')
+    );
+    $body = (string) $response->getBody();
+    $this->assertContains('Vim users', $body);
+    $this->assertContains(
+      'https://github.com/hhvm/vim-hack/blob/master/README',
+      $body,
+    );
+    $this->assertContains(
+      'https://github.com/hhvm/vim-hack/blob/master/README.md',
+      $body,
+    );
+  }
+
   public function testCanGetLinksList(): void {
     $_ = $this->internalLinksList();
   }
