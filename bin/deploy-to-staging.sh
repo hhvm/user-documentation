@@ -12,9 +12,7 @@ IMAGE_TAG=$(date +%Y-%m-%d)-$DEPLOY_REV
 IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 
 echo "** Building image"
-COMPOSER_GITHUB_OAUTH_TOKEN=$(hhvm bin/composer-github-oauth-token.php)
 docker build \
-  --build-arg COMPOSER_GITHUB_OAUTH_TOKEN="$COMPOSER_GITHUB_OAUTH_TOKEN" \
   -t $IMAGE_NAME $(pwd)
 docker tag -f $IMAGE_NAME hhvm/user-documentation:latest # add an alias
 
