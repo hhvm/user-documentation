@@ -2,7 +2,7 @@ An area that may seem counter-intuitive is generics as it pertains to subtyping.
 
 @@ subtypes-examples/intuitive.php @@
 
-Since `int` is a subtype of [`num`](http://docs.hhvm.com/hack/types/type-system#num), the typechecker is perfectly finw with passing an `int` to a function that takes `num`. It would be fine if you pass a `float` to the function. It would also be fine if you pass one `int` and one `float` to the function.
+Since `int` is a subtype of [`num`](http://docs.hhvm.com/hack/types/type-system#num), the typechecker is perfectly fine with passing an `int` to a function that takes `num`. It would be fine if you pass a `float` to the function. It would also be fine if you pass one `int` and one `float` to the function.
 
 However, do you think the typechecker should accept this?
 
