@@ -93,16 +93,16 @@
         },
         {
             "name": "fredemmott/definition-finder",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/definition-finder.git",
-                "reference": "04bec8273b6b1dc33312a9497d639d344bda6ae4"
+                "reference": "41ab3cb546ad436060ab0edf928d337b1fa7e5f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/definition-finder/zipball/04bec8273b6b1dc33312a9497d639d344bda6ae4",
-                "reference": "04bec8273b6b1dc33312a9497d639d344bda6ae4",
+                "url": "https://api.github.com/repos/fredemmott/definition-finder/zipball/41ab3cb546ad436060ab0edf928d337b1fa7e5f8",
+                "reference": "41ab3cb546ad436060ab0edf928d337b1fa7e5f8",
                 "shasum": ""
             },
             "require": {
@@ -135,7 +135,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2015-12-17 06:59:42"
+            "time": "2016-04-21 21:16:11"
         },
         {
             "name": "fredemmott/hhvm-autoload",
