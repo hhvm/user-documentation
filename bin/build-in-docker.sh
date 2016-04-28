@@ -34,17 +34,6 @@ sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example \
   | sed 's,CACHE_ROUTES = false,CACHE_ROUTES = true,' \
   > LocalConfig.php
 
-# If we have a GitHub API key to increase rate limits, use it :)
-if [ ! -z "$COMPOSER_GITHUB_OAUTH_TOKEN" ]; then
-  echo "** Using Composer GitHub OAuth token"
-  hhvm /opt/composer/composer.phar \
-    config -g \
-    github-oauth.github.com \
-    "$COMPOSER_GITHUB_OAUTH_TOKEN"
-else
-    echo "** No Composer GitHub OAuth token found"
-fi
-
 # Install direct dependencies
 touch /opt/composer/.hhconfig
 hhvm /opt/composer/composer.phar install

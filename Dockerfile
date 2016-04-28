@@ -1,5 +1,4 @@
 FROM hhvm/hhvm-proxygen:3.13.1
-ARG COMPOSER_GITHUB_OAUTH_TOKEN
 ENV TZ UTC
 
 # We need a unicode-aware system to generate the docs
