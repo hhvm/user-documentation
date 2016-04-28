@@ -29,7 +29,15 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     return [
       'Hack class documentation' => tuple(
         '/manual/en/class.hack.maptktv.php',
+        '/hack/reference/class/HH.Map/',
+      ),
+      'Hack class moved to HH namespace' => tuple(
         '/hack/reference/class/Map/',
+        '/hack/reference/class/HH.Map/',
+      ),
+      'Method in Hack class moved to HH namespace' => tuple(
+        '/hack/reference/class/Map/filter/',
+        '/hack/reference/class/HH.Map/filter/',
       ),
       'Hack interface reference with added namespace' => tuple(
         '/manual/en/class.hack.iterabletv.php',
@@ -96,8 +104,8 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
         '/hack/reference/class/Vector/',
       ),
       'Missing trailing /' => tuple(
-        '/hack/reference/class/Map',
-        '/hack/reference/class/Map/',
+        '/hack/reference/class/HH.Map',
+        '/hack/reference/class/HH.Map/',
       ),
       'PHP bad punctuation' => tuple(
         '/manual/en/debugger.about.php',
@@ -134,8 +142,8 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
 
   public function notFoundSuggestions(): array<(string, string)> {
     return [
-      tuple('/map', '/hack/reference/class/Map/'),
-      tuple('/maptktv.filter', '/hack/reference/class/Map/filter/'),
+      tuple('/map', '/hack/reference/class/HH.Map/'),
+      tuple('/maptktv.filter', '/hack/reference/class/HH.Map/filter/'),
     ];
   }
 

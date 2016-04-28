@@ -56,7 +56,7 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
         tuple(
           '/hack/collections/classes',
           'ImmSet<T>',
-          '/hack/reference/class/ImmSet/',
+          '/hack/reference/class/HH.ImmSet/',
         ),
       'Hack class with a class with type parameter as its type parameter' =>
         tuple(

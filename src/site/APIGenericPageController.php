@@ -8,6 +8,7 @@ use HHVM\UserDocumentation\APIMethodIndexEntry;
 use HHVM\UserDocumentation\APINavData;
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\HTMLFileRenderable;
+use HHVM\UserDocumentation\URLBuilder;
 
 class APIGenericPageController extends WebPageController {
   public async function getTitle(): Awaitable<string> {
@@ -23,9 +24,9 @@ class APIGenericPageController extends WebPageController {
 
   <<__Memoize>>
   protected function getRootDefinition(): APIIndexEntry {
-    $definition_name = $this->getPossibleAPINameChange(
-      $this->getRequiredStringParam('name')
-    );
+    $this->redirectIfAPIRenamed();
+    $definition_name = $this->getRequiredStringParam('name');
+
     $index = APIIndex::getIndexForType($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();
@@ -97,13 +98,43 @@ class APIGenericPageController extends WebPageController {
     return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
   }
 
-  // For any changes to the current docs APIs. e.g., Pair ==> HH.Pair
-  protected function getPossibleAPINameChange(string $old): string {
-    // Maybe this map should be in a file?
-    $change_map = Map {
+  protected function redirectIfAPIRenamed(): void {
+    invariant(
+      self::class === static::class,
+      '%s must be overridden by subclasses',
+      __FUNCTION__,
+    );
+
+    $redirect_to = $this->getRenamedAPI($this->getRequiredStringParam('name'));
+
+    if ($redirect_to === null) {
+      return;
+    }
+
+    $type = $this->getDefinitionType();
+    if ($type === APIDefinitionType::FUNCTION_DEF) {
+      $url = URLBuilder::getPathForFunction(shape('name' => $redirect_to));
+    } else {
+      $url = URLBuilder::getPathForClass(shape(
+        'name' => $redirect_to,
+        'type' => $type,
+      ));
+    }
+
+    throw new RedirectException($url);
+  }
+
+  protected function getRenamedAPI(string $old): ?string {
+    $change_map = ImmMap {
+      'ImmMap' => 'HH.ImmMap',
+      'ImmSet' => 'HH.ImmSet',
+      'ImmVector' => 'HH.ImmVector',
+      'Map' => 'HH.Map',
       'Pair' => 'HH.Pair',
+      'Set' => 'HH.Set',
+      'Vector' => 'HH.Vector',
     };
-    // If no change, just returned what was passed in.
-    return idx($change_map, $old, $old);
+
+    return $change_map[$old] ?? null;
   }
 }

@@ -3,13 +3,13 @@
 use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APIClassIndexEntry;
 use HHVM\UserDocumentation\APIMethodIndexEntry;
+use HHVM\UserDocumentation\URLBuilder;
 
 final class APIMethodPageController extends APIGenericPageController {
   <<__Memoize>>
   protected function getRootDefinition(): APIClassIndexEntry {
-    $definition_name = $this->getPossibleAPINameChange(
-      $this->getRequiredStringParam('class')
-    );
+    $this->redirectIfAPIRenamed();
+    $definition_name = $this->getRequiredStringParam('class');
     $index = APIIndex::getClassIndex($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();
@@ -36,5 +36,22 @@ final class APIMethodPageController extends APIGenericPageController {
 
   protected function getHTMLFilePath(): string {
     return $this->getMethodDefinition()['htmlPath'];
+  }
+
+  <<__Override>>
+  protected function redirectIfAPIRenamed(): void {
+    $redirect_to = $this->getRenamedAPI($this->getRequiredStringParam('class'));
+    if ($redirect_to === null) {
+      return;
+    }
+
+    $type = $this->getDefinitionType();
+    throw new RedirectException(
+      URLBuilder::getPathForMethod(shape(
+        'name' => $this->getRequiredStringParam('method'),
+        'className' => $redirect_to,
+        'classType' => $type,
+      )),
+    );
   }
 }
