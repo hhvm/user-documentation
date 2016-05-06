@@ -26,7 +26,7 @@ Also, there are currently LTS releases for:
 
 * [Ubuntu 10.04 (Lucid)](./linux.md#ubuntu-10.04-lucid)
 * [Ubuntu 12.04 (Precise)](./linux.md#ubuntu-12.04-precise)
-* [Mint 16 (Preta)](./linux.md#mint-16-preta)
+* [Mint 16 (Petra)](./linux.md#mint-16-preta)
 
 However, LTS support for these three distributions will end on January 28, 2016, when support for HHVM 3.6 LTS ends.
 
