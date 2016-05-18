@@ -14,13 +14,17 @@
    ```
 
 
-2. Install [Docker](http://docs.docker.com/linux/step_one/). If you are running Mac, [here](http://docs.docker.com/mac/step_one/) are those instructions. Add yourself to the docker group.
+2. Install [Docker](https://www.docker.com/). 
+   - [Linux](http://docs.docker.com/linux/step_one/)
+   - [Mac](http://docs.docker.com/mac/step_one/)
+
+3. **Linux Only**: Add yourself to the docker group.
 
    ```
    $ sudo usermod -aG docker your-user-name
    ```
 
-3. After you add yourself to the group, make sure you **logout** to ensure that the docker service is running, or you might get something like 
+3. **Linux Only**: After you add yourself to the group, make sure you **logout** to ensure that the docker service is running, or you might get something like 
 
    ```
     Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
