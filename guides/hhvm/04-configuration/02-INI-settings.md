@@ -334,7 +334,7 @@ VirtualHost {
 This is an example of the ini format for `hhvm.virtual_hosts`:
 
 ```
-hhvm.server.allowed_directories[] =/ var/www
+hhvm.server.allowed_directories[] = /var/www
 hhvm.server.allowed_directories[] = /usr/bin
 hhvm.virtual_host[flibtest][prefix] = my.
 hhvm.virtual_host[flibtest][path_translation] = flib/_bin
