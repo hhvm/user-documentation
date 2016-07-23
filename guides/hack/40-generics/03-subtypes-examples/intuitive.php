@@ -11,8 +11,8 @@ function get_int(): int {
 }
 
 function run(): void {
-  $num1 = rand();
-  $num2 = rand();
+  $num1 = get_int();
+  $num2 = get_int();
   echo_add($num1, $num2); // int is a subtype of num
 }
 
