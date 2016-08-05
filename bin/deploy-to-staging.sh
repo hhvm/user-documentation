@@ -47,6 +47,6 @@ DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
 echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
 eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
 echo "** Running test suite against staging:"
-echo "**     ./bin/test-staging.sh"
-./bin/test-staging.sh
+echo "**    docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh"
+docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh
 echo "** To switch over prod, run 'eb swap'"

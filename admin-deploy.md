@@ -51,6 +51,8 @@
    ```
    # On Mac OS X 10.7+
    $  curl -s https://s3.amazonaws.com/elasticbeanstalk-cli-resources/install-ebcli.py | python
+   ... or ...
+   $ brew install awsebcli
    ```
 
    Other distros, you can check here: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html

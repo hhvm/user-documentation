@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN rm -rf /var/www
 ADD . /var/www
-RUN touch /docker_build && cd /var/www && bin/build-in-docker.sh
+RUN touch /docker_build && cd /var/www && container-bin/init.sh
 
 # Make the webserver port accessible outside the container
 EXPOSE 80
