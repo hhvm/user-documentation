@@ -1,5 +1,9 @@
 #!/bin/bash
 set -e
+IS_MACOS=false
+if [ "$(uname -s)" == Darwin ]; then
+  IS_MACOS=true
+fi
 
 if [ ! -e Dockerrun.aws.json ]; then
   echo "Run from root directory of checkout"
@@ -14,7 +18,7 @@ IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 echo "** Building image"
 docker build \
   -t $IMAGE_NAME $(pwd)
-docker tag -f $IMAGE_NAME hhvm/user-documentation:latest # add an alias
+docker tag $IMAGE_NAME hhvm/user-documentation:latest # add an alias
 
 echo "** Pushing image to dockerhub"
 docker push $IMAGE_NAME
@@ -22,11 +26,19 @@ docker push hhvm/user-documentation:latest # push the alias too
 
 echo "** Updating AWS config"
 ## Update AWS config file
-# mac sed doesn't support -i
-SEDTEMP=$(mktemp)
-sed 's_"hhvm/user-documentation:[^"]\+"_"'$IMAGE_NAME'"_' Dockerrun.aws.json > $SEDTEMP
-cat $SEDTEMP > Dockerrun.aws.json
-rm $SEDTEMP
+if $IS_MACOS; then
+  # OSX sed:
+  #  - doesn't support -i
+  #  - requires -E to recognize '+'
+  #  - doesn't want a '\' before the '+'
+  SEDTEMP=$(mktemp)
+  sed -E 's_"hhvm/user-documentation:[^"]+"_"'$IMAGE_NAME'"_' \
+    Dockerrun.aws.json > $SEDTEMP
+  cat $SEDTEMP > Dockerrun.aws.json
+  rm $SEDTEMP
+else
+  sed -i 's_"hhvm/user-documentation:[^"]\+"_"'$IMAGE_NAME'"_' Dockerrun.aws.json
+fi
 
 git commit \
   -m "[autocommit] AWS deploy $IMAGE_TAG" \
