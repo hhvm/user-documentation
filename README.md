@@ -24,7 +24,20 @@ Our strategy to create better documentation begins with a re-thinking of our doc
 
 Check out the [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site. [`bin/build.php`](https://github.com/hhvm/user-documentation/blob/master/bin/build.php) is where all the execution begins.
 
-## Build The Site Locally
+## Running A Local Copy
+
+If you just want to quickly run a copy and don't plan on contributing changes:
+
+1. Install [Docker](https://docs.docker.com/engine/installation/)
+2. `docker run -p 8080:80 -d hhvm/user-documentation`; this will output a
+   container ID
+3. You can then access a local copy of the documentation at
+   `http://localhost:8080`
+4. To stop the instance, run `docker stop ID_FROM_STEP_2_ABOVE`. If you don't
+   have a copy of that ID any more, run `docker ps` and use the container name
+   in the right-most column instead.
+
+## Building The Site
 
 If you would like to build the site locally (e.g., to test your [content contributions](#contributing-content)), you will need to install and configure your system to be able to build and run the site locally.
 
@@ -41,8 +54,7 @@ These are the basic step-by-step instructions to get you up and running. It assu
 8. `bundle --path vendor-rb/` # install required ruby bundles
 9. `hhvm bin/build.php` # build the site!
 
-
-## Running The Site
+## Running The Site From A Checkout
 
 Configure a webserver and HHVM to serve the `public/` directory, with all
 requests that don't match a file being served by `index.php`. For local
