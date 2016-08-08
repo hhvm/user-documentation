@@ -93,7 +93,6 @@ EOF;
               content="width=device-width, initial-scale=1.0"
             />
             <link rel="shortcut icon" href="/favicon.png" />
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css" />
             {$open_search}
             <x:comment>
               Build ID: {file_get_contents(BuildPaths::BUILD_ID)}
@@ -114,8 +113,6 @@ EOF;
             {$this->getSideNav()}
             {$content}
             {$this->getEagerFetchScript()}
-            {$this->getAlgoliaDocSearchScript()}
-            {$this->getCallToAlgoliaDocSearchScript()}
           </body>
         </html>
       </x:doctype>;
@@ -228,9 +225,10 @@ EOF;
               report a problem or make a suggestion
             </github-issue-link>
           </div>
-          <div class="headerElement algolia-search-wrapper">
-            <input id="algolia-doc-search" type="search" placeholder="Search docs..." />
-          </div>
+          <search-bar
+            class="headerElement"
+            placeholder="Search our Documentation"
+          />
         </div>
       </div>;
   }
@@ -356,22 +354,6 @@ if (document.querySelectorAll) {
     );
   }
 }
-EOF;
-    return <script language="javascript">{$code}</script>;
-  }
-
-  private function getAlgoliaDocSearchScript(): :script {
-    return <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>;
-  }
-
-  private function getCallToAlgoliaDocSearchScript(): :script {
-    $code = <<<EOF
-// For Algolia search
-docsearch({
-  apiKey: '07e0af547f8ec07e210176de2f89e19f',
-  indexName: 'hhvm',
-  inputSelector: '#algolia-doc-search',
-});
 EOF;
     return <script language="javascript">{$code}</script>;
   }

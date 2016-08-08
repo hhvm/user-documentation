@@ -57,9 +57,11 @@
   }
 
   .githubIssueLink {
+    text-align: center;
     font-size: smaller;
     position: absolute;
-    margin-left: 600px;
+    left: 0;
+    right: 0;
     padding-left: 1em;
     padding-right: 1em;
     a {
@@ -70,7 +72,7 @@
 
 @media only screen and (max-width: $medium-screen-cutoff) {
   .headerElement.githubIssueLink {
-    margin-left:200px;
+    text-align: right;
   }
 }
 
@@ -94,7 +96,7 @@
       &.hackLogo {
         left: $side-padding-mob;
       }
-
+      
       &.hhvmLogo {
         left: 110px + $side-padding-mob;
       }
