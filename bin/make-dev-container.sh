@@ -39,8 +39,7 @@ To start your container:
   docker start $CONTAINER_NAME
 
 Handy tips:
- - You can modify files directly in $(pwd) and they will be reflected in the
-   container.
+ - You can modify files directly in $(pwd) and they will be reflected in the container.
  - Build commands should be ran in a container shell.
  - hh_client should be ran in a container shell.
  - Composer is available in the container at /opt/composer/composer.phar
