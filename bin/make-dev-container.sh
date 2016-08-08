@@ -32,7 +32,7 @@ The webserver is accessible at:
 To view the HHVM logs:
   docker logs -f $CONTAINER_NAME
 To get a shell in your container:
-  docker exec -it $CONTAINER_NAME /bin/bash -l
+  docker exec -it $CONTAINER_NAME /bin/bash -c "TERM=\$TERM /bin/bash -l"
 To stop your container:
   docker stop $CONTAINER_NAME
 To start your container:
@@ -40,6 +40,7 @@ To start your container:
 
 Handy tips:
  - You can modify files directly in $(pwd) and they will be reflected in the container.
+ - $(pwd) is mounted as /var/www in the container.
  - Build commands should be ran in a container shell.
  - hh_client should be ran in a container shell.
  - Composer is available in the container at /opt/composer/composer.phar
