@@ -52,7 +52,6 @@ touch /opt/composer/.hhconfig
 hhvm /opt/composer/composer.phar install
 bundle --path vendor-rb/
 
-(cd /var && git clone --depth=1 https://github.com/facebook/hhvm.git)
 hhvm bin/build.php
 
 # Run tests
