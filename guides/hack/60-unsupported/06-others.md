@@ -17,7 +17,7 @@ The typechecker will also raise undefined variable errors for any locals that
 
 ## Variable Variables
 
-@@ others-examples/varvars.php @@
+@@ others-examples/varvars.php.type-errors @@
 
 There is no way to do type inference in a case like this. The typechecker can't know that what we meant by assigning `x` to `$val` was that we were going to use that `x` as a variable later on.
 

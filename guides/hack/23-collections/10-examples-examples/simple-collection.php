@@ -105,7 +105,7 @@ final class AbsurdSet<Tv> implements \MutableSet<Tv> {
   public function remove(Tv $value): AbsurdSet<Tv> {
     return new AbsurdSet($this->cs->remove($value));
   }
-  public function toArray(): array<Tv> {
+  public function toArray(): array<Tv, Tv> {
     return $this->cs->toArray();
   }
   public function toImmMap(): \ImmMap<mixed, Tv> {
