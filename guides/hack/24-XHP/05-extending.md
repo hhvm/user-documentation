@@ -39,7 +39,7 @@ XHP attributes support the following types:
 * Class or interface names
 * [Generic](../generics/introduction.md) types, with type arguments
 
-The typechecker will raise errors if attributes are incorrect when instantiating an element (e.g. `<a href={true} />`; because XHP allows attributes to be set in other ways (e.g. `setAttribute()`) ot all probelms will be caught by the typechecker, and an `XHPInvalidAttributeException` will be thrown.
+The typechecker will raise errors if attributes are incorrect when instantiating an element (e.g. `<a href={true} />`; because XHP allows attributes to be set in other ways (e.g. `setAttribute()`), not all problems can be caught by the typechecker, and an `XHPInvalidAttributeException` will be thrown at runtime instead in those cases.
 
 The [`->:` operator](../operators/XHP-attribute-access.md) can be used to retrieve the value of an attribute, and Hack will understand it's type.
 
