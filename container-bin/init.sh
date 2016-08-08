@@ -22,14 +22,27 @@ apt-get install -y python-pygments
 
 # Install Composer (PHP dependency manager)
 apt-get install -y curl
-mkdir /opt/composer
-curl -sS https://getcomposer.org/installer | hhvm --php -- --install-dir=/opt/composer
 
 # We need an HHVM checkout to generate the API docs
 apt-get install -y git
 
+mkdir /opt/composer
+curl -sS https://getcomposer.org/installer | hhvm --php -- --install-dir=/opt/composer
+touch /opt/composer/.hhconfig
+
+# We need the HHVM source to build the docs
+(cd /var && git clone --depth=1 https://github.com/facebook/hhvm.git)
+
+# No point running anything else for devservers, as /var/www gets mounted
+# over anyway
+if [ "${DOCKER_BUILD_ENV}" == "dev" ]; then
+  apt-get clean
+  rm -rf /var/lib/apt/lists/*
+  exit
+fi
+
 # Configure
-cp hhvm.prod.ini /etc/hhvm/site.ini
+cp hhvm.${DOCKER_BUILD_ENV}.ini /etc/hhvm/site.ini
 sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example \
   | sed 's,CACHE_ROUTES = false,CACHE_ROUTES = true,' \
   > LocalConfig.php

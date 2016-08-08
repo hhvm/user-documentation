@@ -1,4 +1,5 @@
 FROM hhvm/hhvm-proxygen:3.13.1
+ARG DOCKER_BUILD_ENV=prod
 ENV TZ UTC
 
 # We need a unicode-aware system to generate the docs
