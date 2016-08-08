@@ -12,7 +12,7 @@ It is used to reduce a bit of the verbosity that generally comes with using the 
 <?php
 $user = 'Joel';
 $greeting = function() use ($user) {
-  return 'Hello $user';
+  return 'Hello '.$user;
 };
 echo $greeting();
 ```
@@ -22,7 +22,7 @@ can now be written as:
 ```
 <?hh
 $user = 'Joel';
-$greeting = () ==> "Hello $user";
+$greeting = () ==> 'Hello '.$user;
 echo $greeting();
 ```
 
