@@ -46,4 +46,4 @@ array_map('my-named-function', .....);
 
 On its own, the Hack typechecker cannot understand what to do with a function that is referred to by its string name only. It needs some help.
 
-In this case, you want to help the typechecker by using [`fun()`](/hack/callables/special-functions#fun) which tells the typechejcer to lookup the actual function associated with that name and typecheck that. 
+In this case, you want to help the typechecker by using [`fun()`](/hack/callables/special-functions#fun) which tells the typechecker to lookup the actual function associated with that name and typecheck that.
