@@ -125,6 +125,8 @@ type FunctionDocumentation = shape(
   'classType' => ?APIDefinitionType,
   'visibility' => ?MemberVisibility,
   'static' => ?bool,
+  'deprecated' => bool,
+  'deprecationMessage' => ?string,
 );
 
 type MethodDocumentation = shape(
@@ -137,6 +139,8 @@ type MethodDocumentation = shape(
   'classType' => APIDefinitionType,
   'visibility' => MemberVisibility,
   'static' => bool,
+  'deprecated' => bool,
+  'deprecationMessage' => ?string,
 );
 
 type DocumentationIndexEntry = shape(
