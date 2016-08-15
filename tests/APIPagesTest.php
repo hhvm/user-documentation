@@ -77,4 +77,12 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       $this->assertContains($node['name'], (string) $response->getBody());
     }
   }
+
+  public function testMethodDeprecated(): void {
+    $response = \HH\Asio\join(
+      PageLoader::getPage('/hack/reference/class/HH.Vector/fromArray/')
+    );
+
+    $this->assertContains('Deprecation', (string) $response->getBody());
+  }
 }

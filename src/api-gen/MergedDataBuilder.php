@@ -17,6 +17,8 @@ final class MergedDataBuilder {
     $this->mergeField($new, 'returnType');
     $this->mergeField($new, 'visibility');
     $this->mergeField($new, 'docComment');
+    $this->mergeField($new, 'deprecated');
+    $this->mergeField($new, 'deprecationMessage');
 
     $p1 = idx($this->data, 'parent');
     $p2 = idx($new, 'parent');
@@ -111,6 +113,14 @@ final class MergedDataBuilder {
     if ($key === 'returnType' && $value !== null && $old_value !== null) {
       // UNSAFE array to shape coercion
       $value = self::MergedTypehint($value, $old_value);
+    }
+
+    if ($key === 'deprecated') {
+      $value = $old_value || $value;
+    }
+
+    if ($key === 'deprecationMessage') {
+      $value = $value ?? $old_value;
     }
 
     if ($value !== null && $value != []) {

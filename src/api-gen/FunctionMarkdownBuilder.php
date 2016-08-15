@@ -40,6 +40,7 @@ final class FunctionMarkdownBuilder {
       "\n\n",
       [
         $this->getHeading(),
+        $this->getDeprecation(),
         $this->getDescription(),
         $this->getParameters(),
         $this->getReturnValues(),
@@ -63,6 +64,16 @@ final class FunctionMarkdownBuilder {
         $this->docblock?->getText() !== $this->docblock?->getShortDescription()
        ) {
       return $this->docblock?->getShortDescription();
+    }
+    return null;
+  }
+
+  private function getDeprecation(): ?string {
+    if ($this->yaml['data']['deprecated']) {
+      $message = $this->yaml['data']['deprecationMessage'] ??
+        'This function is deprecated';
+
+      return "### Deprecation\n\n" . $message . "\n\n";
     }
     return null;
   }
