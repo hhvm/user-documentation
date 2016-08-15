@@ -5,6 +5,7 @@ You must be running a 64-bit OS to compile & install HHVM. Here are the supporte
 * [Ubuntu 14.04](#ubuntu-14.04-trusty)
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
 * [Ubuntu 15.10](#ubuntu-15.10-wily-werewolf)
+* [Ubuntu 16.04](#ubuntu-16.04-xenial)
 * [Debian 8](#debian-8-jessie)
 * [Mac OS X Homebrew](#mac-os-x-homebrew)
 * [Unsupported](#unsupported)
@@ -12,7 +13,7 @@ You must be running a 64-bit OS to compile & install HHVM. Here are the supporte
 ## Ubuntu 14.04 Trusty
 
 > **Please Note:** You must be running a 64-bit OS to compile & install HHVM.
-> 
+>
 ### Packages Installation
 
 Using sudo or as root user: (it is recommended that you run `sudo apt-get update` and `sudo apt-get upgrade` first, or you may receive errors)
@@ -54,7 +55,7 @@ The installed hhvm binary can be found in `/usr/local/bin`.
 
 ### Errors
 
-If any errors occur, you may have to remove the `CMakeCache.txt` file in the checkout. 
+If any errors occur, you may have to remove the `CMakeCache.txt` file in the checkout.
 
 If your failure was on the `make` command, try to correct the error and run `make` again, it should restart from the point it stops. If the error persists, try to remove as explained above.
 
@@ -88,6 +89,10 @@ There are 2 families of regression tests. There are about 5000 tests in all. All
 Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 
 ## Ubuntu 15.10 Wily Werewolf
+
+Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
+
+## Ubuntu 16.04 Xenial
 
 Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 
@@ -140,7 +145,7 @@ The hhvm binary can be found in `hphp/hhvm/hhvm`.
 
 ### Errors
 
-If any errors occur, it may be required to remove the `CMakeCache.txt` directory in the checkout. 
+If any errors occur, it may be required to remove the `CMakeCache.txt` directory in the checkout.
 
 If your failure was on the `make` command, try to correct the error and run `make` again, it should restart from the point it stops. If don't, try to remove as explained above.
 

@@ -1,9 +1,10 @@
-HHVM is officially supported on most major [linux platforms](./linux.md). There is experimental, hope-to-be official support on [Mac OS X 10.10](./mac.md). And work is being done to support [HHVM on Windows](./windows.md). 
+HHVM is officially supported on most major [linux platforms](./linux.md). There is experimental, hope-to-be official support on [Mac OS X 10.10](./mac.md). And work is being done to support [HHVM on Windows](./windows.md).
 
 ## Prebuilt Packages
 
 The easiest way to get going with HHVM is to use one of our supported prebuilt packages. Currently prebuilt packages are available for:
 
+* [Ubuntu 16.04 (Xenial)](./linux.md#ubuntu-16.04-xenial)
 * [Ubuntu 15.10 (Wily Werewolf)](./linux.md#ubuntu-15.10-wily-werewolf)
 * [Ubuntu 15.04 (Vivid)](./linux.md#ubuntu-15.04-vivid)
 * [Ubuntu 14.04 (Trusty)](./linux.md#ubuntu-14.04-trusty)
