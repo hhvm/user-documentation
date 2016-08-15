@@ -4,8 +4,8 @@ namespace Hack\UserDocumentation\Types\TypeSystem\Examples\Call;
 
 function use_callable(
   Vector<int> $vec,
-  (function(int) : ?int) $callback
-  ): Vector<?int> {
+  (function(int) : ?int) $callback,
+): Vector<?int> {
   $ret = Vector {};
   foreach ($vec as $item) {
     $ret[] = $callback($item);
