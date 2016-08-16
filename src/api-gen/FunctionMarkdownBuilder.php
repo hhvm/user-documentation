@@ -69,10 +69,8 @@ final class FunctionMarkdownBuilder {
   }
 
   private function getDeprecation(): ?string {
-    if ($this->yaml['data']['deprecated']) {
-      $message = $this->yaml['data']['deprecationMessage'] ??
-        'This function is deprecated';
-
+    $message = $this->yaml['data']['deprecation'];
+    if ($message !== null) {
       return "### Deprecation\n\n" . $message . "\n\n";
     }
     return null;

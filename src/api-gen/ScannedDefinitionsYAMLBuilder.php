@@ -117,8 +117,8 @@ class ScannedDefinitionsYAMLBuilder {
   private function getFunctionDocumentation(
     ScannedFunctionAbstract $function,
   ): FunctionDocumentation {
-    $deprecationMessages =
-      $function->getAttributes()->get('__Deprecated')?->toArray();
+    $deprecationMessage =
+      $function->getAttributes()->get('__Deprecated')?->at(0);
     return shape(
       'name' => $function->getName(),
       'returnType' =>
@@ -134,9 +134,8 @@ class ScannedDefinitionsYAMLBuilder {
         ->toArray(),
       'visibility' => null,
       'static' => null,
-      'deprecated' => $function->getAttributes()->containsKey('__Deprecated'),
-      'deprecationMessage' => $deprecationMessages !== null ?
-        implode("\n\n", $deprecationMessages) : null,
+      'deprecation' => $deprecationMessage !== null ?
+        (string) $deprecationMessage : null,
     );
   }
 
