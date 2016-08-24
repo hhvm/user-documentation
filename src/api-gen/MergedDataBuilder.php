@@ -152,9 +152,19 @@ final class MergedDataBuilder {
       $generics = $b['genericTypes'];
     }
 
+    $nullable = $a['nullable'] && $b['nullable'];
+
+    // If one of them is nullable and the other mixed
+    // we really want the nullable instead of non-null from mixed.
+    if (($a['nullable'] || $b['nullable']) &&
+        (strpos($a['typename'], 'mixed') !== 0 ^
+         strpos($b['typename'], 'mixed') !== 0)) {
+      $nullable = true;
+    }
+
     return shape(
       'typename' => $name,
-      'nullable' => $a['nullable'] && $b['nullable'],
+      'nullable' => $nullable,
       'genericTypes' => $generics,
     );
   }
