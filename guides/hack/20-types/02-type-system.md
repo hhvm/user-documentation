@@ -87,7 +87,7 @@ The primary purpose of return `this` is to allow chaining of method calls on the
 
 ## `num`
 
-`num` is special union type of `int` and `float`. Normally, in Hack, `int`s and `floats` are incompatible types. However it was realized that many numerical operating functions work similarly whether you pass an integer or a float. `num` is used for those cases.
+`num` is special union type of `int` and `float`. Normally, in Hack, `int`s and `float`s are incompatible types. However it was realized that many numerical operating functions work similarly whether you pass an integer or a float. `num` is used for those cases.
 
 @@ type-system-examples/num.php @@
 
