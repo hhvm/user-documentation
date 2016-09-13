@@ -30,7 +30,7 @@ As the name suggests, using this attribute is just as unsafe as the [other `UNSA
 
 ## `<<__Memoize>>`
 
-The `__Memoize` attribute allows functions or methods to cache their results. Memoization is used primarily to cache the result of otherwise time-consuming operations. 
+The `__Memoize` attribute allows functions or methods to cache their results for the duration of a given request. Memoization is used primarily to cache the result of otherwise time-consuming operations.
 
 @@ special-examples/memoize.php @@
 
@@ -66,6 +66,7 @@ interface IMemoizeParam {
 `__Memoize` can be a real time saver and provide some performance improvements, but there are some gotchas that you should be aware of when using it.
 
 - While performance can rise, memory usage will also rise because you are caching results in memory.
+- Memoization only lasts for the current request - is not shared between requests.
 - HHVM can actually free memory used by memoized results if needed. Thus, sometimes, a memoized result might be removed from memory and the time consuming operation will happen again. This can be a good thing though as HHVM is managing the memory for you properly.
 - HHVM makes no guarantees about the side effects your memoization may have.
 - Your function will return the same object, which means that, if your object mutated, all return values for previous and future calls to the function will have that mutation. Sometimes that's exactly the behavior we want - say, a singleton. However, if we are just caching a result of a fetch, it could be disastrous if someone erroneously changed that returned object in-place and suddenly every other caller is using a corrupted object. To avoid that, you can use [`Immutable Collections`](/hack/collections/classes#immutable-collections) or design your own immutable return type.
