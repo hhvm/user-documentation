@@ -56,7 +56,9 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [pcre](http://php.net/manual/en/book.pcre.php)
 * [pdo](http://php.net/manual/en/book.pdo.php)
 * [pdo_mysql](http://php.net/manual/en/ref.pdo-mysql.php)
+* [pdo_pgsql](http://php.net/manual/en/ref.pdo-pgsql.php)
 * [pdo_sqlite](http://php.net/manual/en/ref.pdo-sqlite.php)
+* [pgsql](http://php.net/manual/en/book.pgsql.php)
 * [phar](http://php.net/manual/en/book.phar.php)
 * [posix](http://php.net/manual/en/book.posix.php)
 * [readline](http://php.net/manual/en/book.readline.php)
@@ -95,7 +97,6 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [msgpack](https://github.com/reeze/msgpack-hhvm)
 * [mongodb](http://github.com/mongodb/mongo-hhvm-driver): Official MongoDB driver as HNI extension
 * [mongofill](https://github.com/mongofill/mongofill-hhvm): Implementation of legacy MongoDB driver in pure PHP
-* [pgsql](https://github.com/PocketRent/hhvm-pgsql)
 * [shp](https://github.com/skyfms/hhvm-ext_shape)
 * [ssdeep](https://github.com/treffynnon/hhvm-ssdeep)
 * [uuid](https://github.com/vipsoft/hhvm-ext-uuid)
