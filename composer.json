@@ -3,8 +3,8 @@
     "facebook/xhp-lib": "^2.2.4",
     "hhvm": "~3.12",
     "zendframework/zend-diactoros": "^1.1",
-    "nikic/fast-route": "^0.7",
-    "fredemmott/hhvm-autoload": "dev-master",
+    "nikic/fast-route": "^1.0.1",
+    "fredemmott/hhvm-autoload": "^1.0.0",
     "fredemmott/type-assert": "^0.2.0"
   },
   "require-dev": {
