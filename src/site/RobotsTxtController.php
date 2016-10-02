@@ -3,7 +3,13 @@
 use HHVM\UserDocumentation\LocalConfig;
 use Psr\Http\Message\ResponseInterface;
 
-final class RobotsTxtController extends WebController {
+final class RobotsTxtController
+extends WebController
+implements RoutableGetController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())->literal('/robots.txt');
+  }
+
   const string DO_NOT_CRAWL_FILE =
     LocalConfig::ROOT.'/public/robots.txt-do-not-crawl';
   const string DEFAULT_FILE =

@@ -2,12 +2,19 @@
 
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\JumpIndexData;
-
 use Psr\Http\Message\ResponseInterface;
 
 require_once(BuildPaths::JUMP_INDEX);
 
-final class JumpController extends WebController {
+final class JumpController
+extends WebController
+implements RoutableGetController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/j/')
+      ->string('keyword');
+  }
+
   public function getResponse(): Awaitable<ResponseInterface> {
     $keyword = $this->getRequiredStringParam('keyword');
     $data = JumpIndexData::getIndex();

@@ -14,6 +14,15 @@ use HHVM\UserDocumentation\URLBuilder;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class GuidePageController extends WebPageController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/')
+      ->guidesProduct('product')
+      ->literal('/')
+      ->string('guide')
+      ->literal('/')
+      ->string('page');
+  }
 
   <<__Memoize>>
   private function getProduct(): GuidesProduct {

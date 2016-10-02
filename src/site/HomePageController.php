@@ -4,10 +4,14 @@ use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\GuidesProduct;
 
 final class HomePageController extends WebPageController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())->literal('/');
+  }
+
   public async function getTitle(): Awaitable<string> {
     return 'HHVM and Hack Documentation';
   }
-  
+
   protected function getInnerContent(GuidesProduct $product): XHPRoot {
     $guides = GuidesIndex::getGuides($product);
 
@@ -34,7 +38,7 @@ final class HomePageController extends WebPageController {
     }
     return $root;
   }
-  
+
   protected function getGuideSummary(string $product, string $guide): ?XHPRoot {
     $path = GuidesIndex::getFileForSummary(
       $product,
@@ -47,7 +51,7 @@ final class HomePageController extends WebPageController {
   }
 
   protected async function getBody(): Awaitable<XHPRoot> {
-    return 
+    return
       <x:frag>
         <div class="guideListWrapper">
           <h2 class="listTitle">Hack</h2>
@@ -55,7 +59,7 @@ final class HomePageController extends WebPageController {
           {$this->getInnerContent(GuidesProduct::HACK)}
           <h3 class="listTitle">
             <a href="/hack/reference/">Hack API Reference</a>
-          </h3> 
+          </h3>
           <p>Full reference docs for all functions, classes, interfaces, and traits in the Hack language.</p>
         </div>
         <div class="guideListWrapper">

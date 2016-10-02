@@ -6,6 +6,13 @@ use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\PHPAPIIndex;
 
 final class APIFullListController extends APIListController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/')
+      ->apiProduct('product')
+      ->literal('/reference/');
+  }
+
   <<__Override>>
   protected function getDefinitionTypes(): ImmSet<APIDefinitionType> {
     return new ImmSet(APIDefinitionType::getValues());

@@ -8,6 +8,10 @@ use HHVM\UserDocumentation\SearchResultSet;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class SearchController extends WebPageController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())->literal('/search');
+  }
+
   public async function getTitle(): Awaitable<string> {
     return "Search results for '{$this->getSearchTerm()}':";
   }

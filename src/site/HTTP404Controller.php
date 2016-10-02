@@ -9,7 +9,7 @@ use HHVM\UserDocumentation\PHPDotNetArticleRedirectData;
 
 require_once(BuildPaths::JUMP_INDEX);
 
-final class HTTP404Controller extends WebPageController {
+final class HTTP404Controller extends NonRoutableWebPageController {
   public async function getTitle(): Awaitable<string> {
     return 'Page Not Found';
   }

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d21976d27791796987d3346f279343de",
-    "content-hash": "abce6d8666090b4664b000a28235dc0f",
+    "hash": "51377e97320bffd8cbdb7b4193f5a870",
+    "content-hash": "ff9754228dfb5213a308fb5270234ae4",
     "packages": [
         {
             "name": "91carriage/phpunit-hhi",
@@ -53,6 +53,90 @@
                 "testing"
             ],
             "time": "2016-08-13 23:23:26"
+        },
+        {
+            "name": "facebook/hack-codegen",
+            "version": "v1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/hack-codegen.git",
+                "reference": "aa7af566faa123b1ab39dd168d40890e2af7fe31"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/hack-codegen/zipball/aa7af566faa123b1ab39dd168d40890e2af7fe31",
+                "reference": "aa7af566faa123b1ab39dd168d40890e2af7fe31",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/utils.php",
+                    "lib/Str.php",
+                    "lib/StrBuffer.php",
+                    "lib/Filesystem.php",
+                    "src/SignedSourceBase.php",
+                    "src/SignedSource.php",
+                    "src/PartiallyGeneratedSignedSource.php",
+                    "src/PartiallyGeneratedCode.php",
+                    "src/HackBuilderKeys.php",
+                    "src/HackBuilderValues.php",
+                    "src/IHackCodegenConfig.php",
+                    "src/HackCodegenConfig.php",
+                    "src/CodegenWithVisibility.php",
+                    "src/ICodeBuilderRenderer.php",
+                    "src/ICodeBuilder.php",
+                    "src/HackBuilderRenderer.php",
+                    "src/BaseCodeBuilder.php",
+                    "src/HackBuilder.php",
+                    "src/ICodegenFormatter.php",
+                    "src/CodegenClassBase.php",
+                    "src/CodegenClass.php",
+                    "src/CodegenFunctionBase.php",
+                    "src/CodegenMethodBase.php",
+                    "src/CodegenConstructor.php",
+                    "src/CodegenEnum.php",
+                    "src/CodegenFile.php",
+                    "src/CodegenFunction.php",
+                    "src/CodegenGeneratedFrom.php",
+                    "src/CodegenImplementsInterface.php",
+                    "src/CodegenInterface.php",
+                    "src/CodegenMemberVar.php",
+                    "src/CodegenMethod.php",
+                    "src/CodegenShape.php",
+                    "src/CodegenTrait.php",
+                    "src/CodegenType.php",
+                    "src/CodegenUsesTrait.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Drew Hoskins",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Gaurav Kumar",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Alejandro Marcu",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Matthieu Martin",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Hack Codegen is a library for programatically generating Hack code",
+            "keywords": [
+                "code generation",
+                "hack"
+            ],
+            "time": "2016-01-25 21:06:57"
         },
         {
             "name": "facebook/xhp-lib",
@@ -147,6 +231,87 @@
             "time": "2016-10-02 21:32:15"
         },
         {
+            "name": "fredemmott/hack-router",
+            "version": "v1.0.0rc7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fredemmott/hack-router.git",
+                "reference": "3db07d70a54b9b9f0c827dbe3d371336865a4ccd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fredemmott/hack-router/zipball/3db07d70a54b9b9f0c827dbe3d371336865a4ccd",
+                "reference": "3db07d70a54b9b9f0c827dbe3d371336865a4ccd",
+                "shasum": ""
+            },
+            "require": {
+                "hack-psr/psr7-http-message-hhi": "^0.2.0",
+                "nikic/fast-route": "^1.0.0 || >0.7 <1.0"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "^5.1",
+                "phpunit/phpunit": "^5.1",
+                "zendframework/zend-diactoros": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "URI routing for Hack",
+            "homepage": "https://github.com/fredemmott/hack-router",
+            "keywords": [
+                "hack",
+                "hhvm",
+                "router",
+                "routing"
+            ],
+            "time": "2016-10-03 01:14:53"
+        },
+        {
+            "name": "fredemmott/hack-router-codegen",
+            "version": "v1.0.0rc2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fredemmott/hack-router-codegen.git",
+                "reference": "27586ce958ff9d4fbbfcd5c34257dc84edbdb7da"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fredemmott/hack-router-codegen/zipball/27586ce958ff9d4fbbfcd5c34257dc84edbdb7da",
+                "reference": "27586ce958ff9d4fbbfcd5c34257dc84edbdb7da",
+                "shasum": ""
+            },
+            "require": {
+                "facebook/hack-codegen": "^1.1",
+                "fredemmott/definition-finder": "^1.3.0",
+                "fredemmott/hack-router": "^1.0.0rc7",
+                "fredemmott/type-assert": "^0.2.0"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "^5.5",
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "URI routing for Hack with codegen",
+            "homepage": "https://github.com/fredemmott/hack-router-codegen",
+            "keywords": [
+                "hack",
+                "hhvm",
+                "router",
+                "routing"
+            ],
+            "time": "2016-10-03 02:59:52"
+        },
+        {
             "name": "fredemmott/hhvm-autoload",
             "version": "v1.0.0",
             "source": {
@@ -224,6 +389,41 @@
                 "hack"
             ],
             "time": "2016-09-28 04:21:05"
+        },
+        {
+            "name": "hack-psr/psr7-http-message-hhi",
+            "version": "v0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fredemmott/psr7-http-message-hhi.git",
+                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/31422ed7c566dd1cd481d95fd1d7e65798944fc9",
+                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9",
+                "shasum": ""
+            },
+            "require": {
+                "psr/http-message": "^1.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Typechecker definitions for PSR-7",
+            "homepage": "https://github.com/fredemmott/psr7-http-message-hhi",
+            "keywords": [
+                "hack",
+                "hhi",
+                "hhvm",
+                "http-message",
+                "psr",
+                "psr-7",
+                "psr7"
+            ],
+            "time": "2015-11-02 23:49:05"
         },
         {
             "name": "nikic/fast-route",
@@ -423,41 +623,6 @@
                 "instantiate"
             ],
             "time": "2015-06-14 21:17:01"
-        },
-        {
-            "name": "hack-psr/psr7-http-message-hhi",
-            "version": "v0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fredemmott/psr7-http-message-hhi.git",
-                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/31422ed7c566dd1cd481d95fd1d7e65798944fc9",
-                "reference": "31422ed7c566dd1cd481d95fd1d7e65798944fc9",
-                "shasum": ""
-            },
-            "require": {
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Typechecker definitions for PSR-7",
-            "homepage": "https://github.com/fredemmott/psr7-http-message-hhi",
-            "keywords": [
-                "hack",
-                "hhi",
-                "hhvm",
-                "http-message",
-                "psr",
-                "psr-7",
-                "psr7"
-            ],
-            "time": "2015-11-02 23:49:05"
         },
         {
             "name": "mustangostang/spyc",
@@ -1612,7 +1777,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {
         "mustangostang/spyc": 20
     },
