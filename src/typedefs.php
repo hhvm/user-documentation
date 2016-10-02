@@ -48,6 +48,11 @@ enum APIDefinitionType: string as string {
   FUNCTION_DEF = 'function';
 }
 
+enum APIProduct: string as string {
+  HACK = 'hack';
+  PHP = 'php';
+}
+
 enum SurveyMode: string {
   ACTIVE = 'active';
   DISABLED = 'disabled';
