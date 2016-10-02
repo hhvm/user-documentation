@@ -2,6 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+use \FredEmmott\TypeAssert\TypeAssert;
 use \Psr\Http\Message\ResponseInterface;
 use \HHVM\UserDocumentation\ArgAssert;
 use \Response;
@@ -17,7 +18,7 @@ final class RemotePageLoader extends PageLoader {
     $path = parse_url($url, PHP_URL_PATH);
     $query = parse_url($url, PHP_URL_QUERY);
 
-    $test_host = ArgAssert::isNotNull(self::getHost());
+    $test_host = TypeAssert::isNotNull(self::getHost());
     if ($scheme === null) {
       switch ($test_host) {
         case 'docs.hhvm.com':

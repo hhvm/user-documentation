@@ -2,6 +2,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use FredEmmott\TypeAssert\TypeAssert;
+
 final class MergedDataBuilder {
   private Map<string, mixed> $data;
   public function __construct(
@@ -208,7 +210,7 @@ final class MergedDataBuilder {
         $key = substr($name, $ns_sep + 1);
       }
       if ($keyed->containsKey($key)) {
-        $keyed[$key] = ArgAssert::isNotNull(
+        $keyed[$key] = TypeAssert::isNotNull(
           self::MergedTypehint($keyed[$key], $interface)
          );
       } else {
