@@ -6,6 +6,15 @@ use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\PHPAPIIndex;
 
 final class APIListByTypeController extends APIListController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/')
+      ->apiProduct('product')
+      ->literal('/reference/')
+      ->definitionType('type')
+      ->literal('/');
+  }
+
   <<__Override>>
   protected function getDefinitionTypes(): ImmSet<APIDefinitionType> {
     return ImmSet {

@@ -3,10 +3,20 @@
 use HHVM\UserDocumentation\StaticResourceMap;
 use Psr\Http\Message\ResponseInterface;
 
-final class StaticResourcesController extends WebController {
+final class StaticResourcesController
+extends WebController
+implements RoutableGetController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/s/')
+      ->string('checksum')
+      ->literal('/')
+      ->stringWithSlashes('file');
+  }
+
   public async function getResponse(): Awaitable<ResponseInterface> {
     $checksum = $this->getRequiredStringParam('checksum');
-    $file = $this->getRequiredStringParam('file');
+    $file = '/'.$this->getRequiredStringParam('file');
 
     $entry = self::invariantTo404(
       () ==> StaticResourceMap::getEntryForFile($file)

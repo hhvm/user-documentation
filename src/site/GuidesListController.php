@@ -6,6 +6,13 @@ use HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\URLBuilder;
 
 final class GuidesListController extends WebPageController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/')
+      ->guidesProduct('product')
+      ->literal('/');
+  }
+
   public async function getTitle(): Awaitable<string> {
     switch ($this->getProduct()) {
       case GuidesProduct::HHVM:

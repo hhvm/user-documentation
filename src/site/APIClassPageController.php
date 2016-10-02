@@ -11,6 +11,17 @@ use HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\URLBuilder;
 
 final class APIClassPageController extends APIPageController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/')
+      ->apiProduct('product')
+      ->literal('/reference/')
+      ->definitionType('type')
+      ->literal('/')
+      ->string('name')
+      ->literal('/');
+  }
+
   <<__Memoize,__Override>>
   protected function getRootDefinition(): APIIndexEntry {
     $this->redirectIfAPIRenamed();

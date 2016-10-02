@@ -6,6 +6,18 @@ use HHVM\UserDocumentation\APIMethodIndexEntry;
 use HHVM\UserDocumentation\URLBuilder;
 
 final class APIMethodPageController extends APIPageController {
+  public static function getUriPattern(): UriPattern {
+    return (new UriPattern())
+      ->literal('/')
+      ->apiProduct('product')
+      ->literal('/reference/')
+      ->definitionType('type')
+      ->literal('/')
+      ->string('class')
+      ->literal('/')
+      ->string('method')
+      ->literal('/');
+  }
   <<__Memoize,__Override>>
   protected function getRootDefinition(): APIClassIndexEntry {
     $this->redirectIfAPIRenamed();
