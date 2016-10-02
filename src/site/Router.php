@@ -1,6 +1,6 @@
 <?hh // strict
 
-use HHVM\UserDocumentation\ArgAssert;
+use FredEmmott\TypeAssert\TypeAssert;
 use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\LocalConfig;
 
@@ -79,7 +79,10 @@ class Router {
         throw new HTTPMethodNotAllowedException($path);
       case \FastRoute\Dispatcher::FOUND:
         return tuple(
-          ArgAssert::isClassname($route[1], WebController::class),
+          TypeAssert::isClassnameOf(
+            WebController::class,
+            $route[1],
+          ),
           (new Map($route[2]))
             ->map($encoded ==> urldecode($encoded))
             ->toImmMap(),
