@@ -4,7 +4,8 @@
     "hhvm": "~3.12",
     "zendframework/zend-diactoros": "^1.1",
     "nikic/fast-route": "^0.7",
-    "fredemmott/hhvm-autoload": "dev-master"
+    "fredemmott/hhvm-autoload": "dev-master",
+    "fredemmott/type-assert": "^0.2.0"
   },
   "require-dev": {
     "fredemmott/definition-finder": "^1.1.0",

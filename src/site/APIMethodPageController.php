@@ -5,8 +5,8 @@ use HHVM\UserDocumentation\APIClassIndexEntry;
 use HHVM\UserDocumentation\APIMethodIndexEntry;
 use HHVM\UserDocumentation\URLBuilder;
 
-final class APIMethodPageController extends APIGenericPageController {
-  <<__Memoize>>
+final class APIMethodPageController extends APIPageController {
+  <<__Memoize,__Override>>
   protected function getRootDefinition(): APIClassIndexEntry {
     $this->redirectIfAPIRenamed();
     $definition_name = $this->getRequiredStringParam('class');
@@ -18,7 +18,7 @@ final class APIMethodPageController extends APIGenericPageController {
   }
 
   <<__Memoize>>
-  protected function getMethodDefinition(): APIMethodIndexEntry {
+  private function getMethodDefinition(): APIMethodIndexEntry {
     $method_name = $this->getRequiredStringParam('method');
     $methods = $this->getRootDefinition()['methods'];
     if (!array_key_exists($method_name, $methods)) {
@@ -27,6 +27,7 @@ final class APIMethodPageController extends APIGenericPageController {
     return $methods[$method_name];
   }
 
+  <<__Override>>
   public async function getTitle(): Awaitable<string> {
     return
       $this->getRootDefinition()['name'].
@@ -34,8 +35,25 @@ final class APIMethodPageController extends APIGenericPageController {
       $this->getMethodDefinition()['name'];
   }
 
+  <<__Override>>
   protected function getHTMLFilePath(): string {
     return $this->getMethodDefinition()['htmlPath'];
+  }
+
+  <<__Override>>
+  protected function getBreadcrumbs(): :ui:breadcrumbs {
+    $root = $this->getRootDefinition();
+    $type = $this->getDefinitionType();
+    $parents = Map {
+      'Hack' => '/hack/',
+      'Reference' => '/hack/reference/',
+      ucwords($type) => '/hack/reference/'.$type.'/',
+      $root['name'] => $root['urlPath'],
+    };
+
+    $page = $this->getMethodDefinition()['name'];
+
+    return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
   }
 
   <<__Override>>
@@ -44,7 +62,6 @@ final class APIMethodPageController extends APIGenericPageController {
     if ($redirect_to === null) {
       return;
     }
-
     $type = $this->getDefinitionType();
     throw new RedirectException(
       URLBuilder::getPathForMethod(shape(

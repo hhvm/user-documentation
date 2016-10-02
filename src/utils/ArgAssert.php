@@ -2,6 +2,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use FredEmmott\TypeAssert\TypeAssert;
+
 class ArgAssert {
   public static function isNotNull<T>(?T $value): T {
     invariant($value !== null, 'unexpected null');
@@ -9,16 +11,12 @@ class ArgAssert {
   }
 
   public static function isClassname<T>(
-    mixed $value,
+    string $value,
     classname<T> $class,
   ): classname<T> {
-    invariant(
-      $value === $class ||
-      (is_string($value) && is_subclass_of($value, $class)),
-      "'%s' is not a classname<%s>",
-      var_export($value, true),
+    return TypeAssert::isClassnameOf(
       $class,
+      $value,
     );
-    return /* UNSAFE_EXPR */ $value;
   }
 }
