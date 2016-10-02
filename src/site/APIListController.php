@@ -3,15 +3,13 @@
 use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APINavData;
 use HHVM\UserDocumentation\APIDefinitionType;
+use HHVM\UserDocumentation\APIProduct;
 use HHVM\UserDocumentation\PHPAPIIndex;
 
-enum APIProduct: string as string {
-  HACK = 'hack';
-  PHP = 'php';
-}
+abstract class APIListController extends WebPageController {
+  abstract protected function getDefinitionTypes(): ImmSet<APIDefinitionType>;
 
-final class APIListController extends WebPageController {
-  public async function getTitle(): Awaitable<string> {
+  final public async function getTitle(): Awaitable<string> {
     switch ($this->getProduct()) {
       case APIProduct::HACK:
         return 'Hack APIs';
@@ -20,7 +18,7 @@ final class APIListController extends WebPageController {
     }
   }
 
-  private function getDefinitions(
+  final private function getDefinitions(
   ): Map<APIDefinitionType, Map<string, string>> {
     switch ($this->getProduct()) {
       case APIProduct::HACK:
@@ -30,10 +28,10 @@ final class APIListController extends WebPageController {
     }
   }
 
-  private function getHackDefinitions(
+  final private function getHackDefinitions(
   ): Map<APIDefinitionType, Map<string, string>> {
     $out = Map {};
-    foreach (APIDefinitionType::getValues() as $type) {
+    foreach ($this->getDefinitionTypes() as $type) {
       $index = APIIndex::getIndexForType($type);
       $out[$type] = Map { };
       foreach ($index as $node) {
@@ -43,11 +41,12 @@ final class APIListController extends WebPageController {
     return $out;
   }
 
-  private function getPHPDefinitions(
+  final private function getPHPDefinitions(
   ): Map<APIDefinitionType, Map<string, string>> {
+    $supported_types = $this->getDefinitionTypes();
     $out = Map { };
 
-    foreach (APIDefinitionType::getValues() as $type) {
+    foreach ($supported_types as $type) {
       $out[$type] = Map { };
     }
 
@@ -56,18 +55,16 @@ final class APIListController extends WebPageController {
       if (!$data['supportedInHHVM']) {
         continue;
       }
+      if (!$supported_types->contains($data['type'])) {
+        continue;
+      }
       $out[$data['type']][$name] = $data['url'];
     }
     return $out->filter($map ==> $map->count() !== 0);
   }
 
-  protected function getInnerContent(): XHPRoot {
+  final protected function getInnerContent(): XHPRoot {
     $defs = $this->getDefinitions();
-    $type = $this->getOptionalStringParam('type');
-    if ($type !== null) {
-      $type = APIDefinitionType::assert($type);
-      $defs = Map { $type => $defs[$type] };
-    }
 
     $root = <div class="referenceList" />;
     foreach ($defs as $type => $api_references) {
@@ -104,29 +101,15 @@ final class APIListController extends WebPageController {
     return $root;
   }
 
-  protected async function getBody(): Awaitable<XHPRoot> {
+  final protected async function getBody(): Awaitable<XHPRoot> {
     return
       <div class="apiListWrapper">
         {$this->getInnerContent()}
       </div>;
   }
 
-  protected function getBreadcrumbs(): :ui:breadcrumbs {
-    $parents = Map {
-      'Hack' => '/hack/',
-    };
-    $type = $this->getOptionalStringParam('type');
-    if ($type === null) {
-      $page = 'Reference';
-    } else {
-      $parents['Reference'] = '/hack/reference/';
-      $page = ucwords($type);
-    }
-    return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
-  }
-
   <<__Memoize>>
-  private function getProduct(): APIProduct {
+  final private function getProduct(): APIProduct {
     return APIProduct::assert(
       $this->getRequiredStringParam('product')
     );

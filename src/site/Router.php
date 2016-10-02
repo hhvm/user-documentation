@@ -13,9 +13,9 @@ class Router {
       '/{product:(?:hack|hhvm)}/'
         => GuidesListController::class,
       '/{product:(?:hack|php)}/reference/'
-        => APIListController::class,
+        => APIFullListController::class,
       '/{product:(?:hack|php)}/reference/{type:(?:class|function|interface|trait)}/'
-        => APIListController::class,
+        => APIListByTypeController::class,
       '/{product:(?:hack|php)}/reference/{type:(?:class|function|interface|trait)}/{name}/'
         => APIClassPageController::class,
       '/{product:(?:hack)}/reference/{type:(?:class|interface|trait)}/{class}/{method}/'
