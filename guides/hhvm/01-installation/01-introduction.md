@@ -17,19 +17,11 @@ HHVM releases a point (stable) release on the order of every 8 weeks. Every thir
 
 LTS Version | Release Date | End of Support
 ------------|--------------|---------------
-3.6 | 11 March 2015 | 1 March 2016
-3.9 | 14 August 2015 | 15 July 2016
 3.12 | 29 January 2016 | 30 December 2016
+3.15 | 7 September 2016 | 9 August 2017
+3.18 | 13 February 2017 | 15 January 2018
 
 In addition to the normal stable packages, there are supported [LTS releases](/hhvm/installation/linux#obtaining-lts-releases) for the above distributions.
-
-Also, there are currently LTS releases for:
-
-* [Ubuntu 10.04 (Lucid)](./linux.md#ubuntu-10.04-lucid)
-* [Ubuntu 12.04 (Precise)](./linux.md#ubuntu-12.04-precise)
-* [Mint 16 (Petra)](./linux.md#mint-16-preta)
-
-However, LTS support for these three distributions will end on January 28, 2016, when support for HHVM 3.6 LTS ends.
 
 See our [blog post](http://hhvm.com/blog/6083/hhvm-long-term-support) regarding LTS releases.
 
