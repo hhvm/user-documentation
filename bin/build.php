@@ -9,7 +9,6 @@ function build_site(?Traversable<string> $filters = null): void {
 
   $steps = Vector {
     // No Dependencies
-    RoutingCodegenBuildStep::class,
     RawYAMLBuildStep::class,
     MergedYAMLBuildStep::class,
     FetchPHPDotNetIndexBuildStep::class,
@@ -30,6 +29,11 @@ function build_site(?Traversable<string> $filters = null): void {
     APILegacyRedirectsBuildStep::class,
     PHPDotNetArticleRedirectsBuildStep::class,
 
+    // This needs to be able to invoke static methods on the controllers;
+    // some of the controller files require_once() generated indicies, so the
+    // indices must be built before codegen can be updated.
+    RoutingCodegenBuildStep::class,
+
     // Static Resources
     SyntaxHighlightCSSBuildStep::class,
     SASSBuildStep::class,
@@ -41,7 +45,6 @@ function build_site(?Traversable<string> $filters = null): void {
     // Needs the Markdown
     GuidesHTMLBuildStep::class,
     APIHTMLBuildStep::class,
-
   };
 
   if ($filters !== null) {
