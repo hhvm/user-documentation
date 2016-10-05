@@ -61,4 +61,6 @@ eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
 echo "** Running test suite against staging:"
 echo "**    docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh"
 docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh
-echo "** To switch over prod, run 'eb swap'"
+echo "** Next steps:"
+echo "**  - $ git push # pushes the updated AWS configuration"
+echo "**  - $ eb swap # swaps staging.docs.hhvm.com and docs.hhvm.com"
