@@ -49,6 +49,8 @@ You should then login as your new admin account, and create yourself a less priv
  - open a terminal, and go to the 'user-documentation' repo
  - run `eb init` - you want the us-west-2 region and the existing hhvm-docs app; you'll also be prompted for -a vs -b - it doesn't matter which you pick
 
+At this stage, you can alternatively run `bin/make-dev-container.sh` to get a local development environment.
+
 ## Deploying the site to staging
 
 Run `bin/deploy-to-staging.sh` - this will:
