@@ -19,14 +19,18 @@ async function connect(\AsyncMysqlConnectionPool $pool):
 
 async function get_data(\AsyncMysqlConnection $conn, string $name):
   Awaitable<\AsyncMysqlQueryResult> {
+  /* DON'T DO THIS!
+   *
+   * Use AsyncMysqlConnection::queryf() instead, which automatically escapes
+   * strings for %s placeholders.
+   */
   $escaped_name = $conn->escapeString($name);
   var_dump($escaped_name);
-  return await $conn->queryf(
-    'SELECT age FROM test_table where name = %s',
-    $escaped_name
+  return await $conn->query(
+    'SELECT age FROM test_table where name = '.$escaped_name,
   );
 }
-async function simple_queryf(): Awaitable<int> {
+async function simple_query(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
   $result = await get_data($conn, 'Joel Marcey');
