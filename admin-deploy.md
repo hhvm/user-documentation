@@ -1,111 +1,62 @@
 # Deploying The Site (for admins only)
 
-> If you have installed Docker and AWS Elastic Beanstalk, you will probably be starting from the [general starting point](#general-starting-point).
+## DockerHub
 
-## Only Do This Once
+The site is deployed from DockerHub - this is used both by the production AWS instance, and local copies.
 
-1. You have probably already done this, but make sure you have `git` installed and you have set up your email and name configuration. Also make sure your server has a working IPv6.
+ - Sign up for https://hub.docker.com/
+ - Get an existing owner of the hhvm to add you to the 'owners' team so that you can push new images to `hhvm/user-documentation`
 
-   ```
-   $ git config --global user.name "Your GitHub Name" # Real name, not username.
-   $ git config --global user.email "Your GitHub Email"
+## Configuring Docker
 
-   $ curl -6 http://www.google.com
-   ```
+  - Install Docker following the instructions on [their website](https://www.docker.com/products/overview) - not Homebrew or similar
+  - run 'docker login', and enter your DockerHub credentials
+  - if you are on Linux, add yourself to the 'docker' group (`sudo usermod -aG docker $(whoami)`), log out, and log in again
 
+## Install the AWS tools
 
-2. Install [Docker](https://www.docker.com/). 
-   - [Linux](http://docs.docker.com/linux/step_one/)
-   - [Mac](http://docs.docker.com/mac/step_one/)
+You need both the standard AWS tools, and the 'EB' (elastic beanstalk) tools.
 
-3. **Linux Only**: Add yourself to the docker group.
+ - if you are using Homebrew on OSX, `brew install awscli` and `brew install awsebcli`
+ - otherwise, see Amazon's instructions for [the AWS CLI](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) and [the EB cli](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
 
-   ```
-   $ sudo usermod -aG docker your-user-name
-   ```
+## Create AWS accounts
 
-3. **Linux Only**: After you add yourself to the group, make sure you **logout** to ensure that the docker service is running, or you might get something like 
+Our AWS login page is at https://fb-oss.signin.aws.amazon.com - first, get an existing admin to create an admin account for you:
 
-   ```
-    Cannot connect to the Docker daemon. Is 'docker daemon' running on this host?
-   ```
+ - go to IAM (Identity & Access Mangement)
+ - Create a new user (usually `yourfbunixname`)
+ - Set a password, and tick 'require user to change their password on next login'
+ - Enable two-factor authentication (aka multi-factor authentication, MFA); you can use the Duo app on your phone, or a hardware device if one is available. We generally recommend a hardware device as resetting MFA is a pain with AWS, and neccessary if your phone is lost, upgraded, wiped, or restored from backup.
+ - Add this account to the 'admins' group
+ - **NEVER** create API keys for this account
 
-4. Once Docker is installed, login to docker
+You should then login as your new admin account, and create yourself a less privileged account:
 
-   ```
-   $ docker login # enter your docker username, password and email
-   ```
+ - go to IAM
+ - Create a new user (usually `yourfbunixname_non_admin`)
+ - **DO NOT** set a password or associate a two-factor device
+ - You'll then be given an API keypair
+ - Open up another tab, and go to IAM again
+ - Add the new user to the 'EB-hhvm-docs' group
+ - Open a terminal
+ - run `aws configure` and enter the API credentials IAM gave you in the first tab; leave the other options at their default
+ - close both tabs, and remove any other copies of those new credentials
 
-5. Login in to AWS and create an access key (click on your name in the top
-   right, 'security credentials', 'Users', '<your user name>', 'create new access key'.
+## Set up the documentation repo
 
-6. Install the AWS EB (Elastic Beanstalk) tools:
+ - clone it from github
+ - open a terminal, and go to the 'user-documentation' repo
+ - run `eb init` - you want the us-west-2 region and the existing hhvm-docs app; you'll also be prompted for -a vs -b - it doesn't matter which you pick
 
-   ```
-   # On Ubuntu
-   $ sudo apt-get install python-dev
-   $ sudo apt-get install python-pip
-   $ sudo pip install awsebcli
-   ```
+## Deploying the site to staging
 
-   ```
-   # On Mac OS X 10.7+
-   $  curl -s https://s3.amazonaws.com/elasticbeanstalk-cli-resources/install-ebcli.py | python
-   ... or ...
-   $ brew install awsebcli
-   ```
+Run `bin/deploy-to-staging.sh` - this will:
 
-   Other distros, you can check here: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html
-
-7. Configure your `hhvm/user-documentation` checkout for pushing to AWS - you will be prompted for your access keys, region (`us-west-2`) and application. Select the `hack-hhvm-docs` application.
-
-   ```
-   # From your user-documentation checkout directory
-   $ eb init
-   ```
-
-## General Starting Point
-
-1. Rebase your repo to get the lastest and greatest changes; do a full composer rebuild... e.g., just in case new classes were added for testing.
-
-   ```
-   # or another branch name instead of origin/master, if applicable
-   $ git fetch && git rebase origin/master
-   $ hhvm composer.phar install
-   ```
-
-2. To save you time, you may want to run the PHPUnit test suite before starting the deploy, just in case there is a problem that needs fixing.
-
-   ```
-   $ hhvm bin/build.php
-   $ hhvm vendor/bin/phpunit
-   ```
-
-3. Assuming there are no issues with the build or tests, from your checkout, push to staging on AWS with:
-
-   ```
-   $ bin/deploy-to-staging.sh
-   ```
-
-4. Once the deploy script is finished and you have successfully deployed, do a fetch and merge via `git pull` and then push the AWS commit to the `user-documentation` repo. **Do not** `rebase`, so that the history before that commit keeps on matching what was actually pushed.
-
-   ```
-   $ git pull
-   $ git push
-   ```
-
-5. Create a changelog, ideally piping it to a markdown file via [gist](https://github.com/defunkt/gist)
-
-   ```
-   $ bin/changelog.sh | gist --type md
-   ```
-
-6. Test the staging site at http://staging.docs.hhvm.com
-
-7. Swap staging and production
-
-  ```
-  $ eb swap
-  ```
-
-  Now the docs will be at http://docs.hhvm.com
+ - build a docker image containing the fully built site
+ - run the full test suite inside the docker image
+ - push the image to dockerhub
+ - make a git commit updating the version in the AWS config
+ - deploy it to staging.docs.hhvm.com
+ - run a partial test suite remotely against staging.docs.hhvm.com (search the tests for `@group remote` to see what this does)
+ - tell you the next steps :)
