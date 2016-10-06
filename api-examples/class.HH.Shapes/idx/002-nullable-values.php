@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\HH\Shapes\Idx;
 
-function run(): void {
+function runNullable(): void {
   $point = shape('x' => 3, 'y' => null);
 
   // The key 'z' doesn't exist in $point so our explicit default 0 is returned
@@ -12,4 +12,4 @@ function run(): void {
   var_dump(Shapes::idx($point, 'y', 0));
 }
 
-run();
+runNullable();
