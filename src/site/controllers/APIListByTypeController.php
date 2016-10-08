@@ -1,11 +1,9 @@
 <?hh // strict
 
-use HHVM\UserDocumentation\APIIndex;
-use HHVM\UserDocumentation\APINavData;
 use HHVM\UserDocumentation\APIDefinitionType;
-use HHVM\UserDocumentation\PHPAPIIndex;
+use HHVM\UserDocumentation\APIProduct;
 
-final class APIListByTypeController extends APIListController {
+final class APIListByTypeController extends WebPageController {
   use APIListByTypeControllerParametersTrait;
 
   public static function getUriPattern(): UriPattern {
@@ -18,11 +16,6 @@ final class APIListByTypeController extends APIListController {
   }
 
   <<__Override>>
-  protected function getDefinitionTypes(): ImmSet<APIDefinitionType> {
-    return ImmSet { $this->getParameters()->getType() };
-  }
-
-  <<__Override>>
   protected function getBreadcrumbs(): :ui:breadcrumbs {
     $parents = Map {
       'Hack' => '/hack/',
@@ -30,5 +23,24 @@ final class APIListByTypeController extends APIListController {
     };
     $type = $this->getParameters()->getType();
     return <ui:breadcrumbs parents={$parents} currentPage={ucwords($type)} />;
+  }
+
+  <<__Override>>
+  protected async function getTitle(): Awaitable<string> {
+    switch ($this->getParameters()->getProduct()) {
+      case APIProduct::HACK:
+        return 'Hack APIs';
+      case APIProduct::PHP:
+        return 'Supported PHP APIs';
+    }
+  }
+
+  <<__Override>>
+  final protected async function getBody(): Awaitable<XHPRoot> {
+    return
+      <api-list
+        product={$this->getParameters()->getProduct()}
+        types={ImmSet{$this->getParameters()->getType()}}
+      />;
   }
 }

@@ -6,21 +6,14 @@ use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\APIProduct;
 use HHVM\UserDocumentation\PHPAPIIndex;
 
-abstract class APIListController extends WebPageController {
-  abstract protected function getDefinitionTypes(): ImmSet<APIDefinitionType>;
-
-  final public async function getTitle(): Awaitable<string> {
-    switch ($this->getProduct()) {
-      case APIProduct::HACK:
-        return 'Hack APIs';
-      case APIProduct::PHP:
-        return 'Supported PHP APIs';
-    }
-  }
+class :api-list extends :x:element {
+  attribute
+    APIProduct product @required,
+    ImmSet<APIDefinitionType> types @required;
 
   final private function getDefinitions(
   ): Map<APIDefinitionType, Map<string, string>> {
-    switch ($this->getProduct()) {
+    switch ($this->:product) {
       case APIProduct::HACK:
         return $this->getHackDefinitions();
       case APIProduct::PHP:
@@ -31,7 +24,7 @@ abstract class APIListController extends WebPageController {
   final private function getHackDefinitions(
   ): Map<APIDefinitionType, Map<string, string>> {
     $out = Map {};
-    foreach ($this->getDefinitionTypes() as $type) {
+    foreach ($this->:types as $type) {
       $index = APIIndex::getIndexForType($type);
       $out[$type] = Map { };
       foreach ($index as $node) {
@@ -43,10 +36,9 @@ abstract class APIListController extends WebPageController {
 
   final private function getPHPDefinitions(
   ): Map<APIDefinitionType, Map<string, string>> {
-    $supported_types = $this->getDefinitionTypes();
     $out = Map { };
 
-    foreach ($supported_types as $type) {
+    foreach ($this->:types as $type) {
       $out[$type] = Map { };
     }
 
@@ -55,7 +47,7 @@ abstract class APIListController extends WebPageController {
       if (!$data['supportedInHHVM']) {
         continue;
       }
-      if (!$supported_types->contains($data['type'])) {
+      if (!$this->:types->contains($data['type'])) {
         continue;
       }
       $out[$data['type']][$name] = $data['url'];
@@ -63,7 +55,7 @@ abstract class APIListController extends WebPageController {
     return $out->filter($map ==> $map->count() !== 0);
   }
 
-  final protected function getInnerContent(): XHPRoot {
+  final private function getInnerContent(): XHPRoot {
     $defs = $this->getDefinitions();
 
     $root = <div class="referenceList" />;
@@ -86,7 +78,7 @@ abstract class APIListController extends WebPageController {
       );
     }
 
-    if ($this->getProduct() === APIProduct::HACK) {
+    if ($this->:product === APIProduct::HACK) {
       return (
         <x:frag>
           <p>
@@ -101,18 +93,10 @@ abstract class APIListController extends WebPageController {
     return $root;
   }
 
-  final protected async function getBody(): Awaitable<XHPRoot> {
+  final protected function render(): XHPRoot {
     return
       <div class="apiListWrapper">
         {$this->getInnerContent()}
       </div>;
-  }
-
-  <<__Memoize>>
-  final private function getProduct(): APIProduct {
-    return $this->getParameters_PRIVATE_IMPL()->getEnum(
-      APIProduct::class,
-      'Product',
-    );
   }
 }
