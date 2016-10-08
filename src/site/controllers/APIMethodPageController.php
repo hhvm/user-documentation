@@ -6,22 +6,25 @@ use HHVM\UserDocumentation\APIMethodIndexEntry;
 use HHVM\UserDocumentation\URLBuilder;
 
 final class APIMethodPageController extends APIPageController {
+  use APIMethodPageControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
-      ->apiProduct('product')
+      ->apiProduct('Product')
       ->literal('/reference/')
-      ->definitionType('type')
+      ->definitionType('Type')
       ->literal('/')
-      ->string('class')
+      ->string('Class')
       ->literal('/')
-      ->string('method')
+      ->string('Method')
       ->literal('/');
   }
+
   <<__Memoize,__Override>>
   protected function getRootDefinition(): APIClassIndexEntry {
     $this->redirectIfAPIRenamed();
-    $definition_name = $this->getRequiredStringParam('class');
+    $definition_name = $this->getParameters()->getClass();
     $index = APIIndex::getClassIndex($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();
@@ -31,7 +34,7 @@ final class APIMethodPageController extends APIPageController {
 
   <<__Memoize>>
   private function getMethodDefinition(): APIMethodIndexEntry {
-    $method_name = $this->getRequiredStringParam('method');
+    $method_name = $this->getParameters()->getMethod();
     $methods = $this->getRootDefinition()['methods'];
     if (!array_key_exists($method_name, $methods)) {
       throw new HTTPNotFoundException();
@@ -70,14 +73,14 @@ final class APIMethodPageController extends APIPageController {
 
   <<__Override>>
   protected function redirectIfAPIRenamed(): void {
-    $redirect_to = $this->getRenamedAPI($this->getRequiredStringParam('class'));
+    $redirect_to = $this->getRenamedAPI($this->getParameters()->getClass());
     if ($redirect_to === null) {
       return;
     }
     $type = $this->getDefinitionType();
     throw new RedirectException(
       URLBuilder::getPathForMethod(shape(
-        'name' => $this->getRequiredStringParam('method'),
+        'name' => $this->getParameters()->getMethod(),
         'className' => $redirect_to,
         'classType' => $type,
       )),

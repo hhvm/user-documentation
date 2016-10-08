@@ -1,5 +1,7 @@
 <?hh // strict
 
+use FredEmmott\HackRouter\StringRequestParameter;
+use FredEmmott\HackRouter\StringRequestParameterSlashes;
 use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\PHPAPIIndex;
@@ -8,8 +10,24 @@ use HHVM\UserDocumentation\SearchResultSet;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class SearchController extends WebPageController {
+  use SearchControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())->literal('/search');
+  }
+
+  <<__Override>>
+  protected static function getExtraParametersSpec(
+  ): self::TParameterDefinitions {
+    return shape(
+      'required' => ImmVector {
+        new StringRequestParameter(
+          StringRequestParameterSlashes::ALLOW_SLASHES,
+          'term',
+        ),
+      },
+      'optional' => ImmVector { },
+    );
   }
 
   public async function getTitle(): Awaitable<string> {
@@ -65,7 +83,7 @@ final class SearchController extends WebPageController {
 
   <<__Memoize>>
   private function getSearchTerm(): string {
-    return $this->getRequiredStringParam('term');
+    return $this->getParameters()->getterm();
   }
 
   private function getSearchResults(): SearchResultSet {

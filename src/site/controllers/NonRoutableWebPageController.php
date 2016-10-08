@@ -154,7 +154,7 @@ EOF;
   }
 
   private function getBodyClass(?string $extra_class): string {
-    $class = 'bodyClass'.ucwords($this->getOptionalStringParam('product'));
+    $class = 'bodyClass'.ucwords($this->getRawParameter_UNSAFE('product'));
     if ($extra_class !== null) {
       $class = $class.' '.$extra_class;
     }
@@ -163,7 +163,7 @@ EOF;
 
   private function getTitleContent(string $title): XHPRoot {
     $title_class =
-      "mainTitle mainTitle".$this->getOptionalStringParam('product');
+      "mainTitle mainTitle".$this->getRawParameter_UNSAFE('product');
     return
       <div class={$title_class}>
         <div class="widthWrapper">
@@ -182,7 +182,7 @@ EOF;
 
   protected function getHeader(): XHPRoot {
     $header_class =
-      "header headerType".$this->getOptionalStringParam('product');
+      "header headerType".$this->getRawParameter_UNSAFE('product');
     return
       <div class={$header_class}>
         <div class="widthWrapper">

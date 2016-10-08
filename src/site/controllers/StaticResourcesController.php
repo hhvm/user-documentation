@@ -1,22 +1,34 @@
 <?hh // strict
 
+use FredEmmott\HackRouter\IntRequestParameter;
 use HHVM\UserDocumentation\StaticResourceMap;
 use Psr\Http\Message\ResponseInterface;
 
 final class StaticResourcesController
 extends WebController
 implements RoutableGetController {
+  use StaticResourcesControllerParametersTrait;
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/s/')
-      ->string('checksum')
+      ->string('Checksum')
       ->literal('/')
-      ->stringWithSlashes('file');
+      ->stringWithSlashes('File');
+  }
+
+  <<__Override>>
+  protected static function getExtraParametersSpec(
+  ): self::TParameterDefinitions {
+    return shape(
+      'required' => ImmVector {},
+      'optional' => ImmVector { new IntRequestParameter('MTime') },
+    );
   }
 
   public async function getResponse(): Awaitable<ResponseInterface> {
-    $checksum = $this->getRequiredStringParam('checksum');
-    $file = '/'.$this->getRequiredStringParam('file');
+    $params = $this->getParameters();
+    $checksum = $params->getChecksum();
+    $file = '/'.$params->getFile();
 
     $entry = self::invariantTo404(
       () ==> StaticResourceMap::getEntryForFile($file)
@@ -36,7 +48,7 @@ implements RoutableGetController {
 
     if (
       $checksum === 'local-changes'
-      && $this->getOptionalStringParam('mtime') === null
+      && $this->getParameters()->getMTime() === null
     ) {
       $response = $response->withAddedHeader(
         'Cache-Control',

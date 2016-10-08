@@ -1,11 +1,21 @@
 <?hh // strict
 
+use FredEmmott\HackRouter\RequestParameters;
+use FredEmmott\HackRouter\RequestParameter;
+use FredEmmott\TypeAssert\IncorrectTypeException;
+use FredEmmott\TypeAssert\TypeAssert;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
 <<__ConsistentConstruct>>
 abstract class WebController {
-  private ImmMap<string, string> $parameters;
+  const type TParameterDefinitions = shape(
+    'required' => ImmVector<RequestParameter>,
+    'optional' => ImmVector<RequestParameter>,
+  );
+
+  private RequestParameters $parameters;
+  private ImmMap<string, string> $rawParameters;
 
   public function __construct(
     ImmMap<string,string> $parameters,
@@ -18,26 +28,53 @@ abstract class WebController {
       }
       $combined_params[(string) $key] = (string) $value;
     }
-    $this->parameters = $combined_params->toImmMap();
+
+    $spec = self::getParametersSpec();
+    $this->parameters = new RequestParameters(
+      $spec['required'],
+      $spec['optional'],
+      $combined_params->immutable(),
+    );
+    $this->rawParameters = $combined_params->immutable();
+  }
+
+  final public static function getParametersSpec(
+  ): self::TParameterDefinitions {
+    $uri = self::getUriParametersSpec();
+    $extra = static::getExtraParametersSpec();
+    return shape(
+      'required' => $uri['required']->concat($extra['required']),
+      'optional' => $uri['optional']->concat($extra['optional']),
+    );
+  }
+
+  /** Use the codegen traits instead */
+  final protected function getParameters_PRIVATE_IMPL(): RequestParameters {
+    return $this->parameters;
+  }
+
+  final private static function getUriParametersSpec(
+  ): self::TParameterDefinitions {
+    try {
+      $class = TypeAssert::isClassnameOf(
+        RoutableController::class,
+        static::class,
+      );
+    } catch (IncorrectTypeException $e) {
+      return shape('required' => ImmVector {}, 'optional' => ImmVector {});
+    }
+    return shape(
+      'required' => $class::getUriPattern()->getParameters(),
+      'optional' => ImmVector {},
+    );
+  }
+
+  protected static function getExtraParametersSpec(
+  ): self::TParameterDefinitions {
+    return shape('required' => ImmVector {}, 'optional' => ImmVector {});
   }
 
   abstract public function getResponse(): Awaitable<ResponseInterface>;
-
-  final protected function getRequiredStringParam(string $key): string {
-    invariant(
-      $this->parameters->containsKey($key),
-      'required parameter %s is not set',
-      $key,
-    );
-    return $this->parameters[$key];
-  }
-
-  final protected function getOptionalStringParam(string $key): ?string {
-    return
-      $this->parameters->containsKey($key)
-        ? $this->parameters[$key]
-        : NULL;
-  }
 
   final protected function getRequestedPath(): string {
     return $this->request->getUri()->getPath();
@@ -59,6 +96,14 @@ abstract class WebController {
         $e
       );
     }
+  }
+
+  final protected function getRawParameter_UNSAFE(string $name): ?string {
+    $params = $this->rawParameters;
+    if (!$params->containsKey($name)) {
+      return null;
+    }
+    return $params->at($name);
   }
 
   protected function requireSecureConnection(): void {

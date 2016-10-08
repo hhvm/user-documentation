@@ -8,18 +8,21 @@ use Psr\Http\Message\ResponseInterface;
 
 final class RedirectToGuideFirstPageController
 extends WebController implements RoutableGetController {
+  use RedirectToGuideFirstPageControllerParametersTrait;
+  
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
-      ->guidesProduct('product')
+      ->guidesProduct('Product')
       ->literal('/')
-      ->string('guide')
+      ->string('Guide')
       ->literal('/');
   }
 
   public async function getResponse(): Awaitable<ResponseInterface> {
-    $product = GuidesProduct::assert($this->getRequiredStringParam('product'));
-    $guide = $this->getRequiredStringParam('guide');
+    $params = $this->getParameters();
+    $product = GuidesProduct::assert($params->getProduct());
+    $guide = $params->getGuide();
     $path = self::invariantTo404(() ==> {
       $pages = GuidesIndex::getPages($product, $guide);
       $page = $pages[0];

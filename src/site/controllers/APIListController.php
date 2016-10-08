@@ -110,8 +110,9 @@ abstract class APIListController extends WebPageController {
 
   <<__Memoize>>
   final private function getProduct(): APIProduct {
-    return APIProduct::assert(
-      $this->getRequiredStringParam('product')
+    return $this->getParameters_PRIVATE_IMPL()->getEnum(
+      APIProduct::class,
+      'Product',
     );
   }
 }

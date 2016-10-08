@@ -6,15 +6,17 @@ use Psr\Http\Message\ResponseInterface;
 final class LegacyRedirectController
 extends WebController
 implements RoutableGetController {
+  use LegacyRedirectControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/manual/en/')
-      ->string('legacy_id')
+      ->string('LegacyId')
       ->literal('.php');
   }
 
   public async function getResponse(): Awaitable<ResponseInterface> {
-    $id = $this->getRequiredStringParam('legacy_id');
+    $id = $this->getParameters()->getLegacyId();
 
     $url = LegacyRedirects::getUrlForId($id);
     if ($url !== null) {
