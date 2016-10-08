@@ -11,21 +11,23 @@ use HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\URLBuilder;
 
 final class APIClassPageController extends APIPageController {
+  use APIClassPageControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
-      ->apiProduct('product')
+      ->apiProduct('Product')
       ->literal('/reference/')
-      ->definitionType('type')
+      ->definitionType('Type')
       ->literal('/')
-      ->string('name')
+      ->string('Name')
       ->literal('/');
   }
 
   <<__Memoize,__Override>>
   protected function getRootDefinition(): APIIndexEntry {
     $this->redirectIfAPIRenamed();
-    $definition_name = $this->getRequiredStringParam('name');
+    $definition_name = $this->getParameters()->getName();
 
     $index = APIIndex::getIndexForType($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
@@ -61,7 +63,7 @@ final class APIClassPageController extends APIPageController {
 
   <<__Override>>
   protected function redirectIfAPIRenamed(): void {
-    $redirect_to = $this->getRenamedAPI($this->getRequiredStringParam('name'));
+    $redirect_to = $this->getRenamedAPI($this->getParameters()->getName());
 
     if ($redirect_to === null) {
       return;

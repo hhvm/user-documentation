@@ -6,20 +6,20 @@ use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\PHPAPIIndex;
 
 final class APIListByTypeController extends APIListController {
+  use APIListByTypeControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
-      ->apiProduct('product')
+      ->apiProduct('Product')
       ->literal('/reference/')
-      ->definitionType('type')
+      ->definitionType('Type')
       ->literal('/');
   }
 
   <<__Override>>
   protected function getDefinitionTypes(): ImmSet<APIDefinitionType> {
-    return ImmSet {
-      APIDefinitionType::assert($this->getRequiredStringParam('type')),
-    };
+    return ImmSet { $this->getParameters()->getType() };
   }
 
   <<__Override>>
@@ -28,7 +28,7 @@ final class APIListByTypeController extends APIListController {
       'Hack' => '/hack/',
       'Reference' => '/hack/reference/',
     };
-    $type = $this->getRequiredStringParam('type');
+    $type = $this->getParameters()->getType();
     return <ui:breadcrumbs parents={$parents} currentPage={ucwords($type)} />;
   }
 }

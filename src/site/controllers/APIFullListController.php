@@ -9,7 +9,7 @@ final class APIFullListController extends APIListController {
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
-      ->apiProduct('product')
+      ->apiProduct('Product')
       ->literal('/reference/');
   }
 

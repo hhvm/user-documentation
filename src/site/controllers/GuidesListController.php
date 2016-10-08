@@ -6,10 +6,12 @@ use HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\URLBuilder;
 
 final class GuidesListController extends WebPageController {
+  use GuidesListControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
-      ->guidesProduct('product')
+      ->guidesProduct('Product')
       ->literal('/');
   }
 
@@ -75,7 +77,7 @@ final class GuidesListController extends WebPageController {
 
   protected function getGuideSummary(string $guide): ?XHPRoot {
     $path = GuidesIndex::getFileForSummary(
-      $this->getRequiredStringParam('product'),
+      $this->getProduct(),
       $guide,
     );
     if (file_get_contents($path)) {
@@ -96,8 +98,6 @@ final class GuidesListController extends WebPageController {
 
   <<__Memoize>>
   private function getProduct(): GuidesProduct {
-    return GuidesProduct::assert(
-      $this->getRequiredStringParam('product')
-    );
+    return $this->getParameters()->getProduct();
   }
 }

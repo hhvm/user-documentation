@@ -14,31 +14,31 @@ use HHVM\UserDocumentation\URLBuilder;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class GuidePageController extends WebPageController {
+  use GuidePageControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
-      ->guidesProduct('product')
+      ->guidesProduct('Product')
       ->literal('/')
-      ->string('guide')
+      ->string('Guide')
       ->literal('/')
-      ->string('page');
+      ->string('Page');
   }
 
   <<__Memoize>>
   private function getProduct(): GuidesProduct {
-    return GuidesProduct::assert(
-      $this->getRequiredStringParam('product')
-    );
+    return $this->getParameters()->getProduct();
   }
 
   <<__Memoize>>
   private function getGuide(): string {
-    return $this->getRequiredStringParam('guide');
+    return $this->getParameters()->getGuide();
   }
 
   <<__Memoize>>
   private function getPage(): string {
-    return $this->getRequiredStringParam('page');
+    return $this->getParameters()->getPage();
   }
 
   public async function getTitle(): Awaitable<string> {
@@ -223,9 +223,9 @@ final class GuidePageController extends WebPageController {
   protected function getInnerContent(): XHPRoot {
     return self::invariantTo404(() ==> {
       $path = GuidesIndex::getFileForPage(
-        GuidesProduct::assert($this->getRequiredStringParam('product')),
-        $this->getRequiredStringParam('guide'),
-        $this->getRequiredStringParam('page'),
+        $this->getProduct(),
+        $this->getGuide(),
+        $this->getPage(),
       );
       return
         <div class="innerContent">{new HTMLFileRenderable($path)}</div>;

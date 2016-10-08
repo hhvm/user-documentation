@@ -13,8 +13,9 @@ use HHVM\UserDocumentation\URLBuilder;
 abstract class APIPageController extends WebPageController {
   <<__Memoize>>
   final protected function getDefinitionType(): APIDefinitionType {
-    return APIDefinitionType::assert(
-      $this->getRequiredStringParam('type')
+    return $this->getParameters_PRIVATE_IMPL()->getEnum(
+      APIDefinitionType::class,
+      'Type',
     );
   }
 

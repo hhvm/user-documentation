@@ -9,14 +9,17 @@ require_once(BuildPaths::JUMP_INDEX);
 final class JumpController
 extends WebController
 implements RoutableGetController {
+  use JumpControllerParametersTrait;
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/j/')
-      ->string('keyword');
+      ->string('Keyword');
   }
 
   public function getResponse(): Awaitable<ResponseInterface> {
-    $keyword = $this->getRequiredStringParam('keyword');
+    $keyword = $this->getParameters()->getKeyword();
+
     $data = JumpIndexData::getIndex();
     $url = idx($data, strtolower($keyword));
     if (is_string($url)) {
