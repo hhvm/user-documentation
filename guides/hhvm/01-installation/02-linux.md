@@ -96,5 +96,5 @@ There are a variety of volunteered owned mirrors to get the packages, if the def
 * http://dl.hhvm.com/ (US)
 * http://mirror.yourwebhoster.eu/hhvm/ (NL)
 * http://mirror.mephi.ru/hhvm/ (RU)
-* http://hhvm.bauerj.eu/ (DE)
+* https://hhvm.bauerj.eu/ (DE)
 * http://mirrors.noc.im/hhvm/ (CN)
