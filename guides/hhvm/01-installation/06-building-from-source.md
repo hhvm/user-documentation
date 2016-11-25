@@ -19,7 +19,7 @@ You must be running a 64-bit OS to compile & install HHVM. Here are the supporte
 Using sudo or as root user: (it is recommended that you run `sudo apt-get update` and `sudo apt-get upgrade` first, or you may receive errors)
 
 ```
-sudo apt-get install autoconf automake binutils-dev build-essential cmake g++ gawk git \
+sudo apt-get install autoconf automake binutils-dev bison build-essential cmake g++ gawk git \
   libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-regex-dev \
   libboost-system-dev libboost-thread-dev libboost-context-dev libbz2-dev libc-client-dev libldap2-dev \
   libc-client2007e-dev libcap-dev libcurl4-openssl-dev libdwarf-dev libelf-dev \
