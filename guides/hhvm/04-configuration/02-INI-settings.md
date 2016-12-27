@@ -710,7 +710,7 @@ These are settings of the JIT for [Profile Guided Optimizations](https://en.wiki
 | `hhvm.jit_pgo_hot_only` | `bool` | `false` | If enabled, only profile hot sections of code.
 | `hhvm.jit_pgo_region_selector` | `string` | `hotcfg` | The regions to translate during PGO. The default are hot sections of code.
 | `hhvm.jit_pgo_release_vv_min_percent` | `int` | `10` | The minimum percentage of extra args, varenvs and locals that will be released.
-| `hhvm.jit_pgo_threshold` | `int` | `2` or `5000` | The maximum amount of PGO transacations. For the defaults, `2` when HHVM is compiled in debug mode; `5000` otherwise.
+| `hhvm.jit_pgo_threshold` | `int` | `2` or `5000` | The maximum amount of PGO translations. For the defaults, `2` when HHVM is compiled in debug mode; `5000` otherwise.
 | `hhvm.jit_pgo_use_post_conditions` | `bool` | `true` | For profiling translations, grab the postconditions to be used for region selection whenever we decide to retranslate.
 
 ## APC Settings
