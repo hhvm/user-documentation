@@ -132,7 +132,6 @@ These are settings that are available to you when running HHVM in [server mode](
 | `hhvm.server.ssl_certificate_file` | `string` | `''` | The file that contains your SSL certificate. `hhvm.server.enable_ssl` must be enabled for this to take effect.
 | `hhvm.server.ssl_certificate_key_file` | `string` | `''` | The file that contains your SSL certificate key. `hhvm.server.enable_ssl` must be enabled for this to take effect.
 | `hhvm.server.ssl_port` | `int` | `443` | The port for SSL connections. `hhvm.server.enable_ssl` must be enabled for this to take effect.
-| `hhvm.server.startup_document` | `string` | `''` | The document that is loaded and executed when the server starts up. This is different than `hhvm.server.default_document`, which is the page that is loaded on a request when a page is not explicitly specified.
 | `hhvm.server.stat_cache` | `bool` | `false` | If enabled, the server will cache calls to [stat()](https://en.wikipedia.org/wiki/Stat_(system_call)).
 | `hhvm.server.takeover_filename` | `string` | `''` | Between server instances port takeover, this is the file that is used.
 | `hhvm.server.thread_count` | `int` | 2x the number of CPU cores | This specifies the number of worker threads used to serve web traffic in [server mode](../basic-usage/server.md). The number to set here is really quite experimental. If you use [`async`](/hack/async/introduction), then this number can be the default. Otherwise, you might want a higher number.
