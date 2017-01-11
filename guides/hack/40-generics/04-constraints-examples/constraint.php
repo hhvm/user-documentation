@@ -10,7 +10,7 @@ class Complex<T as num> {
     $this->real = $real;
     $this->imag = $imag;
   }
-  public static function add(Complex<T> $z1, Complex<T> $z2): Complex<T> {
+  public static function add(Complex<T> $z1, Complex<T> $z2): Complex<num> {
     return new Complex($z1->real + $z2->real, $z1->imag + $z2->imag);
   }
 

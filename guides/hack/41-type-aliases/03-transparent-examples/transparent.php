@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\TypeAliases\Transparent\Examples\Converted;
 
 type Matrix<T> = Vector<Vector<T>>;
 
-function add<T as num>(Matrix<T> $m1, Matrix<T> $m2): Matrix<T> {
+function add<T as num>(Matrix<T> $m1, Matrix<T> $m2): Matrix<num> {
   // Assumes that $m1 and $m2 have the same dimensions; real code should have
   // better error detection and handling of course.
   $r = Vector {};
