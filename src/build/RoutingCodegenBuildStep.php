@@ -12,9 +12,9 @@ final class RoutingCodegenBuildStep extends BuildStep {
     Codegen::forTree(
       LocalConfig::ROOT.'/src/site',
       shape(
-        'controller_base' => \RoutableController::class,
+        'controllerBase' => \RoutableController::class,
         'router' => self::getRouterConfig(),
-        'request_parameters' => self::getRequestParametersConfig(),
+        'requestParameters' => self::getRequestParametersConfig(),
       ),
     )->build();
   }
@@ -31,7 +31,7 @@ final class RoutingCodegenBuildStep extends BuildStep {
   ): Codegen::TRequestParametersCodegenConfig {
     $root = LocalConfig::ROOT.'/src/site/controllers/codegen/';
     return shape(
-      'get_parameters' => $class ==> {
+      'getParameters' => $class ==> {
         $class = TypeAssert::isClassnameOf(\WebController::class, $class);
         $spec = $class::getParametersSpec();
         $out = Vector {};

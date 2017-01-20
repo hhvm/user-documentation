@@ -2,4 +2,4 @@ int(34)
 int(28)
 int(2)
 
-Catchable fatal error: Argument 1 passed to Hack\UserDocumentation\Types\Intro\Examples\PreHack\bar() must be an instance of Hack\UserDocumentation\Types\Intro\Examples\PreHack\A, Hack\UserDocumentation\Types\Intro\Examples\PreHack\Z given in /data/users/joelm/user-documentation/guides/hack/20-types/01-introduction-examples/pre-hack.php on line 22
+Catchable fatal error: Argument 1 passed to Hack\UserDocumentation\Types\Intro\Examples\PreHack\bar() must be an instance of Hack\UserDocumentation\Types\Intro\Examples\PreHack\A, Hack\UserDocumentation\Types\Intro\Examples\PreHack\Z given in /data/users/joelm/user-documentation/guides/hack/20-types/01-introduction-examples/pre-hack.php on line 33

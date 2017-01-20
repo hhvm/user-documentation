@@ -1,11 +1,11 @@
 {
   "require": {
-    "facebook/xhp-lib": "^2.2.4",
-    "hhvm": "~3.12",
+    "facebook/xhp-lib": "^2.3.2",
+    "hhvm": "~3.17",
     "zendframework/zend-diactoros": "^1.1",
     "nikic/fast-route": "^1.0.1",
     "fredemmott/hhvm-autoload": "^1.0.0",
-    "fredemmott/type-assert": "^0.2.0",
+    "fredemmott/type-assert": "^1.0.0",
     "fredemmott/hack-router-codegen": "^1.0.0rc2",
     "fredemmott/hack-router": "^v1.0.0rc7"
   },
@@ -13,7 +13,7 @@
     "fredemmott/definition-finder": "^1.1.0",
     "phpdocumentor/reflection-docblock": "^2.0",
     "mustangostang/spyc": "0.5.x-dev",
-    "hack-psr/psr7-http-message-hhi": "^0.2.0",
+    "hack-psr/psr7-http-message-hhi": "^1.0.0",
     "phpunit/phpunit": "^5.1",
     "91carriage/phpunit-hhi": "^5.1"
   },

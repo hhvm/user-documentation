@@ -1,12 +1,11 @@
 File "%sconcrete.php", line 18, characters 7-14:
-This object is of type Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\BadChild (Typing[4110])
+Class Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\BadChild does not correctly implement all required methods  (Typing[4110])
 File "%sconcrete.php", line 18, characters 24-46:
-It is incompatible with this object of type Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\ParentWithoutConstraint
-because some declarations are incompatible.
+Some methods are incompatible with those declared in type Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\ParentWithoutConstraint
 Read the following to see why:
 File "%sconcrete.php", line 21, characters 14-16:
 The assigned type of this type constant is inconsistent with its parent
-File "%sconcrete.php", line 15, characters 20-27:
-This is an array key (int/string)
 File "%sconcrete.php", line 21, characters 20-22:
-It is incompatible with an int
+This is an int
+File "%sconcrete.php", line 15, characters 20-27:
+It is incompatible with an array key (int/string)

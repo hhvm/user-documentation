@@ -4,13 +4,12 @@ File "%sinterface-bad.php", line 14, characters 19-25:
 Required here
 
 File "%sinterface-bad.php", line 21, characters 7-11:
-This object is of type Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Paper (Typing[4054])
+Class Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Paper does not correctly implement all required methods  (Typing[4054])
 File "%sinterface-bad.php", line 21, characters 24-29:
-It is incompatible with this object of type Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Fliers
-because some declarations are incompatible.
+Some methods are incompatible with those declared in type Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Fliers
 Read the following to see why:
 File "%sinterface-bad.php", line 21, characters 7-11:
-This object doesn't implement the method closeDoors
+This type doesn't implement the method closeDoors
 File "%sinterface-bad.php", line 21, characters 24-29:
 Which is required by this interface
 File "%sinterface-bad.php", line 9, characters 19-28:

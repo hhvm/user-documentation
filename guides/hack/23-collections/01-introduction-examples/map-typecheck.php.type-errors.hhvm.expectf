@@ -11,4 +11,4 @@ object(HH\Vector)#1 (5) {
   int(500)
 }
 
-Catchable fatal error: Argument 1 passed to %s must be an instance of HH\Map, HH\Vector given in %s on line 9
+Catchable fatal error: Argument 1 passed to %s must be an instance of HH\Map, HH\Vector given in %s on line 18
