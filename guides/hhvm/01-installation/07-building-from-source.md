@@ -166,7 +166,7 @@ brew install llvm --with-clang
 ```
 brew install freetype gettext cmake libtool mcrypt oniguruma  \
              autoconf libelf readline automake md5sha1sum \
-             gd icu4c libmemcached pkg-config tbb imagemagick \
+             gd icu4c libmemcached pkg-config tbb imagemagick@6 \
              libevent sqlite openssl glog boost lz4 pcre \
              gawk jemalloc ocaml gmp dwarfutils libzip
 ```
@@ -207,8 +207,9 @@ cmake . \
     -DLIBINTL_INCLUDE_DIR=$(brew --prefix gettext)/include \
     -DLIBDWARF_LIBRARIES=$(brew --prefix dwarfutils)/lib/libdwarf.a \
     -DLIBDWARF_INCLUDE_DIRS=$(brew --prefix dwarfutils)/include \
-    -DLIBMAGICKWAND_INCLUDE_DIRS=$(brew --prefix imagemagick)/include/ImageMagick-6 \
-    -DLIBMAGICKWAND_LIBRARIES=$(brew --prefix imagemagick)/lib/libMagickWand-6.Q16.dylib \
+    -DLIBMAGICKWAND_INCLUDE_DIRS=$(brew --prefix imagemagick@6)/include/ImageMagick-6 \
+    -DLIBMAGICKWAND_LIBRARIES=$(brew --prefix imagemagick@6)/lib/libMagickWand-6.Q16.dylib \
+    -DLIBMAGICKCORE_LIBRARIES=$(brew --prefix imagemagick@6)/lib/libMagickCore-6.Q16.dylib \
     -DFREETYPE_INCLUDE_DIRS=$(brew --prefix freetype)/include/freetype2 \
     -DFREETYPE_LIBRARIES=$(brew --prefix freetype)/lib/libfreetype.dylib \
     -DLIBMEMCACHED_LIBRARY=$(brew --prefix libmemcached)/lib/libmemcached.dylib \
