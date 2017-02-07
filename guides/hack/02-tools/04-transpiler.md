@@ -62,7 +62,7 @@ Notice the following:
 The new `require_once` line is **important**. After you use the transpiler, you must copy the Hack library to the transpiled directory. The Hack library is called `hacklib` and is normally located in `/usr/share/hhvm/hack/hacklib`.
 
 ```
-cp -r /usr/share/hhvm/hack/hacklib /tmp/traspiled
+cp -r /usr/share/hhvm/hack/hacklib /tmp/transpiled
 ```
 
 Finally, add a piece of code to a top-level file somewhere in the root of your transpiled directory that will run before any of the transpiled code will run:
