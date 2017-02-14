@@ -38,7 +38,7 @@ You can find more detailed installation information [here](/hhvm/installation/in
 
 ### Why is HHVM released every 8 weeks?
 
-At Facebook, HHVM is pushed every 2 weeks (as you can see from the [NEWS](https://github.com/facebook/hhvm/blob/master/NEWS) file), but having everyone in the world update every 2 weeks would lead to too much testing and churn. After asking around this seems to be a good compromise between churn and getting new features. In the future we could switch to every 6 weeks or 10 weeks or any multiple of 2 that the community likes.
+At Facebook, HHVM is pushed every 2 weeks, but having everyone in the world update every 2 weeks would lead to too much testing and churn. After asking around this seems to be a good compromise between churn and getting new features. In the future we could switch to every 6 weeks or 10 weeks or any multiple of 2 that the community likes.
 
 ### What code does HHVM currently run?
 
