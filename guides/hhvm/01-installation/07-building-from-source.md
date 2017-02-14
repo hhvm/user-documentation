@@ -6,6 +6,7 @@ You must be running a 64-bit OS to compile & install HHVM. Here are the supporte
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
 * [Ubuntu 15.10](#ubuntu-15.10-wily-werewolf)
 * [Ubuntu 16.04](#ubuntu-16.04-xenial)
+* [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 * [Debian 8](#debian-8-jessie)
 * [Mac OS X Homebrew](#mac-os-x-homebrew)
 * [Unsupported](#unsupported)
@@ -93,6 +94,10 @@ Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 
 ## Ubuntu 16.04 Xenial
+
+Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
+
+## Ubuntu 16.10 Yakkety
 
 Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 

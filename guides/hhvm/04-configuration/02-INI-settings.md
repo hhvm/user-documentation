@@ -712,6 +712,20 @@ These are settings of the JIT for [Profile Guided Optimizations](https://en.wiki
 | `hhvm.jit_pgo_threshold` | `int` | `2` or `5000` | The maximum amount of PGO translations. For the defaults, `2` when HHVM is compiled in debug mode; `5000` otherwise.
 | `hhvm.jit_pgo_use_post_conditions` | `bool` | `true` | For profiling translations, grab the postconditions to be used for region selection whenever we decide to retranslate.
 
+## Garbage Collector Settings
+
+These are settings for the automated garbage collector.  To enable the automated GC, set `hhvm.enable_gc`, `hhvm.eager_gc` and `hhvm.quarantine` to true; or build with the `-DHHVM_EAGER_GC`.
+
+| Setting | Type | Default | Description
+| ------- | ---- | ------- | -----------
+| `hhvm.enable_gc` | `bool` | `HHVM_EAGER_GC` | Enable the garbage collector.
+| `hhvm.eager_gc` | `bool` | `HHVM_EAGER_GC` | Run the GC eagerly.
+| `hhvm.filter_gc_points | `bool` | `true` | Limit eager gc runs to once per surprise point.
+| `hhvm.quarantine` | `bool` | `HHVM_EAGER_GC` |
+| `hhvm.gc_sample_rate` | `int` | `0` |
+| `hhvm.gc_min_trigger` | `int` | `64 << 20` |
+| `hhvm.gc_trigger_pct` | `double` | 0.5 |
+
 ## APC Settings
 
 These are custom HHVM settings to the [Alternative PHP Cache (APC)](http://php.net/manual/en/book.apc.php).

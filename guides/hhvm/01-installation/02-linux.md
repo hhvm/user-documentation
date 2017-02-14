@@ -9,10 +9,11 @@ Here are the supported distributions:
 * [Ubuntu 15.04](#ubuntu-15.04-vivid)
 * [Ubuntu 15.10](#ubuntu-15.10-wily-werewolf)
 * [Ubuntu 16.04](#ubuntu-16.04-xenial)
+* [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 * [Debian 7](#debian-7-wheezy)
 * [Debian 8](#debian-8-jessie)
 
-## Ubuntu 14.04 Trusty
+## Ubuntu 16.10 Yakkety
 
 ```
 # installs add-apt-repository
@@ -23,28 +24,21 @@ sudo add-apt-repository "deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
 sudo apt-get update
 sudo apt-get install hhvm
 ```
+## Ubuntu 16.04 Xenial
 
-## Ubuntu 15.04 Vivid
-
-Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
+Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 
 ## Ubuntu 15.10 Wily Werewolf
 
-Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
+Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 
-## Ubuntu 16.04 Xenial
+## Ubuntu 15.04 Vivid
 
-Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
+Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 
+## Ubuntu 14.04 Trusty (Supported through HHVM 3.18)
 
-## Debian 7 Wheezy
-
-```
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-echo deb http://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.d/hhvm.list
-sudo apt-get update
-sudo apt-get install hhvm
-```
+Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 
 ## Debian 8 Jessie
 
@@ -55,17 +49,26 @@ sudo apt-get update
 sudo apt-get install hhvm
 ```
 
+## Debian 7 Wheezy
+
+```
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
+echo deb http://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.d/hhvm.list
+sudo apt-get update
+sudo apt-get install hhvm
+```
+
 ## Obtaining LTS Releases
 
 The commands above will get you the latest stable point release of HHVM. If you want an [LTS release](/hhvm/installation/introduction#prebuilt-packages__lts-releases), then append `-lts` and the LTS version in the `deb` line.
 
-e.g., the following `deb` line in `/etc/apt/sources.list` will get all stable updates on Ubuntu 14.04 "trusty":
+e.g., the following `deb` line in `/etc/apt/sources.list` will get all stable updates on Ubuntu 16.04 "Xenial":
 
-    deb http://dl.hhvm.com/ubuntu trusty main
+    deb http://dl.hhvm.com/ubuntu xenial main
 
-In order to get only LTS updates in the 3.9 series, change that to:
+In order to get only LTS updates in the 3.15 series, change that to:
 
-    deb http://dl.hhvm.com/ubuntu trusty-lts-3.9 main
+    deb http://dl.hhvm.com/ubuntu xenial-lts-3.15 main
 
 ## Other Packages
 
