@@ -1,7 +1,7 @@
 <?hh // strict
 
-use FredEmmott\HackRouter\RequestParameters;
-use FredEmmott\HackRouter\RequestParameter;
+use Facebook\HackRouter\RequestParameters;
+use Facebook\HackRouter\RequestParameter;
 use FredEmmott\TypeAssert\IncorrectTypeException;
 use FredEmmott\TypeAssert\TypeAssert;
 use Psr\Http\Message\ResponseInterface;

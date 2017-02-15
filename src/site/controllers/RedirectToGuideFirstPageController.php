@@ -1,6 +1,6 @@
 <?hh // strict
 
-use FredEmmott\HackRouter\SupportsGetRequests;
+use Facebook\HackRouter\SupportsGetRequests;
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\GuidesProduct;
 use HHVM\UserDocumentation\URLBuilder;

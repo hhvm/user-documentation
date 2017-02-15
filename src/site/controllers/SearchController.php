@@ -1,7 +1,7 @@
 <?hh // strict
 
-use FredEmmott\HackRouter\StringRequestParameter;
-use FredEmmott\HackRouter\StringRequestParameterSlashes;
+use Facebook\HackRouter\StringRequestParameter;
+use Facebook\HackRouter\StringRequestParameterSlashes;
 use HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\PHPAPIIndex;

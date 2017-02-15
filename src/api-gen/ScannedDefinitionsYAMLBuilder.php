@@ -2,15 +2,15 @@
 
 namespace HHVM\UserDocumentation;
 
-use FredEmmott\DefinitionFinder\FileParser;
-use FredEmmott\DefinitionFinder\ScannedClass;
-use FredEmmott\DefinitionFinder\ScannedBase;
-use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
-use FredEmmott\DefinitionFinder\ScannedMethod;
-use FredEmmott\DefinitionFinder\ScannedTypehint;
-use FredEmmott\DefinitionFinder\ScannedGeneric;
-use FredEmmott\DefinitionFinder\ScannedParameter;
-use FredEmmott\DefinitionFinder\HasScannedGenerics;
+use Facebook\DefinitionFinder\FileParser;
+use Facebook\DefinitionFinder\ScannedClass;
+use Facebook\DefinitionFinder\ScannedBase;
+use Facebook\DefinitionFinder\ScannedFunctionAbstract;
+use Facebook\DefinitionFinder\ScannedMethod;
+use Facebook\DefinitionFinder\ScannedTypehint;
+use Facebook\DefinitionFinder\ScannedGeneric;
+use Facebook\DefinitionFinder\ScannedParameter;
+use Facebook\DefinitionFinder\HasScannedGenerics;
 
 class ScannedDefinitionsYAMLBuilder {
   private Vector<ScannedDefinitionFilter> $filters = Vector { };

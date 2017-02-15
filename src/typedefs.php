@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use FredEmmott\DefinitionFinder\ScannedBase;
+use Facebook\DefinitionFinder\ScannedBase;
 
 type PHPDotNetAPIIndexEntry = shape(
   'type' => APIDefinitionType,

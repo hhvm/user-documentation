@@ -1,7 +1,7 @@
 <?hh // strict
 
-use FredEmmott\HackRouter\IncludeInUriMap;
-use FredEmmott\HackRouter\SupportsGetRequests;
+use Facebook\HackRouter\IncludeInUriMap;
+use Facebook\HackRouter\SupportsGetRequests;
 
 interface RoutableGetController extends
 RoutableController, SupportsGetRequests {

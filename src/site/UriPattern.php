@@ -6,7 +6,7 @@ use HHVM\UserDocumentation\{
   GuidesProduct
 };
 
-final class UriPattern extends \FredEmmott\HackRouter\UriPattern {
+final class UriPattern extends \Facebook\HackRouter\UriPattern {
   public function apiProduct(string $name): this {
     return $this->enum(APIProduct::class, $name);
   }

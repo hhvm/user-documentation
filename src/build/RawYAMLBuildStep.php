@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use FredEmmott\DefinitionFinder\FileParser;
+use Facebook\DefinitionFinder\FileParser;
 
 final class RawYAMLBuildStep extends BuildStep {
   public function buildAll(): void {

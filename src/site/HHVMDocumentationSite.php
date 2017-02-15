@@ -1,6 +1,6 @@
 <?hh
 
-use FredEmmott\HackRouter as HackRouter;
+use Facebook\HackRouter as HackRouter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\SapiEmitter;

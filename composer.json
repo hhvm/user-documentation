@@ -4,13 +4,13 @@
     "hhvm": "~3.17",
     "zendframework/zend-diactoros": "^1.1",
     "nikic/fast-route": "^1.0.1",
-    "fredemmott/hhvm-autoload": "^1.0.0",
+    "facebook/hhvm-autoload": "^1.2.1",
     "fredemmott/type-assert": "^1.0.0",
-    "fredemmott/hack-router-codegen": "^1.0.0rc2",
-    "fredemmott/hack-router": "^v1.0.0rc7"
+    "facebook/hack-router-codegen": "^1.0.0rc2",
+    "facebook/hack-router": "^v1.0.0rc8"
   },
   "require-dev": {
-    "fredemmott/definition-finder": "^1.1.0",
+    "facebook/definition-finder": "^1.4.4",
     "phpdocumentor/reflection-docblock": "^2.0",
     "mustangostang/spyc": "0.5.x-dev",
     "hack-psr/psr7-http-message-hhi": "^1.0.0",

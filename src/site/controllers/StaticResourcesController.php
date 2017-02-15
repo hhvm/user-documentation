@@ -1,6 +1,6 @@
 <?hh // strict
 
-use FredEmmott\HackRouter\IntRequestParameter;
+use Facebook\HackRouter\IntRequestParameter;
 use HHVM\UserDocumentation\StaticResourceMap;
 use Psr\Http\Message\ResponseInterface;
 

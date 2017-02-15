@@ -2,11 +2,11 @@
 
 namespace HHVM\UserDocumentation;
 
-use FredEmmott\DefinitionFinder\ScannedBase;
-use FredEmmott\DefinitionFinder\ScannedClass;
-use FredEmmott\DefinitionFinder\ScannedFunctionAbstract;
-use FredEmmott\DefinitionFinder\HasScannedGenerics;
-use FredEmmott\DefinitionFinder\HasScannedVisibility;
+use Facebook\DefinitionFinder\ScannedBase;
+use Facebook\DefinitionFinder\ScannedClass;
+use Facebook\DefinitionFinder\ScannedFunctionAbstract;
+use Facebook\DefinitionFinder\HasScannedGenerics;
+use Facebook\DefinitionFinder\HasScannedVisibility;
 
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {

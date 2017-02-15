@@ -45,6 +45,7 @@ final class DocblockTagReader {
     // empty map
     $raw_tags = new Map($this->docblock?->getTagsByName($name));
     foreach ($raw_tags as $tag) {
+      // UNSAFE
       invariant(
         $tag instanceof $type,
         'Expected %s tags to be %s, got %s',

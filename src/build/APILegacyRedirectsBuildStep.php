@@ -75,7 +75,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
       foreach ($class['methods'] as $method) {
         $old_id = idx($old_methods, $old_class_name.'::'.$method['name']);
-        if ($old_id) {
+        if ($old_id !== null) {
           $old_ids_to_new_urls[$old_id] = $method['urlPath'];
         }
       }
@@ -84,7 +84,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
     foreach (APIIndex::getFunctionIndex() as $function) {
       Log::v('.');
       $old_id = idx($old_functions, $function['name']);
-      if ($old_id) {
+      if ($old_id !== null) {
         $old_ids_to_new_urls[$old_id] = $function['urlPath'];
       }
     }

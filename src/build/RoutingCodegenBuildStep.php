@@ -3,7 +3,7 @@
 namespace HHVM\UserDocumentation;
 
 use Facebook\HackCodegen as hcg;
-use FredEmmott\HackRouter\Codegen;
+use Facebook\HackRouter\Codegen;
 use FredEmmott\TypeAssert\TypeAssert;
 
 final class RoutingCodegenBuildStep extends BuildStep {

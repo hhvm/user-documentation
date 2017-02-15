@@ -35,7 +35,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
         $php_settings_with_urls,
         $setting,
       );
-      if (!$url) {
+      if ($url === null) {
         $url = 'http://php.net/manual/en/ini.list.php';
       } else {
         $url = sprintf(

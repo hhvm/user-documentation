@@ -27,7 +27,7 @@ abstract final class LegacyRedirects {
     // Since the API redirects are quite specific, see if we are redirecting
     // from there first.
     $url = idx(APILegacyRedirectData::getIndex(), $id);
-    if ($url) {
+    if ($url !== null) {
       return $url;
     }
 
@@ -35,7 +35,7 @@ abstract final class LegacyRedirects {
     // priority in case we gave more specific articles, but this is safer
     // given that we need a substring match for the manual list.
     $url = idx(PHPDotNetArticleRedirectData::getIndex(), $id);
-    if ($url) {
+    if ($url !== null) {
       return $url;
     }
 

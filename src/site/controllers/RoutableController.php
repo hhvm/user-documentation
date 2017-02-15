@@ -1,6 +1,6 @@
 <?hh // strict
 
-use FredEmmott\HackRouter\IncludeInUriMap;
+use Facebook\HackRouter\IncludeInUriMap;
 
 interface RoutableController extends IncludeInUriMap {
   require extends WebController;
