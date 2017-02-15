@@ -2,18 +2,18 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<2fc55122b2d8a14ef0a8ce45b3724a41>>
+ * @generated SignedSource<<e577d989aa2f99f1ec01723886f096c6>>
  */
 
 abstract class RouterCodegenBase
-  extends \FredEmmott\HackRouter\BaseRouter<classname<\RoutableController>> {
+  extends \Facebook\HackRouter\BaseRouter<classname<\RoutableController>> {
 
   <<__Override>>
   final public function getRoutes(
-  ): ImmMap<\FredEmmott\HackRouter\HttpMethod, ImmMap<string, classname<\RoutableController>>> {
+  ): ImmMap<\Facebook\HackRouter\HttpMethod, ImmMap<string, classname<\RoutableController>>> {
     $get = ImmMap {
       '/' => \HomePageController::class,
       '/j/{Keyword}' => \JumpController::class,
@@ -34,7 +34,7 @@ abstract class RouterCodegenBase
       '/{Product:(?:hhvm|hack)}/{Guide}/{Page}' => \GuidePageController::class,
     };
     return ImmMap {
-      \FredEmmott\HackRouter\HttpMethod::GET => $get,
+      \Facebook\HackRouter\HttpMethod::GET => $get,
     };
   }
 }

@@ -2,14 +2,14 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<9adc8fa8149f224ba3ce3c3ab28cdae8>>
+ * @generated SignedSource<<09aece083ccf2f70f74f4bb889a01918>>
  */
 
 class LegacyRedirectControllerParameters
-  extends \FredEmmott\HackRouter\RequestParametersCodegen {
+  extends \Facebook\HackRouter\RequestParametersCodegen {
 
   final public function getLegacyId(): string {
     return $this->getParameters()->getString('LegacyId');
@@ -20,7 +20,7 @@ trait LegacyRedirectControllerParametersTrait {
 
   require extends \WebController;
 
-  final public function getParameters(): LegacyRedirectControllerParameters {
+  final protected function getParameters(): LegacyRedirectControllerParameters {
     $params = $this->getParameters_PRIVATE_IMPL();
     return new LegacyRedirectControllerParameters($params);
   }

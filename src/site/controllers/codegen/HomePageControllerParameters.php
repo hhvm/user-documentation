@@ -2,21 +2,21 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<7f95002c11fcb4e7d4d9ffc7c546bd90>>
+ * @generated SignedSource<<44e8b3c0467715daaafd790ac22fcf15>>
  */
 
 class HomePageControllerParameters
-  extends \FredEmmott\HackRouter\RequestParametersCodegen {
+  extends \Facebook\HackRouter\RequestParametersCodegen {
 }
 
 trait HomePageControllerParametersTrait {
 
   require extends \WebController;
 
-  final public function getParameters(): HomePageControllerParameters {
+  final protected function getParameters(): HomePageControllerParameters {
     $params = $this->getParameters_PRIVATE_IMPL();
     return new HomePageControllerParameters($params);
   }

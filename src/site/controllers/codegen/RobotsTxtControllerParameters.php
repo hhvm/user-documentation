@@ -2,21 +2,21 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<e48cb15cd478a49918c73bd123dea89e>>
+ * @generated SignedSource<<5ae61f2ff836f39a5999dac8a218fdf2>>
  */
 
 class RobotsTxtControllerParameters
-  extends \FredEmmott\HackRouter\RequestParametersCodegen {
+  extends \Facebook\HackRouter\RequestParametersCodegen {
 }
 
 trait RobotsTxtControllerParametersTrait {
 
   require extends \WebController;
 
-  final public function getParameters(): RobotsTxtControllerParameters {
+  final protected function getParameters(): RobotsTxtControllerParameters {
     $params = $this->getParameters_PRIVATE_IMPL();
     return new RobotsTxtControllerParameters($params);
   }

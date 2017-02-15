@@ -2,14 +2,14 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<bf25cd9396d03249bb97468330513547>>
+ * @generated SignedSource<<376347537cdde57340dc1f139cd59156>>
  */
 
 class RedirectToGuideFirstPageControllerParameters
-  extends \FredEmmott\HackRouter\RequestParametersCodegen {
+  extends \Facebook\HackRouter\RequestParametersCodegen {
 
   final public function getProduct(): \HHVM\UserDocumentation\GuidesProduct {
     return $this->getParameters()->getEnum(
@@ -27,7 +27,7 @@ trait RedirectToGuideFirstPageControllerParametersTrait {
 
   require extends \WebController;
 
-  final public function getParameters(
+  final protected function getParameters(
   ): RedirectToGuideFirstPageControllerParameters {
     $params = $this->getParameters_PRIVATE_IMPL();
     return new RedirectToGuideFirstPageControllerParameters($params);

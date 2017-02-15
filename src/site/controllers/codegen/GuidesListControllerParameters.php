@@ -2,14 +2,14 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<79d34d74bd045dc55fb7d8d4e68e369e>>
+ * @generated SignedSource<<6b7cf1947446648b3d7739594e14b1ee>>
  */
 
 class GuidesListControllerParameters
-  extends \FredEmmott\HackRouter\RequestParametersCodegen {
+  extends \Facebook\HackRouter\RequestParametersCodegen {
 
   final public function getProduct(): \HHVM\UserDocumentation\GuidesProduct {
     return $this->getParameters()->getEnum(
@@ -23,7 +23,7 @@ trait GuidesListControllerParametersTrait {
 
   require extends \WebController;
 
-  final public function getParameters(): GuidesListControllerParameters {
+  final protected function getParameters(): GuidesListControllerParameters {
     $params = $this->getParameters_PRIVATE_IMPL();
     return new GuidesListControllerParameters($params);
   }

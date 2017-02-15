@@ -47,6 +47,7 @@ final class RemotePageLoader extends PageLoader {
 
     invariant(
       $status !== 0,
+      '%s',
       curl_error($ch),
     );
 

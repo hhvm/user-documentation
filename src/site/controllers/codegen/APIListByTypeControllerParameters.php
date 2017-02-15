@@ -2,14 +2,14 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<94478ff7a21c5f1942c24b504b4ef057>>
+ * @generated SignedSource<<b56e670cfa0396d329e493c08963eda6>>
  */
 
 class APIListByTypeControllerParameters
-  extends \FredEmmott\HackRouter\RequestParametersCodegen {
+  extends \Facebook\HackRouter\RequestParametersCodegen {
 
   final public function getProduct(): \HHVM\UserDocumentation\APIProduct {
     return $this->getParameters()->getEnum(
@@ -30,7 +30,7 @@ trait APIListByTypeControllerParametersTrait {
 
   require extends \WebController;
 
-  final public function getParameters(): APIListByTypeControllerParameters {
+  final protected function getParameters(): APIListByTypeControllerParameters {
     $params = $this->getParameters_PRIVATE_IMPL();
     return new APIListByTypeControllerParameters($params);
   }

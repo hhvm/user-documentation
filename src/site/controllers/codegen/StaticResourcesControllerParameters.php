@@ -2,14 +2,14 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run /var/www/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<6a90f63d11a427c1aac6092a710eacc5>>
+ * @generated SignedSource<<2b1643c7a6d4c0787103bd466402d3dd>>
  */
 
 class StaticResourcesControllerParameters
-  extends \FredEmmott\HackRouter\RequestParametersCodegen {
+  extends \Facebook\HackRouter\RequestParametersCodegen {
 
   final public function getChecksum(): string {
     return $this->getParameters()->getString('Checksum');
@@ -28,7 +28,8 @@ trait StaticResourcesControllerParametersTrait {
 
   require extends \WebController;
 
-  final public function getParameters(): StaticResourcesControllerParameters {
+  final protected function getParameters(
+  ): StaticResourcesControllerParameters {
     $params = $this->getParameters_PRIVATE_IMPL();
     return new StaticResourcesControllerParameters($params);
   }
