@@ -720,11 +720,11 @@ These are settings for the automated garbage collector.  To enable the automated
 | ------- | ---- | ------- | -----------
 | `hhvm.enable_gc` | `bool` | `HHVM_EAGER_GC` | Enable the garbage collector.
 | `hhvm.eager_gc` | `bool` | `HHVM_EAGER_GC` | Run the GC eagerly.
-| `hhvm.filter_gc_points | `bool` | `true` | Limit eager gc runs to once per surprise point.
+| `hhvm.filter_gc_points` | `bool` | `true` | Limit eager gc runs to once per surprise point.
 | `hhvm.quarantine` | `bool` | `HHVM_EAGER_GC` |
 | `hhvm.gc_sample_rate` | `int` | `0` |
 | `hhvm.gc_min_trigger` | `int` | `64 << 20` |
-| `hhvm.gc_trigger_pct` | `double` | 0.5 |
+| `hhvm.gc_trigger_pct` | `double` | `0.5` |
 
 ## APC Settings
 
