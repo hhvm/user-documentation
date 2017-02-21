@@ -99,6 +99,13 @@ Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 
 ## Ubuntu 16.10 Yakkety
 
+We currently have issues building on GCC 6.  To downgrade to GCC 5 do:
+```
+sudo apt-get install gcc-5 g++-5
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 40 --slave /usr/bin/g++ g++ /usr/bin/g++-5
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 40 --slave /usr/bin/g++ g++ /usr/bin/g++-6
+sudo update-alternatives --config gcc
+```
 Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
 
 ## Debian 8 Jessie
