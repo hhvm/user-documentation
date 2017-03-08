@@ -202,9 +202,9 @@ array(11) {
 This the ini format for `hhvm.static_file.files_match`:
 
 ```
-hhvm.static_file.files_match[pattern]   = "[regex](here)*"
-hhvm.static_file.files_match[headers][] = "header1"
-hhvm.static_file.files_match[headers][] = "header2"
+hhvm.static_file.files_match[0][pattern]   = "[regex](here)*"
+hhvm.static_file.files_match[0][headers][] = "header1"
+hhvm.static_file.files_match[0][headers][] = "header2"
 ```
 
 ### IP Block Map Format
