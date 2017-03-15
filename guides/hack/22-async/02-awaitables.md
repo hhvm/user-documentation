@@ -42,7 +42,7 @@ Here we are using one of the two built-in async helper functions in the `HH\Asio
 
 Sometimes you want to get a result out of an awaitable when the function you are in **is not** `async`. For this there is `HH\Asio\join()` which takes an `Awaitable` and blocks until it resolves into a result.
 
-This means that invocations of async functions from the global scope (aka psuedomain) cannot be awaited, and must be joined.
+This means that invocations of async functions from the global scope (aka pseudomain) cannot be awaited, and must be joined.
 
 @@ awaitables-examples/join.php @@
 
