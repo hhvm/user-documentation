@@ -52,9 +52,11 @@ touch /opt/composer/.hhconfig
 hhvm /opt/composer/composer.phar install
 bundle --path vendor-rb/
 
+echo "** Run build"
 hhvm bin/build.php
 
 # Run tests
+echo "** Run tests"
 hhvm vendor/bin/phpunit tests/
 
 # Clean up

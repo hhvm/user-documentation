@@ -45,8 +45,8 @@ final class DocblockTagReader {
     // empty map
     $raw_tags = new Map($this->docblock?->getTagsByName($name));
     foreach ($raw_tags as $tag) {
-      /* HH_FIXME[4162] instanceof too restrictive on classname<T> */
       invariant(
+      /* HH_FIXME[4162] instanceof too restrictive on classname<T> */
         $tag instanceof $type,
         'Expected %s tags to be %s, got %s',
         $name,
