@@ -10,7 +10,7 @@ Since the value side of an array may itself be an array (or a `Generic` class), 
 
 ## Hack Collections
 
-While PHP Arrays are extremely versatile, that flexibility occaisionally comes at a cost either in terms of performance, correctness, or readability.  Hack Collection classes seek to resolve those issues by providing deeply specialized object versions of arrays in the form of common container patterns: [`Vector`](/hack/reference/class/Vector/), [`Map`](/hack/reference/class/Map/), and [`Set`](/hack/reference/class/Set/).
+While PHP Arrays are extremely versatile, that flexibility occasionally comes at a cost either in terms of performance, correctness, or readability.  Hack Collection classes seek to resolve those issues by providing deeply specialized object versions of arrays in the form of common container patterns: [`Vector`](/hack/reference/class/Vector/), [`Map`](/hack/reference/class/Map/), and [`Set`](/hack/reference/class/Set/).
 
 ### Type of Collections
 
