@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 if [ ! -e /docker_build ]; then
   echo "This script should only be ran from a Dockerfile"

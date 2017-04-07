@@ -5,6 +5,8 @@ use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
+use FredEmmott\TypeAssert\TypeAssert;
+
 final class DocblockTagReader {
   private function __construct(
     private ?DocBlock $docblock,
@@ -45,15 +47,7 @@ final class DocblockTagReader {
     // empty map
     $raw_tags = new Map($this->docblock?->getTagsByName($name));
     foreach ($raw_tags as $tag) {
-      invariant(
-      /* HH_FIXME[4162] instanceof too restrictive on classname<T> */
-        $tag instanceof $type,
-        'Expected %s tags to be %s, got %s',
-        $name,
-        $type,
-        get_class($tag),
-      );
-      $tags[] = $tag;
+      $tags[] = TypeAssert::isInstanceOf($type, $tag);
     }
 
     return $tags;
