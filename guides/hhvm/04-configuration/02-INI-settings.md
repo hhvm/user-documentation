@@ -467,6 +467,22 @@ The [admin server](/hhvm/advanced-usage/admin-server) allows the administrator o
 | `hhvm.admin_server.port` | `int` | `0` | The port the admin server should listen on. If set to 0, the admin server is not started.
 | `hhvm.admin_server.thread_count` | `int` | `1` | The number of threads the admin server should use.
 
+## CLI Server
+
+The [CLI server](/hhvm/advanced-usage/CLI-server) allows you to run command line scripts on a running HHVM server.  This means the translation cache can persist between runs of your scripts.
+
+| Setting | Type | Default | Description
+|---------|------|---------|------------
+| `hhvm.use_remote_unix_server` | `string` | `no` | Enable the use of the CLI server.
+| `hhvm.unix_server_path` | `string` | `''` | The path to the unix socket for the CLI server.
+| `hhvm.unix_server_workers` | `int` | CPU cores | The number of worker threads the CLI server will allow.
+| `hhvm.unix_server_quarantine_apc` | `bool` | `false` | Quarantine APC from the scripts being run.
+| `hhvm.unix_server_quarantine_units` | `bool` | `false` | Quarantine the loaded units from the scripts being run on a per user bases.
+| `hhvm.unix_server_verify_exe_access` | `bool` | `false` | Checks units are readable by client beforing executing them on the server.
+| `hhvm.unix_server_fail_when_busy` | `bool` | `false` | Fail if there are no available workers.
+| `hhvm.unix_server_allowed_users` | `Vector<string>` | *empty* | Users allowed to use the CLI server.
+| `hhvm.unix_server_allowed_groups` | `Vector<string>` | *empty* | Groups allowed to use the CLI server.
+
 ## Debug Settings
 
 These settings are useful when you are debugging actual HHVM issues.
@@ -676,6 +692,7 @@ The [hacker's guide](https://github.com/facebook/hhvm/blob/master/hphp/doc/hacke
 | `hhvm.jit_region_selector` | `string` | `tracelet` | The regions of code that will be translating the bytecode to machine code. The default is is single basic blocks, or tracelets. Other options are `method` and `none`.
 | `hhvm.jit_relocation_size` | `int` | `1048576` (1 MB) | The size of code relocation.
 | `hhvm.jit_require_write_lease` | `bool` | `false` |  The write Lease guards write access to the translation caches, srcDB, and TransDB. The term "lease" is meant to indicate that the right of ownership is conferred for a long, variable time: often the entire length of a request. If a request is not actively translating, it will perform a "hinted drop" of the lease: the lease is unlocked but all calls to `acquire(false)`` from other threads will fail for a short period of time.
+| `hhvm.jit_retranslate_all_request` | `int` | `3000` or `0` | The number of profile requests, before retranslating all code into optimized translations.
 | `hhvm.jit_stress_lease` | `bool` | `false` | If HHVM was compiled in debug mode, the you can enable this setting to cede the write lease half the time.
 | `hhvm.jit_target_cache_size` | `int` | `67108864` | The size, in bytes, of the target cache.
 | `hhvm.jit_timer` | `bool` | `true` | Timer is used to track how much CPU time we spend in the different stages of the jit. Typical usage starts and stops timing with construction/destruction of the object, respectively. The stop() function may be called to stop timing early, in case it's not reasonable to add a new scope just for timing.
