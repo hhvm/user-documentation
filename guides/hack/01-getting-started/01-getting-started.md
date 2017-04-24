@@ -6,7 +6,7 @@ The prerequisites you need to write and execute Hack code is pretty straightforw
 
 * The [HHVM runtime](../../hhvm/getting-started/getting-started.md)
 * The Hack [typechecker](../typechecker/introduction.md) (included as part of the build of the HHVM runtime)
-* Optionally, a Hack-aware editor. We recommend [Nuclide](https://github.com/facebook/nuclide), with its [`nuclide-hack` package](https://github.com/facebook/nuclide/blob/master/pkg/nuclide/hack/README.md).
+* Optionally, a Hack-aware editor. We recommend [Nuclide](https://github.com/facebook/nuclide), with its first-class [support for Hack](https://nuclide.io/docs/languages/hack/).
 
 The HHVM runtime is required for both (1) executing Hack code (2) to run the Hack typechecker, which is the cornerstone benefit of using the Hack language -- to make sure your code is well written, safe and consistent.
 
