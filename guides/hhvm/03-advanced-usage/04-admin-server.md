@@ -9,7 +9,7 @@ hhvm.admin_server.password=SomePassword
 
 The `port` can be any open port. And you should **always specify a password** to secure the admin port since you don't want just anybody being able to control your server. In fact, you will probably want to put the admin server *behind a firewall*. You will specify the password with every request to the admin port.
 
-In [FastCGI](/hhvm/advanced-usage/fastCGI) mode, a FastCGI server, fronted with a web server like nginx, will be listening to the admin port, while in [Proxygen](../basic-usage/proxygen.md) mode, it will be an HTTP server.
+The admin server uses the same protocol as the main server - so, if you're using [FastCGI](/hhvm/advanced-usage/fastCGI) mode, the admin server will also be FastCGI, and you will need to configure a front-end webserver (like nginx). If you are using [Proxygen](../basic-usage/proxygen.md) mode, the admin server will be an HTTP server.
 
 ## Querying the Admin Server
 
