@@ -680,6 +680,7 @@ The [hacker's guide](https://github.com/facebook/hhvm/blob/master/hphp/doc/hacke
 | `hhvm.jit_disabled_by_hphpd` | `bool` | `false` | If enabled, the JIT is disabled in the debugger.
 | `hhvm.jit_enable_rename_function` | `bool` | `false` | If `false`, `fb_rename_function()` will throw a fatal error. And HHVM knowing that functions cannot be renamed can increase performance.
 | `hhvm.jit_global_translation_limit` | `int` | `-1` | How often the JIT does translation before falling back to interpreted code. The default is to always JIT.
+| `hhvm.jit_max_request_translation_time` | `int` | `-1` | Sets a maximum number of microseconds to spend per request translating. This is useful for deployments that can't rely on a warm-up script. Default is an unlimited amount of time. Requires `hhvm.jit_timer` to be enabled.
 | `hhvm.jit_keep_dbg_files` | `bool` | `false` | If enabled, elf writer based debug files will be kept.
 | `hhvm.jit_llvm` | `int` | `0` | If enabled, then use the experimental LLVM backend, see [this blog post](http://hhvm.com/blog/10205/llvm-code-generation-in-hhvm) for more information. If `0`, LLVM is not used. If `1`, LLVM is used for TransOptimize translations. If `2`, LLVM is used for all translations.
 | `hhvm.jit_loops` | `bool` | `true` | Disable this if you don't want loops to be compiled by the JIT, but rather interpreted.
