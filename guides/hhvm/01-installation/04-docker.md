@@ -4,7 +4,7 @@ We publish Docker images to Docker Hub.  These can be used to install HHVM in a 
 
 ```
 docker pull hhvm/hhvm
-docker run --tty --interactive hhvm/hhvm-latest /bin/bash -l
+docker run --tty --interactive hhvm/hhvm:latest /bin/bash -l
 hhvm --version
 ```
 
