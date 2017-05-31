@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\API\Examples\Vector\ToVector;
 
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
-// Make a deep Vector copy of $v
+// Make a new Vector that is a copy of $v (i.e. contains the same elements)
 $v2 = $v->toVector();
 
 // Modify $v2 by adding an element
