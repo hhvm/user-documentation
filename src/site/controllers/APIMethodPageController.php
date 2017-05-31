@@ -24,7 +24,7 @@ final class APIMethodPageController extends APIPageController {
   <<__Memoize,__Override>>
   protected function getRootDefinition(): APIClassIndexEntry {
     $this->redirectIfAPIRenamed();
-    $definition_name = $this->getParameters()->getClass();
+    $definition_name = $this->getParameters()['Class'];
     $index = APIIndex::getClassIndex($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();
@@ -34,7 +34,7 @@ final class APIMethodPageController extends APIPageController {
 
   <<__Memoize>>
   private function getMethodDefinition(): APIMethodIndexEntry {
-    $method_name = $this->getParameters()->getMethod();
+    $method_name = $this->getParameters()['Method'];
     $methods = $this->getRootDefinition()['methods'];
     if (!array_key_exists($method_name, $methods)) {
       throw new HTTPNotFoundException();
@@ -73,14 +73,14 @@ final class APIMethodPageController extends APIPageController {
 
   <<__Override>>
   protected function redirectIfAPIRenamed(): void {
-    $redirect_to = $this->getRenamedAPI($this->getParameters()->getClass());
+    $redirect_to = $this->getRenamedAPI($this->getParameters()['Class']);
     if ($redirect_to === null) {
       return;
     }
     $type = $this->getDefinitionType();
     throw new RedirectException(
       URLBuilder::getPathForMethod(shape(
-        'name' => $this->getParameters()->getMethod(),
+        'name' => $this->getParameters()['Method'],
         'className' => $redirect_to,
         'classType' => $type,
       )),

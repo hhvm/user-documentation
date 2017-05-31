@@ -83,7 +83,7 @@ final class SearchController extends WebPageController {
 
   <<__Memoize>>
   private function getSearchTerm(): string {
-    return $this->getParameters()->getterm();
+    return $this->getParameters()['term'];
   }
 
   private function getSearchResults(): SearchResultSet {

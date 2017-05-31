@@ -2,34 +2,41 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run bin/build.php
+ * To re-generate this file run
+ * /Users/mickeyp/hhvm-docs/user-documentation/bin/build.php
  *
  *
- * @generated SignedSource<<376347537cdde57340dc1f139cd59156>>
+ * @generated SignedSource<<9a388cf8b2a604eb93623627b1bd2d2c>>
  */
 
-class RedirectToGuideFirstPageControllerParameters
+<<Codegen>>
+final class RedirectToGuideFirstPageControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
-  final public function getProduct(): \HHVM\UserDocumentation\GuidesProduct {
-    return $this->getParameters()->getEnum(
-      \HHVM\UserDocumentation\GuidesProduct::class,
-      'Product',
-    );
-  }
+  const type TParameters = shape(
+    'Product' => \HHVM\UserDocumentation\GuidesProduct,
+    'Guide' => string,
+  );
 
-  final public function getGuide(): string {
-    return $this->getParameters()->getString('Guide');
+  public function get(): self::TParameters {
+    $p = $this->getParameters();
+    return shape(
+      "Product" => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
+      "Guide" => $p->getString('Guide'),
+    );
   }
 }
 
+<<Codegen>>
 trait RedirectToGuideFirstPageControllerParametersTrait {
 
   require extends \WebController;
 
+  <<__Memoize>>
   final protected function getParameters(
-  ): RedirectToGuideFirstPageControllerParameters {
-    $params = $this->getParameters_PRIVATE_IMPL();
-    return new RedirectToGuideFirstPageControllerParameters($params);
+  ): RedirectToGuideFirstPageControllerParameters::TParameters {
+    $raw = $this->getParameters_PRIVATE_IMPL();
+    return (new RedirectToGuideFirstPageControllerParameters($raw))
+      ->get();
   }
 }

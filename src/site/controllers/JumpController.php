@@ -18,7 +18,7 @@ implements RoutableGetController {
   }
 
   public function getResponse(): Awaitable<ResponseInterface> {
-    $keyword = $this->getParameters()->getKeyword();
+    $keyword = $this->getParameters()['Keyword'];
 
     $data = JumpIndexData::getIndex();
     $url = idx($data, strtolower($keyword));

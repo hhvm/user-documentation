@@ -15,6 +15,7 @@ LocalConfig.php
 .bundle
 bourbon/
 .DS_Store
+*~
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

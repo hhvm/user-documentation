@@ -6,11 +6,11 @@
     "nikic/fast-route": "^1.0.1",
     "facebook/hhvm-autoload": "^1.2.1",
     "fredemmott/type-assert": "^1.0.0",
-    "facebook/hack-router-codegen": "^1.0.0rc2",
+    "facebook/hack-router-codegen": "^1.0.0rc3",
     "facebook/hack-router": "^v1.0.0rc8"
   },
   "require-dev": {
-    "facebook/definition-finder": "^1.4.4",
+    "facebook/definition-finder": "^1.5.1",
     "phpdocumentor/reflection-docblock": "^2.0",
     "mustangostang/spyc": "0.5.x-dev",
     "hack-psr/psr7-http-message-hhi": "^1.0.0",

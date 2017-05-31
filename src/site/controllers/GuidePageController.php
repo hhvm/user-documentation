@@ -28,17 +28,17 @@ final class GuidePageController extends WebPageController {
 
   <<__Memoize>>
   private function getProduct(): GuidesProduct {
-    return $this->getParameters()->getProduct();
+    return $this->getParameters()['Product'];
   }
 
   <<__Memoize>>
   private function getGuide(): string {
-    return $this->getParameters()->getGuide();
+    return $this->getParameters()['Guide'];
   }
 
   <<__Memoize>>
   private function getPage(): string {
-    return $this->getParameters()->getPage();
+    return $this->getParameters()['Page'];
   }
 
   public async function getTitle(): Awaitable<string> {

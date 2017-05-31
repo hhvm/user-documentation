@@ -21,8 +21,8 @@ extends WebController implements RoutableGetController {
 
   public async function getResponse(): Awaitable<ResponseInterface> {
     $params = $this->getParameters();
-    $product = GuidesProduct::assert($params->getProduct());
-    $guide = $params->getGuide();
+    $product = GuidesProduct::assert($params['Product']);
+    $guide = $params['Guide'];
     $path = self::invariantTo404(() ==> {
       $pages = GuidesIndex::getPages($product, $guide);
       $page = $pages[0];

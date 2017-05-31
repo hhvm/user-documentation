@@ -23,7 +23,7 @@ final class APIFullListController extends WebPageController {
 
   <<__Override>>
   protected async function getTitle(): Awaitable<string> {
-    switch ($this->getParameters()->getProduct()) {
+    switch ($this->getParameters()['Product']) {
       case APIProduct::HACK:
         return 'Hack APIs';
       case APIProduct::PHP:
@@ -35,7 +35,7 @@ final class APIFullListController extends WebPageController {
   final protected async function getBody(): Awaitable<XHPRoot> {
     return
       <api-list
-        product={$this->getParameters()->getProduct()}
+        product={$this->getParameters()['Product']}
         types={new ImmSet(APIDefinitionType::getValues())}
       />;
   }

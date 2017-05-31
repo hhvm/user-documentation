@@ -2,26 +2,39 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run bin/build.php
+ * To re-generate this file run
+ * /Users/mickeyp/hhvm-docs/user-documentation/bin/build.php
  *
  *
- * @generated SignedSource<<fcc66daf42840834b7d255354dfc7278>>
+ * @generated SignedSource<<1e0e558fd89037191bf6e1f4d5a76ee4>>
  */
 
-class JumpControllerParameters
+<<Codegen>>
+final class JumpControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
-  final public function getKeyword(): string {
-    return $this->getParameters()->getString('Keyword');
+  const type TParameters = shape(
+    'Keyword' => string,
+  );
+
+  public function get(): self::TParameters {
+    $p = $this->getParameters();
+    return shape(
+      "Keyword" => $p->getString('Keyword'),
+    );
   }
 }
 
+<<Codegen>>
 trait JumpControllerParametersTrait {
 
   require extends \WebController;
 
-  final protected function getParameters(): JumpControllerParameters {
-    $params = $this->getParameters_PRIVATE_IMPL();
-    return new JumpControllerParameters($params);
+  <<__Memoize>>
+  final protected function getParameters(
+  ): JumpControllerParameters::TParameters {
+    $raw = $this->getParameters_PRIVATE_IMPL();
+    return (new JumpControllerParameters($raw))
+      ->get();
   }
 }

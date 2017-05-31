@@ -2,26 +2,39 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run bin/build.php
+ * To re-generate this file run
+ * /Users/mickeyp/hhvm-docs/user-documentation/bin/build.php
  *
  *
- * @generated SignedSource<<09aece083ccf2f70f74f4bb889a01918>>
+ * @generated SignedSource<<f019e32ce80af464cf311684dcd43026>>
  */
 
-class LegacyRedirectControllerParameters
+<<Codegen>>
+final class LegacyRedirectControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
-  final public function getLegacyId(): string {
-    return $this->getParameters()->getString('LegacyId');
+  const type TParameters = shape(
+    'LegacyId' => string,
+  );
+
+  public function get(): self::TParameters {
+    $p = $this->getParameters();
+    return shape(
+      "LegacyId" => $p->getString('LegacyId'),
+    );
   }
 }
 
+<<Codegen>>
 trait LegacyRedirectControllerParametersTrait {
 
   require extends \WebController;
 
-  final protected function getParameters(): LegacyRedirectControllerParameters {
-    $params = $this->getParameters_PRIVATE_IMPL();
-    return new LegacyRedirectControllerParameters($params);
+  <<__Memoize>>
+  final protected function getParameters(
+  ): LegacyRedirectControllerParameters::TParameters {
+    $raw = $this->getParameters_PRIVATE_IMPL();
+    return (new LegacyRedirectControllerParameters($raw))
+      ->get();
   }
 }
