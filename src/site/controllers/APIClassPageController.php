@@ -27,7 +27,7 @@ final class APIClassPageController extends APIPageController {
   <<__Memoize,__Override>>
   protected function getRootDefinition(): APIIndexEntry {
     $this->redirectIfAPIRenamed();
-    $definition_name = $this->getParameters()->getName();
+    $definition_name = $this->getParameters()['Name'];
 
     $index = APIIndex::getIndexForType($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
@@ -63,7 +63,7 @@ final class APIClassPageController extends APIPageController {
 
   <<__Override>>
   protected function redirectIfAPIRenamed(): void {
-    $redirect_to = $this->getRenamedAPI($this->getParameters()->getName());
+    $redirect_to = $this->getRenamedAPI($this->getParameters()['Name']);
 
     if ($redirect_to === null) {
       return;

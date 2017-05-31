@@ -98,6 +98,6 @@ final class GuidesListController extends WebPageController {
 
   <<__Memoize>>
   private function getProduct(): GuidesProduct {
-    return $this->getParameters()->getProduct();
+    return $this->getParameters()['Product'];
   }
 }

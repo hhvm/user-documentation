@@ -48,17 +48,7 @@ final class RoutingCodegenBuildStep extends BuildStep {
           \WebController::class,
         },
         'methodName' => 'getParameters',
-        'methodImplementation' => $spec ==>
-          hcg\hack_builder()
-            ->addAssignment(
-              '$params',
-              '$this->getParameters_PRIVATE_IMPL()',
-            )
-            ->addReturn(
-              'new %s($params)',
-              $spec['class']['name'],
-            )
-            ->getCode(),
+        'getRawParametersCode' => '$this->getParameters_PRIVATE_IMPL()',
       ),
       'output' => $classname ==> shape(
         'file' => $root.$classname.'Parameters.php',

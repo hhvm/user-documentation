@@ -16,7 +16,7 @@ implements RoutableGetController {
   }
 
   public async function getResponse(): Awaitable<ResponseInterface> {
-    $id = $this->getParameters()->getLegacyId();
+    $id = $this->getParameters()['LegacyId'];
 
     $url = LegacyRedirects::getUrlForId($id);
     if ($url !== null) {

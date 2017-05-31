@@ -27,8 +27,8 @@ implements RoutableGetController {
 
   public async function getResponse(): Awaitable<ResponseInterface> {
     $params = $this->getParameters();
-    $checksum = $params->getChecksum();
-    $file = '/'.$params->getFile();
+    $checksum = $params['Checksum'];
+    $file = '/'.$params['File'];
 
     $entry = self::invariantTo404(
       () ==> StaticResourceMap::getEntryForFile($file)
@@ -48,7 +48,7 @@ implements RoutableGetController {
 
     if (
       $checksum === 'local-changes'
-      && $this->getParameters()->getMTime() === null
+      && $this->getParameters()['MTime'] === null
     ) {
       $response = $response->withAddedHeader(
         'Cache-Control',

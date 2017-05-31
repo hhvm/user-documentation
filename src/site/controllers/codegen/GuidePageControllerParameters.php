@@ -2,37 +2,43 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run bin/build.php
+ * To re-generate this file run
+ * /Users/mickeyp/hhvm-docs/user-documentation/bin/build.php
  *
  *
- * @generated SignedSource<<c3e806eccf475122d39d0b47e3363646>>
+ * @generated SignedSource<<eb51741a855f33e61dc490d2029b8096>>
  */
 
-class GuidePageControllerParameters
+<<Codegen>>
+final class GuidePageControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
-  final public function getProduct(): \HHVM\UserDocumentation\GuidesProduct {
-    return $this->getParameters()->getEnum(
-      \HHVM\UserDocumentation\GuidesProduct::class,
-      'Product',
+  const type TParameters = shape(
+    'Product' => \HHVM\UserDocumentation\GuidesProduct,
+    'Guide' => string,
+    'Page' => string,
+  );
+
+  public function get(): self::TParameters {
+    $p = $this->getParameters();
+    return shape(
+      "Product" => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
+      "Guide" => $p->getString('Guide'),
+      "Page" => $p->getString('Page'),
     );
-  }
-
-  final public function getGuide(): string {
-    return $this->getParameters()->getString('Guide');
-  }
-
-  final public function getPage(): string {
-    return $this->getParameters()->getString('Page');
   }
 }
 
+<<Codegen>>
 trait GuidePageControllerParametersTrait {
 
   require extends \WebController;
 
-  final protected function getParameters(): GuidePageControllerParameters {
-    $params = $this->getParameters_PRIVATE_IMPL();
-    return new GuidePageControllerParameters($params);
+  <<__Memoize>>
+  final protected function getParameters(
+  ): GuidePageControllerParameters::TParameters {
+    $raw = $this->getParameters_PRIVATE_IMPL();
+    return (new GuidePageControllerParameters($raw))
+      ->get();
   }
 }

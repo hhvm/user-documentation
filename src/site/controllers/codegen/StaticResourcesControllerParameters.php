@@ -2,35 +2,43 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run bin/build.php
+ * To re-generate this file run
+ * /Users/mickeyp/hhvm-docs/user-documentation/bin/build.php
  *
  *
- * @generated SignedSource<<2b1643c7a6d4c0787103bd466402d3dd>>
+ * @generated SignedSource<<e555d20fc3c2afc5755147555d8ccb2e>>
  */
 
-class StaticResourcesControllerParameters
+<<Codegen>>
+final class StaticResourcesControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
-  final public function getChecksum(): string {
-    return $this->getParameters()->getString('Checksum');
-  }
+  const type TParameters = shape(
+    'Checksum' => string,
+    'File' => string,
+    'MTime' => ?int,
+  );
 
-  final public function getFile(): string {
-    return $this->getParameters()->getString('File');
-  }
-
-  final public function getMTime(): ?int {
-    return $this->getParameters()->getOptionalInt('MTime');
+  public function get(): self::TParameters {
+    $p = $this->getParameters();
+    return shape(
+      "Checksum" => $p->getString('Checksum'),
+      "File" => $p->getString('File'),
+      "MTime" => $p->getOptionalInt('MTime'),
+    );
   }
 }
 
+<<Codegen>>
 trait StaticResourcesControllerParametersTrait {
 
   require extends \WebController;
 
+  <<__Memoize>>
   final protected function getParameters(
-  ): StaticResourcesControllerParameters {
-    $params = $this->getParameters_PRIVATE_IMPL();
-    return new StaticResourcesControllerParameters($params);
+  ): StaticResourcesControllerParameters::TParameters {
+    $raw = $this->getParameters_PRIVATE_IMPL();
+    return (new StaticResourcesControllerParameters($raw))
+      ->get();
   }
 }

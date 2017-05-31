@@ -185,9 +185,15 @@ class ScannedDefinitionsYAMLBuilder {
   private static function GetGenericDocumentation(
     ScannedGeneric $g,
   ): GenericDocumentation {
+    if ($g->getConstraints()->isEmpty()) {
+       return shape(
+         'name' => $g->getName(),
+         'constraint' => '',
+       );
+    }
     return shape(
       'name' => $g->getName(),
-      'constraint' => $g->getConstraintTypeName(),
+      'constraint' => $g->getConstraints()[0]['type'],
     );
   }
 

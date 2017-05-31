@@ -21,13 +21,13 @@ final class APIListByTypeController extends WebPageController {
       'Hack' => '/hack/',
       'Reference' => '/hack/reference/',
     };
-    $type = $this->getParameters()->getType();
+    $type = $this->getParameters()['Type'];
     return <ui:breadcrumbs parents={$parents} currentPage={ucwords($type)} />;
   }
 
   <<__Override>>
   protected async function getTitle(): Awaitable<string> {
-    switch ($this->getParameters()->getProduct()) {
+    switch ($this->getParameters()['Product']) {
       case APIProduct::HACK:
         return 'Hack APIs';
       case APIProduct::PHP:
@@ -39,8 +39,8 @@ final class APIListByTypeController extends WebPageController {
   final protected async function getBody(): Awaitable<XHPRoot> {
     return
       <api-list
-        product={$this->getParameters()->getProduct()}
-        types={ImmSet{$this->getParameters()->getType()}}
+        product={$this->getParameters()['Product']}
+        types={ImmSet{$this->getParameters()['Type']}}
       />;
   }
 }

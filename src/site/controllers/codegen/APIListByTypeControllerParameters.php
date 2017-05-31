@@ -2,36 +2,41 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run bin/build.php
+ * To re-generate this file run
+ * /Users/mickeyp/hhvm-docs/user-documentation/bin/build.php
  *
  *
- * @generated SignedSource<<b56e670cfa0396d329e493c08963eda6>>
+ * @generated SignedSource<<cccca7bd6847de9b663f2a7d23bc0b76>>
  */
 
-class APIListByTypeControllerParameters
+<<Codegen>>
+final class APIListByTypeControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
-  final public function getProduct(): \HHVM\UserDocumentation\APIProduct {
-    return $this->getParameters()->getEnum(
-      \HHVM\UserDocumentation\APIProduct::class,
-      'Product',
-    );
-  }
+  const type TParameters = shape(
+    'Product' => \HHVM\UserDocumentation\APIProduct,
+    'Type' => \HHVM\UserDocumentation\APIDefinitionType,
+  );
 
-  final public function getType(): \HHVM\UserDocumentation\APIDefinitionType {
-    return $this->getParameters()->getEnum(
-      \HHVM\UserDocumentation\APIDefinitionType::class,
-      'Type',
+  public function get(): self::TParameters {
+    $p = $this->getParameters();
+    return shape(
+      "Product" => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
+      "Type" => $p->getEnum(\HHVM\UserDocumentation\APIDefinitionType::class, 'Type'),
     );
   }
 }
 
+<<Codegen>>
 trait APIListByTypeControllerParametersTrait {
 
   require extends \WebController;
 
-  final protected function getParameters(): APIListByTypeControllerParameters {
-    $params = $this->getParameters_PRIVATE_IMPL();
-    return new APIListByTypeControllerParameters($params);
+  <<__Memoize>>
+  final protected function getParameters(
+  ): APIListByTypeControllerParameters::TParameters {
+    $raw = $this->getParameters_PRIVATE_IMPL();
+    return (new APIListByTypeControllerParameters($raw))
+      ->get();
   }
 }
