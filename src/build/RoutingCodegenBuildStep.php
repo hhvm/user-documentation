@@ -15,6 +15,7 @@ final class RoutingCodegenBuildStep extends BuildStep {
         'controllerBase' => \RoutableController::class,
         'router' => self::getRouterConfig(),
         'requestParameters' => self::getRequestParametersConfig(),
+        'hackCodegenConfig' => new hcg\HackCodegenConfig(LocalConfig::ROOT),
       ),
     )->build();
   }

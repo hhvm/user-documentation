@@ -2,11 +2,10 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * To re-generate this file run
- * /Users/mickeyp/hhvm-docs/user-documentation/bin/build.php
+ * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<eb51741a855f33e61dc490d2029b8096>>
+ * @generated SignedSource<<213e82b2c3382fbce942c655c01edd47>>
  */
 
 <<Codegen>>
