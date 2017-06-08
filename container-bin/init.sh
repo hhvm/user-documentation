@@ -7,9 +7,8 @@ if [ ! -e /docker_build ]; then
   exit 1
 fi
 
-apt-get update -y
 # Install Ruby and Bundler (Ruby package manager)
-apt-get install -y ruby1.9.3 bundler
+apt-get install -y ruby bundler
 # we depend on a recent version of the Nokogiri gem, which bundler will install
 # for us later; this needs to build it's own libxml so we need to install the
 # -dev versions of some dependencies
