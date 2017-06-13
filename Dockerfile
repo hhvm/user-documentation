@@ -14,6 +14,11 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN rm -rf /var/www
 ADD . /var/www
+
+# HHVM currently tries to init numa, which indirectly calls set_mempolicy(); as
+# set_mempolicy is banned by Docker's default profile, stub out libnuma
+ENV LD_PRELOAD /var/www/container-bin/numa_stub.so
+
 RUN touch /docker_build && cd /var/www && container-bin/init.sh
 
 # Make the webserver port accessible outside the container
