@@ -72,7 +72,7 @@ rm -rf /root/.composer
 rm -rf /var/hhvm /var/www/.git /tmp/hh_server
 apt-get remove -y \
   build-essential ruby bundler zlib1g-dev python-pygments curl
-apt-get autoremove -y
+SUDO_FORCE_REMOVE=yes apt-get autoremove -y
 apt-get clean
 rm -rf /var/lib/apt/lists/*
 
