@@ -57,16 +57,16 @@
         },
         {
             "name": "facebook/definition-finder",
-            "version": "v1.5.1",
+            "version": "v1.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "ccb1471e263714b7313e54923bb4f5c1b6af7b1f"
+                "reference": "b94f265ff8df574f66a11a1ccd207ce4c09a6286"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/ccb1471e263714b7313e54923bb4f5c1b6af7b1f",
-                "reference": "ccb1471e263714b7313e54923bb4f5c1b6af7b1f",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/b94f265ff8df574f66a11a1ccd207ce4c09a6286",
+                "reference": "b94f265ff8df574f66a11a1ccd207ce4c09a6286",
                 "shasum": ""
             },
             "require": {
@@ -95,7 +95,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2017-05-03T02:44:04+00:00"
+            "time": "2017-06-23T23:55:40+00:00"
         },
         {
             "name": "facebook/hack-codegen",
@@ -166,12 +166,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-router.git",
-                "reference": "720e06565bf45d46499fddfca0c327bc4c78e8a9"
+                "reference": "f4abdbf9f95b00ca6e04850f9c0c9e938cd567f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/720e06565bf45d46499fddfca0c327bc4c78e8a9",
-                "reference": "720e06565bf45d46499fddfca0c327bc4c78e8a9",
+                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/f4abdbf9f95b00ca6e04850f9c0c9e938cd567f0",
+                "reference": "f4abdbf9f95b00ca6e04850f9c0c9e938cd567f0",
                 "shasum": ""
             },
             "require": {
@@ -203,7 +203,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2017-05-03 03:01:50"
+            "time": "2017-06-09 17:49:55"
         },
         {
             "name": "facebook/hack-router-codegen",
@@ -253,16 +253,16 @@
         },
         {
             "name": "facebook/hhvm-autoload",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "39ecfe62b1f002b95b0a67cf73ae3da476d55570"
+                "reference": "7c998b32421b083837e810dd736b8cb092b52f22"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/39ecfe62b1f002b95b0a67cf73ae3da476d55570",
-                "reference": "39ecfe62b1f002b95b0a67cf73ae3da476d55570",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/7c998b32421b083837e810dd736b8cb092b52f22",
+                "reference": "7c998b32421b083837e810dd736b8cb092b52f22",
                 "shasum": ""
             },
             "require": {
@@ -293,7 +293,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2017-02-17T05:54:26+00:00"
+            "time": "2017-06-23T19:40:44+00:00"
         },
         {
             "name": "facebook/xhp-lib",
@@ -651,7 +651,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2017-02-16T16:15:51+00:00"
+            "time": "2017-02-16 16:15:51"
         },
         {
             "name": "mustangostang/spyc",
@@ -701,11 +701,11 @@
                 "yaml",
                 "yml"
             ],
-            "time": "2017-02-24T16:06:33+00:00"
+            "time": "2017-02-24 16:06:33"
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.1",
+            "version": "1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
@@ -855,7 +855,7 @@
                 "spy",
                 "stub"
             ],
-            "time": "2017-05-31T16:22:32+00:00"
+            "time": "2017-05-31 16:22:32"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -918,7 +918,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-04-02T07:44:40+00:00"
+            "time": "2017-04-02 07:44:40"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -965,7 +965,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2016-10-03T07:40:28+00:00"
+            "time": "2016-10-03 07:40:28"
         },
         {
             "name": "phpunit/php-text-template",
@@ -1055,7 +1055,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2017-03-07T15:42:04+00:00"
+            "time": "2017-03-07 15:42:04"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -1104,7 +1104,7 @@
             "keywords": [
                 "tokenizer"
             ],
-            "time": "2017-03-07T07:36:57+00:00"
+            "time": "2017-03-07 07:36:57"
         },
         {
             "name": "phpunit/phpunit",
@@ -1112,12 +1112,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "3395d759df4603b2a93e05f201c09eeb3f899eb9"
+                "reference": "c0c61c97be37e1c77ab61ad73448e9208c05aade"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/3395d759df4603b2a93e05f201c09eeb3f899eb9",
-                "reference": "3395d759df4603b2a93e05f201c09eeb3f899eb9",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c0c61c97be37e1c77ab61ad73448e9208c05aade",
+                "reference": "c0c61c97be37e1c77ab61ad73448e9208c05aade",
                 "shasum": ""
             },
             "require": {
@@ -1186,7 +1186,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-06-04T05:23:38+00:00"
+            "time": "2017-06-23T12:45:27+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1245,7 +1245,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2017-03-07T08:47:31+00:00"
+            "time": "2017-03-07 08:47:31"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -1290,7 +1290,7 @@
             ],
             "description": "Looks up which function or method a line of code belongs to",
             "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
-            "time": "2017-03-04T10:23:55+00:00"
+            "time": "2017-03-04 10:23:55"
         },
         {
             "name": "sebastian/comparator",
@@ -1354,7 +1354,7 @@
                 "compare",
                 "equality"
             ],
-            "time": "2017-03-07T10:34:43+00:00"
+            "time": "2017-03-07 10:34:43"
         },
         {
             "name": "sebastian/diff",
@@ -1406,7 +1406,7 @@
             "keywords": [
                 "diff"
             ],
-            "time": "2017-05-22T07:24:03+00:00"
+            "time": "2017-05-22 07:24:03"
         },
         {
             "name": "sebastian/environment",
@@ -1456,7 +1456,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2016-11-26T07:53:53+00:00"
+            "time": "2016-11-26 07:53:53"
         },
         {
             "name": "sebastian/exporter",
@@ -1523,7 +1523,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2017-03-07T10:36:49+00:00"
+            "time": "2017-03-07 10:36:49"
         },
         {
             "name": "sebastian/global-state",
@@ -1574,7 +1574,7 @@
             "keywords": [
                 "global state"
             ],
-            "time": "2017-02-23T14:11:06+00:00"
+            "time": "2017-02-23 14:11:06"
         },
         {
             "name": "sebastian/object-enumerator",
@@ -1620,7 +1620,7 @@
             ],
             "description": "Traverses array structures and object graphs to enumerate all referenced objects",
             "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
-            "time": "2017-03-07T10:37:45+00:00"
+            "time": "2017-03-07 10:37:45"
         },
         {
             "name": "sebastian/recursion-context",
@@ -1673,7 +1673,7 @@
             ],
             "description": "Provides functionality to recursively process PHP variables",
             "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
-            "time": "2017-03-08T08:21:15+00:00"
+            "time": "2017-03-08 08:21:15"
         },
         {
             "name": "sebastian/resource-operations",
@@ -1715,7 +1715,7 @@
             ],
             "description": "Provides a list of PHP built-in functions that operate on resources",
             "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
-            "time": "2016-10-03T07:43:09+00:00"
+            "time": "2016-10-03 07:43:09"
         },
         {
             "name": "sebastian/version",
@@ -1758,7 +1758,7 @@
             ],
             "description": "Library that helps with managing the version number of Git-hosted PHP projects",
             "homepage": "https://github.com/sebastianbergmann/version",
-            "time": "2016-10-03T07:35:21+00:00"
+            "time": "2016-10-03 07:35:21"
         },
         {
             "name": "symfony/yaml",
@@ -1766,12 +1766,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "5f6b55e907b65fdb1cefe25b82604049f1d40e81"
+                "reference": "08c644988dba9d608d18bb8ad8dd633f276137f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/5f6b55e907b65fdb1cefe25b82604049f1d40e81",
-                "reference": "5f6b55e907b65fdb1cefe25b82604049f1d40e81",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/08c644988dba9d608d18bb8ad8dd633f276137f7",
+                "reference": "08c644988dba9d608d18bb8ad8dd633f276137f7",
                 "shasum": ""
             },
             "require": {
@@ -1813,7 +1813,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-06-02T22:30:16+00:00"
+            "time": "2017-06-14T20:38:21+00:00"
         }
     ],
     "aliases": [],
