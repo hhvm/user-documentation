@@ -2,10 +2,13 @@ The HHVM release cadence tries for every 8 weeks on Fridays. The branch for a pa
 
 ## Dates
 
-* 3.22.0 September 25th 2017 (cut on September 11th 2017)
-* 3.21.0 July 31st 2017 (cut on July 17th 2017)
+* 3.24.0 January 12th 2018 (cut on January 1st 2018)
+* 3.23.0 November 17th 2017 (cut on November 6th 2017)
+* 3.22.0 September 21st 2017 (cut on September 11th 2017)
 
 ## Previous Releases
+
+* [3.21.0](http://hhvm.com/blog/2017/08/02/hhvm-3-21.html) August 2nd 2017
 * [3.20.0](http://hhvm.com/blog/2017/06/06/hhvm-3-20.html) June 7th 2017
 * [3.19.0](http://hhvm.com/blog/2017/04/13/hhvm-3-19.html) April 10th 2017
 * [3.18.0](http://hhvm.com/blog/2017/02/15/hhvm-3-18.html) February 14th 2017
