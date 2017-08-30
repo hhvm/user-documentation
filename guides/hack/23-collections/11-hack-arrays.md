@@ -11,7 +11,7 @@ recommending they are used instead once the
    items of type `Tv`; it supercedes `Map`, `ImmMap`, and `ConstMap`. `Tk` must
    be an `arraykey`, i.e. `string` or `int` keys.
  - `keyset<T as arraykey>` is an indexable and keyed traversable container of
-   unique items of type `T`; it supercedes `Set`, `ImmSet`, and `ConstMap`. It
+   unique items of type `T`; it supercedes `Set`, `ImmSet`, and `ConstSet`. It
    can only contain `arraykey` values, i.e. `string` or `int`.
 
 All of these types preserve insertion order.
