@@ -179,6 +179,7 @@ abstract final class ScannedDefinitionFilters {
       'rsort',
       'snuncompress',
       'sort',
+      'type_structure',
       'uasort',
       'uksort',
       'usort',

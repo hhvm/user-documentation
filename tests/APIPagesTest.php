@@ -5,6 +5,9 @@ namespace HHVM\UserDocumentation\Tests;
 use HHVM\UserDocumentation\APINavData;
 use HHVM\UserDocumentation\NavDataNode;
 use HHVM\UserDocumentation\APIDefinitionType;
+use HHVM\UserDocumentation\URLBuilder;
+
+use namespace HH\Lib\Vec;
 
 class APIPagesTest extends \PHPUnit_Framework_TestCase {
   public static function allAPIPages(): array<(string, NavDataNode)> {
@@ -71,54 +74,64 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
 
     // Top-level pages don't contain their own name in the output - eg 'Classes'
     // is 'Class Reference'
-    $blacklist = (new Set(APIDefinitionType::getValues()))
-      ->map($x ==> APINavData::getRootNameForType($x));
+    $blacklist = (new Set(APIDefinitionType::getValues()))->map($x ==>
+      APINavData::getRootNameForType($x));
     if (!$blacklist->contains($node['name'])) {
-      $this->assertContains($node['name'], (string) $response->getBody());
+      $this->assertContains($node['name'], (string)$response->getBody());
     }
   }
 
   public function testMethodDeprecated(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('/hack/reference/class/HH.Vector/fromArray/')
+      PageLoader::getPage('/hack/reference/class/HH.Vector/fromArray/'),
     );
 
-    $this->assertContains('Deprecation', (string) $response->getBody());
+    $this->assertContains('Deprecation', (string)$response->getBody());
   }
 
   public function testNullableTypeMerged(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('/hack/reference/class/HH.Vector/firstValue/')
+      PageLoader::getPage('/hack/reference/class/HH.Vector/firstValue/'),
     );
 
-    $this->assertContains('<code>?Tv</code>', (string) $response->getBody());
+    $this->assertContains('<code>?Tv</code>', (string)$response->getBody());
   }
 
-  public function getDoNotDocumentClasses(): array<array<string>> {
+  public function getDoNotDocument(): array<(string, APIDefinitionType)> {
     // vec/dict/keyset are not classes; with HH prefix, they shouldn't exist
-    return (ImmVector {
-      'vec',
-      'HH\\vec',
-      'dict',
-      'HH\\dict',
-      'keyset',
-      'HH\\keyset',
-    })->map($x ==> [$x])->toArray();
+    $classes = vec['vec', 'HH\\vec', 'dict', 'HH\\dict', 'keyset', 'HH\\keyset']
+      |> Vec\map($$, $x ==> tuple($x, APIDefinitionType::CLASS_DEF));
+
+    // Very unsupported
+    $functions = vec['type_structure', 'HH\\type_structure']
+      |> Vec\map($$, $x ==> tuple($x, APIDefinitionType::FUNCTION_DEF));
+
+    return (array) Vec\concat($classes, $functions);
   }
 
   /**
-   * @dataProvider getDoNotDocumentClasses
+   * @dataProvider getDoNotDocument
    */
-  public function testDoesNotDocumentClass(string $class): void {
-    $url = \HHVM\UserDocumentation\URLBuilder::getPathForClass(shape(
-      'name' => $class,
-      'type' => \HHVM\UserDocumentation\APIDefinitionType::CLASS_DEF,
-    ));
+  public function testDoesNotDocument(
+    string $name,
+    APIDefinitionType $type,
+  ): void {
+    switch ($type) {
+      case APIDefinitionType::CLASS_DEF:
+      case APIDefinitionType::TRAIT_DEF:
+      case APIDefinitionType::INTERFACE_DEF:
+        $url =
+          URLBuilder::getPathForClass(shape('name' => $name, 'type' => $type));
+        break;
+      case APIDefinitionType::FUNCTION_DEF:
+        $url = URLBuilder::getPathForFunction(shape('name' => $name));
+        break;
+    }
     $response = \HH\Asio\join(PageLoader::getPage($url));
     $this->assertSame(
       404,
       $response->getStatusCode(),
-      sprintf('"%s" should not be documented', $class),
+      sprintf('"%s" should not be documented', $name),
     );
   }
 }
