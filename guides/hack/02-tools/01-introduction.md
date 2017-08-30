@@ -2,7 +2,6 @@ In addition to the language itself, Hack provides programmers a wide set of tool
 
 * adding type annotations to your code and quick type checking ([`hh_server`](./hh_server.md))
 * migrating PHP code to Hack ([`hackificator`](./hackificator.md))
-* transpile Hack code to PHP ([`h2tp`](./transpiler.md))
 
 If you installed HHVM from a package, you can generally find these tools in your `/usr/bin` or whatever binary directory executables get installed on your distro.
 
