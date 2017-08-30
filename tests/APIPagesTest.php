@@ -93,4 +93,32 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
 
     $this->assertContains('<code>?Tv</code>', (string) $response->getBody());
   }
+
+  public function getDoNotDocumentClasses(): array<array<string>> {
+    // vec/dict/keyset are not classes; with HH prefix, they shouldn't exist
+    return (ImmVector {
+      'vec',
+      'HH\\vec',
+      'dict',
+      'HH\\dict',
+      'keyset',
+      'HH\\keyset',
+    })->map($x ==> [$x])->toArray();
+  }
+
+  /**
+   * @dataProvider getDoNotDocumentClasses
+   */
+  public function testDoesNotDocumentClass(string $class): void {
+    $url = \HHVM\UserDocumentation\URLBuilder::getPathForClass(shape(
+      'name' => $class,
+      'type' => \HHVM\UserDocumentation\APIDefinitionType::CLASS_DEF,
+    ));
+    $response = \HH\Asio\join(PageLoader::getPage($url));
+    $this->assertSame(
+      404,
+      $response->getStatusCode(),
+      sprintf('"%s" should not be documented', $class),
+    );
+  }
 }
