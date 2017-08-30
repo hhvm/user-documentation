@@ -133,6 +133,14 @@ abstract final class ScannedDefinitionFilters {
       'VectorIterator',
       'WaitHandle',
 
+      //////////////////////////
+      // Not Actually Classes //
+      //////////////////////////
+
+      'dict',
+      'keyset',
+      'vec',
+
       ////////////////
       // Interfaces //
       ////////////////
