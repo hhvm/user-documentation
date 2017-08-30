@@ -1,4 +1,4 @@
-Hack also provides additional "array-like" types: `dict`, `vec`, and `keyset`;
+Hack provides additional "array-like" types: `dict`, `vec`, and `keyset`;
 we expect these to eventually replace the collection objects, and will be
 recommending they are used instead once the
 [Hack Standard Library](https://github.com/hhvm/hsl) leaves 'preview' status.
@@ -6,12 +6,12 @@ recommending they are used instead once the
 ## The Types
 
  - `vec<T>` is an indexable and traversable container of items of type `T`; it
-   supercedes `Vector`, `ImmVector`, and `ConstVector`
+   is a replacement for `Vector`, `ImmVector`, and `ConstVector`
  - `dict<Tk as arraykey, Tv>` is an indexable and keyed traversable container of
-   items of type `Tv`; it supercedes `Map`, `ImmMap`, and `ConstMap`. `Tk` must
+   items of type `Tv`; it is a replacement for `Map`, `ImmMap`, and `ConstMap`. `Tk` must
    be an `arraykey`, i.e. `string` or `int` keys.
  - `keyset<T as arraykey>` is an indexable and keyed traversable container of
-   unique items of type `T`; it supercedes `Set`, `ImmSet`, and `ConstSet`. It
+   unique items of type `T`; it is a replacement for `Set`, `ImmSet`, and `ConstSet`. It
    can only contain `arraykey` values, i.e. `string` or `int`.
 
 All of these types preserve insertion order.
@@ -28,6 +28,15 @@ Additionally, Hack provides the following conversion functions:
  - `keyset<Tv as arraykey>(Traversable<Tv>): keyset<Tv>`
 
 @@ hack-arrays-examples/conversions.php @@
+
+## Library functions
+
+As Hack Arrays are not objects, they do not have methods. Library support is
+provided via the [Hack Standard Library](https://github.com/hhvm/hsl).
+
+A full [API reference](https://hhvm.github.io/hsl/api/) is automatically
+generated, however we strongly recommend reading
+[the README](https://github.com/hhvm/hsl/blob/master/README.md) first.
 
 ## Compared to Hack Collections
 
@@ -53,8 +62,3 @@ The difference between reference and copy-on-write semantics is shown below:
 The ban on references is demonstrated below:
 
 @@ hack-arrays-examples/can-not-contain-references.php @@
-
-## Library functions
-
-As Hack Arrays are not objects, they do not have methods. Library support is
-provided via the [Hack Standard Library](https://github.com/hhvm/hsl).
