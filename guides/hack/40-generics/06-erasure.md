@@ -11,6 +11,6 @@ However, with the exception of the return type for [async](/hack/async/introduct
  * In a class scope, e.g., `T::aStaticMethod()`.
  * As the right-hand side of an [`instanceof`](http://php.net/manual/en/language.operators.type.php) check.
  * As the type of a static property.
- * As the type of the exception in a catch block (e.g., `catch (T $execption)`).
+ * As the type of the exception in a catch block (e.g., `catch (T $exception)`).
 
 For a possible alternative to instantiation, class scope and `instanceof` usage, Hack provides a construct called [`Classname<T>`](/hack/types/type-system#type-aliases__classname) that extends the PHP representation of `Foo::class`.
