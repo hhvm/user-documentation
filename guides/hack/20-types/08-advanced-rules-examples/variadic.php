@@ -2,9 +2,8 @@
 
 namespace Hack\UserDocumentation\Types\AdvancedRules\Examples\Variadic;
 
-// this typechecks, but the variadic type hint is not yet supported in HHVM
-function foo(int ...$args): array<int> {
-  $ret = array();
+function foo(int ...$args): vec<int> {
+  $ret = vec[];
   foreach ($args as $arg) {
     $ret[] = $arg;
   }
