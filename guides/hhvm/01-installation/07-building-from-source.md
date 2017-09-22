@@ -163,98 +163,11 @@ If your failure was on the `make` command, try to correct the error and run `mak
 
 ## Mac OS X Homebrew
 
-This requires Mac OS X 10.10 or higher.
-
-### Install compiler
-
-The only supported compiler for HHVM on OS X right now is clang, and the version Apple ships doesn't support TLS, so we need to build our own.
+This requires MacOS 10.12 or higher.
 
 ```
-brew install llvm --with-clang
+brew tap hhvm/hhvm
+brew install hhvm
 ```
 
-### Install dependencies
-
-```
-brew install freetype gettext cmake libtool mcrypt oniguruma  \
-             autoconf libelf readline automake md5sha1sum \
-             gd icu4c libmemcached pkg-config tbb imagemagick@6 \
-             libevent sqlite openssl glog boost lz4 pcre \
-             gawk jemalloc ocaml gmp dwarfutils libzip
-```
-
-### Get HHVM
-
-```
-git clone --recursive git://github.com/facebook/hhvm.git
-```
-
-### Build HHVM
-
-```
-cd hhvm
-cmake . \
-    -DCMAKE_CXX_COMPILER=$(brew --prefix llvm)/bin/clang++ \
-    -DCMAKE_C_COMPILER=$(brew --prefix llvm)/bin/clang \
-    -DCMAKE_ASM_COMPILER=$(brew --prefix llvm)/bin/clang \
-    -DCMAKE_C_FLAGS="-I$(brew --prefix readline)/include -L$(brew --prefix readline)/lib" \
-    -DCMAKE_CXX_FLAGS="-I$(brew --prefix readline)/include -L$(brew --prefix readline)/lib" \
-    -DENABLE_MCROUTER=OFF \
-    -DENABLE_EXTENSION_MCROUTER=OFF \
-    -DENABLE_EXTENSION_IMAP=OFF \
-    -DMYSQL_UNIX_SOCK_ADDR=/tmp/mysql.sock \
-    -DLIBEVENT_LIB=$(brew --prefix libevent)/lib/libevent.dylib \
-    -DLIBEVENT_INCLUDE_DIR=$(brew --prefix libevent)/include \
-    -DICU_INCLUDE_DIR=$(brew --prefix icu4c)/include \
-    -DICU_LIBRARY=$(brew --prefix icu4c)/lib/libicuuc.dylib \
-    -DICU_I18N_LIBRARY=$(brew --prefix icu4c)/lib/libicui18n.dylib \
-    -DICU_DATA_LIBRARY=$(brew --prefix icu4c)/lib/libicudata.dylib \
-    -DREADLINE_INCLUDE_DIR=$(brew --prefix readline)/include \
-    -DREADLINE_LIBRARY=$(brew --prefix readline)/lib/libreadline.dylib \
-    -DBOOST_INCLUDEDIR=$(brew --prefix boost)/include \
-    -DBOOST_LIBRARYDIR=$(brew --prefix boost)/lib \
-    -DJEMALLOC_INCLUDE_DIR=$(brew --prefix jemalloc)/include \
-    -DJEMALLOC_LIB=$(brew --prefix jemalloc)/lib/libjemalloc.dylib \
-    -DLIBINTL_LIBRARIES=$(brew --prefix gettext)/lib/libintl.dylib \
-    -DLIBINTL_INCLUDE_DIR=$(brew --prefix gettext)/include \
-    -DLIBDWARF_LIBRARIES=$(brew --prefix dwarfutils)/lib/libdwarf.a \
-    -DLIBDWARF_INCLUDE_DIRS=$(brew --prefix dwarfutils)/include \
-    -DLIBMAGICKWAND_INCLUDE_DIRS=$(brew --prefix imagemagick@6)/include/ImageMagick-6 \
-    -DLIBMAGICKWAND_LIBRARIES=$(brew --prefix imagemagick@6)/lib/libMagickWand-6.Q16.dylib \
-    -DLIBMAGICKCORE_LIBRARIES=$(brew --prefix imagemagick@6)/lib/libMagickCore-6.Q16.dylib \
-    -DFREETYPE_INCLUDE_DIRS=$(brew --prefix freetype)/include/freetype2 \
-    -DFREETYPE_LIBRARIES=$(brew --prefix freetype)/lib/libfreetype.dylib \
-    -DLIBMEMCACHED_LIBRARY=$(brew --prefix libmemcached)/lib/libmemcached.dylib \
-    -DLIBMEMCACHED_INCLUDE_DIR=$(brew --prefix libmemcached)/include \
-    -DLIBELF_LIBRARIES=$(brew --prefix libelf)/lib/libelf.a \
-    -DLIBELF_INCLUDE_DIRS=$(brew --prefix libelf)/include/libelf \
-    -DLIBGLOG_LIBRARY=$(brew --prefix glog)/lib/libglog.dylib \
-    -DLIBGLOG_INCLUDE_DIR=$(brew --prefix glog)/include \
-    -DOPENSSL_SSL_LIBRARY=$(brew --prefix openssl)/lib/libssl.dylib \
-    -DOPENSSL_INCLUDE_DIR=$(brew --prefix openssl)/include \
-    -DOPENSSL_CRYPTO_LIBRARY=$(brew --prefix openssl)/lib/libcrypto.dylib \
-    -DCRYPT_LIB=$(brew --prefix openssl)/lib/libcrypto.dylib \
-    -DTBB_INSTALL_DIR=$(brew --prefix tbb) \
-    -DLIBSQLITE3_INCLUDE_DIR=$(brew --prefix sqlite)/include \
-    -DLIBSQLITE3_LIBRARY=$(brew --prefix sqlite)/lib/libsqlite3.0.dylib \
-    -DLIBZIP_INCLUDE_DIR_ZIP=$(brew --prefix libzip)/include \
-    -DLIBZIP_INCLUDE_DIR_ZIPCONF=$(brew --prefix libzip)/lib/libzip/include \
-    -DLIBZIP_LIBRARY=$(brew --prefix libzip)/lib/libzip.dylib \
-    -DLZ4_INCLUDE_DIR=$(brew --prefix lz4)/include \
-    -DLZ4_LIBRARY=$(brew --prefix lz4)/lib/liblz4.dylib \
-    -DPCRE_INCLUDE_DIR=$(brew --prefix pcre)/include \
-    -DPCRE_LIBRARY=$(brew --prefix pcre)/lib/libpcre.dylib \
-    -DSYSTEM_PCRE_HAS_JIT=1
-make -j4 hhvm
-```
-
-### Run Tests
-
-```
-cd hphp
-./hhvm/hhvm test/run test/quick
-```
-
-## Unsupported
-
-There is a [wiki](https://github.com/facebook/hhvm/wiki/Building-and-Installing-HHVM) on the HHVM source code GitHub repo that discusses unsupported distributions on which you may be able to compile HHVM, including various flavors of Linux and Mac OS X using [MacPorts](https://github.com/facebook/hhvm/wiki/Building-and-installing-HHVM-on-OSX-10.10-with-MacPorts).
+This will take a very long time; we hope to provide binaries for MacOS in the future.
