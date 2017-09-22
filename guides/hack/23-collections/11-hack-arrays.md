@@ -23,7 +23,7 @@ Literals are created with `[]` syntax:
 @@ hack-arrays-examples/literals.php @@
 
 Additionally, Hack provides the following conversion functions:
- - `vec<Tv>(Traversable<Tv>): Vec<Tv>`
+ - `vec<Tv>(Traversable<Tv>): vec<Tv>`
  - `dict<Tk as arraykey, Tv>(KeyedTraversable<Tk, Tv>): dict<Tk, Tv>`
  - `keyset<Tv as arraykey>(Traversable<Tv>): keyset<Tv>`
 
