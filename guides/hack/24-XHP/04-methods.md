@@ -14,7 +14,7 @@ Remember all XHP Objects derive from the [`XHPRoot`](/hack/XHP/interfaces) inter
 -`isAttributeSet(string $name): bool` | Returns whether the attribute with name `$name` is set.
 -`prependChild(mixed $child): this` | Adds $child to the beginning of the XHP object's array of children. If $child is an `array`, each item in the array will be appended.
 -`replaceChildren(...): this` | Replaces all the children of this XHP Object with the variable number of children passed to this method.
--`setAttribute(string $name, mixed $val): this` | Sets the value of the XHP object's attribute named `$name`. The value will be checked against the attribute's type, and if they don't match, `XHPInvalidAttributeException` is thrown. If the attribute is not declared or does not exist, then `XHPAttributeNotSupportedException` is thrown. If the attribute you are reading is statically known, use `$this->:name = $value` style syntax instead for better typechecker coverage.
+-`setAttribute(string $name, mixed $val): this` | Sets the value of the XHP object's attribute named `$name`. The value will be checked against the attribute's type, and if they don't match, `XHPInvalidAttributeException` is thrown. If the attribute is not declared or does not exist, then `XHPAttributeNotSupportedException` is thrown.
 -`setAttributes(KeyedTraversable<string, mixed> $attrs): this` | Replaces the XHP object's array of attributes with `$attrs`. Same errors can apply as `setAttribute()`.
 
 @@ methods-examples/list-builder.php @@
