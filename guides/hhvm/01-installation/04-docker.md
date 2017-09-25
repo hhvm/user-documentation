@@ -17,8 +17,8 @@ Start by creating the following files and folders in a directory:
 ```
 FROM hhvm/hhvm-proxygen:latest
 
-RUN rm -rf /var/www
-ADD . /var/www
+RUN rm -rf /var/www/public
+ADD . /var/www/public
 
 EXPOSE 80
 ```
