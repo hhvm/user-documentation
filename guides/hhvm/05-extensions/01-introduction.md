@@ -82,7 +82,7 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [url](http://php.net/manual/en/book.url.php)
 * [wddx](http://php.net/manual/en/book.wddx.php)
 * xenon
-* [xhprof](http://xhprof.io/)
+* [xhprof](http://php.net/manual/en/book.xhprof.php)
 * [xml](http://php.net/manual/en/book.xml.php)
 * [xmlreader](http://php.net/manual/en/book.xmlreader.php)
 * [xmlwriter](http://php.net/manual/en/book.xmlwriter.php)
