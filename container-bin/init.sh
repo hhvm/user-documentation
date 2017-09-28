@@ -19,12 +19,6 @@ apt-get install -y build-essential zlib1g-dev
 # installed.
 apt-get install -y python-pygments
 
-# Install Composer (PHP dependency manager)
-apt-get install -y curl
-
-# We need an HHVM checkout to generate the API docs
-apt-get install -y git
-
 mkdir /opt/composer
 curl -sS https://getcomposer.org/installer | hhvm --php -- --install-dir=/opt/composer
 touch /opt/composer/.hhconfig
@@ -49,6 +43,7 @@ sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example \
 # Install direct dependencies
 touch /opt/composer/.hhconfig
 hhvm /opt/composer/composer.phar install
+hh_server --check $(pwd) # fail early
 bundle --path vendor-rb/
 
 echo "** Run build"
