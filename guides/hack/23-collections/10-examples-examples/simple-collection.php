@@ -12,7 +12,7 @@ final class AbsurdSet<Tv> implements \MutableSet<Tv> {
       invariant($values !== null, "won't happen");
       $this->cs = new Set($values);
       foreach ($values as $value) {
-        // Yes, this is rediculous
+        // Yes, this is ridiculous
         if (is_int($value)) {
           $this->cs[] = $value + 2;
         }
