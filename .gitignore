@@ -3,7 +3,6 @@ vendor-rb
 composer.phar
 .commit-template
 *.swp
-LocalConfig.php
 *.php.diff
 *.php.out
 *.php.type-errors.diff

@@ -10,7 +10,5 @@ fi
 cd /var/www
 hhvm /opt/composer/composer.phar install
 bundle --path vendor-rb
-sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example \
-  > LocalConfig.php
 
 hhvm bin/build.php

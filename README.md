@@ -44,15 +44,12 @@ If you would like to build the site locally (e.g., to test your [content contrib
 These are the basic step-by-step instructions to get you up and running. It assumes certain packages are installed on your system. Click [here](installation-detailed.md) for detailed installation information.
 
 1. Clone the [HHVM repository](https://github.com/facebook/hhvm) anywhere convenient.
-2. Clone this repo.
+2. Clone this repo to the same parent directory (i.e. you have foo/hhvm and foo/user-documentation)
 3. `cd path/to/user-documentation`
-4. Copy `LocalConfig.php.example` to `LocalConfig.php`
-5. Adjust the `LocalConfig::HHVM_TREE` constant to point to your checkout of
-   HHVM.
-6. `hhvm /path/to/composer.phar install` # Make sure you have composer downloaded
-7. `sudo gem install bundler` # to get Ruby bundles
-8. `bundle --path vendor-rb/` # install required ruby bundles
-9. `hhvm bin/build.php` # build the site!
+4. `hhvm /path/to/composer.phar install` # Make sure you have composer downloaded
+5. `sudo gem install bundler` # to get Ruby bundles
+6. `bundle --path vendor-rb/` # install required ruby bundles
+7. `hhvm bin/build.php` # build the site!
 
 ## Running The Site From A Checkout
 

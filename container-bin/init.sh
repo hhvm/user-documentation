@@ -36,9 +36,6 @@ fi
 
 # Configure
 cp hhvm.${DOCKER_BUILD_ENV}.ini /etc/hhvm/site.ini
-sed 's,/home/fred/hhvm,/var/hhvm,' LocalConfig.php.example \
-  | sed 's,CACHE_ROUTES = false,CACHE_ROUTES = true,' \
-  > LocalConfig.php
 
 # Install direct dependencies
 touch /opt/composer/.hhconfig
@@ -73,4 +70,3 @@ rm -rf /var/lib/apt/lists/*
 
 # Debug output
 hhvm --version
-cat /var/www/LocalConfig.php

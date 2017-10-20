@@ -7,9 +7,9 @@ use HHVM\UserDocumentation\LocalConfig;
 final class Router extends RouterCodegenBase {
   <<__Override>>
   protected function getCacheFilePath(): ?string {
-    if (LocalConfig::CACHE_ROUTES) {
-      return BuildPaths::FASTROUTE_CACHE;
+    if (\Facebook\AutoloadMap\Generated\is_dev()) {
+      return null;
     }
-    return null;
+    return BuildPaths::FASTROUTE_CACHE;
   }
 }

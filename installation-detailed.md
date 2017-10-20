@@ -18,10 +18,7 @@ First `apt-get update`.
 The API reference documentation is generated from the HHVM source, so a copy of
 that is needed:
 
-1. Clone the [HHVM repository](https://github.com/facebook/hhvm) anywhere convenient - you might want `--depth=1`
-2. Copy `LocalConfig.php.example` to `LocalConfig.php`
-3. Adjust the `LocalConfig::HHVM_TREE` constant to point to your checkout of
-   HHVM
+Clone the [HHVM repository](https://github.com/facebook/hhvm) to the same parent directory - you might want `--depth=1`
 
 *NOTE*: The configuration and dependency process requires network access, so if you are behind a proxy, take any steps necessary to be able to get through it.
 
