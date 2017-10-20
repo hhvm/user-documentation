@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f811aba5680fac22976f7064bd26ccc6",
+    "content-hash": "d0f5b9a4957236f9dee64e98dffa2f83",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -362,16 +362,16 @@
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v1.5.0",
+            "version": "v1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "68878416e3197457b067d7a208f0f9f36f060c16"
+                "reference": "e91e24c69118505999e6f7e9e051b03c85f634b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/68878416e3197457b067d7a208f0f9f36f060c16",
-                "reference": "68878416e3197457b067d7a208f0f9f36f060c16",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/e91e24c69118505999e6f7e9e051b03c85f634b4",
+                "reference": "e91e24c69118505999e6f7e9e051b03c85f634b4",
                 "shasum": ""
             },
             "require": {
@@ -408,7 +408,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2017-09-16T19:00:56+00:00"
+            "time": "2017-10-20T01:23:28+00:00"
         },
         {
             "name": "hhvm/hsl",

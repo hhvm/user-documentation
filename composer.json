@@ -4,7 +4,7 @@
     "hhvm": "~3.17",
     "zendframework/zend-diactoros": "^1.1",
     "nikic/fast-route": "^1.0.1",
-    "hhvm/hhvm-autoload": "^1.2.1",
+    "hhvm/hhvm-autoload": "^1.5.3",
     "fredemmott/type-assert": "^1.0.0",
     "facebook/hack-router-codegen": "^1.0.0rc4",
     "facebook/hack-router": "^v1.0.0rc8",
