@@ -3,5 +3,6 @@
     "src/",
     "tests/"
   ],
+  "extraFiles": [ "LocalConfig.php" ],
   "parser": "ext-factparse"
 }
