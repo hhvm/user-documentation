@@ -6,9 +6,9 @@
     "nikic/fast-route": "^1.0.1",
     "hhvm/hhvm-autoload": "^1.5.3",
     "fredemmott/type-assert": "^1.0.0",
-    "facebook/hack-router-codegen": "^1.0.0rc4",
-    "facebook/hack-router": "^v1.0.0rc8",
-    "hhvm/hsl": "^0.2.0"
+    "facebook/hack-router-codegen": "^0.9",
+    "facebook/hack-router": "^0.9",
+    "hhvm/hsl": "^0.7"
   },
   "require-dev": {
     "facebook/definition-finder": "^1.5.1",
