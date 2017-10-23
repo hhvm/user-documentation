@@ -59,7 +59,6 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
    * @large
    */
   public function testAPIPage(string $name, NavDataNode $node): void {
-    $guard = new XHPValidationGuard();
     $this->testAPIPageQuick($name, $node);
   }
 

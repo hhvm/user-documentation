@@ -25,7 +25,6 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
    * @large
    */
   public function testGuidePage(string $name, string $path): void {
-    $guard = new XHPValidationGuard();
     $this->testGuidePageQuick($name, $path);
   }
 
