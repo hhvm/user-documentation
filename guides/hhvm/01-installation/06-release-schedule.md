@@ -35,10 +35,6 @@ The HHVM release cadence tries for every 8 weeks on Fridays. The branch for a pa
 * [2.3.0](http://hhvm.com/blog/2393/hhvm-2-3-0-and-travis-ci) December 13th 2013
 * [2.2.0](http://hhvm.com/blog/1301/hhvm-2-2-0) October 17th 2013 
 
-## Nightlies
-
-You can run `hhvm-nightly` from the same repo. That is rebuilt every night from master.
-
 ## Long-term Support
 
 See [our page on LTS releases](/hhvm/installation/introduction#prebuilt-packages__lts-releases).
