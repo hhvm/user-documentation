@@ -4,11 +4,11 @@
     "hhvm": "~3.17",
     "zendframework/zend-diactoros": "^1.1",
     "nikic/fast-route": "^1.0.1",
-    "hhvm/hhvm-autoload": "^1.5.3",
+    "hhvm/hhvm-autoload": "^1.5",
     "fredemmott/type-assert": "^1.0.0",
     "facebook/hack-router-codegen": "^0.9",
     "facebook/hack-router": "^0.9",
-    "hhvm/hsl": "^0.7"
+    "hhvm/hsl": "^1.0"
   },
   "require-dev": {
     "facebook/definition-finder": "^1.5.1",

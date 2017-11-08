@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "db777e7468c53facd265c622997cb2a9",
+    "content-hash": "5f1eea344c4d1277c49fd717240768ec",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -113,22 +113,22 @@
         },
         {
             "name": "facebook/hack-router",
-            "version": "v0.9",
+            "version": "v0.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-router.git",
-                "reference": "1ef6cd857d9e45ebe0d8fff5a76350214349d704"
+                "reference": "6f30d68db99b4de890feb8fd1e4870298da0df01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/1ef6cd857d9e45ebe0d8fff5a76350214349d704",
-                "reference": "1ef6cd857d9e45ebe0d8fff5a76350214349d704",
+                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/6f30d68db99b4de890feb8fd1e4870298da0df01",
+                "reference": "6f30d68db99b4de890feb8fd1e4870298da0df01",
                 "shasum": ""
             },
             "require": {
                 "hack-psr/psr7-http-message-hhi": "^0.2.0|^1.0.0",
                 "hhvm/hhvm-autoload": "^1.5.3",
-                "hhvm/hsl": "^0.7",
+                "hhvm/hsl": "^1.0.0",
                 "nikic/fast-route": "^1.0.0 || >0.7 <1.0"
             },
             "require-dev": {
@@ -157,7 +157,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2017-10-23T21:50:57+00:00"
+            "time": "2017-10-26T20:55:54+00:00"
         },
         {
             "name": "facebook/hack-router-codegen",
@@ -411,16 +411,16 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v0.7",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "c5a3f28fad4e379bd305085fc2c28e8df450c6a2"
+                "reference": "99ed4bce2170d12e38654f8502482fcac5b80352"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/c5a3f28fad4e379bd305085fc2c28e8df450c6a2",
-                "reference": "c5a3f28fad4e379bd305085fc2c28e8df450c6a2",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/99ed4bce2170d12e38654f8502482fcac5b80352",
+                "reference": "99ed4bce2170d12e38654f8502482fcac5b80352",
                 "shasum": ""
             },
             "require": {
@@ -436,7 +436,7 @@
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "description": "The Hack Standard Library",
-            "time": "2017-10-09T22:38:19+00:00"
+            "time": "2017-10-26T18:38:35+00:00"
         },
         {
             "name": "hhvm/type-assert",
