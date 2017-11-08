@@ -16,8 +16,7 @@ async function b_two(string $key): Awaitable<string> {
 
 async function batching(): Awaitable<void> {
   $results = await \HH\Asio\v(array(b_one('hello'), b_two('world')));
-  echo $results[0] . PHP_EOL;
-  echo $results[1];
+  printf("%s\n%s\n", $results[0], $results[1]);
 }
 
 \HH\Asio\join(batching());

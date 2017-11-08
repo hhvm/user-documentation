@@ -4,6 +4,8 @@ namespace HHVM\UserDocumentation\Tests;
 
 use HHVM\UserDocumentation\LocalConfig;
 
+use namespace HH\Lib\{Str, Vec};
+
 /**
  * @large
  */
@@ -11,7 +13,17 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
   const string TEST_RUNNER = LocalConfig::HHVM_TREE.'/hphp/test/run';
 
   public function testExamplesOutput(): void {
+    $exclude_suffixes = vec[
+      '.inc.php',
+      '.php.type-errors',
+      '.noexec.php',
+    ];
+    $exclude_regexp = $exclude_suffixes
+      |> Vec\map($$, $suffix ==> preg_quote($suffix, '/'))
+      |> Str\join($$, '|')
+      |> '/('.$$.')$/';
     $this->runExamples(Vector {
+      '--exclude-pattern', $exclude_regexp,
     });
   }
 
@@ -23,6 +35,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
 
     $this->runExamples(Vector {
       '--typechecker',
+      '--exclude', '.inc.php',
     });
   }
 

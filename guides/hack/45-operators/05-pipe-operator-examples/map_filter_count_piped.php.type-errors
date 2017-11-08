@@ -1,8 +1,0 @@
-<?hh
-
-function pipe_operator_example1_piped($arr): int {
-   return $arr
-     |> array_map($x ==> $x->getNumber(), $$)
-     |> array_filter($$, $x ==> $x % 2 == 0)
-     |> count($$)
- }

@@ -44,12 +44,4 @@ Classic:
 
 With Pipe:
 
-@@ pipe-operator-examples/map_filter_count_piped.php.type-errors @@
-
-Classic style:
-
-@@ pipe-operator-examples/file_access.php @@
-
-Pipe style:
-
-@@ pipe-operator-examples/file_access_piped.php.type-errors @@
+@@ pipe-operator-examples/map_filter_count_piped.php @@

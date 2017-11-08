@@ -28,7 +28,7 @@ This shows you a way to organize your async functions in such a way that we have
 
 Use the async mysql extension to perform database connection and queries.
 
-@@ examples-examples/async-mysql.php @@
+@@ examples-examples/async-mysql.noexec.php @@
 
 ## Batching
 

@@ -77,5 +77,4 @@ async function generate_page(int $author_id): Awaitable<string> {
   return $page;
 }
 
-$page = \HH\Asio\join(generate_page(13324)); // just made up a user id
-var_dump($page);
+print \HH\Asio\join(generate_page(13324)); // just made up a user id
