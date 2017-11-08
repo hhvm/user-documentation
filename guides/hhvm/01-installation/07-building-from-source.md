@@ -2,16 +2,11 @@ Building from source is advisable generally when you need features that exist in
 
 You must be running a 64-bit OS to compile & install HHVM. Here are the supported distributions for compiling from source:
 
-* [Ubuntu 14.04](#ubuntu-14.04-trusty)
-* [Ubuntu 15.04](#ubuntu-15.04-vivid)
-* [Ubuntu 15.10](#ubuntu-15.10-wily-werewolf)
 * [Ubuntu 16.04](#ubuntu-16.04-xenial)
 * [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 * [Debian 8](#debian-8-jessie)
-* [Mac OS X Homebrew](#mac-os-x-homebrew)
-* [Unsupported](#unsupported)
 
-## Ubuntu 14.04 Trusty
+## Ubuntu 16.04 Trusty
 
 > **Please Note:** You must be running a 64-bit OS to compile & install HHVM.
 >
@@ -85,28 +80,13 @@ There are 2 families of regression tests. There are about 5000 tests in all. All
   popd
 ```
 
-## Ubuntu 15.04 Vivid
-
-Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
-
-## Ubuntu 15.10 Wily Werewolf
-
-Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
-
-## Ubuntu 16.04 Xenial
-
-Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
-
 ## Ubuntu 16.10 Yakkety
 
-We currently have issues building on GCC 6.  To downgrade to GCC 5 do:
-```
-sudo apt-get install gcc-5 g++-5
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-5 40 --slave /usr/bin/g++ g++ /usr/bin/g++-5
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-6 40 --slave /usr/bin/g++ g++ /usr/bin/g++-6
-sudo update-alternatives --config gcc
-```
-Same instructions as [Ubuntu 14.04](#ubuntu-14.04-trusty)
+Same instructions as [Ubuntu 16.04](#ubuntu-14.04-trusty)
+
+## Ubuntu 17.04 Zesty
+
+Same instructions as [Ubuntu 16.04](#ubuntu-14.04-trusty)
 
 ## Debian 8 Jessie
 
@@ -160,14 +140,3 @@ The hhvm binary can be found in `hphp/hhvm/hhvm`.
 If any errors occur, it may be required to remove the `CMakeCache.txt` directory in the checkout.
 
 If your failure was on the `make` command, try to correct the error and run `make` again, it should restart from the point it stops. If don't, try to remove as explained above.
-
-## Mac OS X Homebrew
-
-This requires MacOS 10.12 or higher.
-
-```
-brew tap hhvm/hhvm
-brew install hhvm
-```
-
-This will take a very long time; we hope to provide binaries for MacOS in the future.
