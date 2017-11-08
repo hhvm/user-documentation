@@ -10,6 +10,25 @@ if [ ! -e Dockerrun.aws.json ]; then
   exit 1
 fi
 
+if ! git diff --quiet; then
+  echo "** Uncommitted changes, refusing to run:"
+  echo
+  git status
+  exit 1
+fi
+
+echo "** Making clean checkout"
+
+ORIGINAL_DIR="$(pwd)"
+CLEAN_DIR="$(mktemp -d)"
+(
+  cd "$CLEAN_DIR"
+  git clone --depth=1 "file://$ORIGINAL_DIR" hhvm-docs
+  cd hhvm-docs
+  git rev-parse HEAD > DOCSITE_REV
+  rm -rf .git
+)
+
 export TZ=America/Los_Angeles
 DEPLOY_REV=$(git rev-parse --short HEAD)
 IMAGE_TAG=$(date +%Y-%m-%d)-$DEPLOY_REV
@@ -17,8 +36,11 @@ IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 
 echo "** Building image"
 docker build \
-  -t $IMAGE_NAME $(pwd)
+  -t $IMAGE_NAME "$CLEAN_DIR/hhvm-docs"
 docker tag $IMAGE_NAME hhvm/user-documentation:latest # add an alias
+
+echo "** Cleaning up"
+rm -rf "$CLEAN_DIR"
 
 echo "** Pushing image to dockerhub"
 docker push $IMAGE_NAME
