@@ -12,7 +12,7 @@ class :my-br extends :x:element {
 }
 
 class :my-ul extends :x:element {
-  children (:li)+; // one more more
+  children (:li)+; // one or more
 
   protected function render(): \XHPRoot {
     return
