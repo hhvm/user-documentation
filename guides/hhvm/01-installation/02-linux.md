@@ -19,7 +19,11 @@ Here are the supported distributions:
 # installs add-apt-repository
 sudo apt-get install software-properties-common
 
+# Key rotation is in progress as of November 2017; this is the old key:
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
+# And this is the new key:
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+
 sudo add-apt-repository "deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
 sudo apt-get update
 sudo apt-get install hhvm
@@ -43,7 +47,11 @@ Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 ## Debian 8 Jessie
 
 ```
+# Key rotation is in progress as of November 2017; this is the old key:
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
+# And this is the new key:
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+
 echo deb http://dl.hhvm.com/debian jessie main | sudo tee /etc/apt/sources.list.d/hhvm.list
 sudo apt-get update
 sudo apt-get install hhvm
@@ -52,7 +60,11 @@ sudo apt-get install hhvm
 ## Debian 7 Wheezy
 
 ```
+# Key rotation is in progress as of November 2017; this is the old key:
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
+# And this is the new key:
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+
 echo deb http://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.d/hhvm.list
 sudo apt-get update
 sudo apt-get install hhvm
