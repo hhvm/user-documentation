@@ -1,40 +1,21 @@
-The HHVM release cadence tries for every 8 weeks on Fridays. The branch for a particular release is cut on the Monday 11 days prior to that and then rigorously tested. It might be delayed if there are any issues found during testing or if our team is busy with other issues that come up -- this unfortunately happens fairly regularly. Point releases will be done as needed for major bugs.
+We aim to release a new stable version of HHVM every 8 weeks on Fridays. The branch for a particular release is cut on the Monday 11 days prior to that and then rigorously tested. It might be delayed if there are any issues found during testing or we are otherwise not confident in the releases. Point releases will be done as needed for major bugs.
 
-## Dates
+## Lifecycle
 
-* 3.25.0 March 9th 2018 - cut on February 26th 2018
-* 3.24.0 (LTS) January 12th 2018 - cut on January 1st 2018
-* 3.23.0 November 17th 2017 - cut on November 6th 2017
+We offer "long term support" (LTS) for every third releases - so roughly twice a year. These are supported through the next 6 releases, so roughly 48 weeks. This means that there are 2 supported LTS versions at any time. Non-LTS releases are supported until the next release comes out, so only for approximately for 8 weeks each.
 
-## Previous Releases
+## Future Releases
 
-* [3.22.0](http://hhvm.com/blog/2017/09/26/hhvm-3-22.html) September 26th 2017
-* [3.21.0 (LTS)](http://hhvm.com/blog/2017/08/02/hhvm-3-21.html) August 2nd 2017
-* [3.20.0](http://hhvm.com/blog/2017/06/06/hhvm-3-20.html) June 7th 2017
-* [3.19.0](http://hhvm.com/blog/2017/04/13/hhvm-3-19.html) April 10th 2017
-* [3.18.0 (LTS)](http://hhvm.com/blog/2017/02/15/hhvm-3-18.html) February 14th 2017
-* 3.17.0 December 25th 2016
-* 3.16.0 Skipped
-* [3.15.0 (LTS)](http://hhvm.com/blog/11711/hhvm-3-15) September 7th 2016
-* 3.14.0 June 10th 2016
-* 3.13.0 March 31 2016
-* 3.12.0 Feburary 12 2016 (LTS)
-* 3.11.0 December 9 2015
-* [3.10.0](http://hhvm.com/blog/10379/hhvm-3-10-0) October 15 2015
-* [3.9.0 (LTS)](http://hhvm.com/blog/9995/hhvm-3-9-0) August 18 2015
-* [3.8.0](http://hhvm.com/blog/9803/hhvm-3-8-0) July 13 2015
-* [3.7.0](http://hhvm.com/blog/9059/hhvm-3-7-0) April 27 2015
-* [3.6.0 (LTS)](http://hhvm.com/blog/8849/hhvm-3-6-0) March 11 2015
-* [3.5.0](http://hhvm.com/blog/7637/hhvm-3-5-0) January 16 2015
-* [3.4.0](http://hhvm.com/blog/6899/hhvm-3-4-0) November 14th 2014
-* [3.3.0 (LTS)](http://hhvm.com/blog/6239/hhvm-3-3-0) September 19th 2014
-* [3.2.0](http://hhvm.com/blog/5609/hhvm-3-2-0) July 17th 2014
-* [3.1.0](http://hhvm.com/blog/5195/hhvm-3-1-0) May 29th 2014
-* [3.0.0 (LTS)](http://hhvm.com/blog/4349/hhvm-3-0-0) March 27th 2014
-* [2.4.0](http://hhvm.com/blog/3287/hhvm-2-4-0) February 1st 2014
-* [2.3.0](http://hhvm.com/blog/2393/hhvm-2-3-0-and-travis-ci) December 13th 2013
-* [2.2.0](http://hhvm.com/blog/1301/hhvm-2-2-0) October 17th 2013 
+| Version | LTS | Branch Cut Date | Expected Release Date | Expected End Of Support |
+|---------|-----|-----------------|-----------------------|-------------------------|
+| 3.23    | No  | 2017-11-06      | 2017-11-17            | 2018-01-12              |
+| 3.24    | Yes | 2018-01-01      | 2018-01-12            | 2018-12-14              |
+| 3.25    | No  | 2018-02-26      | 2018-03-09            | 2018-05-04              |
 
-## Long-term Support
+## Supported Releases
 
-See [our page on LTS releases](/hhvm/installation/introduction#prebuilt-packages__lts-releases).
+| Version                                                | LTS | Release Date | Expected End Of Support |
+|--------------------------------------------------------|-----|--------------|-------------------------|
+| [3.22](http://hhvm.com/blog/2017/09/26/hhvm-3-22.html) | No  | 2017-09-26   | 2017-11-17              |
+| [3.21](http://hhvm.com/blog/2017/08/02/hhvm-3-21.html) | Yes | 2017-08-02   | 2018-07-04              |
+| [3.18](http://hhvm.com/blog/2017/02/15/hhvm-3-18.html) | Yes | 2017-02-15   | 2018-01-12              |
