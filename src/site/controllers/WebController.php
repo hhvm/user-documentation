@@ -1,11 +1,10 @@
 <?hh // strict
 
-use Facebook\HackRouter\RequestParameters;
-use Facebook\HackRouter\RequestParameter;
-use FredEmmott\TypeAssert\IncorrectTypeException;
-use FredEmmott\TypeAssert\TypeAssert;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use type Facebook\HackRouter\{RequestParameter, RequestParameters};
+use type Facebook\TypeAssert\IncorrectTypeException;
+use type Psr\Http\Message\ResponseInterface;
+use type Psr\Http\Message\ServerRequestInterface;
+use namespace Facebook\TypeAssert;
 
 <<__ConsistentConstruct>>
 abstract class WebController {
@@ -56,7 +55,7 @@ abstract class WebController {
   final private static function getUriParametersSpec(
   ): self::TParameterDefinitions {
     try {
-      $class = TypeAssert::isClassnameOf(
+      $class = TypeAssert\classname_of(
         RoutableController::class,
         static::class,
       );

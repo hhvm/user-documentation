@@ -2,10 +2,9 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use \FredEmmott\TypeAssert\TypeAssert;
-use \Psr\Http\Message\ResponseInterface;
-use \HHVM\UserDocumentation\ArgAssert;
-use \Response;
+use type \Psr\Http\Message\ResponseInterface;
+use type \Response;
+use namespace Facebook\TypeAssert;
 
 final class RemotePageLoader extends PageLoader {
   protected function __construct() {}
@@ -18,7 +17,7 @@ final class RemotePageLoader extends PageLoader {
     $path = parse_url($url, PHP_URL_PATH);
     $query = parse_url($url, PHP_URL_QUERY);
 
-    $test_host = TypeAssert::isNotNull(self::getHost());
+    $test_host = TypeAssert\not_null(self::getHost());
     if ($scheme === null) {
       switch ($test_host) {
         case 'docs.hhvm.com':

@@ -74,11 +74,11 @@ class Stringify {
   ): string {
     $ret = '';
 
-    $visibility = $func['visibility'];
+    $visibility = $func['visibility'] ?? null;
     if ($visibility !== null) {
       $ret .= $visibility.' ';
     }
-    if ($func['static'] === true) {
+    if ($func['static'] ?? false === true) {
       $ret .= 'static ';
     }
     $ret .= 'function '.$func['name'];

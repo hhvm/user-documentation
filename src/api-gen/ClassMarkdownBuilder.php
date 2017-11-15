@@ -162,7 +162,11 @@ EOF;
   }
 
   private static function nameFromData(
-    shape('name' => string, 'generics' => array<GenericDocumentation>) $data,
+    shape(
+      'name' => string,
+      'generics' => array<GenericDocumentation>,
+      ...
+    ) $data,
   ): string {
     $name = $data['name'];
     $name .= Stringify::generics($data['generics']);

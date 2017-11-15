@@ -49,9 +49,9 @@ final class MergedYAMLBuilder {
     }
   }
 
-  private function removePrivateMethods(
-    array<shape('visibility' => string)> $methods,
-  ): array<shape()> {
+  private function removePrivateMethods<T as shape('visibility' => string, ...)>(
+    array<T> $methods,
+  ): array<T> {
     // We filter out private methods at this late stage as occassionally we have
     // inconsistent ideas of what the visibility is and we want to go for the
     // most restrictive - if we filter out before merge, we'll end up with public
@@ -77,7 +77,7 @@ final class MergedYAMLBuilder {
     if (strpos($def['data']['name'], "\\") !== false) {
       $merged['data']['name'] = $def['data']['name'];
     }
- 
+
     $merged_data = StringKeyedShapes::toMap($merged['data']);
     $new_data = StringKeyedShapes::toMap($def['data']);
 

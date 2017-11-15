@@ -7,6 +7,7 @@ final class URLBuilder {
     shape(
       'name' => string,
       'type' => APIDefinitionType,
+      ...
     ) $class,
   ): string {
     return sprintf(
@@ -21,6 +22,7 @@ final class URLBuilder {
       'name' => string,
       'className' => string,
       'classType' => APIDefinitionType,
+      ...
     ) $method,
   ): string {
     return sprintf(
@@ -34,6 +36,7 @@ final class URLBuilder {
   public static function getPathForFunction(
     shape(
       'name' => string,
+      ...
     ) $function,
   ): string {
     return sprintf(

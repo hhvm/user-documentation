@@ -5,7 +5,7 @@ use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
-use FredEmmott\TypeAssert\TypeAssert;
+use namespace Facebook\TypeAssert;
 
 final class DocblockTagReader {
   private function __construct(
@@ -47,7 +47,7 @@ final class DocblockTagReader {
     // empty map
     $raw_tags = new Map($this->docblock?->getTagsByName($name));
     foreach ($raw_tags as $tag) {
-      $tags[] = TypeAssert::isInstanceOf($type, $tag);
+      $tags[] = TypeAssert\instance_of($type, $tag);
     }
 
     return $tags;

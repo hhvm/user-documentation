@@ -2,9 +2,10 @@
 
 namespace HHVM\UserDocumentation;
 
-use Facebook\HackCodegen as hcg;
-use Facebook\HackRouter\Codegen;
-use FredEmmott\TypeAssert\TypeAssert;
+use type Facebook\HackRouter\Codegen;
+
+use namespace Facebook\HackCodegen as hcg;
+use namespace Facebook\TypeAssert;
 
 final class RoutingCodegenBuildStep extends BuildStep {
   public function buildAll(): void {
@@ -15,7 +16,8 @@ final class RoutingCodegenBuildStep extends BuildStep {
         'controllerBase' => \RoutableController::class,
         'router' => self::getRouterConfig(),
         'requestParameters' => self::getRequestParametersConfig(),
-        'hackCodegenConfig' => new hcg\HackCodegenConfig(LocalConfig::ROOT),
+        'hackCodegenConfig' => (new hcg\HackCodegenConfig())
+          ->withRootDir(LocalConfig::ROOT),
       ),
     )->build();
   }
@@ -33,7 +35,7 @@ final class RoutingCodegenBuildStep extends BuildStep {
     $root = LocalConfig::ROOT.'/src/site/controllers/codegen/';
     return shape(
       'getParameters' => $class ==> {
-        $class = TypeAssert::isClassnameOf(\WebController::class, $class);
+        $class = TypeAssert\classname_of(\WebController::class, $class);
         $spec = $class::getParametersSpec();
         $out = Vector {};
         foreach ($spec['required'] as $p) {

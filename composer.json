@@ -1,13 +1,13 @@
 {
   "require": {
     "facebook/xhp-lib": "^2.3.2",
-    "hhvm": "~3.17",
+    "hhvm": "^3.23.0",
     "zendframework/zend-diactoros": "^1.1",
-    "nikic/fast-route": "^1.0.1",
     "hhvm/hhvm-autoload": "^1.5",
-    "fredemmott/type-assert": "^1.0.0",
-    "facebook/hack-router-codegen": "^0.9",
-    "facebook/hack-router": "^0.9",
+    "hhvm/type-assert": "^3.1.0",
+    "facebook/hack-codegen": "^3.0.1",
+    "facebook/hack-router-codegen": "^0.10.1",
+    "facebook/hack-router": "^0.10",
     "hhvm/hsl": "^1.0"
   },
   "require-dev": {

@@ -53,7 +53,7 @@ class ScannedDefinitionsYAMLBuilder {
   private function buildDefinitions<T as ScannedBase>(
     APIDefinitionType $type,
     \ConstVector<T> $defs,
-    (function(T):shape('name' => string)) $converter,
+    (function(T):shape('name' => string, ...)) $converter,
   ): void {
     $defs = $this->filtered($defs);
     $writer = new YAMLWriter($this->destination);
@@ -132,8 +132,6 @@ class ScannedDefinitionsYAMLBuilder {
         ->getParameters()
         ->map($p ==> self::GetParameterDocumentation($p))
         ->toArray(),
-      'visibility' => null,
-      'static' => null,
       'deprecation' => $deprecationMessage !== null ?
         (string) $deprecationMessage : null,
     );

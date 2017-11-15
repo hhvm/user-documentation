@@ -74,7 +74,7 @@ type DocumentationSource = shape(
 type BaseYAML = shape(
   'sources' => array<DocumentationSource>,
   'type' => APIDefinitionType,
-  'data' => shape('name' => string),
+  'data' => shape('name' => string, ...),
 );
 
 type ClassYAML = shape(
@@ -126,10 +126,10 @@ type FunctionDocumentation = shape(
   'generics' => array<GenericDocumentation>,
   'docComment' => ?string,
   'parameters' => array<ParameterDocumentation>,
-  'className' => ?string,
-  'classType' => ?APIDefinitionType,
-  'visibility' => ?MemberVisibility,
-  'static' => ?bool,
+  ?'className' => string,
+  ?'classType' => APIDefinitionType,
+  ?'visibility' => MemberVisibility,
+  ?'static' => bool,
   'deprecation' => ?string,
 );
 
@@ -160,6 +160,7 @@ type APIIndexEntry = shape(
   'name' => string,
   'htmlPath' => string,
   'urlPath' => string,
+  ...
 );
 
 type APIFunctionIndexEntry = shape(

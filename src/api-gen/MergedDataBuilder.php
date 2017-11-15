@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use FredEmmott\TypeAssert\TypeAssert;
+use namespace Facebook\TypeAssert;
 
 final class MergedDataBuilder {
   private Map<string, mixed> $data;
@@ -210,7 +210,7 @@ final class MergedDataBuilder {
         $key = substr($name, $ns_sep + 1);
       }
       if ($keyed->containsKey($key)) {
-        $keyed[$key] = TypeAssert::isNotNull(
+        $keyed[$key] = TypeAssert\not_null(
           self::MergedTypehint($keyed[$key], $interface)
          );
       } else {
