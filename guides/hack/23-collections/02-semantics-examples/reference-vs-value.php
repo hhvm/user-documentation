@@ -32,7 +32,7 @@ function value_semantics(): void {
   $arr[0] = 100; // $cp_arr is not affected by this
   var_dump($arr);
   var_dump($cp_arr);
-  bar($arr); // $arr is not affected by anytnig bar does to it
+  bar($arr); // $arr is not affected by anything bar does to it
   var_dump($arr);
 }
 
