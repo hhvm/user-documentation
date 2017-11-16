@@ -52,6 +52,22 @@ class APIIndex {
     return $results;
   }
 
+  private static function nameMatchesTerm(
+    string $name,
+    string $term,
+  ): bool {
+    if (Str\contains_ci($name, $term)) {
+      return true;
+    }
+
+    $parts = Str\split($name, '\\');
+    return C\any(
+      $parts,
+      $part ==>
+        Str\starts_with_ci($part, $term) || Str\starts_with_ci($term, $part)
+    );
+  }
+
   private static function searchEntries (
     string $term,
     APIDefinitionType $type,
@@ -62,7 +78,7 @@ class APIIndex {
     $entries = self::getIndexForType($type);
     foreach ($entries as $_ => $entry) {
       $name = $entry['name'];
-      if (C\every($terms, $term ==> Str\contains_ci($name, $term))) {
+      if (C\every($terms, $term ==> self::nameMatchesTerm($name, $term))) {
         $results->addAPIResult($type, $entry);
       }
     }
