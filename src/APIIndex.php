@@ -3,6 +3,8 @@ namespace HHVM\UserDocumentation;
 
 require(BuildPaths::APIDOCS_INDEX);
 
+use namespace HH\Lib\{C, Str};
+
 class APIIndex {
   public static function getIndex(
   ): APIIndexShape {
@@ -54,12 +56,13 @@ class APIIndex {
     string $term,
     APIDefinitionType $type,
   ): SearchResultSet {
+    $terms = Str\split($term, ' ');
     $results = new SearchResultSet();
 
     $entries = self::getIndexForType($type);
     foreach ($entries as $_ => $entry) {
       $name = $entry['name'];
-      if (stripos($name, $term) !== false) {
+      if (C\every($terms, $term ==> Str\contains_ci($name, $term))) {
         $results->addAPIResult($type, $entry);
       }
     }
