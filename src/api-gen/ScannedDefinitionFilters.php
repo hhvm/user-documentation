@@ -8,6 +8,8 @@ use Facebook\DefinitionFinder\ScannedFunctionAbstract;
 use Facebook\DefinitionFinder\HasScannedGenerics;
 use Facebook\DefinitionFinder\HasScannedVisibility;
 
+use HH\Lib\Str;
+
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {
     $is_hh_specific =
@@ -52,8 +54,9 @@ abstract final class ScannedDefinitionFilters {
 
   public static function ShouldNotDocument(ScannedBase $def): bool {
     return (
-      (strpos($def->getName(), "__SystemLib\\") === 0)
-      || strpos($def->getName(), 'WaitHandle')
+      Str\starts_with($def->getName(), "__SystemLib\\")
+      || Str\starts_with($def->getName(), "HH\\Lib\\_Private\\")
+      || Str\contains($def->getName(), 'WaitHandle')
       || self::IsBlacklisted($def)
       || self::IsUndefinedFunction($def)
     );
