@@ -51,6 +51,39 @@ final class SearchTest extends \PHPUnit_Framework_TestCase {
         'async',
         ['/hack/async/introduction'],
       ),
+      tuple(
+        'string contains',
+        [
+          'HH\\Lib\\Str\\contains',
+          'HH\\Lib\\Str\\contains_ci',
+        ]
+      ),
+      tuple(
+        'vector contains',
+        [
+          'HH\\Lib\\C\\contains',
+        ]
+      ),
+      tuple(
+        'vector contains',
+        [
+          'HH\\Lib\\C\\contains',
+        ]
+      ),
+      tuple(
+        'set contains',
+        [
+          'HH\\Lib\\C\\contains',
+          'HH\\Lib\\C\\contains_key',
+        ]
+      ),
+      tuple(
+        'keyset contains',
+        [
+          'HH\\Lib\\C\\contains',
+          'HH\\Lib\\C\\contains_key',
+        ]
+      ),
     ];
   }
 }
