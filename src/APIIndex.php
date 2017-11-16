@@ -6,6 +6,15 @@ require(BuildPaths::APIDOCS_INDEX);
 use namespace HH\Lib\{C, Str};
 
 class APIIndex {
+  const dict<string, keyset<string>> KEYWORD_EXPANSIONS = dict[
+    'vec' => keyset['\\c\\'],
+    'dict' => keyset['\\c\\'],
+    'keyset' => keyset['\\c\\'],
+    'vector' => keyset['\\c\\', 'vec'],
+    'map' => keyset['\\c\\', 'dict'],
+    'set' => keyset['\\c\\', 'keyset'],
+  ];
+
   public static function getIndex(
   ): APIIndexShape {
     return APIIndexData::getIndex();
@@ -61,11 +70,27 @@ class APIIndex {
     }
 
     $parts = Str\split($name, '\\');
-    return C\any(
-      $parts,
-      $part ==>
-        Str\starts_with_ci($part, $term) || Str\starts_with_ci($term, $part)
-    );
+    if (
+      C\any(
+        $parts,
+        $part ==>
+          Str\length($part) >= 3 && // Don't match C\ against everything
+          (Str\starts_with_ci($part, $term) || Str\starts_with_ci($term, $part))
+      )
+    ) {
+      return true;
+    }
+
+    $fallbacks = self::KEYWORD_EXPANSIONS[Str\lowercase($term)] ?? null;
+    if ($fallbacks === null) {
+      return false;
+    }
+
+    if (C\any($fallbacks, $fb ==> self::nameMatchesTerm($name, $fb))) {
+      return true;
+    }
+
+    return false;
   }
 
   private static function searchEntries (
