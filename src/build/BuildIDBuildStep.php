@@ -11,7 +11,7 @@ final class BuildIDBuildStep extends BuildStep {
     } else {
       $docsite_rev = $this->getHead(__DIR__.'/../../');
     }
-    $hhvm_rev = $this->getHead(LocalConfig::HHVM_TREE);
+    $hhvm_rev = $this->getHead(BuildPaths::HHVM_TREE);
 
     $build_id = strftime('%FT%T%z').':'.$docsite_rev.':'.$hhvm_rev;
     file_put_contents(BuildPaths::BUILD_ID, $build_id);

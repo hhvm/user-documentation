@@ -1,1 +1,2 @@
 assume_php=false
+ignored_paths = [ ".+/api-sources/.+" ]

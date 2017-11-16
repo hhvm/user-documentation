@@ -2,15 +2,14 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use HHVM\UserDocumentation\LocalConfig;
-
+use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
 use namespace HH\Lib\{Str, Vec};
 
 /**
  * @large
  */
 class ExamplesTest extends \PHPUnit_Framework_TestCase {
-  const string TEST_RUNNER = LocalConfig::HHVM_TREE.'/hphp/test/run';
+  const string TEST_RUNNER = BuildPaths::HHVM_TREE.'/hphp/test/run';
 
   public function testExamplesOutput(): void {
     $exclude_suffixes = vec[

@@ -10,13 +10,18 @@ final class RawYAMLBuildStep extends BuildStep {
 
     Log::i("\nRawYAMLBuild");
     $sources = (Vector { })
-      ->addAll(self::findSources(LocalConfig::HHVM_TREE.'/hphp/system/php/', $exts))
-      ->addAll(self::findSources(LocalConfig::HHVM_TREE.'/hphp/runtime/ext/', $exts));
+      ->addAll(self::findSources(BuildPaths::HHVM_TREE.'/hphp/system/php/', $exts))
+      ->addAll(self::findSources(BuildPaths::HHVM_TREE.'/hphp/runtime/ext/', $exts));
     $this->buildSources(BuildPaths::SYSTEMLIB_YAML, $sources);
 
     $this->buildSources(
       BuildPaths::HHI_YAML,
-      self::findSources(LocalConfig::HHVM_TREE.'/hphp/hack/hhi/', $exts),
+      self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts),
+    );
+
+    $this->buildSources(
+      BuildPaths::HSL_YAML,
+      self::findSources(BuildPaths::HSL_TREE.'/src/', $exts),
     );
   }
 

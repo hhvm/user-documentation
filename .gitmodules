@@ -1,0 +1,6 @@
+[submodule "api-sources/hsl"]
+	path = api-sources/hsl
+	url = https://github.com/hhvm/hsl.git
+[submodule "api-sources/hhvm"]
+	path = api-sources/hhvm
+	url = https://github.com/facebook/hhvm.git

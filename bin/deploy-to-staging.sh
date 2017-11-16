@@ -25,6 +25,7 @@ CLEAN_DIR="$(mktemp -d)"
   cd "$CLEAN_DIR"
   git clone --depth=1 "file://$ORIGINAL_DIR" hhvm-docs
   cd hhvm-docs
+  git submodule update --init --depth 50
   git rev-parse HEAD > DOCSITE_REV
   rm -rf .git
 )

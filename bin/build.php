@@ -3,8 +3,8 @@ namespace HHVM\UserDocumentation;
 
 require(__DIR__.'/../vendor/hh_autoload.php');
 function build_site(?Traversable<string> $filters = null): void {
-  if (!is_dir(LocalConfig::BUILD_DIR)) {
-    mkdir(LocalConfig::BUILD_DIR);
+  if (!is_dir(BuildPaths::BUILD_DIR)) {
+    mkdir(BuildPaths::BUILD_DIR);
   }
 
   $steps = Vector {

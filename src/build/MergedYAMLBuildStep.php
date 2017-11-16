@@ -7,7 +7,8 @@ final class MergedYAMLBuildStep extends BuildStep {
     Log::i("\nMergedYAMLBuild");
     $sources = (Vector { })
       ->addAll(self::findSources(BuildPaths::HHI_YAML, Set{'yml'}))
-      ->addAll(self::findSources(BuildPaths::SYSTEMLIB_YAML, Set{'yml'}));
+      ->addAll(self::findSources(BuildPaths::SYSTEMLIB_YAML, Set{'yml'}))
+      ->addAll(self::findSources(BuildPaths::HSL_YAML, Set{'yml'}));
     if (!is_dir(BuildPaths::MERGED_YAML)) {
       mkdir(BuildPaths::MERGED_YAML, /* mode = */ 0755, /* recursive = */ true);
     }
