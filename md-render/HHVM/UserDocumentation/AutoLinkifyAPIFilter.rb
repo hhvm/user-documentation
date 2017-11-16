@@ -34,6 +34,9 @@ module HHVM
             url = DEFINITIONS['HH\\' + content.to_s] # to_s in case content nil
           end
           if url.nil?
+            url = DEFINITIONS['HH\\Lib\\' + content.to_s]
+          end
+          if url.nil?
             file = File.basename(context[:file])
             match = CLASS_REGEXP.match file
             if match
