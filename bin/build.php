@@ -22,6 +22,7 @@ function build_site(?Traversable<string> $filters = null): void {
     MergedYAMLBuildStep::class,
     FetchPHPDotNetIndexBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
+    FacebookIPRangesBuildStep::class,
 
     // Needs getting the PHP ini settings HHVM supports
     PHPIniSupportInHHVMMarkdownBuildStep::class,

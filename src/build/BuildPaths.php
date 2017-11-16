@@ -58,9 +58,11 @@ abstract final class BuildPaths {
   const string SITE_MAP = self::BUILD_DIR.'/sitemap.txt';
 
   const string STATIC_RESOURCES_MAP =
-   self::BUILD_DIR.'/static_resources.php';
+    self::BUILD_DIR.'/static_resources.php';
   const string STATIC_RESOURCES_MAP_JSON =
-   self::BUILD_DIR.'/static_resources.json';
+    self::BUILD_DIR.'/static_resources.json';
+  const string FB_IP_RANGES_JSON =
+    self::BUILD_DIR.'/fb_ip_ranges.json';
 
   const string FASTROUTE_CACHE =
     self::BUILD_DIR.'/route.cache';
