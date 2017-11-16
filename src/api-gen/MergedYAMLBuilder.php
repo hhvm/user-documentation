@@ -2,6 +2,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Str;
+
 final class MergedYAMLBuilder {
   private Map<string, BaseYAML> $definitions = Map { };
   public function __construct(
@@ -18,6 +20,10 @@ final class MergedYAMLBuilder {
       || $type === APIDefinitionType::TRAIT_DEF
     ) {
       $type === APIDefinitionType::CLASS_DEF;
+    }
+
+    if (Str\starts_with($name, "HH\\Lib")) {
+      return $type.' '.$name;
     }
 
     $last_ns = strrpos($name, "\\");
