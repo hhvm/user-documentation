@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "fc3b0bbcc08f837285f1c09f497cbad8",
+    "content-hash": "d3eddfb27702d1c2b1393248c0ac7113",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -630,6 +630,38 @@
                 "instantiate"
             ],
             "time": "2015-06-14T21:17:01+00:00"
+        },
+        {
+            "name": "facebook/fbexpect",
+            "version": "v0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/fbexpect.git",
+                "reference": "d650f97d7da0b7bbaf7a3641feca4cdb41414dce"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/d650f97d7da0b7bbaf7a3641feca4cdb41414dce",
+                "reference": "d650f97d7da0b7bbaf7a3641feca4cdb41414dce",
+                "shasum": ""
+            },
+            "require": {
+                "91carriage/phpunit-hhi": "^5.7",
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "files": [
+                    "src/expect.php",
+                    "src/utils.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "description": "Unit test helpers for Facebook projects",
+            "time": "2017-09-20T18:27:43+00:00"
         },
         {
             "name": "mustangostang/spyc",

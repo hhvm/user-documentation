@@ -2,6 +2,8 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+use function Facebook\FBExpect\expect;
+
 /**
  * @small
  */
@@ -18,8 +20,8 @@ final class SearchTest extends \PHPUnit_Framework_TestCase {
     );
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
-    foreach ($expected as $url) {
-      $this->assertContains($url, $expected);
+    foreach ($expected as $substr) {
+      expect($body)->toContain($substr);
     }
   }
 
@@ -27,11 +29,11 @@ final class SearchTest extends \PHPUnit_Framework_TestCase {
     return [
       tuple(
         'array_filter',
-        ['http://php.net/manual/en/class.mysqli.php'],
+        ['http://php.net/manual/en/function.array-filter.php'],
       ),
       tuple(
         'mysqli',
-        ['http://php.net/manual/en/function.array_filter.php'],
+        ['http://php.net/manual/en/class.mysqli.php'],
       ),
       tuple(
         'vw',
