@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\{C, Str};
+
 // Index of all definitions, so that markdown processing can
 // automatically linkify them
 final class UnifiedAPIIndexBuildStep extends BuildStep {
@@ -30,7 +32,13 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
 
     $jump_index = [];
     foreach ($defs as $name => $url) {
-      $jump_index[strtolower($name)] = $url;
+      $name = Str\lowercase($name);
+      if (
+        (!C\contains_key($jump_index, $name))
+        || Str\length($jump_index[$name]) > Str\length($url)
+      ) {
+        $jump_index[$name] = $url;
+      }
     }
 
     $code = $this->writeCode(
@@ -47,15 +55,25 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     Log::v("\nProcessing Hack API Index");
 
     $out = Map { };
+    $maybe_set = ($name, $url) ==> {
+      if (
+        (!C\contains_key($out, $name))
+        || Str\length($out[$name]) > Str\length($url)
+      ) {
+        $out[$name] = $url;
+      }
+    };
+
     foreach (APIDefinitionType::getValues() as $type) {
       $defs = APIIndex::getIndexForType($type);
       foreach ($defs as $_ => $def) {
         $name = $def['name'];
-        $out[$name] = $def['urlPath'];
+        $maybe_set($name, $def['urlPath']);
+
         $ns_pos = strrpos($name, "\\");
         if ($ns_pos !== false) {
           $name = substr($name, $ns_pos + 1);
-          $out[$name] = $def['urlPath'];
+          $maybe_set($name, $def['urlPath']);
         }
 
         $def = Shapes::toArray($def);
@@ -66,7 +84,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
 
         foreach ($children as $_ => $child) {
           $name = $child['className'].'::'.$child['name'];
-          $out[$name] = $child['urlPath'];
+          $maybe_set($name, $child['urlPath']);
         }
       }
     }
