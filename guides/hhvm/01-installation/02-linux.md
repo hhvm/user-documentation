@@ -17,14 +17,11 @@ Here are the supported distributions:
 
 ```
 # installs add-apt-repository
-sudo apt-get install software-properties-common
+sudo apt-get install software-properties-common apt-transport-https
 
-# Key rotation is in progress as of November 2017; this is the old key:
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-# And this is the new key:
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-sudo add-apt-repository "deb http://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
+sudo add-apt-repository "deb https://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
 sudo apt-get update
 sudo apt-get install hhvm
 ```
@@ -47,12 +44,10 @@ Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
 ## Debian 8 Jessie
 
 ```
-# Key rotation is in progress as of November 2017; this is the old key:
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-# And this is the new key:
+sudo apt-get install -y apt-transport-https
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-echo deb http://dl.hhvm.com/debian jessie main | sudo tee /etc/apt/sources.list.d/hhvm.list
+echo deb https://dl.hhvm.com/debian jessie main | sudo tee /etc/apt/sources.list.d/hhvm.list
 sudo apt-get update
 sudo apt-get install hhvm
 ```
@@ -61,11 +56,9 @@ sudo apt-get install hhvm
 
 ```
 # Key rotation is in progress as of November 2017; this is the old key:
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0x5a16e7281be7a449
-# And this is the new key:
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-echo deb http://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.d/hhvm.list
+echo deb https://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.d/hhvm.list
 sudo apt-get update
 sudo apt-get install hhvm
 ```
@@ -76,11 +69,11 @@ The commands above will get you the latest stable point release of HHVM. If you 
 
 e.g., the following `deb` line in `/etc/apt/sources.list` will get all stable updates on Ubuntu 16.04 "Xenial":
 
-    deb http://dl.hhvm.com/ubuntu xenial main
+    deb https://dl.hhvm.com/ubuntu xenial main
 
 In order to get only LTS updates in the 3.15 series, change that to:
 
-    deb http://dl.hhvm.com/ubuntu xenial-lts-3.15 main
+    deb https://dl.hhvm.com/ubuntu xenial-lts-3.15 main
 
 ## Other Packages
 
