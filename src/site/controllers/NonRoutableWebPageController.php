@@ -53,7 +53,7 @@ EOF;
   }
 
   final public async function getResponse(): Awaitable<ResponseInterface> {
-    list($title, $content) = await \HH\Asio\va2(
+    list($title, $content) = await \HH\Asio\va(
       $this->getTitle(),
       $this->getContentPane()
     );
@@ -145,7 +145,7 @@ EOF;
   }
 
   final protected async function getContentPane(): Awaitable<XHPRoot> {
-    list($title, $body) = await \HH\Asio\va2(
+    list($title, $body) = await \HH\Asio\va(
       $this->getTitle(),
       $this->getBody(),
     );
