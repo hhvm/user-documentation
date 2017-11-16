@@ -20,7 +20,11 @@ apt-get install -y build-essential zlib1g-dev
 apt-get install -y python-pygments
 
 mkdir /opt/composer
-curl -sS https://getcomposer.org/installer | hhvm --php -- --install-dir=/opt/composer
+wget -qO /dev/stdout https://getcomposer.org/installer | hhvm --php -- --install-dir=/opt/composer
+if [ ! -e /opt/composer/composer.phar ]; then
+  echo "Failed to install composer"
+  exit 1
+fi
 touch /opt/composer/.hhconfig
 
 # We need the HHVM source to build the docs
