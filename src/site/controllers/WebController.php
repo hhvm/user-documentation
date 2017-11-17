@@ -9,11 +9,17 @@
  *
  */
 
+use function HHVM\UserDocumentation\{
+  cidr_to_bitstring_and_bitmask,
+  is_fb_ip_address,
+  is_ip_in_range,
+};
 use type Facebook\HackRouter\{RequestParameter, RequestParameters};
 use type Facebook\TypeAssert\IncorrectTypeException;
 use type Psr\Http\Message\ResponseInterface;
 use type Psr\Http\Message\ServerRequestInterface;
 use namespace Facebook\TypeAssert;
+use namespace HH\Lib\{C, Str, Vec};
 
 <<__ConsistentConstruct>>
 abstract class WebController {
@@ -119,5 +125,58 @@ abstract class WebController {
     if ($uri->getScheme() !== 'https') {
       throw new RedirectException((string) $uri->withScheme('https'));
     }
+  }
+
+  protected function isFacebookIP(): bool {
+    return is_fb_ip_address($this->getRemoteIPAddress());
+  }
+
+  <<__Memoize>>
+  private function getRemoteIPAddress(): string {
+    $stack = $this->request->getServerParams()['HTTP_X_FORWARDED_FOR']
+      |> Str\split((string) $$, ',')
+      |> Vec\map($$, $part ==> Str\trim($part))
+      |> Vec\filter($$, $part ==> !Str\is_empty($part));
+    $ip = (string) $this->request->getServerParams()['REMOTE_ADDR'];
+    $stack[] = $ip;
+    while (!C\is_empty($stack)) {
+      $top = C\lastx($stack);
+      if (!self::isTrusted($top)) {
+        return $top;
+      }
+      $ip = $top;
+      $stack = Vec\take($stack, C\count($stack) - 1);
+    }
+
+    return $ip;
+  }
+
+  private static function isTrusted(string $ip): bool {
+    return C\any(
+      self::getTrustedRanges(),
+      $range ==> is_ip_in_range($ip, $range),
+    );
+  }
+
+  <<__Memoize>>
+  private static function getTrustedRanges(): vec<(string, string)> {
+    $key = __FUNCTION__.'$__DATA__';
+    $success = false;
+    $data = apc_fetch($key, $success);
+    if ($success) {
+      return $data;
+    }
+
+    $cidr = vec[
+      '10.0.0.0/8',
+      '172.16.0.0/12',
+      '192.168.0.0/16',
+      '127.0.0.0/8',
+    ];
+
+    $data = Vec\map($cidr, $range ==> cidr_to_bitstring_and_bitmask($range));
+
+    apc_store($key, $data);
+    return $data;
   }
 }
