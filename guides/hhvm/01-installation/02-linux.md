@@ -5,49 +5,32 @@ While you can [build from source](/hhvm/installation/building-from-source), it i
 
 Here are the supported distributions:
 
-* [Ubuntu 14.04](#ubuntu-14.04-trusty)
-* [Ubuntu 15.04](#ubuntu-15.04-vivid)
-* [Ubuntu 15.10](#ubuntu-15.10-wily-werewolf)
-* [Ubuntu 16.04](#ubuntu-16.04-xenial)
-* [Ubuntu 16.10](#ubuntu-16.10-yakkety)
-* [Debian 7](#debian-7-wheezy)
-* [Debian 8](#debian-8-jessie)
+* Ubuntu 16.04 Xenial
+* Ubuntu 16.10 Yakkety
+* Ubuntu 17.04 Zesty
+* Ubunty 17.10 Artful
+* Debian 7 Wheezy
+* Debian 8 Jessie
+* Debian 9 Stretch
 
-## Ubuntu 16.10 Yakkety
+## Ubuntu
 
 ```
-# installs add-apt-repository
 sudo apt-get install software-properties-common apt-transport-https
-
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-sudo add-apt-repository "deb https://dl.hhvm.com/ubuntu $(lsb_release -sc) main"
+sudo add-apt-repository https://dl.hhvm.com/ubuntu
 sudo apt-get update
 sudo apt-get install hhvm
 ```
-## Ubuntu 16.04 Xenial
 
-Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
-
-## Ubuntu 15.10 Wily Werewolf
-
-Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
-
-## Ubuntu 15.04 Vivid
-
-Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
-
-## Ubuntu 14.04 Trusty (Supported through HHVM 3.18)
-
-Same instructions as [Ubuntu 16.10](#ubuntu-16.10-yakkety)
-
-## Debian 8 Jessie
+## Debian 8 Jessie, Debian 9 Stretch
 
 ```
-sudo apt-get install -y apt-transport-https
+sudo apt-get install -y apt-transport-https software-properties-common
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-echo deb https://dl.hhvm.com/debian jessie main | sudo tee /etc/apt/sources.list.d/hhvm.list
+sudo add-apt-repository https://dl.hhvm.com/debian
 sudo apt-get update
 sudo apt-get install hhvm
 ```
@@ -55,7 +38,7 @@ sudo apt-get install hhvm
 ## Debian 7 Wheezy
 
 ```
-# Key rotation is in progress as of November 2017; this is the old key:
+sudo apt-get install -y apt-transport-https software-properties-common
 sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
 echo deb https://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.d/hhvm.list
