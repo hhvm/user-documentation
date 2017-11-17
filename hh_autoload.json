@@ -4,5 +4,5 @@
     "tests/"
   ],
   "extraFiles": [ "LocalConfig.php" ],
-  "parser": "ext-factparse"
+  "devFailureHandler": "Facebook\\AutoloadMap\\HHClientFallbackHandler"
 }
