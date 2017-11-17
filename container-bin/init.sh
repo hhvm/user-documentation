@@ -27,9 +27,6 @@ if [ ! -e /opt/composer/composer.phar ]; then
 fi
 touch /opt/composer/.hhconfig
 
-# We need the HHVM source to build the docs
-(cd /var && git clone --depth=1 https://github.com/facebook/hhvm.git)
-
 # No point running anything else for devservers, as /var/www gets mounted
 # over anyway
 if [ "${DOCKER_BUILD_ENV}" == "dev" ]; then
@@ -65,7 +62,7 @@ echo "** Removing intermediate build products"
 rm -rf build/*-yaml/ build/*-markdown/
 echo "** Cleaning up..."
 rm -rf /root/.composer
-rm -rf /var/hhvm /var/www/.git /tmp/hh_server
+rm -rf /var/www/{.git,api-sources,api-examples,guides,md-render} /tmp/hh_server
 apt-get remove -y \
   build-essential ruby bundler zlib1g-dev python-pygments curl
 SUDO_FORCE_REMOVE=yes apt-get autoremove -y
