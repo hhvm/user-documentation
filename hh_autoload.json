@@ -3,6 +3,5 @@
     "src/",
     "tests/"
   ],
-  "extraFiles": [ "LocalConfig.php" ],
-  "devFailureHandler": "Facebook\\AutoloadMap\\HHClientFallbackHandler"
+  "extraFiles": [ "LocalConfig.php" ]
 }
