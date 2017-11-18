@@ -37,6 +37,27 @@ a {
   color: red;
 }
 
+.apiTopMessage {
+  border: 1px solid $blue;
+  background-color: lighten($blue, 40%);
+  color: $darkblue;
+  font-size: smaller;
+  font-style: italic;
+  padding: 0.5em;
+}
+
+.apiTopMessage:nth-child(n+2) {
+  border-top: none;
+}
+
+.isNotFbViewer * .fbOnly {
+  display: none;
+}
+
+.apiTopMessage.fbOnly p:last-child {
+  padding-bottom: 0px;
+}
+
 @media only screen and (max-width: 1020px) {
   body {
     font-size: 15px;

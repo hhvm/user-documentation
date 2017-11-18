@@ -67,7 +67,10 @@ abstract final class ScannedDefinitionFilters {
       || Str\starts_with($def->getName(), "HH\\Lib\\_Private\\")
       || Str\contains($def->getName(), 'WaitHandle')
       || self::IsBlacklisted($def)
-      || self::IsUndefinedFunction($def)
+      || (
+        Str\contains($def->getFileName(), 'api-sources/hhvm/')
+        && self::IsUndefinedFunction($def)
+      )
     );
   }
 

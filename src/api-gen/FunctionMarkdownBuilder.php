@@ -58,7 +58,7 @@ final class FunctionMarkdownBuilder {
 
     $main_md = $parts
       |> Vec\filter_nulls($$)
-      |> Vec\filter($$, $x ==> Str\is_empty($x))
+      |> Vec\filter($$, $x ==> !Str\is_empty($x))
       |> Str\join($$, "\n\n");
     return $this->getFrontMatter().$main_md."\n";
   }
@@ -68,23 +68,24 @@ final class FunctionMarkdownBuilder {
       'name' => $this->yaml['data']['name'],
       'sources' => Vec\map(
         $this->yaml['sources'],
-        $source ==> Str\strip_prefix($source['name'], LocalConfig::ROOT),
+        $source ==> Str\strip_prefix($source['name'], LocalConfig::ROOT.'/'),
       ),
     );
     $fbonly_messages = vec[];
     if (
       C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hsl/'))
     ) {
-      $data['lib'] = 'hhvm/hsl';
-      $fbonly_messages[] =
-        "You don't need the `HH\\Lib\\` prefix when working in the www ".
-        "repository.";
+      $data['lib'] = shape(
+        'name' => 'the Hack Standard Library',
+        'github' => 'hhvm/hsl',
+        'composer' => 'hhvm/hsl',
+      );
     }
     if (
       !C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hhvm/'))
     ) {
-      if (Str\ends_with($data['name'], '_async')) {
-        $name = Str\strip_suffix($data['name'], "HH\\Lib\\");
+      $name = Str\strip_prefix($data['name'], "HH\\Lib\\");
+      if (Str\ends_with($name, '_async')) {
         $parts = Str\split($name, '\\');
         $last = C\lastx($parts);
         $parts = Vec\take($parts, C\count($parts) - 1);
@@ -95,14 +96,16 @@ final class FunctionMarkdownBuilder {
           $parts[] = 'gen_'.Str\strip_suffix($last, '_async');
         }
         $name = Str\join($parts, "\\");
-        $fbonly_messages[] = "This function is called  `".$name."` in the www ".
-          "repository.";
       }
+      $fbonly_messages[] = "This function is available as `".$name."()` in ".
+        "Facebooks' www repository.";
     }
     if (!C\is_empty($fbonly_messages)) {
       $data['fbonly messages'] = $fbonly_messages;
     }
-    return "```yamlmeta\n".\Spyc::YAMLDump($data)."\n```\n";
+    // JSON is a subset of yaml, and json_encode handles vecs :p
+    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    return "```yamlmeta\n".$json."\n```\n";
   }
 
   public static function getOutputFileName(

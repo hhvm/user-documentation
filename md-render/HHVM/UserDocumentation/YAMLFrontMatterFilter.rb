@@ -1,8 +1,9 @@
 require 'yaml'
+require 'html/pipeline'
 
 module HHVM
   module UserDocumentation
-    class YAMLFrontMatterFilter < HTML::Pipeline::HtmlFilter
+    class YAMLFrontMatterFilter < HTML::Pipeline::Filter
       def call
         doc.search('pre').each do |node|
           if node['lang'] != 'yamlmeta'
@@ -12,25 +13,30 @@ module HHVM
 
           if data['lib']
             node.add_previous_sibling(%Q{
-              <div class="apiFromLib">
-                This library is part of the
-                <span class="apiLibName">#{data['lib']}</span>
-                library, not HHVM itself.
+              <div class="apiTopMessage apiFromLib">
+                This API is part of
+                <a href="https://github.com/#{data['lib']['github']}/"
+                  >#{data['lib']['name']}</a>, not HHVM itself.
               </div>
             })
           end
 
           if data['fbonly messages']
+            html = ''
             data['fbonly messages'].each do |message|
-              node.add_previous_sibling(%Q{
-                <div class="fbonly">#{message}</div>
-              })
+              html += HTML::Pipeline::MarkdownFilter.new(message).call().to_s
             end
+            node.add_previous_sibling(%Q{
+              <div class="apiTopMessage fbOnly">
+                <strong>Facebook Engineer?</strong>
+                #{html}
+              </div>
+            })
           end
 
           node.remove
         end
-
+        doc
       end
     end
   end

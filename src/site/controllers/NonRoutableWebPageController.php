@@ -167,6 +167,11 @@ EOF;
     if ($extra_class !== null) {
       $class = $class.' '.$extra_class;
     }
+    if ($this->isFacebookIP()) {
+      $class .= ' isFbViewer';
+    } else {
+      $class .= ' isNotFbViewer';
+    }
     return $class;
   }
 
