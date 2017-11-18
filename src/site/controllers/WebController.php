@@ -128,16 +128,24 @@ abstract class WebController {
   }
 
   protected function isFacebookIP(): bool {
-    return is_fb_ip_address($this->getRemoteIPAddress());
+    $ip = $this->getRemoteIPAddress();
+    if ($ip === null) {
+      return false;
+    }
+    return is_fb_ip_address($ip);
   }
 
   <<__Memoize>>
-  private function getRemoteIPAddress(): string {
-    $stack = $this->request->getServerParams()['HTTP_X_FORWARDED_FOR']
+  private function getRemoteIPAddress(): ?string {
+    $ip = $this->request->getServerParams()['REMOTE_ADDR'] ?? null;
+    if ($ip === null) {
+      return null;
+    }
+    $ip = (string) $ip;
+    $stack = ($this->request->getServerParams()['HTTP_X_FORWARDED_FOR'] ?? '')
       |> Str\split((string) $$, ',')
       |> Vec\map($$, $part ==> Str\trim($part))
       |> Vec\filter($$, $part ==> !Str\is_empty($part));
-    $ip = (string) $this->request->getServerParams()['REMOTE_ADDR'];
     $stack[] = $ip;
     while (!C\is_empty($stack)) {
       $top = C\lastx($stack);
