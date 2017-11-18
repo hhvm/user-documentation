@@ -20,7 +20,6 @@ class YAMLWriter {
   public function write(BaseYAML $def): void {
     file_put_contents(
       $this->getFileName($def),
-      /* UNSAFE_EXPR: no HHI for Spyc */
       \Spyc::YAMLDump($def),
     );
   }

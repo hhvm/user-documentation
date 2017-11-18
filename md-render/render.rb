@@ -12,6 +12,7 @@ require_relative 'HHVM/UserDocumentation/ResponsiveTablesFilter.rb'
 require_relative 'HHVM/UserDocumentation/VersionedImagesFilter.rb'
 require_relative 'HHVM/UserDocumentation/IgnoreNewlinesFilter.rb'
 require_relative 'HHVM/UserDocumentation/AutoLinkifyAPIFilter.rb'
+require_relative 'HHVM/UserDocumentation/YAMLFrontMatterFilter.rb'
 
 generatedMarkdownProcessor = HHVM::UserDocumentation::IncludeGuidesGeneratedMarkdownFilter.new
 
@@ -26,6 +27,7 @@ markdownPipeline = HTML::Pipeline.new(
     HHVM::UserDocumentation::VersionedImagesFilter,
     HHVM::UserDocumentation::IgnoreNewlinesFilter,
     HHVM::UserDocumentation::AutoLinkifyAPIFilter,
+    HHVM::UserDocumentation::YAMLFrontMatterFilter,
   ],
 )
 

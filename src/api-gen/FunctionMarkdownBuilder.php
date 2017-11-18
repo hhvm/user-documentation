@@ -16,6 +16,8 @@ use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 use phpDocumentor\Reflection\DocBlock\Tag;
 
+use namespace HH\Lib\{C, Str, Vec};
+
 final class FunctionMarkdownBuilder {
   private FunctionYAML $yaml;
   private ?DocBlock $docblock;
@@ -45,17 +47,62 @@ final class FunctionMarkdownBuilder {
   }
 
   public function getMarkdown(): string {
-    return implode(
-      "\n\n",
-      [
-        $this->getHeading(),
-        $this->getDeprecation(),
-        $this->getDescription(),
-        $this->getParameters(),
-        $this->getReturnValues(),
-        $this->getExamples(),
-      ],
-    )."\n";
+    $parts = vec[
+      $this->getHeading(),
+      $this->getDeprecation(),
+      $this->getDescription(),
+      $this->getParameters(),
+      $this->getReturnValues(),
+      $this->getExamples(),
+    ];
+
+    $main_md = $parts
+      |> Vec\filter_nulls($$)
+      |> Vec\filter($$, $x ==> Str\is_empty($x))
+      |> Str\join($$, "\n\n");
+    return $this->getFrontMatter().$main_md."\n";
+  }
+
+  public function getFrontMatter(): ?string {
+    $data = shape(
+      'name' => $this->yaml['data']['name'],
+      'sources' => Vec\map(
+        $this->yaml['sources'],
+        $source ==> Str\strip_prefix($source['name'], LocalConfig::ROOT),
+      ),
+    );
+    $fbonly_messages = vec[];
+    if (
+      C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hsl/'))
+    ) {
+      $data['lib'] = 'hhvm/hsl';
+      $fbonly_messages[] =
+        "You don't need the `HH\\Lib\\` prefix when working in the www ".
+        "repository.";
+    }
+    if (
+      !C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hhvm/'))
+    ) {
+      if (Str\ends_with($data['name'], '_async')) {
+        $name = Str\strip_suffix($data['name'], "HH\\Lib\\");
+        $parts = Str\split($name, '\\');
+        $last = C\lastx($parts);
+        $parts = Vec\take($parts, C\count($parts) - 1);
+
+        if ($last === 'from_async') {
+          $parts[] = 'gen';
+        } else {
+          $parts[] = 'gen_'.Str\strip_suffix($last, '_async');
+        }
+        $name = Str\join($parts, "\\");
+        $fbonly_messages[] = "This function is called  `".$name."` in the www ".
+          "repository.";
+      }
+    }
+    if (!C\is_empty($fbonly_messages)) {
+      $data['fbonly messages'] = $fbonly_messages;
+    }
+    return "```yamlmeta\n".\Spyc::YAMLDump($data)."\n```\n";
   }
 
   public static function getOutputFileName(
