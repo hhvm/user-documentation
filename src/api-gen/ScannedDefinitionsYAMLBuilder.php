@@ -21,6 +21,8 @@ use Facebook\DefinitionFinder\ScannedGeneric;
 use Facebook\DefinitionFinder\ScannedParameter;
 use Facebook\DefinitionFinder\HasScannedGenerics;
 
+use namespace HH\Lib\{Str, Vec};
+
 class ScannedDefinitionsYAMLBuilder {
   private Vector<ScannedDefinitionFilter> $filters = Vector { };
 
@@ -195,12 +197,14 @@ class ScannedDefinitionsYAMLBuilder {
     if ($g->getConstraints()->isEmpty()) {
        return shape(
          'name' => $g->getName(),
-         'constraint' => '',
+         'constraint' => null,
        );
     }
     return shape(
       'name' => $g->getName(),
-      'constraint' => $g->getConstraints()[0]['type'],
+      'constraint' => $g->getConstraints()
+        |> Vec\map($$, $it ==> $it['relationship'].' '.$it['type'])
+        |> Str\join($$, ' '),
     );
   }
 
@@ -209,6 +213,7 @@ class ScannedDefinitionsYAMLBuilder {
   ): TypehintDocumentation {
     return shape(
       'typename' => $typehint->getTypeName(),
+      'typetext' => $typehint->getTypeText(),
       'nullable' => $typehint->isNullable(),
       'genericTypes' =>
         $typehint

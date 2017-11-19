@@ -14,10 +14,15 @@ namespace HHVM\UserDocumentation;
 use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 
+use namespace HH\Lib\{C, Str, Vec};
+
 class Stringify {
 
   public static function typehint(TypehintDocumentation $typehint): string {
     $s = $typehint['nullable'] ? '?' : '';
+    if ($typehint['typename'] === 'callable') {
+      return $s.$typehint['typetext'];
+    }
     $s .= $typehint['typename'];
 
     if ($typehint['genericTypes']) {
@@ -90,7 +95,12 @@ class Stringify {
     if ($func['static'] ?? false === true) {
       $ret .= 'static ';
     }
-    $ret .= 'function '.$func['name'];
+    $name = $func['name']
+      |> Str\split($$, '\\')
+      |> C\lastx($$);
+    $ret .= 'function '.$name;
+
+    $ret .= self::generics($func['generics']);
 
     $ret .= Stringify::parameters($func, $format);
 
@@ -163,10 +173,17 @@ class Stringify {
       return '';
     }
 
-    $generics = array_map(
-      $generic ==> $generic['name'],
+    $generics = Vec\map(
       $generics,
+      $generic ==> {
+        $name = $generic['name'];
+        $constraint = $generic['constraint'] ?? '';
+        if ($constraint !== '') {
+          return $name.' '.$constraint;
+        }
+        return $name;
+      },
     );
-    return '<'.implode(',', $generics).'>';
+    return '<'.Str\join($generics, ', ').'>';
   }
 }

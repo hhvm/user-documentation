@@ -146,16 +146,19 @@ final class MergedDataBuilder {
     }
 
     $name = $a['typename'];
+    $text = $a['typetext'];
     // Try to make the type as specific as possible. object or mixed could
     // be used in something like HNI to represent what might be an int.
     if (Shapes::idx($b, 'typename') !== null) {
       if (strpos($name, 'object') === 0 ||
           strpos($name, 'mixed') === 0) {
         $name = $b['typename'];
+        $text = $b['typetext'];
       }
     } else if (strpos($b['typename'], $name) !== false &&
                strpos($name, "\\") === false) { // Namespace like \ or HH\
       $name = $b['typename'];
+      $text = $b['typetext'];
     }
 
     $generics = $a['genericTypes'];
@@ -175,6 +178,7 @@ final class MergedDataBuilder {
 
     return shape(
       'typename' => $name,
+      'typetext' => $text,
       'nullable' => $nullable,
       'genericTypes' => $generics,
     );
