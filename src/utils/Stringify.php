@@ -20,7 +20,7 @@ class Stringify {
 
   public static function typehint(TypehintDocumentation $typehint): string {
     $s = $typehint['nullable'] ? '?' : '';
-    if ($typehint['typename'] === 'callable') {
+    if (!Str\starts_with_ci($typehint['typetext'], $typehint['typename'])) {
       return $s.$typehint['typetext'];
     }
     $s .= $typehint['typename'];
