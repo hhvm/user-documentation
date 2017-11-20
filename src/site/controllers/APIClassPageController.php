@@ -19,6 +19,8 @@ use HHVM\UserDocumentation\BuildPaths;
 use HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\URLBuilder;
 
+use namespace HH\Lib\Str;
+
 final class APIClassPageController extends APIPageController {
   use APIClassPageControllerParametersTrait;
 
@@ -47,6 +49,11 @@ final class APIClassPageController extends APIPageController {
 
   <<__Override>>
   public async function getTitle(): Awaitable<string> {
+    return Str\strip_prefix($this->getRootDefinition()['name'], "HH\\Lib\\");
+  }
+
+  <<__Override>>
+  protected async function getHeading(): Awaitable<string> {
     return $this->getRootDefinition()['name'];
   }
 

@@ -19,6 +19,10 @@ abstract class NonRoutableWebPageController extends WebController {
   protected abstract function getTitle(): Awaitable<string>;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
 
+  protected function getHeading(): Awaitable<string> {
+    return $this->getTitle();
+  }
+
   protected function getExtraBodyClass(): ?string {
     return null;
   }
@@ -145,14 +149,14 @@ EOF;
   }
 
   final protected async function getContentPane(): Awaitable<XHPRoot> {
-    list($title, $body) = await \HH\Asio\va(
-      $this->getTitle(),
+    list($heading, $body) = await \HH\Asio\va(
+      $this->getHeading(),
       $this->getBody(),
     );
     return (
       <div class="mainContainer">
         {$this->getBreadcrumbs()}
-        {$this->getTitleContent($title)}
+        {$this->getTitleContent($heading)}
         <div class="widthWrapper flexWrapper">
           <div class="mainWrapper">
             {$body}
