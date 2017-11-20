@@ -11,10 +11,11 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{C, Str, Vec};
+use namespace Facebook\TypeAssert;
 
 final class MergedYAMLBuilder {
-  private Map<string, BaseYAML> $definitions = Map { };
+  private dict<string, BaseYAML> $definitions = dict[];
   public function __construct(
     private string $destination,
   ) {
@@ -46,33 +47,35 @@ final class MergedYAMLBuilder {
   public function build(): void {
     $writer = new YAMLWriter($this->destination);
     foreach ($this->definitions as $def) {
-      // UNSAFE ($def['data']['methods'] is not defined on the shape)
-      if ($methods = idx($def['data'], 'methods')) {
-        $methods = $this->removePrivateMethods(/*UNSAFE_EXPR*/ $methods);
-        foreach ($methods as $k => $method) {
-          $method['className'] = $def['data']['name'];
-          $methods[$k] = $method;
-        }
-        usort(
-          $methods,
-          // ($a, $b) ==> $a['name'] <=> $b['name'], - SOON :D
-          ($a, $b) ==> strcmp($a['name'], $b['name']),
-        );
-        $def['data']['methods'] = $methods;
+      if ($def['type'] === APIDefinitionType::FUNCTION_DEF) {
+        $writer->write(FunctionYAML::class, $def);
+        continue;
       }
-      $writer->write($def);
+      $def = TypeAssert\matches_type_structure(
+        type_alias_structure(ClassYAML::class),
+        $def,
+      );
+      $methods = $this->removePrivateMethods($def['data']['methods']);
+      foreach ($methods as $k => $method) {
+        $method['className'] = $def['data']['name'];
+        $methods[$k] = $method;
+      }
+      $methods = Vec\sort_by($methods, $m ==> $m['name']);
+
+      $def['data']['methods'] = vec_like_array_cast($methods);
+      $writer->write(ClassYAML::class, $def);
     }
   }
 
-  private function removePrivateMethods<T as shape('visibility' => string, ...)>(
-    array<T> $methods,
-  ): array<T> {
+  private function removePrivateMethods<
+    T as shape('visibility' => MemberVisibility, ...)
+  >(array<T> $methods): vec<T> {
     // We filter out private methods at this late stage as occassionally we have
     // inconsistent ideas of what the visibility is and we want to go for the
     // most restrictive - if we filter out before merge, we'll end up with public
     // or protected, but if it says private anywhere we want to ignore those and
     // just not document the method
-    return array_filter(
+    return Vec\filter(
       $methods,
       $method ==> $method['visibility'] !== 'private',
     );
@@ -80,7 +83,7 @@ final class MergedYAMLBuilder {
 
   public function addDefinition(BaseYAML $def): this {
     $key = self::GetMergeKey($def['type'], $def['data']['name']);
-    if (!$this->definitions->containsKey($key)) {
+    if (!C\contains_key($this->definitions, $key)) {
       $this->definitions[$key] = $def;
       return $this;
     }

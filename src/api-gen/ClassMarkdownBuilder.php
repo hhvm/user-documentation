@@ -13,7 +13,10 @@ final class ClassMarkdownBuilder {
   public function __construct(
     string $file,
   ) {
-    $this->yaml = \Spyc::YAMLLoad($file);
+    $this->yaml = JSON\decode_as_shape(
+      ClassYAML::class,
+      file_get_contents($file),
+    );
     $doc = $this->yaml['data']['docComment'];
     if ($doc !== null) {
       $this->docblock = new DocBlock($doc);

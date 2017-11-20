@@ -95,6 +95,7 @@ type ClassYAML = shape(
 type FunctionYAML = shape(
   'sources' => array<DocumentationSource>,
   'data' => FunctionDocumentation,
+  'type' => APIDefinitionType,
 );
 
 type ClassDocumentation = shape(

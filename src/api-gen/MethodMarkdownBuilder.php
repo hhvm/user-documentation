@@ -13,11 +13,14 @@ namespace HHVM\UserDocumentation;
 
 class MethodMarkdownBuilder {
   private ClassYAML $yaml;
-  
+
   public function __construct(
     private string $file,
   ) {
-    $this->yaml = \Spyc::YAMLLoad($file);
+    $this->yaml = JSON\decode_as_shape(
+      ClassYAML::class,
+      file_get_contents($file),
+    );
   }
 
   public function build(): void {
@@ -31,7 +34,7 @@ class MethodMarkdownBuilder {
     FunctionDocumentation $method,
   ): void {
     $classname = $this->yaml['data']['name'];
-    $md = (new FunctionMarkdownBuilder($this->file, $method, $classname))
+    $md = (new FunctionMarkdownBuilder($this->file, tuple($classname, $method)))
       ->getMarkdown();
 
     $filename = self::getOutputFileName(

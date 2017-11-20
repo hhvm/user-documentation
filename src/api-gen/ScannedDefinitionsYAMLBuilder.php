@@ -66,6 +66,12 @@ class ScannedDefinitionsYAMLBuilder {
     \ConstVector<T> $defs,
     (function(T):shape('name' => string, ...)) $converter,
   ): void {
+    if ($type === APIDefinitionType::FUNCTION_DEF) {
+      $shape_type = FunctionYAML::class;
+    } else {
+      $shape_type = ClassYAML::class;
+    }
+
     $defs = $this->filtered($defs);
     $writer = new YAMLWriter($this->destination);
     foreach ($defs as $def) {
@@ -74,7 +80,7 @@ class ScannedDefinitionsYAMLBuilder {
         'type' => $type,
         'data' => $converter($def),
       );
-      $writer->write($data);
+      $writer->write($shape_type, $data);
     }
   }
 

@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace Facebook\TypeAssert;
+
 final class MergedYAMLBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nMergedYAMLBuild");
@@ -24,7 +26,19 @@ final class MergedYAMLBuildStep extends BuildStep {
     $builder = new MergedYAMLBuilder(BuildPaths::MERGED_YAML);
     foreach ($sources as $source) {
       Log::v('.');
-      $builder->addDefinition(\Spyc::YAMLLoad($source));
+      $data = JSON\decode_as_shape(BaseYAML::class, file_get_contents($source));
+      if ($data['type'] === APIDefinitionType::FUNCTION_DEF) {
+        $data = TypeAssert\matches_type_structure(
+          type_alias_structure(FunctionYAML::class),
+          $data,
+        );
+      } else {
+        $data = TypeAssert\matches_type_structure(
+          type_alias_structure(ClassYAML::class),
+          $data,
+        );
+      }
+      $builder->addDefinition($data);
     }
     $builder->build();
   }

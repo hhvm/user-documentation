@@ -22,15 +22,29 @@ final class FunctionMarkdownBuilder {
   private FunctionYAML $yaml;
   private ?DocBlock $docblock;
   private DocblockTagReader $tagReader;
+  private ?string $class = null;
 
   public function __construct(
-      string $file,
-      ?FunctionDocumentation $method = null,
-      private ?string $class = null,
-      ) {
-    $this->yaml = \Spyc::YAMLLoad($file);
-    if ($method) {
-      $this->yaml['data'] = $method;
+    string $file,
+    ?(string, FunctionDocumentation) $method_data = null,
+  ) {
+    if ($method_data === null) {
+      $this->yaml = JSON\decode_as_shape(
+        FunctionYAML::class,
+        \file_get_contents($file),
+      );
+    } else {
+      $root = JSON\decode_as_shape(
+        ClassYAML::class,
+        \file_get_contents($file),
+      );
+      list($class, $method) = $method_data;
+      $this->class = $class;
+      $this->yaml = shape(
+        'sources' => $root['sources'],
+        'type' => $root['type'],
+        'data' => $method,
+      );
     }
 
     $comment = $this->yaml['data']['docComment'];

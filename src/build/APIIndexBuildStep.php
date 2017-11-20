@@ -50,7 +50,10 @@ final class APIIndexBuildStep extends BuildStep {
     );
     foreach ($list as $yaml_path) {
       Log::v('.');
-      $data = ((): BaseYAML ==> \Spyc::YAMLLoad($yaml_path))(); // cast :p
+      $data = JSON\decode_as_shape(
+        BaseYAML::class,
+        file_get_contents($yaml_path),
+      );
 
       $type = $data['type'];
       switch ($type) {
@@ -100,7 +103,7 @@ final class APIIndexBuildStep extends BuildStep {
             $class,
           );
           $html_path = APIHTMLBuildStep::getOutputFileName($md_path);
-      
+
           $idx = strtr($class['name'], "\\", '.');
           $entry = shape(
             'name' => $class['name'],
