@@ -12,7 +12,8 @@ namespace HHVM\UserDocumentation;
 
 require(BuildPaths::APIDOCS_INDEX);
 
-use namespace HH\Lib\{C, Str};
+use namespace Facebook\TypeAssert;
+use namespace HH\Lib\{C, Str, Vec};
 
 class APIIndex {
   const dict<string, keyset<string>> KEYWORD_EXPANSIONS = dict[
@@ -74,17 +75,25 @@ class APIIndex {
     string $name,
     string $term,
   ): bool {
-    if (Str\contains_ci($name, $term)) {
+    if (Str\length($term) >= 3 && Str\contains_ci($name, $term)) {
+      return true;
+    } else if (Str\compare_ci($term, $name) === 0) {
       return true;
     }
 
-    $parts = Str\split($name, '\\');
+    $parts = Str\split($name, '\\')
+      |> Vec\map($$, $part ==> Str\split($part, '::'))
+      |> Vec\flatten($$);
     if (
       C\any(
         $parts,
         $part ==>
-          Str\length($part) >= 3 && // Don't match C\ against everything
-          (Str\starts_with_ci($part, $term) || Str\starts_with_ci($term, $part))
+          // Don't match "C" against everything
+          (
+            Str\length($part) >= 3 &&
+            Str\length($term) >= 3 &&
+            (Str\starts_with_ci($part, $term) || Str\starts_with_ci($term, $part))
+          ) || Str\compare_ci($part, $term) === 0
       )
     ) {
       return true;
@@ -102,6 +111,21 @@ class APIIndex {
     return false;
   }
 
+  private static function getMethods(APIIndexEntry $entry): ?vec<APIMethodIndexEntry> {
+    $arr = Shapes::toArray($entry);
+    $methods = $arr['methods'] ?? null;
+    if ($methods !== null) {
+      return Vec\map(
+        /* HH_IGNORE_ERROR[4110] */ $methods,
+        $method ==> TypeAssert\matches_type_structure(
+          type_alias_structure(APIMethodIndexEntry::class),
+          $method,
+        ),
+      );
+    }
+    return null;
+  }
+
   private static function searchEntries (
     string $term,
     APIDefinitionType $type,
@@ -112,8 +136,20 @@ class APIIndex {
     $entries = self::getIndexForType($type);
     foreach ($entries as $_ => $entry) {
       $name = $entry['name'];
+
       if (C\every($terms, $term ==> self::nameMatchesTerm($name, $term))) {
         $results->addAPIResult($type, $entry);
+      }
+
+      $methods = self::getMethods($entry);
+      if ($methods === null) {
+        continue;
+      }
+      foreach ($methods as $method) {
+        $name = $entry['name'].'::'.$method['name'];
+        if (C\every($terms, $term ==> self::nameMatchesTerm($name, $term))) {
+          $results->addAPIResult($type, $entry);
+        }
       }
     }
 
