@@ -26,17 +26,17 @@ Note that an integer literal **cannot** be used directly as a field name.
 
 The names of all fields in a given shape definition must be distinct and have the same form.
 
-### All Non-Nullable Fields Are Required
+### Optional Fields
 
-When returning your shape from a function, for example, all fields must be accounted for; otherwise the Hack typechecker will raise an error.
+All fields are required, unless explicitly marked as optional. <strong>Since HHVM 3.23, nullable fields are no longer considered optional</strong>.
 
-@@ introduction-examples/fields.php.type-errors @@
+Fields are marked optional by preceding the field name with a `?` token:
 
-In the above example, we forgot to set the `name` field of the shape. Note that HHVM will still run the code since it really is just an array under the covers.
+@@ introduction-examples/optional.php @@
 
-### Nullable Fields Are Optional
+Nullable fields are not optional - using them interchangeably will cause typechecker errors:
 
-The typechecker conflates optional and nullable. `shape('name' => ?string)` will match both `shape('name' => null)` and `shape()`. Accordingly, the typechecker will *not* raise an error if you omit a nullable field. The runtime, however, will raise an `OutOfBoundsException` if you try to read an omitted field.
+@@ introduction-examples/nullable_is_not_optional.php.type-errors @@
 
 ## Class Constants
 

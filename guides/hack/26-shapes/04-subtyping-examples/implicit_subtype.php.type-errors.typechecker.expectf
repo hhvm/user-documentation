@@ -1,0 +1,3 @@
+%s:11:10,14: Invalid return type (Typing[4166])
+  %s:7:26,30: The field 'z' is not defined in this shape type, and this shape type does not allow unknown fields.
+  %s:11:10,14: The field 'z' is set in the shape.

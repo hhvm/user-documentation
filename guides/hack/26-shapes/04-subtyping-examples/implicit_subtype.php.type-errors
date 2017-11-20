@@ -1,0 +1,12 @@
+<?hh // strict
+
+namespace Hack\UserDocumentation\Shapes\Subtyping\Examples\Implicit;
+
+type Point = shape('x' => int, 'y' => int);
+
+function get_3d_point(): Point {
+  // Invalid return type (Typing[4166])
+  //   The field 'z' is not defined in this shape type, and this shape type does not allow unknown fields.
+  //   The field 'z' is set in the shape.
+  return shape('x' => 123, 'y' => 456, 'z' => 789);
+}

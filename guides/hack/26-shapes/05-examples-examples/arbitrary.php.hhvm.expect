@@ -1,9 +1,0 @@
-4 + 2i
-User with id: Rex has hit http://example.com 10 times.
-float(1004.23)
-array(2) {
-  ["x"]=>
-  bool(true)
-  ["y"]=>
-  bool(false)
-}

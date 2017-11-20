@@ -1,0 +1,6 @@
+%s:12:10,14: Invalid return type (Typing[4110])
+  %s:5:65,67: This is an int
+  %s:12:47,50: It is incompatible with a nullable type
+%s:19:10,14: Invalid return type (Typing[4057])
+  %s:19:10,14: The field 'z' is missing
+  %s:15:38,55: The field 'z' is defined
