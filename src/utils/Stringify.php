@@ -19,10 +19,11 @@ use namespace HH\Lib\{C, Str, Vec};
 class Stringify {
 
   public static function typehint(TypehintDocumentation $typehint): string {
-    $s = $typehint['nullable'] ? '?' : '';
     if (!Str\starts_with_ci($typehint['typetext'], $typehint['typename'])) {
-      return $s.$typehint['typetext'];
+      return $typehint['typetext'];
     }
+
+    $s = $typehint['nullable'] ? '?' : '';
     $s .= $typehint['typename'];
 
     if ($typehint['genericTypes']) {
