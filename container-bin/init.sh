@@ -61,6 +61,7 @@ rm -rf vendor-rb/
 echo "** Removing intermediate build products"
 rm -rf build/*-yaml/ build/*-markdown/
 echo "** Cleaning up..."
+pkill hh_server
 rm -rf /root/.composer
 rm -rf /var/www/{.git,api-sources,api-examples,guides,md-render} /tmp/hh_server
 apt-get remove -y \
