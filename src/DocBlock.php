@@ -65,13 +65,13 @@ final class DocBlock {
       }
     }
 
-    $first_newline = Str\search($content, "\n");
-    if ($first_period === null && $first_newline !== null) {
-      $sep = $first_newline;
-    } else if ($first_period !== null && $first_newline === null) {
+    $first_para = Str\search($content, "\n\n");
+    if ($first_period === null && $first_para !== null) {
+      $sep = $first_para;
+    } else if ($first_period !== null && $first_para === null) {
       $sep = $first_period;
-    } else if ($first_period !== null && $first_newline !== null) {
-      $sep = Math\minva($first_newline, $first_period);
+    } else if ($first_period !== null && $first_para !== null) {
+      $sep = Math\minva($first_para, $first_period);
     } else {
       $sep = null;
     }
