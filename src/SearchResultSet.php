@@ -24,13 +24,6 @@ final class SearchResultSet {
     }
   }
 
-  public function addAPIResult(
-    APIDefinitionType $type,
-    APIIndexEntry $entry,
-  ): void {
-    $this->apiDefs[$type][$entry['name']] = $entry;
-  }
-
   public function addPHPAPIResult(
     APIDefinitionType $type,
     string $name,

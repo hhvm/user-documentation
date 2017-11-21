@@ -101,7 +101,6 @@ final class SearchController extends WebPageController {
   private function getSearchResults(): SearchResultSet {
     return ((new SearchResultSet())
       ->addAll($this->getHardcodedResults())
-      ->addAll(APIIndex::search($this->getSearchTerm()))
       ->addAll(GuidesIndex::search($this->getSearchTerm()))
       ->addAll(PHPAPIIndex::search($this->getSearchTerm()))
     );

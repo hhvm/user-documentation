@@ -13,16 +13,16 @@ namespace HHVM\UserDocumentation;
 require(BuildPaths::APIDOCS_INDEX);
 
 use namespace Facebook\TypeAssert;
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{C, Math, Str, Vec};
 
 class APIIndex {
-  const dict<string, keyset<string>> KEYWORD_EXPANSIONS = dict[
+  const dict<string, keyset<string>> SYNONYMS = dict[
     'vec' => keyset['\\c\\'],
     'dict' => keyset['\\c\\'],
     'keyset' => keyset['\\c\\'],
-    'vector' => keyset['\\c\\', 'vec'],
-    'map' => keyset['\\c\\', 'dict'],
-    'set' => keyset['\\c\\', 'keyset'],
+    'vector' => keyset['vec'],
+    'map' => keyset['dict'],
+    'set' => keyset['keyset'],
   ];
 
   public static function getIndex(
@@ -61,57 +61,116 @@ class APIIndex {
 
   public static function search(
     string $term,
-  ): SearchResultSet {
-    $results = new SearchResultSet();
-    foreach (APIDefinitionType::getValues() as $type) {
-      $results->addAll(
-        self::searchEntries($term, $type)
-      );
-    }
-    return $results;
+  ): vec<SearchResult> {
+    return APIDefinitionType::getValues()
+      |> Vec\map($$, $type ==> self::searchEntries($term, $type))
+      |> Vec\flatten($$)
+      |> Vec\sort_by($$, $result ==> -($result->getScore()));
   }
 
-  private static function nameMatchesTerm(
+  private static function matchFullTerm(
     string $name,
     string $term,
-  ): bool {
-    if (Str\length($term) >= 3 && Str\contains_ci($name, $term)) {
-      return true;
-    } else if (Str\compare_ci($term, $name) === 0) {
-      return true;
+  ): ?float {
+    if (Str\length($term) === 0) {
+      return null;
     }
 
+    if (Str\compare_ci($term, $name) === 0) {
+      return SearchScores::EXACT_MATCH_SCORE;
+    }
+
+    $multi = 1.0;
+    if (Str\length($term) < 3 || Str\length($name) < 3) {
+      $multi = SearchScores::SHORT_MATCH_MULTIPLIER;
+    }
+
+    if (Str\starts_with($term, $name) || Str\starts_with($name, $term)) {
+      return SearchScores::PREFIX_MATCH_SCORE * $multi;
+    }
+    if (Str\contains_ci($name, $term)) {
+      return SearchScores::SUBSTRING_MATCH_SCORE * $multi;
+    }
+
+    return null;
+  }
+
+  private static function matchWords(
+    string $name,
+    string $term,
+  ): ?float {
+    $parts = Str\split($term, ' ');
+    if (C\count($parts) === 1) {
+      return null;
+    }
+
+    $total = 0.0;
+    foreach ($parts as $part) {
+      $score = self::matchTerm($name, $part);
+      if ($score === null) {
+        return null;
+      }
+      $total += $score;
+    }
+    return ($total / C\count($parts)) * SearchScores::WORD_SPLIT_MULTIPLIER;
+  }
+
+  private static function matchComponents(
+    string $name,
+    string $term,
+  ): ?float {
     $parts = Str\split($name, '\\')
       |> Vec\map($$, $part ==> Str\split($part, '::'))
       |> Vec\flatten($$);
-    if (
-      C\any(
-        $parts,
-        $part ==>
-          // Don't match "C" against everything
-          (
-            Str\length($part) >= 3 &&
-            Str\length($term) >= 3 &&
-            (Str\starts_with_ci($part, $term) || Str\starts_with_ci($term, $part))
-          ) || Str\compare_ci($part, $term) === 0
-      )
-    ) {
-      return true;
+    if (C\count($parts) === 1) {
+      return null;
     }
 
-    $fallbacks = self::KEYWORD_EXPANSIONS[Str\lowercase($term)] ?? null;
-    if ($fallbacks === null) {
-      return false;
+    $score = $parts
+      |> Vec\map($$, $part ==> self::matchTerm($part, $term))
+      |> Vec\filter_nulls($$)
+      |> Math\max($$);
+
+    if ($score === null) {
+      return null;
     }
 
-    if (C\any($fallbacks, $fb ==> self::nameMatchesTerm($name, $fb))) {
-      return true;
-    }
-
-    return false;
+    return $score * SearchScores::COMPONENT_MATCH_MULTIPLIER;
   }
 
-  private static function getMethods(APIIndexEntry $entry): ?vec<APIMethodIndexEntry> {
+  private static function matchSynonyms(string $name, string $term): ?float {
+    $synonyms = self::SYNONYMS[Str\lowercase($term)] ?? null;
+    if ($synonyms === null) {
+      return null;
+    }
+
+    $score = $synonyms
+      |> Vec\map($$, $synonym ==> self::matchTerm($name, $synonym))
+      |> Vec\filter_nulls($$)
+      |> Math\max($$);
+    if ($score === null) {
+      return null;
+    }
+
+    return $score * SearchScores::SYNONYM_MATCH_MULTIPLIER;
+  }
+
+  <<__Memoize>>
+  private static function matchTerm(
+    string $name,
+    string $term,
+  ): ?float {
+    return Math\max(Vec\filter_nulls(vec[
+      self::matchFullTerm($name, $term),
+      self::matchWords($name, $term),
+      self::matchComponents($name, $term),
+      self::matchSynonyms($name, $term),
+    ]));
+  }
+
+  private static function getMethods(
+    APIIndexEntry $entry,
+  ): ?vec<APIMethodIndexEntry> {
     $arr = Shapes::toArray($entry);
     $methods = $arr['methods'] ?? null;
     if ($methods !== null) {
@@ -129,16 +188,20 @@ class APIIndex {
   private static function searchEntries (
     string $term,
     APIDefinitionType $type,
-  ): SearchResultSet {
+  ): vec<SearchResult> {
     $terms = Str\split($term, ' ');
-    $results = new SearchResultSet();
+    $results = vec[];
 
     $entries = self::getIndexForType($type);
     foreach ($entries as $_ => $entry) {
       $name = $entry['name'];
+      $type = Str\contains($name, "HH\\Lib\\")
+        ? SearchResultType::HSL_API
+        : SearchResultType::HACK_API;
 
-      if (C\every($terms, $term ==> self::nameMatchesTerm($name, $term))) {
-        $results->addAPIResult($type, $entry);
+      $score = self::matchTerm($name, $term);
+      if ($score !== null) {
+        $results[] = new SearchResult($type, $score, $name, $entry['urlPath']);
       }
 
       $methods = self::getMethods($entry);
@@ -147,8 +210,9 @@ class APIIndex {
       }
       foreach ($methods as $method) {
         $name = $entry['name'].'::'.$method['name'];
-        if (C\every($terms, $term ==> self::nameMatchesTerm($name, $term))) {
-          $results->addAPIResult($type, $entry);
+        $score = self::matchTerm($name, $term);
+        if ($score !== null) {
+          $results[] = new SearchResult($type, $score, $name, $method['urlPath']);
         }
       }
     }
