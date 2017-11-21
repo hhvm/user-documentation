@@ -11,25 +11,26 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\{Str, Vec};
+
 final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   const string SOURCE_ROOT = BuildPaths::GUIDES_MARKDOWN;
   const string BUILD_ROOT = BuildPaths::GUIDES_HTML;
 
   public function buildAll(): void {
     Log::i("\nGuidesHTMLBuild");
-    $sources = (
-      self::findSources(self::SOURCE_ROOT, Set{'md'})
-      ->filter($path ==> basename($path) !== 'README.md')
-    );
-    sort($sources);
+    $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
+      |> Vec\filter($$, $path ==> \basename($path) !== 'README.md')
+      |> Vec\sort($$);
 
     $list = $this->renderFiles($sources);
 
     Log::i("\nCreating summaries");
     $summaries = self::findSources(self::SOURCE_ROOT, Set{'txt'})
-      ->filter($path ==> strpos($path, '-summary') !== false)
-      ->map($path ==> substr($path, strlen(self::SOURCE_ROOT) + 1));
-    sort($summaries);
+      |> Vec\filter($$, $path ==> Str\contains($path, '-summary'))
+      |> Vec\map($$, $path ==> Str\strip_suffix($path, self::SOURCE_ROOT.'/'))
+      |> Vec\sort($$);
+
     $summary_index = $this->createSummaryIndex($summaries);
     file_put_contents(
       BuildPaths::GUIDES_SUMMARY,
@@ -38,7 +39,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   }
 
   private function createSummaryIndex(
-    Iterable<string> $summaries,
+    Traversable<string> $summaries,
   ): Map<string, Map<string, string>> {
     $out = Map { };
     foreach ($summaries as $summary) {

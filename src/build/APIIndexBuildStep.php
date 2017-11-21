@@ -24,7 +24,7 @@ final class APIIndexBuildStep extends BuildStep {
   }
 
   private function createIndex(
-    Iterable<string> $list,
+    Traversable<string> $list,
   ): void {
     Log::i("\nCreate Index");
 
@@ -40,7 +40,7 @@ final class APIIndexBuildStep extends BuildStep {
   }
 
   private function generateIndexData(
-    Iterable<string> $list,
+    Traversable<string> $list,
   ): APIIndexShape {
     $out = shape(
       'class' => [],

@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Vec;
+
 class MethodMarkdownBuilder {
   private ClassYAML $yaml;
 
@@ -23,16 +25,17 @@ class MethodMarkdownBuilder {
     );
   }
 
-  public function build(): void {
+  public function build(): vec<string> {
     $classname = $this->yaml['data']['name'];
-    foreach ($this->yaml['data']['methods'] as $method) {
-      $this->buildOne($method);
-    }
+    return Vec\map(
+      $this->yaml['data']['methods'],
+      $method ==> $this->buildOne($method),
+    );
   }
 
   private function buildOne(
     FunctionDocumentation $method,
-  ): void {
+  ): string {
     $classname = $this->yaml['data']['name'];
     $md = (new FunctionMarkdownBuilder($this->file, tuple($classname, $method)))
       ->getMarkdown();
@@ -43,7 +46,8 @@ class MethodMarkdownBuilder {
       $method,
     );
 
-    file_put_contents($filename, $md);
+    \file_put_contents($filename, $md);
+    return $filename;
   }
 
   public static function getOutputFileName(

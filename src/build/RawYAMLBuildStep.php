@@ -12,6 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 use Facebook\DefinitionFinder\FileParser;
+use namespace HH\Lib\Vec;
 
 final class RawYAMLBuildStep extends BuildStep {
   public function buildAll(): void {
@@ -36,7 +37,7 @@ final class RawYAMLBuildStep extends BuildStep {
 
   private function buildSources(
     string $output_dir,
-    Iterable<string> $sources,
+    Traversable<string> $sources,
   ): void {
     if (!is_dir($output_dir)) {
       mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
@@ -44,7 +45,7 @@ final class RawYAMLBuildStep extends BuildStep {
 
     Log::i("\nBuild sources for $output_dir");
 
-    foreach ($sources as $filename) {
+    $files = Vec\map($sources, $filename ==> {
       Log::v(".");
       $source = shape(
         'type' => DocumentationSourceType::FILE,
@@ -53,10 +54,14 @@ final class RawYAMLBuildStep extends BuildStep {
       );
       $bytes = file_get_contents($filename);
       $parser = FileParser::FromData($bytes, $filename);
-      (new ScannedDefinitionsYAMLBuilder($source, $parser, $output_dir))
+      return (new ScannedDefinitionsYAMLBuilder($source, $parser, $output_dir))
         ->addFilter($x ==> ScannedDefinitionFilters::IsHHSpecific($x))
         ->addFilter($x ==> !ScannedDefinitionFilters::ShouldNotDocument($x))
         ->build();
-    }
+    }) |> Vec\flatten($$);
+    \file_put_contents(
+      $output_dir.'/index.json',
+      JSON\encode_shape(DirectoryIndex::class, shape('files' => $files)),
+    );
   }
 }

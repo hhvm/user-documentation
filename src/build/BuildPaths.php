@@ -17,6 +17,8 @@ abstract final class BuildPaths {
 
   const string BUILD_DIR = LocalConfig::ROOT.'/build';
 
+  const string DIR_INDEX_ROOT = self::BUILD_DIR.'/dir-index';
+
   const string SYSTEMLIB_YAML = self::BUILD_DIR.'/systemlib-yaml';
   const string HHI_YAML = self::BUILD_DIR.'/hhi-yaml';
   const string HSL_YAML = self::BUILD_DIR.'/hsl-yaml';

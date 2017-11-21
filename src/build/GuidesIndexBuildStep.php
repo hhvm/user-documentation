@@ -23,7 +23,7 @@ final class GuidesIndexBuildStep extends BuildStep {
   }
 
   private function createIndex(
-    Iterable<string> $list,
+    Traversable<string> $list,
   ): void {
     $index = $this->generateIndexData($list);
 
@@ -34,7 +34,7 @@ final class GuidesIndexBuildStep extends BuildStep {
   }
 
   private function generateIndexData(
-    Iterable<string> $sources,
+    Traversable<string> $sources,
   ): Map<string, Map<string, Map<string, string>>> {
     $out = Map { };
     foreach ($sources as $path) {

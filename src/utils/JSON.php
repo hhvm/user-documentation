@@ -43,7 +43,7 @@ function encode_dict<Tk as arraykey, Tv>(dict<Tk, Tv> $data): string {
 
 function encode_shape<T as shape(...)>(
   typename<T> $type,
-  shape(...) $data,
+  T $data,
 ): string {
   return json_encode(
     TypeAssert\matches_type_structure(

@@ -38,34 +38,37 @@ class ScannedDefinitionsYAMLBuilder {
     return $this;
   }
 
-  public function build(): void {
-    $this->buildDefinitions(
-      APIDefinitionType::CLASS_DEF,
-      $this->parser->getClasses(),
-      $x ==> $this->getClassDocumentation($x),
+  public function build(): vec<string> {
+    $files = Vec\concat(
+      $this->buildDefinitions(
+        APIDefinitionType::CLASS_DEF,
+        $this->parser->getClasses(),
+        $x ==> $this->getClassDocumentation($x),
+      ),
+      $this->buildDefinitions(
+        APIDefinitionType::INTERFACE_DEF,
+        $this->parser->getInterfaces(),
+        $x ==> $this->getClassDocumentation($x),
+      ),
+      $this->buildDefinitions(
+        APIDefinitionType::TRAIT_DEF,
+        $this->parser->getTraits(),
+        $x ==> $this->getClassDocumentation($x),
+      ),
+      $this->buildDefinitions(
+        APIDefinitionType::FUNCTION_DEF,
+        $this->parser->getFunctions(),
+        $x ==> $this->getFunctionDocumentation($x),
+      ),
     );
-    $this->buildDefinitions(
-      APIDefinitionType::INTERFACE_DEF,
-      $this->parser->getInterfaces(),
-      $x ==> $this->getClassDocumentation($x),
-    );
-    $this->buildDefinitions(
-      APIDefinitionType::TRAIT_DEF,
-      $this->parser->getTraits(),
-      $x ==> $this->getClassDocumentation($x),
-    );
-    $this->buildDefinitions(
-      APIDefinitionType::FUNCTION_DEF,
-      $this->parser->getFunctions(),
-      $x ==> $this->getFunctionDocumentation($x),
-    );
+    return $files;
   }
 
   private function buildDefinitions<T as ScannedBase>(
     APIDefinitionType $type,
     \ConstVector<T> $defs,
     (function(T):shape('name' => string, ...)) $converter,
-  ): void {
+  ): vec<string> {
     if ($type === APIDefinitionType::FUNCTION_DEF) {
       $shape_type = FunctionYAML::class;
     } else {
@@ -74,14 +77,17 @@ class ScannedDefinitionsYAMLBuilder {
 
     $defs = $this->filtered($defs);
     $writer = new YAMLWriter($this->destination);
-    foreach ($defs as $def) {
-      $data = shape(
-        'sources' => [$this->source],
-        'type' => $type,
-        'data' => $converter($def),
-      );
-      $writer->write($shape_type, $data);
-    }
+    return Vec\map(
+      $defs,
+      $def ==> $writer->write(
+        $shape_type,
+        shape(
+          'sources' => [$this->source],
+          'type' => $type,
+          'data' => $converter($def),
+        ),
+      ),
+    );
   }
 
   private function filtered<T as ScannedBase>(

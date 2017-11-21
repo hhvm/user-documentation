@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Vec;
+
 final class MergedMarkdownBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nMergedMarkdownBuild");
@@ -19,21 +21,26 @@ final class MergedMarkdownBuildStep extends BuildStep {
     if (!is_dir(BuildPaths::APIDOCS_MARKDOWN)) {
       mkdir(BuildPaths::APIDOCS_MARKDOWN, /* mode = */ 0755, /* recursive = */ true);
     }
-    foreach ($sources as $source) {
+    Log::i("\nBuilding Markdown");
+    $files = Vec\map($sources, $source ==> {
       Log::v('.');
       $filename = pathinfo($source)['filename'];
       $type = explode('.', $filename)[0];
       switch (APIDefinitionType::assert($type)) {
         case APIDefinitionType::FUNCTION_DEF:
-          (new FunctionMarkdownBuilder($source))->build();
-          break;
+          return vec[(new FunctionMarkdownBuilder($source))->build()];
         case APIDefinitionType::CLASS_DEF:
         case APIDefinitionType::INTERFACE_DEF:
         case APIDefinitionType::TRAIT_DEF:
-          (new ClassMarkdownBuilder($source))->build();
-          (new MethodMarkdownBuilder($source))->build();
-          break;
+          return Vec\concat(
+            vec[(new ClassMarkdownBuilder($source))->build()],
+            (new MethodMarkdownBuilder($source))->build(),
+          );
       }
-    }
+    }) |> Vec\flatten($$);
+    \file_put_contents(
+      BuildPaths::APIDOCS_MARKDOWN.'/index.json',
+      JSON\encode_shape(DirectoryIndex::class, shape('files' => $files)),
+    );
   }
 }

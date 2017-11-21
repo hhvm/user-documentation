@@ -17,13 +17,14 @@ final class ClassMarkdownBuilder {
     $this->docblock = new DocBlock($doc ?? '');
   }
 
-  public function build(): void {
+  public function build(): string {
     $md = $this->getMarkdown();
     $filename = self::getOutputFileName(
       APIDefinitionType::assert($this->yaml['type']),
       $this->yaml['data'],
     );
-    file_put_contents($filename, $md);
+    \file_put_contents($filename, $md);
+    return $filename;
   }
 
   public static function getOutputFileName(

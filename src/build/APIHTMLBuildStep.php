@@ -11,18 +11,18 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\{Str, Vec};
+
 final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   const string SOURCE_ROOT = BuildPaths::APIDOCS_MARKDOWN;
   const string BUILD_ROOT = BuildPaths::APIDOCS_HTML;
 
   public function buildAll(): void {
     Log::i("\nAPIHTMLBuild");
-    $sources = (
-      self::findSources(self::SOURCE_ROOT, Set{'md'})
-      ->filter($path ==> basename($path) !== 'README.md')
-      ->filter($path ==> strpos($path, '-examples') === false)
-    );
-    sort($sources);
+    $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
+      |> Vec\filter($$, $path ==> \basename($path) !== 'README.md')
+      |> Vec\filter($$, $path ==> strpos($path, '-examples') === false)
+      |> Vec\sort($$);
 
     $this->renderFiles($sources);
   }

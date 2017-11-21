@@ -45,10 +45,11 @@ final class FunctionMarkdownBuilder {
     $this->docblock = new DocBlock($comment ?? '');
   }
 
-  public function build(): void {
+  public function build(): string {
     $md = $this->getMarkdown();
     $filename = self::getOutputFileName($this->yaml['data']);
-    file_put_contents($filename, $md);
+    \file_put_contents($filename, $md);
+    return $filename;
   }
 
   public function getMarkdown(): string {

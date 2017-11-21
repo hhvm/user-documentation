@@ -23,6 +23,7 @@ final class MergedYAMLBuildStep extends BuildStep {
     if (!is_dir(BuildPaths::MERGED_YAML)) {
       mkdir(BuildPaths::MERGED_YAML, /* mode = */ 0755, /* recursive = */ true);
     }
+    Log::i("\nBuilding YAML");
     $builder = new MergedYAMLBuilder(BuildPaths::MERGED_YAML);
     foreach ($sources as $source) {
       Log::v('.');

@@ -13,7 +13,7 @@ namespace HHVM\UserDocumentation;
 
 final class StaticResourceMapBuildStep extends BuildStep {
   use CodegenBuildStep;
- 
+
   private static function getTypes(): Map<string, string> {
     return Map {
       'css' => 'text/css',
@@ -64,7 +64,7 @@ final class StaticResourceMapBuildStep extends BuildStep {
   }
 
   private static function makeMap(
-    Vector<string> $sources,
+    vec<string> $sources,
   ): array<string, StaticResourceMapEntry> {
     $map = [];
 

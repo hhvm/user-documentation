@@ -46,10 +46,9 @@ final class MergedYAMLBuilder {
 
   public function build(): void {
     $writer = new YAMLWriter($this->destination);
-    foreach ($this->definitions as $def) {
+    $files = Vec\map($this->definitions, $def ==> {
       if ($def['type'] === APIDefinitionType::FUNCTION_DEF) {
-        $writer->write(FunctionYAML::class, $def);
-        continue;
+        return $writer->write(FunctionYAML::class, $def);
       }
       $def = TypeAssert\matches_type_structure(
         type_alias_structure(ClassYAML::class),
@@ -63,8 +62,12 @@ final class MergedYAMLBuilder {
       $methods = Vec\sort_by($methods, $m ==> $m['name']);
 
       $def['data']['methods'] = vec_like_array_cast($methods);
-      $writer->write(ClassYAML::class, $def);
-    }
+      return $writer->write(ClassYAML::class, $def);
+    });
+    \file_put_contents(
+      $this->destination.'/index.json',
+      JSON\encode_shape(DirectoryIndex::class, shape('files' => $files)),
+    );
   }
 
   private function removePrivateMethods<

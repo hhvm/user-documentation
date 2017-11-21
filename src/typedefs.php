@@ -21,6 +21,10 @@ type PHPDotNetAPIIndexEntry = shape(
 
 type ScannedDefinitionFilter = (function(ScannedBase): bool);
 
+type DirectoryIndex = shape(
+  'files' => Traversable<string>,
+);
+
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';

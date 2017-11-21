@@ -17,15 +17,14 @@ class YAMLWriter {
   ) {
   }
 
-  public function write<T as BaseYAML>(typename<T> $type, T $def): void {
+  public function write<T as BaseYAML>(typename<T> $type, T $def): string {
     invariant(
       $type !== BaseYAML::class,
       'Must specify a subtype of BaseYAML',
     );
-    file_put_contents(
-      $this->getFileName($def),
-      JSON\encode_shape($type, $def),
-    );
+    $file = $this->getFileName($def);
+    file_put_contents($file, JSON\encode_shape($type, $def));
+    return $file;
   }
 
   private function getFileName(BaseYAML $def): string {

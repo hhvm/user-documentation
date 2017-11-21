@@ -18,7 +18,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   const string RENDERER = LocalConfig::ROOT.'/md-render/render.rb';
   const int MAX_JOBS = 20;
 
-  protected function renderFiles(Vector<string> $files): Vector<string> {
+  protected function renderFiles(Traversable<string> $files): Vector<string> {
     Log::i("\nRendering markdown to HTML");
     $ret = Vector { };
     $jobs = Map { };
@@ -69,7 +69,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     );
     return $ret;
   }
-  
+
   private function parseSingleRenderResult(string $line): ?string {
     if (substr($line, 0, 4) !== 'OK] ') {
       Log::v('!');
