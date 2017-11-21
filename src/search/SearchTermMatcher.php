@@ -10,7 +10,7 @@
  */
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\{C, Math, Str, Vec};
+use namespace HH\Lib\{C, Keyset, Math, Str, Vec};
 
 abstract final class SearchTermMatcher {
   const dict<string, keyset<string>> SYNONYMS = dict[
@@ -20,6 +20,7 @@ abstract final class SearchTermMatcher {
     'vector' => keyset['vec'],
     'map' => keyset['dict'],
     'set' => keyset['keyset'],
+    'string' => keyset['str'],
   ];
 
   protected static function matchFullTerm(
@@ -64,7 +65,7 @@ abstract final class SearchTermMatcher {
     }
 
     $total = 0.0;
-    foreach ($parts as $part) {
+    foreach ($parts as $idx => $part) {
       $score = self::matchTerm($name, $part);
       if ($score === null) {
         return null;
@@ -75,7 +76,14 @@ abstract final class SearchTermMatcher {
 
     $idx = 0;
     foreach ($parts as $part) {
-      $new_idx = Str\search_ci($name, $part, $idx);
+      $new_idx = $part
+        |> Keyset\union(
+          vec[$$],
+          self::SYNONYMS[Str\lowercase($$)] ?? vec[],
+        )
+        |> Vec\map($$, $part ==> Str\search_ci($name, $part, $idx + 1))
+        |> Vec\filter_nulls($$)
+        |> Math\min($$);
       if ($new_idx === null) {
         return $score * SearchScores::OUT_OF_ORDER_WORD_SPLIT_MULTIPLIER;
       }
