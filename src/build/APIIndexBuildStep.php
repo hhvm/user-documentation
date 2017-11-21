@@ -12,8 +12,6 @@
 namespace HHVM\UserDocumentation;
 
 final class APIIndexBuildStep extends BuildStep {
-  use CodegenBuildStep;
-
   public function buildAll(): void {
     Log::i("\nAPIIndexBuild");
 
@@ -29,13 +27,12 @@ final class APIIndexBuildStep extends BuildStep {
     Log::i("\nCreate Index");
 
     $index = $this->generateIndexData($list);
-    $code = $this->writeCode(
-      'APIIndexData.hhi',
-      $index,
-    );
     file_put_contents(
-      BuildPaths::APIDOCS_INDEX,
-      $code,
+      BuildPaths::APIDOCS_INDEX_JSON,
+      JSON\encode_shape(
+        APIIndexShape::class,
+        $index,
+      ),
     );
   }
 

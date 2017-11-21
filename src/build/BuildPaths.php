@@ -26,7 +26,7 @@ abstract final class BuildPaths {
 
   const string APIDOCS_MARKDOWN = self::BUILD_DIR.'/api-markdown';
   const string APIDOCS_HTML = self::BUILD_DIR.'/api-html';
-  const string APIDOCS_INDEX = self::BUILD_DIR.'/api-index.php';
+  const string APIDOCS_INDEX_JSON = self::BUILD_DIR.'/api-index.json';
   const string APIDOCS_LEGACY_REDIRECTS
     = self::BUILD_DIR.'/api-legacy-redirects.php';
 

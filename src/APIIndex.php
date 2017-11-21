@@ -10,15 +10,27 @@
  */
 namespace HHVM\UserDocumentation;
 
-require(BuildPaths::APIDOCS_INDEX);
-
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Math, Str, Vec};
 
 final class APIIndex {
+  <<__Memoize>>
   public static function getIndex(
   ): APIIndexShape {
-    return APIIndexData::getIndex();
+    $key = __CLASS__.'!'.BuildPaths::BUILD_ID;
+
+    $success = false;
+    $data = apc_fetch($key, $success);
+    if ($success) {
+      return $data;
+    }
+
+    $data = JSON\decode_as_shape(
+      APIIndexShape::class,
+      \file_get_contents(BuildPaths::APIDOCS_INDEX_JSON),
+    );
+    apc_store($key, $data);
+    return $data;
   }
 
   public static function getIndexForType(
