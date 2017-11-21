@@ -11,17 +11,11 @@
 
 namespace HHVM\UserDocumentation;
 
-use phpDocumentor\Reflection\DocBlock;
-use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
-use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
-use phpDocumentor\Reflection\DocBlock\Tag;
-
 use namespace HH\Lib\{C, Str, Vec};
 
 final class FunctionMarkdownBuilder {
   private FunctionYAML $yaml;
-  private ?DocBlock $docblock;
-  private DocblockTagReader $tagReader;
+  private DocBlock $docblock;
   private ?string $class = null;
 
   public function __construct(
@@ -48,10 +42,7 @@ final class FunctionMarkdownBuilder {
     }
 
     $comment = $this->yaml['data']['docComment'];
-    if ($comment !== null) {
-      $this->docblock = new DocBlock($comment);
-    }
-    $this->tagReader = DocblockTagReader::newFromObject($this->docblock);
+    $this->docblock = new DocBlock($comment ?? '');
   }
 
   public function build(): void {
@@ -133,12 +124,7 @@ final class FunctionMarkdownBuilder {
   }
 
   private function getHeading(): ?string {
-    if (
-        $this->docblock?->getText() !== $this->docblock?->getShortDescription()
-       ) {
-      return $this->docblock?->getShortDescription();
-    }
-    return null;
+    return $this->docblock->getSummary();
   }
 
   private function getDeprecation(): ?string {
@@ -157,19 +143,18 @@ final class FunctionMarkdownBuilder {
       Stringify::signature($this->yaml['data']).
       "\n```\n\n";
 
-    $md .= $this->docblock?->getText();
+    $md .= $this->docblock->getDescription();
 
     return $md;
   }
 
   private function getParameters(): ?string {
-
     // If no parameters for the function, then move on
     if (count($this->yaml['data']['parameters']) === 0) {
       return null;
     }
 
-    $tags = $this->tagReader->getParamTags();
+    $tags = $this->docblock->getParamInfo();
 
     $md = "### Parameters\n\n";
 
@@ -185,7 +170,7 @@ final class FunctionMarkdownBuilder {
         // The '-' is generally included in the description. We can do something
         // more fancy if we need to, like `: ` and a preg_match on the first
         // position of a alphnumeric character, thus getting rid of any '-'
-        $md .= ' '.$tag->getDescription();
+        $md .= ' '.$tag['text'];
       }
       $md .= "\n";
     }
@@ -193,16 +178,17 @@ final class FunctionMarkdownBuilder {
   }
 
   private function getReturnValues(): ?string {
-    $tags = $this->tagReader->getTypedTagsByName('return', ReturnTag::class);
-    if (!$tags) {
+    $tags = $this->docblock->getReturnInfo();
+    if ($tags === null || C\is_empty($tags)) {
       return null;
     }
 
     $ret = "### Return Values\n";
     foreach ($tags as $tag) {
       $ret .= "\n - ";
-      $types = $tag->getTypes();
-      $types = array_filter($types, $type ==> $type !== '\-' && $type !== '-');
+      $types = $tag['types'];
+
+      $types = Vec\filter($types, $type ==> $type !== '\-' && $type !== '-');
       if ($types) {
         $ret .= '`'.implode('|', $types).'` - ';
       } else {
@@ -212,7 +198,7 @@ final class FunctionMarkdownBuilder {
         }
       }
 
-      $ret .= $tag->getDescription();
+      $ret .= $tag['text'];
     }
     return $ret;
   }

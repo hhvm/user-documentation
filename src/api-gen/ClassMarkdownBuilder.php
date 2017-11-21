@@ -2,13 +2,9 @@
 
 namespace HHVM\UserDocumentation;
 
-use phpDocumentor\Reflection\DocBlock;
-use phpDocumentor\Reflection\DocBlock\Tag;
-
 final class ClassMarkdownBuilder {
   private ClassYAML $yaml;
-  private ?DocBlock $docblock;
-  private DocblockTagReader $tagReader;
+  private DocBlock $docblock;
 
   public function __construct(
     string $file,
@@ -18,10 +14,7 @@ final class ClassMarkdownBuilder {
       file_get_contents($file),
     );
     $doc = $this->yaml['data']['docComment'];
-    if ($doc !== null) {
-      $this->docblock = new DocBlock($doc);
-    }
-    $this->tagReader = DocblockTagReader::newFromObject($this->docblock);
+    $this->docblock = new DocBlock($doc ?? '');
   }
 
   public function build(): void {
@@ -63,8 +56,8 @@ final class ClassMarkdownBuilder {
   private function getDescription(): string {
     $md = "";
     if ($this->docblock !== null) {
-      $desc = $this->docblock->getText();
-      if ($desc !== "" && strpos($desc, 'Copyright (c)') !== 0) {
+      $desc = $this->docblock->getDescription();
+      if ($desc !== null && strpos($desc, 'Copyright (c)') !== 0) {
         $md .= $desc . "\n";
       }
     }
@@ -72,9 +65,7 @@ final class ClassMarkdownBuilder {
   }
 
   private function getGuides(): ?string {
-    $guides = $this->tagReader
-      ->getTagsByName('guide')
-      ->map($tag ==> $tag->getContent());
+    $guides = $this->docblock->getTagsByName('guide');
     if (!$guides) {
       return null;
     }
@@ -149,7 +140,7 @@ EOF;
 
       $comment = $method['docComment'];
       if ($comment !== null) {
-        $desc = (new DocBlock($comment))->getShortDescription();
+        $desc = (new DocBlock($comment))->getSummary();
         if ($desc !== "") {
           $md .= '<br />'.$desc;
         }

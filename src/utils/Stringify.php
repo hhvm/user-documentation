@@ -42,14 +42,14 @@ class Stringify {
 
   public static function parameter(
     ParameterDocumentation $param,
-    ?ReturnTag $tag,
+    ?DocBlock::TParamInfo $info,
   ): string {
     $name = $param['name'];
 
     $s = '';
-    $types = $tag?->getTypes();
-    if ($types !== null && $types !== []) {
-      $s .= implode('|',$types).' ';
+    $types = $info['types'] ?? null;
+    if ($types !== null) {
+      $s .= Str\join($types, '|');
     } else {
       $th = $param['typehint'];
       if ($th !== null) {
@@ -146,12 +146,10 @@ class Stringify {
     FunctionDocumentation $func,
     StringifyFormat $format = StringifyFormat::MULTI_LINE,
   ): string {
-    $tags = DocblockTagReader::newFromString($func['docComment'])
-      ->getParamTags();
-
-    $params = array_map(
-      $param ==> Stringify::parameter($param, idx($tags, $param['name'])),
+    $param_info = (new DocBlock($func['docComment'] ?? ''))->getParamInfo();
+    $params = Vec\map(
       $func['parameters'],
+      $p ==> Stringify::parameter($p, $param_info[$p['name']] ?? null),
     );
 
     if (!$params) {

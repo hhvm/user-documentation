@@ -12,7 +12,6 @@
   },
   "require-dev": {
     "facebook/definition-finder": "^1.5.1",
-    "phpdocumentor/reflection-docblock": "^2.0",
     "hack-psr/psr7-http-message-hhi": "^1.0.0",
     "phpunit/phpunit": "^5.1",
     "91carriage/phpunit-hhi": "^5.1",
