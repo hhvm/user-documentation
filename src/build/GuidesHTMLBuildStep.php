@@ -26,10 +26,11 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
     $list = $this->renderFiles($sources);
 
     Log::i("\nCreating summaries");
-    $summaries = self::findSources(self::SOURCE_ROOT, Set{'txt'})
-      |> Vec\filter($$, $path ==> Str\contains($path, '-summary'))
-      |> Vec\map($$, $path ==> Str\strip_suffix($path, self::SOURCE_ROOT.'/'))
+    var_dump(self::SOURCE_ROOT.'/*/*/*-summary.txt');
+    $summaries = \glob(self::SOURCE_ROOT.'/*/*/*-summary.txt')
+      |> Vec\map($$, $path ==> Str\strip_prefix($path, self::SOURCE_ROOT.'/'))
       |> Vec\sort($$);
+      var_dump($summaries);
 
     $summary_index = $this->createSummaryIndex($summaries);
     file_put_contents(

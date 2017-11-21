@@ -9,17 +9,21 @@
  *
  */
 
-use Facebook\HackRouter\StringRequestParameter;
-use Facebook\HackRouter\StringRequestParameterSlashes;
-use HHVM\UserDocumentation\APIIndex;
-use HHVM\UserDocumentation\GuidesIndex;
-use HHVM\UserDocumentation\GuidesProduct;
-use HHVM\UserDocumentation\PHPAPIIndex;
-use HHVM\UserDocumentation\SearchResultSet;
+use type Facebook\HackRouter\StringRequestParameter;
+use type Facebook\HackRouter\StringRequestParameterSlashes;
+use type HHVM\UserDocumentation\{
+  APIIndex,
+  GuidesIndex,
+  GuidesProduct,
+  GuidePageSearchResult,
+  PHPAPIIndex,
+  SearchResult,
+  SearchScores,
+};
 
-use Psr\Http\Message\ServerRequestInterface;
+use type Psr\Http\Message\ServerRequestInterface;
 
-use namespace HH\Lib\{C, Str};
+use namespace HH\Lib\{C, Str, Vec};
 
 final class SearchController extends WebPageController {
   use SearchControllerParametersTrait;
@@ -46,51 +50,18 @@ final class SearchController extends WebPageController {
     return "Search results for '{$this->getSearchTerm()}':";
   }
 
-  private function getListFromResultSet(
-    Map<string, string> $result_set,
-  ): ?XHPRoot {
-    if (count($result_set) === 0) {
-      return null;
-    } else {
-      $list = <ul />;
-      foreach ($result_set as $name => $path) {
-        $item = <li><a href={$path}>{$name}</a></li>;
-        $list->appendChild($item);
-      }
-    }
-    return $list;
-  }
-
   protected async function getBody(): Awaitable<XHPRoot> {
-    $results = $this->getSearchResults();
+    $results = Vec\map($this->getSearchResults(), $result ==>
+      <li data-search-score={sprintf('%.2f', $result->getScore())}>
+        <a href={$result->getHref()}>{$result->getTitle()}</a>
+      </li>
+    );
 
-    $result_lists = (Map {
-      'Hack Guides' => $results->getHackGuides(),
-      'HHVM Guides' => $results->getHHVMGuides(),
-      'Hack Classes' => $results->getHackClasses(),
-      'Hack Traits' => $results->getHackTraits(),
-      'Hack Interfaces' => $results->getHackInterfaces(),
-      'Hack Functions' => $results->getHackFunctions(),
-      'PHP Classes' => $results->getPHPClasses(),
-      'PHP Functions' => $results->getPHPFunctions(),
-    })
-      ->map($defs ==>$this->getListFromResultSet($defs))
-      ->filter($xhp ==> $xhp !== null);
-
-    if (!$result_lists) {
-      return <p>No results found.</p>;
-    }
-
-    $root = <div class="innerContent" />;
-    foreach ($result_lists as $type => $list) {
-      $root->appendChild(
-        <x:frag>
-          <h1>{$type}</h1>
-          {$list}
-        </x:frag>
-      );
-    }
-    return $root;
+    return(
+      <div class="innerContent">
+        <ul class="searchResults">{$results}</ul>
+      </div>
+    );
   }
 
   <<__Memoize>>
@@ -98,17 +69,40 @@ final class SearchController extends WebPageController {
     return $this->getParameters()['term'];
   }
 
-  private function getSearchResults(): SearchResultSet {
-    return ((new SearchResultSet())
-      ->addAll($this->getHardcodedResults())
-      ->addAll(GuidesIndex::search($this->getSearchTerm()))
-      ->addAll(PHPAPIIndex::search($this->getSearchTerm()))
-    );
+  private function getSearchResults(): vec<SearchResult> {
+    $term = $this->getSearchTerm();
+    $results = vec[
+      $this->getHardcodedResults(),
+      GuidesIndex::search($term),
+      PHPAPIIndex::search($term),
+      APIIndex::search($term),
+    ]
+      |> Vec\flatten($$)
+      |> Vec\sort_by($$, $result ==> -($result->getScore()));
+
+    if (C\count($results) < 2) {
+      return $results;
+    }
+
+    $max = $results[0]->getScore();
+    $next = $results[1]->getScore();
+    if ($next >= $max * 0.8) {
+      $cut = $max * 0.2;
+    } else {
+      $cut = $max * 0.1;
+    }
+
+    $results = Vec\filter($results, $r ==> $r->getScore() >= $cut);
+
+    if (C\count($results) > 10) {
+      $cut = $results[9]->getScore();
+      $results = Vec\filter($results, $r ==> $r->getScore() >= 0.5 * $cut);
+    }
+    return $results;
   }
 
-  private function getHardcodedResults(): SearchResultSet {
+  private function getHardcodedResults(): vec<SearchResult> {
     $term = Str\lowercase($this->getSearchTerm());
-    $results = new SearchResultSet();
 
     $hack_array_keywords = keyset[
       'vec',
@@ -118,14 +112,17 @@ final class SearchController extends WebPageController {
       'map', 'immmap', 'constmap',
       'set', 'immset', 'constset',
     ];
-    if (C\contains_key($hack_array_keywords, $term)) {
-      $results->addGuideResult(
+    if (!C\contains_key($hack_array_keywords, $term)) {
+      return vec[];
+    }
+
+    return vec[
+      new GuidePageSearchResult(
         GuidesProduct::HACK,
         'collections',
         'hack-arrays',
-      );
-    }
-
-    return $results;
+        SearchScores::HARDCODED_RESULT_SCORE,
+      ),
+    ];
   }
 }

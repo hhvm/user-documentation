@@ -11,9 +11,9 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\Math;
 
-final class SearchResult {
+class SearchResult {
   private float $score;
 
   public function __construct(
@@ -28,8 +28,11 @@ final class SearchResult {
         break;
       case SearchResultType::HACK_API:
       case SearchResultType::PHP_API:
+        break;
       case SearchResultType::HACK_GUIDE:
       case SearchResultType::HHVM_GUIDE:
+        $score *= SearchScores::GUIDES_MULTIPLIER;
+        $score += SearchScores::GUIDES_BOOST;
         break;
     }
     $this->score = $score;

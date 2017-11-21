@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-class GuidesIndex {
+final class GuidesIndex {
   public static function getIndex(
   ): Map<GuidesProduct, Map<string, Map<string, string>>> {
     return require(BuildPaths::GUIDES_INDEX);
@@ -36,24 +36,42 @@ class GuidesIndex {
 
   public static function search(
     string $term,
-  ): SearchResultSet {
-    $results = new SearchResultSet();
+  ): vec<SearchResult> {
+    $results = vec[];
 
     $index = self::getIndex();
-    foreach ($index as $type => $value) {
-      foreach ($value as $category => $entry) {
-        foreach ($entry as $name => $filepath) {
-          if (stripos($name, $term) !== false) {
-            $results->addGuideResult($type, $category, $name);
-          } else {
-            $content = file_get_contents(BuildPaths::GUIDES_HTML.'/'.$filepath);
-            if ($content !== false) {
-              $content = strip_tags($content);
-              if (stripos(html_entity_decode($content), $term) !== false) {
-                $results->addGuideResult($type, $category, $name);
-              }
+    foreach ($index as $product => $value) {
+      foreach ($value as $guide => $entry) {
+        foreach ($entry as $page => $filepath) {
+          $name = Guides::normalizeName($product, $guide, $page);
+          $score = SearchTermMatcher::matchTerm($name, $term);
+          if ($score !== null) {
+            if ($page === 'introduction') {
+              $score *= SearchScores::GUIDE_INTRODUCTION_MULTIPLIER;
             }
+            $results[] = new GuidePageSearchResult(
+              $product,
+              $guide,
+              $page,
+              $score,
+            );
+            continue;
           }
+          $content = file_get_contents(BuildPaths::GUIDES_HTML.'/'.$filepath);
+          if ($content === false) {
+            continue;
+          }
+          $content = html_entity_decode(strip_tags($content));
+          $score = SearchTermMatcher::matchTerm($content, $term);
+          if ($score === null) {
+            continue;
+          }
+          $results[] = new GuidePageSearchResult(
+            $product,
+            $guide,
+            $page,
+            $score * SearchScores::CONTENT_MATCH_MULTIPLIER,
+          );
         }
       }
     }
