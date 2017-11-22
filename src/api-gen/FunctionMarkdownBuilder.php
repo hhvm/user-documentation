@@ -105,7 +105,7 @@ final class FunctionMarkdownBuilder {
         $name = Str\join($parts, "\\");
       }
       $fbonly_messages[] = "This function is available as `".$name."()` in ".
-        "Facebooks' www repository.";
+        "Facebook's www repository.";
     }
     if (!C\is_empty($fbonly_messages)) {
       $data['fbonly messages'] = $fbonly_messages;
