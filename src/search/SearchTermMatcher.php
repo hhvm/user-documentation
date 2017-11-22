@@ -25,14 +25,14 @@ abstract final class SearchTermMatcher {
   ];
 
   protected static function matchFullTerm(
-    string $name,
+    string $content,
     string $term,
   ): ?float {
     if (Str\length($term) === 0) {
       return null;
     }
 
-    if (Str\compare_ci($term, $name) === 0) {
+    if ($term === $content) {
       return SearchScores::EXACT_MATCH_SCORE;
     }
 
@@ -41,18 +41,18 @@ abstract final class SearchTermMatcher {
     }
 
     $multi = 1.0;
-    if (Str\length($term) < 3 || Str\length($name) < 3) {
+    if (Str\length($term) < 3 || Str\length($content) < 3) {
       $multi = SearchScores::SHORT_MATCH_MULTIPLIER;
     }
 
-    if (Str\starts_with_ci($name, $term)) {
+    if (Str\starts_with($content, $term)) {
       return SearchScores::PREFIX_MATCH_SCORE * $multi;
     }
-    if (Str\ends_with_ci($name, $term)) {
+    if (Str\ends_with($content, $term)) {
       return SearchScores::SUFFIX_MATCH_SCORE * $multi;
     }
 
-    if (Str\contains_ci($name, $term)) {
+    if (Str\contains($content, $term)) {
       return SearchScores::SUBSTRING_MATCH_SCORE * $multi;
     }
 
@@ -60,7 +60,7 @@ abstract final class SearchTermMatcher {
   }
 
   protected static function matchWords(
-    string $name,
+    string $content,
     string $term,
   ): ?float {
     $parts = Str\split($term, ' ');
@@ -70,7 +70,7 @@ abstract final class SearchTermMatcher {
 
     $total = 0.0;
     foreach ($parts as $idx => $part) {
-      $score = self::matchTerm($name, $part);
+      $score = self::matchTermInner($content, $part);
       if ($score === null) {
         return null;
       }
@@ -85,7 +85,7 @@ abstract final class SearchTermMatcher {
           vec[$$],
           self::SYNONYMS[Str\lowercase($$)] ?? vec[],
         )
-        |> Vec\map($$, $part ==> Str\search_ci($name, $part, $idx + 1))
+        |> Vec\map($$, $part ==> Str\search($content, $part, $idx + 1))
         |> Vec\filter_nulls($$)
         |> Math\min($$);
       if ($new_idx === null) {
@@ -97,10 +97,10 @@ abstract final class SearchTermMatcher {
   }
 
   protected static function matchComponents(
-    string $name,
+    string $content,
     string $term,
   ): ?float {
-    $parts = Str\split($name, '\\')
+    $parts = Str\split($content, '\\')
       |> Vec\map($$, $part ==> Str\split($part, '::'))
       |> Vec\flatten($$);
     if (C\count($parts) === 1) {
@@ -108,7 +108,7 @@ abstract final class SearchTermMatcher {
     }
 
     $score = $parts
-      |> Vec\map($$, $part ==> self::matchTerm($part, $term))
+      |> Vec\map($$, $part ==> self::matchTermInner($part, $term))
       |> Vec\filter_nulls($$)
       |> Math\max($$);
 
@@ -119,14 +119,14 @@ abstract final class SearchTermMatcher {
     return $score * SearchScores::COMPONENT_MATCH_MULTIPLIER;
   }
 
-  protected static function matchSynonyms(string $name, string $term): ?float {
+  protected static function matchSynonyms(string $content, string $term): ?float {
     $synonyms = self::SYNONYMS[Str\lowercase($term)] ?? null;
     if ($synonyms === null) {
       return null;
     }
 
     $score = $synonyms
-      |> Vec\map($$, $synonym ==> self::matchTerm($name, $synonym))
+      |> Vec\map($$, $synonym ==> self::matchTermInner($content, $synonym))
       |> Vec\filter_nulls($$)
       |> Math\max($$);
     if ($score === null) {
@@ -138,31 +138,54 @@ abstract final class SearchTermMatcher {
 
   <<__Memoize>>
   public static function matchTerm(
-    string $name,
+    string $content,
     string $term,
   ): ?float {
-    return Math\max(Vec\filter_nulls(vec[
-      self::matchFullTerm($name, $term),
-      self::matchWords($name, $term),
-      self::matchComponents($name, $term),
-      self::matchSynonyms($name, $term),
-      self::matchLevenshtein($name, $term),
-    ]));
+    $content = Str\lowercase($content);
+    $term = Str\lowercase($term);
+    return self::matchTermInner($content, $term);
   }
 
-  protected static function matchLevenshtein(
-    string $name,
+  protected static function matchTermInner(
+    string $content,
     string $term,
   ): ?float {
+    $matches = vec[
+      self::matchFullTerm($content, $term),
+      self::matchWords($content, $term),
+      self::matchSynonyms($content, $term),
+    ];
+
+    if (Str\length($content) < 80) {
+      // Don't try these on long-form content
+      $matches = Vec\concat(
+        $matches,
+        vec[
+          self::matchComponents($content, $term),
+          self::matchEditDistance($content, $term),
+        ],
+      );
+    }
+    return Math\max(Vec\filter_nulls($matches));
+  }
+
+  protected static function matchEditDistance(
+    string $content,
+    string $term,
+  ): ?float {
+    if ($content === $term) {
+      return null;
+    }
+    
     $length = Math\minva(
-      Str\length($name),
+      Str\length($content),
       Str\split($term, ' ')
         |> Vec\map($$, $word ==> Str\length($word))
         |> Math\max($$)
         |> TypeAssert\not_null($$)
       ,
     );
-    $diff = \levenshtein($name, $term);
+    $diff = \levenshtein($content, $term);
     if ($diff >= Math\minva($length * 0.5, 3)) {
       return null;
     }
