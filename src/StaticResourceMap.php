@@ -10,11 +10,30 @@
  */
 namespace HHVM\UserDocumentation;
 
-require(BuildPaths::STATIC_RESOURCES_MAP);
+use namespace Facebook\TypeAssert;
+use namespace HH\Lib\{C, Dict};
 
 class StaticResourceMap {
-  private static function getMap(): array<string, StaticResourceMapEntry> {
-    return StaticResourceData::getData();
+  private static function getMap(): dict<string, StaticResourceMapEntry> {
+    $key = self::class.'!'.LocalConfig::getBuildID();
+
+    $success = false;
+    $data = \apc_fetch($key, $success);
+    if ($success) {
+      return $data;
+    }
+
+    $data = \file_get_contents(BuildPaths::STATIC_RESOURCES_MAP_JSON)
+      |> JSON\decode_as_dict($$)
+      |> Dict\map(
+        $$,
+        $value ==> TypeAssert\matches_type_structure(
+          type_alias_structure(StaticResourceMapEntry::class),
+          $value,
+        ),
+      );
+    \apc_store($key, $data);
+    return $data;
   }
 
   public static function getEntryForFile(

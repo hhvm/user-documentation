@@ -12,8 +12,6 @@
 namespace HHVM\UserDocumentation;
 
 final class StaticResourceMapBuildStep extends BuildStep {
-  use CodegenBuildStep;
-
   private static function getTypes(): Map<string, string> {
     return Map {
       'css' => 'text/css',
@@ -46,27 +44,16 @@ final class StaticResourceMapBuildStep extends BuildStep {
 
     $map = self::makeMap($sources);
 
-    // For PHP
-    $code = $this->writeCode(
-      'StaticResourceData.hhi',
-      $map,
-    );
-    file_put_contents(
-      BuildPaths::STATIC_RESOURCES_MAP,
-      $code,
-    );
-
-    // For Ruby (md-render)
-    file_put_contents(
+    \file_put_contents(
       BuildPaths::STATIC_RESOURCES_MAP_JSON,
-      json_encode($map, JSON_PRETTY_PRINT),
+      JSON\encode_dict($map),
     );
   }
 
   private static function makeMap(
     vec<string> $sources,
-  ): array<string, StaticResourceMapEntry> {
-    $map = [];
+  ): dict<string, StaticResourceMapEntry> {
+    $map = dict[];
 
     $prefix_len = strlen(self::getRoot());
 

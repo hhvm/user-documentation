@@ -60,8 +60,6 @@ abstract final class BuildPaths {
     self::SCRATCH_DIR.'/syntax-highlighting.css';
   const string SITE_MAP = self::FINAL_DIR.'/sitemap.txt';
 
-  const string STATIC_RESOURCES_MAP =
-    self::FINAL_DIR.'/static_resources.php';
   const string STATIC_RESOURCES_MAP_JSON =
     self::FINAL_DIR.'/static_resources.json';
   const string FB_IP_RANGES_JSON =
