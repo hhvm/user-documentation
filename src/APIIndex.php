@@ -14,13 +14,43 @@ use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Math, Str, Vec};
 
 final class APIIndex {
+  private function __construct(
+    private ProductAPIIndexShape $index,
+  ) {
+  }
+
   <<__Memoize>>
-  public static function getIndex(
+  public static function get(APIProduct $product): APIIndex {
+    $idx = self::getRawIndex();
+    switch ($product) {
+      case APIProduct::HACK:
+        return new self($idx[APIProduct::HACK]);
+      case APIProduct::HSL:
+        return new self($idx[APIProduct::HSL]);
+      case APIProduct::PHP:
+        invariant_violation("Can't handle PHP index");
+    }
+  }
+
+  public function getIndex(): ProductAPIIndexShape {
+    return $this->index;
+  }
+
+  public static function searchAllProducts(string $term): vec<SearchResult> {
+    return Vec\concat(
+      self::get(APIProduct::HACK)->search($term),
+      self::get(APIProduct::HSL)->search($term),
+    );
+  }
+
+  <<__Memoize>>
+  private static function getRawIndex(
   ): APIIndexShape {
-    $key = __CLASS__.'!'.BuildPaths::BUILD_ID;
+    $key = __CLASS__.'!'.LocalConfig::getBuildID();
 
     $success = false;
     $data = apc_fetch($key, $success);
+    $success = false;
     if ($success) {
       return $data;
     }
@@ -33,44 +63,47 @@ final class APIIndex {
     return $data;
   }
 
-  public static function getIndexForType(
+  public function getIndexForType(
     APIDefinitionType $type,
   ): array<string, APIIndexEntry> {
-    $index = Shapes::toArray(self::getIndex());
+    $index = Shapes::toArray($this->index);
     invariant(
       array_key_exists($type, $index),
       'invalid type: %s',
       (string) $type,
     );
-    // UNSAFE
     return $index[$type];
   }
 
-  public static function getFunctionIndex(
+  public function getFunctionIndex(
   ): array<string, APIFunctionIndexEntry> {
-    return self::getIndex()['function'];
+    return $this->index['function'];
   }
 
-  public static function getClassIndex(
+  public function getClassIndex(
     APIDefinitionType $type,
   ): array<string, APIClassIndexEntry> {
-    invariant(
-      $type !== APIDefinitionType::FUNCTION_DEF,
-      'functions are not classes',
-    );
-    // UNSAFE
-    return self::getIndex()[$type];
+    switch($type) {
+      case APIDefinitionType::FUNCTION_DEF:
+        invariant_violation('functions are not classes');
+      case APIDefinitionType::CLASS_DEF:
+        return $this->index['class'];
+      case APIDefinitionType::INTERFACE_DEF:
+        return $this->index['interface'];
+      case APIDefinitionType::TRAIT_DEF:
+        return $this->index['trait'];
+    }
   }
 
-  public static function search(
+  public function search(
     string $term,
   ): vec<SearchResult> {
     return APIDefinitionType::getValues()
-      |> Vec\map($$, $type ==> self::searchEntries($term, $type))
+      |> Vec\map($$, $type ==> $this->searchEntries($term, $type))
       |> Vec\flatten($$);
   }
 
-  private static function getMethods(
+  private function getMethods(
     APIIndexEntry $entry,
   ): ?vec<APIMethodIndexEntry> {
     $arr = Shapes::toArray($entry);
@@ -87,14 +120,14 @@ final class APIIndex {
     return null;
   }
 
-  private static function searchEntries (
+  private function searchEntries (
     string $term,
     APIDefinitionType $type,
   ): vec<SearchResult> {
     $terms = Str\split($term, ' ');
     $results = vec[];
 
-    $entries = self::getIndexForType($type);
+    $entries = $this->getIndexForType($type);
     foreach ($entries as $_ => $entry) {
       $name = $entry['name'];
       $type = Str\contains($name, "HH\\Lib\\")
@@ -106,7 +139,7 @@ final class APIIndex {
         $results[] = new SearchResult($type, $score, $name, $entry['urlPath']);
       }
 
-      $methods = self::getMethods($entry);
+      $methods = $this->getMethods($entry);
       if ($methods === null) {
         continue;
       }
@@ -122,10 +155,10 @@ final class APIIndex {
     return $results;
   }
 
-  public static function getDataForFunction(
+  public function getDataForFunction(
     string $name,
   ): APIFunctionIndexEntry {
-    $index = self::getIndex();
+    $index = $this->index;
     invariant(
       array_key_exists($name, $index['function']),
       'function %s does not exist',
@@ -134,11 +167,11 @@ final class APIIndex {
     return $index['function'][$name];
   }
 
-  public static function getDataForClass(
+  public function getDataForClass(
     APIDefinitionType $class_type,
     string $class_name,
   ): APIClassIndexEntry {
-    $index = self::getClassIndex($class_type);
+    $index = $this->getClassIndex($class_type);
     invariant(
       array_key_exists($class_name, $index),
       'class %s does not exist',
@@ -147,12 +180,12 @@ final class APIIndex {
     return $index[$class_name];
   }
 
-  public static function getDataForMethod(
+  public function getDataForMethod(
     APIDefinitionType $class_type,
     string $class_name,
     string $method_name,
   ): APIMethodIndexEntry {
-    $index = self::getClassIndex($class_type);
+    $index = $this->getClassIndex($class_type);
     invariant(
       array_key_exists($class_name, $index),
       'class %s does not exist',

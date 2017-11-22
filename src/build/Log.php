@@ -47,12 +47,18 @@ class Log {
     self::print(self::WARN, $msg);
   }
 
-  public static function i(string $msg): void {
-    self::print(self::INFO, $msg);
+  public static function i(
+    \HH\FormatString<\PlainSprintf> $msg,
+    mixed ...$args
+  ): void {
+    self::print(self::INFO, \vsprintf($msg, $args));
   }
 
-  public static function v(string $msg): void {
-    self::print(self::VERBOSE, $msg);
+  public static function v(
+    \HH\FormatString<\PlainSprintf> $msg,
+    mixed ...$args
+  ): void {
+    self::print(self::VERBOSE, \vsprintf($msg, $args));
   }
 
   private static function print(int $loglevel, string $msg): void {

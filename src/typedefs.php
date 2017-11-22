@@ -63,6 +63,7 @@ enum APIDefinitionType: string as string {
 
 enum APIProduct: string as string {
   HACK = 'hack';
+  HSL = 'hsl';
   PHP = 'php';
 }
 
@@ -200,11 +201,16 @@ type APIClassIndexEntry = shape(
   'methods' => array<string, APIMethodIndexEntry>,
 );
 
-type APIIndexShape = shape(
+type ProductAPIIndexShape = shape(
   'class' => array<string, APIClassIndexEntry>,
   'interface' => array<string, APIClassIndexEntry>,
   'trait' => array<string, APIClassIndexEntry>,
   'function' => array<string, APIFunctionIndexEntry>,
+);
+
+type APIIndexShape = shape(
+  APIProduct::HACK => ProductAPIIndexShape,
+  APIProduct::HSL => ProductAPIIndexShape,
 );
 
 type StaticResourceMapEntry = shape(

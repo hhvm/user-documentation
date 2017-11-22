@@ -19,6 +19,7 @@ final class FunctionMarkdownBuilder {
   private ?string $class = null;
 
   public function __construct(
+    private APIProduct $product,
     string $file,
     ?(string, FunctionDocumentation) $method_data = null,
   ) {
@@ -47,7 +48,7 @@ final class FunctionMarkdownBuilder {
 
   public function build(): string {
     $md = $this->getMarkdown();
-    $filename = self::getOutputFileName($this->yaml['data']);
+    $filename = self::getOutputFileName($this->product, $this->yaml['data']);
     \file_put_contents($filename, $md);
     return $filename;
   }
@@ -115,11 +116,13 @@ final class FunctionMarkdownBuilder {
   }
 
   public static function getOutputFileName(
+    APIProduct $product,
     FunctionDocumentation $docs,
   ): string {
     return sprintf(
-      '%s/function.%s.md',
+      '%s/%s/function.%s.md',
       BuildPaths::APIDOCS_MARKDOWN,
+      $product,
       strtr($docs['name'], "\\", '.'),
     );
   }

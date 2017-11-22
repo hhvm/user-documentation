@@ -9,7 +9,7 @@
  *
  */
 
-use HHVM\UserDocumentation\BuildPaths;
+use HHVM\UserDocumentation\LocalConfig;
 use HHVM\UserDocumentation\UIGlyphIcon;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -107,7 +107,7 @@ EOF;
             <link rel="shortcut icon" href="/favicon.png" />
             {$open_search}
             <x:comment>
-              Build ID: {file_get_contents(BuildPaths::BUILD_ID)}
+              Build ID: {LocalConfig::getBuildID()}
             </x:comment>
             <static:stylesheet
               path="/css/main.css"

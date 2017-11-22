@@ -11,20 +11,32 @@
 namespace HHVM\UserDocumentation;
 
 final class APINavData {
-  public static function getNavData(): array<string, NavDataNode> {
+  private APIIndex $index;
+  private function __construct(
+    APIProduct $product,
+  ) {
+    $this->index = APIIndex::get($product);
+  }
+
+  <<__Memoize>>
+  public static function get(APIProduct $product): this {
+    return new self($product);
+  }
+
+  public function getNavData(): array<string, NavDataNode> {
     return [
-      'Classes' => self::getNavDataForClasses(APIDefinitionType::CLASS_DEF),
-      'Interfaces' => self::getNavDataForClasses(APIDefinitionType::INTERFACE_DEF),
-      'Traits' => self::getNavDataForClasses(APIDefinitionType::TRAIT_DEF),
+      'Classes' => $this->getNavDataForClasses(APIDefinitionType::CLASS_DEF),
+      'Interfaces' => $this->getNavDataForClasses(APIDefinitionType::INTERFACE_DEF),
+      'Traits' => $this->getNavDataForClasses(APIDefinitionType::TRAIT_DEF),
       'Functions' => shape(
         'name' => 'Functions',
         'urlPath' => '/hack/reference/function/',
-        'children' => self::getNavDataForFunctions(),
+        'children' => $this->getNavDataForFunctions(),
       ),
     ];
   }
 
-  public static function getRootNameForType(
+  public function getRootNameForType(
     APIDefinitionType $class_type,
   ): string {
     switch ($class_type) {
@@ -39,27 +51,27 @@ final class APINavData {
     }
   }
 
-  private static function getNavDataForClasses(
+  private function getNavDataForClasses(
     APIDefinitionType $class_type,
   ): NavDataNode {
     $nav_data = [];
-    $classes = APIIndex::getClassIndex($class_type);
+    $classes = $this->index->getClassIndex($class_type);
 
     foreach ($classes as $class) {
       $nav_data[$class['name']] = shape(
         'name' => $class['name'],
         'urlPath' => $class['urlPath'],
-        'children' => self::getNavDataForMethods($class['methods']),
+        'children' => $this->getNavDataForMethods($class['methods']),
       );
     }
     return shape(
-      'name' => self::getRootNameForType($class_type),
+      'name' => $this->getRootNameForType($class_type),
       'urlPath' => '/hack/reference/'.$class_type.'/',
       'children' => $nav_data,
     );
   }
 
-  private static function getNavDataForMethods(
+  private function getNavDataForMethods(
     array<string, APIMethodIndexEntry> $methods,
   ): array<string, NavDataNode> {
     $nav_data = [];
@@ -73,9 +85,9 @@ final class APINavData {
     return $nav_data;
   }
 
-  private static function getNavDataForFunctions(
+  private function getNavDataForFunctions(
   ): array<string, NavDataNode> {
-    $functions = APIIndex::getFunctionIndex();
+    $functions = $this->index->getFunctionIndex();
 
     $nav_data = [];
     foreach ($functions as $function) {

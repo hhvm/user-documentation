@@ -9,7 +9,7 @@
  *
  */
 
-use HHVM\UserDocumentation\BuildPaths;
+use HHVM\UserDocumentation\LocalConfig;
 
 final class :github-issue-link extends :x:element {
   attribute
@@ -39,7 +39,7 @@ final class :github-issue-link extends :x:element {
   }
 
   private function getMetadataForBody(): string {
-    $build_id = trim(file_get_contents(BuildPaths::BUILD_ID));
+    $build_id = LocalConfig::getBuildID();
     $request_time = (new DateTime())
       ->setTimezone(new DateTimeZone('Etc/UTC'))
       ->format(DateTime::RFC2822);

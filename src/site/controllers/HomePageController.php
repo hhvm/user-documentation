@@ -70,6 +70,10 @@ final class HomePageController extends WebPageController {
             <a href="/hack/reference/">Hack API Reference</a>
           </h3>
           <p>Full reference docs for all functions, classes, interfaces, and traits in the Hack language.</p>
+          <h3 class="listTitle">
+            <a href="/hsl/reference/">Hack Standard Library Reference</a>
+          </h3>
+          <p>Full reference docs for all functions, classes, interfaces, and traits in the Hack Standard Library (HSL).</p>
         </div>
         <div class="guideListWrapper">
           <h2 class="listTitle">HHVM</h2>

@@ -40,7 +40,8 @@ final class APIClassPageController extends APIPageController {
     $this->redirectIfAPIRenamed();
     $definition_name = $this->getParameters()['Name'];
 
-    $index = APIIndex::getIndexForType($this->getDefinitionType());
+    $index = APIIndex::get($this->getParameters()['Product'])
+      ->getIndexForType($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();
     }
@@ -64,13 +65,14 @@ final class APIClassPageController extends APIPageController {
 
   <<__Override>>
   protected function getSideNav(): XHPRoot {
+    $api_nav_data = APINavData::get($this->getParameters()['Product']);
     $path = [
-      APINavData::getRootNameForType($this->getDefinitionType()),
+      $api_nav_data->getRootNameForType($this->getDefinitionType()),
       $this->getRootDefinition()['name'],
     ];
     return (
       <ui:navbar
-        data={APINavData::getNavData()}
+        data={$api_nav_data->getNavData()}
         activePath={$path}
         extraNavListClass="apiNavList"
       />
@@ -85,11 +87,15 @@ final class APIClassPageController extends APIPageController {
       return;
     }
 
+    $product = $this->getParameters()['Product'];
     $type = $this->getDefinitionType();
     if ($type === APIDefinitionType::FUNCTION_DEF) {
-      $url = URLBuilder::getPathForFunction(shape('name' => $redirect_to));
+      $url = URLBuilder::getPathForFunction(
+        $product,
+        shape('name' => $redirect_to),
+      );
     } else {
-      $url = URLBuilder::getPathForClass(shape(
+      $url = URLBuilder::getPathForClass($product, shape(
         'name' => $redirect_to,
         'type' => $type,
       ));

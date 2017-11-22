@@ -11,34 +11,34 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Vec;
+
 final class APIIndexBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nAPIIndexBuild");
 
-    $sources = self::findSources(BuildPaths::MERGED_YAML, Set{'yml'});
-    sort($sources);
-
-    $this->createIndex($sources);
-  }
-
-  private function createIndex(
-    Traversable<string> $list,
-  ): void {
-    Log::i("\nCreate Index");
-
-    $index = $this->generateIndexData($list);
-    file_put_contents(
+    $full_index = shape(
+      APIProduct::HACK => $this->createIndex(APIProduct::HACK),
+      APIProduct::HSL => $this->createIndex(APIProduct::HSL),
+    );
+    \file_put_contents(
       BuildPaths::APIDOCS_INDEX_JSON,
       JSON\encode_shape(
         APIIndexShape::class,
-        $index,
+        $full_index,
       ),
     );
   }
 
-  private function generateIndexData(
-    Traversable<string> $list,
-  ): APIIndexShape {
+  private function createIndex(
+    APIProduct $product,
+  ): ProductAPIIndexShape {
+    $list = BuildPaths::APIDOCS_DATA.'/'.$product
+      |> self::findSources($$, ImmSet {'yml'})
+      |> Vec\sort($$);
+
+    Log::i("\nCreating index for %s", $product);
+
     $out = shape(
       'class' => [],
       'interface' => [],
@@ -60,13 +60,16 @@ final class APIIndexBuildStep extends BuildStep {
           )();
 
           $idx = strtr($docs['name'], "\\", '.');
-          $md_path = FunctionMarkdownBuilder::getOutputFileName($docs);
+          $md_path = FunctionMarkdownBuilder::getOutputFileName(
+            $product,
+            $docs,
+          );
           $html_path = APIHTMLBuildStep::getOutputFileName($md_path);
 
           $out['function'][$idx] = shape(
             'name' => $docs['name'],
             'htmlPath' => $html_path,
-            'urlPath' => URLBuilder::getPathForFunction($docs),
+            'urlPath' => URLBuilder::getPathForFunction($product, $docs),
           );
           break;
         case APIDefinitionType::CLASS_DEF:
@@ -81,6 +84,7 @@ final class APIIndexBuildStep extends BuildStep {
           foreach ($class['methods'] as $method) {
             $idx = strtr($method['name'], "\\", '.');
             $md_path = MethodMarkdownBuilder::getOutputFileName(
+              $product,
               $type,
               $class,
               $method,
@@ -91,11 +95,12 @@ final class APIIndexBuildStep extends BuildStep {
               'className' => $class['name'],
               'classType' => $type,
               'htmlPath' => $html_path,
-              'urlPath' => URLBuilder::getPathForMethod($method),
+              'urlPath' => URLBuilder::getPathForMethod($product, $method),
             );
           }
 
           $md_path = ClassMarkdownBuilder::getOutputFileName(
+            $product,
             $type,
             $class,
           );
@@ -106,7 +111,7 @@ final class APIIndexBuildStep extends BuildStep {
             'name' => $class['name'],
             'type' => $type,
             'htmlPath' => $html_path,
-            'urlPath' => URLBuilder::getPathForClass($class),
+            'urlPath' => URLBuilder::getPathForClass($product, $class),
             'methods' => $methods,
           );
 

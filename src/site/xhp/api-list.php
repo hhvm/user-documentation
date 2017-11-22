@@ -24,17 +24,19 @@ class :api-list extends :x:element {
   ): Map<APIDefinitionType, Map<string, string>> {
     switch ($this->:product) {
       case APIProduct::HACK:
-        return $this->getHackDefinitions();
+      case APIProduct::HSL:
+        return $this->getHackDefinitions($this->:product);
       case APIProduct::PHP:
         return $this->getPHPDefinitions();
     }
   }
 
   final private function getHackDefinitions(
+    APIProduct $product,
   ): Map<APIDefinitionType, Map<string, string>> {
     $out = Map {};
     foreach ($this->:types as $type) {
-      $index = APIIndex::getIndexForType($type);
+      $index = APIIndex::get($product)->getIndexForType($type);
       $out[$type] = Map { };
       foreach ($index as $node) {
         $out[$type][$node['name']] = $node['urlPath'];

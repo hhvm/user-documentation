@@ -58,10 +58,12 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
     $old_ids_to_new_urls = [];
 
+    $index = APIIndex::get(APIProduct::HACK);
+
     $classes = (Map {})
-      ->setAll(APIIndex::getClassIndex(APIDefinitionType::CLASS_DEF))
-      ->setAll(APIIndex::getClassIndex(APIDefinitionType::INTERFACE_DEF))
-      ->setAll(APIIndex::getClassIndex(APIDefinitionType::TRAIT_DEF));
+      ->setAll($index->getClassIndex(APIDefinitionType::CLASS_DEF))
+      ->setAll($index->getClassIndex(APIDefinitionType::INTERFACE_DEF))
+      ->setAll($index->getClassIndex(APIDefinitionType::TRAIT_DEF));
 
     foreach ($classes as $class) {
       Log::v('.');
@@ -90,7 +92,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
       }
     }
 
-    foreach (APIIndex::getFunctionIndex() as $function) {
+    foreach ($index->getFunctionIndex() as $function) {
       Log::v('.');
       $old_id = idx($old_functions, $function['name']);
       if ($old_id !== null) {

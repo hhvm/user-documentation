@@ -17,6 +17,7 @@ class MethodMarkdownBuilder {
   private ClassYAML $yaml;
 
   public function __construct(
+    private APIProduct $product,
     private string $file,
   ) {
     $this->yaml = JSON\decode_as_shape(
@@ -37,10 +38,14 @@ class MethodMarkdownBuilder {
     FunctionDocumentation $method,
   ): string {
     $classname = $this->yaml['data']['name'];
-    $md = (new FunctionMarkdownBuilder($this->file, tuple($classname, $method)))
-      ->getMarkdown();
+    $md = (new FunctionMarkdownBuilder(
+      $this->product,
+      $this->file,
+      tuple($classname, $method),
+    ))->getMarkdown();
 
     $filename = self::getOutputFileName(
+      $this->product,
       APIDefinitionType::assert($this->yaml['type']),
       $this->yaml['data'],
       $method,
@@ -51,11 +56,13 @@ class MethodMarkdownBuilder {
   }
 
   public static function getOutputFileName(
+    APIProduct $product,
     APIDefinitionType $class_type,
     ClassDocumentation $class,
     FunctionDocumentation $method,
   ): string {
     $class_file_name = ClassMarkdownBuilder::getOutputFileName(
+      $product,
       $class_type,
       $class
     );

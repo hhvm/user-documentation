@@ -22,7 +22,7 @@ final class BuildIDBuildStep extends BuildStep {
     }
 
     $build_id = strftime('%FT%T%z').':'.$docsite_rev;
-    file_put_contents(BuildPaths::BUILD_ID, $build_id);
+    file_put_contents(BuildPaths::BUILD_ID_FILE, $build_id."\n");
   }
 
   private function getHead(string $path): string {

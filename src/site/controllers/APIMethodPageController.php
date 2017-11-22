@@ -34,7 +34,8 @@ final class APIMethodPageController extends APIPageController {
   protected function getRootDefinition(): APIClassIndexEntry {
     $this->redirectIfAPIRenamed();
     $definition_name = $this->getParameters()['Class'];
-    $index = APIIndex::getClassIndex($this->getDefinitionType());
+    $index = APIIndex::get($this->getParameters()['Product'])
+      ->getClassIndex($this->getDefinitionType());
     if (!array_key_exists($definition_name, $index)) {
       throw new HTTPNotFoundException();
     }
@@ -86,9 +87,10 @@ final class APIMethodPageController extends APIPageController {
     if ($redirect_to === null) {
       return;
     }
+    $product = $this->getParameters()['Product'];
     $type = $this->getDefinitionType();
     throw new RedirectException(
-      URLBuilder::getPathForMethod(shape(
+      URLBuilder::getPathForMethod($product, shape(
         'name' => $this->getParameters()['Method'],
         'className' => $redirect_to,
         'classType' => $type,

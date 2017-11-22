@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Vec;
+
 final class SiteMapBuildStep extends BuildStep {
   const string ROOT = 'https://docs.hhvm.com';
 
@@ -56,8 +58,15 @@ final class SiteMapBuildStep extends BuildStep {
     };
   }
 
-  private function getAPIPages(): ImmVector<string> {
-    return $this->getPagesFromNavData(APINavData::getNavData());
+  private function getAPIPages(): vec<string> {
+    return Vec\concat(
+      $this->getPagesFromNavData(
+        APINavData::get(APIProduct::HACK)->getNavData(),
+      ),
+      $this->getPagesFromNavData(
+        APINavData::get(APIProduct::HSL)->getNavData(),
+      ),
+    );
   }
 
   private function getGuidePages(): ImmVector<string> {

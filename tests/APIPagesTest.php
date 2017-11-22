@@ -2,16 +2,19 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use HHVM\UserDocumentation\APINavData;
-use HHVM\UserDocumentation\NavDataNode;
-use HHVM\UserDocumentation\APIDefinitionType;
-use HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\{
+  APIDefinitionType,
+  APINavData,
+  APIProduct,
+  NavDataNode,
+  URLBuilder,
+};
 
 use namespace HH\Lib\Vec;
 
 class APIPagesTest extends \PHPUnit_Framework_TestCase {
   public static function allAPIPages(): array<(string, NavDataNode)> {
-    $to_visit = array_values(APINavData::getNavData());
+    $to_visit = array_values(APINavData::get(APIProduct::HACK)->getNavData());
     $out = [];
 
     while ($node = array_pop($to_visit)) {
@@ -74,7 +77,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     // Top-level pages don't contain their own name in the output - eg 'Classes'
     // is 'Class Reference'
     $blacklist = (new Set(APIDefinitionType::getValues()))->map($x ==>
-      APINavData::getRootNameForType($x));
+      APINavData::get(APIProduct::HACK)->getRootNameForType($x));
     if (!$blacklist->contains($node['name'])) {
       $this->assertContains($node['name'], (string)$response->getBody());
     }
@@ -120,10 +123,10 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       case APIDefinitionType::TRAIT_DEF:
       case APIDefinitionType::INTERFACE_DEF:
         $url =
-          URLBuilder::getPathForClass(shape('name' => $name, 'type' => $type));
+          URLBuilder::getPathForClass(APIProduct::HACK, shape('name' => $name, 'type' => $type));
         break;
       case APIDefinitionType::FUNCTION_DEF:
-        $url = URLBuilder::getPathForFunction(shape('name' => $name));
+        $url = URLBuilder::getPathForFunction(APIProduct::HACK, shape('name' => $name));
         break;
     }
     $response = \HH\Asio\join(PageLoader::getPage($url));

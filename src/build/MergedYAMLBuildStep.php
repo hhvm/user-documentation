@@ -18,13 +18,14 @@ final class MergedYAMLBuildStep extends BuildStep {
     Log::i("\nMergedYAMLBuild");
     $sources = (Vector { })
       ->addAll(self::findSources(BuildPaths::HHI_YAML, Set{'yml'}))
-      ->addAll(self::findSources(BuildPaths::SYSTEMLIB_YAML, Set{'yml'}))
-      ->addAll(self::findSources(BuildPaths::HSL_YAML, Set{'yml'}));
-    if (!is_dir(BuildPaths::MERGED_YAML)) {
-      mkdir(BuildPaths::MERGED_YAML, /* mode = */ 0755, /* recursive = */ true);
+      ->addAll(self::findSources(BuildPaths::SYSTEMLIB_YAML, Set{'yml'}));
+
+    $out_dir = BuildPaths::APIDOCS_DATA.'/'.APIProduct::HACK;
+    if (!is_dir($out_dir)) {
+      mkdir($out_dir, /* mode = */ 0755, /* recursive = */ true);
     }
     Log::i("\nBuilding YAML");
-    $builder = new MergedYAMLBuilder(BuildPaths::MERGED_YAML);
+    $builder = new MergedYAMLBuilder($out_dir);
     foreach ($sources as $source) {
       Log::v('.');
       $data = JSON\decode_as_shape(BaseYAML::class, file_get_contents($source));

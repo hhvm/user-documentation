@@ -75,7 +75,7 @@ final class SearchController extends WebPageController {
       $this->getHardcodedResults(),
       GuidesIndex::search($term),
       PHPAPIIndex::search($term),
-      APIIndex::search($term),
+      APIIndex::searchAllProducts($term),
     ]
       |> Vec\flatten($$)
       |> Vec\sort_by($$, $result ==> -($result->getScore()));

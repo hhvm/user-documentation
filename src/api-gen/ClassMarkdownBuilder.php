@@ -7,6 +7,7 @@ final class ClassMarkdownBuilder {
   private DocBlock $docblock;
 
   public function __construct(
+    private APIProduct $product,
     string $file,
   ) {
     $this->yaml = JSON\decode_as_shape(
@@ -20,6 +21,7 @@ final class ClassMarkdownBuilder {
   public function build(): string {
     $md = $this->getMarkdown();
     $filename = self::getOutputFileName(
+      $this->product,
       APIDefinitionType::assert($this->yaml['type']),
       $this->yaml['data'],
     );
@@ -28,12 +30,14 @@ final class ClassMarkdownBuilder {
   }
 
   public static function getOutputFileName(
+    APIProduct $product,
     APIDefinitionType $type,
     ClassDocumentation $docs,
   ): string {
     return sprintf(
-      '%s/%s.%s.md',
+      '%s/%s/%s.%s.md',
       BuildPaths::APIDOCS_MARKDOWN,
+      $product,
       $type,
       strtr($docs['name'], "\\", '.'),
     );
@@ -112,7 +116,7 @@ EOF;
     $methods = $this->yaml['data']['methods'];
 
     foreach ($methods as $method) {
-      $method_url = URLBuilder::getPathForMethod($method);
+      $method_url = URLBuilder::getPathForMethod($this->product, $method);
 
       if ($method['static']) {
         $name = '::';

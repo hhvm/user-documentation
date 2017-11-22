@@ -13,6 +13,7 @@ namespace HHVM\UserDocumentation;
 
 final class URLBuilder {
   public static function getPathForClass(
+    APIProduct $product,
     shape(
       'name' => string,
       'type' => APIDefinitionType,
@@ -20,13 +21,15 @@ final class URLBuilder {
     ) $class,
   ): string {
     return sprintf(
-      '/hack/reference/%s/%s/',
+      '/%s/reference/%s/%s/',
+      $product,
       $class['type'],
       strtr($class['name'], "\\", '.'),
     );
   }
 
   public static function getPathForMethod(
+    APIProduct $product,
     shape(
       'name' => string,
       'className' => string,
@@ -35,7 +38,8 @@ final class URLBuilder {
     ) $method,
   ): string {
     return sprintf(
-      '/hack/reference/%s/%s/%s/',
+      '/%s/reference/%s/%s/%s/',
+      $product,
       $method['classType'],
       strtr($method['className'], "\\", '.'),
       $method['name'],
@@ -43,13 +47,15 @@ final class URLBuilder {
   }
 
   public static function getPathForFunction(
+    APIProduct $product,
     shape(
       'name' => string,
       ...
     ) $function,
   ): string {
     return sprintf(
-      '/hack/reference/function/%s/',
+      '/%s/reference/function/%s/',
+      $product,
       strtr($function['name'], "\\", '.'),
     );
   }

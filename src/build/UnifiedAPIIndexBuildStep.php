@@ -22,7 +22,8 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     Log::i("\nUnifiedAPIIndexBuildStep");
 
     $defs = new Map($this->getPHPAPILinks());
-    $defs->setAll($this->getHackAPILinks());
+    $defs->setAll($this->getHackAPILinks(APIProduct::HACK));
+    $defs->setAll($this->getHackAPILinks(APIProduct::HSL));
     $defs->setAll($this->getSpecialAttributeLinks());
 
     file_put_contents(
@@ -51,8 +52,10 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     );
   }
 
-  private function getHackAPILinks(): ImmMap<string, string> {
-    Log::v("\nProcessing Hack API Index");
+  private function getHackAPILinks(
+    APIProduct $product,
+  ): ImmMap<string, string> {
+    Log::v("\nProcessing %s API Index", $product);
 
     $out = Map { };
     $maybe_set = ($name, $url) ==> {
@@ -65,7 +68,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     };
 
     foreach (APIDefinitionType::getValues() as $type) {
-      $defs = APIIndex::getIndexForType($type);
+      $defs = APIIndex::get($product)->getIndexForType($type);
       foreach ($defs as $_ => $def) {
         $name = $def['name'];
         $maybe_set($name, $def['urlPath']);

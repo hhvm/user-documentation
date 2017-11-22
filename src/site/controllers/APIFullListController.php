@@ -35,6 +35,8 @@ final class APIFullListController extends WebPageController {
     switch ($this->getParameters()['Product']) {
       case APIProduct::HACK:
         return 'Hack APIs';
+      case APIProduct::HSL:
+        return 'The Hack Standard Library';
       case APIProduct::PHP:
         return 'Supported PHP APIs';
     }

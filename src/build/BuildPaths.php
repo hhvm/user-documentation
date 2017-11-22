@@ -19,11 +19,10 @@ abstract final class BuildPaths {
 
   const string DIR_INDEX_ROOT = self::BUILD_DIR.'/dir-index';
 
-  const string SYSTEMLIB_YAML = self::BUILD_DIR.'/systemlib-yaml';
-  const string HHI_YAML = self::BUILD_DIR.'/hhi-yaml';
-  const string HSL_YAML = self::BUILD_DIR.'/hsl-yaml';
-  const string MERGED_YAML = self::BUILD_DIR.'/merged-yaml';
-
+  const string SYSTEMLIB_YAML = self::BUILD_DIR.'/unmerged-api-data/systemlib';
+  const string HHI_YAML = self::BUILD_DIR.'/unmerged-api-data/hhi';
+  
+  const string APIDOCS_DATA = self::BUILD_DIR.'/api-data';
   const string APIDOCS_MARKDOWN = self::BUILD_DIR.'/api-markdown';
   const string APIDOCS_HTML = self::BUILD_DIR.'/api-html';
   const string APIDOCS_INDEX_JSON = self::BUILD_DIR.'/api-index.json';
@@ -69,5 +68,5 @@ abstract final class BuildPaths {
   const string FASTROUTE_CACHE =
     self::BUILD_DIR.'/route.cache';
 
-  const string BUILD_ID = self::BUILD_DIR.'/build_id.txt';
+  const string BUILD_ID_FILE = self::BUILD_DIR.'/build_id.txt';
 }

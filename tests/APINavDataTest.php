@@ -2,15 +2,19 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use HHVM\UserDocumentation\APINavData;
-use HHVM\UserDocumentation\NavDataNode;
+use type HHVM\UserDocumentation\{
+  APINavData,
+  APIProduct,
+  NavDataNode,
+};
 
 /**
  * @small
  */
 class APINavDataTest extends \PHPUnit_Framework_TestCase {
   public function testNamespacedDefinitionName(): void {
-    $classes = APINavData::getNavData()['Classes']['children'];
+    $classes = APINavData::get(APIProduct::HACK)
+      ->getNavData()['Classes']['children'];
     $have_ns_separator = false;
     foreach ($classes as $node) {
       $node = (($x): NavDataNode ==> /* UNSAFE_EXPR */ $x)($node);
@@ -23,7 +27,8 @@ class APINavDataTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testNamespacedDefinitionURL(): void {
-    $classes = APINavData::getNavData()['Classes']['children'];
+    $classes = APINavData::get(APIProduct::HACK)
+      ->getNavData()['Classes']['children'];
 
     $have_ns_separator = false;
     foreach ($classes as $node) {

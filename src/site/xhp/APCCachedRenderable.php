@@ -9,7 +9,7 @@
  *
  */
 
-use HHVM\UserDocumentation\BuildPaths;
+use type HHVM\UserDocumentation\LocalConfig;
 
 class APCCachedRenderable implements \XHPUnsafeRenderable, \XHPAlwaysValidChild {
   private function __construct(
@@ -39,11 +39,6 @@ class APCCachedRenderable implements \XHPUnsafeRenderable, \XHPAlwaysValidChild 
   private static function makeKey(string $key): string {
     // Might seem overkill for a non-user-controlled cache key, but I don't want
     // to worry about forgetting about it if user input ever ends up in here.
-    return hash('sha256', $key.'!!!'.__CLASS__.'!!!'.self::getBuildID());
-  }
-
-  <<__Memoize>>
-  private static function getBuildID(): string {
-    return trim(file_get_contents(BuildPaths::BUILD_ID));
+    return hash('sha256', $key.'!!!'.__CLASS__.'!!!'.LocalConfig::getBuildID());
   }
 }

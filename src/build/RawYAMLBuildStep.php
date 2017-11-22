@@ -19,18 +19,20 @@ final class RawYAMLBuildStep extends BuildStep {
     $exts = Set { 'php', 'hhi' };
 
     Log::i("\nRawYAMLBuild");
+
+    // Builtins
     $sources = (Vector { })
       ->addAll(self::findSources(BuildPaths::HHVM_TREE.'/hphp/system/php/', $exts))
       ->addAll(self::findSources(BuildPaths::HHVM_TREE.'/hphp/runtime/ext/', $exts));
     $this->buildSources(BuildPaths::SYSTEMLIB_YAML, $sources);
-
     $this->buildSources(
       BuildPaths::HHI_YAML,
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts),
     );
 
+    // Extra libraries
     $this->buildSources(
-      BuildPaths::HSL_YAML,
+      BuildPaths::APIDOCS_DATA.'/'.APIProduct::HSL,
       self::findSources(BuildPaths::HSL_TREE.'/src/', $exts),
     );
   }
@@ -43,7 +45,7 @@ final class RawYAMLBuildStep extends BuildStep {
       mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
     }
 
-    Log::i("\nBuild sources for $output_dir");
+    Log::i("\nBuild sources for %s", $output_dir);
 
     $files = Vec\map($sources, $filename ==> {
       Log::v(".");

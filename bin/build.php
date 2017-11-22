@@ -11,6 +11,9 @@
 namespace HHVM\UserDocumentation;
 
 require(__DIR__.'/../vendor/hh_autoload.php');
+
+use namespace HH\Lib\Vec;
+
 function build_site(?Traversable<string> $filters = null): void {
   if (!is_dir(BuildPaths::BUILD_DIR)) {
     mkdir(BuildPaths::BUILD_DIR);
@@ -50,7 +53,7 @@ function build_site(?Traversable<string> $filters = null): void {
     StaticResourceMapBuildStep::class,
 
     // Needs the static resources
-    MergedMarkdownBuildStep::class,
+    APIMarkdownBuildStep::class,
 
     // Needs the Markdown
     GuidesHTMLBuildStep::class,
@@ -70,7 +73,7 @@ function build_site(?Traversable<string> $filters = null): void {
     );
   }
 
-  $steps[] = BuildIDBuildStep::class;
+  $steps = Vec\concat(vec[BuildIDBuildStep::class], $steps);
 
   foreach ($steps as $step) {
     (new $step())->buildAll();

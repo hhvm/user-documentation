@@ -46,6 +46,7 @@ final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
     $input = realpath(self::SOURCE_ROOT.'/'.$input);
     $args = (Vector {self::RENDERER, $input, $output})
       ->map($unescaped ==> escapeshellarg($unescaped));
+      var_dump($args);
     shell_exec(sprintf("%s %s > %s", ...$args));
     return $output;
   }

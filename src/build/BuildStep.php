@@ -45,7 +45,7 @@ abstract class BuildStep {
     \ConstSet<string> $extensions,
   ): vec<string> {
     $root = realpath($root);
-    Log::i("\nFinding sources in $root");
+    Log::i("\nFinding sources in %s", $root);
 
     $index = self::getIndexFile($root);
     if ($index !== null && \file_exists($index)) {
