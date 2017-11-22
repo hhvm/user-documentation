@@ -20,12 +20,11 @@ final class URLBuilder {
       ...
     ) $class,
   ): string {
-    return sprintf(
-      '/%s/reference/%s/%s/',
-      $product,
-      $class['type'],
-      strtr($class['name'], "\\", '.'),
-    );
+    return \APIClassPageControllerURIBuilder::getPath(shape(
+      'Product' => $product,
+      'Name' => \strtr($class['name'], "\\", '.'),
+      'Type' => $class['type'],
+    ));
   }
 
   public static function getPathForMethod(
@@ -37,13 +36,12 @@ final class URLBuilder {
       ...
     ) $method,
   ): string {
-    return sprintf(
-      '/%s/reference/%s/%s/%s/',
-      $product,
-      $method['classType'],
-      strtr($method['className'], "\\", '.'),
-      $method['name'],
-    );
+    return \APIMethodPageControllerURIBuilder::getPath(shape(
+      'Product' => $product,
+      'Class' => \strtr($method['className'], "\\", '.'),
+      'Method' => $method['name'],
+      'Type' => $method['classType'],
+    ));
   }
 
   public static function getPathForFunction(
@@ -53,24 +51,41 @@ final class URLBuilder {
       ...
     ) $function,
   ): string {
-    return sprintf(
-      '/%s/reference/function/%s/',
-      $product,
-      strtr($function['name'], "\\", '.'),
-    );
+    return \APIClassPageControllerURIBuilder::getPath(shape(
+      'Product' => $product,
+      'Name' => \strtr($function['name'], "\\", '.'),
+      'Type' => APIDefinitionType::FUNCTION_DEF,
+    ));
   }
 
   public static function getPathForProductGuides(
     GuidesProduct $product,
   ): string {
-    return '/'.$product.'/';
+    return \GuidesListControllerURIBuilder::getPath(shape(
+      'Product' => $product,
+    ));
+  }
+
+  public static function getPathForProductAPIReference(
+    APIProduct $product,
+  ): string {
+    invariant(
+      $product !== APIProduct::PHP,
+      'No reference pages for PHP',
+    );
+    return \APIFullListControllerURIBuilder::getPath(shape(
+      'Product' => $product,
+    ));
   }
 
   public static function getPathForGuide(
     GuidesProduct $product,
     string $topic,
   ): string {
-    return self::getPathForProductGuides($product).$topic.'/';
+    return \RedirectToGuideFirstPageControllerURIBuilder::getPath(shape(
+      'Product' => $product,
+      'Guide' => $topic,
+    ));
   }
 
   public static function getPathForGuidePage(
@@ -78,6 +93,10 @@ final class URLBuilder {
     string $topic,
     string $page,
   ): string {
-    return self::getPathForGuide($product, $topic).$page;
+    return \GuidePageControllerURIBuilder::getPath(shape(
+      'Product' => $product,
+      'Guide' => $topic,
+      'Page' => $page,
+    ));
   }
 }

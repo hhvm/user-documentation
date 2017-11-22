@@ -25,6 +25,7 @@ final class RoutingCodegenBuildStep extends BuildStep {
         'controllerBase' => \RoutableController::class,
         'router' => self::getRouterConfig(),
         'requestParameters' => self::getRequestParametersConfig(),
+        'uriBuilders' => self::getUriBuildersConfig(),
         'hackCodegenConfig' => (new hcg\HackCodegenConfig())
           ->withRootDir(LocalConfig::ROOT),
       ),
@@ -69,6 +70,19 @@ final class RoutingCodegenBuildStep extends BuildStep {
         ),
         'trait' => shape(
           'name' => $classname.'ParametersTrait',
+        ),
+      ),
+    );
+  }
+
+  private static function getUriBuildersConfig(
+  ): Codegen::TUriBuilderCodegenConfig {
+    $root = LocalConfig::ROOT.'/src/site/controllers/codegen/';
+    return shape(
+      'output' => $classname ==> shape(
+        'file' => $root.$classname.'URIBuilder.php',
+        'class' => shape(
+          'name' => $classname.'URIBuilder',
         ),
       ),
     );

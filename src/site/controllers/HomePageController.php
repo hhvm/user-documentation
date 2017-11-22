@@ -27,12 +27,11 @@ final class HomePageController extends WebPageController {
     $root = <ul class="guideList" />;
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
-      $url = sprintf(
-        "/%s/%s/%s",
-        $product,
-        $guide,
-        $pages[0],
-      );
+      $url = GuidePageControllerURIBuilder::getPath(shape(
+        'Product' => $product,
+        'Guide' => $guide,
+        'Page' => $pages[0],
+      ));
 
       $title = ucwords(strtr($guide, '-', ' '));
 
