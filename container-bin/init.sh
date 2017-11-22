@@ -59,7 +59,7 @@ hhvm /opt/composer/composer.phar \
   --optimize-autoloader
 rm -rf vendor-rb/
 echo "** Removing intermediate build products"
-rm -rf build/*-yaml/ build/*-markdown/
+rm -rf build/scratch
 echo "** Cleaning up..."
 pkill hh_server
 rm -rf /root/.composer

@@ -1,1 +1,1 @@
-../build/sitemap.txt
+../build/final/sitemap.txt

@@ -15,8 +15,11 @@ require(__DIR__.'/../vendor/hh_autoload.php');
 use namespace HH\Lib\Vec;
 
 function build_site(?Traversable<string> $filters = null): void {
-  if (!is_dir(BuildPaths::BUILD_DIR)) {
-    mkdir(BuildPaths::BUILD_DIR);
+  if (!\is_dir(BuildPaths::SCRATCH_DIR)) {
+    \mkdir(BuildPaths::SCRATCH_DIR, 0755, /* recursive = */ true);
+  }
+  if (!\is_dir(BuildPaths::FINAL_DIR)) {
+    \mkdir(BuildPaths::FINAL_DIR, 0755, /* recursive = */ true);
   }
 
   $steps = Vector {

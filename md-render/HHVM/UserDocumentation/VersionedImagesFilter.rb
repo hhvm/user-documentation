@@ -3,7 +3,7 @@ require 'json'
 module HHVM
   module UserDocumentation
     class VersionedImagesFilter < HTML::Pipeline::Filter
-      STATIC_RESOURCES = JSON.parse(File.read(File.dirname(__FILE__)+'/../../../build/static_resources.json'))
+      STATIC_RESOURCES = JSON.parse(File.read(File.dirname(__FILE__)+'/../../../build/final/static_resources.json'))
       def call
         doc.search('img').each do |node|
           path = node[:src]

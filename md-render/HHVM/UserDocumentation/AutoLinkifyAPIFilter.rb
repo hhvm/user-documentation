@@ -3,7 +3,7 @@ require 'json'
 module HHVM
   module UserDocumentation
     class AutoLinkifyAPIFilter < HTML::Pipeline::Filter
-      DEFINITIONS = JSON.parse(File.read(File.dirname(__FILE__)+'/../../../build/unified-index.json'))
+      DEFINITIONS = JSON.parse(File.read(File.dirname(__FILE__)+'/../../../build/final/unified-index.json'))
       CLASS_REGEXP = /^(?<type>class|interface|trait)\.(?<name>[^.]+)/
       def call
         doc.search('p code, li code, td code').each do |node|
