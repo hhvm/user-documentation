@@ -25,13 +25,21 @@ final class APIListByTypeController extends WebPageController {
   }
 
   <<__Override>>
-  protected function getBreadcrumbs(): :ui:breadcrumbs {
-    $parents = Map {
-      'Hack' => '/hack/',
-      'Reference' => '/hack/reference/',
-    };
-    $type = $this->getParameters()['Type'];
-    return <ui:breadcrumbs parents={$parents} currentPage={ucwords($type)} />;
+  protected function getBreadcrumbs(): vec<(string, ?string)> {
+    $parameters = $this->getParameters();
+    return vec[
+      Breadcrumbs::getRootAPIBreadcrumb($parameters['Product']),
+      tuple(
+        'Reference',
+        APIFullListControllerURIBuilder::getPath(shape(
+          'Product' => $parameters['Product'],
+        )),
+      ),
+      tuple(
+        \ucwords($parameters['Type']),
+        APIListByTypeControllerURIBuilder::getPath($parameters),
+      ),
+    ];
   }
 
   <<__Override>>

@@ -103,4 +103,26 @@ final class APIClassPageController extends APIPageController {
 
     throw new RedirectException($url);
   }
+
+  <<__Override>>
+  protected function getBreadcrumbs(): vec<(string, ?string)> {
+    $parameters = $this->getParameters();
+    $root = $this->getRootDefinition();
+
+    return vec[
+      Breadcrumbs::getRootAPIBreadcrumb($parameters['Product']),
+      tuple(
+        'Reference',
+        URLBuilder::getPathForProductAPIReference($parameters['Product']),
+      ),
+      tuple(
+        \ucwords($this->getDefinitionType()),
+        APIListByTypeControllerURIBuilder::getPath(shape(
+          'Product' => $parameters['Product'],
+          'Type' => $parameters['Type'],
+        )),
+      ),
+      tuple($root['name'], $root['urlPath']),
+    ];
+  }
 }

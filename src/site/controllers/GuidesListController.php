@@ -102,14 +102,12 @@ final class GuidesListController extends WebPageController {
     return NULL;
   }
 
-  protected function getBreadcrumbs(): :ui:breadcrumbs {
+  protected function getBreadcrumbs(): vec<(string, ?string)> {
     $product = $this->getProduct();
-
-    $parents = Map {
-      $product => URLBuilder::getPathForProductGuides($product),
-    };
-
-    return <ui:breadcrumbs parents={$parents} currentPage="Learn" />;
+    return vec[
+      tuple ($product, URLBuilder::getPathForProductGuides($product)),
+      tuple('Learn', null),
+    ];
   }
 
   <<__Memoize>>

@@ -9,8 +9,12 @@
  *
  */
 
-use HHVM\UserDocumentation\APIDefinitionType;
-use HHVM\UserDocumentation\APIProduct;
+use type HHVM\UserDocumentation\{
+  APIDefinitionType,
+  APIProduct,
+  GuidesProduct,
+  URLBuilder,
+};
 
 final class APIFullListController extends WebPageController {
   use APIFullListControllerParametersTrait;
@@ -23,11 +27,12 @@ final class APIFullListController extends WebPageController {
   }
 
   <<__Override>>
-  final protected function getBreadcrumbs(): :ui:breadcrumbs {
-    $parents = Map {
-      'Hack' => '/hack/',
-    };
-    return <ui:breadcrumbs parents={$parents} currentPage="Reference" />;
+  final protected function getBreadcrumbs(): vec<(string, ?string)> {
+    $parameters = $this->getParameters();
+    return vec[
+      Breadcrumbs::getRootAPIBreadcrumb($parameters['Product']),
+      tuple('Reference', APIFullListControllerURIBuilder::getPath($parameters)),
+    ];
   }
 
   <<__Override>>

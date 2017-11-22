@@ -15,6 +15,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactaros\HtmlResponse;
 
+use namespace HH\Lib\C;
+
 abstract class NonRoutableWebPageController extends WebController {
   protected abstract function getTitle(): Awaitable<string>;
   protected abstract function getBody(): Awaitable<\XHPRoot>;
@@ -153,9 +155,18 @@ EOF;
       $this->getHeading(),
       $this->getBody(),
     );
+
+    $breadcrumbs = $this->getBreadcrumbs();
+    if ($breadcrumbs !== null) {
+      invariant(
+        !C\is_empty($breadcrumbs),
+        'If using breadcrumbs, specify at least one',
+      );
+      $breadcrumbs = <ui:breadcrumbs stack={$breadcrumbs} />;
+    }
     return (
       <div class="mainContainer">
-        {$this->getBreadcrumbs()}
+        {$breadcrumbs}
         {$this->getTitleContent($heading)}
         <div class="widthWrapper flexWrapper">
           <div class="mainWrapper">
@@ -194,7 +205,8 @@ EOF;
     return <x:frag />;
   }
 
-  protected function getBreadcrumbs(): ?:ui:breadcrumbs {
+  protected function getBreadcrumbs(
+  ): ?vec<(string, ?string)> {
     return null;
   }
 

@@ -197,21 +197,21 @@ final class GuidePageController extends WebPageController {
     return $adj_guide;
   }
 
-  protected function getBreadcrumbs(): :ui:breadcrumbs {
+  protected function getBreadcrumbs(): vec<(string, ?string)> {
     $product = $this->getProduct();
     $product_url = URLBuilder::getPathForProductGuides($product);
     $guide = $this->getGuide();
-
-    $parents = Map {
-      $product => $product_url,
-      'Learn' => $product_url,
-      Guides::normalizePart($guide)
-        => URLBuilder::getPathForGuide($product, $guide),
-    };
-
     $page = Guides::normalizePart($this->getPage());
 
-    return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
+    return vec[
+      tuple($product, $product_url),
+      tuple('Learn', $product_url),
+      tuple(
+        Guides::normalizePart($guide),
+        URLBuilder::getPathForGuide($product, $guide),
+      ),
+      tuple($page, null),
+    ];
   }
 
   protected function getSideNav(): XHPRoot {

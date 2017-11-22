@@ -66,19 +66,27 @@ final class APIMethodPageController extends APIPageController {
   }
 
   <<__Override>>
-  protected function getBreadcrumbs(): :ui:breadcrumbs {
+  protected function getBreadcrumbs(): vec<(string, ?string)> {
+    $parameters = $this->getParameters();
     $root = $this->getRootDefinition();
-    $type = $this->getDefinitionType();
-    $parents = Map {
-      'Hack' => '/hack/',
-      'Reference' => '/hack/reference/',
-      ucwords($type) => '/hack/reference/'.$type.'/',
-      $root['name'] => $root['urlPath'],
-    };
+    $method = $this->getMethodDefinition();
 
-    $page = $this->getMethodDefinition()['name'];
-
-    return <ui:breadcrumbs parents={$parents} currentPage={$page} />;
+    return vec[
+      Breadcrumbs::getRootAPIBreadcrumb($parameters['Product']),
+      tuple(
+        'Reference',
+        URLBuilder::getPathForProductAPIReference($parameters['Product']),
+      ),
+      tuple(
+        \ucwords($this->getDefinitionType()),
+        APIListByTypeControllerURIBuilder::getPath(shape(
+          'Product' => $parameters['Product'],
+          'Type' => $parameters['Type'],
+        )),
+      ),
+      tuple($root['name'], $root['urlPath']),
+      tuple($method['name'], null),
+    ];
   }
 
   <<__Override>>

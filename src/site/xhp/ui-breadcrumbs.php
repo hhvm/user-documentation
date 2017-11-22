@@ -9,29 +9,34 @@
  *
  */
 
+ use namespace HH\Lib\{C, Vec};
+
 final class :ui:breadcrumbs extends :x:element {
-  attribute
-    ConstMap<string, string> parents @required,
-    string currentPage @required;
+  attribute vec<(string, ?string)> stack @required;
 
   public function render(): XHPRoot{
+    $stack = $this->:stack;
+    list($current, $_) = C\lastx($stack);
+    $ancestors = Vec\take($stack, C\count($stack) - 1);
+
     $container = (
       <x:frag>
         <a href="/">Documentation</a>
       </x:frag>
     );
-    foreach ($this->:parents as $name => $url) {
+    foreach ($ancestors as list($name, $url)) {
+      $link = $url === null ? $name : <a href={$url}>{$name}</a>;
       $container->appendChild(
         <x:frag>
           <i class="breadcrumbSeparator" />
-          <a href={$url}>{$name}</a>
+          {$link}
         </x:frag>
       );
     }
     $container->appendChild(
       <x:frag>
         <i class="breadcrumbSeparator" />
-        {$this->:currentPage}
+        {$current}
       </x:frag>
     );
     return (
