@@ -31,11 +31,12 @@ final class PHPAPIIndex {
         if ($score === null) {
           return null;
         }
-        return new SearchResult(
-          SearchResultType::PHP_API,
-          $score,
+        return new APISearchResult(
+          APIProduct::PHP,
+          $data['type'],
           $name,
           $data['url'],
+          $score,
         );
       }),
       Vec\map_with_key(self::getIndex(), ($name, $data) ==> {
@@ -43,11 +44,12 @@ final class PHPAPIIndex {
         if ($score === null) {
           return null;
         }
-        return new SearchResult(
-          SearchResultType::PHP_API,
-          $score * SearchScores::HREF_MATCH_MULTIPLIER,
+        return new APISearchResult(
+          APIProduct::PHP,
+          $data['type'],
           $name,
           $data['url'],
+          $score * SearchScores::HREF_MATCH_MULTIPLIER,
         );
       }),
     ) |> Vec\filter_nulls($$);

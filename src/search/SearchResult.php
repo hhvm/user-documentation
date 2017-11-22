@@ -13,29 +13,13 @@ namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\Math;
 
-class SearchResult {
-  private float $score;
+abstract class SearchResult {
 
   public function __construct(
-    private SearchResultType $type,
-    float $score,
     private string $title,
     private string $href,
+    private float $score,
   ) {
-    switch ($type) {
-      case SearchResultType::HSL_API:
-        $score *= SearchScores::HSL_API_MULTIPLIER;
-        break;
-      case SearchResultType::HACK_API:
-      case SearchResultType::PHP_API:
-        break;
-      case SearchResultType::HACK_GUIDE:
-      case SearchResultType::HHVM_GUIDE:
-        $score *= SearchScores::GUIDES_MULTIPLIER;
-        $score += SearchScores::GUIDES_BOOST;
-        break;
-    }
-    $this->score = $score;
   }
 
   final public function getScore(): float {

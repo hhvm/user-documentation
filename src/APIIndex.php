@@ -14,22 +14,27 @@ use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Math, Str, Vec};
 
 final class APIIndex {
+  private ProductAPIIndexShape $index;
+
   private function __construct(
-    private ProductAPIIndexShape $index,
+    private APIProduct $product,
   ) {
+    $idx = self::getRawIndex();
+    switch ($product) {
+      case APIProduct::HACK:
+        $this->index = $idx[APIProduct::HACK];
+        break;
+      case APIProduct::HSL:
+        $this->index = $idx[APIProduct::HSL];
+        break;
+      case APIProduct::PHP:
+        invariant_violation("Can't handle PHP index");
+    }
   }
 
   <<__Memoize>>
   public static function get(APIProduct $product): APIIndex {
-    $idx = self::getRawIndex();
-    switch ($product) {
-      case APIProduct::HACK:
-        return new self($idx[APIProduct::HACK]);
-      case APIProduct::HSL:
-        return new self($idx[APIProduct::HSL]);
-      case APIProduct::PHP:
-        invariant_violation("Can't handle PHP index");
-    }
+    return new self($product);
   }
 
   public function getIndex(): ProductAPIIndexShape {
@@ -130,13 +135,16 @@ final class APIIndex {
     $entries = $this->getIndexForType($type);
     foreach ($entries as $_ => $entry) {
       $name = $entry['name'];
-      $type = Str\contains($name, "HH\\Lib\\")
-        ? SearchResultType::HSL_API
-        : SearchResultType::HACK_API;
 
       $score = SearchTermMatcher::matchTerm($name, $term);
       if ($score !== null) {
-        $results[] = new SearchResult($type, $score, $name, $entry['urlPath']);
+        $results[] = new APISearchResult(
+          $this->product,
+          $type,
+          $name,
+          $entry['urlPath'],
+          $score,
+        );
       }
 
       $methods = $this->getMethods($entry);
@@ -147,7 +155,13 @@ final class APIIndex {
         $name = $entry['name'].'::'.$method['name'];
         $score = SearchTermMatcher::matchTerm($name, $term);
         if ($score !== null) {
-          $results[] = new SearchResult($type, $score, $name, $method['urlPath']);
+          $results[] = new APISearchResult(
+            $this->product,
+            APIDefinitionType::FUNCTION_DEF,
+            $name,
+            $method['urlPath'],
+            $score,
+          );
         }
       }
     }

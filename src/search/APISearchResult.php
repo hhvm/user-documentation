@@ -13,20 +13,24 @@ namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\Str;
 
-final class GuidePageSearchResult extends SearchResult {
+final class APISearchResult extends SearchResult {
   public function __construct(
-    GuidesProduct $product,
-    string $guide,
-    string $page,
+    APIProduct $product,
+    APIDefinitionType $type,
+    string $name,
+    string $href,
     float $score,
   ) {
-    $score *= SearchScores::GUIDES_MULTIPLIER;
-    $score += SearchScores::GUIDES_BOOST;
-
-    $title = Guides::normalizeName($product, $guide, $page);
-    $href = URLBuilder::getPathForGuidePage($product, $guide, $page);
+    switch ($product) {
+      case APIProduct::HSL:
+        $score *= SearchScores::HSL_API_MULTIPLIER;
+        break;
+      case APIProduct::HACK:
+      case APIProduct::PHP:
+        break;
+    }
     parent::__construct(
-      $title,
+      $name,
       $href,
       $score,
     );
