@@ -38,14 +38,12 @@ final class SearchTest extends \PHPUnit_Framework_TestCase {
       tuple(
         'vw',
         [
-          '/hack/async/utility-functions',
           '/hack/reference/function/HH.Asio.vw/',
         ],
       ),
       tuple(
         'HH\Asio\vw',
         [
-          '/hack/async/utility-functions',
           '/hack/reference/function/HH.Asio.vw/',
         ],
       ),
