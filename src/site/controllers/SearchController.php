@@ -84,7 +84,7 @@ final class SearchController extends WebPageController {
       return $results;
     }
     $max = $results[0]->getScore();
-    return Vec\filter($results, $r ==> $r->getScore() >= 0.2 * $max);
+    return Vec\filter($results, $r ==> $r->getScore() >= 0.3 * $max);
   }
 
   private function getHardcodedResults(): vec<SearchResult> {
