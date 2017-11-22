@@ -11,12 +11,14 @@
 
 namespace HHVM\UserDocumentation;
 
-require_once(BuildPaths::PHP_INI_SUPPORT_IN_HHVM);
+use namespace Facebook\TypeSpec;
 
 final class PHPIniSupportInHHVMMarkdownBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nPHPIniSupportInHHVMMarkdownBuild");
-    $settings = PHPIniSupportInHHVM::getData();
+    $settings = \file_get_contents(BuildPaths::PHP_INI_SUPPORT_IN_HHVM_JSON)
+      |> JSON\decode_as_dict($$)
+      |> TypeSpec\dict(TypeSpec\string(), TypeSpec\string())->assertType($$);
     if (!is_dir(BuildPaths::GUIDES_GENERATED_MARKDOWN)) {
       mkdir(
         BuildPaths::GUIDES_GENERATED_MARKDOWN,
@@ -31,7 +33,7 @@ final class PHPIniSupportInHHVMMarkdownBuildStep extends BuildStep {
     );
   }
 
-  private function getMarkdown(array<string, string> $settings): string {
+  private function getMarkdown(dict<string, string> $settings): string {
     $md = '';
     $cols = 5;
     // Create blank table headers

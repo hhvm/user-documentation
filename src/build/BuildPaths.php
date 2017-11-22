@@ -52,8 +52,8 @@ abstract final class BuildPaths {
     = self::FINAL_DIR.'/php-dot-net-api-index.php';
   const string PHP_DOT_NET_ARTICLE_REDIRECTS
     = self::FINAL_DIR.'/php-dot-net-article-redirects.php';
-  const string PHP_INI_SUPPORT_IN_HHVM
-    = self::FINAL_DIR.'/php-ini-support-in-hhvm.php';
+  const string PHP_INI_SUPPORT_IN_HHVM_JSON
+    = self::FINAL_DIR.'/php-ini-support-in-hhvm.json';
 
   const string CORE_CSS = self::FINAL_DIR.'/main.css';
   const string SYNTAX_HIGHLIGHT_CSS =

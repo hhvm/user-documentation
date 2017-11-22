@@ -11,33 +11,31 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\{Str, Vec};
+
 final class PHPIniSupportInHHVMBuildStep extends BuildStep {
-  use CodegenBuildStep;
 
   public function buildAll(): void {
     Log::i("\nPHPIniSupportInHHVM");
 
-    $code = $this->writeCode(
-      'PHPIniSupportInHHVM.hhi',
-      $this->getIndexData(),
-    );
-    file_put_contents(
-      BuildPaths::PHP_INI_SUPPORT_IN_HHVM,
-      $code,
+    \file_put_contents(
+      BuildPaths::PHP_INI_SUPPORT_IN_HHVM_JSON,
+      JSON\encode_dict($this->getIndexData()),
     );
   }
 
 
-  private function getIndexData(): array<string, string> {
+  private function getIndexData(): dict<string, string> {
     // all the HHVM ini settings
-    $settings = new Vector(array_keys(ini_get_all()));
+    $settings = Vec\keys(ini_get_all());
     // The ones that are PHP settings (i.e., don't start with HHVM)
-    $php_supported_settings = $settings->filter(
-      $setting ==> strpos($setting, 'hhvm.') !== 0
+    $php_supported_settings = Vec\filter(
+      $settings,
+      $setting ==> !Str\contains($setting, 'hhvm.'),
     );
     $php_settings_with_urls = $this->getPHPSettingsWithURLs();
 
-    $out = [];
+    $out = dict[];
     foreach ($php_supported_settings as $setting) {
       // default to here if no URL exists for specific setting
       $url = idx(
@@ -57,7 +55,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
     return $out;
   }
 
-  private function getPHPSettingsWithURLs(): array<string, string> {
+  private function getPHPSettingsWithURLs(): dict<string, string> {
     // The HTML is not well formatted. We know that. Turn off outputting errors.
     libxml_use_internal_errors(true);
     // UNSAFE
@@ -71,7 +69,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
     // Query all the settings with URL references
     $nodes = $xpath->query("//tbody//tr//td//a");
 
-    $settings = array();
+    $settings = dict[];
     foreach ($nodes as $i => $node) {
       // settingName => URL
       $settings[$node->nodeValue] = $node->attributes->item(0)->nodeValue;
@@ -79,4 +77,3 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
     return $settings;
   }
 }
-
