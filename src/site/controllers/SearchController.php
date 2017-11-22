@@ -80,25 +80,11 @@ final class SearchController extends WebPageController {
       |> Vec\flatten($$)
       |> Vec\sort_by($$, $result ==> -($result->getScore()));
 
-    if (C\count($results) < 2) {
+    if (C\count($results) < 5) {
       return $results;
     }
-
     $max = $results[0]->getScore();
-    $next = $results[1]->getScore();
-    if ($next >= $max * 0.8) {
-      $cut = $max * 0.2;
-    } else {
-      $cut = $max * 0.1;
-    }
-
-    $results = Vec\filter($results, $r ==> $r->getScore() >= $cut);
-
-    if (C\count($results) > 10) {
-      $cut = $results[9]->getScore();
-      $results = Vec\filter($results, $r ==> $r->getScore() >= 0.5 * $cut);
-    }
-    return $results;
+    return Vec\filter($results, $r ==> $r->getScore() >= 0.2 * $max);
   }
 
   private function getHardcodedResults(): vec<SearchResult> {
