@@ -62,15 +62,18 @@ abstract final class SearchTermMatcher {
   protected static function matchWords(
     string $content,
     string $term,
+    keyset<string> $terms,
   ): ?float {
     $parts = Str\split($term, ' ');
     if (C\count($parts) === 1) {
       return null;
     }
 
+    $terms = Keyset\union($terms, $parts);
+
     $total = 0.0;
     foreach ($parts as $idx => $part) {
-      $score = self::matchTermInner($content, $part);
+      $score = self::matchTermInner($content, $part, $terms);
       if ($score === null) {
         return null;
       }
@@ -99,6 +102,7 @@ abstract final class SearchTermMatcher {
   protected static function matchComponents(
     string $content,
     string $term,
+    keyset<string> $terms,
   ): ?float {
     $parts = Str\split($content, '\\')
       |> Vec\map($$, $part ==> Str\split($part, '::'))
@@ -107,8 +111,10 @@ abstract final class SearchTermMatcher {
       return null;
     }
 
+    $terms = Keyset\union($terms, $parts);
+
     $score = $parts
-      |> Vec\map($$, $part ==> self::matchTermInner($part, $term))
+      |> Vec\map($$, $part ==> self::matchTermInner($part, $term, $terms))
       |> Vec\filter_nulls($$)
       |> Math\max($$);
 
@@ -119,14 +125,23 @@ abstract final class SearchTermMatcher {
     return $score * SearchScores::COMPONENT_MATCH_MULTIPLIER;
   }
 
-  protected static function matchSynonyms(string $content, string $term): ?float {
+  protected static function matchSynonyms(
+    string $content,
+    string $term,
+    keyset<string> $terms,
+  ): ?float {
     $synonyms = self::SYNONYMS[Str\lowercase($term)] ?? null;
     if ($synonyms === null) {
       return null;
     }
 
+    $synonyms = Keyset\filter($synonyms, $s ==> !C\contains_key($terms, $s));
+    $terms = Keyset\union($terms, $synonyms);
+
     $score = $synonyms
-      |> Vec\map($$, $synonym ==> self::matchTermInner($content, $synonym))
+      |> Vec\map($$, $synonym ==> {
+        return self::matchTermInner($content, $synonym, $terms);
+      })
       |> Vec\filter_nulls($$)
       |> Math\max($$);
     if ($score === null) {
@@ -143,17 +158,18 @@ abstract final class SearchTermMatcher {
   ): ?float {
     $content = Str\lowercase($content);
     $term = Str\lowercase($term);
-    return self::matchTermInner($content, $term);
+    return self::matchTermInner($content, $term, keyset[$term]);
   }
 
   protected static function matchTermInner(
     string $content,
     string $term,
+    keyset<string> $terms,
   ): ?float {
     $matches = vec[
       self::matchFullTerm($content, $term),
-      self::matchWords($content, $term),
-      self::matchSynonyms($content, $term),
+      self::matchWords($content, $term, $terms),
+      self::matchSynonyms($content, $term, $terms),
     ];
 
     if (Str\length($content) < 80) {
@@ -161,7 +177,7 @@ abstract final class SearchTermMatcher {
       $matches = Vec\concat(
         $matches,
         vec[
-          self::matchComponents($content, $term),
+          self::matchComponents($content, $term, $terms),
           self::matchEditDistance($content, $term),
         ],
       );
@@ -176,7 +192,7 @@ abstract final class SearchTermMatcher {
     if ($content === $term) {
       return null;
     }
-    
+
     $length = Math\minva(
       Str\length($content),
       Str\split($term, ' ')
@@ -186,7 +202,7 @@ abstract final class SearchTermMatcher {
       ,
     );
     $diff = \levenshtein($content, $term);
-    if ($diff >= Math\minva($length * 0.5, 3)) {
+    if ($diff >= Math\minva($length, 3)) {
       return null;
     }
     if ($diff === -1) {
