@@ -28,8 +28,10 @@ abstract final class SearchScores {
   const float OUT_OF_ORDER_WORD_SPLIT_MULTIPLIER = 0.5;
 
   const float COMPONENT_MATCH_MULTIPLIER = 0.9;
-  const float SYNONYM_MATCH_MULTIPLIER = 0.9;
+  const float SYNONYM_MATCH_MULTIPLIER = 0.5;
   const float SHORT_MATCH_MULTIPLIER = 0.1;
+  // raw is length/distance
+  const float LEVENSHTEIN_MULTIPLIER = 10.0;
 
   const float HREF_MATCH_MULTIPLIER = 0.5;
   const float CONTENT_MATCH_MULTIPLIER = 0.1;

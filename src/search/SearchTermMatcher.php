@@ -11,6 +11,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\{C, Keyset, Math, Str, Vec};
+use namespace Facebook\TypeAssert;
 
 abstract final class SearchTermMatcher {
   const dict<string, keyset<string>> SYNONYMS = dict[
@@ -145,6 +146,31 @@ abstract final class SearchTermMatcher {
       self::matchWords($name, $term),
       self::matchComponents($name, $term),
       self::matchSynonyms($name, $term),
+      self::matchLevenshtein($name, $term),
     ]));
+  }
+
+  protected static function matchLevenshtein(
+    string $name,
+    string $term,
+  ): ?float {
+    $length = Math\minva(
+      Str\length($name),
+      Str\split($term, ' ')
+        |> Vec\map($$, $word ==> Str\length($word))
+        |> Math\max($$)
+        |> TypeAssert\not_null($$)
+      ,
+    );
+    $diff = \levenshtein($name, $term);
+    if ($diff >= Math\minva($length * 0.5, 3)) {
+      return null;
+    }
+    if ($diff === -1) {
+      return null;
+    }
+
+    return ((float) $length) / ((float) $diff)
+      * SearchScores::LEVENSHTEIN_MULTIPLIER;
   }
 }
