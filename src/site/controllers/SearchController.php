@@ -54,6 +54,7 @@ final class SearchController extends WebPageController {
     $results = Vec\map($this->getSearchResults(), $result ==>
       <li data-search-score={sprintf('%.2f', $result->getScore())}>
         <a href={$result->getHref()}>{$result->getTitle()}</a>
+        <span class="searchResultType">{$result->getResultTypeText()}</span>
       </li>
     );
 
@@ -83,6 +84,7 @@ final class SearchController extends WebPageController {
     if (C\count($results) < 5) {
       return $results;
     }
+
     $max = $results[0]->getScore();
     return Vec\filter($results, $r ==> $r->getScore() >= 0.3 * $max);
   }

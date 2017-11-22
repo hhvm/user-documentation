@@ -33,4 +33,6 @@ abstract class SearchResult {
   final public function getHref(): string {
     return $this->href;
   }
+
+  abstract public function getResultTypeText(): string;
 }

@@ -15,8 +15,8 @@ use namespace HH\Lib\Str;
 
 final class APISearchResult extends SearchResult {
   public function __construct(
-    APIProduct $product,
-    APIDefinitionType $type,
+    private APIProduct $product,
+    private APIDefinitionType $type,
     string $name,
     string $href,
     float $score,
@@ -34,5 +34,27 @@ final class APISearchResult extends SearchResult {
       $href,
       $score,
     );
+  }
+
+  <<__Override>>
+  public function getResultTypeText(): string {
+    $type = $this->type;
+    if ($type === APIDefinitionType::FUNCTION_DEF) {
+      if (Str\contains($this->getTitle(), '::')) {
+        $type = 'method';
+      }
+    }
+    switch($this->product) {
+      case APIProduct::HACK:
+        $product = 'Hack';
+        break;
+      case APIProduct::HSL:
+        $product = 'HSL';
+        break;
+      case APIProduct::PHP:
+        $product = 'PHP';
+        break;
+    }
+    return $product.' '.$type;
   }
 }

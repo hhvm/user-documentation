@@ -15,7 +15,7 @@ use namespace HH\Lib\Str;
 
 final class GuidePageSearchResult extends SearchResult {
   public function __construct(
-    GuidesProduct $product,
+    private GuidesProduct $product,
     string $guide,
     string $page,
     float $score,
@@ -30,5 +30,18 @@ final class GuidePageSearchResult extends SearchResult {
       $href,
       $score,
     );
+  }
+
+  <<__Override>>
+  public function getResultTypeText(): string {
+    switch ($this->product) {
+      case GuidesProduct::HACK:
+        $product = 'Hack';
+        break;
+      case GuidesProduct::HHVM:
+        $product = 'HHVM';
+        break;
+    }
+    return $product.' guide';
   }
 }
