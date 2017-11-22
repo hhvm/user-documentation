@@ -72,11 +72,18 @@ final class GuidesListController extends WebPageController {
       $body->appendChild(
         <div class="guideListWrapper">
           <h3 class="listTitle">
-            <a href="/hack/reference/">API Reference</a>
+            <a href="/hack/reference/">Built-in API Reference</a>
           </h3>
           <p>
             Full reference docs for all functions, classes, interfaces, and
             traits in the Hack language.
+          </p>
+          <h3 class="listTitle">
+            <a href="/hsl/reference/">Standard Library API Reference</a>
+          </h3>
+          <p>
+            Full reference docs for all functions, classes, interfaces, and
+            traits in the Hack Standard Library.
           </p>
         </div>
       );
