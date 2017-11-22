@@ -15,9 +15,9 @@ use namespace Facebook\TypeAssert;
 
 abstract final class SearchTermMatcher {
   const dict<string, keyset<string>> SYNONYMS = dict[
-    'vec' => keyset['\\c\\'],
-    'dict' => keyset['\\c\\'],
-    'keyset' => keyset['\\c\\'],
+    'vec' => keyset['c'],
+    'dict' => keyset['c'],
+    'keyset' => keyset['c'],
     'vector' => keyset['vec'],
     'map' => keyset['dict'],
     'set' => keyset['keyset'],

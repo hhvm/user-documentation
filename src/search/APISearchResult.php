@@ -26,9 +26,32 @@ final class APISearchResult extends SearchResult {
         $score *= SearchScores::HSL_API_MULTIPLIER;
         break;
       case APIProduct::HACK:
+        $score *= SearchScores::HACK_API_MULTIPLIER;
+        break;
       case APIProduct::PHP:
+        $score *= SearchScores::PHP_API_MULTIPLIER;
         break;
     }
+
+    switch ($type) {
+      case APIDefinitionType::CLASS_DEF:
+        $score *= SearchScores::CLASS_MULTIPLIER;
+        break;
+      case APIDefinitionType::INTERFACE_DEF:
+        $score *= SearchScores::INTERFACE_MULTIPLIER;
+        break;
+      case APIDefinitionType::TRAIT_DEF:
+        $score *= SearchScores::TRAIT_MULTIPLIER;
+        break;
+      case APIDefinitionType::FUNCTION_DEF:
+        if (Str\contains($name, '::')) {
+          $score *= SearchScores::METHOD_MULTIPLIER;
+        } else {
+          $score *= SearchScores::FUNCTION_MULTIPLIER;
+        }
+        break;
+    }
+
     parent::__construct(
       $name,
       $href,

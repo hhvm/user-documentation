@@ -31,15 +31,25 @@ abstract final class SearchScores {
   const float SYNONYM_MATCH_MULTIPLIER = 0.5;
   const float SHORT_MATCH_MULTIPLIER = 0.1;
   // raw is length/distance
-  const float LEVENSHTEIN_MULTIPLIER = 10.0;
+  const float LEVENSHTEIN_MULTIPLIER = 8.0;
 
   const float HREF_MATCH_MULTIPLIER = 0.5;
   const float CONTENT_MATCH_MULTIPLIER = 0.1;
 
+  ///// API Reference Weights ///
 
-  ///// Boosts /////
+  const float HSL_API_MULTIPLIER = 4.0;
+  const float HACK_API_MULTIPLIER = 1.0;
+  const float PHP_API_MULTIPLIER = 0.5;
 
-  const float HSL_API_MULTIPLIER = 2.0;
+  const float FUNCTION_MULTIPLIER = 1.0;
+  const float METHOD_MULTIPLIER = 0.9;
+  const float CLASS_MULTIPLIER = 1.2;
+  const float INTERFACE_MULTIPLIER = 1.0;
+  const float TRAIT_MULTIPLIER = 1.0;
+
+  ///// Guide Weights /////
+
   const float GUIDES_MULTIPLIER = 1.5;
   const float GUIDES_BOOST = 5.0;
   // e.g. async/introduction before async/extensions
