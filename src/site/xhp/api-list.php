@@ -15,6 +15,8 @@ use HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\APIProduct;
 use HHVM\UserDocumentation\PHPAPIIndex;
 
+use namespace HH\Lib\C;
+
 class :api-list extends :x:element {
   attribute
     APIProduct product @required,
@@ -71,6 +73,9 @@ class :api-list extends :x:element {
 
     $root = <div class="referenceList" />;
     foreach ($defs as $type => $api_references) {
+      if (C\is_empty($api_references)) {
+        continue;
+      }
       $title = ucwords($type.' Reference');
       $type_list = <ul class="apiList" />;
       foreach ($api_references as $name => $url) {
