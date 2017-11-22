@@ -44,8 +44,11 @@ abstract final class SearchTermMatcher {
       $multi = SearchScores::SHORT_MATCH_MULTIPLIER;
     }
 
-    if (Str\starts_with_ci($term, $name) || Str\starts_with_ci($name, $term)) {
+    if (Str\starts_with_ci($name, $term)) {
       return SearchScores::PREFIX_MATCH_SCORE * $multi;
+    }
+    if (Str\ends_with_ci($name, $term)) {
+      return SearchScores::SUFFIX_MATCH_SCORE * $multi;
     }
 
     if (Str\contains_ci($name, $term)) {
