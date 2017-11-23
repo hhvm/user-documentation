@@ -30,6 +30,10 @@ module HHVM
               <div class="apiTopMessage fbOnly">
                 <strong>Facebook Engineer?</strong>
                 #{html}
+                <!--
+                  Not a Facebook engineer... yet?
+                  https://www.facebook.com/careers/
+                -->
               </div>
             })
           end
