@@ -66,7 +66,7 @@ final class APIClassPageController extends APIPageController {
   <<__Override>>
   protected function getSideNav(): XHPRoot {
     $api_nav_data = APINavData::get($this->getParameters()['Product']);
-    $path = [
+    $path = vec[
       $api_nav_data->getRootNameForType($this->getDefinitionType()),
       $this->getRootDefinition()['name'],
     ];

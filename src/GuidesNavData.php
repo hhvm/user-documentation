@@ -11,8 +11,8 @@
 namespace HHVM\UserDocumentation;
 
 final class GuidesNavData {
-  public static function getNavData(): array<string, NavDataNode> {
-    $nav_data = [];
+  public static function getNavData(): dict<string, NavDataNode> {
+    $nav_data = dict[];
     foreach (GuidesIndex::getIndex() as $name => $product_guides) {
       $nav_data[$name] = shape(
         'name' => $name,
@@ -29,8 +29,8 @@ final class GuidesNavData {
   private static function getNavDataForProduct(
     GuidesProduct $product,
     Map<string, Map<string, string>> $product_guides,
-  ): array<string, NavDataNode> {
-    $nav_data = [];
+  ): dict<string, NavDataNode> {
+    $nav_data = dict[];
     foreach ($product_guides as $topic => $pages) {
       $name = self::pathToName($topic);
       $nav_data[$name] = shape(
@@ -50,14 +50,14 @@ final class GuidesNavData {
     GuidesProduct $product,
     string $topic,
     Map<string, string> $pages,
-  ): array<string, NavDataNode> {
-    $nav_data = [];
+  ): dict<string, NavDataNode> {
+    $nav_data = dict[];
     foreach ($pages as $title => $html_file) {
       $name = self::pathToName($title);
       $nav_data[$name] = shape(
         'name' => $name,
         'urlPath' => URLBuilder::getPathForGuidePage($product, $topic, $title),
-        'children' => [],
+        'children' => dict[],
       );
     }
     return $nav_data;

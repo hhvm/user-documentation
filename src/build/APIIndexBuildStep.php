@@ -12,6 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\Vec;
+use namespace Facebook\TypeAssert;
 
 final class APIIndexBuildStep extends BuildStep {
   public function buildAll(): void {
@@ -40,10 +41,10 @@ final class APIIndexBuildStep extends BuildStep {
     Log::i("\nCreating index for %s", $product);
 
     $out = shape(
-      'class' => [],
-      'interface' => [],
-      'trait' => [],
-      'function' => [],
+      'class' => dict[],
+      'interface' => dict[],
+      'trait' => dict[],
+      'function' => dict[],
     );
     foreach ($list as $yaml_path) {
       Log::v('.');
@@ -55,9 +56,10 @@ final class APIIndexBuildStep extends BuildStep {
       $type = $data['type'];
       switch ($type) {
         case APIDefinitionType::FUNCTION_DEF:
-          $docs = (
-            (): FunctionDocumentation ==> /* UNSAFE_EXPR */ $data['data']
-          )();
+          $docs = TypeAssert\matches_type_structure(
+            type_alias_structure(FunctionDocumentation::class),
+            $data['data'],
+          );
 
           $idx = strtr($docs['name'], "\\", '.');
           $md_path = FunctionMarkdownBuilder::getOutputFileName(
@@ -75,12 +77,12 @@ final class APIIndexBuildStep extends BuildStep {
         case APIDefinitionType::CLASS_DEF:
         case APIDefinitionType::INTERFACE_DEF:
         case APIDefinitionType::TRAIT_DEF:
-          $class = (
-            (): ClassDocumentation ==> /* UNSAFE_EXPR */ $data['data']
-          )();
+          $class = TypeAssert\matches_type_structure(
+            type_alias_structure(ClassDocumentation::class),
+            $data['data'],
+          );
 
-
-          $methods = [];
+          $methods = dict[];
           foreach ($class['methods'] as $method) {
             $idx = strtr($method['name'], "\\", '.');
             $md_path = MethodMarkdownBuilder::getOutputFileName(

@@ -14,8 +14,8 @@ use HHVM\UserDocumentation\UIGlyphIcon;
 
 class :ui:navbar extends :x:element {
   attribute
-    array<string, NavDataNode> data @required,
-    array<string> activePath @required,
+    dict<string, NavDataNode> data @required,
+    vec<string> activePath @required,
     string extraNavListClass;
 
   protected function render(): XHPRoot {

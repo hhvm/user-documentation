@@ -48,31 +48,24 @@ function is_ip_in_range(string $ip, (string, string) $range): bool {
 }
 
 function get_fb_ip_ranges(): TIPRanges {
-  $key = __FUNCTION__.'$__DATA__';
-  $success = false;
-  $data = apc_fetch($key, $success);
-  if ($success) {
-    return $data;
-  }
+  return apc_fetch_or_set_function_data(
+    __FUNCTION__,
+    () ==> {
+      $raw_data = \file_get_contents(BuildPaths::FB_IP_RANGES_JSON)
+        |> JSON\decode_as_shape(TIPRangesJSON::class, $$);
 
-  $raw_data = file_get_contents(BuildPaths::FB_IP_RANGES_JSON)
-    |> json_decode($$, /* assoc = */ true, /* depth = */ 5, JSON_FB_HACK_ARRAYS)
-    |> TypeAssert\matches_type_structure(
-      type_alias_structure(TIPRangesJSON::class),
-      $$,
-    );
-  $ipv4 = Vec\map(
-    $raw_data['ipv4'],
-    $cidr ==> cidr_to_bitstring_and_bitmask($cidr),
-  );
-  $ipv6 = Vec\map(
-    $raw_data['ipv6'],
-    $cidr ==> cidr_to_bitstring_and_bitmask($cidr),
-  );
+      $ipv4 = Vec\map(
+        $raw_data['ipv4'],
+        $cidr ==> cidr_to_bitstring_and_bitmask($cidr),
+      );
+      $ipv6 = Vec\map(
+        $raw_data['ipv6'],
+        $cidr ==> cidr_to_bitstring_and_bitmask($cidr),
+      );
 
-  $data = shape('ipv4' => $ipv4, 'ipv6' => $ipv6);
-  apc_store($key, $data);
-  return $data;
+      return shape('ipv4' => $ipv4, 'ipv6' => $ipv6);
+    },
+  );
 }
 
 function is_fb_ip_address(string $ip): bool {

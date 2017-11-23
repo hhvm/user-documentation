@@ -61,7 +61,7 @@ final class MergedYAMLBuilder {
       }
       $methods = Vec\sort_by($methods, $m ==> $m['name']);
 
-      $def['data']['methods'] = vec_like_array_cast($methods);
+      $def['data']['methods'] = $methods;
       return $writer->write(ClassYAML::class, $def);
     });
     \file_put_contents(
@@ -72,7 +72,7 @@ final class MergedYAMLBuilder {
 
   private function removePrivateMethods<
     T as shape('visibility' => MemberVisibility, ...)
-  >(array<T> $methods): vec<T> {
+  >(vec<T> $methods): vec<T> {
     // We filter out private methods at this late stage as occassionally we have
     // inconsistent ideas of what the visibility is and we want to go for the
     // most restrictive - if we filter out before merge, we'll end up with public
@@ -104,9 +104,8 @@ final class MergedYAMLBuilder {
 
     $merged['data'] = (new MergedDataBuilder($merged_data))
       ->addData($new_data)
-      ->build()->toArray();
+      ->build();
 
-    // UNSAFE array to shape conversion
     $this->definitions[$key] = $merged;
     return $this;
   }

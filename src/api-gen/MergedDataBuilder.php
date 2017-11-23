@@ -11,10 +11,12 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace Facebook\TypeAssert;
+use namespace Facebook\{TypeAssert, TypeSpec};
+use namespace HH\Lib\{C, Vec};
 
 final class MergedDataBuilder {
   private Map<string, mixed> $data;
+
   public function __construct(
     \ConstMap<string, mixed> $initial,
   ) {
@@ -35,24 +37,40 @@ final class MergedDataBuilder {
     if ($p1 === null || $p2 === null) {
       $parent = ($p1 !== null) ? $p1 : $p2;
     } else {
-      // UNSAFE mixed to shape coercion
-      $parent = self::MergedTypehint($p1, $p2);
+      $shape = TypeSpec\__Private\from_type_structure(
+        type_alias_structure(TypehintDocumentation::class),
+      );
+      $spec = TypeSpec\nullable($shape);
+      $parent = self::MergedTypehint(
+        $spec->assertType($p1),
+        $spec->assertType($p2),
+      );
     }
     if ($parent !== null) {
       $this->data['parent'] = $parent;
     }
 
-    $interfaces = new Vector(/*UNSAFE_EXPR*/idx($this->data, 'interfaces', []));
-    $interfaces->addAll(/*UNSAFE_EXPR*/idx($new, 'interfaces', []));
-    if ($interfaces) {
+    $spec = TypeSpec\vec(
+      TypeSpec\__Private\from_type_structure(
+        type_alias_structure(TypehintDocumentation::class),
+      ),
+    );
+
+    $interfaces = Vec\concat(
+      $spec->assertType($this->data['interfaces'] ?? vec[]),
+      $spec->assertType($new['interfaces'] ?? vec[]),
+    );
+    if (!C\is_empty($interfaces)) {
       $this->data['interfaces'] = self::MergedInterfaces($interfaces);
     }
     return $this;
   }
 
-  public function build(): Map<string, mixed> {
-    $data = clone $this->data;
-    return $this->data;
+  public function build(): BaseDocumentation {
+    return TypeAssert\matches_type_structure(
+      type_alias_structure(BaseDocumentation::class),
+      $this->data->toArray(),
+    );
   }
 
   private function mergeField(\ConstMap<string, mixed> $new, string $key): void {
@@ -63,29 +81,34 @@ final class MergedDataBuilder {
     $value = $new[$key];
 
     if ($key === 'methods') {
-      assert(is_array($value));
+      $methods_spec = TypeSpec\vec(
+        TypeSpec\__Private\from_type_structure(
+          type_alias_structure(MethodDocumentation::class),
+        ),
+      );
+      $value = $methods_spec->assertType($value);
 
       $builders = Map { };
-      $methods = [];
+      $methods = vec[];
 
       foreach ($value as $method) {
-        $builders[$method['name']] = (new MergedDataBuilder(new Map($method)));
+        $arr = Shapes::toArray($method);
+        $builders[$method['name']] = (new MergedDataBuilder(new Map($arr)));
       }
-      $methods = idx($this->data, 'methods', []);
-      assert(is_array($methods));
+      $methods = $methods_spec->assertType(idx($this->data, 'methods', vec[]));
 
-      $merged_methods = [];
+      $merged_methods = vec[];
       foreach ($methods as $method) {
         $name = $method['name'];
         if ($builders->containsKey($name)) {
-          $builders[$name]->addData(new Map($method));
+          $builders[$name]->addData(new Map(Shapes::toArray($method)));
         } else {
           $merged_methods[] = $method;
         }
       }
 
       foreach ($builders as $name => $builder) {
-        $merged_methods[] = $builder->build()->toArray();
+        $merged_methods[] = $builder->build();
       }
       $this->data['methods'] = $merged_methods;
       return;
@@ -106,8 +129,11 @@ final class MergedDataBuilder {
     }
 
     if ($key === 'parameters' && $value !== null && $old_value !== null) {
-      assert(is_array($value));
-      assert(is_array($old_value));
+      $shape = type_alias_structure(ParameterDocumentation::class);
+      $spec = TypeSpec\vec(TypeSpec\__Private\from_type_structure($shape));
+      $value = $spec->assertType($value);
+      $old_value = $spec->assertType($old_value);
+
       if (count($value) !== count($old_value)) {
         $name = (string) idx($this->data, 'name', '<unknown>');
         Log::w("\nParameter number mismatch when merging ".$name);
@@ -121,15 +147,18 @@ final class MergedDataBuilder {
     }
 
     if ($key === 'returnType' && $value !== null && $old_value !== null) {
-      // UNSAFE array to shape coercion
-      $value = self::MergedTypehint($value, $old_value);
+      $ts = type_alias_structure(TypehintDocumentation::class);
+      $value = self::MergedTypehint(
+        TypeAssert\matches_type_structure($ts, $value),
+        TypeAssert\matches_type_structure($ts, $old_value),
+      );
     }
 
     if ($key === 'deprecation') {
       $value = $old_value ?? $value;
     }
 
-    if ($value !== null && $value != []) {
+    if ($value !== null && $value !== vec[]) {
       $this->data[$key] = $value;
     }
   }
@@ -211,9 +240,9 @@ final class MergedDataBuilder {
   }
 
   private static function MergedInterfaces(
-    \ConstVector<TypehintDocumentation> $interfaces,
-  ): array<TypehintDocumentation> {
-    $keyed = Map { };
+    vec<TypehintDocumentation> $interfaces,
+  ): vec<TypehintDocumentation> {
+    $keyed = dict[];
     foreach ($interfaces as $interface) {
       $name = $interface['typename'];
       $ns_sep = strrpos($name, "\\");
@@ -222,7 +251,7 @@ final class MergedDataBuilder {
       } else {
         $key = substr($name, $ns_sep + 1);
       }
-      if ($keyed->containsKey($key)) {
+      if (C\contains_key($keyed, $key)) {
         $keyed[$key] = TypeAssert\not_null(
           self::MergedTypehint($keyed[$key], $interface)
          );
@@ -230,6 +259,6 @@ final class MergedDataBuilder {
         $keyed[$key] = $interface;
       }
     }
-    return array_values($keyed->toArray());
+    return vec($keyed);
   }
 }

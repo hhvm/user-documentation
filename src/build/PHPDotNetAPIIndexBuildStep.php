@@ -11,30 +11,27 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Dict;
+
 final class PHPDotNetAPIIndexBuildStep extends BuildStep {
-  use CodegenBuildStep;
 
   public function buildAll(): void {
     Log::i("\nPHPDotNetAPIIndex");
 
-    $code = $this->writeCode(
-      'PHPDotNetAPIIndex.hhi',
-      $this->getIndexData(),
-    );
-    file_put_contents(
-      BuildPaths::PHP_DOT_NET_API_INDEX,
-      $code,
+    \file_put_contents(
+      BuildPaths::PHP_DOT_NET_API_INDEX_JSON,
+      JSON\encode_dict($this->getIndexData()),
     );
   }
 
 
-  private function getIndexData(): array<string, PHPDotNetAPIIndexEntry> {
+  private function getIndexData(): dict<string, PHPDotNetAPIIndexEntry> {
     $reader = new PHPDocsIndexReader(
-      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
+      \file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
     );
     $defs = $reader->getAllAPIDefinitions();
 
-    $out = [];
+    $out = dict[];
     foreach ($defs as $name => $id) {
       $type = explode('.', $id)[0];
       $type = APIDefinitionType::coerce($type);
@@ -60,8 +57,6 @@ final class PHPDotNetAPIIndexBuildStep extends BuildStep {
       );
     }
 
-    ksort($out);
-
-    return $out;
+    return Dict\sort_by_key($out);
   }
 }

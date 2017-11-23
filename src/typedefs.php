@@ -86,21 +86,26 @@ type DocumentationSource = shape(
 );
 
 type BaseYAML = shape(
-  'sources' => array<DocumentationSource>,
+  'sources' => vec<DocumentationSource>,
   'type' => APIDefinitionType,
   'data' => shape('name' => string, ...),
 );
 
 type ClassYAML = shape(
-  'sources' => array<DocumentationSource>,
+  'sources' => vec<DocumentationSource>,
   'type' => APIDefinitionType,
   'data' => ClassDocumentation,
 );
 
 type FunctionYAML = shape(
-  'sources' => array<DocumentationSource>,
+  'sources' => vec<DocumentationSource>,
   'data' => FunctionDocumentation,
   'type' => APIDefinitionType,
+);
+
+type BaseDocumentation = shape(
+  'name' => string,
+  ...
 );
 
 type ClassDocumentation = shape(
@@ -108,18 +113,18 @@ type ClassDocumentation = shape(
   'namespace' => string,
   'shortName' => string,
   'type' => APIDefinitionType,
-  'methods' => array<MethodDocumentation>,
-  'generics' => array<GenericDocumentation>,
+  'methods' => vec<MethodDocumentation>,
+  'generics' => vec<GenericDocumentation>,
   'docComment' => ?string,
   'parent' => ?TypehintDocumentation,
-  'interfaces' => array<TypehintDocumentation>,
+  'interfaces' => vec<TypehintDocumentation>,
 );
 
 type TypehintDocumentation = shape(
   'typename' => string,
   'typetext' => string,
   'nullable' => bool,
-  'genericTypes' => array<mixed /* cyclic: TypehintDocumentation*/>,
+  'genericTypes' => vec<mixed /* cyclic: TypehintDocumentation*/>,
 );
 
 type GenericDocumentation = shape(
@@ -139,9 +144,9 @@ type ParameterDocumentation = shape(
 type FunctionDocumentation = shape(
   'name' => string,
   'returnType' => ?TypehintDocumentation,
-  'generics' => array<GenericDocumentation>,
+  'generics' => vec<GenericDocumentation>,
   'docComment' => ?string,
-  'parameters' => array<ParameterDocumentation>,
+  'parameters' => vec<ParameterDocumentation>,
   ?'className' => string,
   ?'classType' => APIDefinitionType,
   ?'visibility' => MemberVisibility,
@@ -152,9 +157,9 @@ type FunctionDocumentation = shape(
 type MethodDocumentation = shape(
   'name' => string,
   'returnType' => ?TypehintDocumentation,
-  'generics' => array<GenericDocumentation>,
+  'generics' => vec<GenericDocumentation>,
   'docComment' => ?string,
-  'parameters' => array<ParameterDocumentation>,
+  'parameters' => vec<ParameterDocumentation>,
   'className' => string,
   'classType' => APIDefinitionType,
   'visibility' => MemberVisibility,
@@ -169,7 +174,7 @@ type DocumentationIndexEntry = shape(
 );
 
 type DocumentationIndex = shape(
-  'types' => array<string,DocumentationIndexEntry>,
+  'types' => dict<string,DocumentationIndexEntry>,
 );
 
 type APIIndexEntry = shape(
@@ -198,14 +203,14 @@ type APIClassIndexEntry = shape(
   'name' => string,
   'htmlPath' => string,
   'urlPath' => string,
-  'methods' => array<string, APIMethodIndexEntry>,
+  'methods' => dict<string, APIMethodIndexEntry>,
 );
 
 type ProductAPIIndexShape = shape(
-  'class' => array<string, APIClassIndexEntry>,
-  'interface' => array<string, APIClassIndexEntry>,
-  'trait' => array<string, APIClassIndexEntry>,
-  'function' => array<string, APIFunctionIndexEntry>,
+  'class' => dict<string, APIClassIndexEntry>,
+  'interface' => dict<string, APIClassIndexEntry>,
+  'trait' => dict<string, APIClassIndexEntry>,
+  'function' => dict<string, APIFunctionIndexEntry>,
 );
 
 type APIIndexShape = shape(
@@ -224,11 +229,11 @@ type NavDataNode = shape(
   'name' => string,
   'urlPath' => string,
   /*
-   * This is actually array<string, NavDataNode> but recursive shapes aren't
+   * This is actually dict<string, NavDataNode> but recursive shapes aren't
    * allowed. Given we only read this from JS, not a big deal, just be careful
    * writing it.
    */
-  'children' => array<string, mixed>,
+  'children' => dict<string, mixed>,
 );
 
 type PaginationDataNode = shape(

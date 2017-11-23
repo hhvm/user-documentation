@@ -20,7 +20,12 @@ use HHVM\UserDocumentation\PaginationDataNode;
 use HHVM\UserDocumentation\UIGlyphIcon;
 use HHVM\UserDocumentation\URLBuilder;
 
-use Psr\Http\Message\ServerRequestInterface;
+use function HHVM\UserDocumentation\type_alias_structure;
+
+use type Psr\Http\Message\ServerRequestInterface;
+
+use namespace Facebook\TypeAssert;
+use namespace HH\Lib\Dict;
 
 final class GuidePageController extends WebPageController {
   use GuidePageControllerParametersTrait;
@@ -215,13 +220,15 @@ final class GuidePageController extends WebPageController {
   }
 
   protected function getSideNav(): XHPRoot {
+    $ts = type_alias_structure(NavDataNode::class);
+    $data = Dict\map(
+      GuidesNavData::getNavData()[$this->getProduct()]['children'],
+      $child ==> TypeAssert\matches_type_structure($ts, $child),
+    );
     return (
       <ui:navbar
-        data={
-          /* UNSAFE_EXPR */
-          GuidesNavData::getNavData()[$this->getProduct()]['children']
-        }
-        activePath={[
+        data={$data}
+        activePath={vec[
           GuidesNavData::pathToName($this->getGuide()),
           GuidesNavData::pathToName($this->getPage()),
         ]}

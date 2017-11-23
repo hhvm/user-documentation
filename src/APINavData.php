@@ -23,8 +23,8 @@ final class APINavData {
     return new self($product);
   }
 
-  public function getNavData(): array<string, NavDataNode> {
-    return [
+  public function getNavData(): dict<string, NavDataNode> {
+    return dict[
       'Classes' => $this->getNavDataForClasses(APIDefinitionType::CLASS_DEF),
       'Interfaces' => $this->getNavDataForClasses(APIDefinitionType::INTERFACE_DEF),
       'Traits' => $this->getNavDataForClasses(APIDefinitionType::TRAIT_DEF),
@@ -54,7 +54,7 @@ final class APINavData {
   private function getNavDataForClasses(
     APIDefinitionType $class_type,
   ): NavDataNode {
-    $nav_data = [];
+    $nav_data = dict[];
     $classes = $this->index->getClassIndex($class_type);
 
     foreach ($classes as $class) {
@@ -72,29 +72,29 @@ final class APINavData {
   }
 
   private function getNavDataForMethods(
-    array<string, APIMethodIndexEntry> $methods,
-  ): array<string, NavDataNode> {
-    $nav_data = [];
+    dict<string, APIMethodIndexEntry> $methods,
+  ): dict<string, NavDataNode> {
+    $nav_data = dict[];
     foreach ($methods as $method) {
       $nav_data[$method['name']] = shape(
         'name' => $method['name'],
         'urlPath' => $method['urlPath'],
-        'children' => [],
+        'children' => dict[],
       );
     }
     return $nav_data;
   }
 
   private function getNavDataForFunctions(
-  ): array<string, NavDataNode> {
+  ): dict<string, NavDataNode> {
     $functions = $this->index->getFunctionIndex();
 
-    $nav_data = [];
+    $nav_data = dict[];
     foreach ($functions as $function) {
       $nav_data[$function['name']] = shape(
         'name' => $function['name'],
         'urlPath' => $function['urlPath'],
-        'children' => [],
+        'children' => dict[],
       );
     }
     return $nav_data;

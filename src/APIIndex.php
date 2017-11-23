@@ -51,26 +51,18 @@ final class APIIndex {
   <<__Memoize>>
   private static function getRawIndex(
   ): APIIndexShape {
-    $key = __CLASS__.'!'.LocalConfig::getBuildID();
-
-    $success = false;
-    $data = apc_fetch($key, $success);
-    $success = false;
-    if ($success) {
-      return $data;
-    }
-
-    $data = JSON\decode_as_shape(
-      APIIndexShape::class,
-      \file_get_contents(BuildPaths::APIDOCS_INDEX_JSON),
+    return apc_fetch_or_set_class_data(
+      self::class,
+      () ==> JSON\decode_as_shape(
+        APIIndexShape::class,
+        \file_get_contents(BuildPaths::APIDOCS_INDEX_JSON),
+      ),
     );
-    apc_store($key, $data);
-    return $data;
   }
 
   public function getIndexForType(
     APIDefinitionType $type,
-  ): array<string, APIIndexEntry> {
+  ): dict<string, APIIndexEntry> {
     $index = Shapes::toArray($this->index);
     invariant(
       array_key_exists($type, $index),
@@ -81,13 +73,13 @@ final class APIIndex {
   }
 
   public function getFunctionIndex(
-  ): array<string, APIFunctionIndexEntry> {
+  ): dict<string, APIFunctionIndexEntry> {
     return $this->index['function'];
   }
 
   public function getClassIndex(
     APIDefinitionType $type,
-  ): array<string, APIClassIndexEntry> {
+  ): dict<string, APIClassIndexEntry> {
     switch($type) {
       case APIDefinitionType::FUNCTION_DEF:
         invariant_violation('functions are not classes');

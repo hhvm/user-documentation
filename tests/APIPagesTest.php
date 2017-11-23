@@ -27,7 +27,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     return $out;
   }
 
-  public function shortListOfAPIPages(): array<(string, NavDataNode)> {
+  public function shortListOfAPIPages(): vec<(string, NavDataNode)> {
     $wanted = Set {
       '/hack/reference/class/', // index
       '/hack/reference/class/AsyncMysqlClient/', // class
@@ -36,7 +36,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       '/hack/reference/class/HH.Asio.WrappedResult/', // namespaced
     };
     $all = self::allAPIPages();
-    $out = [];
+    $out = vec[];
     foreach ($all as $tuple) {
       list($_, $node) = $tuple;
       if ($wanted->contains($node['urlPath'])) {
@@ -51,7 +51,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       shape(
         'urlPath' => '/hack/reference/',
         'name' => 'Hack APIs',
-        'children' => [],
+        'children' => dict[],
       ),
     );
     return $out;

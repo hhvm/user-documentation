@@ -48,8 +48,8 @@ abstract final class BuildPaths {
   const string JUMP_INDEX
     = self::FINAL_DIR.'/jump-index.php';
 
-  const string PHP_DOT_NET_API_INDEX
-    = self::FINAL_DIR.'/php-dot-net-api-index.php';
+  const string PHP_DOT_NET_API_INDEX_JSON
+    = self::FINAL_DIR.'/php-dot-net-api-index.json';
   const string PHP_DOT_NET_ARTICLE_REDIRECTS
     = self::FINAL_DIR.'/php-dot-net-article-redirects.php';
   const string PHP_INI_SUPPORT_IN_HHVM_JSON

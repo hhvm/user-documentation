@@ -163,7 +163,7 @@ EOF;
   private static function nameFromData(
     shape(
       'name' => string,
-      'generics' => array<GenericDocumentation>,
+      'generics' => vec<GenericDocumentation>,
       ...
     ) $data,
   ): string {

@@ -97,7 +97,7 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
     $this->assertGreaterThanOrEqual(
       1,
       $nodes->length,
-      'no matches',
+      'Expected '.$keyword.' to link to '.$dest
     );
   }
 }

@@ -82,7 +82,7 @@ class ScannedDefinitionsYAMLBuilder {
       $def ==> $writer->write(
         $shape_type,
         shape(
-          'sources' => [$this->source],
+          'sources' => vec[$this->source],
           'type' => $type,
           'data' => $converter($def),
         ),
@@ -122,17 +122,17 @@ class ScannedDefinitionsYAMLBuilder {
       'methods' => $class
         ->getMethods()
         ->map($m ==> $this->getMethodDocumentation($type, $name, $m))
-        ->toArray(),
+        |> vec($$),
       'generics' => $class
         ->getGenericTypes()
         ->map($gt ==> self::GetGenericDocumentation($gt))
-        ->toArray(),
+        |> vec($$),
       'parent' =>
         self::GetNullableTypehintDocumentation($class->getParentClassInfo()),
       'interfaces' => $class
         ->getInterfaceInfo()
         ->map($interface ==> self::GetTypehintDocumentation($interface))
-        ->toArray(),
+        |> vec($$),
       'docComment' => $class->getDocComment(),
     );
   }
@@ -149,12 +149,12 @@ class ScannedDefinitionsYAMLBuilder {
       'generics' => $function
         ->getGenericTypes()
         ->map($gt ==> self::GetGenericDocumentation($gt))
-        ->toArray(),
+        |> vec($$),
       'docComment' => $function->getDocComment(),
       'parameters' => $function
         ->getParameters()
         ->map($p ==> self::GetParameterDocumentation($p))
-        ->toArray(),
+        |> vec($$),
       'deprecation' => $deprecationMessage !== null ?
         (string) $deprecationMessage : null,
     );
@@ -231,7 +231,7 @@ class ScannedDefinitionsYAMLBuilder {
         $typehint
         ->getGenericTypes()
         ->map($th ==> self::GetTypehintDocumentation($th))
-        ->toArray(),
+        |> vec($$),
     );
   }
 

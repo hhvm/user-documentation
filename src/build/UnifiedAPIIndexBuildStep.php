@@ -12,6 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\{C, Str};
+use namespace Facebook\TypeAssert;
 
 // Index of all definitions, so that markdown processing can
 // automatically linkify them
@@ -79,15 +80,20 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
           $maybe_set($name, $def['urlPath']);
         }
 
-        $def = Shapes::toArray($def);
-        $children = idx($def, 'methods');
-        if (!is_array($children)) {
+        if ($type === APIDefinitionType::FUNCTION_DEF) {
           continue;
         }
 
-        foreach ($children as $_ => $child) {
-          $name = $child['className'].'::'.$child['name'];
-          $maybe_set($name, $child['urlPath']);
+        $def = TypeAssert\matches_type_structure(
+          type_alias_structure(APIClassIndexEntry::class),
+          $def,
+        );
+
+        $methods = $def['methods'];
+
+        foreach ($methods as $_ => $method) {
+          $name = $method['className'].'::'.$method['name'];
+          $maybe_set($name, $method['urlPath']);
         }
       }
     }

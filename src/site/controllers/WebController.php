@@ -168,23 +168,18 @@ abstract class WebController {
 
   <<__Memoize>>
   private static function getTrustedRanges(): vec<(string, string)> {
-    $key = __FUNCTION__.'$__DATA__';
-    $success = false;
-    $data = apc_fetch($key, $success);
-    if ($success) {
-      return $data;
-    }
-
-    $cidr = vec[
-      '10.0.0.0/8',
-      '172.16.0.0/12',
-      '192.168.0.0/16',
-      '127.0.0.0/8',
-    ];
-
-    $data = Vec\map($cidr, $range ==> cidr_to_bitstring_and_bitmask($range));
-
-    apc_store($key, $data);
-    return $data;
+    return HHVM\UserDocumentation\apc_fetch_or_set_method_data(
+      self::class,
+      __FUNCTION__,
+      () ==> Vec\map(
+        vec[
+          '10.0.0.0/8',
+          '172.16.0.0/12',
+          '192.168.0.0/16',
+          '127.0.0.0/8',
+        ],
+        $range ==> cidr_to_bitstring_and_bitmask($range),
+      ),
+    );
   }
 }

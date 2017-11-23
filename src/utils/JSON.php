@@ -25,11 +25,7 @@ function decode_as_dict(string $json): dict<string, mixed> {
 function decode_as_shape<T as shape(...)>(typename<T> $type, string $json): T {
   return TypeAssert\matches_type_structure(
     \HHVM\UserDocumentation\type_alias_structure($type),
-    \json_decode(
-      $json,
-      /* assoc = */ true,
-      /* depth = */ 512,
-    ),
+    decode_as_dict($json),
   );
 }
 

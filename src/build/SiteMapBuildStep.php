@@ -74,7 +74,7 @@ final class SiteMapBuildStep extends BuildStep {
   }
 
   private function getPagesFromNavData(
-    array<string, NavDataNode> $roots,
+    dict<string, NavDataNode> $roots,
   ): ImmVector<string> {
     $out = Vector { };
     $to_visit = array_values($roots);

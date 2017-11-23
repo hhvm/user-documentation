@@ -15,6 +15,7 @@ use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
 use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
 
 use namespace HH\Lib\{C, Str, Vec};
+use namespace Facebook\TypeAssert;
 
 class Stringify {
 
@@ -27,15 +28,17 @@ class Stringify {
     $s .= $typehint['typename'];
 
     if ($typehint['genericTypes']) {
-      $s .= '<';
-      $s .= implode(
-        ',',
-        array_map(
-          $typehint ==> Stringify::typehint(/* UNSAFE_EXPR */ $typehint),
-          $typehint['genericTypes'],
-        ),
-      );
-      $s .= '>';
+      $s .= $typehint['genericTypes']
+        |> Vec\map(
+          $$,
+          $sub ==> TypeAssert\matches_type_structure(
+            type_alias_structure(TypehintDocumentation::class),
+            $sub ,
+          ),
+        )
+        |> Vec\map($$, $sub ==> Stringify::typehint($sub))
+        |> Str\join($$, ', ')
+        |> '<'.$$.'>';
     }
     return $s;
   }
@@ -167,7 +170,7 @@ class Stringify {
     }
   }
 
-  public static function generics(array<GenericDocumentation> $generics): string {
+  public static function generics(vec<GenericDocumentation> $generics): string {
     if (count($generics) === 0) {
       return '';
     }

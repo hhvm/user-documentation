@@ -11,14 +11,25 @@
 
 namespace HHVM\UserDocumentation;
 
-require_once(BuildPaths::PHP_DOT_NET_API_INDEX);
+use namespace HH\Lib\{Dict, Vec};
 
-use namespace HH\Lib\Vec;
+use namespace Facebook\TypeAssert;
 
 final class PHPAPIIndex {
   public static function getIndex(
-  ): array<string, PHPDotNetAPIIndexEntry> {
-    return PHPDotNetAPIIndexData::getData();
+  ): dict<string, PHPDotNetAPIIndexEntry> {
+    return apc_fetch_or_set_class_data(
+      self::class,
+      () ==> \file_get_contents(BuildPaths::PHP_DOT_NET_API_INDEX_JSON)
+        |> JSON\decode_as_dict($$)
+        |> Dict\map(
+          $$,
+          $v ==> TypeAssert\matches_type_structure(
+            type_alias_structure(PHPDotNetAPIIndexEntry::class),
+            $v,
+          ),
+        ),
+    );
   }
 
 
