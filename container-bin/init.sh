@@ -7,17 +7,17 @@ if [ ! -e /docker_build ]; then
   exit 1
 fi
 
-# Install Ruby and Bundler (Ruby package manager)
-apt-get install -y ruby bundler
 # we depend on a recent version of the Nokogiri gem, which bundler will install
 # for us later; this needs to build it's own libxml so we need to install the
 # -dev versions of some dependencies
-apt-get install -y build-essential zlib1g-dev
-
+#
 # The highlighting gem installs its' own version of pygments so we don't actually
-# use this, but this is a handy way to make sure all the dependencies are
+# use pygments, but this is a handy way to make sure all the dependencies are
 # installed.
-apt-get install -y python-pygments
+APT_DEPS="ruby bundler build-essential zlib1g-dev python-pygments"
+
+# Install Ruby and Bundler (Ruby package manager)
+apt-get install -y $APT_DEPS
 
 mkdir /opt/composer
 wget -qO /dev/stdout https://getcomposer.org/installer | hhvm --php -- --install-dir=/opt/composer
@@ -64,8 +64,7 @@ echo "** Cleaning up..."
 pkill hh_server
 rm -rf /root/.composer
 rm -rf /var/www/{.git,api-sources,api-examples,guides,md-render} /tmp/hh_server
-apt-get remove -y \
-  build-essential ruby bundler zlib1g-dev python-pygments curl
+apt-get remove -y $APT_DEPS
 SUDO_FORCE_REMOVE=yes apt-get autoremove -y
 apt-get clean
 rm -rf /var/lib/apt/lists/*
