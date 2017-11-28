@@ -4,3 +4,4 @@
 [submodule "api-sources/hhvm"]
 	path = api-sources/hhvm
 	url = https://github.com/facebook/hhvm.git
+  branch = HHVM-3.23
