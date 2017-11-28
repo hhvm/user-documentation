@@ -11,14 +11,30 @@
 
 namespace Facebook\GFM;
 
+use namespace HH\Lib\C;
 
 final class Document extends ContainerBlock {
-  public static function isStartedByLine(string $_): bool {
-    return false;
+  public function __construct(private vec<Node> $children) {
   }
-
-  <<__Override>>
-  public function getContinuationPrefix(): ?string {
-    return '';
+  public static function consume(vec<string> $lines): (Node, vec<string>) {
+    $children = vec[];
+    while (!C\is_empty($lines)) {
+      $match = null;
+      foreach (Block::PRIORITIZED_BLOCK_TYPES as $block) {
+        $match = $block::consume($lines);
+        if ($match !== null) {
+          break;
+        }
+      }
+      invariant($match !== null, 'should *always* find a match');
+      list($child, $new_lines) = $match;
+      $children[] = $child;
+      invariant(
+        C\count($lines) > C\count($new_lines),
+        'consuming failed to reduce line count',
+      );
+      $lines = $new_lines;
+    }
+    return tuple(new self($children), vec[]);
   }
 }

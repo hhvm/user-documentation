@@ -11,15 +11,20 @@
 
 namespace Facebook\GFM;
 
-<<__ConsistentConstruct>>
-abstract class Block<TChild as Node> extends Node {
-  public function __construct(string $firstLine) {
-  }
-  abstract public static function isStartedByLine(string $_): bool;
+abstract class Block extends Node {
+  const vec<classname<Block>> PRIORITIZED_BLOCK_TYPES = vec[
+    BlankLine::class,
+    ATXHeading::class,
+    FencedCodeBlock::class,
+    HTMLBlock::class,
+    IndentedCodeBlock::class,
+    LinkReferenceDefinition::class,
+    ThematicBreak::class,
+    SetextHeading::class,
+    Paragraph::class,
+  ];
 
-  public function getContinuationPrefix(): ?string {
-    return null;
-  }
-
-  abstract public function appendBlock(Block<Node> $_): void;
+  public abstract static function consume(
+    vec<string> $lines,
+  ): ?(Node, vec<string>);
 }

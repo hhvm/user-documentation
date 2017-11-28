@@ -37,41 +37,18 @@ final class HTMLBlock extends FencedBlock {
       'figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|'.
       'html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|'.
       'optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|'.
-      'thead|title|tr|track|ul)( +|$|\\/?>/' => '/^$/',
-    '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')*'.' *\\/?> *$' => '/^$/',
-    '/^</'.self::TAG_NAME.' *> *$/' => '/^$/',
+      'thead|title|tr|track|ul)( +|$|\\/)?>/' => '/^$/',
+    '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')*'.' *\\/?> *$/' => '/^$/',
+    '/^<\\/'.self::TAG_NAME.' *> *$/' => '/^$/',
   ];
 
-  private string $endPattern;
-
-  public function __construct(
-    string $firstLine,
-  ) {
-    $wanted_end = null;
+  <<__Override>>
+  public static function getEndPatternForFirstLine(string $line): ?string {
     foreach (self::PATTERNS as $start => $end) {
-      if (\preg_match($start, $firstLine) === 1) {
-        $wanted_end = $end;
-        break;
-      }
-    }
-    invariant(
-      $wanted_end !== null,
-      "failed to match first line against a pattern",
-    );
-    $this->endPattern = $wanted_end;
-    parent::__construct($firstLine);
-  }
-
-  public static function isStartedByLine(string $line): bool {
-    foreach (self::PATTERNS as $start => $_end) {
       if (\preg_match($start, $line) === 1) {
-        return true;
+        return $end;
       }
     }
-    return false;
-  }
-
-  public function isEndedByLine(string $line): bool {
-    return \preg_match($this->endPattern, $line) === 1;
+    return null;
   }
 }

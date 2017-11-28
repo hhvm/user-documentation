@@ -11,11 +11,30 @@
 
 namespace Facebook\GFM;
 
+use namespace HH\Lib\{C, Str, Vec};
+
 final class ATXHeading extends LeafBlock {
-  public static function isStartedByLine(string $line): bool {
-    return \preg_match(
-      '/^ {0,3}#{1,6} .+( #+)?/',
-      $line,
-    ) === 1;
+  const string PATTERN = '/^ {0,3}(?<level>#{1,6}) (?<title>.+)$/';
+
+  public function __construct(private int $level, private string $heading) {
+  }
+
+  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+    $first = C\firstx($lines);
+    $rest = Vec\drop($lines, 1);
+
+    $matches = [];
+    $result = \preg_match(self::PATTERN, $first, $matches);
+    if ($result !== 1) {
+      return null;
+    }
+
+    $level = Str\length($matches['level']);
+
+    $title = $matches['title']
+      |> Str\trim_right($$, '#')
+      |> Str\trim_right($$, ' ');
+
+    return tuple(new self($level, $title), $rest);
   }
 }

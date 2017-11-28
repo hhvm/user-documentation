@@ -11,11 +11,39 @@
 
 namespace Facebook\GFM;
 
+use namespace HH\Lib\{C, Vec};
+
 final class SetextHeading extends LeafBlock {
-  public static function isStartedByLine(string $line): bool {
-    return \preg_match(
-      '/^ {0,3}[-=]+ +$/',
-      $line,
-    ) === 1;
+  public function __construct(private int $level, private vec<string> $lines) {
+  }
+
+  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+    for ($idx = 1; $idx < C\count($lines); ++$idx) {
+      $line = $lines[$idx];
+      if ($line === '') {
+        return null;
+      }
+
+      $matches = [];
+      if (\preg_match('/^ {0,3}(?<level>=+|-+) *$/', $line, $matches) === 1) {
+        $level = $matches['level'][0] === '=' ? 1 : 2;
+        return tuple(
+          new self($level, Vec\take($lines, $idx)),
+          Vec\drop($lines, $idx + 1),
+        );
+      }
+
+      $matches_other_block = C\any(
+        Block::PRIORITIZED_BLOCK_TYPES,
+        (classname<Block> $block) ==>
+          $block !== Paragraph::class &&
+          $block !== SetextHeading::class &&
+          $block::consume(Vec\drop($lines, $idx)) !== null
+      );
+      if ($matches_other_block) {
+        return null;
+      }
+    }
+    return null;
   }
 }

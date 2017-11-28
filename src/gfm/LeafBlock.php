@@ -11,9 +11,5 @@
 
 namespace Facebook\GFM;
 
-abstract class LeafBlock extends Block<Inline> {
-  <<__Override>>
-  final public function appendBlock(Block<Node> $_): void {
-    invariant_violation("Can't append a block to a lead block");
-  }
+abstract class LeafBlock extends Block {
 }

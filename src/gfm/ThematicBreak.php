@@ -11,11 +11,14 @@
 
 namespace Facebook\GFM;
 
+use namespace HH\Lib\{C, Vec};
+
 final class ThematicBreak extends LeafBlock {
-  public static function isStartedByLine(string $line): bool {
-    return \preg_match(
-      '/^ {0,3}(-_\\* *){3,}$/',
-      $line,
-    ) === 1;
+  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+    $first = C\firstx($lines);
+    if (\preg_match('/^ {0,3}([-_*] *){3,}$/', $first) !== 1) {
+      return null;
+    }
+    return tuple(new self(), Vec\drop($lines, 1));
   }
 }

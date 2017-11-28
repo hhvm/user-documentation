@@ -11,5 +11,15 @@
 
 namespace Facebook\GFM;
 
-abstract class ContainerBlock extends Block {
+final class LinkReferenceDefinition extends LeafBlock {
+  public function __construct(
+    private string $label,
+    private string $destination,
+    private ?string $title,
+  ) {
+  }
+
+  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+    return null;
+  }
 }
