@@ -54,7 +54,7 @@ final class ListItem extends ContainerBlock {
       $line = $lines[$idx];
       if ($line === '') {
         if ($last_blank) {
-          $matched = Vec\take($matched, $idx);
+          $matched = Vec\take($matched, C\count($matched) - 1);
           break;
         }
         $matched[] = $line;
@@ -85,6 +85,10 @@ final class ListItem extends ContainerBlock {
       }
 
       $matched[] = $line;
+    }
+
+    if (C\lastx($matched) === '') {
+      $matched = Vec\take($matched, C\count($matched) - 1);
     }
 
     $rest = Vec\drop($lines, C\count($matched));
