@@ -203,6 +203,9 @@ final class LinkReferenceDefinition extends LeafBlock {
     for ($line_idx = 0; $line_idx < $line_count; ++$line_idx) {
       $escaped = false;
       $line = $lines[$line_idx];
+      if ($line === '') {
+        return null;
+      }
       $len = Str\length($line);
       for ($idx = 0; $idx < $len; ++$idx) {
         $chr = $line[$idx];
@@ -260,8 +263,12 @@ final class LinkReferenceDefinition extends LeafBlock {
     $depth = 0;
     $idx = null;
     for ($line_idx = 0; $line_idx < $line_count; ++$line_idx) {
-      $escaped = false;
       $line = $lines[$line_idx];
+      if ($line === '') {
+        return null;
+      }
+
+      $escaped = false;
       $len = Str\length($line);
       for ($idx = 0; $idx < $len; ++$idx) {
         $chr = $line[$idx];
