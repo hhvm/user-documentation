@@ -15,15 +15,23 @@ abstract class Inline {
   const keyset<classname<Inline>> INLINES = keyset[
     HardLineBreak::class,
     SoftLineBreak::class,
+    CodeSpan::class,
+    EntityReference::class,
+    AutoLink::class,
+    RawHTML::class,
+    BackslashEscape::class,
     TextualContent::class,
   ];
-  const type TNode = (classname<Inline>, string);
+
+  abstract const type TContent;
+  const type TNode = (classname<Inline>, self::TContent);
+
   abstract public static function consume(
     string $chars,
   ): ?(self::TNode, string);
 
   protected static function makeNode(
-    string $value,
+    this::TContent $value,
   ): self::TNode {
     return tuple(static::class, $value);
   }

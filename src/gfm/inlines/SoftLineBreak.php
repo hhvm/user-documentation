@@ -14,6 +14,8 @@ namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\Str;
 
 final class SoftLineBreak extends Inline {
+  const type TContent = string;
+  
   public static function consume(
     string $string,
   ): ?(self::TNode, string) {

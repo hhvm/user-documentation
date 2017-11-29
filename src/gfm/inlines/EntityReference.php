@@ -13,13 +13,12 @@ namespace Facebook\GFM\Inlines;
 
 use namespace HH\Lib\Str;
 
-final class TextualContent extends Inline {
+final class EntityReference extends Inline {
   const type TContent = string;
-  
+
   public static function consume(
-    string $chars,
-  ): (self::TNode, string) {
-    invariant(!Str\is_empty($chars), "Should never be called on empty string");
-    return tuple(self::makeNode($chars[0]), Str\slice($chars, 1));
+    string $string,
+  ): ?(self::TNode, string) {
+    return null; // FIXME
   }
 }
