@@ -18,6 +18,7 @@ final class HardLineBreak extends Inline {
   }
 
   public static function consume(
+    Context $_,
     string $string,
   ): ?(Inline, string) {
     if (Str\starts_with($string, "\\\n")) {

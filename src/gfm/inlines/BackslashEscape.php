@@ -27,6 +27,7 @@ final class BackslashEscape extends Inline {
   }
 
   public static function consume(
+    Context $_,
     string $string,
   ): ?(Inline, string) {
     if ($string[0] !== "\\") {

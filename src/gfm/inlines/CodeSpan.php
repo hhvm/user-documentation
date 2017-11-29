@@ -15,6 +15,7 @@ use namespace HH\Lib\Str;
 
 final class CodeSpan extends Inline {
   public static function consume(
+    Context $_,
     string $string,
   ): ?(Inline, string) {
     return null; // FIXME

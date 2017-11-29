@@ -12,18 +12,8 @@
 namespace Facebook\GFM\Inlines ;
 
 abstract class Inline {
-  const keyset<classname<Inline>> INLINES = keyset[
-    HardLineBreak::class,
-    SoftLineBreak::class,
-    CodeSpan::class,
-    EntityReference::class,
-    AutoLink::class,
-    RawHTML::class,
-    BackslashEscape::class,
-    TextualContent::class,
-  ];
-
   abstract public static function consume(
+    Context $context,
     string $chars,
   ): ?(Inline, string);
 }
