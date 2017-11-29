@@ -14,13 +14,14 @@ namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\Str;
 
 final class SoftLineBreak extends Inline {
-  const type TContent = string;
-  
+  public function __construct() {
+  }
+
   public static function consume(
     string $string,
-  ): ?(self::TNode, string) {
+  ): ?(Inline, string) {
     if ($string[0] === "\n") {
-      return tuple(self::makeNode("\n"), Str\slice($string, 1));
+      return tuple(new self(), Str\slice($string, 1));
     }
     return null;
   }

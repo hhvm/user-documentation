@@ -23,16 +23,7 @@ abstract class Inline {
     TextualContent::class,
   ];
 
-  abstract const type TContent;
-  const type TNode = (classname<Inline>, self::TContent);
-
   abstract public static function consume(
     string $chars,
-  ): ?(self::TNode, string);
-
-  protected static function makeNode(
-    this::TContent $value,
-  ): self::TNode {
-    return tuple(static::class, $value);
-  }
+  ): ?(Inline, string);
 }

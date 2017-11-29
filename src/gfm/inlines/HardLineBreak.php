@@ -14,20 +14,21 @@ namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\Str;
 
 final class HardLineBreak extends Inline {
-  const type TContent = string;
+  public function __construct() {
+  }
 
   public static function consume(
     string $string,
-  ): ?(self::TNode, string) {
+  ): ?(Inline, string) {
     if (Str\starts_with($string, "\\\n")) {
-      return tuple(self::makeNode("\\\n"), Str\slice($string, 2));
+      return tuple(new self(), Str\slice($string, 2));
     }
 
     $len = Str\length($string);
     if ($len === 1 && $string === "\\") {
-      return tuple(self::makeNode("\\"), '');
+      return tuple(new self(), '');
     }
-    
+
     for ($i = 0; $i < $len; ++$i) {
       if ($string[$i] === ' ') {
         continue;
@@ -37,10 +38,7 @@ final class HardLineBreak extends Inline {
           return null;
         }
 
-        return tuple(
-          self::makeNode(Str\slice($string, 0, $i + 1)),
-          Str\slice($string, $i),
-        );
+        return tuple(new self(), Str\slice($string, $i));
       }
       return null;
     }

@@ -14,11 +14,9 @@ namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\Str;
 
 final class AutoLink extends Inline {
-  const type TContent = string;
-
   public static function consume(
     string $string,
-  ): ?(self::TNode, string) {
+  ): ?(Inline, string) {
     return null; // FIXME
   }
 }
