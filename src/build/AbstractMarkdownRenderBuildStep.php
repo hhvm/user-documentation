@@ -10,6 +10,7 @@
  */
 
 namespace HHVM\UserDocumentation;
+use namespace Facebook\GFM;
 
 abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   abstract const string SOURCE_ROOT;
@@ -20,14 +21,34 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
   protected function renderFiles(Traversable<string> $files): Vector<string> {
     Log::i("\nRendering markdown to HTML");
-    $ret = Vector { };
-    $jobs = Map { };
+    $jobs = dict[];
 
     foreach ($files as $input) {
       $output = self::getOutputFileName($input);
       $jobs[$input] = $output;
     }
 
+    if ((bool) \getenv('FB_GFM')) {
+      Log::v('[fbgfm]');
+      $files = $jobs;
+      foreach ($jobs as $in => $out) {
+        $ast = GFM\parse(\file_get_contents($in));
+        $html = GFM\render_html($ast);
+        \file_put_contents($out, $html);
+        Log::v('.');
+      }
+    } else {
+      Log::v('[ruby]');
+      $files = $this->renderFilesWithRuby($jobs);
+    }
+
+    return new Vector($files);
+  }
+
+  protected function renderFilesWithRuby(
+    dict<string, string> $files,
+  ): vec<string> {
+    $ret = vec[];
     $pipes = [];
     $renderer = proc_open(
       self::RENDERER,
@@ -39,7 +60,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     stream_set_blocking($stdout, true);
 
     $in_progress = 0;
-    foreach ($jobs as $input => $output) {
+    foreach ($files as $input => $output) {
       if ($in_progress == self::MAX_JOBS) {
         $result = $this->parseSingleRenderResult(trim(fgets($stdout)));
         --$in_progress;
