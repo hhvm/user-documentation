@@ -9,7 +9,7 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM;
 
-abstract class LeafBlock extends Block {
+interface ASTNode {
 }

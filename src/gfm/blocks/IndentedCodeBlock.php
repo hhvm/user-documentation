@@ -11,32 +11,9 @@
 
 namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\{C, Str, Vec};
-
-final class IndentedCodeBlock extends LeafBlock {
-  public function __construct(vec<string> $lines) {
-  }
-
-  public static function consume(
-    Context $_,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    $matched = vec[];
-    foreach ($lines as $line) {
-      if (Str\starts_with($line, '    ')) {
-        $matched[] = $line;
-      } else {
-        break;
-      }
-    }
-
-    if (C\count($matched) === 0) {
-      return null;
-    }
-
-    return tuple(
-      new self($matched),
-      Vec\drop($lines, C\count($matched)),
-    );
+final class IndentedCodeBlock implements Block {
+  final public function __construct(
+    private string $code,
+  ) {
   }
 }

@@ -11,20 +11,9 @@
 
 namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\Str;
-
-final class FencedCodeBlock extends FencedBlock {
-  <<__Override>>
-  protected static function getEndPatternForFirstLine(string $first): ?string {
-    $matches = [];
-    $result = \preg_match(
-      '/^ {0,3}(?<fence>`{3,}|~{3,})( [^`]*)?$/',
-      $first,
-      $matches,
-    );
-    if ($result !== 1) {
-      return null;
-    }
-    return '/^ {0,3}'.$matches['fence'].'+ *$/';
+final class FencedCodeBlock implements Block {
+  final public function __construct(
+    private string $code,
+  ) {
   }
 }

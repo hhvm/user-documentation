@@ -11,7 +11,7 @@
 
 namespace Facebook\GFM\Inlines;
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{C, Str};
 
 final class TextualContent extends Inline {
   public function __construct(
@@ -25,15 +25,15 @@ final class TextualContent extends Inline {
   ): (Inline, string) {
     $out = $chars[0];
     $len = Str\length($chars);
-    
+
     for ($i = 1; $i < $len; ++$i) {
       $rest = Str\slice($chars, $i);
-      $result = self::parseWithBlacklist(
+      list($inlines, $_) = self::parseWithBlacklist(
         $context,
         $rest,
         /* blacklist = */ keyset[self::class],
       );
-      if ($result !== null) {
+      if (!C\is_empty($inlines)) {
         break;
       }
       $out .= $rest[0];

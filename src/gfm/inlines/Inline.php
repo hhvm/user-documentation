@@ -11,9 +11,10 @@
 
 namespace Facebook\GFM\Inlines;
 
+use type Facebook\GFM\ASTNode as ASTNode;
 use namespace HH\Lib\{C, Keyset, Str};
 
-abstract class Inline {
+abstract class Inline implements ASTNode {
   abstract public static function consume(
     Context $context,
     string $chars,
@@ -23,18 +24,20 @@ abstract class Inline {
     Context $context,
     string $markdown,
   ): vec<Inline> {
-    return self::parseWithBlacklist(
+    list($parsed, $rest) = self::parseWithBlacklist(
       $context,
       $markdown,
       keyset[],
     );
+    invariant($rest === '', "TextualContent should have taken everything");
+    return $parsed;
   }
 
   final protected static function parseWithBlacklist(
     Context $context,
     string $markdown,
     keyset<classname<Inline>> $blacklist,
-  ): vec<Inline> {
+  ): (vec<Inline>, string) {
     $types = $context->getInlineTypes();
     foreach ($blacklist as $type) {
       unset($types[$type]);
@@ -50,10 +53,12 @@ abstract class Inline {
           break;
         }
       }
-      invariant($result !== null, 'TextualContent should consume everything');
+      if ($result === null) {
+        return tuple($out, $markdown);
+      }
       list($inline, $markdown) = $result;
       $out[] = $inline;
     }
-    return $out;
+    return tuple($out, '');
   }
 }

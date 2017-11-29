@@ -11,17 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\{C, Vec};
+use type Facebook\GFM\ASTNode;
 
-final class BlankLine extends LeafBlock {
-
-  public static function consume(
-    Context $_,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    if (C\firstx($lines) !== '') {
-      return null;
-    }
-    return tuple(new self(), Vec\drop($lines, 1));
-  }
+interface Block extends ASTNode {
 }

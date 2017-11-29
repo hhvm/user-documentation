@@ -9,12 +9,15 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM\UnparsedBlocks;
 
-use namespace HH\Lib\{C, Vec};
+use type Facebook\GFM\Blocks\Heading as ASTHeading;
+use namespace Facebook\GFM\Inlines;
+
+use namespace HH\Lib\{C, Str, Vec};
 
 final class SetextHeading extends LeafBlock {
-  public function __construct(private int $level, private vec<string> $lines) {
+  public function __construct(private int $level, private string $heading) {
   }
 
   public static function consume(
@@ -31,7 +34,7 @@ final class SetextHeading extends LeafBlock {
       if (\preg_match('/^ {0,3}(?<level>=+|-+) *$/', $line, $matches) === 1) {
         $level = $matches['level'][0] === '=' ? 1 : 2;
         return tuple(
-          new self($level, Vec\take($lines, $idx)),
+          new self($level, Str\join(Vec\take($lines, $idx), "\n")),
           Vec\drop($lines, $idx + 1),
         );
       }
@@ -42,5 +45,12 @@ final class SetextHeading extends LeafBlock {
       }
     }
     return null;
+  }
+
+  public function withParsedInlines(Inlines\Context $ctx): ASTHeading {
+    return new ASTHeading(
+      $this->level,
+      Inlines\Inline::parse($ctx, $this->heading),
+    );
   }
 }

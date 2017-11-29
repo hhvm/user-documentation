@@ -9,7 +9,7 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM\UnparsedBlocks;
 
 use namespace HH\Lib\C;
 

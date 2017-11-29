@@ -11,9 +11,12 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class Document implements Block {
+use type Facebook\GFM\Inlines\Inline;
+
+final class Heading implements Block {
   final public function __construct(
-    private vec<Block> $children,
+    private int $level,
+    private vec<Inline> $heading,
   ) {
   }
 }

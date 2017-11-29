@@ -9,16 +9,20 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM\UnparsedBlocks;
 
+use type Facebook\GFM\Inlines\Context as InlineContext;
+use type Facebook\GFM\Blocks\Block as ASTBlock;
 use namespace HH\Lib\{C, Str};
 
 abstract class Block {
 
-  public abstract static function consume(
+  abstract public static function consume(
     Context $context,
     vec<string> $lines,
   ): ?(Block, vec<string>);
+
+  abstract public function withParsedInlines(InlineContext $_): ASTBlock;
 
   protected static function isParagraphContinuationText(
     Context $context,

@@ -9,11 +9,7 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM\UnparsedBlocks;
 
-final class Document implements Block {
-  final public function __construct(
-    private vec<Block> $children,
-  ) {
-  }
+abstract class LeafBlock extends Block {
 }

@@ -9,9 +9,11 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM\UnparsedBlocks;
 
 use namespace HH\Lib\{C, Str, Vec};
+use type Facebook\GFM\Blocks\Heading as ASTHeading;
+use namespace Facebook\GFM\Inlines;
 
 final class ATXHeading extends LeafBlock {
   const string PATTERN = '/^ {0,3}(?<level>#{1,6}) (?<title>.+)$/';
@@ -39,5 +41,12 @@ final class ATXHeading extends LeafBlock {
       |> Str\trim_right($$, ' ');
 
     return tuple(new self($level, $title), $rest);
+  }
+
+  public function withParsedInlines(Inlines\Context $ctx): ASTHeading {
+    return new ASTHeading(
+      $this->level,
+      Inlines\Inline::parse($ctx, $this->heading),
+    );
   }
 }

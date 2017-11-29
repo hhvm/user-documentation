@@ -11,17 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\{C, Vec};
+use type Facebook\GFM\Inlines\Inline;
 
-final class ThematicBreak extends LeafBlock {
-  public static function consume(
-    Context $_,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    $first = C\firstx($lines);
-    if (\preg_match('/^ {0,3}([-_*] *){3,}$/', $first) !== 1) {
-      return null;
-    }
-    return tuple(new self(), Vec\drop($lines, 1));
-  }
+final class ThematicBreak implements Block {
 }

@@ -11,35 +11,11 @@
 
 namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\{C, Vec};
+use type Facebook\GFM\Inlines\Inline;
 
-final class Paragraph extends LeafBlock {
-  public function __construct(
-    private vec<string> $lines,
+final class Paragraph implements Block {
+  final public function __construct(
+    private vec<Inline> $inlines,
   ) {
-  }
-
-  public static function consume(
-    Context $context,
-    vec<string> $lines,
-  ): (Paragraph, vec<string>) {
-    $matched = vec[C\firstx($lines)];
-
-    for ($idx = 1; $idx < C\count($lines); ++$idx) {
-      if ($lines[$idx] === '') {
-        break;
-      }
-      if (
-        !self::isParagraphContinuationText($context, Vec\drop($lines, $idx))
-      ) {
-        break;
-      }
-      $matched[] = $lines[$idx];
-    }
-
-    return tuple(
-      new self($matched),
-      Vec\drop($lines, C\count($matched)),
-    );
   }
 }
