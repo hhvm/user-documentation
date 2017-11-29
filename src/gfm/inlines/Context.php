@@ -18,6 +18,7 @@ final class Context {
     HardLineBreak::class,
     SoftLineBreak::class,
     CodeSpan::class,
+    DisallowedRawHTML::class,
     EntityReference::class,
     AutoLink::class,
     RawHTML::class,
