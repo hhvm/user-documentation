@@ -9,20 +9,8 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM\_Private;
 
-final class ListItem implements Block {
-  final public function __construct(
-    private ?int $number,
-    private vec<Block> $children,
-  ) {
-  }
-
-  public function getNumber(): ?int {
-    return $this->number;
-  }
-
-  public function getChildren(): vec<Block> {
-    return $this->children;
-  }
+function plain_text_to_html(string $plain): string {
+  return \htmlspecialchars($plain);
 }

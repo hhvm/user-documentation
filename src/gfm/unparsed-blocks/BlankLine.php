@@ -11,11 +11,11 @@
 
 namespace Facebook\GFM\UnparsedBlocks;
 
-use type Facebook\GFM\Blocks\Block as ASTBlock;
+use type Facebook\GFM\Blocks\BlankLine as ASTNode;
 use namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\{C, Vec};
 
-final class BlankLine extends LeafBlock implements ASTBlock {
+final class BlankLine extends LeafBlock {
 
   public static function consume(
     Context $_,
@@ -27,7 +27,7 @@ final class BlankLine extends LeafBlock implements ASTBlock {
     return tuple(new self(), Vec\drop($lines, 1));
   }
 
-  public function withParsedInlines(Inlines\Context $_ctx): this {
-    return $this;
+  public function withParsedInlines(Inlines\Context $_ctx): ASTNode {
+    return new ASTNode();
   }
 }

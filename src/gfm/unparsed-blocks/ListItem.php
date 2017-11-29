@@ -107,7 +107,6 @@ final class ListItem extends ContainerBlock {
   <<__Override>>
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
     return new ASTNode(
-      $this->delimiter,
       $this->number,
       Vec\map($this->children, $child ==> $child->withParsedInlines($ctx)),
     );

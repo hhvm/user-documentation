@@ -13,12 +13,7 @@ namespace Facebook\GFM\Inlines;
 
 use namespace HH\Lib\{C, Str};
 
-final class TextualContent extends Inline {
-  public function __construct(
-    private string $content,
-  ) {
-  }
-
+final class TextualContent extends InlineWithPlainTextContent {
   public static function consume(
     Context $context,
     string $chars,

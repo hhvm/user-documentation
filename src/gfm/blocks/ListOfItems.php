@@ -11,9 +11,19 @@
 
 namespace Facebook\GFM\Blocks;
 
+use namespace HH\Lib\C;
+
 final class ListOfItems implements Block {
   final public function __construct(
-    private vec<ListItem> $children,
+    private vec<ListItem> $items,
   ) {
+  }
+
+  public function getFirstNumber(): ?int {
+    return C\firstx($this->items)->getNumber();
+  }
+
+  public function getItems(): vec<ListItem> {
+    return $this->items;
   }
 }

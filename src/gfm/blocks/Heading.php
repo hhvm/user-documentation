@@ -19,4 +19,12 @@ final class Heading implements Block {
     private vec<Inline> $heading,
   ) {
   }
+
+  public function getLevel(): int {
+    return $this->level;
+  }
+
+  public function getHeading(): vec<Inline> {
+    return $this->heading;
+  }
 }

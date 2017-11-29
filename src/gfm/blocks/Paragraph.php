@@ -15,7 +15,11 @@ use type Facebook\GFM\Inlines\Inline;
 
 final class Paragraph implements Block {
   final public function __construct(
-    private vec<Inline> $inlines,
+    private vec<Inline> $contents,
   ) {
+  }
+
+  public function getContents(): vec<Inline> {
+    return $this->contents;
   }
 }

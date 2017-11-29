@@ -11,9 +11,5 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class FencedCodeBlock implements Block {
-  final public function __construct(
-    private string $code,
-  ) {
-  }
+final class FencedCodeBlock extends CodeBlock {
 }

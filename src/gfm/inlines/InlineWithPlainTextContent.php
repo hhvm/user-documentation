@@ -9,20 +9,15 @@
  *
  */
 
-namespace Facebook\GFM\Blocks;
+namespace Facebook\GFM\Inlines;
 
-final class ListItem implements Block {
+abstract class InlineWithPlainTextContent extends Inline {
   final public function __construct(
-    private ?int $number,
-    private vec<Block> $children,
+    private string $content,
   ) {
   }
 
-  public function getNumber(): ?int {
-    return $this->number;
-  }
-
-  public function getChildren(): vec<Block> {
-    return $this->children;
+  public function getContent(): string {
+    return $this->content;
   }
 }

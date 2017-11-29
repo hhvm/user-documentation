@@ -13,12 +13,7 @@ namespace Facebook\GFM\Inlines;
 
 use namespace HH\Lib\Str;
 
-final class DisallowedRawHTML extends Inline {
-  public function __construct(
-    private string $content,
-  ) {
-  }
-
+final class DisallowedRawHTML extends InlineWithPlainTextContent {
   public static function consume(
     Context $_,
     string $string,

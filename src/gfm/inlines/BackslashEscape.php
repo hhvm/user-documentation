@@ -13,18 +13,13 @@ namespace Facebook\GFM\Inlines;
 
 use namespace HH\Lib\{C, Str};
 
-final class BackslashEscape extends Inline {
+final class BackslashEscape extends InlineWithPlainTextContent {
   // Verbatim from the GFM spec
   const keyset<string> ASCII_PUNCTUATION = keyset[
     '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.',
     '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`',
     '{', '|', '}', '~',
   ];
-
-  public function __construct(
-    private string $content,
-  ) {
-  }
 
   public static function consume(
     Context $_,

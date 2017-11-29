@@ -16,4 +16,8 @@ final class Document implements Block {
     private vec<Block> $children,
   ) {
   }
+
+  public function getChildren(): vec<Block> {
+    return $this->children;
+  }
 }

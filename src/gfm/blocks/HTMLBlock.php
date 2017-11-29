@@ -16,4 +16,8 @@ final class HTMLBlock implements Block {
     private string $code,
   ) {
   }
+
+  public function getCode(): string {
+    return $this->code;
+  }
 }

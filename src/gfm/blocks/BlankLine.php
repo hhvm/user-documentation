@@ -11,18 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class ListItem implements Block {
-  final public function __construct(
-    private ?int $number,
-    private vec<Block> $children,
-  ) {
-  }
+use type Facebook\GFM\ASTNode;
 
-  public function getNumber(): ?int {
-    return $this->number;
-  }
-
-  public function getChildren(): vec<Block> {
-    return $this->children;
-  }
+final class BlankLine implements Block {
 }
