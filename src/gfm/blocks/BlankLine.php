@@ -9,7 +9,16 @@
  *
  */
 
-namespace Facebook\GFM\BlockParsing;
+namespace Facebook\GFM\Blocks;
 
-abstract class LeafBlock extends Block {
+use namespace HH\Lib\{C, Vec};
+
+final class BlankLine extends LeafBlock {
+
+  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+    if (C\firstx($lines) !== '') {
+      return null;
+    }
+    return tuple(new self(), Vec\drop($lines, 1));
+  }
 }

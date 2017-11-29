@@ -9,16 +9,18 @@
  *
  */
 
-namespace Facebook\GFM\BlockParsing;
+namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\{C, Vec};
+final class Document extends ContainerBlock {
+  public function __construct(
+    private vec<Node> $children,
+  ) {
+  }
 
-final class BlankLine extends LeafBlock {
-
-  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
-    if (C\firstx($lines) !== '') {
-      return null;
-    }
-    return tuple(new self(), Vec\drop($lines, 1));
+  public static function consume(vec<string> $lines): (Node, vec<string>) {
+    return tuple(
+      new self(self::consumeChildren($lines)),
+      vec[],
+    );
   }
 }

@@ -9,8 +9,7 @@
  *
  */
 
-namespace Facebook\GFM\BlockParsing;
+namespace Facebook\GFM\Blocks;
 
-
-abstract class Node {
+abstract class LeafBlock extends Block {
 }

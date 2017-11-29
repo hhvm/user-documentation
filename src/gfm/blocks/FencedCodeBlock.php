@@ -9,7 +9,7 @@
  *
  */
 
-namespace Facebook\GFM\BlockParsing;
+namespace Facebook\GFM\Blocks;
 
 use namespace HH\Lib\Str;
 
