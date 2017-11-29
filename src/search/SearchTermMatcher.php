@@ -22,6 +22,8 @@ abstract final class SearchTermMatcher {
     'map' => keyset['dict'],
     'set' => keyset['keyset'],
     'string' => keyset['str'],
+    'varray' => keyset['vec'],
+    'darray' => keyset['dict'],
   ];
 
   protected static function matchFullTerm(
