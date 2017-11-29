@@ -16,12 +16,24 @@ use namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class FencedCodeBlock extends FencedBlock {
-  const string PATTERN = '/^ {0,3}(?<fence>`{3,}|~{3,})([^`]*)?$/';
+  const string PATTERN = '/^ {0,3}(?<fence>`{3,}|~{3,})(?<info>[^`]*)?$/';
   private string $content;
+  private ?string $infoString;
 
   protected function __construct(
     vec<string> $lines,
   ) {
+    $first = C\firstx($lines);
+    $matches = [];
+    invariant(
+      \preg_match(self::PATTERN, $first, $matches) === 1,
+      'Invalid first line',
+    );
+    $info = Str\trim($matches['info'] ?? '');
+    if ($info !== '') {
+      $this->infoString = $info;
+    }
+
     $this->content = $lines
       |> Vec\slice($$, 1, C\count($lines) - 2)
       |> Str\join($$, "\n");
@@ -39,6 +51,6 @@ final class FencedCodeBlock extends FencedBlock {
 
   <<__Override>>
   public function withParsedInlines(Inlines\Context $_): ASTNode {
-    return new ASTNode($this->content);
+    return new ASTNode($this->infoString, $this->content);
   }
 }

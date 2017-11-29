@@ -13,6 +13,7 @@ namespace Facebook\GFM;
 
 use namespace HH\Lib\{C, Str, Vec};
 use function Facebook\GFM\_Private\plain_text_to_html;
+use function Facebook\GFM\_Private\plain_text_to_html_attribute;
 
 // TODO: fix namespace support in XHP, use that :'(
 function render_html(ASTNode $node): string {
@@ -33,9 +34,17 @@ function render_html(ASTNode $node): string {
       |> Str\join($$, '');
   }
 
+  // Blocks\FencedCodeBlock
+  // Blocks\IndentedCodeBlock
   if ($node instanceof Blocks\CodeBlock) {
+    $extra = '';
+    $info = $node->getInfoString();
+    if ($info !== null) {
+      $first = C\firstx(Str\split($info, ' '));
+      $extra = ' class="language-'.plain_text_to_html_attribute($first).'"';
+    }
     return plain_text_to_html($node->getCode())
-      |> '<pre><code>'.$$."\n</code></pre>";
+      |> '<pre><code'.$extra.'>'.$$."\n</code></pre>";
   }
 
   if ($node instanceof Blocks\Heading) {

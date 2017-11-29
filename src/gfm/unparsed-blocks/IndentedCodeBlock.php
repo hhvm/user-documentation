@@ -44,6 +44,6 @@ final class IndentedCodeBlock extends LeafBlock {
 
   <<__Override>>
   public function withParsedInlines(Inlines\Context $_): ASTNode {
-    return new ASTNode($this->content);
+    return new ASTNode(/* info string = */ null, $this->content);
   }
 }

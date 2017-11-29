@@ -13,8 +13,13 @@ namespace Facebook\GFM\Blocks;
 
 abstract class CodeBlock implements Block {
   final public function __construct(
+    private ?string $infoString,
     private string $code,
   ) {
+  }
+
+  final public function getInfoString(): ?string {
+    return $this->infoString;
   }
 
   final public function getCode(): string {
