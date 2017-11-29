@@ -36,7 +36,7 @@ abstract class FencedBlock extends LeafBlock {
 
     $matched = vec[$first];
 
-    foreach ($lines as $line) {
+    foreach (Vec\drop($lines, 1) as $line) {
       $matched[] = $line;
       if (\preg_match($end, $line) === 1) {
         break;

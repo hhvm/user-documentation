@@ -29,7 +29,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     }
 
     if ((bool) \getenv('FB_GFM')) {
-      Log::v('[fbgfm]');
+      Log::v(' [fbgfm] ');
       $files = $jobs;
       foreach ($jobs as $in => $out) {
         $ast = GFM\parse(\file_get_contents($in));
@@ -38,7 +38,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
         Log::v('.');
       }
     } else {
-      Log::v('[ruby]');
+      Log::v(' [ruby] ');
       $files = $this->renderFilesWithRuby($jobs);
     }
 

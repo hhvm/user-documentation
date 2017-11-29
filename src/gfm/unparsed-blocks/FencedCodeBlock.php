@@ -16,6 +16,7 @@ use namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class FencedCodeBlock extends FencedBlock {
+  const string PATTERN = '/^ {0,3}(?<fence>`{3,}|~{3,})([^`]*)?$/';
   private string $content;
 
   protected function __construct(
@@ -29,11 +30,7 @@ final class FencedCodeBlock extends FencedBlock {
   <<__Override>>
   protected static function getEndPatternForFirstLine(string $first): ?string {
     $matches = [];
-    $result = \preg_match(
-      '/^ {0,3}(?<fence>`{3,}|~{3,})( [^`]*)?$/',
-      $first,
-      $matches,
-    );
+    $result = \preg_match(self::PATTERN, $first, $matches);
     if ($result !== 1) {
       return null;
     }
