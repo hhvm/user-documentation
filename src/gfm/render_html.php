@@ -16,21 +16,33 @@ use function Facebook\GFM\_Private\plain_text_to_html;
 use function Facebook\GFM\_Private\plain_text_to_html_attribute;
 
 // TODO: fix namespace support in XHP, use that :'(
-function render_html(ASTNode $node): string {
+function render_html(RenderContext $ctx, ASTNode $node): string {
+  $nodes = $ctx->transformNode($node);
+  $count = C\count($nodes);
+  if ($count === 0) {
+    return '';
+  }
+  if ($count > 1) {
+    return $nodes
+      |> Vec\map($$, $node ==> render_html($ctx, $node))
+      |> Str\join($$, '');
+  }
+  $node = C\firstx($nodes);
+
   if ($node instanceof Blocks\BlankLine) {
     return "\n";
   }
 
   if ($node instanceof Blocks\BlockQuote) {
     return $node->getChildren()
-      |> Vec\map($$, $child ==> render_html($child))
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
       |> Str\join($$, '')
       |> '<blockquote>'.$$.'</blockquote>';
   }
 
   if ($node instanceof Blocks\Document) {
     return $node->getChildren()
-      |> Vec\map($$, $child ==> render_html($child))
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
       |> Str\join($$, '');
   }
 
@@ -50,7 +62,7 @@ function render_html(ASTNode $node): string {
   if ($node instanceof Blocks\Heading) {
     $level = $node->getLevel();
     return $node->getHeading()
-      |> Vec\map($$, $child ==> render_html($child))
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
       |> Str\join($$, '')
       |> sprintf("<h%d>%s</h%d>", $level, $$, $level);
   }
@@ -70,7 +82,7 @@ function render_html(ASTNode $node): string {
       $children = $child->getContents();
     }
     return $children
-      |> Vec\map($$, $child ==> render_html($child))
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
       |> Str\join($$, "\n")
       |> '<li>'.$$.'</li>';
   }
@@ -85,14 +97,14 @@ function render_html(ASTNode $node): string {
       $end = '</ol>';
     }
     return $node->getItems()
-      |> Vec\map($$, $item ==> render_html($item))
+      |> Vec\map($$, $item ==> render_html($ctx, $item))
       |> Str\join($$, "\n")
       |> $start."\n".$$."\n".$end."\n";
   }
 
   if ($node instanceof Blocks\Paragraph) {
     return $node->getContents()
-      |> Vec\map($$, $item ==> render_html($item))
+      |> Vec\map($$, $item ==> render_html($ctx, $item))
       |> Str\join($$, '')
       |> '<p>'.$$."</p>\n";
   }
