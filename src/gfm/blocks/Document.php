@@ -13,11 +13,11 @@ namespace Facebook\GFM\Blocks;
 
 final class Document extends ContainerBlock {
   public function __construct(
-    private vec<Node> $children,
+    private vec<Block> $children,
   ) {
   }
 
-  public static function consume(vec<string> $lines): (Node, vec<string>) {
+  public static function consume(vec<string> $lines): (Block, vec<string>) {
     return tuple(
       new self(self::consumeChildren($lines)),
       vec[],

@@ -17,7 +17,7 @@ use namespace HH\Lib\C;
 abstract class ContainerBlock extends Block {
   protected static function consumeChildren(
     vec<string> $lines,
-  ): vec<Node> {
+  ): vec<Block> {
     $children = vec[];
     while (!C\is_empty($lines)) {
       $match = null;

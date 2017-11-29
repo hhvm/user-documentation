@@ -14,7 +14,7 @@ namespace Facebook\GFM\Blocks;
 use namespace HH\Lib\{C, Vec};
 
 final class ThematicBreak extends LeafBlock {
-  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
     $first = C\firstx($lines);
     if (\preg_match('/^ {0,3}([-_*] *){3,}$/', $first) !== 1) {
       return null;

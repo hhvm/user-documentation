@@ -15,11 +15,11 @@ use namespace HH\Lib\{C, Str, Vec};
 
 final class ListOfItems extends ContainerBlock {
   public function __construct(
-    private vec<Node> $children,
+    private vec<Block> $children,
   ) {
   }
 
-  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
     $first = ListItem::consume($lines);
     if ($first === null) {
       return null;

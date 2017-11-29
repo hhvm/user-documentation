@@ -17,7 +17,7 @@ final class IndentedCodeBlock extends LeafBlock {
   public function __construct(vec<string> $lines) {
   }
 
-  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
     $matched = vec[];
     foreach ($lines as $line) {
       if (Str\starts_with($line, '    ')) {

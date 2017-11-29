@@ -17,7 +17,7 @@ final class ListItem extends ContainerBlock {
   public function __construct(
     private string $delimiter,
     private ?int $number,
-    private vec<Node> $children,
+    private vec<Block> $children,
   ) {
   }
 

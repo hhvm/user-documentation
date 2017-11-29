@@ -17,7 +17,7 @@ final class SetextHeading extends LeafBlock {
   public function __construct(private int $level, private vec<string> $lines) {
   }
 
-  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
     for ($idx = 1; $idx < C\count($lines); ++$idx) {
       $line = $lines[$idx];
       if ($line === '') {

@@ -19,7 +19,7 @@ final class ATXHeading extends LeafBlock {
   public function __construct(private int $level, private string $heading) {
   }
 
-  public static function consume(vec<string> $lines): ?(Node, vec<string>) {
+  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
     $first = C\firstx($lines);
     $rest = Vec\drop($lines, 1);
 
