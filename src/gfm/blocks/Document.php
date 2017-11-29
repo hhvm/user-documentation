@@ -20,7 +20,7 @@ final class Document extends ContainerBlock {
   public static function consume(
     Context $context,
     vec<string> $lines,
-  ): (Block, vec<string>) {
+  ): (Document, vec<string>) {
     return tuple(new self(self::consumeChildren($context, $lines)), vec[]);
   }
 }

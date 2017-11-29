@@ -20,9 +20,28 @@ final class TextualContent extends Inline {
   }
 
   public static function consume(
+    Context $context,
     string $chars,
   ): (Inline, string) {
-    invariant(!Str\is_empty($chars), "Should never be called on empty string");
-    return tuple(new self($chars[0]), Str\slice($chars, 1));
+    $out = $chars[0];
+    $len = Str\length($chars);
+    
+    for ($i = 1; $i < $len; ++$i) {
+      $rest = Str\slice($chars, $i);
+      $result = self::parseWithBlacklist(
+        $context,
+        $rest,
+        /* blacklist = */ keyset[self::class],
+      );
+      if ($result !== null) {
+        break;
+      }
+      $out .= $rest[0];
+    }
+
+    return tuple(
+      new self($out),
+      Str\slice($chars, Str\length($out)),
+    );
   }
 }

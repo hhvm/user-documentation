@@ -11,7 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\C;
+use namespace HH\Lib\{C, Str};
 
 abstract class Block {
 
@@ -32,5 +32,14 @@ abstract class Block {
       ) &&
         $block::consume($context, $lines) !== null,
     );
+  }
+
+  final public static function parse(
+    Context $context,
+    string $markdown,
+  ): Document {
+    $lines = Str\split($markdown, "\n");
+    list($document, $_) = Document::consume($context, $lines);
+    return $document;
   }
 }
