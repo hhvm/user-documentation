@@ -19,7 +19,10 @@ final class BlockQuote extends ContainerBlock {
   ) {
   }
 
-  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
+  public static function consume(
+    Context $context,
+    vec<string> $lines,
+  ): ?(Block, vec<string>) {
     $line = C\firstx($lines);
     if (\preg_match('/^ {0,3}>/', $line) !== 1) {
       return null;
@@ -40,14 +43,11 @@ final class BlockQuote extends ContainerBlock {
         continue;
       }
 
-      if (self::isParagraphContinuationText(Vec\drop($lines, $idx))) {
+      if (self::isParagraphContinuationText($context, Vec\drop($lines, $idx))) {
         $matched[] = $line;
       }
     }
     $rest = Vec\drop($lines, C\count($matched));
-    return tuple(
-      new self(self::consumeChildren($matched)),
-      $rest,
-    );
+    return tuple(new self(self::consumeChildren($context, $matched)), $rest);
   }
 }

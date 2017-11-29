@@ -25,6 +25,7 @@ abstract class FencedBlock extends LeafBlock {
   ): ?string;
 
   final public static function consume(
+    Context $_,
     vec<string> $lines,
   ): ?(Block, vec<string>) {
     $first = C\firstx($lines);

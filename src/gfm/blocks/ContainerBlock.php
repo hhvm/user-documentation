@@ -16,13 +16,14 @@ use namespace HH\Lib\C;
 
 abstract class ContainerBlock extends Block {
   protected static function consumeChildren(
+    Context $context,
     vec<string> $lines,
   ): vec<Block> {
     $children = vec[];
     while (!C\is_empty($lines)) {
       $match = null;
-      foreach (Block::PRIORITIZED_BLOCK_TYPES as $block) {
-        $match = $block::consume($lines);
+      foreach ($context->getBlockTypes() as $block) {
+        $match = $block::consume($context, $lines);
         if ($match !== null) {
           break;
         }

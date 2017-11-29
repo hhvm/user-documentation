@@ -21,7 +21,10 @@ final class LinkReferenceDefinition extends LeafBlock {
   ) {
   }
 
-  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
+  public static function consume(
+    Context $_,
+    vec<string> $lines,
+  ): ?(Block, vec<string>) {
     $first = C\firstx($lines);
     $matches = [];
     if (

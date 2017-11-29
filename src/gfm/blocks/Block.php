@@ -14,33 +14,23 @@ namespace Facebook\GFM\Blocks;
 use namespace HH\Lib\C;
 
 abstract class Block {
-  const vec<classname<Block>> PRIORITIZED_BLOCK_TYPES = vec[
-    BlankLine::class,
-    ATXHeading::class,
-    FencedCodeBlock::class,
-    HTMLBlock::class,
-    IndentedCodeBlock::class,
-    LinkReferenceDefinition::class,
-    BlockQuote::class,
-    ListOfItems::class,
-    ThematicBreak::class,
-    SetextHeading::class,
-    Paragraph::class,
-  ];
 
   public abstract static function consume(
+    Context $context,
     vec<string> $lines,
   ): ?(Block, vec<string>);
 
   protected static function isParagraphContinuationText(
+    Context $context,
     vec<string> $lines,
   ): bool {
     return !C\any(
-      Block::PRIORITIZED_BLOCK_TYPES,
-      (classname<Block> $block) ==>
-        $block !== Paragraph::class &&
-        $block !== SetextHeading::class &&
-        $block::consume($lines) !== null
+      $context->getBlockTypes(),
+      (classname<Block> $block) ==> !C\contains_key(
+        $context->getIgnoredBlockTypesForParagraphContinuation(),
+        $block,
+      ) &&
+        $block::consume($context, $lines) !== null,
     );
   }
 }

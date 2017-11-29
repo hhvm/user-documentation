@@ -29,7 +29,10 @@ final class ListItem extends ContainerBlock {
     return $this->delimiter;
   }
 
-  public static function consume(vec<string> $lines): ?(ListItem, vec<string>) {
+  public static function consume(
+    Context $context,
+    vec<string> $lines,
+  ): ?(ListItem, vec<string>) {
     $line = C\firstx($lines);
     $matches = [];
     if (
@@ -63,7 +66,8 @@ final class ListItem extends ContainerBlock {
       }
       $last_blank = false;
 
-      $maybe_thematic_break = ThematicBreak::consume(Vec\drop($lines, $idx));
+      $maybe_thematic_break =
+        ThematicBreak::consume($context, Vec\drop($lines, $idx));
       if ($maybe_thematic_break !== null) {
         break;
       }
@@ -76,8 +80,8 @@ final class ListItem extends ContainerBlock {
       // Laziness
       $line = Str\trim_left($line);
       if (!self::isParagraphContinuationText(
-        Vec\concat(
-          vec[$line],
+          $context,
+          Vec\concat(vec[$line],
           Vec\drop($lines, $idx + 1),
         ),
       )) {
@@ -93,7 +97,7 @@ final class ListItem extends ContainerBlock {
 
     $rest = Vec\drop($lines, C\count($matched));
     return tuple(
-      new self($delimiter, null, self::consumeChildren($matched)),
+      new self($delimiter, null, self::consumeChildren($context, $matched)),
       $rest,
     );
   }

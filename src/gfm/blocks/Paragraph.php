@@ -19,14 +19,19 @@ final class Paragraph extends LeafBlock {
   ) {
   }
 
-  public static function consume(vec<string> $lines): (Paragraph, vec<string>) {
+  public static function consume(
+    Context $context,
+    vec<string> $lines,
+  ): (Paragraph, vec<string>) {
     $matched = vec[C\firstx($lines)];
 
     for ($idx = 1; $idx < C\count($lines); ++$idx) {
       if ($lines[$idx] === '') {
         break;
       }
-      if (!self::isParagraphContinuationText(Vec\drop($lines, $idx))) {
+      if (
+        !self::isParagraphContinuationText($context, Vec\drop($lines, $idx))
+      ) {
         break;
       }
       $matched[] = $lines[$idx];

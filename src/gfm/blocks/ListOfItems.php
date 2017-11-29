@@ -19,8 +19,11 @@ final class ListOfItems extends ContainerBlock {
   ) {
   }
 
-  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
-    $first = ListItem::consume($lines);
+  public static function consume(
+    Context $context,
+    vec<string> $lines,
+  ): ?(Block, vec<string>) {
+    $first = ListItem::consume($context, $lines);
     if ($first === null) {
       return null;
     }
@@ -29,7 +32,7 @@ final class ListOfItems extends ContainerBlock {
     $d = $first->getDelimiter();
 
     while (!C\is_empty($lines)) {
-      $next = ListItem::consume($lines);
+      $next = ListItem::consume($context, $lines);
       if ($next === null) {
         break;
       }

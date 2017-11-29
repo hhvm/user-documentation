@@ -17,7 +17,10 @@ final class SetextHeading extends LeafBlock {
   public function __construct(private int $level, private vec<string> $lines) {
   }
 
-  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
+  public static function consume(
+    Context $context,
+    vec<string> $lines,
+  ): ?(Block, vec<string>) {
     for ($idx = 1; $idx < C\count($lines); ++$idx) {
       $line = $lines[$idx];
       if ($line === '') {
@@ -32,7 +35,9 @@ final class SetextHeading extends LeafBlock {
           Vec\drop($lines, $idx + 1),
         );
       }
-      if (!self::isParagraphContinuationText(Vec\drop($lines, $idx))) {
+      if (
+        !self::isParagraphContinuationText($context, Vec\drop($lines, $idx))
+      ) {
         return null;
       }
     }

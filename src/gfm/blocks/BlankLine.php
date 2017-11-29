@@ -15,7 +15,10 @@ use namespace HH\Lib\{C, Vec};
 
 final class BlankLine extends LeafBlock {
 
-  public static function consume(vec<string> $lines): ?(Block, vec<string>) {
+  public static function consume(
+    Context $_,
+    vec<string> $lines,
+  ): ?(Block, vec<string>) {
     if (C\firstx($lines) !== '') {
       return null;
     }
