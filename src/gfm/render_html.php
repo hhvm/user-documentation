@@ -113,7 +113,7 @@ function render_html(ASTNode $node): string {
   }
 
   if ($node instanceof Inlines\CodeSpan) {
-    // TODO
+    return '<code>'.plain_text_to_html($node->getCode()).'</code>';
   }
 
   if ($node instanceof Inlines\Emphasis) {
