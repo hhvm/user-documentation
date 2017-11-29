@@ -9,8 +9,18 @@
  *
  */
 
-namespace Facebook\GFM;
+namespace Facebook\GFM\BlockParsing;
 
+final class Document extends ContainerBlock {
+  public function __construct(
+    private vec<Node> $children,
+  ) {
+  }
 
-abstract class Node {
+  public static function consume(vec<string> $lines): (Node, vec<string>) {
+    return tuple(
+      new self(self::consumeChildren($lines)),
+      vec[],
+    );
+  }
 }

@@ -9,7 +9,7 @@
  *
  */
 
-namespace Facebook\GFM;
+namespace Facebook\GFM\BlockParsing;
 
 final class HTMLBlock extends FencedBlock {
   const string TAG_NAME = '[a-z][a-z0-9-]*';

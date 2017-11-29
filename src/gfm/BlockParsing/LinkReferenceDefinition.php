@@ -9,16 +9,17 @@
  *
  */
 
-namespace Facebook\GFM;
+namespace Facebook\GFM\BlockParsing;
 
-use namespace HH\Lib\{C, Vec};
+final class LinkReferenceDefinition extends LeafBlock {
+  public function __construct(
+    private string $label,
+    private string $destination,
+    private ?string $title,
+  ) {
+  }
 
-final class ThematicBreak extends LeafBlock {
   public static function consume(vec<string> $lines): ?(Node, vec<string>) {
-    $first = C\firstx($lines);
-    if (\preg_match('/^ {0,3}([-_*] *){3,}$/', $first) !== 1) {
-      return null;
-    }
-    return tuple(new self(), Vec\drop($lines, 1));
+    return null;
   }
 }

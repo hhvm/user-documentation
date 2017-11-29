@@ -9,17 +9,16 @@
  *
  */
 
-namespace Facebook\GFM;
+namespace Facebook\GFM\BlockParsing;
 
-final class LinkReferenceDefinition extends LeafBlock {
-  public function __construct(
-    private string $label,
-    private string $destination,
-    private ?string $title,
-  ) {
-  }
+use namespace HH\Lib\{C, Vec};
+
+final class BlankLine extends LeafBlock {
 
   public static function consume(vec<string> $lines): ?(Node, vec<string>) {
-    return null;
+    if (C\firstx($lines) !== '') {
+      return null;
+    }
+    return tuple(new self(), Vec\drop($lines, 1));
   }
 }

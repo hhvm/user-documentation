@@ -9,8 +9,8 @@
  *
  */
 
-namespace Facebook\GFM;
+namespace Facebook\GFM\BlockParsing;
 
 
-abstract class Inline extends Node {
+abstract class Node {
 }
