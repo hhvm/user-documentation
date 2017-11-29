@@ -11,6 +11,8 @@
 
 namespace Facebook\GFM;
 
+use namespace HH\Lib\C;
+
 abstract class Block extends Node {
   const vec<classname<Block>> PRIORITIZED_BLOCK_TYPES = vec[
     BlankLine::class,
@@ -19,6 +21,8 @@ abstract class Block extends Node {
     HTMLBlock::class,
     IndentedCodeBlock::class,
     LinkReferenceDefinition::class,
+    BlockQuote::class,
+    ListOfItems::class,
     ThematicBreak::class,
     SetextHeading::class,
     Paragraph::class,
@@ -27,4 +31,16 @@ abstract class Block extends Node {
   public abstract static function consume(
     vec<string> $lines,
   ): ?(Node, vec<string>);
+
+  protected static function isParagraphContinuationText(
+    vec<string> $lines,
+  ): bool {
+    return !C\any(
+      Block::PRIORITIZED_BLOCK_TYPES,
+      (classname<Block> $block) ==>
+        $block !== Paragraph::class &&
+        $block !== SetextHeading::class &&
+        $block::consume($lines) !== null
+    );
+  }
 }

@@ -32,15 +32,7 @@ final class SetextHeading extends LeafBlock {
           Vec\drop($lines, $idx + 1),
         );
       }
-
-      $matches_other_block = C\any(
-        Block::PRIORITIZED_BLOCK_TYPES,
-        (classname<Block> $block) ==>
-          $block !== Paragraph::class &&
-          $block !== SetextHeading::class &&
-          $block::consume(Vec\drop($lines, $idx)) !== null
-      );
-      if ($matches_other_block) {
+      if (!self::isParagraphContinuationText(Vec\drop($lines, $idx))) {
         return null;
       }
     }
