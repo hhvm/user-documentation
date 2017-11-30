@@ -96,7 +96,7 @@ final class ListItem extends ContainerBlock {
     }
     $rest = Vec\drop($lines, C\count($matched));
     return tuple(
-      new self($delimiter, null, self::consumeChildren($context, $matched)),
+      new self($delimiter, $number, self::consumeChildren($context, $matched)),
       $rest,
     );
   }
