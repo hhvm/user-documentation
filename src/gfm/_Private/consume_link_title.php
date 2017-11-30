@@ -14,6 +14,7 @@ namespace Facebook\GFM\_Private;
 use namespace HH\Lib\{C, Str, Vec};
 
 function consume_link_title(string $input): ?(string, string) {
+  invariant($input !== '', "Can't consume an empty string");
   $first = $input[0];
   if ($first === '"' || $first === "'") {
     return consume_quoted_link_title($input);

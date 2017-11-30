@@ -115,6 +115,10 @@ final class Link extends Inline {
 
     list($destination, $str) = $destination;
 
+    if ($str === '') {
+      return null;
+    }
+
     $str = Str\trim_left($str);
     $title = consume_link_title($str);
     if ($title !== null) {
@@ -123,6 +127,10 @@ final class Link extends Inline {
     } else {
       // make title ?string, instead of string|?(string, string)
       $title = null;
+    }
+
+    if ($str === '') {
+      return null;
     }
 
     if ($str[0] !== ')') {
