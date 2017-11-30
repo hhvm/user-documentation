@@ -17,6 +17,10 @@ final class SoftLineBreak extends Inline {
   public function __construct() {
   }
 
+  public function getContentAsPlainText(): string {
+    return "\n";
+  }
+
   public static function consume(
     Context $_,
     string $string,

@@ -19,6 +19,10 @@ final class CodeSpan extends Inline {
   ) {
   }
 
+  public function getContentAsPlainText(): string {
+    return $this->code;
+  }
+
   public static function consume(
     Context $_,
     string $string,

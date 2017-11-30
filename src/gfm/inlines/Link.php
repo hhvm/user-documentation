@@ -25,6 +25,12 @@ final class Link extends Inline {
   ) {
   }
 
+  public function getContentAsPlainText(): string {
+    return $this->text
+      |> Vec\map($$, $child ==> $child->getContentAsPlainText())
+      |> Str\join($$, '');
+  }
+
   public function getText(): vec<Inline> {
     return $this->text;
   }
@@ -40,18 +46,28 @@ final class Link extends Inline {
   public static function consume(
     Context $ctx,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Link, string) {
+    return self::consumeLinkish(
+      $ctx,
+      $string,
+      keyset[
+        CodeSpan::class,
+        AutoLink::class,
+        RawHTML::class,
+      ],
+    );
+  }
+
+  public static function consumeLinkish(
+    Context $ctx,
+    string $string,
+    keyset<classname<Inline>> $inners,
+  ): ?(Link, string) {
     if ($string[0] !== '[') {
       return null;
     }
 
     $depth = 1;
-
-    $higher_precedence = keyset[
-      CodeSpan::class,
-      AutoLink::class,
-      RawHTML::class,
-    ];
 
     $str = Str\slice($string, 1);
     $text = vec[];
@@ -77,7 +93,7 @@ final class Link extends Inline {
       }
 
       $result = null;
-      foreach ($higher_precedence as $type) {
+      foreach ($inners as $type) {
         $result = $type::consume($ctx, $orig_str);
         if ($result !== null) {
           break;

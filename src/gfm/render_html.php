@@ -141,7 +141,17 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
   }
 
   if ($node instanceof Inlines\Image) {
-    // TODO
+    $title = $node->getTitle();
+    if ($title !== null) {
+      $title = ' title="'.plain_text_to_html_attribute($title).'"';
+    }
+    $src = plain_text_to_html_attribute($node->getSource());
+    $text = $node->getDescription()
+      |> Vec\map($$, $child ==> $child->getContentAsPlainText())
+      |> Str\join($$, '');
+    $alt = ($text === '')
+      ? '' : ' alt="'.plain_text_to_html_attribute($text).'"';
+    return '<img src="'.$src.'"'.$alt.$title.' />';
   }
 
   if ($node instanceof Inlines\Link) {

@@ -20,6 +20,8 @@ abstract class Inline implements ASTNode {
     string $chars,
   ): ?(Inline, string);
 
+  abstract public function getContentAsPlainText(): string;
+
   final public static function parse(
     Context $context,
     string $markdown,

@@ -17,7 +17,11 @@ abstract class InlineWithPlainTextContent extends Inline {
   ) {
   }
 
-  public function getContent(): string {
+  final public function getContent(): string {
+    return $this->content;
+  }
+
+  final public function getContentAsPlainText(): string {
     return $this->content;
   }
 }

@@ -14,6 +14,10 @@ namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\Str;
 
 final class EntityReference extends Inline {
+  public function getContentAsPlainText(): string {
+    return '';
+  }
+
   public static function consume(
     Context $_,
     string $string,

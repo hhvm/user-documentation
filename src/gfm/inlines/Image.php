@@ -11,13 +11,62 @@
 
 namespace Facebook\GFM\Inlines;
 
-use namespace HH\Lib\Str;
+use function Facebook\GFM\_Private\{
+  consume_link_destination,
+  consume_link_title,
+};
+use namespace HH\Lib\{Str, Vec};
 
 final class Image extends Inline {
+  public function getContentAsPlainText(): string {
+    return '';
+  }
+
+  public function __construct(
+    private vec<Inline> $description,
+    private string $source,
+    private ?string $title,
+  ) {
+  }
+
+  public function getDescription(): vec<Inline> {
+    return $this->description;
+  }
+
+  public function getSource(): string {
+    return $this->source;
+  }
+
+  public function getTitle(): ?string {
+    return $this->title;
+  }
+
   public static function consume(
-    Context $_,
+    Context $context,
     string $string,
   ): ?(Inline, string) {
-    return null; // FIXME
+    if (!Str\starts_with($string, '![')) {
+      return null;
+    }
+
+    $link = Link::consumeLinkish(
+      $context,
+      Str\slice($string, 1),
+      keyset[Link::class],
+    );
+
+    if ($link === null) {
+      return null;
+    }
+
+    list($link, $rest) = $link;
+    return tuple(
+      new self(
+        $link->getText(),
+        $link->getDestination(),
+        $link->getTitle(),
+      ),
+      $rest,
+    );
   }
 }
