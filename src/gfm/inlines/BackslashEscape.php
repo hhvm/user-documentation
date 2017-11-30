@@ -23,8 +23,9 @@ final class BackslashEscape extends InlineWithPlainTextContent {
 
   public static function consume(
     Context $_,
+    string $_previous,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     if ($string[0] !== "\\") {
       return null;
     }
@@ -36,9 +37,9 @@ final class BackslashEscape extends InlineWithPlainTextContent {
 
     $next = $string[1];
     if (C\contains_key(self::ASCII_PUNCTUATION, $next)) {
-      return tuple(new self($next), Str\slice($string, 2));
+      return tuple(new self($next), "\n", Str\slice($string, 2));
     }
 
-    return tuple(new self('\\'), Str\slice($string, 1));
+    return tuple(new self('\\'), "\n", Str\slice($string, 1));
   }
 }

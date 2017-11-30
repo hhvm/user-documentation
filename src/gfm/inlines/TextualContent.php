@@ -16,26 +16,31 @@ use namespace HH\Lib\{C, Str};
 final class TextualContent extends InlineWithPlainTextContent {
   public static function consume(
     Context $context,
+    string $_last,
     string $chars,
-  ): (Inline, string) {
+  ): (Inline, string, string) {
     $out = $chars[0];
+    $last = $out;
     $len = Str\length($chars);
 
     for ($i = 1; $i < $len; ++$i) {
       $rest = Str\slice($chars, $i);
-      list($inlines, $_) = self::parseWithBlacklist(
+      list($inlines, $_, $_) = self::parseWithBlacklist(
         $context,
+        $last,
         $rest,
         /* blacklist = */ keyset[self::class],
       );
       if (!C\is_empty($inlines)) {
         break;
       }
-      $out .= $rest[0];
+      $last = $rest[0];
+      $out .= $last;
     }
 
     return tuple(
       new self($out),
+      $last,
       Str\slice($chars, Str\length($out)),
     );
   }

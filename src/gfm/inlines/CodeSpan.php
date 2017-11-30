@@ -25,8 +25,9 @@ final class CodeSpan extends Inline {
 
   public static function consume(
     Context $_,
+    string $_previous,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     if ($string[0] !== '`') {
       return null;
     }
@@ -45,6 +46,7 @@ final class CodeSpan extends Inline {
 
     return tuple(
       new self(Str\trim(Str\slice($string, $i, $end - $i))),
+      '`',
       Str\slice($string, $end + $i),
     );
   }

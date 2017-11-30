@@ -43,8 +43,9 @@ final class Image extends Inline {
 
   public static function consume(
     Context $context,
+    string $_previous,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     if (!Str\starts_with($string, '![')) {
       return null;
     }
@@ -59,13 +60,14 @@ final class Image extends Inline {
       return null;
     }
 
-    list($link, $rest) = $link;
+    list($link, $last, $rest) = $link;
     return tuple(
       new self(
         $link->getText(),
         $link->getDestination(),
         $link->getTitle(),
       ),
+      $last,
       $rest,
     );
   }

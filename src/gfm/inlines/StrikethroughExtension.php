@@ -31,8 +31,9 @@ final class StrikethroughExtension extends Inline {
 
   public static function consume(
     Context $context,
+    string $_last,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     if ($string[0] !== '~') {
       return null;
     }
@@ -51,6 +52,6 @@ final class StrikethroughExtension extends Inline {
     $matched = Str\slice($string, 0, $end_pos);
     $children = Inline::parse($context, $matched);
     $rest = Str\trim_left(Str\slice($string, $end_pos + 1), '~');
-    return tuple(new self($children), $rest);
+    return tuple(new self($children), '~', $rest);
   }
 }

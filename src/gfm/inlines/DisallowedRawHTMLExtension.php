@@ -16,12 +16,13 @@ use namespace HH\Lib\Str;
 final class DisallowedRawHTMLExtension extends InlineWithPlainTextContent {
   public static function consume(
     Context $_,
+    string $_previous,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     $matches = [];
     if (
       \preg_match(
-        '/^<(?<tag>title|textarea|style|xmp|iframe|noembed|noframes|script|'.
+        '/^<(title|textarea|style|xmp|iframe|noembed|noframes|script|'.
           'plaintext)/i',
         $string,
         $matches,
@@ -29,9 +30,10 @@ final class DisallowedRawHTMLExtension extends InlineWithPlainTextContent {
     ) {
       return null;
     }
-    $tag = '<'.$matches['tag'];
+    $tag = $matches[0];
     return tuple(
       new self($tag),
+      $tag[Str\length($tag) - 1],
       Str\strip_prefix($string, $tag),
     );
   }

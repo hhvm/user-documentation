@@ -20,8 +20,9 @@ final class EntityReference extends Inline {
 
   public static function consume(
     Context $_,
+    string $_previous,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     return null; // FIXME
   }
 }

@@ -20,8 +20,9 @@ final class RawHTML extends Inline {
 
   public static function consume(
     Context $_,
+    string $_last,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     return null; // FIXME
   }
 }

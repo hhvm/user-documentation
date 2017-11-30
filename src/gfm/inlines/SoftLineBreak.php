@@ -23,10 +23,11 @@ final class SoftLineBreak extends Inline {
 
   public static function consume(
     Context $_,
+    string $_last,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     if ($string[0] === "\n") {
-      return tuple(new self(), Str\slice($string, 1));
+      return tuple(new self(), "\n", Str\slice($string, 1));
     }
     return null;
   }

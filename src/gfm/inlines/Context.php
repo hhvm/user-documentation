@@ -16,6 +16,7 @@ use namespace HH\Lib\Str;
 final class Context {
   const keyset<classname<Inline>> ALL_INLINE_TYPES = keyset[
     AutoLink::class,
+    AutoLinkExtension::class,
     Link::class,
     HardLineBreak::class,
     SoftLineBreak::class,

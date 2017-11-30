@@ -15,8 +15,13 @@ use namespace HH\Lib\Str;
 
 final class AutoLink extends Inline {
   public function __construct(
+    private string $text,
     private string $destination,
   ) {
+  }
+
+  public function getText(): string {
+    return $this->text;
   }
 
   public function getDestination(): string {
@@ -24,13 +29,14 @@ final class AutoLink extends Inline {
   }
 
   public function getContentAsPlainText(): string {
-    return $this->destination;
+    return $this->text;
   }
 
   public static function consume(
     Context $_,
+    string $_previous,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     if ($string[0] !== '<') {
       return null;
     }
@@ -42,10 +48,13 @@ final class AutoLink extends Inline {
 
     $uri = Str\slice($string, 1, $end - 1);
     if (\preg_match('/^[a-z][a-z0-9:=.-]{1,31}:[^<> ]*$/i', $uri) !== 1) {
+      // TODO: handle email autolinks
       return null;
     }
+
     return tuple(
-      new self($uri),
+      new self($uri, $uri),
+      $string[$end],
       Str\slice($string, $end + 1),
     );
   }

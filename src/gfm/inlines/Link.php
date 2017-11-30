@@ -45,8 +45,9 @@ final class Link extends Inline {
 
   public static function consume(
     Context $ctx,
+    string $_last,
     string $string,
-  ): ?(Link, string) {
+  ): ?(Link, string, string) {
     return self::consumeLinkish(
       $ctx,
       $string,
@@ -62,7 +63,7 @@ final class Link extends Inline {
     Context $ctx,
     string $string,
     keyset<classname<Inline>> $inners,
-  ): ?(Link, string) {
+  ): ?(Link, string, string) {
     if ($string[0] !== '[') {
       return null;
     }
@@ -72,6 +73,9 @@ final class Link extends Inline {
     $str = Str\slice($string, 1);
     $text = vec[];
     $part = '';
+
+    $last = '';
+    $chr = '';
 
     while (!Str\is_empty($str)) {
       $orig_str = $str;
@@ -84,17 +88,19 @@ final class Link extends Inline {
           break;
         }
         $part .= ']';
+        $last = $chr;
         continue;
       }
       if ($chr === '[') {
         $part .= '[';
         ++$depth;
+        $last = $chr;
         continue;
       }
 
       $result = null;
       foreach ($inners as $type) {
-        $result = $type::consume($ctx, $orig_str);
+        $result = $type::consume($ctx, $last, $orig_str);
         if ($result !== null) {
           break;
         }
@@ -104,10 +110,11 @@ final class Link extends Inline {
           $text = Vec\concat($text, Inline::parse($ctx, $part));
           $part = '';
         }
-        list($next, $str) = $result;
+        list($next, $last, $str) = $result;
         $text[] = $next;
         continue;
       }
+      $last = $chr;
       $part .= $chr;
     }
 
@@ -157,6 +164,7 @@ final class Link extends Inline {
 
     return tuple(
       new self($text, $destination, $title),
+      ')',
       Str\slice($str, 1),
     );
   }

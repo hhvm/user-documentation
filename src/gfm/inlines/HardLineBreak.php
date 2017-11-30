@@ -23,15 +23,16 @@ final class HardLineBreak extends Inline {
 
   public static function consume(
     Context $_,
+    string $_previous,
     string $string,
-  ): ?(Inline, string) {
+  ): ?(Inline, string, string) {
     if (Str\starts_with($string, "\\\n")) {
-      return tuple(new self(), Str\slice($string, 2));
+      return tuple(new self(), "\n", Str\slice($string, 2));
     }
 
     $len = Str\length($string);
     if ($len === 1 && $string === "\\") {
-      return tuple(new self(), '');
+      return tuple(new self(), "\\", '');
     }
 
     for ($i = 0; $i < $len; ++$i) {
@@ -43,7 +44,7 @@ final class HardLineBreak extends Inline {
           return null;
         }
 
-        return tuple(new self(), Str\slice($string, $i));
+        return tuple(new self(), $string[$i], Str\slice($string, $i));
       }
       return null;
     }

@@ -114,11 +114,9 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
   }
 
   if ($node instanceof Inlines\AutoLink) {
-    $destination = $node->getDestination();
-    $href = plain_text_to_html_attribute($destination);
-    $label = plain_text_to_html($destination);
-    return '<a href="'.$href.'">'.$label.'</a>';
-    // TODO
+    $href = plain_text_to_html_attribute($node->getDestination());
+    $text = plain_text_to_html($node->getText());
+    return '<a href="'.$href.'">'.$text.'</a>';
   }
 
   // Inlines\BackslashEscape

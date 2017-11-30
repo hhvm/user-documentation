@@ -17,8 +17,9 @@ use namespace HH\Lib\{C, Keyset, Str};
 abstract class Inline implements ASTNode {
   abstract public static function consume(
     Context $context,
+    string $previous,
     string $chars,
-  ): ?(Inline, string);
+  ): ?(Inline, string, string);
 
   abstract public function getContentAsPlainText(): string;
 
@@ -26,8 +27,9 @@ abstract class Inline implements ASTNode {
     Context $context,
     string $markdown,
   ): vec<Inline> {
-    list($parsed, $rest) = self::parseWithBlacklist(
+    list($parsed, $_last, $rest) = self::parseWithBlacklist(
       $context,
+      '',
       $markdown,
       keyset[],
     );
@@ -37,9 +39,10 @@ abstract class Inline implements ASTNode {
 
   final protected static function parseWithBlacklist(
     Context $context,
+    string $last,
     string $markdown,
     keyset<classname<Inline>> $blacklist,
-  ): (vec<Inline>, string) {
+  ): (vec<Inline>, string, string) {
     $types = $context->getInlineTypes();
     foreach ($blacklist as $type) {
       unset($types[$type]);
@@ -50,17 +53,17 @@ abstract class Inline implements ASTNode {
     while (!Str\is_empty($markdown)) {
       $result = null;
       foreach ($types as $type) {
-        $result = $type::consume($context, $markdown);
+        $result = $type::consume($context, $last, $markdown);
         if ($result !== null) {
           break;
         }
       }
       if ($result === null) {
-        return tuple($out, $markdown);
+        return tuple($out, $last, $markdown);
       }
-      list($inline, $markdown) = $result;
+      list($inline, $last, $markdown) = $result;
       $out[] = $inline;
     }
-    return tuple($out, '');
+    return tuple($out, $last, '');
   }
 }
