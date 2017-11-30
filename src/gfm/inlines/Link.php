@@ -123,7 +123,7 @@ final class Link extends Inline {
       return null;
     }
 
-    $str = Str\trim_left(Str\slice($str, 2));
+    $str = Str\trim_left(Str\slice($str, 1));
 
     $destination = consume_link_destination($str);
 
