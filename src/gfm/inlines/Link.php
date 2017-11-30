@@ -89,10 +89,11 @@ final class Link extends Inline {
       $text = Vec\concat($text, Inline::parse($ctx, $part));
     }
 
-    if ($str[0] !== '(') {
+    if (!Str\starts_with($str, '](')) {
       return null;
     }
-    $str = Str\trim_left(Str\slice($str, 1));
+
+    $str = Str\trim_left(Str\slice($str, 2));
 
     $destination = consume_link_destination($str);
 

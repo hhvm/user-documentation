@@ -17,8 +17,7 @@ function consume_link_destination(string $input): ?(string, string) {
   if ($input[0] === '<') {
     return consume_bracketed_link_destination($input);
   }
-  return null;
-  // return consume_unbracketed_link_destination($input);
+  return consume_unbracketed_link_destination($input);
 }
 
 function consume_bracketed_link_destination(string $input): ?(string, string) {
@@ -96,6 +95,6 @@ function consume_unbracketed_link_destination(
     return null;
   }
 
-  $rest = Str\slice($input, $idx - 1) |> Str\trim_left($$);
+  $rest = Str\slice($input, $idx) |> Str\trim_left($$);
   return tuple($destination, $rest);
 }
