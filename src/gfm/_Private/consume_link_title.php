@@ -63,7 +63,7 @@ function consume_quoted_link_title(string $input): ?(string, string) {
     return null;
   }
 
-  $rest = Str\slice($input, $idx);
+  $rest = Str\slice($input, $idx + 1);
   return tuple($title, $rest);
 }
 
@@ -116,6 +116,6 @@ function consume_parenthesized_link_title(string $input): ?(string, string) {
     return null;
   }
 
-  $rest = Str\slice($input, $idx);
+  $rest = Str\slice($input, $idx + 1);
   return tuple($title, $rest);
 }
