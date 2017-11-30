@@ -14,6 +14,13 @@ namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\Str;
 
 final class Link extends Inline {
+  public function __construct(
+    private string $destination,
+    private vec<Inline> $text,
+    private ?string $title,
+  ) {
+  }
+
   public static function consume(
     Context $_,
     string $string,

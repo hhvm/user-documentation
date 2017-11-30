@@ -12,6 +12,7 @@
 namespace Facebook\GFM\UnparsedBlocks;
 
 use type Facebook\GFM\Blocks\LinkReferenceDefinition as ASTNode;
+use function Facebook\GFM\_Private\consume_link_destination;
 use namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
@@ -75,104 +76,12 @@ final class LinkReferenceDefinition extends LeafBlock {
   private static function consumeDestination(
     vec<string> $lines,
   ): ?(string, vec<string>) {
-    $first = C\firstx($lines);
-    if (Str\starts_with($first, '<')) {
-      return self::consumeAngleBracketedDestination($lines);
-    }
-    return self::consumeUnbracketedDestination($lines);
-  }
-
-  private static function consumeAngleBracketedDestination(
-    vec<string> $lines,
-  ): ?(string, vec<string>) {
-    $line = C\firstx($lines);
-    invariant($line[0] === '<', "Shouldn't be called without an angle bracket");
-    $len = Str\length($line);
-
-    $ignore_brackets = false;
-    $destination = '';
-    for ($idx = 1; $idx < $len; ++$idx) {
-      $chr = $line[$idx];
-      if ($chr === ' ') {
-        return null;
-      }
-      if (!$ignore_brackets) {
-        if ($chr === '<') {
-          return null;
-        }
-        if ($chr === '>') {
-          $rest = Str\slice($line, $idx) |> Str\trim_left($$);
-          if ($rest !== '') {
-            $lines = Vec\concat(
-              vec[$rest],
-              Vec\drop($lines, 1),
-            );
-          } else {
-            $lines = Vec\drop($lines, 1);
-          }
-          return tuple($destination, $lines);
-        }
-      }
-      if ($chr === '\\') {
-        $ignore_brackets = true;
-      } else {
-        $ignore_brackets = false;
-        $destination .= $chr;
-      }
-    }
-    return null;
-  }
-
-  private static function consumeUnbracketedDestination(
-    vec<string> $lines,
-  ): ?(string, vec<string>) {
-    $line = C\firstx($lines);
-    $len = Str\length($line);
-
-    $paren_depth = 0;
-    $escaped = false;
-    $destination = '';
-    for ($idx = 0; $idx < $len; ++$idx) {
-      $chr = $line[$idx];
-      if ($chr === ' ') {
-        break;
-      }
-
-      if ($chr === '\\') {
-        $escaped = true;
-        continue;
-      }
-      if ($chr === '(' && !$escaped) {
-        $destination .= 'chr';
-        $paren_depth++;
-        continue;
-      }
-      if ($chr === ')' && !$escaped) {
-        if ($paren_depth === 0) {
-          break;
-        }
-        $destination .= 'chr';
-        --$paren_depth;
-        continue;
-      }
-      $escaped = false;
-      $destination .= $chr;
-    }
-
-    if ($destination === '') {
+    $out = consume_link_destination(Str\join($lines, "\n"));
+    if ($out === null) {
       return null;
     }
-
-    $rest = Str\slice($line, $idx - 1) |> Str\trim_left($$);
-    if ($rest === '') {
-      $lines = Vec\drop($lines, 1);
-    } else {
-      $lines = Vec\concat(
-        vec[$rest],
-        Vec\drop($lines, 1),
-      );
-    }
-    return tuple($destination, $lines);
+    list($destination, $rest) = $out;
+    return tuple($destination, Str\split($rest, "\n"));
   }
 
   private static function consumeTitle(
