@@ -175,7 +175,10 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
   }
 
   if ($node instanceof Inlines\Strikethrough) {
-    // TODO
+    $children = $node->getChildren()
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
+      |> Str\join($$, '');
+    return '<del>'.$children.'</del>';
   }
 
   invariant_violation(
