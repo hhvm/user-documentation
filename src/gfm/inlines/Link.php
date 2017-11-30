@@ -58,7 +58,10 @@ final class Link extends Inline {
     $part = '';
 
     while (!Str\is_empty($str)) {
+      $orig_str = $str;
       $chr = $str[0];
+      $str = Str\slice($str, 1);
+
       if ($chr === ']') {
         --$depth;
         if ($depth === 0) {
@@ -75,7 +78,7 @@ final class Link extends Inline {
 
       $result = null;
       foreach ($higher_precedence as $type) {
-        $result = $type::consume($ctx, $str);
+        $result = $type::consume($ctx, $orig_str);
         if ($result !== null) {
           break;
         }
@@ -90,7 +93,6 @@ final class Link extends Inline {
         continue;
       }
       $part .= $chr;
-      $str = Str\slice($str, 1);
     }
 
     if ($depth !== 0) {

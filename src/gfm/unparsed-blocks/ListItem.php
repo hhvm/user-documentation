@@ -68,8 +68,7 @@ final class ListItem extends ContainerBlock {
       }
       $last_blank = false;
 
-      $maybe_thematic_break =
-        ThematicBreak::consume($context, Vec\drop($lines, $idx));
+      $maybe_thematic_break = ThematicBreak::consume($context, vec[$line]);
       if ($maybe_thematic_break !== null) {
         break;
       }
@@ -81,12 +80,7 @@ final class ListItem extends ContainerBlock {
 
       // Laziness
       $line = Str\trim_left($line);
-      if (!self::isParagraphContinuationText(
-          $context,
-          Vec\concat(vec[$line],
-          Vec\drop($lines, $idx + 1),
-        ),
-      )) {
+      if (!self::isParagraphContinuationText($context, vec[$line])) {
         break;
       }
 
@@ -96,7 +90,6 @@ final class ListItem extends ContainerBlock {
     if (C\lastx($matched) === '') {
       $matched = Vec\take($matched, C\count($matched) - 1);
     }
-
     $rest = Vec\drop($lines, C\count($matched));
     return tuple(
       new self($delimiter, null, self::consumeChildren($context, $matched)),

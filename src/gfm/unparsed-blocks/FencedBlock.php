@@ -43,6 +43,10 @@ abstract class FencedBlock extends LeafBlock {
       }
     }
 
+    if (C\count($matched) === 1) {
+      return null;
+    }
+
     return tuple(
       new static($matched),
       Vec\drop($lines, C\count($matched)),
