@@ -66,8 +66,6 @@ final class ListItem extends ContainerBlock {
         $last_blank = true;
         continue;
       }
-      $last_blank = false;
-
       $maybe_thematic_break = ThematicBreak::consume($context, vec[$line]);
       if ($maybe_thematic_break !== null) {
         break;
@@ -77,6 +75,12 @@ final class ListItem extends ContainerBlock {
         $matched[] = Str\strip_prefix($line, $prefix);
         continue;
       }
+
+      if ($last_blank) {
+        break;
+      }
+      $last_blank = false;
+
 
       // Laziness
       $line = Str\trim_left($line);
