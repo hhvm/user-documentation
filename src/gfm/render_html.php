@@ -145,7 +145,15 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
   }
 
   if ($node instanceof Inlines\Link) {
-    // TODO
+    $title = $node->getTitle();
+    if ($title !== null) {
+      $title = ' title="'.plain_text_to_html_attribute($title).'"';
+    }
+    $href = plain_text_to_html_attribute($node->getDestination());
+    $text = $node->getText()
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
+      |> Str\join($$, '');
+    return '<a href="'.$href.'"'.$title.'>'.$text.'</a>';
   }
 
   if ($node instanceof Inlines\RawHTML) {

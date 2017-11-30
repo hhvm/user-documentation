@@ -25,6 +25,18 @@ final class Link extends Inline {
   ) {
   }
 
+  public function getText(): vec<Inline> {
+    return $this->text;
+  }
+
+  public function getDestination(): string {
+    return $this->destination;
+  }
+
+  public function getTitle(): ?string {
+    return $this->title;
+  }
+
   public static function consume(
     Context $ctx,
     string $string,
