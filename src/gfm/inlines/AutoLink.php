@@ -32,6 +32,13 @@ final class AutoLink extends Inline {
     return $this->text;
   }
 
+  // From GFM spec
+  const string ABSOLUTE_URI_PATTERN = '/^[a-z][a-z0-9:=.-]{1,31}:[^<> ]*$/i';
+  const string EMAIL_ADDRESS_PATTERN =
+    "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9]".
+    '(?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?'.
+    '(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/';
+
   public static function consume(
     Context $_,
     string $_previous,
@@ -47,15 +54,22 @@ final class AutoLink extends Inline {
     }
 
     $uri = Str\slice($string, 1, $end - 1);
-    if (\preg_match('/^[a-z][a-z0-9:=.-]{1,31}:[^<> ]*$/i', $uri) !== 1) {
-      // TODO: handle email autolinks
-      return null;
+    if (\preg_match(self::ABSOLUTE_URI_PATTERN, $uri) === 1) {
+      return tuple(
+        new self($uri, $uri),
+        $string[$end],
+        Str\slice($string, $end + 1),
+      );
     }
 
-    return tuple(
-      new self($uri, $uri),
-      $string[$end],
-      Str\slice($string, $end + 1),
-    );
+    if (\preg_match(self::EMAIL_ADDRESS_PATTERN, $uri) === 1) {
+      return tuple(
+        new self($uri, 'mailto:'.$uri),
+        $string[$end],
+        Str\slice($string, $end + 1),
+      );
+    }
+
+    return null;
   }
 }
