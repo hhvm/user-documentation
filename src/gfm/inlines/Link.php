@@ -103,7 +103,7 @@ final class Link extends Inline {
       $text = Vec\concat($text, Inline::parse($ctx, $part));
     }
 
-    if (!Str\starts_with($str, '](')) {
+    if (!Str\starts_with($str, '(')) {
       return null;
     }
 

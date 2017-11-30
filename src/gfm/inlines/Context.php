@@ -15,16 +15,16 @@ use namespace HH\Lib\Str;
 
 final class Context {
   const keyset<classname<Inline>> ALL_INLINE_TYPES = keyset[
+    AutoLink::class,
+    Link::class,
     HardLineBreak::class,
     SoftLineBreak::class,
     CodeSpan::class,
     DisallowedRawHTML::class,
     EntityReference::class,
     Image::class,
-    Link::class,
     Emphasis::class,
     Strikethrough::class,
-    AutoLink::class,
     RawHTML::class,
     BackslashEscape::class,
     TextualContent::class,
