@@ -12,7 +12,10 @@
 namespace Facebook\GFM\UnparsedBlocks;
 
 use type Facebook\GFM\Blocks\LinkReferenceDefinition as ASTNode;
-use function Facebook\GFM\_Private\consume_link_destination;
+use function Facebook\GFM\_Private\{
+  consume_link_destination,
+  consume_link_title,
+};
 use namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
@@ -87,161 +90,12 @@ final class LinkReferenceDefinition extends LeafBlock {
   private static function consumeTitle(
     vec<string> $lines,
   ): ?(string, vec<string>) {
-    $first = C\firstx($lines);
-    if ($first === '') {
+    $out = consume_link_title(Str\join($lines, "\n"));
+    if ($out === null) {
       return null;
     }
-    $first_chr = $first[0];
-    if ($first_chr === '"' || $first_chr === "'") {
-      return self::consumeQuotedTitle($lines);
-    }
-    if ($first_chr === '(') {
-      return self::consumeParenthesizedTitle($lines);
-    }
-    return null;
-  }
-
-  private static function consumeQuotedTitle(
-    vec<string> $lines,
-  ): ?(string, vec<string>) {
-    $line_count = C\count($lines);
-    $quote = C\firstx($lines)[0];
-    invariant(
-      $quote === "'" || $quote === '"',
-      'Should not be called without a quote',
-    );
-
-    $title = '';
-    $idx = null;
-    $terminated = false;
-    for ($line_idx = 0; $line_idx < $line_count; ++$line_idx) {
-      $escaped = false;
-      $line = $lines[$line_idx];
-      if ($line === '') {
-        return null;
-      }
-      $len = Str\length($line);
-      for ($idx = 0; $idx < $len; ++$idx) {
-        $chr = $line[$idx];
-        if ($chr === $quote) {
-          if ($escaped) {
-            $title .= $chr;
-            $escaped = false;
-            continue;
-          }
-          $terminated = true;
-          break;
-        }
-
-        if ($escaped) {
-          $title .= '\\';
-        } else if ($chr === '\\') {
-          $escaped = true;
-          continue;
-        }
-        $escaped = false;
-        $title .= $chr;
-      }
-      if ($terminated) {
-        break;
-      }
-    }
-
-    if ($terminated === false) {
-      return null;
-    }
-
-    invariant($idx !== null, "Shouldn't be invoked with no lines");
-    invariant($line_idx !== $line_count, "Shouldn't reach EOF with match");
-
-    $last_matched = $lines[$line_idx];
-    $unmatched = Str\slice($last_matched, $idx + 1);
-    if (Str\trim($unmatched) === '') {
-      $lines = Vec\drop($lines, $line_idx + 1);
-    } else {
-      $lines = Vec\concat(
-        vec[$unmatched],
-        Vec\drop($lines, $line_idx + 1),
-      );
-    }
-
-    return tuple($title, $lines);
-  }
-
-  private static function consumeParenthesizedTitle(
-    vec<string> $lines,
-  ): ?(string, vec<string>) {
-    $line_count = C\count($lines);
-
-    $title = '';
-    $depth = 0;
-    $idx = null;
-    for ($line_idx = 0; $line_idx < $line_count; ++$line_idx) {
-      $line = $lines[$line_idx];
-      if ($line === '') {
-        return null;
-      }
-
-      $escaped = false;
-      $len = Str\length($line);
-      for ($idx = 0; $idx < $len; ++$idx) {
-        $chr = $line[$idx];
-        if ($chr === '(') {
-          if ($escaped) {
-            $title .= $chr;
-            $escaped = false;
-            continue;
-          }
-          ++$depth;
-          continue;
-        }
-
-        if ($chr === ')') {
-          if ($escaped) {
-            $title .= $chr;
-            $escaped = false;
-            continue;
-          }
-          --$depth;
-          if ($depth === 0) {
-            break;
-          }
-          continue;
-        }
-
-        if ($escaped) {
-          $title .= '\\';
-        } else if ($chr === '\\') {
-          $escaped = true;
-          continue;
-        }
-        $escaped = false;
-        $title .= $chr;
-      }
-      if ($depth === 0) {
-        break;
-      }
-    }
-
-    if ($depth !== 0) {
-      return null;
-    }
-
-    invariant($idx !== null, "Shouldn't be invoked with no lines");
-    invariant($line_idx !== $line_count, "Shouldn't reach EOF with depth == 0");
-
-    $last_matched = $lines[$line_idx];
-    $unmatched = Str\slice($last_matched, $idx + 1);
-    if (Str\trim($unmatched) === '') {
-      $lines = Vec\drop($lines, $line_idx + 1);
-    } else {
-      $lines = Vec\concat(
-        vec[$unmatched],
-        Vec\drop($lines, $line_idx + 1),
-      );
-    }
-
-    return tuple($title, $lines);
+    list($title, $rest) = $out;
+    return tuple($title, Str\split($rest, "\n"));
   }
 
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
