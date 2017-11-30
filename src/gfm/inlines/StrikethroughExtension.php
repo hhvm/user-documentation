@@ -13,7 +13,7 @@ namespace Facebook\GFM\Inlines;
 
 use namespace HH\Lib\{Str, Vec};
 
-final class Strikethrough extends Inline {
+final class StrikethroughExtension extends Inline {
   public function __construct(
     private vec<Inline> $children,
   ) {

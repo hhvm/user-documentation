@@ -178,7 +178,7 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
     return "\n";
   }
 
-  if ($node instanceof Inlines\Strikethrough) {
+  if ($node instanceof Inlines\StrikethroughExtension) {
     $children = $node->getChildren()
       |> Vec\map($$, $child ==> render_html($ctx, $child))
       |> Str\join($$, '');
