@@ -11,7 +11,7 @@
 
 namespace Facebook\GFM\Inlines\_Private\EmphasisStack;
 
-use type Facebook\GFM\Inlines\{Context, Inline};
+use type Facebook\GFM\Inlines\{Context, Emphasis, Inline};
 
 abstract class Node {
   abstract public function toInlines(Context $ctx): vec<Inline>;
@@ -36,12 +36,17 @@ class DelimiterNode extends TextNode {
   public function __construct(
     string $text,
     private int $flags,
+    private string $rest,
   ) {
     parent::__construct($text);
   }
 
   public function getFlags(): int {
     return $this->flags;
+  }
+
+  public function getRest(): string {
+    return $this->rest;
   }
 }
 
@@ -53,5 +58,30 @@ class InlineNode extends Node {
 
   public function toInlines(Context $_): vec<Inline> {
     return vec[$this->content];
+  }
+}
+
+class EmphasisNode extends Node {
+  public function __construct(
+    private Emphasis $content,
+    private string $last,
+    private string $rest,
+  ) {
+  }
+
+  public function getContent(): Emphasis {
+    return $this->content;
+  }
+
+  public function toInlines(Context $_): vec<Inline> {
+    return vec[$this->content];
+  }
+
+  public function getLast(): string {
+    return $this->last;
+  }
+
+  public function getRest(): string {
+    return $this->rest;
   }
 }

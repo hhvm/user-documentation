@@ -69,7 +69,11 @@ final class Emphasis extends Inline {
     }
 
     $stack = vec[
-      new Stack\DelimiterNode($start, self::IS_START),
+      new Stack\DelimiterNode(
+        $start,
+        self::IS_START,
+        $rest,
+      ),
     ];
 
     $last = $start[0];
@@ -114,8 +118,8 @@ final class Emphasis extends Inline {
             $stack[] = new Stack\TextNode($text);
             $text = '';
           }
-          $stack[] = new Stack\DelimiterNode($run, $flags);
           $rest = $new_rest;
+          $stack[] = new Stack\DelimiterNode($run, $flags, $rest);
           continue;
         }
       }
@@ -127,8 +131,6 @@ final class Emphasis extends Inline {
     if ($text !== '') {
       $stack[] = new Stack\TextNode($text);
     }
-
-    var_dump(['pre-processed', $stack]);
 
     // Modified `process_emphasis` procedure from GFM spec appendix;
     // stack is vec<delimiter|string|Inline>
@@ -193,17 +195,27 @@ final class Emphasis extends Inline {
         $mid_nodes[] = new Stack\DelimiterNode(
           $opener_text,
           $opener->getFlags(),
+          $opener->getRest(),
         );
       }
+
+      $last = $closer->getText()[0];
+      $rest = $closer->getRest().$closer_text;
+
       $mid_nodes[] =
         Vec\slice($stack, $opener_idx + 1, $closer_idx - ($opener_idx + 1))
         |> self::consumeStackSlice($context, $$)
         |> new self($strong, $$)
-        |> new Stack\InlineNode($$);
+        |> new Stack\EmphasisNode(
+          $$,
+          $last,
+          $rest,
+        );
       if ($closer_text !== '') {
         $mid_nodes[] = new Stack\DelimiterNode(
           $closer_text,
           $closer->getFlags(),
+          $closer->getRest(),
         );
       }
 
@@ -214,8 +226,16 @@ final class Emphasis extends Inline {
       );
     }
 
-    var_dump(['final', $stack]);
-    return null; // FIXME
+    $first = C\first($stack);
+    if (!$first instanceof Stack\EmphasisNode) {
+      return null;
+    }
+
+    return tuple(
+      $first->getContent(),
+      $first->getLast(),
+      $first->getRest(),
+    );
   }
 
   private static function consumeStackSlice(

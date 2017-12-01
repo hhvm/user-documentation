@@ -131,7 +131,11 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
   }
 
   if ($node instanceof Inlines\Emphasis) {
-    // TODO
+    $tag = $node->isStrong() ? 'strong' : 'em';
+    return $node->getContent()
+      |> Vec\map($$, $item ==> render_html($ctx, $item))
+      |> Str\join($$, '')
+      |> '<'.$tag.'>'.$$.'</'.$tag.'>';
   }
 
   if ($node instanceof Inlines\EntityReference) {
