@@ -169,7 +169,7 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
   }
 
   if ($node instanceof Inlines\RawHTML) {
-    // TODO
+    return $node->getContent();
   }
 
   if ($node instanceof Inlines\SoftLineBreak) {
