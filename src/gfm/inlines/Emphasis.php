@@ -167,24 +167,22 @@ final class Emphasis extends Inline {
         if ($item->getText()[0] !== $char) {
           continue;
         }
-
-        $opener = tuple($i, $item);
+        $opener = $item;
         break;
       }
+      $opener_idx = $i;
 
       if ($opener === null) {
         $openers_bottom[$char] = $position - 1;
-        if (!($closer_flags | self::IS_START)) {
-          $stack[$position] = new Stack\TextNode($closer_text);
+        if (!($closer_flags & self::IS_START)) {
+          $stack[$closer_idx] = new Stack\TextNode($closer_text);
           ++$position;
         }
         continue;
       }
 
-      list($opener_idx, $opener) = $opener;
       $opener_text = $opener->getText();
       $strong = Str\length($opener_text) > 2 && Str\length($closer_text) > 2;
-
 
       $chomp = $strong ? 2 : 1;
       $opener_text = Str\slice($opener_text, $chomp);
@@ -197,7 +195,8 @@ final class Emphasis extends Inline {
           $opener->getFlags(),
         );
       }
-      $mid_nodes[] = Vec\slice($stack, $opener_idx, $closer_idx - $opener_idx)
+      $mid_nodes[] =
+        Vec\slice($stack, $opener_idx + 1, $closer_idx - ($opener_idx + 1))
         |> self::consumeStackSlice($context, $$)
         |> new self($strong, $$)
         |> new Stack\InlineNode($$);
@@ -211,12 +210,11 @@ final class Emphasis extends Inline {
       $stack = Vec\concat(
         Vec\take($stack, $opener_idx),
         $mid_nodes,
-        Vec\slice($stack, $closer_idx),
+        Vec\drop($stack, $closer_idx + 1),
       );
     }
 
     var_dump(['final', $stack]);
-
     return null; // FIXME
   }
 
