@@ -141,8 +141,8 @@ final class Emphasis extends Inline {
       '_' => -1,
     ];
 
-    while ($position < C\count($stack)) {
-      $closer_idx = self::findCloser($stack, $position);
+    while ($position + 1 < C\count($stack)) {
+      $closer_idx = self::findCloser($stack, $position + 1);
       if ($closer_idx === null) {
         break;
       }
@@ -191,12 +191,15 @@ final class Emphasis extends Inline {
       $closer_text = Str\slice($closer_text, $chomp);
 
       $mid_nodes = vec[];
+
       if ($opener_text !== '') {
         $mid_nodes[] = new Stack\DelimiterNode(
           $opener_text,
           $opener->getFlags(),
           $opener->getRest(),
         );
+      } else {
+        $position--;
       }
 
       $last = $closer->getText()[0];
@@ -217,6 +220,8 @@ final class Emphasis extends Inline {
           $closer->getFlags(),
           $closer->getRest(),
         );
+      } else {
+        $position--;
       }
 
       $stack = Vec\concat(
