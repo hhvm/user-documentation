@@ -260,10 +260,11 @@ final class Emphasis extends Inline {
     string $delimiter,
     string $rest,
   ): bool {
-    $next = $rest[0] || null;
-    if ($next === null) {
+    if ($rest === '') {
       return false;
     }
+    $next = $rest[0];
+
     if (C\contains_key(self::WHITESPACE, $next)) {
       return false;
     }
@@ -283,7 +284,7 @@ final class Emphasis extends Inline {
     string $delimiter,
     string $rest,
   ): bool {
-    $next = $rest[0] ?? '';
+    $next = $rest === '' ? '' : $rest[0];
 
     if (C\contains_key(self::WHITESPACE, $previous)) {
       return false;
