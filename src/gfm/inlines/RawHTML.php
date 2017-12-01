@@ -34,7 +34,7 @@ final class RawHTML extends Inline {
     '('.HTMLBlock::ATTRIBUTE.')*'.
     ' *'.
     ' \\/?>';
-  const string CLOSING_TAG = '</'.HTMLBlock::TAG_NAME.' *>';
+  const string CLOSING_TAG = '<\\/'.HTMLBlock::TAG_NAME.' *>';
   const string DECLARATION = '<![A-Z]+ +[^>]+>';
 
   public static function consume(
