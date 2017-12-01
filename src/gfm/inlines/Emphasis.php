@@ -182,7 +182,7 @@ final class Emphasis extends Inline {
       }
 
       $opener_text = $opener->getText();
-      $strong = Str\length($opener_text) > 2 && Str\length($closer_text) > 2;
+      $strong = Str\length($opener_text) >= 2 && Str\length($closer_text) >= 2;
 
       $chomp = $strong ? 2 : 1;
       $opener_text = Str\slice($opener_text, $chomp);
