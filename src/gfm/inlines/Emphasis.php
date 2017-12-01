@@ -99,9 +99,9 @@ final class Emphasis extends Inline {
       }
 
       $char = $rest[0];
-      if ($char === '*' && $char === '_') {
+      if ($char === '*' || $char === '_') {
         list($run, $new_rest) = self::consumeDelimiterRun($rest);
-        $flags  = 0;
+        $flags = 0;
 
         if (self::isLeftFlankingDelimiterRun($last, $run, $new_rest)) {
           $flags |= self::IS_START;
@@ -127,6 +127,8 @@ final class Emphasis extends Inline {
     if ($text !== '') {
       $stack[] = new Stack\TextNode($text);
     }
+
+    var_dump(['pre-processed', $stack]);
 
     // Modified `process_emphasis` procedure from GFM spec appendix;
     // stack is vec<delimiter|string|Inline>
@@ -213,7 +215,7 @@ final class Emphasis extends Inline {
       );
     }
 
-    var_dump($stack);
+    var_dump(['final', $stack]);
 
     return null; // FIXME
   }
