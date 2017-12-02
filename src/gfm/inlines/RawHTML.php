@@ -45,7 +45,7 @@ final class RawHTML extends Inline {
     $matches = [];
     if (
       \preg_match(
-        '/^'.self::OPEN_TAG.'|'.self::CLOSING_TAG.'|'.self::DECLARATION.'/i',
+        '/^('.self::OPEN_TAG.'|'.self::CLOSING_TAG.'|'.self::DECLARATION.')/i',
         $string,
         $matches,
       ) === 1
