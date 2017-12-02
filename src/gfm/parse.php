@@ -11,12 +11,8 @@
 
 namespace Facebook\GFM;
 
-function parse(string $markdown): Blocks\Document {
-  return parse_with_context(new Context(), $markdown);
-}
-
-function parse_with_context(
-  Context $context,
+function parse(
+  ParserContext $context,
   string $markdown,
 ): Blocks\Document {
   return UnparsedBlocks\Block::parse($context->getBlockContext(), $markdown)

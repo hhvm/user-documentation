@@ -14,7 +14,7 @@ namespace Facebook\GFM;
 use type Facebook\GFM\UnparsedBlocks\Context as BlockContext;
 use type Facebook\GFM\Inlines\Context as InlineContext;
 
-final class Context {
+final class ParserContext {
   private BlockContext $blockContext;
   private InlineContext $inlineContext;
 

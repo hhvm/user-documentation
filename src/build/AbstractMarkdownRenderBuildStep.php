@@ -31,7 +31,9 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
     if ((bool) \getenv('FB_GFM')) {
       Log::v(' [fbgfm] ');
-      $ctx = (new GFM\RenderContext())
+      $parser_ctx = (new GFM\ParserContext())
+        ->enableHTML_UNSAFE();
+      $render_ctx = (new GFM\RenderContext())
         ->appendFilter(
           ($_ctx, $node) ==> {
             if (!$node instanceof GFM\Blocks\CodeBlock) {
@@ -43,8 +45,8 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
       $files = $jobs;
       foreach ($jobs as $in => $out) {
-        $ast = GFM\parse(\file_get_contents($in));
-        $html = GFM\render_html($ctx, $ast);
+        $ast = GFM\parse($parser_ctx, \file_get_contents($in));
+        $html = GFM\render_html($render_ctx, $ast);
         \file_put_contents($out, $html);
         Log::v('.');
       }
