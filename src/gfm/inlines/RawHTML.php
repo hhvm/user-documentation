@@ -42,6 +42,10 @@ final class RawHTML extends Inline {
     string $_last,
     string $string,
   ): ?(Inline, string, string) {
+    if (!$context->isHTMLEnabled()) {
+      return null;
+    }
+    
     $matches = [];
     if (
       \preg_match(

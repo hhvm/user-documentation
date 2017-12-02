@@ -55,6 +55,16 @@ final class HTMLBlock extends FencedBlock {
     parent::__construct($lines);
   }
 
+  public static function consume(
+    Context $context,
+    vec<string> $lines,
+  ): ?(Block, vec<string>) {
+    if (!$context->isHTMLEnabled()) {
+      return null;
+    }
+    return parent::consume($context, $lines);
+  }
+
   <<__Override>>
   public static function getEndPatternForFirstLine(string $line): ?string {
     foreach (self::PATTERNS as $start => $end) {

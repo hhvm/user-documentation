@@ -38,11 +38,11 @@ final class Context {
     return $this;
   }
 
+  public function isHTMLEnabled(): bool {
+    return $this->isHtmlEnabled;
+  }
+
   public function getInlineTypes(): keyset<classname<Inline>> {
-    $types = self::ALL_INLINE_TYPES;
-    if (!$this->isHtmlEnabled) {
-      unset($types[RawHTML::class]);
-    }
-    return $types;
+    return self::ALL_INLINE_TYPES;
   }
 }

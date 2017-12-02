@@ -35,12 +35,12 @@ final class Context {
     return $this;
   }
 
+  public function isHTMLEnabled(): bool {
+    return $this->isHtmlEnabled;
+  }
+
   public function getBlockTypes(): keyset<classname<Block>> {
-    $types = self::ALL_BLOCK_TYPES;
-    if (!$this->isHtmlEnabled) {
-      unset($types[HTMLBlock::class]);
-    }
-    return $types;
+    return self::ALL_BLOCK_TYPES;
   }
 
   public function getIgnoredBlockTypesForParagraphContinuation(

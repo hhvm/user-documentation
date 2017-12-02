@@ -24,7 +24,7 @@ abstract class FencedBlock extends LeafBlock {
     string $first,
   ): ?string;
 
-  final public static function consume(
+  public static function consume(
     Context $_,
     vec<string> $lines,
   ): ?(Block, vec<string>) {
