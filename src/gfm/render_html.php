@@ -121,6 +121,7 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
 
   // Inlines\BackslashEscape
   // Inlines\DisallowedRawHTML
+  // Inlines\EntityReference
   // Inlines\TextualContent
   if ($node instanceof Inlines\InlineWithPlainTextContent) {
     return plain_text_to_html($node->getContent());
@@ -136,10 +137,6 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
       |> Vec\map($$, $item ==> render_html($ctx, $item))
       |> Str\join($$, '')
       |> '<'.$tag.'>'.$$.'</'.$tag.'>';
-  }
-
-  if ($node instanceof Inlines\EntityReference) {
-    // TODO
   }
 
   if ($node instanceof Inlines\HardLineBreak) {
