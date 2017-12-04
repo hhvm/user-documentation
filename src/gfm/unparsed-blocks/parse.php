@@ -9,12 +9,15 @@
  *
  */
 
-namespace Facebook\GFM;
+namespace Facebook\GFM\UnparsedBlocks;
+
+use namespace HH\Lib\Str;
 
 function parse(
-  ParserContext $context,
+  Context $context,
   string $markdown,
-): Blocks\Document {
-  return UnparsedBlocks\parse($context->getBlockContext(), $markdown)
-    ->withParsedInlines($context->getInlineContext());
+): Document {
+  $lines = Str\split($markdown, "\n");
+  list($document, $_) = Document::consume($context, $lines);
+  return $document;
 }

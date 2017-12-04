@@ -39,7 +39,7 @@ final class SetextHeading extends LeafBlock {
         );
       }
       if (
-        !self::isParagraphContinuationText($context, Vec\drop($lines, $idx))
+        !_Private\is_paragraph_continuation_text($context, Vec\drop($lines, $idx))
       ) {
         return null;
       }

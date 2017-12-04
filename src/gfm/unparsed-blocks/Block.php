@@ -23,27 +23,4 @@ abstract class Block {
   ): ?(Block, vec<string>);
 
   abstract public function withParsedInlines(InlineContext $_): ASTBlock;
-
-  protected static function isParagraphContinuationText(
-    Context $context,
-    vec<string> $lines,
-  ): bool {
-    return !C\any(
-      $context->getBlockTypes(),
-      (classname<Block> $block) ==> !C\contains_key(
-        $context->getIgnoredBlockTypesForParagraphContinuation(),
-        $block,
-      ) &&
-        $block::consume($context, $lines) !== null,
-    );
-  }
-
-  final public static function parse(
-    Context $context,
-    string $markdown,
-  ): Document {
-    $lines = Str\split($markdown, "\n");
-    list($document, $_) = Document::consume($context, $lines);
-    return $document;
-  }
 }

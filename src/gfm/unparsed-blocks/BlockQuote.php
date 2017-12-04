@@ -45,7 +45,7 @@ final class BlockQuote extends ContainerBlock {
         continue;
       }
 
-      if (self::isParagraphContinuationText($context, Vec\drop($lines, $idx))) {
+      if (_Private\is_paragraph_continuation_text($context, Vec\drop($lines, $idx))) {
         $matched[] = $line;
       }
     }

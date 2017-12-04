@@ -84,7 +84,7 @@ final class ListItem extends ContainerBlock {
 
       // Laziness
       $line = Str\trim_left($line);
-      if (!self::isParagraphContinuationText($context, vec[$line])) {
+      if (!_Private\is_paragraph_continuation_text($context, vec[$line])) {
         break;
       }
 
