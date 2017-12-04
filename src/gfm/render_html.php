@@ -33,6 +33,12 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
     return "\n";
   }
 
+  if ($node instanceof Blocks\BlockSequence) {
+    return $node->getChildren()
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
+      |> Str\join($$, "\n");
+  }
+
   if ($node instanceof Blocks\BlockQuote) {
     return $node->getChildren()
       |> Vec\map($$, $child ==> render_html($ctx, $child))

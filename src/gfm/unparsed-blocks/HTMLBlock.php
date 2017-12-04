@@ -46,13 +46,13 @@ final class HTMLBlock extends FencedBlock {
     '/^<\\/'.self::TAG_NAME.' *> *$/' => '/^$/',
   ];
 
-  protected string $content;
-
-  protected function __construct(
-    vec<string> $lines,
+  public function __construct(
+    private string $content,
   ) {
-    $this->content = Str\join($lines, "\n");
-    parent::__construct($lines);
+  }
+
+  protected static function createFromLines(vec<string> $lines): this {
+    return new self(Str\join($lines, "\n"));
   }
 
   public static function consume(

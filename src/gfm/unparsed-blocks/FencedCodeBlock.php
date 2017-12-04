@@ -17,12 +17,16 @@ use namespace HH\Lib\{C, Str, Vec};
 
 final class FencedCodeBlock extends FencedBlock {
   const string PATTERN = '/^ {0,3}(?<fence>`{3,}|~{3,})(?<info>[^`]*)?$/';
-  private string $content;
-  private ?string $infoString;
 
   public function __construct(
-    vec<string> $lines,
+    private string $content,
+    private ?string $infoString,
   ) {
+  }
+
+  protected static function createFromLines(
+    vec<string> $lines,
+  ): this {
     $first = C\firstx($lines);
     $matches = [];
     invariant(
@@ -30,15 +34,16 @@ final class FencedCodeBlock extends FencedBlock {
       'Invalid first line',
     );
     $info = Str\trim($matches['info'] ?? '');
-    if ($info !== '') {
-      $this->infoString = $info;
+    if ($info === '') {
+      $info = null;
     }
 
-    $this->content = $lines
+    $content = $lines
       |> Vec\slice($$, 1, C\count($lines) - 2)
       |> Str\join($$, "\n");
-    parent::__construct($lines);
+    return new self($content, $info);
   }
+
   <<__Override>>
   protected static function getEndPatternForFirstLine(string $first): ?string {
     $matches = [];

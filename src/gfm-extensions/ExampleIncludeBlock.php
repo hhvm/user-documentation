@@ -55,18 +55,17 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
     }
 
 
-    if (!\file_exists($file)) {
-      var_dump([$first, $file]);
-      return null;
-    }
+    invariant(
+      \file_exists($file),
+      'failed to find file %s, referenced by %s',
+      $file,
+      $context->getFilePath(),
+    );
 
     return tuple(
-      new UnparsedBlocks\FencedCodeBlock(
-        vec[
-          '```hack',
-          \file_get_contents($file),
-          '```',
-        ],
+      UnparsedBlocks\BlockSequence::flatten(
+        self::getExampleBlock($file),
+        self::getOutputBlock($file),
       ),
       Vec\drop($lines, 1),
     );
@@ -76,5 +75,45 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
     Inlines\Context $_,
   ): \Facebook\GFM\Blocks\Block {
     invariant_violation('should never be called');
+  }
+
+  private static function getExampleBlock(string $file): UnparsedBlocks\Block {
+    return new UnparsedBlocks\FencedCodeBlock(
+      \file_get_contents($file),
+      'Hack',
+    );
+  }
+  private static function getOutputBlock(string $file): ?UnparsedBlocks\Block {
+    if (\file_exists($file.'.no.auto.output')) {
+      return null;
+    }
+
+    $out = $file.'.example.hhvm.out';
+    $expect = $file.'.hhvm.expect';
+
+    $out_exists = \file_exists($out);
+    $expect_exists = \file_exists($expect);
+
+    invariant(
+      !($out_exists && $expect_exists),
+      'both %s and %s exist.',
+      $out, $expect,
+    );
+
+    invariant(
+      $out_exists || $expect_exists || Str\contains($file, '.inc.php'),
+      'none of %s, %s, or %s exist.',
+      $out, $expect, $file.'.no.auto.output',
+    );
+    if (!($out_exists || $expect_exists)) {
+      return null;
+    }
+
+    $out = $out_exists ? $out : $expect;
+
+    return UnparsedBlocks\BlockSequence::flatten(
+      new UnparsedBlocks\HTMLBlock('<em>Output</em>'),
+      new UnparsedBlocks\FencedCodeBlock(\file_get_contents($out), null),
+    );
   }
 }

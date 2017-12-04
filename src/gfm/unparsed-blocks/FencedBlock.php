@@ -13,12 +13,8 @@ namespace Facebook\GFM\UnparsedBlocks;
 
 use namespace HH\Lib\{C, Vec};
 
-<<__ConsistentConstruct>>
 abstract class FencedBlock extends LeafBlock {
-  protected function __construct(
-    vec<string> $lines,
-  ) {
-  }
+  protected abstract static function createFromLines(vec<string> $lines): this;
 
   protected abstract static function getEndPatternForFirstLine(
     string $first,
@@ -48,7 +44,7 @@ abstract class FencedBlock extends LeafBlock {
     }
 
     return tuple(
-      new static($matched),
+      static::createFromLines($matched),
       Vec\drop($lines, C\count($matched)),
     );
   }
