@@ -20,7 +20,7 @@ final class FencedCodeBlock extends FencedBlock {
   private string $content;
   private ?string $infoString;
 
-  protected function __construct(
+  public function __construct(
     vec<string> $lines,
   ) {
     $first = C\firstx($lines);

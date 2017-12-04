@@ -33,6 +33,10 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
       Log::v(' [fbgfm] ');
       $parser_ctx = (new GFM\ParserContext())
         ->enableHTML_UNSAFE();
+
+      $parser_ctx->getBlockContext()
+        ->prependBlockType(namespace\GFM\ExamplesIncludeBlock::class);
+
       $render_ctx = (new GFM\RenderContext())
         ->appendFilter(
           ($_ctx, $node) ==> {
@@ -45,6 +49,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
       $files = $jobs;
       foreach ($jobs as $in => $out) {
+        $parser_ctx->getBlockContext()->setFilePath($in);
         $ast = GFM\parse($parser_ctx, \file_get_contents($in));
         $html = GFM\render_html($render_ctx, $ast);
         \file_put_contents($out, $html);

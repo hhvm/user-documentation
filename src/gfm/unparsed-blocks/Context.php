@@ -29,6 +29,32 @@ final class Context {
     Paragraph::class,
   ];
 
+  private keyset<classname<Block>> $blockTypes;
+
+  public function __construct() {
+    $this->blockTypes = self::ALL_BLOCK_TYPES;
+  }
+
+  public function prependBlockType(classname<Block> $block): this {
+    return $this->prependBlockTypes(keyset[$block]);
+  }
+
+  public function prependBlockTypes(keyset<classname<Block>> $blocks): this {
+    $this->blockTypes = Keyset\union($blocks, $this->blockTypes);
+    return $this;
+  }
+
+  private ?string $file;
+
+  public function setFilePath(string $file): this {
+    $this->file = $file;
+    return $this;
+  }
+
+  public function getFilePath(): ?string {
+    return $this->file;
+  }
+
   private bool $isHtmlEnabled = false;
 
   public function enableHTML_UNSAFE(): this {
@@ -41,7 +67,7 @@ final class Context {
   }
 
   public function getBlockTypes(): keyset<classname<Block>> {
-    return self::ALL_BLOCK_TYPES;
+    return $this->blockTypes;
   }
 
   public function getIgnoredBlockTypesForParagraphContinuation(
