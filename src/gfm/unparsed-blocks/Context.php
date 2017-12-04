@@ -15,6 +15,7 @@ use namespace HH\Lib\Keyset;
 
 final class Context {
   const keyset<classname<Block>> ALL_BLOCK_TYPES = keyset[
+    TableExtension::class,
     BlankLine::class,
     ATXHeading::class,
     FencedCodeBlock::class,

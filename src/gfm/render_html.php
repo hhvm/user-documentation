@@ -109,6 +109,49 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
       |> '<p>'.$$."</p>\n";
   }
 
+  if ($node instanceof Blocks\TableExtension) {
+    $html = "<table>\n<thead>\n<tr>\n";
+
+    $alignments = $node->getColumnAlignments();
+    $header = $node->getHeader();
+    for ($i = 0; $i < C\count($header); ++$i) {
+      $cell = $header[$i];
+      $alignment = $alignments[$i];
+      if ($alignment !== null) {
+        $alignment = ' align="'.$alignment.'"';
+      }
+      $html .=
+        '<th'.$alignment.'>'.
+        Str\join(Vec\map($cell, $cell ==> render_html($ctx, $cell)), '').
+        "</th>\n";
+    }
+    $html .= '</thead>';
+
+    $data = $node->getData();
+    if (C\is_empty($data)) {
+      return $html."</table>\n";
+    }
+    $html .= "\n<tbody>";
+
+    foreach ($data as $row) {
+      $html .= "\n<tr>";
+      for ($i = 0; $i < C\count($header); ++$i) {
+        $cell = $row[$i];
+        $alignment = $alignments[$i];
+        if ($alignment !== null) {
+          $alignment = ' align="'.$alignment.'"';
+        }
+
+        $html .=
+          "\n<td".$alignment.'>'.
+          Str\join(Vec\map($cell, $cell ==> render_html($ctx, $cell)), '').
+          "</td>";
+      }
+      $html .= "\n</tr>";
+    }
+    return $html.'</tbody></table>';
+  }
+
   if ($node instanceof Blocks\ThematicBreak) {
     return "<hr />\n";
   }
