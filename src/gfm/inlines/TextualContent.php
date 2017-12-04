@@ -25,7 +25,7 @@ final class TextualContent extends InlineWithPlainTextContent {
 
     for ($i = 1; $i < $len; ++$i) {
       $rest = Str\slice($chars, $i);
-      list($inlines, $_, $_) = self::parseWithBlacklist(
+      list($inlines, $_, $_) = _Private\parse_with_blacklist(
         $context,
         $last,
         $rest,

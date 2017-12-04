@@ -11,7 +11,8 @@
 
 namespace Facebook\GFM\Inlines\_Private\EmphasisStack;
 
-use type Facebook\GFM\Inlines\{Context, Emphasis, Inline};
+use namespace Facebook\GFM\Inlines;
+use type Facebook\GFM\Inlines\{Context, Inline};
 
 abstract class Node {
   abstract public function toInlines(Context $ctx): vec<Inline>;
@@ -28,7 +29,7 @@ class TextNode extends Node {
   }
 
   public function toInlines(Context $ctx): vec<Inline> {
-    return Inline::parse($ctx, $this->getText());
+    return Inlines\parse($ctx, $this->getText());
   }
 }
 
@@ -63,13 +64,13 @@ class InlineNode extends Node {
 
 class EmphasisNode extends Node {
   public function __construct(
-    private Emphasis $content,
+    private Inlines\Emphasis $content,
     private string $last,
     private string $rest,
   ) {
   }
 
-  public function getContent(): Emphasis {
+  public function getContent(): Inlines\Emphasis {
     return $this->content;
   }
 

@@ -107,7 +107,7 @@ final class Link extends Inline {
       }
       if ($result !== null) {
         if ($part !== '') {
-          $text = Vec\concat($text, Inline::parse($ctx, $part));
+          $text = Vec\concat($text, parse($ctx, $part));
           $part = '';
         }
         list($next, $last, $str) = $result;
@@ -123,7 +123,7 @@ final class Link extends Inline {
     }
 
     if ($part !== '') {
-      $text = Vec\concat($text, Inline::parse($ctx, $part));
+      $text = Vec\concat($text, parse($ctx, $part));
     }
 
     if (!Str\starts_with($str, '(')) {

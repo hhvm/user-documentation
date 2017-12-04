@@ -50,7 +50,7 @@ final class StrikethroughExtension extends Inline {
     }
 
     $matched = Str\slice($string, 0, $end_pos);
-    $children = Inline::parse($context, $matched);
+    $children = parse($context, $matched);
     $rest = Str\trim_left(Str\slice($string, $end_pos + 1), '~');
     return tuple(new self($children), '~', $rest);
   }

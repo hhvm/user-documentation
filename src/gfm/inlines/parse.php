@@ -11,15 +11,16 @@
 
 namespace Facebook\GFM\Inlines;
 
-use type Facebook\GFM\ASTNode as ASTNode;
-use namespace HH\Lib\{C, Keyset, Str};
-
-abstract class Inline implements ASTNode {
-  abstract public static function consume(
+function parse(
     Context $context,
-    string $previous,
-    string $chars,
-  ): ?(Inline, string, string);
-
-  abstract public function getContentAsPlainText(): string;
+    string $markdown,
+  ): vec<Inline> {
+  list($parsed, $_last, $rest) = _Private\parse_with_blacklist(
+    $context,
+    '',
+    $markdown,
+    keyset[],
+  );
+  invariant($rest === '', "TextualContent should have taken everything");
+  return $parsed;
 }

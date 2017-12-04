@@ -164,11 +164,11 @@ final class TableExtension extends LeafBlock {
 
   public function withParsedInlines(Inlines\Context $context): ASTTableExtension {
     return new ASTTableExtension(
-      Vec\map($this->header, $cell ==> Inlines\Inline::parse($context, $cell)),
+      Vec\map($this->header, $cell ==> Inlines\parse($context, $cell)),
       $this->alignments,
       Vec\map(
         $this->data,
-        $row ==> Vec\map($row, $cell ==> Inlines\Inline::parse($context, $cell)),
+        $row ==> Vec\map($row, $cell ==> Inlines\parse($context, $cell)),
       ),
     );
   }

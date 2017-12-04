@@ -101,7 +101,7 @@ final class LinkReferenceDefinition extends LeafBlock {
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
     $title = $this->title;
     if ($title !== null) {
-      $title = Inlines\Inline::parse($ctx, $title);
+      $title = Inlines\parse($ctx, $title);
     } else {
       // No-op, but avoids null|string|vec<Inline> type
       $title = null;

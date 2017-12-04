@@ -46,6 +46,6 @@ final class Paragraph extends LeafBlock {
   }
 
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
-    return new ASTNode(Inlines\Inline::parse($ctx, $this->content));
+    return new ASTNode(Inlines\parse($ctx, $this->content));
   }
 }

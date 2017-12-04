@@ -50,7 +50,7 @@ final class SetextHeading extends LeafBlock {
   public function withParsedInlines(Inlines\Context $ctx): ASTHeading {
     return new ASTHeading(
       $this->level,
-      Inlines\Inline::parse($ctx, $this->heading),
+      Inlines\parse($ctx, $this->heading),
     );
   }
 }
