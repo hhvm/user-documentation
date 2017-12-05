@@ -1,5 +1,7 @@
 require 'colorize'
 
+# REIMPLEMENTED IN HACK PIPLEINE
+
 module HHVM
   module UserDocumentation
     class IncludeExamplesFilter < HTML::Pipeline::Filter

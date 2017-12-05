@@ -1,6 +1,8 @@
 require 'yaml'
 require 'html/pipeline'
 
+# REIMPLEMENTED IN HACK PIPLEINE
+
 module HHVM
   module UserDocumentation
     class YAMLFrontMatterFilter < HTML::Pipeline::Filter

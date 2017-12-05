@@ -1,5 +1,7 @@
 require 'json'
 
+# REIMPLEMENTED IN HACK PIPELINE
+
 module HHVM
   module UserDocumentation
     class AutoLinkifyAPIFilter < HTML::Pipeline::Filter
