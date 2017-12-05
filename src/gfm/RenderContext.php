@@ -18,10 +18,7 @@ use type Facebook\GFM\Blocks\Document as Document;
 use namespace HH\Lib\Vec;
 
 class RenderContext {
-  const type TFilter = (function(RenderContext, ASTNode): bool);
-  const type TTransform = (function(RenderContext, ASTNode): vec<ASTNode>);
-
-  private vec<self::TTransform> $transformations = vec[];
+  private vec<RenderFilter> $filters = vec[];
 
   private ?Document $document;
 
@@ -46,27 +43,23 @@ class RenderContext {
   }
 
   public function resetFileData(): this {
+    foreach ($this->filters as $filter) {
+      $filter->resetFileData();
+    }
     $this->document = null;
     return $this;
   }
 
-  public function appendFilter(self::TFilter $filter): this {
-    $this->appendTransformation(
-      ($ctx, $node) ==> $filter($ctx, $node) ? vec[$node] : vec[],
-    );
-    return $this;
-  }
-
-  public function appendTransformation(self::TTransform $transform): this {
-    $this->transformations[] = $transform;
+  public function appendFilters(RenderFilter ...$filters): this {
+    $this->filters = Vec\concat($this->filters, $filters);
     return $this;
   }
 
   public function transformNode(ASTNode $node): vec<ASTNode> {
     $nodes = vec[$node];
-    foreach ($this->transformations as $transform) {
+    foreach ($this->filters as $filter) {
       $nodes = $nodes
-        |> Vec\map($$, $node ==> $transform($this, $node))
+        |> Vec\map($$, $node ==> $filter->filter($this, $node))
         |> Vec\flatten($$);
     }
     return $nodes;

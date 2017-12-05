@@ -10,7 +10,7 @@
  */
 
 namespace HHVM\UserDocumentation;
-use namespace Facebook\GFM;
+use namespace Facebook\GFM as FBMarkdown;
 
 abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   abstract const string SOURCE_ROOT;
@@ -31,21 +31,22 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
     if ((bool) \getenv('FB_GFM')) {
       Log::v(' [fbgfm] ');
-      $parser_ctx = (new GFM\ParserContext())
+      $parser_ctx = (new FBMarkdown\ParserContext())
         ->setBlockContext(
-          (new namespace\GFM\BlockContext())
+          (new GFM\BlockContext())
             ->prependBlockTypes(
-              namespace\GFM\YamlFrontMatterBlock::class,
-              namespace\GFM\ExamplesIncludeBlock::class,
+              GFM\YamlFrontMatterBlock::class,
+              GFM\ExamplesIncludeBlock::class,
             )
         )
         ->enableHTML_UNSAFE();
       $parser_ctx->getInlineContext()->prependInlineTypes(
-        namespace\GFM\AutoLinkifyInline::class,
+        GFM\AutoLinkifyInline::class,
       );
-      $render_ctx = (new GFM\RenderContext())
-        ->appendTransformation(
-          ($_ctx, $node) ==> namespace\GFM\versioned_images($node),
+      $render_ctx = (new FBMarkdown\RenderContext())
+        ->appendFilters(
+          new GFM\HeadingAnchorsFilter(),
+          new GFM\VersionedImagesFilter(),
         );
 
       $files = $jobs;
@@ -53,9 +54,10 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
         $parser_ctx
           ->resetFileData()
           ->setFilePath($in);
-        $ast = GFM\parse($parser_ctx, \file_get_contents($in));
-        $html = (new GFM\HTMLRenderer())->render($render_ctx, $ast);
-        \file_put_contents($out, $html);
+        $doc = FBMarkdown\parse($parser_ctx, \file_get_contents($in));
+        invariant($doc !== null, 'transform should not null the doc');
+        $html = (new FBMarkdown\HTMLRenderer())->render($render_ctx, $doc);
+        \file_put_contents($out, '<!-- fbgfm -->'.$html);
         Log::v('.');
       }
     } else {
