@@ -28,7 +28,11 @@ class HTMLRenderer {
         |> Vec\map($$, $node ==> $this->render($ctx, $node))
         |> Str\join($$, '');
     }
-    $node = C\firstx($nodes);
+    $node = C\onlyx($nodes);
+
+    if ($node instanceof RenderableAsHTML) {
+      return $node->renderAsHTML($ctx, $this);
+    }
 
     if ($node instanceof Blocks\BlankLine) {
       return "\n";
