@@ -26,7 +26,7 @@ final class EntityReference extends InlineWithPlainTextContent {
     $matches = [];
     if (
       \preg_match(
-        '/^&([0-9]{1,8}|#X[0-9a-f]{1,8}|[a-z]+);$/i',
+        '/^&([0-9]{1,8}|#X[0-9a-f]{1,8}|[a-z]+);/i',
         $string,
         $matches,
       ) !== 1
