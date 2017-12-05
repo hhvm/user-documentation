@@ -48,6 +48,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
         ->appendFilters(
           new MarkdownExt\HeadingAnchorsFilter(),
           new MarkdownExt\VersionedImagesFilter(),
+          new MarkdownExt\InternalMarkdownLinksFilter(),
         );
 
       $files = $jobs;
