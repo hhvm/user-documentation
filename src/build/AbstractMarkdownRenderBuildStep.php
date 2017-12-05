@@ -29,7 +29,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     }
 
 
-    if ((bool) \getenv('FB_MarkdownExt')) {
+    if ((bool) \getenv('FB_GFM')) {
       Log::v(' [fbgfm] ');
       $parser_ctx = (new Markdown\ParserContext())
         ->setBlockContext(
