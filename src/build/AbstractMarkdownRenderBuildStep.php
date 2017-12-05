@@ -54,7 +54,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
           ->resetFileData()
           ->setFilePath($in);
         $ast = GFM\parse($parser_ctx, \file_get_contents($in));
-        $html = GFM\render_html($render_ctx, $ast);
+        $html = (new GFM\HTMLRenderer())->render($render_ctx, $ast);
         \file_put_contents($out, $html);
         Log::v('.');
       }

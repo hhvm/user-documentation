@@ -14,7 +14,7 @@ namespace Facebook\GFM\Inlines;
 use type Facebook\GFM\ASTNode as ASTNode;
 use namespace HH\Lib\{C, Keyset, Str};
 
-abstract class Inline implements ASTNode {
+abstract class Inline extends ASTNode {
   abstract public static function consume(
     Context $context,
     string $previous,

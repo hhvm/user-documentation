@@ -11,5 +11,5 @@
 
 namespace Facebook\GFM;
 
-interface ASTNode {
+abstract class ASTNode {
 }

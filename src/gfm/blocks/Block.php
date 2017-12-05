@@ -13,5 +13,5 @@ namespace Facebook\GFM\Blocks;
 
 use type Facebook\GFM\ASTNode;
 
-abstract class Block implements ASTNode {
+abstract class Block extends ASTNode {
 }
