@@ -164,7 +164,7 @@ EOF;
         $name.
         '`<code class="methodListSignature">'.
         $generics.$params.$return_type.
-        '</span>]('.$method_url.') ';
+        '</code>]('.$method_url.') ';
 
       $comment = $method['docComment'];
       if ($comment !== null) {
