@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation\GFM;
 
-use type HHVM\UserDocumentation\BuildPaths;
+use type HHVM\UserDocumentation\{BuildPaths, YAMLMeta};
 
 use namespace Facebook\GFM\Inlines;
 use namespace Facebook\TypeAssert;
@@ -41,20 +41,48 @@ final class AutoLinkifyInline extends Inlines\Link {
     list($quoted, $last, $rest) = $result;
 
     $content = $quoted->getCode();
+    if ($content === null) {
+      return null;
+    }
+    if (Str\contains($content, ' ')) {
+      return null;
+    }
+    if (Str\starts_with($content, '$')) {
+      return null;
+    }
+
     $matches = [];
     if (\preg_match('/^[^(<]+/', $content, $matches) !== 1) {
       return null;
     }
     $definition = (string) $matches[0];
 
-    $to_try = vec[
+    $block_context = $context->getBlockContext();
+    invariant(
+      $block_context instanceof BlockContext,
+      'Expected block context to be a %s',
+      BlockContext::class,
+    );
+    $meta = $block_context->getYamlMeta();
+
+    if ($definition === ($meta['name'] ?? null)) {
+      return null;
+    }
+
+    $method = self::getMethodTarget($meta, $definition);
+
+    $to_try = Vec\filter_nulls(vec[
+      $method,
       $definition,
       "HH\\".$definition,
+      "HH\\".$method,
       "HH\\Lib\\".$definition,
-    ];
+      "HH\\Lib\\".$method,
+    ]);
 
 
     $index = self::getIndex();
+
 
     foreach ($to_try as $def) {
       $target = $index[$def] ?? null;
@@ -67,14 +95,17 @@ final class AutoLinkifyInline extends Inlines\Link {
       }
     }
 
-    $block_context = $context->getBlockContext();
-    invariant(
-      $block_context instanceof BlockContext,
-      'Expected block context to be a %s',
-      BlockContext::class,
-    );
-    $yaml = $block_context->getYamlMeta();
+    return null;
+  }
+
+  private static function getMethodTarget(
+    ?YAMLMeta $yaml,
+    string $def,
+  ): ?string {
     if ($yaml === null) {
+      return null;
+    }
+    if (Str\contains($def, '::')) {
       return null;
     }
     $class = $yaml['class'] ?? null;
@@ -82,17 +113,7 @@ final class AutoLinkifyInline extends Inlines\Link {
       return null;
     }
 
-    $def = $class.'::'.Str\strip_prefix($definition, '::');
-    $target = $index[$def] ?? null;
-    if ($target === null) {
-      return null;
-    }
-
-    return tuple(
-      self::makeAutoLink($quoted, $target),
-      $last,
-      $rest,
-    );
+    return $class.'::'.Str\strip_prefix($def, '::');
   }
 
   private static function makeAutoLink(
