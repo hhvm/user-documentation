@@ -11,18 +11,15 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class ListItem extends Block {
+final class ListItem extends ContainerBlock {
   final public function __construct(
     private ?int $number,
-    private vec<Block> $children,
+    vec<Block> $children,
   ) {
+    parent::__construct($children);
   }
 
   public function getNumber(): ?int {
     return $this->number;
-  }
-
-  public function getChildren(): vec<Block> {
-    return $this->children;
   }
 }

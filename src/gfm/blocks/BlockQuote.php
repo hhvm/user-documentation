@@ -11,13 +11,5 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class BlockQuote extends Block {
-  final public function __construct(
-    private vec<Block> $children,
-  ) {
-  }
-
-  public function getChildren(): vec<Block> {
-    return $this->children;
-  }
+final class BlockQuote extends ContainerBlock {
 }

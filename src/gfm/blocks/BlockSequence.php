@@ -15,7 +15,7 @@ use namespace HH\Lib\Vec;
 
 // Not used by the core engine; useful for extensions when a single piece
 // of syntax might want to create multiple blocks
-final class BlockSequence extends Block {
+final class BlockSequence extends LeafBlock {
   private vec<Block> $children;
 
   final public function __construct(

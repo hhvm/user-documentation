@@ -11,7 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class HTMLBlock extends Block {
+final class HTMLBlock extends LeafBlock {
   final public function __construct(
     private string $code,
   ) {

@@ -13,7 +13,7 @@ namespace Facebook\GFM\Blocks;
 
 use type Facebook\GFM\Inlines\Inline;
 
-final class LinkReferenceDefinition extends Block {
+final class LinkReferenceDefinition extends LeafBlock {
   final public function __construct(
     private string $label,
     private string $destination,

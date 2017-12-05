@@ -11,13 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class Document extends Block {
-  final public function __construct(
-    private vec<Block> $children,
-  ) {
-  }
+use namespace HH\Lib\C;
 
-  public function getChildren(): vec<Block> {
-    return $this->children;
-  }
+final class Document extends ContainerBlock {
 }

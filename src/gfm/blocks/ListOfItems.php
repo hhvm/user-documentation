@@ -11,19 +11,24 @@
 
 namespace Facebook\GFM\Blocks;
 
-use namespace HH\Lib\C;
+use namespace Facebook\TypeAssert;
+use namespace HH\Lib\{C, Vec};
 
-final class ListOfItems extends Block {
-  final public function __construct(
-    private vec<ListItem> $items,
+final class ListOfItems extends ContainerBlock {
+  public function __construct(
+    vec<ListItem> $children,
   ) {
+    parent::__construct($children);
   }
 
   public function getFirstNumber(): ?int {
-    return C\firstx($this->items)->getNumber();
+    return C\firstx($this->getItems())->getNumber();
   }
 
   public function getItems(): vec<ListItem> {
-    return $this->items;
+    return Vec\map(
+      $this->getChildren(),
+      $child ==> TypeAssert\instance_of(ListItem::class, $child),
+    );
   }
 }

@@ -11,15 +11,15 @@
 
 namespace Facebook\GFM\Blocks;
 
-use type Facebook\GFM\Inlines\Inline;
+use namespace HH\Lib\{C, Vec};
 
-final class Paragraph extends LeafBlock {
-  final public function __construct(
-    private vec<Inline> $contents,
+abstract class ContainerBlock extends Block {
+  public function __construct(
+    protected vec<Block> $children,
   ) {
   }
 
-  public function getContents(): vec<Inline> {
-    return $this->contents;
+  final public function getChildren(): vec<Block> {
+    return $this->children;
   }
 }

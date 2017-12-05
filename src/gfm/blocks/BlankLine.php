@@ -13,5 +13,5 @@ namespace Facebook\GFM\Blocks;
 
 use type Facebook\GFM\ASTNode;
 
-final class BlankLine extends Block {
+final class BlankLine extends LeafBlock {
 }

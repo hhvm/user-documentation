@@ -13,7 +13,7 @@ namespace Facebook\GFM\Blocks;
 
 use type Facebook\GFM\Inlines\Inline;
 
-final class Heading extends Block {
+final class Heading extends LeafBlock {
   final public function __construct(
     private int $level,
     private vec<Inline> $heading,

@@ -11,15 +11,5 @@
 
 namespace Facebook\GFM\Blocks;
 
-use type Facebook\GFM\Inlines\Inline;
-
-final class Paragraph extends LeafBlock {
-  final public function __construct(
-    private vec<Inline> $contents,
-  ) {
-  }
-
-  public function getContents(): vec<Inline> {
-    return $this->contents;
-  }
+abstract class LeafBlock extends Block {
 }
