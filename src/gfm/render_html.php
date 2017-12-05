@@ -77,6 +77,12 @@ function render_html(RenderContext $ctx, ASTNode $node): string {
     return $node->getCode();
   }
 
+  if ($node instanceof Blocks\InlineSequenceBlock) {
+    return $node->getChildren()
+      |> Vec\map($$, $child ==> render_html($ctx, $child))
+      |> Str\join($$, '');
+  }
+
   if ($node instanceof Blocks\LinkReferenceDefinition) {
     return '';
   }

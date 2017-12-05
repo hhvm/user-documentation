@@ -15,6 +15,9 @@ function parse(
   ParserContext $context,
   string $markdown,
 ): Blocks\Document {
-  return UnparsedBlocks\parse($context->getBlockContext(), $markdown)
-    ->withParsedInlines($context->getInlineContext());
+  $block_context = $context->getBlockContext();
+  $inline_context = $context->getInlineContext();
+  $no_inlines = UnparsedBlocks\parse($block_context, $markdown);
+  $inline_context->setBlockContext($block_context);
+  return $no_inlines->withParsedInlines($context->getInlineContext());
 }

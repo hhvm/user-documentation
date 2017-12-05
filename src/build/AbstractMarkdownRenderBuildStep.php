@@ -32,24 +32,24 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     if ((bool) \getenv('FB_GFM')) {
       Log::v(' [fbgfm] ');
       $parser_ctx = (new GFM\ParserContext())
+        ->setBlockContext(
+          (new namespace\GFM\BlockContext())
+            ->prependBlockTypes(
+              namespace\GFM\YamlFrontMatterBlock::class,
+              namespace\GFM\ExamplesIncludeBlock::class,
+            )
+        )
         ->enableHTML_UNSAFE();
-
-      $parser_ctx->getBlockContext()
-        ->prependBlockType(namespace\GFM\ExamplesIncludeBlock::class);
-
-      $render_ctx = (new GFM\RenderContext())
-        ->appendFilter(
-          ($_ctx, $node) ==> {
-            if (!$node instanceof GFM\Blocks\CodeBlock) {
-              return true;
-            }
-            return $node->getInfoString() !== 'yamlmeta';
-          }
-        );
+      $parser_ctx->getInlineContext()->prependInlineTypes(
+        namespace\GFM\AutoLinkifyInline::class,
+      );
+      $render_ctx = new GFM\RenderContext();
 
       $files = $jobs;
       foreach ($jobs as $in => $out) {
-        $parser_ctx->getBlockContext()->setFilePath($in);
+        $parser_ctx
+          ->resetFileData()
+          ->setFilePath($in);
         $ast = GFM\parse($parser_ctx, \file_get_contents($in));
         $html = GFM\render_html($render_ctx, $ast);
         \file_put_contents($out, $html);

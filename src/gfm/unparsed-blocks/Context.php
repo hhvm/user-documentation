@@ -13,7 +13,7 @@ namespace Facebook\GFM\UnparsedBlocks;
 
 use namespace HH\Lib\Keyset;
 
-final class Context {
+class Context {
   const keyset<classname<Block>> ALL_BLOCK_TYPES = keyset[
     TableExtension::class,
     BlankLine::class,
@@ -35,11 +35,12 @@ final class Context {
     $this->blockTypes = self::ALL_BLOCK_TYPES;
   }
 
-  public function prependBlockType(classname<Block> $block): this {
-    return $this->prependBlockTypes(keyset[$block]);
+  public function resetFileData(): this {
+    $this->file = null;
+    return $this;
   }
 
-  public function prependBlockTypes(keyset<classname<Block>> $blocks): this {
+  public function prependBlockTypes(classname<Block> ...$blocks): this {
     $this->blockTypes = Keyset\union($blocks, $this->blockTypes);
     return $this;
   }

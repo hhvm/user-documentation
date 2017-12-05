@@ -22,9 +22,11 @@ final class HTMLBlock extends FencedBlock {
   const string SINGLE_QUOTED_ATTRIBUTE_VALUE = "'[^']*'";
   const string DOUBLE_QUOTED_ATTRIBUTE_VALUE = '"[^"]*"';
   const string ATTRIBUTE_VALUE =
+    '('.
     self::UNQUOTED_ATTRIBUTE_VALUE.'|'.
     self::SINGLE_QUOTED_ATTRIBUTE_VALUE.'|'.
-    self::DOUBLE_QUOTED_ATTRIBUTE_VALUE;
+    self::DOUBLE_QUOTED_ATTRIBUTE_VALUE.
+    ')';
   const string ATTRIBUTE_VALUE_SPECIFICATION = ' *= *'.self::ATTRIBUTE_VALUE;
   const string ATTRIBUTE =
   ' +'.self::ATTRIBUTE_NAME.'('.self::ATTRIBUTE_VALUE_SPECIFICATION.')?';
@@ -58,7 +60,7 @@ final class HTMLBlock extends FencedBlock {
   public static function consume(
     Context $context,
     vec<string> $lines,
-  ): ?(Block, vec<string>) {
+  ): ?(this, vec<string>) {
     if (!$context->isHTMLEnabled()) {
       return null;
     }

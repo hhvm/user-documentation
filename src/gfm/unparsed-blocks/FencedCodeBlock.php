@@ -24,6 +24,14 @@ final class FencedCodeBlock extends FencedBlock {
   ) {
   }
 
+  public function getContent(): string {
+    return $this->content;
+  }
+
+  public function getInfoString(): ?string {
+    return $this->infoString;
+  }
+
   protected static function createFromLines(
     vec<string> $lines,
   ): this {

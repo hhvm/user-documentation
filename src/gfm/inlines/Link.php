@@ -17,7 +17,7 @@ use function Facebook\GFM\_Private\{
 };
 use namespace HH\Lib\{Str, Vec};
 
-final class Link extends Inline {
+class Link extends Inline {
   public function __construct(
     private vec<Inline> $text,
     private string $destination,

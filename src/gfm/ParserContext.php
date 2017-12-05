@@ -29,11 +29,32 @@ final class ParserContext {
     return $this;
   }
 
+  public function setFilePath(string $file): this {
+    $this->blockContext->setFilePath($file);
+    return $this;
+  }
+
+  public function resetFileData(): this {
+    $this->blockContext->resetFileData();
+    $this->inlineContext->resetFileData();
+    return $this;
+  }
+
   public function getBlockContext(): BlockContext {
     return $this->blockContext;
   }
 
   public function getInlineContext(): InlineContext{
     return $this->inlineContext;
+  }
+
+  public function setBlockContext(BlockContext $ctx): this {
+    $this->blockContext = $ctx;
+    return $this;
+  }
+
+  public function setInlineContext(InlineContext $ctx): this {
+    $this->inlineContext = $ctx;
+    return $this;
   }
 }

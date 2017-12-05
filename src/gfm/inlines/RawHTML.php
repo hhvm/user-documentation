@@ -33,7 +33,7 @@ final class RawHTML extends Inline {
     '<'.HTMLBlock::TAG_NAME.
     '('.HTMLBlock::ATTRIBUTE.')*'.
     ' *'.
-    ' \\/?>';
+    '\\/?>';
   const string CLOSING_TAG = '<\\/'.HTMLBlock::TAG_NAME.' *>';
   const string DECLARATION = '<![A-Z]+ +[^>]+>';
 
@@ -45,7 +45,7 @@ final class RawHTML extends Inline {
     if (!$context->isHTMLEnabled()) {
       return null;
     }
-    
+
     $matches = [];
     if (
       \preg_match(
@@ -84,7 +84,7 @@ final class RawHTML extends Inline {
     }
 
     // ...but only in the context of `-->`
-    if (($rest[$end + 1] ?? null) !== '>') {
+    if (($rest[$end + 2] ?? null) !== '>') {
       return null;
     }
 

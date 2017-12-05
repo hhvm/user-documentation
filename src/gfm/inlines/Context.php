@@ -11,9 +11,10 @@
 
 namespace Facebook\GFM\Inlines;
 
-use namespace HH\Lib\Str;
+use type Facebook\GFM\UnparsedBlocks\Context as BlockContext;
+use namespace HH\Lib\{Keyset, Str};
 
-final class Context {
+class Context {
   const keyset<classname<Inline>> ALL_INLINE_TYPES = keyset[
     AutoLink::class,
     AutoLinkExtension::class,
@@ -42,7 +43,40 @@ final class Context {
     return $this->isHtmlEnabled;
   }
 
+  public function getFilePath(): ?string {
+    return $this->getBlockContext()->getFilePath();
+  }
+
+  private ?BlockContext $blockContext;
+
+  public function setBlockContext(BlockContext $ctx): this {
+    $this->blockContext = $ctx;
+    return $this;
+  }
+
+  public function getBlockContext(): BlockContext {
+    $ctx = $this->blockContext;
+    invariant(
+      $ctx !== null,
+      'Call %s::setBlockContext before parsing inlines',
+      static::class,
+    );
+    return $ctx;
+  }
+
+  public function resetFileData(): this {
+    $this->blockContext = null;
+    return $this;
+  }
+
+  private keyset<classname<Inline>> $inlineTypes = self::ALL_INLINE_TYPES;
+
   public function getInlineTypes(): keyset<classname<Inline>> {
-    return self::ALL_INLINE_TYPES;
+    return $this->inlineTypes;
+  }
+
+  public function prependInlineTypes(classname<Inline> ...$types): this {
+    $this->inlineTypes = Keyset\union($types, $this->inlineTypes);
+    return $this;
   }
 }

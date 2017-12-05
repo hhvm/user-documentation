@@ -25,6 +25,19 @@ type DirectoryIndex = shape(
   'files' => Traversable<string>,
 );
 
+type YAMLMeta = shape(
+  'name' => string,
+  'sources' => vec<string>,
+  ?'class' => string,
+  ?'lib' => shape(
+    'name' => string,
+    'github' => string,
+    'composer' => string,
+  ),
+  ?'fbonly messages' => vec<string>,
+);
+
+
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';

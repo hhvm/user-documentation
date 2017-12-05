@@ -23,7 +23,7 @@ abstract class FencedBlock extends LeafBlock {
   public static function consume(
     Context $_,
     vec<string> $lines,
-  ): ?(Block, vec<string>) {
+  ): ?(this, vec<string>) {
     $first = C\firstx($lines);
     $end = static::getEndPatternForFirstLine($first);
     if ($end === null) {

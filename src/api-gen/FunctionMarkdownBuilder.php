@@ -70,7 +70,7 @@ final class FunctionMarkdownBuilder {
     return $this->getFrontMatter().$main_md."\n";
   }
 
-  public function getFrontMatter(): ?string {
+  public function getFrontMatter(): string {
     $data = shape(
       'name' => $this->yaml['data']['name'],
       'sources' => Vec\map(
@@ -78,6 +78,11 @@ final class FunctionMarkdownBuilder {
         $source ==> Str\strip_prefix($source['name'], LocalConfig::ROOT.'/'),
       ),
     );
+    $class = $this->class;
+    if ($class !== null) {
+      $data['class'] = $class;
+    }
+
     $fbonly_messages = vec[];
     if (
       C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hsl/'))
@@ -111,7 +116,10 @@ final class FunctionMarkdownBuilder {
       $data['fbonly messages'] = $fbonly_messages;
     }
     // JSON is a subset of yaml, and json_encode handles vecs :p
-    $json = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    $json = JSON\encode_shape(
+      YAMLMeta::class,
+      $data,
+    );
     return "```yamlmeta\n".$json."\n```\n";
   }
 

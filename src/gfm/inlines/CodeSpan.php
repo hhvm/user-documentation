@@ -27,7 +27,7 @@ final class CodeSpan extends Inline {
     Context $_,
     string $_previous,
     string $string,
-  ): ?(Inline, string, string) {
+  ): ?(this, string, string) {
     if ($string[0] !== '`') {
       return null;
     }

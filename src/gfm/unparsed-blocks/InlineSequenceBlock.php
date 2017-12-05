@@ -11,23 +11,16 @@
 
 namespace Facebook\GFM\UnparsedBlocks;
 
-use type Facebook\GFM\Blocks\BlockSequence as ASTNode;
+use type Facebook\GFM\Blocks\InlineSequenceBlock as ASTNode;
 use namespace Facebook\GFM\Inlines;
 use namespace HH\Lib\Vec;
 
-/**  Not used by the core engine; useful for extensions when a single piece
- * of syntax might want to create multiple blocks. */
-final class BlockSequence extends Block {
-  private vec<Block> $children;
-
+/**  Not used by the core engine; useful for extensions when a block-level
+ * extension wants to produce inlines. */
+final class InlineSequenceBlock extends Block {
   final public function __construct(
-    vec<?Block> $children,
+    private string $markdown,
   ) {
-    $this->children = Vec\filter_nulls($children);
-  }
-
-  final public static function flatten(?Block ...$children): this {
-    return new self(vec($children));
   }
 
   public static function consume(
@@ -41,7 +34,7 @@ final class BlockSequence extends Block {
     Inlines\Context $context,
   ): ASTNode {
     return new ASTNode(
-      Vec\map($this->children, $child ==> $child->withParsedInlines($context)),
+      Inlines\parse($context, $this->markdown),
     );
   }
 }
