@@ -73,6 +73,10 @@ class Context {
 
   public function getIgnoredBlockTypesForParagraphContinuation(
   ): keyset<classname<Block>> {
-    return keyset[SetextHeading::class, Paragraph::class];
+    return keyset[
+      HTMLBlock::class,
+      Paragraph::class,
+      SetextHeading::class,
+    ];
   }
 }
