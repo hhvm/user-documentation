@@ -11,7 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class Document implements Block {
+final class Document extends Block {
   final public function __construct(
     private vec<Block> $children,
   ) {

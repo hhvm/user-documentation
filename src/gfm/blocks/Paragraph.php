@@ -13,7 +13,7 @@ namespace Facebook\GFM\Blocks;
 
 use type Facebook\GFM\Inlines\Inline;
 
-final class Paragraph implements Block {
+final class Paragraph extends Block {
   final public function __construct(
     private vec<Inline> $contents,
   ) {

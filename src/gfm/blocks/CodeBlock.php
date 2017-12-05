@@ -11,7 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-abstract class CodeBlock implements Block {
+abstract class CodeBlock extends Block {
   final public function __construct(
     private ?string $infoString,
     private string $code,

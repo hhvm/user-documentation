@@ -16,7 +16,7 @@ use namespace HH\Lib\Vec;
 
 /** Not used by the core engine; useful for extensions that want to create
  * markdown text. */
-final class InlineSequenceBlock implements Block {
+final class InlineSequenceBlock extends Block {
   private vec<Inlines\Inline> $children;
 
   final public function __construct(

@@ -11,7 +11,7 @@
 
 namespace Facebook\GFM\Blocks;
 
-final class ListItem implements Block {
+final class ListItem extends Block {
   final public function __construct(
     private ?int $number,
     private vec<Block> $children,

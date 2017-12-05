@@ -13,5 +13,5 @@ namespace Facebook\GFM\Blocks;
 
 use type Facebook\GFM\Inlines\Inline;
 
-final class ThematicBreak implements Block {
+final class ThematicBreak extends Block {
 }

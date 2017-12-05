@@ -13,7 +13,7 @@ namespace Facebook\GFM\Blocks;
 
 use namespace HH\Lib\C;
 
-final class ListOfItems implements Block {
+final class ListOfItems extends Block {
   final public function __construct(
     private vec<ListItem> $items,
   ) {
