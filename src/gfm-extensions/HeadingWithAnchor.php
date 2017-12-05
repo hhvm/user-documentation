@@ -38,7 +38,7 @@ implements GFM\RenderableAsHTML {
     GFM\HTMLRenderer $renderer,
   ): string {
     $contents = $this->heading
-      |> Vec\map($$, $part ==> $renderer->render($ctx, $part))
+      |> Vec\map($$, $part ==> $renderer->render($part))
       |> Str\join($$, '');
     $id = GFM\_Private\plain_text_to_html_attribute($this->id);
     return

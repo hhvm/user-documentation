@@ -57,7 +57,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
           ->setFilePath($in);
         $doc = FBMarkdown\parse($parser_ctx, \file_get_contents($in));
         invariant($doc !== null, 'transform should not null the doc');
-        $html = (new FBMarkdown\HTMLRenderer())->render($render_ctx, $doc);
+        $html = (new FBMarkdown\HTMLRenderer($render_ctx))->render($doc);
         \file_put_contents($out, '<!-- fbgfm -->'.$html);
         Log::v('.');
       }
