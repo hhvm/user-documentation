@@ -55,6 +55,7 @@ final class FunctionMarkdownBuilder {
 
   public function getMarkdown(): string {
     $parts = vec[
+      $this->getFrontMatterString(),
       $this->getHeading(),
       $this->getDeprecation(),
       $this->getDescription(),
@@ -67,10 +68,19 @@ final class FunctionMarkdownBuilder {
       |> Vec\filter_nulls($$)
       |> Vec\filter($$, $x ==> !Str\is_empty($x))
       |> Str\join($$, "\n\n");
-    return $this->getFrontMatter().$main_md."\n";
+    return $main_md."\n";
   }
 
-  public function getFrontMatter(): string {
+  private function getFrontMatterString(): string {
+    $data = $this->getFrontMatterData();
+    $json = JSON\encode_shape(
+      YAMLMeta::class,
+      $data,
+    );
+    return "```yamlmeta\n".$json."\n```";
+  }
+
+  private function getFrontMatterData(): YAMLMeta {
     $data = shape(
       'name' => $this->yaml['data']['name'],
       'sources' => Vec\map(
@@ -115,12 +125,8 @@ final class FunctionMarkdownBuilder {
     if (!C\is_empty($fbonly_messages)) {
       $data['fbonly messages'] = $fbonly_messages;
     }
-    // JSON is a subset of yaml, and json_encode handles vecs :p
-    $json = JSON\encode_shape(
-      YAMLMeta::class,
-      $data,
-    );
-    return "```yamlmeta\n".$json."\n```\n";
+
+    return $data;
   }
 
   public static function getOutputFileName(

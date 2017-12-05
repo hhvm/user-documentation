@@ -2,6 +2,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\{C, Str, Vec};
+
 final class ClassMarkdownBuilder {
   private ClassYAML $yaml;
   private DocBlock $docblock;
@@ -45,6 +47,7 @@ final class ClassMarkdownBuilder {
 
   public function getMarkdown(): string {
     $parts = (Vector {
+      $this->getFrontMatterString(),
       $this->getHeading(),
       $this->getGuides(),
       $this->getDescription(),
@@ -52,6 +55,26 @@ final class ClassMarkdownBuilder {
     })->filter($x ==> $x !== null)
       ->map($x ==> trim($x));
     return implode("\n\n", $parts);
+  }
+
+  private function getFrontMatterString(): string {
+    return JSON\encode_shape(
+      YAMLMeta::class,
+      $this->getFrontMatterData(),
+    ) |> "```yamlmeta\n".$$."\n```";
+  }
+
+  private function getFrontMatterData(): YAMLMeta {
+    $data = shape(
+      'class' => $this->yaml['data']['name'],
+      'name' => $this->yaml['data']['name'],
+      'sources' => Vec\map(
+        $this->yaml['sources'],
+        $source ==> Str\strip_prefix($source['name'], LocalConfig::ROOT.'/'),
+      ),
+    );
+
+    return $data;
   }
 
   private function getHeading(): string {

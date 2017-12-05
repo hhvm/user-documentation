@@ -65,7 +65,8 @@ final class AutoLinkifyInline extends Inlines\Link {
     );
     $meta = $block_context->getYamlMeta();
 
-    if ($definition === ($meta['name'] ?? null)) {
+    $name = ($meta['name'] ?? null);
+    if ($name !== null && Str\ends_with($name, $definition)) {
       return null;
     }
 

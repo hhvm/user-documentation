@@ -39,6 +39,7 @@ final class APIMarkdownBuildStep extends BuildStep {
 
     Log::i("\nGenerating markdown for %s", $product);
     $sources = self::findSources($in, Set{'yml'});
+    Log::i("\nGenerating markdown...");
     return Vec\map($sources, $source ==> {
       Log::v('.');
       $filename = pathinfo($source)['filename'];
