@@ -37,6 +37,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
             ->prependBlockTypes(
               GFM\YamlFrontMatterBlock::class,
               GFM\ExamplesIncludeBlock::class,
+              GFM\IncludeGeneratedMarkdownBlock::class,
             )
         )
         ->enableHTML_UNSAFE();
