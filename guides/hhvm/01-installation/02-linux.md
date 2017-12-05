@@ -85,6 +85,5 @@ sudo apt-get install hhvm-dev-nightly
 There are a variety of volunteered owned mirrors to get the packages, if the default one shown in these instructions are slow. Just change the prefix in your `/etc/apt/sources.list.d/hhvm.list` (still leave the subdirectory of your distro).
 
 * http://dl.hhvm.com/ (US)
-* http://mirror.yourwebhoster.eu/hhvm/ (NL)
 * http://mirror.mephi.ru/hhvm/ (RU)
 * https://hhvm.bauerj.eu/ (DE)
