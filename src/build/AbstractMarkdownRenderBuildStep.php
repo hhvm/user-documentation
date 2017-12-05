@@ -43,7 +43,10 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
       $parser_ctx->getInlineContext()->prependInlineTypes(
         namespace\GFM\AutoLinkifyInline::class,
       );
-      $render_ctx = new GFM\RenderContext();
+      $render_ctx = (new GFM\RenderContext())
+        ->appendTransformation(
+          ($_ctx, $node) ==> namespace\GFM\versioned_images($node),
+        );
 
       $files = $jobs;
       foreach ($jobs as $in => $out) {

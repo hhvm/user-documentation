@@ -32,12 +32,18 @@ class StaticResourceMap {
   public static function getEntryForFile(
     string $filename,
   ): StaticResourceMapEntry {
-    $map = self::getMap();
+    $entry = self::getNullableEntryForFile($filename);
     invariant(
-      array_key_exists($filename, $map),
-      "Filename not in map: %s",
-      $filename,
+      $entry !== null,
+      "Couldn't find entry in static resources map",
     );
-    return $map[$filename];
+    return $entry;
+  }
+
+  public static function getNullableEntryForFile(
+    string $filename,
+  ): ?StaticResourceMapEntry {
+    $map = self::getMap();
+    return $map[$filename] ?? null;
   }
 }

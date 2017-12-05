@@ -1,5 +1,7 @@
 require 'json'
 
+# REPLACED IN HACK REIMPLEMENTATION
+
 module HHVM
   module UserDocumentation
     class VersionedImagesFilter < HTML::Pipeline::Filter
