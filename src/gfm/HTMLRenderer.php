@@ -12,11 +12,17 @@
 namespace Facebook\GFM;
 
 use namespace HH\Lib\{C, Str, Vec};
-use function Facebook\GFM\_Private\plain_text_to_html;
-use function Facebook\GFM\_Private\plain_text_to_html_attribute;
 
 // TODO: fix namespace support in XHP, use that :'(
 class HTMLRenderer extends Renderer<string> {
+
+  protected static function escapeContent(string $text): string {
+    return _Private\plain_text_to_html($text);
+  }
+
+  protected static function escapeAttribute(string $text): string {
+    return _Private\plain_text_to_html_attribute($text);
+  }
 
   <<__Override>>
   protected function renderNodes(vec<ASTNode> $nodes): string {
@@ -52,9 +58,9 @@ class HTMLRenderer extends Renderer<string> {
     $info = $node->getInfoString();
     if ($info !== null) {
       $first = C\firstx(Str\split($info, ' '));
-      $extra = ' class="language-'.plain_text_to_html_attribute($first).'"';
+      $extra = ' class="language-'.self::escapeAttribute($first).'"';
     }
-    return plain_text_to_html($node->getCode())
+    return self::escapeContent($node->getCode())
       |> '<pre><code'.$extra.'>'.$$."\n</code></pre>";
   }
 
@@ -110,15 +116,29 @@ class HTMLRenderer extends Renderer<string> {
 
   <<__Override>>
   protected function renderParagraph(Blocks\Paragraph $node): string {
-    return $node->getContents()
-      |> Vec\map($$, $item ==> $this->render($item))
-      |> Str\join($$, '')
-      |> '<p>'.$$."</p>\n";
+    return '<p>'.$this->renderNodes($node->getContents()).'</p>';
   }
 
   <<__Override>>
   protected function renderTableExtension(Blocks\TableExtension $node): string {
-    $html = "<table>\n<thead>\n<tr>\n";
+    $html = "<table>\n".$this->renderTableHeader($node);
+
+    $data = $node->getData();
+    if (C\is_empty($data)) {
+      return $html."</table>\n";
+    }
+    $html .= "\n<tbody>";
+
+    $row_idx = -1;
+    foreach ($data as $row) {
+      ++$row_idx;
+      $html .= "\n".$this->renderTableDataRow($node, $row_idx, $row);
+    }
+    return $html.'</tbody></table>';
+  }
+
+  protected function renderTableHeader(Blocks\TableExtension $node): string {
+    $html = "<thead>\n<tr>\n";
 
     $alignments = $node->getColumnAlignments();
     $header = $node->getHeader();
@@ -130,34 +150,42 @@ class HTMLRenderer extends Renderer<string> {
       }
       $html .=
         '<th'.$alignment.'>'.
-        Str\join(Vec\map($cell, $cell ==> $this->render($cell)), '').
+        $this->renderNodes($cell).
         "</th>\n";
     }
     $html .= '</thead>';
+    return $html;
+  }
 
-    $data = $node->getData();
-    if (C\is_empty($data)) {
-      return $html."</table>\n";
+  protected function renderTableDataRow(
+    Blocks\TableExtension $table,
+    int $row_idx,
+    Blocks\TableExtension::TRow $row,
+  ): string {
+    $html = "<tr>";
+    for ($i = 0; $i < C\count($row); ++$i) {
+      $cell = $row[$i];
+
+      $html .= "\n".$this->renderTableDataCell($table, $row_idx, $i, $cell);
     }
-    $html .= "\n<tbody>";
+    $html .= "\n</tr>";
+    return $html;
+  }
 
-    foreach ($data as $row) {
-      $html .= "\n<tr>";
-      for ($i = 0; $i < C\count($header); ++$i) {
-        $cell = $row[$i];
-        $alignment = $alignments[$i];
-        if ($alignment !== null) {
-          $alignment = ' align="'.$alignment.'"';
-        }
-
-        $html .=
-          "\n<td".$alignment.'>'.
-          Str\join(Vec\map($cell, $cell ==> $this->render($cell)), '').
-          "</td>";
-      }
-      $html .= "\n</tr>";
+  protected function renderTableDataCell(
+    Blocks\TableExtension $table,
+    int $row_idx,
+    int $col_idx,
+    Blocks\TableExtension::TCell $cell,
+  ): string {
+    $alignment = $table->getColumnAlignments()[$col_idx];
+    if ($alignment !== null) {
+      $alignment = ' align="'.$alignment.'"';
     }
-    return $html.'</tbody></table>';
+    return
+      "<td".$alignment.'>'.
+      $this->renderNodes($cell).
+      "</td>";
   }
 
   <<__Override>>
@@ -167,19 +195,19 @@ class HTMLRenderer extends Renderer<string> {
 
   <<__Override>>
   protected function renderAutoLink(Inlines\AutoLink $node): string {
-    $href = plain_text_to_html_attribute($node->getDestination());
-    $text = plain_text_to_html($node->getText());
+    $href = self::escapeAttribute($node->getDestination());
+    $text = self::escapeContent($node->getText());
     return '<a href="'.$href.'">'.$text.'</a>';
   }
 
   <<__Override>>
   protected function renderInlineWithPlainTextContent(Inlines\InlineWithPlainTextContent $node): string {
-    return plain_text_to_html($node->getContent());
+    return self::escapeContent($node->getContent());
   }
 
   <<__Override>>
   protected function renderCodeSpan(Inlines\CodeSpan $node): string {
-    return '<code>'.plain_text_to_html($node->getCode()).'</code>';
+    return '<code>'.self::escapeContent($node->getCode()).'</code>';
   }
 
   <<__Override>>
@@ -200,14 +228,14 @@ class HTMLRenderer extends Renderer<string> {
   protected function renderImage(Inlines\Image $node): string {
     $title = $node->getTitle();
     if ($title !== null) {
-      $title = ' title="'.plain_text_to_html_attribute($title).'"';
+      $title = ' title="'.self::escapeAttribute($title).'"';
     }
-    $src = plain_text_to_html_attribute($node->getSource());
+    $src = self::escapeAttribute($node->getSource());
     $text = $node->getDescription()
       |> Vec\map($$, $child ==> $child->getContentAsPlainText())
       |> Str\join($$, '');
     $alt = ($text === '')
-      ? '' : ' alt="'.plain_text_to_html_attribute($text).'"';
+      ? '' : ' alt="'.self::escapeAttribute($text).'"';
     return '<img src="'.$src.'"'.$alt.$title.' />';
   }
 
@@ -215,9 +243,9 @@ class HTMLRenderer extends Renderer<string> {
   protected function renderLink(Inlines\Link $node): string {
     $title = $node->getTitle();
     if ($title !== null) {
-      $title = ' title="'.plain_text_to_html_attribute($title).'"';
+      $title = ' title="'.self::escapeAttribute($title).'"';
     }
-    $href = plain_text_to_html_attribute($node->getDestination());
+    $href = self::escapeAttribute($node->getDestination());
     $text = $node->getText()
       |> Vec\map($$, $child ==> $this->render($child))
       |> Str\join($$, '');
