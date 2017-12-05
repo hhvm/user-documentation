@@ -10,7 +10,7 @@
  */
 
 namespace HHVM\UserDocumentation;
-use namespace Facebook\GFM as FBMarkdown;
+use namespace Facebook\Markdown;
 
 abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   abstract const string SOURCE_ROOT;
@@ -29,25 +29,25 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     }
 
 
-    if ((bool) \getenv('FB_GFM')) {
+    if ((bool) \getenv('FB_MarkdownExt')) {
       Log::v(' [fbgfm] ');
-      $parser_ctx = (new FBMarkdown\ParserContext())
+      $parser_ctx = (new Markdown\ParserContext())
         ->setBlockContext(
-          (new GFM\BlockContext())
+          (new MarkdownExt\BlockContext())
             ->prependBlockTypes(
-              GFM\YamlFrontMatterBlock::class,
-              GFM\ExamplesIncludeBlock::class,
-              GFM\IncludeGeneratedMarkdownBlock::class,
+              MarkdownExt\YamlFrontMatterBlock::class,
+              MarkdownExt\ExamplesIncludeBlock::class,
+              MarkdownExt\IncludeGeneratedMarkdownBlock::class,
             )
         )
         ->enableHTML_UNSAFE();
       $parser_ctx->getInlineContext()->prependInlineTypes(
-        GFM\AutoLinkifyInline::class,
+        MarkdownExt\AutoLinkifyInline::class,
       );
-      $render_ctx = (new FBMarkdown\RenderContext())
+      $render_ctx = (new Markdown\RenderContext())
         ->appendFilters(
-          new GFM\HeadingAnchorsFilter(),
-          new GFM\VersionedImagesFilter(),
+          new MarkdownExt\HeadingAnchorsFilter(),
+          new MarkdownExt\VersionedImagesFilter(),
         );
 
       $files = $jobs;
@@ -55,9 +55,9 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
         $parser_ctx
           ->resetFileData()
           ->setFilePath($in);
-        $doc = FBMarkdown\parse($parser_ctx, \file_get_contents($in));
+        $doc = Markdown\parse($parser_ctx, \file_get_contents($in));
         invariant($doc !== null, 'transform should not null the doc');
-        $html = (new GFM\HTMLRenderer($render_ctx))->render($doc);
+        $html = (new MarkdownExt\HTMLRenderer($render_ctx))->render($doc);
         \file_put_contents($out, '<!-- fbgfm -->'.$html);
         Log::v('.');
       }
