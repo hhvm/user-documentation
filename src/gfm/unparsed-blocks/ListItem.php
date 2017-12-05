@@ -39,20 +39,21 @@ final class ListItem extends ContainerBlock {
     $matches = [];
     if (
       \preg_match(
-        '/^(?<full>(?<marker>[-+*]|(?<digits>[0-9]{1,9})[.)]) {1,4})/',
+        '/^ {0,3}(?<marker>[-+*]|(?<digits>[0-9]{1,9})[.)]) {1,4}/',
         $line,
         $matches,
       ) !== 1
     ) {
       return null;
     }
-    $width = Str\length($matches['full']);
+    $full = $matches[0];
+    $width = Str\length($full);
     $prefix = Str\repeat(' ', $width);
     $ordered = ($matches['digits'] ?? null) !== null;
     $number = $ordered ? ((int) $matches['digits']) : null;
     $delimiter = Str\trim_left($matches['marker'], '0123456789');
 
-    $matched = vec[Str\strip_prefix($line, $matches['full'])];
+    $matched = vec[Str\strip_prefix($line, $full)];
 
     $last_blank = false;
     for ($idx = 1; $idx < C\count($lines); ++$idx) {
