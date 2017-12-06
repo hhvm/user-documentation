@@ -58,7 +58,7 @@ class ListItem extends ContainerBlock {
     $last_blank = false;
     for ($idx = 1; $idx < C\count($lines); ++$idx) {
       $line = $lines[$idx];
-      if ($line === '') {
+      if (self::isBlankLine($line)) {
         if ($last_blank) {
           $matched = Vec\take($matched, C\count($matched) - 1);
           break;
@@ -72,8 +72,10 @@ class ListItem extends ContainerBlock {
         break;
       }
 
-      if (Str\starts_with($line, $prefix)) {
-        $matched[] = Str\strip_prefix($line, $prefix);
+      $rest = self::stripWhitespacePrefix($line, $width);
+      if ($rest !== null) {
+        $matched[] = $rest;
+        $last_blank = false;
         continue;
       }
 
@@ -81,7 +83,6 @@ class ListItem extends ContainerBlock {
         break;
       }
       $last_blank = false;
-
 
       // Laziness
       $line = Str\trim_left($line);

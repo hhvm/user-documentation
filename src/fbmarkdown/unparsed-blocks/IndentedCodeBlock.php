@@ -26,13 +26,11 @@ final class IndentedCodeBlock extends LeafBlock {
     $matched = vec[];
     foreach ($lines as $line) {
       $matches = [];
-      if (
-        \preg_match("/^( {4}| {0,3}\\t)(?<rest>.*)$/", $line, $matches) !== 1
-      ) {
+      $rest = self::stripWhitespacePrefix($line, 4);
+      if ($rest === null) {
         break;
       }
-
-      $matched[] = $matches['rest'];
+      $matched[] = $rest;
     }
 
     if (C\count($matched) === 0) {
