@@ -23,8 +23,8 @@ class Context {
     IndentedCodeBlock::class,
     LinkReferenceDefinition::class,
     BlockQuote::class,
-    ListOfItems::class,
     ThematicBreak::class,
+    ListOfItems::class,
     SetextHeading::class,
     Paragraph::class,
   ];
