@@ -33,24 +33,12 @@ class TaskListItemExtension extends ListItem{
     Context $context,
     string $delimiter,
     ?int $number,
-    vec<string> $contents,
+    Lines $contents,
   ): ListItem {
-    $first = C\first($contents);
-    if ($first === null) {
-      return parent::createFromContents(
-        $context,
-        $delimiter,
-        $number,
-        $contents,
-      );
-    }
-
+    list($first, $rest) = $contents->getFirstLineAndRest();
     $first = Str\trim_left($first);
     if (Str\starts_with($first, '[ ] ')) {
-      $contents = Vec\concat(
-        vec[Str\slice($first, 4)],
-        Vec\drop($contents, 1),
-      );
+      $contents = $contents->withoutFirstNBytes(4);
       return new self(
         /* checked = */ false,
         $delimiter,
@@ -60,10 +48,7 @@ class TaskListItemExtension extends ListItem{
     }
 
     if (Str\starts_with($first, '[x] ')) {
-      $contents = Vec\concat(
-        vec[Str\slice($first, 4)],
-        Vec\drop($contents, 1),
-      );
+      $contents = $contents->withoutFirstNBytes(4);
       return new self(
         /* checked = */ true,
         $delimiter,

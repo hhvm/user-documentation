@@ -13,14 +13,14 @@ namespace Facebook\Markdown\_Private;
 
 use namespace HH\Lib\{C, Str, Vec};
 
-function consume_link_destination(string $input): ?(string, string) {
+function consume_link_destination(string $input): ?(string, int) {
   if ($input[0] === '<') {
     return consume_bracketed_link_destination($input);
   }
   return consume_unbracketed_link_destination($input);
 }
 
-function consume_bracketed_link_destination(string $input): ?(string, string) {
+function consume_bracketed_link_destination(string $input): ?(string, int) {
   invariant($input[0] === '<', 'should not be called on unbracketed input');
   $len = Str\length($input);
 
@@ -39,8 +39,7 @@ function consume_bracketed_link_destination(string $input): ?(string, string) {
         return null;
       }
       if ($chr === '>') {
-        $rest = Str\slice($input, $idx) |> Str\trim_left($$);
-        return tuple($destination, $rest);
+        return tuple($destination, $idx);
       }
     }
     if ($chr === '\\') {
@@ -55,7 +54,7 @@ function consume_bracketed_link_destination(string $input): ?(string, string) {
 
 function consume_unbracketed_link_destination(
   string $input,
-): ?(string, string) {
+): ?(string, int) {
   $len = Str\length($input);
 
   $paren_depth = 0;
@@ -95,6 +94,5 @@ function consume_unbracketed_link_destination(
     return null;
   }
 
-  $rest = Str\slice($input, $idx) |> Str\trim_left($$);
-  return tuple($destination, $rest);
+  return tuple($destination, $idx);
 }

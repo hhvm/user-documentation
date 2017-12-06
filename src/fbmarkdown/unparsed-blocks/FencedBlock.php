@@ -22,9 +22,9 @@ abstract class FencedBlock extends LeafBlock {
 
   public static function consume(
     Context $_,
-    vec<string> $lines,
-  ): ?(this, vec<string>) {
-    $first = C\firstx($lines);
+    Lines $lines,
+  ): ?(this, Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
     $end = static::getEndPatternForFirstLine($first);
     if ($end === null) {
       return null;
@@ -32,20 +32,20 @@ abstract class FencedBlock extends LeafBlock {
 
     $matched = vec[$first];
 
-    foreach (Vec\drop($lines, 1) as $line) {
+    while (!$rest->isEmpty()) {
+      list($line, $rest) = $rest->getFirstLineAndRest();
       $matched[] = $line;
       if (\preg_match($end, $line) === 1) {
         break;
       }
     }
-
     if (C\count($matched) === 1) {
       return null;
     }
 
     return tuple(
       static::createFromLines($matched),
-      Vec\drop($lines, C\count($matched)),
+      $rest,
     );
   }
 }

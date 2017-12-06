@@ -19,8 +19,8 @@ use namespace HH\Lib\{C, Str, Vec};
 abstract class YamlFrontMatterBlock extends UnparsedBlocks\Block{
   public static function consume(
     UnparsedBlocks\Context $context,
-    vec<string> $lines,
-  ): ?(UnparsedBlocks\Block, vec<string>) {
+    UnparsedBlocks\Lines $lines,
+  ): ?(UnparsedBlocks\Block, UnparsedBlocks\Lines) {
     $match = UnparsedBlocks\FencedCodeBlock::consume($context, $lines);
     if ($match === null) {
       return null;

@@ -29,13 +29,13 @@ final class LinkReferenceDefinition extends LeafBlock {
 
   public static function consume(
     Context $_,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    $first = C\firstx($lines);
+    Lines $lines,
+  ): ?(Block, Lines) {
+    list($first, $without_first) = $lines->getFirstLineAndRest();
     $matches = [];
     if (
       \preg_match(
-        '/^ {0,3}\[(?<label> *([^ \]]+ *)+)\]: *(?<rest>.*)$/',
+        '/^(?<prefix> {0,3}\[(?<label> *([^ \]]+ *)+)\]: *)(?<rest>.*)$/',
         $first,
         $matches,
       ) !== 1
@@ -50,12 +50,9 @@ final class LinkReferenceDefinition extends LeafBlock {
 
     $rest = $matches['rest'] ?? '';
     if ($rest !== '') {
-      $lines = Vec\concat(
-        vec[$rest],
-        Vec\drop($lines, 1),
-      );
+      $lines = $lines->withoutFirstLinePrefix($matches['prefix']);
     } else {
-      $lines = Vec\drop($lines, 1);
+      $lines = $without_first;
     }
 
     $result = self::consumeDestination($lines);
@@ -77,25 +74,25 @@ final class LinkReferenceDefinition extends LeafBlock {
   }
 
   private static function consumeDestination(
-    vec<string> $lines,
-  ): ?(string, vec<string>) {
-    $out = consume_link_destination(Str\join($lines, "\n"));
+    Lines $lines,
+  ): ?(string, Lines) {
+    $out = consume_link_destination($lines->toString());
     if ($out === null) {
       return null;
     }
-    list($destination, $rest) = $out;
-    return tuple($destination, Str\split($rest, "\n"));
+    list($destination, $consumed_bytes) = $out;
+    return tuple($destination, $lines->withoutFirstNBytes($consumed_bytes));
   }
 
   private static function consumeTitle(
-    vec<string> $lines,
-  ): ?(string, vec<string>) {
-    $out = consume_link_title(Str\join($lines, "\n"));
+    Lines $lines,
+  ): ?(string, Lines) {
+    $out = consume_link_title($lines->toString());
     if ($out === null) {
       return null;
     }
-    list($title, $rest) = $out;
-    return tuple($title, Str\split($rest, "\n"));
+    list($title, $consumed_bytes) = $out;
+    return tuple($title, $lines->withoutFirstNBytes($consumed_bytes));
   }
 
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {

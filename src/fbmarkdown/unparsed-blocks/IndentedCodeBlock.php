@@ -21,25 +21,16 @@ final class IndentedCodeBlock extends LeafBlock {
 
   public static function consume(
     Context $_,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    $matched = vec[];
-    foreach ($lines as $line) {
-      $matches = [];
-      $rest = self::stripWhitespacePrefix($line, 4);
-      if ($rest === null) {
-        break;
-      }
-      $matched[] = $rest;
-    }
-
-    if (C\count($matched) === 0) {
+    Lines $lines,
+  ): ?(Block, Lines) {
+    list($matched, $rest) = $lines->getIndentedLinesAndRest(4);
+    if ($matched->isEmpty()) {
       return null;
     }
 
     return tuple(
-      new self(Str\join($matched, "\n")),
-      Vec\drop($lines, C\count($matched)),
+      new self($matched->toString()),
+      $rest,
     );
   }
 

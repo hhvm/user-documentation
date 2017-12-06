@@ -24,8 +24,8 @@ final class ListOfItems extends ContainerBlock {
 
   private static function consumeItem(
     Context $context,
-    vec<string> $lines,
-  ): ?(ListItem, vec<string>) {
+    Lines $lines,
+  ): ?(ListItem, Lines) {
     foreach ($context->getListItemTypes() as $type) {
       $match = $type::consume($context, $lines);
       if ($match!== null) {
@@ -37,8 +37,8 @@ final class ListOfItems extends ContainerBlock {
 
   public static function consume(
     Context $context,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
+    Lines $lines,
+  ): ?(Block, Lines) {
     $first = self::consumeItem($context, $lines);
     if ($first === null) {
       return null;
@@ -48,7 +48,7 @@ final class ListOfItems extends ContainerBlock {
     $nodes = vec[$first];
     $d = $first->getDelimiter();
 
-    while (!C\is_empty($lines)) {
+    while (!$lines->isEmpty()) {
       $next = self::consumeItem($context, $lines);
       if ($next === null) {
         break;

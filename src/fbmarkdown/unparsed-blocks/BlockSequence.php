@@ -32,8 +32,8 @@ final class BlockSequence extends Block {
 
   public static function consume(
     Context $_,
-    vec<string> $_,
-  ): ?(Block, vec<string>) {
+    Lines $_,
+  ): ?(Block, Lines) {
     invariant_violation('should never be called');
   }
 

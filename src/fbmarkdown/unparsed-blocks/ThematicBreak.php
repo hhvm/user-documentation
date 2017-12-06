@@ -19,13 +19,13 @@ final class ThematicBreak extends LeafBlock {
 
   public static function consume(
     Context $_,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    $first = C\firstx($lines);
+    Lines $lines,
+  ): ?(Block, Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
     if (\preg_match('/^ {0,3}([-_*] *){3,}$/', $first) !== 1) {
       return null;
     }
-    return tuple(new self(), Vec\drop($lines, 1));
+    return tuple(new self(), $rest);
   }
 
   public function withParsedInlines(Inlines\Context $context): ASTNode {

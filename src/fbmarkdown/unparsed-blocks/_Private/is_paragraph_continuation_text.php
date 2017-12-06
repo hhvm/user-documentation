@@ -11,12 +11,12 @@
 
 namespace Facebook\Markdown\UnparsedBlocks\_Private;;
 
-use type Facebook\Markdown\UnparsedBlocks\{Block, Context};
+use type Facebook\Markdown\UnparsedBlocks\{Block, Context, Lines};
 use namespace HH\Lib\C;
 
 function is_paragraph_continuation_text(
   Context $context,
-  vec<string> $lines,
+  Lines $lines,
 ): bool {
   return !C\any(
     $context->getBlockTypes(),

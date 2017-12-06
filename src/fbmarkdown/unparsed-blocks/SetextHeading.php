@@ -22,11 +22,14 @@ final class SetextHeading extends LeafBlock {
 
   public static function consume(
     Context $context,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    for ($idx = 1; $idx < C\count($lines); ++$idx) {
-      $line = $lines[$idx];
-      if ($line === '') {
+    Lines $lines,
+  ): ?(Block, Lines) {
+    list($first, $lines) = $lines->getFirstLineAndRest();
+    $heading = $first;
+
+    while (!$lines->isEmpty()) {
+      list($line, $rest) = $lines->getFirstLineAndRest();
+      if (self::isBlankLine($line)) {
         return null;
       }
 
@@ -34,15 +37,15 @@ final class SetextHeading extends LeafBlock {
       if (\preg_match('/^ {0,3}(?<level>=+|-+) *$/', $line, $matches) === 1) {
         $level = $matches['level'][0] === '=' ? 1 : 2;
         return tuple(
-          new self($level, Str\join(Vec\take($lines, $idx), "\n")),
-          Vec\drop($lines, $idx + 1),
+          new self($level, $heading),
+          $lines,
         );
       }
-      if (
-        !_Private\is_paragraph_continuation_text($context, Vec\drop($lines, $idx))
-      ) {
+
+      if (!_Private\is_paragraph_continuation_text($context, $lines)) {
         return null;
       }
+      $lines = $rest;
     }
     return null;
   }

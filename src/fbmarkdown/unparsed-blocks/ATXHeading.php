@@ -23,10 +23,9 @@ final class ATXHeading extends LeafBlock {
 
   public static function consume(
     Context $_context,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    $first = C\firstx($lines);
-    $rest = Vec\drop($lines, 1);
+    Lines $lines,
+  ): ?(Block, Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
 
     $matches = [];
     $result = \preg_match(self::PATTERN, $first, $matches);

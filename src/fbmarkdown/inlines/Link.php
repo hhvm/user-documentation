@@ -138,17 +138,17 @@ class Link extends Inline {
       return null;
     }
 
-    list($destination, $str) = $destination;
+    list($destination, $idx) = $destination;
+    $str = Str\trim_left(Str\slice($str, $idx));
 
     if ($str === '') {
       return null;
     }
 
-    $str = Str\trim_left($str);
     $title = consume_link_title($str);
     if ($title !== null) {
-      list($title, $str) = $title;
-      $str = Str\trim_left($str);
+      list($title, $idx) = $title;
+      $str = Str\trim_left(Str\slice($str, $idx));
     } else {
       // make title ?string, instead of string|?(string, string)
       $title = null;

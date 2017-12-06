@@ -26,10 +26,10 @@ final class TableExtension extends LeafBlock {
 
   public static function consume(
     Context $ctx,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
+    Lines $lines,
+  ): ?(Block, Lines) {
     $rows = vec[];
-    while (!C\is_empty($lines)) {
+    while (!$lines->isEmpty()) {
       $result = self::consumeRow($ctx, $lines);
       if ($result === null) {
         break;
@@ -116,9 +116,9 @@ final class TableExtension extends LeafBlock {
 
   private static function consumeRow(
     Context $_,
-    vec<string> $lines,
-  ): ?(vec<string>, vec<string>) {
-    $first = C\firstx($lines);
+    Lines $lines,
+  ): ?(vec<string>, Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
 
     if (Str\starts_with($first, '|')) {
       $first = Str\slice($first, 1);
@@ -158,7 +158,7 @@ final class TableExtension extends LeafBlock {
 
     return tuple(
       Vec\map($parts, $part ==> Str\trim($part)),
-      Vec\drop($lines, 1),
+      $rest,
     );
   }
 

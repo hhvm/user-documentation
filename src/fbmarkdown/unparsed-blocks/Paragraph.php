@@ -23,25 +23,27 @@ final class Paragraph extends LeafBlock {
 
   public static function consume(
     Context $context,
-    vec<string> $lines,
-  ): (Paragraph, vec<string>) {
-    $matched = vec[C\firstx($lines)];
+    Lines $lines,
+  ): (Paragraph, Lines) {
+    list($first, $lines) = $lines->getFirstLineAndRest();
+    $matched = vec[$first];
 
-    for ($idx = 1; $idx < C\count($lines); ++$idx) {
-      if ($lines[$idx] === '') {
+    while (!$lines->isEmpty()) {
+      list($next, $rest) = $lines->getFirstLineAndRest();
+      if (self::isBlankLine($next)) {
         break;
       }
-      if (
-        !_Private\is_paragraph_continuation_text($context, Vec\drop($lines, $idx))
-      ) {
+
+      if (!_Private\is_paragraph_continuation_text($context, $lines)) {
         break;
       }
-      $matched[] = $lines[$idx];
+      $matched[] = $next;
+      $lines = $rest;
     }
 
     return tuple(
       new self(Str\join($matched, "\n")),
-      Vec\drop($lines, C\count($matched)),
+      $lines,
     );
   }
 

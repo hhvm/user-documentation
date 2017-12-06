@@ -33,9 +33,9 @@ class ListItem extends ContainerBlock {
 
   final public static function consume(
     Context $context,
-    vec<string> $lines,
-  ): ?(ListItem, vec<string>) {
-    $line = C\firstx($lines);
+    Lines $lines,
+  ): ?(ListItem, Lines) {
+    list($column, $line, $rest) = $lines->getColumnFirstLineAndRest();
     $matches = [];
     if (
       \preg_match(
@@ -48,34 +48,38 @@ class ListItem extends ContainerBlock {
     }
     $full = $matches[0];
     $width = Str\length($full);
-    $prefix = Str\repeat(' ', $width);
     $ordered = ($matches['digits'] ?? null) !== null;
     $number = $ordered ? ((int) $matches['digits']) : null;
     $delimiter = Str\trim_left($matches['marker'], '0123456789');
 
-    $matched = vec[Str\strip_prefix($line, $full)];
-
+    $matched = vec[
+      tuple($column + $width, Str\slice($line, $width)),
+    ];
     $last_blank = false;
-    for ($idx = 1; $idx < C\count($lines); ++$idx) {
-      $line = $lines[$idx];
+
+    $lines = $rest;
+    while (!$lines->isEmpty()) {
+      list($column, $line, $rest) = $lines->getColumnFirstLineAndRest();
       if (self::isBlankLine($line)) {
         if ($last_blank) {
           $matched = Vec\take($matched, C\count($matched) - 1);
           break;
         }
-        $matched[] = $line;
+        $matched[] = tuple($column, $line);
+        $lines = $rest;
         $last_blank = true;
         continue;
       }
-      $maybe_thematic_break = ThematicBreak::consume($context, vec[$line]);
+      $maybe_thematic_break = ThematicBreak::consume($context, $lines);
       if ($maybe_thematic_break !== null) {
         break;
       }
 
-      $rest = self::stripWhitespacePrefix($line, $width);
-      if ($rest !== null) {
-        $matched[] = $rest;
+      $indented = Lines::stripWhitespacePrefix($line, $width, $column);
+      if ($indented !== null) {
+        $matched[] = tuple($column + $width, $indented);
         $last_blank = false;
+        $lines = $rest;
         continue;
       }
 
@@ -85,21 +89,25 @@ class ListItem extends ContainerBlock {
       $last_blank = false;
 
       // Laziness
-      $line = Str\trim_left($line);
-      if (!_Private\is_paragraph_continuation_text($context, vec[$line])) {
+      if (!_Private\is_paragraph_continuation_text($context, $lines)) {
         break;
       }
 
-      $matched[] = $line;
+      $matched[] = tuple($column, $line);
+      $lines = $rest;
     }
 
-    if (C\lastx($matched) === '') {
+    if (C\lastx($matched)[1] === '') {
       $matched = Vec\take($matched, C\count($matched) - 1);
     }
-    $rest = Vec\drop($lines, C\count($matched));
 
     return tuple(
-      static::createFromContents($context, $delimiter, $number, $matched),
+      static::createFromContents(
+        $context,
+        $delimiter,
+        $number,
+        new Lines($matched),
+      ),
       $rest,
     );
   }
@@ -108,7 +116,7 @@ class ListItem extends ContainerBlock {
     Context $context,
     string $delimiter,
     ?int $number,
-    vec<string> $contents,
+    Lines $contents,
   ): ListItem {
     return new self(
       $delimiter,

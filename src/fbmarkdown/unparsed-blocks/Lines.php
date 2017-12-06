@@ -1,0 +1,195 @@
+<?hh // strict
+/*
+ *  Copyright (c) 2004-present, Facebook, Inc.
+ *  All rights reserved.
+ *
+ *  This source code is licensed under the BSD-style license found in the
+ *  LICENSE file in the root directory of this source tree. An additional grant
+ *  of patent rights can be found in the PATENTS file in the same directory.
+ *
+ */
+
+namespace Facebook\Markdown\UnparsedBlocks;
+
+use namespace HH\Lib\{C, Str, Vec};
+
+final class Lines {
+  public function __construct(
+    private vec<(int, string)> $lines,
+  ) {
+  }
+
+  public function isEmpty(): bool {
+    return C\is_empty($this->lines);
+  }
+
+  public function getCount(): int {
+    return C\count($this->lines);
+  }
+
+  public function getColumn(): int {
+    return C\firstx($this->lines)[0];
+  }
+
+  public function getFirstLine(): string {
+    return C\firstx($this->lines)[1];
+  }
+
+  public function getFirstLineAndRest(): (string, Lines) {
+    return tuple(
+      $this->getFirstLine(),
+      new self(Vec\drop($this->lines, 1)),
+    );
+  }
+
+  public function getColumnFirstLineAndRest(): (int, string, Lines) {
+    return tuple(
+      $this->getColumn(),
+      $this->getFirstLine(),
+      new self(Vec\drop($this->lines, 1)),
+    );
+  }
+
+  public function getPrefixedLinesAndRest(
+    Context $context,
+    string $pattern,
+  ): (Lines, Lines) {
+    $contents = vec[];
+    $count = C\count($this->lines);
+    for ($i = 0; $i < $count; ++$i) {
+      list($indentation, $line) = $this->lines[$i];
+
+      $matches = [];
+      if (\preg_match($pattern, $line, $matches) === 1) {
+        $match = $matches[0];
+        $len = Str\length($match);
+        $contents[] = tuple(
+          $indentation + Str\length($match),
+          Str\slice($line, $len),
+        );
+        continue;
+      }
+
+      if ($i === 0) {
+        return tuple(new Lines(vec[]), $this);
+      }
+
+      $rest = Vec\slice($this->lines, $i);
+      if (_Private\is_paragraph_continuation_text($context, new self($rest))) {
+        $contents[] = tuple($indentation, $line);
+        continue;
+      }
+
+      break;
+    }
+
+    return tuple(
+      new self($contents),
+      new self(Vec\drop($this->lines, $i)),
+    );
+  }
+
+  public function getIndentedLinesAndRest(
+    int $indent,
+  ): (Lines, Lines) {
+    $lines = $this;
+    $matched = vec[];
+    while (!$lines->isEmpty()) {
+      list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
+      $line = self::stripWhitespacePrefix($line, $indent, $col);
+      if ($line === null) {
+        break;
+      }
+      $matched[] = $line;
+      $lines = $rest;
+    }
+
+    return tuple(
+      new self(Vec\map($matched, $l ==> tuple($indent, $l))),
+      $lines,
+    );
+  }
+
+  public static function stripWhitespacePrefix(
+    string $line,
+    int $width,
+    int $column,
+  ): ?string {
+    $count = 0;
+    $len = Str\length($line);
+    for ($i = 0; $i < $len && $count < $width; ++$i) {
+      $char = $line[$i];
+      if ($char === ' ') {
+        ++$count;
+        continue;
+      }
+      if ($char === "\t") {
+        $tab_width = (($column + $count) % 4);
+        if ($tab_width === 0) {
+          $tab_width = 4;
+        }
+        $count += $tab_width;
+        continue;
+      }
+      break;
+    }
+    if ($count >= $width) {
+      return Str\repeat(' ', $count - $width).Str\slice($line, $i);
+    }
+    return null;
+  }
+
+  public function withoutFirstLinePrefix(
+    string $prefix,
+  ): Lines {
+    list($offset, $line) = C\firstx($this->lines);
+    $len = Str\length($prefix);
+    invariant(
+      Str\slice($line, 0, $len) === $prefix,
+      'Line does not start with prefix',
+    );
+    return new self(
+      Vec\concat(
+        vec[tuple($offset + $len, Str\slice($line, $len))],
+        Vec\drop($this->lines, 1),
+      ),
+    );
+  }
+
+  public function withoutFirstNBytes(
+    int $count,
+  ): Lines {
+    $lines = $this->lines;
+    while ($count > 0) {
+      list($offset, $line) = C\firstx($lines);
+
+      $len = Str\length($line);
+      if ($count > $len) {
+        $count -= $len + 1; // +1 for "\n"
+        $lines = Vec\drop($lines, 1);
+        continue;
+      }
+      if ($count === $len) {
+        $lines = Vec\concat(
+          vec[tuple($offset + $count, '')],
+          Vec\drop($lines, 1),
+        );
+        break;
+      }
+      if ($count <= $len) {
+        $lines = Vec\concat(
+          vec[tuple($offset + $count, Str\slice($line, $count))],
+          Vec\drop($lines, 1),
+        );
+        break;
+      }
+    }
+    return new self($lines);
+  }
+
+  public function toString(): string {
+    return $this->lines
+      |> Vec\map($$, $indent_and_line ==> $indent_and_line[1])
+      |> Str\join($$, "\n");
+  }
+}

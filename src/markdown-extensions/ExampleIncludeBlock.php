@@ -25,9 +25,9 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
 
   public static function consume(
     UnparsedBlocks\Context $context,
-    vec<string> $lines,
-  ): ?(UnparsedBlocks\Block, vec<string>) {
-    $first = C\firstx($lines);
+    UnparsedBlocks\Lines $lines,
+  ): ?(UnparsedBlocks\Block, UnparsedBlocks\Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
     $matches = [];
     if (\preg_match(self::PATTERN, $first, $matches) !== 1) {
       return null;
@@ -67,7 +67,7 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
         self::getExampleBlock($file),
         self::getOutputBlock($file),
       ),
-      Vec\drop($lines, 1),
+      $rest,
     );
   }
 

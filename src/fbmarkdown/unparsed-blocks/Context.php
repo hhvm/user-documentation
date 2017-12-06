@@ -11,7 +11,7 @@
 
 namespace Facebook\Markdown\UnparsedBlocks;
 
-use namespace HH\Lib\Keyset;
+use namespace HH\Lib\{Keyset, Vec};
 
 class Context {
   const keyset<classname<Block>> ALL_BLOCK_TYPES = keyset[

@@ -17,10 +17,10 @@ use namespace HH\Lib\C;
 abstract class ContainerBlock extends Block {
   protected static function consumeChildren(
     Context $context,
-    vec<string> $lines,
+    Lines $lines,
   ): vec<Block> {
     $children = vec[];
-    while (!C\is_empty($lines)) {
+    while (!$lines->isEmpty()) {
       $match = null;
       foreach ($context->getBlockTypes() as $block) {
         $match = $block::consume($context, $lines);
@@ -32,10 +32,10 @@ abstract class ContainerBlock extends Block {
       list($child, $new_lines) = $match;
       $children[] = $child;
       invariant(
-        C\count($lines) > C\count($new_lines),
+        $lines->getCount() > $new_lines->getCount(),
         'consuming failed to reduce line count with class "%s" on line "%s"',
         get_class($child),
-        $lines[0],
+        $lines->getFirstLine(),
       );
       $lines = $new_lines;
     }

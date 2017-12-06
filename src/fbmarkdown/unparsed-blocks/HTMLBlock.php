@@ -59,8 +59,8 @@ final class HTMLBlock extends FencedBlock {
 
   public static function consume(
     Context $context,
-    vec<string> $lines,
-  ): ?(this, vec<string>) {
+    Lines $lines,
+  ): ?(this, Lines) {
     if (!$context->isHTMLEnabled()) {
       return null;
     }

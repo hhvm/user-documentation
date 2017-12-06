@@ -13,18 +13,18 @@ namespace Facebook\Markdown\UnparsedBlocks;
 
 use type Facebook\Markdown\Blocks\BlankLine as ASTNode;
 use namespace Facebook\Markdown\Inlines;
-use namespace HH\Lib\{C, Vec};
 
 final class BlankLine extends LeafBlock {
 
   public static function consume(
     Context $_,
-    vec<string> $lines,
-  ): ?(Block, vec<string>) {
-    if (C\firstx($lines) !== '') {
+    Lines $lines,
+  ): ?(Block, Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
+    if (!self::isBlankLine($first)) {
       return null;
     }
-    return tuple(new self(), Vec\drop($lines, 1));
+    return tuple(new self(), $rest);
   }
 
   public function withParsedInlines(Inlines\Context $_ctx): ASTNode {

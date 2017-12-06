@@ -21,9 +21,9 @@ final class IncludeGeneratedMarkdownBlock extends UnparsedBlocks\Block {
 
   public static function consume(
     UnparsedBlocks\Context $context,
-    vec<string> $lines,
-  ): ?(UnparsedBlocks\Block, vec<string>) {
-    $first = C\firstx($lines);
+    UnparsedBlocks\Lines $lines,
+  ): ?(UnparsedBlocks\Block, UnparsedBlocks\Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
     $matches = [];
     if (\preg_match(self::PATTERN, $first, $matches) !== 1) {
       return null;
@@ -42,7 +42,7 @@ final class IncludeGeneratedMarkdownBlock extends UnparsedBlocks\Block {
       \file_get_contents($file),
     );
 
-    return tuple($inner_doc, Vec\drop($lines, 1));
+    return tuple($inner_doc, $rest);
   }
 
   public function withParsedInlines(

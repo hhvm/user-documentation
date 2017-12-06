@@ -13,7 +13,7 @@ namespace Facebook\Markdown\_Private;
 
 use namespace HH\Lib\{C, Str, Vec};
 
-function consume_link_title(string $input): ?(string, string) {
+function consume_link_title(string $input): ?(string, int) {
   invariant($input !== '', "Can't consume an empty string");
   $first = $input[0];
   if ($first === '"' || $first === "'") {
@@ -25,7 +25,7 @@ function consume_link_title(string $input): ?(string, string) {
   return null;
 }
 
-function consume_quoted_link_title(string $input): ?(string, string) {
+function consume_quoted_link_title(string $input): ?(string, int) {
   $quote = $input[0];
   invariant(
     $quote === "'" || $quote === '"',
@@ -64,11 +64,10 @@ function consume_quoted_link_title(string $input): ?(string, string) {
     return null;
   }
 
-  $rest = Str\slice($input, $idx + 1);
-  return tuple($title, $rest);
+  return tuple($title, $idx + 1);
 }
 
-function consume_parenthesized_link_title(string $input): ?(string, string) {
+function consume_parenthesized_link_title(string $input): ?(string, int) {
   invariant($input[0] === '(', 'must start with paren');
   $len = Str\length($input);
   $title = '';
@@ -117,6 +116,5 @@ function consume_parenthesized_link_title(string $input): ?(string, string) {
     return null;
   }
 
-  $rest = Str\slice($input, $idx + 1);
-  return tuple($title, $rest);
+  return tuple($title, $idx + 1);
 }

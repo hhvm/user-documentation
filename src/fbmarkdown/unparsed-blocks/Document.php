@@ -23,9 +23,12 @@ final class Document extends ContainerBlock {
 
   public static function consume(
     Context $context,
-    vec<string> $lines,
-  ): (Document, vec<string>) {
-    return tuple(new self(self::consumeChildren($context, $lines)), vec[]);
+    Lines $lines,
+  ): (Document, Lines) {
+    return tuple(
+      new self(self::consumeChildren($context, $lines)),
+      new Lines(vec[]),
+    );
   }
 
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
