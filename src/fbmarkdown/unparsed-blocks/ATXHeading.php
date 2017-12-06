@@ -37,8 +37,7 @@ final class ATXHeading extends LeafBlock {
     $level = Str\length($matches['level']);
 
     $title = $matches['title']
-      |> Str\trim_right($$, '#')
-      |> Str\trim_right($$, ' ');
+      |> Str\trim_right($$, '# ');
 
     return tuple(new self($level, $title), $rest);
   }
