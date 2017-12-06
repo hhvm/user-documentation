@@ -86,6 +86,26 @@ class HTMLRenderer extends Renderer<string> {
   }
 
   <<__Override>>
+  protected function renderTaskListItemExtension(
+    Blocks\TaskListItemExtension $node,
+  ): string {
+    $checked = $node->isChecked() ? ' checked=""' : '';
+    $checkbox = new Blocks\HTMLBlock(
+      '<input disabled="" '.$checked.'> ',
+    );
+
+    return $this->renderListItem(
+      new Blocks\ListItem(
+        $node->getNumber(),
+        Vec\concat(
+          vec[$checkbox],
+          $node->getChildren(),
+        ),
+      ),
+    );
+  }
+
+  <<__Override>>
   protected function renderListItem(Blocks\ListItem $node): string {
     $children = $node->getChildren();
     $child = C\first($children);

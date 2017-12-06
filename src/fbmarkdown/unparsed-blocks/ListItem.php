@@ -15,11 +15,11 @@ use type Facebook\Markdown\Blocks\ListItem as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class ListItem extends ContainerBlock {
+class ListItem extends ContainerBlock {
   public function __construct(
-    private string $delimiter,
-    private ?int $number,
-    private vec<Block> $children,
+    protected string $delimiter,
+    protected ?int $number,
+    protected vec<Block> $children,
   ) {
   }
 
@@ -31,7 +31,7 @@ final class ListItem extends ContainerBlock {
     return $this->delimiter;
   }
 
-  public static function consume(
+  final public static function consume(
     Context $context,
     vec<string> $lines,
   ): ?(ListItem, vec<string>) {
@@ -96,9 +96,23 @@ final class ListItem extends ContainerBlock {
       $matched = Vec\take($matched, C\count($matched) - 1);
     }
     $rest = Vec\drop($lines, C\count($matched));
+
     return tuple(
-      new self($delimiter, $number, self::consumeChildren($context, $matched)),
+      static::createFromContents($context, $delimiter, $number, $matched),
       $rest,
+    );
+  }
+
+  protected static function createFromContents(
+    Context $context,
+    string $delimiter,
+    ?int $number,
+    vec<string> $contents,
+  ): ListItem {
+    return new self(
+      $delimiter,
+      $number,
+      self::consumeChildren($context, $contents),
     );
   }
 

@@ -13,6 +13,7 @@ namespace Facebook\Markdown\UnparsedBlocks;
 
 use type Facebook\Markdown\Blocks\ListOfItems as ASTNode;
 use namespace Facebook\Markdown\Inlines;
+use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class ListOfItems extends ContainerBlock {
@@ -21,20 +22,34 @@ final class ListOfItems extends ContainerBlock {
   ) {
   }
 
+  private static function consumeItem(
+    Context $context,
+    vec<string> $lines,
+  ): ?(ListItem, vec<string>) {
+    foreach ($context->getListItemTypes() as $type) {
+      $match = $type::consume($context, $lines);
+      if ($match!== null) {
+        return $match;
+      }
+    }
+    return null;
+  }
+
   public static function consume(
     Context $context,
     vec<string> $lines,
   ): ?(Block, vec<string>) {
-    $first = ListItem::consume($context, $lines);
+    $first = self::consumeItem($context, $lines);
     if ($first === null) {
       return null;
     }
+
     list($first, $lines) = $first;
     $nodes = vec[$first];
     $d = $first->getDelimiter();
 
     while (!C\is_empty($lines)) {
-      $next = ListItem::consume($context, $lines);
+      $next = self::consumeItem($context, $lines);
       if ($next === null) {
         break;
       }

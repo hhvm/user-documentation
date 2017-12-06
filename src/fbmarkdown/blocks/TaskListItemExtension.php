@@ -11,15 +11,16 @@
 
 namespace Facebook\Markdown\Blocks;
 
-class ListItem extends ContainerBlock {
+class TaskListItemExtension extends ListItem {
   public function __construct(
-    private ?int $number,
+    private bool $checked,
+    ?int $number,
     vec<Block> $children,
   ) {
-    parent::__construct($children);
+    parent::__construct($number, $children);
   }
 
-  final public function getNumber(): ?int {
-    return $this->number;
+  final public function isChecked(): bool {
+    return $this->checked;
   }
 }

@@ -79,4 +79,10 @@ class Context {
       SetextHeading::class,
     ];
   }
+
+  public function getListItemTypes(): keyset<classname<ListItem>> {
+    // TaskListItemExtension will also return normal ListItems; if we support
+    // removing extensions, this will need to change.
+    return keyset[TaskListItemExtension::class];
+  }
 }
