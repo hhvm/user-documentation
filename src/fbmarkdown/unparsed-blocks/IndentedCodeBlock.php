@@ -25,11 +25,14 @@ final class IndentedCodeBlock extends LeafBlock {
   ): ?(Block, vec<string>) {
     $matched = vec[];
     foreach ($lines as $line) {
-      if (Str\starts_with($line, '    ')) {
-        $matched[] = Str\slice($line, 4);
-      } else {
+      $matches = [];
+      if (
+        \preg_match("/^( {4}| {0,3}\\t)(?<rest>.*)$/", $line, $matches) !== 1
+      ) {
         break;
       }
+
+      $matched[] = $matches['rest'];
     }
 
     if (C\count($matched) === 0) {
