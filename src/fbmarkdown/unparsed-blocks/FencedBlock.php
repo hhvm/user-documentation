@@ -16,6 +16,7 @@ use namespace HH\Lib\{C, Vec};
 abstract class FencedBlock extends LeafBlock {
   protected abstract static function createFromLines(
     vec<string> $lines,
+    int $indentation_of_first,
     bool $eof,
   ): this;
 
@@ -27,7 +28,7 @@ abstract class FencedBlock extends LeafBlock {
     Context $_,
     Lines $lines,
   ): ?(this, Lines) {
-    list($first, $rest) = $lines->getFirstLineAndRest();
+    list($indentation, $first, $rest) = $lines->getColumnFirstLineAndRest();
     $end = static::getEndPatternForFirstLine($first);
     if ($end === null) {
       return null;
@@ -46,7 +47,7 @@ abstract class FencedBlock extends LeafBlock {
     }
 
     return tuple(
-      static::createFromLines($matched, $eof),
+      static::createFromLines($matched, $indentation, $eof),
       $rest,
     );
   }

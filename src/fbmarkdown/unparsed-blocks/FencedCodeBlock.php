@@ -16,7 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class FencedCodeBlock extends FencedBlock {
-  const string PATTERN = '/^ {0,3}(?<fence>`{3,}|~{3,})(?<info>[^`]*)?$/';
+  const string PATTERN = '/^(?<indent> {0,3})(?<fence>`{3,}|~{3,})(?<info>[^`]*)?$/';
 
   public function __construct(
     private string $content,
@@ -34,6 +34,7 @@ final class FencedCodeBlock extends FencedBlock {
 
   protected static function createFromLines(
     vec<string> $lines,
+    int $column,
     bool $eof,
   ): this {
     $first = C\firstx($lines);
@@ -46,11 +47,29 @@ final class FencedCodeBlock extends FencedBlock {
     if ($info === '') {
       $info = null;
     }
+    $indent = Str\length($matches['indent']);
 
     $content = $lines
       |> Vec\slice($$, 1, C\count($lines) - ($eof ? 1 : 2))
+      |> Vec\map($$, $line ==> self::unindentLine($line, $indent, $column))
       |> Str\join($$, "\n");
     return new self($content, $info);
+  }
+
+  private static function unindentLine(
+    string $line,
+    int $indent,
+    int $column,
+  ): string {
+    if ($indent === 0) {
+      return $line;
+    }
+    $stripped = Lines::stripWhitespacePrefix($line, $indent, $column);
+    if ($stripped !== null) {
+      return $stripped;
+    }
+
+    return Str\trim_left($line);
   }
 
   <<__Override>>
