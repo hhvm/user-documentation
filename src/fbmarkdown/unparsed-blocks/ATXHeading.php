@@ -16,7 +16,7 @@ use type Facebook\Markdown\Blocks\Heading as ASTHeading;
 use namespace Facebook\Markdown\Inlines;
 
 final class ATXHeading extends LeafBlock {
-  const string PATTERN = '/^ {0,3}(?<level>#{1,6}) (?<title>.+)$/';
+  const string PATTERN = '/^ {0,3}(?<level>#{1,6})[ \t](?<title>.+)$/';
 
   public function __construct(private int $level, private string $heading) {
   }

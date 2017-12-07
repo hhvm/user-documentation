@@ -22,7 +22,7 @@ final class ThematicBreak extends LeafBlock {
     Lines $lines,
   ): ?(Block, Lines) {
     list($first, $rest) = $lines->getFirstLineAndRest();
-    if (\preg_match('/^ {0,3}([-_*] *){3,}$/', $first) !== 1) {
+    if (\preg_match('/^ {0,3}([-_*][ \t]*){3,}$/', $first) !== 1) {
       return null;
     }
     return tuple(new self(), $rest);
