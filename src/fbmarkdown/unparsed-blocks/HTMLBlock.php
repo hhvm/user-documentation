@@ -33,7 +33,7 @@ class HTMLBlock extends FencedBlock {
   ' +'.self::ATTRIBUTE_NAME.'('.self::ATTRIBUTE_VALUE_SPECIFICATION.')?';
 
   const dict<string, string> PARAGRAPH_INTERRUPTING_PATTERNS = dict[
-    '/^(<script|<pre|style)( |>|$)/' => ',</script>|</pre>|</style>,',
+    '/^(<script|<pre|style)( |>|$)/i' => ',</script>|</pre>|</style>,i',
     '/^<!--/' => '/-->/',
     '/^<\\?/' => '/\\?>/',
     '/^<![A-Z]/' => '/>/',
@@ -44,8 +44,8 @@ class HTMLBlock extends FencedBlock {
       'figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|'.
       'html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|'.
       'optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|'.
-      'thead|title|tr|track|ul)( +|$|\\/)?>/' => '/^$/',
-    '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')*'.' *\\/?> *$/' => '/^$/',
+      'thead|title|tr|track|ul)( +|$|\\/)?>/i' => '/^$/',
+    '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')*'.' *\\/?> *$/i' => '/^$/',
   ];
 
   const dict<string, string> NON_INTERRUPTING_PATTERNS = dict[
