@@ -44,7 +44,7 @@ class HTMLBlock extends FencedBlock {
       'figcaption|figure|footer|form|frame|frameset|h[1-6]|head|header|hr|'.
       'html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|'.
       'optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|'.
-      'thead|title|tr|track|ul)( +|$|\\/)?>/i' => '/^$/',
+      'thead|title|tr|track|ul)([ \\t]+|$|>|\\/>)/i' => '/^$/',
     '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')*'.' *\\/?> *$/i' => '/^$/',
   ];
 
