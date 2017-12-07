@@ -58,6 +58,7 @@ class HTMLBlock extends FencedBlock {
   ) {
   }
 
+  <<__Override>>
   protected static function createFromLines(
     vec<string> $lines,
     int $_indentation_of_first,

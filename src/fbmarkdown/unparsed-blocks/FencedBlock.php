@@ -37,6 +37,19 @@ abstract class FencedBlock extends LeafBlock {
     }
 
     $matched = vec[$first];
+
+    if (
+      is_a(static::class, HTMLBlock::class, true)
+      && \preg_match($end, $first) === 1
+    ) {
+      // Keyed specifically to HTMLBlock as the behavior for the rest of the
+      // line feels a bit strange
+      return tuple(
+        static::createFromLines($matched, $indentation, false),
+        $rest,
+      );
+    }
+
     $eof = true;
 
     while (!$rest->isEmpty()) {
