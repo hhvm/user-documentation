@@ -23,15 +23,38 @@ final class IndentedCodeBlock extends LeafBlock {
     Context $_,
     Lines $lines,
   ): ?(Block, Lines) {
-    list($matched, $rest) = $lines->getIndentedLinesAndRest(4);
-    if ($matched->isEmpty()) {
-      return null;
+    $matched = vec[];
+    $blank_line_stash = null;
+    while (!$lines->isEmpty()) {
+      list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
+      $stripped = Lines::stripWhitespacePrefix($line, 4, $col);
+      if ($stripped !== null) {
+        $blank_line_stash = null;
+        $matched[] = $stripped;
+        $lines = $rest;
+        continue;
+      }
+
+      if (!Lines::isBlankLine($line)) {
+        break;
+      }
+
+      if ($blank_line_stash === null) {
+        $blank_line_stash = tuple($matched, $lines);
+      }
+
+      $matched[] = '';
+      $lines = $rest;
     }
 
-    return tuple(
-      new self($matched->toString()),
-      $rest,
-    );
+    if ($blank_line_stash !== null) {
+      list($matched, $lines) = $blank_line_stash;
+    }
+
+    if (C\is_empty($matched)) {
+      return null;
+    }
+    return tuple(new self(Str\join($matched, "\n")), $lines);
   }
 
   <<__Override>>
