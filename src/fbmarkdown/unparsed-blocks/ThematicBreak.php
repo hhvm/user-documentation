@@ -13,21 +13,27 @@ namespace Facebook\Markdown\UnparsedBlocks;
 
 use type Facebook\Markdown\Blocks\ThematicBreak as ASTNode;
 use namespace Facebook\Markdown\Inlines;
-use namespace HH\Lib\{C, Vec};
+use namespace HH\Lib\{C, Str, Vec};
 
 final class ThematicBreak extends LeafBlock {
+
+  <<__Memoize>>
+  private static function getPattern(): string {
+    $pattern = '/^ {0,3}';
+
+    return vec['-', '_', '*']
+      |> Vec\map($$, $c ==> \preg_quote($c, '/'))
+      |> Vec\map($$, $c ==> '('.$c."[ \\t]*){3,}")
+      |> Str\join($$, '|')
+      |> '/^ {0,3}('.$$.')$/';
+  }
 
   public static function consume(
     Context $_,
     Lines $lines,
   ): ?(Block, Lines) {
     list($first, $rest) = $lines->getFirstLineAndRest();
-    if (
-      \preg_match(
-        '/^ {0,3}((-[ \t]*){3,})((_[ \t]*){3,})((\*[ \t]*){3,})$/',
-        $first,
-      ) !== 1
-    ) {
+    if (\preg_match(self::getPattern(), $first) !== 1) {
       return null;
     }
     return tuple(new self(), $rest);
