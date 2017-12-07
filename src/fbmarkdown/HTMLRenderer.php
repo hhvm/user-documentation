@@ -140,6 +140,9 @@ class HTMLRenderer extends Renderer<string> {
     if ($start === null) {
       $start = '<ul>';
       $end = '</ul>';
+    } else if ($start === 1) {
+      $start ='<ol>';
+      $end = '</ol>';
     } else {
       $start = sprintf('<ol start="%d">', $start);
       $end = '</ol>';
