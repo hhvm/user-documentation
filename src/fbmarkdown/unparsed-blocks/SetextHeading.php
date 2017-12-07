@@ -24,22 +24,25 @@ final class SetextHeading extends LeafBlock {
     Context $context,
     Lines $lines,
   ): ?(Block, Lines) {
-    list($first, $lines) = $lines->getFirstLineAndRest();
+    list($first_col, $first, $lines) = $lines->getColumnFirstLineAndRest();
     $heading = $first;
 
     while (!$lines->isEmpty()) {
-      list($line, $rest) = $lines->getFirstLineAndRest();
+      list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
       if (Lines::isBlankLine($line)) {
         return null;
       }
 
       $matches = [];
       if (\preg_match('/^ {0,3}(?<level>=+|-+) *$/', $line, $matches) === 1) {
-        $level = $matches['level'][0] === '=' ? 1 : 2;
-        return tuple(
-          new self($level, $heading),
-          $rest,
-        );
+        // Heading underline can not be a lazy continuation item
+        if ($col >= $first_col) {
+          $level = $matches['level'][0] === '=' ? 1 : 2;
+          return tuple(
+            new self($level, $heading),
+            $rest,
+          );
+        }
       }
 
       if (!_Private\is_paragraph_continuation_text($context, $lines)) {
