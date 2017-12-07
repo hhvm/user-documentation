@@ -109,7 +109,9 @@ final class LinkReferenceDefinition extends LeafBlock {
     $lines = $lines->withLeftTrimmedFirstLine();
     if ($lines->getFirstLine() === '') {
       list($_, $lines) = $lines->getFirstLineAndRest();
-      $lines = $lines->withLeftTrimmedFirstLine();
+      if (!$lines->isEmpty()) {
+        $lines = $lines->withLeftTrimmedFirstLine();
+      }
     }
 
     $title = null;
@@ -118,10 +120,12 @@ final class LinkReferenceDefinition extends LeafBlock {
       list($title, $lines) = $result;
     }
 
-    list($line, $lines) =
-      $lines->withLeftTrimmedFirstLine()->getFirstLineAndRest();
-    if ($line !== '') {
-      return null;
+    if (!$lines->isEmpty()) {
+      list($line, $lines) =
+        $lines->withLeftTrimmedFirstLine()->getFirstLineAndRest();
+      if ($line !== '') {
+        return null;
+      }
     }
 
     $def = new self($label, $destination, $title);
@@ -132,6 +136,10 @@ final class LinkReferenceDefinition extends LeafBlock {
   private static function consumeDestination(
     Lines $lines,
   ): ?(string, Lines) {
+    if ($lines->isEmpty()) {
+      return null;
+    }
+
     $out = consume_link_destination($lines->toString());
     if ($out === null) {
       return null;
@@ -143,6 +151,10 @@ final class LinkReferenceDefinition extends LeafBlock {
   private static function consumeTitle(
     Lines $lines,
   ): ?(string, Lines) {
+    if ($lines->isEmpty()) {
+      return null;
+    }
+
     $out = consume_link_title($lines->toString());
     if ($out === null) {
       return null;
