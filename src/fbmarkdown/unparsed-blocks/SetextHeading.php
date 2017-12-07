@@ -45,6 +45,7 @@ final class SetextHeading extends LeafBlock {
       if (!_Private\is_paragraph_continuation_text($context, $lines)) {
         return null;
       }
+      $heading .= "\n".$line;
       $lines = $rest;
     }
     return null;
