@@ -46,13 +46,9 @@ abstract class Renderer<T> {
   abstract protected function renderLinkReferenceDefinition(
     Blocks\LinkReferenceDefinition $node
   ): T;
-  abstract protected function renderListItem(Blocks\ListItem $node): T;
   abstract protected function renderListOfItems(Blocks\ListOfItems $node): T;
   abstract protected function renderParagraph(Blocks\Paragraph $node): T;
   abstract protected function renderTableExtension(Blocks\TableExtension $node): T;
-  abstract protected function renderTaskListItemExtension(
-    Blocks\TaskListItemExtension $node,
-  ): T;
   abstract protected function renderThematicBreak(): T;
 
   ///// inlines ////
@@ -111,14 +107,6 @@ abstract class Renderer<T> {
 
     if ($node instanceof Blocks\LinkReferenceDefinition) {
       return $this->renderLinkReferenceDefinition($node);
-    }
-
-    if ($node instanceof Blocks\TaskListItemExtension) {
-      return $this->renderTaskListItemExtension($node);
-    }
-
-    if ($node instanceof Blocks\ListItem) {
-      return $this->renderListItem($node);
     }
 
     if ($node instanceof Blocks\ListOfItems) {

@@ -16,9 +16,18 @@ use namespace HH\Lib\{C, Vec};
 
 final class ListOfItems extends ContainerBlock {
   public function __construct(
+    private bool $loose,
     vec<ListItem> $children,
   ) {
     parent::__construct($children);
+  }
+
+  public function isLoose(): bool {
+    return $this->loose;
+  }
+
+  public function isTight(): bool {
+    return !$this->isLoose();
   }
 
   public function getFirstNumber(): ?int {

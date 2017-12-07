@@ -18,6 +18,7 @@ use namespace HH\Lib\{C, Str, Vec};
 
 final class ListOfItems extends ContainerBlock {
   public function __construct(
+    private bool $loose,
     private vec<ListItem> $children,
   ) {
   }
@@ -46,11 +47,19 @@ final class ListOfItems extends ContainerBlock {
 
     list($first, $lines) = $first;
     $nodes = vec[$first];
+    
+    $loose = $first->makesListLoose();
     $d = $first->getDelimiter();
 
     while (!$lines->isEmpty()) {
       $next = self::consumeItem($context, $lines);
       if ($next === null) {
+        list($line, $rest) = $lines->getFirstLineAndRest();
+        if (self::isBlankLine($line)) {
+          $loose = true;
+          $lines = $rest;
+          continue;
+        }
         break;
       }
       list($next, $rest) = $next;
@@ -58,15 +67,17 @@ final class ListOfItems extends ContainerBlock {
         break;
       }
       $nodes[] = $next;
+      $loose = $loose || $next->makesListLoose();
       $lines = $rest;
     }
 
-    return tuple(new self($nodes), $lines);
+    return tuple(new self($loose, $nodes), $lines);
   }
 
   <<__Override>>
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
     return new ASTNode(
+      $this->loose,
       Vec\map($this->children, $child ==> $child->withParsedInlines($ctx)),
     );
   }

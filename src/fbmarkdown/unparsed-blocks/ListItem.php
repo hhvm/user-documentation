@@ -31,6 +31,10 @@ class ListItem extends ContainerBlock {
     return $this->delimiter;
   }
 
+  public function makesListLoose(): bool {
+    return C\any($this->children, $child ==> $child instanceof BlankLine);
+  }
+
   final public static function consume(
     Context $context,
     Lines $lines,

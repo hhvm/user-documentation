@@ -85,33 +85,49 @@ class HTMLRenderer extends Renderer<string> {
     return '';
   }
 
-  <<__Override>>
   protected function renderTaskListItemExtension(
-    Blocks\TaskListItemExtension $node,
+    Blocks\ListOfItems $list,
+    Blocks\TaskListItemExtension $item,
   ): string {
-    $checked = $node->isChecked() ? ' checked=""' : '';
+    $checked = $item->isChecked() ? ' checked=""' : '';
     $checkbox = new Blocks\HTMLBlock(
       '<input disabled="" '.$checked.'> ',
     );
 
     return $this->renderListItem(
+      $list,
       new Blocks\ListItem(
-        $node->getNumber(),
+        $item->getNumber(),
         Vec\concat(
           vec[$checkbox],
-          $node->getChildren(),
+          $item->getChildren(),
         ),
       ),
     );
   }
 
-  <<__Override>>
-  protected function renderListItem(Blocks\ListItem $node): string {
-    $children = $node->getChildren();
-    $child = C\first($children);
-    if (C\count($children) === 1 && $child instanceof Blocks\Paragraph) {
-      $children = $child->getContents();
+  protected function renderListItem(
+    Blocks\ListOfItems $list,
+    Blocks\ListItem $item,
+  ): string {
+    if ($item instanceof Blocks\TaskListItemExtension) {
+      return $this->renderTaskListItemExtension($list, $item);
     }
+
+    $children = $item->getChildren();
+
+    if ($list->isTight()) {
+      $children = Vec\map(
+        $children,
+        $child ==> {
+          if ($child instanceof Blocks\Paragraph) {
+            return $child->getContents();
+          }
+          return vec[$child];
+        },
+      ) |> Vec\flatten($$);
+    }
+
     return $children
       |> Vec\map($$, $child ==> $this->render($child))
       |> Str\join($$, "\n")
@@ -129,7 +145,7 @@ class HTMLRenderer extends Renderer<string> {
       $end = '</ol>';
     }
     return $node->getItems()
-      |> Vec\map($$, $item ==> $this->render($item))
+      |> Vec\map($$, $item ==> $this->renderListItem($node, $item))
       |> Str\join($$, "\n")
       |> $start."\n".$$."\n".$end."\n";
   }
