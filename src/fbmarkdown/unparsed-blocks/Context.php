@@ -75,6 +75,7 @@ class Context {
   ): keyset<classname<Block>> {
     return keyset[
       HTMLBlock::class,
+      IndentedCodeBlock::class,
       Paragraph::class,
       SetextHeading::class,
     ];
