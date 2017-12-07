@@ -69,16 +69,18 @@ class ListItem extends ContainerBlock {
     $matched = vec[
       tuple($column + $width, $rest_of_line),
     ];
-    $last_blank = false;
+    $pre_blank_line = null;
 
     $lines = $rest;
     while (!$lines->isEmpty()) {
       list($column, $line, $rest) = $lines->getColumnFirstLineAndRest();
       if (self::isBlankLine($line)) {
-        if ($last_blank) {
-          $matched = Vec\take($matched, C\count($matched) - 1);
+        if ($pre_blank_line !== null) {
+          list($matched, $lines) = $pre_blank_line;
           break;
         }
+        $pre_blank_line = tuple($matched, $lines);
+
         $matched[] = tuple($column, $line);
         $lines = $rest;
         $last_blank = true;
@@ -92,15 +94,15 @@ class ListItem extends ContainerBlock {
       $indented = Lines::stripWhitespacePrefix($line, $width, $column);
       if ($indented !== null) {
         $matched[] = tuple($column + $width, $indented);
-        $last_blank = false;
+        $pre_blank_line = null;
         $lines = $rest;
         continue;
       }
 
-      if ($last_blank) {
+      if ($pre_blank_line !== null) {
         break;
       }
-      $last_blank = false;
+      $pre_blank_line = null;
 
       // Laziness
       if (!_Private\is_paragraph_continuation_text($context, $lines)) {
@@ -111,8 +113,8 @@ class ListItem extends ContainerBlock {
       $lines = $rest;
     }
 
-    if (C\lastx($matched)[1] === '') {
-      $matched = Vec\take($matched, C\count($matched) - 1);
+    if ($pre_blank_line !== null) {
+      list($matched, $lines) = $pre_blank_line;
     }
 
     return tuple(
@@ -122,7 +124,7 @@ class ListItem extends ContainerBlock {
         $number,
         new Lines($matched),
       ),
-      $rest,
+      $lines,
     );
   }
 
