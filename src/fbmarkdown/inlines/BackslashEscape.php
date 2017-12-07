@@ -30,10 +30,9 @@ final class BackslashEscape extends InlineWithPlainTextContent {
       return null;
     }
 
-    invariant(
-      Str\length($string) > 1,
-      'should have been interpreted as hard line break',
-    );
+    if (Str\length($string) === 1) {
+      return null;
+    }
 
     $next = $string[1];
     if (C\contains_key(self::ASCII_PUNCTUATION, $next)) {

@@ -31,10 +31,6 @@ final class HardLineBreak extends Inline {
     }
 
     $len = Str\length($string);
-    if ($len === 1 && $string === "\\") {
-      return tuple(new self(), "\\", '');
-    }
-
     for ($i = 0; $i < $len; ++$i) {
       if ($string[$i] === ' ') {
         continue;
