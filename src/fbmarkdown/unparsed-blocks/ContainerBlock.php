@@ -11,10 +11,15 @@
 
 namespace Facebook\Markdown\UnparsedBlocks;
 
-use namespace HH\Lib\C;
+use namespace HH\Lib\{C, Dict};
 
 
-abstract class ContainerBlock extends Block {
+abstract class ContainerBlock<TChild as Block> extends Block {
+  public function __construct(
+    protected vec<TChild> $children,
+  ) {
+  }
+
   protected static function consumeChildren(
     Context $context,
     Lines $lines,

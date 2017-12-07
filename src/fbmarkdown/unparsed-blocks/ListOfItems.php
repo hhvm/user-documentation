@@ -16,11 +16,12 @@ use namespace Facebook\Markdown\Inlines;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class ListOfItems extends ContainerBlock {
+final class ListOfItems extends ContainerBlock<ListItem> {
   public function __construct(
     private bool $loose,
-    private vec<ListItem> $children,
+    vec<ListItem> $children,
   ) {
+    parent::__construct($children);
   }
 
   private static function consumeItem(

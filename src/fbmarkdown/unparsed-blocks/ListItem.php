@@ -15,12 +15,13 @@ use type Facebook\Markdown\Blocks\ListItem as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-class ListItem extends ContainerBlock {
+class ListItem extends ContainerBlock<Block> {
   public function __construct(
     protected string $delimiter,
     protected ?int $number,
-    protected vec<Block> $children,
+    vec<Block> $children,
   ) {
+    parent::__construct($children);
   }
 
   public function isOrderedList(): bool {
