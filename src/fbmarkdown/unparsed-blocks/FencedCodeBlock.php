@@ -73,7 +73,10 @@ final class FencedCodeBlock extends FencedBlock {
   }
 
   <<__Override>>
-  protected static function getEndPatternForFirstLine(string $first): ?string {
+  protected static function getEndPatternForFirstLine(
+    Context $_,
+    string $first,
+  ): ?string {
     $matches = [];
     $result = \preg_match(self::PATTERN, $first, $matches);
     if ($result !== 1) {

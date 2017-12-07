@@ -21,15 +21,16 @@ abstract class FencedBlock extends LeafBlock {
   ): this;
 
   protected abstract static function getEndPatternForFirstLine(
+    Context $context,
     string $first,
   ): ?string;
 
   public static function consume(
-    Context $_,
+    Context $context,
     Lines $lines,
   ): ?(this, Lines) {
     list($indentation, $first, $rest) = $lines->getColumnFirstLineAndRest();
-    $end = static::getEndPatternForFirstLine($first);
+    $end = static::getEndPatternForFirstLine($context, $first);
     if ($end === null) {
       return null;
     }

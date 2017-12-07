@@ -38,6 +38,7 @@ class Context {
   public function resetFileData(): this {
     $this->file = null;
     $this->linkReferenceDefinitions = dict[];
+    $this->paragraphDepth = 0;
     return $this;
   }
 
@@ -89,10 +90,29 @@ class Context {
     return $this->blockTypes;
   }
 
+  private int $paragraphDepth = 0;
+
+  public function isInParagraphContinuation(): bool {
+    return $this->paragraphDepth !== 0;
+  }
+
+  public function pushParagraphContinuation(): this {
+    $this->paragraphDepth++;
+    return $this;
+  }
+
+  public function popParagraphContinuation(): this {
+    $this->paragraphDepth--;
+    invariant(
+      $this->paragraphDepth >= 0,
+      "Can't have a negative paragraph continuation depth",
+    );
+    return $this;
+  }
+
   public function getIgnoredBlockTypesForParagraphContinuation(
   ): keyset<classname<Block>> {
     return keyset[
-      HTMLBlock::class,
       IndentedCodeBlock::class,
       Paragraph::class,
       SetextHeading::class,

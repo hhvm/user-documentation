@@ -13,9 +13,10 @@ namespace Facebook\Markdown\UnparsedBlocks;
 
 use type Facebook\Markdown\Blocks\HTMLBlock as ASTNode;
 use namespace Facebook\Markdown\Inlines;
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{Dict, Str};
 
-final class HTMLBlock extends FencedBlock {
+<<__ConsistentConstruct>>
+class HTMLBlock extends FencedBlock {
   const string TAG_NAME = '[a-z][a-z0-9-]*';
   const string ATTRIBUTE_NAME = '[a-z_:][a-z0-9_.:-]*';
   const string UNQUOTED_ATTRIBUTE_VALUE = '[^"\'=<>` ]+';
@@ -31,7 +32,7 @@ final class HTMLBlock extends FencedBlock {
   const string ATTRIBUTE =
   ' +'.self::ATTRIBUTE_NAME.'('.self::ATTRIBUTE_VALUE_SPECIFICATION.')?';
 
-  const dict<string, string> PATTERNS = dict[
+  const dict<string, string> PARAGRAPH_INTERRUPTING_PATTERNS = dict[
     '/^(<script|<pre|style)( |>|$)/' => ',</script>|</pre>|</style>,',
     '/^<!--/' => '/-->/',
     '/^<\\?/' => '/\\?>/',
@@ -45,6 +46,9 @@ final class HTMLBlock extends FencedBlock {
       'optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|'.
       'thead|title|tr|track|ul)( +|$|\\/)?>/' => '/^$/',
     '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')*'.' *\\/?> *$/' => '/^$/',
+  ];
+
+  const dict<string, string> NON_INTERRUPTING_PATTERNS = dict[
     '/^<\\/'.self::TAG_NAME.' *> *$/' => '/^$/',
   ];
 
@@ -58,7 +62,7 @@ final class HTMLBlock extends FencedBlock {
     int $_indentation_of_first,
     bool $_eof,
   ): this {
-    return new self(Str\join($lines, "\n"));
+    return new static(Str\join($lines, "\n"));
   }
 
   public static function consume(
@@ -72,8 +76,19 @@ final class HTMLBlock extends FencedBlock {
   }
 
   <<__Override>>
-  public static function getEndPatternForFirstLine(string $line): ?string {
-    foreach (self::PATTERNS as $start => $end) {
+  public static function getEndPatternForFirstLine(
+    Context $context,
+    string $line,
+  ): ?string {
+    if ($context->isInParagraphContinuation()) {
+      $patterns = self::PARAGRAPH_INTERRUPTING_PATTERNS;
+    } else {
+      $patterns = Dict\merge(
+        self::PARAGRAPH_INTERRUPTING_PATTERNS,
+        self::NON_INTERRUPTING_PATTERNS,
+      );
+    }
+    foreach ($patterns as $start => $end) {
       if (\preg_match($start, $line) === 1) {
         return $end;
       }
