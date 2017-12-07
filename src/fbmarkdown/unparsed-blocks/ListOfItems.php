@@ -47,15 +47,18 @@ final class ListOfItems extends ContainerBlock {
 
     list($first, $lines) = $first;
     $nodes = vec[$first];
-    
+
     $loose = $first->makesListLoose();
     $d = $first->getDelimiter();
+
+    $pre_blank = null;
 
     while (!$lines->isEmpty()) {
       $next = self::consumeItem($context, $lines);
       if ($next === null) {
         list($line, $rest) = $lines->getFirstLineAndRest();
         if (self::isBlankLine($line)) {
+          $pre_blank = tuple($loose, $nodes, $lines);
           $loose = true;
           $lines = $rest;
           continue;
@@ -66,9 +69,14 @@ final class ListOfItems extends ContainerBlock {
       if ($next->getDelimiter() !== $d) {
         break;
       }
+      $pre_blank = null;
       $nodes[] = $next;
       $loose = $loose || $next->makesListLoose();
       $lines = $rest;
+    }
+
+    if ($pre_blank !== null) {
+      list($loose, $nodes, $lines) = $pre_blank;
     }
 
     return tuple(new self($loose, $nodes), $lines);
