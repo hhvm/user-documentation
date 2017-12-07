@@ -37,11 +37,29 @@ class Context {
 
   public function resetFileData(): this {
     $this->file = null;
+    $this->linkReferenceDefinitions = dict[];
     return $this;
   }
 
   public function prependBlockTypes(classname<Block> ...$blocks): this {
     $this->blockTypes = Keyset\union($blocks, $this->blockTypes);
+    return $this;
+  }
+
+  private dict<string, LinkReferenceDefinition> $linkReferenceDefinitions
+    = dict[];
+
+  public function getLinkReferenceDefinition(
+    string $key,
+  ): ?LinkReferenceDefinition {
+    $key = LinkReferenceDefinition::normalizeKey($key);
+    return $this->linkReferenceDefinitions[$key] ?? null;
+  }
+
+  public function addLinkReferenceDefinition(
+    LinkReferenceDefinition $def,
+  ): this {
+    $this->linkReferenceDefinitions[$def->getKey()] = $def;
     return $this;
   }
 

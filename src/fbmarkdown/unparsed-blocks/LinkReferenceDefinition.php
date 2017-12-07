@@ -39,8 +39,19 @@ final class LinkReferenceDefinition extends LeafBlock {
     return $this->title;
   }
 
+  public function getKey(): string {
+    return self::normalizeKey($this->getLabel());
+  }
+
+  public static function normalizeKey(string $in): string {
+    return $in
+      |> Str\trim($$)
+      |> \mb_convert_case($$, MB_CASE_LOWER, "UTF-8")
+      |> \preg_replace('/\s+/', ' ', $$);
+  }
+
   public static function consume(
-    Context $_,
+    Context $context,
     Lines $lines,
   ): ?(Block, Lines) {
     list($first, $without_first) = $lines->getFirstLineAndRest();
@@ -55,10 +66,7 @@ final class LinkReferenceDefinition extends LeafBlock {
       return null;
     }
 
-    $label = $matches['label']
-      |> Str\trim($$)
-      |> \mb_convert_case($$, MB_CASE_LOWER, "UTF-8")
-      |> \preg_replace('/\s+/', ' ', $$);
+    $label = $matches['label'];
 
     $rest = $matches['rest'] ?? '';
     if ($rest !== '') {
@@ -85,10 +93,9 @@ final class LinkReferenceDefinition extends LeafBlock {
       return null;
     }
 
-    return tuple(
-      new self($label, $destination, $title),
-      $lines,
-    );
+    $def = new self($label, $destination, $title);
+    $context->addLinkReferenceDefinition($def);
+    return tuple($def, $lines);
   }
 
   private static function consumeDestination(

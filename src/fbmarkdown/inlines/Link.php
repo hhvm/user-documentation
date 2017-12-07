@@ -15,6 +15,7 @@ use function Facebook\Markdown\_Private\{
   consume_link_destination,
   consume_link_title,
 };
+use type Facebook\Markdown\UnparsedBlocks\LinkReferenceDefinition;
 use namespace HH\Lib\{Str, Vec};
 
 class Link extends Inline {
@@ -73,6 +74,7 @@ class Link extends Inline {
     $str = Str\slice($string, 1);
     $text = vec[];
     $part = '';
+    $key = '';
 
     $last = '';
     $chr = '';
@@ -108,6 +110,7 @@ class Link extends Inline {
       if ($result !== null) {
         if ($part !== '') {
           $text = Vec\concat($text, parse($ctx, $part));
+          $key .= $part;
           $part = '';
         }
         list($next, $last, $str) = $result;
@@ -123,11 +126,84 @@ class Link extends Inline {
     }
 
     if ($part !== '') {
+      $key .= $part;
       $text = Vec\concat($text, parse($ctx, $part));
     }
 
+    if (Str\starts_with($str, '[]')) {
+      // collapsed reference link
+      $def = $ctx->getBlockContext()->getLinkReferenceDefinition($key);
+      if ($def === null) {
+        return null;
+      }
+
+      return tuple(
+        new self($text, $def->getDestination(), $def->getTitle()),
+        ']',
+        Str\slice($str, 2),
+      );
+    }
+
+    if (Str\starts_with($str, '[')) {
+      // full reference link
+      $depth = 1;
+      $matched = '';
+      $len = Str\length($str);
+      for ($i = 1; $i < $len && $i <= 999; ++$i) {
+        $char = $str[$i];
+        if ($char === '[') {
+          ++$depth;
+          $matched .= $char;
+          continue;
+        }
+        if ($char === ']') {
+          --$depth;
+          if ($depth === 0) {
+            break;
+          }
+          $matched .= $char;
+          continue;
+        }
+        if ($char === '\\') {
+          if ($i + 1 >= $len) {
+            return null;
+          }
+          $matched .= $char.$str[$i+1];
+          ++$i;
+          continue;
+        }
+        $matched .= $char;
+      }
+      if ($depth !== 0) {
+        return null;
+      }
+
+      $key = LinkReferenceDefinition::normalizeKey($matched);
+      $def = $ctx->getBlockContext()->getLinkReferenceDefinition($key);
+
+      if ($def === null) {
+        return null;
+      }
+
+      return tuple(
+        new self($text, $def->getDestination(), $def->getTitle()),
+        ']',
+        Str\slice($str, 1, $len - 2),
+      );
+    }
+
     if (!Str\starts_with($str, '(')) {
-      return null;
+      // shortcut reference link?
+      $def = $ctx->getBlockContext()->getLinkReferenceDefinition($key);
+      if ($def === null) {
+        return null;
+      }
+
+      return tuple(
+        new self($text, $def->getDestination(), $def->getTitle()),
+        ']',
+        $str,
+      );
     }
 
     $str = Str\trim_left(Str\slice($str, 1));
