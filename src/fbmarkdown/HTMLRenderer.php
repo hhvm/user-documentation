@@ -60,8 +60,11 @@ class HTMLRenderer extends Renderer<string> {
       $first = C\firstx(Str\split($info, ' '));
       $extra = ' class="language-'.self::escapeAttribute($first).'"';
     }
-    return self::escapeContent($node->getCode())
-      |> '<pre><code'.$extra.'>'.$$."\n</code></pre>";
+    $code = $node->getCode();
+    if ($code !== '') {
+      $code = self::escapeContent($code)."\n";
+    }
+    return'<pre><code'.$extra.'>'.$code."</code></pre>\n";
   }
 
   <<__Override>>
