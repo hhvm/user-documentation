@@ -17,8 +17,8 @@ use namespace Facebook\Markdown\Inlines;
 
 final class ATXHeading extends LeafBlock {
   const vec<string> PATTERNS = vec[
-    '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.+))?[ \t]+#+$/',
-    '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.+))?$/',
+    '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.*))?[ \t]+#+[ \t]*$/',
+    '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.*))?$/',
   ];
 
   public function __construct(private int $level, private string $heading) {
@@ -45,7 +45,7 @@ final class ATXHeading extends LeafBlock {
     }
 
     $level = Str\length($matches['level']);
-    return tuple(new self($level, $title), $rest);
+    return tuple(new self($level, Str\trim($title)), $rest);
   }
 
   public function withParsedInlines(Inlines\Context $ctx): ASTHeading {
