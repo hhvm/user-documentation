@@ -34,17 +34,19 @@ abstract class FencedBlock extends LeafBlock {
     }
 
     $matched = vec[$first];
+    $eof = true;
 
     while (!$rest->isEmpty()) {
       list($line, $rest) = $rest->getFirstLineAndRest();
       $matched[] = $line;
       if (\preg_match($end, $line) === 1) {
+        $eof = false;
         break;
       }
     }
 
     return tuple(
-      static::createFromLines($matched, $rest->isEmpty()),
+      static::createFromLines($matched, $eof),
       $rest,
     );
   }
