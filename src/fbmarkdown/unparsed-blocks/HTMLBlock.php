@@ -46,11 +46,10 @@ class HTMLBlock extends FencedBlock {
       'html|iframe|legend|li|link|main|menu|menuitem|meta|nav|noframes|ol|'.
       'optgroup|option|p|param|section|source|summary|table|tbody|td|tfoot|th|'.
       'thead|title|tr|track|ul)([ \\t]+|$|>|\\/>)/i' => '/^$/',
-    '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')*'.' *\\/?> *$/i' => '/^$/',
   ];
 
   const dict<string, string> NON_INTERRUPTING_PATTERNS = dict[
-    '/^<\\/'.self::TAG_NAME.' *> *$/' => '/^$/',
+    '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')* *\\/?> *$/i' => '/^$/',
   ];
 
   public function __construct(
