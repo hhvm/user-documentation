@@ -29,7 +29,7 @@ final class SetextHeading extends LeafBlock {
 
     while (!$lines->isEmpty()) {
       list($line, $rest) = $lines->getFirstLineAndRest();
-      if (self::isBlankLine($line)) {
+      if (Lines::isBlankLine($line)) {
         return null;
       }
 

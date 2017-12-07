@@ -23,8 +23,4 @@ abstract class Block {
   ): ?(Block, Lines);
 
   abstract public function withParsedInlines(InlineContext $_): ASTBlock;
-
-  protected static function isBlankLine(string $line): bool {
-    return Str\trim($line, " \t") === '';
-  }
 }

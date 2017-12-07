@@ -30,7 +30,7 @@ final class ListOfItems extends ContainerBlock {
     if (ThematicBreak::consume($context, $lines) !== null) {
       return null;
     }
-    
+
     foreach ($context->getListItemTypes() as $type) {
       $match = $type::consume($context, $lines);
       if ($match!== null) {
@@ -61,7 +61,7 @@ final class ListOfItems extends ContainerBlock {
       $next = self::consumeItem($context, $lines);
       if ($next === null) {
         list($line, $rest) = $lines->getFirstLineAndRest();
-        if (self::isBlankLine($line)) {
+        if (Lines::isBlankLine($line)) {
           $pre_blank = tuple($loose, $nodes, $lines);
           $loose = true;
           $lines = $rest;

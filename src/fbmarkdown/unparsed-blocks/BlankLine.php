@@ -21,7 +21,7 @@ final class BlankLine extends LeafBlock {
     Lines $lines,
   ): ?(Block, Lines) {
     list($first, $rest) = $lines->getFirstLineAndRest();
-    if (!self::isBlankLine($first)) {
+    if (!Lines::isBlankLine($first)) {
       return null;
     }
     return tuple(new self(), $rest);

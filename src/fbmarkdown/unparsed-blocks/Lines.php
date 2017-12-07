@@ -55,20 +55,42 @@ final class Lines {
   ): (Lines, Lines) {
     $lines = $this;
     $matched = vec[];
+    $blank_line_stash = null;
     while (!$lines->isEmpty()) {
       list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
-      $line = self::stripWhitespacePrefix($line, $indent, $col);
-      if ($line === null) {
+      $stripped = self::stripWhitespacePrefix($line, $indent, $col);
+      if ($stripped !== null) {
+        $blank_line_stash = null;
+        $matched[] = $stripped;
+        $lines = $rest;
+        continue;
+      }
+
+      if (!self::isBlankLine($line)) {
         break;
       }
+
+      if ($blank_line_stash !== null) {
+        break;
+      }
+
+      $blank_line_stash = tuple($matched, $lines);
       $matched[] = $line;
       $lines = $rest;
+    }
+
+    if ($blank_line_stash !== null) {
+      list($matched, $lines) = $blank_line_stash;
     }
 
     return tuple(
       new self(Vec\map($matched, $l ==> tuple($indent, $l))),
       $lines,
     );
+  }
+
+  public static function isBlankLine(string $line): bool {
+    return Str\trim($line, " \t") === '';
   }
 
   public static function stripWhitespacePrefix(

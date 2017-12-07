@@ -74,7 +74,7 @@ class ListItem extends ContainerBlock {
     $lines = $rest;
     while (!$lines->isEmpty()) {
       list($column, $line, $rest) = $lines->getColumnFirstLineAndRest();
-      if (self::isBlankLine($line)) {
+      if (Lines::isBlankLine($line)) {
         if ($pre_blank_line !== null) {
           list($matched, $lines) = $pre_blank_line;
           break;

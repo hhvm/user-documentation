@@ -30,7 +30,7 @@ final class Paragraph extends LeafBlock {
 
     while (!$lines->isEmpty()) {
       list($next, $rest) = $lines->getFirstLineAndRest();
-      if (self::isBlankLine($next)) {
+      if (Lines::isBlankLine($next)) {
         break;
       }
 
