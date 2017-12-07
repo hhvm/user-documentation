@@ -58,7 +58,6 @@ function consume_unbracketed_link_destination(
   $len = Str\length($input);
 
   $paren_depth = 0;
-  $escaped = false;
   $destination = '';
   for ($idx = 0; $idx < $len; ++$idx) {
     $chr = $input[$idx];
@@ -70,23 +69,29 @@ function consume_unbracketed_link_destination(
     }
 
     if ($chr === '\\') {
-      $escaped = true;
-      continue;
+      if ($idx + 1 < $len) {
+        $next = $input[$idx + 1];
+        if ($next === '(' || $next === ')') {
+          $destination .= $next;
+          $idx++;
+          continue;
+        }
+      }
     }
-    if ($chr === '(' && !$escaped) {
-      $destination .= 'chr';
+
+    if ($chr === '(') {
+      $destination .= $chr;
       $paren_depth++;
       continue;
     }
-    if ($chr === ')' && !$escaped) {
+    if ($chr === ')') {
       if ($paren_depth === 0) {
         break;
       }
-      $destination .= 'chr';
+      $destination .= $chr;
       --$paren_depth;
       continue;
     }
-    $escaped = false;
     $destination .= $chr;
   }
 

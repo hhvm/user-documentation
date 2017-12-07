@@ -54,23 +54,48 @@ final class LinkReferenceDefinition extends LeafBlock {
     Context $context,
     Lines $lines,
   ): ?(Block, Lines) {
-    list($first, $without_first) = $lines->getFirstLineAndRest();
-    $matches = [];
-    if (
-      \preg_match(
-        '/^(?<prefix> {0,3}\[(?<label> *([^ \]]+ *)+)\]: *)(?<rest>.*)$/',
-        $first,
-        $matches,
-      ) !== 1
-    ) {
+    list($column, $first, $without_first) = $lines->getColumnFirstLineAndRest();
+    list($first, $_) = Lines::stripUpToNLeadingWhitespace($first, 3, $column);
+
+    if (!Str\starts_with($first, '[')) {
       return null;
     }
 
-    $label = $matches['label'];
+    $label = '';
+    $len = Str\length($first);
+    for ($i = 1; $i < $len; ++$i) {
+      $char = $first[$i];
+      if ($char === '[') {
+        return null;
+      }
+      if ($char === ']') {
+        break;
+      }
+      if ($char === '\\') {
+        if ($i + 1 < $len) {
+          $next = $first[$i + 1];
+          if ($next === '[' || $next === ']') {
+            $label .= "\\".$next;
+            ++$i;
+            continue;
+          }
+        }
+      }
 
-    $rest = $matches['rest'] ?? '';
+      $label .= $char;
+    }
+
+    if ($i + 2 >= $len) {
+      return null;
+    }
+    if ($first[$i + 1] !== ':') {
+      return null;
+    }
+    $rest = Str\trim_left(Str\slice($first, $i + 2));
+    $prefix = Str\slice($first, 0, $len - Str\length($rest));
+
     if ($rest !== '') {
-      $lines = $lines->withoutFirstLinePrefix($matches['prefix']);
+      $lines = $lines->withoutFirstLinePrefix($prefix);
     } else {
       $lines = $without_first;
     }

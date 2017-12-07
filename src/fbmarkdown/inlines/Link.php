@@ -99,6 +99,16 @@ class Link extends Inline {
         $last = $chr;
         continue;
       }
+      if ($chr === '\\') {
+        if (!Str\is_empty($str)) {
+          $next = $str[0];
+          if ($next === '[' || $next === ']') {
+            $part .= '\\'.$next;
+            $str = Str\slice($str, 1);
+            continue;
+          }
+        }
+      }
 
       $result = null;
       foreach ($inners as $type) {
