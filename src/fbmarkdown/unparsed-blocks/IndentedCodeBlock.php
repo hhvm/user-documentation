@@ -28,7 +28,7 @@ final class IndentedCodeBlock extends LeafBlock {
     while (!$lines->isEmpty()) {
       list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
       $stripped = Lines::stripWhitespacePrefix($line, 4, $col);
-      if ($stripped !== null) {
+      if ($stripped !== null && $stripped !== '') {
         $blank_line_stash = null;
         $matched[] = $stripped;
         $lines = $rest;
