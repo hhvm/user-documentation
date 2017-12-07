@@ -75,14 +75,20 @@ final class LinkReferenceDefinition extends LeafBlock {
       $lines = $without_first;
     }
 
-    $result = self::consumeDestination($lines);
+    $result = self::consumeDestination($lines->withLeftTrimmedFirstLine());
     if ($result === null) {
       return null;
     }
+
     list($destination, $lines) = $result;
+    $lines = $lines->withLeftTrimmedFirstLine();
+    if ($lines->getFirstLine() === '') {
+      list($_, $lines) = $lines->getFirstLineAndRest();
+      $lines = $lines->withLeftTrimmedFirstLine();
+    }
 
     $title = null;
-    $result = self::consumeTitle($lines->withLeftTrimmedFirstLine());
+    $result = self::consumeTitle($lines);
     if ($result !== null) {
       list($title, $lines) = $result;
     }
