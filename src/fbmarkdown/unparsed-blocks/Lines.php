@@ -54,14 +54,27 @@ final class Lines {
     return Str\trim($line, " \t") === '';
   }
 
-  public static function stripWhitespacePrefix(
+  public static function stripNLeadingWhitespace(
     string $line,
-    int $width,
+    int $n,
     int $column,
   ): ?string {
+    list($result, $stripped) = self::stripUpToNLeadingWhitespace(
+      $line,
+      $n,
+      $column,
+    );
+    return ($stripped === $n) ? $result : null;
+  }
+
+  public static function stripUpToNLeadingWhitespace(
+    string $line,
+    int $n,
+    int $column,
+  ): (string, int) {
     $count = 0;
     $len = Str\length($line);
-    for ($i = 0; $i < $len && $count < $width; ++$i) {
+    for ($i = 0; $i < $len && $count < $n; ++$i) {
       $char = $line[$i];
       if ($char === ' ') {
         ++$count;
@@ -77,10 +90,17 @@ final class Lines {
       }
       break;
     }
-    if ($count >= $width) {
-      return Str\repeat(' ', $count - $width).Str\slice($line, $i);
+    if ($count >= $n) {
+      return tuple(
+        Str\repeat(' ', $count - $n).Str\slice($line, $i),
+        $n,
+      );
     }
-    return null;
+
+    return tuple(
+      Str\slice($line, $i),
+      $count,
+    );
   }
 
   public function withLeftTrimmedFirstLine(): Lines {

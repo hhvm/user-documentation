@@ -64,7 +64,7 @@ final class FencedCodeBlock extends FencedBlock {
     if ($indent === 0) {
       return $line;
     }
-    $stripped = Lines::stripWhitespacePrefix($line, $indent, $column);
+    $stripped = Lines::stripNLeadingWhitespace($line, $indent, $column);
     if ($stripped !== null) {
       return $stripped;
     }
@@ -75,6 +75,7 @@ final class FencedCodeBlock extends FencedBlock {
   <<__Override>>
   protected static function getEndPatternForFirstLine(
     Context $_,
+    int $_column,
     string $first,
   ): ?string {
     $matches = [];

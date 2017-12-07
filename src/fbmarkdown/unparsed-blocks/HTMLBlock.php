@@ -65,6 +65,7 @@ class HTMLBlock extends FencedBlock {
     return new static(Str\join($lines, "\n"));
   }
 
+  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,
@@ -78,6 +79,7 @@ class HTMLBlock extends FencedBlock {
   <<__Override>>
   public static function getEndPatternForFirstLine(
     Context $context,
+    int $column,
     string $line,
   ): ?string {
     if ($context->isInParagraphContinuation()) {
@@ -88,6 +90,9 @@ class HTMLBlock extends FencedBlock {
         self::NON_INTERRUPTING_PATTERNS,
       );
     }
+
+    list($line, $_) = Lines::stripUpToNLeadingWhitespace($line, 3, $column);
+
     foreach ($patterns as $start => $end) {
       if (\preg_match($start, $line) === 1) {
         return $end;

@@ -92,7 +92,7 @@ class ListItem extends ContainerBlock<Block> {
         break;
       }
 
-      $indented = Lines::stripWhitespacePrefix($line, $width, $column);
+      $indented = Lines::stripNLeadingWhitespace($line, $width, $column);
       if ($indented !== null) {
         $matched[] = tuple($column + $width, $indented);
         $pre_blank_line = null;
