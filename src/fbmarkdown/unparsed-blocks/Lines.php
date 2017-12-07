@@ -50,45 +50,6 @@ final class Lines {
     );
   }
 
-  public function getPrefixedLinesAndRest(
-    Context $context,
-    string $pattern,
-  ): (Lines, Lines) {
-    $contents = vec[];
-    $count = C\count($this->lines);
-    for ($i = 0; $i < $count; ++$i) {
-      list($indentation, $line) = $this->lines[$i];
-
-      $matches = [];
-      if (\preg_match($pattern, $line, $matches) === 1) {
-        $match = $matches[0];
-        $len = Str\length($match);
-        $contents[] = tuple(
-          $indentation + Str\length($match),
-          Str\slice($line, $len),
-        );
-        continue;
-      }
-
-      if ($i === 0) {
-        return tuple(new Lines(vec[]), $this);
-      }
-
-      $rest = Vec\slice($this->lines, $i);
-      if (_Private\is_paragraph_continuation_text($context, new self($rest))) {
-        $contents[] = tuple($indentation, $line);
-        continue;
-      }
-
-      break;
-    }
-
-    return tuple(
-      new self($contents),
-      new self(Vec\drop($this->lines, $i)),
-    );
-  }
-
   public function getIndentedLinesAndRest(
     int $indent,
   ): (Lines, Lines) {
@@ -124,7 +85,7 @@ final class Lines {
         continue;
       }
       if ($char === "\t") {
-        $tab_width = (($column + $count) % 4);
+        $tab_width = 4 - (($column + $count) % 4);
         if ($tab_width === 0) {
           $tab_width = 4;
         }

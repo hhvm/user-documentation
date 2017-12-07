@@ -25,14 +25,43 @@ final class BlockQuote extends ContainerBlock {
     Context $context,
     Lines $lines,
   ): ?(Block, Lines) {
-    list($matched, $rest) = $lines->getPrefixedLinesAndRest(
-      $context,
-      '/^ {0,3}> ?/',
-    );
-    if ($matched->isEmpty()) {
+    $contents = vec[];
+    while (!$lines->isEmpty()) {
+      list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
+
+      $matches = [];
+      if (\preg_match('/^ {0,3}>([ \t])?/', $line, $matches) === 1) {
+        $prefix = $matches[0];
+        $len = Str\length($prefix);
+        $match = Str\slice($line, $len);
+        if (Str\ends_with($prefix, "\t")) {
+          $spaces = 3 - (($col + $len - 1) % 4);
+          $match = Str\repeat(' ', $spaces).$match;
+        }
+        $contents[] = tuple($col + $len, $match);
+        $lines = $rest;
+        continue;
+      }
+
+      if (C\is_empty($contents)) {
+        return null;
+      }
+
+      if (_Private\is_paragraph_continuation_text($context, $lines)) {
+        $contents[] = tuple($col, $line);
+        $lines = $rest;
+        continue;
+      }
+
+      break;
+    }
+
+    if (C\is_empty($contents)) {
       return null;
     }
-    return tuple(new self(self::consumeChildren($context, $matched)), $rest);
+    $contents = new Lines($contents);
+
+    return tuple(new self(self::consumeChildren($context, $contents)), $lines);
   }
 
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
