@@ -16,7 +16,10 @@ use type Facebook\Markdown\Blocks\Heading as ASTHeading;
 use namespace Facebook\Markdown\Inlines;
 
 final class ATXHeading extends LeafBlock {
-  const string PATTERN = '/^ {0,3}(?<level>#{1,6})[ \t](?<title>.+)$/';
+  const vec<string> PATTERNS = vec[
+    '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.+))?[ \t]+#+$/',
+    '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.+))?$/',
+  ];
 
   public function __construct(private int $level, private string $heading) {
   }
@@ -28,18 +31,20 @@ final class ATXHeading extends LeafBlock {
     list($first, $rest) = $lines->getFirstLineAndRest();
 
     $matches = [];
-    $result = \preg_match(self::PATTERN, $first, $matches);
-    if ($result !== 1) {
+    $title = null;
+    foreach (self::PATTERNS as $pattern) {
+      $result = \preg_match($pattern, $first, $matches);
+      if ($result === 1) {
+        $title = $matches['title'] ?? '';
+        break;
+      }
+    }
+
+    if ($title === null) {
       return null;
     }
 
     $level = Str\length($matches['level']);
-
-    $title = $matches['title'];
-    if (\preg_match('/^(?<title>.*)[ \\t]+#+$/', $title, $matches)) {
-      $title = $matches['title'];
-    }
-
     return tuple(new self($level, $title), $rest);
   }
 
