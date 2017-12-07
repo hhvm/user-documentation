@@ -19,9 +19,10 @@ function parse(
 ): Document {
   $lines = $markdown
     |> Str\split($$, "\n")
-    |> Vec\map($$, $line ==> tuple(0, $line))
     |> (C\lastx($$) === '' ? Vec\slice($$, 0, C\count($$) - 1) : $$)
+    |> Vec\map($$, $line ==> tuple(0, $line))
     |> new Lines($$);
+
   list($document, $_) = Document::consume($context, $lines);
   return $document;
 }
