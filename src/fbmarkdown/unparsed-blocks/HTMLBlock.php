@@ -49,7 +49,10 @@ class HTMLBlock extends FencedBlock {
   ];
 
   const dict<string, string> NON_INTERRUPTING_PATTERNS = dict[
+    // Open tag
     '/^<'.self::TAG_NAME.'('.self::ATTRIBUTE.')* *\\/?> *$/i' => '/^$/',
+    // Closing tag
+    '/^<\\/'.self::TAG_NAME.' *> *$/' => '/^$/',
   ];
 
   public function __construct(
