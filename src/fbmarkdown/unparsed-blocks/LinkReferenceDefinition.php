@@ -27,6 +27,18 @@ final class LinkReferenceDefinition extends LeafBlock {
   ) {
   }
 
+  public function getLabel(): string {
+    return $this->label;
+  }
+
+  public function getDestination(): string {
+    return $this->destination;
+  }
+
+  public function getTitle(): ?string {
+    return $this->title;
+  }
+
   public static function consume(
     Context $_,
     Lines $lines,
@@ -62,9 +74,15 @@ final class LinkReferenceDefinition extends LeafBlock {
     list($destination, $lines) = $result;
 
     $title = null;
-    $result = self::consumeTitle($lines);
+    $result = self::consumeTitle($lines->withLeftTrimmedFirstLine());
     if ($result !== null) {
       list($title, $lines) = $result;
+    }
+
+    list($line, $lines) =
+      $lines->withLeftTrimmedFirstLine()->getFirstLineAndRest();
+    if ($line !== '') {
+      return null;
     }
 
     return tuple(

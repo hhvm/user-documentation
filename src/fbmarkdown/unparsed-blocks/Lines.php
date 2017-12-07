@@ -50,45 +50,6 @@ final class Lines {
     );
   }
 
-  public function getIndentedLinesAndRest(
-    int $indent,
-  ): (Lines, Lines) {
-    $lines = $this;
-    $matched = vec[];
-    $blank_line_stash = null;
-    while (!$lines->isEmpty()) {
-      list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
-      $stripped = self::stripWhitespacePrefix($line, $indent, $col);
-      if ($stripped !== null) {
-        $blank_line_stash = null;
-        $matched[] = $stripped;
-        $lines = $rest;
-        continue;
-      }
-
-      if (!self::isBlankLine($line)) {
-        break;
-      }
-
-      if ($blank_line_stash !== null) {
-        break;
-      }
-
-      $blank_line_stash = tuple($matched, $lines);
-      $matched[] = $line;
-      $lines = $rest;
-    }
-
-    if ($blank_line_stash !== null) {
-      list($matched, $lines) = $blank_line_stash;
-    }
-
-    return tuple(
-      new self(Vec\map($matched, $l ==> tuple($indent, $l))),
-      $lines,
-    );
-  }
-
   public static function isBlankLine(string $line): bool {
     return Str\trim($line, " \t") === '';
   }
@@ -120,6 +81,29 @@ final class Lines {
       return Str\repeat(' ', $count - $width).Str\slice($line, $i);
     }
     return null;
+  }
+
+  public function withLeftTrimmedFirstLine(): Lines {
+    list($col, $line) = $this->lines[0];
+
+    $len = Str\length($line);
+    for ($i = 0; $i < $len; ++$i) {
+      $char = $line[$i];
+      if ($char !== ' ' && $char !== "\t") {
+        break;
+      }
+    }
+
+    if ($i === 0) {
+      return $this;
+    }
+
+    return new self(
+      Vec\concat(
+        vec[tuple($col + $i , Str\slice($line, $i))],
+        Vec\drop($this->lines, 1),
+      ),
+    );
   }
 
   public function withoutFirstLinePrefix(
