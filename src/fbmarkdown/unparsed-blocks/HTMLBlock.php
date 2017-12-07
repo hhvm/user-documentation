@@ -33,7 +33,8 @@ class HTMLBlock extends FencedBlock {
   ' +'.self::ATTRIBUTE_NAME.'('.self::ATTRIBUTE_VALUE_SPECIFICATION.')?';
 
   const dict<string, string> PARAGRAPH_INTERRUPTING_PATTERNS = dict[
-    '/^(<script|<pre|style)( |>|$)/i' => ',</script>|</pre>|</style>,i',
+    // GFM spec states that closing tag doesn't need to match opening tag
+    '/^(<script|<pre|<style)( |>|$)/i' => ',</script>|</pre>|</style>,i',
     '/^<!--/' => '/-->/',
     '/^<\\?/' => '/\\?>/',
     '/^<![A-Z]/' => '/>/',
