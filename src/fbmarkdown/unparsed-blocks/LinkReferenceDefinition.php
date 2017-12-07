@@ -85,7 +85,7 @@ final class LinkReferenceDefinition extends LeafBlock {
       $label .= $char;
     }
 
-    if ($i + 2 >= $len) {
+    if ($i + 1 >= $len) {
       return null;
     }
     if ($first[$i + 1] !== ':') {

@@ -39,7 +39,7 @@ function consume_bracketed_link_destination(string $input): ?(string, int) {
         return null;
       }
       if ($chr === '>') {
-        return tuple($destination, $idx);
+        return tuple($destination, $idx + 1);
       }
     }
     if ($chr === '\\') {
