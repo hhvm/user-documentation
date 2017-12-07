@@ -11,7 +11,7 @@
 
 namespace Facebook\Markdown\UnparsedBlocks;
 
-use namespace HH\Lib\{Vec, Str};
+use namespace HH\Lib\{C, Vec, Str};
 
 function parse(
   Context $context,
@@ -20,6 +20,7 @@ function parse(
   $lines = $markdown
     |> Str\split($$, "\n")
     |> Vec\map($$, $line ==> tuple(0, $line))
+    |> (C\lastx($$) === '' ? Vec\slice($$, 0, C\count($$) - 1) : $$)
     |> new Lines($$);
   list($document, $_) = Document::consume($context, $lines);
   return $document;
