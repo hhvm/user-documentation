@@ -27,6 +27,10 @@ final class ListOfItems extends ContainerBlock {
     Context $context,
     Lines $lines,
   ): ?(ListItem, Lines) {
+    if (ThematicBreak::consume($context, $lines) !== null) {
+      return null;
+    }
+    
     foreach ($context->getListItemTypes() as $type) {
       $match = $type::consume($context, $lines);
       if ($match!== null) {
