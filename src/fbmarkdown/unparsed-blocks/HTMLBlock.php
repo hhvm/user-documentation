@@ -53,7 +53,10 @@ final class HTMLBlock extends FencedBlock {
   ) {
   }
 
-  protected static function createFromLines(vec<string> $lines): this {
+  protected static function createFromLines(
+    vec<string> $lines,
+    bool $_eof,
+  ): this {
     return new self(Str\join($lines, "\n"));
   }
 

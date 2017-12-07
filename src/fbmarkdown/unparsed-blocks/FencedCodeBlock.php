@@ -34,6 +34,7 @@ final class FencedCodeBlock extends FencedBlock {
 
   protected static function createFromLines(
     vec<string> $lines,
+    bool $eof,
   ): this {
     $first = C\firstx($lines);
     $matches = [];
@@ -47,7 +48,7 @@ final class FencedCodeBlock extends FencedBlock {
     }
 
     $content = $lines
-      |> Vec\slice($$, 1, C\count($lines) - 2)
+      |> Vec\slice($$, 1, C\count($lines) - ($eof ? 1 : 2))
       |> Str\join($$, "\n");
     return new self($content, $info);
   }

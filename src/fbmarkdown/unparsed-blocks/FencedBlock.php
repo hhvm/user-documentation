@@ -14,7 +14,10 @@ namespace Facebook\Markdown\UnparsedBlocks;
 use namespace HH\Lib\{C, Vec};
 
 abstract class FencedBlock extends LeafBlock {
-  protected abstract static function createFromLines(vec<string> $lines): this;
+  protected abstract static function createFromLines(
+    vec<string> $lines,
+    bool $eof,
+  ): this;
 
   protected abstract static function getEndPatternForFirstLine(
     string $first,
@@ -39,12 +42,9 @@ abstract class FencedBlock extends LeafBlock {
         break;
       }
     }
-    if (C\count($matched) === 1) {
-      return null;
-    }
 
     return tuple(
-      static::createFromLines($matched),
+      static::createFromLines($matched, $rest->isEmpty()),
       $rest,
     );
   }
