@@ -20,9 +20,13 @@ final class IndentedCodeBlock extends LeafBlock {
   }
 
   public static function consume(
-    Context $_,
+    Context $context,
     Lines $lines,
   ): ?(Block, Lines) {
+    if ($context->isInParagraphContinuation()) {
+      return null;
+    }
+
     $matched = vec[];
     $blank_line_stash = null;
     while (!$lines->isEmpty()) {

@@ -18,15 +18,11 @@ function is_paragraph_continuation_text(
   Context $context,
   Lines $lines,
 ): bool {
-  $context->pushParagraphContinuation();
+  $context->pushParagraphContinuation(true);
   try {
     return !C\any(
       $context->getBlockTypes(),
-      (classname<Block> $block) ==> !C\contains_key(
-        $context->getIgnoredBlockTypesForParagraphContinuation(),
-        $block,
-      ) &&
-        $block::consume($context, $lines) !== null,
+      (classname<Block> $block) ==> $block::consume($context, $lines) !== null,
     );
   } finally {
     $context->popParagraphContinuation();

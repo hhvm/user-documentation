@@ -16,7 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class ListOfItems extends ContainerBlock<ListItem> {
+final class ListOfItems extends ContainerBlock<?(ListOfItems, Lines), ListItem> {
   public function __construct(
     private bool $loose,
     vec<ListItem> $children,
@@ -41,10 +41,10 @@ final class ListOfItems extends ContainerBlock<ListItem> {
     return null;
   }
 
-  public static function consume(
+  protected static function consumeImpl(
     Context $context,
     Lines $lines,
-  ): ?(Block, Lines) {
+  ): ?(ListOfItems, Lines) {
     $first = self::consumeItem($context, $lines);
     if ($first === null) {
       return null;

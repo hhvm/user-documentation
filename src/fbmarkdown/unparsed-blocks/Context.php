@@ -38,7 +38,7 @@ class Context {
   public function resetFileData(): this {
     $this->file = null;
     $this->linkReferenceDefinitions = dict[];
-    $this->paragraphDepth = 0;
+    $this->paragraphStack = vec[];
     return $this;
   }
 
@@ -92,33 +92,23 @@ class Context {
     return $this->blockTypes;
   }
 
-  private int $paragraphDepth = 0;
+  private vec<bool> $paragraphStack = vec[];
 
   public function isInParagraphContinuation(): bool {
-    return $this->paragraphDepth !== 0;
+    return C\last($this->paragraphStack) ?? false;
   }
 
-  public function pushParagraphContinuation(): this {
-    $this->paragraphDepth++;
+  public function pushParagraphContinuation(bool $in_continuation): this {
+    $this->paragraphStack[] = $in_continuation;
     return $this;
   }
 
   public function popParagraphContinuation(): this {
-    $this->paragraphDepth--;
-    invariant(
-      $this->paragraphDepth >= 0,
-      "Can't have a negative paragraph continuation depth",
+    $this->paragraphStack = Vec\take(
+      $this->paragraphStack,
+      C\count($this->paragraphStack) - 1,
     );
     return $this;
-  }
-
-  public function getIgnoredBlockTypesForParagraphContinuation(
-  ): keyset<classname<Block>> {
-    return keyset[
-      IndentedCodeBlock::class,
-      Paragraph::class,
-      SetextHeading::class,
-    ];
   }
 
   public function getListItemTypes(): keyset<classname<ListItem>> {

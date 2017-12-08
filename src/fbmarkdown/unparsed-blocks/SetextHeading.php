@@ -24,6 +24,10 @@ final class SetextHeading extends LeafBlock {
     Context $context,
     Lines $lines,
   ): ?(Block, Lines) {
+    if ($context->isInParagraphContinuation()) {
+      return null;
+    }
+
     list($first_col, $first, $lines) = $lines->getColumnFirstLineAndRest();
     $heading = $first;
 

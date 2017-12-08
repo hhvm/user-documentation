@@ -14,11 +14,29 @@ namespace Facebook\Markdown\UnparsedBlocks;
 use namespace HH\Lib\{C, Dict};
 
 
-abstract class ContainerBlock<TChild as Block> extends Block {
+abstract class ContainerBlock<TProduce as ?(Block, Lines), TChild as Block>
+extends Block {
   public function __construct(
     protected vec<TChild> $children,
   ) {
   }
+
+  final public static function consume(
+    Context $context,
+    Lines $lines,
+  ): TProduce {
+    $context->pushParagraphContinuation(false);
+    try {
+      return static::consumeImpl($context, $lines);
+    } finally {
+      $context->popParagraphContinuation();
+    }
+  }
+
+  abstract protected static function consumeImpl(
+    Context $context,
+    Lines $lines,
+  ): TProduce;
 
   protected static function consumeChildren(
     Context $context,

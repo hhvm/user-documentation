@@ -15,7 +15,7 @@ use type Facebook\Markdown\Blocks\ListItem as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-class ListItem extends ContainerBlock<Block> {
+class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
   public function __construct(
     protected string $delimiter,
     protected ?int $number,
@@ -36,7 +36,7 @@ class ListItem extends ContainerBlock<Block> {
     return C\any($this->children, $child ==> $child instanceof BlankLine);
   }
 
-  final public static function consume(
+  final protected static function consumeImpl(
     Context $context,
     Lines $lines,
   ): ?(ListItem, Lines) {

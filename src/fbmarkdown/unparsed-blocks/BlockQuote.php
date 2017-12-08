@@ -15,11 +15,11 @@ use type Facebook\Markdown\Blocks\BlockQuote as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class BlockQuote extends ContainerBlock<Block> {
-  public static function consume(
+class BlockQuote extends ContainerBlock<?(BlockQuote, Lines), Block> {
+  protected static function consumeImpl(
     Context $context,
     Lines $lines,
-  ): ?(Block, Lines) {
+  ): ?(BlockQuote, Lines) {
     $contents = vec[];
     while (!$lines->isEmpty()) {
       list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();

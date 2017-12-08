@@ -24,7 +24,11 @@ final class Paragraph extends LeafBlock {
   public static function consume(
     Context $context,
     Lines $lines,
-  ): (Paragraph, Lines) {
+  ): ?(Paragraph, Lines) {
+    if ($context->isInParagraphContinuation()) {
+      return null;
+    }
+
     list($first, $lines) = $lines->getFirstLineAndRest();
     $matched = vec[$first];
 
