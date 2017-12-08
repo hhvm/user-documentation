@@ -11,7 +11,7 @@
 
 namespace Facebook\Markdown\UnparsedBlocks;
 
-use namespace HH\Lib\{Keyset, Vec};
+use namespace HH\Lib\{C, Keyset, Vec};
 
 class Context {
   const keyset<classname<Block>> ALL_BLOCK_TYPES = keyset[
@@ -60,7 +60,9 @@ class Context {
   public function addLinkReferenceDefinition(
     LinkReferenceDefinition $def,
   ): this {
-    $this->linkReferenceDefinitions[$def->getKey()] = $def;
+    if (!C\contains_key($this->linkReferenceDefinitions, $def->getKey())) {
+      $this->linkReferenceDefinitions[$def->getKey()] = $def;
+    }
     return $this;
   }
 

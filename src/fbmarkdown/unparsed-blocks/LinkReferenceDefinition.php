@@ -54,64 +54,35 @@ final class LinkReferenceDefinition extends LeafBlock {
     Context $context,
     Lines $lines,
   ): ?(Block, Lines) {
-    list($column, $first, $without_first) = $lines->getColumnFirstLineAndRest();
-    list($first, $_) = Lines::stripUpToNLeadingWhitespace($first, 3, $column);
+    $label = self::consumeLabel($lines);
+    if ($label === null) {
+      return null;
+    }
+    list($label, $lines) = $label;
 
-    if (!Str\starts_with($first, '[')) {
+    $first = $lines->getFirstLine();
+    if ($first[0] ?? null !== ':') {
       return null;
     }
 
-    $label = '';
-    $len = Str\length($first);
-    for ($i = 1; $i < $len; ++$i) {
-      $char = $first[$i];
-      if ($char === '[') {
-        return null;
-      }
-      if ($char === ']') {
-        break;
-      }
-      if ($char === '\\') {
-        if ($i + 1 < $len) {
-          $next = $first[$i + 1];
-          if ($next === '[' || $next === ']') {
-            $label .= "\\".$next;
-            ++$i;
-            continue;
-          }
-        }
-      }
+    var_dump($lines);
 
-      $label .= $char;
+    $lines = $lines->withoutFirstLinePrefix(':')->withLeftTrimmedFirstLine();
+
+    if ($lines->getFirstLine() === '') {
+      list($_, $lines) = $lines->getFirstLineAndRest();
     }
 
-    if ($i + 1 >= $len) {
-      return null;
-    }
-    if ($first[$i + 1] !== ':') {
-      return null;
-    }
-    $rest = Str\trim_left(Str\slice($first, $i + 2));
-    $prefix = Str\slice($first, 0, $len - Str\length($rest));
-
-    if ($rest !== '') {
-      $lines = $lines->withoutFirstLinePrefix($prefix);
-    } else {
-      $lines = $without_first;
-    }
-
-    $result = self::consumeDestination($lines->withLeftTrimmedFirstLine());
+    $result = self::consumeDestination($lines);
     if ($result === null) {
       return null;
     }
 
     list($destination, $lines) = $result;
     $lines = $lines->withLeftTrimmedFirstLine();
+
     if ($lines->getFirstLine() === '') {
       list($_, $lines) = $lines->getFirstLineAndRest();
-      if (!$lines->isEmpty()) {
-        $lines = $lines->withLeftTrimmedFirstLine();
-      }
     }
 
     $title = null;
@@ -133,6 +104,53 @@ final class LinkReferenceDefinition extends LeafBlock {
     return tuple($def, $lines);
   }
 
+  private static function consumeLabel(
+    Lines $lines,
+  ): ?(string, Lines) {
+    list($column, $first, $without_first) = $lines->getColumnFirstLineAndRest();
+    list($first, $_) = Lines::stripUpToNLeadingWhitespace($first, 3, $column);
+
+    if (!Str\starts_with($first, '[')) {
+      return null;
+    }
+
+    $label = '';
+    $prefix = '[';
+    $len = Str\length($first);
+    for ($i = 1; $i < $len; ++$i) {
+      $char = $first[$i];
+      $prefix .= $char;
+      if ($char === '[') {
+        return null;
+      }
+      if ($char === ']') {
+        break;
+      }
+      if ($char === '\\') {
+        if ($i + 1 < $len) {
+          $next = $first[$i + 1];
+          if ($next === '[' || $next === ']') {
+            $label .= "\\".$next;
+            $prefix .= $next;
+            ++$i;
+            continue;
+          }
+        }
+      }
+
+      $label .= $char;
+    }
+
+    if ($i === $len || $label === '') {
+      return null;
+    }
+
+    return tuple(
+      $label,
+      $lines->withoutFirstLinePrefix($prefix),
+    );
+  }
+
   private static function consumeDestination(
     Lines $lines,
   ): ?(string, Lines) {
@@ -151,6 +169,11 @@ final class LinkReferenceDefinition extends LeafBlock {
   private static function consumeTitle(
     Lines $lines,
   ): ?(string, Lines) {
+    list($first, $rest) = $lines->getFirstLineAndRest();
+    if ($first === '') {
+      $lines = $rest;
+    }
+
     if ($lines->isEmpty()) {
       return null;
     }
