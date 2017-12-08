@@ -46,7 +46,7 @@ function consume_bracketed_link_destination(string $input): ?(string, int) {
     }
 
     if ($chr === '>') {
-      break;
+      return tuple($destination, $idx + 1);
     }
 
     $destination .= $chr;
