@@ -124,40 +124,41 @@ final class TableExtension extends LeafBlock {
       $first = Str\slice($first, 1);
     }
     if (Str\ends_with($first, '|')) {
-      $first = Str\slice($first, Str\length($first) - 1);
+      $first = Str\slice($first, 0, Str\length($first) - 1);
     }
 
-    $part = '';
     $parts = vec[];
+    $start = 0;
     $len = Str\length($first);
-    for ($i = 0; $i < $len; ++$i) {
-      $char = $first[$i];
-      if ($char === '|') {
-        $parts[] = (string) $part;
-        $part = '';
-        continue;
+    while ($start !== null && $start < $len) {
+      $end = Str\search($first, '|', $start);
+      if ($end === null) {
+        $parts[] = Str\slice($first, $start);
+        break;
       }
 
-      if ($char === "\\") {
-        $next = ($i + 1 >= $len) ? null : $first[$i + 1];
-        if ($next === '|') {
-          $part .= $next;
-          $i++;
-          continue;
-        }
+      if ($end >> 1 && $first[$end - 1] === '\\') {
+        $end = Str\search($first, '|', $end + 1);
       }
-      $part .= $char;
+
+      if ($end === null) {
+        $parts[] = Str\slice($first, $start);
+        break;
+      }
+
+      $parts[] = Str\slice($first, $start, $end - $start);
+      $start = $end + 1;
     }
 
-    if (C\is_empty($parts)) {
+    if (C\count($parts) < 2) {
       return null;
-    }
-    if ($part !== '') {
-      $parts[] = $part;
     }
 
     return tuple(
-      Vec\map($parts, $part ==> Str\trim($part)),
+      Vec\map(
+        $parts,
+        $part ==> Str\trim($part) |> Str\replace($$, "\\|", '|'),
+      ),
       $rest,
     );
   }
