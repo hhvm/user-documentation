@@ -120,10 +120,14 @@ final class TableExtension extends LeafBlock {
   ): ?(vec<string>, Lines) {
     list($first, $rest) = $lines->getFirstLineAndRest();
 
+    $is_row = false;
+
     if (Str\starts_with($first, '|')) {
+      $is_row = true;
       $first = Str\slice($first, 1);
     }
     if (Str\ends_with($first, '|')) {
+      $is_row = true;
       $first = Str\slice($first, 0, Str\length($first) - 1);
     }
 
@@ -136,7 +140,6 @@ final class TableExtension extends LeafBlock {
         $parts[] = Str\slice($first, $start);
         break;
       }
-
       if ($end >> 1 && $first[$end - 1] === '\\') {
         $end = Str\search($first, '|', $end + 1);
       }
@@ -150,7 +153,9 @@ final class TableExtension extends LeafBlock {
       $start = $end + 1;
     }
 
-    if (C\count($parts) < 2) {
+    $is_row = $is_row || C\count($parts) >= 2;
+
+    if (!$is_row) {
       return null;
     }
 
