@@ -11,15 +11,10 @@
 
 namespace Facebook\Markdown\Inlines;
 
+use const Facebook\Markdown\_Private\ASCII_PUNCTUATION;
 use namespace HH\Lib\{C, Str};
 
 final class BackslashEscape extends InlineWithPlainTextContent {
-  // Verbatim from the GFM spec
-  const keyset<string> ASCII_PUNCTUATION = keyset[
-    '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.',
-    '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`',
-    '{', '|', '}', '~',
-  ];
 
   public static function consume(
     Context $_,
@@ -35,7 +30,7 @@ final class BackslashEscape extends InlineWithPlainTextContent {
     }
 
     $next = $string[1];
-    if (C\contains_key(self::ASCII_PUNCTUATION, $next)) {
+    if (C\contains_key(ASCII_PUNCTUATION, $next)) {
       return tuple(new self($next), "\n", Str\slice($string, 2));
     }
 

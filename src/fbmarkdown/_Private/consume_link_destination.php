@@ -24,7 +24,6 @@ function consume_bracketed_link_destination(string $input): ?(string, int) {
   invariant($input[0] === '<', 'should not be called on unbracketed input');
   $len = Str\length($input);
 
-  $ignore_brackets = false;
   $destination = '';
   for ($idx = 1; $idx < $len; ++$idx) {
     $chr = $input[$idx];
@@ -34,20 +33,23 @@ function consume_bracketed_link_destination(string $input): ?(string, int) {
     if ($chr === "\n") {
       return null;
     }
-    if (!$ignore_brackets) {
-      if ($chr === '<') {
-        return null;
-      }
-      if ($chr === '>') {
-        return tuple($destination, $idx + 1);
-      }
-    }
+
     if ($chr === '\\') {
-      $ignore_brackets = true;
-    } else {
-      $ignore_brackets = false;
-      $destination .= $chr;
+      if ($idx + 1 < $len) {
+        $next = $input[$idx + 1];
+        if (C\contains_key(ASCII_PUNCTUATION, $next)) {
+          $destination .= $next;
+          $idx++;
+          continue;
+        }
+      }
     }
+
+    if ($chr === '>') {
+      break;
+    }
+
+    $destination .= $chr;
   }
   return null;
 }
@@ -71,7 +73,7 @@ function consume_unbracketed_link_destination(
     if ($chr === '\\') {
       if ($idx + 1 < $len) {
         $next = $input[$idx + 1];
-        if ($next === '(' || $next === ')') {
+        if (C\contains_key(ASCII_PUNCTUATION, $next)) {
           $destination .= $next;
           $idx++;
           continue;
