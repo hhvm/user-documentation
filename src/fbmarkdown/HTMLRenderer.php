@@ -24,6 +24,40 @@ class HTMLRenderer extends Renderer<string> {
     return _Private\plain_text_to_html_attribute($text);
   }
 
+  // This is the list from the reference implementation
+  const keyset<string> URI_SAFE = keyset[
+    '-', '_', '.', '+', '!', '*', "'", '(', ')', ';', ':', '%', '#', '@', '?',
+    '=', ';', ':', '/', ',', '+', '&', '$',
+    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+    'u', 'v', 'w', 'x', 'y', 'z',
+    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+  ];
+
+  protected static function escapeURIAttribute(string $text): string {
+    // While the spec states that no particular method is required, we attempt
+    // to match cmark's behavior so that we can run the spec test suite.
+    $text = \html_entity_decode(
+      $text,
+      /* HH_FIXME[4106] */ /* HH_FIXME[2049] */ \ENT_HTML5,
+      'UTF-8',
+    );
+
+    $out = '';
+    $len = Str\length($text);
+    for ($i = 0; $i < $len; ++$i) {
+      $char = $text[$i];
+      if (C\contains_key(self::URI_SAFE, $char)) {
+        $out .= $char;
+        continue;
+      }
+      $out .= \urlencode($char);
+    }
+    $text = $out;
+
+    return self::escapeAttribute($text);
+  }
+
   <<__Override>>
   protected function renderNodes(vec<ASTNode> $nodes): string {
     return $nodes
@@ -237,7 +271,7 @@ class HTMLRenderer extends Renderer<string> {
 
   <<__Override>>
   protected function renderAutoLink(Inlines\AutoLink $node): string {
-    $href = self::escapeAttribute($node->getDestination());
+    $href = self::escapeURIAttribute($node->getDestination());
     $text = self::escapeContent($node->getText());
     return '<a href="'.$href.'">'.$text.'</a>';
   }
@@ -272,7 +306,7 @@ class HTMLRenderer extends Renderer<string> {
     if ($title !== null) {
       $title = ' title="'.self::escapeAttribute($title).'"';
     }
-    $src = self::escapeAttribute($node->getSource());
+    $src = self::escapeURIAttribute($node->getSource());
     $text = $node->getDescription()
       |> Vec\map($$, $child ==> $child->getContentAsPlainText())
       |> Str\join($$, '');
@@ -287,7 +321,7 @@ class HTMLRenderer extends Renderer<string> {
     if ($title !== null) {
       $title = ' title="'.self::escapeAttribute($title).'"';
     }
-    $href = self::escapeAttribute($node->getDestination());
+    $href = self::escapeURIAttribute($node->getDestination());
     $text = $node->getText()
       |> Vec\map($$, $child ==> $this->render($child))
       |> Str\join($$, '');
