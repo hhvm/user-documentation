@@ -76,21 +76,34 @@ final class LinkReferenceDefinition extends LeafBlock {
 
     $title = self::consumeWhitespaceAndTitle($lines);
     if ($title !== null) {
-      list($title, $lines) = $title;
+      list($title, $rest) = $title;
+      if (self::consumeEnd($rest) === null) {
+        $title = null;
+      } else {
+        $lines = $rest;
+      }
     } else {
       // refine from ?(tuple|string) to ?string
       $title = null;
     }
 
-    $lines = $lines->withLeftTrimmedFirstLine();
-    list($first, $lines) = $lines->getFirstLineAndRest();
-    if ($first !== '') {
+    $lines = self::consumeEnd($lines);
+    if ($lines === null) {
       return null;
     }
 
     $def = new self($label, $destination, $title);
     $context->addLinkReferenceDefinition($def);
     return tuple($def, $lines);
+  }
+
+  private static function consumeEnd(Lines $lines): ?Lines {
+    $lines = $lines->withLeftTrimmedFirstLine();
+    list($first, $lines) = $lines->getFirstLineAndRest();
+    if ($first !== '') {
+      return null;
+    }
+    return $lines;
   }
 
   /** Consume whitespace, including at most one newline */
