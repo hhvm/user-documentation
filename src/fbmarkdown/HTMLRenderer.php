@@ -229,7 +229,7 @@ class HTMLRenderer extends Renderer<string> {
         $this->renderNodes($cell).
         "</th>\n";
     }
-    $html .= '</thead>';
+    $html .= "</tr>\n</thead>";
     return $html;
   }
 
