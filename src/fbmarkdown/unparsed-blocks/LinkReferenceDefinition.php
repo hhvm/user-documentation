@@ -152,7 +152,7 @@ final class LinkReferenceDefinition extends LeafBlock {
   private static function consumeLabel(
     Lines $lines,
   ): ?(string, Lines) {
-    list($column, $first_raw, $without_first) = $lines->getColumnFirstLineAndRest();
+    list($column, $first_raw, $_) = $lines->getColumnFirstLineAndRest();
     list($first, $_) = Lines::stripUpToNLeadingWhitespace($first_raw, 3, $column);
 
     if (!Str\starts_with($first, '[')) {
@@ -160,41 +160,46 @@ final class LinkReferenceDefinition extends LeafBlock {
     }
 
     $label = '';
-    $prefix = Str\slice($first_raw, 0, Str\search($first_raw, '[')).'[';
+    $lines = $lines->withoutFirstNBytes((int) Str\search($first_raw, '[') + 1);
 
-    $len = Str\length($first);
-    for ($i = 1; $i < $len; ++$i) {
-      $char = $first[$i];
-      $prefix .= $char;
-      if ($char === '[') {
-        return null;
-      }
-      if ($char === ']') {
-        break;
-      }
-      if ($char === '\\') {
-        if ($i + 1 < $len) {
-          $next = $first[$i + 1];
-          if ($next === '[' || $next === ']') {
-            $label .= "\\".$next;
-            $prefix .= $next;
+    while (!$lines->isEmpty()) {
+      list($line, $rest) = $lines->getFirstLineAndRest();
+      $len = Str\length($line);
+      for ($i = 0; $i < $len; ++$i) {
+        $char = $line[$i];
+        if ($char === '[') {
+          return null;
+        }
+        if ($char === ']') {
+          break;
+        }
+        if ($char === "\\") {
+          if ($i + 1 < $len) {
+            $label .= "\\".$line[$i + 1];
             ++$i;
             continue;
           }
         }
+        $label .= $char;
       }
 
-      $label .= $char;
+      if ($i < $len) {
+        // We matched the ']'
+        $lines = $lines->withoutFirstNBytes($i + 1);
+        break;
+      }
+
+      if ($rest->isEmpty()) {
+        return null;
+      }
+      $lines = $rest;
     }
 
-    if ($i === $len || $label === '') {
+    if (Str\trim($label) === '') {
       return null;
     }
 
-    return tuple(
-      $label,
-      $lines->withoutFirstLinePrefix($prefix),
-    );
+    return tuple($label, $lines);
   }
 
   private static function consumeDestination(
