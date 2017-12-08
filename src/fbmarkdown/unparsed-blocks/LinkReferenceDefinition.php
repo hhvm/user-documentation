@@ -61,42 +61,31 @@ final class LinkReferenceDefinition extends LeafBlock {
     list($label, $lines) = $label;
 
     $first = $lines->getFirstLine();
-    if ($first[0] ?? null !== ':') {
+    if (($first[0] ?? null) !== ':') {
       return null;
     }
 
-    var_dump($lines);
+    $lines = $lines->withoutFirstLinePrefix(':');
 
-    $lines = $lines->withoutFirstLinePrefix(':')->withLeftTrimmedFirstLine();
-
-    if ($lines->getFirstLine() === '') {
-      list($_, $lines) = $lines->getFirstLineAndRest();
-    }
-
-    $result = self::consumeDestination($lines);
+    $result = self::consumeOptionalWhitespaceAndDestination($lines);
     if ($result === null) {
       return null;
     }
 
     list($destination, $lines) = $result;
+
+    $title = self::consumeWhitespaceAndTitle($lines);
+    if ($title !== null) {
+      list($title, $lines) = $title;
+    } else {
+      // refine from ?(tuple|string) to ?string
+      $title = null;
+    }
+
     $lines = $lines->withLeftTrimmedFirstLine();
-
-    if ($lines->getFirstLine() === '') {
-      list($_, $lines) = $lines->getFirstLineAndRest();
-    }
-
-    $title = null;
-    $result = self::consumeTitle($lines);
-    if ($result !== null) {
-      list($title, $lines) = $result;
-    }
-
-    if (!$lines->isEmpty()) {
-      list($line, $lines) =
-        $lines->withLeftTrimmedFirstLine()->getFirstLineAndRest();
-      if ($line !== '') {
-        return null;
-      }
+    list($first, $lines) = $lines->getFirstLineAndRest();
+    if ($first !== '') {
+      return null;
     }
 
     $def = new self($label, $destination, $title);
@@ -104,18 +93,62 @@ final class LinkReferenceDefinition extends LeafBlock {
     return tuple($def, $lines);
   }
 
+  /** Consume whitespace, including at most one newline */
+  private static function consumeWhitespace(
+    Lines $lines,
+  ): ?Lines {
+    if ($lines->isEmpty()) {
+      return null;
+    }
+
+    list($first, $rest) = $lines->getFirstLineAndRest();
+    $len = Str\length($first);
+    for ($i = 0; $i < $len; ++$i) {
+      $char = $first[$i];
+      if ($char === ' ' || $char === "\t") {
+        continue;
+      }
+      return $lines->withoutFirstNBytes($i);
+    }
+
+    // entire first line was whitespace
+    if ($rest->isEmpty()) {
+      return $rest;
+    }
+    return $rest->withLeftTrimmedFirstLine();
+  }
+
+  private static function consumeOptionalWhitespaceAndDestination(
+    Lines $lines,
+  ): ?(string, Lines) {
+    $lines = self::consumeWhitespace($lines) ?? $lines;
+    return self::consumeDestination($lines);
+  }
+
+  private static function consumeWhitespaceAndTitle(
+    Lines $lines,
+  ): ?(string, Lines) {
+    $lines = self::consumeWhitespace($lines);
+    if ($lines === null) {
+      return null;
+    }
+
+    return self::consumeTitle($lines);
+  }
+
   private static function consumeLabel(
     Lines $lines,
   ): ?(string, Lines) {
-    list($column, $first, $without_first) = $lines->getColumnFirstLineAndRest();
-    list($first, $_) = Lines::stripUpToNLeadingWhitespace($first, 3, $column);
+    list($column, $first_raw, $without_first) = $lines->getColumnFirstLineAndRest();
+    list($first, $_) = Lines::stripUpToNLeadingWhitespace($first_raw, 3, $column);
 
     if (!Str\starts_with($first, '[')) {
       return null;
     }
 
     $label = '';
-    $prefix = '[';
+    $prefix = Str\slice($first_raw, 0, Str\search($first_raw, '[')).'[';
+
     $len = Str\length($first);
     for ($i = 1; $i < $len; ++$i) {
       $char = $first[$i];
@@ -169,6 +202,10 @@ final class LinkReferenceDefinition extends LeafBlock {
   private static function consumeTitle(
     Lines $lines,
   ): ?(string, Lines) {
+    if ($lines->isEmpty()) {
+      return null;
+    }
+
     list($first, $rest) = $lines->getFirstLineAndRest();
     if ($first === '') {
       $lines = $rest;
