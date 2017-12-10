@@ -12,6 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 final class BuildIDBuildStep extends BuildStep {
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nBuildID");
     $docsite_rev_file = __DIR__.'/../../DOCSITE_REV';

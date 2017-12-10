@@ -41,10 +41,12 @@ final class Emphasis extends Inline {
     return $this->content;
   }
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return '';
   }
 
+  <<__Override>>
   public static function consume(
     Context $context,
     string $previous,

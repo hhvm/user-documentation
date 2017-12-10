@@ -19,10 +19,12 @@ use HHVM\UserDocumentation\PHPDotNetArticleRedirectData;
 require_once(BuildPaths::JUMP_INDEX);
 
 final class HTTP404Controller extends NonRoutableWebPageController {
+  <<__Override>>
   public async function getTitle(): Awaitable<string> {
     return 'Page Not Found';
   }
 
+  <<__Override>>
   public function getExtraBodyClass(): ?string {
     return 'notFoundErrorPage';
   }
@@ -73,6 +75,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
     return null;
   }
 
+  <<__Override>>
   public async function getBody(): Awaitable<\XHPRoot> {
     return
       <x:frag>
@@ -143,15 +146,18 @@ final class HTTP404Controller extends NonRoutableWebPageController {
     );
   }
 
+  <<__Override>>
   protected function getStatusCode(): int {
     return 404;
   }
 
+  <<__Override>>
   protected function getGithubIssueTitle(): string {
     $request_path = $this->getRequestedPath();
     return '404: '.$request_path;
   }
 
+  <<__Override>>
   protected function getGithubIssueBody(): string {
     return <<<EOF
 Please complete the information below:
@@ -166,6 +172,7 @@ Please complete the information below:
 EOF;
   }
 
+  <<__Override>>
   protected function requireSecureConnection(): void {
     /* No-op implementation so that the 404 handler doesn't throw a redirect
      * exception. If you need something similar, maybe add a

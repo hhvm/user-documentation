@@ -24,6 +24,7 @@ implements RoutableGetController {
       ->literal('.php');
   }
 
+  <<__Override>>
   public async function getResponse(): Awaitable<ResponseInterface> {
     $id = $this->getParameters()['LegacyId'];
 

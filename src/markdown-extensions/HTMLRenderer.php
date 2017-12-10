@@ -25,6 +25,7 @@ final class HTMLRenderer extends Markdown\HTMLRenderer {
       '</div>';
   }
 
+  <<__Override>>
   protected function renderTableDataCell(
     Markdown\Blocks\TableExtension $table,
     int $_row_idx,

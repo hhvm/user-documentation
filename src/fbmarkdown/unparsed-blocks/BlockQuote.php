@@ -16,6 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
 class BlockQuote extends ContainerBlock<?(BlockQuote, Lines), Block> {
+  <<__Override>>
   protected static function consumeImpl(
     Context $context,
     Lines $lines,
@@ -59,6 +60,7 @@ class BlockQuote extends ContainerBlock<?(BlockQuote, Lines), Block> {
     return tuple(new self(self::consumeChildren($context, $contents)), $lines);
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
     return new ASTNode(
       Vec\map(

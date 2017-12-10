@@ -17,6 +17,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   const string SOURCE_ROOT = BuildPaths::GUIDES_MARKDOWN;
   const string BUILD_ROOT = BuildPaths::GUIDES_HTML;
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nGuidesHTMLBuild");
     $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})

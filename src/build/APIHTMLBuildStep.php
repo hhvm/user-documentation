@@ -17,6 +17,7 @@ final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   const string SOURCE_ROOT = BuildPaths::APIDOCS_MARKDOWN;
   const string BUILD_ROOT = BuildPaths::APIDOCS_HTML;
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nAPIHTMLBuild");
     $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})

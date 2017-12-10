@@ -21,6 +21,7 @@ final class Paragraph extends LeafBlock {
   ) {
   }
 
+  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,
@@ -51,6 +52,7 @@ final class Paragraph extends LeafBlock {
     );
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
     return new ASTNode(Inlines\parse($ctx, $this->content));
   }

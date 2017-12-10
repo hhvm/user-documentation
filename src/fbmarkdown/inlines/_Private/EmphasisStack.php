@@ -28,6 +28,7 @@ class TextNode extends Node {
     return $this->text;
   }
 
+  <<__Override>>
   public function toInlines(Context $ctx): vec<Inline> {
     return Inlines\parse($ctx, $this->getText());
   }
@@ -57,6 +58,7 @@ class InlineNode extends Node {
   ) {
   }
 
+  <<__Override>>
   public function toInlines(Context $_): vec<Inline> {
     return vec[$this->content];
   }
@@ -74,6 +76,7 @@ class EmphasisNode extends Node {
     return $this->content;
   }
 
+  <<__Override>>
   public function toInlines(Context $_): vec<Inline> {
     return vec[$this->content];
   }

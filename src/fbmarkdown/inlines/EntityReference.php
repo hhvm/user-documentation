@@ -14,6 +14,7 @@ namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\Str;
 
 final class EntityReference extends InlineWithPlainTextContent {
+  <<__Override>>
   public static function consume(
     Context $_,
     string $_previous,

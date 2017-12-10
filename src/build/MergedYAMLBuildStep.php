@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation;
 use namespace Facebook\TypeAssert;
 
 final class MergedYAMLBuildStep extends BuildStep {
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nMergedYAMLBuild");
     $sources = (Vector { })

@@ -17,6 +17,7 @@ use namespace HHVM\UserDocumentation\JSON;
 use namespace HH\Lib\{C, Str, Vec};
 
 abstract class YamlFrontMatterBlock extends UnparsedBlocks\Block{
+  <<__Override>>
   public static function consume(
     UnparsedBlocks\Context $context,
     UnparsedBlocks\Lines $lines,

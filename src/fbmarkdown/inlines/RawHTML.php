@@ -24,6 +24,7 @@ final class RawHTML extends Inline {
     return $this->content;
   }
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return '';
   }
@@ -37,6 +38,7 @@ final class RawHTML extends Inline {
   const string CLOSING_TAG = '<\\/'.HTMLBlock::TAG_NAME.' *>';
   const string DECLARATION = '<![A-Z]+ +[^>]+>';
 
+  <<__Override>>
   public static function consume(
     Context $context,
     string $_last,

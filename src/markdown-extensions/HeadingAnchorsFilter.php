@@ -24,6 +24,7 @@ final class HeadingAnchorsFilter extends RenderFilter {
     return $this;
   }
 
+  <<__Override>>
   public function filter(
     RenderContext $_,
     ASTNode $heading,

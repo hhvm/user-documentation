@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation;
 use namespace Facebook\TypeSpec;
 
 final class PHPIniSupportInHHVMMarkdownBuildStep extends BuildStep {
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nPHPIniSupportInHHVMMarkdownBuild");
     $settings = \file_get_contents(BuildPaths::PHP_INI_SUPPORT_IN_HHVM_JSON)

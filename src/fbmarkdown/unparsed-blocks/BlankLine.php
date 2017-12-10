@@ -16,6 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 
 final class BlankLine extends LeafBlock {
 
+  <<__Override>>
   public static function consume(
     Context $_,
     Lines $lines,
@@ -27,6 +28,7 @@ final class BlankLine extends LeafBlock {
     return tuple(new self(), $rest);
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $_ctx): ASTNode {
     return new ASTNode();
   }

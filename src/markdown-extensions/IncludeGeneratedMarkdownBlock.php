@@ -19,6 +19,7 @@ final class IncludeGeneratedMarkdownBlock extends UnparsedBlocks\Block {
   const string PATTERN =
     '/^@@ guides-generated-markdown\/(?<file>[^ @]+) @@$/';
 
+  <<__Override>>
   public static function consume(
     UnparsedBlocks\Context $context,
     UnparsedBlocks\Lines $lines,
@@ -45,6 +46,7 @@ final class IncludeGeneratedMarkdownBlock extends UnparsedBlocks\Block {
     return tuple($inner_doc, $rest);
   }
 
+  <<__Override>>
   public function withParsedInlines(
     Inlines\Context $_,
   ): \Facebook\Markdown\Blocks\Block {

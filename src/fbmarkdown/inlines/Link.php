@@ -26,6 +26,7 @@ class Link extends Inline {
   ) {
   }
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return $this->text
       |> Vec\map($$, $child ==> $child->getContentAsPlainText())
@@ -44,6 +45,7 @@ class Link extends Inline {
     return $this->title;
   }
 
+  <<__Override>>
   public static function consume(
     Context $ctx,
     string $_last,

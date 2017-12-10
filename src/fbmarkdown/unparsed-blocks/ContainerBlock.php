@@ -21,6 +21,7 @@ extends Block {
   ) {
   }
 
+  <<__Override>>
   final public static function consume(
     Context $context,
     Lines $lines,

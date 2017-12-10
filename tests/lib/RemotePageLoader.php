@@ -9,6 +9,7 @@ use namespace Facebook\TypeAssert;
 final class RemotePageLoader extends PageLoader {
   protected function __construct() {}
 
+  <<__Override>>
   protected async function getPageImpl(
     string $url,
   ): Awaitable<ResponseInterface> {

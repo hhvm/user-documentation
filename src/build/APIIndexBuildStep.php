@@ -15,6 +15,7 @@ use namespace HH\Lib\Vec;
 use namespace Facebook\TypeAssert;
 
 final class APIIndexBuildStep extends BuildStep {
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nAPIIndexBuild");
 

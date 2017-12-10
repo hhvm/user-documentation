@@ -30,6 +30,7 @@ abstract class APIPageController extends WebPageController {
 
   abstract protected function getRootDefinition(): APIIndexEntry;
 
+  <<__Override>>
   final protected async function getBody(): Awaitable<XHPRoot> {
     return
       <div class="referencePageWrapper">

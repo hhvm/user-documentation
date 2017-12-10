@@ -21,6 +21,7 @@ abstract class InlineWithPlainTextContent extends Inline {
     return $this->content;
   }
 
+  <<__Override>>
   final public function getContentAsPlainText(): string {
     return $this->content;
   }

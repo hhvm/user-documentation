@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation;
 final class FetchPHPDotNetIndexBuildStep extends BuildStep {
   const string SOURCE = 'http://php.net/manual/en/search-index.json';
 
+  <<__Override>>
   public function buildAll(): void {
     Log::v("\nFetching php.net documentation index...");
     $json = file_get_contents(self::SOURCE);

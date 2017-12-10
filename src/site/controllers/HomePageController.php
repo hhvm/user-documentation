@@ -13,10 +13,12 @@ use HHVM\UserDocumentation\GuidesIndex;
 use HHVM\UserDocumentation\GuidesProduct;
 
 final class HomePageController extends WebPageController {
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())->literal('/');
   }
 
+  <<__Override>>
   public async function getTitle(): Awaitable<string> {
     return 'HHVM and Hack Documentation';
   }
@@ -58,6 +60,7 @@ final class HomePageController extends WebPageController {
     return NULL;
   }
 
+  <<__Override>>
   protected async function getBody(): Awaitable<XHPRoot> {
     return
       <x:frag>

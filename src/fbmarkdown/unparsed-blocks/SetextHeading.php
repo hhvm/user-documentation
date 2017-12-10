@@ -20,6 +20,7 @@ final class SetextHeading extends LeafBlock {
   public function __construct(private int $level, private string $heading) {
   }
 
+  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,
@@ -58,6 +59,7 @@ final class SetextHeading extends LeafBlock {
     return null;
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $ctx): ASTHeading {
     return new ASTHeading(
       $this->level,

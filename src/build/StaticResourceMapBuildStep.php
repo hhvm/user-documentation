@@ -34,6 +34,7 @@ final class StaticResourceMapBuildStep extends BuildStep {
     return realpath(LocalConfig::ROOT.'/public/');
   }
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nStaticResourcesMapBuild");
 

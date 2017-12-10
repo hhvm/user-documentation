@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation;
 use namespace HH\Lib\Vec;
 
 final class APIMarkdownBuildStep extends BuildStep {
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nAPIMarkdownBuild");
 

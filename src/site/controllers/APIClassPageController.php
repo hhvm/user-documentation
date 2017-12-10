@@ -24,6 +24,7 @@ use namespace HH\Lib\Str;
 final class APIClassPageController extends APIPageController {
   use APIClassPageControllerParametersTrait;
 
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')

@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation;
 final class SyntaxHighlightCSSBuildStep extends BuildStep {
   const string PROVIDER = LocalConfig::ROOT.'/md-render/syntax-highlight-css.rb';
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nSyntaxHighlightCSS");
     $css = null;

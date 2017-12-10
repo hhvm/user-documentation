@@ -15,6 +15,7 @@ use namespace HH\Lib\Dict;
 
 final class PHPDotNetAPIIndexBuildStep extends BuildStep {
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nPHPDotNetAPIIndex");
 

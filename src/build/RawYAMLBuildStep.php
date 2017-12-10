@@ -15,6 +15,7 @@ use Facebook\DefinitionFinder\FileParser;
 use namespace HH\Lib\Vec;
 
 final class RawYAMLBuildStep extends BuildStep {
+  <<__Override>>
   public function buildAll(): void {
     $exts = Set { 'php', 'hhi' };
 

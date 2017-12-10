@@ -23,12 +23,14 @@ final class StrikethroughExtension extends Inline {
     return $this->children;
   }
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return $this->children
       |> Vec\map($$, $child ==> $child->getContentAsPlainText())
       |> Str\join($$, '');
   }
 
+  <<__Override>>
   public static function consume(
     Context $context,
     string $_last,

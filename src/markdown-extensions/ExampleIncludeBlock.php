@@ -23,6 +23,7 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
       '(?:.(hhvm|typechecker).expect[f]?)?'.
     ') @@$/';
 
+  <<__Override>>
   public static function consume(
     UnparsedBlocks\Context $context,
     UnparsedBlocks\Lines $lines,
@@ -71,6 +72,7 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
     );
   }
 
+  <<__Override>>
   public function withParsedInlines(
     Inlines\Context $_,
   ): \Facebook\Markdown\Blocks\Block {

@@ -29,6 +29,7 @@ final class AutoLinkifyInline extends Inlines\Link {
       '(?:.(hhvm|typechecker).expect[f]?)?'.
     ') @@$/';
 
+  <<__Override>>
   public static function consume(
     Inlines\Context $context,
     string $previous,

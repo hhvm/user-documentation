@@ -17,10 +17,12 @@ final class HardLineBreak extends Inline {
   public function __construct() {
   }
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return "\n";
   }
 
+  <<__Override>>
   public static function consume(
     Context $_,
     string $_previous,

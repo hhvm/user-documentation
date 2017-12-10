@@ -8,6 +8,7 @@ use \Psr\Http\Message\ResponseInterface;
 final class LocalPageLoader extends PageLoader {
   protected function __construct() {}
 
+  <<__Override>>
   protected async function getPageImpl(
     string $url,
   ): Awaitable<ResponseInterface> {

@@ -28,6 +28,7 @@ final class ThematicBreak extends LeafBlock {
       |> '/^ {0,3}('.$$.')$/';
   }
 
+  <<__Override>>
   public static function consume(
     Context $_,
     Lines $lines,
@@ -39,6 +40,7 @@ final class ThematicBreak extends LeafBlock {
     return tuple(new self(), $rest);
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $context): ASTNode {
     return new ASTNode();
   }

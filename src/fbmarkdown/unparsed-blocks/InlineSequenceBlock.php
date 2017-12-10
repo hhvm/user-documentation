@@ -23,6 +23,7 @@ final class InlineSequenceBlock extends Block {
   ) {
   }
 
+  <<__Override>>
   public static function consume(
     Context $_,
     Lines $_,
@@ -30,6 +31,7 @@ final class InlineSequenceBlock extends Block {
     invariant_violation('should never be called');
   }
 
+  <<__Override>>
   public function withParsedInlines(
     Inlines\Context $context,
   ): ASTNode {

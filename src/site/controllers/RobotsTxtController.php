@@ -24,6 +24,7 @@ implements RoutableGetController {
   const string DEFAULT_FILE =
     LocalConfig::ROOT.'/public/robots.txt-default';
 
+  <<__Override>>
   public async function getResponse(): Awaitable<ResponseInterface> {
     if ($this->getRequestedHost() === 'docs.hhvm.com') {
       $source = self::DEFAULT_FILE;

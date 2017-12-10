@@ -15,6 +15,7 @@ use namespace HH\Lib\{Str, Vec};
 
 final class PHPIniSupportInHHVMBuildStep extends BuildStep {
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nPHPIniSupportInHHVM");
 

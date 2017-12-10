@@ -17,6 +17,7 @@ use HHVM\UserDocumentation\URLBuilder;
 final class GuidesListController extends WebPageController {
   use GuidesListControllerParametersTrait;
 
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
@@ -24,6 +25,7 @@ final class GuidesListController extends WebPageController {
       ->literal('/');
   }
 
+  <<__Override>>
   public async function getTitle(): Awaitable<string> {
     switch ($this->getProduct()) {
       case GuidesProduct::HHVM:
@@ -60,6 +62,7 @@ final class GuidesListController extends WebPageController {
     return $root;
   }
 
+  <<__Override>>
   protected async function getBody(): Awaitable<XHPRoot> {
     $body =
       <x:frag>
@@ -102,6 +105,7 @@ final class GuidesListController extends WebPageController {
     return NULL;
   }
 
+  <<__Override>>
   protected function getBreadcrumbs(): vec<(string, ?string)> {
     $product = $this->getProduct();
     return vec[

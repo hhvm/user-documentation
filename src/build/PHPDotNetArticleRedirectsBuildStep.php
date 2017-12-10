@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation;
 final class PHPDotNetArticleRedirectsBuildStep extends BuildStep {
   use CodegenBuildStep;
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nPHPDotNetArticleRedirectsBuild");
     $reader = new PHPDocsIndexReader(

@@ -19,6 +19,7 @@ use type HHVM\UserDocumentation\{
 final class APIFullListController extends WebPageController {
   use APIFullListControllerParametersTrait;
 
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')

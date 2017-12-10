@@ -14,6 +14,7 @@ namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str};
 
 final class TextualContent extends InlineWithPlainTextContent {
+  <<__Override>>
   public static function consume(
     Context $context,
     string $_last,

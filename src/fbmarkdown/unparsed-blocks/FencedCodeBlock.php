@@ -32,6 +32,7 @@ final class FencedCodeBlock extends FencedBlock {
     return $this->infoString;
   }
 
+  <<__Override>>
   protected static function createFromLines(
     vec<string> $lines,
     int $column,

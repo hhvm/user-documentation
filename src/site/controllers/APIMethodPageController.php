@@ -17,6 +17,7 @@ use HHVM\UserDocumentation\URLBuilder;
 final class APIMethodPageController extends APIPageController {
   use APIMethodPageControllerParametersTrait;
 
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')

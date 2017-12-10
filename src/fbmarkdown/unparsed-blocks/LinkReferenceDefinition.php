@@ -50,6 +50,7 @@ final class LinkReferenceDefinition extends LeafBlock {
       |> \preg_replace('/\s+/', ' ', $$);
   }
 
+  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,
@@ -245,6 +246,7 @@ final class LinkReferenceDefinition extends LeafBlock {
     return tuple($title, $lines->withoutFirstNBytes($consumed_bytes));
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
     $title = $this->title;
     if ($title !== null) {

@@ -24,6 +24,7 @@ final class TableExtension extends LeafBlock {
   ) {
   }
 
+  <<__Override>>
   public static function consume(
     Context $ctx,
     Lines $lines,
@@ -168,6 +169,7 @@ final class TableExtension extends LeafBlock {
     );
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $context): ASTTableExtension {
     return new ASTTableExtension(
       Vec\map($this->header, $cell ==> Inlines\parse($context, $cell)),

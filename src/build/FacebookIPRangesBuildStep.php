@@ -15,6 +15,7 @@ use namespace HH\Lib\{Str, Vec};
 
 final class FacebookIPRangesBuildStep extends BuildStep {
 
+  <<__Override>>
   public function buildAll(): void {
     Log::v("\nCreating list of FB employee IP addresses...");
 

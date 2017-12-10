@@ -30,6 +30,7 @@ use namespace HH\Lib\Dict;
 final class GuidePageController extends WebPageController {
   use GuidePageControllerParametersTrait;
 
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
@@ -55,6 +56,7 @@ final class GuidePageController extends WebPageController {
     return $this->getParameters()['Page'];
   }
 
+  <<__Override>>
   public async function getTitle(): Awaitable<string> {
     list($product, $guide, $page) = tuple(
       $this->getProduct(),
@@ -66,6 +68,7 @@ final class GuidePageController extends WebPageController {
     );
   }
 
+  <<__Override>>
   protected async function getBody(): Awaitable<XHPRoot> {
     return
       <div class="guidePageWrapper">
@@ -202,6 +205,7 @@ final class GuidePageController extends WebPageController {
     return $adj_guide;
   }
 
+  <<__Override>>
   protected function getBreadcrumbs(): vec<(string, ?string)> {
     $product = $this->getProduct();
     $product_url = URLBuilder::getPathForProductGuides($product);
@@ -219,6 +223,7 @@ final class GuidePageController extends WebPageController {
     ];
   }
 
+  <<__Override>>
   protected function getSideNav(): XHPRoot {
     $ts = type_alias_structure(NavDataNode::class);
     $data = Dict\map(

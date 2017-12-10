@@ -36,6 +36,7 @@ class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
     return C\any($this->children, $child ==> $child instanceof BlankLine);
   }
 
+  <<__Override>>
   final protected static function consumeImpl(
     Context $context,
     Lines $lines,

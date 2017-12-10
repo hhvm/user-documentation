@@ -22,6 +22,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
    */
   const string LEGACY_INDEX = LocalConfig::ROOT.'/legacy-docs-site-index.json';
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nAPILegacyRedirectsBuild");
     $this->createIndex();

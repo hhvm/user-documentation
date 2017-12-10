@@ -19,6 +19,7 @@ use namespace Facebook\TypeAssert;
 final class UnifiedAPIIndexBuildStep extends BuildStep {
   use CodegenBuildStep;
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nUnifiedAPIIndexBuildStep");
 

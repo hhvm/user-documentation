@@ -15,6 +15,7 @@ use HHVM\UserDocumentation\APIProduct;
 final class APIListByTypeController extends WebPageController {
   use APIListByTypeControllerParametersTrait;
 
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')

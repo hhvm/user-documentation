@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation;
 final class SASSBuildStep extends BuildStep {
   const string PROVIDER = LocalConfig::ROOT.'/sass/build.rb';
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nSASS");
     $css = null;

@@ -24,10 +24,12 @@ final class AutoLinkExtension extends Inline {
     '', "\n", ' ', '*', '_', '~', '(',
   ];
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     invariant_violation('Should never be called');
   }
 
+  <<__Override>>
   public static function consume(
     Context $_,
     string $last,

@@ -13,6 +13,7 @@ namespace HHVM\UserDocumentation;
 
 final class GuidesIndexBuildStep extends BuildStep {
 
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nGuidesIndexBuild");
 

@@ -28,6 +28,7 @@ extends WebController implements RoutableGetController {
       ->literal('/');
   }
 
+  <<__Override>>
   public async function getResponse(): Awaitable<ResponseInterface> {
     $params = $this->getParameters();
     $product = GuidesProduct::assert($params['Product']);

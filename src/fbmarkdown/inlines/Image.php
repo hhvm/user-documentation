@@ -18,6 +18,7 @@ use function Facebook\Markdown\_Private\{
 use namespace HH\Lib\{Str, Vec};
 
 final class Image extends Inline {
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return '';
   }
@@ -41,6 +42,7 @@ final class Image extends Inline {
     return $this->title;
   }
 
+  <<__Override>>
   public static function consume(
     Context $context,
     string $_previous,

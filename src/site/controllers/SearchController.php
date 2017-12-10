@@ -28,6 +28,7 @@ use namespace HH\Lib\{C, Str, Vec};
 final class SearchController extends WebPageController {
   use SearchControllerParametersTrait;
 
+  <<__Override>>
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())->literal('/search');
   }
@@ -46,10 +47,12 @@ final class SearchController extends WebPageController {
     );
   }
 
+  <<__Override>>
   public async function getTitle(): Awaitable<string> {
     return "Search results for '{$this->getSearchTerm()}':";
   }
 
+  <<__Override>>
   protected async function getBody(): Awaitable<XHPRoot> {
     $results = Vec\map($this->getSearchResults(), $result ==>
       <li data-search-score={sprintf('%.2f', $result->getScore())}>

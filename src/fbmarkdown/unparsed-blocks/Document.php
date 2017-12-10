@@ -16,6 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\Vec;
 
 class Document extends ContainerBlock<(Document, Lines), Block> {
+  <<__Override>>
   final protected static function consumeImpl(
     Context $context,
     Lines $lines,
@@ -26,6 +27,7 @@ class Document extends ContainerBlock<(Document, Lines), Block> {
     );
   }
 
+  <<__Override>>
   public function withParsedInlines(Inlines\Context $ctx): ASTNode {
     return new ASTNode(
       Vec\map(

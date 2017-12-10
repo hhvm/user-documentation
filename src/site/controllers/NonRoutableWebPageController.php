@@ -58,6 +58,7 @@ Please complete the information below:
 EOF;
   }
 
+  <<__Override>>
   final public async function getResponse(): Awaitable<ResponseInterface> {
     list($title, $content) = await \HH\Asio\va(
       $this->getTitle(),

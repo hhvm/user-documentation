@@ -26,6 +26,7 @@ abstract class FencedBlock extends LeafBlock {
     string $first,
   ): ?string;
 
+  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,

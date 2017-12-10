@@ -28,6 +28,7 @@ final class AutoLink extends Inline {
     return $this->destination;
   }
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return $this->text;
   }
@@ -39,6 +40,7 @@ final class AutoLink extends Inline {
     '(?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?'.
     '(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/';
 
+  <<__Override>>
   public static function consume(
     Context $_,
     string $_previous,

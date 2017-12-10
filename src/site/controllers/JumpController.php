@@ -26,6 +26,7 @@ implements RoutableGetController {
       ->string('Keyword');
   }
 
+  <<__Override>>
   public function getResponse(): Awaitable<ResponseInterface> {
     $keyword = $this->getParameters()['Keyword'];
 

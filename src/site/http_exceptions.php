@@ -20,6 +20,7 @@ abstract class HTTPException extends \Exception {
 abstract class RoutingException extends HTTPException {}
 
 final class HTTPNotFoundException extends RoutingException {
+  <<__Override>>
   public async function getResponse(
     ServerRequestInterface $request,
   ): Awaitable<ResponseInterface> {
@@ -28,6 +29,7 @@ final class HTTPNotFoundException extends RoutingException {
 }
 
 final class HTTPMethodNotAllowedException extends RoutingException {
+  <<__Override>>
   public async function getResponse(
     ServerRequestInterface $_,
   ): Awaitable<ResponseInterface> {
@@ -42,6 +44,7 @@ final class RedirectException extends HTTPException {
     parent::__construct();
   }
 
+  <<__Override>>
   public async function getResponse(
     ServerRequestInterface $_,
   ): Awaitable<ResponseInterface> {

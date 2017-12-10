@@ -19,10 +19,12 @@ final class CodeSpan extends Inline {
   ) {
   }
 
+  <<__Override>>
   public function getContentAsPlainText(): string {
     return $this->code;
   }
 
+  <<__Override>>
   public static function consume(
     Context $_,
     string $_previous,

@@ -16,6 +16,7 @@ use namespace HH\Lib\{C, Str};
 
 final class BackslashEscape extends InlineWithPlainTextContent {
 
+  <<__Override>>
   public static function consume(
     Context $_,
     string $_previous,

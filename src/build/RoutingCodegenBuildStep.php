@@ -17,6 +17,7 @@ use namespace Facebook\HackCodegen as hcg;
 use namespace Facebook\TypeAssert;
 
 final class RoutingCodegenBuildStep extends BuildStep {
+  <<__Override>>
   public function buildAll(): void {
     Log::i("\nBuilding Router-related codegen...");
     Codegen::forTree(

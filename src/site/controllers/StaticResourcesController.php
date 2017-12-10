@@ -34,6 +34,7 @@ implements RoutableGetController {
     );
   }
 
+  <<__Override>>
   public async function getResponse(): Awaitable<ResponseInterface> {
     $params = $this->getParameters();
     $checksum = $params['Checksum'];
