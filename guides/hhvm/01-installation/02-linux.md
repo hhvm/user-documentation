@@ -87,3 +87,4 @@ There are a variety of volunteered owned mirrors to get the packages, if the def
 * http://dl.hhvm.com/ (US)
 * http://mirror.mephi.ru/hhvm/ (RU)
 * https://hhvm.bauerj.eu/ (DE)
+* https://mirrors.tuna.tsinghua.edu.cn/HHVM/ (CN)
