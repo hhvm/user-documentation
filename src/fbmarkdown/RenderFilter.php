@@ -16,7 +16,7 @@ abstract class RenderFilter {
     RenderContext $context,
     ASTNode $node,
   ): vec<ASTNode>;
-  
+
   public function resetFileData(): this {
     return $this;
   }

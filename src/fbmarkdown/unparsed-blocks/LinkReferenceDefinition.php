@@ -57,7 +57,7 @@ final class LinkReferenceDefinition extends LeafBlock {
     if ($context->isInParagraphContinuation()) {
       return null;
     }
-    
+
     $label = self::consumeLabel($lines);
     if ($label === null) {
       return null;

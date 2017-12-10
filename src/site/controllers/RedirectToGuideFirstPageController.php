@@ -18,7 +18,7 @@ use Psr\Http\Message\ResponseInterface;
 final class RedirectToGuideFirstPageController
 extends WebController implements RoutableGetController {
   use RedirectToGuideFirstPageControllerParametersTrait;
-  
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/')
