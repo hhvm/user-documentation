@@ -8,7 +8,8 @@
     "facebook/hack-codegen": "^3.0.1",
     "facebook/hack-router-codegen": "^0.10.1",
     "facebook/hack-router": "^0.10",
-    "hhvm/hsl": "^1.0"
+    "hhvm/hsl": "^1.0",
+    "hhvm/hhast": "^0.4.0"
   },
   "require-dev": {
     "facebook/definition-finder": "^1.5.1",

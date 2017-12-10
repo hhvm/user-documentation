@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "71af4f5c04ec0104f6e2123dcf424339",
+    "content-hash": "1a2561d89d554de53ba08a1165a2d5f6",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -311,6 +311,39 @@
                 "psr7"
             ],
             "time": "2016-09-22T15:18:26+00:00"
+        },
+        {
+            "name": "hhvm/hhast",
+            "version": "v0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/hhast.git",
+                "reference": "4405a33582d3700c18ab30d1202e994e084b0849"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/4405a33582d3700c18ab30d1202e994e084b0849",
+                "reference": "4405a33582d3700c18ab30d1202e994e084b0849",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^3.21.0",
+                "hhvm/hsl": "^1.0.0",
+                "hhvm/type-assert": "^3.1"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "^5.7",
+                "facebook/fbexpect": "^0.3.0",
+                "facebook/hack-codegen": "dev-master",
+                "hhvm/hhvm-autoload": "^1.5",
+                "phpunit/phpunit": "^5.7"
+            },
+            "bin": [
+                "bin/hhast-lint"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2017-11-09T18:37:23+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
