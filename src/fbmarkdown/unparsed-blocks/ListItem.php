@@ -77,15 +77,12 @@ class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
     while (!$lines->isEmpty()) {
       list($column, $line, $rest) = $lines->getColumnFirstLineAndRest();
       if (Lines::isBlankLine($line)) {
-        if ($pre_blank_line !== null) {
-          list($matched, $lines) = $pre_blank_line;
-          break;
+        if ($pre_blank_line === null) {
+          $pre_blank_line = tuple($matched, $lines);
         }
-        $pre_blank_line = tuple($matched, $lines);
 
         $matched[] = tuple($column, $line);
         $lines = $rest;
-        $last_blank = true;
         continue;
       }
       $maybe_thematic_break = ThematicBreak::consume($context, $lines);
@@ -104,7 +101,6 @@ class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
       if ($pre_blank_line !== null) {
         break;
       }
-      $pre_blank_line = null;
 
       // Laziness
       if (!_Private\is_paragraph_continuation_text($context, $lines)) {
