@@ -22,42 +22,121 @@ class BlockQuote extends ContainerBlock<?(BlockQuote, Lines), Block> {
     Lines $lines,
   ): ?(BlockQuote, Lines) {
     $contents = vec[];
+    $parsed = null;
+
     while (!$lines->isEmpty()) {
-      list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
-
-      $matches = [];
-      if (\preg_match('/^ {0,3}>([ \t])?/', $line, $matches) === 1) {
-        $prefix = $matches[0];
-        $len = Str\length($prefix);
-        $match = Str\slice($line, $len);
-        if (Str\ends_with($prefix, "\t")) {
-          $spaces = 3 - (($col + $len - 1) % 4);
-          $match = Str\repeat(' ', $spaces).$match;
-        }
-        $contents[] = tuple($col + $len, $match);
-        $lines = $rest;
-        continue;
+      $chunk = self::consumePrefixedChunk($context, $lines);
+      if ($chunk === null) {
+        break;
       }
 
-      if (C\is_empty($contents)) {
-        return null;
+      list($chunk, $lines) = $chunk;
+      $contents = Vec\concat($contents, $chunk);
+      $parsed = self::consumeChildren($context, new Lines($contents));
+
+      if (!self::endsWithParagraph(C\lastx($parsed))) {
+        break;
       }
 
-      if (_Private\is_paragraph_continuation_text($context, $lines)) {
-        $contents[] = tuple($col, $line);
-        $lines = $rest;
-        continue;
+      $chunk = self::consumeLazyChunk($context, $lines);
+      if ($chunk === null) {
+        break;
       }
 
-      break;
+      list($chunk, $lines) = $chunk;
+      $contents = Vec\concat($contents, $chunk);
+      $parsed = null;
+    }
+
+
+    if (C\is_empty($contents)) {
+      return null;
+    }
+
+    if ($parsed === null) {
+      $parsed = self::consumeChildren($context, new Lines($contents));
+    }
+
+    return tuple(new self($parsed), $lines);
+  }
+
+  protected static function endsWithParagraph(
+    Block $block,
+  ): bool {
+    if ($block instanceof Paragraph) {
+      return true;
+    }
+    if ($block instanceof ContainerBlock) {
+      $last = C\lastx($block->getChildren());
+      return self::endsWithParagraph($last);
+    }
+    return false;
+  }
+
+  protected static function consumeLazyChunk(
+    Context $context,
+    Lines $lines,
+  ): ?(vec<(int, string)>, Lines) {
+    $contents = vec[];
+    while (!$lines->isEmpty()) {
+      if (!_Private\is_paragraph_continuation_text($context, $lines)) {
+        break;
+      }
+      list($col, $line, $lines) = $lines->getColumnFirstLineAndRest();
+      $contents[] = tuple($col, $line);
     }
 
     if (C\is_empty($contents)) {
       return null;
     }
-    $contents = new Lines($contents);
 
-    return tuple(new self(self::consumeChildren($context, $contents)), $lines);
+    return tuple($contents, $lines);
+  }
+
+  protected static function consumePrefixedChunk(
+    Context $context,
+    Lines $lines,
+  ): ?(vec<(int, string)>, Lines) {
+    $contents = vec[];
+    while (!$lines->isEmpty()) {
+      list($col, $line, $rest) = $lines->getColumnFirstLineAndRest();
+      list($_, $line, $n) = Lines::stripUpToNLeadingWhitespace(
+        $line,
+        3,
+        $col,
+      );
+      $col = $col + $n;
+
+      $offset = null;
+      if (Str\starts_with($line, '> ')) {
+        $line = Str\slice($line, 2);
+        $col += 2;
+      } else if (Str\starts_with($line, ">\t")) {
+        $col += 1; // >
+        $tab_width = 4 - ($col % 4);
+        $col += 1; // \t
+
+        $line = Str\slice($line, 2);
+
+        if ($tab_width === 0) {
+          $tab_width = 4;
+        }
+        $line = Str\repeat(' ', $tab_width - 1).$line;
+      } else if (Str\starts_with($line, '>')) {
+        $line = Str\slice($line, 1);
+        $col += 1;
+      } else {
+        break;
+      }
+
+      $contents[] = tuple($col, $line);
+      $lines = $rest;
+    }
+
+    if (C\is_empty($contents)) {
+      return null;
+    }
+    return tuple($contents, $lines);
   }
 
   <<__Override>>

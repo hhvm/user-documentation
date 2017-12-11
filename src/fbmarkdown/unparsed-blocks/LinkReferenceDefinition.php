@@ -158,7 +158,11 @@ final class LinkReferenceDefinition extends LeafBlock {
     Lines $lines,
   ): ?(string, Lines) {
     list($column, $first_raw, $_) = $lines->getColumnFirstLineAndRest();
-    list($first, $_) = Lines::stripUpToNLeadingWhitespace($first_raw, 3, $column);
+    list($_, $first, $_) = Lines::stripUpToNLeadingWhitespace(
+      $first_raw,
+      3,
+      $column,
+  );
 
     if (!Str\starts_with($first, '[')) {
       return null;

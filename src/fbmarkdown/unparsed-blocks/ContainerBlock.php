@@ -21,6 +21,10 @@ extends Block {
   ) {
   }
 
+  public function getChildren(): vec<TChild> {
+    return $this->children;
+  }
+
   <<__Override>>
   final public static function consume(
     Context $context,
@@ -45,24 +49,31 @@ extends Block {
   ): vec<Block> {
     $children = vec[];
     while (!$lines->isEmpty()) {
-      $match = null;
-      foreach ($context->getBlockTypes() as $block) {
-        $match = $block::consume($context, $lines);
-        if ($match !== null) {
-          break;
-        }
-      }
-      invariant($match !== null, 'should *always* find a match');
-      list($child, $new_lines) = $match;
+      $pre_count = $lines->getCount();
+      list($child, $lines) = self::consumeSingle($context, $lines);
       $children[] = $child;
       invariant(
-        $lines->getCount() > $new_lines->getCount(),
+        $pre_count > $lines->getCount(),
         'consuming failed to reduce line count with class "%s" on line "%s"',
         get_class($child),
         $lines->getFirstLine(),
       );
-      $lines = $new_lines;
     }
     return $children;
+  }
+
+  protected static function consumeSingle(
+    Context $context,
+    Lines $lines,
+  ): (Block, Lines) {
+    $match = null;
+    foreach ($context->getBlockTypes() as $block) {
+      $match = $block::consume($context, $lines);
+      if ($match !== null) {
+        break;
+      }
+    }
+    invariant($match !== null, 'should *always* find a match');
+    return $match;
   }
 }

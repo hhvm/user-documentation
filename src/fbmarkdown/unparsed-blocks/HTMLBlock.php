@@ -95,7 +95,7 @@ class HTMLBlock extends FencedBlock {
       );
     }
 
-    list($line, $_) = Lines::stripUpToNLeadingWhitespace($line, 3, $column);
+    list($_, $line, $_) = Lines::stripUpToNLeadingWhitespace($line, 3, $column);
 
     foreach ($patterns as $start => $end) {
       if (\preg_match($start, $line) === 1) {

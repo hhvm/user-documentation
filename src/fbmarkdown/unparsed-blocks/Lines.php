@@ -59,7 +59,7 @@ final class Lines {
     int $n,
     int $column,
   ): ?string {
-    list($result, $stripped) = self::stripUpToNLeadingWhitespace(
+    list($_, $result, $stripped) = self::stripUpToNLeadingWhitespace(
       $line,
       $n,
       $column,
@@ -67,11 +67,15 @@ final class Lines {
     return ($stripped === $n) ? $result : null;
   }
 
+  public function getRawData(): vec<(int, string)> {
+    return $this->lines;
+  }
+
   public static function stripUpToNLeadingWhitespace(
     string $line,
     int $n,
     int $column,
-  ): (string, int) {
+  ): (string, string, int) {
     $count = 0;
     $len = Str\length($line);
     for ($i = 0; $i < $len && $count < $n; ++$i) {
@@ -92,12 +96,14 @@ final class Lines {
     }
     if ($count >= $n) {
       return tuple(
+        Str\slice($line, 0, $i),
         Str\repeat(' ', $count - $n).Str\slice($line, $i),
         $n,
       );
     }
 
     return tuple(
+      Str\slice($line, 0, $i),
       Str\slice($line, $i),
       $count,
     );
