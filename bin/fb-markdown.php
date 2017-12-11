@@ -21,4 +21,4 @@ function cli_gfm_render(string $in): string {
   return (new HTMLRenderer($render_ctx))->render($ast);
 }
 
-print(cli_gfm_render(\file_get_contents('/dev/stdin'))."\n");
+print(cli_gfm_render(\file_get_contents('/dev/stdin')));

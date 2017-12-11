@@ -62,6 +62,7 @@ class HTMLRenderer extends Renderer<string> {
   protected function renderNodes(vec<ASTNode> $nodes): string {
     return $nodes
       |> Vec\map($$, $node ==> $this->render($node))
+      |> Vec\filter($$, $line ==> $line !== '')
       |> Str\join($$, '');
   }
 
@@ -75,15 +76,14 @@ class HTMLRenderer extends Renderer<string> {
 
   <<__Override>>
   protected function renderBlankLine(): string {
-    return "\n";
+    return '';
   }
 
   <<__Override>>
   protected function renderBlockQuote(Blocks\BlockQuote $node): string {
     return $node->getChildren()
-      |> Vec\map($$, $child ==> $this->render($child))
-      |> Str\join($$, '')
-      |> '<blockquote>'.$$.'</blockquote>';
+      |> $this->renderNodes($$)
+      |> "<blockquote>\n".$$."</blockquote>\n";
   }
 
   <<__Override>>
@@ -105,14 +105,13 @@ class HTMLRenderer extends Renderer<string> {
   protected function renderHeading(Blocks\Heading $node): string {
     $level = $node->getLevel();
     return $node->getHeading()
-      |> Vec\map($$, $child ==> $this->render($child))
-      |> Str\join($$, '')
-      |> sprintf("<h%d>%s</h%d>", $level, $$, $level);
+      |> $this->renderNodes($$)
+      |> sprintf("<h%d>%s</h%d>\n", $level, $$, $level);
   }
 
   <<__Override>>
   protected function renderHTMLBlock(Blocks\HTMLBlock $node): string {
-    return $node->getCode();
+    return $node->getCode()."\n";
   }
 
   <<__Override>>
@@ -154,7 +153,7 @@ class HTMLRenderer extends Renderer<string> {
     $children = $item->getChildren();
 
     if ($list->isTight()) {
-      $children = Vec\map(
+      return Vec\map(
         $children,
         $child ==> {
           if ($child instanceof Blocks\Paragraph) {
@@ -162,13 +161,15 @@ class HTMLRenderer extends Renderer<string> {
           }
           return vec[$child];
         },
-      ) |> Vec\flatten($$);
+      )
+        |> Vec\flatten($$)
+        |> $this->renderNodes($$)
+        |> "<li>".$$."</li>\n";
     }
 
     return $children
-      |> Vec\map($$, $child ==> $this->render($child))
-      |> Str\join($$, "\n")
-      |> '<li>'.$$.'</li>';
+      |> $this->renderNodes($$)
+      |> "<li>\n".$$."</li>\n";
   }
 
   <<__Override>>
@@ -187,12 +188,12 @@ class HTMLRenderer extends Renderer<string> {
     return $node->getItems()
       |> Vec\map($$, $item ==> $this->renderListItem($node, $item))
       |> Str\join($$, "\n")
-      |> $start."\n".$$."\n".$end."\n";
+      |> $start."\n".$$.$end."\n";
   }
 
   <<__Override>>
   protected function renderParagraph(Blocks\Paragraph $node): string {
-    return '<p>'.$this->renderNodes($node->getContents()).'</p>';
+    return '<p>'.$this->renderNodes($node->getContents())."</p>\n";
   }
 
   <<__Override>>
@@ -203,14 +204,14 @@ class HTMLRenderer extends Renderer<string> {
     if (C\is_empty($data)) {
       return $html."</table>\n";
     }
-    $html .= "\n<tbody>";
+    $html .= "<tbody>";
 
     $row_idx = -1;
     foreach ($data as $row) {
       ++$row_idx;
       $html .= "\n".$this->renderTableDataRow($node, $row_idx, $row);
     }
-    return $html.'</tbody></table>';
+    return $html."</tbody></table>\n";
   }
 
   protected function renderTableHeader(Blocks\TableExtension $node): string {
@@ -229,7 +230,7 @@ class HTMLRenderer extends Renderer<string> {
         $this->renderNodes($cell).
         "</th>\n";
     }
-    $html .= "</tr>\n</thead>";
+    $html .= "</tr>\n</thead>\n";
     return $html;
   }
 
