@@ -29,13 +29,20 @@ final class TableExtension extends LeafBlock {
     Context $ctx,
     Lines $lines,
   ): ?(Block, Lines) {
+    if ($ctx->isInParagraphContinuation()) {
+      return null;
+    }
+
     $rows = vec[];
     while (!$lines->isEmpty()) {
       $result = self::consumeRow($ctx, $lines);
       if ($result === null) {
         break;
       }
-      list($row, $lines) = $result;
+      list($definitely_row, $row, $lines) = $result;
+      if (C\count($rows) < 2 && !$definitely_row) {
+        return null;
+      }
       $rows[] = $row;
     }
 
@@ -116,19 +123,19 @@ final class TableExtension extends LeafBlock {
   }
 
   private static function consumeRow(
-    Context $_,
+    Context $context,
     Lines $lines,
-  ): ?(vec<string>, Lines) {
+  ): ?(bool, vec<string>, Lines) {
     list($first, $rest) = $lines->getFirstLineAndRest();
 
-    $is_row = false;
+    $definitely_row = false;
 
     if (Str\starts_with($first, '|')) {
-      $is_row = true;
+      $definitely_row = true;
       $first = Str\slice($first, 1);
     }
     if (Str\ends_with($first, '|')) {
-      $is_row = true;
+      $definitely_row = true;
       $first = Str\slice($first, 0, Str\length($first) - 1);
     }
 
@@ -154,13 +161,20 @@ final class TableExtension extends LeafBlock {
       $start = $end + 1;
     }
 
-    $is_row = $is_row || C\count($parts) >= 2;
+    $definitely_row = $definitely_row || C\count($parts) >= 2;
 
-    if (!$is_row) {
-      return null;
+    if (!$definitely_row) {
+      $is_continuation = _Private\is_paragraph_continuation_text(
+        $context,
+        $lines,
+      );
+      if (!$is_continuation) {
+        return null;
+      }
     }
 
     return tuple(
+      $definitely_row,
       Vec\map(
         $parts,
         $part ==> Str\trim($part) |> Str\replace($$, "\\|", '|'),
