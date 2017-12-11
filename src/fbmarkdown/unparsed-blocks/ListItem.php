@@ -41,42 +41,61 @@ class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
     Context $context,
     Lines $lines,
   ): ?(ListItem, Lines) {
-    list($column, $line, $rest) = $lines->getColumnFirstLineAndRest();
+    // Consume leading whitespace
+    list($column, $line, $lines) = $lines->getColumnFirstLineAndRest();
+    list($_, $line, $n) = Lines::stripUpToNLeadingWhitespace($line, 3, $column);
     $matches = [];
     if (
       \preg_match(
-        '/^ {0,3}(?<marker>[-+*]|(?<digits>[0-9]{1,9})[.)])( {1,4}|\t)/',
+        '/^(?<marker>[-+*]|(?<digits>[0-9]{1,9})[.)])/',
         $line,
         $matches,
       ) !== 1
     ) {
       return null;
     }
-    $prefix = $matches[0];
-    $width = Str\length($prefix);
-    $rest_of_line = Str\slice($line, $width);
 
-    if (Str\ends_with($prefix, "\t")) {
-      $tab_width = 4 - (($width + $column - 1) % 4);
-      if ($tab_width === 0) {
-        $tab_width = 4;
-      }
-      $rest_of_line = Str\repeat(' ', $tab_width - 1).$rest_of_line;
+    // Consume marker
+    $marker_length = Str\length($matches[0]);
+    $indent_cols = $n + $marker_length;
+    $column += $indent_cols;
+    $line = Str\slice($line, $marker_length);
+
+    // Consume post-marker whitespace
+    if (Lines::isBlankLine($line)) {
+      $line = null;
+      $n = 1;
+    } else if (Lines::stripNLeadingWhitespace($line, 5, $column) !== null) {
+      // `-     foo` is `<li><pre><code>foo</pre></code></li>`
+      list($_, $line, $n) =
+        Lines::stripUpToNLeadingWhitespace($line, 1, $column);
+    } else {
+      list($_, $line, $n) =
+        Lines::stripUpToNLeadingWhitespace($line, 4, $column);
+    }
+    if ($n === 0) {
+      return null;
     }
 
-    $ordered = $matches['digits'] !== '';
+    $indent_cols += $n;
+    $column += $n;
+
+    $ordered = ($matches['digits'] ?? '') !== '';
     $number = $ordered ? ((int) $matches['digits']) : null;
     $delimiter = Str\trim_left($matches['marker'], '0123456789');
 
-    $matched = vec[
-      tuple($column + $width, $rest_of_line),
-    ];
+    $matched = vec[];
+    if ($line !== null) {
+      $matched[] = tuple($column, $line);
+    }
     $pre_blank_line = null;
 
-    $lines = $rest;
     while (!$lines->isEmpty()) {
       list($column, $line, $rest) = $lines->getColumnFirstLineAndRest();
       if (Lines::isBlankLine($line)) {
+        if (C\is_empty($matched)) {
+          break;
+        }
         if ($pre_blank_line === null) {
           $pre_blank_line = tuple($matched, $lines);
         }
@@ -90,15 +109,19 @@ class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
         break;
       }
 
-      $indented = Lines::stripNLeadingWhitespace($line, $width, $column);
+      $indented = Lines::stripNLeadingWhitespace($line, $indent_cols, $column);
       if ($indented !== null) {
-        $matched[] = tuple($column + $width, $indented);
+        $matched[] = tuple($column + $indent_cols, $indented);
         $pre_blank_line = null;
         $lines = $rest;
         continue;
       }
 
       if ($pre_blank_line !== null) {
+        break;
+      }
+
+      if (C\is_empty($matched)) {
         break;
       }
 

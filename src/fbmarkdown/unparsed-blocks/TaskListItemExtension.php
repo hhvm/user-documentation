@@ -35,6 +35,14 @@ class TaskListItemExtension extends ListItem{
     ?int $number,
     Lines $contents,
   ): ListItem {
+    if ($contents->isEmpty()) {
+      return parent::createFromContents(
+        $context,
+        $delimiter,
+        $number,
+        $contents,
+      );
+    }
     list($first, $rest) = $contents->getFirstLineAndRest();
     $first = Str\trim_left($first);
     if (Str\starts_with($first, '[ ] ')) {
