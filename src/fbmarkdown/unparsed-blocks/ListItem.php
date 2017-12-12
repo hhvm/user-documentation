@@ -32,6 +32,10 @@ class ListItem extends ContainerBlock<Block> {
     return $this->delimiter;
   }
 
+  public function getNumber(): ?int {
+    return $this->number;
+  }
+
   public function makesListLoose(): bool {
     return C\any($this->children, $child ==> $child instanceof BlankLine);
   }

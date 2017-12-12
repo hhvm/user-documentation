@@ -56,6 +56,14 @@ final class ListOfItems extends ContainerBlock<ListItem> {
     $loose = $first->makesListLoose();
     $d = $first->getDelimiter();
 
+    if (
+      $context->isInParagraphContinuation()
+      && $first->isOrderedList()
+      && $first->getNumber() !== 1
+    ) {
+      return null;
+    }
+
     $pre_blank = null;
 
     while (!$lines->isEmpty()) {
