@@ -107,10 +107,6 @@ class ListItem extends ContainerBlock<Block> {
         $lines = $rest;
         continue;
       }
-      $maybe_thematic_break = ThematicBreak::consume($context, $lines);
-      if ($maybe_thematic_break !== null) {
-        break;
-      }
 
       $indented = Lines::stripNLeadingWhitespace($line, $indent_cols, $column);
       if ($indented !== null) {
@@ -118,6 +114,11 @@ class ListItem extends ContainerBlock<Block> {
         $pre_blank_line = null;
         $lines = $rest;
         continue;
+      }
+      
+      $maybe_thematic_break = ThematicBreak::consume($context, $lines);
+      if ($maybe_thematic_break !== null) {
+        break;
       }
 
       if ($pre_blank_line !== null) {
