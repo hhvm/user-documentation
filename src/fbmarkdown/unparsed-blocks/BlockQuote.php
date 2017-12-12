@@ -16,8 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
 class BlockQuote extends ContainerBlock<?(BlockQuote, Lines), Block> {
-  <<__Override>>
-  protected static function consumeImpl(
+  public static function consume(
     Context $context,
     Lines $lines,
   ): ?(BlockQuote, Lines) {

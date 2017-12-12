@@ -36,8 +36,7 @@ class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
     return C\any($this->children, $child ==> $child instanceof BlankLine);
   }
 
-  <<__Override>>
-  final protected static function consumeImpl(
+  public static function consume(
     Context $context,
     Lines $lines,
   ): ?(ListItem, Lines) {
@@ -125,13 +124,22 @@ class ListItem extends ContainerBlock<?(ListItem, Lines), Block> {
         break;
       }
 
-      // Laziness
+      // Laziness - explicitly check for a list item as empty list items are
+      // valid paragraph continuation text
+      if (ListItem::consume($context, $lines) !== null) {
+        break;
+      }
+
       if (!_Private\is_paragraph_continuation_text($context, $lines)) {
         break;
       }
 
       $matched[] = tuple($column, $line);
       $lines = $rest;
+    }
+
+    if (C\is_empty($matched) && $context->isInParagraphContinuation()) {
+      return null;
     }
 
     if ($pre_blank_line !== null) {

@@ -26,19 +26,7 @@ extends Block {
   }
 
   <<__Override>>
-  final public static function consume(
-    Context $context,
-    Lines $lines,
-  ): TProduce {
-    $context->pushParagraphContinuation(false);
-    try {
-      return static::consumeImpl($context, $lines);
-    } finally {
-      $context->popParagraphContinuation();
-    }
-  }
-
-  abstract protected static function consumeImpl(
+  abstract public static function consume(
     Context $context,
     Lines $lines,
   ): TProduce;
@@ -62,7 +50,19 @@ extends Block {
     return $children;
   }
 
-  protected static function consumeSingle(
+  final protected static function consumeSingle(
+    Context $context,
+    Lines $lines,
+  ): (Block, Lines) {
+    $context->pushParagraphContinuation(false);
+    try {
+      return self::consumeSingleImpl($context, $lines);
+    } finally {
+      $context->popParagraphContinuation();
+    }
+  }
+
+  protected static function consumeSingleImpl(
     Context $context,
     Lines $lines,
   ): (Block, Lines) {

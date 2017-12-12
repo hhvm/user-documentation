@@ -16,8 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\Vec;
 
 class Document extends ContainerBlock<(Document, Lines), Block> {
-  <<__Override>>
-  final protected static function consumeImpl(
+  public static function consume(
     Context $context,
     Lines $lines,
   ): (Document, Lines) {

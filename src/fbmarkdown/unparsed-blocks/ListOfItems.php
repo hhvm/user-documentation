@@ -41,8 +41,7 @@ final class ListOfItems extends ContainerBlock<?(ListOfItems, Lines), ListItem> 
     return null;
   }
 
-  <<__Override>>
-  protected static function consumeImpl(
+  public static function consume(
     Context $context,
     Lines $lines,
   ): ?(ListOfItems, Lines) {
