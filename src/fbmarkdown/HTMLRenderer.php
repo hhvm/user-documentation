@@ -151,6 +151,10 @@ class HTMLRenderer extends Renderer<string> {
     }
 
     $children = $item->getChildren();
+    if (C\is_empty($children)) {
+      return "<li></li>\n";
+    }
+    
     $content = '';
 
     if ($list->isTight()) {
