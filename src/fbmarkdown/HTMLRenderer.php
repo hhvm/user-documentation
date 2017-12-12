@@ -208,7 +208,7 @@ class HTMLRenderer extends Renderer<string> {
     if (C\is_empty($data)) {
       return $html."</table>\n";
     }
-    $html .= "<tbody>";
+    $html .= "\n<tbody>";
 
     $row_idx = -1;
     foreach ($data as $row) {
@@ -234,7 +234,7 @@ class HTMLRenderer extends Renderer<string> {
         $this->renderNodes($cell).
         "</th>\n";
     }
-    $html .= "</tr>\n</thead>\n";
+    $html .= "</tr>\n</thead>";
     return $html;
   }
 
