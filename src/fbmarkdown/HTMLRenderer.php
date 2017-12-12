@@ -155,16 +155,20 @@ class HTMLRenderer extends Renderer<string> {
 
     if ($list->isTight()) {
       if (!C\first($children) instanceof Blocks\Paragraph) {
-        $content = "\n";
+        $content .= "\n";
       }
 
-      foreach ($children as $child) {
-        if ($child instanceof Blocks\Paragraph) {
-          $content .= $this->renderNodes($child->getContents());
-          continue;
-        }
-        $content .= "\n".$this->render($child);
-      }
+      $content .= $children
+        |> Vec\map(
+          $$,
+          $child ==> {
+            if ($child instanceof Blocks\Paragraph) {
+              return $this->renderNodes($child->getContents());
+            }
+            return $this->render($child);
+          },
+        )
+        |> Str\join($$, "\n");
     } else {
       $content = "\n".$this->renderNodes($children);
     }
