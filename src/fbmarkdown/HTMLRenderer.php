@@ -154,7 +154,7 @@ class HTMLRenderer extends Renderer<string> {
     if (C\is_empty($children)) {
       return "<li></li>\n";
     }
-    
+
     $content = '';
 
     if ($list->isTight()) {
@@ -169,10 +169,16 @@ class HTMLRenderer extends Renderer<string> {
             if ($child instanceof Blocks\Paragraph) {
               return $this->renderNodes($child->getContents());
             }
+            if ($child instanceof Blocks\Block) {
+              return Str\trim($this->render($child));
+            }
             return $this->render($child);
           },
         )
         |> Str\join($$, "\n");
+      if (!C\last($children) instanceof Blocks\Paragraph) {
+        $content .= "\n";
+      }
     } else {
       $content = "\n".$this->renderNodes($children);
     }
