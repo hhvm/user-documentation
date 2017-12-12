@@ -42,6 +42,16 @@ final class CodeSpan extends Inline {
     }
     $marker = Str\repeat('`', $i);
     $end = Str\search($string, $marker, $i);
+    while (
+      $end !== null
+      && $end + $i < $len
+      && (
+        $string[$end + $i] === '`'
+        || $string[$end - 1] === '`'
+      )
+    ) {
+      $end = Str\search($string, $marker, $end + 1);
+    }
     if ($end === null) {
       return null;
     }
