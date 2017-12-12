@@ -12,6 +12,7 @@
 namespace Facebook\Markdown\UnparsedBlocks;
 
 use const Facebook\Markdown\_Private\ASCII_PUNCTUATION;
+use function Facebook\Markdown\_Private\decode_html_entity;
 use type Facebook\Markdown\Blocks\FencedCodeBlock as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
@@ -61,6 +62,15 @@ final class FencedCodeBlock extends FencedBlock {
           if (C\contains_key(ASCII_PUNCTUATION, $next)) {
             $new_info .= $next;
             ++$i;
+            continue;
+          }
+        }
+        if ($char === '&') {
+          $result = decode_html_entity(Str\slice($info, $i));
+          if ($result !== null) {
+            list($match, $entity, $_rest) = $result;
+            $new_info .= $entity;
+            $i += Str\length($match) - 1;
             continue;
           }
         }
