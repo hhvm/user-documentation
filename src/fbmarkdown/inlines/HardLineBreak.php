@@ -42,7 +42,7 @@ final class HardLineBreak extends Inline {
           return null;
         }
 
-        return tuple(new self(), $string[$i], Str\slice($string, $i));
+        return tuple(new self(), $string[$i], Str\slice($string, $i + 1));
       }
       return null;
     }
