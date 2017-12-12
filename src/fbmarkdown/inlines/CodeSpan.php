@@ -47,7 +47,11 @@ final class CodeSpan extends Inline {
     }
 
     return tuple(
-      new self(Str\trim(Str\slice($string, $i, $end - $i))),
+      new self(
+        Str\slice($string, $i, $end - $i)
+        |> Str\trim($$)
+        |> \preg_replace('/\s+/m', ' ', $$),
+      ),
       '`',
       Str\slice($string, $end + $i),
     );
