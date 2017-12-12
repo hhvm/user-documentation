@@ -17,11 +17,13 @@ use namespace HH\Lib\{C, Str, Vec};
 class TaskListItemExtension extends ListItem{
   public function __construct(
     private bool $checked,
+    int $indentation,
     string $delimiter,
     ?int $number,
     vec<Block> $children,
   ) {
     parent::__construct(
+      $indentation,
       $delimiter,
       $number,
       $children,
@@ -31,6 +33,7 @@ class TaskListItemExtension extends ListItem{
   <<__Override>>
   protected static function createFromContents(
     Context $context,
+    int $indentation,
     string $delimiter,
     ?int $number,
     Lines $contents,
@@ -38,6 +41,7 @@ class TaskListItemExtension extends ListItem{
     if ($contents->isEmpty()) {
       return parent::createFromContents(
         $context,
+        $indentation,
         $delimiter,
         $number,
         $contents,
@@ -49,6 +53,7 @@ class TaskListItemExtension extends ListItem{
       $contents = $contents->withoutFirstNBytes(4);
       return new self(
         /* checked = */ false,
+        $indentation,
         $delimiter,
         $number,
         self::consumeChildren($context, $contents),
@@ -59,6 +64,7 @@ class TaskListItemExtension extends ListItem{
       $contents = $contents->withoutFirstNBytes(4);
       return new self(
         /* checked = */ true,
+        $indentation,
         $delimiter,
         $number,
         self::consumeChildren($context, $contents),
@@ -67,6 +73,7 @@ class TaskListItemExtension extends ListItem{
 
     return parent::createFromContents(
       $context,
+      $indentation,
       $delimiter,
       $number,
       $contents,

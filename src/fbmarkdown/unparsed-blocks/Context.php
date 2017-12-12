@@ -38,7 +38,7 @@ class Context {
   public function resetFileData(): this {
     $this->file = null;
     $this->linkReferenceDefinitions = dict[];
-    $this->paragraphStack = vec[];
+    $this->stacks = dict[];
     return $this;
   }
 
@@ -92,23 +92,41 @@ class Context {
     return $this->blockTypes;
   }
 
-  private vec<bool> $paragraphStack = vec[];
+  private dict<string, vec<mixed>> $stacks = dict[];
 
-  public function isInParagraphContinuation(): bool {
-    return C\last($this->paragraphStack) ?? false;
+  public function pushContext(string $context, mixed $value): this {
+    $stack = $this->stacks[$context] ?? vec[];
+    $stack[] = $value;
+    $this->stacks[$context] = $stack;
+    return $this;
   }
 
-  public function pushParagraphContinuation(bool $in_continuation): this {
-    $this->paragraphStack[] = $in_continuation;
+  public function popContext(string $context): this {
+    $stack = $this->stacks[$context] ?? vec[];
+    $count = C\count($stack) - 1;
+    invariant($count >= 0, "Trying to pop more than was pushed");
+    $stack = Vec\take($stack, $count);
+    $this->stacks[$context] = $stack;
     return $this;
+  }
+
+  public function getContext(string $context): mixed{
+    $stack = $this->stacks[$context] ?? vec[];
+    return C\last($stack);
+  }
+
+  const string PARAGRAPH_CONTINUATION_FLAG = 'paragraph continuation';
+
+  public function isInParagraphContinuation(): bool {
+    return (bool) $this->getContext(self::PARAGRAPH_CONTINUATION_FLAG);
+  }
+
+  public function pushParagraphContinuation(bool $value): this {
+    return $this->pushContext(self::PARAGRAPH_CONTINUATION_FLAG, $value);
   }
 
   public function popParagraphContinuation(): this {
-    $this->paragraphStack = Vec\take(
-      $this->paragraphStack,
-      C\count($this->paragraphStack) - 1,
-    );
-    return $this;
+    return $this->popContext(self::PARAGRAPH_CONTINUATION_FLAG);
   }
 
   public function getListItemTypes(): keyset<classname<ListItem>> {

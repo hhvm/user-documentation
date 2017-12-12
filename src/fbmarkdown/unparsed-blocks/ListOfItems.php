@@ -45,13 +45,19 @@ final class ListOfItems extends ContainerBlock<ListItem> {
     Context $context,
     Lines $lines,
   ): ?(ListOfItems, Lines) {
-    $first = self::consumeItem($context, $lines);
+    try {
+      $context->pushContext(ListItem::MAX_INDENT_CONTEXT, 3);
+      $first = self::consumeItem($context, $lines);
+    } finally {
+      $context->popContext(ListItem::MAX_INDENT_CONTEXT);
+    }
     if ($first === null) {
       return null;
     }
 
     list($first, $lines) = $first;
     $nodes = vec[$first];
+    $max_indent = $first->getIndentation() - 1;
 
     $loose = $first->makesListLoose();
     $d = $first->getDelimiter();
@@ -67,7 +73,13 @@ final class ListOfItems extends ContainerBlock<ListItem> {
     $pre_blank = null;
 
     while (!$lines->isEmpty()) {
-      $next = self::consumeItem($context, $lines);
+      try {
+        $context->pushContext(ListItem::MAX_INDENT_CONTEXT, $max_indent);
+        $next = self::consumeItem($context, $lines);
+      } finally {
+        $context->popContext(ListItem::MAX_INDENT_CONTEXT);
+      }
+
       if ($next === null) {
         list($line, $rest) = $lines->getFirstLineAndRest();
         if (Lines::isBlankLine($line)) {
@@ -82,6 +94,7 @@ final class ListOfItems extends ContainerBlock<ListItem> {
       if ($next->getDelimiter() !== $d) {
         break;
       }
+      $max_indent = $next->getIndentation() - 1;
       $pre_blank = null;
       $nodes[] = $next;
       $loose = $loose || $next->makesListLoose();

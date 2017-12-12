@@ -16,12 +16,19 @@ use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
 class ListItem extends ContainerBlock<Block> {
+  const string MAX_INDENT_CONTEXT = 'list item max indent';
+
   public function __construct(
+    protected int $indentation,
     protected string $delimiter,
     protected ?int $number,
     vec<Block> $children,
   ) {
     parent::__construct($children);
+  }
+
+  public function getIndentation(): int {
+    return $this->indentation;
   }
 
   public function isOrderedList(): bool {
@@ -44,9 +51,20 @@ class ListItem extends ContainerBlock<Block> {
     Context $context,
     Lines $lines,
   ): ?(ListItem, Lines) {
+    $max_indent = $context->getContext(self::MAX_INDENT_CONTEXT);
+    invariant(
+      \is_int($max_indent),
+      'expected to get a maximum indentation from context, got a %s',
+      gettype($max_indent),
+    );
+
     // Consume leading whitespace
     list($column, $line, $lines) = $lines->getColumnFirstLineAndRest();
-    list($_, $line, $n) = Lines::stripUpToNLeadingWhitespace($line, 3, $column);
+    list($_, $line, $n) = Lines::stripUpToNLeadingWhitespace(
+      $line,
+      $max_indent,
+      $column,
+    );
     $matches = [];
     if (
       \preg_match(
@@ -115,7 +133,7 @@ class ListItem extends ContainerBlock<Block> {
         $lines = $rest;
         continue;
       }
-      
+
       $maybe_thematic_break = ThematicBreak::consume($context, $lines);
       if ($maybe_thematic_break !== null) {
         break;
@@ -131,8 +149,13 @@ class ListItem extends ContainerBlock<Block> {
 
       // Laziness - explicitly check for a list item as empty list items are
       // valid paragraph continuation text
-      if (ListItem::consume($context, $lines) !== null) {
-        break;
+      try {
+        $context->pushContext(self::MAX_INDENT_CONTEXT, $indent_cols - 1);
+        if (ListItem::consume($context, $lines) !== null) {
+          break;
+        }
+      } finally {
+        $context->popContext(self::MAX_INDENT_CONTEXT);
       }
 
       if (!_Private\is_paragraph_continuation_text($context, $lines)) {
@@ -154,6 +177,7 @@ class ListItem extends ContainerBlock<Block> {
     return tuple(
       static::createFromContents(
         $context,
+        $indent_cols,
         $delimiter,
         $number,
         new Lines($matched),
@@ -164,11 +188,13 @@ class ListItem extends ContainerBlock<Block> {
 
   protected static function createFromContents(
     Context $context,
+    int $indent_cols,
     string $delimiter,
     ?int $number,
     Lines $contents,
   ): ListItem {
     return new self(
+      $indent_cols,
       $delimiter,
       $number,
       self::consumeChildren($context, $contents),
