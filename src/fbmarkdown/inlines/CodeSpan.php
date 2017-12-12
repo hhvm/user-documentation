@@ -27,9 +27,13 @@ final class CodeSpan extends Inline {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $_previous,
+    string $previous,
     string $string,
   ): ?(this, string, string) {
+    if ($previous === '`') {
+      return null;
+    }
+
     if ($string[0] !== '`') {
       return null;
     }
@@ -44,9 +48,8 @@ final class CodeSpan extends Inline {
     $end = Str\search($string, $marker, $i);
     while (
       $end !== null
-      && $end + $i < $len
       && (
-        $string[$end + $i] === '`'
+        ($end + $i < $len && $string[$end + $i] === '`')
         || $string[$end - 1] === '`'
       )
     ) {
