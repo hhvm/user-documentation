@@ -14,6 +14,8 @@ namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\Str;
 
 final class EntityReference extends InlineWithPlainTextContent {
+  const string UNICODE_REPLACEMENT_CHARACTER = "\u{fffd}";
+
   <<__Override>>
   public static function consume(
     Context $_,
@@ -44,6 +46,12 @@ final class EntityReference extends InlineWithPlainTextContent {
     );
     if ($out === $match) {
       return null;
+    }
+    if ($out === "\000") {
+      $out = self::UNICODE_REPLACEMENT_CHARACTER;
+    }
+    if (!\mb_check_encoding($out, 'UTF-8')) {
+      $out = self::UNICODE_REPLACEMENT_CHARACTER;
     }
 
     return tuple(
