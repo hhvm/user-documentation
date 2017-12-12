@@ -34,7 +34,6 @@ function consume_quoted_link_title(string $input): ?(string, int) {
   $len = Str\length($input);
 
   $title = '';
-  $escaped = false;
   $idx = null;
   for ($idx = 1; $idx < $len; ++$idx) {
     $chr = $input[$idx];
@@ -42,21 +41,20 @@ function consume_quoted_link_title(string $input): ?(string, int) {
       return null;
     }
     if ($chr === $quote) {
-      if ($escaped) {
-        $title .= $chr;
-        $escaped = false;
-        continue;
-      }
       break;
     }
 
-    if ($escaped) {
-      $title .= '\\';
-    } else if ($chr === '\\') {
-      $escaped = true;
-      continue;
+    if ($chr === "\\") {
+      if ($idx + 1 < $len) {
+        $next = $input[$idx + 1];
+        if (C\contains_key(ASCII_PUNCTUATION, $next)) {
+          $title .= $next;
+          ++$idx;
+          continue;
+        }
+      }
     }
-    $escaped = false;
+
     $title .= $chr;
   }
 
@@ -72,7 +70,6 @@ function consume_parenthesized_link_title(string $input): ?(string, int) {
   $len = Str\length($input);
   $title = '';
   $depth = 0;
-  $escaped = false;
   for ($idx = 0; $idx < $len; ++$idx) {
     $chr = $input[$idx];
     if ($chr === "\n" && ($chr[$idx + 1] ?? null) === "\n") {
@@ -80,21 +77,11 @@ function consume_parenthesized_link_title(string $input): ?(string, int) {
     }
 
     if ($chr === '(') {
-      if ($escaped) {
-        $title .= $chr;
-        $escaped = false;
-        continue;
-      }
       ++$depth;
       continue;
     }
 
     if ($chr === ')') {
-      if ($escaped) {
-        $title .= $chr;
-        $escaped = false;
-        continue;
-      }
       --$depth;
       if ($depth === 0) {
         break;
@@ -102,13 +89,17 @@ function consume_parenthesized_link_title(string $input): ?(string, int) {
       continue;
     }
 
-    if ($escaped) {
-      $title .= '\\';
-    } else if ($chr === '\\') {
-      $escaped = true;
-      continue;
+    if ($chr === "\\") {
+      if ($idx + 1 < $len) {
+        $next = $input[$idx + 1];
+        if (C\contains_key(ASCII_PUNCTUATION, $next)) {
+          $title .= $next;
+          ++$idx;
+          continue;
+        }
+      }
     }
-    $escaped = false;
+
     $title .= $chr;
   }
 
