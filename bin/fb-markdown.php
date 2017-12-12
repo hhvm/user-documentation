@@ -17,6 +17,9 @@ function cli_gfm_render(string $in): string {
   // Spec-compliance requires enabling HTML
   $parser_ctx = (new ParserContext())->enableHTML_UNSAFE();
   $ast = parse($parser_ctx, $in);
+  if ((bool) \getenv('FB_GFM_DUMP_AST')) {
+    var_dump($ast);
+  }
   $render_ctx = new RenderContext();
   return (new HTMLRenderer($render_ctx))->render($ast);
 }

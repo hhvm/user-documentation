@@ -13,7 +13,7 @@ namespace Facebook\Markdown\UnparsedBlocks;
 
 use type Facebook\Markdown\Blocks\HTMLBlock as ASTNode;
 use namespace Facebook\Markdown\Inlines;
-use namespace HH\Lib\{Dict, Str};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 
 <<__ConsistentConstruct>>
 class HTMLBlock extends FencedBlock {
@@ -66,6 +66,9 @@ class HTMLBlock extends FencedBlock {
     int $_indentation_of_first,
     bool $_eof,
   ): this {
+    if (C\last($lines) === '') {
+      $lines = Vec\take($lines, C\count($lines) - 1);
+    }
     return new static(Str\join($lines, "\n"));
   }
 
