@@ -55,6 +55,17 @@ function consume_quoted_link_title(string $input): ?(string, int) {
       }
     }
 
+    if ($chr === '&') {
+      $rest = Str\slice($input, $idx);
+      $result = decode_html_entity($rest);
+      if ($result !== null) {
+        list($match, $entity, $_rest) = $result;
+        $title .= $entity;
+        $idx += Str\length($match) - 1;
+        continue;
+      }
+    }
+
     $title .= $chr;
   }
 

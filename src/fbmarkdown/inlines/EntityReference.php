@@ -11,10 +11,10 @@
 
 namespace Facebook\Markdown\Inlines;
 
+use function \Facebook\Markdown\_Private\decode_html_entity;
 use namespace HH\Lib\Str;
 
 final class EntityReference extends InlineWithPlainTextContent {
-  const string UNICODE_REPLACEMENT_CHARACTER = "\u{fffd}";
 
   <<__Override>>
   public static function consume(
@@ -22,42 +22,13 @@ final class EntityReference extends InlineWithPlainTextContent {
     string $_previous,
     string $string,
   ): ?(Inline, string, string) {
-    if ($string[0] !== '&') {
+    $result = decode_html_entity($string);
+    if ($result === null) {
       return null;
     }
 
-    $matches = [];
-    if (
-      \preg_match(
-        '/^&(#[0-9]{1,8}|#X[0-9a-f]{1,8}|[a-z]+);/i',
-        $string,
-        $matches,
-      ) !== 1
-    ) {
-      return null;
-    }
+    list($_match, $out, $rest) = $result;
 
-    $match = $matches[0];
-
-    $out = \html_entity_decode(
-      $match,
-      /* HH_FIXME[4106] */ /* HH_FIXME[2049] */ \ENT_HTML5,
-      'UTF-8',
-    );
-    if ($out === $match) {
-      return null;
-    }
-    if ($out === "\000") {
-      $out = self::UNICODE_REPLACEMENT_CHARACTER;
-    }
-    if (!\mb_check_encoding($out, 'UTF-8')) {
-      $out = self::UNICODE_REPLACEMENT_CHARACTER;
-    }
-
-    return tuple(
-      new self($out),
-      ';',
-      Str\strip_prefix($string, $match),
-    );
+    return tuple(new self($out), ';', $rest);
   }
 }
