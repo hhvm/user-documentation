@@ -11,6 +11,7 @@
 
 namespace Facebook\Markdown\UnparsedBlocks;
 
+use const Facebook\Markdown\_Private\ASCII_PUNCTUATION;
 use type Facebook\Markdown\Blocks\FencedCodeBlock as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
@@ -47,6 +48,25 @@ final class FencedCodeBlock extends FencedBlock {
     $info = Str\trim($matches['info'] ?? '');
     if ($info === '') {
       $info = null;
+    } else {
+      $new_info = '';
+      $len = Str\length($info);
+      for ($i = 0; $i < $len; ++$i) {
+        $char = $info[$i];
+        if (
+          $char === "\\"
+          && $i + 1 < $len
+        ) {
+          $next = $info[$i + 1];
+          if (C\contains_key(ASCII_PUNCTUATION, $next)) {
+            $new_info .= $next;
+            ++$i;
+            continue;
+          }
+        }
+        $new_info .= $char;
+      }
+      $info = $new_info;
     }
     $indent = Str\length($matches['indent']);
 
