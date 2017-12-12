@@ -14,7 +14,7 @@ namespace Facebook\Markdown\UnparsedBlocks;
 use namespace HH\Lib\{C, Dict};
 
 
-abstract class ContainerBlock<TProduce as ?(Block, Lines), TChild as Block>
+abstract class ContainerBlock<TChild as Block>
 extends Block {
   public function __construct(
     protected vec<TChild> $children,
@@ -24,12 +24,6 @@ extends Block {
   public function getChildren(): vec<TChild> {
     return $this->children;
   }
-
-  <<__Override>>
-  abstract public static function consume(
-    Context $context,
-    Lines $lines,
-  ): TProduce;
 
   protected static function consumeChildren(
     Context $context,
