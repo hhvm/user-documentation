@@ -151,32 +151,25 @@ class HTMLRenderer extends Renderer<string> {
     }
 
     $children = $item->getChildren();
-    $newline = true;
+    $content = '';
 
     if ($list->isTight()) {
-      if (
-        C\count($children) === 1
-        && C\onlyx($children) instanceof Blocks\Paragraph
-      ) {
-        $newline = false;
+      if (!C\first($children) instanceof Blocks\Paragraph) {
+        $content = "\n";
       }
 
-      $children = Vec\map(
-        $children,
-        $child ==> {
-          if ($child instanceof Blocks\Paragraph) {
-            return $child->getContents();
-          }
-          return vec[$child];
-        },
-      ) |> Vec\flatten($$);
+      foreach ($children as $child) {
+        if ($child instanceof Blocks\Paragraph) {
+          $content .= $this->renderNodes($child->getContents());
+          continue;
+        }
+        $content .= "\n".$this->render($child);
+      }
+    } else {
+      $content = "\n".$this->renderNodes($children);
     }
 
-    $content = $this->renderNodes($children);
-    if ($newline) {
-      return "<li>\n".$content."</li>\n";
-    }
-    return "<li>".$content."</li>\n";
+    return '<li>'.$content."</li>\n";
   }
 
   <<__Override>>
