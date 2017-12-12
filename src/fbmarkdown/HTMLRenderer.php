@@ -126,18 +126,29 @@ class HTMLRenderer extends Renderer<string> {
     Blocks\TaskListItemExtension $item,
   ): string {
     $checked = $item->isChecked() ? ' checked=""' : '';
-    $checkbox = new Blocks\HTMLBlock(
-      '<input disabled="" '.$checked.'> ',
-    );
+    $checkbox = '<input'.$checked.' disabled="" type="checkbox"> ';
+
+    $children = $item->getChildren();
+    $first = C\first($children);
+    if ($first instanceof Blocks\Paragraph) {
+      $children[0] = new Blocks\Paragraph(
+        Vec\concat(
+          vec[new Inlines\RawHTML($checkbox)],
+          $first->getContents(),
+        )
+      );
+    } else {
+      $children = Vec\concat(
+        vec[new Blocks\HTMLBlock($checkbox)],
+        $children,
+      );
+    }
 
     return $this->renderListItem(
       $list,
       new Blocks\ListItem(
         $item->getNumber(),
-        Vec\concat(
-          vec[$checkbox],
-          $item->getChildren(),
-        ),
+        $children,
       ),
     );
   }
