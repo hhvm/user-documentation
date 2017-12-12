@@ -44,7 +44,7 @@ final class SetextHeading extends LeafBlock {
         if ($col >= $first_col) {
           $level = $matches['level'][0] === '=' ? 1 : 2;
           return tuple(
-            new self($level, $heading),
+            new self($level, Str\trim($heading)),
             $rest,
           );
         }
