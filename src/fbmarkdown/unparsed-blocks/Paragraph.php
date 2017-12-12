@@ -49,8 +49,18 @@ final class Paragraph extends LeafBlock {
     return tuple(
       new self(
         $matched
-        |> Vec\map($$, $line ==> Str\trim_left($line))
-        |> Str\join($$, "\n"),
+        |> Vec\map(
+          $$,
+          $line ==> {
+            $line = Str\trim_left($line);
+            if (Str\ends_with($line, '  ')) {
+              return $line;
+            }
+            return Str\trim_right($line);
+          },
+        )
+        |> Str\join($$, "\n")
+        |> Str\trim_right($$),
       ),
       $lines,
     );
