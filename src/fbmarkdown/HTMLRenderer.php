@@ -151,9 +151,17 @@ class HTMLRenderer extends Renderer<string> {
     }
 
     $children = $item->getChildren();
+    $newline = true;
 
     if ($list->isTight()) {
-      return Vec\map(
+      if (
+        C\count($children) === 1
+        && C\onlyx($children) instanceof Blocks\Paragraph
+      ) {
+        $newline = false;
+      }
+
+      $children = Vec\map(
         $children,
         $child ==> {
           if ($child instanceof Blocks\Paragraph) {
@@ -161,15 +169,14 @@ class HTMLRenderer extends Renderer<string> {
           }
           return vec[$child];
         },
-      )
-        |> Vec\flatten($$)
-        |> $this->renderNodes($$)
-        |> "<li>".$$."</li>\n";
+      ) |> Vec\flatten($$);
     }
 
-    return $children
-      |> $this->renderNodes($$)
-      |> "<li>\n".$$."</li>\n";
+    $content = $this->renderNodes($children);
+    if ($newline) {
+      return "<li>\n".$content."</li>\n";
+    }
+    return "<li>".$content."</li>\n";
   }
 
   <<__Override>>
@@ -187,7 +194,7 @@ class HTMLRenderer extends Renderer<string> {
     }
     return $node->getItems()
       |> Vec\map($$, $item ==> $this->renderListItem($node, $item))
-      |> Str\join($$, "\n")
+      |> Str\join($$, '')
       |> $start."\n".$$.$end."\n";
   }
 
