@@ -26,9 +26,9 @@ class Context {
     DisallowedRawHTMLExtension::class,
     EntityReference::class,
     Image::class,
+    RawHTML::class,
     Emphasis::class,
     StrikethroughExtension::class,
-    RawHTML::class,
     TextualContent::class,
   ];
 
