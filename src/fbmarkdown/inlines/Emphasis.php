@@ -15,9 +15,7 @@ use namespace Facebook\Markdown\Inlines\_Private\EmphasisStack as Stack;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class Emphasis extends Inline {
-  const keyset<string> WHITESPACE = keyset[
-    " ", "\t", "\x0a", "\x0b", "\x0C", "\x0d",
-  ];
+  const string UNICODE_WHITESPACE = "[\\pZ\u{0009}\u{000d}\u{000a}\u{000c}]";
   const keyset<string> PUNCTUATION = keyset[
     '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.',
     '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`',
@@ -54,6 +52,9 @@ final class Emphasis extends Inline {
   ): ?(Inline, int) {
     $first = $markdown[$offset];
     if ($first !== '*' && $first !== '_') {
+      return null;
+    }
+    if ($offset > 0 && $markdown[$offset - 1] === $first) {
       return null;
     }
     // This is tricky as until we find the closing marker, we don't know if
@@ -274,6 +275,32 @@ final class Emphasis extends Inline {
     return tuple($match, $offset + Str\length($match));
   }
 
+  private static function startsWithWhitespace(
+    string $markdown,
+    int $offset,
+  ): bool {
+    if ($offset === Str\length($markdown)) {
+      return true;
+    }
+    return \preg_match(
+      '/^'.self::UNICODE_WHITESPACE.'/u',
+      Str\slice($markdown, $offset),
+    ) === 1;
+  }
+
+  private static function endsWithWhitespace(
+    string $markdown,
+    int $offset,
+  ): bool {
+    if ($offset === 0) {
+      return true;
+    }
+    return \preg_match(
+      '/'.self::UNICODE_WHITESPACE.'$/u',
+      Str\slice($markdown, 0, $offset),
+    ) === 1;
+  }
+
   private static function isLeftFlankingDelimiterRun(
     string $markdown,
     int $start_offset,
@@ -283,18 +310,24 @@ final class Emphasis extends Inline {
     $next = $end_offset === $len ? '' : $markdown[$end_offset];
     $previous = $start_offset === 0 ? '' : $markdown[$start_offset - 1];
 
-    if (C\contains_key(self::WHITESPACE, $next)) {
+    if (self::startsWithWhitespace($markdown, $end_offset)) {
       return false;
     }
-    if (
-      C\contains_key(self::PUNCTUATION, $next)
-      && $previous !== ''
-      && !C\contains_key(self::WHITESPACE, $previous)
-      && !C\contains_key(self::PUNCTUATION, $previous)
-    ) {
-      return false;
+
+    $previous_punctuation = C\contains_key(self::PUNCTUATION, $previous);
+    $previous_whitespace = self::endsWithWhitespace($markdown, $start_offset);
+
+    if ($previous_whitespace || $previous_punctuation) {
+      return true;
     }
-    return true;
+
+    // No intra-word `_` emphasis, but `*` is fine
+    $next_punctuation = C\contains_key(self::PUNCTUATION, $next);
+    if ((!$next_punctuation) && $markdown[$start_offset] !== '_') {
+      return true;
+    }
+
+    return false;
   }
 
   private static function isRightFlankingDelimiterRun(
@@ -306,18 +339,24 @@ final class Emphasis extends Inline {
     $next = $end_offset === $len ? '' : $markdown[$end_offset];
     $previous = $start_offset === 0 ? '' : $markdown[$start_offset - 1];
 
-    if (C\contains_key(self::WHITESPACE, $previous)) {
+    if (self::endsWithWhitespace($markdown, $start_offset)) {
       return false;
     }
-    if (
-      C\contains_key(self::PUNCTUATION, $previous)
-      && $next !== ''
-      && !C\contains_key(self::WHITESPACE, $next)
-      && !C\contains_key(self::PUNCTUATION, $next)
-    ) {
-      return false;
+
+    $next_whitespace = self::startsWithWhitespace($markdown, $end_offset);
+    $next_punctuation = C\contains_key(self::PUNCTUATION, $next);
+
+    if ($next_whitespace || $next_punctuation) {
+      return true;
     }
-    return true;
+
+    // No intra-word `_` emphasis, but `*` is fine
+    $previous_punctuation = C\contains_key(self::PUNCTUATION, $previous);
+    if ((!$previous_punctuation) && $markdown[$start_offset] !== '_') {
+      return true;
+    }
+
+    return false;
   }
 
   private static function consumeHigherPrecedence(
