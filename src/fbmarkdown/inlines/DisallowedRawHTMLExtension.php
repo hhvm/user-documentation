@@ -17,15 +17,15 @@ final class DisallowedRawHTMLExtension extends InlineWithPlainTextContent {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $_previous,
-    string $string,
-  ): ?(Inline, string, string) {
+    string $markdown,
+    int $offset,
+  ): ?(Inline, int) {
     $matches = [];
     if (
       \preg_match(
         '/^<(title|textarea|style|xmp|iframe|noembed|noframes|script|'.
           'plaintext)/i',
-        $string,
+        Str\slice($markdown, $offset),
         $matches,
       ) !== 1
     ) {
@@ -34,8 +34,7 @@ final class DisallowedRawHTMLExtension extends InlineWithPlainTextContent {
     $tag = $matches[0];
     return tuple(
       new self($tag),
-      $tag[Str\length($tag) - 1],
-      Str\strip_prefix($string, $tag),
+      $offset + Str\length($tag),
     );
   }
 }

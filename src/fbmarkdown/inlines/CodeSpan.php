@@ -11,6 +11,7 @@
 
 namespace Facebook\Markdown\Inlines;
 
+use namespace Facebook\Markdown\Inlines\_Private\StrPos;
 use namespace HH\Lib\Str;
 
 final class CodeSpan extends Inline {
@@ -27,29 +28,27 @@ final class CodeSpan extends Inline {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $previous,
     string $string,
-  ): ?(this, string, string) {
-    if ($previous === '`') {
+    int $offset,
+  ): ?(this, int) {
+    if ($offset > 0 && $string[$offset - 1] === '`') {
       return null;
     }
 
-    if ($string[0] !== '`') {
+    if ($string[$offset] !== '`') {
       return null;
     }
+
+    $start = StrPos\trim_left($string, $offset, '`');
+    $marker_len = $start - $offset;
+    $marker = Str\repeat('`', $marker_len);
+    $end = Str\search($string, $marker, $start);
 
     $len = Str\length($string);
-    for ($i = 1; $i < $len; ++$i) {
-      if ($string[$i] !== '`') {
-        break;
-      }
-    }
-    $marker = Str\repeat('`', $i);
-    $end = Str\search($string, $marker, $i);
     while (
       $end !== null
       && (
-        ($end + $i < $len && $string[$end + $i] === '`')
+        ($end + $marker_len < $len && $string[$end + $marker_len] === '`')
         || $string[$end - 1] === '`'
       )
     ) {
@@ -61,12 +60,11 @@ final class CodeSpan extends Inline {
 
     return tuple(
       new self(
-        Str\slice($string, $i, $end - $i)
+        Str\slice($string, $start, $end - $start)
         |> Str\trim($$)
         |> \preg_replace('/\s+/m', ' ', $$),
       ),
-      '`',
-      Str\slice($string, $end + $i),
+      $end + $marker_len,
     );
   }
 

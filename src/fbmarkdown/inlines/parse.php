@@ -11,16 +11,26 @@
 
 namespace Facebook\Markdown\Inlines;
 
+use namespace HH\Lib\{C, Str};
+
 function parse(
-    Context $context,
-    string $markdown,
-  ): vec<Inline> {
-  list($parsed, $_last, $rest) = _Private\parse_with_blacklist(
+  Context $context,
+  string $markdown,
+): vec<Inline> {
+  list($parsed, $offset) = _Private\parse_with_blacklist(
     $context,
-    '',
     $markdown,
+    0,
     keyset[],
   );
-  invariant($rest === '', "TextualContent should have taken everything");
+  $length = Str\length($markdown);
+  invariant(
+    $offset === $length,
+    'TextualContent should have consumed everything. '.
+    'Offset: %d; Length: %d; Final class: %s',
+    $offset,
+    $length,
+    get_class(C\lastx($parsed)),
+  );
   return $parsed;
 }

@@ -19,16 +19,16 @@ final class EntityReference extends InlineWithPlainTextContent {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $_previous,
-    string $string,
-  ): ?(Inline, string, string) {
-    $result = decode_html_entity($string);
+    string $markdown,
+    int $offset,
+  ): ?(Inline, int) {
+    $result = decode_html_entity(Str\slice($markdown, $offset));
     if ($result === null) {
       return null;
     }
 
-    list($_match, $out, $rest) = $result;
+    list($match, $out, $_rest) = $result;
 
-    return tuple(new self($out), ';', $rest);
+    return tuple(new self($out), $offset + Str\length($match));
   }
 }

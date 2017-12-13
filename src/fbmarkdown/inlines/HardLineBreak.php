@@ -25,24 +25,24 @@ final class HardLineBreak extends Inline {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $_previous,
-    string $string,
-  ): ?(Inline, string, string) {
-    if (Str\starts_with($string, "\\\n")) {
-      return tuple(new self(), "\n", Str\slice($string, 2));
+    string $markdown,
+    int $offset,
+  ): ?(Inline, int) {
+    if (Str\slice($markdown, $offset, 2) === "\\\n") {
+      return tuple(new self(), $offset + 2);
     }
 
-    $len = Str\length($string);
-    for ($i = 0; $i < $len; ++$i) {
-      if ($string[$i] === ' ') {
+    $len = Str\length($markdown);
+    for ($i = $offset; $i < $len; ++$i) {
+      if ($markdown[$i] === ' ') {
         continue;
       }
-      if ($string[$i] === "\n") {
-        if ($i < 2) {
+      if ($markdown[$i] === "\n") {
+        if ($i - $offset < 2) {
           return null;
         }
 
-        return tuple(new self(), $string[$i], Str\slice($string, $i + 1));
+        return tuple(new self(), $i + 1);
       }
       return null;
     }

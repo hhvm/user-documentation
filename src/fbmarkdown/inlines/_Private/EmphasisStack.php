@@ -38,7 +38,8 @@ class DelimiterNode extends TextNode {
   public function __construct(
     string $text,
     private int $flags,
-    private string $rest,
+    private int $startOffset,
+    private int $endOffset,
   ) {
     parent::__construct($text);
   }
@@ -47,8 +48,12 @@ class DelimiterNode extends TextNode {
     return $this->flags;
   }
 
-  public function getRest(): string {
-    return $this->rest;
+  public function getStartOffset(): int {
+    return $this->startOffset;
+  }
+
+  public function getEndOffset(): int {
+    return $this->endOffset;
   }
 }
 
@@ -67,8 +72,8 @@ class InlineNode extends Node {
 class EmphasisNode extends Node {
   public function __construct(
     private Inlines\Emphasis $content,
-    private string $last,
-    private string $rest,
+    private int $startOffset,
+    private int $endOffset,
   ) {
   }
 
@@ -81,11 +86,11 @@ class EmphasisNode extends Node {
     return vec[$this->content];
   }
 
-  public function getLast(): string {
-    return $this->last;
+  public function getStartOffset(): int {
+    return $this->startOffset;
   }
 
-  public function getRest(): string {
-    return $this->rest;
+  public function getEndOffset(): int {
+    return $this->endOffset;
   }
 }

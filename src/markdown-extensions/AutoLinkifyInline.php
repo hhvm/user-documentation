@@ -32,14 +32,14 @@ final class AutoLinkifyInline extends Inlines\Link {
   <<__Override>>
   public static function consume(
     Inlines\Context $context,
-    string $previous,
-    string $rest,
-  ): ?(Inlines\Link, string, string) {
-    $result = Inlines\CodeSpan::consume($context, $previous, $rest);
+    string $markdown,
+    int $offset,
+  ): ?(Inlines\Link, int) {
+    $result = Inlines\CodeSpan::consume($context, $markdown, $offset);
     if ($result === null) {
       return null;
     }
-    list($quoted, $last, $rest) = $result;
+    list($quoted, $offset) = $result;
 
     $content = $quoted->getCode();
     if ($content === null) {
@@ -91,8 +91,7 @@ final class AutoLinkifyInline extends Inlines\Link {
       if ($target !== null) {
         return tuple(
           self::makeAutoLink($quoted, $target),
-          $last,
-          $rest,
+          $offset,
         );
       }
     }

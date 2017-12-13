@@ -11,6 +11,7 @@
 
 namespace Facebook\Markdown\Inlines;
 
+use namespace Facebook\Markdown\Inlines\_Private\StrPos;
 use namespace HH\Lib\{Str, Vec};
 
 final class StrikethroughExtension extends Inline {
@@ -33,27 +34,28 @@ final class StrikethroughExtension extends Inline {
   <<__Override>>
   public static function consume(
     Context $context,
-    string $_last,
     string $string,
-  ): ?(Inline, string, string) {
-    if ($string[0] !== '~') {
+    int $offset,
+  ): ?(Inline, int) {
+    if ($string[$offset] !== '~') {
       return null;
     }
 
-    $string = Str\trim_left($string, '~');
-    $end_pos = Str\search($string, '~');
+    $start_pos = StrPos\trim_left($string, $offset, '~');
+    $end_pos = Str\search($string, '~', $start_pos);
     if ($end_pos === null) {
       return null;
     }
 
-    $para_pos = Str\search($string, "\n\n");
+    $para_pos = Str\search($string, "\n\n", $start_pos);
     if ($para_pos !== null && $para_pos < $end_pos) {
       return null;
     }
 
-    $matched = Str\slice($string, 0, $end_pos);
+    $matched = Str\slice($string, $start_pos, $end_pos);
     $children = parse($context, $matched);
-    $rest = Str\trim_left(Str\slice($string, $end_pos + 1), '~');
-    return tuple(new self($children), '~', $rest);
+
+    $end_pos = StrPos\trim_left($string, $end_pos, '~');
+    return tuple(new self($children), $end_pos);
   }
 }

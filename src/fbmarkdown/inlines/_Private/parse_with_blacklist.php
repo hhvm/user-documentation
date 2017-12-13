@@ -16,30 +16,37 @@ use namespace HH\Lib\{C, Str};
 
 function parse_with_blacklist (
   Inlines\Context $context,
-  string $last,
   string $markdown,
+  int $offset,
   keyset<classname<Inlines\Inline>> $blacklist,
-): (vec<Inlines\Inline>, string, string) {
+): (vec<Inlines\Inline>, int) {
   $types = $context->getInlineTypes();
   foreach ($blacklist as $type) {
     unset($types[$type]);
   }
 
   $out = vec[];
+  $len = Str\length($markdown);
 
-  while (!Str\is_empty($markdown)) {
+  while ($offset < $len) {
     $result = null;
     foreach ($types as $type) {
-      $result = $type::consume($context, $last, $markdown);
+      $result = $type::consume($context, $markdown, $offset);
       if ($result !== null) {
         break;
       }
     }
     if ($result === null) {
-      return tuple($out, $last, $markdown);
+      return tuple($out, $offset);
     }
-    list($inline, $last, $markdown) = $result;
+    list($inline, $new_offset) = $result;
+    invariant(
+      $new_offset > $offset,
+      "Failed to consume any data with %s",
+      get_class($inline),
+    );
+    $offset = $new_offset;
     $out[] = $inline;
   }
-  return tuple($out, $last, '');
+  return tuple($out, $offset);
 }

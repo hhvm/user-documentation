@@ -17,32 +17,28 @@ final class TextualContent extends InlineWithPlainTextContent {
   <<__Override>>
   public static function consume(
     Context $context,
-    string $_last,
-    string $chars,
-  ): (Inline, string, string) {
-    $out = $chars[0];
-    $last = $out;
-    $len = Str\length($chars);
+    string $input,
+    int $offset,
+  ): (Inline, int) {
+    $out = $input[$offset];
+    $len = Str\length($input);
 
-    for ($i = 1; $i < $len; ++$i) {
-      $rest = Str\slice($chars, $i);
-      list($inlines, $_, $_) = _Private\parse_with_blacklist(
+    for ($i = $offset + 1; $i < $len; ++$i) {
+      list($inlines, $_) = _Private\parse_with_blacklist(
         $context,
-        $last,
-        $rest,
+        $input,
+        $i,
         /* blacklist = */ keyset[self::class],
       );
       if (!C\is_empty($inlines)) {
         break;
       }
-      $last = $rest[0];
-      $out .= $last;
+      $out .= $input[$i];
     }
 
     return tuple(
       new self($out),
-      $last,
-      Str\slice($chars, Str\length($out)),
+      $i,
     );
   }
 }

@@ -45,16 +45,16 @@ final class Image extends Inline {
   <<__Override>>
   public static function consume(
     Context $context,
-    string $_previous,
-    string $string,
-  ): ?(Inline, string, string) {
-    if (!Str\starts_with($string, '![')) {
+    string $markdown,
+    int $offset,
+  ): ?(Inline, int) {
+    if (Str\slice($markdown, $offset, 2) !== '![') {
       return null;
     }
-
     $link = Link::consumeLinkish(
       $context,
-      Str\slice($string, 1),
+      $markdown,
+      $offset + 1,
       keyset[Link::class],
     );
 
@@ -62,15 +62,14 @@ final class Image extends Inline {
       return null;
     }
 
-    list($link, $last, $rest) = $link;
+    list($link, $offset) = $link;
     return tuple(
       new self(
         $link->getText(),
         $link->getDestination(),
         $link->getTitle(),
       ),
-      $last,
-      $rest,
+      $offset,
     );
   }
 }

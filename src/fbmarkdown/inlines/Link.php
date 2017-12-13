@@ -15,6 +15,7 @@ use function Facebook\Markdown\_Private\{
   consume_link_destination,
   consume_link_title,
 };
+use namespace Facebook\Markdown\Inlines\_Private\StrPos;
 use type Facebook\Markdown\UnparsedBlocks\LinkReferenceDefinition;
 use namespace HH\Lib\{Str, Vec};
 
@@ -48,12 +49,13 @@ class Link extends Inline {
   <<__Override>>
   public static function consume(
     Context $ctx,
-    string $_last,
     string $string,
-  ): ?(Link, string, string) {
+    int $offset,
+  ): ?(Link, int) {
     return self::consumeLinkish(
       $ctx,
       $string,
+      $offset,
       keyset[
         CodeSpan::class,
         AutoLink::class,
@@ -65,48 +67,44 @@ class Link extends Inline {
   public static function consumeLinkish(
     Context $ctx,
     string $string,
+    int $offset,
     keyset<classname<Inline>> $inners,
-  ): ?(Link, string, string) {
-    if ($string[0] !== '[') {
+  ): ?(Link, int) {
+    if ($string[$offset] !== '[') {
       return null;
     }
 
+    $offset++;
     $depth = 1;
 
-    $str = Str\slice($string, 1);
+    $len = Str\length($string);
     $text = vec[];
     $part = '';
     $key = '';
 
-    $last = '';
-    $chr = '';
-
-    while (!Str\is_empty($str)) {
-      $orig_str = $str;
-      $chr = $str[0];
-      $str = Str\slice($str, 1);
+    for ($offset = $offset; $offset < $len; ++$offset) {
+      $chr = $string[$offset];
 
       if ($chr === ']') {
         --$depth;
         if ($depth === 0) {
+          $offset++;
           break;
         }
         $part .= ']';
-        $last = $chr;
         continue;
       }
       if ($chr === '[') {
         $part .= '[';
         ++$depth;
-        $last = $chr;
         continue;
       }
       if ($chr === '\\') {
-        if (!Str\is_empty($str)) {
-          $next = $str[0];
+        if ($offset + 1 < $len) {
+          $next = $string[$offset + 1];
           if ($next === '[' || $next === ']') {
             $part .= '\\'.$next;
-            $str = Str\slice($str, 1);
+            ++$offset;
             continue;
           }
         }
@@ -114,7 +112,7 @@ class Link extends Inline {
 
       $result = null;
       foreach ($inners as $type) {
-        $result = $type::consume($ctx, $last, $orig_str);
+        $result = $type::consume($ctx, $string, $offset);
         if ($result !== null) {
           break;
         }
@@ -125,11 +123,10 @@ class Link extends Inline {
           $key .= $part;
           $part = '';
         }
-        list($next, $last, $str) = $result;
+        list($next, $offset) = $result;
         $text[] = $next;
         continue;
       }
-      $last = $chr;
       $part .= $chr;
     }
 
@@ -142,7 +139,7 @@ class Link extends Inline {
       $text = Vec\concat($text, parse($ctx, $part));
     }
 
-    if (Str\starts_with($str, '[]')) {
+    if (Str\slice($string, $offset, 2) === '[]') {
       // collapsed reference link
       $def = $ctx->getBlockContext()->getLinkReferenceDefinition($key);
       if ($def === null) {
@@ -151,18 +148,17 @@ class Link extends Inline {
 
       return tuple(
         new self($text, $def->getDestination(), $def->getTitle()),
-        ']',
-        Str\slice($str, 2),
+        $offset + 2,
       );
     }
 
-    if (Str\starts_with($str, '[')) {
+    if ($offset < $len && $string[$offset] === '[') {
       // full reference link
       $depth = 1;
       $matched = '';
-      $len = Str\length($str);
-      for ($i = 1; $i < $len && $i <= 999; ++$i) {
-        $char = $str[$i];
+      $offset++;
+      for ($i = 0; $i < 999 && $offset < $len; ++$i, ++$offset) {
+        $char = $string[$offset];
         if ($char === '[') {
           ++$depth;
           $matched .= $char;
@@ -177,11 +173,11 @@ class Link extends Inline {
           continue;
         }
         if ($char === '\\') {
-          if ($i + 1 >= $len) {
+          if ($offset + 1 >= $len) {
             return null;
           }
-          $matched .= $char.$str[$i+1];
-          ++$i;
+          $matched .= $char.$string[$offset+1];
+          ++$offset;
           continue;
         }
         $matched .= $char;
@@ -199,12 +195,11 @@ class Link extends Inline {
 
       return tuple(
         new self($text, $def->getDestination(), $def->getTitle()),
-        ']',
-        Str\slice($str, 1, $len - 2),
+        $offset,
       );
     }
 
-    if (!Str\starts_with($str, '(')) {
+    if ($offset === $len || $string[$offset] !== '(') {
       // shortcut reference link?
       $def = $ctx->getBlockContext()->getLinkReferenceDefinition($key);
       if ($def === null) {
@@ -213,47 +208,46 @@ class Link extends Inline {
 
       return tuple(
         new self($text, $def->getDestination(), $def->getTitle()),
-        ']',
-        $str,
+        $offset,
       );
     }
+    $offset++;
 
-    $str = Str\trim_left(Str\slice($str, 1));
-
-    $destination = consume_link_destination($str);
+    $slice = Str\slice($string, $offset);
+    $destination = consume_link_destination($slice);
 
     if ($destination === null) {
       return null;
     }
 
-    list($destination, $idx) = $destination;
-    $str = Str\trim_left(Str\slice($str, $idx));
+    list($destination, $consumed) = $destination;
+    $offset = StrPos\trim_left($string, $offset + $consumed);
 
-    if ($str === '') {
+    if ($offset === $len) {
       return null;
     }
 
-    $title = consume_link_title($str);
+    $slice = Str\slice($string, $offset);
+    $title = consume_link_title($slice);
     if ($title !== null) {
-      list($title, $idx) = $title;
-      $str = Str\trim_left(Str\slice($str, $idx));
+      list($title, $consumed) = $title;
+      $offset = StrPos\trim_left($string, $offset + $consumed);
     } else {
       // make title ?string, instead of string|?(string, string)
       $title = null;
     }
 
-    if ($str === '') {
+    if ($offset === $len) {
       return null;
     }
 
-    if ($str[0] !== ')') {
+    if ($string[$offset] !== ')') {
       return null;
     }
 
     return tuple(
       new self($text, $destination, $title),
-      ')',
-      Str\slice($str, 1),
+      $offset + 1,
     );
   }
 }

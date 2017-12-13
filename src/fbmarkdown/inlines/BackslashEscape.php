@@ -19,22 +19,22 @@ final class BackslashEscape extends InlineWithPlainTextContent {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $_previous,
     string $string,
-  ): ?(Inline, string, string) {
-    if ($string[0] !== "\\") {
+    int $offset,
+  ): ?(Inline, int) {
+    if ($string[$offset] !== "\\") {
       return null;
     }
 
-    if (Str\length($string) === 1) {
+    if ($offset === Str\length($string) - 1) {
       return null;
     }
 
-    $next = $string[1];
+    $next = $string[$offset + 1];
     if (C\contains_key(ASCII_PUNCTUATION, $next)) {
-      return tuple(new self($next), "\n", Str\slice($string, 2));
+      return tuple(new self($next), $offset + 2);
     }
 
-    return tuple(new self('\\'), "\n", Str\slice($string, 1));
+    return tuple(new self('\\'), $offset + 1);
   }
 }

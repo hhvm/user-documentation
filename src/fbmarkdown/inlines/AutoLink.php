@@ -43,32 +43,32 @@ final class AutoLink extends Inline {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $_previous,
     string $string,
-  ): ?(Inline, string, string) {
-    if ($string[0] !== '<') {
+    int $offset,
+  ): ?(Inline, int) {
+    if ($string[$offset] !== '<') {
       return null;
     }
+    $start = $offset + 1;
 
-    $end = Str\search($string, '>');
+    $end = Str\search($string, '>', $offset);
     if ($end === null) {
       return null;
     }
+    $offset = $end + 1;
 
-    $uri = Str\slice($string, 1, $end - 1);
+    $uri = Str\slice($string, $start, $end - $start);
     if (\preg_match(self::ABSOLUTE_URI_PATTERN, $uri) === 1) {
       return tuple(
         new self($uri, $uri),
-        $string[$end],
-        Str\slice($string, $end + 1),
+        $offset,
       );
     }
 
     if (\preg_match(self::EMAIL_ADDRESS_PATTERN, $uri) === 1) {
       return tuple(
         new self($uri, 'mailto:'.$uri),
-        $string[$end],
-        Str\slice($string, $end + 1),
+        $offset,
       );
     }
 

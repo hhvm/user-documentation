@@ -17,9 +17,9 @@ use namespace HH\Lib\{C, Keyset, Str};
 abstract class Inline extends ASTNode {
   abstract public static function consume(
     Context $context,
-    string $previous,
     string $chars,
-  ): ?(Inline, string, string);
+    int $offset,
+  ): ?(Inline, int);
 
   abstract public function getContentAsPlainText(): string;
 }

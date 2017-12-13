@@ -21,7 +21,7 @@ final class AutoLinkExtension extends Inline {
   const string PREFIX = 'www\.|'.self::SCHEME.'|'.self::EMAIL;
 
   const keyset<string> MUST_FOLLOW = keyset[
-    '', "\n", ' ', '*', '_', '~', '(',
+    "\n", ' ', '*', '_', '~', '(',
   ];
 
   <<__Override>>
@@ -32,13 +32,17 @@ final class AutoLinkExtension extends Inline {
   <<__Override>>
   public static function consume(
     Context $_,
-    string $last,
-    string $string,
-  ): ?(Inline, string, string) {
-    if (!C\contains_key(self::MUST_FOLLOW, $last)) {
+    string $markdown,
+    int $offset,
+  ): ?(Inline, int) {
+    if (
+      $offset > 0
+      && !C\contains_key(self::MUST_FOLLOW, $markdown[$offset - 1])
+    ) {
       return null;
     }
-    $last = null;
+
+    $string = Str\slice($markdown, $offset);
 
     $matches = [];
     $result = \preg_match(
@@ -51,34 +55,31 @@ final class AutoLinkExtension extends Inline {
     }
 
     $full = $matches[0];
-    $last = $full[Str\length($full) - 1];
-    $rest = Str\strip_prefix($string, $full);
+    $offset += Str\length($full);
     $prefix = $matches['prefix'];
     $domain = $matches['domain'];
+
     if (Str\lowercase($prefix) === 'www.') {
-      list($path, $last, $rest) = self::consumePath($last, $rest);
+      list($path, $offset) = self::consumePath($markdown, $offset);
       $text = $prefix.$domain.$path;
       return tuple(
         new AutoLink($text, 'http://'.$text),
-        $last,
-        $rest,
+        $offset,
       );
     }
     if (Str\ends_with($prefix, '://')) {
-      list($path, $last, $rest) = self::consumePath($last, $rest);
+      list($path, $offset) = self::consumePath($markdown, $offset);
       $text = $prefix.$domain.$path;
       return tuple(
         new AutoLink($text, $text),
-        $last,
-        $rest,
+        $offset,
       );
     }
 
     // email
     return tuple(
       new AutoLink($full, 'mailto:'.$full),
-      $last,
-      $rest,
+      $offset,
     );
   }
 
@@ -88,14 +89,15 @@ final class AutoLinkExtension extends Inline {
   ];
 
   private static function consumePath(
-    string $previous,
-    string $rest,
-  ): (string, string, string) {
+    string $markdown,
+    int $offset,
+  ): (string, int) {
     $matches = [];
+    $rest = Str\slice($markdown, $offset);
     \preg_match('/^[^[\]<> ]+/', $rest, $matches);
     $match = $matches[0];
     if ($match === '') {
-      return tuple('', $previous, $rest);
+      return tuple('', $offset);
     }
 
     $len = Str\length($match);
@@ -104,7 +106,7 @@ final class AutoLinkExtension extends Inline {
     if (C\contains_key(self::TRAILING_PUNCTUATION, $last)) {
       $match = Str\slice($match, 0, $len - 1);
       if ($match === '') {
-        return tuple('', $previous, $rest);
+        return tuple('', $offset);
       }
       $len--;
       $last = $match[$len - 1];
@@ -117,7 +119,7 @@ final class AutoLinkExtension extends Inline {
       if ($closes > $opens) {
         $match = Str\slice($match, 0, $len - 1);
         if ($match === '') {
-          return tuple('', $previous, $rest);
+          return tuple('', $offset);
         }
         $len--;
         $last = $match[$len - 1];
@@ -131,7 +133,7 @@ final class AutoLinkExtension extends Inline {
         if (\ctype_alnum($slice)) {
           $match = Str\slice($match, 0, $idx);
           if ($match === '') {
-            return tuple('', $previous, $rest);
+            return tuple('', $offset);
           }
           $len = $idx;
           $last = $match[$len - 1];
@@ -139,6 +141,6 @@ final class AutoLinkExtension extends Inline {
       }
     }
 
-    return tuple($match, $last, Str\strip_prefix($rest, $match));
+    return tuple($match, $offset + $len);
   }
 }

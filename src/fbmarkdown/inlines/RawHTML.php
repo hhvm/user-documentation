@@ -41,9 +41,9 @@ final class RawHTML extends Inline {
   <<__Override>>
   public static function consume(
     Context $context,
-    string $_last,
     string $string,
-  ): ?(Inline, string, string) {
+    int $offset,
+  ): ?(Inline, int) {
     if (!$context->isHTMLEnabled()) {
       return null;
     }
@@ -52,45 +52,47 @@ final class RawHTML extends Inline {
     if (
       \preg_match(
         '/^('.self::OPEN_TAG.'|'.self::CLOSING_TAG.'|'.self::DECLARATION.')/i',
-        $string,
+        Str\slice($string, $offset),
         $matches,
       ) === 1
     ) {
       $match = $matches[0];
       return tuple(
         new self($match),
-        $match[Str\length($match) - 1],
-        Str\strip_prefix($string, $match),
+        $offset + Str\length($match),
       );
     }
 
     return
-      self::consumeHtmlComment($string)
-      ?? self::consumeProcessingInstruction($string)
-      ?? self::consumeCDataSection($string);
+      self::consumeHtmlComment($string, $offset)
+      ?? self::consumeProcessingInstruction($string, $offset)
+      ?? self::consumeCDataSection($string, $offset);
   }
 
   private static function consumeHtmlComment(
     string $in,
-  ): ?(Inline, string, string) {
-    if (!Str\starts_with($in, '<!--')) {
+    int $offset,
+  ): ?(Inline, int) {
+    if (Str\slice($in, $offset, 3) !== '<!--') {
       return null;
     }
 
-    $rest = Str\slice($in, 4);
+    $offset += 4;
 
-    // We need `--`...
-    $end = Str\search($rest, '--');
+    // We need `-->`...
+    $end = Str\search($in, '-->', $offset);
     if ($end === null) {
       return null;
     }
 
-    // ...but only in the context of `-->`
-    if (($rest[$end + 2] ?? null) !== '>') {
+    // ...but without `--` first
+    $dash_dash = Str\search($in, '--', $offset);
+    assert($dash_dash !== null); // we already found an end marker
+    if ($dash_dash < $end) {
       return null;
     }
 
-    $text = Str\slice($rest, 0, $end);
+    $text = Str\slice($in, $offset, $end - $offset);
     if (C\any(vec['-', '->'], $bad ==> Str\starts_with($text, $bad))) {
       return null;
     }
@@ -99,36 +101,39 @@ final class RawHTML extends Inline {
     }
 
     $match = '<!--'.$text.'-->';
-    return tuple(new self($match), '>', Str\strip_prefix($in, $match));
+    return tuple(new self($match), $end + 3);
   }
 
   private static function consumeProcessingInstruction(
     string $in,
-  ): ?(Inline, string, string) {
-    return self::consumeFencedSection($in, '<?', '?>');
+    int $offset,
+  ): ?(Inline, int) {
+    return self::consumeFencedSection($in, $offset, '<?', '?>');
   }
 
   private static function consumeFencedSection(
     string $in,
+    int $offset,
     string $start,
     string $end,
-  ): ?(Inline, string, string) {
-    if (!Str\starts_with($in, $start)) {
+  ): ?(Inline, int) {
+    $slice = Str\slice($in, $offset);
+    if (!Str\starts_with($slice, $start)) {
       return null;
     }
-    $idx = Str\search($in, $end);
+    $idx = Str\search($in, $end, $offset);
     if ($idx === null) {
       return null;
     }
 
-    $match = Str\slice($in, 0, $idx).$end;
-    $last = $match[Str\length($match) - 1];
-    return tuple(new self($match), $last, Str\strip_prefix($in, $match));
+    $match = Str\slice($in, $offset, $idx).$end;
+    return tuple(new self($match), $idx + Str\length($end));
   }
 
   private static function consumeCDataSection(
     string $in,
-  ): ?(Inline, string, string) {
-    return self::consumeFencedSection($in, '<![CDATA[', ']]>');
+    int $offset,
+  ): ?(Inline, int) {
+    return self::consumeFencedSection($in, $offset, '<![CDATA[', ']]>');
   }
 }

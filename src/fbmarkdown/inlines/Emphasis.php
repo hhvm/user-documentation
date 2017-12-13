@@ -49,10 +49,10 @@ final class Emphasis extends Inline {
   <<__Override>>
   public static function consume(
     Context $context,
-    string $previous,
-    string $string,
-  ): ?(Inline, string, string) {
-    $first = $string[0];
+    string $markdown,
+    int $offset,
+  ): ?(Inline, int) {
+    $first = $markdown[$offset];
     if ($first !== '*' && $first !== '_') {
       return null;
     }
@@ -64,55 +64,60 @@ final class Emphasis extends Inline {
     //  - `<strong>*`
     //  - `***`
 
-    $start = self::consumeDelimiterRun($string);
-    list($start, $rest) = $start;
-    if (!self::isLeftFlankingDelimiterRun($previous, $start, $rest)) {
+    $start = self::consumeDelimiterRun($markdown, $offset);
+    list($start, $end_offset) = $start;
+    if (!self::isLeftFlankingDelimiterRun($markdown, $offset, $end_offset)) {
       return null;
     }
-
     $stack = vec[
       new Stack\DelimiterNode(
         $start,
         self::IS_START,
-        $rest,
+        $offset,
+        $end_offset,
       ),
     ];
+    $offset = $end_offset;
 
-    $last = $start[0];
     $text = '';
 
-    while (!Str\is_empty($rest)) {
-      $link = Link::consume($context, $last, $rest);
+    $len = Str\length($markdown);
+    for (; $offset < $len; ++$offset) {
+      $link = Link::consume($context, $markdown, $offset);
       if ($link !== null) {
         if ($text !== '') {
           $stack[] = new Stack\TextNode($text);
           $text = '';
         }
-        list($link, $last, $rest) = $link;
+        list($link, $offset) = $link;
+        $offset--;
         $stack[] = new Stack\InlineNode($link);
         continue;
       }
 
-      $image = Image::consume($context, $last, $rest);
+      $image = Image::consume($context, $markdown, $offset);
       if ($image !== null) {
         if ($text !== '') {
           $stack[] = new Stack\TextNode($text);
           $text = '';
         }
-        list($image, $last, $rest) = $image;
+        list($image, $offset) = $image;
+        $offset--;
         $stack[] = new Stack\InlineNode($image);
         continue;
       }
 
-      $char = $rest[0];
+      $char = $markdown[$offset];
       if ($char === '*' || $char === '_') {
-        list($run, $new_rest) = self::consumeDelimiterRun($rest);
+        list($run, $end_offset) = self::consumeDelimiterRun($markdown, $offset);
         $flags = 0;
 
-        if (self::isLeftFlankingDelimiterRun($last, $run, $new_rest)) {
+        if (self::isLeftFlankingDelimiterRun($markdown, $offset, $end_offset)) {
           $flags |= self::IS_START;
         }
-        if (self::isRightFlankingDelimiterRun($last, $run, $new_rest)) {
+        if (
+          self::isRightFlankingDelimiterRun($markdown, $offset, $end_offset)
+        ) {
           $flags |= self::IS_END;
         }
         if ($flags !== 0) {
@@ -120,14 +125,14 @@ final class Emphasis extends Inline {
             $stack[] = new Stack\TextNode($text);
             $text = '';
           }
-          $rest = $new_rest;
-          $stack[] = new Stack\DelimiterNode($run, $flags, $rest);
+          $stack[] =
+            new Stack\DelimiterNode($run, $flags, $offset, $end_offset);
+          $offset = $end_offset - 1;
           continue;
         }
       }
 
       $text .= $char;
-      $rest = Str\slice($rest, 1);
     }
 
     if ($text !== '') {
@@ -198,14 +203,12 @@ final class Emphasis extends Inline {
         $mid_nodes[] = new Stack\DelimiterNode(
           $opener_text,
           $opener->getFlags(),
-          $opener->getRest(),
+          $opener->getStartOffset(),
+          $opener->getEndOffset(),
         );
       } else {
         $position--;
       }
-
-      $last = $closer->getText()[0];
-      $rest = $closer->getRest().$closer_text;
 
       $mid_nodes[] =
         Vec\slice($stack, $opener_idx + 1, $closer_idx - ($opener_idx + 1))
@@ -213,14 +216,15 @@ final class Emphasis extends Inline {
         |> new self($strong, $$)
         |> new Stack\EmphasisNode(
           $$,
-          $last,
-          $rest,
+          $opener->getStartOffset(),
+          $closer->getEndOffset(),
         );
       if ($closer_text !== '') {
         $mid_nodes[] = new Stack\DelimiterNode(
           $closer_text,
           $closer->getFlags(),
-          $closer->getRest(),
+          $closer->getStartOffset(),
+          $closer->getEndOffset() - $chomp,
         );
       } else {
         $position--;
@@ -240,8 +244,7 @@ final class Emphasis extends Inline {
 
     return tuple(
       $first->getContent(),
-      $first->getLast(),
-      $first->getRest(),
+      $first->getEndOffset(),
     );
   }
 
@@ -273,24 +276,24 @@ final class Emphasis extends Inline {
   }
 
   private static function consumeDelimiterRun(
-    string $string,
-  ): (string, string) {
+    string $markdown,
+    int $offset,
+  ): (string, int) {
+    $slice = Str\slice($markdown, $offset);
     $matches = [];
-    \preg_match('/^(\\*+|_+)/', $string, $matches);
+    \preg_match('/^(\\*+|_+)/', $slice, $matches);
     $match = $matches[0];
-    $rest = Str\strip_prefix($string, $match);
-    return tuple($match, $rest);
+    return tuple($match, $offset + Str\length($match));
   }
 
   private static function isLeftFlankingDelimiterRun(
-    string $previous,
-    string $delimiter,
-    string $rest,
+    string $markdown,
+    int $start_offset,
+    int $end_offset,
   ): bool {
-    if ($rest === '') {
-      return false;
-    }
-    $next = $rest[0];
+    $len = Str\length($markdown);
+    $next = $end_offset === $len ? '' : $markdown[$end_offset];
+    $previous = $start_offset === 0 ? '' : $markdown[$start_offset - 1];
 
     if (C\contains_key(self::WHITESPACE, $next)) {
       return false;
@@ -307,11 +310,13 @@ final class Emphasis extends Inline {
   }
 
   private static function isRightFlankingDelimiterRun(
-    string $previous,
-    string $delimiter,
-    string $rest,
+    string $markdown,
+    int $start_offset,
+    int $end_offset,
   ): bool {
-    $next = $rest === '' ? '' : $rest[0];
+    $len = Str\length($markdown);
+    $next = $end_offset === $len ? '' : $markdown[$end_offset];
+    $previous = $start_offset === 0 ? '' : $markdown[$start_offset - 1];
 
     if (C\contains_key(self::WHITESPACE, $previous)) {
       return false;
