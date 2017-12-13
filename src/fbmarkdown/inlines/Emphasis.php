@@ -97,7 +97,8 @@ final class Emphasis extends Inline {
       }
 
       $char = $markdown[$offset];
-      if ($char === '*' || $char === '_') {
+      $previous = $markdown[$offset - 1];
+      if ($previous !== $char && ($char === '*' || $char === '_')) {
         list($run, $end_offset) = self::consumeDelimiterRun($markdown, $offset);
         $flags = 0;
 
