@@ -52,7 +52,7 @@ final class StrikethroughExtension extends Inline {
       return null;
     }
 
-    $matched = Str\slice($string, $start_pos, $end_pos);
+    $matched = Str\slice($string, $start_pos, $end_pos - $start_pos);
     $children = parse($context, $matched);
 
     $end_pos = StrPos\trim_left($string, $end_pos, '~');
