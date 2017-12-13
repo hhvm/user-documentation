@@ -36,8 +36,8 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
 
       $raw_examples[] = Str\slice(
         $text,
-        $start,
-        ($end - $start) + 1,
+        $start + 1,
+        ($end - $start),
       );
       $offset = $end + Str\length(self::EXAMPLE_END);
     }
