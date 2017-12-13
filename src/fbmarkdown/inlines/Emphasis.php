@@ -83,27 +83,15 @@ final class Emphasis extends Inline {
 
     $len = Str\length($markdown);
     for (; $offset < $len; ++$offset) {
-      $link = Link::consume($context, $markdown, $offset);
-      if ($link !== null) {
+      $inline = self::consumeHigherPrecedence($context, $markdown, $offset);
+      if ($inline !== null) {
         if ($text !== '') {
           $stack[] = new Stack\TextNode($text);
           $text = '';
         }
-        list($link, $offset) = $link;
+        list($inline, $offset) = $inline;
         $offset--;
-        $stack[] = new Stack\InlineNode($link);
-        continue;
-      }
-
-      $image = Image::consume($context, $markdown, $offset);
-      if ($image !== null) {
-        if ($text !== '') {
-          $stack[] = new Stack\TextNode($text);
-          $text = '';
-        }
-        list($image, $offset) = $image;
-        $offset--;
-        $stack[] = new Stack\InlineNode($image);
+        $stack[] = new Stack\InlineNode($inline);
         continue;
       }
 
@@ -330,5 +318,24 @@ final class Emphasis extends Inline {
       return false;
     }
     return true;
+  }
+
+  private static function consumeHigherPrecedence(
+    Context $context,
+    string $markdown,
+    int $offset,
+  ): ?(Inline, int) {
+    foreach ($context->getInlineTypes() as $type) {
+      if ($type === self::class) {
+        return null;
+      }
+
+      $result = $type::consume($context, $markdown, $offset);
+      if ($result !== null) {
+        return $result;
+      }
+    }
+
+    invariant_violation('should be unreachable');
   }
 }
