@@ -13,9 +13,12 @@ namespace Facebook\Markdown\Inlines\_Private\EmphasisStack;
 
 use namespace Facebook\Markdown\Inlines;
 use type Facebook\Markdown\Inlines\{Context, Inline};
+use namespace HH\Lib\Str;
 
 abstract class Node {
   abstract public function toInlines(Context $ctx): vec<Inline>;
+
+  abstract public function debugDump(string $markdown): string;
 }
 
 class TextNode extends Node {
@@ -31,6 +34,10 @@ class TextNode extends Node {
   <<__Override>>
   public function toInlines(Context $ctx): vec<Inline> {
     return Inlines\parse($ctx, $this->getText());
+  }
+
+  public function debugDump(string $_markdown): string {
+    return '(text '.var_export($this->text, true).')';
   }
 }
 
@@ -55,6 +62,13 @@ class DelimiterNode extends TextNode {
   public function getEndOffset(): int {
     return $this->endOffset;
   }
+
+  public function debugDump(string $_markdown): string {
+    return '(delim '.
+      (($this->flags & Inlines\Emphasis::IS_START) ? 'open' : '').
+      (($this->flags & Inlines\Emphasis::IS_END) ? 'close' : '').
+      ' '.var_export($this->getText(), true).')';
+  }
 }
 
 class InlineNode extends Node {
@@ -66,6 +80,10 @@ class InlineNode extends Node {
   <<__Override>>
   public function toInlines(Context $_): vec<Inline> {
     return vec[$this->content];
+  }
+
+  public function debugDump(string $_markdown): string {
+    return '(inline '.get_class($this->content).')';
   }
 }
 
@@ -92,5 +110,21 @@ class EmphasisNode extends Node {
 
   public function getEndOffset(): int {
     return $this->endOffset;
+  }
+
+  public function getLength(): int {
+    return ($this->endOffset - $this->startOffset);
+  }
+
+  public function debugDump(string $markdown): string {
+    $node = $this->content;
+    return '('.
+      ($node->isStrong() ? 'strong' : 'em')
+      .' '.
+      var_export(
+        Str\slice($markdown, $this->startOffset, $this->getLength()),
+        true,
+      )
+      .')';
   }
 }

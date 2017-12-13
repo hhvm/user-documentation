@@ -153,6 +153,10 @@ abstract class Renderer<T> {
       return $this->renderImage($node);
     }
 
+    if ($node instanceof Inlines\InlineSequence) {
+      return $this->renderNodes($node->getChildren());
+    }
+
     if ($node instanceof Inlines\Link) {
       return $this->renderLink($node);
     }

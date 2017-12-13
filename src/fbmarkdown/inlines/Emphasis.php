@@ -48,15 +48,13 @@ final class Emphasis extends Inline {
   public static function consume(
     Context $context,
     string $markdown,
-    int $offset,
+    int $initial_offset,
   ): ?(Inline, int) {
+    $offset = $initial_offset;
+    if (!self::isStartOfRun($context, $markdown, $offset)) {
+      return null;
+    }
     $first = $markdown[$offset];
-    if ($first !== '*' && $first !== '_') {
-      return null;
-    }
-    if ($offset > 0 && $markdown[$offset - 1] === $first) {
-      return null;
-    }
     // This is tricky as until we find the closing marker, we don't know if
     // `***` means:
     //  - `<strong><em>`
@@ -96,9 +94,7 @@ final class Emphasis extends Inline {
         continue;
       }
 
-      $char = $markdown[$offset];
-      $previous = $markdown[$offset - 1];
-      if ($previous !== $char && ($char === '*' || $char === '_')) {
+      if (self::isStartOfRun($context, $markdown, $offset)) {
         list($run, $end_offset) = self::consumeDelimiterRun($markdown, $offset);
         $flags = 0;
 
@@ -122,7 +118,7 @@ final class Emphasis extends Inline {
         }
       }
 
-      $text .= $char;
+      $text .= $markdown[$offset];
     }
 
     if ($text !== '') {
@@ -137,7 +133,7 @@ final class Emphasis extends Inline {
     ];
 
     while ($position < C\count($stack)) {
-      //printf("---------- %d\n", $position);
+      // self::debugDump($markdown, $position, $stack);
       $closer_idx = self::findCloser($stack, $position);
       if ($closer_idx === null) {
         break;
@@ -211,22 +207,27 @@ final class Emphasis extends Inline {
         $mid_nodes[] = new Stack\DelimiterNode(
           $opener_text,
           $opener->getFlags(),
-          $opener->getStartOffset(),
+          $opener->getStartOffset() + $chomp,
           $opener->getEndOffset(),
         );
       } else {
         $position--;
       }
 
+      $first_content_idx = $opener_idx + 1;
+      $last_content_idx = $closer_idx - 1;
+      $content_length = ($last_content_idx - $first_content_idx) + 1;
+
       $mid_nodes[] =
-        Vec\slice($stack, $opener_idx + 1, $closer_idx - ($opener_idx + 1))
+        Vec\slice($stack, $first_content_idx, $content_length)
         |> self::consumeStackSlice($context, $$)
         |> new self($strong, $$)
         |> new Stack\EmphasisNode(
           $$,
-          $opener->getStartOffset(),
+          $opener->getEndOffset() - $chomp,
           $closer->getStartOffset() + $chomp,
         );
+      $position -= $content_length;
 
       if ($closer_text !== '') {
         $mid_nodes[] = new Stack\DelimiterNode(
@@ -244,13 +245,39 @@ final class Emphasis extends Inline {
       );
     }
 
+
     $first = C\first($stack);
-    if (!$first instanceof Stack\EmphasisNode) {
-      return null;
+    if ($first instanceof Stack\EmphasisNode) {
+      return tuple(
+        $first->getContent(),
+        $first->getEndOffset(),
+      );
     }
 
+    $first = C\find(
+      $stack,
+      $elem ==> $elem instanceof Stack\EmphasisNode,
+    );
+
+    if ($first === null) {
+      return null;
+    }
+    assert($first instanceof Stack\EmphasisNode);
+
+    $children = Vec\concat(
+      parse(
+        $context,
+        Str\slice(
+          $markdown,
+          $initial_offset,
+          $first->getStartOffset() - $initial_offset,
+        ),
+      ),
+      vec[$first->getContent()],
+    );
+
     return tuple(
-      $first->getContent(),
+      new InlineSequence($children),
       $first->getEndOffset(),
     );
   }
@@ -394,5 +421,48 @@ final class Emphasis extends Inline {
     }
 
     invariant_violation('should be unreachable');
+  }
+
+  private static function debugDump(
+    string $markdown,
+    int $position,
+    vec<Stack\Node> $stack,
+  ): void {
+    printf("-------------------- %d\n", $position);
+    print(
+      Vec\map_with_key(
+        $stack,
+        ($idx, $item) ==> '  '.$idx.'. '.$item->debugDump($markdown)
+      )
+      |> Str\join($$, "\n")
+      |> $$."\n"
+    );
+  }
+
+  private static function isStartOfRun(
+    Context $context,
+    string $markdown,
+    int $offset,
+  ): bool {
+    $first = $markdown[$offset];
+    if ($first !== '*' && $first !== '_') {
+      return false;
+    }
+
+    if ($offset === 0) {
+      return true;
+    }
+
+    $previous = $markdown[$offset - 1];
+    if ($previous !== "\\" && $previous !== $first) {
+      return true;
+    }
+
+    $previous = parse(
+      $context,
+      Str\slice($markdown, 0, $offset),
+    );
+
+    return C\last($previous) instanceof BackslashEscape;
   }
 }
