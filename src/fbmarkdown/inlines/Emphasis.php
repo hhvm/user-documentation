@@ -129,17 +129,16 @@ final class Emphasis extends Inline {
       $stack[] = new Stack\TextNode($text);
     }
 
-    // Modified `process_emphasis` procedure from GFM spec appendix;
-    // stack is vec<delimiter|string|Inline>
-    // delimiter is tuple(marker, flags);
+    // Modified `process_emphasis` procedure from GFM spec appendix
     $position = 0;
     $openers_bottom = dict[
-      '*' => -1,
-      '_' => -1,
+      '*' => vec[0, 0, 0],
+      '_' => vec[0, 0, 0],
     ];
 
-    while ($position + 1 < C\count($stack)) {
-      $closer_idx = self::findCloser($stack, $position + 1);
+    while ($position < C\count($stack)) {
+      //printf("---------- %d\n", $position);
+      $closer_idx = self::findCloser($stack, $position);
       if ($closer_idx === null) {
         break;
       }
@@ -155,7 +154,9 @@ final class Emphasis extends Inline {
       );
       $char = $closer_text[0];
       $opener = null;
-      for ($i = $position - 1; $i > $openers_bottom[$char]; --$i) {
+      $closer_len = Str\length($closer->getText()) % 3;
+      $bottom = $openers_bottom[$char][$closer_len];
+      for ($i = $position - 1; $i >= $bottom; $i--) {
         $item = $stack[$i];
         if (!$item instanceof Stack\DelimiterNode) {
           continue;
@@ -166,17 +167,34 @@ final class Emphasis extends Inline {
         if ($item->getText()[0] !== $char) {
           continue;
         }
+
+        // intra-word delimiters must match exactly
+        // e.g.
+        //  - `*foo**bar` is not emphasized
+        //  - `**foo**bar` is emphasized
+        if (
+          (
+            ($closer->getFlags() & self::IS_START)
+            || ($item->getFlags() & self::IS_END)
+          )
+          && (
+            (Str\length($closer->getText()) + Str\length($item->getText()))
+            % 3 === 0
+          )
+        ) {
+          continue;
+        }
         $opener = $item;
         break;
       }
       $opener_idx = $i;
 
       if ($opener === null) {
-        $openers_bottom[$char] = $position - 1;
+        $openers_bottom[$char][$closer_len] = $position - 1;
         if (!($closer_flags & self::IS_START)) {
           $stack[$closer_idx] = new Stack\TextNode($closer_text);
-          ++$position;
         }
+        ++$position;
         continue;
       }
 
@@ -207,17 +225,16 @@ final class Emphasis extends Inline {
         |> new Stack\EmphasisNode(
           $$,
           $opener->getStartOffset(),
-          $closer->getEndOffset(),
+          $closer->getStartOffset() + $chomp,
         );
+
       if ($closer_text !== '') {
         $mid_nodes[] = new Stack\DelimiterNode(
           $closer_text,
           $closer->getFlags(),
-          $closer->getStartOffset(),
-          $closer->getEndOffset() - $chomp,
+          $closer->getStartOffset() + $chomp,
+          $closer->getEndOffset(),
         );
-      } else {
-        $position--;
       }
 
       $stack = Vec\concat(
