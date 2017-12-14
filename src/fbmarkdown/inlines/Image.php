@@ -20,7 +20,9 @@ use namespace HH\Lib\{Str, Vec};
 final class Image extends Inline {
   <<__Override>>
   public function getContentAsPlainText(): string {
-    return '';
+    return $this->description
+      |> Vec\map($$, $child ==> $child->getContentAsPlainText())
+      |> Str\join($$, '');
   }
 
   public function __construct(

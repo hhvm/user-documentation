@@ -41,7 +41,9 @@ final class Emphasis extends Inline {
 
   <<__Override>>
   public function getContentAsPlainText(): string {
-    return '';
+    return $this->content
+      |> Vec\map($$, $child ==> $child->getContentAsPlainText())
+      |> Str\join($$, '');
   }
 
   <<__Override>>
