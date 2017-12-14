@@ -17,7 +17,7 @@ use function Facebook\Markdown\_Private\{
 };
 use namespace Facebook\Markdown\Inlines\_Private\StrPos;
 use type Facebook\Markdown\UnparsedBlocks\LinkReferenceDefinition;
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\{C, Str, Vec};
 
 class Link extends Inline {
   public function __construct(
@@ -78,32 +78,36 @@ class Link extends Inline {
     $depth = 1;
 
     $len = Str\length($string);
-    $text = vec[];
-    $part = '';
     $key = '';
 
+    $start = $offset;
     for ($offset = $offset; $offset < $len; ++$offset) {
       $chr = $string[$offset];
 
       if ($chr === ']') {
         --$depth;
         if ($depth === 0) {
-          $offset++;
+          $offset;
           break;
         }
-        $part .= ']';
         continue;
       }
       if ($chr === '[') {
-        $part .= '[';
+        if (
+          $string[$offset - 1] !== '!'
+          && !C\contains_key($inners, Link::class)
+          && self::consume($ctx, $string, $offset) !== null
+        ) {
+          return null;
+        }
         ++$depth;
         continue;
       }
+
       if ($chr === '\\') {
         if ($offset + 1 < $len) {
           $next = $string[$offset + 1];
           if ($next === '[' || $next === ']') {
-            $part .= '\\'.$next;
             ++$offset;
             continue;
           }
@@ -118,26 +122,19 @@ class Link extends Inline {
         }
       }
       if ($result !== null) {
-        if ($part !== '') {
-          $text = Vec\concat($text, parse($ctx, $part));
-          $key .= $part;
-          $part = '';
-        }
-        list($next, $offset) = $result;
-        $text[] = $next;
+        list($_, $offset) = $result;
+        --$offset;
         continue;
       }
-      $part .= $chr;
     }
 
     if ($depth !== 0) {
       return null;
     }
 
-    if ($part !== '') {
-      $key .= $part;
-      $text = Vec\concat($text, parse($ctx, $part));
-    }
+    $key = Str\slice($string, $start, $offset - $start);
+    $offset++;
+    $text = parse($ctx, $key);
 
     if (Str\slice($string, $offset, 2) === '[]') {
       // collapsed reference link
