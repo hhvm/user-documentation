@@ -197,23 +197,36 @@ class Link extends Inline {
       );
     }
 
-    if ($offset === $len || $string[$offset] !== '(') {
-      // shortcut reference link?
-      $def = $ctx->getBlockContext()->getLinkReferenceDefinition($key);
-      if ($def === null) {
-        return null;
-      }
+    $result = self::consumeDestinationAndTitle($string, $offset);
+    if ($result !== null) {
+      list($destination, $title, $offset) = $result;
+      return tuple(new self($text, $destination, $title), $offset);
+    }
 
-      return tuple(
-        new self($text, $def->getDestination(), $def->getTitle()),
-        $offset,
-      );
+    // shortcut reference link?
+    $def = $ctx->getBlockContext()->getLinkReferenceDefinition($key);
+    if ($def === null) {
+      return null;
+    }
+
+    return tuple(
+      new self($text, $def->getDestination(), $def->getTitle()),
+      $offset,
+    );
+  }
+
+  private static function consumeDestinationAndTitle(
+    string $markdown,
+    int $offset,
+  ): ?(string, ?string, int) {
+    $len = Str\length($markdown);
+    if ($offset === $len || $markdown[$offset] !== '(') {
+      return null;
     }
     $offset++;
 
-
-    $maybe_offset = StrPos\trim_left($string, $offset);
-    $slice = Str\slice($string, $maybe_offset);
+    $maybe_offset = StrPos\trim_left($markdown, $offset);
+    $slice = Str\slice($markdown, $maybe_offset);
     $destination = consume_link_destination($slice);
 
     if ($destination !== null) {
@@ -223,19 +236,19 @@ class Link extends Inline {
       $consumed = 0;
     }
 
-    $offset = StrPos\trim_left($string, $maybe_offset + $consumed);
+    $offset = StrPos\trim_left($markdown, $maybe_offset + $consumed);
 
     if ($offset === $len) {
       return null;
     }
 
-    $slice = Str\slice($string, $offset);
+    $slice = Str\slice($markdown, $offset);
     $title = consume_link_title($slice);
     if ($title !== null) {
       list($title, $consumed) = $title;
-      $offset = StrPos\trim_left($string, $offset + $consumed);
+      $offset = StrPos\trim_left($markdown, $offset + $consumed);
     } else {
-      // make title ?string, instead of string|?(string, string)
+      // make title ?markdown, instead of markdown|?(markdown, markdown)
       $title = null;
     }
 
@@ -243,13 +256,10 @@ class Link extends Inline {
       return null;
     }
 
-    if ($string[$offset] !== ')') {
+    if ($markdown[$offset] !== ')') {
       return null;
     }
 
-    return tuple(
-      new self($text, $destination, $title),
-      $offset + 1,
-    );
+    return tuple($destination, $title, $offset + 1);
   }
 }
