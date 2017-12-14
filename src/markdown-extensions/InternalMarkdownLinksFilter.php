@@ -56,13 +56,19 @@ final class InternalMarkdownLinksFilter extends RenderFilter {
   }
 
   private function getNewDestination(string $uri): string {
-    if (!Str\ends_with($uri, '.md')) {
+    $path = \parse_url($uri, PHP_URL_PATH);
+    if ($path === null || !Str\ends_with($path, '.md')) {
       return $uri;
     }
+
     $host = \parse_url($uri, PHP_URL_HOST);
     if ($host !== null) {
       return $uri;
     }
-    return Str\strip_suffix($uri, '.md');
+    return Str\replace(
+      $uri,
+      $path,
+      Str\strip_suffix($path, '.md'),
+    );
   }
 }
