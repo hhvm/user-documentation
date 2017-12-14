@@ -13,7 +13,7 @@ namespace HHVM\UserDocumentation\MarkdownExt;
 
 use type Facebook\Markdown\{ASTNode, RenderContext, RenderFilter};
 use namespace Facebook\Markdown\Blocks;
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{Str, Vec};
 
 /**
  * Re-format code blocks to be rendered nicely.
@@ -35,13 +35,26 @@ final class PrettyCodeBlocksFilter extends RenderFilter {
     }
 
     $info_string = $node->getInfoString();
-    if ($info_string !== null && Str\lowercase($info_string) === 'hack') {
+    $classes = 'highlight fbgfm';
+    $code = $node->getCode();
+    if (
+      $info_string !== null
+      && (
+        Str\lowercase($info_string) === 'hack'
+        || Str\lowercase($info_string) === 'hacksignature'
+      )
+    ){
+      if (Str\lowercase($info_string) === 'hacksignature') {
+        $code = Str\split($code, "\n") |> Vec\drop($$, 1) |> Str\join($$, "\n");
+      }
+
+      $classes .= ' source-language-'.$info_string;
       $info_string = 'PHP';
     }
 
     return vec[
-      new Blocks\HTMLBlock('<div class="highlight fbgfm">'),
-      new PrettyCodeBlock($info_string, $node->getCode()),
+      new Blocks\HTMLBlock('<div class="'.$classes.'">'),
+      new PrettyCodeBlock($info_string, $code),
       new Blocks\HTMLBlock('</div>'),
     ];
   }
