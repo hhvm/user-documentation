@@ -13,7 +13,7 @@ namespace Facebook\Markdown\Inlines\_Private\StrPos;
 
 use namespace HH\Lib\{C, Str};
 
-function trim_left(string $in, int $start, string $chars = " \t"): int {
+function trim_left(string $in, int $start, string $chars = " \t\n"): int {
   $len = Str\length($in);
   for ($i = $start; $i < $len; ++$i) {
     if (\strpbrk($in[$i], $chars) === false) {

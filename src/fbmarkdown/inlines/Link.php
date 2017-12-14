@@ -213,7 +213,9 @@ class Link extends Inline {
     }
     $offset++;
 
-    $slice = Str\slice($string, $offset);
+
+    $maybe_offset = StrPos\trim_left($string, $offset);
+    $slice = Str\slice($string, $maybe_offset);
     $destination = consume_link_destination($slice);
 
     if ($destination !== null) {
@@ -223,7 +225,7 @@ class Link extends Inline {
       $consumed = 0;
     }
 
-    $offset = StrPos\trim_left($string, $offset + $consumed);
+    $offset = StrPos\trim_left($string, $maybe_offset + $consumed);
 
     if ($offset === $len) {
       return null;
