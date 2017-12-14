@@ -16,12 +16,12 @@ function memoize_handle(): Awaitable<string> {
 }
 
 function runMe(): void {
-  $t1 = microtime();
+  $t1 = microtime(true);
   \HH\Asio\join(memoize_handle());
-  $t2 = microtime() - $t1;
-  $t3 = microtime();
+  $t2 = microtime(true) - $t1;
+  $t3 = microtime(true);
   \HH\Asio\join(memoize_handle());
-  $t4 = microtime() - $t3;
+  $t4 = microtime(true) - $t3;
   var_dump($t4 < $t2); // The memmoized result will get here a lot faster
 }
 
