@@ -87,12 +87,14 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
     $parser_ctx = (new ParserContext())
       ->enableHTML_UNSAFE()
       ->disableExtensions();
+    $render_ctx = (new RenderContext())
+      ->disableExtensions();
     if ($extension !== null) {
       $parser_ctx->enableNamedExtension($extension);
+      $render_ctx->enableNamedExtension($extension);
     }
-    
+
     $ast = parse($parser_ctx, $in);
-    $render_ctx = new RenderContext();
     $actual_html = (new HTMLRenderer($render_ctx))->render($ast);
 
     // Improve output readability

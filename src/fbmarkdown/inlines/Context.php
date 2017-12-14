@@ -23,7 +23,6 @@ class Context {
     AutoLinkExtension::class,
     Link::class,
     CodeSpan::class,
-    DisallowedRawHTMLExtension::class,
     EntityReference::class,
     Image::class,
     RawHTML::class,

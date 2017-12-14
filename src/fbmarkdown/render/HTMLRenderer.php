@@ -15,6 +15,9 @@ use namespace HH\Lib\{C, Str, Vec};
 
 // TODO: fix namespace support in XHP, use that :'(
 class HTMLRenderer extends Renderer<string> {
+  const keyset<classname<RenderFilter>> EXTENSIONS = keyset[
+    TagFilterExtension::class,
+  ];
 
   protected static function escapeContent(string $text): string {
     return _Private\plain_text_to_html($text);
