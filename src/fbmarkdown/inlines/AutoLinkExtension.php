@@ -134,7 +134,11 @@ final class AutoLinkExtension extends Inline {
     if ($last === ';') {
       $idx = Str\search_last($match, '&');
       if ($idx !== null) {
-        $slice = Str\slice($match, $idx + 1);
+        $slice = Str\slice(
+          $match,
+          $idx + 1,
+          $len -  ($idx + 2),
+        );
         if (\ctype_alnum($slice)) {
           $match = Str\slice($match, 0, $idx);
           if ($match === '') {
