@@ -131,10 +131,9 @@ EOF;
     $md = "### Interface synopsis\n";
 
     $md .=
-      '<code class="code">'.
+      "```HackSignature\n<?hh\n".
       Stringify::interfaceSignature($this->yaml['data']).
-      '</code>';
-    $md .= "\n";
+      "```\n";
 
     $methods = $this->yaml['data']['methods'];
 
