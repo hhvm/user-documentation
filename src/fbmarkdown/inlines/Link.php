@@ -15,6 +15,7 @@ use function Facebook\Markdown\_Private\{
   consume_link_destination,
   consume_link_title,
 };
+use const Facebook\Markdown\_Private\ASCII_PUNCTUATION;
 use namespace Facebook\Markdown\Inlines\_Private\StrPos;
 use type Facebook\Markdown\UnparsedBlocks\LinkReferenceDefinition;
 use namespace HH\Lib\{C, Str, Vec};
@@ -107,7 +108,7 @@ class Link extends Inline {
       if ($chr === '\\') {
         if ($offset + 1 < $len) {
           $next = $string[$offset + 1];
-          if ($next === '[' || $next === ']') {
+          if (C\contains_key(ASCII_PUNCTUATION, $next)) {
             ++$offset;
             continue;
           }
