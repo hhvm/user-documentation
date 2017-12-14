@@ -1,6 +1,6 @@
 FROM hhvm/hhvm-proxygen:3.23.2
 ARG DOCKER_BUILD_ENV=prod
-ARG FB_GFM=false
+ARG FB_GFM=true
 ENV TZ UTC
 
 # We need a unicode-aware system to generate the docs
