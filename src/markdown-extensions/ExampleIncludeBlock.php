@@ -81,7 +81,7 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
 
   private static function getExampleBlock(string $file): UnparsedBlocks\Block {
     return new UnparsedBlocks\FencedCodeBlock(
-      \file_get_contents($file),
+      Str\trim(\file_get_contents($file)),
       'Hack',
     );
   }
@@ -115,7 +115,10 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
 
     return UnparsedBlocks\BlockSequence::flatten(
       new UnparsedBlocks\HTMLBlock('<em>Output</em>'),
-      new UnparsedBlocks\FencedCodeBlock(\file_get_contents($out), null),
+      new UnparsedBlocks\FencedCodeBlock(
+        Str\trim(\file_get_contents($out)),
+        null,
+      ),
     );
   }
 }
