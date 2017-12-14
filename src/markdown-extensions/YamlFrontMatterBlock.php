@@ -43,10 +43,21 @@ abstract class YamlFrontMatterBlock extends UnparsedBlocks\Block{
     );
     $context->setYamlMeta($data);
 
+    $messages = Vec\filter_nulls(vec[
+      self::getLibMessage($data),
+      self::getFacebookMessages($data),
+    ]);
+
+    if (C\is_empty($messages)) {
+      return null;
+    }
+    $messages = new UnparsedBlocks\BlockSequence($messages);
+
     return tuple(
       UnparsedBlocks\BlockSequence::flatten(
-        self::getLibMessage($data),
-        self::getFacebookMessages($data),
+        new UnparsedBlocks\HTMLBlock('<div class="apiTopMessages">'),
+        $messages,
+        new UnparsedBlocks\HTMLBlock('</div>'),
       ),
       $rest,
     );
