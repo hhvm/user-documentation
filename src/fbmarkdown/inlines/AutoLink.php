@@ -34,7 +34,7 @@ final class AutoLink extends Inline {
   }
 
   // From GFM spec
-  const string ABSOLUTE_URI_PATTERN = '/^[a-z][a-z0-9:=.-]{1,31}:[^<> ]*$/i';
+  const string ABSOLUTE_URI_PATTERN = '/^[a-z][a-z0-9:=.+-]{1,31}:[^<> ]*$/i';
   const string EMAIL_ADDRESS_PATTERN =
     "/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9]".
     '(?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?'.
