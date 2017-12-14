@@ -216,11 +216,13 @@ class Link extends Inline {
     $slice = Str\slice($string, $offset);
     $destination = consume_link_destination($slice);
 
-    if ($destination === null) {
-      return null;
+    if ($destination !== null) {
+      list($destination, $consumed) = $destination;
+    } else {
+      $destination = '';
+      $consumed = 0;
     }
 
-    list($destination, $consumed) = $destination;
     $offset = StrPos\trim_left($string, $offset + $consumed);
 
     if ($offset === $len) {
