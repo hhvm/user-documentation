@@ -47,12 +47,17 @@ final class RawHTML extends Inline {
     if (!$context->isHTMLEnabled()) {
       return null;
     }
+    if ($string[$offset] !== '<') {
+      return null;
+    }
+
+    $slice = Str\slice($string, $offset);
 
     $matches = [];
     if (
       \preg_match(
         '/^('.self::OPEN_TAG.'|'.self::CLOSING_TAG.'|'.self::DECLARATION.')/i',
-        Str\slice($string, $offset),
+        $slice,
         $matches,
       ) === 1
     ) {
@@ -78,7 +83,6 @@ final class RawHTML extends Inline {
     if ($match === null) {
       return null;
     }
-
     list($comment, $offset) = $match;
     $content = $comment->getContent();
     $text = Str\slice($content, 4, Str\length($content) - 7);
@@ -119,13 +123,15 @@ final class RawHTML extends Inline {
     if (!Str\starts_with($slice, $start)) {
       return null;
     }
+
     $idx = Str\search($in, $end, $offset + Str\length($start));
     if ($idx === null) {
       return null;
     }
+    $idx += Str\length($end);
 
-    $match = Str\slice($in, $offset, $idx);
-    return tuple(new self($match), $idx + Str\length($end));
+    $match = Str\slice($in, $offset, $idx - $offset);
+    return tuple(new self($match), $idx);
   }
 
   private static function consumeCDataSection(
