@@ -336,8 +336,8 @@ class HTMLRenderer extends Renderer<string> {
     $text = $node->getDescription()
       |> Vec\map($$, $child ==> $child->getContentAsPlainText())
       |> Str\join($$, '');
-    $alt = ($text === '')
-      ? '' : ' alt="'.self::escapeAttribute($text).'"';
+    // Needs to always be present for spec tests to pass
+    $alt = ' alt="'.self::escapeAttribute($text).'"';
     return '<img src="'.$src.'"'.$alt.$title.' />';
   }
 
