@@ -49,7 +49,7 @@ abstract class YamlFrontMatterBlock extends UnparsedBlocks\Block{
     ]);
 
     if (C\is_empty($messages)) {
-      return null;
+      return tuple(new UnparsedBlocks\BlockSequence(vec[]), $rest);
     }
     $messages = new UnparsedBlocks\BlockSequence($messages);
 
