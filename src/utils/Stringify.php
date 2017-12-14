@@ -92,16 +92,23 @@ class Stringify {
   ): string {
     $ret = '';
 
+    $name = $func['name'];
+    $last_ns = Str\search_last($name, "\\");
+    if ($last_ns !== null) {
+      $ret .= 'namespace '.Str\slice($name, 0, $last_ns).";\n\n";
+      $name = Str\slice($name, $last_ns + 1);
+    }
+
     $visibility = $func['visibility'] ?? null;
     if ($visibility !== null) {
       $ret .= $visibility.' ';
     }
+
     if ($func['static'] ?? false === true) {
       $ret .= 'static ';
     }
-    $name = $func['name']
-      |> Str\split($$, '\\')
-      |> C\lastx($$);
+
+
     $ret .= 'function '.$name;
 
     $ret .= self::generics($func['generics']);
@@ -112,6 +119,8 @@ class Stringify {
     if ($return_type !== null) {
       $ret .= ': '.Stringify::typehint($return_type);
     }
+
+    $ret .= ';';
 
     return $ret;
   }
