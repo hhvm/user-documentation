@@ -91,7 +91,7 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
     $xpath = new \DOMXPath($dom);
 
     $nodes = $xpath->query(
-        '//a[@class = "autoAPILink" and @href = "'.$dest.'"]'.
+        '//a[@href = "'.$dest.'"]'.
         '/code[text() = "'.$keyword.'"]'
     );
     $this->assertGreaterThanOrEqual(
