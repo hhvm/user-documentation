@@ -15,9 +15,9 @@ use namespace HH\Lib\{C, Str, Vec};
 
 final class AutoLinkExtension extends Inline {
   // From the GFM spec
-  const string DOMAIN = '([a-z0-9_-]+\.)*[a-z0-9-]+\.[a-z0-9]';
+  const string DOMAIN = '([a-z0-9_-]+\.)*[a-z0-9-]+\.[a-z0-9]+';
   const string SCHEME = '(http|https|ftp):\/\/';
-  const string EMAIL = '[-._+]+@';
+  const string EMAIL = '[a-z0-9-._+]+@';
   const string PREFIX = 'www\.|'.self::SCHEME.'|'.self::EMAIL;
 
   const keyset<string> MUST_FOLLOW = keyset[
@@ -59,6 +59,11 @@ final class AutoLinkExtension extends Inline {
     $prefix = $matches['prefix'];
     $domain = $matches['domain'];
 
+    $next = $offset < Str\length($markdown) ? $markdown[$offset] : null;
+    if ($next === '-' || $next === '_') {
+      return null;
+    }
+
     if (Str\lowercase($prefix) === 'www.') {
       list($path, $offset) = self::consumePath($markdown, $offset);
       $text = $prefix.$domain.$path;
@@ -95,7 +100,7 @@ final class AutoLinkExtension extends Inline {
     $matches = [];
     $rest = Str\slice($markdown, $offset);
     \preg_match('/^[^[\]<> ]+/', $rest, $matches);
-    $match = $matches[0];
+    $match = $matches[0] ?? '';
     if ($match === '') {
       return tuple('', $offset);
     }
