@@ -45,9 +45,7 @@ final class AutoLinkifyInline extends Inlines\Link {
     if ($content === null) {
       return null;
     }
-    if (Str\contains($content, ' ')) {
-      return null;
-    }
+
     if (Str\starts_with($content, '$')) {
       return null;
     }
@@ -57,6 +55,10 @@ final class AutoLinkifyInline extends Inlines\Link {
       return null;
     }
     $definition = (string) $matches[0];
+
+    if (Str\contains($definition, ' ')) {
+      return null;
+    }
 
     $block_context = $context->getBlockContext();
     invariant(
