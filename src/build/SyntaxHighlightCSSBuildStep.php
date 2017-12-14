@@ -17,6 +17,13 @@ final class SyntaxHighlightCSSBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nSyntaxHighlightCSS");
+
+    if (AbstractMarkdownRenderBuildStep::isFBMarkdownEnabled()) {
+      Log::v(' [skip: fbgfm]');
+      \file_put_contents(BuildPaths::SYNTAX_HIGHLIGHT_CSS, '');
+      return;
+    }
+
     $css = null;
     $exit_code = null;
     exec(self::PROVIDER, /* & */ $css, /* & */ $exit_code);

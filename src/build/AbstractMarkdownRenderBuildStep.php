@@ -19,6 +19,10 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   const string RENDERER = LocalConfig::ROOT.'/md-render/render.rb';
   const int MAX_JOBS = 20;
 
+  public static function isFBMarkdownEnabled(): bool {
+    return (bool) \getenv('FB_GFM');
+  }
+
   protected function renderFiles(Traversable<string> $files): Vector<string> {
     Log::i("\nRendering markdown to HTML");
     $jobs = dict[];
@@ -29,7 +33,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     }
 
 
-    if ((bool) \getenv('FB_GFM')) {
+    if (self::isFBMarkdownEnabled()) {
       Log::v(' [fbgfm] ');
       $parser_ctx = (new Markdown\ParserContext())
         ->setBlockContext(
