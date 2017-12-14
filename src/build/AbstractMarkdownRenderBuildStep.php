@@ -20,7 +20,8 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   const int MAX_JOBS = 20;
 
   public static function isFBMarkdownEnabled(): bool {
-    return (bool) \getenv('FB_GFM');
+    $env = \getenv('FB_GFM');
+    return $env === 'true' || $env === 1;
   }
 
   protected function renderFiles(Traversable<string> $files): Vector<string> {
