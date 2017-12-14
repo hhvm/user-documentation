@@ -28,9 +28,9 @@ class HTMLBlock extends FencedBlock {
     self::SINGLE_QUOTED_ATTRIBUTE_VALUE.'|'.
     self::DOUBLE_QUOTED_ATTRIBUTE_VALUE.
     ')';
-  const string ATTRIBUTE_VALUE_SPECIFICATION = ' *= *'.self::ATTRIBUTE_VALUE;
+  const string ATTRIBUTE_VALUE_SPECIFICATION = "\\s*=\\s*".self::ATTRIBUTE_VALUE;
   const string ATTRIBUTE =
-  ' +'.self::ATTRIBUTE_NAME.'('.self::ATTRIBUTE_VALUE_SPECIFICATION.')?';
+  "\\s+".self::ATTRIBUTE_NAME.'('.self::ATTRIBUTE_VALUE_SPECIFICATION.')?';
 
   const dict<string, string> PARAGRAPH_INTERRUPTING_PATTERNS = dict[
     // GFM spec states that closing tag doesn't need to match opening tag

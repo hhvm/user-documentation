@@ -33,10 +33,10 @@ final class RawHTML extends Inline {
   const string OPEN_TAG =
     '<'.HTMLBlock::TAG_NAME.
     '('.HTMLBlock::ATTRIBUTE.')*'.
-    ' *'.
+    '\\s*'.
     '\\/?>';
-  const string CLOSING_TAG = '<\\/'.HTMLBlock::TAG_NAME.' *>';
-  const string DECLARATION = '<![A-Z]+ +[^>]+>';
+  const string CLOSING_TAG = '<\\/'.HTMLBlock::TAG_NAME.'\\s*>';
+  const string DECLARATION = '<![A-Z]+\\s+[^>]+>';
 
   <<__Override>>
   public static function consume(
@@ -57,9 +57,10 @@ final class RawHTML extends Inline {
       ) === 1
     ) {
       $match = $matches[0];
+      $offset += Str\length($match);
       return tuple(
         new self($match),
-        $offset + Str\length($match),
+        $offset,
       );
     }
 
