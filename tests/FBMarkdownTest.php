@@ -14,7 +14,7 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
   // Sanity check - make sure it matches the last one in the spec
   const int EXAMPLE_COUNT = 649;
 
-  public function getExamples(): array<(string, string, string, ?string)> {
+  public function getSpecExamples(): array<(string, string, string, ?string)> {
     $spec_file_path = \getenv('GFM_SPEC_FILE');
     if (!is_string($spec_file_path)) {
       $this->markTestSkipped('need GFM_SPEC_FILE env var');
@@ -72,8 +72,8 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
     'Example 312' => 'Out of date named entity table',
   ];
 
-  /** @dataProvider getExamples */
-  public function testExample(
+  /** @dataProvider getSpecExamples */
+  public function testSpecExample(
     string $name,
     string $in,
     string $expected_html,
@@ -83,7 +83,37 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
     if ($blacklist !== null) {
       $this->markTestSkipped($blacklist);
     }
+    $this->assertExampleMatches($name, $in, $expected_html, $extension);
+  }
 
+  public function getManualExamples(
+  ): array<(string, string)> {
+    return [
+      tuple("- foo\n\n", "<ul>\n<li>foo</li>\n</ul>\n"),
+      tuple("- foo\n\n\n", "<ul>\n<li>foo</li>\n</ul>\n"),
+    ];
+  }
+
+  /** @dataProvider getManualExamples */
+  public function testManualExample(
+    string $in,
+    string $expected_html,
+  ): void {
+    $this->assertExampleMatches(
+      'unnamed',
+      $in,
+      $expected_html,
+      null,
+    );
+  }
+
+
+  private function assertExampleMatches(
+    string $name,
+    string $in,
+    string $expected_html,
+    ?string $extension,
+  ): void {
     $parser_ctx = (new ParserContext())
       ->enableHTML_UNSAFE()
       ->disableExtensions();
@@ -108,4 +138,5 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
       $in,
     );
   }
+
 }

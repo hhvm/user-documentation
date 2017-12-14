@@ -83,7 +83,9 @@ final class ListOfItems extends ContainerBlock<ListItem> {
       if ($next === null) {
         list($line, $rest) = $lines->getFirstLineAndRest();
         if (Lines::isBlankLine($line)) {
-          $pre_blank = tuple($loose, $nodes, $lines);
+          if ($pre_blank === null) {
+            $pre_blank = tuple($loose, $nodes, $lines);
+          }
           $loose = true;
           $lines = $rest;
           continue;
