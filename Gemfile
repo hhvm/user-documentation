@@ -1,8 +1,11 @@
 source 'https://rubygems.org'
-gem 'html-pipeline', '~> 1.0'
-gem 'github-markdown'
-gem 'pygments.rb'
-gem 'colorize'
+
+group :gfm do
+  gem 'html-pipeline', '~> 1.0'
+  gem 'github-markdown'
+  gem 'pygments.rb'
+  gem 'colorize'
+end
 
 group :sass do
   gem 'sass', '3.4.19'
