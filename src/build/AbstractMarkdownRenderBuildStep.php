@@ -36,49 +36,31 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
     if (self::isFBMarkdownEnabled()) {
       Log::v(' [fbgfm] ');
-      $parser_ctx = (new Markdown\ParserContext())
-        ->setBlockContext(
-          (new MarkdownExt\BlockContext())
-            ->prependBlockTypes(
-              MarkdownExt\YamlFrontMatterBlock::class,
-              MarkdownExt\ExamplesIncludeBlock::class,
-              MarkdownExt\IncludeGeneratedMarkdownBlock::class,
-            )
-        )
-        ->enableHTML_UNSAFE();
-      $parser_ctx->getInlineContext()->prependInlineTypes(
-        MarkdownExt\AutoLinkifyInline::class,
-      );
-      $render_ctx = (new Markdown\RenderContext())
-        ->appendFilters(
-          new MarkdownExt\HeadingAnchorsFilter(),
-          new MarkdownExt\VersionedImagesFilter(),
-          new MarkdownExt\InternalMarkdownLinksFilter(),
-          new MarkdownExt\PrettyCodeBlocksFilter(),
-        );
-
-      $files = $jobs;
-      foreach ($jobs as $in => $out) {
-        $parser_ctx
-          ->resetFileData()
-          ->setFilePath($in);
-        $doc = Markdown\parse($parser_ctx, \file_get_contents($in));
-        invariant($doc !== null, 'transform should not null the doc');
-        $html = (new MarkdownExt\HTMLRenderer($render_ctx))->render($doc);
-        \file_put_contents(
-          $out,
-          '<!-- fbgfm -->'.
-          '<script>hljs.initHighlightingOnLoad();</script>'.
-          $html,
-        );
-        Log::v('.');
-      }
+      $files = $this->renderFilesWithFBMarkdown($jobs);
     } else {
       Log::v(' [ruby] ');
       $files = $this->renderFilesWithRuby($jobs);
     }
 
     return new Vector($files);
+  }
+
+  protected function renderFilesWithFBMarkdown(
+    dict<string, string> $files,
+  ): vec<string> {
+    $renderer = new MarkdownRenderer();
+    foreach ($files as $in => $out) {
+      $md = \file_get_contents($in);
+      $html = $renderer->renderMarkdownToHTML($in, $md);
+      \file_put_contents(
+        $out,
+        '<!-- fbgfm -->'.
+        '<script>hljs.initHighlightingOnLoad();</script>'.
+        $html,
+      );
+      Log::v('.');
+    }
+    return vec($files);
   }
 
   protected function renderFilesWithRuby(
