@@ -38,10 +38,6 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
     });
   }
 
-  private function getHHVMPath(): string {
-    return PHP_BINARY;
-  }
-
   <<__Memoize>>
   private function getHHServerPath(): string {
     $hh_server = dirname(PHP_BINARY).'/hh_server';
@@ -54,6 +50,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
   private function runExamples(Vector<string> $extra_args): void {
     $command = Vector {
       PHP_BINARY,
+      '-d', 'hhvm.hack.lang.look_for_typechecker=0',
       self::TEST_RUNNER,
       '-m', 'interp',
     };
@@ -65,7 +62,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
     $output = null;
 
     $env = Vector {
-      'HHVM_BIN='.escapeshellarg($this->getHHVMPath()),
+      'HHVM_BIN='.escapeshellarg(PHP_BINARY),
       'HH_SERVER_BIN='.escapeshellarg($this->getHHServerPath()),
     };
 
