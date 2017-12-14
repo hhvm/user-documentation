@@ -21,7 +21,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
 
   public static function isFBMarkdownEnabled(): bool {
     $env = \getenv('FB_GFM');
-    return $env === 'true' || $env === '1';
+    return $env !== 'false' && $env !== '0';
   }
 
   protected function renderFiles(Traversable<string> $files): Vector<string> {
