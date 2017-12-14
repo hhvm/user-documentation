@@ -53,6 +53,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
           new MarkdownExt\HeadingAnchorsFilter(),
           new MarkdownExt\VersionedImagesFilter(),
           new MarkdownExt\InternalMarkdownLinksFilter(),
+          new MarkdownExt\PrettyCodeBlocksFilter(),
         );
 
       $files = $jobs;
