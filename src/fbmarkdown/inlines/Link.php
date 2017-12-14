@@ -192,7 +192,7 @@ class Link extends Inline {
 
       return tuple(
         new self($text, $def->getDestination(), $def->getTitle()),
-        $offset,
+        $offset + 1,
       );
     }
 
