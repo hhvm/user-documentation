@@ -12,7 +12,7 @@
 namespace Facebook\Markdown\Inlines;
 
 use type Facebook\Markdown\UnparsedBlocks\Context as BlockContext;
-use namespace HH\Lib\{Keyset, Str};
+use namespace HH\Lib\{C, Keyset, Str};
 
 class Context {
   const keyset<classname<Inline>> ALL_INLINE_TYPES = keyset[
@@ -69,10 +69,32 @@ class Context {
     return $this;
   }
 
+  public function disableExtensions(): this {
+    $this->disabledInlineTypes = $this->inlineTypes
+      |> Keyset\filter($$, $class ==> Str\ends_with($class, 'Extension'))
+      |> Keyset\union($$, $this->disabledInlineTypes);
+    return $this;
+  }
+
+  public function enableNamedExtension(string $name): this {
+    $this->disabledInlineTypes = Keyset\filter(
+      $this->disabledInlineTypes,
+      $class ==> !Str\ends_with(
+        Str\lowercase($class),
+        "\\".$name.'extension',
+      ),
+    );
+    return $this;
+  }
+
   private keyset<classname<Inline>> $inlineTypes = self::ALL_INLINE_TYPES;
+  private keyset<classname<Inline>> $disabledInlineTypes = keyset[];
 
   public function getInlineTypes(): keyset<classname<Inline>> {
-    return $this->inlineTypes;
+    return Keyset\filter(
+      $this->inlineTypes,
+      $type ==> !C\contains($this->disabledInlineTypes, $type),
+    );
   }
 
   public function prependInlineTypes(classname<Inline> ...$types): this {

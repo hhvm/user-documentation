@@ -29,6 +29,18 @@ final class ParserContext {
     return $this;
   }
 
+  public function disableExtensions(): this {
+    $this->blockContext->disableExtensions();
+    $this->inlineContext->disableExtensions();
+    return $this;
+  }
+
+  public function enableNamedExtension(string $name): this {
+    $this->blockContext->enableNamedExtension($name);
+    $this->inlineContext->enableNamedExtension($name);
+    return $this;
+  }
+
   public function setFilePath(string $file): this {
     $this->blockContext->setFilePath($file);
     return $this;

@@ -11,7 +11,7 @@
 
 namespace Facebook\Markdown\UnparsedBlocks;
 
-use namespace HH\Lib\{C, Keyset, Vec};
+use namespace HH\Lib\{C, Keyset, Str, Vec};
 
 class Context {
   const keyset<classname<Block>> ALL_BLOCK_TYPES = keyset[
@@ -30,6 +30,7 @@ class Context {
   ];
 
   private keyset<classname<Block>> $blockTypes;
+  private keyset<classname<Block>> $disabledBlockTypes = keyset[];
 
   public function __construct() {
     $this->blockTypes = self::ALL_BLOCK_TYPES;
@@ -39,6 +40,24 @@ class Context {
     $this->file = null;
     $this->linkReferenceDefinitions = dict[];
     $this->stacks = dict[];
+    return $this;
+  }
+
+  public function disableExtensions(): this {
+    $this->disabledBlockTypes = $this->blockTypes
+      |> Keyset\filter($$, $class ==> Str\ends_with($class, 'Extension'))
+      |> Keyset\union($$, $this->disabledBlockTypes);
+    return $this;
+  }
+
+  public function enableNamedExtension(string $name): this {
+    $this->disabledBlockTypes = Keyset\filter(
+      $this->disabledBlockTypes,
+      $class ==> !Str\ends_with(
+        Str\lowercase($class),
+        "\\".$name.'extension',
+      ),
+    );
     return $this;
   }
 
@@ -89,7 +108,10 @@ class Context {
   }
 
   public function getBlockTypes(): keyset<classname<Block>> {
-    return $this->blockTypes;
+    return Keyset\filter(
+      $this->blockTypes,
+      $type ==> !C\contains($this->disabledBlockTypes, $type),
+    );
   }
 
   private dict<string, vec<mixed>> $stacks = dict[];

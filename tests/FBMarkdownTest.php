@@ -14,7 +14,7 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
   // Sanity check - make sure it matches the last one in the spec
   const int EXAMPLE_COUNT = 649;
 
-  public function getExamples(): array<(string, string, string)> {
+  public function getExamples(): array<(string, string, string, ?string)> {
     $spec_file_path = \getenv('GFM_SPEC_FILE');
     if (!is_string($spec_file_path)) {
       $this->markTestSkipped('need GFM_SPEC_FILE env var');
@@ -29,22 +29,23 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
         break;
       }
       $start += Str\length(self::EXAMPLE_START);
-      $start = Str\search($text, "\n", $start);
-      invariant($start !== null, "No newline after start marker");
+      $newline = Str\search($text, "\n", $start);
+      invariant($newline !== null, "No newline after start marker");
+      $extension = Str\trim(Str\slice($text, $start, $newline - $start));
+      $start = $newline;
       $end = Str\search($text, self::EXAMPLE_END, $start);
       invariant($end !== null, 'Found start without end at %d', $offset);
 
-      $raw_examples[] = Str\slice(
-        $text,
-        $start + 1,
-        ($end - $start),
+      $raw_examples[] = tuple(
+        Str\slice($text, $start + 1, ($end - $start)),
+        $extension === '' ? null : $extension,
       );
       $offset = $end + Str\length(self::EXAMPLE_END);
     }
 
     $examples = [];
 
-    foreach ($raw_examples as $example) {
+    foreach ($raw_examples as list($example, $extension)) {
       $parts = Str\split($example, "\n.\n");
       $count = C\count($parts);
       invariant(
@@ -57,6 +58,7 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
         'Example '.(C\count($examples) + 1),
         Str\replace($parts[0], self::TAB_REPLACEMENT, "\t"),
         $parts[1] ?? '',
+        $extension,
       );
     }
     expect(C\count($examples))->toBeSame(
@@ -75,13 +77,20 @@ class FBMarkdownTest extends \PHPUnit_Framework_TestCase {
     string $name,
     string $in,
     string $expected_html,
+    ?string $extension,
   ): void {
     $blacklist = self::BLACKLIST[$name] ?? null;
     if ($blacklist !== null) {
       $this->markTestSkipped($blacklist);
     }
 
-    $parser_ctx = (new ParserContext())->enableHTML_UNSAFE();
+    $parser_ctx = (new ParserContext())
+      ->enableHTML_UNSAFE()
+      ->disableExtensions();
+    if ($extension !== null) {
+      $parser_ctx->enableNamedExtension($extension);
+    }
+    
     $ast = parse($parser_ctx, $in);
     $render_ctx = new RenderContext();
     $actual_html = (new HTMLRenderer($render_ctx))->render($ast);
