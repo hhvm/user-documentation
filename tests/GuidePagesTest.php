@@ -72,7 +72,7 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
     $this->assertSame(200, $response->getStatusCode());
 
     $body = (string) $response->getBody();
-    $this->assertContains('highlight highlight-php', $body);
+    $this->assertContains('highlight', $body);
     // Namespace declaration
     $this->assertContains('Hack\UserDocumentation\Async\Intro\Examples', $body);
   }
