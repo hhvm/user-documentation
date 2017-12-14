@@ -119,9 +119,16 @@ EOF;
             <link
               href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700"
               rel="stylesheet"
-              type="text/css"
             />
             {$google_analytics}
+            <link
+              href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"
+              rel="stylesheet"
+              type="text/css"
+            />
+            <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+            />
           </head>
           <body class={$body_class}>
             {$this->getHeader()}

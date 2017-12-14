@@ -40,7 +40,7 @@ final class PrettyCodeBlocksFilter extends RenderFilter {
     }
 
     return vec[
-      new Blocks\HTMLBlock('<div class="highlight">'),
+      new Blocks\HTMLBlock('<div class="highlight fbgfm">'),
       new PrettyCodeBlock($info_string, $node->getCode()),
       new Blocks\HTMLBlock('</div>'),
     ];

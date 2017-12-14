@@ -64,7 +64,12 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
         $doc = Markdown\parse($parser_ctx, \file_get_contents($in));
         invariant($doc !== null, 'transform should not null the doc');
         $html = (new MarkdownExt\HTMLRenderer($render_ctx))->render($doc);
-        \file_put_contents($out, '<!-- fbgfm -->'.$html);
+        \file_put_contents(
+          $out,
+          '<!-- fbgfm -->'.
+          '<script>hljs.initHighlightingOnLoad();</script>'.
+          $html,
+        );
         Log::v('.');
       }
     } else {

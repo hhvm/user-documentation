@@ -5,6 +5,10 @@
   overflow-x: auto;
   padding: 10px;
   margin: 25px 0;
+
+  &.fbgfm {
+    padding: 0px;
+  }
 }
 
 p + .highlight {
