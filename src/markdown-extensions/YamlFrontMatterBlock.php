@@ -94,7 +94,7 @@ abstract class YamlFrontMatterBlock extends UnparsedBlocks\Block{
         "**Facebook Engineer?**\n\n".
         '<p>'.$message."</p>\n".
         '<!-- '.
-        'Not a Facebook engineer... yet? https\://www.facebook.com/careers/'.
+        'Not a Facebook engineer... yet? https://www.facebook.com/careers/'.
         " -->\n".
         '</div>',
       ),
