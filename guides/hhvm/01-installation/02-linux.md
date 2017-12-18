@@ -82,8 +82,13 @@ sudo apt-get install hhvm-dev-nightly
 
 ## Mirrors
 
-There are a variety of volunteered owned mirrors to get the packages, if the default one shown in these instructions are slow. Just change the prefix in your `/etc/apt/sources.list.d/hhvm.list` (still leave the subdirectory of your distro).
+dl.hhvm.com is fronted by a global CDN, so should be fast for all users. If you wish to maintain a local mirror, you can use AWS CLI utilities to sync:
 
-* http://dl.hhvm.com/ (US)
-* http://mirror.mephi.ru/hhvm/ (RU)
-* https://hhvm.bauerj.eu/ (DE)
+```
+aws s3 sync \
+  --no-sign-request \
+  --region us-west-2 \
+  s3://hhvm-downloads/ \
+  ./localpath/ \
+  --exclude '*index.html'
+```
