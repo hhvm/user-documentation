@@ -42,6 +42,12 @@ While the XHP syntax is part of Hack, a large part of the implementation is in a
 }
 ```
 
+Run Composer commands using HHVM like so:
+
+```
+$ hhvm $(which composer) install;
+```
+
 This includes the base classes and interfaces, and definitions of standard HTML elements.
 
 ## Why use XHP?
