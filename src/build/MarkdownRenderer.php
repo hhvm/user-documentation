@@ -51,7 +51,8 @@ final class MarkdownRenderer {
     $parser_ctx = $this->getParserContext()
       ->resetFileData()
       ->setFilePath($file);
-    $render_ctx = $this->getRenderContext();
+    $render_ctx = $this->getRenderContext()
+      ->resetFileData();
 
     $doc = Markdown\parse($parser_ctx, $markdown);
     return (new MarkdownExt\HTMLRenderer($render_ctx))->render($doc);
