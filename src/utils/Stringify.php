@@ -51,8 +51,8 @@ class Stringify {
 
     $s = '';
     $types = $info['types'] ?? null;
-    if ($types !== null) {
-      $s .= Str\join($types, '|');
+    if ($types !== null && !C\is_empty($types)) {
+      $s .= Str\join($types, '|'). ' ';
     } else {
       $th = $param['typehint'];
       if ($th !== null) {
