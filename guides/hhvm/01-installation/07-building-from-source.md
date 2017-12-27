@@ -1,33 +1,23 @@
 Building from source is advisable generally when you need features that exist in our source that are not in a [package](http://beta.docs.hhvm.com/hhvm/installation/introduction#prebuilt-packages). Otherwise, installing from a package is the easiest and most stable way to get up and running.
 
-You must be running a 64-bit OS to compile & install HHVM. Here are the supported distributions for compiling from source:
+## Requirements
 
-* [Ubuntu 16.04](#ubuntu-16.04-xenial)
-* [Ubuntu 16.10](#ubuntu-16.10-yakkety)
-* [Debian 8](#debian-8-jessie)
+ - An `x86_64` system
+ - GCC 5 or above
+ - Additional build-time dependencies; these are listed for various distributions in [our packaging repository](https://github.com/hhvm/packaging/) - for example,
+   [Debian Jessie's `control` file](https://github.com/hhvm/packaging/blob/master/debian-8-jessie/debian/control) contains the build dependency list. If you are not
+   on a distribution we currently target, use Jessie as a starting point: the packages are likely to be similary named.
 
-## Ubuntu 16.04 Trusty
+### GCC 5
 
-> **Please Note:** You must be running a 64-bit OS to compile & install HHVM.
->
-### Packages Installation
+If your system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build]](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
+several of our binary packages.
 
-Using sudo or as root user: (it is recommended that you run `sudo apt-get update` and `sudo apt-get upgrade` first, or you may receive errors)
+HHVM might build with GCC 4.9, however:
+ - we are no longer testing this
+ - HHVM is [known to trigger optimization bugs in GCC 4.9](https://github.com/facebook/hhvm/issues/8011)
 
-```
-sudo apt-get install autoconf automake binutils-dev bison build-essential cmake g++ gawk git \
-  libboost-dev libboost-filesystem-dev libboost-program-options-dev libboost-regex-dev \
-  libboost-system-dev libboost-thread-dev libboost-context-dev libbz2-dev libc-client-dev libldap2-dev \
-  libc-client2007e-dev libcap-dev libcurl4-openssl-dev libdwarf-dev libelf-dev \
-  libexpat-dev libgd2-xpm-dev libgoogle-glog-dev libgoogle-perftools-dev libicu-dev \
-  libjemalloc-dev libmcrypt-dev libmemcached-dev libmysqlclient-dev libncurses-dev \
-  libonig-dev libpcre3-dev libreadline-dev libtbb-dev libtool libxml2-dev zlib1g-dev \
-  libevent-dev libmagickwand-dev libinotifytools0-dev libiconv-hook-dev libedit-dev \
-  libiberty-dev libxslt1-dev ocaml-native-compilers libsqlite3-dev libyaml-dev libgmp3-dev \
-  gperf libkrb5-dev libnotify-dev libpq-dev
-```
-
-### Downloading the HHVM source-code
+## Downloading the HHVM source-code
 
 ```
 git clone git://github.com/facebook/hhvm.git --depth=1
@@ -35,7 +25,7 @@ cd hhvm
 git submodule update --init --recursive
 ```
 
-### Building HHVM
+## Building HHVM
 
 Please ensure that your machine has more than 1GB of RAM. Expect a long compilation time if you are compiling on a virtual machine with one virtual core.
 
@@ -45,17 +35,23 @@ make -j [number_of_processor_cores] # eg. make -j 4
 sudo make install
 ```
 
-### Running programs
+If you have build your own GCC, you will need to pass additional options to cmake:
+
+```
+-DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++ -DSTATIC_CXX_LIB=On
+```
+
+## Running programs
 
 The installed hhvm binary can be found in `/usr/local/bin`.
 
-### Errors
+## Errors
 
 If any errors occur, you may have to remove the `CMakeCache.txt` file in the checkout.
 
 If your failure was on the `make` command, try to correct the error and run `make` again, it should restart from the point it stops. If the error persists, try to remove as explained above.
 
-### Running Tests
+## Running Tests
 
 If you want to run the regression tests, you will first need to install some locales.  These locales should be sufficient, although may be more than are actually needed:
 
@@ -79,64 +75,3 @@ There are 2 families of regression tests. There are about 5000 tests in all. All
     test/run slow
   popd
 ```
-
-## Ubuntu 16.10 Yakkety
-
-Same instructions as [Ubuntu 16.04](#ubuntu-14.04-trusty)
-
-## Ubuntu 17.04 Zesty
-
-Same instructions as [Ubuntu 16.04](#ubuntu-14.04-trusty)
-
-## Debian 8 Jessie
-
-### Packages installation
-
-```
-apt-get install git-core cmake gawk libmysqlclient-dev \
-  libxml2-dev libmcrypt-dev libicu-dev openssl build-essential binutils-dev \
-  libcap-dev zlib1g-dev libtbb-dev libonig-dev libpcre3-dev \
-  autoconf libtool libcurl4-openssl-dev wget memcached \
-  libreadline-dev libncurses5-dev libmemcached-dev libbz2-dev \
-  libc-client2007e-dev php5-mcrypt php5-imagick libgoogle-perftools-dev \
-  libcloog-ppl-dev libelf-dev libdwarf-dev libunwind8-dev subversion \
-  libtbb2 g++-4.8 gcc-4.8 libjemalloc-dev \
-  libc6-dev libmpfr4 libgcc1 binutils \
-  libc6 libc-dev-bin libc-bin libgomp1 \
-  libstdc++-4.8-dev libstdc++6 \
-  libarchive13 cmake-data libacl1 libattr1 \
-  g++ cpp gcc make libboost-thread1.55.0 \
-  libboost-thread-dev libgd2-xpm-dev \
-  pkg-config libboost-system1.55-dev libboost-context1.55-dev \
-  libboost-program-options1.55-dev libboost-filesystem1.55-dev libboost-regex1.55-dev \
-  libmagickwand-dev libiberty-dev libevent-dev libxslt-dev libgoogle-glog-dev \
-  automake libldap2-dev libkrb5-dev libyaml-dev gperf ocaml-native-compilers libpq-dev
-```
-
-### Getting HHVM source-code
-
-```
-mkdir dev
-cd dev
-git clone git://github.com/facebook/hhvm.git --depth=1
-export CMAKE_PREFIX_PATH=`pwd`
-```
-
-### Building HHVM
-
-```
-cd hhvm
-git submodule update --init --recursive
-cmake .
-make
-```
-
-### Running programs
-
-The hhvm binary can be found in `hphp/hhvm/hhvm`.
-
-### Errors
-
-If any errors occur, it may be required to remove the `CMakeCache.txt` directory in the checkout.
-
-If your failure was on the `make` command, try to correct the error and run `make` again, it should restart from the point it stops. If don't, try to remove as explained above.
