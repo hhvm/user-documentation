@@ -62,11 +62,14 @@ brew sh
 Inside this shell:
 
 ```
-# Several of our dependencies are not linked into standard places.
+# Several of our dependencies are not linked into standard places...
+
+# ... some of the `brew sh` wrappers will remove CFLAGS/CXXFLAGS that reference undeclared dependencies
+export HOMEBREW_DEPENDENCIES="$(brew deps --include-build hhvm | paste -s -d , -)"
 # ... some of those use pkg-config, and we need to tell it where to look:
-export PKG_CONFIG_PATH="$(brew deps --include-build hhvm | xargs brew --prefix | sed 's,$,/lib/pkgconfig,' | paste -s -d : -)"
+export PKG_CONFIG_PATH="$(echo "$HOMEBREW_DEPENDENCIES" | tr ',' "\n" | xargs brew --prefix | sed 's,$,/lib/pkgconfig,' | paste -s -d : -)"
 # ... for others, CMake directly looks for specific files, and we need to tell it where to look too:
-export CMAKE_PREFIX_PATH="$(brew deps --include-build hhvm | xargs brew --prefix | paste -s -d : -)"
+export CMAKE_PREFIX_PATH="$(echo "$HOMEBREW_DEPENDENCIES" | tr ',' "\n" | xargs brew --prefix | paste -s -d : -)"
 
 # Configure.
 # - If you install MySQL server from Homebrew, it uses /tmp/mysql.sock as the unix socket by default
