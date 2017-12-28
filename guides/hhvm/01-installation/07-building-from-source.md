@@ -10,7 +10,7 @@ Building from source is advisable generally when you need features that exist in
 
 ### GCC 5
 
-If your system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build]](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
+If your system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
 several of our binary packages.
 
 HHVM might build with GCC 4.9, however:
