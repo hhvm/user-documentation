@@ -13,37 +13,39 @@ Here are the supported distributions:
 * Debian 8 Jessie
 * Debian 9 Stretch
 
+These instructions require root; use `su -` or `sudo -i` to get a root shell first.
+
 ## Ubuntu
 
 ```
-sudo apt-get install software-properties-common apt-transport-https
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+apt-get install software-properties-common apt-transport-https
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-sudo add-apt-repository https://dl.hhvm.com/ubuntu
-sudo apt-get update
-sudo apt-get install hhvm
+add-apt-repository https://dl.hhvm.com/ubuntu
+apt-get update
+apt-get install hhvm
 ```
 
 ## Debian 8 Jessie, Debian 9 Stretch
 
 ```
-sudo apt-get install -y apt-transport-https software-properties-common
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+apt-get install -y apt-transport-https software-properties-common
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-sudo add-apt-repository https://dl.hhvm.com/debian
-sudo apt-get update
-sudo apt-get install hhvm
+add-apt-repository https://dl.hhvm.com/debian
+apt-get update
+apt-get install hhvm
 ```
 
 ## Debian 7 Wheezy
 
 ```
-sudo apt-get install -y apt-transport-https software-properties-common
-sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+apt-get install -y apt-transport-https software-properties-common
+apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
-echo deb https://dl.hhvm.com/debian wheezy main | sudo tee /etc/apt/sources.list.d/hhvm.list
-sudo apt-get update
-sudo apt-get install hhvm
+echo deb https://dl.hhvm.com/debian wheezy main > /etc/apt/sources.list.d/hhvm.list
+apt-get update
+apt-get install hhvm
 ```
 
 ## Obtaining LTS Releases
@@ -64,19 +66,19 @@ The above commands all install the standard `hhvm` package, which is the stable,
 
 ```
 # Stable debug build that is suitable for debuggers like gdb
-sudo apt-get install hhvm-dbg
+apt-get install hhvm-dbg
 
 # Stable developer package that contains the headers so you can create extensions, etc.
-sudo apt-get install hhvm-dev
+apt-get install hhvm-dev
 
 # Nightly build (Living on the edge, rebuilt everyday, possibly unstable)
-sudo apt-get install hhvm-nightly
+apt-get install hhvm-nightly
 
 # Nightly debug build
-sudo apt-get install hhvm-nightly-dbg
+apt-get install hhvm-nightly-dbg
 
 # Nightly developer build
-sudo apt-get install hhvm-dev-nightly
+apt-get install hhvm-dev-nightly
 
 ```
 
