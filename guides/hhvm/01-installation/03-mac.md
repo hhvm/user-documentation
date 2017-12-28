@@ -16,3 +16,5 @@ brew install hhvm-preview
 ```
 
 We hope to replace `hhvm-preview` with nightly builds in the future.
+
+You can also [manually build from source](building-from-source#building-hhvm__macos).

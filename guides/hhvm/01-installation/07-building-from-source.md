@@ -36,10 +36,47 @@ make -j [number_of_processor_cores] # eg. make -j 4
 sudo make install
 ```
 
+### Custom GCC
+
 If you have built your own GCC, you will need to pass additional options to cmake:
 
 ```
 -DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++ -DSTATIC_CXX_LIB=On
+```
+
+### MacOS
+
+It's fairly common in some environments to work around `opendirectoryd` issues by scheduling a cronjob to kill it; if you're doing this, disable it before building HHVM, or you
+are likely to get misleading errors such as `/bin/sh: /bin/sh: cannot execute binary file` in the middle of the build.
+
+Even when building HHVM from source, it's easiest to use [brew](https://brew.sh) to install dependencies and manage the build environment:
+
+```
+brew tap hhvm/hhvm
+brew deps --include-build hhvm | xargs brew install
+brew sh
+```
+
+`brew sh` will drop you into a bash shell in a normalized build environment - e.g. `PATH` will be set to include common build tools.
+
+Inside this shell:
+
+```
+# Several of our dependencies are not linked into standard places.
+# ... some of those use pkg-config, and we need to tell it where to look:
+export PKG_CONFIG_PATH="$(brew deps --include-build hhvm | xargs brew --prefix | sed 's,$,/lib/pkgconfig,' | paste -s -d : -)"
+# ... for others, CMake directly looks for specific files, and we need to tell it where to look too:
+export CMAKE_PREFIX_PATH="$(brew deps --include-build hhvm | xargs brew --prefix | paste -s -d : -)"
+
+# Configure.
+# - If you install MySQL server from Homebrew, it uses /tmp/mysql.sock as the unix socket by default
+# - disable extensions that aren't supported on MacOS
+cmake . \
+  -DMYSQL_UNIX_SOCK_ADDR=/tmp/mysql.sock \
+  -DENABLE_MCROUTER=OFF \
+  -DENABLE_EXTENSION_MCROUTER=OFF \
+  -DENABLE_EXTENSION_IMAP=OFF
+make # you probably want `make -j<number of cores`, e.g. `make -j12`
 ```
 
 ## Running programs
