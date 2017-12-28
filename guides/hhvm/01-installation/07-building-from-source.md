@@ -4,6 +4,7 @@ Building from source is advisable generally when you need features that exist in
 
  - An `x86_64` system
  - GCC 5 or above
+ - Several GB of RAM
  - Additional build-time dependencies; these are listed for various distributions in [our packaging repository](https://github.com/hhvm/packaging/) - for example,
    [Debian Jessie's `control` file](https://github.com/hhvm/packaging/blob/master/debian-8-jessie/debian/control) contains the build dependency list. If you are not
    on a distribution we currently target, use Jessie as a starting point: the packages are likely to be similary named.
@@ -27,7 +28,7 @@ git submodule update --init --recursive
 
 ## Building HHVM
 
-Please ensure that your machine has more than 1GB of RAM. Expect a long compilation time if you are compiling on a virtual machine with one virtual core.
+This will take a *long* time.
 
 ```
 cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock .
@@ -35,7 +36,7 @@ make -j [number_of_processor_cores] # eg. make -j 4
 sudo make install
 ```
 
-If you have build your own GCC, you will need to pass additional options to cmake:
+If you have built your own GCC, you will need to pass additional options to cmake:
 
 ```
 -DCMAKE_C_COMPILER=/path/to/gcc -DCMAKE_CXX_COMPILER=/path/to/g++ -DSTATIC_CXX_LIB=On
