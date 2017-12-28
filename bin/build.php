@@ -51,7 +51,6 @@ function build_site(?Traversable<string> $filters = null): void {
     RoutingCodegenBuildStep::class,
 
     // Static Resources
-    SyntaxHighlightCSSBuildStep::class,
     SASSBuildStep::class,
     StaticResourceMapBuildStep::class,
 

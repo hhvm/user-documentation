@@ -10,7 +10,7 @@ curl https://getcomposer.org/installer | hhvm -d hhvm.jit=0 --php -- /dev/stdin 
 cd /var/source
 git submodule update --init
 hhvm -d hhvm.jit=0 /usr/local/bin/composer install
-bundle install --without=gfm --path vendor-rb
+bundle install --path vendor-rb
 
 hh_server --check $(pwd)
 hhvm bin/build.php

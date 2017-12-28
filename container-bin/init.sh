@@ -15,9 +15,6 @@ fi
 # use pygments, but this is a handy way to make sure all the dependencies are
 # installed.
 APT_DEPS="ruby bundler"
-if ! $FB_GFM; then
-  APT_DEPS="{$APT_DEPS} build-essential zlib1g-dev python-pygments"
-fi
 
 # Install Ruby and Bundler (Ruby package manager)
 apt-get install -y $APT_DEPS
@@ -45,13 +42,7 @@ cp hhvm.${DOCKER_BUILD_ENV}.ini /etc/hhvm/site.ini
 touch /opt/composer/.hhconfig
 hhvm /opt/composer/composer.phar install
 hh_server --check $(pwd) # fail early
-if $FB_GFM; then
-  bundle --path vendor-rb/ --without=gfm
-else
-  bundle --path vendor-rb/
-fi
-
-export FB_GFM
+bundle --path vendor-rb/
 
 echo "** Run build"
 hhvm bin/build.php
@@ -72,7 +63,7 @@ rm -rf build/scratch
 echo "** Cleaning up..."
 pkill hh_server
 rm -rf /root/.composer
-rm -rf /var/www/{.git,api-sources,api-examples,guides,md-render} /tmp/hh_server
+rm -rf /var/www/{.git,api-sources,api-examples,guides} /tmp/hh_server
 apt-get remove -y $APT_DEPS
 SUDO_FORCE_REMOVE=yes apt-get autoremove -y
 apt-get clean

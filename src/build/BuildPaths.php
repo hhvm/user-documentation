@@ -56,8 +56,6 @@ abstract final class BuildPaths {
     = self::FINAL_DIR.'/php-ini-support-in-hhvm.json';
 
   const string CORE_CSS = self::FINAL_DIR.'/main.css';
-  const string SYNTAX_HIGHLIGHT_CSS =
-    self::SCRATCH_DIR.'/syntax-highlighting.css';
   const string SITE_MAP = self::FINAL_DIR.'/sitemap.txt';
 
   const string STATIC_RESOURCES_MAP_JSON =

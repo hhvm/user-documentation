@@ -3,7 +3,6 @@ Dockerfile
 # They're all in the Docker image anyway :) let's save some space
 bin/
 guides/
-md-render/
 public/
 src/
 

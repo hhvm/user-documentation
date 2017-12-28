@@ -16,13 +16,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   abstract const string SOURCE_ROOT;
   abstract const string BUILD_ROOT;
 
-  const string RENDERER = LocalConfig::ROOT.'/md-render/render.rb';
   const int MAX_JOBS = 20;
-
-  public static function isFBMarkdownEnabled(): bool {
-    $env = \getenv('FB_GFM');
-    return $env !== 'false' && $env !== '0';
-  }
 
   protected function renderFiles(Traversable<string> $files): Vector<string> {
     Log::i("\nRendering markdown to HTML");
@@ -34,13 +28,8 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     }
 
 
-    if (self::isFBMarkdownEnabled()) {
-      Log::v(' [fbgfm] ');
-      $files = $this->renderFilesWithFBMarkdown($jobs);
-    } else {
-      Log::v(' [ruby] ');
-      $files = $this->renderFilesWithRuby($jobs);
-    }
+    Log::v(' [fbgfm] ');
+    $files = $this->renderFilesWithFBMarkdown($jobs);
 
     return new Vector($files);
   }
@@ -61,52 +50,6 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
       Log::v('.');
     }
     return vec($files);
-  }
-
-  protected function renderFilesWithRuby(
-    dict<string, string> $files,
-  ): vec<string> {
-    $ret = vec[];
-    $pipes = [];
-    $renderer = proc_open(
-      self::RENDERER,
-      [['pipe', 'r'], ['pipe', 'w']],
-      $pipes,
-      /* cwd = */ dirname(self::RENDERER),
-    );
-    list($stdin, $stdout) = $pipes;
-    stream_set_blocking($stdout, true);
-
-    $in_progress = 0;
-    foreach ($files as $input => $output) {
-      if ($in_progress == self::MAX_JOBS) {
-        $result = $this->parseSingleRenderResult(trim(fgets($stdout)));
-        --$in_progress;
-        if ($result !== null) {
-          $ret[] = $result;
-        }
-      }
-
-      ++$in_progress;
-      fprintf($stdin, "%s -> %s\n", $input, $output);
-      Log::v('+');
-    }
-    fclose($stdin);
-
-    while ($line = trim(fgets($stdout))) {
-      $result = $this->parseSingleRenderResult($line);
-      if ($result !== null) {
-        $ret[] = $result;
-      }
-    }
-
-    $exit_code = proc_close($renderer);
-    invariant(
-      $exit_code === 0,
-      'Markdown renderer exited with error code %d!',
-      $exit_code,
-    );
-    return $ret;
   }
 
   private function parseSingleRenderResult(string $line): ?string {
