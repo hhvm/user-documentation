@@ -18,6 +18,7 @@ These instructions require root; use `su -` or `sudo -i` to get a root shell fir
 ## Ubuntu
 
 ```
+apt-get update
 apt-get install software-properties-common apt-transport-https
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
@@ -29,6 +30,7 @@ apt-get install hhvm
 ## Debian 8 Jessie, Debian 9 Stretch
 
 ```
+apt-get update
 apt-get install -y apt-transport-https software-properties-common
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
@@ -40,6 +42,7 @@ apt-get install hhvm
 ## Debian 7 Wheezy
 
 ```
+apt-get update
 apt-get install -y apt-transport-https software-properties-common
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
 
