@@ -15,7 +15,7 @@ use namespace Facebook\Markdown\{Inlines, UnparsedBlocks};
 
 use namespace HH\Lib\{C, Str, Vec};
 
-final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
+final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
   const string PATTERN =
     '/^@@ (?<dir>[^@ ]+)'.
     '(?<file>[^@ \\/]+\\.php'.
@@ -23,7 +23,6 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
       '(?:.(hhvm|typechecker).expect[f]?)?'.
     ') @@$/';
 
-  <<__Override>>
   public static function consume(
     UnparsedBlocks\Context $context,
     UnparsedBlocks\Lines $lines,
@@ -70,13 +69,6 @@ final class ExamplesIncludeBlock extends UnparsedBlocks\Block {
       ),
       $rest,
     );
-  }
-
-  <<__Override>>
-  public function withParsedInlines(
-    Inlines\Context $_,
-  ): \Facebook\Markdown\Blocks\Block {
-    invariant_violation('should never be called');
   }
 
   private static function getExampleBlock(string $file): UnparsedBlocks\Block {

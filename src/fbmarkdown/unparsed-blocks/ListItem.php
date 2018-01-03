@@ -15,7 +15,7 @@ use type Facebook\Markdown\Blocks\ListItem as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-class ListItem extends ContainerBlock<Block> {
+class ListItem extends ContainerBlock<Block> implements BlockProducer {
   const string MAX_INDENT_CONTEXT = 'list item max indent';
 
   public function __construct(

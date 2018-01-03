@@ -19,7 +19,7 @@ use function Facebook\Markdown\_Private\{
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class LinkReferenceDefinition extends LeafBlock {
+final class LinkReferenceDefinition extends LeafBlock implements BlockProducer {
   public function __construct(
     private string $label,
     private string $destination,
@@ -50,7 +50,6 @@ final class LinkReferenceDefinition extends LeafBlock {
       |> \preg_replace('/\s+/', ' ', $$);
   }
 
-  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,

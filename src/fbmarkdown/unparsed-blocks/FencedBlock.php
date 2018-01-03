@@ -13,7 +13,7 @@ namespace Facebook\Markdown\UnparsedBlocks;
 
 use namespace HH\Lib\{C, Vec};
 
-abstract class FencedBlock extends LeafBlock {
+abstract class FencedBlock extends LeafBlock implements BlockProducer {
   protected abstract static function createFromLines(
     vec<string> $lines,
     int $indentation_of_first,
@@ -26,7 +26,6 @@ abstract class FencedBlock extends LeafBlock {
     string $first,
   ): ?string;
 
-  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,

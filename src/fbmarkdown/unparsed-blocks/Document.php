@@ -15,7 +15,7 @@ use type Facebook\Markdown\Blocks\Document as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\Vec;
 
-class Document extends ContainerBlock<Block> {
+class Document extends ContainerBlock<Block> implements BlockProducer {
   public static function consume(
     Context $context,
     Lines $lines,

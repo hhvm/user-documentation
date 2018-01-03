@@ -14,7 +14,7 @@ namespace Facebook\Markdown\UnparsedBlocks;
 use namespace Facebook\Markdown\{Blocks, Inlines};
 use namespace HH\Lib\{C, Str, Vec};
 
-class TaskListItemExtension extends ListItem{
+class TaskListItemExtension extends ListItem {
   public function __construct(
     private bool $checked,
     int $indentation,

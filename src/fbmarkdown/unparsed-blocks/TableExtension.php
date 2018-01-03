@@ -16,7 +16,7 @@ use type Facebook\Markdown\Blocks\TableExtensionColumnAlignment as ColumnAlignme
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class TableExtension extends LeafBlock {
+final class TableExtension extends LeafBlock implements BlockProducer {
   public function __construct(
     private vec<string> $header,
     private vec<?ColumnAlignment> $alignments,
@@ -24,7 +24,6 @@ final class TableExtension extends LeafBlock {
   ) {
   }
 
-  <<__Override>>
   public static function consume(
     Context $ctx,
     Lines $lines,

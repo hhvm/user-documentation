@@ -15,7 +15,7 @@ use type Facebook\Markdown\Blocks\ThematicBreak as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class ThematicBreak extends LeafBlock {
+final class ThematicBreak extends LeafBlock implements BlockProducer {
 
   <<__Memoize>>
   private static function getPattern(): string {
@@ -28,7 +28,6 @@ final class ThematicBreak extends LeafBlock {
       |> '/^ {0,3}('.$$.')$/';
   }
 
-  <<__Override>>
   public static function consume(
     Context $_,
     Lines $lines,

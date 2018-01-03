@@ -16,7 +16,7 @@ use namespace Facebook\Markdown\{Inlines, UnparsedBlocks};
 use namespace HHVM\UserDocumentation\JSON;
 use namespace HH\Lib\{C, Str, Vec};
 
-abstract class YamlFrontMatterBlock extends UnparsedBlocks\Block{
+abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
   <<__Override>>
   public static function consume(
     UnparsedBlocks\Context $context,

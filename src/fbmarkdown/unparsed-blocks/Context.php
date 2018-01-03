@@ -14,7 +14,7 @@ namespace Facebook\Markdown\UnparsedBlocks;
 use namespace HH\Lib\{C, Keyset, Str, Vec};
 
 class Context {
-  const keyset<classname<Block>> ALL_BLOCK_TYPES = keyset[
+  const keyset<classname<BlockProducer>> ALL_BLOCK_TYPES = keyset[
     TableExtension::class,
     BlankLine::class,
     ATXHeading::class,
@@ -29,8 +29,8 @@ class Context {
     Paragraph::class,
   ];
 
-  private keyset<classname<Block>> $blockTypes;
-  private keyset<classname<Block>> $disabledBlockTypes = keyset[];
+  private keyset<classname<BlockProducer>> $blockTypes;
+  private keyset<classname<BlockProducer>> $disabledBlockTypes = keyset[];
 
   public function __construct() {
     $this->blockTypes = self::ALL_BLOCK_TYPES;
@@ -61,7 +61,7 @@ class Context {
     return $this;
   }
 
-  public function prependBlockTypes(classname<Block> ...$blocks): this {
+  public function prependBlockTypes(classname<BlockProducer> ...$blocks): this {
     $this->blockTypes = Keyset\union($blocks, $this->blockTypes);
     return $this;
   }
@@ -107,7 +107,7 @@ class Context {
     return $this->isHtmlEnabled;
   }
 
-  public function getBlockTypes(): keyset<classname<Block>> {
+  public function getBlockTypes(): keyset<classname<BlockProducer>> {
     return Keyset\filter(
       $this->blockTypes,
       $type ==> !C\contains($this->disabledBlockTypes, $type),

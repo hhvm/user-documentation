@@ -15,11 +15,10 @@ use type HHVM\UserDocumentation\BuildPaths;
 use namespace Facebook\Markdown\{Inlines, UnparsedBlocks};
 use namespace HH\Lib\{C, Str, Vec};
 
-final class IncludeGeneratedMarkdownBlock extends UnparsedBlocks\Block {
+final class IncludeGeneratedMarkdownBlock implements UnparsedBlocks\BlockProducer {
   const string PATTERN =
     '/^@@ guides-generated-markdown\/(?<file>[^ @]+) @@$/';
 
-  <<__Override>>
   public static function consume(
     UnparsedBlocks\Context $context,
     UnparsedBlocks\Lines $lines,
@@ -44,13 +43,6 @@ final class IncludeGeneratedMarkdownBlock extends UnparsedBlocks\Block {
     );
 
     return tuple($inner_doc, $rest);
-  }
-
-  <<__Override>>
-  public function withParsedInlines(
-    Inlines\Context $_,
-  ): \Facebook\Markdown\Blocks\Block {
-    invariant_violation('should never be called');
   }
 
   private static function getExampleBlock(string $file): UnparsedBlocks\Block {

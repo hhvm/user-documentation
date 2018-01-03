@@ -15,7 +15,7 @@ use type Facebook\Markdown\Blocks\BlockQuote as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-class BlockQuote extends ContainerBlock<Block> {
+class BlockQuote extends ContainerBlock<Block> implements BlockProducer {
   public static function consume(
     Context $context,
     Lines $lines,

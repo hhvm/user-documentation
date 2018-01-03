@@ -15,13 +15,12 @@ use type Facebook\Markdown\Blocks\Paragraph as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class Paragraph extends LeafBlock {
+final class Paragraph extends LeafBlock implements BlockProducer {
   public function __construct(
     private string $content,
   ) {
   }
 
-  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,

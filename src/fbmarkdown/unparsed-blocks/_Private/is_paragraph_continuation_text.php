@@ -11,7 +11,7 @@
 
 namespace Facebook\Markdown\UnparsedBlocks\_Private;;
 
-use type Facebook\Markdown\UnparsedBlocks\{Block, Context, Lines};
+use type Facebook\Markdown\UnparsedBlocks\{BlockProducer, Context, Lines};
 use namespace HH\Lib\C;
 
 function is_paragraph_continuation_text(
@@ -22,7 +22,7 @@ function is_paragraph_continuation_text(
   try {
     return !C\any(
       $context->getBlockTypes(),
-      (classname<Block> $block) ==> $block::consume($context, $lines) !== null,
+      (classname<BlockProducer> $block) ==> $block::consume($context, $lines) !== null,
     );
   } finally {
     $context->popParagraphContinuation();

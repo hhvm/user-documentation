@@ -14,9 +14,7 @@ namespace Facebook\Markdown\UnparsedBlocks;
 use type Facebook\Markdown\Blocks\BlankLine as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 
-final class BlankLine extends LeafBlock {
-
-  <<__Override>>
+final class BlankLine extends LeafBlock implements BlockProducer {
   public static function consume(
     Context $_,
     Lines $lines,

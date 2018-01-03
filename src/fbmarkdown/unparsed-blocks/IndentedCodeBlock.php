@@ -15,11 +15,10 @@ use type Facebook\Markdown\Blocks\IndentedCodeBlock as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class IndentedCodeBlock extends LeafBlock {
+final class IndentedCodeBlock extends LeafBlock implements BlockProducer {
   public function __construct(private string $content) {
   }
 
-  <<__Override>>
   public static function consume(
     Context $context,
     Lines $lines,
