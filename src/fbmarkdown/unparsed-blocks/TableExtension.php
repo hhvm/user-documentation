@@ -16,7 +16,7 @@ use type Facebook\Markdown\Blocks\TableExtensionColumnAlignment as ColumnAlignme
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class TableExtension extends LeafBlock implements BlockProducer {
+class TableExtension extends LeafBlock implements BlockProducer {
   public function __construct(
     private vec<string> $header,
     private vec<?ColumnAlignment> $alignments,

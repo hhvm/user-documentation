@@ -17,7 +17,8 @@ use type Facebook\Markdown\Blocks\FencedCodeBlock as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class FencedCodeBlock extends FencedBlock {
+<<__ConsistentConstruct>>
+class FencedCodeBlock extends FencedBlock {
   const string PATTERN = '/^(?<indent> {0,3})(?<fence>`{3,}|~{3,})(?<info>[^`]*)?$/';
 
   public function __construct(
@@ -84,7 +85,7 @@ final class FencedCodeBlock extends FencedBlock {
       |> Vec\slice($$, 1, C\count($lines) - ($eof ? 1 : 2))
       |> Vec\map($$, $line ==> self::unindentLine($line, $indent, $column))
       |> Str\join($$, "\n");
-    return new self($content, $info);
+    return new static($content, $info);
   }
 
   private static function unindentLine(

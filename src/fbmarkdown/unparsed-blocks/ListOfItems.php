@@ -16,7 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class ListOfItems extends ContainerBlock<ListItem> implements BlockProducer {
+class ListOfItems extends ContainerBlock<ListItem> implements BlockProducer {
   public function __construct(
     private bool $loose,
     vec<ListItem> $children,

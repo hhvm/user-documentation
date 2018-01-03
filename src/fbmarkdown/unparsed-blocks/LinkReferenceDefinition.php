@@ -19,7 +19,7 @@ use function Facebook\Markdown\_Private\{
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class LinkReferenceDefinition extends LeafBlock implements BlockProducer {
+class LinkReferenceDefinition extends LeafBlock implements BlockProducer {
   public function __construct(
     private string $label,
     private string $destination,

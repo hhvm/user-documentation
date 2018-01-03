@@ -15,7 +15,7 @@ use namespace HH\Lib\{C, Str, Vec};
 use type Facebook\Markdown\Blocks\Heading as ASTHeading;
 use namespace Facebook\Markdown\Inlines;
 
-final class ATXHeading extends LeafBlock implements BlockProducer {
+class ATXHeading extends LeafBlock implements BlockProducer {
   const vec<string> PATTERNS = vec[
     '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.*))?[ \t]+#+[ \t]*$/',
     '/^ {0,3}(?<level>#{1,6})([ \t](?<title>.*))?$/',

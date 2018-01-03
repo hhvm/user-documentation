@@ -16,7 +16,7 @@ use namespace Facebook\Markdown\Inlines;
 
 use namespace HH\Lib\{C, Str, Vec};
 
-final class SetextHeading extends LeafBlock implements BlockProducer {
+class SetextHeading extends LeafBlock implements BlockProducer {
   public function __construct(private int $level, private string $heading) {
   }
 

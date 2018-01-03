@@ -17,7 +17,7 @@ use namespace HH\Lib\Vec;
 
 /**  Not used by the core engine; useful for extensions when a block-level
  * extension wants to produce inlines. */
-final class InlineSequenceBlock extends Block {
+class InlineSequenceBlock extends Block {
   final public function __construct(
     private string $markdown,
   ) {

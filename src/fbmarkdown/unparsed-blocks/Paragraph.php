@@ -15,7 +15,7 @@ use type Facebook\Markdown\Blocks\Paragraph as ASTNode;
 use namespace Facebook\Markdown\Inlines;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class Paragraph extends LeafBlock implements BlockProducer {
+class Paragraph extends LeafBlock implements BlockProducer {
   public function __construct(
     private string $content,
   ) {
