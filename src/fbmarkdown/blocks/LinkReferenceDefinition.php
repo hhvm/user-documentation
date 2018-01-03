@@ -13,7 +13,7 @@ namespace Facebook\Markdown\Blocks;
 
 use type Facebook\Markdown\Inlines\Inline;
 
-final class LinkReferenceDefinition extends LeafBlock {
+class LinkReferenceDefinition extends LeafBlock {
   final public function __construct(
     private string $label,
     private string $destination,

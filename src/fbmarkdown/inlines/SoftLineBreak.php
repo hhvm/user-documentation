@@ -13,7 +13,7 @@ namespace Facebook\Markdown\Inlines;
 
 use namespace HH\Lib\Str;
 
-final class SoftLineBreak extends Inline {
+class SoftLineBreak extends Inline {
   public function __construct() {
   }
 

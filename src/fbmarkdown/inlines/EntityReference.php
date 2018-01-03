@@ -14,7 +14,7 @@ namespace Facebook\Markdown\Inlines;
 use function \Facebook\Markdown\_Private\decode_html_entity;
 use namespace HH\Lib\Str;
 
-final class EntityReference extends InlineWithPlainTextContent {
+class EntityReference extends InlineWithPlainTextContent {
 
   <<__Override>>
   public static function consume(

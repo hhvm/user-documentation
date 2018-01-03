@@ -13,5 +13,5 @@ namespace Facebook\Markdown\Blocks;
 
 use type Facebook\Markdown\Inlines\Inline;
 
-final class ThematicBreak extends LeafBlock {
+class ThematicBreak extends LeafBlock {
 }

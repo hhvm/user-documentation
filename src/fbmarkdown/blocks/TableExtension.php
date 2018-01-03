@@ -19,7 +19,7 @@ enum TableExtensionColumnAlignment: string {
   CENTER = 'center';
 }
 
-final class TableExtension extends LeafBlock {
+class TableExtension extends LeafBlock {
   const type TCell = vec<Inline>;
   const type TRow = vec<self::TCell>;
   public function __construct(

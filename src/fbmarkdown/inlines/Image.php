@@ -17,7 +17,7 @@ use function Facebook\Markdown\_Private\{
 };
 use namespace HH\Lib\{Str, Vec};
 
-final class Image extends Inline {
+class Image extends Inline {
   <<__Override>>
   public function getContentAsPlainText(): string {
     return $this->description

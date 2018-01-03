@@ -13,5 +13,5 @@ namespace Facebook\Markdown\Blocks;
 
 use namespace HH\Lib\C;
 
-final class Document extends ContainerBlock {
+class Document extends ContainerBlock {
 }

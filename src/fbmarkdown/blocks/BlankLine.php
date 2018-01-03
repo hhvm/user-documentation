@@ -13,5 +13,5 @@ namespace Facebook\Markdown\Blocks;
 
 use type Facebook\Markdown\ASTNode;
 
-final class BlankLine extends LeafBlock {
+class BlankLine extends LeafBlock {
 }

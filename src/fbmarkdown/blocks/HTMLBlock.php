@@ -11,7 +11,7 @@
 
 namespace Facebook\Markdown\Blocks;
 
-final class HTMLBlock extends LeafBlock {
+class HTMLBlock extends LeafBlock {
   final public function __construct(
     private string $code,
   ) {

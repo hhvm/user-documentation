@@ -11,5 +11,5 @@
 
 namespace Facebook\Markdown\Blocks;
 
-final class IndentedCodeBlock extends CodeBlock {
+class IndentedCodeBlock extends CodeBlock {
 }

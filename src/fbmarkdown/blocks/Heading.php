@@ -13,7 +13,7 @@ namespace Facebook\Markdown\Blocks;
 
 use type Facebook\Markdown\Inlines\Inline;
 
-final class Heading extends LeafBlock {
+class Heading extends LeafBlock {
   final public function __construct(
     private int $level,
     private vec<Inline> $heading,

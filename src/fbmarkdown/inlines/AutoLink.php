@@ -13,7 +13,7 @@ namespace Facebook\Markdown\Inlines;
 
 use namespace HH\Lib\Str;
 
-final class AutoLink extends Inline {
+class AutoLink extends Inline {
   public function __construct(
     private string $text,
     private string $destination,

@@ -11,5 +11,5 @@
 
 namespace Facebook\Markdown\Blocks;
 
-final class FencedCodeBlock extends CodeBlock {
+class FencedCodeBlock extends CodeBlock {
 }

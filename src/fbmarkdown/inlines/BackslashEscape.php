@@ -14,7 +14,7 @@ namespace Facebook\Markdown\Inlines;
 use const Facebook\Markdown\_Private\ASCII_PUNCTUATION;
 use namespace HH\Lib\{C, Str};
 
-final class BackslashEscape extends InlineWithPlainTextContent {
+class BackslashEscape extends InlineWithPlainTextContent {
 
   <<__Override>>
   public static function consume(

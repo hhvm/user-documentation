@@ -14,7 +14,8 @@ namespace Facebook\Markdown\Inlines;
 use type Facebook\Markdown\UnparsedBlocks\HTMLBlock;
 use namespace HH\Lib\{C, Str};
 
-final class RawHTML extends Inline {
+<<__ConsistentConstruct>>
+class RawHTML extends Inline {
   public function __construct(
     private string $content,
   ) {
@@ -131,7 +132,7 @@ final class RawHTML extends Inline {
     $idx += Str\length($end);
 
     $match = Str\slice($in, $offset, $idx - $offset);
-    return tuple(new self($match), $idx);
+    return tuple(new static($match), $idx);
   }
 
   private static function consumeCDataSection(

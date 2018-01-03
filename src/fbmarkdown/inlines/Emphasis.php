@@ -14,7 +14,7 @@ namespace Facebook\Markdown\Inlines;
 use namespace Facebook\Markdown\Inlines\_Private\EmphasisStack as Stack;
 use namespace HH\Lib\{C, Str, Vec};
 
-final class Emphasis extends Inline {
+class Emphasis extends Inline {
   const string UNICODE_WHITESPACE = "[\\pZ\u{0009}\u{000d}\u{000a}\u{000c}]";
   const keyset<string> PUNCTUATION = keyset[
     '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.',

@@ -11,5 +11,5 @@
 
 namespace Facebook\Markdown\Blocks;
 
-final class BlockQuote extends ContainerBlock {
+class BlockQuote extends ContainerBlock {
 }

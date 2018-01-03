@@ -13,7 +13,7 @@ namespace Facebook\Markdown\Inlines;
 
 use namespace HH\Lib\{C, Str, Vec};
 
-final class AutoLinkExtension extends Inline {
+class AutoLinkExtension extends Inline {
   // From the GFM spec
   const string DOMAIN = '([a-z0-9_-]+\.)*[a-z0-9-]+\.[a-z0-9]+';
   const string SCHEME = '(http|https|ftp):\/\/';

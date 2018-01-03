@@ -14,7 +14,7 @@ namespace Facebook\Markdown\Inlines;
 use namespace Facebook\Markdown\Inlines\_Private\StrPos;
 use namespace HH\Lib\{Str, Vec};
 
-final class StrikethroughExtension extends Inline {
+class StrikethroughExtension extends Inline {
   public function __construct(
     private vec<Inline> $children,
   ) {

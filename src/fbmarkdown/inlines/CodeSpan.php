@@ -14,7 +14,8 @@ namespace Facebook\Markdown\Inlines;
 use namespace Facebook\Markdown\Inlines\_Private\StrPos;
 use namespace HH\Lib\Str;
 
-final class CodeSpan extends Inline {
+<<__ConsistentConstruct>>
+class CodeSpan extends Inline {
   public function __construct(
     private string $code,
   ) {
@@ -59,7 +60,7 @@ final class CodeSpan extends Inline {
     }
 
     return tuple(
-      new self(
+      new static(
         Str\slice($string, $start, $end - $start)
         |> Str\trim($$)
         |> \preg_replace('/\s+/m', ' ', $$),

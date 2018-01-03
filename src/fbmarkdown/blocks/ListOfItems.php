@@ -14,7 +14,7 @@ namespace Facebook\Markdown\Blocks;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Vec};
 
-final class ListOfItems extends ContainerBlock {
+class ListOfItems extends ContainerBlock {
   public function __construct(
     private bool $loose,
     vec<ListItem> $children,
