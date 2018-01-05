@@ -74,11 +74,14 @@ export CMAKE_PREFIX_PATH="$(echo "$HOMEBREW_DEPENDENCIES" | tr ',' "\n" | xargs 
 # Configure.
 # - If you install MySQL server from Homebrew, it uses /tmp/mysql.sock as the unix socket by default
 # - disable extensions that aren't supported on MacOS
+# - disable LZ4 deprecation warnings: they aren't compatable with Apple clang++
 cmake . \
   -DMYSQL_UNIX_SOCK_ADDR=/tmp/mysql.sock \
   -DENABLE_MCROUTER=OFF \
   -DENABLE_EXTENSION_MCROUTER=OFF \
-  -DENABLE_EXTENSION_IMAP=OFF
+  -DENABLE_EXTENSION_IMAP=OFF \
+  -DCMAKE_C_FLAGS=-DLZ4_DISABLE_DEPRECATE_WARNINGS=1 \
+  -DCMAKE_CXX_FLAGS=-DLZ4_DISABLE_DEPRECATE_WARNINGS=1
 make # you probably want `make -j<number of cores`, e.g. `make -j12`
 ```
 
