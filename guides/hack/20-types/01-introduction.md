@@ -8,7 +8,7 @@ The above example is a perfectly valid program that will run on HHVM (except a f
 
 But look at this next example to see how much clearer the intent was.
 
-@@ introduction-examples/hack.php.type-errors @@ 
+@@ introduction-examples/hack.php.type-errors @@
 
 Now we can see that the intent was to have only `int`s passed. And while the program will still run just like in the previous example, users of this API will now know what is expected. Combine adding these explicit types to methods and properties with the [Hack typechecker](../typechecker/introduction.md), you have a real strong foundation for safe, dynamic programming.
 
