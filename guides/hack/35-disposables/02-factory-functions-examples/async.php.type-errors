@@ -21,14 +21,14 @@ class Foo {
   }
   
   <<__ReturnDisposable>>
-  public async function getHandle(): Awaitable<Handle> {
+  public async function getHandleAsync(): Awaitable<Handle> {
     return new Handle($this->id);
   }
 }
 
 async function main() {
   $foo = new Foo();
-  using ($handle = await $foo->getHandle()) {
+  using ($handle = await $foo->getHandleAsync()) {
     print("doing stuff\n");
   }
 }

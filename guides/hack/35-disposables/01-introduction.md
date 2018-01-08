@@ -36,5 +36,5 @@ In order to ensure that the lifetime of the disposable object can be statically 
 
 ## Guidelines
 
-- `<<__AcceptDisposable>>` is intended for logging and debugging functions; it is not safe for these functions to retain a disposable.
+- `<<__AcceptDisposable>>` functions must not store the parameter, or pass it to anything else that is not marked `<<__AcceptDisposable>>`. One use-case is for logging and debugging functions.
 - `<<__ReturnDisposable>>` is intended for factory functions.
