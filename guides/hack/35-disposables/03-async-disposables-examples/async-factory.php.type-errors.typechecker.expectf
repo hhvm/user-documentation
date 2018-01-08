@@ -1,0 +1,2 @@
+%sasync-factory.php:11:3,20: Unrecognized user attribute: __ReturnDisposable starts with __ but is not a standard attribute (Naming[2049])
+%sasync-factory.php:13:10,21: 'new' must not be used for disposable objects except in a 'using' statement (Typing[4187])

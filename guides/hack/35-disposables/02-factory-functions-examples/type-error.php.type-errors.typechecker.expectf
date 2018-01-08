@@ -1,0 +1,1 @@
+%stype-error.php:11:10,21: 'new' must not be used for disposable objects except in a 'using' statement (Typing[4187])

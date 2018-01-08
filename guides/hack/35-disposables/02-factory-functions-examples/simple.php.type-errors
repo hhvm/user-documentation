@@ -1,0 +1,36 @@
+<?hh
+
+namespace Hack\UserDocumentation\Examples\Intro\Returning\Simple;
+
+class Handle implements \IDisposable {
+  public function __construct(
+    private string $id,
+  ) {
+  }
+
+  public function __dispose(): void {
+    \printf("Releasing %s.\n", $this->id);
+  }
+}
+
+class Foo {
+  private string $id;
+  public function __construct(
+  ) {
+    $this->id = 'opaque internal handle';
+  }
+  
+  <<__ReturnDisposable>>
+  public function getHandle(): Handle{
+    return new Handle($this->id);
+  }
+}
+
+function main() {
+  $foo = new Foo();
+  using ($handle = $foo->getHandle()) {
+    print("doing stuff\n");
+  }
+}
+
+main();

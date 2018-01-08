@@ -1,0 +1,22 @@
+<?hh
+
+namespace Hack\UserDocumentation\Examples\AsyncDisposables\AsyncFactory;
+
+class Handle implements \IAsyncDisposable {
+  public async function __disposeAsync(): Awaitable<void> {
+    print("Disposing\n");
+  }
+}
+
+<<__ReturnDisposable>>
+async function make_handle_async(): Awaitable<Handle> {
+  return new Handle();
+}
+
+async function main(): Awaitable<void> {
+  print("doing stuff\n");
+  await using await make_handle_async();
+  print("doing more stuff\n");
+}
+
+main();

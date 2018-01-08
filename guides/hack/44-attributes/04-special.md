@@ -85,6 +85,15 @@ The runtime error messages will get sampled at a rate of `1 / $sample_rate`, whi
 
 Using this attribute could fill your logs with `E_DEPRECATED` warnings when calling methods or functions that are deprecated. This is an impetus for removing this function sooner rather than later.
 
+
+## `<<__AcceptDisposable>>`
+
+Marks a function that can safely accept an instance of `IDisposable` or `IAsyncDisposable`; this is useful for debugging functions, e.g. `var_dump()`
+
+## `<<__ReturnDisposable>>`
+
+Marks a function that can safely return an instance of `IDisposable` or `IAsyncDisposable`; this is useful for factory functions.
+
 ## Uncommon
 
 The following attributes are much less useful and much less common than the above, but are included for completeness.

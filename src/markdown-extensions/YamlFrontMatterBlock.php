@@ -14,7 +14,7 @@ namespace HHVM\UserDocumentation\MarkdownExt;
 use type HHVM\UserDocumentation\YAMLMeta;
 use namespace Facebook\Markdown\{Inlines, UnparsedBlocks};
 use namespace HHVM\UserDocumentation\JSON;
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 
 abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
   <<__Override>>
@@ -44,6 +44,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $context->setYamlMeta($data);
 
     $messages = Vec\filter_nulls(vec[
+      self::getVersionRequirementMessage($data),
       self::getLibMessage($data),
       self::getFacebookMessages($data),
     ]);
@@ -60,6 +61,34 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
         new UnparsedBlocks\HTMLBlock('</div>'),
       ),
       $rest,
+    );
+  }
+
+  private static function getVersionRequirementMessage(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $versions = $data['min-versions'] ?? null;
+    if ($versions === null) {
+      return null;
+    }
+    $experimental = null;
+    if ($data['experimental'] ?? false) {
+      $experimental = ', and is currently experimental';
+    }
+    
+    return UnparsedBlocks\BlockSequence::flatten(
+      new UnparsedBlocks\HTMLBlock('<div class="apiTopMessage apiFromLib">'),
+      new UnparsedBlocks\InlineSequenceBlock(
+        'This functionality requires '.(
+          $versions
+          |> Dict\map_with_key(
+            $$,
+            ($name, $ver) ==> sprintf('%s %s or later', $name, $ver),
+          )
+          |> Str\join($$, ', ')
+        ).$experimental.'.'
+      ),
+      new UnparsedBlocks\HTMLBlock('</div>'),
     );
   }
 

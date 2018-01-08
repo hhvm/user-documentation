@@ -26,8 +26,8 @@ type DirectoryIndex = shape(
 );
 
 type YAMLMeta = shape(
-  'name' => string,
-  'sources' => vec<string>,
+  ?'name' => string,
+  ?'sources' => vec<string>,
   ?'class' => string,
   ?'lib' => shape(
     'name' => string,
@@ -35,6 +35,8 @@ type YAMLMeta = shape(
     'composer' => string,
   ),
   ?'fbonly messages' => vec<string>,
+  ?'min-versions' => dict<RequirableProduct, string>,
+  ?'experimental' => bool,
 );
 
 
@@ -57,6 +59,11 @@ enum MemberVisibility: string {
 enum GuidesProduct: string as string {
   HHVM = 'hhvm';
   HACK = 'hack';
+}
+
+enum RequirableProduct: string as string {
+  HHVM = 'HHVM';
+  HSL = 'HSL';
 }
 
 enum UIGlyphIcon: string {
