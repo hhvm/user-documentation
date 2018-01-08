@@ -30,9 +30,9 @@ Disposables can then be used in `using` blocks:
 In order to ensure that the lifetime of the disposable object can be statically enforced, we need to add a few restriction:
 - A local assigned inside the using(...) parentheses can be used only as the target of a method invocation in the using block, or passed to a function or method whose argument is marked with the `<<__AcceptDisposable>>` attribute.
 - The same restriction applies to any parameter marked with `<<__AcceptDisposable>>` throughout the function that defined the parameter. This lets you pull code out of the using block into a helper.
-- It is not permitted to write a type hint on function parameters that implement IDisposable, unless the parameter is marked `<<__AcceptDisposable>>`.
-- Classes that implement `IDisposable` may not be constructed in any other context.
-- functions may not return instances of `IDisposable` or `Awaitable`s of them unless they are marked as `<<__ReturnDisposable>>``.
+- It is not permitted to write a type hint on function parameters that implement `IDisposable` or `IAsyncDisposable`, unless the parameter is marked `<<__AcceptDisposable>>`.
+- Classes that implement `IDisposable` or `IAsyncDisposable` may not be constructed in any other context, except when returned by a function marked as `<<__ReturnDisposable>>`.
+- functions may not return `IDisposable`, `IAsyncDisposable`, `Awaitable<IDisposable>`, `Awaitable<IAsyncDisposable>`, or subtypes of them unless they are marked as `<<__ReturnDisposable>>``.
 
 ## Guidelines
 
