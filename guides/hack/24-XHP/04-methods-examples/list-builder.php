@@ -19,7 +19,7 @@ function xhp_object_methods_run(): void {
   echo <ul>{$list->getFirstChild()}</ul> . "\n";
   echo <ul>{$list->getLastChild()}</ul>. "\n";
   foreach ($list->getAttributes() as $attr) {
-    echo <ul><li>{$attr}</li></ul> . "\n";
+    echo <ul><li>{(string) $attr}</li></ul> . "\n";
   }
   echo <ul><li>{$list->getAttribute('id')}</li></ul> . "\n";
 }
