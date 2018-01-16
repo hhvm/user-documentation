@@ -75,7 +75,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     if ($data['experimental'] ?? false) {
       $experimental = ', and is currently experimental';
     }
-    
+
     return UnparsedBlocks\BlockSequence::flatten(
       new UnparsedBlocks\HTMLBlock('<div class="apiTopMessage apiFromLib">'),
       new UnparsedBlocks\InlineSequenceBlock(

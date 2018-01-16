@@ -14,6 +14,7 @@ namespace Facebook\Markdown;
 use namespace HH\Lib\Str;
 
 class TagFilterExtension extends RenderFilter {
+  <<__Override>>
   public function filter(
     RenderContext $context,
     ASTNode $node,

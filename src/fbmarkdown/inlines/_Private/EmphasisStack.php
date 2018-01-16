@@ -36,6 +36,7 @@ class TextNode extends Node {
     return Inlines\parse($ctx, $this->getText());
   }
 
+  <<__Override>>
   public function debugDump(string $_markdown): string {
     return '(text '.var_export($this->text, true).')';
   }
@@ -63,6 +64,7 @@ class DelimiterNode extends TextNode {
     return $this->endOffset;
   }
 
+  <<__Override>>
   public function debugDump(string $_markdown): string {
     return '(delim '.
       (($this->flags & Inlines\Emphasis::IS_START) ? 'open' : '').
@@ -82,6 +84,7 @@ class InlineNode extends Node {
     return vec[$this->content];
   }
 
+  <<__Override>>
   public function debugDump(string $_markdown): string {
     return '(inline '.get_class($this->content).')';
   }
@@ -116,6 +119,7 @@ class EmphasisNode extends Node {
     return ($this->endOffset - $this->startOffset);
   }
 
+  <<__Override>>
   public function debugDump(string $markdown): string {
     $node = $this->content;
     return '('.
