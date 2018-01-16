@@ -6,16 +6,16 @@
     "hhvm/hhvm-autoload": "^1.5",
     "hhvm/type-assert": "^3.1.0",
     "facebook/hack-codegen": "^3.0.1",
-    "facebook/hack-router-codegen": "^0.10.1",
-    "facebook/hack-router": "^0.10",
+    "facebook/hack-router-codegen": "^0.10.2",
+    "facebook/hack-router": "^0.11",
     "hhvm/hsl": "^1.0",
-    "hhvm/hhast": "^0.4.0"
+    "hhvm/hhast": "^0.6.0"
   },
   "require-dev": {
     "facebook/definition-finder": "^1.5.1",
     "hack-psr/psr7-http-message-hhi": "^1.0.0",
     "phpunit/phpunit": "^5.1",
     "91carriage/phpunit-hhi": "^5.1",
-    "facebook/fbexpect": "^0.3.0"
+    "facebook/fbexpect": "^0.4.0"
   }
 }
