@@ -69,7 +69,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
     $command_str =
       implode('', $env->map($x ==> $x.' ')).$command_str;
 
-    exec($command_str, /*&*/ $output, /*&*/ $exit_code);
+    exec($command_str, /*&*/ &$output, /*&*/ &$exit_code);
 
     $this->assertSame(0, $exit_code, implode("\n", $output));
   }

@@ -9,7 +9,7 @@ function getLambda(): (function(?int): bool) {
 function annotateLambda(string $s1, string $s2): array<string> {
   $strs = array($s1, $s2);
   usort(
-    $strs,
+    &$strs,
     (string $s1, string $s2): int ==> strlen($s1) - strlen($s2)
   );
   return $strs;

@@ -70,7 +70,7 @@ class ListItem extends ContainerBlock<Block> implements BlockProducer {
       \preg_match(
         '/^(?<marker>[-+*]|(?<digits>[0-9]{1,9})[.)])/',
         $line,
-        $matches,
+        &$matches,
       ) !== 1
     ) {
       return null;

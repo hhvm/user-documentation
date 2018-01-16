@@ -317,7 +317,7 @@ class Emphasis extends Inline {
   ): (string, int) {
     $slice = Str\slice($markdown, $offset);
     $matches = [];
-    \preg_match('/^(\\*+|_+)/', $slice, $matches);
+    \preg_match('/^(\\*+|_+)/', $slice, &$matches);
     $match = $matches[0];
     return tuple($match, $offset + Str\length($match));
   }

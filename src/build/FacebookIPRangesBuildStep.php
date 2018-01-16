@@ -21,7 +21,7 @@ final class FacebookIPRangesBuildStep extends BuildStep {
 
     $errno = null;
     $errstr = null;
-    $handle = stream_socket_client('tcp://whois.radb.net:43', $errno, $errstr);
+    $handle = stream_socket_client('tcp://whois.radb.net:43', &$errno, &$errstr);
     if ($handle === false) {
       fprintf(
         STDERR,

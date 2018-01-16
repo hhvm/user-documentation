@@ -160,8 +160,8 @@ final class GuidePageController extends WebPageController {
     $adjacent_page = null;
 
     // Gets last page if next = true, first page if previous (next = false)
-    reset($sibling_pages);
-    $head_page = key($sibling_pages);
+    reset(&$sibling_pages);
+    $head_page = key(&$sibling_pages);
 
     if ($page === $head_page) {
       list($adjacent_guide, $adjacent_guide_data) =
@@ -169,9 +169,9 @@ final class GuidePageController extends WebPageController {
       if ($adjacent_guide_data !== null) {
         $guide_pages = $adjacent_guide_data['children'];
         $guide_pages = $next ? $guide_pages : array_reverse($guide_pages);
-        $adjacent_data = reset($guide_pages);
+        $adjacent_data = reset(&$guide_pages);
         $adjacent_page = shape(
-          'page' => array(key($guide_pages) => $adjacent_data),
+          'page' => array(key(&$guide_pages) => $adjacent_data),
           'guide' => array($adjacent_guide => $adjacent_guide_data),
         );
       }

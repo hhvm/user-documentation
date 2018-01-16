@@ -48,7 +48,7 @@ class AutoLinkExtension extends Inline {
     $result = \preg_match(
       '/^(?<prefix>'.self::PREFIX.')(?<domain>'.self::DOMAIN.')/i',
       $string,
-      $matches,
+      &$matches,
     );
     if ($result !== 1) {
       return null;
@@ -99,7 +99,7 @@ class AutoLinkExtension extends Inline {
   ): (string, int) {
     $matches = [];
     $rest = Str\slice($markdown, $offset);
-    \preg_match('/^[^[\]<> ]+/', $rest, $matches);
+    \preg_match('/^[^[\]<> ]+/', $rest, &$matches);
     $match = $matches[0] ?? '';
     if ($match === '') {
       return tuple('', $offset);

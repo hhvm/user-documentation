@@ -51,7 +51,7 @@ final class AutoLinkifyInline extends Inlines\Link {
     }
 
     $matches = [];
-    if (\preg_match('/^[^(<]+/', $content, $matches) !== 1) {
+    if (\preg_match('/^[^(<]+/', $content, &$matches) !== 1) {
       return null;
     }
     $definition = (string) $matches[0];

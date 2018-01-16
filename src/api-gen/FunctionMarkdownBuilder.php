@@ -241,7 +241,7 @@ final class FunctionMarkdownBuilder {
     if (count($examples) === 0) {
       return null;
     }
-    sort($examples);
+    sort(&$examples);
 
     $ret = "### Examples\n";
     foreach ($examples as $example) {

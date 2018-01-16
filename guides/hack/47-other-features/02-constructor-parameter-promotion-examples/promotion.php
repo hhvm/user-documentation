@@ -14,7 +14,7 @@ class User {
 
     // Put user at the beginning of the database if preferred.
     if ($this->preferred) {
-      array_unshift(Users::$users, $this);
+      array_unshift(&Users::$users, $this);
     } else {
       Users::$users[] = $this;
     }

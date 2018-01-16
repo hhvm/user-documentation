@@ -79,7 +79,7 @@ final class SiteMapBuildStep extends BuildStep {
   ): ImmVector<string> {
     $out = Vector { };
     $to_visit = array_values($roots);
-    while ($node = array_shift($to_visit)) {
+    while ($node = array_shift(&$to_visit)) {
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

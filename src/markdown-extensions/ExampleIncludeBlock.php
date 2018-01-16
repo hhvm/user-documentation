@@ -29,7 +29,7 @@ final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
   ): ?(UnparsedBlocks\Block, UnparsedBlocks\Lines) {
     list($first, $rest) = $lines->getFirstLineAndRest();
     $matches = [];
-    if (\preg_match(self::PATTERN, $first, $matches) !== 1) {
+    if (\preg_match(self::PATTERN, $first, &$matches) !== 1) {
       return null;
     }
 

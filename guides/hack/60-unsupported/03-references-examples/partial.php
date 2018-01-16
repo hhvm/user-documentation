@@ -16,19 +16,19 @@ function foo(int& $x): void {
   $x++;
   $y = $x;
   $a = new A($x);
-  $a->setX($y);
+  $a->setX(&$y);
 }
 
 function bar(int& $x): void {
   $y = $x;
   $y = 5;
   $x = $y;
-  foo($x);
+  foo(&$x);
 }
 
 function baz(): int {
   $x = 4;
-  bar($x);
+  bar(&$x);
   return $x;
 }
 

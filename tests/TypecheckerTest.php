@@ -11,8 +11,8 @@ class TypecheckerTest extends \PHPUnit_Framework_TestCase {
     $exit_code = null;
     exec(
       'hh_server --check '.escapeshellarg(__DIR__.'/../').' 2>&1',
-      $output,
-      $exit_code,
+      &$output,
+      &$exit_code,
     );
     if ($exit_code === 77) {
       // Server already running - 3.10 => 3.11 regression:

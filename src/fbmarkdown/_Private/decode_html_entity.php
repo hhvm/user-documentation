@@ -25,7 +25,7 @@ function decode_html_entity(string $string): ?(string, string, string) {
     \preg_match(
       '/^&(#[0-9]{1,8}|#X[0-9a-f]{1,8}|[a-z]+);/i',
       $string,
-      $matches,
+      &$matches,
     ) !== 1
   ) {
     return null;

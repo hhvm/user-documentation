@@ -38,7 +38,7 @@ class SetextHeading extends LeafBlock implements BlockProducer {
       }
 
       $matches = [];
-      if (\preg_match('/^ {0,3}(?<level>=+|-+) *$/', $line, $matches) === 1) {
+      if (\preg_match('/^ {0,3}(?<level>=+|-+) *$/', $line, &$matches) === 1) {
         // Heading underline can not be a lazy continuation item
         if ($col >= $first_col) {
           $level = $matches['level'][0] === '=' ? 1 : 2;

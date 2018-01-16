@@ -10,7 +10,7 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
     $to_visit = array_values(GuidesNavData::getNavData());
     $out = [];
 
-    while ($node = array_pop($to_visit)) {
+    while ($node = array_pop(&$to_visit)) {
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

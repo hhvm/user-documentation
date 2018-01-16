@@ -44,7 +44,7 @@ class FencedCodeBlock extends FencedBlock {
     $first = C\firstx($lines);
     $matches = [];
     invariant(
-      \preg_match(self::PATTERN, $first, $matches) === 1,
+      \preg_match(self::PATTERN, $first, &$matches) === 1,
       'Invalid first line',
     );
     $info = Str\trim($matches['info'] ?? '');
@@ -111,7 +111,7 @@ class FencedCodeBlock extends FencedBlock {
     string $first,
   ): ?string {
     $matches = [];
-    $result = \preg_match(self::PATTERN, $first, $matches);
+    $result = \preg_match(self::PATTERN, $first, &$matches);
     if ($result !== 1) {
       return null;
     }

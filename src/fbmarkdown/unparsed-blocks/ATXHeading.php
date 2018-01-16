@@ -33,7 +33,7 @@ class ATXHeading extends LeafBlock implements BlockProducer {
     $matches = [];
     $title = null;
     foreach (self::PATTERNS as $pattern) {
-      $result = \preg_match($pattern, $first, $matches);
+      $result = \preg_match($pattern, $first, &$matches);
       if ($result === 1) {
         $title = $matches['title'] ?? '';
         break;

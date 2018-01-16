@@ -18,7 +18,7 @@ final class GuidesIndexBuildStep extends BuildStep {
     Log::i("\nGuidesIndexBuild");
 
     $sources = self::findSources(BuildPaths::GUIDES_MARKDOWN, Set{'md'});
-    sort($sources);
+    sort(&$sources);
 
     $this->createIndex($sources);
   }

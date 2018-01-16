@@ -57,7 +57,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
 
     if ($candidates) {
       uksort(
-        $candidates,
+        &$candidates,
         function (string $a, string $b): int {
           $a = strlen($a);
           $b = strlen($b);
@@ -69,7 +69,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
           return 0;
         },
       );
-      return key($candidates);
+      return key(&$candidates);
     }
 
     return null;

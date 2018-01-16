@@ -59,7 +59,7 @@ class RawHTML extends Inline {
       \preg_match(
         '/^('.self::OPEN_TAG.'|'.self::CLOSING_TAG.'|'.self::DECLARATION.')/i',
         $slice,
-        $matches,
+        &$matches,
       ) === 1
     ) {
       $match = $matches[0];

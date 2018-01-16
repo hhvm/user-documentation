@@ -15,7 +15,7 @@ function run(): void {
 
   $s = shape();
   var_dump($s);
-  Shapes::removeKey($s, 'name');  // no such field, so request ignored
+  Shapes::removeKey(&$s, 'name');  // no such field, so request ignored
   $a = Shapes::toArray($s);
   echo "# elements in array = " . count($a) . "\n";
   var_dump($s, $a);
@@ -23,7 +23,7 @@ function run(): void {
 
   $s = shape('x' => 10, 'y' => 20);
   var_dump($s);
-  Shapes::removeKey($s, C::KEYX); // field 'x' removed
+  Shapes::removeKey(&$s, C::KEYX); // field 'x' removed
   $a = Shapes::toArray($s);
   echo "# elements in array = " . count($a) . "\n";
   var_dump($s, $a);
@@ -31,7 +31,7 @@ function run(): void {
 
   $s = shape('id' => "23456", 'url' => "www.example.com", 'count' => 23);
   var_dump($s);
-  Shapes::removeKey($s, 'url');   // field 'url' removed
+  Shapes::removeKey(&$s, 'url');   // field 'url' removed
   $a = Shapes::toArray($s);
   echo "# elements in array = " . count($a) . "\n";
   var_dump($s, $a);
