@@ -9,7 +9,8 @@
     "facebook/hack-router-codegen": "^0.10.2",
     "facebook/hack-router": "^0.11",
     "hhvm/hsl": "^1.0",
-    "hhvm/hhast": "^0.6.0"
+    "hhvm/hhast": "^0.6.0",
+    "facebook/fbmarkdown": "^0.1.0"
   },
   "require-dev": {
     "facebook/definition-finder": "^1.5.1",

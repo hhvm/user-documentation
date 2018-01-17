@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ceae6a6c58a71c25ca522cd3076ce35",
+    "content-hash": "35dff4b57c1a710f60588cbd83876d98",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -47,6 +47,35 @@
                 "hhvm"
             ],
             "time": "2018-01-05T20:56:28+00:00"
+        },
+        {
+            "name": "facebook/fbmarkdown",
+            "version": "v0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/fbmarkdown.git",
+                "reference": "ef02b7b7523a35a9670a9c2df3cd22b6ea62d3e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/ef02b7b7523a35a9670a9c2df3cd22b6ea62d3e0",
+                "reference": "ef02b7b7523a35a9670a9c2df3cd22b6ea62d3e0",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm/hhvm-autoload": "^1.5",
+                "hhvm/hsl": "^1.1",
+                "hhvm/type-assert": "^3.1"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "~5.7",
+                "facebook/fbexpect": "^0.4.0",
+                "hhvm/hhast": "^0.6.0",
+                "phpunit/phpunit": "~5.7"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2018-01-16T23:41:00+00:00"
         },
         {
             "name": "facebook/hack-codegen",
