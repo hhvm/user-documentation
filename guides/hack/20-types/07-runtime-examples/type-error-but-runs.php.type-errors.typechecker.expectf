@@ -1,4 +1,4 @@
-File "%stype-error-but-runs.php", line 8, characters 3-8:
+File "%stype-error-but-runs.php", line 8, characters 3-16:
 You cannot return a value (Typing[4084])
 File "%stype-error-but-runs.php", line 7, characters 23-26:
 This is a void function

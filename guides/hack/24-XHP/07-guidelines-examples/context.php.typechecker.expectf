@@ -1,0 +1,6 @@
+File "%s/context.php", line 37, characters 8-30:
+XHP children must be compatible with XHPChild (Typing[4193])
+File "%s/context.php", line 37, characters 8-17:
+This is an object of type :ui-mychild (known to be exactly the class ':ui-mychild')
+File "%s/context.php", line 37, characters 8-17:
+  where the class ':ui-mychild' was referenced here
