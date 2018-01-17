@@ -8,11 +8,9 @@ There are a couple of caveats to be aware of when using `foreach` to iterate ove
 
 ### Modifying the Collection
 
-Adding or deleting an item from the collection is not allowed and, if tried, will result in an `InvalidOperationException`.
+Adding or deleting an item from the collection will not affect iteration:
 
 @@ iterating-examples/modifying.php @@
-
-Note that in the example, the actual add or removal will take effect, but the exception will be thrown when we go back to the loop iteration check.
 
 ### By Reference
 
