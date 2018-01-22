@@ -11,17 +11,19 @@
 
 namespace HHVM\UserDocumentation;
 
-use Facebook\DefinitionFinder\FileParser;
-use Facebook\DefinitionFinder\ScannedClass;
-use Facebook\DefinitionFinder\ScannedBase;
-use Facebook\DefinitionFinder\ScannedFunctionAbstract;
-use Facebook\DefinitionFinder\ScannedMethod;
-use Facebook\DefinitionFinder\ScannedTypehint;
-use Facebook\DefinitionFinder\ScannedGeneric;
-use Facebook\DefinitionFinder\ScannedParameter;
-use Facebook\DefinitionFinder\HasScannedGenerics;
+use type Facebook\DefinitionFinder\{
+  FileParser,
+  ScannedClass,
+  ScannedBase,
+  ScannedFunctionAbstract,
+  ScannedMethod,
+  ScannedTypehint,
+  ScannedGeneric,
+  ScannedParameter,
+  ScannedGenerics,
+};
 
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\{C, Str, Vec};
 
 class ScannedDefinitionsYAMLBuilder {
   private Vector<ScannedDefinitionFilter> $filters = Vector { };
@@ -66,7 +68,7 @@ class ScannedDefinitionsYAMLBuilder {
 
   private function buildDefinitions<T as ScannedBase>(
     APIDefinitionType $type,
-    \ConstVector<T> $defs,
+    vec<T> $defs,
     (function(T):shape('name' => string, ...)) $converter,
   ): vec<string> {
     if ($type === APIDefinitionType::FUNCTION_DEF) {
@@ -91,13 +93,12 @@ class ScannedDefinitionsYAMLBuilder {
   }
 
   private function filtered<T as ScannedBase>(
-    \ConstVector<T> $list,
-  ): \ConstVector<T> {
-    foreach ($this->filters as $filter) {
-      // https://github.com/facebook/hhvm/issues/5919
-      $list = $list->filter($v ==> $filter($v));
-    }
-    return $list;
+    vec<T> $list,
+  ): vec<T> {
+    return Vec\filter(
+      $list,
+      $item ==> C\every($this->filters, $filter ==> $filter($item)),
+    );
   }
 
   private function getClassDocumentation(
@@ -119,20 +120,20 @@ class ScannedDefinitionsYAMLBuilder {
       'namespace' => $namespace,
       'shortName' => $shortName,
       'type' => $type,
-      'methods' => $class
-        ->getMethods()
-        ->map($m ==> $this->getMethodDocumentation($type, $name, $m))
-        |> vec($$),
-      'generics' => $class
-        ->getGenericTypes()
-        ->map($gt ==> self::GetGenericDocumentation($gt))
-        |> vec($$),
+      'methods' => Vec\map(
+        $class->getMethods(),
+        $m ==> $this->getMethodDocumentation($type, $name, $m),
+      ),
+      'generics' => Vec\map(
+        $class->getGenericTypes(),
+        $gt ==> self::GetGenericDocumentation($gt),
+      ),
       'parent' =>
         self::GetNullableTypehintDocumentation($class->getParentClassInfo()),
-      'interfaces' => $class
-        ->getInterfaceInfo()
-        ->map($interface ==> self::GetTypehintDocumentation($interface))
-        |> vec($$),
+      'interfaces' => Vec\map(
+        $class->getInterfaceInfo(),
+        $interface ==> self::GetTypehintDocumentation($interface),
+      ),
       'docComment' => $class->getDocComment(),
     );
   }
@@ -141,20 +142,20 @@ class ScannedDefinitionsYAMLBuilder {
     ScannedFunctionAbstract $function,
   ): FunctionDocumentation {
     $deprecationMessage =
-      $function->getAttributes()->get('__Deprecated')?->at(0);
+      $function->getAttributes()['__Deprecated'][0] ?? null;
     return shape(
       'name' => $function->getName(),
       'returnType' =>
         self::GetNullableTypehintDocumentation($function->getReturnType()),
-      'generics' => $function
-        ->getGenericTypes()
-        ->map($gt ==> self::GetGenericDocumentation($gt))
-        |> vec($$),
+      'generics' => Vec\map(
+        $function->getGenericTypes(),
+        $gt ==> self::GetGenericDocumentation($gt),
+      ),
       'docComment' => $function->getDocComment(),
-      'parameters' => $function
-        ->getParameters()
-        ->map($p ==> self::GetParameterDocumentation($p))
-        |> vec($$),
+      'parameters' => Vec\map(
+        $function->getParameters(),
+        $p ==> self::GetParameterDocumentation($p),
+      ),
       'deprecation' => $deprecationMessage !== null ?
         (string) $deprecationMessage : null,
     );
@@ -206,7 +207,7 @@ class ScannedDefinitionsYAMLBuilder {
   private static function GetGenericDocumentation(
     ScannedGeneric $g,
   ): GenericDocumentation {
-    if ($g->getConstraints()->isEmpty()) {
+    if (C\is_empty($g->getConstraints())) {
        return shape(
          'name' => $g->getName(),
          'constraint' => null,
@@ -227,11 +228,10 @@ class ScannedDefinitionsYAMLBuilder {
       'typename' => $typehint->getTypeName(),
       'typetext' => $typehint->getTypeText(),
       'nullable' => $typehint->isNullable(),
-      'genericTypes' =>
-        $typehint
-        ->getGenericTypes()
-        ->map($th ==> self::GetTypehintDocumentation($th))
-        |> vec($$),
+      'genericTypes' => Vec\map(
+        $typehint->getGenericTypes(),
+        $th ==> self::GetTypehintDocumentation($th),
+      ),
     );
   }
 

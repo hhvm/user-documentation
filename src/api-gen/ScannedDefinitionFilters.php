@@ -11,20 +11,23 @@
 
 namespace HHVM\UserDocumentation;
 
-use Facebook\DefinitionFinder\ScannedBase;
-use Facebook\DefinitionFinder\ScannedClass;
-use Facebook\DefinitionFinder\ScannedFunctionAbstract;
-use Facebook\DefinitionFinder\HasScannedGenerics;
-use Facebook\DefinitionFinder\HasScannedVisibility;
+use type Facebook\DefinitionFinder\{
+  HasScannedGenerics,
+  ScannedBase,
+  ScannedClass,
+  ScannedFunctionAbstract,
+  ScannedGenerics,
+  ScannedVisibility,
+};
 
-use HH\Lib\Str;
+use namespace HH\Lib\{C, Str};
 
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {
     $is_hh_specific =
       strpos($def->getName(), 'HH\\') === 0
       || strpos($def->getName(), '__SystemLib\\') === 0
-      || $def->getAttributes()->containsKey('__HipHopSpecific')
+      || C\contains_key($def->getAttributes(), '__HipHopSpecific')
       || strpos($def->getName(), 'fb_') === 0
       || strpos($def->getName(), 'hphp_') === 0;
 

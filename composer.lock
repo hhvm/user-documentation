@@ -8,23 +8,26 @@
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v1.6.4",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "e39f5e2a6e3636e5a8cdb1670188c5c728b13470"
+                "reference": "4f4ae3c89bfa38cb9ee37fbafe5b8267cab87c9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/e39f5e2a6e3636e5a8cdb1670188c5c728b13470",
-                "reference": "e39f5e2a6e3636e5a8cdb1670188c5c728b13470",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/4f4ae3c89bfa38cb9ee37fbafe5b8267cab87c9b",
+                "reference": "4f4ae3c89bfa38cb9ee37fbafe5b8267cab87c9b",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "~3.23"
+                "hhvm": "~3.23",
+                "hhvm/hhvm-autoload": "^1.6",
+                "hhvm/hsl": "^1.2"
             },
             "require-dev": {
                 "91carriage/phpunit-hhi": "~5.1",
+                "facebook/fbexpect": "^0.4.0",
                 "hhvm/systemlib-extractor": "~1.0",
                 "phpunit/phpunit": "~5.1"
             },
@@ -46,7 +49,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2018-01-05T20:56:28+00:00"
+            "time": "2018-01-19T23:29:11+00:00"
         },
         {
             "name": "facebook/fbmarkdown",
@@ -377,21 +380,20 @@
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v1.5.4",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "20aa3b34de71a337644a146f2abbafe491fd3bb2"
+                "reference": "a2124986412f2c86d7da84b67a8c7b37bde25a3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/20aa3b34de71a337644a146f2abbafe491fd3bb2",
-                "reference": "20aa3b34de71a337644a146f2abbafe491fd3bb2",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/a2124986412f2c86d7da84b67a8c7b37bde25a3f",
+                "reference": "a2124986412f2c86d7da84b67a8c7b37bde25a3f",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0",
-                "facebook/definition-finder": "~1.6.4",
                 "fredemmott/hack-error-suppressor": "^1.0",
                 "hhvm": "^3.23"
             },
@@ -423,7 +425,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2018-01-05T21:10:38+00:00"
+            "time": "2018-01-18T22:05:10+00:00"
         },
         {
             "name": "hhvm/hsl",
