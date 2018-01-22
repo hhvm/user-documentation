@@ -10,7 +10,7 @@
  */
 namespace HHVM\UserDocumentation\Tests;
 
-use type HHVM\UserDocumentation\DocBlock;
+use type Facebook\HHAPIDoc\DocBlock\DocBlock;
 use function Facebook\FBExpect\expect;
 use namespace HH\Lib\Vec;
 
@@ -80,7 +80,7 @@ final class DocBlockTest extends \PHPUnit_Framework_TestCase {
     expect($db->getDescription())->toBeSame('Bar.');
 
     $params = Vec\map(
-      $db->getParamInfo(),
+      $db->getParameterInfo(),
       $p ==> tuple($p['name'], $p['types'], $p['text']),
     );
 
@@ -101,7 +101,7 @@ final class DocBlockTest extends \PHPUnit_Framework_TestCase {
    */
   public function testMultipleParamTypes(): void {
     $params = Vec\map(
-      $db = self::getDocBlock(__FUNCTION__)->getParamInfo(),
+      $db = self::getDocBlock(__FUNCTION__)->getParameterInfo(),
       $p ==> tuple($p['name'], $p['types'], $p['text']),
     );
     expect($params)->toBeSame(vec[

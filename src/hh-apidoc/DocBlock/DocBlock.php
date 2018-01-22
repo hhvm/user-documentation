@@ -9,7 +9,7 @@
  *
  */
 
-namespace HHVM\UserDocumentation;
+namespace Facebook\HHAPIDoc\DocBlock;
 
 use namespace HH\Lib\{C, Math, Str, Vec};
 
@@ -19,8 +19,8 @@ final class DocBlock {
 
   private vec<(string, ?string)> $tags = vec[];
 
-  public function __construct(string $content) {
-    $lines = $content
+  public function __construct(private string $rawDocBlock) {
+    $lines = $rawDocBlock
       |> Str\trim($$)
       |> Str\strip_prefix($$, '/**')
       |> Str\strip_suffix($$, '*/')
@@ -143,12 +143,7 @@ final class DocBlock {
     |> Vec\filter_nulls($$);
   }
 
-  const type TReturnInfo = shape(
-    'types' => vec<string>,
-    'text' => ?string,
-  );
-
-  public function getReturnInfo(): vec<self::TReturnInfo> {
+  public function getReturnInfo(): vec<ReturnInfo> {
     $out = vec[];
     foreach ($this->tags as list($key, $value)) {
       if ($key !== '@return' && $key !== '@returns') {
@@ -193,14 +188,8 @@ final class DocBlock {
       |> Vec\map($$, $x ==> Str\trim($x));
   }
 
-  const type TParamInfo = shape(
-    'name' => string,
-    'types' => vec<string>,
-    'text' => ?string,
-  );
-
   <<__Memoize>>
-  public function getParamInfo(): dict<string, self::TParamInfo> {
+  public function getParameterInfo(): dict<string, ParameterInfo> {
     $out = dict[];
     foreach ($this->tags as list($key, $value)) {
       if ($key !== '@param') {

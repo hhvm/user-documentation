@@ -2,6 +2,7 @@
 
 namespace HHVM\UserDocumentation;
 
+use type Facebook\HHAPIDoc\DocBlock\DocBlock;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class ClassMarkdownBuilder {

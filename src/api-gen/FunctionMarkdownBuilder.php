@@ -11,6 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
+use type Facebook\HHAPIDoc\DocBlock\DocBlock;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class FunctionMarkdownBuilder {
@@ -172,7 +173,7 @@ final class FunctionMarkdownBuilder {
       return null;
     }
 
-    $tags = $this->docblock->getParamInfo();
+    $tags = $this->docblock->getParameterInfo();
 
     $md = "### Parameters\n\n";
 

@@ -11,9 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use phpDocumentor\Reflection\DocBlock\Tag\ReturnTag;
-use phpDocumentor\Reflection\DocBlock\Tag\ParamTag;
-
+use namespace Facebook\HHAPIDoc\DocBlock;
 use namespace HH\Lib\{C, Str, Vec};
 use namespace Facebook\TypeAssert;
 
@@ -45,7 +43,7 @@ class Stringify {
 
   public static function parameter(
     ParameterDocumentation $param,
-    ?DocBlock::TParamInfo $info,
+    ?DocBlock\ParameterInfo $info,
   ): string {
     $name = $param['name'];
 
@@ -158,7 +156,8 @@ class Stringify {
     FunctionDocumentation $func,
     StringifyFormat $format = StringifyFormat::MULTI_LINE,
   ): string {
-    $param_info = (new DocBlock($func['docComment'] ?? ''))->getParamInfo();
+    $param_info = (new DocBlock\DocBlock($func['docComment'] ?? ''))
+      ->getParameterInfo();
     $params = Vec\map(
       $func['parameters'],
       $p ==> Stringify::parameter($p, $param_info[$p['name']] ?? null),
