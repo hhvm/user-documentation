@@ -22,7 +22,10 @@ function stringify_parameters(
 ): string {
   $params = Vec\map(
     $function->getParameters(),
-    $p ==> stringify_parameter($p, $docs),
+    $p ==> stringify_parameter(
+      $p,
+      $docs?->getParameterInfo()['$'.$p->getName()] ?? null,
+    ),
   );
 
   if (!$params) {

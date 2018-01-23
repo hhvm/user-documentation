@@ -11,9 +11,6 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use type Facebook\DefinitionFinder\ScannedBase;
-use namespace HH\Lib\C;
-
 class Summary extends PageSection {
   public function getMarkdown(): ?string {
     return $this->docBlock?->getSummary();

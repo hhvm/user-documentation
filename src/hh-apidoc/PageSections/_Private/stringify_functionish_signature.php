@@ -18,7 +18,7 @@ use type Facebook\DefinitionFinder\{
 };
 use namespace HH\Lib\{Str, Vec};
 
-function stringify_function(
+function stringify_functionish_signature(
   StringifyFormat $format,
   ScannedFunctionAbstract $function,
   ?DocBlock $docs,
@@ -26,7 +26,7 @@ function stringify_function(
   $ret = '';
   $ns = $function->getNamespaceName();
   if ($format === StringifyFormat::MULTI_LINE && $ns !== '') {
-    $ret .= 'namespace '.$ns."\n\n";
+    $ret .= 'namespace '.$ns.";\n\n";
     $name = $function->getShortName();
   } else {
     $name = $function->getName();
@@ -51,9 +51,9 @@ function stringify_function(
   $ret .= stringify_parameters($format, $function, $docs);
 
   if ($type = $function->getReturnType()) {
-    $ret .= stringify_typehint($type);
+    $ret .= ': '.stringify_typehint($type);
   }
-  
+
   $ret .= ';';
   return $ret;
 }

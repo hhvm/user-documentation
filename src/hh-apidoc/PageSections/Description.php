@@ -11,10 +11,10 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use type Facebook\DefinitionFinder\ScannedBase;
+use type Facebook\DefinitionFinder\ScannedFunctionAbstract;
 
-class DescriptionHeading extends PageSection {
-  public function getMarkdown(): string {
-    return "## Description\n";
+class Description extends PageSection {
+  public function getMarkdown(): ?string {
+    return $this->docBlock?->getDescription();
   }
 }

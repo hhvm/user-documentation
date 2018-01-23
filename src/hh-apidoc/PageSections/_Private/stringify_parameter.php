@@ -11,19 +11,17 @@
 
 namespace Facebook\HHAPIDoc\PageSections\_Private;
 
-use type Facebook\HHAPIDoc\DocBlock\DocBlock;
+use namespace Facebook\HHAPIDoc\DocBlock;
 use type Facebook\DefinitionFinder\ScannedParameter;
 use namespace HH\Lib\{C, Str, Vec};
 
 function stringify_parameter(
   ScannedParameter $parameter,
-  ?DocBlock $function_docs,
+  ?DocBlock\ParameterInfo $docs,
 ): string {
   $s = '';
 
-  $param_info =
-    $function_docs?->getParameterInfo()[$parameter->getName()] ?? null;
-  $types = $param_info['types'] ?? null;
+  $types = $docs['types'] ?? null;
   if ($types) {
     $s .= Str\join($types, '|').' ';
   } else if ($th = $parameter->getTypehint()) {
@@ -36,7 +34,7 @@ function stringify_parameter(
   if ($parameter->isPassedByReference()) {
     $s .= '&';
   }
-  $s .= $parameter->getName();
+  $s .= '$'.$parameter->getName();
 
   if ($parameter->isOptional()) {
     $s .= ' = '.$parameter->getDefaultString();

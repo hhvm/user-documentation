@@ -11,22 +11,21 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use namespace HH\Lib\C;
+use type Facebook\DefinitionFinder\ScannedFunctionAbstract;
 
-class DeprecationMessage extends PageSection {
-  protected function getDeprecationMessage(): ?string {
-    $deprecated = $this->definition->getAttributes()['__Deprecated'] ?? null;
-    if ($deprecated === null) {
-      return null;
-    }
-    return (string) C\firstx($deprecated);
-  }
-
+class FunctionishSignature extends PageSection {
   public function getMarkdown(): ?string {
-    $message = $this->getDeprecationMessage();
-    if ($message === null) {
+    $f = $this->definition;
+    if (!$f instanceof ScannedFunctionAbstract) {
       return null;
     }
-    return "## Deprecated\n\n".$message;
+
+    $str = _Private\stringify_functionish_signature(
+      _Private\StringifyFormat::MULTI_LINE,
+      $f,
+      $this->docBlock,
+    );
+
+    return "```HackSignature\n".$str."\n```";
   }
 }

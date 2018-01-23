@@ -235,4 +235,14 @@ final class DocBlock {
     }
     return $out;
   }
+
+  public static function nullable(?string $comment): ?this {
+    if ($comment === null) {
+      return null;
+    }
+    if ($comment === '') {
+      return null;
+    }
+    return new self($comment);
+  }
 }
