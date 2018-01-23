@@ -21,36 +21,25 @@ use namespace HH\Lib\{C, Str, Vec};
 
 /** Test CLI for dumping the markdown for a given definition. */
 function cli_dump(string $file, ?string $symbol): void {
-  $parsed = FileParser::FromFile($file);
-  $defs = Vec\concat(
-    $parsed->getClasses(),
-    $parsed->getInterfaces(),
-    $parsed->getTraits(),
-    $parsed->getFunctions(),
-  ) |> Vec\map(
-    $$,
-    $def ==> $def instanceof ScannedClass
-      ? (Vec\concat(vec[$def], $def->getMethods()))
-      : vec[$def]
-  ) |> Vec\flatten($$);
+  $parser = FileParser::FromFile($file);
+  $documentables = Documentables\from_parser($parser);
 
   if ($symbol !== null) {
-    $def = C\find($defs, $def ==> $def->getName() === $symbol);
-    if ($def === null) {
-      $def = C\find($defs, $def ==> Str\ends_with($def->getName(), $symbol));
-    }
-
-    if ($def === null) {
-      $defs = vec[];
-    } else {
-      $defs = vec[$def];
-    }
+    $documentables = Vec\filter(
+      $documentables,
+      $documentable ==> $documentable['definition']->getName() === $symbol
+        || \sprintf(
+          '%s::%s',
+          $documentable['parent']?->getName(),
+          $documentable['definition']->getName(),
+        ) === $symbol,
+    );
   }
 
   $md = new MarkdownBuilder();
   print(
-    $defs
-    |> Vec\map($$, $def ==> $md->getDocumentationForDefinition($def))
+    $documentables
+    |> Vec\map($$, $def ==> $md->getDocumentation($def))
     |> Str\join($$, "\n")
     |> $$."\n"
   );

@@ -11,15 +11,24 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
+use type Facebook\HHAPIDoc\Documentable;
 use type Facebook\HHAPIDoc\DocBlock\DocBlock;
-use type Facebook\DefinitionFinder\ScannedBase;
+use type Facebook\DefinitionFinder\{
+  ScannedBase,
+  ScannedClass,
+};
 
 <<__ConsistentConstruct>>
 abstract class PageSection {
+  protected ScannedBase $definition;
+  protected ?ScannedClass $parent;
+
   public function __construct(
-    protected ScannedBase $definition,
+    protected Documentable $documentable,
     protected ?DocBlock $docBlock,
   ) {
+    $this->definition = $documentable['definition'];
+    $this->parent = $documentable['parent'];
   }
 
   abstract public function getMarkdown(): ?string;

@@ -11,7 +11,6 @@
 
 namespace Facebook\HHAPIDoc;
 
-use type Facebook\DefinitionFinder\ScannedBase;
 use namespace HH\Lib\{Str, Vec};
 
 class MarkdownBuilder {
@@ -29,12 +28,14 @@ class MarkdownBuilder {
     ];
   }
 
-  public function getDocumentationForDefinition(
-    ScannedBase $definition,
+  public function getDocumentation(
+    Documentable $documentable,
   ): string {
-    $docs = DocBlock\DocBlock::nullable($definition->getDocComment());
+    $docs = DocBlock\DocBlock::nullable(
+      $documentable['definition']->getDocComment(),
+    );
     return $this->getPageSections()
-      |> Vec\map($$, $s ==> (new $s($definition, $docs))->getMarkdown())
+      |> Vec\map($$, $s ==> (new $s($documentable, $docs))->getMarkdown())
       |> Vec\filter_nulls($$)
       |> Str\join($$, "\n\n");
   }

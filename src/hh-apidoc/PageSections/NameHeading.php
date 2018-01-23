@@ -11,26 +11,21 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use type Facebook\DefinitionFinder\{
-  ScannedFunctionAbstract,
-  ScannedMethod,
-};
+use type Facebook\DefinitionFinder\ScannedFunctionAbstract;
 
 class NameHeading extends PageSection {
   public function getMarkdown(): string {
+    $md = '# ';
+    if ($this->parent) {
+      $md .= $this->parent->getName().'::';
+    }
     $def = $this->definition;
-    if ($def instanceof ScannedMethod) {
-      $name = \sprintf(
-        '%s%s()',
-        $def->isStatic() ? '::' : '->',
-        $def->getName(),
-      );
-    } else if ($def instanceof ScannedFunctionAbstract) {
-      $name = $def->getName().'()';
-    } else {
-      $name = $def->getName();
+    $md .= $def->getName();
+
+    if ($def instanceof ScannedFunctionAbstract) {
+      $md .= '()';
     }
 
-    return '# '.$name;
+    return $md;
   }
 }
