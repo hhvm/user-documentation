@@ -9,8 +9,12 @@
  *
  */
 
-use HHVM\UserDocumentation\NavDataNode;
-use HHVM\UserDocumentation\UIGlyphIcon;
+use type HHVM\UserDocumentation\{
+  NavDataNode,
+  UIGlyphIcon,
+};
+
+use namespace HH\Lib\Dict;
 
 class :ui:navbar extends :x:element {
   attribute
@@ -19,9 +23,9 @@ class :ui:navbar extends :x:element {
     string extraNavListClass;
 
   protected function render(): XHPRoot {
-    $roots = array_map(
-      $node ==> $this->renderLevel1Item($node),
+    $roots = Dict\map(
       $this->:data,
+      $node ==> $this->renderLevel1Item($node),
     );
 
     $nav_list_class = 'navList';
@@ -100,7 +104,7 @@ class :ui:navbar extends :x:element {
     );
   }
 
-  private function isActive(/* HH_FIXME[4033 */...$nodes): bool {
+  private function isActive(NavDataNode ...$nodes): bool {
     $idx = 0;
     $active = $this->:activePath;
     foreach ($nodes as $node) {
@@ -120,7 +124,7 @@ class :ui:navbar extends :x:element {
    */
   private function renderLevel1Item(NavDataNode $node): XHPRoot {
     return $this->cachedRender(
-      $node['name'],
+      $node['name'].'//'.$node['urlPath'],
       $this->isActive($node),
       () ==> $this->renderLevel1ItemImpl($node),
     );
@@ -159,7 +163,7 @@ class :ui:navbar extends :x:element {
     NavDataNode $node,
   ): XHPRoot {
     return $this->cachedRender(
-      $parent['name'].$node['name'],
+      $parent['name'].'//'.$node['name'].'//'.$node['urlPath'],
       $this->isActive($parent, $node),
       () ==> $this->renderLevel2ItemImpl($parent, $node),
     );
@@ -223,8 +227,8 @@ class :ui:navbar extends :x:element {
   private function renderChildren(
     string $list_class,
     NavDataNode $parent,
-    (function(NavDataNode): XHPRoot) $render_func,
-  ): ?XHPRoot {
+    (function(NavDataNode): XHPChild) $render_func,
+  ): ?XHPChild {
     if (!$parent['children']) {
       return null;
     }
@@ -232,7 +236,7 @@ class :ui:navbar extends :x:element {
     $root = <ul class={$list_class} />;
     foreach ($parent['children'] as $child) {
       $root->appendChild(
-        $render_func(/* UNSAFE_EXPR */ $child)
+        $render_func(/* HH_IGNORE_ERROR[4110] mixed to shape */ $child)
       );
     }
     return $root;
@@ -247,7 +251,7 @@ class :ui:navbar extends :x:element {
       return $callback();
     }
 
-    $cache_key = $cache_key.'!!!'.__CLASS__.'!!!';
+    $cache_key .= '!!!'.self::class.'!!!';
     $stored = APCCachedRenderable::get($cache_key);
     if ($stored) {
       return $stored;
