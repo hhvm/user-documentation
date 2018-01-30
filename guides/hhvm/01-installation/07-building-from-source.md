@@ -5,9 +5,6 @@ Building from source is advisable generally when you need features that exist in
  - An `x86_64` system
  - GCC 5 or above
  - Several GB of RAM
- - Additional build-time dependencies; these are listed for various distributions in [our packaging repository](https://github.com/hhvm/packaging/) - for example,
-   [Debian Jessie's `control` file](https://github.com/hhvm/packaging/blob/master/debian-8-jessie/debian/control) contains the build dependency list. If you are not
-   on a distribution we currently target, use Jessie as a starting point: the packages are likely to be similary named.
 
 ### GCC 5
 
@@ -17,6 +14,31 @@ several of our binary packages.
 HHVM might build with GCC 4.9, however:
  - we are no longer testing this
  - HHVM is [known to trigger optimization bugs in GCC 4.9](https://github.com/facebook/hhvm/issues/8011)
+
+## Installing Build Dependencies
+
+### Debian or Ubuntu
+
+```
+$ add-apt-repository -s https://dl.hhvm.com/debian
+# - or - #
+$ add-apt-repository -s https://dl.hhvm.com/ubuntu
+
+$ apt-get update
+$ apt-get build-dep hhvm-nightly
+```
+
+### Homebrew
+
+```
+$ brew tap hhvm/hhvm
+$ brew deps --include-build hhvm | xargs brew install
+```
+
+### Other Distributions
+
+It's best to obtain the dependency list from our nightly packaging system, to ensure you're using an
+up-to-date list; to do this, search https://github.com/hhvm/packaging/ for `Build-Depends:`
 
 ## Downloading the HHVM source-code
 
@@ -49,12 +71,10 @@ If you have built your own GCC, you will need to pass additional options to cmak
 It's fairly common in some environments to work around `opendirectoryd` issues by scheduling a cronjob to kill it; if you're doing this, disable it before building HHVM, or you
 are likely to get misleading errors such as `/bin/sh: /bin/sh: cannot execute binary file` in the middle of the build.
 
-Even when building HHVM from source, it's easiest to use [brew](https://brew.sh) to install dependencies and manage the build environment:
+Even when building HHVM from source, it's easiest to use [brew](https://brew.sh) to manage the build environment:
 
 ```
-brew tap hhvm/hhvm
-brew deps --include-build hhvm | xargs brew install
-brew sh
+$ brew sh
 ```
 
 `brew sh` will drop you into a bash shell in a normalized build environment - e.g. `PATH` will be set to include common build tools.
