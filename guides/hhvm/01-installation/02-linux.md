@@ -5,13 +5,14 @@ While you can [build from source](/hhvm/installation/building-from-source), it i
 
 Here are the supported distributions:
 
-* Ubuntu 16.04 Xenial
-* Ubuntu 16.10 Yakkety
-* Ubuntu 17.04 Zesty
-* Ubunty 17.10 Artful
-* Debian 7 Wheezy
-* Debian 8 Jessie
-* Debian 9 Stretch
+| Distribution | HHVM 3.21 | HHVM 3.24 | Nightlies |
+|--------------|-----------|-----------|-----------|
+| Debian 7 Wheezy | Yes | Yes | No |
+| Debian 8 Jessie | Yes | Yes | Yes |
+| Debian 9 Stretch | No | Yes | Yes|
+| Ubuntu 14.04 Trusty | Yes | Yes | Yes |
+| Ubuntu 16.04 Xenial | Yes | Yes | Yes |
+| Ubuntu 17.10 Artful | No | No | Yes |
 
 These instructions require root; use `su -` or `sudo -i` to get a root shell first.
 
