@@ -10,4 +10,4 @@ However, there is some support for runtime type checking in HHVM, but its enforc
   - [Generics](../generics/introduction.md) are enforced as if they did not have type parameters.
   - [Shapes](../shapes/introduction.md) and [tuples](type-system.md#tuples) are only enforced as if they were an `array()`. The inner types of each are not enforced.
   - [Enums](../enums/introduction.md) are enforced only at the underlying type level. HHVM does not check for valid enum values.
-  - If you specify the [soft-type hint operator `@`](advanced-rules.md#Soft Type Hints) before an annotation, a warning would be thrown in the case where a catchable fatal would have been.
+  - If you specify the [soft-type hint operator `@`](advanced-rules.md#Soft+Type+Hints) before an annotation, a warning would be thrown in the case where a catchable fatal would have been.
