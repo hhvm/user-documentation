@@ -5,12 +5,11 @@ ENV TZ UTC
 # We need a unicode-aware system to generate the docs
 # Not needed for HHVM >= 3.19, as 3.19 is built on Ubuntu 16.04, which has a
 # different locale system
-RUN apt-get update -y && apt-get install -y locales && locale-gen en_US.UTF-8
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get clean && apt-get update -y && apt-get install -y locales && locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
-
-ENV DEBIAN_FRONTEND noninteractive
 
 RUN rm -rf /var/www
 ADD . /var/www
