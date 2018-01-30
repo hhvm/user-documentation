@@ -2,8 +2,12 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use HHVM\UserDocumentation\GuidesNavData;
-use HHVM\UserDocumentation\NavDataNode;
+use type HHVM\UserDocumentation\{
+  GuidesNavData,
+  NavDataNode,
+};
+use namespace HH\Lib\Tuple;
+use function Facebook\FBExpect\expect;
 
 class GuidePagesTest extends \PHPUnit_Framework_TestCase {
   public static function allGuidePages(): array<(string, string)> {
@@ -89,5 +93,21 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
 
     $body = (string) $response->getBody();
     $this->assertContains('allow_url_fopen</a></td>', $body);
+  }
+
+  public function testCachedNavDataIsNotJustByName(): void {
+    list(
+      $hack,
+      $hhvm,
+    ) = \HH\Asio\join(
+      Tuple\from_async(
+        PageLoader::getPage('/hack/typechecker/introduction'),
+        PageLoader::getPage('/hhvm/configuration/INI-settings'),
+      ),
+    );
+    $hack = (string) $hack->getBody();
+    $hhvm = (string) $hhvm->getBody();
+    expect($hack)->toContain('/hack/getting-started/getting-started');
+    expect($hhvm)->toContain('/hhvm/getting-started/getting-started');
   }
 }
