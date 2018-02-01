@@ -7,6 +7,11 @@ if [ ! -e /docker_build ]; then
   exit 1
 fi
 
+# This is done by the dockerfile, but the intermediate issue can be cached, so do
+# it again here.
+apt-get clean
+apt-get update -y
+
 # we depend on a recent version of the Nokogiri gem, which bundler will install
 # for us later; this needs to build it's own libxml so we need to install the
 # -dev versions of some dependencies
