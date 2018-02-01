@@ -2,13 +2,18 @@ Building from source is advisable generally when you need features that exist in
 
 ## Requirements
 
- - An `x86_64` system
- - GCC 5 or above
- - Several GB of RAM
+- An `x86_64` system
+- Several GB of RAM
+- MacOS:
+  - Sierra or High Sierra
+  - Clang from Xcode Command Line Tools
+- Linux:
+  - GCC 5 or GCC 7
+  - we only actively support building on distributions we create binary packages for; your mileage may vary on other systems
 
 ### GCC 5
 
-If your system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
+If your Linux-based system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
 several of our binary packages.
 
 HHVM might build with GCC 4.9, however:
