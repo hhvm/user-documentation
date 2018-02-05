@@ -1,7 +1,5 @@
-Hack provides additional "array-like" types: `dict`, `vec`, and `keyset`;
-we expect these to eventually replace the collection objects, and will be
-recommending they are used instead once the
-[Hack Standard Library](https://github.com/hhvm/hsl) leaves 'preview' status.
+Hack provides additional "array-like" types: `dict`, `vec`, and `keyset`, and
+they are recommended both over PHP arrays, and the Hack Collection objects.
 
 ## The Types
 
@@ -34,7 +32,7 @@ Additionally, Hack provides the following conversion functions:
 As Hack Arrays are not objects, they do not have methods. Library support is
 provided via the [Hack Standard Library](https://github.com/hhvm/hsl).
 
-A full [API reference](https://hhvm.github.io/hsl/api/) is automatically
+A full [API reference](https://docs.hhvm.com/hsl/reference/) is automatically
 generated, however we strongly recommend reading
 [the README](https://github.com/hhvm/hsl/blob/master/README.md) first.
 
