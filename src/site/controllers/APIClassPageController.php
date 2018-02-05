@@ -9,17 +9,20 @@
  *
  */
 
-use HHVM\UserDocumentation\APIClassIndexEntry;
-use HHVM\UserDocumentation\APIDefinitionType;
-use HHVM\UserDocumentation\APIIndex;
-use HHVM\UserDocumentation\APIIndexEntry;
-use HHVM\UserDocumentation\APIMethodIndexEntry;
-use HHVM\UserDocumentation\APINavData;
-use HHVM\UserDocumentation\BuildPaths;
-use HHVM\UserDocumentation\HTMLFileRenderable;
-use HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\{
+  APIProduct,
+  APIClassIndexEntry,
+  APIDefinitionType,
+  APIIndex,
+  APIIndexEntry,
+  APIMethodIndexEntry,
+  APINavData,
+  BuildPaths,
+  HTMLFileRenderable,
+  URLBuilder,
+};
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{C, Str};
 
 final class APIClassPageController extends APIPageController {
   use APIClassPageControllerParametersTrait;
@@ -80,8 +83,31 @@ final class APIClassPageController extends APIPageController {
     );
   }
 
+  private function redirectIfHSLAPIWithHackProduct(): void {
+    $p = $this->getParameters();
+    if ($p['Product'] !== APIProduct::HACK) {
+      return;
+    }
+
+    $index = APIIndex::get(APIProduct::HACK)->getIndexForType($p['Type']);
+    $name = $p['Name'];
+    if (C\contains_key($index, $name)) {
+      return;
+    }
+
+    $index = APIIndex::get(APIProduct::HSL)->getIndexForType($p['Type']);
+    $entry = $index[$name] ?? null;
+    if ($entry === null) {
+      return;
+    }
+
+    throw new RedirectException($entry['urlPath']);
+  }
+
   <<__Override>>
   protected function redirectIfAPIRenamed(): void {
+    $this->redirectIfHSLAPIWithHackProduct();
+
     $redirect_to = $this->getRenamedAPI($this->getParameters()['Name']);
 
     if ($redirect_to === null) {

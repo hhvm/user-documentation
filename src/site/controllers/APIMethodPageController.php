@@ -9,10 +9,14 @@
  *
  */
 
-use HHVM\UserDocumentation\APIIndex;
-use HHVM\UserDocumentation\APIClassIndexEntry;
-use HHVM\UserDocumentation\APIMethodIndexEntry;
-use HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\{
+  APIClassIndexEntry,
+  APIIndex,
+  APIMethodIndexEntry,
+  APIProduct,
+  URLBuilder,
+};
+use namespace HH\Lib\C;
 
 final class APIMethodPageController extends APIPageController {
   use APIMethodPageControllerParametersTrait;
@@ -89,9 +93,36 @@ final class APIMethodPageController extends APIPageController {
       tuple($method['name'], null),
     ];
   }
+  private function redirectIfHSLAPIWithHackProduct(): void {
+    $p = $this->getParameters();
+    if ($p['Product'] !== APIProduct::HACK) {
+      return;
+    }
+
+    $class = $p['Class'];
+
+    $index = APIIndex::get(APIProduct::HACK)->getClassIndex($p['Type']);
+    if (C\contains_key($index, $class)) {
+      return;
+    }
+
+    $index = APIIndex::get(APIProduct::HSL)->getClassIndex($p['Type']);
+    $class_entry = $index[$class] ?? null;
+    if ($class_entry === null) {
+      return;
+    }
+    $method_entry = $class_entry['methods'][$p['Method']] ?? null;
+    if ($method_entry === null) {
+      return;
+    }
+
+    throw new RedirectException($method_entry['urlPath']);
+  }
 
   <<__Override>>
   protected function redirectIfAPIRenamed(): void {
+    $this->redirectIfHSLAPIWithHackProduct();
+
     $redirect_to = $this->getRenamedAPI($this->getParameters()['Class']);
     if ($redirect_to === null) {
       return;
