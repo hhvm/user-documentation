@@ -59,16 +59,3 @@ Class | Access | Iteration | Insert | Removal
 **`Set`** | `O(1)` | `O(n)` | `O(1)` | `O(1)`
 **`Pair`** | `O(1)` | `O(1)` | N/A | N/A
 **`array`** | `O(1)` | `O(n)` | `O(1)` | `O(1)`
-
-
-### Type Checking
-
-Related to readability, the Hack typechecker cannot tell, for example, whether the context of your code is passing an `array` used like a vector to a function with a parameter of an `array` used like a map. For example, the following code passes the typechecker.
-
-@@ introduction-examples/array-typecheck.php @@
-
-However, if you take a similar style of code, but instead use `Vector` and `Map`, the typechecker can easily tell the intent.
-
-@@ introduction-examples/map-typecheck.php.type-errors @@
-
-Using Hack collections gives the typechecker more data to work with in trying to decide whether you have typing problems in your code.

@@ -3,9 +3,13 @@
 namespace Hack\UserDocumentation\Collections\Typing\Examples\Iter;
 
 // Given that this function takes an Iterable, you can pass any of
-// our current concerte collection classes to this method
+// our current concrete collection classes to this method
 function take_iterable<T>(Iterable<T> $it): array<T> {
-  return $it->toValuesArray();
+  $arr = [];
+  foreach ($it as $v) {
+    $arr[] = $v;
+  }
+  return $arr;
 }
 
 function run(): void {
