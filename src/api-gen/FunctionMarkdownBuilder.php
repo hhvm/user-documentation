@@ -134,11 +134,11 @@ final class FunctionMarkdownBuilder {
     APIProduct $product,
     FunctionDocumentation $docs,
   ): string {
-    return sprintf(
+    return \sprintf(
       '%s/%s/function.%s.md',
       BuildPaths::APIDOCS_MARKDOWN,
       $product,
-      strtr($docs['name'], "\\", '.'),
+      \strtr($docs['name'], "\\", '.'),
     );
   }
 
@@ -169,7 +169,7 @@ final class FunctionMarkdownBuilder {
 
   private function getParameters(): ?string {
     // If no parameters for the function, then move on
-    if (count($this->yaml['data']['parameters']) === 0) {
+    if (\count($this->yaml['data']['parameters']) === 0) {
       return null;
     }
 
@@ -209,7 +209,7 @@ final class FunctionMarkdownBuilder {
 
       $types = Vec\filter($types, $type ==> $type !== '\-' && $type !== '-');
       if ($types) {
-        $ret .= '`'.implode('|', $types).'` - ';
+        $ret .= '`'.\implode('|', $types).'` - ';
       } else {
         $ret_th = $this->yaml['data']['returnType'];
         if ($ret_th !== null) {
@@ -232,26 +232,26 @@ final class FunctionMarkdownBuilder {
     }
 
     $path .= $this->yaml['data']['name'];
-    $path = strtr($path, "\\", '.');
-    $examples = (new Vector(glob($path.'/*.php')))
-      ->addAll(glob($path.'/*.md'))
-      ->map($filename ==> pathinfo($filename, PATHINFO_FILENAME))
+    $path = \strtr($path, "\\", '.');
+    $examples = (new Vector(\glob($path.'/*.php')))
+      ->addAll(\glob($path.'/*.md'))
+      ->map($filename ==> \pathinfo($filename, \PATHINFO_FILENAME))
       ->toSet()
       ->toVector(); // Work around issue that Sets can't be sorted
 
-    if (count($examples) === 0) {
+    if (\count($examples) === 0) {
       return null;
     }
-    sort(&$examples);
+    \sort(&$examples);
 
     $ret = "### Examples\n";
     foreach ($examples as $example) {
       $preamble = $path.'/'.$example.'.md';
       $code = $path.'/'.$example.'.php';
-      if (file_exists($preamble)) {
-        $ret .= "\n\n".file_get_contents($preamble);
+      if (\file_exists($preamble)) {
+        $ret .= "\n\n".\file_get_contents($preamble);
       }
-      if (file_exists($code)) {
+      if (\file_exists($code)) {
         $ret .= "\n\n@@ ".$code." @@";
       }
       $ret .= "\n\n";

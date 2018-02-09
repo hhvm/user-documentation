@@ -15,7 +15,7 @@ final class ClassMarkdownBuilder {
   ) {
     $this->yaml = JSON\decode_as_shape(
       ClassYAML::class,
-      file_get_contents($file),
+      \file_get_contents($file),
     );
     $doc = $this->yaml['data']['docComment'];
     $this->docblock = new DocBlock($doc ?? '');
@@ -37,12 +37,12 @@ final class ClassMarkdownBuilder {
     APIDefinitionType $type,
     ClassDocumentation $docs,
   ): string {
-    return sprintf(
+    return \sprintf(
       '%s/%s/%s.%s.md',
       BuildPaths::APIDOCS_MARKDOWN,
       $product,
       $type,
-      strtr($docs['name'], "\\", '.'),
+      \strtr($docs['name'], "\\", '.'),
     );
   }
 
@@ -54,8 +54,8 @@ final class ClassMarkdownBuilder {
       $this->getDescription(),
       $this->getContents(),
     })->filter($x ==> $x !== null)
-      ->map($x ==> trim($x));
-    return implode("\n\n", $parts);
+      ->map($x ==> \trim($x));
+    return \implode("\n\n", $parts);
   }
 
   private function getFrontMatterString(): string {
@@ -79,14 +79,14 @@ final class ClassMarkdownBuilder {
   }
 
   private function getHeading(): string {
-    return '## The '.htmlspecialchars($this->getName()).' '.$this->yaml['type'];
+    return '## The '.\htmlspecialchars($this->getName()).' '.$this->yaml['type'];
   }
 
   private function getDescription(): string {
     $md = "";
     if ($this->docblock !== null) {
       $desc = $this->docblock->getDescription();
-      if ($desc !== null && strpos($desc, 'Copyright (c)') !== 0) {
+      if ($desc !== null && \strpos($desc, 'Copyright (c)') !== 0) {
         $md .= $desc . "\n";
       }
     }
@@ -106,7 +106,7 @@ this is new to you, we strongly recommend reading the introductory guides first:
 EOF;
 
     foreach ($guides as $url_path) {
-      list($_, $product, $category, $page) = explode('/', $url_path);
+      list($_, $product, $category, $page) = \explode('/', $url_path);
       invariant(
         $product === 'hack',
         'can only link to hack guides - "%s" is referencing "%s"',
@@ -114,9 +114,9 @@ EOF;
         $product,
       );
 
-      $title = ucwords(strtr($category.': '.$page, '-', ' '));
+      $title = \ucwords(\strtr($category.': '.$page, '-', ' '));
 
-      $ret .= sprintf(
+      $ret .= \sprintf(
         " - [%s](%s)\n",
         $title,
         $url_path,
@@ -147,17 +147,17 @@ EOF;
         $name = '->';
       }
       $name .= $method['name'];
-      $generics = htmlspecialchars(
+      $generics = \htmlspecialchars(
         Stringify::generics($method['generics'])
       );
-      $params = htmlspecialchars(
+      $params = \htmlspecialchars(
         Stringify::parameters($method, StringifyFormat::ONE_LINE)
       );
       $return_type = $method['returnType'];
       $return_type =
         $return_type === null
         ? ''
-        : ': '.htmlspecialchars(Stringify::typehint($return_type));
+        : ': '.\htmlspecialchars(Stringify::typehint($return_type));
 
       $md .=
         ' * [`'.

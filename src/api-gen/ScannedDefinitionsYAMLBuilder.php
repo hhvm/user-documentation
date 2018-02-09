@@ -178,7 +178,7 @@ class ScannedDefinitionsYAMLBuilder {
       invariant(
         $method->isProtected(),
         'method with no visibility: %s',
-        var_export($method, true),
+        \var_export($method, true),
       );
       $ret['visibility'] = MemberVisibility::PROTECTED;
     }

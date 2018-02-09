@@ -22,14 +22,14 @@ final class MergedYAMLBuildStep extends BuildStep {
       ->addAll(self::findSources(BuildPaths::SYSTEMLIB_YAML, Set{'yml'}));
 
     $out_dir = BuildPaths::APIDOCS_DATA.'/'.APIProduct::HACK;
-    if (!is_dir($out_dir)) {
-      mkdir($out_dir, /* mode = */ 0755, /* recursive = */ true);
+    if (!\is_dir($out_dir)) {
+      \mkdir($out_dir, /* mode = */ 0755, /* recursive = */ true);
     }
     Log::i("\nBuilding YAML");
     $builder = new MergedYAMLBuilder($out_dir);
     foreach ($sources as $source) {
       Log::v('.');
-      $data = JSON\decode_as_shape(BaseYAML::class, file_get_contents($source));
+      $data = JSON\decode_as_shape(BaseYAML::class, \file_get_contents($source));
       if ($data['type'] === APIDefinitionType::FUNCTION_DEF) {
         $data = TypeAssert\matches_type_structure(
           type_alias_structure(FunctionYAML::class),

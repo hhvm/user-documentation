@@ -70,7 +70,7 @@ final class GuidesNavData {
       case 'faq':
         return 'FAQ';
       default:
-        return ucwords(strtr($name, '-', ' '));
+        return \ucwords(\strtr($name, '-', ' '));
     }
   }
 }

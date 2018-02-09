@@ -17,7 +17,7 @@ class C extends A {
   <<__UNSAFE_Construct>>
   public function __construct(int $x) {
     $this->x = $x;
-    var_dump($this->x);
+    \var_dump($this->x);
   }
 }
 

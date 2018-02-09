@@ -20,14 +20,14 @@ async function simple_query(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
   $result = await $conn->query('SELECT name FROM test_table WHERE userID < 50');
-  var_dump($result->mapRows()->count() === $result->numRows());
+  \var_dump($result->mapRows()->count() === $result->numRows());
   $conn->close();
   return $result->numRows();
 }
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

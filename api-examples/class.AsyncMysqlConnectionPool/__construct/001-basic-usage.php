@@ -42,9 +42,9 @@ function run_it(): void {
   } catch (\AsyncMysqlConnectException $ex) {
     $stats = get_stats($pool);
     echo "Allowed pool connections: " . $stats['created_pool_connections'] .
-         PHP_EOL .
+         \PHP_EOL .
          "Requested pool connections: " . $stats['connections_requested'] .
-         PHP_EOL;
+         \PHP_EOL;
   }
 
   $options = array(
@@ -53,7 +53,7 @@ function run_it(): void {
   );
   $pool = set_connection_pool($options);
   $conn = \HH\Asio\join(connect_with_pool($pool));
-  sleep(10); // Idle for 5 seconds. So should timeout here.
+  \sleep(10); // Idle for 5 seconds. So should timeout here.
   try {
     $result = \HH\Asio\join($conn->query("SELECT * FROM test_table"));
   } catch (\AsyncMysqlQueryException $ex) {

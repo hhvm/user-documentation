@@ -48,7 +48,7 @@ function run(): void {
     ->setAutomaticTransmission(true)
     ->setPluggable(true)
     ->drive();
-  var_dump($h);
+  \var_dump($h);
 }
 
 run();

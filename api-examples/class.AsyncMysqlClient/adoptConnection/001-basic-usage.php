@@ -7,12 +7,12 @@ require __DIR__ . "/../../__includes/async_mysql_connect.inc.php";
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function get_synchronous_connection(): resource {
-  $conn = mysql_connect(
+  $conn = \mysql_connect(
     CI::$host,
     CI::$user,
     CI::$passwd
   );
-  mysql_select_db(
+  \mysql_select_db(
     CI::$db,
     $conn
   );
@@ -32,7 +32,7 @@ function run_it(): void {
   $sconn = get_synchronous_connection();
   $aconn = use_async_connection($sconn);
   $rows = \HH\Asio\join(get_rows($aconn));
-  var_dump($rows->numRows()); // The number of rows from the SELECT statement
+  \var_dump($rows->numRows()); // The number of rows from the SELECT statement
 }
 
 run_it();

@@ -8,7 +8,7 @@ async function get_hello(): Awaitable<string> {
 
 async function run_a_hello(): Awaitable<void> {
   $x = await get_hello();
-  var_dump($x);
+  \var_dump($x);
 }
 
 run_a_hello();

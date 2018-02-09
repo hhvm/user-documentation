@@ -29,19 +29,19 @@ type TIPRangesJSON = shape(
 function cidr_to_bitstring_and_bitmask(string $cidr): (string, string) {
   list($addr, $bits) = Str\split($cidr, '/');
   $bits = (int) $bits;
-  $addr = inet_pton($addr);
+  $addr = \inet_pton($addr);
 
-  $mask = Str\repeat("\xff", intdiv($bits, 8));
+  $mask = Str\repeat("\xff", \intdiv($bits, 8));
   $bits = $bits % 8;
   if ($bits !== 0) {
-    $mask .= chr(((1 << $bits) - 1) << (8 - $bits));
+    $mask .= \chr(((1 << $bits) - 1) << (8 - $bits));
   }
   $mask .= Str\repeat("\x00", Str\length($addr) - Str\length($mask));
   return tuple($addr, $mask);
 }
 
 function is_ip_in_range(string $ip, (string, string) $range): bool {
-  $addr_bitstring = inet_pton($ip);
+  $addr_bitstring = \inet_pton($ip);
   list($range_bitstring, $range_bitmask) = $range;
   /* HH_IGNORE_ERROR[4110] bitwise & on strings */
   return ($addr_bitstring & $range_bitmask) === $range_bitstring;

@@ -11,10 +11,10 @@ use function Facebook\FBExpect\expect;
 
 class GuidePagesTest extends \PHPUnit_Framework_TestCase {
   public static function allGuidePages(): array<(string, string)> {
-    $to_visit = array_values(GuidesNavData::getNavData());
+    $to_visit = \array_values(GuidesNavData::getNavData());
     $out = [];
 
-    while ($node = array_pop(&$to_visit)) {
+    while ($node = \array_pop(&$to_visit)) {
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

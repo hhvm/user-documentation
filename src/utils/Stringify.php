@@ -137,12 +137,12 @@ class Stringify {
       $ret .= 'extends ' . $parent['typename'] . ' ';
     }
     $implInterfaces = $iface['interfaces'];
-    if (count($implInterfaces) > 0) {
+    if (\count($implInterfaces) > 0) {
       $ret .= 'implements ';
       foreach ($implInterfaces as $implInterface) {
         $ret .= $implInterface['typename'] . ', ';
       }
-      $ret = substr($ret, 0, -2); // remove trailing ', ''
+      $ret = \substr($ret, 0, -2); // remove trailing ', ''
     }
     $ret .= ' {...}';
     if ($ns !== '') {
@@ -171,15 +171,15 @@ class Stringify {
       case StringifyFormat::MULTI_LINE:
         return
           "(\n".
-          implode("\n", array_map($x ==> '  '.$x.',', $params)).
+          \implode("\n", \array_map($x ==> '  '.$x.',', $params)).
           "\n)";
       case StringifyFormat::ONE_LINE:
-        return '('.implode(', ', $params).')';
+        return '('.\implode(', ', $params).')';
     }
   }
 
   public static function generics(vec<GenericDocumentation> $generics): string {
-    if (count($generics) === 0) {
+    if (\count($generics) === 0) {
       return '';
     }
 

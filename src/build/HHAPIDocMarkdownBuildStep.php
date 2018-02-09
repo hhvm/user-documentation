@@ -60,8 +60,8 @@ final class HHAPIDocMarkdownBuildStep extends BuildStep {
   ): vec<string> {
     $out = BuildPaths::APIDOCS_MARKDOWN.'/'.$product;
 
-    if (!is_dir($out)) {
-      mkdir($out, /* mode = */ 0755, /* recursive = */ true);
+    if (!\is_dir($out)) {
+      \mkdir($out, /* mode = */ 0755, /* recursive = */ true);
     }
 
     $builder = new MarkdownBuilder();
@@ -113,7 +113,7 @@ final class HHAPIDocMarkdownBuildStep extends BuildStep {
     }
     invariant_violation(
       "Can't handle type %s",
-      get_class($definition),
+      \get_class($definition),
     );
   }
 }

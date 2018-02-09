@@ -10,7 +10,7 @@ function filter_evens(Set<int> $numbers): Set<int> {
 
 function run(): void {
   $numbers = Set {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-  var_dump(filter_evens($numbers));
+  \var_dump(filter_evens($numbers));
 }
 
 run();

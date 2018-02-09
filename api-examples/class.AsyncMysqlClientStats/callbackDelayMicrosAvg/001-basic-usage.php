@@ -26,7 +26,7 @@ async function get_delay(): Awaitable<float> {
 
 function run(): void {
   $d = \HH\Asio\join(get_delay());
-  var_dump($d);
+  \var_dump($d);
 }
 
 run();

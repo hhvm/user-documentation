@@ -19,18 +19,18 @@ async function connect(\AsyncMysqlConnectionPool $pool):
 async function simple_query(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
-  $id = rand(100, 60000); // userID is a SMALLINT
-  $name = str_shuffle("ABCDEFGHIJ");
+  $id = \rand(100, 60000); // userID is a SMALLINT
+  $name = \str_shuffle("ABCDEFGHIJ");
   $query = 'INSERT INTO test_table (userID, name) VALUES ('
          . $id . ', "' . $name . '")';
   try {
     $result = await $conn->query($query);
     // What was the last primary id we inserted into the table?
-    var_dump($result->lastInsertId());
+    \var_dump($result->lastInsertId());
   } catch (\AsyncMysqlQueryException $ex) {
     // this could happen if we try to insert duplicate user id
     // But to keep test output consistent, just var dump a positive number
-    var_dump(PHP_INT_MAX);
+    \var_dump(\PHP_INT_MAX);
     $conn->close();
     return 0;
   }
@@ -40,7 +40,7 @@ async function simple_query(): Awaitable<int> {
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

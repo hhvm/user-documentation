@@ -20,7 +20,7 @@ async function do_cpu_work(): Awaitable<void> {
 
 async function do_sleep(): Awaitable<void> {
   print("Start sleep\n");
-  sleep(1);
+  \sleep(1);
   print("End sleep\n");
 }
 

@@ -25,7 +25,7 @@ abstract class PageLoader {
 
   <<__Memoize>>
   protected static function getHost(): ?string {
-    $host = getenv('REMOTE_TEST_HOST');
+    $host = \getenv('REMOTE_TEST_HOST');
     if ($host === false) {
       return null;
     }

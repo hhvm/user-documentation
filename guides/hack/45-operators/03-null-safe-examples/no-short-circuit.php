@@ -9,7 +9,7 @@ class Bar {
 }
 
 function get_Bar(): ?Bar {
-  if (rand(0, 10) < 5) {
+  if (\rand(0, 10) < 5) {
     return null;
   }
   return new Bar();
@@ -20,7 +20,7 @@ function foo(): ?int {
   $b = get_Bar();
   // Even if $b ends up being null, $x will be incremented to 5
   $y = $b?->baz($x++);
-  var_dump($x);
+  \var_dump($x);
   return $y;
 }
 

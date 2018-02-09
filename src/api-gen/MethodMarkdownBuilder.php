@@ -22,7 +22,7 @@ class MethodMarkdownBuilder {
   ) {
     $this->yaml = JSON\decode_as_shape(
       ClassYAML::class,
-      file_get_contents($file),
+      \file_get_contents($file),
     );
   }
 
@@ -66,9 +66,9 @@ class MethodMarkdownBuilder {
       $class_type,
       $class
     );
-    return str_replace(
+    return \str_replace(
       '.md',
-      sprintf('.method.%s.md', $method['name']),
+      \sprintf('.method.%s.md', $method['name']),
       $class_file_name,
     );
   }

@@ -24,9 +24,9 @@ async function simple_query_error(): Awaitable<int> {
   } catch (\AsyncMysqlQueryException $ex) {
     $qr = $ex->getResult();
     // Actually `AsyncMysqlQueryErrorResult`
-    var_dump($qr instanceof \AsyncMysqlErrorResult);
+    \var_dump($qr instanceof \AsyncMysqlErrorResult);
     // Error should be "Table doesn't exist...""
-    var_dump($qr->mysql_normalize_error());
+    \var_dump($qr->mysql_normalize_error());
     $conn->close();
     return 0;
   }
@@ -36,7 +36,7 @@ async function simple_query_error(): Awaitable<int> {
 
 function run(): void {
   $r = \HH\Asio\join(simple_query_error());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

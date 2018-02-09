@@ -22,7 +22,7 @@ final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
     Log::i("\nAPIHTMLBuild");
     $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
       |> Vec\filter($$, $path ==> \basename($path) !== 'README.md')
-      |> Vec\filter($$, $path ==> strpos($path, '-examples') === false)
+      |> Vec\filter($$, $path ==> \strpos($path, '-examples') === false)
       |> Vec\sort($$);
 
     $this->renderFiles($sources);

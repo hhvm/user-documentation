@@ -18,8 +18,8 @@ abstract final class LegacyRedirects {
   public static function getUrlForId(string $id): ?string {
     $ids = [
       $id,
-      strtr($id, '.', '-'),
-      strtr($id, '-', '.'),
+      \strtr($id, '.', '-'),
+      \strtr($id, '-', '.'),
     ];
 
     foreach ($ids as $id) {
@@ -52,7 +52,7 @@ abstract final class LegacyRedirects {
     // $from being a string part of $id. If so, then we can redirect to the
     // appropriate place.
     foreach (self::getManualRedirectData() as $from => $to) {
-      if (stripos($id, $from) !== false) {
+      if (\stripos($id, $from) !== false) {
         return $to;
       }
     }

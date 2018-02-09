@@ -36,7 +36,7 @@ async function percent_L_queryf(): Awaitable<int> {
 
 function run(): void {
   $r = \HH\Asio\join(percent_L_queryf());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

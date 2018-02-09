@@ -18,7 +18,7 @@ async function wrapping_exceptions(): Awaitable<void> {
   // Since we wrapped, the results will contain both the exception and the
   // integer result
   $results = await \HH\Asio\v($handles);
-  var_dump($results);
+  \var_dump($results);
 }
 
 \HH\Asio\join(wrapping_exceptions());

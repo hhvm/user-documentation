@@ -13,10 +13,10 @@ final class RemotePageLoader extends PageLoader {
   protected async function getPageImpl(
     string $url,
   ): Awaitable<ResponseInterface> {
-    $host_header = parse_url($url, PHP_URL_HOST);
-    $scheme = parse_url($url, PHP_URL_SCHEME);
-    $path = parse_url($url, PHP_URL_PATH);
-    $query = parse_url($url, PHP_URL_QUERY);
+    $host_header = \parse_url($url, \PHP_URL_HOST);
+    $scheme = \parse_url($url, \PHP_URL_SCHEME);
+    $path = \parse_url($url, \PHP_URL_PATH);
+    $query = \parse_url($url, \PHP_URL_QUERY);
 
     $test_host = TypeAssert\not_null(self::getHost());
     if ($scheme === null) {
@@ -34,38 +34,38 @@ final class RemotePageLoader extends PageLoader {
       $url .= '?'.$query;
     }
 
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_HEADER, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $ch = \curl_init($url);
+    \curl_setopt($ch, \CURLOPT_HEADER, 1);
+    \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
 
     if ($host_header) {
-      curl_setopt($ch, CURLOPT_HTTPHEADER, ['Host: '.$host_header]);
+      \curl_setopt($ch, \CURLOPT_HTTPHEADER, ['Host: '.$host_header]);
     }
 
     $response = await \HH\Asio\curl_exec($ch);
-    $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $status = (int) \curl_getinfo($ch, \CURLINFO_HTTP_CODE);
 
     invariant(
       $status !== 0,
       '%s',
-      curl_error($ch),
+      \curl_error($ch),
     );
 
-    $header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-    $header_blob = substr($response, 0, $header_size);
-    $header_lines = explode("\r\n", trim($header_blob));
-    array_shift(&$header_lines); // status code and http ver
+    $header_size = \curl_getinfo($ch, \CURLINFO_HEADER_SIZE);
+    $header_blob = \substr($response, 0, $header_size);
+    $header_lines = \explode("\r\n", \trim($header_blob));
+    \array_shift(&$header_lines); // status code and http ver
 
-    if ($header_size === strlen($response)) {
+    if ($header_size === \strlen($response)) {
       $body = '';
     } else {
-      $body = substr($response, $header_size);
+      $body = \substr($response, $header_size);
     }
 
     $response = Response::newWithStringBody($body)->withStatus($status);
 
     foreach ($header_lines as $header_line) {
-      list($name, $value) = explode(": ", $header_line);
+      list($name, $value) = \explode(": ", $header_line);
       $response = $response->withAddedHeader($name, $value);
     }
 

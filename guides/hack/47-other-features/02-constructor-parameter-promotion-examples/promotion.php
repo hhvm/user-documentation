@@ -14,7 +14,7 @@ class User {
 
     // Put user at the beginning of the database if preferred.
     if ($this->preferred) {
-      array_unshift(&Users::$users, $this);
+      \array_unshift(&Users::$users, $this);
     } else {
       Users::$users[] = $this;
     }
@@ -26,7 +26,7 @@ function run(): void {
   $u2 = new User(2, 'Fred', true);
   $u3 = new User(3, "Sam", false);
   $u4 = new User(4, 'Matthew', true);
-  var_dump(Users::$users);
+  \var_dump(Users::$users);
 }
 
 run();

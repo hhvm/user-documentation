@@ -8,8 +8,8 @@ class A {
 }
 
 function run(): void {
-  var_dump(new A());
-  var_dump(A::$stat);
+  \var_dump(new A());
+  \var_dump(A::$stat);
 }
 
 run();

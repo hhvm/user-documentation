@@ -6,7 +6,7 @@ require_once "interface.php";
 
 class VolkswagenDiesel implements Car {
   public function drive(): Awaitable<void> {
-    $being_tested = class_exists(
+    $being_tested = \class_exists(
       \PHPUnit_Framework_TestCase::class,
       /* autoload = */ false,
     );

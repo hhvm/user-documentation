@@ -11,7 +11,7 @@ function foo(string $num): int {
 }
 
 function run(): void {
-  var_dump(foo("1"));
+  \var_dump(foo("1"));
 }
 
 run();

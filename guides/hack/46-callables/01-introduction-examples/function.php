@@ -17,19 +17,19 @@ function my_math((function(int, bool): int) $callback, int $a, bool $b): ?int {
 }
 
 function run(): void {
-  var_dump(
+  \var_dump(
     my_math(fun(
       '\Hack\UserDocumentation\Callables\Intro\Examples\Func\add_or_mult'
       ),
       3, true)
   );
-  var_dump(
+  \var_dump(
     my_math(fun(
       '\Hack\UserDocumentation\Callables\Intro\Examples\Func\add_or_mult'
       ),
       3, false)
   );
-  var_dump(
+  \var_dump(
     my_math(fun(
       '\Hack\UserDocumentation\Callables\Intro\Examples\Func\add_or_mult'
       ),

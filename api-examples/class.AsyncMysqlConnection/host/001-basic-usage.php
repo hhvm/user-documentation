@@ -26,7 +26,7 @@ async function get_host(): Awaitable<string> {
 
 function run(): void {
   $info = \HH\Asio\join(get_host());
-  var_dump($info);
+  \var_dump($info);
 }
 
 run();

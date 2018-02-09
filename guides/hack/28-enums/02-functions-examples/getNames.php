@@ -13,7 +13,7 @@ enum Day: int {
 }
 
 function check_name(string $name): bool {
-  return in_array($name, Day::getNames());
+  return \in_array($name, Day::getNames());
 }
 
 var_dump(check_name("SUNDAY")); // bool(true)

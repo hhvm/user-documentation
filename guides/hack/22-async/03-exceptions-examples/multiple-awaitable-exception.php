@@ -15,7 +15,7 @@ async function multiple_waithandle_exception(): Awaitable<void> {
   // You will get a fatal error here with the exception thrown
   $results = await \HH\Asio\v($handles);
   // This won't happen
-  var_dump($results);
+  \var_dump($results);
 }
 
 \HH\Asio\join(multiple_waithandle_exception());

@@ -10,7 +10,7 @@ function apply_prefix(Vector<string> $phrases): Vector<string> {
 
 function run(): void {
   $phrases = Vector {'Joel', 'Rex', 'Fred', 'Matthew', 'Tim', 'Jez'};
-  var_dump(apply_prefix($phrases));
+  \var_dump(apply_prefix($phrases));
 }
 
 run();

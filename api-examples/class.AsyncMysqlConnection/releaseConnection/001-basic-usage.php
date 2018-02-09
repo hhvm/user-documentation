@@ -21,7 +21,7 @@ async function simple_query(): Awaitable<int> {
   $conn = await connect($pool);
   $result = await $conn->query('SELECT name FROM test_table WHERE userID = 1');
   $sync_connection = $conn->releaseConnection();
-  var_dump($sync_connection);
+  \var_dump($sync_connection);
   try {
     $result2 = await $conn->query(
       'SELECT name FROM test_table WHERE userID = 1'
@@ -30,18 +30,18 @@ async function simple_query(): Awaitable<int> {
     echo "Connection destroyed when released\n";
   }
   // This call will block since it is not async
-  $sync_result = mysql_query(
+  $sync_result = \mysql_query(
     'SELECT name FROM test_table WHERE userID = 1',
     $sync_connection,
   );
-  $sync_rows = mysql_num_rows($sync_result);
-  mysql_close($sync_connection);
+  $sync_rows = \mysql_num_rows($sync_result);
+  \mysql_close($sync_connection);
   return $result->numRows() + $sync_rows;
 }
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

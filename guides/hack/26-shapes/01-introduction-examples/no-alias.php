@@ -18,9 +18,9 @@ class C {
 
 function main(): void {
   $c = new C(shape('real' => -2.5, 'imag' => 1.3));
-  var_dump($c);
+  \var_dump($c);
   $c->setProp(shape('real' => 2.0, 'imag' => 99.3));
-  var_dump($c->getProp());
+  \var_dump($c->getProp());
 }
 
 main();

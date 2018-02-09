@@ -9,21 +9,21 @@ function run(): void {
   $pair = Pair {'A', 'B'};
 
   foreach ($vec as $val) {
-    var_dump($val);
+    \var_dump($val);
   }
 
   foreach ($map as $key => $val) {
-    var_dump($key);
-    var_dump($val);
+    \var_dump($key);
+    \var_dump($val);
   }
 
   foreach ($set as $val) {
-    var_dump($val);
+    \var_dump($val);
   }
 
   foreach ($pair as $key => $val) {
-    var_dump($key);
-    var_dump($val);
+    \var_dump($key);
+    \var_dump($val);
   }
 }
 

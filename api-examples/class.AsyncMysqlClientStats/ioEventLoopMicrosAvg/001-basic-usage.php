@@ -26,7 +26,7 @@ async function get_loop_info(): Awaitable<float> {
 
 function run(): void {
   $l = \HH\Asio\join(get_loop_info());
-  var_dump($l);
+  \var_dump($l);
 }
 
 run();

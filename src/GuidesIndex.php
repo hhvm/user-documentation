@@ -57,11 +57,11 @@ final class GuidesIndex {
             );
             continue;
           }
-          $content = file_get_contents(BuildPaths::GUIDES_HTML.'/'.$filepath);
+          $content = \file_get_contents(BuildPaths::GUIDES_HTML.'/'.$filepath);
           if ($content === false) {
             continue;
           }
-          $content = html_entity_decode(strip_tags($content));
+          $content = \html_entity_decode(\strip_tags($content));
           $score = SearchTermMatcher::matchTerm($content, $term);
           if ($score === null) {
             continue;

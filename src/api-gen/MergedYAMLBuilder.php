@@ -36,9 +36,9 @@ final class MergedYAMLBuilder {
       return $type.' '.$name;
     }
 
-    $last_ns = strrpos($name, "\\");
+    $last_ns = \strrpos($name, "\\");
     if ($last_ns !== false) {
-      $name = substr($name, $last_ns + 1);
+      $name = \substr($name, $last_ns + 1);
     }
 
     return $type.' '.$name;
@@ -95,7 +95,7 @@ final class MergedYAMLBuilder {
     foreach ($def['sources'] as $source) { $merged['sources'][] = $source; }
 
     // eg SystemLib defines HH\Traversable, HHI defines \Traversable
-    if (strpos($def['data']['name'], "\\") !== false) {
+    if (\strpos($def['data']['name'], "\\") !== false) {
       $merged['data']['name'] = $def['data']['name'];
     }
 

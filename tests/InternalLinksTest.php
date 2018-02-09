@@ -28,10 +28,10 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     $this->assertSame(
       200,
       $response->getStatusCode(),
-      sprintf(
+      \sprintf(
         ">>> 404: %s\n>>> Linked from:\n%s",
         $target,
-        implode("\n", $sources->map($x ==> '>>>  - '.$x)),
+        \implode("\n", $sources->map($x ==> '>>>  - '.$x)),
       ),
     );
   }
@@ -120,9 +120,9 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
 
     /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
-    libxml_use_internal_errors(true); // No support for HTML5 tags
+    \libxml_use_internal_errors(true); // No support for HTML5 tags
     $dom->loadHTML($response->getBody());
-    libxml_clear_errors();
+    \libxml_clear_errors();
     /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $xpath = new \DOMXPath($dom);
     $hrefs = $xpath->query('//a/@href');
@@ -131,12 +131,12 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     foreach ($hrefs as $node) {
       $url = $node->value;
 
-      $host = parse_url($url, PHP_URL_HOST);
+      $host = \parse_url($url, \PHP_URL_HOST);
       if ($host !== null) {
         continue;
       }
 
-      $path = $this->normalizePath($page, parse_url($url, PHP_URL_PATH));
+      $path = $this->normalizePath($page, \parse_url($url, \PHP_URL_PATH));
       if ($path === null) {
         continue;
       }
@@ -184,39 +184,39 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       return $path;
     }
 
-    $in_dir = substr($source, -1) === '/';
+    $in_dir = \substr($source, -1) === '/';
 
-    if (substr($path, 0, 2) === './') {
+    if (\substr($path, 0, 2) === './') {
       if ($in_dir) {
         // /foo/bar/ + ./baz => /foo/bar/baz
         $context = $source;
       } else {
         // /foo/bar + ./baz => /foo/baz
-        $context = dirname($source);
+        $context = \dirname($source);
         if ($context !== '/') {
           $context .= '/';
         }
       }
-      return $context.substr($path, 2);
+      return $context.\substr($path, 2);
     }
 
-    if (substr($path, 0, 3) === '../') {
+    if (\substr($path, 0, 3) === '../') {
       $orig_path = $path;
 
       if ($in_dir) {
         // /foo/bar/ + ../baz => /foo/baz
-        $context = dirname($source);
+        $context = \dirname($source);
       } else {
         // /foo/bar + ../baz => /baz
-        $context = dirname(dirname($source));
+        $context = \dirname(\dirname($source));
       }
       if ($context !== '/') {
         $context .= '/';
       }
-      $path = $context.substr($path, 3);
+      $path = $context.\substr($path, 3);
 
-      while (strpos($path, '/../') !== false) {
-        $path = preg_replace('_/[^/]+/\.\./_', '/', $path);
+      while (\strpos($path, '/../') !== false) {
+        $path = \preg_replace('_/[^/]+/\.\./_', '/', $path);
       }
       return $path;
     }
@@ -225,7 +225,7 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       if ($in_dir) {
         return $source.$path;
       } else {
-        return dirname($source).'/'.$path;
+        return \dirname($source).'/'.$path;
       }
     }
 

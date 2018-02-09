@@ -45,7 +45,7 @@ async function simple_query(): Awaitable<int> {
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

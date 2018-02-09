@@ -26,7 +26,7 @@ async function get_server_info(): Awaitable<string> {
 
 function run(): void {
   $info = \HH\Asio\join(get_server_info());
-  var_dump($info);
+  \var_dump($info);
 }
 
 run();

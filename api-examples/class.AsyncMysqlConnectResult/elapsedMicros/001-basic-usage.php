@@ -26,7 +26,7 @@ async function get_connection_time(): Awaitable<int> {
 
 function run(): void {
   $em = \HH\Asio\join(get_connection_time());
-  var_dump($em);
+  \var_dump($em);
 }
 
 run();

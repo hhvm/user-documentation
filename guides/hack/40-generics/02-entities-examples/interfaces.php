@@ -42,7 +42,7 @@ class MyQueue<T> implements MyCollection<T> {
 }
 
 function processCollection<T>(MyCollection<T> $p1): void {
-  var_dump($p1->get());
+  \var_dump($p1->get());
 }
 
 function run(): void {

@@ -19,8 +19,8 @@ function createPoint(int $x = 0, int $y = 0): Point {
 }
 
 function run(): void {
-  var_dump(createPoint(9, 3));
-  var_dump(new C());
+  \var_dump(createPoint(9, 3));
+  \var_dump(new C());
 }
 
 run();

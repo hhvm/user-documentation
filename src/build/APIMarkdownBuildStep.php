@@ -34,8 +34,8 @@ final class APIMarkdownBuildStep extends BuildStep {
     $in = BuildPaths::APIDOCS_DATA.'/'.$product;
     $out = BuildPaths::APIDOCS_MARKDOWN.'/'.$product;
 
-    if (!is_dir($out)) {
-      mkdir($out, /* mode = */ 0755, /* recursive = */ true);
+    if (!\is_dir($out)) {
+      \mkdir($out, /* mode = */ 0755, /* recursive = */ true);
     }
 
     Log::i("\nGenerating markdown for %s", $product);
@@ -43,8 +43,8 @@ final class APIMarkdownBuildStep extends BuildStep {
     Log::i("\nGenerating markdown...");
     return Vec\map($sources, $source ==> {
       Log::v('.');
-      $filename = pathinfo($source)['filename'];
-      $type = explode('.', $filename)[0];
+      $filename = \pathinfo($source)['filename'];
+      $type = \explode('.', $filename)[0];
       switch (APIDefinitionType::assert($type)) {
         case APIDefinitionType::FUNCTION_DEF:
           return vec[(new FunctionMarkdownBuilder($product, $source))->build()];

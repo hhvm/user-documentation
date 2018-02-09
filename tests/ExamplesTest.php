@@ -18,7 +18,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
       '.noexec.php',
     ];
     $exclude_regexp = $exclude_suffixes
-      |> Vec\map($$, $suffix ==> preg_quote($suffix, '/'))
+      |> Vec\map($$, $suffix ==> \preg_quote($suffix, '/'))
       |> Str\join($$, '|')
       |> '/('.$$.')$/';
     $this->runExamples(Vector {
@@ -27,8 +27,8 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testExamplesTypecheck(): void {
-    $hh_server = dirname(PHP_BINARY).'/hh_server';
-    if (!file_exists($hh_server)) {
+    $hh_server = \dirname(\PHP_BINARY).'/hh_server';
+    if (!\file_exists($hh_server)) {
       $this->markTestSkipped("Couldn't find hh_server");
     }
 
@@ -40,8 +40,8 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
 
   <<__Memoize>>
   private function getHHServerPath(): string {
-    $hh_server = dirname(PHP_BINARY).'/hh_server';
-    if (!file_exists($hh_server)) {
+    $hh_server = \dirname(\PHP_BINARY).'/hh_server';
+    if (!\file_exists($hh_server)) {
       $this->markTestSkipped("Couldn't find hh_server");
     }
     return $hh_server;
@@ -49,7 +49,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
 
   private function runExamples(Vector<string> $extra_args): void {
     $command = Vector {
-      PHP_BINARY,
+      \PHP_BINARY,
       '-d', 'hhvm.hack.lang.look_for_typechecker=0',
       self::TEST_RUNNER,
       '-m', 'interp',
@@ -57,20 +57,20 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
     $command->addAll($extra_args);
     $command[] = LocalConfig::ROOT.'/guides';
 
-    $command_str = implode(' ', $command->map($arg ==> escapeshellarg($arg)));
+    $command_str = \implode(' ', $command->map($arg ==> \escapeshellarg($arg)));
     $exit_code = null;
     $output = null;
 
     $env = Vector {
-      'HHVM_BIN='.escapeshellarg(PHP_BINARY),
-      'HH_SERVER_BIN='.escapeshellarg($this->getHHServerPath()),
+      'HHVM_BIN='.\escapeshellarg(\PHP_BINARY),
+      'HH_SERVER_BIN='.\escapeshellarg($this->getHHServerPath()),
     };
 
     $command_str =
-      implode('', $env->map($x ==> $x.' ')).$command_str;
+      \implode('', $env->map($x ==> $x.' ')).$command_str;
 
-    exec($command_str, /*&*/ &$output, /*&*/ &$exit_code);
+    \exec($command_str, /*&*/ &$output, /*&*/ &$exit_code);
 
-    $this->assertSame(0, $exit_code, implode("\n", $output));
+    $this->assertSame(0, $exit_code, \implode("\n", $output));
   }
 }

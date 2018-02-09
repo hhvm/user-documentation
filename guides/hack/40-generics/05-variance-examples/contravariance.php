@@ -25,7 +25,7 @@ function main(): void {
   $c = new C($cat);
   // calling setMe with Animal on an instance of C that was initialized with Cat
   $c->setMe($animal);
-  var_dump($c);
+  \var_dump($c);
 }
 
 main();

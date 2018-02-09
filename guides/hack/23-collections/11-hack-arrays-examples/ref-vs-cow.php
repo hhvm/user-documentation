@@ -13,7 +13,7 @@ function main(): void {
     $x = vec[123];
     $y = do_stuff($x);
 
-    var_dump([
+    \var_dump([
         array(
             'in' => $a,
             'out' => $b,

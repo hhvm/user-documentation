@@ -28,9 +28,9 @@ async function simple_query(): Awaitable<int> {
   if ($row_blocks->count() > 0) {
     // An AsyncMysqlRowBlock
     $row_block = $row_blocks[0];
-    var_dump($row_block->fieldName(2)); // string
+    \var_dump($row_block->fieldName(2)); // string
   } else {
-    var_dump('nothing');
+    \var_dump('nothing');
   }
   $conn->close();
   return $result->numRows();
@@ -38,7 +38,7 @@ async function simple_query(): Awaitable<int> {
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

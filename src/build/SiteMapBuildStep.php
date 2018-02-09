@@ -30,21 +30,21 @@ final class SiteMapBuildStep extends BuildStep {
       $combined->addAll($url_list);
     }
     invariant(
-      count($combined) < 50000,
+      \count($combined) < 50000,
       'more than 50,000 URLs in sitemap, need to split sitemap for Google',
     );
 
     $combined = $combined
       ->map($x ==> self::ROOT.$x)
       ->map($x ==> $x."\n");
-    $text = implode('', $combined);
+    $text = \implode('', $combined);
 
     invariant(
-      strlen($text) < 50 * 1024 * 1024,
+      \strlen($text) < 50 * 1024 * 1024,
       'site map > 50MB, need to split sitemap for Google',
     );
 
-    file_put_contents(
+    \file_put_contents(
       BuildPaths::SITE_MAP,
       $text,
     );
@@ -78,8 +78,8 @@ final class SiteMapBuildStep extends BuildStep {
     dict<string, NavDataNode> $roots,
   ): ImmVector<string> {
     $out = Vector { };
-    $to_visit = array_values($roots);
-    while ($node = array_shift(&$to_visit)) {
+    $to_visit = \array_values($roots);
+    while ($node = \array_shift(&$to_visit)) {
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

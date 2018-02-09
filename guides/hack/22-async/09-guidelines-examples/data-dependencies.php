@@ -19,12 +19,12 @@ async function fetch_all_post_ids_for_author(int $author_id)
 
 async function fetch_post_data(int $post_id): Awaitable<PostData> {
   // Query database, etc. but for now, return something random
-  return new PostData(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
+  return new PostData(\str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
 }
 
 async function fetch_comment_count(int $post_id): Awaitable<int> {
   // Query database, etc., but for now, return something random
-  return rand(0, 50);
+  return \rand(0, 50);
 }
 
 async function fetch_page_data(int $author_id)
@@ -72,7 +72,7 @@ async function generate_page(int $author_id): Awaitable<string> {
     list($post_data, $comment_count) = $tuple;
     // Normally render the data into HTML, but for now, just create a
     // normal string
-    $page .= $post_data->text . " " . $comment_count . PHP_EOL;
+    $page .= $post_data->text . " " . $comment_count . \PHP_EOL;
   }
   return $page;
 }

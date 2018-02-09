@@ -65,7 +65,7 @@ final class APIIndex {
   ): dict<string, APIIndexEntry> {
     $index = Shapes::toArray($this->index);
     invariant(
-      array_key_exists($type, $index),
+      \array_key_exists($type, $index),
       'invalid type: %s',
       (string) $type,
     );
@@ -166,7 +166,7 @@ final class APIIndex {
   ): APIFunctionIndexEntry {
     $index = $this->index;
     invariant(
-      array_key_exists($name, $index['function']),
+      \array_key_exists($name, $index['function']),
       'function %s does not exist',
       $name,
     );
@@ -179,7 +179,7 @@ final class APIIndex {
   ): APIClassIndexEntry {
     $index = $this->getClassIndex($class_type);
     invariant(
-      array_key_exists($class_name, $index),
+      \array_key_exists($class_name, $index),
       'class %s does not exist',
       $class_name,
     );
@@ -193,14 +193,14 @@ final class APIIndex {
   ): APIMethodIndexEntry {
     $index = $this->getClassIndex($class_type);
     invariant(
-      array_key_exists($class_name, $index),
+      \array_key_exists($class_name, $index),
       'class %s does not exist',
       $class_name,
     );
     $class = $index[$class_name];
     $methods = $class['methods'];
     invariant(
-      array_key_exists($method_name, $methods),
+      \array_key_exists($method_name, $methods),
       'Method %s::%s does not exist',
       $class_name,
       $method_name,

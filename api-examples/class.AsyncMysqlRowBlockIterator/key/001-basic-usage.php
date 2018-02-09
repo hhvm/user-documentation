@@ -41,7 +41,7 @@ async function iterate(): Awaitable<int> {
       while ($rit->valid()) {
         // current() will give you a string value of the field in the row
         if ($rit->key() > 0 && is_numeric($rit->current())) {
-          return intval($rit->current());
+          return \intval($rit->current());
         }
         $rit->next();
       }
@@ -55,7 +55,7 @@ async function iterate(): Awaitable<int> {
 
 function run(): void {
   $r = \HH\Asio\join(iterate());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

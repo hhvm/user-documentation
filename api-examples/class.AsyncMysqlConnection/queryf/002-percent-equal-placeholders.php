@@ -42,7 +42,7 @@ async function simple_queryf(): Awaitable<int> {
 
 function run(): void {
   $r = \HH\Asio\join(simple_queryf());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

@@ -14,10 +14,10 @@ use namespace HH\Lib\Vec;
 
 class APIPagesTest extends \PHPUnit_Framework_TestCase {
   public static function allAPIPages(): array<(string, NavDataNode)> {
-    $to_visit = array_values(APINavData::get(APIProduct::HACK)->getNavData());
+    $to_visit = \array_values(APINavData::get(APIProduct::HACK)->getNavData());
     $out = [];
 
-    while ($node = array_pop(&$to_visit)) {
+    while ($node = \array_pop(&$to_visit)) {
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }
@@ -43,7 +43,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
         $out[] = tuple($node['urlPath'], $node);
       }
     }
-    $this->assertSame(count($wanted), count($out));
+    $this->assertSame(\count($wanted), \count($out));
 
     // Not included in the API Nav bar, but test it too :)
     $out[] = tuple(
@@ -133,7 +133,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     $this->assertSame(
       404,
       $response->getStatusCode(),
-      sprintf('"%s" should not be documented', $name),
+      \sprintf('"%s" should not be documented', $name),
     );
   }
 }

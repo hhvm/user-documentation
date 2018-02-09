@@ -8,13 +8,13 @@ function addLastnameTraditional(): array<string> {
     "Will",
     "Phil"
   );
-  return array_map(function ($name) {
+  return \array_map(function ($name) {
     return $name . " Banks";
   }, $people);
 }
 
 function run(): void {
-  var_dump(addLastnameTraditional());
+  \var_dump(addLastnameTraditional());
 }
 
 run();

@@ -21,14 +21,14 @@ async function simple_query(): Awaitable<int> {
   $conn = await connect($pool);
   $result = await $conn->query('SELECT name FROM test_table WHERE userID = 1');
   // How long did it take to get this result?
-  var_dump($result->elapsedMicros());
+  \var_dump($result->elapsedMicros());
   $conn->close();
   return $result->numRows();
 }
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

@@ -34,21 +34,21 @@ final class PHPDotNetAPIIndexBuildStep extends BuildStep {
 
     $out = dict[];
     foreach ($defs as $name => $id) {
-      $type = explode('.', $id)[0];
+      $type = \explode('.', $id)[0];
       $type = APIDefinitionType::coerce($type);
       if ($type === null) {
         continue;
       }
 
-      $url = sprintf('http://php.net/manual/en/%s.php', $id);
+      $url = \sprintf('http://php.net/manual/en/%s.php', $id);
 
       $supported =
         $type === APIDefinitionType::FUNCTION_DEF
-        ? function_exists($name)
+        ? \function_exists($name)
         : (
-            class_exists($name)
-            || trait_exists($name)
-            || interface_exists($name)
+            \class_exists($name)
+            || \trait_exists($name)
+            || \interface_exists($name)
           );
 
       $out[$name] = shape(

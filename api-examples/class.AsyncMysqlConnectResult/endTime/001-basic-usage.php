@@ -26,7 +26,7 @@ async function get_connection_start_time(): Awaitable<float> {
 
 function run(): void {
   $et = \HH\Asio\join(get_connection_start_time());
-  var_dump($et);
+  \var_dump($et);
 }
 
 run();

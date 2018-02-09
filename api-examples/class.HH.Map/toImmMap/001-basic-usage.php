@@ -10,7 +10,7 @@ $m = Map {
 };
 
 function expects_immutable(ImmMap<string, string> $iv): void {
-  var_dump($iv);
+  \var_dump($iv);
 }
 
 // Get a deep, immutable copy of $m

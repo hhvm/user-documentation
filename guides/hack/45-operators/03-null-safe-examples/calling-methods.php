@@ -9,7 +9,7 @@ class Bar {
 }
 
 function get_Bar(): ?Bar {
-  if (rand(0, 10) === 5) {
+  if (\rand(0, 10) === 5) {
     return null;
   }
   return new Bar();

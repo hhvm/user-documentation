@@ -23,7 +23,7 @@ class AppUser extends User implements IUser {
 
 function run(): void {
   $au = new AppUser(-1);
-  var_dump($au->getID());
+  \var_dump($au->getID());
 }
 
 run();

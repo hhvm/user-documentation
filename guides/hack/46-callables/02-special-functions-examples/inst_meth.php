@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\Callables\SpecialFunctions\Examples\InstMeth;
 
 class Foo {
   public function bar() {
-    var_dump(__CLASS__.'->'.__FUNCTION__);
+    \var_dump(__CLASS__.'->'.__FUNCTION__);
   }
 }
 

@@ -33,8 +33,8 @@ final class IPUtilsTest extends \PHPUnit_Framework_TestCase {
         '%s is not in %s, but should be; subnet: %s, subnet mask: %s',
         $ip,
         $subnet_cidr,
-        inet_ntop($range[0]),
-        inet_ntop($range[1]),
+        \inet_ntop($range[0]),
+        \inet_ntop($range[1]),
       );
     }
     foreach($ips_not_in_subnet as $ip) {
@@ -42,8 +42,8 @@ final class IPUtilsTest extends \PHPUnit_Framework_TestCase {
         '%s is in %s, but should not be; subnet: %s, subnet mask: %s',
         $ip,
         $subnet_cidr,
-        inet_ntop($range[0]),
-        inet_ntop($range[1]),
+        \inet_ntop($range[0]),
+        \inet_ntop($range[1]),
       );
     }
   }

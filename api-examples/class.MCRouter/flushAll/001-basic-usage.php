@@ -3,12 +3,12 @@
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouter\FlushAll;
 
 function construct_mcrouter(): \MCRouter {
-  $servers = Vector { getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
   // For many use cases, calling MCRouter::createSimple($servers) would
   // suffice here. But this shows you how to explicitly create the configuration
   // options for creating an instance of MCRouter
   $options = array(
-    'config_str' => json_encode(
+    'config_str' => \json_encode(
       array(
         'pools' => array(
           'P' => array(
@@ -21,7 +21,7 @@ function construct_mcrouter(): \MCRouter {
     'enable_flush_cmd' => true, // Need this in order to use flushAll
   );
   $mc = new \MCRouter($options); // could also pass a persistence id string here
-  var_dump($mc instanceof \MCRouter);
+  \var_dump($mc instanceof \MCRouter);
   return $mc;
 }
 
@@ -42,17 +42,17 @@ async function flush(\MCRouter $mc): Awaitable<void> {
 
 async function run(): Awaitable<void> {
   $mc = construct_mcrouter();
-  $unique_key = str_shuffle('ABCDEFGHIJKLMN');
+  $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
   await set_value($mc, $unique_key, "Hi");
   $val = await $mc->get($unique_key);
-  var_dump($val);
+  \var_dump($val);
   await del_key($mc, $unique_key);
   await flush($mc);
   try {
     $val = await $mc->get($unique_key);
-    var_dump($val); // Won't get here because exception will be thrown
+    \var_dump($val); // Won't get here because exception will be thrown
   } catch (\MCRouterException $ex) {
-    var_dump($ex->getMessage()); // There are no more keys/values since flush
+    \var_dump($ex->getMessage()); // There are no more keys/values since flush
   }
 }
 

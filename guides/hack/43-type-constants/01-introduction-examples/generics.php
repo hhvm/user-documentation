@@ -32,13 +32,13 @@ class OtherUser extends User<arraykey> implements IUser<arraykey> {
 
 function run(): void {
   $au = new AppUser(-1);
-  var_dump($au->getID());
+  \var_dump($au->getID());
   $wu = new WebUser('-1');
-  var_dump($wu->getID());
+  \var_dump($wu->getID());
   $ou1 = new OtherUser(-1);
-  var_dump($ou1->getID());
+  \var_dump($ou1->getID());
   $ou2 = new OtherUser('-1');
-  var_dump($ou2->getID());
+  \var_dump($ou2->getID());
 }
 
 run();

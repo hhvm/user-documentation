@@ -28,9 +28,9 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     $defs->setAll($this->getHackAPILinks(APIProduct::HSL));
     $defs->setAll($this->getSpecialAttributeLinks());
 
-    file_put_contents(
+    \file_put_contents(
       BuildPaths::UNIFIED_INDEX_JSON,
-      json_encode($defs, JSON_PRETTY_PRINT)
+      \json_encode($defs, \JSON_PRETTY_PRINT)
     );
 
     $jump_index = [];
@@ -48,7 +48,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
       'JumpIndexData.hhi',
       $jump_index,
     );
-    file_put_contents(
+    \file_put_contents(
       BuildPaths::JUMP_INDEX,
       $code,
     );
@@ -75,9 +75,9 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
         $name = $def['name'];
         $maybe_set($name, $def['urlPath']);
 
-        $ns_pos = strrpos($name, "\\");
+        $ns_pos = \strrpos($name, "\\");
         if ($ns_pos !== false) {
-          $name = substr($name, $ns_pos + 1);
+          $name = \substr($name, $ns_pos + 1);
           $maybe_set($name, $def['urlPath']);
         }
 

@@ -42,8 +42,8 @@ final class RawYAMLBuildStep extends BuildStep {
     string $output_dir,
     Traversable<string> $sources,
   ): void {
-    if (!is_dir($output_dir)) {
-      mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
+    if (!\is_dir($output_dir)) {
+      \mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
     }
 
     Log::i("\nBuild sources for %s", $output_dir);
@@ -53,9 +53,9 @@ final class RawYAMLBuildStep extends BuildStep {
       $source = shape(
         'type' => DocumentationSourceType::FILE,
         'name' => $filename,
-        'mtime' => stat($filename)['mtime'],
+        'mtime' => \stat($filename)['mtime'],
       );
-      $bytes = file_get_contents($filename);
+      $bytes = \file_get_contents($filename);
       $parser = FileParser::FromData($bytes, $filename);
       return (new ScannedDefinitionsYAMLBuilder($source, $parser, $output_dir))
         ->addFilter($x ==> ScannedDefinitionFilters::IsHHSpecific($x))

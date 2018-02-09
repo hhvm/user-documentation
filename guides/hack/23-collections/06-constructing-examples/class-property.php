@@ -13,8 +13,8 @@ class A {
 function run(): void {
   A::$users[0] = "Joel";
   A::$users_a[0] = "Fred";
-  var_dump(A::$users);
-  var_dump(A::$users_a);
+  \var_dump(A::$users);
+  \var_dump(A::$users_a);
 }
 
 run();

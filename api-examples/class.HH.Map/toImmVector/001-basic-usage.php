@@ -10,7 +10,7 @@ $m = Map {
 };
 
 function expects_immutable(ImmVector<string> $iv): void {
-  var_dump($iv);
+  \var_dump($iv);
 }
 
 // Get an immutable Vector of $m's values

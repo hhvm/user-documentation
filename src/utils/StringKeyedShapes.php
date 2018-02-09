@@ -22,7 +22,7 @@ final class StringKeyedShapes {
       invariant(
         is_string($key),
         'non-string key %s passed as key',
-        var_export($key, true),
+        \var_export($key, true),
       );
       $ret[$key] = $value;
     }

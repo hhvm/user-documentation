@@ -28,7 +28,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
 
   private function getIndexData(): dict<string, string> {
     // all the HHVM ini settings
-    $settings = Vec\keys(ini_get_all());
+    $settings = Vec\keys(\ini_get_all());
     // The ones that are PHP settings (i.e., don't start with HHVM)
     $php_supported_settings = Vec\filter(
       $settings,
@@ -46,7 +46,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
       if ($url === null) {
         $url = 'http://php.net/manual/en/ini.list.php';
       } else {
-        $url = sprintf(
+        $url = \sprintf(
           'http://php.net/manual/en/%s',
           $php_settings_with_urls[$setting]
         );
@@ -58,7 +58,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
 
   private function getPHPSettingsWithURLs(): dict<string, string> {
     // The HTML is not well formatted. We know that. Turn off outputting errors.
-    libxml_use_internal_errors(true);
+    \libxml_use_internal_errors(true);
     // UNSAFE
     $dom = new \DomDocument();
     $html_content = \HH\Asio\join(

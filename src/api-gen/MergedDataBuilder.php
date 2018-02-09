@@ -124,7 +124,7 @@ final class MergedDataBuilder {
 
       // Pick the most restrictive
       $old_value = $map[$old_value];
-      $value = max($old_value, $map[$value]);
+      $value = \max($old_value, $map[$value]);
       $value = $map->keys()[$value];
     }
 
@@ -134,12 +134,12 @@ final class MergedDataBuilder {
       $value = $spec->assertType($value);
       $old_value = $spec->assertType($old_value);
 
-      if (count($value) !== count($old_value)) {
+      if (\count($value) !== \count($old_value)) {
         $name = (string) idx($this->data, 'name', '<unknown>');
         Log::w("\nParameter number mismatch when merging ".$name);
-        $num = min(count($value), count($old_value));
+        $num = \min(\count($value), \count($old_value));
       } else {
-        $num = count($value);
+        $num = \count($value);
       }
       for ($i = 0; $i < $num; $i++) {
         self::MergedParameter($value[$i], $old_value[$i]);
@@ -179,19 +179,19 @@ final class MergedDataBuilder {
     // Try to make the type as specific as possible. object or mixed could
     // be used in something like HNI to represent what might be an int.
     if (Shapes::idx($b, 'typename') !== null) {
-      if (strpos($name, 'object') === 0 ||
-          strpos($name, 'mixed') === 0) {
+      if (\strpos($name, 'object') === 0 ||
+          \strpos($name, 'mixed') === 0) {
         $name = $b['typename'];
         $text = $b['typetext'];
       }
-    } else if (strpos($b['typename'], $name) !== false &&
-               strpos($name, "\\") === false) { // Namespace like \ or HH\
+    } else if (\strpos($b['typename'], $name) !== false &&
+               \strpos($name, "\\") === false) { // Namespace like \ or HH\
       $name = $b['typename'];
       $text = $b['typetext'];
     }
 
     $generics = $a['genericTypes'];
-    if (count($generics) === 0) {
+    if (\count($generics) === 0) {
       $generics = $b['genericTypes'];
     }
 
@@ -200,8 +200,8 @@ final class MergedDataBuilder {
     // If one of them is nullable and the other mixed
     // we really want the nullable instead of non-null from mixed.
     if (($a['nullable'] || $b['nullable']) &&
-        (strpos($a['typename'], 'mixed') !== 0 ^
-         strpos($b['typename'], 'mixed') !== 0)) {
+        (\strpos($a['typename'], 'mixed') !== 0 ^
+         \strpos($b['typename'], 'mixed') !== 0)) {
       $nullable = true;
     }
 
@@ -245,11 +245,11 @@ final class MergedDataBuilder {
     $keyed = dict[];
     foreach ($interfaces as $interface) {
       $name = $interface['typename'];
-      $ns_sep = strrpos($name, "\\");
+      $ns_sep = \strrpos($name, "\\");
       if ($ns_sep === false) {
         $key = $name;
       } else {
-        $key = substr($name, $ns_sep + 1);
+        $key = \substr($name, $ns_sep + 1);
       }
       if (C\contains_key($keyed, $key)) {
         $keyed[$key] = TypeAssert\not_null(

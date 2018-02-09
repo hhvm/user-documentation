@@ -20,14 +20,14 @@ async function simple_query(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
   $result = await $conn->query('SELECT name FROM test_table WHERE userID = 1');
-  var_dump($result->clientStats()->callbackDelayMicrosAvg());
+  \var_dump($result->clientStats()->callbackDelayMicrosAvg());
   $conn->close();
   return $result->numRows();
 }
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

@@ -17,14 +17,14 @@ function addLastnameTraditional(string $lastname): array<string> {
       "Will",
       "Phil"
   );
-  return array_map(function ($name) use ($lastname) {
+  return \array_map(function ($name) use ($lastname) {
     return $name . " " . $lastname;
   }, $people);
 }
 
 function run(): void {
-  var_dump(addLastnameTraditional("Smith"));
-  var_dump(addLastname("Smith"));
+  \var_dump(addLastnameTraditional("Smith"));
+  \var_dump(addLastname("Smith"));
 }
 
 run();

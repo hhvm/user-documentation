@@ -48,9 +48,9 @@ function get_id_from_userTC(AppUserTC $uc): AppUserTC::Ttc {
 
 function run(): void {
   $aug = new AppUserG(-1);
-  var_dump(get_id_from_userg($aug));
+  \var_dump(get_id_from_userg($aug));
   $autc = new AppUserTC(-2);
-  var_dump(get_id_from_userTC($autc));
+  \var_dump(get_id_from_userTC($autc));
 }
 
 run();

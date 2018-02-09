@@ -13,11 +13,11 @@ type PointS = shape(C2::KEYA => int, C2::KEYB => int);
 type PointI = shape(C2::KEYX => int, C2::KEYY => int);
 
 function print_pointS(PointS $p): void {
-  var_dump($p);
+  \var_dump($p);
 }
 
 function print_pointI(PointI $p): void {
-  var_dump($p);
+  \var_dump($p);
 }
 
 function run(): void {

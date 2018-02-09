@@ -7,9 +7,9 @@ function maxVal<T>(T $p1, T $p2): T {
 }
 
 function run(): void {
-  var_dump(maxVal(10, 20));
-  var_dump(maxVal(15.6, -20.78));
-  var_dump(maxVal('red', 'green'));
+  \var_dump(maxVal(10, 20));
+  \var_dump(maxVal(15.6, -20.78));
+  \var_dump(maxVal('red', 'green'));
 }
 
 run();

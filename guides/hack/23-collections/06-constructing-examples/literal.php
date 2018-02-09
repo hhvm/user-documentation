@@ -9,11 +9,11 @@ function run(): void {
   $set = Set {'A', 'B', 'C'};
   $pair = Pair {'A', 'B'};
 
-  var_dump($vec);
-  var_dump($ivec);
-  var_dump($map);
-  var_dump($set);
-  var_dump($pair);
+  \var_dump($vec);
+  \var_dump($ivec);
+  \var_dump($map);
+  \var_dump($set);
+  \var_dump($pair);
 }
 
 run();

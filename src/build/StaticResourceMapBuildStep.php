@@ -31,7 +31,7 @@ final class StaticResourceMapBuildStep extends BuildStep {
 
   <<__Memoize>>
   private static function getRoot(): string {
-    return realpath(LocalConfig::ROOT.'/public/');
+    return \realpath(LocalConfig::ROOT.'/public/');
   }
 
   <<__Override>>
@@ -56,19 +56,19 @@ final class StaticResourceMapBuildStep extends BuildStep {
   ): dict<string, StaticResourceMapEntry> {
     $map = dict[];
 
-    $prefix_len = strlen(self::getRoot());
+    $prefix_len = \strlen(self::getRoot());
 
     $mimetype_map = self::getTypes();
 
     foreach ($sources as $source) {
-      $relative = substr($source, $prefix_len);
-      $full_hash = hash('sha256', file_get_contents($source));
-      $ext = pathinfo($source, PATHINFO_EXTENSION);
+      $relative = \substr($source, $prefix_len);
+      $full_hash = \hash('sha256', \file_get_contents($source));
+      $ext = \pathinfo($source, \PATHINFO_EXTENSION);
 
       $map[$relative] = shape(
         'localPath' => $source,
-        'checksum' => substr($full_hash, 0, 16),
-        'mtime' => filemtime($source),
+        'checksum' => \substr($full_hash, 0, 16),
+        'mtime' => \filemtime($source),
         'mimeType' => $mimetype_map->at($ext),
       );
     }

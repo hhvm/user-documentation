@@ -42,7 +42,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
       'APILegacyRedirectData.hhi',
       $index,
     );
-    file_put_contents(
+    \file_put_contents(
       BuildPaths::APIDOCS_LEGACY_REDIRECTS,
       $code,
     );
@@ -50,7 +50,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
   private function generateOldHackDocsData(): array<string, string> {
     Log::v("\nProcessing old site index");
-    $reader = new PHPDocsIndexReader(file_get_contents(self::LEGACY_INDEX));
+    $reader = new PHPDocsIndexReader(\file_get_contents(self::LEGACY_INDEX));
     $old_classes = $reader->getClasses();
     $old_methods = $reader->getMethods();
     $old_functions = $reader->getFunctions();
@@ -73,8 +73,8 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
       $old_id = idx($old_classes, $raw_name);
 
       if ($old_id === null) {
-        $name_parts = explode("\\", $raw_name);
-        $no_ns_name = $name_parts[count($name_parts) - 1];
+        $name_parts = \explode("\\", $raw_name);
+        $no_ns_name = $name_parts[\count($name_parts) - 1];
         $old_class_name = $no_ns_name;
         $old_id = idx($old_classes, $no_ns_name);
       }
@@ -107,13 +107,13 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
   private function generatePHPDotNetData(): array<string, string> {
     Log::v("\nProcessing PHP.net index");
     $reader = new PHPDocsIndexReader(
-      file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
+      \file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
     );
     $defs = $reader->getAllAPIDefinitions();
 
     $index = [];
     foreach ($defs as $_ => $id) {
-      $url = sprintf('http://php.net/manual/en/%s.php', $id);
+      $url = \sprintf('http://php.net/manual/en/%s.php', $id);
       $index[$id] = $url;
     }
     return $index;

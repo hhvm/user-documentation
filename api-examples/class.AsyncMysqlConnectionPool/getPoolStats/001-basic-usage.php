@@ -36,7 +36,7 @@ function run_it(): void {
   $conns = \HH\Asio\join(\HH\Asio\v($conn_awaitables));
   // Get pool connection stats, like pool connections created, how many
   // connections were requested, etc.
-  var_dump(get_stats($pool));
+  \var_dump(get_stats($pool));
 }
 
 run_it();

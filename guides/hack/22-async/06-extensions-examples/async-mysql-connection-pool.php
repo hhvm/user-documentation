@@ -26,7 +26,7 @@ async function get_connection(): Awaitable<\AsyncMysqlConnection> {
 
 async function run(): Awaitable<void> {
   $conn = await get_connection();
-  var_dump($conn);
+  \var_dump($conn);
 }
 
 \HH\Asio\join(run());

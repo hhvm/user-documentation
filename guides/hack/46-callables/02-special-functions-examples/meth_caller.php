@@ -20,7 +20,7 @@ function main() {
   };
 
   $out = $in->map(meth_caller(Foo::class, 'getContent'));
-  var_dump($out);
+  \var_dump($out);
 }
 
 main();

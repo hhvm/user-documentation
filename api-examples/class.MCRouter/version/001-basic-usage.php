@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouter\Version;
 
 function get_simple_mcrouter(): \MCRouter {
-  $servers = Vector { getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
   $mc = \MCRouter::createSimple($servers);
   return $mc;
 }
@@ -13,7 +13,7 @@ async function get_version(\MCRouter $mc): Awaitable<?string> {
   try {
     $ret = await $mc->version();
   } catch (\MCRouterException $ex) {
-    var_dump($ex->getMessage());
+    \var_dump($ex->getMessage());
   }
   return $ret;
 
@@ -22,7 +22,7 @@ async function get_version(\MCRouter $mc): Awaitable<?string> {
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $ver = await get_version($mc);
-  var_dump($ver);
+  \var_dump($ver);
 }
 
 \HH\Asio\join(run());

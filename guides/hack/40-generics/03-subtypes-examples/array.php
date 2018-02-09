@@ -15,7 +15,7 @@ function run(): void {
   // typechecker CAN guarantee array<int> now since what is received by
   // addRandomToArray() is a copy (passed-by-value)
   addRandomToArray($arr);
-  var_dump($arr); // Still only going to contain 3, not the 3.2.
+  \var_dump($arr); // Still only going to contain 3, not the 3.2.
 }
 
 run();

@@ -16,9 +16,9 @@ function run(): void {
     }
     return $a * $a;
   };
-  var_dump(my_math($callback, 3, true));
-  var_dump(my_math($callback, 3, false));
-  var_dump(my_math($callback, -1, false));
+  \var_dump(my_math($callback, 3, true));
+  \var_dump(my_math($callback, 3, false));
+  \var_dump(my_math($callback, -1, false));
 }
 
 run();

@@ -14,7 +14,7 @@ class RobotsTxtTest extends \PHPUnit_Framework_TestCase {
       PageLoader::getPage('http://docs.hhvm.com/robots.txt'),
     );
     $this->assertSame(
-      file_get_contents(RobotsTxtController::DEFAULT_FILE),
+      \file_get_contents(RobotsTxtController::DEFAULT_FILE),
       (string) $response->getBody(),
     );
   }
@@ -24,7 +24,7 @@ class RobotsTxtTest extends \PHPUnit_Framework_TestCase {
       PageLoader::getPage('http://staging.docs.hhvm.com/robots.txt'),
     );
     $this->assertSame(
-      file_get_contents(RobotsTxtController::DO_NOT_CRAWL_FILE),
+      \file_get_contents(RobotsTxtController::DO_NOT_CRAWL_FILE),
       (string) $response->getBody(),
     );
   }

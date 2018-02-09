@@ -83,7 +83,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
           $versions
           |> Dict\map_with_key(
             $$,
-            ($name, $ver) ==> sprintf('%s %s or later', $name, $ver),
+            ($name, $ver) ==> \sprintf('%s %s or later', $name, $ver),
           )
           |> Str\join($$, ', ')
         ).$experimental.'.'

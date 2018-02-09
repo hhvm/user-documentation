@@ -18,7 +18,7 @@ class APINavDataTest extends \PHPUnit_Framework_TestCase {
     $have_ns_separator = false;
     foreach ($classes as $node) {
       $node = (($x): NavDataNode ==> /* UNSAFE_EXPR */ $x)($node);
-      if (strpos($node['name'], "HH\\") === 0) {
+      if (\strpos($node['name'], "HH\\") === 0) {
         $have_ns_separator = true;
         break;
       }
@@ -33,10 +33,10 @@ class APINavDataTest extends \PHPUnit_Framework_TestCase {
     $have_ns_separator = false;
     foreach ($classes as $node) {
       $node = (($x): NavDataNode ==> /* UNSAFE_EXPR */ $x)($node);
-      if (strpos($node['name'], "HH\\") === 0) {
+      if (\strpos($node['name'], "HH\\") === 0) {
         $have_ns_separator = true;
 
-        $url_pattern = strtr($node['name'], "\\", '.');
+        $url_pattern = \strtr($node['name'], "\\", '.');
         $this->assertContains($url_pattern, $node['urlPath']);
         break;
       }

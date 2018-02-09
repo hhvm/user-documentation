@@ -23,16 +23,16 @@ class YAMLWriter {
       'Must specify a subtype of BaseYAML',
     );
     $file = $this->getFileName($def);
-    file_put_contents($file, JSON\encode_shape($type, $def));
+    \file_put_contents($file, JSON\encode_shape($type, $def));
     return $file;
   }
 
   private function getFileName(BaseYAML $def): string {
     $prefix = $def['type'];
 
-    $def_name = strtr($def['data']['name'], "\\", '.');
+    $def_name = \strtr($def['data']['name'], "\\", '.');
 
-    return sprintf(
+    return \sprintf(
       '%s/%s.%s.yml',
       $this->destination,
       $prefix,

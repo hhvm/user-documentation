@@ -36,7 +36,7 @@ function run_it(): void {
     $conn_awaitables[] = connect_with_pool($pool);
     $conns = \HH\Asio\join(\HH\Asio\v($conn_awaitables));
   } catch (\AsyncMysqlConnectException $ex) {
-    var_dump(get_stats($pool));
+    \var_dump(get_stats($pool));
   }
 }
 

@@ -7,8 +7,8 @@ function run() {
 
   $array = $s->toArray();
 
-  var_dump(is_array($array));
-  var_dump($array);
+  \var_dump(is_array($array));
+  \var_dump($array);
 }
 
 run();

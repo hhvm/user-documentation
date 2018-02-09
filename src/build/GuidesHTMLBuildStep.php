@@ -32,9 +32,9 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
       |> Vec\sort($$);
 
     $summary_index = $this->createSummaryIndex($summaries);
-    file_put_contents(
+    \file_put_contents(
       BuildPaths::GUIDES_SUMMARY,
-      '<?hh return '.var_export($summary_index, true).";",
+      '<?hh return '.\var_export($summary_index, true).";",
     );
   }
 
@@ -43,11 +43,11 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   ): Map<string, Map<string, string>> {
     $out = Map { };
     foreach ($summaries as $summary) {
-      $parts = (new Vector(explode('/', $summary)))
+      $parts = (new Vector(\explode('/', $summary)))
         ->map(
-          $part ==> preg_match('/^[0-9]{2}-/', $part) ? substr($part, 3) : $part
+          $part ==> \preg_match('/^[0-9]{2}-/', $part) ? \substr($part, 3) : $part
         );
-      if (count($parts) !== 3) {
+      if (\count($parts) !== 3) {
         continue;
       }
       list($product, $section, $page) = $parts;

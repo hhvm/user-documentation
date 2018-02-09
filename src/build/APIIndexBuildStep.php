@@ -51,7 +51,7 @@ final class APIIndexBuildStep extends BuildStep {
       Log::v('.');
       $data = JSON\decode_as_shape(
         BaseYAML::class,
-        file_get_contents($yaml_path),
+        \file_get_contents($yaml_path),
       );
 
       $type = $data['type'];
@@ -62,7 +62,7 @@ final class APIIndexBuildStep extends BuildStep {
             $data['data'],
           );
 
-          $idx = strtr($docs['name'], "\\", '.');
+          $idx = \strtr($docs['name'], "\\", '.');
           $md_path = FunctionMarkdownBuilder::getOutputFileName(
             $product,
             $docs,
@@ -85,7 +85,7 @@ final class APIIndexBuildStep extends BuildStep {
 
           $methods = dict[];
           foreach ($class['methods'] as $method) {
-            $idx = strtr($method['name'], "\\", '.');
+            $idx = \strtr($method['name'], "\\", '.');
             $md_path = MethodMarkdownBuilder::getOutputFileName(
               $product,
               $type,
@@ -109,7 +109,7 @@ final class APIIndexBuildStep extends BuildStep {
           );
           $html_path = APIHTMLBuildStep::getOutputFileName($md_path);
 
-          $idx = strtr($class['name'], "\\", '.');
+          $idx = \strtr($class['name'], "\\", '.');
           $entry = shape(
             'name' => $class['name'],
             'type' => $type,

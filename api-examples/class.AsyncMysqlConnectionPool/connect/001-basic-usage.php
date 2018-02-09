@@ -43,15 +43,15 @@ async function get_row_data(\AsyncMysqlConnection $conn):
 async function run_it_1(MyPool $pool): Awaitable<void> {
   $conn = await $pool->connect();
   $rows = await get_num_rows($conn);
-  var_dump($rows);
+  \var_dump($rows);
 }
 
 async function run_it_2(MyPool $pool): Awaitable<void> {
   $conn = await $pool->connect();
   $data = await get_row_data($conn);
-  var_dump($data->count());
+  \var_dump($data->count());
   // Should show only one created pool connection since we are pooling it
-  var_dump($pool->getPool()->getPoolStats());
+  \var_dump($pool->getPool()->getPoolStats());
 }
 
 function run(): void {

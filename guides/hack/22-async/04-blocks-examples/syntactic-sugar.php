@@ -25,10 +25,10 @@ async function use_async_lambda(): Awaitable<void> {
     async () ==> {
       $y = await gen_float();
       $z = await gen_int();
-      return round($y) + $z;
+      return \round($y) + $z;
     }
   );
-  var_dump($x);
+  \var_dump($x);
 }
 
 async function use_async_block(): Awaitable<void> {
@@ -37,22 +37,22 @@ async function use_async_block(): Awaitable<void> {
   $x = await async {
     $y = await gen_float();
     $z = await gen_int();
-    return round($y) + $z;
+    return \round($y) + $z;
   };
-  var_dump($x);
+  \var_dump($x);
 }
 
 async function call_async_function(): Awaitable<void> {
   // Normally you have to call a simple async function and get its value, even
   // if it takes no arguments, etc.
   $x = await gen_string();
-  var_dump($x);
+  \var_dump($x);
 }
 
 async function use_async_block_2(): Awaitable<void> {
   // Here you can inline your function right in the async block
   $x = await async { return "Hello"; };
-  var_dump($x);
+  \var_dump($x);
 }
 
 \HH\Asio\join(use_async_lambda());

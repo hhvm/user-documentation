@@ -91,7 +91,7 @@ class InterfaceSynopsis extends PageSection {
     } else {
       invariant_violation(
         "Don't know what a %s is.",
-        get_class($c),
+        \get_class($c),
       );
     }
 

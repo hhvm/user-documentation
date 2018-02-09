@@ -41,9 +41,9 @@ function familySize(): int {
 }
 
 function run(): void {
-  var_dump(familySize());
-  var_dump(calculateYears());
-  var_dump(addLastname());
+  \var_dump(familySize());
+  \var_dump(calculateYears());
+  \var_dump(addLastname());
 }
 
 run();

@@ -21,17 +21,17 @@ class IntBox extends Box {
 function run(): void {
   $ibox = new IntBox(10);
   $ibox->set(11);
-  var_dump($ibox);
+  \var_dump($ibox);
   invariant($ibox instanceof Box, 'Upcast to Box');
-  var_dump($ibox);
+  \var_dump($ibox);
   // CHECK THIS -- THIS SHOULD (?) ERROR BUT THE TYPECHECKER IS NOT CATCHING IT
   // This will be an error because 'this::T' in '$box' may not be an int
   $ibox->set(1337);
-  var_dump($ibox);
+  \var_dump($ibox);
   // This is not an error because the type checker knows that the type
   // returned by $box->get(), is the same accepted by $box->set()
   $ibox->set($ibox->get());
-  var_dump($ibox);
+  \var_dump($ibox);
 }
 
 run();

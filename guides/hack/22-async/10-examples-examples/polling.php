@@ -20,19 +20,19 @@ class Polling {
 }
 
 async function do_polling(Polling $p): Awaitable<int> {
-  echo "do polling 1" . PHP_EOL;
+  echo "do polling 1" . \PHP_EOL;
   // No async function in Polling, so loop until we are ready, but let
   // other awaitables go via later()
   while (!$p->isReady()) {
     await \HH\Asio\later();
   }
-  echo "\ndo polling 2" . PHP_EOL;
+  echo "\ndo polling 2" . \PHP_EOL;
   return $p->getResult();
 }
 
 async function no_polling(): Awaitable<string> {
   echo '.';
-  return str_shuffle("ABCDEFGH");
+  return \str_shuffle("ABCDEFGH");
 }
 
 async function polling_example(): Awaitable<void> {

@@ -14,7 +14,7 @@ enum Day: int {
 
 class MyCalendar {
   public static function get_latest_day_int(Vector<int> $days): Day {
-    if (min($days) > 0 && max($days) < 8) {
+    if (\min($days) > 0 && \max($days) < 8) {
       // We know that all values in $days are in the enum value range,
       // so we can assert that we are converting to one that exists.
       // assertAll returns a Container, so make sure to create a new
@@ -25,7 +25,7 @@ class MyCalendar {
   }
 
   public static function get_latest_day(Vector<Day> $days): Day {
-    return max($days);
+    return \max($days);
   }
 }
 

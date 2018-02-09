@@ -19,7 +19,7 @@ async function do_connect(): Awaitable<\AsyncMysqlQueryResult> {
 
 function run_it(): void {
   $res = \HH\Asio\join(do_connect());
-  var_dump($res->numRows()); // The number of rows from the SELECT statement
+  \var_dump($res->numRows()); // The number of rows from the SELECT statement
 }
 
 run_it();

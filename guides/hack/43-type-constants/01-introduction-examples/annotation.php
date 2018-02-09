@@ -32,8 +32,8 @@ class Inty extends Base {
 function run(): void {
   $s = new Stringy();
   $i = new Inty();
-  var_dump($s->getString());
-  var_dump($i->getInt());
+  \var_dump($s->getString());
+  \var_dump($i->getInt());
 }
 
 run();

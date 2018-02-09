@@ -9,7 +9,7 @@ const HALF_SECOND = 500000; // microseconds
 async function get_name_string(int $id): Awaitable<string> {
   // simulate fetch to database where we would actually use $id
   await \HH\Asio\usleep(HALF_SECOND);
-  return str_shuffle("ABCDEFG");
+  return \str_shuffle("ABCDEFG");
 }
 
 async function generate(): AsyncGenerator<int, string, int> {
@@ -28,12 +28,12 @@ async function associate_ids_to_names(
   // You have to call next() before you send. So this is the priming step and
   // you will get the initialization result from generate()
   $result = await $async_generator->next();
-  var_dump($result);
+  \var_dump($result);
 
   foreach ($ids as $id) {
     // $result will be an array of ?int and string
     $result = await $async_generator->send($id);
-    var_dump($result);
+    \var_dump($result);
   }
 }
 

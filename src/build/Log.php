@@ -64,14 +64,14 @@ class Log {
   private static function print(int $loglevel, string $msg): void {
     if (self::$loglevel & $loglevel) {
       $color = self::$color[$loglevel];
-      if (strpos($msg, "\n") === 0) {
-        $msg = strftime("\n%Y-%m-%d %H:%M:%S] ").ltrim($msg);
+      if (\strpos($msg, "\n") === 0) {
+        $msg = \strftime("\n%Y-%m-%d %H:%M:%S] ").\ltrim($msg);
       }
       print(self::color($color, $msg));
     }
   }
 
   private static function color(Color $color, string $msg): string {
-    return chr(27) . $color . $msg . chr(27) . Color::RESET;
+    return \chr(27) . $color . $msg . \chr(27) . Color::RESET;
   }
 }

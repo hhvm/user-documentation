@@ -46,7 +46,7 @@ function run(): void {
   $pool = get_pool();
 
   $conn = \HH\Asio\join(get_connection($pool));
-  var_dump($conn->isReusable());
+  \var_dump($conn->isReusable());
   $r2 = \HH\Asio\join(simple_query($conn));
   $conn->close();
 
@@ -54,7 +54,7 @@ function run(): void {
   $r2 = \HH\Asio\join(simple_query_2($conn2));
   // You will see one destroyed pool connection since we close $conn above
   // and we didn't set it to be reusable
-  var_dump($pool->getPoolStats());
+  \var_dump($pool->getPoolStats());
   $conn2->close();
 }
 

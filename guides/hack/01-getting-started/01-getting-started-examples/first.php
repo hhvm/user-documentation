@@ -18,7 +18,7 @@ function get_int(): int {
 function use_box(): void {
   $box = new Box(get_int());
   $i = $box->get();
-  var_dump($i);
+  \var_dump($i);
 }
 
 use_box();

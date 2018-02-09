@@ -9,13 +9,13 @@ function run(): void {
     if ($val === 'B') {
       $vec[] = 'D';
       // Affects the container...
-      var_dump($vec);
+      \var_dump($vec);
     }
     //... but not the foreach ...
-    var_dump($val);
+    \var_dump($val);
   }
   // ... and does affect the outside
-  var_dump($vec);
+  \var_dump($vec);
 }
 
 run();

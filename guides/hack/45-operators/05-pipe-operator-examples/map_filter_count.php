@@ -3,9 +3,9 @@
 namespace Hack\UserDocumentation\Operators\Pipe\Examples\MapFilterCountNested;
 
 function nested_example(array<int> $arr): int {
-  return count(
-    array_filter(
-      array_map($x ==> $x * $x, $arr),
+  return \count(
+    \array_filter(
+      \array_map($x ==> $x * $x, $arr),
       $x ==> $x % 2 == 0
     )
   );

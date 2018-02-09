@@ -10,8 +10,8 @@ function create_user(int $id, string $name): customer {
 
 function ts_shape(): void {
   $c = create_user(0, "James");
-  var_dump($c['id']);
-  var_dump($c['name']);
+  \var_dump($c['id']);
+  \var_dump($c['name']);
 }
 
 ts_shape();

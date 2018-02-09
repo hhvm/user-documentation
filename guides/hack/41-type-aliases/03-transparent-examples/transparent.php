@@ -30,7 +30,7 @@ function get_m2(): Vector<Vector<int>> {
 }
 
 function run(): void {
-  var_dump(add(
+  \var_dump(add(
     get_m1(),
     // get_m2() returns a Vector<Vector<int>>, and add() takes a Matrix<int>,
     // but no conversion is needed here since the two are equivalent.

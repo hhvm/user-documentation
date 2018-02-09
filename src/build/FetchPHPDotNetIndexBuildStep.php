@@ -17,8 +17,8 @@ final class FetchPHPDotNetIndexBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::v("\nFetching php.net documentation index...");
-    $json = file_get_contents(self::SOURCE);
-    $data = json_decode($json);
+    $json = \file_get_contents(self::SOURCE);
+    $data = \json_decode($json);
     invariant(
       is_array($data),
       '%s is not a json array',
@@ -31,11 +31,11 @@ final class FetchPHPDotNetIndexBuildStep extends BuildStep {
     );
     foreach ($data as $row) {
       invariant(
-        count($row) === 3,
+        \count($row) === 3,
         '%s is not an array of 3-entry arrays',
         self::SOURCE,
       );
     }
-    file_put_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON, $json);
+    \file_put_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON, $json);
   }
 }

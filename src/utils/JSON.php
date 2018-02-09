@@ -18,7 +18,7 @@ function decode_as_dict(string $json): dict<string, mixed> {
     $json,
     /* assoc = */ true,
     /* depth = */ 512,
-    JSON_FB_HACK_ARRAYS,
+    \JSON_FB_HACK_ARRAYS,
   );
 }
 
@@ -30,9 +30,9 @@ function decode_as_shape<T as shape(...)>(typename<T> $type, string $json): T {
 }
 
 function encode_dict<Tk as arraykey, Tv>(dict<Tk, Tv> $data): string {
-  return json_encode(
+  return \json_encode(
     $data,
-    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES,
+    \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES,
     /* depth = */ 512,
   );
 }
@@ -41,12 +41,12 @@ function encode_shape<T as shape(...)>(
   typename<T> $type,
   T $data,
 ): string {
-  return json_encode(
+  return \json_encode(
     TypeAssert\matches_type_structure(
       \HHVM\UserDocumentation\type_alias_structure($type),
       $data,
     ),
-    JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES,
+    \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES,
     /* depth = */ 512,
   );
 }

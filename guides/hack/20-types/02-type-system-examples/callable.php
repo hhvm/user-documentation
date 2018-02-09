@@ -17,7 +17,7 @@ function ts_callable(): void {
   $callable = function(int $i): ?int {
     return $i % 2 === 0 ? $i + 1 : null;
   };
-  var_dump(use_callable(Vector {1, 2, 3}, $callable));
+  \var_dump(use_callable(Vector {1, 2, 3}, $callable));
 }
 
 ts_callable();

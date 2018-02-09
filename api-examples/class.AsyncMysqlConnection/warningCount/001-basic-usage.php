@@ -27,7 +27,7 @@ async function get_warning_count_on_query(): Awaitable<int> {
 
 function run(): void {
   $wc = \HH\Asio\join(get_warning_count_on_query());
-  var_dump($wc);
+  \var_dump($wc);
 }
 
 run();

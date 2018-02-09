@@ -26,7 +26,7 @@ async function get_port(): Awaitable<int> {
 
 function run(): void {
   $port = \HH\Asio\join(get_port());
-  var_dump($port);
+  \var_dump($port);
 }
 
 run();

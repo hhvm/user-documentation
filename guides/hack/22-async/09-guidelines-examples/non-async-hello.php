@@ -7,7 +7,7 @@ function get_hello(): string {
 }
 
 function run_na_hello(): void {
-  var_dump(get_hello());
+  \var_dump(get_hello());
 }
 
 run_na_hello();

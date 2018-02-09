@@ -14,7 +14,7 @@ class A {
 
 function callFoo(): void {
   $a = new A(new B());
-  var_dump($a->foo());
+  \var_dump($a->foo());
 
 }
 

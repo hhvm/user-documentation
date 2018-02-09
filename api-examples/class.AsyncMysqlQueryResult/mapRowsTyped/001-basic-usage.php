@@ -22,14 +22,14 @@ async function simple_query(): Awaitable<int> {
   $result = await $conn->query(
     'SELECT name, age FROM test_table WHERE userID < 50'
   );
-  var_dump($result->mapRowsTyped()->count() === $result->numRows());
+  \var_dump($result->mapRowsTyped()->count() === $result->numRows());
   $conn->close();
   return $result->numRows();
 }
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

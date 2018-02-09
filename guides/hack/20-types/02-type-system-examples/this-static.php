@@ -21,7 +21,7 @@ class A {
   public static function create(int $x): this {
     $instance = new static();
     if ($x < 4) {
-      $instance->x = floatval($x);
+      $instance->x = \floatval($x);
     }
     return $instance;
   }

@@ -10,8 +10,8 @@ function return_indexish(bool $which): \Indexish<int, mixed> {
 }
 
 function run(): void {
-  var_dump(return_indexish(true));
-  var_dump(return_indexish(false));
+  \var_dump(return_indexish(true));
+  \var_dump(return_indexish(false));
 }
 
 run();

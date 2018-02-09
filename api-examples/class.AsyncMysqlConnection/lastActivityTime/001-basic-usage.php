@@ -26,7 +26,7 @@ async function get_time(): Awaitable<float> {
 
 function run(): void {
   $t = \HH\Asio\join(get_time());
-  var_dump($t);
+  \var_dump($t);
 }
 
 run();

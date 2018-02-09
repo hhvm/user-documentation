@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Callables\SpecialFunctions\Examples\Fun;
 
 function foo() {
-  var_dump(__FUNCTION__);
+  \var_dump(__FUNCTION__);
 }
 
 function main() {

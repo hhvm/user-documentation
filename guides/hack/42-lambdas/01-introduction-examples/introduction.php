@@ -12,7 +12,7 @@ function addLastname(): Vector<string> {
 }
 
 function run(): void {
-  var_dump(addLastname());
+  \var_dump(addLastname());
 }
 
 run();

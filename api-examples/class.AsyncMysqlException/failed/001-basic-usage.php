@@ -29,7 +29,7 @@ async function simple_query(): Awaitable<?string> {
     return $result->vectorRows()[0];
   } catch (\AsyncMysqlConnectException $ex) { // implicitly constructed
     $ret = "Connection Exception";
-    var_dump($ex->failed());
+    \var_dump($ex->failed());
   } catch (\AsyncMysqlQueryException $ex) { // implicitly constructed
     $ret = "Query Exception";
   } catch (\AsyncMysqlException $ex) {
@@ -44,7 +44,7 @@ async function simple_query(): Awaitable<?string> {
 
 function run(): void {
   $r = \HH\Asio\join(simple_query());
-  var_dump($r);
+  \var_dump($r);
 }
 
 run();

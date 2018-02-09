@@ -17,23 +17,23 @@ class Customers {
   }
 
   public function get_name(ID $id): ?Name {
-    if (!array_key_exists($id, $this->c)) {
+    if (!\array_key_exists($id, $this->c)) {
       return null;
     }
     return $this->c[$id];
   }
 
   public function get_id(Name $name): ?ID {
-    $key = array_search($name, $this->c);
+    $key = \array_search($name, $this->c);
     return $key ? $key : null;
   }
 }
 
 function ts_type_alias(): void {
   $c = new Customers();
-  var_dump($c->get_name(0));
-  var_dump($c->get_id("Fred"));
-  var_dump($c->get_id("NoName"));
+  \var_dump($c->get_name(0));
+  \var_dump($c->get_id("Fred"));
+  \var_dump($c->get_id("NoName"));
 }
 
 ts_type_alias();

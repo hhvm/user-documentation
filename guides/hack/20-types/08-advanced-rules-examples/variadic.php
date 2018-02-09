@@ -11,7 +11,7 @@ function foo(int ...$args): vec<int> {
 }
 
 function bar(): void {
-  var_dump(foo(1, 2, 3, 4));
+  \var_dump(foo(1, 2, 3, 4));
 }
 
 bar();

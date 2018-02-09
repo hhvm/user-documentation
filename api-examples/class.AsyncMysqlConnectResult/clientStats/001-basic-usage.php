@@ -20,14 +20,14 @@ async function get_client_stats(): Awaitable<\AsyncMysqlClientStats> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
   $cstats = $conn->connectResult()->clientStats();
-  var_dump($cstats->callbackDelayMicrosAvg());
+  \var_dump($cstats->callbackDelayMicrosAvg());
   $conn->close();
   return $cstats;
 }
 
 function run(): void {
   $cs = \HH\Asio\join(get_client_stats());
-  var_dump($cs);
+  \var_dump($cs);
 }
 
 run();

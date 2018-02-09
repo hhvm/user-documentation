@@ -53,35 +53,35 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   }
 
   private function parseSingleRenderResult(string $line): ?string {
-    if (substr($line, 0, 4) !== 'OK] ') {
+    if (\substr($line, 0, 4) !== 'OK] ') {
       Log::v('!');
       return null;
     }
     Log::v('-');
-    list($in, $out) = explode(' -> ', $line);
+    list($in, $out) = \explode(' -> ', $line);
     // $in still has 'OK] ' prefix, but we don't need it now anyway
     return $out;
   }
 
   public static function getOutputFileName(string $input): string {
-    $input = str_replace(static::SOURCE_ROOT.'/', '', $input);
-    $parts = (new Vector(explode('/', $input)))
+    $input = \str_replace(static::SOURCE_ROOT.'/', '', $input);
+    $parts = (new Vector(\explode('/', $input)))
       ->map(
-        $part ==> preg_match('/^[0-9]{2}-/', $part) ? substr($part, 3) : $part
+        $part ==> \preg_match('/^[0-9]{2}-/', $part) ? \substr($part, 3) : $part
       );
 
-    $output = implode('/', $parts);
+    $output = \implode('/', $parts);
 
-    $dir = dirname($output);
+    $dir = \dirname($output);
     $output =
       static::BUILD_ROOT.'/'.
       ($dir === '.' ? '' : $dir.'/').
-      basename($output, '.md').
+      \basename($output, '.md').
       '.html';
 
-    $output_dir = dirname($output);
-    if (!is_dir($output_dir)) {
-      mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
+    $output_dir = \dirname($output);
+    if (!\is_dir($output_dir)) {
+      \mkdir($output_dir, /* mode = */ 0755, /* recursive = */ true);
     }
 
     return $output;

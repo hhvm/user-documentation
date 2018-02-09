@@ -20,7 +20,7 @@ function main() {
   };
 
   $out = $in->map($foo ==> $foo->getContent());
-  var_dump($out);
+  \var_dump($out);
 }
 
 main();

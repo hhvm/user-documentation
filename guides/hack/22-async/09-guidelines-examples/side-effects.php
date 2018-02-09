@@ -7,7 +7,7 @@ async function get_curl_data(string $url): Awaitable<string> {
 }
 
 function possible_side_effects(): int {
-  sleep(1);
+  \sleep(1);
   echo "Output buffer stuff";
   return 4;
 }

@@ -16,7 +16,7 @@ async function b_two(string $key): Awaitable<string> {
 
 async function batching(): Awaitable<void> {
   $results = await \HH\Asio\v(array(b_one('hello'), b_two('world')));
-  printf("%s\n%s\n", $results[0], $results[1]);
+  \printf("%s\n%s\n", $results[0], $results[1]);
 }
 
 \HH\Asio\join(batching());
@@ -55,7 +55,7 @@ async function multi_key_lookup(array<string> $keys)
   // lookup multiple keys, but, for now, return something random
   $r = array();
   foreach ($keys as $key) {
-    $r[$key] = str_shuffle("ABCDEF");
+    $r[$key] = \str_shuffle("ABCDEF");
   }
   return $r;
 }

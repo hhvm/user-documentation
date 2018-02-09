@@ -25,11 +25,11 @@ use namespace HH\Lib\{C, Str};
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedBase $def): bool {
     $is_hh_specific =
-      strpos($def->getName(), 'HH\\') === 0
-      || strpos($def->getName(), '__SystemLib\\') === 0
+      \strpos($def->getName(), 'HH\\') === 0
+      || \strpos($def->getName(), '__SystemLib\\') === 0
       || C\contains_key($def->getAttributes(), '__HipHopSpecific')
-      || strpos($def->getName(), 'fb_') === 0
-      || strpos($def->getName(), 'hphp_') === 0;
+      || \strpos($def->getName(), 'fb_') === 0
+      || \strpos($def->getName(), 'hphp_') === 0;
 
     if ($is_hh_specific) {
       return true;
@@ -82,7 +82,7 @@ abstract final class ScannedDefinitionFilters {
       return false;
     }
     $name = $def->getName();
-    if (function_exists($name) || function_exists("HH\\".$name)) {
+    if (\function_exists($name) || \function_exists("HH\\".$name)) {
       return false;
     }
     Log::w("\nUndefined function: ".$def->getName());
@@ -202,13 +202,13 @@ abstract final class ScannedDefinitionFilters {
       'uksort',
       'usort',
     ];
-    $keyed = array_flip($blacklist);
+    $keyed = \array_flip($blacklist);
 
     $name = $def->getName();
-    if (strpos($name, "HH\\") === 0) {
-      $name = substr($name, 3);
+    if (\strpos($name, "HH\\") === 0) {
+      $name = \substr($name, 3);
     }
 
-    return array_key_exists($name, $keyed);
+    return \array_key_exists($name, $keyed);
   }
 }

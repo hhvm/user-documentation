@@ -67,7 +67,7 @@ function build_site(?Traversable<string> $filters = null): void {
     $steps = $steps->filter(
       function (classname<BuildStep> $step): bool use ($filters) {
         foreach ($filters as $filter) {
-          if (stripos($step, $filter) !== false) {
+          if (\stripos($step, $filter) !== false) {
             return true;
           }
         }

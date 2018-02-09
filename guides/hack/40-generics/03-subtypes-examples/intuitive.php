@@ -7,7 +7,7 @@ function echo_add(num $x, num $y): void {
 }
 
 function get_int(): int {
-  return rand();
+  return \rand();
 }
 
 function run(): void {

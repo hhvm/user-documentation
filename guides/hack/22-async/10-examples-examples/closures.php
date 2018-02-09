@@ -14,7 +14,7 @@ async function closure_async(): Awaitable<void> {
   $rh = await $hello();
   $rb = await $bye("bye");
 
-  echo $rh . " " . $rb . PHP_EOL;
+  echo $rh . " " . $rb . \PHP_EOL;
 }
 
 closure_async();

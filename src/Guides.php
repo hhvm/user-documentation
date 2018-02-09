@@ -21,16 +21,16 @@ final class Guides {
     // If there is only one page in a guide, only print the guide name.
     return
       (
-        strcasecmp($guide, $page) === 0
-        || count(GuidesIndex::getPages($product, $guide)) === 1
+        \strcasecmp($guide, $page) === 0
+        || \count(GuidesIndex::getPages($product, $guide)) === 1
       )
-        ? ucwords(strtr($guide, '-', ' '))
-        : ucwords(strtr($guide.': '.$page, '-', ' '));
+        ? \ucwords(\strtr($guide, '-', ' '))
+        : \ucwords(\strtr($guide.': '.$page, '-', ' '));
   }
 
   public static function normalizePart(
     string $part,
   ): string {
-    return ucwords(strtr($part, '-', ' '));
+    return \ucwords(\strtr($part, '-', ' '));
   }
 }

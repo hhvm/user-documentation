@@ -10,11 +10,11 @@ enum Size: string {
 }
 
 function say_greeting_with_size(string $size): void {
-  echo "Hello. We have size " . $size . PHP_EOL;
+  echo "Hello. We have size " . $size . \PHP_EOL;
 }
 
 function give_shirt(Size $size): void {
-  echo "Here is your shirt of size " . $size . PHP_EOL;
+  echo "Here is your shirt of size " . $size . \PHP_EOL;
 }
 
 function sales(): void {

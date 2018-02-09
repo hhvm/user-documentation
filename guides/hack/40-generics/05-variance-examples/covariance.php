@@ -14,9 +14,9 @@ class C<+T> {
 class Animal {}
 class Cat extends Animal {}
 
-function f(C<Animal> $p1): void { var_dump($p1); }
+function f(C<Animal> $p1): void { \var_dump($p1); }
 
-function g(array<Animal> $p1): void { var_dump($p1); }
+function g(array<Animal> $p1): void { \var_dump($p1); }
 
 function run(): void {
   f(new C(new Animal()));

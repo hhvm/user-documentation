@@ -12,11 +12,11 @@ function run(): void {
   $mapA = Map {1 => 'A', 2 => 'B'};
   $mapB = Map {2 => 'B', 1 => 'A'};
 
-  var_dump($vecA == $vecB); // true
-  var_dump($vecA == $vecC); // false, different values
-  var_dump($vecA == $vecD); // false, same values, but different order
-  var_dump($setA == $setB); // true, same values, order doesn't matter
-  var_dump($mapA == $mapB); // true, ordering of keys doesn't matter
+  \var_dump($vecA == $vecB); // true
+  \var_dump($vecA == $vecC); // false, different values
+  \var_dump($vecA == $vecD); // false, same values, but different order
+  \var_dump($setA == $setB); // true, same values, order doesn't matter
+  \var_dump($mapA == $mapB); // true, ordering of keys doesn't matter
 }
 
 run();

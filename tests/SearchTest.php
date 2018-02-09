@@ -16,7 +16,7 @@ final class SearchTest extends \PHPUnit_Framework_TestCase {
     array<string> $expected,
   ): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('/search?term='.urlencode($term))
+      PageLoader::getPage('/search?term='.\urlencode($term))
     );
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();

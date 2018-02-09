@@ -37,14 +37,14 @@ abstract class BuildStep {
       return null;
     }
 
-    return BuildPaths::DIR_INDEX_ROOT.'/'.md5($root).'_'.$head.'.json';
+    return BuildPaths::DIR_INDEX_ROOT.'/'.\md5($root).'_'.$head.'.json';
   }
 
   protected static function findSources(
     string $root,
     \ConstSet<string> $extensions,
   ): vec<string> {
-    $root = realpath($root);
+    $root = \realpath($root);
     Log::i("\nFinding sources in %s", $root);
 
     $index = self::getIndexFile($root);

@@ -3,9 +3,9 @@
 namespace Hack\UserDocumentation\Async\Extensions\Examples\Stream;
 
 function get_resources(): array<resource> {
-  $r1 = fopen('php://stdout', 'w');
-  $r2 = fopen('php://stdout', 'w');
-  $r3 = fopen('php://stdout', 'w');
+  $r1 = \fopen('php://stdout', 'w');
+  $r2 = \fopen('php://stdout', 'w');
+  $r3 = \fopen('php://stdout', 'w');
 
   return array($r1, $r2, $r3);
 }

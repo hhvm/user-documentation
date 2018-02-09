@@ -50,10 +50,10 @@ async function async_mysql_tutorial(): Awaitable<void> {
   $conn = await get_connection();
   if ($conn !== null) {
     $result = await fetch_user_name($conn, 2);
-    var_dump($result);
+    \var_dump($result);
     $info = await get_user_info($conn, 'Fred Emmott');
-    var_dump($info instanceof Vector);
-    var_dump($info[0] instanceof Map);
+    \var_dump($info instanceof Vector);
+    \var_dump($info[0] instanceof Map);
   }
 }
 

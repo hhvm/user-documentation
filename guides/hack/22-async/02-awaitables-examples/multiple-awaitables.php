@@ -13,8 +13,8 @@ async function quads_m(): Awaitable<void> {
   );
   $results = await \HH\Asio\m($awaitables);
 
-  var_dump($results['five']); // float(20)
-  var_dump($results['nine']); // float(36)
+  \var_dump($results['five']); // float(20)
+  \var_dump($results['nine']); // float(36)
 }
 
 quads_m();

@@ -45,7 +45,7 @@ function subtract(Complex $z1, Complex $z2): Complex {
 function toString(Complex $z): string {
   if ($z['imag'] <= 0.0) {
     return "(" . $z['real'] . " - " . (-$z['imag']) . "i)";
-  } else if (1.0/$z['imag'] == -INF) {
+  } else if (1.0/$z['imag'] == -\INF) {
     return "(" . $z['real'] . " - " . 0.0 . "i)";
   } else {
     return "(" . $z['real'] . " + " . (+$z['imag']) . "i)";
