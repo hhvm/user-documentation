@@ -7,12 +7,12 @@
     "hhvm/type-assert": "^3.1.0",
     "facebook/hack-codegen": "^3.0.1",
     "facebook/hack-router-codegen": "^0.10.2",
-    "facebook/hack-router": "^0.11",
+    "facebook/hack-router": "^0.13",
     "hhvm/hsl": "^1.0",
-    "hhvm/hhast": "^0.6.0",
-    "facebook/fbmarkdown": "^0.1.0"
+    "facebook/fbmarkdown": "^0.2"
   },
   "require-dev": {
+    "hhvm/hhast": "^1.0",
     "facebook/definition-finder": "^1.5.1",
     "hack-psr/psr7-http-message-hhi": "^1.0.0",
     "phpunit/phpunit": "^5.1",

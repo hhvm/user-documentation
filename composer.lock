@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "35dff4b57c1a710f60588cbd83876d98",
+    "content-hash": "8000463bcb05de8e01f7554ae2be4863",
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v1.7.0",
+            "version": "v1.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "4f4ae3c89bfa38cb9ee37fbafe5b8267cab87c9b"
+                "reference": "eb09fdb5c57fc2fe02374cf8690ad1898d97b90d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/4f4ae3c89bfa38cb9ee37fbafe5b8267cab87c9b",
-                "reference": "4f4ae3c89bfa38cb9ee37fbafe5b8267cab87c9b",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/eb09fdb5c57fc2fe02374cf8690ad1898d97b90d",
+                "reference": "eb09fdb5c57fc2fe02374cf8690ad1898d97b90d",
                 "shasum": ""
             },
             "require": {
@@ -49,20 +49,20 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2018-01-19T23:29:11+00:00"
+            "time": "2018-02-09T16:35:07+00:00"
         },
         {
             "name": "facebook/fbmarkdown",
-            "version": "v0.1",
+            "version": "v0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbmarkdown.git",
-                "reference": "ef02b7b7523a35a9670a9c2df3cd22b6ea62d3e0"
+                "reference": "d988fccf22fb52b1cb418e619aa199e4a01022cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/ef02b7b7523a35a9670a9c2df3cd22b6ea62d3e0",
-                "reference": "ef02b7b7523a35a9670a9c2df3cd22b6ea62d3e0",
+                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/d988fccf22fb52b1cb418e619aa199e4a01022cc",
+                "reference": "d988fccf22fb52b1cb418e619aa199e4a01022cc",
                 "shasum": ""
             },
             "require": {
@@ -73,25 +73,32 @@
             "require-dev": {
                 "91carriage/phpunit-hhi": "~5.7",
                 "facebook/fbexpect": "^0.4.0",
-                "hhvm/hhast": "^0.6.0",
+                "hhvm/hhast": "^1.0",
                 "phpunit/phpunit": "~5.7"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2018-01-16T23:41:00+00:00"
+            "description": "Markdown parser and renderer for Hack",
+            "keywords": [
+                "facebook",
+                "gfm",
+                "hack",
+                "markdown"
+            ],
+            "time": "2018-02-09T21:03:58+00:00"
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v3.0.3",
+            "version": "v3.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "4a6fd111c7f1d1b6d2e73f2668637223e8592aa3"
+                "reference": "fb23a839e41ca5d0ed577530f2442c2fc6dfd6ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/4a6fd111c7f1d1b6d2e73f2668637223e8592aa3",
-                "reference": "4a6fd111c7f1d1b6d2e73f2668637223e8592aa3",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/fb23a839e41ca5d0ed577530f2442c2fc6dfd6ba",
+                "reference": "fb23a839e41ca5d0ed577530f2442c2fc6dfd6ba",
                 "shasum": ""
             },
             "require": {
@@ -138,20 +145,20 @@
                 "code generation",
                 "hack"
             ],
-            "time": "2018-01-09T19:54:23+00:00"
+            "time": "2018-02-09T17:41:15+00:00"
         },
         {
             "name": "facebook/hack-router",
-            "version": "v0.11",
+            "version": "v0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-router.git",
-                "reference": "aa662262b980df1fdfbaf56e42b496cfc7be252c"
+                "reference": "a3e4de12179eff2b5e86bda428a361649942068c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/aa662262b980df1fdfbaf56e42b496cfc7be252c",
-                "reference": "aa662262b980df1fdfbaf56e42b496cfc7be252c",
+                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/a3e4de12179eff2b5e86bda428a361649942068c",
+                "reference": "a3e4de12179eff2b5e86bda428a361649942068c",
                 "shasum": ""
             },
             "require": {
@@ -163,6 +170,7 @@
             "require-dev": {
                 "91carriage/phpunit-hhi": "^5.1",
                 "facebook/fbexpect": "^0.4.0",
+                "hhvm/hhast": "^1.0",
                 "phpunit/phpunit": "^5.1",
                 "zendframework/zend-diactoros": "^1.3"
             },
@@ -181,31 +189,32 @@
                 "router",
                 "routing"
             ],
-            "time": "2018-01-09T20:22:32+00:00"
+            "time": "2018-02-09T21:39:32+00:00"
         },
         {
             "name": "facebook/hack-router-codegen",
-            "version": "v0.10.2",
+            "version": "v0.10.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-router-codegen.git",
-                "reference": "85736d0dd883ce2e40bd282ccb5be2400f0c3a48"
+                "reference": "118da57cfb67e99d4e7029188c9a261c4fc341c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-router-codegen/zipball/85736d0dd883ce2e40bd282ccb5be2400f0c3a48",
-                "reference": "85736d0dd883ce2e40bd282ccb5be2400f0c3a48",
+                "url": "https://api.github.com/repos/hhvm/hack-router-codegen/zipball/118da57cfb67e99d4e7029188c9a261c4fc341c7",
+                "reference": "118da57cfb67e99d4e7029188c9a261c4fc341c7",
                 "shasum": ""
             },
             "require": {
                 "facebook/definition-finder": "^1.5.3",
                 "facebook/hack-codegen": "^3.0.1",
-                "facebook/hack-router": "^0.11",
+                "facebook/hack-router": "^0.13",
                 "hhvm": "^3.23.0",
                 "hhvm/type-assert": "^3.0"
             },
             "require-dev": {
                 "91carriage/phpunit-hhi": "^5.5",
+                "hhvm/hhast": "^1.0",
                 "phpunit/phpunit": "^5.5"
             },
             "type": "library",
@@ -228,24 +237,24 @@
                 "router",
                 "routing"
             ],
-            "time": "2018-01-09T20:33:30+00:00"
+            "time": "2018-02-09T22:10:45+00:00"
         },
         {
             "name": "facebook/xhp-lib",
-            "version": "v2.4.0",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/xhp-lib.git",
-                "reference": "aff764effe546739b19fd59082e92e37ecbc43c8"
+                "url": "https://github.com/hhvm/xhp-lib.git",
+                "reference": "5ef653637aa15aed232ff913b3c66b346df0932a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/xhp-lib/zipball/aff764effe546739b19fd59082e92e37ecbc43c8",
-                "reference": "aff764effe546739b19fd59082e92e37ecbc43c8",
+                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/5ef653637aa15aed232ff913b3c66b346df0932a",
+                "reference": "5ef653637aa15aed232ff913b3c66b346df0932a",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "~3.12",
+                "hhvm": "~3.23",
                 "hhvm/hhvm-autoload": "^1.5",
                 "hhvm/type-assert": "^3.0"
             },
@@ -271,7 +280,7 @@
                 "hhvm",
                 "xhp"
             ],
-            "time": "2017-09-28T18:09:22+00:00"
+            "time": "2018-02-09T20:32:16+00:00"
         },
         {
             "name": "fredemmott/hack-error-suppressor",
@@ -312,16 +321,16 @@
         },
         {
             "name": "hack-psr/psr7-http-message-hhi",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fredemmott/psr7-http-message-hhi.git",
-                "reference": "6635714788172c17961a7c157168cc4d90a8884f"
+                "reference": "163404a2284e2c45ce06d400ba35a3f6cc95b1b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/6635714788172c17961a7c157168cc4d90a8884f",
-                "reference": "6635714788172c17961a7c157168cc4d90a8884f",
+                "url": "https://api.github.com/repos/fredemmott/psr7-http-message-hhi/zipball/163404a2284e2c45ce06d400ba35a3f6cc95b1b0",
+                "reference": "163404a2284e2c45ce06d400ba35a3f6cc95b1b0",
                 "shasum": ""
             },
             "require": {
@@ -343,53 +352,20 @@
                 "psr-7",
                 "psr7"
             ],
-            "time": "2016-09-22T15:18:26+00:00"
-        },
-        {
-            "name": "hhvm/hhast",
-            "version": "v0.6",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hhvm/hhast.git",
-                "reference": "71f2ce15efc03a5cd8ae64508f0b9c875bd85035"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/71f2ce15efc03a5cd8ae64508f0b9c875bd85035",
-                "reference": "71f2ce15efc03a5cd8ae64508f0b9c875bd85035",
-                "shasum": ""
-            },
-            "require": {
-                "facebook/hack-codegen": "~3.0.3",
-                "hhvm": "^3.24.0 <3.25.0",
-                "hhvm/hsl": "^1.0.0",
-                "hhvm/type-assert": "^3.1"
-            },
-            "require-dev": {
-                "91carriage/phpunit-hhi": "^5.7",
-                "facebook/fbexpect": "^0.4.0",
-                "hhvm/hhvm-autoload": "^1.5",
-                "phpunit/phpunit": "^5.7"
-            },
-            "bin": [
-                "bin/hhast-lint"
-            ],
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "time": "2018-01-11T00:10:50+00:00"
+            "time": "2018-02-09T20:54:15+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "a2124986412f2c86d7da84b67a8c7b37bde25a3f"
+                "reference": "6ea8fe2cf396a5e9f15d4ef1097ef4d9dcd15eaa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/a2124986412f2c86d7da84b67a8c7b37bde25a3f",
-                "reference": "a2124986412f2c86d7da84b67a8c7b37bde25a3f",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/6ea8fe2cf396a5e9f15d4ef1097ef4d9dcd15eaa",
+                "reference": "6ea8fe2cf396a5e9f15d4ef1097ef4d9dcd15eaa",
                 "shasum": ""
             },
             "require": {
@@ -425,20 +401,20 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2018-01-18T22:05:10+00:00"
+            "time": "2018-02-08T22:51:10+00:00"
         },
         {
             "name": "hhvm/hsl",
-            "version": "v1.2.0",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "ef61c015ab5969d10c2b0d66cfbc1dd20b13ec17"
+                "reference": "556bb0a0749226417dd0f53567571ecc008f37f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/ef61c015ab5969d10c2b0d66cfbc1dd20b13ec17",
-                "reference": "ef61c015ab5969d10c2b0d66cfbc1dd20b13ec17",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/556bb0a0749226417dd0f53567571ecc008f37f2",
+                "reference": "556bb0a0749226417dd0f53567571ecc008f37f2",
                 "shasum": ""
             },
             "require": {
@@ -454,30 +430,30 @@
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "description": "The Hack Standard Library",
-            "time": "2018-01-05T23:38:40+00:00"
+            "time": "2018-02-05T22:10:31+00:00"
         },
         {
             "name": "hhvm/type-assert",
-            "version": "v3.2.0",
+            "version": "v3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/type-assert.git",
-                "reference": "fb7771076e78e38c7578ce94c7a2e81d6f9dcdb0"
+                "reference": "8f70814c8268f50e2fa728893d3ad9cad73df398"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/fb7771076e78e38c7578ce94c7a2e81d6f9dcdb0",
-                "reference": "fb7771076e78e38c7578ce94c7a2e81d6f9dcdb0",
+                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/8f70814c8268f50e2fa728893d3ad9cad73df398",
+                "reference": "8f70814c8268f50e2fa728893d3ad9cad73df398",
                 "shasum": ""
             },
             "require": {
                 "hhvm": "^3.23.0",
+                "hhvm/hhvm-autoload": "^1.4",
                 "hhvm/hsl": "^1.0"
             },
             "require-dev": {
                 "91carriage/phpunit-hhi": "~5.1",
                 "facebook/fbexpect": "^0.2.0 | ^0.3.0 | ^0.4.0",
-                "hhvm/hhvm-autoload": "^1.4",
                 "phpunit/phpunit": "~5.1"
             },
             "type": "library",
@@ -487,7 +463,7 @@
                 "TypeAssert",
                 "hack"
             ],
-            "time": "2018-01-08T17:56:33+00:00"
+            "time": "2018-02-09T17:05:23+00:00"
         },
         {
             "name": "psr/http-message",
@@ -595,11 +571,11 @@
     "packages-dev": [
         {
             "name": "91carriage/phpunit-hhi",
-            "version": "5.7.2",
+            "version": "5.7.3",
             "source": {
                 "type": "git",
                 "url": "https://git.simon.geek.nz/91-carriage/phpunit-hhi.git",
-                "reference": "b2ca7d221fa4ac6b4331e0dbc32cdc918ab8b11f"
+                "reference": "e885e708b0658cc55f57a45c7b5720cdc617c4c9"
             },
             "require": {
                 "hhvm": ">=3.23.0"
@@ -640,7 +616,7 @@
                 "phpunit",
                 "testing"
             ],
-            "time": "2018-01-09T08:14:01+00:00"
+            "time": "2018-02-09T19:25:38+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -698,16 +674,16 @@
         },
         {
             "name": "facebook/fbexpect",
-            "version": "v0.4",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbexpect.git",
-                "reference": "21e8ea201df6555bcf014a75560426650c7d961b"
+                "reference": "5af28d762b2bf8c6e7c242ce94eacf5136f61459"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/21e8ea201df6555bcf014a75560426650c7d961b",
-                "reference": "21e8ea201df6555bcf014a75560426650c7d961b",
+                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/5af28d762b2bf8c6e7c242ce94eacf5136f61459",
+                "reference": "5af28d762b2bf8c6e7c242ce94eacf5136f61459",
                 "shasum": ""
             },
             "require": {
@@ -727,7 +703,40 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "description": "Unit test helpers for Facebook projects",
-            "time": "2018-01-05T21:25:50+00:00"
+            "time": "2018-02-09T00:09:55+00:00"
+        },
+        {
+            "name": "hhvm/hhast",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/hhast.git",
+                "reference": "ddd9ec394375922e609d8c88a83142fd3cc89de2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/ddd9ec394375922e609d8c88a83142fd3cc89de2",
+                "reference": "ddd9ec394375922e609d8c88a83142fd3cc89de2",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^3.24.0",
+                "hhvm/hsl": "^1.0.0",
+                "hhvm/type-assert": "^3.1"
+            },
+            "require-dev": {
+                "91carriage/phpunit-hhi": "^5.7",
+                "facebook/fbexpect": "^0.4.0",
+                "facebook/hack-codegen": "~3.0.3",
+                "hhvm/hhvm-autoload": "^1.5",
+                "phpunit/phpunit": "^5.7"
+            },
+            "bin": [
+                "bin/hhast-lint"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2018-02-09T18:24:19+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1234,16 +1243,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.26",
+            "version": "5.7.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7fbc25c13309de0c4c9bb48b7361f1eca34c7fbd"
+                "reference": "b7803aeca3ccb99ad0a506fa80b64cd6a56bbc0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7fbc25c13309de0c4c9bb48b7361f1eca34c7fbd",
-                "reference": "7fbc25c13309de0c4c9bb48b7361f1eca34c7fbd",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b7803aeca3ccb99ad0a506fa80b64cd6a56bbc0c",
+                "reference": "b7803aeca3ccb99ad0a506fa80b64cd6a56bbc0c",
                 "shasum": ""
             },
             "require": {
@@ -1267,7 +1276,7 @@
                 "sebastian/global-state": "^1.1",
                 "sebastian/object-enumerator": "~2.0",
                 "sebastian/resource-operations": "~1.0",
-                "sebastian/version": "~1.0.3|~2.0",
+                "sebastian/version": "^1.0.6|^2.0.1",
                 "symfony/yaml": "~2.1|~3.0|~4.0"
             },
             "conflict": {
@@ -1312,7 +1321,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-12-17T06:14:38+00:00"
+            "time": "2018-02-01T05:50:59+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1888,16 +1897,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v3.4.3",
+            "version": "v3.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "25c192f25721a74084272671f658797d9e0e0146"
+                "reference": "eab73b6c21d27ae4cd037c417618dfd4befb0bfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/25c192f25721a74084272671f658797d9e0e0146",
-                "reference": "25c192f25721a74084272671f658797d9e0e0146",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/eab73b6c21d27ae4cd037c417618dfd4befb0bfe",
+                "reference": "eab73b6c21d27ae4cd037c417618dfd4befb0bfe",
                 "shasum": ""
             },
             "require": {
@@ -1942,20 +1951,20 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T07:37:34+00:00"
+            "time": "2018-01-21T19:05:02+00:00"
         },
         {
             "name": "webmozart/assert",
-            "version": "1.2.0",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f"
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/2db61e59ff05fe5126d152bd0655c9ea113e550f",
-                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/0df1908962e7a3071564e857d86874dad1ef204a",
+                "reference": "0df1908962e7a3071564e857d86874dad1ef204a",
                 "shasum": ""
             },
             "require": {
@@ -1992,7 +2001,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2016-11-23T20:04:58+00:00"
+            "time": "2018-01-29T19:49:41+00:00"
         }
     ],
     "aliases": [],
