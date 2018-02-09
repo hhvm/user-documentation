@@ -23,7 +23,7 @@ async function connect_with_pool(\AsyncMysqlConnectionPool $pool):
   );
 }
 
-function get_stats(\AsyncMysqlConnectionPool $pool): array<mixed> {
+function get_stats(\AsyncMysqlConnectionPool $pool): mixed {
   return $pool->getPoolStats();
 }
 

@@ -21,8 +21,8 @@ async function connect_with_pool(\AsyncMysqlConnectionPool $pool):
   );
 }
 
-function get_stats(\AsyncMysqlConnectionPool $pool): array<string, int> {
-  return $pool->getPoolStats();
+function get_stats(\AsyncMysqlConnectionPool $pool): dict<string, int> {
+  return dict($pool->getPoolStats());
 }
 
 function run_it(): void {

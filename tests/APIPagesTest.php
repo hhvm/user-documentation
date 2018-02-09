@@ -99,7 +99,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     $this->assertContains('<code>?Tv</code>', (string)$response->getBody());
   }
 
-  public function getDoNotDocument(): array<(string, APIDefinitionType)> {
+  public function getDoNotDocument(): vec<(string, APIDefinitionType)> {
     // vec/dict/keyset are not classes; with HH prefix, they shouldn't exist
     $classes = vec['vec', 'HH\\vec', 'dict', 'HH\\dict', 'keyset', 'HH\\keyset']
       |> Vec\map($$, $x ==> tuple($x, APIDefinitionType::CLASS_DEF));
@@ -108,7 +108,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     $functions = vec['type_structure', 'HH\\type_structure']
       |> Vec\map($$, $x ==> tuple($x, APIDefinitionType::FUNCTION_DEF));
 
-    return (array) Vec\concat($classes, $functions);
+    return Vec\concat($classes, $functions);
   }
 
   /**

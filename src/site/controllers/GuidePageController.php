@@ -24,7 +24,7 @@ use function HHVM\UserDocumentation\type_alias_structure;
 
 use type Psr\Http\Message\ServerRequestInterface;
 
-use namespace Facebook\TypeAssert;
+use namespace Facebook\{TypeAssert, TypeSpec};
 use namespace HH\Lib\Dict;
 
 final class GuidePageController extends WebPageController {
@@ -85,21 +85,25 @@ final class GuidePageController extends WebPageController {
     );
 
     $paging = <div class="paginationLinks" />;
-    $nav_data = GuidesNavData::getNavData()[$product]['children'];
+    $nav_data = GuidesNavData::getNavData()[$product]['children']
+      |> TypeSpec\dict(
+        TypeSpec\string(),
+        TypeSpec\__Private\from_type_structure(
+          type_alias_structure(NavDataNode::class),
+        ),
+      )->assertType($$);
 
-    if (is_array($nav_data)) {
-      $paging->appendChild(
-        $this->getPaginationLink($nav_data, $guide, $page, false)
-      );
-      $paging->appendChild(
-        $this->getPaginationLink($nav_data, $guide, $page, true)
-      );
-    }
+    $paging->appendChild(
+      $this->getPaginationLink($nav_data, $guide, $page, false)
+    );
+    $paging->appendChild(
+      $this->getPaginationLink($nav_data, $guide, $page, true)
+    );
     return $paging;
   }
 
   protected function getPaginationLink(
-    array<string, NavDataNode> $guides,
+    dict<string, NavDataNode> $guides,
     string $guide,
     string $page,
     bool $next = false,
@@ -150,7 +154,7 @@ final class GuidePageController extends WebPageController {
   }
 
   protected function getAdjacentPage(
-    array<string, NavDataNode> $guides,
+    dict<string, NavDataNode> $guides,
     string $guide,
     string $page,
     bool $next = false,
@@ -190,7 +194,7 @@ final class GuidePageController extends WebPageController {
   }
 
   protected function getAdjacentGuide(
-    array<string, NavDataNode> $guides,
+    dict<string, NavDataNode> $guides,
     string $current_guide,
     bool $next = false,
   ): (?string, ?NavDataNode) {
