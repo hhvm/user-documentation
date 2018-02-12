@@ -19,7 +19,7 @@ If we support a prebuilt package for a distribution, we support [compiling](/hhv
 
 ### Hack Typechecker
 
-Whether you are using a [prebuilt package](#prebuilt-packages) or compiling from source, the [Hack Typechecker](/hack/typechecker/introduction) is also part of the installation of HHVM, provided that you have **OCaml 4.03** or greater installed on your distribution. In general, you should be able to `apt-get` or `yum` install OCaml for your distribution.
+Whether you are using a [prebuilt package](#prebuilt-packages) or compiling from source, the [Hack Typechecker](/hack/typechecker/introduction) is also part of the installation of HHVM.
 
 ## Unsupported Distributions
 
