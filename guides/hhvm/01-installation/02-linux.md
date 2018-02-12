@@ -86,6 +86,27 @@ apt-get install hhvm-dev-nightly
 
 ```
 
+## GPG Key Installation: Alternative Method
+
+If you encounter issues with the `apt-key adv` command, an alternative is:
+
+```
+apt-get install -y curl
+curl https://dl.hhvm.com/conf/hhvm.gpg.key | apt-key add -
+apt-key finger 'opensource+hhvm@fb.com'
+```
+
+The 'fingerprint' shown by `apt-key finger` (the second line) should exactly match `0583 41C6 8FC8 DE60 17D7  75A1 B411 2585 D386 EB94`; for example:
+
+```
+$ apt-key finger 'opensource+hhvm@fb.com'
+pub   rsa4096 2017-11-03 [SC]
+      0583 41C6 8FC8 DE60 17D7  75A1 B411 2585 D386 EB94
+uid           [ unknown] HHVM Package Signing <opensource+hhvm@fb.com>
+```
+
+If this is not the case, run `apt-key list`, then use `apt-key del` to remove any keys you don't recognize.
+
 ## Mirrors
 
 dl.hhvm.com is fronted by a global CDN, so should be fast for all users. If you wish to maintain a local mirror, you can use AWS CLI utilities to sync:
