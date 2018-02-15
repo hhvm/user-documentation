@@ -26,6 +26,6 @@ class FunctionishSignature extends PageSection {
       $this->docBlock,
     );
 
-    return "```HackSignature\n".$str."\n```";
+    return "```Hack\n".$str."\n```";
   }
 }

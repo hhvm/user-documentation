@@ -110,6 +110,6 @@ class InterfaceSynopsis extends PageSection {
       $ret .= "\n}";
     }
 
-    return "```HackSignature\n".$ret."\n```";
+    return "```Hack\n".$ret."\n```";
   }
 }
