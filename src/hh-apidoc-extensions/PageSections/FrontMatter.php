@@ -17,7 +17,7 @@ use type HHVM\UserDocumentation\{
   YAMLMeta,
 };
 use namespace HHVM\UserDocumentation\JSON;
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\{C, Str, Vec};
 
 final class FrontMatter extends PageSection {
   public function getMarkdown(): string {
@@ -43,10 +43,44 @@ final class FrontMatter extends PageSection {
       $data['class'] = $class->getName();
     }
 
-    // TODO:
-    // - $data['lib'] referencing the HSL
-    // - fb-only notices for namespace aliases
-    // - fb-only notices for foo_async vs gen_foo
+    $builtin = C\any(
+      $data['sources'],
+      $s ==> Str\starts_with($s, 'api-sources/hhvm/'),
+    );
+    if ($builtin) {
+      return $data;
+    }
+
+    if (
+      C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hsl/'))
+    ) {
+      $data['lib'] = shape(
+        'name' => 'the Hack Standard Library',
+        'github' => 'hhvm/hsl',
+        'composer' => 'hhvm/hsl',
+      );
+    }
+
+    $fbonly_messages = vec[];
+    $name = Str\strip_prefix($data['name'], "HH\\Lib\\");
+    if (Str\ends_with($name, '_async')) {
+      $parts = Str\split($name, '\\');
+      $last = C\lastx($parts);
+     $parts = Vec\take($parts, C\count($parts) - 1);
+
+      if ($last === 'from_async') {
+        $parts[] = 'gen';
+      } else {
+        $parts[] = 'gen_'.Str\strip_suffix($last, '_async');
+      }
+      $name = Str\join($parts, "\\");
+      $fbonly_messages[] = "This function is available as `".$name."()` in ".
+          "Facebook's www repository.";
+    }
+
+    if (!C\is_empty($fbonly_messages)) {
+      $data['fbonly messages'] = $fbonly_messages;
+    }
 
     return $data;
   }
