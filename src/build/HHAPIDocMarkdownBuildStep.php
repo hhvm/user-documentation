@@ -21,10 +21,7 @@ use type Facebook\DefinitionFinder\{
   ScannedTrait,
 };
 use namespace Facebook\HHAPIDoc\Documentables;
-use type Facebook\HHAPIDoc\{
-  Documentables,
-  MarkdownBuilder,
-};
+use type Facebook\HHAPIDoc\Documentables;
 use namespace HH\Lib\{Dict, Str, Vec};
 
 final class HHAPIDocMarkdownBuildStep extends BuildStep {
@@ -64,7 +61,7 @@ final class HHAPIDocMarkdownBuildStep extends BuildStep {
       \mkdir($out, /* mode = */ 0755, /* recursive = */ true);
     }
 
-    $builder = new MarkdownBuilder();
+    $builder = new HHAPIDocExt\MarkdownBuilder();
 
     return Vec\map($documentables, $documentable ==> {
       Log::v('.');
