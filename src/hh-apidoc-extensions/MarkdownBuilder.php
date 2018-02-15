@@ -17,9 +17,15 @@ use namespace HH\Lib\Keyset;
 final class MarkdownBuilder extends HHAPIDoc\MarkdownBuilder {
   protected function getPageSections(
   ): keyset<classname<HHAPIDoc\PageSections\PageSection>> {
-    return Keyset\filter(
+    $inherited = Keyset\filter(
       parent::getPageSections(),
       $section ==> $section !== HHAPIDoc\PageSections\NameHeading::class,
+    );
+    return Keyset\union(
+      keyset[
+        PageSections\FrontMatter::class,
+      ],
+      $inherited,
     );
   }
 }
