@@ -91,7 +91,7 @@ final class HHAPIDocMarkdownBuildStep extends BuildStep {
         $product,
         Str\replace($path, "\\", '.'),
       );
-      \file_put_contents($path, $md);
+      \file_put_contents($path, $md."\n<!-- HHAPIDOC -->\n");
       return $path;
     });
   }
