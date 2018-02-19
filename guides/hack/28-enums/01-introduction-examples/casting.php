@@ -30,32 +30,3 @@ function sales(): void {
 }
 
 sales();
-
-// ----------------------
-enum StringSize: string as string {
-  SMALL = "small" ;
-  MEDIUM = "medium";
-  LARGE = "large";
-  X_LARGE = "x-large";
-}
-
-function sales(): void {
-  // We do not need a cast here, because StringSize is exposed as its
-  // underlying type (a string)
-  $s = StringSize::SMALL;
-  say_greeting_with_size($s);
-  
-  // We still need an assertion because StringSize::SMALL is just a string.
-  give_shirt(Size::assert(StringSize::SMALL));
-  
-  // It should also be noted that an enum declared to be its base type
-  // can be passed into any function that takes that base type as its
-  // argument, even though this is rarely the correct behavior. For example,
-  // this function can never return true, because the special type of string
-  // that a SmallSize is can never contain the word "cash". This subtle bug
-  // would have produced an error if SmallSize had not been exposed as a
-  // string.
-  if (Str\contains($s, 'cash')) {
-    record_cash_payment();
-  }
-}
