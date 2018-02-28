@@ -9,3 +9,10 @@ This can be implemented with an async function:
 It can also be implemented by a non-async function:
 
 @@ async-vs-awaitable-examples/non-async-impl.php @@
+
+Using `async` is strongly encouraged for all functions, except for:
+
+- interface method declarations
+- abstract method declarations
+
+The `async` keywould should almost always be used in all other cases, including implementations of interface or abstract methods.
