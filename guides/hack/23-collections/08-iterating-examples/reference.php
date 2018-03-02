@@ -4,9 +4,9 @@ namespace Hack\UserDocumentation\Collections\Iterating\Examples\Reference;
 
 function run(): void {
   $arr = array ('A', 'B', 'C');
-  // if $arr was a Vector instead, we would get a
-  // Fatal error: Collection elements cannot be taken by reference
   \var_dump($arr);
+  /* HH_IGNORE_ERROR[4225] this is not supported in Hack, but the example is
+   * still illustrative */
   foreach ($arr as &$val) {
     \var_dump($val);
     if ($val === 'B') {
