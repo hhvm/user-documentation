@@ -44,11 +44,11 @@ final class PHPDotNetAPIIndexBuildStep extends BuildStep {
 
       $supported =
         $type === APIDefinitionType::FUNCTION_DEF
-        ? \function_exists($name)
+        ? \function_exists($name, /* autoload = */ false)
         : (
-            \class_exists($name)
-            || \trait_exists($name)
-            || \interface_exists($name)
+            \class_exists($name, /* autoload = */ false)
+            || \trait_exists($name, /* autoload = */ false)
+            || \interface_exists($name, /* autoload = */ false)
           );
 
       $out[$name] = shape(

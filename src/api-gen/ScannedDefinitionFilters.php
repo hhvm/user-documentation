@@ -18,6 +18,7 @@ use type Facebook\DefinitionFinder\{
   ScannedFunctionAbstract,
   ScannedGenerics,
   ScannedVisibility,
+  SourceType,
 };
 
 use namespace HH\Lib\{C, Str};
@@ -81,8 +82,18 @@ abstract final class ScannedDefinitionFilters {
     if (!$def instanceof ScannedFunctionAbstract) {
       return false;
     }
+    $path = $def->getFileName();
+    if (!(
+      Str\starts_with($path, BuildPaths::HHVM_TREE)
+      && Str\ends_with($path, '.hhi')
+    )) {
+      return false;
+    }
     $name = $def->getName();
-    if (\function_exists($name) || \function_exists("HH\\".$name)) {
+    if (
+      \function_exists($name, /* autoload = */ false)
+      || \function_exists("HH\\".$name, /* autoload = */ false)
+    ) {
       return false;
     }
     Log::w("\nUndefined function: ".$def->getName());
