@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v1.7.2",
+            "version": "v1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "9fb89966a04281d0596dcb28d4e11b083415ebda"
+                "reference": "d756fa3f9d7e30e90fa3b1d6c01ff4e2827dd0ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/9fb89966a04281d0596dcb28d4e11b083415ebda",
-                "reference": "9fb89966a04281d0596dcb28d4e11b083415ebda",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/d756fa3f9d7e30e90fa3b1d6c01ff4e2827dd0ce",
+                "reference": "d756fa3f9d7e30e90fa3b1d6c01ff4e2827dd0ce",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2018-02-28T18:18:22+00:00"
+            "time": "2018-03-02T23:24:51+00:00"
         },
         {
             "name": "facebook/fbmarkdown",
@@ -571,14 +571,14 @@
     "packages-dev": [
         {
             "name": "91carriage/phpunit-hhi",
-            "version": "5.7.3",
+            "version": "5.7.4",
             "source": {
                 "type": "git",
                 "url": "https://git.simon.geek.nz/91-carriage/phpunit-hhi.git",
-                "reference": "e885e708b0658cc55f57a45c7b5720cdc617c4c9"
+                "reference": "29e50b1130dc6d72266460f1f303ba1f24937a40"
             },
             "require": {
-                "hhvm": ">=3.23.0"
+                "hhvm": ">=3.24.3"
             },
             "conflict": {
                 "phpunit/phpunit": "<5.7.15"
@@ -616,7 +616,7 @@
                 "phpunit",
                 "testing"
             ],
-            "time": "2018-02-09T19:25:38+00:00"
+            "time": "2018-03-02T23:37:33+00:00"
         },
         {
             "name": "doctrine/instantiator",
