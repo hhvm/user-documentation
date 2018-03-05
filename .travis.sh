@@ -17,5 +17,5 @@ hhvm bin/build.php
 hhvm -d hhvm.php7.all=0 -d hhvm.jit=0 vendor/bin/phpunit
 hhvm -d hhvm.php7.all=1 -d hhvm.jit=0 vendor/bin/phpunit
 
-echo > .hhconfig
+grep ignored_paths .hhconfig > .hhconfig
 hh_server --check $(pwd)
