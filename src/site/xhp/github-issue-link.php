@@ -27,7 +27,7 @@ final class :github-issue-link extends :x:element {
     $new_issue_prefill_url = sprintf(
       '%s?title=%s&body=%s',
       'https://github.com/hhvm/user-documentation/issues/new',
-      urlencode($this->:issueTitle),
+      urlencode($this->:issueTitle ?? ''),
       urlencode($body),
     );
 

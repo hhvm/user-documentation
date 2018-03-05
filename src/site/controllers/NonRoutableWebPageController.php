@@ -186,7 +186,9 @@ EOF;
   }
 
   private function getBodyClass(?string $extra_class): string {
-    $class = 'bodyClass'.ucwords($this->getRawParameter_UNSAFE('product'));
+    $class = 'bodyClass'.ucwords(
+      $this->getRawParameter_UNSAFE('product') ?? 'Default',
+    );
     if ($extra_class !== null) {
       $class = $class.' '.$extra_class;
     }
