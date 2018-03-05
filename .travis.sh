@@ -18,5 +18,4 @@ hhvm -d hhvm.php7.all=0 -d hhvm.jit=0 vendor/bin/phpunit
 hhvm -d hhvm.php7.all=1 -d hhvm.jit=0 vendor/bin/phpunit
 
 echo > .hhconfig
-hh_client restart
 hh_client
