@@ -240,6 +240,35 @@ final class DataMerger {
     );
   }
 
+  private static function mergeAttributes(
+    dict<string, vec<mixed>> $a,
+    ?dict<string, vec<mixed>> $b,
+  ): dict<string, vec<mixed>> {
+    if ($b === null) {
+      return $a;
+    }
+    if (C\is_empty($a)) {
+      return $b;
+    }
+    if (C\is_empty($b)) {
+      return $a;
+    }
+    $keys = Keyset\union(Keyset\keys($a), Keyset\keys($b));
+    return Dict\map(
+      $keys,
+      $key ==> {
+        $merged = Vec\concat($a[$key] ?? vec[], $b[$key] ?? vec[]);
+        $values = vec[];
+        foreach ($merged as $value) {
+          if (!C\contains($values, $value)) {
+            $values[] = $value;
+          }
+        }
+        return $values;
+      }
+    );
+  }
+
   private static function mergeClassishPair(
     ScannedClass $a,
     ScannedBase $b,
@@ -269,13 +298,12 @@ final class DataMerger {
       );
     }
 
-    $attributes = dict[]; // TODO FIXME
     $docblock = null; // TODO FIXME
 
     return new $class(
       $name,
       $a->getContext(),
-      $attributes,
+      self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
       $docblock,
       self::mergeDefinitionListsByName($a->getMethods(), $b->getMethods()),
       self::mergeDefinitionListsByName($a->getProperties(), $b->getProperties()),
