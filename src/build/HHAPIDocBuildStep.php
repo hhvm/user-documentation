@@ -26,7 +26,7 @@ use namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\HHAPIDoc\{Documentable, Documentables};
 use namespace HH\Lib\{Dict, Str, Vec};
 
-final class HHAPIDocMarkdownBuildStep extends BuildStep {
+final class HHAPIDocBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nHHAPIDocBuildStep");
@@ -57,6 +57,81 @@ final class HHAPIDocMarkdownBuildStep extends BuildStep {
     $hsl_defs = self::parse($hsl_sources);
     Log::i("\nGenerating HSL markdown");
     self::buildMarkdown(APIProduct::HSL, $hsl_defs);
+  }
+
+  private static function createIndex(
+    APIProduct $product,
+    Documentables $documentables,
+  ): ProductAPIIndexShape {
+    return shape(
+      'class' => self::createClassishIndex(
+        APIDefinitionType::CLASS_DEF,
+        $documentables,
+      ),
+      'interface' => self::createClassishIndex(
+        APIDefinitionType::INTERFACE_DEF,
+        $documentables,
+      ),
+      'trait' => self::createClassishIndex(
+        APIDefinitionType::TRAIT_DEF,
+        $documentables,
+      ),
+      'function' => self::createFunctionIndex($documentables),
+    );
+  }
+
+  private static function createClassishIndex(
+    APIDefinitionType $type,
+    Documentables $documentables,
+  ): dict<string, APIClassIndexEntry> {
+    $classes = Dict\filter(
+      $documentables,
+      $d ==> {
+        if ($type === APIDefinitionType::CLASS_DEF) {
+          return $d['definition'] instanceof ScannedBasicClass;
+        }
+        if ($type === APIDefinitionType::INTERFACE_DEF) {
+          return $d['definition'] instanceof ScannedInterface;
+        }
+        if ($type === APIDefinitionType::TRAIT_DEF) {
+          return $d['definition'] instanceof ScannedTrait;
+        }
+        invariant_violation('unhandled type: %s', $type);
+      },
+    );
+
+    return Dict\map(
+      $classes,
+      $c ==> {
+        $methods = Dict\filter(
+          $documentables,
+          $d ==> $d['parent']?->getName() === $c['definition']->getName(),
+        );
+
+        return shape(
+          'type' => $type,
+          'name' => $c['definition']->getName(),
+          'htmlPath' => 'TODO', // TODO FIXME
+          'urlPath' => 'TODO', // TODO FIXME
+          'methods' => Dict\map(
+            $methods,
+            $m ==> shape(
+              'name' => $m['definition']->getName(),
+              'className' => $c['definition']->getName(),
+              'classType' => $type,
+              'htmlPath' => 'TODO', // TODO FIXME
+              'urlPath' => 'TODO', // TODO FIXME
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  private static function createFunctionIndex(
+    Documentables $documentables,
+  ): dict<string, APIFunctionIndexEntry> {
+    return dict[]; // TODO FIXME
   }
 
   private static function parse(Traversable<string> $sources): Documentables {

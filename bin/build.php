@@ -24,7 +24,7 @@ function build_site(?Traversable<string> $filters = null): void {
 
   $steps = Vector {
     // No Dependencies
-    HHAPIDocMarkdownBuildStep::class,
+    HHAPIDocBuildStep::class,
     RawYAMLBuildStep::class,
     MergedYAMLBuildStep::class,
     FetchPHPDotNetIndexBuildStep::class,
