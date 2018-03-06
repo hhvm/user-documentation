@@ -18,15 +18,20 @@ use type Facebook\DefinitionFinder\{
   ScannedBase,
   ScannedBasicClass,
   ScannedClass,
+  ScannedFunction,
   ScannedGeneric,
   ScannedInterface,
+  ScannedMethod,
+  ScannedParameter,
   ScannedTrait,
   ScannedTypehint,
+  StaticityToken,
   VarianceToken,
+  VisibilityToken,
 };
 
 use namespace Facebook\{TypeAssert, TypeSpec};
-use namespace HH\Lib\{C, Dict, Keyset, Str, Vec};
+use namespace HH\Lib\{C, Dict, Keyset, Math, Str, Vec};
 
 final class DataMerger {
   private static function normalizeNameForMerge(string $name): string {
@@ -72,10 +77,20 @@ final class DataMerger {
     if ($b === null) {
       return $a;
     }
+
     if ($a instanceof ScannedClass) {
       return self::mergeClassishPair($a, $b);
     }
-    return $a;
+
+    if ($a instanceof ScannedFunction) {
+      return self::mergeFunctionPair($a, $b);
+    }
+
+    if ($a instanceof ScannedMethod) {
+      return self::mergeMethodPair($a, $b);
+    }
+
+    invariant_violation('Unhandled type %s', \get_class($a));
   }
 
   private static function mergeDefinitionListsByName<T as ScannedBase>(
@@ -176,7 +191,7 @@ final class DataMerger {
           $nullable = $first->isNullable();
 
           foreach ($rest as $th) {
-            $new_name = self::mergeTypeNames($name, $th->getTypeName());
+            $new_name = self::mergeNames($name, $th->getTypeName());
             if ($new_name !== $name) {
               $name = $new_name;
               $base = $th->getTypeTextBase();
@@ -198,7 +213,7 @@ final class DataMerger {
       );
   }
 
-  private static function mergeTypeNames(
+  private static function mergeNames(
     string $a,
     string $b,
   ): string {
@@ -211,7 +226,10 @@ final class DataMerger {
     if (Str\starts_with($a, "HH\\")) {
       return $a;
     }
-    return $b;
+    if (Str\starts_with($b, "HH\\")) {
+      return $b;
+    }
+    return (Str\length($a) > Str\length($b)) ? $a : $b;
   }
 
   private static function mergeTypehintPair<
@@ -227,7 +245,7 @@ final class DataMerger {
       return $b;
     }
 
-    $name = self::mergeTypeNames($a->getTypeName(), $b->getTypeName());
+    $name = self::mergeNames($a->getTypeName(), $b->getTypeName());
     $base = ($name === $a->getTypeName())
       ? $a->getTypeTextBase()
       : $b->getTypeTextBase();
@@ -291,13 +309,123 @@ final class DataMerger {
     return (Str\length($a) > Str\length($b)) ? $a : $b;
   }
 
+  private static function mergeFunctionPair(
+    ScannedFunction $a,
+    ScannedBase $b,
+  ): ScannedFunction {
+    assert($b instanceof ScannedFunction);
+    return new ScannedFunction(
+      self::mergeNames($a->getName(), $b->getName()),
+      $a->getContext(),
+      self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
+      self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
+      self::mergeGenerics($a->getGenericTypes(), $b->getGenericTypes()),
+      self::mergeTypehintPair($a->getReturnType(), $b->getReturnType()),
+      self::mergeParameterLists($a->getParameters(), $b->getParameters()),
+    );
+  }
+
+  private static function mergeMethodPair(
+    ScannedMethod $a,
+    ScannedBase $b,
+  ): ScannedMethod {
+    assert($b instanceof ScannedMethod);
+
+    if ($a->isPrivate() || $b->isPrivate()) {
+      $visibility = VisibilityToken::T_PRIVATE;
+    } else if ($a->isProtected() || $b->isProtected()) {
+      $visibility = VisibilityToken::T_PROTECTED;
+    } else {
+      $visibility = VisibilityToken::T_PUBLIC;
+    }
+    invariant(
+      $a->isStatic() === $b->isStatic(),
+      '%s has both a static and non-static definition',
+      $a->getName(),
+    );
+    invariant(
+      $a->isAbstract() === $b->isAbstract(),
+      '%s has both an abstract and non-abstract definition',
+      $a->getName(),
+    );
+    invariant(
+      $a->isFinal() === $b->isFinal(),
+      '%s has both a final and non-final definition',
+      $a->getName(),
+    );
+
+    return new ScannedMethod(
+      self::mergeNames($a->getName(), $b->getName()),
+      $a->getContext(),
+      self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
+      self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
+      self::mergeGenerics($a->getGenericTypes(), $b->getGenericTypes()),
+      self::mergeTypehintPair($a->getReturnType(), $b->getReturnType()),
+      self::mergeParameterLists($a->getParameters(), $b->getParameters()),
+      $visibility,
+      $a->isStatic() ? StaticityToken::IS_STATIC : StaticityToken::NOT_STATIC,
+      $a->isAbstract()
+        ? AbstractnessToken::IS_ABSTRACT : AbstractnessToken::NOT_ABSTRACT,
+      $a->isFinal() ? FinalityToken::IS_FINAL : FinalityToken::NOT_FINAL,
+    );
+  }
+
+  private static function mergeParameterLists(
+    vec<ScannedParameter> $a,
+    vec<ScannedParameter> $b,
+  ): vec<ScannedParameter> {
+    $ac = C\count($a);
+    $bc = C\count($b);
+    $count = Math\minva($ac, $bc);
+
+    return Vec\map(
+      \range(0, $count - 1),
+      $i ==> self::mergeParameterPair($a[$i], $b[$i]),
+    );
+  }
+
+  private static function mergeParameterPair(
+    ScannedParameter $a,
+    ScannedParameter $b,
+  ): ScannedParameter {
+    $visibility = null;
+    if ($a->__isPromoted()) {
+      $visibility = $a->__getVisibility();
+    } else if ($b->__isPromoted()) {
+      $visibility = $b->__getVisibility();
+    }
+    $default = null;
+    if ($a->isOptional()) {
+      $default = $a->getDefaultString();
+    }
+    if ($b->isOptional()) {
+      $bds = $b->getDefaultString();
+      if ($default === null || Str\length($bds) > Str\length($default)) {
+        $default = $bds;
+      }
+    }
+
+    return new ScannedParameter(
+      self::mergeNames($a->getName(), $b->getName()),
+      $a->getContext(),
+      self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
+      self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
+      self::mergeTypehintPair($a->getTypehint(), $b->getTypehint()),
+      $a->isPassedByReference() || $b->isPassedByReference(),
+      $a->isInOut() || $b->isInOut(),
+      $a->isVariadic() || $b->isVariadic(),
+      $default,
+      $visibility,
+    );
+  }
+
   private static function mergeClassishPair(
     ScannedClass $a,
     ScannedBase $b,
   ): ScannedClass {
     assert($b instanceof ScannedClass);
 
-    $name = self::mergeTypeNames($a->getName(), $b->getName());
+    $name = self::mergeNames($a->getName(), $b->getName());
 
     $agc = C\count($a->getGenericTypes());
     $bgc = C\count($b->getGenericTypes());
