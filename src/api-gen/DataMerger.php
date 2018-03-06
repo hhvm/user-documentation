@@ -269,6 +269,28 @@ final class DataMerger {
     );
   }
 
+  private static function mergeDocComments(
+    ?string $a,
+    ?string $b,
+  ): ?string {
+    // This almost always means we picked up a file header instead of an actual
+    // doc comment.
+    if (Str\contains((string) $a, 'Copyright')) {
+      $a = null;
+    }
+    if (Str\contains((string) $b, 'Copyright')) {
+      $b = null;
+    }
+    if ($a === null) {
+      return $b;
+    }
+    if ($b === null) {
+      return $a;
+    }
+
+    return (Str\length($a) > Str\length($b)) ? $a : $b;
+  }
+
   private static function mergeClassishPair(
     ScannedClass $a,
     ScannedBase $b,
@@ -298,13 +320,11 @@ final class DataMerger {
       );
     }
 
-    $docblock = null; // TODO FIXME
-
     return new $class(
       $name,
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
-      $docblock,
+      self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
       self::mergeDefinitionListsByName($a->getMethods(), $b->getMethods()),
       self::mergeDefinitionListsByName($a->getProperties(), $b->getProperties()),
       self::mergeDefinitionListsByName($a->getConstants(), $b->getConstants()),
