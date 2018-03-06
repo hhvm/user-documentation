@@ -40,6 +40,33 @@ final class DataMerger {
       |> Str\strip_prefix($$, "HH\\");
   }
 
+  public static function mergeAll(
+    Traversable<Documentable> $in,
+  ): Documentables {
+    return $in
+      |> Dict\group_by($$, $item ==> self::getMergeKey($item))
+      |> Vec\map(
+        $$,
+        $items ==> {
+          $first = C\firstx($items);
+          $rest = Vec\drop($items, 1);
+          if (C\is_empty($rest)) {
+            return $first;
+          }
+          $merged = $first;
+          foreach ($rest as $item) {
+            $merged = self::mergePair($merged, $item);
+          }
+          return $merged;
+        },
+      )
+      |> Dict\pull(
+        $$,
+        $v ==> $v,
+        $k ==> $k['definition']->getName(),
+      );
+  }
+
   private static function mergePair(
     Documentable $a,
     ?Documentable $b,
@@ -48,7 +75,6 @@ final class DataMerger {
       return $a;
     }
 
-    $sources = Vec\concat($a['sources'], $b['sources']);
     $parent = $a['parent'];
     if ($parent) {
       $parent = self::mergeDefinitionPair(
@@ -65,7 +91,7 @@ final class DataMerger {
     );
     return shape(
       'parent' => $parent,
-      'sources' => $sources,
+      'sources' => vec(Keyset\union($a['sources'], $b['sources'])),
       'definition' => $def,
     );
   }
@@ -340,19 +366,27 @@ final class DataMerger {
     }
     invariant(
       $a->isStatic() === $b->isStatic(),
-      '%s has both a static and non-static definition',
+      "%s has both a static and non-static definition\n",
       $a->getName(),
     );
     invariant(
       $a->isAbstract() === $b->isAbstract(),
-      '%s has both an abstract and non-abstract definition',
+      "%s has both an abstract and non-abstract definition\n",
       $a->getName(),
     );
-    invariant(
-      $a->isFinal() === $b->isFinal(),
-      '%s has both a final and non-final definition',
-      $a->getName(),
-    );
+
+    if ($a->isFinal() !== $b->isFinal()) {
+      // Yep, this happens.
+      \fprintf(
+        \STDERR,
+        "%s has both a final and non-final definition\n",
+        $a->getName(),
+      );
+      $finality = FinalityToken::IS_FINAL;
+    } else {
+      $finality =
+        $a->isFinal() ? FinalityToken::IS_FINAL : FinalityToken::NOT_FINAL;
+    }
 
     return new ScannedMethod(
       self::mergeNames($a->getName(), $b->getName()),
@@ -366,7 +400,7 @@ final class DataMerger {
       $a->isStatic() ? StaticityToken::IS_STATIC : StaticityToken::NOT_STATIC,
       $a->isAbstract()
         ? AbstractnessToken::IS_ABSTRACT : AbstractnessToken::NOT_ABSTRACT,
-      $a->isFinal() ? FinalityToken::IS_FINAL : FinalityToken::NOT_FINAL,
+      $finality,
     );
   }
 
@@ -377,6 +411,9 @@ final class DataMerger {
     $ac = C\count($a);
     $bc = C\count($b);
     $count = Math\minva($ac, $bc);
+    if ($count === 0) {
+      return vec[];
+    }
 
     return Vec\map(
       \range(0, $count - 1),

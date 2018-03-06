@@ -37,6 +37,19 @@ final class HHAPIDocMarkdownBuildStep extends BuildStep {
 
     $exts = ImmSet { 'php', 'hhi', 'hh' };
 
+    Log::i("\nFinding Builtin Sources");
+    $builtin_sources = Vec\concat(
+      self::findSources(BuildPaths::HHVM_TREE.'/hphp/system/php/', $exts),
+      self::findSources(BuildPaths::HHVM_TREE.'/hphp/runtime/ext/', $exts),
+      self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts),
+    );
+    Log::i("\nParsing Builtin Sources");
+    $builtin_defs = self::parse($builtin_sources);
+    Log::i("\nDe-duping Builtin Sources");
+    $builtin_defs = DataMerger::mergeAll($builtin_defs);
+    Log::i("\nGenerating Markdown for Builtins");
+    self::buildMarkdown(APIProduct::HACK, $builtin_defs);
+
     Log::i("\nFinding HSL sources");
     $hsl_sources = self::findSources(BuildPaths::HSL_TREE.'/src/', $exts);
     Log::i("\nParsing HSL sources");
