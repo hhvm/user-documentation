@@ -15,13 +15,14 @@ use type Facebook\DefinitionFinder\{
   FileParser,
   ScannedBase,
   ScannedBasicClass,
+  ScannedClass,
   ScannedFunctionAbstract,
   ScannedInterface,
   ScannedMethod,
   ScannedTrait,
 };
 use namespace Facebook\HHAPIDoc\Documentables;
-use type Facebook\HHAPIDoc\Documentables;
+use type Facebook\HHAPIDoc\{Documentable, Documentables};
 use namespace HH\Lib\{Dict, Str, Vec};
 
 final class HHAPIDocMarkdownBuildStep extends BuildStep {
@@ -53,7 +54,7 @@ final class HHAPIDocMarkdownBuildStep extends BuildStep {
 
   private static function buildMarkdown(
     APIProduct $product,
-    Documentables $documentables
+    Documentables $documentables,
   ): vec<string> {
     $out = BuildPaths::APIDOCS_MARKDOWN.'/'.$product;
 
