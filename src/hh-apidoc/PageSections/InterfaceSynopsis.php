@@ -30,19 +30,19 @@ class InterfaceSynopsis extends PageSection {
 
     return
       "## Interface Synopsis\n\n".
-      static::getInheritanceInformation($c)."\n\n".
-      static::getMethodList($c);
+      $this->getInheritanceInformation($c)."\n\n".
+      $this->getMethodList($c);
   }
 
-  protected static function getMethodList(
+  protected function getMethodList(
     ScannedClass $c,
   ): string {
     return $c->getMethods()
-      |> Vec\map($$, $m ==> self::getMethodListItem($c, $m))
+      |> Vec\map($$, $m ==> $this->getMethodListItem($c, $m))
       |> Str\join($$, "\n");
   }
 
-  protected static function getMethodListItem(
+  protected function getMethodListItem(
     ScannedClass $c,
     ScannedMethod $m,
   ): string {
@@ -65,14 +65,34 @@ class InterfaceSynopsis extends PageSection {
     $summary = $docs?->getSummary();
 
     return \sprintf(
-      '- [`%s`][%s]%s',
+      '- [`%s`](%s)%s',
       $ret,
-      $c->getName().'::'.$m->getName(),
+      $this->getLinkPathForMethod($c, $m),
       $summary === null ? '' : "\\\n".$summary,
     );
   }
 
-  protected static function getInheritanceInformation(
+  protected function getLinkPathForMethod(
+    ScannedClass $c,
+    ScannedMethod $m,
+  ): ?string {
+    $pp = $this->context->getPathProvider();
+    if ($c instanceof ScannedBasicClass) {
+      return $pp->getPathForClassMethod($c->getName(), $m->getName());
+    }
+    if ($c instanceof ScannedInterface) {
+      return $pp->getPathForInterfaceMethod($c->getName(), $m->getName());
+    }
+    if ($c instanceof ScannedTrait) {
+      return $pp->getPathForTraitMethod($c->getName(), $m->getName());
+    }
+    invariant_violation(
+      "Don't know how to handle type %s",
+      \get_class($c),
+    );
+  }
+
+  protected function getInheritanceInformation(
     ScannedClass $c,
   ): string {
     $ret = '';

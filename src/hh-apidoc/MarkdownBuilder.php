@@ -14,6 +14,11 @@ namespace Facebook\HHAPIDoc;
 use namespace HH\Lib\{Str, Vec};
 
 class MarkdownBuilder {
+  public function __construct(
+    private MarkdownBuilderContext $context,
+  ) {
+  }
+
   protected function getPageSections(
   ): keyset<classname<PageSections\PageSection>> {
     return keyset[
@@ -34,8 +39,9 @@ class MarkdownBuilder {
     $docs = DocBlock\DocBlock::nullable(
       $documentable['definition']->getDocComment(),
     );
+    $ctx = $this->context;
     return $this->getPageSections()
-      |> Vec\map($$, $s ==> (new $s($documentable, $docs))->getMarkdown())
+      |> Vec\map($$, $s ==> (new $s($ctx, $documentable, $docs))->getMarkdown())
       |> Vec\filter_nulls($$)
       |> Str\join($$, "\n\n");
   }
