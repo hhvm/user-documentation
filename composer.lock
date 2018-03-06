@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v1.7.4",
+            "version": "v1.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "8065ba13f113e0af3a9345f9b89fdcd4e04aa147"
+                "reference": "bd66100f476ed72759a02e437e26dc23cb6b6416"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/8065ba13f113e0af3a9345f9b89fdcd4e04aa147",
-                "reference": "8065ba13f113e0af3a9345f9b89fdcd4e04aa147",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/bd66100f476ed72759a02e437e26dc23cb6b6416",
+                "reference": "bd66100f476ed72759a02e437e26dc23cb6b6416",
                 "shasum": ""
             },
             "require": {
@@ -49,7 +49,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2018-03-06T17:49:24+00:00"
+            "time": "2018-03-06T18:24:13+00:00"
         },
         {
             "name": "facebook/fbmarkdown",

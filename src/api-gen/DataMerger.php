@@ -181,7 +181,7 @@ final class DataMerger {
               $name = $new_name;
               $base = $th->getTypeTextBase();
             }
-            
+
             $nullable = $nullable || $th->isNullable();
             $generics = self::mergeTypehintLists(
               $generics,
@@ -271,8 +271,6 @@ final class DataMerger {
 
     $attributes = dict[]; // TODO FIXME
     $docblock = null; // TODO FIXME
-    $interfaces = vec[]; // TODO FIXME
-    $traits = vec[]; // TODO FIXME
 
     return new $class(
       $name,
@@ -285,8 +283,8 @@ final class DataMerger {
       self::mergeDefinitionListsByName($a->getTypeConstants(), $b->getTypeConstants()),
       self::mergeGenerics($a->getGenericTypes(), $b->getGenericTypes()),
       self::mergeTypehintPair($a->getParentClassInfo(), $b->getParentClassInfo()),
-      $interfaces,
-      $traits,
+      self::mergeTypehintLists($a->getInterfaceInfo(), $b->getInterfaceInfo()),
+      self::mergeTypehintLists($a->getTraitInfo(), $b->getTraitInfo()),
       ($a->isAbstract() || $b->isAbstract())
         ? AbstractnessToken::IS_ABSTRACT
         : AbstractnessToken::NOT_ABSTRACT,
