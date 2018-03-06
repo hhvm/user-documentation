@@ -11,6 +11,10 @@ Building from source is advisable generally when you need features that exist in
   - GCC 5 or GCC 7
   - we only actively support building on distributions we create binary packages for; your mileage may vary on other systems
 
+We only support building with the bundled OCaml; you may need to uninstall
+(or `brew unlink` on Mac) other ocamlc and ocamlbuild binaries before
+building HHVM.
+
 ### GCC 5
 
 If your Linux-based system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
