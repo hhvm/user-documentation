@@ -25,8 +25,6 @@ function build_site(?Traversable<string> $filters = null): void {
   $steps = Vector {
     // No Dependencies
     HHAPIDocBuildStep::class,
-    RawYAMLBuildStep::class,
-    MergedYAMLBuildStep::class,
     FetchPHPDotNetIndexBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
     FacebookIPRangesBuildStep::class,
@@ -36,7 +34,6 @@ function build_site(?Traversable<string> $filters = null): void {
 
     // Needs the YAML
     GuidesIndexBuildStep::class,
-    APIIndexBuildStep::class,
 
     // Needs the indices
     PHPDotNetAPIIndexBuildStep::class,
@@ -54,9 +51,6 @@ function build_site(?Traversable<string> $filters = null): void {
     // Static Resources
     SASSBuildStep::class,
     StaticResourceMapBuildStep::class,
-
-    // Needs the static resources
-    APIMarkdownBuildStep::class,
 
     // Needs the Markdown
     GuidesHTMLBuildStep::class,

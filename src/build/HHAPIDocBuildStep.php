@@ -24,18 +24,13 @@ use type Facebook\DefinitionFinder\{
 use namespace Facebook\HHAPIDoc;
 use namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\HHAPIDoc\{Documentable, Documentables};
-use namespace HH\Lib\{Dict, Str, Vec};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 use namespace Facebook\TypeAssert;
 
 final class HHAPIDocBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nHHAPIDocBuildStep");
-
-    if (!\getenv('USE_HH_APIDOC')) {
-      Log::v('[skip]');
-      return;
-    }
 
     $exts = ImmSet { 'php', 'hhi', 'hh' };
 
@@ -50,12 +45,13 @@ final class HHAPIDocBuildStep extends BuildStep {
     $runtime_defs = self::parse($runtime_sources);
     $hhi_defs = self::parse($hhi_sources);
     Log::i("\nDe-duping Builtin Sources");
+    //FIXME $builtin_defs = Vec\concat($runtime_defs, $hhi_defs);
     $builtin_defs = DataMerger::mergeAll(Vec\concat($runtime_defs, $hhi_defs));
     Log::i("\nFiltering out PHP Builtins");
     $builtin_defs = Vec\filter(
       $builtin_defs,
       $documentable ==> {
-        return true;
+        return true; // FIXME
         $parent = $documentable['parent'];
         if ($parent !== null) {
           return ScannedDefinitionFilters::IsHHSpecific($parent);
@@ -152,7 +148,7 @@ final class HHAPIDocBuildStep extends BuildStep {
         $class_name = $class['definition']->getName();
         $methods = Dict\filter(
           $documentables,
-          $d ==> $d['parent']?->getName() === $class_name,
+          $d ==> $d['parent'] === $class['definition'],
         );
 
         return shape(
@@ -234,6 +230,7 @@ final class HHAPIDocBuildStep extends BuildStep {
       |> Vec\filter(
         $$,
         $documentable ==> {
+          return true; // FIXME
           $parent = $documentable['parent'];
           if (
             $parent !== null

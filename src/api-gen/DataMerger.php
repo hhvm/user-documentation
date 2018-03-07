@@ -45,7 +45,12 @@ final class DataMerger {
   public static function mergeAll(
     vec<Documentable> $in,
   ): vec<Documentable> {
-    return $in
+    /* We start by throwing any documentables with parents (e.g. methods
+     * have a class as a parent), as we need to de-dupe the parents first;
+     * the children are de-duped as part of that process, so we can extract
+     * them from the parents after */
+    $top_level = $in
+      |> Vec\filter($$, $d ==> $d['parent'] === null)
       |> Dict\group_by($$, $item ==> self::getMergeKey($item))
       |> Vec\map(
         $$,
@@ -62,6 +67,35 @@ final class DataMerger {
           return $merged;
         },
       );
+
+    $methods = $top_level
+      |> Vec\map(
+        $$,
+        $parent ==> {
+          $def = $parent['definition'];
+          if ($def instanceof ScannedClass) {
+            // Type refinement
+            $parent['definition'] = $def;
+            return $parent;
+          }
+          return null;
+        },
+      )
+      |> Vec\filter_nulls($$)
+      |> Vec\map(
+        $$,
+        $parent ==> Vec\map(
+          $parent['definition']->getMethods(),
+          $method ==> shape(
+            'definition' => $method,
+            'parent' => $parent['definition'],
+            'sources' => $parent['sources'],
+          ),
+        ),
+      )
+      |> Vec\flatten($$);
+    return Vec\concat($top_level, $methods)
+      |> Vec\sort_by($$, $d ==> $d['definition']->getName());
   }
 
   private static function mergePair(
@@ -319,7 +353,7 @@ final class DataMerger {
     if ($b === 'object' || $b === "HH\\object") {
       return $a;
     }
-    
+
     if (Str\starts_with($a, "HH\\")) {
       return $a;
     }
