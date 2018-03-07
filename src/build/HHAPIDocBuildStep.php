@@ -41,17 +41,15 @@ final class HHAPIDocBuildStep extends BuildStep {
     );
     $hhi_sources =
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts);
-    Log::i("\nParsing Builtin Sources");
+    Log::i("\nParsing builtins");
     $runtime_defs = self::parse($runtime_sources);
     $hhi_defs = self::parse($hhi_sources);
-    Log::i("\nDe-duping Builtin Sources");
-    //FIXME $builtin_defs = Vec\concat($runtime_defs, $hhi_defs);
+    Log::i("\nDe-duping builtins");
     $builtin_defs = DataMerger::mergeAll(Vec\concat($runtime_defs, $hhi_defs));
-    Log::i("\nFiltering out PHP Builtins");
+    Log::i("\nFiltering out PHP builtins");
     $builtin_defs = Vec\filter(
       $builtin_defs,
       $documentable ==> {
-        return true; // FIXME
         $parent = $documentable['parent'];
         if ($parent !== null) {
           return ScannedDefinitionFilters::IsHHSpecific($parent);
@@ -65,7 +63,7 @@ final class HHAPIDocBuildStep extends BuildStep {
     Log::i("\nParsing HSL sources");
     $hsl_defs = self::parse($hsl_sources);
 
-    Log::i("\nGenerating index for Builtins");
+    Log::i("\nGenerating index for builtins");
     $builtin_index = self::createProductIndex(APIProduct::HACK, $builtin_defs);
     Log::i("\nGenerating index for the HSL");
     $hsl_index = self::createProductIndex(APIProduct::HSL, $hsl_defs);
@@ -81,7 +79,7 @@ final class HHAPIDocBuildStep extends BuildStep {
       ),
     );
 
-    Log::i("\nGenerating Markdown for Builtins");
+    Log::i("\nGenerating Markdown for builtins");
     $builtin_md = self::buildMarkdown(APIProduct::HACK, $builtin_defs);
     Log::i("\nGenerating Markdown for the HSL");
     $hsl_md = self::buildMarkdown(APIProduct::HSL, $hsl_defs);
@@ -224,13 +222,15 @@ final class HHAPIDocBuildStep extends BuildStep {
     Traversable<string> $sources,
   ): vec<Documentable> {
     return $sources
-      |> Vec\map($$, $file ==> FileParser::FromFile($file))
+      |> Vec\map(
+        $$,
+        $file ==> { Log::v('.'); return FileParser::FromFile($file); }
+      )
       |> Vec\map($$, $parser ==> Documentables\from_parser($parser))
       |> Vec\flatten($$)
       |> Vec\filter(
         $$,
         $documentable ==> {
-          return true; // FIXME
           $parent = $documentable['parent'];
           if (
             $parent !== null
