@@ -18,11 +18,13 @@ use type Facebook\DefinitionFinder\{
   ScannedBase,
   ScannedBasicClass,
   ScannedClass,
+  ScannedConstant,
   ScannedFunction,
   ScannedGeneric,
   ScannedInterface,
   ScannedMethod,
   ScannedParameter,
+  ScannedProperty,
   ScannedTrait,
   ScannedTypehint,
   StaticityToken,
@@ -41,8 +43,8 @@ final class DataMerger {
   }
 
   public static function mergeAll(
-    Traversable<Documentable> $in,
-  ): Documentables {
+    vec<Documentable> $in,
+  ): vec<Documentable> {
     return $in
       |> Dict\group_by($$, $item ==> self::getMergeKey($item))
       |> Vec\map(
@@ -59,11 +61,6 @@ final class DataMerger {
           }
           return $merged;
         },
-      )
-      |> Dict\pull(
-        $$,
-        $v ==> $v,
-        $k ==> $k['definition']->getName(),
       );
   }
 
@@ -116,7 +113,74 @@ final class DataMerger {
       return self::mergeMethodPair($a, $b);
     }
 
+    if ($a instanceof ScannedConstant) {
+      return self::mergeConstantPair($a, $b);
+    }
+
+    if ($a instanceof ScannedProperty) {
+      return self::mergePropertyPair($a, $b);
+    }
+
     invariant_violation('Unhandled type %s', \get_class($a));
+  }
+
+  private static function mergePropertyPair(
+    ScannedProperty $a,
+    ScannedBase $b,
+  ): ScannedProperty {
+    assert($b instanceof ScannedProperty);
+
+    invariant(
+      $a->isStatic() === $b->isStatic(),
+      'Property %s has both static and non-static definitions',
+      $a->getName(),
+    );
+
+    $visibility = VisibilityToken::T_PUBLIC;
+    if ($a->isPrivate() || $b->isPrivate()) {
+      $visibility = VisibilityToken::T_PRIVATE;
+    } else if ($a->isProtected() || $b->isProtected()) {
+      $visibility = VisibilityToken::T_PROTECTED;
+    }
+
+    return new ScannedProperty(
+      self::mergeNames($a->getName(), $b->getName()),
+      $a->getContext(),
+      self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
+      self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
+      self::mergeTypehintPair($a->getTypehint(), $b->getTypehint()),
+      $visibility,
+      $a->isStatic() ? StaticityToken::IS_STATIC : StaticityToken::NOT_STATIC,
+    );
+  }
+
+  private static function mergeConstantPair(
+    ScannedConstant $a,
+    ScannedBase $b,
+  ): ScannedConstant {
+    assert($b instanceof ScannedConstant);
+
+    $value = $a->getValue();
+    if (
+      $value === 'null'
+      || $value === '0'
+      || $value === "''"
+      || $value === '""'
+      || $value === '0.0'
+    ) {
+      $value = $b->getValue();
+    }
+
+    return new ScannedConstant(
+      self::mergeNames($a->getName(), $b->getName()),
+      $a->getContext(),
+      self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
+      $value,
+      self::mergeTypehintPair($a->getTypehint(), $b->getTypehint()),
+      ($a->isAbstract() || $b->isAbstract())
+        ? AbstractnessToken::IS_ABSTRACT
+        : AbstractnessToken::NOT_ABSTRACT,
+    );
   }
 
   private static function mergeDefinitionListsByName<T as ScannedBase>(
@@ -249,6 +313,13 @@ final class DataMerger {
     if ($b === 'mixed') {
       return $a;
     }
+    if ($a === 'object' || $a === "HH\\object") {
+      return $b;
+    }
+    if ($b === 'object' || $b === "HH\\object") {
+      return $a;
+    }
+    
     if (Str\starts_with($a, "HH\\")) {
       return $a;
     }
@@ -364,43 +435,66 @@ final class DataMerger {
     } else {
       $visibility = VisibilityToken::T_PUBLIC;
     }
-    invariant(
-      $a->isStatic() === $b->isStatic(),
-      "%s has both a static and non-static definition\n",
-      $a->getName(),
-    );
-    invariant(
-      $a->isAbstract() === $b->isAbstract(),
-      "%s has both an abstract and non-abstract definition\n",
-      $a->getName(),
-    );
+    $a_attributes = $a->getAttributes();
 
-    if ($a->isFinal() !== $b->isFinal()) {
-      // Yep, this happens.
+    // Can't give reasonable documentation for this, so mark it as nodoc
+    if ($a->isStatic() !== $b->isStatic()) {
       \fprintf(
         \STDERR,
-        "%s has both a final and non-final definition\n",
+        "\n Warning: Method %s has both a static and non-static ".
+        "definition:\n- %s:%d\n- %s:%d\n- NOT DOCUMENTING THIS FUNCTION\n",
         $a->getName(),
+        $a->getPosition()['filename'],
+        $a->getPosition()['line'],
+        $b->getPosition()['filename'],
+        $b->getPosition()['line'],
       );
-      $finality = FinalityToken::IS_FINAL;
-    } else {
-      $finality =
-        $a->isFinal() ? FinalityToken::IS_FINAL : FinalityToken::NOT_FINAL;
+      $a_attributes['NoDoc'] = Vec\concat(
+        $a_attributes['NoDoc'] ?? vec[],
+        vec[self::class, 'static and non static definitions'],
+      );
+    }
+
+    if ($a->isAbstract() !== $b->isAbstract()) {
+      \fprintf(
+        \STDERR,
+        "\nWarning: Method %s has both an abstract and non-abstract ".
+        "definition:\n- %s:%d\n- %s:%d\n",
+        $a->getName(),
+        $a->getPosition()['filename'],
+        $a->getPosition()['line'],
+        $b->getPosition()['filename'],
+        $b->getPosition()['line'],
+      );
+    }
+
+    if ($a->isFinal() !== $b->isFinal()) {
+      \fprintf(
+        \STDERR,
+        "\nWarning: Method %s has both a final and non-final definition:\n".
+        "- %s:%d\n- %s:%d\n",
+        $a->getName(),
+        $a->getPosition()['filename'],
+        $a->getPosition()['line'],
+        $b->getPosition()['filename'],
+        $b->getPosition()['line'],
+      );
     }
 
     return new ScannedMethod(
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
-      self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
+      self::mergeAttributes($a_attributes, $b->getAttributes()),
       self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
       self::mergeGenerics($a->getGenericTypes(), $b->getGenericTypes()),
       self::mergeTypehintPair($a->getReturnType(), $b->getReturnType()),
       self::mergeParameterLists($a->getParameters(), $b->getParameters()),
       $visibility,
       $a->isStatic() ? StaticityToken::IS_STATIC : StaticityToken::NOT_STATIC,
-      $a->isAbstract()
+      ($a->isAbstract() || $b->isAbstract())
         ? AbstractnessToken::IS_ABSTRACT : AbstractnessToken::NOT_ABSTRACT,
-      $finality,
+      ($a->isFinal() || $b->isFinal())
+        ? FinalityToken::IS_FINAL : FinalityToken::NOT_FINAL,
     );
   }
 

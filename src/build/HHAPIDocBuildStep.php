@@ -16,7 +16,7 @@ use type Facebook\DefinitionFinder\{
   ScannedBase,
   ScannedBasicClass,
   ScannedClass,
-  ScannedFunctionAbstract,
+  ScannedFunction,
   ScannedInterface,
   ScannedMethod,
   ScannedTrait,
@@ -25,6 +25,7 @@ use namespace Facebook\HHAPIDoc;
 use namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\HHAPIDoc\{Documentable, Documentables};
 use namespace HH\Lib\{Dict, Str, Vec};
+use namespace Facebook\TypeAssert;
 
 final class HHAPIDocBuildStep extends BuildStep {
   <<__Override>>
@@ -39,52 +40,95 @@ final class HHAPIDocBuildStep extends BuildStep {
     $exts = ImmSet { 'php', 'hhi', 'hh' };
 
     Log::i("\nFinding Builtin Sources");
-    $builtin_sources = Vec\concat(
+    $runtime_sources = Vec\concat(
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/system/php/', $exts),
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/runtime/ext/', $exts),
-      self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts),
     );
+    $hhi_sources =
+      self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts);
     Log::i("\nParsing Builtin Sources");
-    $builtin_defs = self::parse($builtin_sources);
+    $runtime_defs = self::parse($runtime_sources);
+    $hhi_defs = self::parse($hhi_sources);
     Log::i("\nDe-duping Builtin Sources");
-    $builtin_defs = DataMerger::mergeAll($builtin_defs);
-    Log::i("\nGenerating Markdown for Builtins");
-    self::buildMarkdown(APIProduct::HACK, $builtin_defs);
+    $builtin_defs = DataMerger::mergeAll(Vec\concat($runtime_defs, $hhi_defs));
+    Log::i("\nFiltering out PHP Builtins");
+    $builtin_defs = Vec\filter(
+      $builtin_defs,
+      $documentable ==> {
+        return true;
+        $parent = $documentable['parent'];
+        if ($parent !== null) {
+          return ScannedDefinitionFilters::IsHHSpecific($parent);
+        }
+        return ScannedDefinitionFilters::IsHHSpecific($documentable['definition']);
+      },
+    );
 
     Log::i("\nFinding HSL sources");
     $hsl_sources = self::findSources(BuildPaths::HSL_TREE.'/src/', $exts);
     Log::i("\nParsing HSL sources");
     $hsl_defs = self::parse($hsl_sources);
-    Log::i("\nGenerating HSL markdown");
-    self::buildMarkdown(APIProduct::HSL, $hsl_defs);
+
+    Log::i("\nGenerating index for Builtins");
+    $builtin_index = self::createProductIndex(APIProduct::HACK, $builtin_defs);
+    Log::i("\nGenerating index for the HSL");
+    $hsl_index = self::createProductIndex(APIProduct::HSL, $hsl_defs);
+    Log::i("\nWriting index file");
+    \file_put_contents(
+      BuildPaths::APIDOCS_INDEX_JSON,
+      JSON\encode_shape(
+        APIIndexShape::class,
+        shape(
+          APIProduct::HACK => $builtin_index,
+          APIProduct::HSL => $hsl_index,
+        ),
+      ),
+    );
+
+    Log::i("\nGenerating Markdown for Builtins");
+    $builtin_md = self::buildMarkdown(APIProduct::HACK, $builtin_defs);
+    Log::i("\nGenerating Markdown for the HSL");
+    $hsl_md = self::buildMarkdown(APIProduct::HSL, $hsl_defs);
+
+    \file_put_contents(
+      BuildPaths::APIDOCS_MARKDOWN.'/index.json',
+      JSON\encode_shape(
+        DirectoryIndex::class,
+        shape('files' => Vec\concat($builtin_md, $hsl_md)),
+      ),
+    );
   }
 
-  private static function createIndex(
+  private static function createProductIndex(
     APIProduct $product,
-    Documentables $documentables,
+    vec<Documentable> $documentables,
   ): ProductAPIIndexShape {
     return shape(
       'class' => self::createClassishIndex(
+        $product,
         APIDefinitionType::CLASS_DEF,
         $documentables,
       ),
       'interface' => self::createClassishIndex(
+        $product,
         APIDefinitionType::INTERFACE_DEF,
         $documentables,
       ),
       'trait' => self::createClassishIndex(
+        $product,
         APIDefinitionType::TRAIT_DEF,
         $documentables,
       ),
-      'function' => self::createFunctionIndex($documentables),
+      'function' => self::createFunctionIndex($product, $documentables),
     );
   }
 
   private static function createClassishIndex(
+    APIProduct $product,
     APIDefinitionType $type,
-    Documentables $documentables,
+    vec<Documentable> $documentables,
   ): dict<string, APIClassIndexEntry> {
-    $classes = Dict\filter(
+    $classes = Vec\filter(
       $documentables,
       $d ==> {
         if ($type === APIDefinitionType::CLASS_DEF) {
@@ -100,56 +144,120 @@ final class HHAPIDocBuildStep extends BuildStep {
       },
     );
 
-    return Dict\map(
+    $html_paths = HTMLPaths::get($product);
+
+    return Dict\pull(
       $classes,
-      $c ==> {
+      $class ==> {
+        $class_name = $class['definition']->getName();
         $methods = Dict\filter(
           $documentables,
-          $d ==> $d['parent']?->getName() === $c['definition']->getName(),
+          $d ==> $d['parent']?->getName() === $class_name,
         );
 
         return shape(
           'type' => $type,
-          'name' => $c['definition']->getName(),
-          'htmlPath' => 'TODO', // TODO FIXME
-          'urlPath' => 'TODO', // TODO FIXME
-          'methods' => Dict\map(
+          'name' => $class_name,
+          'htmlPath' => $html_paths->getPathForClassish($type, $class_name),
+          'urlPath' => \APIClassPageControllerURIBuilder::getPath(shape(
+            'Product' => $product,
+            'Name' => Str\replace($class_name, "\\", '.'),
+            'Type' => $type,
+          )),
+          'methods' => Dict\pull(
             $methods,
-            $m ==> shape(
-              'name' => $m['definition']->getName(),
-              'className' => $c['definition']->getName(),
-              'classType' => $type,
-              'htmlPath' => 'TODO', // TODO FIXME
-              'urlPath' => 'TODO', // TODO FIXME
+            $method ==> {
+              $method_name = $method['definition']->getName();
+              return shape(
+                'name' => $method_name,
+                'className' => $class_name,
+                'classType' => $type,
+                'htmlPath' => $html_paths->getPathForClassishMethod(
+                  $type,
+                  $class_name,
+                  $method_name,
+                ),
+                'urlPath' => \APIMethodPageControllerURIBuilder::getPath(shape(
+                  'Product' => $product,
+                  'Class' => Str\replace($class_name, "\\", '.'),
+                  'Method' => $method_name,
+                  'Type' => $type,
+                )),
+              );
+            },
+            $method ==> Str\replace(
+              $method['definition']->getName(),
+              "\\",
+              '.',
             ),
           ),
         );
       },
+      $class ==> Str\replace($class['definition']->getName(), "\\", '.'),
     );
   }
 
   private static function createFunctionIndex(
-    Documentables $documentables,
+    APIProduct $product,
+    vec<Documentable> $documentables,
   ): dict<string, APIFunctionIndexEntry> {
-    return dict[]; // TODO FIXME
+    $functions = Dict\filter(
+      $documentables,
+      $d ==> $d['definition'] instanceof ScannedFunction,
+    );
+    $html_paths = HTMLPaths::get($product);
+    return Dict\pull(
+      $functions,
+      $function ==> {
+        $function_name = $function['definition']->getName();
+        return shape(
+          'name' => $function_name,
+          'htmlPath' => $html_paths->getPathForFunction($function_name),
+          'urlPath' => \APIClassPageControllerURIBuilder::getPath(shape(
+            'Product' => $product,
+            'Name' => Str\replace($function_name, "\\", '.'),
+            'Type' => APIDefinitionType::FUNCTION_DEF,
+          ),
+        ));
+      },
+      $function ==> Str\replace($function['definition']->getName(), "\\", '.'),
+    );
   }
 
-  private static function parse(Traversable<string> $sources): Documentables {
+  private static function parse(
+    Traversable<string> $sources,
+  ): vec<Documentable> {
     return $sources
       |> Vec\map($$, $file ==> FileParser::FromFile($file))
       |> Vec\map($$, $parser ==> Documentables\from_parser($parser))
-      |> Dict\flatten($$);
+      |> Vec\flatten($$)
+      |> Vec\filter(
+        $$,
+        $documentable ==> {
+          $parent = $documentable['parent'];
+          if (
+            $parent !== null
+            && ScannedDefinitionFilters::ShouldNotDocument($parent)
+          ) {
+            return false;
+          }
+          return !ScannedDefinitionFilters::ShouldNotDocument(
+            $documentable['definition'],
+          );
+        },
+      );
   }
 
   private static function buildMarkdown(
     APIProduct $product,
-    Documentables $documentables,
+    vec<Documentable> $documentables,
   ): vec<string> {
-    $out = BuildPaths::APIDOCS_MARKDOWN.'/'.$product;
+    $root = BuildPaths::APIDOCS_MARKDOWN.'/'.$product;
 
-    if (!\is_dir($out)) {
-      \mkdir($out, /* mode = */ 0755, /* recursive = */ true);
+    if (!\is_dir($root)) {
+      \mkdir($root, /* mode = */ 0755, /* recursive = */ true);
     }
+    $md_paths = MarkdownPaths::get($product);
     $ctx = new HHAPIDoc\MarkdownBuilderContext(
       new HHAPIDocExt\PathProvider()
     );
@@ -159,33 +267,32 @@ final class HHAPIDocBuildStep extends BuildStep {
       Log::v('.');
       $md = $builder->getDocumentation($documentable);
       $what = $documentable['definition'];
-      $type = self::getAPIDefinitionType($what);
-      switch ($type) {
-        case APIDefinitionType::FUNCTION_DEF:
-          if ($parent = $documentable['parent']) {
-            $path = 'class.'.$parent->getName().'.method.'.$what->getName();
-            break;
-          }
-          $path = ''; // hack error
-          // FALLTHROUGH
-        case APIDefinitionType::CLASS_DEF:
-        case APIDefinitionType::INTERFACE_DEF:
-        case APIDefinitionType::TRAIT_DEF:
-          $path = $type.'.'.$what->getName();
-          break;
+      if ($what instanceof ScannedMethod) {
+        $parent = TypeAssert\not_null($documentable['parent']);
+        $path = $md_paths->getPathForClassishMethod(
+          self::getClassishAPIDefinitionType($parent),
+          $parent->getName(),
+          $what->getName(),
+        );
+      } else if ($what instanceof ScannedFunction) {
+        $path = $md_paths->getPathForFunction($what->getName());
+      } else if ($what instanceof ScannedClass) {
+        $path = $md_paths->getPathForClassish(
+          self::getClassishAPIDefinitionType($what),
+          $what->getName(),
+        );
+      } else {
+        invariant_violation(
+          "Can't handle definition of type %s",
+          \get_class($what),
+        );
       }
-      $path = \sprintf(
-        '%s/%s/%s.md',
-        BuildPaths::APIDOCS_MARKDOWN,
-        $product,
-        Str\replace($path, "\\", '.'),
-      );
       \file_put_contents($path, $md."\n<!-- HHAPIDOC -->\n");
       return $path;
     });
   }
 
-  private static function getAPIDefinitionType(
+  private static function getClassishAPIDefinitionType(
     ScannedBase $definition,
   ): APIDefinitionType {
     if ($definition instanceof ScannedBasicClass) {
@@ -196,9 +303,6 @@ final class HHAPIDocBuildStep extends BuildStep {
     }
     if ($definition instanceof ScannedTrait) {
       return APIDefinitionType::TRAIT_DEF;
-    }
-    if ($definition instanceof ScannedFunctionAbstract) {
-      return APIDefinitionType::FUNCTION_DEF;
     }
     invariant_violation(
       "Can't handle type %s",

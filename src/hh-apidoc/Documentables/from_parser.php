@@ -11,55 +11,45 @@
 
 namespace Facebook\HHAPIDoc\Documentables;
 
-use type Facebook\DefinitionFinder\BaseParser;
-use type Facebook\HHAPIDoc\Documentables;
+use type Facebook\DefinitionFinder\{BaseParser, ScannedClass};
+use type Facebook\HHAPIDoc\Documentable;
 
-use namespace HH\Lib\{Dict, Vec};
+use namespace HH\Lib\{Dict, Str, Vec};
 
-function from_parser(BaseParser $parser): Documentables {
-  $classes = Vec\concat(
+function from_parser(BaseParser $parser): vec<Documentable> {
+  $top_level = Vec\concat(
     $parser->getClasses(),
     $parser->getInterfaces(),
     $parser->getTraits(),
-  );
-  $methods = $classes
-    |> Vec\map(
-      $$,
-      $class ==> Vec\map(
-        $class->getMethods(),
-        $method ==> tuple($class, $method),
-      ),
-    )
-    |> Vec\flatten($$);
-  $top_level = Vec\concat(
-    $classes,
     $parser->getFunctions(),
-  );
-  return Vec\concat(
-    Vec\map(
-      $top_level,
-      $def ==> tuple(
-        $def->getName(),
-        shape(
-          'sources' => vec[$def->getFileName()],
-          'definition' => $def,
-          'parent' => null,
-        ),
-      ),
+  ) |> Vec\map(
+    $$,
+    $def ==> shape(
+      'sources' => vec[$def->getFileName()],
+      'definition' => $def,
+      'parent' => null,
     ),
-    Vec\map(
-      $methods,
-      $class_and_method ==> {
-        list($class, $method) = $class_and_method;
-        return tuple(
-          $class->getName().'::'.$method->getName(),
-          shape(
-            'sources' => vec[$method->getFileName()],
+  );
+
+  $methods = Vec\map(
+    $top_level,
+    $data ==>  {
+      $class = $data['definition'];
+      if (!$class instanceof ScannedClass) {
+        return vec[];
+      }
+
+      return $class->getMethods()
+        |> Vec\sort_by($$, $m ==> $m->getName())
+        |> Vec\map(
+          $$,
+          $method ==> shape(
+            'sources' => vec[$method->getName()],
             'definition' => $method,
             'parent' => $class,
           ),
         );
-      }
-    ),
-  ) |> Dict\from_entries($$);
+    }
+  ) |> Vec\flatten($$);
+  return Vec\concat($top_level, $methods);
 }

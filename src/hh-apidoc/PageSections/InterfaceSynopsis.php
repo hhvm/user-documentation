@@ -38,6 +38,7 @@ class InterfaceSynopsis extends PageSection {
     ScannedClass $c,
   ): string {
     return $c->getMethods()
+      |> Vec\sort_by($$, $m ==> $m->getName())
       |> Vec\map($$, $m ==> $this->getMethodListItem($c, $m))
       |> Str\join($$, "\n");
   }

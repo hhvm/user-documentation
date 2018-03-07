@@ -61,15 +61,7 @@ class MethodMarkdownBuilder {
     ClassDocumentation $class,
     FunctionDocumentation $method,
   ): string {
-    $class_file_name = ClassMarkdownBuilder::getOutputFileName(
-      $product,
-      $class_type,
-      $class
-    );
-    return \str_replace(
-      '.md',
-      \sprintf('.method.%s.md', $method['name']),
-      $class_file_name,
-    );
+    return MarkdownPaths::get($product)
+      ->getPathForClassishMethod($class_type, $class['name'], $method['name']);
   }
 }

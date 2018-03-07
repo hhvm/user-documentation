@@ -15,8 +15,10 @@ use type Facebook\DefinitionFinder\{
   HasScannedGenerics,
   ScannedBase,
   ScannedClass,
+  ScannedFunction,
   ScannedFunctionAbstract,
   ScannedGenerics,
+  ScannedMethod,
   ScannedVisibility,
   SourceType,
 };
@@ -70,6 +72,7 @@ abstract final class ScannedDefinitionFilters {
       Str\starts_with($def->getName(), "__SystemLib\\")
       || Str\starts_with($def->getName(), "HH\\Lib\\_Private\\")
       || Str\contains($def->getName(), 'WaitHandle')
+      || ($def->getAttributes()['NoDoc'] ?? null) !== null
       || self::IsBlacklisted($def)
       || (
         Str\contains($def->getFileName(), 'api-sources/hhvm/')
@@ -79,7 +82,7 @@ abstract final class ScannedDefinitionFilters {
   }
 
   private static function IsUndefinedFunction(ScannedBase $def): bool {
-    if (!$def instanceof ScannedFunctionAbstract) {
+    if (!$def instanceof ScannedFunction) {
       return false;
     }
     $path = $def->getFileName();

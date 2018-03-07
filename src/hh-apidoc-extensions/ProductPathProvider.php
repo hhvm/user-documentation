@@ -17,8 +17,10 @@ use type HHVM\UserDocumentation\{
   APIIndex,
   APIProduct,
 };
+use namespace HH\Lib\Str;
 
 final class ProductPathProvider implements HHAPIDoc\IPathProvider {
+  use APIDefinitionTypeBasedPathProvider<?string>;
   private APIIndex $index;
 
   public function __construct(
@@ -27,32 +29,25 @@ final class ProductPathProvider implements HHAPIDoc\IPathProvider {
     $this->index = APIIndex::get($product);
   }
 
-  private function getPathForClassish(
+  private static function normalize(string $name): string {
+    return Str\replace($name, "\\", '.');
+  }
+
+  protected function getPathForClassish(
     APIDefinitionType $type,
     string $class,
   ): ?string {
-    $def = $this->index->getClassIndex($type)[$class] ?? null;
+    $def = $this->index->getClassIndex($type)[self::normalize($class)] ?? null;
     return $def === null ? null : $def['urlPath'];
   }
 
-  public function getPathForClass(string $class): ?string {
-    return $this->getPathForClassish(APIDefinitionType::CLASS_DEF, $class);
-  }
-
-  public function getPathForInterface(string $class): ?string {
-    return $this->getPathForClassish(APIDefinitionType::INTERFACE_DEF, $class);
-  }
-
-  public function getPathForTrait(string $class): ?string {
-    return $this->getPathForClassish(APIDefinitionType::TRAIT_DEF, $class);
-  }
-
-  private function getPathForClassishMethod(
+  protected function getPathForClassishMethod(
     APIDefinitionType $type,
     string $class,
     string $method,
   ): ?string {
-    $class = $this->index->getClassIndex($type)[$class] ?? null;
+    $class = $this->index
+      ->getClassIndex($type)[self::normalize($class)] ?? null;
     if ($class === null) {
       return null;
     }
@@ -60,40 +55,8 @@ final class ProductPathProvider implements HHAPIDoc\IPathProvider {
     return $method === null ? null : $method['urlPath'];
   }
 
-  public function getPathForClassMethod(
-    string $class,
-    string $method,
-  ): ?string {
-    return $this->getPathForClassishMethod(
-      APIDefinitionType::CLASS_DEF,
-      $class,
-      $method,
-    );
-  }
-
-  public function getPathForInterfaceMethod(
-    string $class,
-    string $method,
-  ): ?string {
-    return $this->getPathForClassishMethod(
-      APIDefinitionType::INTERFACE_DEF,
-      $class,
-      $method,
-    );
-  }
-  public function getPathForTraitMethod(
-    string $trait,
-    string $method,
-  ): ?string {
-    return $this->getPathForClassishMethod(
-      APIDefinitionType::TRAIT_DEF,
-      $trait,
-      $method,
-    );
-  }
-
   public function getPathForFunction(string $function): ?string {
-    $def = $this->index->getFunctionIndex()[$function] ?? null;
+    $def = $this->index->getFunctionIndex()[self::normalize($function)] ?? null;
     if ($def === null) {
       return null;
     }

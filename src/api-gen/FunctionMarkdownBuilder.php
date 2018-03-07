@@ -134,12 +134,8 @@ final class FunctionMarkdownBuilder {
     APIProduct $product,
     FunctionDocumentation $docs,
   ): string {
-    return \sprintf(
-      '%s/%s/function.%s.md',
-      BuildPaths::APIDOCS_MARKDOWN,
-      $product,
-      \strtr($docs['name'], "\\", '.'),
-    );
+    return MarkdownPaths::get($product)
+      ->getPathForFunction($docs['name']);
   }
 
   private function getHeading(): ?string {

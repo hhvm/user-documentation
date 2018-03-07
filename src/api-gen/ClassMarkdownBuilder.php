@@ -37,12 +37,9 @@ final class ClassMarkdownBuilder {
     APIDefinitionType $type,
     ClassDocumentation $docs,
   ): string {
-    return \sprintf(
-      '%s/%s/%s.%s.md',
-      BuildPaths::APIDOCS_MARKDOWN,
-      $product,
+    return MarkdownPaths::get($product)->getPathForClassish(
       $type,
-      \strtr($docs['name'], "\\", '.'),
+      $docs['name'],
     );
   }
 
