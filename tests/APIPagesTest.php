@@ -88,7 +88,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       PageLoader::getPage('/hack/reference/class/HH.Vector/fromArray/'),
     );
 
-    $this->assertContains('Deprecation', (string)$response->getBody());
+    $this->assertContains('Deprecated', (string)$response->getBody());
   }
 
   public function testNullableTypeMerged(): void {
