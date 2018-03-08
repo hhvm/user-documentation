@@ -31,7 +31,7 @@ class FunctionishReturnValues extends PageSection {
     return $values
       |> Vec\map($$, $v ==> self::getReturnValueInformation($f, $v))
       |> Str\join($$, "\n")
-      |> "### Return Values\n\n".$$;
+      |> "## Return Values\n\n".$$;
   }
 
   protected static function getReturnValueInformation(
