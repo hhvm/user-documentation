@@ -11,7 +11,7 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use namespace HH\Lib\C;
+use namespace HH\Lib\{C, Str, Vec};
 
 class DeprecationMessage extends PageSection {
   protected function getDeprecationMessage(): ?string {
@@ -27,6 +27,6 @@ class DeprecationMessage extends PageSection {
     if ($message === null) {
       return null;
     }
-    return "## Deprecated\n\n".$message;
+    return "**Deprecated:** ".$message;
   }
 }
