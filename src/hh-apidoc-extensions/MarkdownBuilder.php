@@ -26,6 +26,9 @@ final class MarkdownBuilder extends HHAPIDoc\MarkdownBuilder {
         PageSections\FrontMatter::class,
       ],
       $inherited,
+      keyset[
+        PageSections\Examples::class,
+      ],
     );
   }
 }
