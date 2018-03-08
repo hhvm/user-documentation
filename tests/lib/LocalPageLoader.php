@@ -13,7 +13,10 @@ final class LocalPageLoader extends PageLoader {
     string $url,
   ): Awaitable<ResponseInterface> {
     $query_params = [];
-    \parse_str(\parse_url($url, \PHP_URL_QUERY), &$query_params);
+    $query_part = \parse_url($url, \PHP_URL_QUERY);
+    if ($query_part !== null) {
+      \parse_str($query_part, &$query_params);
+    }
 
     /* HH_IGNORE_ERROR[2049] no HHI for diactoros */
     $request = (new ServerRequest(
