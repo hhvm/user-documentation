@@ -8,7 +8,7 @@ We offer "long term support" (LTS) for every third releases - so roughly twice a
 
 | Version                                                 | LTS | Release Date | Expected End Of Support |
 |---------------------------------------------------------|-----|--------------|-------------------------|
-| [3.25](https://hhvm.com/blog/2018/03/15/hhvm-3-24.html) | Yes | 2018-03-15   | 2019-05-10              |
+| [3.25](https://hhvm.com/blog/2018/03/15/hhvm-3-25.html) | No  | 2018-03-15   | 2018-05-07              |
 | [3.24](https://hhvm.com/blog/2018/01/16/hhvm-3-24.html) | Yes | 2018-01-16   | 2018-12-17              |
 | [3.21](https://hhvm.com/blog/2017/08/02/hhvm-3-21.html) | Yes | 2017-08-02   | 2018-07-07              |
 
