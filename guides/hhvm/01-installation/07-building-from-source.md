@@ -28,6 +28,16 @@ HHVM might build with GCC 4.9, however:
 
 ### Debian or Ubuntu
 
+If you haven't already added our apt repositories (e.g. to install binary packages):
+
+```
+$ apt-get update
+$ apt-get install software-properties-common apt-transport-https
+$ apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+```
+
+To install the build dependencies:
+
 ```
 $ add-apt-repository -s https://dl.hhvm.com/debian
 # - or - #
