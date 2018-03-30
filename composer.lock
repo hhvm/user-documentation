@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8000463bcb05de8e01f7554ae2be4863",
+    "content-hash": "59924f623f7bb88d301cb08acad6452e",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -53,16 +53,16 @@
         },
         {
             "name": "facebook/fbmarkdown",
-            "version": "v0.2",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbmarkdown.git",
-                "reference": "d988fccf22fb52b1cb418e619aa199e4a01022cc"
+                "reference": "75bf4df174355522159da82bf92940dd3191857c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/d988fccf22fb52b1cb418e619aa199e4a01022cc",
-                "reference": "d988fccf22fb52b1cb418e619aa199e4a01022cc",
+                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/75bf4df174355522159da82bf92940dd3191857c",
+                "reference": "75bf4df174355522159da82bf92940dd3191857c",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "hack",
                 "markdown"
             ],
-            "time": "2018-02-09T21:03:58+00:00"
+            "time": "2018-03-29T20:17:30+00:00"
         },
         {
             "name": "facebook/hack-codegen",
@@ -405,32 +405,31 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v1.3.0",
+            "version": "v1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "556bb0a0749226417dd0f53567571ecc008f37f2"
+                "reference": "2d40281ec595b25a09bbe51d9216edbf1ad55a42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/556bb0a0749226417dd0f53567571ecc008f37f2",
-                "reference": "556bb0a0749226417dd0f53567571ecc008f37f2",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/2d40281ec595b25a09bbe51d9216edbf1ad55a42",
+                "reference": "2d40281ec595b25a09bbe51d9216edbf1ad55a42",
                 "shasum": ""
             },
             "require": {
+                "hhvm": "^3.23.2",
                 "hhvm/hhvm-autoload": "^1.4"
             },
             "require-dev": {
                 "91carriage/phpunit-hhi": "^5.7",
-                "facebook/definition-finder": "^1.6.1",
                 "facebook/fbexpect": "^0.4",
-                "hhvm": "^3.23.2",
                 "phpunit/phpunit": "^5.7"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
             "description": "The Hack Standard Library",
-            "time": "2018-02-05T22:10:31+00:00"
+            "time": "2018-03-09T21:53:48+00:00"
         },
         {
             "name": "hhvm/type-assert",
