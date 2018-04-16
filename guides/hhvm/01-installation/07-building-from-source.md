@@ -62,7 +62,7 @@ up-to-date list; to do this, search https://github.com/hhvm/packaging/ for `Buil
 ## Downloading the HHVM source-code
 
 ```
-git clone git://github.com/facebook/hhvm.git --depth=1
+git clone git://github.com/facebook/hhvm.git
 cd hhvm
 git submodule update --init --recursive
 ```
