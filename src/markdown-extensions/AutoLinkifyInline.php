@@ -22,13 +22,6 @@ use namespace HH\Lib\{C, Dict, Str, Vec};
  * Given something like `Vec\map()`, automatically make it a link
  */
 final class AutoLinkifyInline extends Inlines\Link {
-  const string PATTERN =
-    '/^@@ (?<dir>[^@ ]+)'.
-    '(?<file>[^@ \\/]+\\.php'.
-      '(?:.type-errors)?'.
-      '(?:.(hhvm|typechecker).expect[f]?)?'.
-    ') @@$/';
-
   <<__Override>>
   public static function consume(
     Inlines\Context $context,
