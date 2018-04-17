@@ -12,7 +12,8 @@ Here are the supported distributions:
 | Debian 9 Stretch | No | Yes | Yes|
 | Ubuntu 14.04 Trusty | Yes | Yes | Yes |
 | Ubuntu 16.04 Xenial | Yes | Yes | Yes |
-| Ubuntu 17.10 Artful | No | No | Yes |
+| Ubuntu 17.10 Artful | No | Yes | Yes |
+| Ubuntu 18.04 Bionic | No | No | Yes |
 
 These instructions require root; use `su -` or `sudo -i` to get a root shell first.
 
