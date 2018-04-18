@@ -32,7 +32,7 @@ In order to ensure that the lifetime of the disposable object can be statically 
 - The same restriction applies to any parameter marked with `<<__AcceptDisposable>>` throughout the function that defined the parameter. This lets you pull code out of the using block into a helper.
 - It is not permitted to write a type hint on function parameters that implement `IDisposable` or `IAsyncDisposable`, unless the parameter is marked `<<__AcceptDisposable>>`.
 - Classes that implement `IDisposable` or `IAsyncDisposable` may not be constructed in any other context, except when returned by a function marked as `<<__ReturnDisposable>>`.
-- functions may not return `IDisposable`, `IAsyncDisposable`, `Awaitable<IDisposable>`, `Awaitable<IAsyncDisposable>`, or subtypes of them unless they are marked as `<<__ReturnDisposable>>``.
+- functions may not return `IDisposable`, `IAsyncDisposable`, `Awaitable<IDisposable>`, `Awaitable<IAsyncDisposable>`, or subtypes of them unless they are marked as `<<__ReturnDisposable>>`.
 
 ## Guidelines
 
