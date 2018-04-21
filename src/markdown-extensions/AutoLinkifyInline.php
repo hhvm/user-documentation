@@ -68,15 +68,24 @@ final class AutoLinkifyInline extends Inlines\Link {
 
     $method = self::getMethodTarget($meta, $definition);
 
-    $to_try = Vec\filter_nulls(vec[
-      $method,
-      $definition,
-      "HH\\".$definition,
-      "HH\\".$method,
-      "HH\\Lib\\".$definition,
-      "HH\\Lib\\".$method,
-    ]);
+    $prefixes = vec[
+      $meta['namespace'] ?? null,
+      '',
+      "HH",
+      "HH\\Lib",
+    ] |> Vec\filter_nulls($$);
 
+    $suffixes = vec[$definition, $method]
+      |> Vec\filter_nulls($$);
+
+    $to_try = self::product2($prefixes, $suffixes)
+      |> Vec\map($$, $parts ==> {
+        // Concat namespace parts and ignore parts that are empty
+        list($prefix, $suffix) = $parts;
+        return vec[$prefix, $suffix]
+          |> Vec\filter($$, $part ==> !Str\is_empty($part))
+          |> Str\join($$, '\\');
+      });
 
     $index = self::getIndex();
 
@@ -92,6 +101,17 @@ final class AutoLinkifyInline extends Inlines\Link {
     }
 
     return null;
+  }
+
+  private static function product2<Tv1, Tv2>(
+    Traversable<Tv1> $first,
+    Traversable<Tv2> $second
+  ): Iterator<(Tv1, Tv2)> {
+    foreach($first as $f) {
+      foreach($second as $s) {
+        yield tuple($f, $s);
+      }
+    }
   }
 
   private static function getMethodTarget(
