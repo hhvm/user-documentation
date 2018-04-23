@@ -70,6 +70,12 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
           'KeyedIterable::map()',
           '/hack/reference/interface/HH.KeyedIterable/map/',
         ),
+      'Default Namepsace' =>
+        tuple(
+          '/hack/async/awaitables',
+          'join',
+          '/hack/reference/function/HH.Asio.join/'
+        ),
     ];
   }
 

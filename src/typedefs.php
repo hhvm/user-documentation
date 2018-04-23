@@ -37,6 +37,7 @@ type YAMLMeta = shape(
   ?'fbonly messages' => vec<string>,
   ?'min-versions' => dict<RequirableProduct, string>,
   ?'experimental' => bool,
+  ?'namespace' => string,
 );
 
 
