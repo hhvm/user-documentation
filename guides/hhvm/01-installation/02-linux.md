@@ -5,15 +5,15 @@ While you can [build from source](/hhvm/installation/building-from-source), it i
 
 Here are the supported distributions:
 
-| Distribution | HHVM 3.21 | HHVM 3.24 | Nightlies |
-|--------------|-----------|-----------|-----------|
-| Debian 7 Wheezy | Yes | Yes | No |
-| Debian 8 Jessie | Yes | Yes | Yes |
-| Debian 9 Stretch | No | Yes | Yes|
-| Ubuntu 14.04 Trusty | Yes | Yes | Yes |
-| Ubuntu 16.04 Xenial | Yes | Yes | Yes |
-| Ubuntu 17.10 Artful | No | Yes | Yes |
-| Ubuntu 18.04 Bionic | No | No | Yes |
+| Distribution | HHVM 3.21 | HHVM 3.24 | HHVM 3.25 | Nightlies |
+|--------------|-----------|-----------|-----------|---------- |
+| Debian 7 Wheezy | Yes | Yes | No | No | No |
+| Debian 8 Jessie | Yes | Yes | Yes | Yes | Yes |
+| Debian 9 Stretch | No | Yes | Yes| Yes | Yes |
+| Ubuntu 14.04 Trusty | Yes | Yes | Yes | Yes | Yes |
+| Ubuntu 16.04 Xenial | Yes | Yes | Yes | Yes | Yes |
+| Ubuntu 17.10 Artful | No | Yes | Yes | Yes | Yes |
+| Ubuntu 18.04 Bionic | No | No | Yes | Yes | Yes |
 
 These instructions require root; use `su -` or `sudo -i` to get a root shell first.
 
