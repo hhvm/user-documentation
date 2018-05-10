@@ -108,6 +108,16 @@ final class AbsurdSet<Tv> implements \MutableSet<Tv> {
   public function toArray(): array<Tv, Tv> {
     return $this->cs->toArray();
   }
+
+  public function toDArray(): /*HH_IGNORE_ERROR[1] */ darray<Tv, Tv> {
+    return $this->cs->toDArray();
+  }
+
+  public function toVArray(): /*HH_IGNORE_ERROR[2] */ varray<Tv> {
+    return $this->cs->toVArray();
+  }
+
+
   public function toImmMap(): \ImmMap<mixed, Tv> {
     return $this->cs->toImmMap();
   }

@@ -79,9 +79,10 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
         $old_id = idx($old_classes, $no_ns_name);
       }
 
-      if (!$old_id) {
+      if ($old_id === null) {
         continue;
       }
+
       $old_ids_to_new_urls[$old_id] = $class['urlPath'];
       $old_class_id = $old_id;
 
