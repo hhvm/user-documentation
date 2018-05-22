@@ -1,2 +1,1 @@
-Fatal error: HH mode: content before <?hh (Line: 3, Char: 16)
-syntax error, unexpected T_HH_ERROR, expecting $end in %s on line 1
+Fatal error: A source file must begin with '<?hh'. in %s/guides/hack/60-unsupported/04-html-examples/html-hack.php on line 3
