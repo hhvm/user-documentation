@@ -1,7 +1,7 @@
 {
   "AWSEBDockerrunVersion": "1",
   "Image": {
-    "Name": "hhvm/user-documentation:2018-05-04-85a0685"
+    "Name": "hhvm/user-documentation:2018-05-22-bb89df4"
   },
   "Ports": [
     {
