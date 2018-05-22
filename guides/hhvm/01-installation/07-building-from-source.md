@@ -124,6 +124,7 @@ cmake . \
   -DCMAKE_CXX_FLAGS=-DLZ4_DISABLE_DEPRECATE_WARNINGS=1 \
   $(brew diy --name=hhvm-preview --version=$(date +%Y.%m.%d))
 make # you probably want `make -j<number of cores`, e.g. `make -j12`
+make install
 ```
 
 ## Running programs
