@@ -1,4 +1,4 @@
-FROM hhvm/hhvm-proxygen:3.25.0
+FROM hhvm/hhvm-proxygen:3.26.2
 ARG DOCKER_BUILD_ENV=prod
 ENV TZ UTC
 
