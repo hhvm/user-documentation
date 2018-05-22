@@ -2,6 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+use const HHVM_VERSION_ID;
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
 use namespace HH\Lib\{Str, Vec};
 
@@ -27,6 +28,9 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testExamplesTypecheck(): void {
+    if (HHVM_VERSION_ID >= 32600 && HHVM_VERSION_ID <= 32602) {
+      $this->markTestSkipped('This versions of HHVM is unable to run the test runner');
+    }
     $hh_server = \dirname(\PHP_BINARY).'/hh_server';
     if (!\file_exists($hh_server)) {
       $this->markTestSkipped("Couldn't find hh_server");
