@@ -47,11 +47,3 @@ This example shows you how to use `lazy()` on a rather large collection and the 
 `Indexish` is an interface that represents a collection that can be indexed by a key. Keys in collections can either be a `string` or `int`. Thus, you can use `Indexish` to represent Hack collections that have one of those two key types.
 
 @@ examples-examples/indexish.php @@
-
-## Creating a New Collection
-
-The current [concrete](./classes.md) collection classes are marked as final. That is, they cannot be directly extended and sub-classed. However, you can create new collection classes by using the [interfaces](./interfaces.md) provided. This example won't create a full-blown new collection since so many methods would have to be implemented from [`Iterable<T>`](./semantics.md#core-interfaces) with much more scrutiny and detail than what is presented here.
-
-However, this example does show all the methods that would have to be implemented if you wanted to create a new set collection.
-
-@@ examples-examples/simple-collection.php @@

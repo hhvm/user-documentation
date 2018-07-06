@@ -1,9 +1,0 @@
-object(Hack\UserDocumentation\Collections\Examples\Examples\SimpleColl\AbsurdSet)#%d (1) {
-  ["cs":"Hack\UserDocumentation\Collections\Examples\Examples\SimpleColl\AbsurdSet":private]=>
-  object(HH\Set)#%d (4) {
-    int(2)
-    int(3)
-    int(4)
-    int(5)
-  }
-}
