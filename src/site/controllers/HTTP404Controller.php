@@ -9,7 +9,6 @@
  *
  */
 
-use Psr\Http\Message\ServerRequestInterface;
 use type HHVM\UserDocumentation\APILegacyRedirectData;
 use type HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\JumpIndexData;

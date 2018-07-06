@@ -9,7 +9,6 @@
  *
  */
 
-use HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\Guides;
 use type HHVM\UserDocumentation\GuidesIndex;
 use type HHVM\UserDocumentation\GuidesNavData;

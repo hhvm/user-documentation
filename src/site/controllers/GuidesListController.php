@@ -11,7 +11,6 @@
 
 use type HHVM\UserDocumentation\GuidesIndex;
 use type HHVM\UserDocumentation\GuidesProduct;
-use HHVM\UserDocumentation\HTMLFileRenderable;
 use type HHVM\UserDocumentation\URLBuilder;
 
 final class GuidesListController extends WebPageController {

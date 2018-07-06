@@ -9,8 +9,6 @@
  *
  */
 
-use HHVM\UserDocumentation\StaticResourceMap;
-
 final class :static:script extends :static:base {
   protected function getAllowedMimeTypes(): Set<string> {
     return Set { 'application/javascript' };

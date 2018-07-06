@@ -13,7 +13,6 @@ use type HHVM\UserDocumentation\LocalConfig;
 use type HHVM\UserDocumentation\UIGlyphIcon;
 use type Psr\Http\Message\ResponseInterface;
 use type Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactaros\HtmlResponse;
 
 use namespace HH\Lib\C;
 

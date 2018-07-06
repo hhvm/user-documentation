@@ -9,15 +9,10 @@
  *
  */
 
-use HHVM\UserDocumentation\APIClassIndexEntry;
 use type HHVM\UserDocumentation\APIDefinitionType;
-use HHVM\UserDocumentation\APIIndex;
 use type HHVM\UserDocumentation\APIIndexEntry;
-use HHVM\UserDocumentation\APIMethodIndexEntry;
-use HHVM\UserDocumentation\APINavData;
 use type HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\HTMLFileRenderable;
-use HHVM\UserDocumentation\URLBuilder;
 
 abstract class APIPageController extends WebPageController {
   <<__Memoize>>

@@ -9,7 +9,7 @@
  *
  */
 
-use Facebook\HackRouter as HackRouter;
+use namespace Facebook\HackRouter;
 use type Psr\Http\Message\ResponseInterface;
 use type Psr\Http\Message\ServerRequestInterface;
 use type Zend\Diactoros\Response\SapiEmitter;

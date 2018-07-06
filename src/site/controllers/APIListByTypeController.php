@@ -9,7 +9,6 @@
  *
  */
 
-use HHVM\UserDocumentation\APIDefinitionType;
 use type HHVM\UserDocumentation\APIProduct;
 
 final class APIListByTypeController extends WebPageController {

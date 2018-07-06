@@ -9,8 +9,6 @@
  *
  */
 
-use HHVM\UserDocumentation\StaticResourceMap;
-
 final class :static:stylesheet extends :static:base {
   use XHPHelpers;
 

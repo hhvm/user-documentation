@@ -9,7 +9,6 @@
  *
  */
 
-use Facebook\HackRouter\SupportsGetRequests;
 use type HHVM\UserDocumentation\GuidesIndex;
 use type HHVM\UserDocumentation\GuidesProduct;
 use type HHVM\UserDocumentation\URLBuilder;
