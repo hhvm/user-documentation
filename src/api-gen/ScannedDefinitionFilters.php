@@ -31,7 +31,6 @@ abstract final class ScannedDefinitionFilters {
     $is_hh_specific =
       Str\contains($name, 'HH\\')
       || Str\contains($name, '__SystemLib\\')
-      || Str\contains($name, "\\Rx\\")
       || C\contains_key($def->getAttributes(), '__HipHopSpecific')
       || Str\contains($name, 'fb_')
       || Str\contains($name, 'hphp_');
@@ -74,6 +73,7 @@ abstract final class ScannedDefinitionFilters {
       Str\starts_with($def->getName(), "__SystemLib\\")
       || Str\starts_with($def->getName(), "HH\\Lib\\_Private\\")
       || Str\contains($def->getName(), 'WaitHandle')
+      || Str\contains($def->getName(), "\\Rx\\")
       || ($def->getAttributes()['NoDoc'] ?? null) !== null
       || self::IsBlacklisted($def)
       || (
