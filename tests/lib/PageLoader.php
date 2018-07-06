@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use \Psr\Http\Message\ResponseInterface;
+use type \Psr\Http\Message\ResponseInterface;
 
 abstract class PageLoader {
   <<__Memoize>>
@@ -15,11 +15,11 @@ abstract class PageLoader {
     }
   }
 
-  public static function getPage(string $url): Awaitable<ResponseInterface> {
-    return self::get()->getPageImpl($url);
+  public static function getPageAsync(string $url): Awaitable<ResponseInterface> {
+    return self::get()->getPageImplAsync($url);
   }
 
-  abstract protected function getPageImpl(
+  abstract protected function getPageImplAsync(
     string $url,
   ): Awaitable<ResponseInterface>;
 

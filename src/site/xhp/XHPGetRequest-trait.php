@@ -9,7 +9,7 @@
  *
  */
 
-use Psr\Http\Message\ServerRequestInterface;
+use type Psr\Http\Message\ServerRequestInterface;
 
 trait XHPGetRequest {
   require extends :x:element;

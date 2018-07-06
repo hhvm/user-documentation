@@ -14,6 +14,7 @@ namespace Facebook\HHAPIDoc\PageSections;
 use type Facebook\DefinitionFinder\ScannedFunctionish;
 
 class NameHeading extends PageSection {
+  <<__Override>>
   public function getMarkdown(): string {
     $md = '# ';
     if ($this->parent) {

@@ -9,7 +9,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 final class PHPAPIPagesTest extends \PHPUnit_Framework_TestCase {
   public function testHackReferenceLinksToPHPReference(): void {
-    $response = \HH\Asio\join(PageLoader::getPage('/hack/reference/'));
+    $response = \HH\Asio\join(PageLoader::getPageAsync('/hack/reference/'));
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
     $this->assertContains(
@@ -19,7 +19,7 @@ final class PHPAPIPagesTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testPHPReferencePageContainsSupportedAPIs(): void {
-    $response = \HH\Asio\join(PageLoader::getPage('/php/reference/'));
+    $response = \HH\Asio\join(PageLoader::getPageAsync('/php/reference/'));
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
 
@@ -35,7 +35,7 @@ final class PHPAPIPagesTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testPHPReferencePageOmitsUnsupportedAPIs(): void {
-    $response = \HH\Asio\join(PageLoader::getPage('/php/reference/'));
+    $response = \HH\Asio\join(PageLoader::getPageAsync('/php/reference/'));
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
 

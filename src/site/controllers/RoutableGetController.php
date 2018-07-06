@@ -10,7 +10,7 @@
  */
 
 use Facebook\HackRouter\IncludeInUriMap;
-use Facebook\HackRouter\SupportsGetRequests;
+use type Facebook\HackRouter\SupportsGetRequests;
 
 interface RoutableGetController extends
 RoutableController, SupportsGetRequests {

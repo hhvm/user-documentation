@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use Facebook\DefinitionFinder\ScannedDefinition;
+use type Facebook\DefinitionFinder\ScannedDefinition;
 
 type PHPDotNetAPIIndexEntry = shape(
   'type' => APIDefinitionType,

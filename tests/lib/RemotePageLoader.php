@@ -10,7 +10,7 @@ final class RemotePageLoader extends PageLoader {
   protected function __construct() {}
 
   <<__Override>>
-  protected async function getPageImpl(
+  protected async function getPageImplAsync(
     string $url,
   ): Awaitable<ResponseInterface> {
     $host_header = \parse_url($url, \PHP_URL_HOST);

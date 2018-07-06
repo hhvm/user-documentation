@@ -10,10 +10,10 @@
  */
 
 use Facebook\HackRouter\SupportsGetRequests;
-use HHVM\UserDocumentation\GuidesIndex;
-use HHVM\UserDocumentation\GuidesProduct;
-use HHVM\UserDocumentation\URLBuilder;
-use Psr\Http\Message\ResponseInterface;
+use type HHVM\UserDocumentation\GuidesIndex;
+use type HHVM\UserDocumentation\GuidesProduct;
+use type HHVM\UserDocumentation\URLBuilder;
+use type Psr\Http\Message\ResponseInterface;
 
 final class RedirectToGuideFirstPageController
 extends WebController implements RoutableGetController {
@@ -29,7 +29,7 @@ extends WebController implements RoutableGetController {
   }
 
   <<__Override>>
-  public async function getResponse(): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<ResponseInterface> {
     $params = $this->getParameters();
     $product = GuidesProduct::assert($params['Product']);
     $guide = $params['Guide'];

@@ -9,7 +9,7 @@
  *
  */
 
-use Facebook\HackRouter\IncludeInUriMap;
+use type Facebook\HackRouter\IncludeInUriMap;
 
 interface RoutableController extends IncludeInUriMap {
   require extends WebController;

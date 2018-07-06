@@ -10,13 +10,13 @@
  */
 
 use HHVM\UserDocumentation\APIClassIndexEntry;
-use HHVM\UserDocumentation\APIDefinitionType;
+use type HHVM\UserDocumentation\APIDefinitionType;
 use HHVM\UserDocumentation\APIIndex;
-use HHVM\UserDocumentation\APIIndexEntry;
+use type HHVM\UserDocumentation\APIIndexEntry;
 use HHVM\UserDocumentation\APIMethodIndexEntry;
 use HHVM\UserDocumentation\APINavData;
-use HHVM\UserDocumentation\BuildPaths;
-use HHVM\UserDocumentation\HTMLFileRenderable;
+use type HHVM\UserDocumentation\BuildPaths;
+use type HHVM\UserDocumentation\HTMLFileRenderable;
 use HHVM\UserDocumentation\URLBuilder;
 
 abstract class APIPageController extends WebPageController {
@@ -31,7 +31,7 @@ abstract class APIPageController extends WebPageController {
   abstract protected function getRootDefinition(): APIIndexEntry;
 
   <<__Override>>
-  final protected async function getBody(): Awaitable<XHPRoot> {
+  final protected async function getBodyAsync(): Awaitable<XHPRoot> {
     return
       <div class="referencePageWrapper">
           {$this->getInnerContent()}

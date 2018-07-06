@@ -9,8 +9,8 @@
  *
  */
 
-use HHVM\UserDocumentation\LocalConfig;
-use Psr\Http\Message\ResponseInterface;
+use type HHVM\UserDocumentation\LocalConfig;
+use type Psr\Http\Message\ResponseInterface;
 
 final class RobotsTxtController
 extends WebController
@@ -25,7 +25,7 @@ implements RoutableGetController {
     LocalConfig::ROOT.'/public/robots.txt-default';
 
   <<__Override>>
-  public async function getResponse(): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<ResponseInterface> {
     if ($this->getRequestedHost() === 'docs.hhvm.com') {
       $source = self::DEFAULT_FILE;
     } else {

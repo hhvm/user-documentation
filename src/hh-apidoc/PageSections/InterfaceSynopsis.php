@@ -22,6 +22,7 @@ use type Facebook\DefinitionFinder\{
 use namespace HH\Lib\{Str, Vec};
 
 class InterfaceSynopsis extends PageSection {
+  <<__Override>>
   public function getMarkdown(): ?string {
     $c = $this->definition;
     if (!$c instanceof ScannedClassish) {

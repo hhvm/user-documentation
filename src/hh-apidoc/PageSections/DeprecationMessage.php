@@ -22,6 +22,7 @@ class DeprecationMessage extends PageSection {
     return (string) C\firstx($deprecated);
   }
 
+  <<__Override>>
   public function getMarkdown(): ?string {
     $message = $this->getDeprecationMessage();
     if ($message === null) {

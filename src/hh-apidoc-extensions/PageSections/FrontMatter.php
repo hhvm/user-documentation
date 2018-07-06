@@ -21,6 +21,7 @@ use namespace HHVM\UserDocumentation\JSON;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class FrontMatter extends PageSection {
+  <<__Override>>
   public function getMarkdown(): string {
     $json = JSON\encode_shape(
       YAMLMeta::class,

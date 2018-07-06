@@ -20,7 +20,7 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
    * @dataProvider notFoundPathProvider
    */
   public function testNotFoundPages(string $path): void {
-    $response = \HH\Asio\join(PageLoader::getPage($path));
+    $response = \HH\Asio\join(PageLoader::getPageAsync($path));
     $this->assertSame(404, $response->getStatusCode());
     $this->assertContains("does not exist", (string) $response->getBody());
   }
@@ -130,7 +130,7 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
    * @dataProvider redirectProvider
    */
   public function testRedirects(string $from, string $to): void {
-    $response = \HH\Asio\join(PageLoader::getPage($from));
+    $response = \HH\Asio\join(PageLoader::getPageAsync($from));
     $this->assertSame(301, $response->getStatusCode());
 
     $target = $response->getHeaderLine('Location');
@@ -140,7 +140,7 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testStaticResource404(): void {
-    $response = \HH\Asio\join(PageLoader::getPage('/s/deadbeef/notfound'));
+    $response = \HH\Asio\join(PageLoader::getPageAsync('/s/deadbeef/notfound'));
     $this->assertSame(404, $response->getStatusCode());
   }
 
@@ -158,7 +158,7 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     string $notfound,
     string $suggestion,
   ): void {
-    $response = \HH\Asio\join(PageLoader::getPage($notfound));
+    $response = \HH\Asio\join(PageLoader::getPageAsync($notfound));
     $this->assertSame(404, $response->getStatusCode());
 
     $body = (string) $response->getBody();

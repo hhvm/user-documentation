@@ -14,12 +14,12 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     array<string> $sources,
   ): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage($target)
+      PageLoader::getPageAsync($target)
     );
     if ($response->getStatusCode() === 301) {
       $target = $response->getHeaderLine('Location');
       $response = \HH\Asio\join(
-        PageLoader::getPage($target),
+        PageLoader::getPageAsync($target),
       );
     }
 
@@ -38,7 +38,7 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
 
   public function testDoesNotBreakExternalMarkdownLinks(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('/hack/typechecker/editors')
+      PageLoader::getPageAsync('/hack/typechecker/editors')
     );
     $body = (string) $response->getBody();
     $this->assertContains('Vim users', $body);
@@ -72,13 +72,13 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     foreach ($api_pages as $call) {
       list($_, $node) = $call;
       $url = $node['urlPath'];
-      $loaders[$url] = $this->getInternalLinksOnPage($url);
+      $loaders[$url] = $this->getInternalLinksOnPageAsync($url);
     }
 
     $guide_pages = GuidePagesTest::allGuidePages();
     foreach ($guide_pages as $call) {
       list($_, $url) = $call;
-      $loaders[$url] = $this->getInternalLinksOnPage($url);
+      $loaders[$url] = $this->getInternalLinksOnPageAsync($url);
     }
 
     $urls = \HH\Asio\join(\HH\Asio\m($loaders));
@@ -103,15 +103,15 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
   }
 
   <<__Memoize>>
-  private async function getInternalLinksOnPage(
+  private async function getInternalLinksOnPageAsync(
     string $page,
   ): Awaitable<Vector<string>> {
     PageLoader::assertLocal();
 
-    $response = await PageLoader::getPage($page);
+    $response = await PageLoader::getPageAsync($page);
 
     if ($response->getStatusCode() === 301) {
-      return await $this->getInternalLinksOnPage(
+      return await $this->getInternalLinksOnPageAsync(
         $response->getHeaderLine('Location')
       );
     }

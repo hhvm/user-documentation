@@ -9,7 +9,7 @@
  *
  */
 
-use HHVM\UserDocumentation\LocalConfig;
+use type HHVM\UserDocumentation\LocalConfig;
 
 final class :github-issue-link extends :x:element {
   attribute

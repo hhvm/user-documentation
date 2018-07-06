@@ -9,11 +9,11 @@
  *
  */
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use type Psr\Http\Message\ResponseInterface;
+use type Psr\Http\Message\ServerRequestInterface;
 
 abstract class HTTPException extends \Exception {
-  abstract public function getResponse(
+  abstract public function getResponseAsync(
     ServerRequestInterface $request,
   ): Awaitable<ResponseInterface>;
 }
@@ -21,16 +21,16 @@ abstract class RoutingException extends HTTPException {}
 
 final class HTTPNotFoundException extends RoutingException {
   <<__Override>>
-  public async function getResponse(
+  public async function getResponseAsync(
     ServerRequestInterface $request,
   ): Awaitable<ResponseInterface> {
-    return await (new HTTP404Controller(ImmMap { }, $request))->getResponse();
+    return await (new HTTP404Controller(ImmMap { }, $request))->getResponseAsync();
   }
 }
 
 final class HTTPMethodNotAllowedException extends RoutingException {
   <<__Override>>
-  public async function getResponse(
+  public async function getResponseAsync(
     ServerRequestInterface $_,
   ): Awaitable<ResponseInterface> {
     return Response::newEmpty()->withStatus(405);
@@ -45,7 +45,7 @@ final class RedirectException extends HTTPException {
   }
 
   <<__Override>>
-  public async function getResponse(
+  public async function getResponseAsync(
     ServerRequestInterface $_,
   ): Awaitable<ResponseInterface> {
     return Response::newEmpty()

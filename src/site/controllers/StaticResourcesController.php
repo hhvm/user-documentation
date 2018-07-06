@@ -9,9 +9,9 @@
  *
  */
 
-use Facebook\HackRouter\IntRequestParameter;
-use HHVM\UserDocumentation\StaticResourceMap;
-use Psr\Http\Message\ResponseInterface;
+use type Facebook\HackRouter\IntRequestParameter;
+use type HHVM\UserDocumentation\StaticResourceMap;
+use type Psr\Http\Message\ResponseInterface;
 
 final class StaticResourcesController
 extends WebController
@@ -35,7 +35,7 @@ implements RoutableGetController {
   }
 
   <<__Override>>
-  public async function getResponse(): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<ResponseInterface> {
     $params = $this->getParameters();
     $checksum = $params['Checksum'];
     $file = '/'.$params['File'];

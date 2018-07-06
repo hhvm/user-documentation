@@ -48,12 +48,12 @@ final class SearchController extends WebPageController {
   }
 
   <<__Override>>
-  public async function getTitle(): Awaitable<string> {
+  public async function getTitleAsync(): Awaitable<string> {
     return "Search results for '{$this->getSearchTerm()}':";
   }
 
   <<__Override>>
-  protected async function getBody(): Awaitable<XHPRoot> {
+  protected async function getBodyAsync(): Awaitable<XHPRoot> {
     $results = Vec\map($this->getSearchResults(), $result ==>
       <li data-search-score={sprintf('%.2f', $result->getScore())}>
         <a href={$result->getHref()}>{$result->getTitle()}</a>

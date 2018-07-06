@@ -10,7 +10,7 @@
  */
 
 use HHVM\UserDocumentation\APIDefinitionType;
-use HHVM\UserDocumentation\APIProduct;
+use type HHVM\UserDocumentation\APIProduct;
 
 final class APIListByTypeController extends WebPageController {
   use APIListByTypeControllerParametersTrait;
@@ -44,7 +44,7 @@ final class APIListByTypeController extends WebPageController {
   }
 
   <<__Override>>
-  protected async function getTitle(): Awaitable<string> {
+  protected async function getTitleAsync(): Awaitable<string> {
     switch ($this->getParameters()['Product']) {
       case APIProduct::HACK:
         return 'Hack APIs';
@@ -56,7 +56,7 @@ final class APIListByTypeController extends WebPageController {
   }
 
   <<__Override>>
-  final protected async function getBody(): Awaitable<XHPRoot> {
+  final protected async function getBodyAsync(): Awaitable<XHPRoot> {
     return
       <api-list
         product={$this->getParameters()['Product']}

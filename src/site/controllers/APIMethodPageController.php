@@ -58,7 +58,7 @@ final class APIMethodPageController extends APIPageController {
   }
 
   <<__Override>>
-  public async function getTitle(): Awaitable<string> {
+  public async function getTitleAsync(): Awaitable<string> {
     return
       $this->getRootDefinition()['name'].
       '::'.

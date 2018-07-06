@@ -20,6 +20,7 @@ use namespace HHVM\UserDocumentation\JSON;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class Examples extends PageSection {
+  <<__Override>>
   public function getMarkdown(): ?string {
     $path = LocalConfig::ROOT.'/api-examples/';
     if ($this->parent !== null) {

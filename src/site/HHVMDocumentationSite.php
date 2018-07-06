@@ -10,15 +10,15 @@
  */
 
 use Facebook\HackRouter as HackRouter;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Response\SapiEmitter;
+use type Psr\Http\Message\ResponseInterface;
+use type Psr\Http\Message\ServerRequestInterface;
+use type Zend\Diactoros\Response\SapiEmitter;
 
 final class HHVMDocumentationSite {
-  public static async function respondTo(
+  public static async function respondToAsync(
     ServerRequestInterface $request,
   ): Awaitable<void> {
-    $response = await self::getResponseForRequest($request);
+    $response = await self::getResponseForRequestAsync($request);
     /* HH_IGNORE_ERROR[2049] no HHI for Diactoros */
     (new SapiEmitter())->emit($response);
   }
@@ -35,7 +35,7 @@ final class HHVMDocumentationSite {
     }
   }
 
-  public static async function getResponseForRequest(
+  public static async function getResponseForRequestAsync(
     ServerRequestInterface $request,
   ): Awaitable<ResponseInterface> {
     try {
@@ -52,7 +52,7 @@ final class HHVMDocumentationSite {
           // If we're here, it's routable with a trailing /
           return await (new RedirectException(
             $with_trailing_slash->getUri()->getPath()
-          ))->getResponse($request);
+          ))->getResponseAsync($request);
         } catch (HTTPException $f) {
           throw $e; // original exception, not the new one
         }
@@ -60,9 +60,9 @@ final class HHVMDocumentationSite {
 
       // This is outside of the try so that we don't try adding a trailing
       // slash if the controller itself throws a 404
-      return await (new $controller($vars, $request))->getResponse();
+      return await (new $controller($vars, $request))->getResponseAsync();
     } catch (HTTPException $e) {
-      return await $e->getResponse($request);
+      return await $e->getResponseAsync($request);
     }
   }
 }

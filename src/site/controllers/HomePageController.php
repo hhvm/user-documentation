@@ -9,8 +9,8 @@
  *
  */
 
-use HHVM\UserDocumentation\GuidesIndex;
-use HHVM\UserDocumentation\GuidesProduct;
+use type HHVM\UserDocumentation\GuidesIndex;
+use type HHVM\UserDocumentation\GuidesProduct;
 
 final class HomePageController extends WebPageController {
   <<__Override>>
@@ -19,7 +19,7 @@ final class HomePageController extends WebPageController {
   }
 
   <<__Override>>
-  public async function getTitle(): Awaitable<string> {
+  public async function getTitleAsync(): Awaitable<string> {
     return 'HHVM and Hack Documentation';
   }
 
@@ -61,7 +61,7 @@ final class HomePageController extends WebPageController {
   }
 
   <<__Override>>
-  protected async function getBody(): Awaitable<XHPRoot> {
+  protected async function getBodyAsync(): Awaitable<XHPRoot> {
     return
       <x:frag>
         <div class="guideListWrapper">

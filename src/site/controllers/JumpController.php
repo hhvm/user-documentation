@@ -9,9 +9,9 @@
  *
  */
 
-use HHVM\UserDocumentation\BuildPaths;
-use HHVM\UserDocumentation\JumpIndexData;
-use Psr\Http\Message\ResponseInterface;
+use type HHVM\UserDocumentation\BuildPaths;
+use type HHVM\UserDocumentation\JumpIndexData;
+use type Psr\Http\Message\ResponseInterface;
 
 require_once(BuildPaths::JUMP_INDEX);
 
@@ -27,7 +27,7 @@ implements RoutableGetController {
   }
 
   <<__Override>>
-  public function getResponse(): Awaitable<ResponseInterface> {
+  public function getResponseAsync(): Awaitable<ResponseInterface> {
     $keyword = $this->getParameters()['Keyword'];
 
     $data = JumpIndexData::getIndex();

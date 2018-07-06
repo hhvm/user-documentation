@@ -54,12 +54,12 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
    * @small
    */
   public function testGuidePageQuick(string $name, string $path): void {
-    $response = \HH\Asio\join(PageLoader::getPage($path));
+    $response = \HH\Asio\join(PageLoader::getPageAsync($path));
 
     // /hack/foo/ => /hack/foo/introduction
     if ($response->getStatusCode() === 301) {
       $response = \HH\Asio\join(
-        PageLoader::getPage($response->getHeaderLine('Location'))
+        PageLoader::getPageAsync($response->getHeaderLine('Location'))
       );
     }
 
@@ -72,7 +72,7 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
    * @small
    */
   public function testExamplesRender(): void {
-    $response = \HH\Asio\join(PageLoader::getPage('/hack/async/introduction'));
+    $response = \HH\Asio\join(PageLoader::getPageAsync('/hack/async/introduction'));
     $this->assertSame(200, $response->getStatusCode());
 
     $body = (string) $response->getBody();
@@ -87,7 +87,7 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
    */
   public function testGeneratedGuidesRender(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('/hhvm/configuration/INI-settings')
+      PageLoader::getPageAsync('/hhvm/configuration/INI-settings')
     );
     $this->assertSame(200, $response->getStatusCode());
 
@@ -101,8 +101,8 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
       $hhvm,
     ) = \HH\Asio\join(
       Tuple\from_async(
-        PageLoader::getPage('/hack/typechecker/introduction'),
-        PageLoader::getPage('/hhvm/configuration/INI-settings'),
+        PageLoader::getPageAsync('/hack/typechecker/introduction'),
+        PageLoader::getPageAsync('/hhvm/configuration/INI-settings'),
       ),
     );
     $hack = (string) $hack->getBody();

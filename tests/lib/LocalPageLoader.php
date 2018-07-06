@@ -2,14 +2,14 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use \Zend\Diactoros\ServerRequest;
-use \Psr\Http\Message\ResponseInterface;
+use type \Zend\Diactoros\ServerRequest;
+use type \Psr\Http\Message\ResponseInterface;
 
 final class LocalPageLoader extends PageLoader {
   protected function __construct() {}
 
   <<__Override>>
-  protected async function getPageImpl(
+  protected async function getPageImplAsync(
     string $url,
   ): Awaitable<ResponseInterface> {
     $query_params = [];
@@ -28,6 +28,6 @@ final class LocalPageLoader extends PageLoader {
       /* headers = */ [],
     ))->withQueryParams($query_params);
 
-    return await \HHVMDocumentationSite::getResponseForRequest($request);
+    return await \HHVMDocumentationSite::getResponseForRequestAsync($request);
   }
 }

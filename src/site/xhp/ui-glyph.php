@@ -9,7 +9,7 @@
  *
  */
 
-use HHVM\UserDocumentation\UIGlyphIcon;
+use type HHVM\UserDocumentation\UIGlyphIcon;
 
 final class :ui:glyph extends :x:element {
   attribute UIGlyphIcon icon @required;

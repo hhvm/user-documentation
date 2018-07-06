@@ -9,8 +9,8 @@
  *
  */
 
-use HHVM\UserDocumentation\LegacyRedirects;
-use Psr\Http\Message\ResponseInterface;
+use type HHVM\UserDocumentation\LegacyRedirects;
+use type Psr\Http\Message\ResponseInterface;
 
 final class LegacyRedirectController
 extends WebController
@@ -25,7 +25,7 @@ implements RoutableGetController {
   }
 
   <<__Override>>
-  public async function getResponse(): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<ResponseInterface> {
     $id = $this->getParameters()['LegacyId'];
 
     $url = LegacyRedirects::getUrlForId($id);

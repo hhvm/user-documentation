@@ -10,15 +10,15 @@
  */
 
 use HHVM\UserDocumentation\BuildPaths;
-use HHVM\UserDocumentation\Guides;
-use HHVM\UserDocumentation\GuidesIndex;
-use HHVM\UserDocumentation\GuidesNavData;
-use HHVM\UserDocumentation\GuidesProduct;
-use HHVM\UserDocumentation\HTMLFileRenderable;
-use HHVM\UserDocumentation\NavDataNode;
-use HHVM\UserDocumentation\PaginationDataNode;
-use HHVM\UserDocumentation\UIGlyphIcon;
-use HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\Guides;
+use type HHVM\UserDocumentation\GuidesIndex;
+use type HHVM\UserDocumentation\GuidesNavData;
+use type HHVM\UserDocumentation\GuidesProduct;
+use type HHVM\UserDocumentation\HTMLFileRenderable;
+use type HHVM\UserDocumentation\NavDataNode;
+use type HHVM\UserDocumentation\PaginationDataNode;
+use type HHVM\UserDocumentation\UIGlyphIcon;
+use type HHVM\UserDocumentation\URLBuilder;
 
 use function HHVM\UserDocumentation\type_alias_structure;
 
@@ -57,7 +57,7 @@ final class GuidePageController extends WebPageController {
   }
 
   <<__Override>>
-  public async function getTitle(): Awaitable<string> {
+  public async function getTitleAsync(): Awaitable<string> {
     list($product, $guide, $page) = tuple(
       $this->getProduct(),
       $this->getGuide(),
@@ -69,7 +69,7 @@ final class GuidePageController extends WebPageController {
   }
 
   <<__Override>>
-  protected async function getBody(): Awaitable<XHPRoot> {
+  protected async function getBodyAsync(): Awaitable<XHPRoot> {
     return
       <div class="guidePageWrapper">
         {$this->getInnerContent()}

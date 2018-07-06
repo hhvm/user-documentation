@@ -88,7 +88,7 @@ abstract class WebController {
     return shape('required' => ImmVector {}, 'optional' => ImmVector {});
   }
 
-  abstract public function getResponse(): Awaitable<ResponseInterface>;
+  abstract public function getResponseAsync(): Awaitable<ResponseInterface>;
 
   final protected function getRequestedPath(): string {
     return $this->request->getUri()->getPath();

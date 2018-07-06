@@ -101,7 +101,7 @@ final class DocBlockTest extends \PHPUnit_Framework_TestCase {
    */
   public function testMultipleParamTypes(): void {
     $params = Vec\map(
-      $db = self::getDocBlock(__FUNCTION__)->getParameterInfo(),
+      self::getDocBlock(__FUNCTION__)->getParameterInfo(),
       $p ==> tuple($p['name'], $p['types'], $p['text']),
     );
     expect($params)->toBeSame(vec[

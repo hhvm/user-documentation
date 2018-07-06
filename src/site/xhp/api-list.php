@@ -9,11 +9,11 @@
  *
  */
 
-use HHVM\UserDocumentation\APIIndex;
+use type HHVM\UserDocumentation\APIIndex;
 use HHVM\UserDocumentation\APINavData;
-use HHVM\UserDocumentation\APIDefinitionType;
-use HHVM\UserDocumentation\APIProduct;
-use HHVM\UserDocumentation\PHPAPIIndex;
+use type HHVM\UserDocumentation\APIDefinitionType;
+use type HHVM\UserDocumentation\APIProduct;
+use type HHVM\UserDocumentation\PHPAPIIndex;
 
 use namespace HH\Lib\C;
 

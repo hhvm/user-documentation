@@ -9,7 +9,7 @@
  *
  */
 
-use HHVM\UserDocumentation\UIGlyphIcon;
+use type HHVM\UserDocumentation\UIGlyphIcon;
 
 final class :ui:button extends :x:element {
   attribute

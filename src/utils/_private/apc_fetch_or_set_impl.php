@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation\_Private;
 
-use HHVM\UserDocumentation\LocalConfig;
+use type HHVM\UserDocumentation\LocalConfig;
 
 function apc_fetch_or_set_raw<Tdata>(
   string $key,

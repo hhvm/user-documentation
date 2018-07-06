@@ -87,7 +87,7 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
     string $keyword,
     string $dest,
   ): void {
-    $page = \HH\Asio\join(PageLoader::getPage($source));
+    $page = \HH\Asio\join(PageLoader::getPageAsync($source));
     $body = (string) $page->getBody();
 
     /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */

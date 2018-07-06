@@ -9,20 +9,20 @@
  *
  */
 
-use HHVM\UserDocumentation\LocalConfig;
-use HHVM\UserDocumentation\UIGlyphIcon;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use type HHVM\UserDocumentation\LocalConfig;
+use type HHVM\UserDocumentation\UIGlyphIcon;
+use type Psr\Http\Message\ResponseInterface;
+use type Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactaros\HtmlResponse;
 
 use namespace HH\Lib\C;
 
 abstract class NonRoutableWebPageController extends WebController {
-  protected abstract function getTitle(): Awaitable<string>;
-  protected abstract function getBody(): Awaitable<\XHPRoot>;
+  protected abstract function getTitleAsync(): Awaitable<string>;
+  protected abstract function getBodyAsync(): Awaitable<\XHPRoot>;
 
-  protected function getHeading(): Awaitable<string> {
-    return $this->getTitle();
+  protected function getHeadingAsync(): Awaitable<string> {
+    return $this->getTitleAsync();
   }
 
   protected function getExtraBodyClass(): ?string {
@@ -59,10 +59,10 @@ EOF;
   }
 
   <<__Override>>
-  final public async function getResponse(): Awaitable<ResponseInterface> {
+  final public async function getResponseAsync(): Awaitable<ResponseInterface> {
     list($title, $content) = await \HH\Asio\va(
-      $this->getTitle(),
-      $this->getContentPane()
+      $this->getTitleAsync(),
+      $this->getContentPaneAsync()
     );
     $content->appendChild($this->getFooter());
 
@@ -158,10 +158,10 @@ EOF;
     return 200;
   }
 
-  final protected async function getContentPane(): Awaitable<XHPRoot> {
+  final protected async function getContentPaneAsync(): Awaitable<XHPRoot> {
     list($heading, $body) = await \HH\Asio\va(
-      $this->getHeading(),
-      $this->getBody(),
+      $this->getHeadingAsync(),
+      $this->getBodyAsync(),
     );
 
     $breadcrumbs = $this->getBreadcrumbs();

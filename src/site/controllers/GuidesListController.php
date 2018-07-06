@@ -9,10 +9,10 @@
  *
  */
 
-use HHVM\UserDocumentation\GuidesIndex;
-use HHVM\UserDocumentation\GuidesProduct;
+use type HHVM\UserDocumentation\GuidesIndex;
+use type HHVM\UserDocumentation\GuidesProduct;
 use HHVM\UserDocumentation\HTMLFileRenderable;
-use HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\URLBuilder;
 
 final class GuidesListController extends WebPageController {
   use GuidesListControllerParametersTrait;
@@ -26,7 +26,7 @@ final class GuidesListController extends WebPageController {
   }
 
   <<__Override>>
-  public async function getTitle(): Awaitable<string> {
+  public async function getTitleAsync(): Awaitable<string> {
     switch ($this->getProduct()) {
       case GuidesProduct::HHVM:
         return 'HHVM Documentation';
@@ -63,7 +63,7 @@ final class GuidesListController extends WebPageController {
   }
 
   <<__Override>>
-  protected async function getBody(): Awaitable<XHPRoot> {
+  protected async function getBodyAsync(): Awaitable<XHPRoot> {
     $body =
       <x:frag>
         <div class="guideListWrapper">

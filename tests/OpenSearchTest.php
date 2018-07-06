@@ -9,7 +9,7 @@ namespace HHVM\UserDocumentation\Tests;
 final class OpenSearchTest extends \PHPUnit_Framework_TestCase {
   public function testNoOpenSearchOnStaging(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('https://staging.docs.hhvm.com/')
+      PageLoader::getPageAsync('https://staging.docs.hhvm.com/')
     );
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
@@ -18,7 +18,7 @@ final class OpenSearchTest extends \PHPUnit_Framework_TestCase {
 
   public function testOpenSearchOnProd(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('https://docs.hhvm.com/')
+      PageLoader::getPageAsync('https://docs.hhvm.com/')
     );
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
@@ -60,7 +60,7 @@ final class OpenSearchTest extends \PHPUnit_Framework_TestCase {
   public function testJump(string $keyword, string $to): void {
     $jump_url= '/j/'.$keyword;
 
-    $response = \HH\Asio\join(PageLoader::getPage($jump_url));
+    $response = \HH\Asio\join(PageLoader::getPageAsync($jump_url));
     $this->assertSame(301, $response->getStatusCode());
 
     $target = $response->getHeaderLine('Location');

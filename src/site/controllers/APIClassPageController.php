@@ -53,12 +53,12 @@ final class APIClassPageController extends APIPageController {
   }
 
   <<__Override>>
-  public async function getTitle(): Awaitable<string> {
+  public async function getTitleAsync(): Awaitable<string> {
     return Str\strip_prefix($this->getRootDefinition()['name'], "HH\\Lib\\");
   }
 
   <<__Override>>
-  protected async function getHeading(): Awaitable<string> {
+  protected async function getHeadingAsync(): Awaitable<string> {
     return $this->getRootDefinition()['name'];
   }
 

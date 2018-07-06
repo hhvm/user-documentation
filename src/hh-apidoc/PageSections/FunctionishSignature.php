@@ -14,6 +14,7 @@ namespace Facebook\HHAPIDoc\PageSections;
 use type Facebook\DefinitionFinder\ScannedFunctionish;
 
 class FunctionishSignature extends PageSection {
+  <<__Override>>
   public function getMarkdown(): ?string {
     $f = $this->definition;
     if (!$f instanceof ScannedFunctionish) {

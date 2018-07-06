@@ -15,6 +15,7 @@ use namespace Facebook\HHAPIDoc;
 use namespace HH\Lib\Keyset;
 
 final class MarkdownBuilder extends HHAPIDoc\MarkdownBuilder {
+  <<__Override>>
   protected function getPageSections(
   ): keyset<classname<HHAPIDoc\PageSections\PageSection>> {
     $inherited = Keyset\filter(

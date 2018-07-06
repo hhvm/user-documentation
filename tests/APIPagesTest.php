@@ -71,7 +71,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
    * @small
    */
   public function testAPIPageQuick(string $_, NavDataNode $node): void {
-    $response = \HH\Asio\join(PageLoader::getPage($node['urlPath']));
+    $response = \HH\Asio\join(PageLoader::getPageAsync($node['urlPath']));
     $this->assertSame(200, $response->getStatusCode());
 
     // Top-level pages don't contain their own name in the output - eg 'Classes'
@@ -85,7 +85,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
 
   public function testMethodDeprecated(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('/hack/reference/class/HH.Vector/fromArray/'),
+      PageLoader::getPageAsync('/hack/reference/class/HH.Vector/fromArray/'),
     );
 
     $this->assertContains('Deprecated', (string)$response->getBody());
@@ -93,7 +93,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
 
   public function testNullableTypeMerged(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPage('/hack/reference/class/HH.Vector/firstValue/'),
+      PageLoader::getPageAsync('/hack/reference/class/HH.Vector/firstValue/'),
     );
 
     $this->assertContains('<code>?Tv</code>', (string)$response->getBody());
@@ -129,7 +129,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
         $url = URLBuilder::getPathForFunction(APIProduct::HACK, shape('name' => $name));
         break;
     }
-    $response = \HH\Asio\join(PageLoader::getPage($url));
+    $response = \HH\Asio\join(PageLoader::getPageAsync($url));
     $this->assertSame(
       404,
       $response->getStatusCode(),

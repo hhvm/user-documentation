@@ -10,17 +10,17 @@
  */
 
 use Psr\Http\Message\ServerRequestInterface;
-use HHVM\UserDocumentation\APILegacyRedirectData;
-use HHVM\UserDocumentation\BuildPaths;
-use HHVM\UserDocumentation\JumpIndexData;
-use HHVM\UserDocumentation\LegacyRedirects;
-use HHVM\UserDocumentation\PHPDotNetArticleRedirectData;
+use type HHVM\UserDocumentation\APILegacyRedirectData;
+use type HHVM\UserDocumentation\BuildPaths;
+use type HHVM\UserDocumentation\JumpIndexData;
+use type HHVM\UserDocumentation\LegacyRedirects;
+use type HHVM\UserDocumentation\PHPDotNetArticleRedirectData;
 
 require_once(BuildPaths::JUMP_INDEX);
 
 final class HTTP404Controller extends NonRoutableWebPageController {
   <<__Override>>
-  public async function getTitle(): Awaitable<string> {
+  public async function getTitleAsync(): Awaitable<string> {
     return 'Page Not Found';
   }
 
@@ -76,7 +76,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
   }
 
   <<__Override>>
-  public async function getBody(): Awaitable<\XHPRoot> {
+  public async function getBodyAsync(): Awaitable<\XHPRoot> {
     return
       <x:frag>
         <div class="notFoundIcon">
