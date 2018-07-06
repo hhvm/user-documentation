@@ -1,20 +1,20 @@
 File "%slist.php", line 12, characters 3-29:
 Invalid assignment (Typing[4110])
 File "%slist.php", line 12, characters 3-21:
-This is a tuple
+This is a tuple of size 3
 File "%slist.php", line 7, characters 11-23:
 It is incompatible with an object of type Set
 
 File "%slist.php", line 13, characters 3-24:
 Invalid assignment (Typing[4110])
 File "%slist.php", line 13, characters 3-16:
-This is a tuple
+This is a tuple of size 2
 File "%slist.php", line 8, characters 11-34:
 It is incompatible with an object of type Map
 
 File "%slist.php", line 18, characters 5-24:
 Invalid assignment (Typing[4110])
 File "%slist.php", line 18, characters 5-16:
-This is a tuple
+This is a tuple of size 2
 File "%slist.php", line 10, characters 11-24:
 It is incompatible with an object of type Set

@@ -3,11 +3,11 @@ Invalid argument (Typing[4110])
 File "%spoint-functions.inc.php", line 9, characters 36-40:
 This is an object of type Hack\UserDocumentation\TypeAliases\Opaque\Examples\AliasNoConstraint\Point
 File "%stest-point.php", line 18, characters 52-62:
-It is incompatible with a tuple
+It is incompatible with a tuple of size 2
 
 File "%stest-point.php", line 18, characters 65-75:
 Invalid argument (Typing[4110])
 File "%spoint-functions.inc.php", line 9, characters 47-51:
 This is an object of type Hack\UserDocumentation\TypeAliases\Opaque\Examples\AliasNoConstraint\Point
 File "%stest-point.php", line 18, characters 65-75:
-It is incompatible with a tuple
+It is incompatible with a tuple of size 2

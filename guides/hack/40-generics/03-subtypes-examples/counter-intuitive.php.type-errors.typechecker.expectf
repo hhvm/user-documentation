@@ -2,7 +2,7 @@ File "%scounter-intuitive.php", line 25, characters 18-21:
 Invalid argument (Typing[4110])
 File "%scounter-intuitive.php", line 15, characters 29-31:
 This is a num (int/float)
-File "%scounter-intuitive.php", line 19, characters 27-29:
-It is incompatible with an int
 File "%scounter-intuitive.php", line 15, characters 29-31:
 Considering that this type argument is invariant with respect to Hack\UserDocumentation\Generics\Subtypes\Examples\CounterIntuitive\Box
+File "%scounter-intuitive.php", line 19, characters 27-29:
+It is incompatible with an int

@@ -7,5 +7,5 @@ function foo(int &$foo) {
 }
 
 $y = vec[1,2,3];
-foo($y[2]);
+foo(&$y[2]);
 var_dump($y);
