@@ -2,14 +2,15 @@
 
 namespace Hack\UserDocumentation\Generics\Entities\Examples\Functions;
 
-function maxVal<T>(T $p1, T $p2): T {
-  return $p1 > $p2 ? $p1 : $p2;
+function nullthrows<T as nonnull>(?T $v): T {
+  invariant($v !== null, 'unexpected null');
+  return $v;
 }
 
 function run(): void {
-  \var_dump(maxVal(10, 20));
-  \var_dump(maxVal(15.6, -20.78));
-  \var_dump(maxVal('red', 'green'));
+  \var_dump(nullthrows(123));
+  \var_dump(nullthrows('abc'));
+  nullthrows(null);
 }
 
 run();

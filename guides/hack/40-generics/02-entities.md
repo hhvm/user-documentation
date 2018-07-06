@@ -6,21 +6,21 @@ Consider the following example in which `Stack` is a generic class having one ty
 
 @@ entities-examples/classes.php.type-errors @@
 
-As shown, the type parameter `T` is used in the declaration of the instance property `$stack`, as the parameter type of the instance method `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves generic methods. 
+As shown, the type parameter `T` is used in the declaration of the instance property `$stack`, as the parameter type of the instance method `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves generic methods.
 
 The line `$stInt->push(10.5);` attempts to call `push` with a non-`int` argument. This is rejected, because `$stInt` is a stack of `int`, and we are trying to push a `float`.
 
 ## Functions
 
-Here is an example of a generic function, `maxVal`, having one type parameter, `T`:
+Here is an example of a generic function, `nullthrows`, having one type parameter, `T`:
 
 @@ entities-examples/functions.php @@
 
-The function returns the larger of the two arguments passed to it. In the case of the call `maxVal(10, 20)`, given that the type of both arguments is `int`, that is inferred as the type corresponding to the type parameter `T`, and an `int` value is returned. In the case of the call `maxVal(15.6, -20.78)`, `T` is inferred as `float`, while in `maxVal('red', 'green')`, `T` is inferred as `string`.
+If the argument is not null, it returns the argument with the type refined; otherwise, it throws an exception.
 
 ## Methods
 
-Although the `push` and `pop` methods are defined in the generic class type `Stack` in the classes example above, they are not themselves generic. They are already bound to the class type parameter `T`. 
+Although the `push` and `pop` methods are defined in the generic class type `Stack` in the classes example above, they are not themselves generic. They are already bound to the class type parameter `T`.
 
 Like a generic function, a generic method has its own type parameters, even if that method does not belong to a generic class. Consider the library type `Pair`:
 
@@ -40,7 +40,7 @@ Like a class, an interface can have type parameters; for example:
 
 @@ entities-examples/interfaces.php @@
 
-Here, we have generic stack and queue classes each of which implements the same generic interface, enabling those classes to store and retrieve elements in a consistent manner. 
+Here, we have generic stack and queue classes each of which implements the same generic interface, enabling those classes to store and retrieve elements in a consistent manner.
 
 # Traits
 
