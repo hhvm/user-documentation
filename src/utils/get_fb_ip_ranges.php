@@ -44,6 +44,7 @@ function is_ip_in_range(string $ip, (string, string) $range): bool {
   $addr_bitstring = \inet_pton($ip);
   list($range_bitstring, $range_bitmask) = $range;
   /* HH_IGNORE_ERROR[4110] bitwise & on strings */
+  /* HH_IGNORE_ERROR[4118] not always-false (=== with 'differing' types) */
   return ($addr_bitstring & $range_bitmask) === $range_bitstring;
 }
 

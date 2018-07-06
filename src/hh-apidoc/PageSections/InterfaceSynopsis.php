@@ -13,8 +13,8 @@ namespace Facebook\HHAPIDoc\PageSections;
 
 use type Facebook\HHAPIDoc\DocBlock\DocBlock;
 use type Facebook\DefinitionFinder\{
-  ScannedBasicClass,
   ScannedClass,
+  ScannedClassish,
   ScannedInterface,
   ScannedMethod,
   ScannedTrait,
@@ -24,7 +24,7 @@ use namespace HH\Lib\{Str, Vec};
 class InterfaceSynopsis extends PageSection {
   public function getMarkdown(): ?string {
     $c = $this->definition;
-    if (!$c instanceof ScannedClass) {
+    if (!$c instanceof ScannedClassish) {
       return null;
     }
 
@@ -35,7 +35,7 @@ class InterfaceSynopsis extends PageSection {
   }
 
   protected function getMethodList(
-    ScannedClass $c,
+    ScannedClassish $c,
   ): string {
     return $c->getMethods()
       |> Vec\sort_by($$, $m ==> $m->getName())
@@ -44,7 +44,7 @@ class InterfaceSynopsis extends PageSection {
   }
 
   protected function getMethodListItem(
-    ScannedClass $c,
+    ScannedClassish $c,
     ScannedMethod $m,
   ): string {
     $docs = DocBlock::nullable($m->getDocComment());
@@ -74,11 +74,11 @@ class InterfaceSynopsis extends PageSection {
   }
 
   protected function getLinkPathForMethod(
-    ScannedClass $c,
+    ScannedClassish $c,
     ScannedMethod $m,
   ): ?string {
     $pp = $this->context->getPathProvider();
-    if ($c instanceof ScannedBasicClass) {
+    if ($c instanceof ScannedClass) {
       return $pp->getPathForClassMethod($c->getName(), $m->getName());
     }
     if ($c instanceof ScannedInterface) {
@@ -94,7 +94,7 @@ class InterfaceSynopsis extends PageSection {
   }
 
   protected function getInheritanceInformation(
-    ScannedClass $c,
+    ScannedClassish $c,
   ): string {
     $ret = '';
 
@@ -103,7 +103,7 @@ class InterfaceSynopsis extends PageSection {
       $ret .= 'namespace '.$ns." {\n";
     }
 
-    if ($c instanceof ScannedBasicClass) {
+    if ($c instanceof ScannedClass) {
       $ret .= 'class ';
     } else if ($c instanceof ScannedInterface) {
       $ret .= 'interface ';

@@ -15,9 +15,9 @@ use type Facebook\HHAPIDoc\{Documentable, Documentables};
 use type Facebook\DefinitionFinder\{
   AbstractnessToken,
   FinalityToken,
-  ScannedBase,
-  ScannedBasicClass,
+  ScannedDefinition,
   ScannedClass,
+  ScannedClassish,
   ScannedConstant,
   ScannedFunction,
   ScannedGeneric,
@@ -42,9 +42,7 @@ final class DataMerger {
       |> Str\strip_prefix($$, "HH\\");
   }
 
-  public static function mergeAll(
-    vec<Documentable> $in,
-  ): vec<Documentable> {
+  public static function mergeAll(vec<Documentable> $in): vec<Documentable> {
     /* We start by throwing any documentables with parents (e.g. methods
      * have a class as a parent), as we need to de-dupe the parents first;
      * the children are de-duped as part of that process, so we can extract
@@ -73,7 +71,7 @@ final class DataMerger {
         $$,
         $parent ==> {
           $def = $parent['definition'];
-          if ($def instanceof ScannedClass) {
+          if ($def instanceof ScannedClassish) {
             // Type refinement
             $parent['definition'] = $def;
             return $parent;
@@ -108,18 +106,12 @@ final class DataMerger {
 
     $parent = $a['parent'];
     if ($parent) {
-      $parent = self::mergeDefinitionPair(
-        $parent,
-        $b['parent'],
-      );
+      $parent = self::mergeDefinitionPair($parent, $b['parent']);
     } else {
       $parent = $b['parent'];
     }
 
-    $def = self::mergeDefinitionPair(
-      $a['definition'],
-      $b['definition'],
-    );
+    $def = self::mergeDefinitionPair($a['definition'], $b['definition']);
     return shape(
       'parent' => $parent,
       'sources' => vec(Keyset\union($a['sources'], $b['sources'])),
@@ -127,7 +119,7 @@ final class DataMerger {
     );
   }
 
-  private static function mergeDefinitionPair<T as ScannedBase>(
+  private static function mergeDefinitionPair<T as ScannedDefinition>(
     T $a,
     ?T $b,
   ): T {
@@ -135,7 +127,7 @@ final class DataMerger {
       return $a;
     }
 
-    if ($a instanceof ScannedClass) {
+    if ($a instanceof ScannedClassish) {
       return self::mergeClassishPair($a, $b);
     }
 
@@ -160,7 +152,7 @@ final class DataMerger {
 
   private static function mergePropertyPair(
     ScannedProperty $a,
-    ScannedBase $b,
+    ScannedDefinition $b,
   ): ScannedProperty {
     assert($b instanceof ScannedProperty);
 
@@ -178,6 +170,7 @@ final class DataMerger {
     }
 
     return new ScannedProperty(
+      $a->getAST(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
@@ -185,27 +178,26 @@ final class DataMerger {
       self::mergeTypehintPair($a->getTypehint(), $b->getTypehint()),
       $visibility,
       $a->isStatic() ? StaticityToken::IS_STATIC : StaticityToken::NOT_STATIC,
+      $a->getDefault() ?? $b->getDefault(),
     );
   }
 
   private static function mergeConstantPair(
     ScannedConstant $a,
-    ScannedBase $b,
+    ScannedDefinition $b,
   ): ScannedConstant {
     assert($b instanceof ScannedConstant);
 
     $value = $a->getValue();
-    if (
-      $value === 'null'
-      || $value === '0'
-      || $value === "''"
-      || $value === '""'
-      || $value === '0.0'
-    ) {
-      $value = $b->getValue();
+    if ($value->hasStaticValue()) {
+      $v = $value->getStaticValue();
+      if ($v === null || $v === '' || $v === 0 || $v === 0.0) {
+        $value = $b->getValue();
+      }
     }
 
     return new ScannedConstant(
+      $a->getAST(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
@@ -217,7 +209,7 @@ final class DataMerger {
     );
   }
 
-  private static function mergeDefinitionListsByName<T as ScannedBase>(
+  private static function mergeDefinitionListsByName<T as ScannedDefinition>(
     vec<T> $a,
     vec<T> $b,
   ): vec<T> {
@@ -264,18 +256,26 @@ final class DataMerger {
       $constraints = $for_type
         |> Vec\map($$, $g ==> $g->getConstraints())
         |> Vec\flatten($$)
-        |> Dict\group_by($$, $c ==> self::normalizeNameForMerge($c['type']))
-        |> Vec\map($$, $constraints_for_type ==> {
-          $type = C\firstx($constraints_for_type)['type'];
-          foreach ($constraints_for_type as $constraint) {
-            if (Str\starts_with($constraint['type'], "HH\\")) {
-              $type = $constraint['type'];
-              break;
+        |> Dict\group_by(
+          $$,
+          $c ==> self::normalizeNameForMerge($c['type']->getTypeText()),
+        )
+        |> Vec\map(
+          $$,
+          $constraints_for_type ==> {
+            $type = C\firstx($constraints_for_type)['type'];
+            foreach ($constraints_for_type as $constraint) {
+              if (Str\starts_with($constraint['type']->getTypeText(), "HH\\")) {
+                $type = $constraint['type'];
+                break;
+              }
             }
-          }
-          return $constraints_for_type
-            |> Keyset\map($$, $c ==> $c['relationship'])
-            |> Vec\map($$, $r ==> shape('type' => $type, 'relationship' => $r));
+            return $constraints_for_type
+              |> Keyset\map($$, $c ==> $c['relationship'])
+              |> Vec\map(
+                $$,
+                $r ==> shape('type' => $type, 'relationship' => $r),
+              );
           },
         )
         |> Vec\flatten($$);
@@ -313,6 +313,7 @@ final class DataMerger {
           $name = $first->getTypeName();
           $base = $first->getTypeTextBase();
           $nullable = $first->isNullable();
+          $shape_fields = $first->isShape() ? $first->getShapeFields() : null;
 
           foreach ($rest as $th) {
             $new_name = self::mergeNames($name, $th->getTypeName());
@@ -322,25 +323,25 @@ final class DataMerger {
             }
 
             $nullable = $nullable || $th->isNullable();
-            $generics = self::mergeTypehintLists(
-              $generics,
-              $th->getGenericTypes(),
-            );
+            $generics =
+              self::mergeTypehintLists($generics, $th->getGenericTypes());
+            if ($th->isShape()) {
+              $shape_fields = $th->getShapeFields();
+            }
           }
           return new ScannedTypehint(
+            $first->getAST(),
             $name,
             $base,
             $generics,
             $name !== 'mixed' && $nullable,
+            $shape_fields,
           );
         },
       );
   }
 
-  private static function mergeNames(
-    string $a,
-    string $b,
-  ): string {
+  private static function mergeNames(string $a, string $b): string {
     if ($a === 'mixed') {
       return $b;
     }
@@ -364,11 +365,8 @@ final class DataMerger {
   }
 
   private static function mergeTypehintPair<
-    T as ?ScannedTypehint super ?ScannedTypehint
-  >(
-    T $a,
-    ?T $b,
-  ): T {
+    T as ?ScannedTypehint super ?ScannedTypehint,
+  >(T $a, ?T $b): T {
     if ($b === null) {
       return $a;
     }
@@ -382,10 +380,14 @@ final class DataMerger {
       : $b->getTypeTextBase();
 
     return new ScannedTypehint(
+      $a->getAST(),
       $name,
       $base,
       self::mergeTypehintLists($a->getGenericTypes(), $b->getGenericTypes()),
       ($a->isNullable() || $b->isNullable()),
+      $a->isShape()
+        ? $a->getShapeFields()
+        : ($b->isShape() ? $b->getShapeFields() : null),
     );
   }
 
@@ -414,20 +416,17 @@ final class DataMerger {
           }
         }
         return $values;
-      }
+      },
     );
   }
 
-  private static function mergeDocComments(
-    ?string $a,
-    ?string $b,
-  ): ?string {
+  private static function mergeDocComments(?string $a, ?string $b): ?string {
     // This almost always means we picked up a file header instead of an actual
     // doc comment.
-    if (Str\contains((string) $a, 'Copyright')) {
+    if (Str\contains((string)$a, 'Copyright')) {
       $a = null;
     }
-    if (Str\contains((string) $b, 'Copyright')) {
+    if (Str\contains((string)$b, 'Copyright')) {
       $b = null;
     }
     if ($a === null) {
@@ -442,10 +441,11 @@ final class DataMerger {
 
   private static function mergeFunctionPair(
     ScannedFunction $a,
-    ScannedBase $b,
+    ScannedDefinition $b,
   ): ScannedFunction {
     assert($b instanceof ScannedFunction);
     return new ScannedFunction(
+      $a->getAST(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
@@ -458,7 +458,7 @@ final class DataMerger {
 
   private static function mergeMethodPair(
     ScannedMethod $a,
-    ScannedBase $b,
+    ScannedDefinition $b,
   ): ScannedMethod {
     assert($b instanceof ScannedMethod);
 
@@ -478,10 +478,10 @@ final class DataMerger {
         "\n Warning: Method %s has both a static and non-static ".
         "definition:\n- %s:%d\n- %s:%d\n- NOT DOCUMENTING THIS FUNCTION\n",
         $a->getName(),
-        $a->getPosition()['filename'],
-        $a->getPosition()['line'],
-        $b->getPosition()['filename'],
-        $b->getPosition()['line'],
+        $a->getFileName(),
+        $a->getPosition()['line'] ?? 0,
+        $b->getFileName(),
+        $b->getPosition()['line'] ?? 0,
       );
       $a_attributes['NoDoc'] = Vec\concat(
         $a_attributes['NoDoc'] ?? vec[],
@@ -495,10 +495,10 @@ final class DataMerger {
         "\nWarning: Method %s has both an abstract and non-abstract ".
         "definition:\n- %s:%d\n- %s:%d\n",
         $a->getName(),
-        $a->getPosition()['filename'],
-        $a->getPosition()['line'],
-        $b->getPosition()['filename'],
-        $b->getPosition()['line'],
+        $a->getFileName(),
+        $a->getPosition()['line'] ?? 0,
+        $b->getFileName(),
+        $b->getPosition()['line'] ?? 0,
       );
     }
 
@@ -508,14 +508,15 @@ final class DataMerger {
         "\nWarning: Method %s has both a final and non-final definition:\n".
         "- %s:%d\n- %s:%d\n",
         $a->getName(),
-        $a->getPosition()['filename'],
-        $a->getPosition()['line'],
-        $b->getPosition()['filename'],
-        $b->getPosition()['line'],
+        $a->getFileName(),
+        $a->getPosition()['line'] ?? 0,
+        $b->getFileName(),
+        $b->getPosition()['line'] ?? 0,
       );
     }
 
     return new ScannedMethod(
+      $a->getAST(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a_attributes, $b->getAttributes()),
@@ -526,9 +527,11 @@ final class DataMerger {
       $visibility,
       $a->isStatic() ? StaticityToken::IS_STATIC : StaticityToken::NOT_STATIC,
       ($a->isAbstract() || $b->isAbstract())
-        ? AbstractnessToken::IS_ABSTRACT : AbstractnessToken::NOT_ABSTRACT,
+        ? AbstractnessToken::IS_ABSTRACT
+        : AbstractnessToken::NOT_ABSTRACT,
       ($a->isFinal() || $b->isFinal())
-        ? FinalityToken::IS_FINAL : FinalityToken::NOT_FINAL,
+        ? FinalityToken::IS_FINAL
+        : FinalityToken::NOT_FINAL,
     );
   }
 
@@ -561,16 +564,21 @@ final class DataMerger {
     }
     $default = null;
     if ($a->isOptional()) {
-      $default = $a->getDefaultString();
+      $default = $a->getDefault();
     }
     if ($b->isOptional()) {
-      $bds = $b->getDefaultString();
-      if ($default === null || Str\length($bds) > Str\length($default)) {
+      $bds = TypeAssert\not_null($b->getDefault());
+      if (
+        $default === null ||
+        Str\length($bds->getAST()->getCode()) >
+          Str\length($default->getAST()->getCode())
+      ) {
         $default = $bds;
       }
     }
 
     return new ScannedParameter(
+      $a->getAST(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
@@ -585,10 +593,10 @@ final class DataMerger {
   }
 
   private static function mergeClassishPair(
-    ScannedClass $a,
-    ScannedBase $b,
-  ): ScannedClass {
-    assert($b instanceof ScannedClass);
+    ScannedClassish $a,
+    ScannedDefinition $b,
+  ): ScannedClassish {
+    assert($b instanceof ScannedClassish);
 
     $name = self::mergeNames($a->getName(), $b->getName());
 
@@ -600,30 +608,37 @@ final class DataMerger {
       $name,
     );
 
-    if ($a instanceof ScannedBasicClass) {
-      $class = ScannedBasicClass::class;
+    if ($a instanceof ScannedClass) {
+      $class = ScannedClass::class;
     } else if ($a instanceof ScannedInterface) {
       $class = ScannedInterface::class;
     } else if ($a instanceof ScannedTrait) {
       $class = ScannedTrait::class;
     } else {
-      invariant_violation(
-        "Don't know how to handle class %s",
-        \get_class($a),
-      );
+      invariant_violation("Don't know how to handle class %s", \get_class($a));
     }
 
     return new $class(
+      $a->getAST(),
       $name,
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
       self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
       self::mergeDefinitionListsByName($a->getMethods(), $b->getMethods()),
-      self::mergeDefinitionListsByName($a->getProperties(), $b->getProperties()),
+      self::mergeDefinitionListsByName(
+        $a->getProperties(),
+        $b->getProperties(),
+      ),
       self::mergeDefinitionListsByName($a->getConstants(), $b->getConstants()),
-      self::mergeDefinitionListsByName($a->getTypeConstants(), $b->getTypeConstants()),
+      self::mergeDefinitionListsByName(
+        $a->getTypeConstants(),
+        $b->getTypeConstants(),
+      ),
       self::mergeGenerics($a->getGenericTypes(), $b->getGenericTypes()),
-      self::mergeTypehintPair($a->getParentClassInfo(), $b->getParentClassInfo()),
+      self::mergeTypehintPair(
+        $a->getParentClassInfo(),
+        $b->getParentClassInfo(),
+      ),
       self::mergeTypehintLists($a->getInterfaceInfo(), $b->getInterfaceInfo()),
       self::mergeTypehintLists($a->getTraitInfo(), $b->getTraitInfo()),
       ($a->isAbstract() || $b->isAbstract())

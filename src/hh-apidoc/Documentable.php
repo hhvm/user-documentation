@@ -12,12 +12,12 @@
 namespace Facebook\HHAPIDoc;
 
 use type Facebook\DefinitionFinder\{
-  ScannedBase,
-  ScannedClass,
+  ScannedDefinition,
+  ScannedClassish,
 };
 
 type Documentable = shape(
-  'definition' => ScannedBase,
-  'parent' => ?ScannedClass,
+  'definition' => ScannedDefinition,
+  'parent' => ?ScannedClassish,
   'sources' => vec<string>,
 );

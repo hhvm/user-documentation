@@ -17,14 +17,14 @@ use type Facebook\HHAPIDoc\{
   MarkdownBuilderContext,
 };
 use type Facebook\DefinitionFinder\{
-  ScannedBase,
-  ScannedClass,
+  ScannedDefinition,
+  ScannedClassish,
 };
 
 <<__ConsistentConstruct>>
 abstract class PageSection {
-  protected ScannedBase $definition;
-  protected ?ScannedClass $parent;
+  protected ScannedDefinition $definition;
+  protected ?ScannedClassish $parent;
 
   public function __construct(
     protected MarkdownBuilderContext $context,

@@ -13,9 +13,9 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\DefinitionFinder\{
   FileParser,
-  ScannedBase,
-  ScannedBasicClass,
+  ScannedDefinition,
   ScannedClass,
+  ScannedClassish,
   ScannedFunction,
   ScannedInterface,
   ScannedMethod,
@@ -126,7 +126,7 @@ final class HHAPIDocBuildStep extends BuildStep {
       $documentables,
       $d ==> {
         if ($type === APIDefinitionType::CLASS_DEF) {
-          return $d['definition'] instanceof ScannedBasicClass;
+          return $d['definition'] instanceof ScannedClass;
         }
         if ($type === APIDefinitionType::INTERFACE_DEF) {
           return $d['definition'] instanceof ScannedInterface;
@@ -224,7 +224,7 @@ final class HHAPIDocBuildStep extends BuildStep {
     return $sources
       |> Vec\map(
         $$,
-        $file ==> { Log::v('.'); return FileParser::FromFile($file); }
+        $file ==> { Log::v('.'); return FileParser::fromFile($file); }
       )
       |> Vec\map($$, $parser ==> Documentables\from_parser($parser))
       |> Vec\flatten($$)
@@ -273,7 +273,7 @@ final class HHAPIDocBuildStep extends BuildStep {
         );
       } else if ($what instanceof ScannedFunction) {
         $path = $md_paths->getPathForFunction($what->getName());
-      } else if ($what instanceof ScannedClass) {
+      } else if ($what instanceof ScannedClassish) {
         $path = $md_paths->getPathForClassish(
           self::getClassishAPIDefinitionType($what),
           $what->getName(),
@@ -290,9 +290,9 @@ final class HHAPIDocBuildStep extends BuildStep {
   }
 
   private static function getClassishAPIDefinitionType(
-    ScannedBase $definition,
+    ScannedDefinition $definition,
   ): APIDefinitionType {
-    if ($definition instanceof ScannedBasicClass) {
+    if ($definition instanceof ScannedClass) {
       return APIDefinitionType::CLASS_DEF;
     }
     if ($definition instanceof ScannedInterface) {

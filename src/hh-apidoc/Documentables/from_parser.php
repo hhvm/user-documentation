@@ -11,7 +11,7 @@
 
 namespace Facebook\HHAPIDoc\Documentables;
 
-use type Facebook\DefinitionFinder\{BaseParser, ScannedClass};
+use type Facebook\DefinitionFinder\{BaseParser, ScannedClassish};
 use type Facebook\HHAPIDoc\Documentable;
 
 use namespace HH\Lib\{Dict, Str, Vec};
@@ -38,7 +38,7 @@ function from_parser(BaseParser $parser): vec<Documentable> {
     $top_level,
     $data ==>  {
       $class = $data['definition'];
-      if (!$class instanceof ScannedClass) {
+      if (!$class instanceof ScannedClassish) {
         return vec[];
       }
 

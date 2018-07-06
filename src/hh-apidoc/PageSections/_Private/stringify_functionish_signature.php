@@ -13,14 +13,14 @@ namespace Facebook\HHAPIDoc\PageSections\_Private;
 
 use type Facebook\HHAPIDoc\DocBlock\DocBlock;
 use type Facebook\DefinitionFinder\{
-  ScannedFunctionAbstract,
+  ScannedFunctionish,
   ScannedMethod,
 };
 use namespace HH\Lib\{Str, Vec};
 
 function stringify_functionish_signature(
   StringifyFormat $format,
-  ScannedFunctionAbstract $function,
+  ScannedFunctionish $function,
   ?DocBlock $docs,
 ): string {
   $ret = '';

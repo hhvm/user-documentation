@@ -32,7 +32,7 @@ function stringify_generic(
   }
 
   return $constraints
-    |> Vec\map($$, $c ==> $c['relationship'].' '.$c['type'])
+    |> Vec\map($$, $c ==> $c['relationship'].' '.$c['type']->getTypeText())
     |> Str\join($$, ' ')
     |> $base.' '.$$;
 }

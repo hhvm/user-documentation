@@ -16,7 +16,7 @@ use type HHVM\UserDocumentation\{
   LocalConfig,
   YAMLMeta,
 };
-use type Facebook\DefinitionFinder\ScannedClass;
+use type Facebook\DefinitionFinder\ScannedClassish;
 use namespace HHVM\UserDocumentation\JSON;
 use namespace HH\Lib\{C, Str, Vec};
 
@@ -42,7 +42,7 @@ final class FrontMatter extends PageSection {
     $class = $this->parent;
     if ($class) {
       $data['class'] = $class->getName();
-    } else if ($def instanceof ScannedClass) {
+    } else if ($def instanceof ScannedClassish) {
       $data['class'] = $def->getName();
     }
 

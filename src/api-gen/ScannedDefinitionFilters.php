@@ -13,10 +13,10 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\DefinitionFinder\{
   HasScannedGenerics,
-  ScannedBase,
-  ScannedClass,
+  ScannedDefinition,
+  ScannedClassish,
   ScannedFunction,
-  ScannedFunctionAbstract,
+  ScannedFunctionish,
   ScannedGenerics,
   ScannedMethod,
   ScannedVisibility,
@@ -26,7 +26,7 @@ use type Facebook\DefinitionFinder\{
 use namespace HH\Lib\{C, Str};
 
 abstract final class ScannedDefinitionFilters {
-  public static function IsHHSpecific(ScannedBase $def): bool {
+  public static function IsHHSpecific(ScannedDefinition $def): bool {
     $is_hh_specific =
       \strpos($def->getName(), 'HH\\') === 0
       || \strpos($def->getName(), '__SystemLib\\') === 0
@@ -42,7 +42,7 @@ abstract final class ScannedDefinitionFilters {
       return true;
     }
 
-    if ($def instanceof ScannedClass) {
+    if ($def instanceof ScannedClassish) {
       foreach ($def->getMethods() as $method) {
         if (self::IsHHSpecific($method)) {
           return true;
@@ -50,7 +50,7 @@ abstract final class ScannedDefinitionFilters {
       }
     }
 
-    if (!$def instanceof ScannedFunctionAbstract) {
+    if (!$def instanceof ScannedFunctionish) {
       return false;
     }
 
@@ -67,7 +67,7 @@ abstract final class ScannedDefinitionFilters {
     return false;
   }
 
-  public static function ShouldNotDocument(ScannedBase $def): bool {
+  public static function ShouldNotDocument(ScannedDefinition $def): bool {
     return (
       Str\starts_with($def->getName(), "__SystemLib\\")
       || Str\starts_with($def->getName(), "HH\\Lib\\_Private\\")
@@ -81,7 +81,7 @@ abstract final class ScannedDefinitionFilters {
     );
   }
 
-  private static function IsUndefinedFunction(ScannedBase $def): bool {
+  private static function IsUndefinedFunction(ScannedDefinition $def): bool {
     if (!$def instanceof ScannedFunction) {
       return false;
     }
@@ -103,7 +103,7 @@ abstract final class ScannedDefinitionFilters {
     return true;
   }
 
-  private static function IsBlacklisted(ScannedBase $def): bool {
+  private static function IsBlacklisted(ScannedDefinition $def): bool {
     // In an ideal world, everything in HH\ should be documented,
     // nothing else should be. Things currently there that are internal
     // should be moved to the __SystemLib\ namespace.

@@ -12,12 +12,12 @@
 namespace Facebook\HHAPIDoc\PageSections\_Private;
 
 use type Facebook\HHAPIDoc\DocBlock\DocBlock;
-use type Facebook\DefinitionFinder\ScannedFunctionAbstract;
+use type Facebook\DefinitionFinder\ScannedFunctionish;
 use namespace HH\Lib\{Str, Vec};
 
 function stringify_parameters(
   StringifyFormat $format,
-  ScannedFunctionAbstract $function,
+  ScannedFunctionish $function,
   ?DocBlock $docs,
 ): string {
   $params = Vec\map(

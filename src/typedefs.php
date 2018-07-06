@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use Facebook\DefinitionFinder\ScannedBase;
+use Facebook\DefinitionFinder\ScannedDefinition;
 
 type PHPDotNetAPIIndexEntry = shape(
   'type' => APIDefinitionType,
@@ -19,7 +19,7 @@ type PHPDotNetAPIIndexEntry = shape(
   'supportedInHHVM' => bool,
 );
 
-type ScannedDefinitionFilter = (function(ScannedBase): bool);
+type ScannedDefinitionFilter = (function(ScannedDefinition): bool);
 
 type DirectoryIndex = shape(
   'files' => Traversable<string>,

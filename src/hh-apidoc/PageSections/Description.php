@@ -11,7 +11,7 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use type Facebook\DefinitionFinder\ScannedFunctionAbstract;
+use type Facebook\DefinitionFinder\ScannedFunctionish;
 
 class Description extends PageSection {
   public function getMarkdown(): ?string {

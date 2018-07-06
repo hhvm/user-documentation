@@ -11,6 +11,7 @@
 
 namespace Facebook\HHAPIDoc\PageSections\_Private;
 
+use namespace Facebook\TypeAssert;
 use namespace Facebook\HHAPIDoc\DocBlock;
 use type Facebook\DefinitionFinder\ScannedParameter;
 use namespace HH\Lib\{C, Str, Vec};
@@ -37,7 +38,12 @@ function stringify_parameter(
   $s .= '$'.$parameter->getName();
 
   if ($parameter->isOptional()) {
-    $s .= ' = '.$parameter->getDefaultString();
+    $d = TypeAssert\not_null($parameter->getDefault());
+    if ($d->hasStaticValue()) {
+      $s .= ' = '.\var_export($d->getStaticValue(), true);
+    } else {
+      $s .= ' = '.$d->getAST()->getCode();
+    }
   }
 
   return $s;
