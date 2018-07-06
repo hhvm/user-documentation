@@ -9,7 +9,7 @@ namespace HHVM\UserDocumentation\Tests;
 final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
   public function testNoEnforcementByDefault(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPageAsync('http://example.com/hack/reference/')
+      PageLoader::getPageAsync('http://example.com/hack/reference/'),
     );
     $this->assertSame(
       200,
@@ -29,7 +29,7 @@ final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
    */
   public function testEnforcedOnDomain(string $domain): void {
     $response = \HH\Asio\join(
-      PageLoader::getPageAsync('http://'.$domain.'/hack/reference/')
+      PageLoader::getPageAsync('http://'.$domain.'/hack/reference/'),
     );
     $this->assertSame(301, $response->getStatusCode());
 
@@ -55,14 +55,14 @@ final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
 
   public function testNotEnforcedOnRobotsTxt(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt')
+      PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt'),
     );
     $this->assertSame(200, $response->getStatusCode());
   }
 
   public function test404DoesNot500(): void {
     $response = \HH\Asio\join(
-      PageLoader::getPageAsync('http://docs.hhvm.com/__idonotexist_fortesting')
+      PageLoader::getPageAsync('http://docs.hhvm.com/__idonotexist_fortesting'),
     );
     $this->assertNotSame(500, $response->getStatusCode());
   }

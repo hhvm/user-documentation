@@ -16,10 +16,7 @@ use type Facebook\HHAPIDoc\{
   DocBlock\DocBlock,
   MarkdownBuilderContext,
 };
-use type Facebook\DefinitionFinder\{
-  ScannedDefinition,
-  ScannedClassish,
-};
+use type Facebook\DefinitionFinder\{ScannedDefinition, ScannedClassish};
 
 <<__ConsistentConstruct>>
 abstract class PageSection {

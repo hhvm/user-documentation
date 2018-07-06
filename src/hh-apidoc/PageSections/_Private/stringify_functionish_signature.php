@@ -12,9 +12,7 @@
 namespace Facebook\HHAPIDoc\PageSections\_Private;
 
 use type Facebook\HHAPIDoc\DocBlock\DocBlock;
-use type Facebook\DefinitionFinder\{
-  ScannedFunctionish,
-  ScannedMethod,
+use type Facebook\DefinitionFinder\{ScannedFunctionish, ScannedMethod,
 };
 use namespace HH\Lib\{Str, Vec};
 

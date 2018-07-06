@@ -224,7 +224,10 @@ final class HHAPIDocBuildStep extends BuildStep {
     return $sources
       |> Vec\map(
         $$,
-        $file ==> { Log::v('.'); return FileParser::fromFile($file); }
+        $file ==> {
+          Log::v('.');
+          return FileParser::fromFile($file);
+        },
       )
       |> Vec\map($$, $parser ==> Documentables\from_parser($parser))
       |> Vec\flatten($$)
@@ -273,8 +276,8 @@ final class HHAPIDocBuildStep extends BuildStep {
         );
       } else if ($what instanceof ScannedFunction) {
         $path = $md_paths->getPathForFunction($what->getName());
-      } else if ($what instanceof ScannedClassish) {
-        $path = $md_paths->getPathForClassish(
+        } else if ($what instanceof ScannedClassish) {
+          $path = $md_paths->getPathForClassish(
           self::getClassishAPIDefinitionType($what),
           $what->getName(),
         );

@@ -51,8 +51,8 @@ final class HHVMDocumentationSite {
           list($controller, $vars) = self::routeRequest($with_trailing_slash);
           // If we're here, it's routable with a trailing /
           return await (new RedirectException(
-            $with_trailing_slash->getUri()->getPath()
-          ))->getResponseAsync($request);
+            $with_trailing_slash->getUri()->getPath())
+          )->getResponseAsync($request);
         } catch (HTTPException $f) {
           throw $e; // original exception, not the new one
         }

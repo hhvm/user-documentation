@@ -60,10 +60,7 @@ EOF;
 
   <<__Override>>
   final public async function getResponseAsync(): Awaitable<ResponseInterface> {
-    list($title, $content) = await \HH\Asio\va(
-      $this->getTitleAsync(),
-      $this->getContentPaneAsync()
-    );
+    list($title, $content) = await \HH\Asio\va($this->getTitleAsync(), $this->getContentPaneAsync());
     $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();
@@ -159,10 +156,7 @@ EOF;
   }
 
   final protected async function getContentPaneAsync(): Awaitable<XHPRoot> {
-    list($heading, $body) = await \HH\Asio\va(
-      $this->getHeadingAsync(),
-      $this->getBodyAsync(),
-    );
+    list($heading, $body) = await \HH\Asio\va($this->getHeadingAsync(), $this->getBodyAsync());
 
     $breadcrumbs = $this->getBreadcrumbs();
     if ($breadcrumbs !== null) {

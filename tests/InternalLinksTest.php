@@ -13,14 +13,10 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
     string $target,
     array<string> $sources,
   ): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync($target)
-    );
+    $response = \HH\Asio\join(PageLoader::getPageAsync($target));
     if ($response->getStatusCode() === 301) {
       $target = $response->getHeaderLine('Location');
-      $response = \HH\Asio\join(
-        PageLoader::getPageAsync($target),
-      );
+      $response = \HH\Asio\join(PageLoader::getPageAsync($target));
     }
 
     $sources = new Set($sources);
@@ -37,9 +33,7 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testDoesNotBreakExternalMarkdownLinks(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('/hack/typechecker/editors')
-    );
+    $response = \HH\Asio\join(PageLoader::getPageAsync('/hack/typechecker/editors'));
     $body = (string) $response->getBody();
     $this->assertContains('Vim users', $body);
     $this->assertContains(

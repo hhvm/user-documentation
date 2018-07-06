@@ -9,8 +9,7 @@
  *
  */
 
-use   type HHVM\UserDocumentation\{
-  APIDefinitionType,
+use type HHVM\UserDocumentation\{APIDefinitionType,
   APIProduct,
   GuidesProduct
 };

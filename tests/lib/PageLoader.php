@@ -15,7 +15,9 @@ abstract class PageLoader {
     }
   }
 
-  public static function getPageAsync(string $url): Awaitable<ResponseInterface> {
+  public static function getPageAsync(
+    string $url,
+  ): Awaitable<ResponseInterface> {
     return self::get()->getPageImplAsync($url);
   }
 

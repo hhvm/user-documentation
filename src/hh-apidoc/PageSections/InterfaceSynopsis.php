@@ -35,9 +35,7 @@ class InterfaceSynopsis extends PageSection {
       $this->getMethodList($c);
   }
 
-  protected function getMethodList(
-    ScannedClassish $c,
-  ): string {
+  protected function getMethodList(ScannedClassish $c): string {
     return $c->getMethods()
       |> Vec\sort_by($$, $m ==> $m->getName())
       |> Vec\map($$, $m ==> $this->getMethodListItem($c, $m))
@@ -94,9 +92,7 @@ class InterfaceSynopsis extends PageSection {
     );
   }
 
-  protected function getInheritanceInformation(
-    ScannedClassish $c,
-  ): string {
+  protected function getInheritanceInformation(ScannedClassish $c): string {
     $ret = '';
 
     $ns = $c->getNamespaceName();

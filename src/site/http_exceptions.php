@@ -24,7 +24,8 @@ final class HTTPNotFoundException extends RoutingException {
   public async function getResponseAsync(
     ServerRequestInterface $request,
   ): Awaitable<ResponseInterface> {
-    return await (new HTTP404Controller(ImmMap { }, $request))->getResponseAsync();
+    return
+      await (new HTTP404Controller(ImmMap {}, $request))->getResponseAsync();
   }
 }
 

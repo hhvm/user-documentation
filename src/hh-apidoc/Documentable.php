@@ -11,10 +11,7 @@
 
 namespace Facebook\HHAPIDoc;
 
-use type Facebook\DefinitionFinder\{
-  ScannedDefinition,
-  ScannedClassish,
-};
+use type Facebook\DefinitionFinder\{ScannedDefinition, ScannedClassish};
 
 type Documentable = shape(
   'definition' => ScannedDefinition,

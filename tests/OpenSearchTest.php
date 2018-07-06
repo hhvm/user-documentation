@@ -8,18 +8,14 @@ namespace HHVM\UserDocumentation\Tests;
  */
 final class OpenSearchTest extends \PHPUnit_Framework_TestCase {
   public function testNoOpenSearchOnStaging(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('https://staging.docs.hhvm.com/')
-    );
+    $response = \HH\Asio\join(PageLoader::getPageAsync('https://staging.docs.hhvm.com/'));
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
     $this->assertNotContains('application/opensearchdescription+xml', $body);
   }
 
   public function testOpenSearchOnProd(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('https://docs.hhvm.com/')
-    );
+    $response = \HH\Asio\join(PageLoader::getPageAsync('https://docs.hhvm.com/'));
     $this->assertSame(200, $response->getStatusCode());
     $body = (string) $response->getBody();
     $this->assertContains('application/opensearchdescription+xml', $body);
