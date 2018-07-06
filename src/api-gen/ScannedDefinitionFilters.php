@@ -27,12 +27,14 @@ use namespace HH\Lib\{C, Str};
 
 abstract final class ScannedDefinitionFilters {
   public static function IsHHSpecific(ScannedDefinition $def): bool {
+    $name = $def->getName();
     $is_hh_specific =
-      \strpos($def->getName(), 'HH\\') === 0
-      || \strpos($def->getName(), '__SystemLib\\') === 0
+      Str\contains($name, 'HH\\')
+      || Str\contains($name, '__SystemLib\\')
+      || Str\contains($name, "\\Rx\\")
       || C\contains_key($def->getAttributes(), '__HipHopSpecific')
-      || \strpos($def->getName(), 'fb_') === 0
-      || \strpos($def->getName(), 'hphp_') === 0;
+      || Str\contains($name, 'fb_')
+      || Str\contains($name, 'hphp_');
 
     if ($is_hh_specific) {
       return true;
