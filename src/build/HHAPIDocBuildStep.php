@@ -24,7 +24,7 @@ use type Facebook\DefinitionFinder\{
 use namespace Facebook\HHAPIDoc;
 use namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\HHAPIDoc\{Documentable, Documentables};
-use namespace HH\Lib\{C, Dict, Str, Vec};
+use namespace HH\Lib\{C, Dict, Str, Tuple, Vec};
 use namespace Facebook\TypeAssert;
 
 final class HHAPIDocBuildStep extends BuildStep {
@@ -42,8 +42,10 @@ final class HHAPIDocBuildStep extends BuildStep {
     $hhi_sources =
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts);
     Log::i("\nParsing builtins");
-    $runtime_defs = self::parse($runtime_sources);
-    $hhi_defs = self::parse($hhi_sources);
+    list($runtime_defs, $hhi_defs) = \HH\Asio\join(Tuple\from_async(
+      self::parseAsync($runtime_sources),
+      self::parseAsync($hhi_sources),
+    ));
     Log::i("\nDe-duping builtins");
     $builtin_defs = DataMerger::mergeAll(Vec\concat($runtime_defs, $hhi_defs));
     Log::i("\nFiltering out PHP builtins");
@@ -61,7 +63,7 @@ final class HHAPIDocBuildStep extends BuildStep {
     Log::i("\nFinding HSL sources");
     $hsl_sources = self::findSources(BuildPaths::HSL_TREE.'/src/', $exts);
     Log::i("\nParsing HSL sources");
-    $hsl_defs = self::parse($hsl_sources);
+    $hsl_defs = \HH\Asio\join(self::parseAsync($hsl_sources));
 
     Log::i("\nGenerating index for builtins");
     $builtin_index = self::createProductIndex(APIProduct::HACK, $builtin_defs);
@@ -218,17 +220,18 @@ final class HHAPIDocBuildStep extends BuildStep {
     );
   }
 
-  private static function parse(
+  private static async function parseAsync(
     Traversable<string> $sources,
-  ): vec<Documentable> {
-    return $sources
-      |> Vec\map(
-        $$,
-        $file ==> {
-          Log::v('.');
-          return FileParser::fromFile($file);
-        },
-      )
+  ): Awaitable<vec<Documentable>> {
+    $parsers = await Vec\map_async(
+      $sources,
+      async $file ==> {
+        $parsed = await FileParser::fromFileAsync($file);
+        Log::v('.');
+        return $parsed;
+      },
+    );
+    return $parsers
       |> Vec\map($$, $parser ==> Documentables\from_parser($parser))
       |> Vec\flatten($$)
       |> Vec\filter(
