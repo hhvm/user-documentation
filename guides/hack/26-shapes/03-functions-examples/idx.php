@@ -10,10 +10,8 @@ class C {
   const int KEYINTZ = 50;
 }
 
-function run(): void {
+function run(shape('x' => int, 'y' => int, ?'z' => int) $s): void {
   echo "======== Shapes::idx ========\n";
-
-  $s = shape('x' => 10, 'y' => 20);
 
   $v = Shapes::idx($s, 'x');    // field exists, return 10
   echo "\$v = " . (($v == null)? "null" : $v) ."\n";
@@ -48,4 +46,4 @@ function run(): void {
   echo "\$v = " . (($v == null)? "null" : $v) ."\n";
 }
 
-run();
+run(shape('x' => 10, 'y' => 20));

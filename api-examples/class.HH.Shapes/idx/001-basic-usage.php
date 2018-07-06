@@ -2,9 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\HH\Shapes\Idx;
 
-function run(): void {
-  $point = shape('x' => 3, 'y' => -1);
-
+function run(shape('x' => int, 'y' => int, ?'z' => int) $point): void {
   // The key 'x' exists in the Shape $point so it's returned
   \var_dump(Shapes::idx($point, 'x'));
 
@@ -15,4 +13,4 @@ function run(): void {
   \var_dump(Shapes::idx($point, 'z', 0));
 }
 
-run();
+run(shape('x' => 3, 'y' => -1));

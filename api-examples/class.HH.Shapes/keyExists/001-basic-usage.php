@@ -2,9 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\HH\Shapes\KeyExists;
 
-function run(): void {
-  $point = shape('x' => 3, 'y' => null);
-
+function run(shape(?'x' => ?int, ?'y' => ?int, ?'z' => ?int) $point): void {
   // The key 'x' exists in Shape $point
   \var_dump(Shapes::keyExists($point, 'x'));
 
@@ -15,4 +13,4 @@ function run(): void {
   \var_dump(Shapes::keyExists($point, 'y'));
 }
 
-run();
+run(shape('x' => 3, 'y' => null));
