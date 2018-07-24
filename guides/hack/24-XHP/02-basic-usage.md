@@ -17,7 +17,7 @@ The following example utilizes three XHP classes: `:div`, `:strong`, `:i`. White
 @@ basic-usage-examples/basic.php @@
 
 
-The `var_dump()` shows that the a tree of objects has been created &mdash; not an HTML/XML string. An HTML string can be produced either by simply using `echo`/`print()`, or by calling `$xhp_obect->toString()`.
+The `var_dump()` shows that the a tree of objects has been created &mdash; not an HTML/XML string. An HTML string can be produced either by simply using `echo`/`print()`, or by calling `$xhp_object->toString()`.
 
 ## Dynamic Content
 
