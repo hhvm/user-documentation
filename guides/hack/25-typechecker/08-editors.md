@@ -10,7 +10,7 @@ The [Nuclide editor](http://nuclide.io/) has first-class support for Hack. It no
 
 ## Emacs
 
-Emacs users will find a plugin inside `/usr/share/hhvm/hack/emacs`, when installing Hack from a supported HHVM package. And [this is the source code](https://github.com/facebook/hhvm/tree/master/hphp/hack/editor-plugins/emacs)
+ Emacs users can find a package in [Github](https://github.com/hhvm/hack-mode) with installation instructions in the [README](https://github.com/hhvm/hack-mode/blob/master/README.md) contained therein.
 
 ## Other
 
