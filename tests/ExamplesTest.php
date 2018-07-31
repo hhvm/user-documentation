@@ -39,6 +39,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
     $this->runExamples(Vector {
       '--typechecker',
       '--exclude', '.inc.php',
+      '--vendor', LocalConfig::ROOT.'/api-sources/hsl/src',
     });
   }
 
@@ -57,6 +58,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
       '-d', 'hhvm.hack.lang.look_for_typechecker=0',
       self::TEST_RUNNER,
       '-m', 'interp',
+      '--vendor', LocalConfig::ROOT.'/vendor/',
     };
     $command->addAll($extra_args);
     $command[] = LocalConfig::ROOT.'/guides';

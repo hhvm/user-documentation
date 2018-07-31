@@ -1,13 +1,13 @@
-object(HH\Vector)#7 (2) {
+object(HH\Vector)#8 (2) {
   [0]=>
-  object(HH\Vector)#8 (2) {
+  object(HH\Vector)#9 (2) {
     [0]=>
     int(6)
     [1]=>
     int(8)
   }
   [1]=>
-  object(HH\Vector)#9 (2) {
+  object(HH\Vector)#10 (2) {
     [0]=>
     int(10)
     [1]=>

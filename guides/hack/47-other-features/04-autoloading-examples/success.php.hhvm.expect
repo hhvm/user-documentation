@@ -1,0 +1,7 @@
+string(105) "/Users/fredemmott/code/user-documentation/guides/hack/47-other-features/04-autoloading-examples/A.inc.php"
+bool(true)
+string(105) "/Users/fredemmott/code/user-documentation/guides/hack/47-other-features/04-autoloading-examples/B.inc.php"
+int(1)
+object(AL_A)#2 (0) {
+}
+bool(true)

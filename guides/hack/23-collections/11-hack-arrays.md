@@ -36,6 +36,10 @@ A full [API reference](https://docs.hhvm.com/hsl/reference/) is automatically
 generated, however we strongly recommend reading
 [the README](https://github.com/hhvm/hsl/blob/master/README.md) first.
 
+Most operations are exposed as pure functions; for example:
+
+@@ hack-arrays-examples/operations.php @@
+
 ## Compared to Hack Collections
 
 Hack Collections (`Vector`, `Map`, `Set`, ...) are objects; Hack Arrays

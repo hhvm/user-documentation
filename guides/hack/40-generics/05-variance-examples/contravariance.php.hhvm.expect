@@ -1,0 +1,5 @@
+object(Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\C)#4 (1) {
+  ["t":"Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\C":private]=>
+  object(Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\Animal)#2 (0) {
+  }
+}

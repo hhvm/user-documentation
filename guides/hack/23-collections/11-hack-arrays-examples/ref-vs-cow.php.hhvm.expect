@@ -2,14 +2,14 @@ array(2) {
   [0]=>
   array(3) {
     ["in"]=>
-    object(HH\Vector)#1 (2) {
+    object(HH\Vector)#2 (2) {
       [0]=>
       int(123)
       [1]=>
       int(456)
     }
     ["out"]=>
-    object(HH\Vector)#1 (2) {
+    object(HH\Vector)#2 (2) {
       [0]=>
       int(123)
       [1]=>

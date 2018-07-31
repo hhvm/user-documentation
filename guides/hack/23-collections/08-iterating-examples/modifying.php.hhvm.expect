@@ -1,5 +1,5 @@
 string(1) "A"
-object(HH\Vector)#1 (4) {
+object(HH\Vector)#2 (4) {
   [0]=>
   string(1) "A"
   [1]=>
@@ -11,7 +11,7 @@ object(HH\Vector)#1 (4) {
 }
 string(1) "B"
 string(1) "C"
-object(HH\Vector)#1 (4) {
+object(HH\Vector)#2 (4) {
   [0]=>
   string(1) "A"
   [1]=>

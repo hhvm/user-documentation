@@ -1,0 +1,6 @@
+object(HH\Vector)#6 (2) {
+  [0]=>
+  string(4) "herp"
+  [1]=>
+  string(4) "derp"
+}
