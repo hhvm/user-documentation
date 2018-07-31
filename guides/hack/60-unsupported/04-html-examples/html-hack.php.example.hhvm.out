@@ -1,2 +1,0 @@
-Fatal error: HH mode: content before <?hh (Line: 3, Char: 16)
-syntax error, unexpected T_HH_ERROR, expecting $end in /data/users/joelm/user-documentation/guides/hack/60-unsupported/04-html-examples/html-hack.php on line 1
