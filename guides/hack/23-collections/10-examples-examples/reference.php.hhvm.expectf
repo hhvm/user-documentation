@@ -1,6 +1,6 @@
 -- VECTOR HAS REFERENCE SEMANTICS --
 
-object(HH\Vector)#1 (5) {
+object(HH\Vector)#%d (5) {
   [0]=>
   int(0)
   [1]=>
@@ -12,7 +12,7 @@ object(HH\Vector)#1 (5) {
   [4]=>
   int(4)
 }
-object(HH\Vector)#1 (5) {
+object(HH\Vector)#%d (5) {
   [0]=>
   int(2)
   [1]=>

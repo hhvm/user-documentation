@@ -2,6 +2,6 @@ string(%d) "%sA.inc.php"
 bool(true)
 string(%d) "%sB.inc.php"
 int(1)
-object(AL_A)#1 (0) {
+object(AL_A)#%d (0) {
 }
 bool(true)
