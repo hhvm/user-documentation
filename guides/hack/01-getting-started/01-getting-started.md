@@ -12,7 +12,7 @@ The HHVM runtime is required for both (1) executing Hack code (2) to run the Hac
 
 #### Try our Interactive Hack Tutorial
 
-You can actually start learning Hack without having to install any software. Just head over to the [interactive Hack tutorial](http://hacklang.org) to learn step-by-step about some of the Hack features.
+You can actually start learning Hack without having to install any software. Just head over to the [interactive Hack tutorial](http://hacklang.org/tutorial.html) to learn step-by-step about some of the Hack features.
 
 ## Your First Hack Program
 
@@ -92,5 +92,5 @@ Now that you have gotten your feet wet with a simple Hack program, the best reso
 * [Asynchronous Programming with Hack](../async/introduction.md)
 * [Collections in Hack](../collections/introduction.md)
 
-There is also an awesome [book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team. For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online. [Hack has an online interactive tutorial](http://hacklang.org/tutorial/) as well.
+There is also an awesome [book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team. For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online. [Hack has an online interactive tutorial](http://hacklang.org/tutorial.html) as well.
 
