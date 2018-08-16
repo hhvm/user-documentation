@@ -1,4 +1,4 @@
-First, make sure that you have the [XHP Library](introduction.md#the-xhp-lib-library) installed a dependency of your project &mdash; this defines the various core classes of XHP, and the standard HTML components.
+First, make sure that you have the [XHP Library](introduction.md#the-xhp-lib-library) installed as a dependency of your project &mdash; this defines the various core classes of XHP, and the standard HTML components.
 
 XHP is a syntax to create actual Hack objects, called XHP objects. They are meant to be used as a tree, where children can either be other XHP objects, or text nodes.
 
