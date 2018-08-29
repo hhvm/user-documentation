@@ -9,7 +9,7 @@
  *
  */
 
-use type \Psr\Http\Message\ResponseInterface;
+use type Psr\Http\Message\ResponseInterface;
 
 abstract final class Response {
 

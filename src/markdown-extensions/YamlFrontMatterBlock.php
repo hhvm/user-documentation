@@ -12,7 +12,7 @@
 namespace HHVM\UserDocumentation\MarkdownExt;
 
 use type HHVM\UserDocumentation\YAMLMeta;
-use namespace Facebook\Markdown\{Inlines, UnparsedBlocks};
+use namespace Facebook\Markdown\UnparsedBlocks;
 use namespace HHVM\UserDocumentation\JSON;
 use namespace HH\Lib\{C, Dict, Str, Vec};
 

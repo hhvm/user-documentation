@@ -14,7 +14,7 @@ namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\DefinitionFinder\{BaseParser, ScannedClassish};
 use type Facebook\HHAPIDoc\Documentable;
 
-use namespace HH\Lib\{Dict, Str, Vec};
+use namespace HH\Lib\Vec;
 
 function from_parser(BaseParser $parser): vec<Documentable> {
   $top_level = Vec\concat(

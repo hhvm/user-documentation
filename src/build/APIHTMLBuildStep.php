@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\Vec;
 
 final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   const string SOURCE_ROOT = BuildPaths::APIDOCS_MARKDOWN;

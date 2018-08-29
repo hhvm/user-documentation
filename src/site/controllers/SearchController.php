@@ -21,7 +21,6 @@ use type HHVM\UserDocumentation\{
   SearchScores,
 };
 
-use type Psr\Http\Message\ServerRequestInterface;
 
 use namespace HH\Lib\{C, Str, Vec};
 

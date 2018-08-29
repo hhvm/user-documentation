@@ -11,7 +11,6 @@
 namespace HHVM\UserDocumentation;
 
 use type Facebook\HHAPIDoc\IPathProvider;
-use namespace HH\Lib\Str;
 
 final class HTMLPaths implements IPathProvider {
   use HHAPIDocExt\APIDefinitionTypeBasedPathProvider<string>;

@@ -11,7 +11,7 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\C;
 
 class DeprecationMessage extends PageSection {
   protected function getDeprecationMessage(): ?string {

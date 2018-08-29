@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\Str;
 
 final class FacebookIPRangesBuildStep extends BuildStep {
 

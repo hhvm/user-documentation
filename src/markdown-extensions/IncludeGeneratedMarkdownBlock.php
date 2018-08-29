@@ -12,8 +12,8 @@
 namespace HHVM\UserDocumentation\MarkdownExt;
 
 use type HHVM\UserDocumentation\BuildPaths;
-use namespace Facebook\Markdown\{Inlines, UnparsedBlocks};
-use namespace HH\Lib\{C, Str, Vec};
+use namespace Facebook\Markdown\UnparsedBlocks;
+use namespace HH\Lib\Str;
 
 final class IncludeGeneratedMarkdownBlock implements UnparsedBlocks\BlockProducer {
   const string PATTERN =

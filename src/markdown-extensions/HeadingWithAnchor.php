@@ -11,9 +11,8 @@
 
 namespace HHVM\UserDocumentation\MarkdownExt;
 
-use type HHVM\UserDocumentation\YAMLMeta;
 use namespace Facebook\Markdown;
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{Str, Vec};
 
 final class HeadingWithAnchor
 extends Markdown\Blocks\LeafBlock
@@ -34,7 +33,7 @@ implements Markdown\RenderableAsHTML {
   }
 
   public function renderAsHTML(
-    Markdown\RenderContext $ctx,
+    Markdown\RenderContext $_ctx,
     Markdown\HTMLRenderer $renderer,
   ): string {
     $contents = $this->heading

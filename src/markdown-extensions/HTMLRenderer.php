@@ -12,7 +12,7 @@
 namespace HHVM\UserDocumentation\MarkdownExt;
 
 use namespace Facebook\Markdown;
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{Str, Vec};
 
 final class HTMLRenderer extends Markdown\HTMLRenderer {
   <<__Override>>

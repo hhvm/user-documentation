@@ -5,7 +5,7 @@ namespace Hack\UserDocumentation\Lambdas\Examples\Design\Introduction;
 class User {
   public string $name;
   protected function __construct(string $name) { $this->name = $name; }
-  static function get(int $id): User {
+  public static function get(int $id): User {
     // Load user from database, return a stub for the example
     return new User("User" . \strval($id));
   }

@@ -2,10 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type HHVM\UserDocumentation\{
-  GuidesNavData,
-  NavDataNode,
-};
+use type HHVM\UserDocumentation\GuidesNavData;
 use namespace HH\Lib\Tuple;
 use function Facebook\FBExpect\expect;
 

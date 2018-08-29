@@ -7,7 +7,7 @@ class User {
 
   protected function __construct(string $name) { $this->name = $name; }
 
-  static function get_name(int $id): User {
+  public static function get_name(int $id): User {
     return new User(\str_shuffle("ABCDEFGHIJ") . \strval($id));
   }
 }

@@ -11,7 +11,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace Facebook\TypeAssert;
-use namespace HH\Lib\{C, Dict};
+use namespace HH\Lib\Dict;
 
 class StaticResourceMap {
   private static function getMap(): dict<string, StaticResourceMapEntry> {

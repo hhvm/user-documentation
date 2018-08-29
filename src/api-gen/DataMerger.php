@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use type Facebook\HHAPIDoc\{Documentable, Documentables};
+use type Facebook\HHAPIDoc\Documentable;
 use type Facebook\DefinitionFinder\{
   AbstractnessToken,
   FinalityToken,
@@ -32,7 +32,7 @@ use type Facebook\DefinitionFinder\{
   VisibilityToken,
 };
 
-use namespace Facebook\{TypeAssert, TypeSpec};
+use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Dict, Keyset, Math, Str, Vec};
 
 final class DataMerger {

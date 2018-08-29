@@ -14,7 +14,7 @@ namespace Facebook\HHAPIDoc\PageSections\_Private;
 use namespace Facebook\TypeAssert;
 use namespace Facebook\HHAPIDoc\DocBlock;
 use type Facebook\DefinitionFinder\ScannedParameter;
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\Str;
 
 function stringify_parameter(
   ScannedParameter $parameter,
@@ -22,7 +22,7 @@ function stringify_parameter(
 ): string {
   $s = '';
 
-  $types = $docs['types'] ?? null;
+  $types = $docs['types'] ?? vec[];
   if ($types) {
     $s .= Str\join($types, '|').' ';
   } else if ($th = $parameter->getTypehint()) {

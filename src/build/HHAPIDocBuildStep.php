@@ -23,8 +23,8 @@ use type Facebook\DefinitionFinder\{
 };
 use namespace Facebook\HHAPIDoc;
 use namespace Facebook\HHAPIDoc\Documentables;
-use type Facebook\HHAPIDoc\{Documentable, Documentables};
-use namespace HH\Lib\{C, Dict, Str, Tuple, Vec};
+use type Facebook\HHAPIDoc\Documentable;
+use namespace HH\Lib\{Dict, Str, Tuple, Vec};
 use namespace Facebook\TypeAssert;
 
 final class HHAPIDocBuildStep extends BuildStep {
@@ -54,9 +54,9 @@ final class HHAPIDocBuildStep extends BuildStep {
       $documentable ==> {
         $parent = $documentable['parent'];
         if ($parent !== null) {
-          return ScannedDefinitionFilters::IsHHSpecific($parent);
+          return ScannedDefinitionFilters::isHHSpecific($parent);
         }
-        return ScannedDefinitionFilters::IsHHSpecific($documentable['definition']);
+        return ScannedDefinitionFilters::isHHSpecific($documentable['definition']);
       },
     );
 
@@ -240,11 +240,11 @@ final class HHAPIDocBuildStep extends BuildStep {
           $parent = $documentable['parent'];
           if (
             $parent !== null
-            && ScannedDefinitionFilters::ShouldNotDocument($parent)
+            && ScannedDefinitionFilters::shouldNotDocument($parent)
           ) {
             return false;
           }
-          return !ScannedDefinitionFilters::ShouldNotDocument(
+          return !ScannedDefinitionFilters::shouldNotDocument(
             $documentable['definition'],
           );
         },

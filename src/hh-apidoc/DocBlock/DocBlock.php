@@ -11,7 +11,7 @@
 
 namespace Facebook\HHAPIDoc\DocBlock;
 
-use namespace HH\Lib\{C, Math, Str, Vec};
+use namespace HH\Lib\{Math, Str, Vec};
 
 final class DocBlock {
   private ?string $summary;

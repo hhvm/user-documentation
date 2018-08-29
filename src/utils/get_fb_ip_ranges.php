@@ -11,7 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Vec, Str};
 
 type TIPRange = (/* bitstring */ string, /* bitmask */ string);

@@ -52,7 +52,7 @@ final class :github-issue-link extends :x:element {
     };
 
     $controller = $this->:controller;
-    if ($controller) {
+    if ($controller !== null) {
       $rows[] = 'Controller: '.$controller;
     }
 

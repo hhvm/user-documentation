@@ -11,14 +11,10 @@
 
 use type HHVM\UserDocumentation\{
   APIProduct,
-  APIClassIndexEntry,
   APIDefinitionType,
   APIIndex,
   APIIndexEntry,
-  APIMethodIndexEntry,
   APINavData,
-  BuildPaths,
-  HTMLFileRenderable,
   URLBuilder,
 };
 

@@ -17,16 +17,12 @@ use type Facebook\DefinitionFinder\{
   ScannedClassish,
   ScannedFunction,
   ScannedFunctionish,
-  ScannedGenerics,
-  ScannedMethod,
-  ScannedVisibility,
-  SourceType,
 };
 
 use namespace HH\Lib\{C, Str};
 
 abstract final class ScannedDefinitionFilters {
-  public static function IsHHSpecific(ScannedDefinition $def): bool {
+  public static function isHHSpecific(ScannedDefinition $def): bool {
     $name = $def->getName();
     $is_hh_specific =
       Str\contains($name, 'HH\\')
@@ -45,7 +41,7 @@ abstract final class ScannedDefinitionFilters {
 
     if ($def instanceof ScannedClassish) {
       foreach ($def->getMethods() as $method) {
-        if (self::IsHHSpecific($method)) {
+        if (self::isHHSpecific($method)) {
           return true;
         }
       }
@@ -68,22 +64,22 @@ abstract final class ScannedDefinitionFilters {
     return false;
   }
 
-  public static function ShouldNotDocument(ScannedDefinition $def): bool {
+  public static function shouldNotDocument(ScannedDefinition $def): bool {
     return (
       Str\starts_with($def->getName(), "__SystemLib\\")
       || Str\starts_with($def->getName(), "HH\\Lib\\_Private\\")
       || Str\contains($def->getName(), 'WaitHandle')
       || Str\contains($def->getName(), "\\Rx\\")
       || ($def->getAttributes()['NoDoc'] ?? null) !== null
-      || self::IsBlacklisted($def)
+      || self::isBlacklisted($def)
       || (
         Str\contains($def->getFileName(), 'api-sources/hhvm/')
-        && self::IsUndefinedFunction($def)
+        && self::isUndefinedFunction($def)
       )
     );
   }
 
-  private static function IsUndefinedFunction(ScannedDefinition $def): bool {
+  private static function isUndefinedFunction(ScannedDefinition $def): bool {
     if (!$def instanceof ScannedFunction) {
       return false;
     }
@@ -105,7 +101,7 @@ abstract final class ScannedDefinitionFilters {
     return true;
   }
 
-  private static function IsBlacklisted(ScannedDefinition $def): bool {
+  private static function isBlacklisted(ScannedDefinition $def): bool {
     // In an ideal world, everything in HH\ should be documented,
     // nothing else should be. Things currently there that are internal
     // should be moved to the __SystemLib\ namespace.

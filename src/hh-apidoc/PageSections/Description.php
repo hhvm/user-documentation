@@ -11,7 +11,6 @@
 
 namespace Facebook\HHAPIDoc\PageSections;
 
-use type Facebook\DefinitionFinder\ScannedFunctionish;
 
 class Description extends PageSection {
   <<__Override>>

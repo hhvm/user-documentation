@@ -11,7 +11,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace Facebook\TypeAssert;
-use namespace HH\Lib\{C, Math, Str, Vec};
+use namespace HH\Lib\{Str, Vec};
 
 final class APIIndex {
   private ProductAPIIndexShape $index;

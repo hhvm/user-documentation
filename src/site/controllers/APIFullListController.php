@@ -12,8 +12,6 @@
 use type HHVM\UserDocumentation\{
   APIDefinitionType,
   APIProduct,
-  GuidesProduct,
-  URLBuilder,
 };
 
 final class APIFullListController extends WebPageController {

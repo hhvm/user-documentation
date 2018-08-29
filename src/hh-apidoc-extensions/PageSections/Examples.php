@@ -12,11 +12,7 @@
 namespace HHVM\UserDocumentation\HHAPIDocExt\PageSections;
 
 use type Facebook\HHAPIDoc\PageSections\PageSection;
-use type HHVM\UserDocumentation\{
-  LocalConfig,
-  YAMLMeta,
-};
-use namespace HHVM\UserDocumentation\JSON;
+use type HHVM\UserDocumentation\LocalConfig;
 use namespace HH\Lib\{C, Str, Vec};
 
 final class Examples extends PageSection {

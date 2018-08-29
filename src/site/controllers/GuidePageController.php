@@ -21,7 +21,6 @@ use type HHVM\UserDocumentation\URLBuilder;
 
 use function HHVM\UserDocumentation\type_alias_structure;
 
-use type Psr\Http\Message\ServerRequestInterface;
 
 use namespace Facebook\{TypeAssert, TypeSpec};
 use namespace HH\Lib\Dict;

@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type \RobotsTxtController;
+use type RobotsTxtController;
 
 /**
  * @group remote

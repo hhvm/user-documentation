@@ -11,7 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\Str;
 
 final class GuidePageSearchResult extends SearchResult {
   public function __construct(

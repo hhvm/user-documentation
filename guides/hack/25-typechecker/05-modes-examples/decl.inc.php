@@ -10,7 +10,7 @@ function php_func($x, $y) {
 }
 
 class B {
-  static function getSomeInt() {
+  public static function getSomeInt() {
     return 100;
   }
 }

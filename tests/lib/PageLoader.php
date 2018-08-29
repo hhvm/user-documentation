@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type \Psr\Http\Message\ResponseInterface;
+use type Psr\Http\Message\ResponseInterface;
 
 abstract class PageLoader {
   <<__Memoize>>

@@ -10,7 +10,6 @@
  */
 
 namespace HHVM\UserDocumentation;
-use namespace Facebook\Markdown;
 
 abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
   abstract const string SOURCE_ROOT;

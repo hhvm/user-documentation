@@ -11,7 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\Math;
 
 abstract class SearchResult {
 

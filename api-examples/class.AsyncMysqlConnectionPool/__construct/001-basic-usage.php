@@ -6,7 +6,7 @@ require __DIR__ . "/../../__includes/async_mysql_connect.inc.php";
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
-function set_connection_pool(array $options): \AsyncMysqlConnectionPool {
+function set_connection_pool(darray $options): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool($options);
 }
 

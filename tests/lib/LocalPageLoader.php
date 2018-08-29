@@ -2,8 +2,8 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type \Zend\Diactoros\ServerRequest;
-use type \Psr\Http\Message\ResponseInterface;
+use type Zend\Diactoros\ServerRequest;
+use type Psr\Http\Message\ResponseInterface;
 
 final class LocalPageLoader extends PageLoader {
   protected function __construct() {}

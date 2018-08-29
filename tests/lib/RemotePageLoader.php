@@ -2,8 +2,8 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type \Psr\Http\Message\ResponseInterface;
-use type \Response;
+use type Psr\Http\Message\ResponseInterface;
+use type Response;
 use namespace Facebook\TypeAssert;
 
 final class RemotePageLoader extends PageLoader {

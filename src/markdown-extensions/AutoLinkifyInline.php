@@ -16,7 +16,7 @@ use type HHVM\UserDocumentation\{BuildPaths, YAMLMeta};
 use namespace Facebook\Markdown\Inlines;
 use namespace Facebook\TypeAssert;
 use namespace HHVM\UserDocumentation\JSON;
-use namespace HH\Lib\{C, Dict, Str, Vec};
+use namespace HH\Lib\{Dict, Str, Vec};
 
 /**
  * Given something like `Vec\map()`, automatically make it a link

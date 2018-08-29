@@ -11,9 +11,9 @@
 
 namespace HHVM\UserDocumentation\MarkdownExt;
 
-use namespace Facebook\Markdown\{Inlines, UnparsedBlocks};
+use namespace Facebook\Markdown\UnparsedBlocks;
 
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\Str;
 
 final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
   const string PATTERN =
