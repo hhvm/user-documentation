@@ -3,7 +3,7 @@ callables that are supported in PHP, and the typechecker understands them - they
 produce a callable with the same return and parameter types as the function
 they reference.
 
-An alternative is to [use lambdas](#about_lambdas).
+An alternative is to [use lambdas](#about-lambdas).
 
 ## `fun()`
 
