@@ -73,7 +73,7 @@ Try not to use `UNSAFE`, opting for `HH_FIXME` instead. `UNSAFE` is less verbose
 
 `UNSAFE_EXPR` is similar to [`UNSAFE`](#unsafe), except turns off the typechecker on a single expression rather than an entire block of code.
 
-THe syntax for `UNSAFE_EXPR` is:
+The syntax for `UNSAFE_EXPR` is:
 
 ```
 /* UNSAFE_EXPR */ <expression>
