@@ -17,7 +17,7 @@ We offer "long term support" (LTS) for every third releases - so roughly twice a
 | Version | LTS | Branch Cut Date | Expected Release Date | Expected End Of Support |
 |---------|-----|-----------------|-----------------------|-------------------------|
 | 3.29    | No  | 2018-10-08      | 2018-10-22            | 2018-11-05              |
-| 3.30    | Yes | 2018-12-03      | 2018-12-17            | 2019-09-05              |
+| 3.30    | Yes | 2018-12-03      | 2018-12-17            | 2019-11-19              |
 
 
 ## Unsupported Releases
