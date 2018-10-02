@@ -2,7 +2,7 @@ Hack supports most of the [PHP operators](http://php.net/manual/en/language.oper
 
 The current exception of support is the ["spaceship" (`<=>`)](http://php.net/manual/en/language.operators.comparison.php) operator; you can use it in your Hack code since [HHVM](/hhvm/) supports it, but it will not be [type checked](/hack/typechecker/introduction). 
 
-Hack also introduces a few new operators beyond those which exists in PHP.
+Hack also introduces a few new operators beyond those which exist in PHP.
 
 ## `==>` ([Lambda operator](lambda.md))
 
