@@ -3,29 +3,28 @@
 namespace HHVM\UserDocumentation\Tests;
 
 use type RobotsTxtController;
+use function Facebook\FBExpect\expect;
 
 /**
  * @group remote
  * @small
  */
-class RobotsTxtTest extends \PHPUnit_Framework_TestCase {
+class RobotsTxtTest extends \Facebook\HackTest\HackTest {
   public function testMainDomainAllowsCrawling(): void {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt'),
     );
-    $this->assertSame(
-      \file_get_contents(RobotsTxtController::DEFAULT_FILE),
-      (string) $response->getBody(),
-    );
+    expect(      (string) $response->getBody(),
+)->toBeSame(
+      \file_get_contents(RobotsTxtController::DEFAULT_FILE)    );
   }
 
   public function testStagingDoesNotAllowCrawling(): void {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('http://staging.docs.hhvm.com/robots.txt'),
     );
-    $this->assertSame(
-      \file_get_contents(RobotsTxtController::DO_NOT_CRAWL_FILE),
-      (string) $response->getBody(),
-    );
+    expect(      (string) $response->getBody(),
+)->toBeSame(
+      \file_get_contents(RobotsTxtController::DO_NOT_CRAWL_FILE)    );
   }
 }

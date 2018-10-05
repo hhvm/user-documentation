@@ -7,10 +7,8 @@ use function Facebook\FBExpect\expect;
 /**
  * @small
  */
-final class SearchTest extends \PHPUnit_Framework_TestCase {
-  /**
-   * @dataProvider expectedResults
-   */
+final class SearchTest extends \Facebook\HackTest\HackTest {
+  <<DataProvider('expectedResults')>>
   public function testSearchTerm(
     string $term,
     array<string> $expected,
@@ -18,7 +16,7 @@ final class SearchTest extends \PHPUnit_Framework_TestCase {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('/search?term='.\urlencode($term)),
     );
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
     $body = (string) $response->getBody();
     foreach ($expected as $substr) {
       expect($body)->toContain($substr);

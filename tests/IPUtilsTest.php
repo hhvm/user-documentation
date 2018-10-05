@@ -18,9 +18,9 @@ use function HHVM\UserDocumentation\{
 };
 use function Facebook\FBExpect\expect;
 
-final class IPUtilsTest extends \PHPUnit_Framework_TestCase {
+final class IPUtilsTest extends \Facebook\HackTest\HackTest {
 
-  /** @dataProvider getSubnetExamples */
+  <<DataProvider('getSubnetExamples')>>
   public function testIsInSubnet(
     string $subnet_cidr,
     vec<string> $ips_in_subnet,
@@ -100,12 +100,12 @@ final class IPUtilsTest extends \PHPUnit_Framework_TestCase {
     ];
   }
 
-  /** @dataProvider getExampleFacebookIPAddresses */
+  <<DataProvider('getExampleFacebookIPAddresses')>>
   public function testIsFacebookIPAddress(string $ip): void {
     expect(is_fb_ip_address($ip))->toBeTrue();
   }
 
-  /** @dataProvider getExampleNonFacebookIPAddresses */
+  <<DataProvider('getExampleNonFacebookIPAddresses')>>
   public function testIsNonFacebookIPAddress(string $ip): void {
     expect(is_fb_ip_address($ip))->toBeFalse();
   }

@@ -1,11 +1,12 @@
 <?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+use function Facebook\FBExpect\expect;
 
 /**
  * @small
  */
-class TypecheckerTest extends \PHPUnit_Framework_TestCase {
+class TypecheckerTest extends \Facebook\HackTest\HackTest {
   public function testTypecheckerPasses(): void {
     $output = array();
     $exit_code = null;
@@ -21,6 +22,6 @@ class TypecheckerTest extends \PHPUnit_Framework_TestCase {
       $this->testTypecheckerPasses();
       return;
     }
-    $this->assertSame(0, $exit_code, \implode("\n", $output));
+    expect($exit_code)->toBeSame(0, \implode("\n", $output));
   }
 }

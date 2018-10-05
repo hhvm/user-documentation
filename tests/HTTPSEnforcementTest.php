@@ -1,20 +1,20 @@
 <?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+use function Facebook\FBExpect\expect;
 
 /**
  * @group remote
  * @small
  */
-final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
+final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
   public function testNoEnforcementByDefault(): void {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('http://example.com/hack/reference/'),
     );
-    $this->assertSame(
-      200,
-      $response->getStatusCode(),
-    );
+    expect(      $response->getStatusCode(),
+)->toBeSame(
+      200    );
   }
 
   public function httpsDomains(): array<array<string>> {
@@ -24,46 +24,41 @@ final class HTTPSEnforcementTest extends \PHPUnit_Framework_TestCase {
     ];
   }
 
-  /**
-   * @dataProvider httpsDomains
-   */
+  <<DataProvider('httpsDomains')>>
   public function testEnforcedOnDomain(string $domain): void {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('http://'.$domain.'/hack/reference/'),
     );
-    $this->assertSame(301, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(301);
 
     $location = $response->getHeaderLine('Location');
-    $this->assertSame(
-      'https://'.$domain.'/hack/reference/',
-      $location,
-    );
+    expect(      $location,
+)->toBeSame(
+      'https://'.$domain.'/hack/reference/'    );
 
     $response = \HH\Asio\join(PageLoader::getPageAsync($location));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
 
     $hsts = $response->getHeaderLine('Strict-Transport-Security');
-    $this->assertContains(
-      'max-age=',
-      $hsts,
-    );
-    $this->assertNotSame(
-      'max-age=0',
-      $hsts,
-    );
+    expect(      $hsts,
+)->toContain(
+      'max-age='    );
+    expect(      $hsts,
+)->toNotBeSame(
+      'max-age=0'    );
   }
 
   public function testNotEnforcedOnRobotsTxt(): void {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt'),
     );
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
   }
 
   public function test404DoesNot500(): void {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('http://docs.hhvm.com/__idonotexist_fortesting'),
     );
-    $this->assertNotSame(500, $response->getStatusCode());
+    expect($response->getStatusCode())->toNotBeSame(500);
   }
 }

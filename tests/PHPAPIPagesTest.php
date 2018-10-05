@@ -1,52 +1,48 @@
 <?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+use function Facebook\FBExpect\expect;
 
 /**
  * @group remote
  * @small
  */
 
-final class PHPAPIPagesTest extends \PHPUnit_Framework_TestCase {
+final class PHPAPIPagesTest extends \Facebook\HackTest\HackTest {
   public function testHackReferenceLinksToPHPReference(): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync('/hack/reference/'));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
     $body = (string) $response->getBody();
-    $this->assertContains(
-      '/php/reference/',
-      $body,
-    );
+    expect(      $body,
+)->toContain(
+      '/php/reference/'    );
   }
 
   public function testPHPReferencePageContainsSupportedAPIs(): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync('/php/reference/'));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
     $body = (string) $response->getBody();
 
-    $this->assertContains(
-      'php.net/manual/en/class.iterator.php',
-      $body,
-    );
+    expect(      $body,
+)->toContain(
+      'php.net/manual/en/class.iterator.php'    );
 
-    $this->assertContains(
-      'php.net/manual/en/function.asort.php',
-      $body,
-    );
+    expect(      $body,
+)->toContain(
+      'php.net/manual/en/function.asort.php'    );
   }
 
   public function testPHPReferencePageOmitsUnsupportedAPIs(): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync('/php/reference/'));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
     $body = (string) $response->getBody();
 
-    $this->assertNotContains(
-      'php.net/manual/en/class.com.php',
-      $body,
-    );
+    expect(      $body,
+)->toNotContain(
+      'php.net/manual/en/class.com.php'    );
 
-    $this->assertNotContains(
-      'php.net/manual/en/function.zend-logo-guid.php',
-      $body,
-    );
+    expect(      $body,
+)->toNotContain(
+      'php.net/manual/en/function.zend-logo-guid.php'    );
   }
 }

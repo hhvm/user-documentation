@@ -1,14 +1,13 @@
 <?hh
 
 namespace HHVM\UserDocumentation\Tests;
+use function Facebook\FBExpect\expect;
 
 /**
  * @large
  */
-final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
-  /**
-   * @dataProvider internalLinksList
-   */
+final class InternalLinksTest extends \Facebook\HackTest\HackTest {
+  <<DataProvider('internalLinksList')>>
   public function testInternalLink(
     string $target,
     array<string> $sources,
@@ -21,9 +20,8 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
 
     $sources = new Set($sources);
 
-    $this->assertSame(
+    expect(      $response->getStatusCode())->toBeSame(
       200,
-      $response->getStatusCode(),
       \sprintf(
         ">>> 404: %s\n>>> Linked from:\n%s",
         $target,
@@ -35,15 +33,13 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
   public function testDoesNotBreakExternalMarkdownLinks(): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync('/hack/typechecker/editors'));
     $body = (string) $response->getBody();
-    $this->assertContains('Vim users', $body);
-    $this->assertContains(
-      'https://github.com/hhvm/vim-hack/blob/master/README',
-      $body,
-    );
-    $this->assertContains(
-      'https://github.com/hhvm/vim-hack/blob/master/README.md',
-      $body,
-    );
+    expect($body)->toContain('Vim users');
+    expect(      $body,
+)->toContain(
+      'https://github.com/hhvm/vim-hack/blob/master/README'    );
+    expect(      $body,
+)->toContain(
+      'https://github.com/hhvm/vim-hack/blob/master/README.md'    );
   }
 
   public function testCanGetLinksList(): void {
@@ -110,7 +106,7 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
       );
     }
 
-    $this->assertSame(200, $response->getStatusCode(), $page);
+    expect($response->getStatusCode())->toBeSame(200, $page);
 
     /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
@@ -156,17 +152,17 @@ final class InternalLinksTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @dataProvider pathNormalizationTestCases
    *
    * Testing the test...
    */
+  <<DataProvider('pathNormalizationTestCases')>>
   public function testPathNormalization(
     string $context,
     string $in,
     ?string $expected,
   ): void {
     $out = $this->normalizePath($context, $in);
-    $this->assertSame($expected, $out);
+    expect($out)->toBeSame($expected);
   }
 
   private function normalizePath(string $source, ?string $path): ?string {

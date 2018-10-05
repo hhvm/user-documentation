@@ -3,13 +3,14 @@
 namespace HHVM\UserDocumentation\Tests;
 
 use const HHVM_VERSION_ID;
+use function Facebook\FBExpect\expect;
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
 use namespace HH\Lib\{Str, Vec};
 
 /**
  * @large
  */
-class ExamplesTest extends \PHPUnit_Framework_TestCase {
+class ExamplesTest extends \Facebook\HackTest\HackTest {
   const string TEST_RUNNER = BuildPaths::HHVM_TREE.'/hphp/test/run';
 
   public function testExamplesOutput(): void {
@@ -29,11 +30,11 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
 
   public function testExamplesTypecheck(): void {
     if (HHVM_VERSION_ID >= 32600 && HHVM_VERSION_ID <= 32602) {
-      $this->markTestSkipped('This versions of HHVM is unable to run the test runner');
+      static::markTestSkipped('This versions of HHVM is unable to run the test runner');
     }
     $hh_server = \dirname(\PHP_BINARY).'/hh_server';
     if (!\file_exists($hh_server)) {
-      $this->markTestSkipped("Couldn't find hh_server");
+      static::markTestSkipped("Couldn't find hh_server");
     }
 
     $this->runExamples(Vector {
@@ -47,7 +48,7 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
   private function getHHServerPath(): string {
     $hh_server = \dirname(\PHP_BINARY).'/hh_server';
     if (!\file_exists($hh_server)) {
-      $this->markTestSkipped("Couldn't find hh_server");
+      static::markTestSkipped("Couldn't find hh_server");
     }
     return $hh_server;
   }
@@ -77,6 +78,6 @@ class ExamplesTest extends \PHPUnit_Framework_TestCase {
 
     \exec($command_str, /*&*/ &$output, /*&*/ &$exit_code);
 
-    $this->assertSame(0, $exit_code, \implode("\n", $output));
+    expect($exit_code)->toBeSame(0, \implode("\n", $output));
   }
 }

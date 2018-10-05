@@ -1,12 +1,13 @@
 <?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+use function Facebook\FBExpect\expect;
 
 /**
  * @group remote
  * @small
  */
-class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
+class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   public function notFoundPathProvider(): array<array<string>> {
     return [
       ['/_I_DO_NOT_EXIST_FOR_TESTING_'],
@@ -16,13 +17,11 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     ];
   }
 
-  /**
-   * @dataProvider notFoundPathProvider
-   */
+  <<DataProvider('notFoundPathProvider')>>
   public function testNotFoundPages(string $path): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync($path));
-    $this->assertSame(404, $response->getStatusCode());
-    $this->assertContains("does not exist", (string) $response->getBody());
+    expect($response->getStatusCode())->toBeSame(404);
+    expect((string) $response->getBody())->toContain("does not exist");
   }
 
   public function redirectProvider(): array<string, (string, string)> {
@@ -126,22 +125,20 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     ];
   }
 
-  /**
-   * @dataProvider redirectProvider
-   */
+  <<DataProvider('redirectProvider')>>
   public function testRedirects(string $from, string $to): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync($from));
-    $this->assertSame(301, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(301);
 
     $target = $response->getHeaderLine('Location');
-    $this->assertNotEmpty($target, 'no location header');
+    expect($target)->toNotBeEmpty('no location header');
 
-    $this->assertSame($to, $target);
+    expect($target)->toBeSame($to);
   }
 
   public function testStaticResource404(): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync('/s/deadbeef/notfound'));
-    $this->assertSame(404, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(404);
   }
 
   public function notFoundSuggestions(): array<(string, string)> {
@@ -151,17 +148,15 @@ class SpecialPagesTest extends \PHPUnit_Framework_TestCase {
     ];
   }
 
-  /**
-   * @dataProvider notFoundSuggestions
-   */
+  <<DataProvider('notFoundSuggestions')>>
   public function testNotFoundSuggestion(
     string $notfound,
     string $suggestion,
   ): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync($notfound));
-    $this->assertSame(404, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(404);
 
     $body = (string) $response->getBody();
-    $this->assertContains($suggestion, $body);
+    expect($body)->toContain($suggestion);
   }
 }

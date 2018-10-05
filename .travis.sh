@@ -14,8 +14,7 @@ bundle install --path vendor-rb
 
 hh_client
 hhvm bin/build.php
-hhvm -d hhvm.php7.all=0 -d hhvm.jit=0 vendor/bin/phpunit
-hhvm -d hhvm.php7.all=1 -d hhvm.jit=0 vendor/bin/phpunit
+hhvm vendor/bin/hacktest tests/
 
 grep ignored_paths .hhconfig > hhconfig
 mv hhconfig .hhconfig

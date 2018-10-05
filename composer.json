@@ -14,9 +14,7 @@
   "require-dev": {
     "hhvm/hhast": "^3.27.0",
     "facebook/definition-finder": "^2.0.0",
-    "hack-psr/psr7-http-message-hhi": "^1.0.0",
-    "phpunit/phpunit": "^5.1",
-    "91carriage/phpunit-hhi": "^5.1",
-    "facebook/fbexpect": "^0.4.0|^1.0.0"
+    "hhvm/hacktest": "^1.1",
+    "facebook/fbexpect": "^2.1"
   }
 }

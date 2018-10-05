@@ -1,6 +1,7 @@
 <?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+use function Facebook\FBExpect\expect;
 
 use type HHVM\UserDocumentation\{
   APINavData,
@@ -11,7 +12,7 @@ use type HHVM\UserDocumentation\{
 /**
  * @small
  */
-class APINavDataTest extends \PHPUnit_Framework_TestCase {
+class APINavDataTest extends \Facebook\HackTest\HackTest {
   public function testNamespacedDefinitionName(): void {
     $classes = APINavData::get(APIProduct::HACK)
       ->getNavData()['Classes']['children'];
@@ -23,7 +24,7 @@ class APINavDataTest extends \PHPUnit_Framework_TestCase {
         break;
       }
     }
-    $this->assertTrue($have_ns_separator);
+    expect($have_ns_separator)->toBeTrue();
   }
 
   public function testNamespacedDefinitionURL(): void {
@@ -37,10 +38,10 @@ class APINavDataTest extends \PHPUnit_Framework_TestCase {
         $have_ns_separator = true;
 
         $url_pattern = \strtr($node['name'], "\\", '.');
-        $this->assertContains($url_pattern, $node['urlPath']);
+        expect($node['urlPath'])->toContain($url_pattern);
         break;
       }
     }
-    $this->assertTrue($have_ns_separator);
+    expect($have_ns_separator)->toBeTrue();
   }
 }

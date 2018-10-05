@@ -17,7 +17,7 @@ use namespace HH\Lib\Vec;
 /**
  * @group small
  */
-final class DocBlockTest extends \PHPUnit_Framework_TestCase {
+final class DocBlockTest extends \Facebook\HackTest\HackTest {
   private static function getDocBlock(string $method): DocBlock {
     $rm = new \ReflectionMethod(__CLASS__, $method);
     return new DocBlock((string)$rm->getDocComment());

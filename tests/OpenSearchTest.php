@@ -1,24 +1,25 @@
 <?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+use function Facebook\FBExpect\expect;
 
 /**
  * @group remote
  * @small
  */
-final class OpenSearchTest extends \PHPUnit_Framework_TestCase {
+final class OpenSearchTest extends \Facebook\HackTest\HackTest {
   public function testNoOpenSearchOnStaging(): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync('https://staging.docs.hhvm.com/'));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
     $body = (string) $response->getBody();
-    $this->assertNotContains('application/opensearchdescription+xml', $body);
+    expect($body)->toNotContain('application/opensearchdescription+xml');
   }
 
   public function testOpenSearchOnProd(): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync('https://docs.hhvm.com/'));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
     $body = (string) $response->getBody();
-    $this->assertContains('application/opensearchdescription+xml', $body);
+    expect($body)->toContain('application/opensearchdescription+xml');
   }
 
   public function jumpProvider(): array<string, (string, string)> {
@@ -50,19 +51,17 @@ final class OpenSearchTest extends \PHPUnit_Framework_TestCase {
     ];
   }
 
-  /**
-   * @dataProvider jumpProvider
-   */
+  <<DataProvider('jumpProvider')>>
   public function testJump(string $keyword, string $to): void {
     $jump_url= '/j/'.$keyword;
 
     $response = \HH\Asio\join(PageLoader::getPageAsync($jump_url));
-    $this->assertSame(301, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(301);
 
     $target = $response->getHeaderLine('Location');
-    $this->assertNotEmpty($target, 'no location header');
+    expect($target)->toNotBeEmpty('no location header');
 
-    $this->assertSame($to, $target);
+    expect($target)->toBeSame($to);
   }
 
 }

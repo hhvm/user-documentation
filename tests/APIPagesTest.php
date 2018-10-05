@@ -11,8 +11,9 @@ use type HHVM\UserDocumentation\{
 };
 
 use namespace HH\Lib\Vec;
+use function Facebook\FBExpect\expect;
 
-class APIPagesTest extends \PHPUnit_Framework_TestCase {
+class APIPagesTest extends \Facebook\HackTest\HackTest {
   public static function allAPIPages(): array<(string, NavDataNode)> {
     $to_visit = \array_values(APINavData::get(APIProduct::HACK)->getNavData());
     $out = [];
@@ -43,7 +44,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
         $out[] = tuple($node['urlPath'], $node);
       }
     }
-    $this->assertSame(\count($wanted), \count($out));
+    expect(\count($out))->toBeSame(\count($wanted));
 
     // Not included in the API Nav bar, but test it too :)
     $out[] = tuple(
@@ -58,28 +59,28 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @dataProvider allAPIPages
    * @large
    */
+  <<DataProvider('allAPIPages')>>
   public function testAPIPage(string $name, NavDataNode $node): void {
     $this->testAPIPageQuick($name, $node);
   }
 
   /**
    * @group remote
-   * @dataProvider shortListOfAPIPages
    * @small
    */
+  <<DataProvider('shortListOfAPIPages')>>
   public function testAPIPageQuick(string $_, NavDataNode $node): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync($node['urlPath']));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
 
     // Top-level pages don't contain their own name in the output - eg 'Classes'
     // is 'Class Reference'
     $blacklist = (new Set(APIDefinitionType::getValues()))->map($x ==>
       APINavData::get(APIProduct::HACK)->getRootNameForType($x));
     if (!$blacklist->contains($node['name'])) {
-      $this->assertContains($node['name'], (string)$response->getBody());
+      expect((string)$response->getBody())->toContain($node['name']);
     }
   }
 
@@ -88,7 +89,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       PageLoader::getPageAsync('/hack/reference/class/HH.Vector/fromArray/'),
     );
 
-    $this->assertContains('Deprecated', (string)$response->getBody());
+    expect((string)$response->getBody())->toContain('Deprecated');
   }
 
   public function testNullableTypeMerged(): void {
@@ -96,7 +97,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
       PageLoader::getPageAsync('/hack/reference/class/HH.Vector/firstValue/'),
     );
 
-    $this->assertContains('<code>?Tv</code>', (string)$response->getBody());
+    expect((string)$response->getBody())->toContain('<code>?Tv</code>');
   }
 
   public function getDoNotDocument(): vec<(string, APIDefinitionType)> {
@@ -111,9 +112,7 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
     return Vec\concat($classes, $functions);
   }
 
-  /**
-   * @dataProvider getDoNotDocument
-   */
+  <<DataProvider('getDoNotDocument')>>
   public function testDoesNotDocument(
     string $name,
     APIDefinitionType $type,
@@ -130,9 +129,8 @@ class APIPagesTest extends \PHPUnit_Framework_TestCase {
         break;
     }
     $response = \HH\Asio\join(PageLoader::getPageAsync($url));
-    $this->assertSame(
+    expect(      $response->getStatusCode())->toBeSame(
       404,
-      $response->getStatusCode(),
       \sprintf('"%s" should not be documented', $name),
     );
   }

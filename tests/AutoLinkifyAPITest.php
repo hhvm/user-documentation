@@ -1,12 +1,14 @@
-<?hh
+<?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+
+use function Facebook\FBExpect\expect;
 
 /**
  * @group remote
  * @small
  */
-class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
+class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
   public function autoLinkifyExamplesProvider(
   ): array<string, (string, string, string)> {
     return [
@@ -79,9 +81,7 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
     ];
   }
 
-  /**
-   * @dataProvider autoLinkifyExamplesProvider
-   */
+  <<DataProvider('autoLinkifyExamplesProvider')>>
   public function testAutoLinkify(
     string $source,
     string $keyword,
@@ -99,11 +99,12 @@ class AutoLinkifyAPITest extends \PHPUnit_Framework_TestCase {
     $nodes = $xpath->query(
         '//a[@href = "'.$dest.'"]'.
         '/code[text() = "'.$keyword.'"]'
-    );
-    $this->assertGreaterThanOrEqual(
+      );
+    expect($nodes->length)->toBeGreaterThanOrEqualTo(
       1,
-      $nodes->length,
-      'Expected '.$keyword.' to link to '.$dest
+      'Expected %s to link to %s',
+      $keyword,
+      $dest
     );
   }
 }

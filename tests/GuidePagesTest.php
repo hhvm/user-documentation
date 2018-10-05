@@ -6,7 +6,7 @@ use type HHVM\UserDocumentation\GuidesNavData;
 use namespace HH\Lib\Tuple;
 use function Facebook\FBExpect\expect;
 
-class GuidePagesTest extends \PHPUnit_Framework_TestCase {
+class GuidePagesTest extends \Facebook\HackTest\HackTest {
   public static function allGuidePages(): array<(string, string)> {
     $to_visit = \array_values(GuidesNavData::getNavData());
     $out = [];
@@ -22,9 +22,9 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
   }
 
   /**
-   * @dataProvider allGuidePages
    * @large
    */
+  <<DataProvider('allGuidePages')>>
   public function testGuidePage(string $name, string $path): void {
     $this->testGuidePageQuick($name, $path);
   }
@@ -47,9 +47,9 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
 
   /**
    * @group remote
-   * @dataProvider shortListOfGuidePages
    * @small
    */
+  <<DataProvider('shortListOfGuidePages')>>
   public function testGuidePageQuick(string $name, string $path): void {
     $response = \HH\Asio\join(PageLoader::getPageAsync($path));
 
@@ -60,8 +60,8 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
       );
     }
 
-    $this->assertSame(200, $response->getStatusCode());
-    $this->assertContains($name, (string) $response->getBody());
+    expect($response->getStatusCode())->toBeSame(200);
+    expect((string) $response->getBody())->toContain($name);
   }
 
   /**
@@ -71,12 +71,12 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
   public function testExamplesRender(): void {
     $response =
       \HH\Asio\join(PageLoader::getPageAsync('/hack/async/introduction'));
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
 
     $body = (string) $response->getBody();
-    $this->assertContains('highlight', $body);
+    expect($body)->toContain('highlight');
     // Namespace declaration
-    $this->assertContains('Hack\UserDocumentation\Async\Intro\Examples', $body);
+    expect($body)->toContain('Hack\UserDocumentation\Async\Intro\Examples');
   }
 
   /**
@@ -87,10 +87,10 @@ class GuidePagesTest extends \PHPUnit_Framework_TestCase {
     $response = \HH\Asio\join(
       PageLoader::getPageAsync('/hhvm/configuration/INI-settings'),
     );
-    $this->assertSame(200, $response->getStatusCode());
+    expect($response->getStatusCode())->toBeSame(200);
 
     $body = (string) $response->getBody();
-    $this->assertContains('allow_url_fopen</a></td>', $body);
+    expect($body)->toContain('allow_url_fopen</a></td>');
   }
 
   public function testCachedNavDataIsNotJustByName(): void {
