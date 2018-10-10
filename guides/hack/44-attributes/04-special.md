@@ -30,7 +30,7 @@ As the name suggests, using this attribute is just as unsafe as the [other `UNSA
 
 ## `<<__Memoize>>`
 
-The `__Memoize` attribute allows functions or methods to cache their results for the duration of a given request. Memoization is used primarily to cache the result of otherwise time-consuming operations.
+The `__Memoize` attribute allows functions or methods to cache their results for the duration of a given request. Memoization is used primarily to cache the result of otherwise time-consuming operations. Thrown `Exception`s are not cached.
 
 @@ special-examples/memoize.php @@
 
