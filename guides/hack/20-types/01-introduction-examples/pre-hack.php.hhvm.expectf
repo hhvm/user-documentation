@@ -1,5 +1,0 @@
-int(34)
-int(28)
-int(2)
-
-Catchable fatal error: Argument 1 passed to Hack\UserDocumentation\Types\Intro\Examples\PreHack\bar() must be an instance of Hack\UserDocumentation\Types\Intro\Examples\PreHack\A, Hack\UserDocumentation\Types\Intro\Examples\PreHack\Z given in %s on line 33

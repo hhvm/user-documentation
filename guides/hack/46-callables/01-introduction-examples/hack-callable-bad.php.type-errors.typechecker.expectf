@@ -1,9 +1,0 @@
-File "%shack-callable-bad.php", line 14, characters 10-18:
-Invalid argument (Typing[4110])
-File "%shack-callable-bad.php", line 6, characters 17-24:
-This is an object of type callable
-File "%shack-callable-bad.php", line 11, characters 15-22:
-It is incompatible with a function
-
-File "%shack-callable-bad.php", line 7, characters 3-13:
-This call is invalid, this is not a function, it is an object of type callable (Typing[4009])

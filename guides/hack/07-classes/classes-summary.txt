@@ -1,0 +1,1 @@
+Defining basic classes, member visiblity, implementing interfaces, inheritance, using traits, and serialization.

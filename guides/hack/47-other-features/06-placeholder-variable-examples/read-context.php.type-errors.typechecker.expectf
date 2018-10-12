@@ -1,5 +1,0 @@
-File "%sread-context.php", line 10, characters 5-16:
-You are using the return value of a void function (Typing[4119])
-File "%sread-context.php", line 10, characters 14-15:
-A void function doesn't return a value ($_ is a placeholder variable not meant to be used)
-

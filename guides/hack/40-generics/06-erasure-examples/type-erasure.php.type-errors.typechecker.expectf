@@ -1,8 +1,0 @@
-File "%stype-erasure.php", line 23, characters 7-8:
-Invalid argument (Typing[4110])
-File "%stype-erasure.php", line 15, characters 18-20:
-This is an int
-File "%stype-erasure.php", line 15, characters 18-20:
-Considering that this type argument is invariant with respect to Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box
-File "%stype-erasure.php", line 21, characters 16-19:
-It is incompatible with a string

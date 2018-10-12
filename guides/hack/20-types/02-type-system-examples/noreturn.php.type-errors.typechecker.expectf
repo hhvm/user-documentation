@@ -1,6 +1,0 @@
-File "%snoreturn.php", line 25, characters 5-11:
-Invalid return type (Typing[4110])
-File "%snoreturn.php", line 19, characters 40-47:
-This is noreturn (throws or exits)
-File "%snoreturn.php", line 25, characters 5-11:
-It is incompatible with void

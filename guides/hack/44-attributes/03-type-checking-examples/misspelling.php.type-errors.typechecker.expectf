@@ -1,8 +1,0 @@
-File "%smisspelling.php", line 11, characters 3-17:
-Unrecognized user attribute: CASEISIMPORTANT does not have a class and is not listed in .hhconfig (Naming[2049])
-
-File "%smisspelling.php", line 14, characters 3-11:
-Unrecognized user attribute: NotListed does not have a class and is not listed in .hhconfig (Naming[2049])
-
-File "%smisspelling.php", line 8, characters 3-15:
-Unrecognized user attribute: EasyToMispell does not have a class and is not listed in .hhconfig (Naming[2049])
