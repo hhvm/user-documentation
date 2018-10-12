@@ -2,6 +2,7 @@ vendor
 vendor-rb
 composer.phar
 .commit-template
+www.pid
 *.swp
 *.php.diff
 *.php.out
