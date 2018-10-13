@@ -1,1 +1,2 @@
-Blah, blah, blah!
+Some simple steps to install Hack, writing and running your first program, and 
+some information about Hack-related tools.
