@@ -89,7 +89,7 @@ Here is a somewhat convoluted, example showing the use of `UNSAFE_EXPR`. You pro
 
 @@ special-examples/unsafe_expr.php @@
 
-Note the `/* */` style comments for `UNSAFE_EXPR` as opposed to the `//` for [`UNSAFE`](#unsafe). This is important because `// UNSAFE_EXPR` will acutally be parsed as `// UNSAFE`, and may give you unexpected results.
+Note the `/* */` style comments for `UNSAFE_EXPR` as opposed to the `//` for [`UNSAFE`](#unsafe). This is important because `// UNSAFE_EXPR` will actually be parsed as `// UNSAFE`, and may give you unexpected results.
 
 Here is a more real-world example around dynamic property access. In Hack's [strict mode](/hack/typechecker/modes#strict-mode), dynamic property access is not allowed. You can use `UNSAFE_EXPR` to get around that.
 
