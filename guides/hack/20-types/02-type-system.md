@@ -67,6 +67,26 @@ You can use the name of any built-in or custom class or interface.
 
 @@ type-system-examples/mixed.php @@
 
+## `nonnull`
+
+`nonnull` is an alternative to `mixed` that excludes `null`. `mixed`
+is the same as `?nonnull`.
+
+This is particularly useful for generic code. For example,
+`Vec\filter_nulls` can be written like this:
+
+```
+function filter_nulls<Tv as nonnull>(Traversable<?Tv> $traversable): vec<Tv> {
+  $result = vec[];
+  foreach ($traversable as $value) {
+    if ($value !== null) {
+      $result[] = $value;
+    }
+  }
+  return $result;
+}
+```
+
 ### Use sparsely
 
 There are valid uses for `mixed`, but generally you want to be as specific as possible with your typing since the typechecker can only do so much with `mixed` given its constraints are so lax.

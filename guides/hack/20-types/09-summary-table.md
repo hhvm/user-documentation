@@ -9,6 +9,7 @@ Primitive  |`int`, `array`           | Yes   |  Yes  | Yes   | Yes  | Yes    | Y
 `noreturn` |`noreturn`               | Yes   |  Yes\*| **No**   | **No**  | **No**    | **No**
 Object     |`Foo`, `IBar`            | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
 `mixed`    |`mixed`                  | Yes   |  Yes  | Yes   | Yes  | Yes    | **No**
+`nonnull`  |`nonnull`                | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
 `this`     |`this`                   | **No**   |  Yes  | **No**   | Yes  | **No**    | Yes 
 XHP        |`XHPRoot`, `XHPChild`    | Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
 Nullable   |`?int`, `?Vector<string>`| Yes   |  Yes  | Yes   | Yes  | Yes    | Yes
