@@ -2,7 +2,7 @@
 
 [Interfaces](http://php.net/manual/en/language.oop5.interfaces.php) provide a way to encapsulate common operations that will be implemented by classes that implement the interface.
 
-Trait and interface requirements allow you to restrict the use of these constructs by specifying what classes may actually use a trait or implement an interface. This can simplify long list of `abstract` method requirements, and provide a hint to the reader as to the intended use of the trait or interface.
+Trait and interface requirements allow you to restrict the use of these constructs by specifying what classes may actually use a trait or implement an interface. This can simplify a long list of `abstract` method requirements, and provide a hint to the reader as to the intended use of the trait or interface.
 
 ## Syntax
 
