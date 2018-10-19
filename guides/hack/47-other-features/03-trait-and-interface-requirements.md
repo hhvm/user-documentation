@@ -6,17 +6,17 @@ Trait and interface requirements allow you to restrict the use of these construc
 
 ## Syntax
 
-To introduce a trait requirement, you can have one or more of these in your trait:
+Interfaces can require the class to extend a specific class.
+
+```
+require extends <class name>;
+```
+
+Traits can require the class to extend a specific class or to implement specific interfaces.
 
 ```
 require extends <class name>;
 require implements <interface name>;
-```
-
-To introduce an interface requirement, you can have one or more of these in your interface:
-
-```
-require extends <class name>;
 ```
 
 ## Traits
