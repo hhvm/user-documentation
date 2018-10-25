@@ -5,10 +5,9 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<673a0ef8d6686d96f9bda7e181c0fcd6>>
+ * @generated SignedSource<<608f6c9f5efa9b8ff38ede30ac620b02>>
  */
 
-<<Codegen>>
 abstract class RouterCodegenBase
   extends \Facebook\HackRouter\BaseRouter<classname<\RoutableController>> {
 

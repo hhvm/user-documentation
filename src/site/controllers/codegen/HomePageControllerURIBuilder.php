@@ -5,10 +5,9 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<b4ee83ac9e80e1e10ff63bff50d23e34>>
+ * @generated SignedSource<<4a2d6a699bba8f41ecd5f7ec4532ba80>>
  */
 
-<<Codegen>>
 abstract final class HomePageControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 

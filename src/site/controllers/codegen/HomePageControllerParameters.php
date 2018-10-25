@@ -5,10 +5,9 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<65c432846cd10598eae5e3abcd7a449e>>
+ * @generated SignedSource<<2cb68ad86b8331a4a8bd86a3a1b95165>>
  */
 
-<<Codegen>>
 final class HomePageControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
@@ -22,7 +21,6 @@ final class HomePageControllerParameters
   }
 }
 
-<<Codegen>>
 trait HomePageControllerParametersTrait {
 
   require extends \WebController;

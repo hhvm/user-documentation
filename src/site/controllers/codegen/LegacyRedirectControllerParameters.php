@@ -5,10 +5,9 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<4b9781688284a2b79e0a11ecf370aae9>>
+ * @generated SignedSource<<9c986e567cc02430f744476d45acf652>>
  */
 
-<<Codegen>>
 final class LegacyRedirectControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
@@ -24,7 +23,6 @@ final class LegacyRedirectControllerParameters
   }
 }
 
-<<Codegen>>
 trait LegacyRedirectControllerParametersTrait {
 
   require extends \WebController;
