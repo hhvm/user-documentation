@@ -66,7 +66,7 @@ rm -rf vendor-rb/
 echo "** Removing intermediate build products"
 rm -rf build/scratch
 echo "** Cleaning up..."
-pkill hh_server
+pkill hh_server || true
 rm -rf /root/.composer
 rm -rf /var/www/{.git,api-sources,api-examples,guides} /tmp/hh_server
 apt-get remove -y $APT_DEPS
