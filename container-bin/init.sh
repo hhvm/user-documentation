@@ -54,7 +54,7 @@ hhvm bin/build.php
 
 # Run tests
 echo "** Run tests"
-hhvm vendor/bin/phpunit tests/
+hhvm vendor/bin/hacktest tests/
 
 # Clean up
 echo "** Removing build-only PHP dependencies"
