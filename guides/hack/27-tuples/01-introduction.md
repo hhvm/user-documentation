@@ -7,7 +7,7 @@ The syntax for a tuple type is a parenthesis-enclosed, comma-separated list of:
  - values, when creating a tuple.
  - types, when annotating with a tuple.
 
-```
+```Hack
 tuple(value1, ..., value n); // for creation
 (type1, ..., type n); // for annotation.
 ```
