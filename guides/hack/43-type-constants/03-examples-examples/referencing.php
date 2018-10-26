@@ -18,7 +18,7 @@ abstract class UserG<Tg as arraykey> {
 class AppUserG<Tg as int> extends UserG<Tg> {}
 
 // Still have to parameterize this function even though we know what Tg is.
-function get_id_from_userg<Tg as arraykey>(AppUserG $ug): Tg {
+function get_id_from_userg<Tg as int>(AppUserG<Tg> $ug): Tg {
   return $ug->getID();
 }
 
