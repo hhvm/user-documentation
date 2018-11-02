@@ -162,6 +162,8 @@ abstract final class LegacyRedirects {
         => '/hhvm/configuration/INI-settings#feature-flags',
       'intro-what-can-hhvm-do' => '/hhvm/getting-started/getting-started',
       'docshhvmimprovedsearch' => '/',
+      'hack.types.refining' => '/hack/types/type-refinement',
+      'hack.async.introduction' => '/hack/asynchronous-operations/introduction',
     };
   }
 }
