@@ -1,5 +1,5 @@
 **This type is intended to help with code being transitioned from untyped mode to strict 
-mode. It might also be useful as a replacement for [mixed](../mixed.md).  In any 
+mode. It might also be useful as a replacement for [mixed](mixed.md).  In any 
 event `dynamic` should not be used in new code.**
 
 Although `dynamic` can be used as the type of a class constant or property, or a function 

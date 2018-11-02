@@ -7,18 +7,17 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [apache](http://php.net/manual/en/book.apache.php)
 * [apc](http://php.net/manual/en/book.apc.php)
 * [array](http://php.net/manual/en/book.array.php)
-* [asio](/hack/async/utility-functions)
-* [async_mysql](/hack/async/extensions#mysql)
+* [asio](/hack/asynchronous-operations/utility-functions)
+* [async_mysql](/hack/asynchronous-operations/extensions#mysql)
 * [bc](http://php.net/manual/en/book.bc.php)
 * [bz2](http://php.net/manual/en/book.bzip2.php)
-* [collections](/hack/collections/classes)
 * [ctype](http://php.net/manual/en/book.ctype.php)
-* [curl](http://php.net/manual/en/book.curl.php) ([async curl](/hack/async/extensions#curl))
+* [curl](http://php.net/manual/en/book.curl.php) ([async curl](/hack/asynchronous-operations/extensions#curl))
 * [date](http://php.net/manual/en/book.date.php)
 * [debugger](http://php.net/manual/en/book.debugger.php)
 * [dom](http://php.net/manual/en/book.dom.php)
 * domdocument
-* [enum](/hack/enums/functions)
+* [enum](/hack/types/enumerated-types)
 * [exif](http://php.net/manual/en/book.exif.php)
 * fb
 * [fileinfo](http://php.net/manual/en/book.fileinfo.php)
@@ -26,8 +25,6 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [gd](http://php.net/manual/en/book.gd.php)
 * [gmp](http://php.net/manual/en/book.gmp.php)
 * [hash](http://php.net/manual/en/book.hash.php)
-* [hh](/hack/typechecker/running#hh_client)
-* [hh_client](/hack/typechecker/running#hh_client)
 * hhvm.debugger
 * hhvm.ini
 * hosthealthmonitor
@@ -44,7 +41,7 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [mail](http://php.net/manual/en/book.mail.php)
 * [mailparse](http://php.net/manual/en/book.mailparse.php)
 * [mbstring](http://php.net/manual/en/book.mbstring.php)
-* [mcrouter](/hack/async/extensions#mcrouter)
+* [mcrouter](/hack/asynchronous-operations/extensions#mcrouter)
 * [mcrypt](http://php.net/manual/en/book.mcrypt.php)
 * [memcache](http://php.net/manual/en/book.memcache.php)
 * [memcached](http://php.net/manual/en/book.memcached.php)
@@ -71,7 +68,7 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [sockets](http://php.net/manual/en/book.sockets.php)
 * [spl](http://php.net/manual/en/book.spl.php)
 * [sqlite3](http://php.net/manual/en/book.sqlite.php)
-* [stream](http://php.net/manual/en/book.stream.php) ([async streams](/hack/async/extensions#streams))
+* [stream](http://php.net/manual/en/book.stream.php) ([async streams](/hack/asynchronous-operations/extensions#streams))
 * [string](http://php.net/manual/en/book.string.php)
 * sysvmsg
 * sysvsem
