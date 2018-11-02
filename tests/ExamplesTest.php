@@ -11,7 +11,7 @@ use namespace HH\Lib\{Str, Vec};
  * @large
  */
 class ExamplesTest extends \Facebook\HackTest\HackTest {
-  const string TEST_RUNNER = BuildPaths::HHVM_TREE.'/hphp/test/run';
+  const string TEST_RUNNER = BuildPaths::HHVM_TREE.'/hphp/test/run.php';
 
   public function testExamplesOutput(): void {
     $exclude_suffixes = vec[
@@ -74,10 +74,12 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     };
 
     $command_str =
-      \implode('', $env->map($x ==> $x.' ')).$command_str;
+      \implode('', $env->map($x ==> $x.' ')).$command_str.' 2>&1';
 
     \exec($command_str, /*&*/ &$output, /*&*/ &$exit_code);
 
-    expect($exit_code)->toBeSame(0, \implode("\n", $output));
+    // Get full output in case of failure
+    \stream_set_blocking(\STDOUT, true);
+    expect($exit_code)->toBeSame(0, '%s', \implode("\n", $output));
   }
 }
