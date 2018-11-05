@@ -1,3 +1,10 @@
+File "%stype-error-but-runs.php", line 8, characters 10-15:
+Invalid return type (Typing[4110])
+File "%stype-error-but-runs.php", line 7, characters 23-26:
+This is void
+File "%stype-error-but-runs.php", line 8, characters 10-15:
+It is incompatible with an int because this is the result of an integer arithmetic operation
+
 File "%stype-error-but-runs.php", line 8, characters 3-16:
 You cannot return a value (Typing[4084])
 File "%stype-error-but-runs.php", line 7, characters 23-26:

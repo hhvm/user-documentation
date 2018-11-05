@@ -1,2 +1,9 @@
-File "%strait-aliasing.php", line 10, characters 13-13:
-Expected ; (Parsing[1002])
+File "%sp", line 11, characters 5-9:
+Trait use aliasing is not supported in Hack. (Naming[2092])
+
+File "%sp", line 17, characters 7-8:
+Could not find method hi in an object of type Hack\UserDocumentation\Unsupported\Other\Examples\TraitAliasing\Hi (Typing[4053])
+File "%sp", line 16, characters 12-13:
+This is why I think it is an object of type Hack\UserDocumentation\Unsupported\Other\Examples\TraitAliasing\Hi
+File "%sp", line 9, characters 7-8:
+Declaration of Hack\UserDocumentation\Unsupported\Other\Examples\TraitAliasing\Hi is here

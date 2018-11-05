@@ -1,2 +1,23 @@
-File "%sstrict.php", line 10, characters 27-27:
-Don't use references! (Parsing[1002])
+File "%sstrict.php", line 10, characters 29-30:
+Don't use references! (Naming[2087])
+
+File "%sstrict.php", line 15, characters 19-20:
+Don't use references! (Naming[2087])
+
+File "%sstrict.php", line 19, characters 12-13:
+This argument should be annotated with & (Typing[4168])
+File "%sstrict.php", line 10, characters 29-30:
+Because this parameter is passed by reference
+
+File "%sstrict.php", line 22, characters 19-20:
+Don't use references! (Naming[2087])
+
+File "%sstrict.php", line 26, characters 7-8:
+This argument should be annotated with & (Typing[4168])
+File "%sstrict.php", line 15, characters 19-20:
+Because this parameter is passed by reference
+
+File "%sstrict.php", line 31, characters 7-8:
+This argument should be annotated with & (Typing[4168])
+File "%sstrict.php", line 22, characters 19-20:
+Because this parameter is passed by reference

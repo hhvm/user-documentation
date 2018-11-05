@@ -17,7 +17,7 @@ As defined here
 
 File "%sinterface-bad.php", line 32, characters 16-22:
 Could not find method takeOff in an object of type Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Paper (Typing[4053])
-File "%sinterface-bad.php", line 30, characters 8-18:
+File "%sinterface-bad.php", line 30, characters 12-16:
 This is why I think it is an object of type Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Paper
 File "%sinterface-bad.php", line 21, characters 7-11:
 Declaration of Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Paper is here

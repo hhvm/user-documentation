@@ -1,6 +1,6 @@
 File "%sdynamic-properties.php", line 11, characters 7-13:
 Could not find member dynProp in an object of type Hack\UserDocumentation\Unsupported\Other\Examples\DynProps\A (Typing[4053])
-File "%sdynamic-properties.php", line 10, characters 8-14:
+File "%sdynamic-properties.php", line 10, characters 12-12:
 This is why I think it is an object of type Hack\UserDocumentation\Unsupported\Other\Examples\DynProps\A
 File "%sdynamic-properties.php", line 5, characters 7-7:
 Declaration of Hack\UserDocumentation\Unsupported\Other\Examples\DynProps\A is here

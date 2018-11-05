@@ -42,6 +42,8 @@ object(HH\Vector)#%d (%d) {
       }
       ["previous":"Exception":private]=>
       NULL
+      ["userMetadata":protected]=>
+      NULL
     }
   }
   [1]=>

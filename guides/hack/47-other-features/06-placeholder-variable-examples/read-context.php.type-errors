@@ -7,6 +7,8 @@ function phv_iteration(): void {
   // Don't care about the values
   foreach ($m as $key => $_) {
     var_dump($key); // dumps 'a', 'b', 'c'
+    // This *should* be an error, but a bug in 3.29.1 allows it. We expect
+    // this to be resolved shortly.
     var_dump($_); // can't do this
   }
 }
