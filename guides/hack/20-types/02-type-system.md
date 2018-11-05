@@ -42,7 +42,7 @@ It is relatively common for [async](../async/introduction.md) functions to retur
 
 `noreturn` is used to indicate that a given function or *static* method always throws an exception or somehow terminates the program within the function itself.
 
-@@ type-system-examples/noreturn.php.type-errors @@
+@@ type-system-examples/noreturn.php @@
 
 **NOTE**: 
 
