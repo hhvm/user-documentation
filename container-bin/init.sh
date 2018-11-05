@@ -46,7 +46,7 @@ cp hhvm.${DOCKER_BUILD_ENV}.ini /etc/hhvm/site.ini
 # Install direct dependencies
 touch /opt/composer/.hhconfig
 hhvm /opt/composer/composer.phar install
-hh_server --check $(pwd) # fail early
+hh_client
 bundle --path vendor-rb/
 
 echo "** Run build"
