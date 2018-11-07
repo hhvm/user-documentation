@@ -53,14 +53,26 @@ final class SearchController extends WebPageController {
 
   <<__Override>>
   protected async function getBodyAsync(): Awaitable<XHPRoot> {
-    $results = Vec\map($this->getSearchResults(), $result ==>
-      <li data-search-score={sprintf('%.2f', $result->getScore())}>
-        <a href={$result->getHref()}>{$result->getTitle()}</a>
-        <span class="searchResultType">{$result->getResultTypeText()}</span>
-      </li>
+    $search_results = $this->getSearchResults();
+
+    if (C\is_empty($search_results)) {
+      return (
+        <div class="innerContent">
+          <p>No results found.</p>
+        </div>
+      );
+    }
+
+    $results = Vec\map(
+      $search_results,
+      $result ==>
+        <li data-search-score={sprintf('%.2f', $result->getScore())}>
+          <a href={$result->getHref()}>{$result->getTitle()}</a>
+          <span class="searchResultType">{$result->getResultTypeText()}</span>
+        </li>,
     );
 
-    return(
+    return (
       <div class="innerContent">
         <ul class="searchResults">{$results}</ul>
       </div>
