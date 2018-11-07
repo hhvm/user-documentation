@@ -72,12 +72,6 @@
 
 @media only screen and (max-width: $medium-screen-cutoff) {
   .headerElement.githubIssueLink {
-    text-align: right;
-  }
-}
-
-@media only screen and (max-width: $small-screen-cutoff) {
-  .headerElement.githubIssueLink {
     display: none;
   }
 }
