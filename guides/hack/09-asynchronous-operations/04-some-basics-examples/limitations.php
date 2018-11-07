@@ -1,6 +1,7 @@
 <?hh //strict
 
 namespace Hack\UserDocumentation\AsyncOps\Basics\Examples\Limitations;
+use namespace HH\Lib\Vec;
 
 async function do_cpu_work(): Awaitable<void> {
   print("Start CPU work\n");
@@ -26,7 +27,7 @@ async function do_sleep(): Awaitable<void> {
 
 async function run(): Awaitable<void> {
   print("Start of main()\n");
-  await \HH\Lib\Vec\from_async(vec[do_cpu_work(), do_sleep()]);
+  await Vec\from_async(vec[do_cpu_work(), do_sleep()]);
   print("End of main()\n");
 }
 

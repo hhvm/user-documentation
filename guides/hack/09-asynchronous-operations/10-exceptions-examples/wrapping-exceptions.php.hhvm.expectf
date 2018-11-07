@@ -1,6 +1,5 @@
-object(HH\Vector)#%d (%d) {
-  [0]=>
-  object(HH\Asio\WrappedException)#%d (1) {
+vec(2) {
+  object(HH\Asio\WrappedException)#%d (%d) {
     ["exception":"HH\Asio\WrappedException":private]=>
     object(Exception)#%d (%d) {
       ["message":protected]=>
@@ -14,15 +13,13 @@ object(HH\Vector)#%d (%d) {
       ["line":protected]=>
       int(8)
       ["trace":"Exception":private]=>
-      array(2) {
-        [0]=>
         array(4) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(16)
+          int(17)
           ["function"]=>
-          string(75) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\exception_thrower"
+          string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
           ["args"]=>
           array(0) {
           }
@@ -32,9 +29,17 @@ object(HH\Vector)#%d (%d) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(24)
+          int(27)
           ["function"]=>
-          string(77) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\wrapping_exceptions"
+          string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
+          ["args"]=>
+          array(0) {
+          }
+        }
+        [2]=>
+        array(2) {
+          ["function"]=>
+          string(65) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\main"
           ["args"]=>
           array(0) {
           }
@@ -42,9 +47,10 @@ object(HH\Vector)#%d (%d) {
       }
       ["previous":"Exception":private]=>
       NULL
+      ["userMetadata":protected]=>
+      NULL
     }
   }
-  [1]=>
   object(HH\Asio\WrappedResult)#%d (%d) {
     ["result":"HH\Asio\WrappedResult":private]=>
     int(2)

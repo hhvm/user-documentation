@@ -1,6 +1,7 @@
 <?hh // strict
 
 namespace Hack\UserDocumentation\AsyncOps\Basics\Examples\AsyncCurl;
+use namespace HH\Lib\Vec;
 
 async function curl_A(): Awaitable<string> {
   $x = await \HH\Asio\curl_exec("http://example.com/");
@@ -14,7 +15,7 @@ async function curl_B(): Awaitable<string> {
 
 async function async_curl(): Awaitable<void> {
   $start = \microtime(true);
-  list($a, $b) = await \HH\Lib\Vec\from_async(vec[curl_A(), curl_B()]);
+  list($a, $b) = await Vec\from_async(vec[curl_A(), curl_B()]);
   $end = \microtime(true);
   echo "Total time taken: " . \strval($end - $start) . " seconds\n";
 }

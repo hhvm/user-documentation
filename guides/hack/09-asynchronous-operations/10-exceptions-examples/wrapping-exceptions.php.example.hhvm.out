@@ -1,8 +1,7 @@
-object(HH\Vector)#11 (2) {
-  [0]=>
+vec(2) {
   object(HH\Asio\WrappedException)#4 (1) {
     ["exception":"HH\Asio\WrappedException":private]=>
-    object(Exception)#2 (7) {
+    object(Exception)#2 (8) {
       ["message":protected]=>
       string(0) ""
       ["string":"Exception":private]=>
@@ -10,19 +9,19 @@ object(HH\Vector)#11 (2) {
       ["code":protected]=>
       int(0)
       ["file":protected]=>
-      string(104) "/data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/wrapping-exceptions.php"
+      string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
       ["line":protected]=>
-      int(8)
+      int(9)
       ["trace":"Exception":private]=>
-      array(2) {
+      array(3) {
         [0]=>
         array(4) {
           ["file"]=>
-          string(104) "/data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/wrapping-exceptions.php"
+          string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
-          int(16)
+          int(17)
           ["function"]=>
-          string(75) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\exception_thrower"
+          string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
           ["args"]=>
           array(0) {
           }
@@ -30,11 +29,19 @@ object(HH\Vector)#11 (2) {
         [1]=>
         array(4) {
           ["file"]=>
-          string(104) "/data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/wrapping-exceptions.php"
+          string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
-          int(24)
+          int(27)
           ["function"]=>
-          string(77) "Hack\UserDocumentation\Async\Exceptions\Examples\Wrapping\wrapping_exceptions"
+          string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
+          ["args"]=>
+          array(0) {
+          }
+        }
+        [2]=>
+        array(2) {
+          ["function"]=>
+          string(65) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\main"
           ["args"]=>
           array(0) {
           }
@@ -42,9 +49,10 @@ object(HH\Vector)#11 (2) {
       }
       ["previous":"Exception":private]=>
       NULL
+      ["userMetadata":protected]=>
+      NULL
     }
   }
-  [1]=>
   object(HH\Asio\WrappedResult)#7 (1) {
     ["result":"HH\Asio\WrappedResult":private]=>
     int(2)

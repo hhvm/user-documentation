@@ -1,6 +1,7 @@
 <?hh // strict
 
 namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable;
+use namespace HH\Lib\Vec;
 
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception("Return exception handle");
@@ -13,7 +14,7 @@ async function non_exception_thrower(): Awaitable<int> {
 async function multiple_waithandle_exception(): Awaitable<void> {
   $handles = vec[exception_thrower(), non_exception_thrower()];
   try {
-    $results = await \HH\Lib\Vec\from_async($handles);
+    $results = await Vec\from_async($handles);
     \var_dump($results);
   }
   catch (\Exception $e) {
