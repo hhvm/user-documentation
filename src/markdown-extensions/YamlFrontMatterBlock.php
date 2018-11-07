@@ -101,10 +101,10 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     // TODO: fix XHP in namespaces
     return new UnparsedBlocks\HTMLBlock(
       '<div class="apiTopMessage apiFromLib">'.
-        'This API is part of '.
+        'Requires '.
         '<a href="https://github.com/'.$lib['github'].'/">'.
         $lib['name'].
-        '</a>, not HHVM itself.'.
+        '</a> to be installed.'.
       '</div>',
     );
   }
