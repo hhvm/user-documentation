@@ -1,6 +1,7 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\Batching;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Batching;
+use namespace HH\Lib\Vec;
 
 // For asio-utilities function later(), etc.
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
@@ -15,7 +16,7 @@ async function b_two(string $key): Awaitable<string> {
 }
 
 async function batching(): Awaitable<void> {
-  $results = await \HH\Asio\v(array(b_one('hello'), b_two('world')));
+  $results = await Vec\from_async(vec[b_one('hello'), b_two('world')]);
   \printf("%s\n%s\n", $results[0], $results[1]);
 }
 
@@ -25,8 +26,8 @@ function main(): void {
 }
 
 class Batcher {
-  private static array<string> $pendingKeys = array();
-  private static ?Awaitable<array<string, string>> $aw = null;
+  private static vec<string> $pendingKeys = vec[];
+  private static ?Awaitable<dict<string, string>> $aw = null;
 
   public static async function lookup(string $key): Awaitable<string> {
     // Add this key to the pending batch
@@ -40,23 +41,23 @@ class Batcher {
     return $results[$key];
   }
 
-  private static async function go(): Awaitable<array<string, string>> {
+  private static async function go(): Awaitable<dict<string, string>> {
     // Let other awaitables get into this batch
     await \HH\Asio\later();
     // Now this batch has started; clear the shared state
     $keys = self::$pendingKeys;
-    self::$pendingKeys = array();
+    self::$pendingKeys = vec[];
     self::$aw = null;
     // Do the multi-key roundtrip
     return await multi_key_lookup($keys);
   }
 }
 
-async function multi_key_lookup(array<string> $keys)
-  : Awaitable<array<string, string>> {
+async function multi_key_lookup(vec<string> $keys)
+  : Awaitable<dict<string, string>> {
 
   // lookup multiple keys, but, for now, return something random
-  $r = array();
+  $r = dict[];
   foreach ($keys as $key) {
     $r[$key] = \str_shuffle("ABCDEF");
   }

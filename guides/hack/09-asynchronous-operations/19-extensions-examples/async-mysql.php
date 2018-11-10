@@ -1,10 +1,10 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Extensions\Examples\AsyncMySQL;
+namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MySQL;
 
-require __DIR__ . '/async-mysql-connect.inc.php';
+require __DIR__ . '/async_mysql_connect.inc.php';
 
-use \Hack\UserDocumentation\Async\Extensions\Examples\AsyncMysql\ConnectionInfo as CI;
+use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function get_connection(): Awaitable<\AsyncMysqlConnection> {
   // Get a connection pool with default options
@@ -35,7 +35,7 @@ async function fetch_user_name(\AsyncMysqlConnection $conn,
 }
 
 async function get_user_info(\AsyncMysqlConnection $conn,
-                             string $user): Awaitable<Vector<Map>> {
+                             string $user): Awaitable<Vector<Map<string,string>>> {
   $result = await $conn->queryf(
     'SELECT * from test_table WHERE name = %s',
     $conn->escapeString($user)
@@ -48,12 +48,12 @@ async function get_user_info(\AsyncMysqlConnection $conn,
 
 async function async_mysql_tutorial(): Awaitable<void> {
   $conn = await get_connection();
-  if ($conn is nonnull) {
+  if ($conn !== null) {
     $result = await fetch_user_name($conn, 2);
     \var_dump($result);
     $info = await get_user_info($conn, 'Fred Emmott');
-    \var_dump($info is Vector);
-    \var_dump($info[0] is Map);
+    \var_dump($info is vec<_>);
+    \var_dump($info[0] is dict<_,_>);
   }
 }
 
@@ -61,4 +61,3 @@ async function async_mysql_tutorial(): Awaitable<void> {
 function main(): void {
   \HH\Asio\join(async_mysql_tutorial());
 }
-

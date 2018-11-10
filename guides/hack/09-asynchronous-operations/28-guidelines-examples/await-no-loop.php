@@ -1,6 +1,7 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\AwaitNoLoop;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AwaitNoLoop;
+use namespace HH\Lib\Vec;
 
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
@@ -20,16 +21,16 @@ async function load_user(int $id): Awaitable<User> {
   return User::get_name($id);
 }
 
-async function load_users_no_loop(array<int> $ids): Awaitable<Vector<User>> {
-  return await \HH\Asio\vm(
+async function load_users_no_loop(vec<int> $ids): Awaitable<vec<User>> {
+  return await Vec\map_async(
     $ids,
-    fun('\Hack\UserDocumentation\Async\Guidelines\Examples\AwaitNoLoop\load_user')
+    fun('\Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AwaitNoLoop\load_user')
   );
 }
 
 <<__Entrypoint>>
 function runMe(): void {
-    $ids = array(1, 2, 5, 99, 332);
+    $ids = vec[1, 2, 5, 99, 332];
     $result = \HH\Asio\join(load_users_no_loop($ids));
     \var_dump($result[4]->name);
 }

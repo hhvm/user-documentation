@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Examples\Examples\Basic;
+namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Basic;
 
 // async specifies a function will return an awaitable. Awaitable<string> means
 // that the awaitable will ultimately return a string when complete

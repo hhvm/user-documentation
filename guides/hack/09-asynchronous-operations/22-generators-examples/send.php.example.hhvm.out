@@ -8,23 +8,23 @@ array(2) {
   [0]=>
   int(1)
   [1]=>
-  string(7) "GEFDBAC"
+  string(7) "GACFBDE"
 }
 array(2) {
   [0]=>
   int(2)
   [1]=>
-  string(7) "FBGEACD"
+  string(7) "DEBGACF"
 }
 array(2) {
   [0]=>
   int(3)
   [1]=>
-  string(7) "GBCDFAE"
+  string(7) "CEBAFDG"
 }
 array(2) {
   [0]=>
   int(4)
   [1]=>
-  string(7) "FCBGEAD"
+  string(7) "BGDFAEC"
 }

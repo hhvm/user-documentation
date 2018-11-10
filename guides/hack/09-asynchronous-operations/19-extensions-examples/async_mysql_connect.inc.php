@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Extensions\Examples\AsyncMysql;
+namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql;
 
 class ConnectionInfo {
   /*

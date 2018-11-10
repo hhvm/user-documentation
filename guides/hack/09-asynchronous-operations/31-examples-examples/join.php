@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Examples\Examples\Join;
+namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Join;
 
 async function join_async(): Awaitable<string> {
   return "Hello";

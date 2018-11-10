@@ -1,6 +1,7 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Examples\Examples\Polling;
+namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Polling;
+use namespace HH\Lib\Vec;
 
 // For asio-utilities function later(), etc.
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
@@ -36,14 +37,14 @@ async function no_polling(): Awaitable<string> {
 }
 
 async function polling_example(): Awaitable<void> {
-  $handles = array(do_polling(new Polling()));
+  $handles = vec[do_polling(new Polling())];
   // To make this semi-realistic, call no_polling a bunch of times to show
   // that do_polling is waiting.
   for ($i = 0; $i < 50; $i++) {
     $handles[] = no_polling();
   }
 
-  $results = await \HH\Asio\v($handles);
+  $results = await Vec\from_async($handles);
 }
 
 <<__Entrypoint>>

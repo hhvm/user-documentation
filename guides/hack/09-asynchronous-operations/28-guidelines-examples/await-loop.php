@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\AwaitLoop;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AwaitLoop;
 
 class User {
   public string $name;
@@ -18,8 +18,8 @@ async function load_user(int $id): Awaitable<User> {
   return User::get_name($id);
 }
 
-async function load_users_await_loop(array<int> $ids): Awaitable<Vector<User>> {
-  $result = Vector {};
+async function load_users_await_loop(vec<int> $ids): Awaitable<vec<User>> {
+  $result = vec[];
   foreach ($ids as $id) {
     $result[] = await load_user($id);
   }
@@ -28,7 +28,7 @@ async function load_users_await_loop(array<int> $ids): Awaitable<Vector<User>> {
 
 <<__Entrypoint>>
 function runMe(): void {
-  $ids = array(1, 2, 5, 99, 332);
+  $ids = vec[1, 2, 5, 99, 332];
   $result = \HH\Asio\join(load_users_await_loop($ids));
   \var_dump($result[4]->name);
 }

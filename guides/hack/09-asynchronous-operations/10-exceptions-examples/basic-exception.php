@@ -7,12 +7,11 @@ async function exception_thrower(): Awaitable<void> {
 }
 
 async function basic_exception(): Awaitable<void> {
-  try {
-    await exception_thrower();
-  }
-  catch (\Exception $e) {
-  	// ...
-  }
+  // the handle does not throw, but result will be an Exception objection.
+  // Remember, this is the same as:
+  //   $handle = exception_thrower();
+  //   await $handle;
+  await exception_thrower();
 }
 
 <<__Entrypoint>>

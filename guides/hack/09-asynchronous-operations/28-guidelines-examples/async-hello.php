@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\AsyncHello;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AsyncHello;
 
 async function get_hello(): Awaitable<string> {
   return "Hello";

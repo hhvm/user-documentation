@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\MemoizeResult;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\MemoizeResult;
 
 async function time_consuming(): Awaitable<string> {
   \sleep(5);

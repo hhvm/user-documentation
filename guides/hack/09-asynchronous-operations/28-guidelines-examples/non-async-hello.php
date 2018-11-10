@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\NonAsyncHello;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\NonAsyncHello;
 
 function get_hello(): string {
   return "Hello";

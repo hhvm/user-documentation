@@ -26,4 +26,3 @@ async function wrapping_exceptions(): Awaitable<void> {
 function main(): void {
   \HH\Asio\join(wrapping_exceptions());
 }
-

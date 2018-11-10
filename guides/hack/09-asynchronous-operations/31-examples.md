@@ -26,12 +26,6 @@ This shows a way to organize async functions such that we have a nice clean data
 
 @@ examples-examples/data-dependencies.php @@
 
-## Accessing MySQL
-
-Use the async mysql extension to perform database connection and queries:
-
-@@ examples-examples/async-mysql.noexec.php @@
-
 ## Batching
 
 Use rescheduling (via `HH\Asio\later`) to batch up operations to send multiple keys in a single request over a high latency network (for 

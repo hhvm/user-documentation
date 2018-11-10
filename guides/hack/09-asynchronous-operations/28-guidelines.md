@@ -40,7 +40,7 @@ In the above example, the loop is doing two things:
 1. Making the loop iterations the limiting factor on how this code is going to run. By the loop, we are guaranteed to get the users sequentially.
 2. We are creating false dependencies. Loading one user is not dependent on loading another user.
 
-Instead, we will want to use our async-aware mapping function, `vm`.
+Instead, we will want to use our async-aware mapping function, `Vec\map_async`.
 
 @@ guidelines-examples/await-no-loop.php @@
 
@@ -77,7 +77,7 @@ In the example above, we reduce the number of roundtrips to the server containin
 in `b_one` and the lookup in `b_two`. The `Batcher::lookup` method helps enable this reduction. The call to `await HH\Asio\later` in 
 `Batcher::go` allows `Batcher::go` to be deferred until other pending awaitables have run.
 
-So, `await HH\Asio\v(vec[b_one..., b_two...]);` has two pending awaitables. If `b_one` is called first, it calls `Batcher::lookup`, which 
+So, `await Vec\from_async(vec[b_one('hello'), b_two('world')]);` has two pending awaitables. If `b_one` is called first, it calls `Batcher::lookup`, which 
 calls `Batcher::go`, which reschedules via `later`. Then HHVM looks for other pending awaitables. `b_two` is also pending. It calls 
 `Batcher::lookup` and then it gets suspended via `await self::$aw` because `Batcher::$aw` is no longer `null`. Now `Batcher::go)` resumes, 
 fetches, and returns the result.

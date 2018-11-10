@@ -1,11 +1,11 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Extensions\Examples\AsyncMCRouter;
+namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MCRouter;
 
 require __DIR__ . "/../../../../vendor/hh_autoload.php"; // For wrap()
 
 function get_mcrouter_object(): \MCRouter {
-  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);
   return $mc;
 }
@@ -38,7 +38,6 @@ async function run(): Awaitable<void> {
   $name = await get_user_name($mcr, 1);
   \var_dump($name); // Should print "Joel"
 }
-
 <<__Entrypoint>>
 function main(): void {
   \HH\Asio\join(run());

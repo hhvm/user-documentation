@@ -6,7 +6,7 @@ yield values to the calling code as many times as necessary in order to provide 
 Generators can be `async` functions; an async generator behaves similarly to a normal generator except that each yielded value is an 
 `Awaitable` that is `await`ed upon.
 
-9.7.1	## Async Iterators
+## Async Iterators
 
 To yield values or key/value pairs from async generators, we return [HH\AsyncIterator](/hack/reference/interface/HH.AsyncIterator/) or 
 [HH\AsyncKeyedIterator](/hack/reference/interface/HH.AsyncKeyedIterator/), respectively.
@@ -23,7 +23,7 @@ Although `await as` is just like calling `await $gen->next()`, we should always 
 [`AsyncGenerator`](/hack/reference/class/HH.AsyncGenerator/) methods directly is rarely needed. Also note that on async iterators, 
 `await as` or a call to [`next`](/hack/reference/class/HH.AsyncGenerator/next/) actually returns a value (instead of `void` like in a normal iterator).
 
-9.7.2	## Sending and Raising
+## Sending and Raising
 
 **Calling these methods directly should be rarely needed; `await as` should be the most common way to access values returned by an iterator.**
 

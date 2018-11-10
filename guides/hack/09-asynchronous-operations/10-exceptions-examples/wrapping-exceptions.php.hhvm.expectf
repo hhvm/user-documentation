@@ -11,8 +11,10 @@ vec(2) {
       ["file":protected]=>
       string(%d) "%s"
       ["line":protected]=>
-      int(8)
+      int(9)
       ["trace":"Exception":private]=>
+      array(3) {
+        [0]=>
         array(4) {
           ["file"]=>
           string(%d) "%s"

@@ -1,6 +1,7 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\Lambdas;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Lambdas;
+use namespace HH\Lib\Vec;
 
 // For asio-utilities that we installed via composer
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
@@ -9,25 +10,25 @@ async function fourth_root(num $n): Awaitable<float> {
   return \sqrt(\sqrt($n));
 }
 
-async function normal_call(): Awaitable<Vector<float>> {
-  $nums = Vector {64, 81};
-  return await \HH\Asio\vm(
+async function normal_call(): Awaitable<vec<float>> {
+  $nums = vec[64, 81];
+  return await Vec\map_async(
     $nums,
-    fun('\Hack\UserDocumentation\Async\Guidelines\Examples\Lambdas\fourth_root')
+    fun('\Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Lambdas\fourth_root')
   );
 }
 
-async function closure_call(): Awaitable<Vector<float>> {
-  $nums = Vector {64, 81};
+async function closure_call(): Awaitable<vec<float>> {
+  $nums = vec[64, 81];
   $froots = async function(num $n): Awaitable<float> {
     return \sqrt(\sqrt($n));
   };
-  return await \HH\Asio\vm($nums, $froots);
+  return await Vec\map_async($nums, $froots);
 }
 
-async function lambda_call(): Awaitable<Vector<float>> {
-  $nums = Vector {64, 81};
-  return await \HH\Asio\vm($nums, async $num ==> \sqrt(\sqrt($num)));
+async function lambda_call(): Awaitable<vec<float>> {
+  $nums = vec[64, 81];
+  return await Vec\map_async($nums, async $num ==> \sqrt(\sqrt($num)));
 }
 
 async function use_lambdas(): Awaitable<void> {

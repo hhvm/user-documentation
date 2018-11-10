@@ -1,4 +1,4 @@
-<?hh
+<?hh // strict
 
 if (!extension_loaded('mcrouter') || !extension_loaded('memcached')) {
   echo 'skip';
@@ -19,7 +19,7 @@ if (!$version) {
 }
 
 try {
-  $servers = Vector { getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector{getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);
 } catch (Exception $ex) {
   echo 'skip';

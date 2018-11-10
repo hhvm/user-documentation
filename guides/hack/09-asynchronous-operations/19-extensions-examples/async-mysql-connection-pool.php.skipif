@@ -1,2 +1,2 @@
-<?hh
+<?hh // strict
 require(__DIR__ . '/async_mysql_require_env.inc.php');

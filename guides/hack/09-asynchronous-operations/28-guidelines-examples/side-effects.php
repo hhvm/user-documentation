@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\SideEffects;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\SideEffects;
 
 async function get_curl_data(string $url): Awaitable<string> {
   return await \HH\Asio\curl_exec($url);

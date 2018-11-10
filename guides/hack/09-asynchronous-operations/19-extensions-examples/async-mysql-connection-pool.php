@@ -1,10 +1,10 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Extensions\Examples\AsyncMySQLConnectionPool;
+namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MySQLConnectionPool;
 
-require __DIR__ . '/async-mysql-connect.inc.php';
+require __DIR__ . '/async_mysql_connect.inc.php';
 
-use \Hack\UserDocumentation\Async\Extensions\Examples\AsyncMysql\ConnectionInfo as CI;
+use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function get_pool(): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool(
@@ -33,4 +33,3 @@ async function run(): Awaitable<void> {
 function main(): void {
   \HH\Asio\join(run());
 }
-

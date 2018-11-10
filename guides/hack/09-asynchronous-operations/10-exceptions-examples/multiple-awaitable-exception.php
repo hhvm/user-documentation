@@ -13,17 +13,13 @@ async function non_exception_thrower(): Awaitable<int> {
 
 async function multiple_waithandle_exception(): Awaitable<void> {
   $handles = vec[exception_thrower(), non_exception_thrower()];
-  try {
-    $results = await Vec\from_async($handles);
-    \var_dump($results);
-  }
-  catch (\Exception $e) {
-  	// ...
-  }
+  // You will get a fatal error here with the exception thrown
+  $results = await Vec\from_async($handles);
+  // This won't happen
+  \var_dump($results);
 }
 
 <<__Entrypoint>>
 function main(): void {
   \HH\Asio\join(multiple_waithandle_exception());
 }
-

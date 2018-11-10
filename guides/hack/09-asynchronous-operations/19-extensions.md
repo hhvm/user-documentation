@@ -94,7 +94,7 @@ full closure syntax:
 The async stream extension has one function, [`stream_await`](../reference/function/stream_await/), which is functionally similar 
 to HHVM's [`stream_select`](http://php.net/manual/en/function.stream-select.php). It waits for a stream to enter a state (e.g., 
 `STREAM_AWAIT_READY`), but without the multiplexing functionality of [`stream_select`](http://php.net/manual/en/function.stream-select.php). We 
-can use [HH\Asio\v](../reference/function/HH.Asio.v/) to await multiple stream handles, but the resulting combined awaitable won't be complete 
+can use [HH\Lib\Vec\from_async](../reference/function/HH.Lib.Vec.from_async/) to await multiple stream handles, but the resulting combined awaitable won't be complete 
 until all of the underlying streams have completed.
 
 ```Hack

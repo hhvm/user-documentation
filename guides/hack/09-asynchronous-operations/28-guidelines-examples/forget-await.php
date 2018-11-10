@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Guidelines\Examples\ForgetAwait;
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\ForgetAwait;
 
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
 

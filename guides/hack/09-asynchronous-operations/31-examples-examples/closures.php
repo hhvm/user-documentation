@@ -1,6 +1,6 @@
-<?hh
+<?hh // strict
 
-namespace Hack\UserDocumentation\Async\Examples\Examples\Closures;
+namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Closures;
 
 <<__Entrypoint>>
 async function closure_async(): Awaitable<void> {
