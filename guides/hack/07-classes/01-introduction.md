@@ -14,5 +14,5 @@
 * [Properties](properties.md)
 * [Serialization](serialization.md)
 * [__toString](methods-with-predefined-semantics#method-__toString)
-* [Type constants](type-constants.md) 
+* [Type constants](type-constants.md) and [$$](type-constants-revisited.md)
 * [Using a trait](using-a-trait.md) 

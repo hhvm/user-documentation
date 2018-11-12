@@ -8,3 +8,5 @@ For now, the declaration of a type constant involves the keywords `const type`. 
 A type constant has public visibility and is implicitly static.
 
 By convention, type constant names begin with an uppercase `T`.
+
+See [$$](inheritance.md) and [$$](type-constants-revisited.md) for more information.
