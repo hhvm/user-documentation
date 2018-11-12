@@ -9,6 +9,7 @@
 * [Predefined attribute __LateInit](predefined-attributes#__lateinit)
 * [Predefined attribute __Memoize](predefined-attributes#__memoize)
 * [Predefined attribute __MemoizeLSB](predefined-attributes#__memoizelsb)
+* [Predefined attribute __MockClass](predefined-attributes#__mockclass)
 * [Predefined attribute __Override](predefined-attributes#__override)
 * [Predefined attribute __ReturnDisposable](predefined-attributes#__returndisposable)
 * [Predefined attribute __Sealed](predefined-attributes#__sealed)

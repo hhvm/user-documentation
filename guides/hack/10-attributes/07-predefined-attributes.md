@@ -6,6 +6,7 @@ The following attributes are defined:
 * [__LateInit](#__lateinit)
 * [__Memoize](#__memoize)
 * [__MemoizeLSB](#__memoizelsb)
+* [__MockClass](#__mockclass)
 * [__Override](#__override)
 * [__ReturnDisposable](#__returndisposable)
 * [__Sealed](#__sealed)
@@ -118,6 +119,17 @@ The interface type `IMemoizeParam` assists with memorizing objects passed to asy
 ## __MemoizeLSB
 
 This is like [<<__Memoize>>](#__memoize), but the cache has Late Static Binding. Each subclass has its own memoize cache
+
+## __MockClass
+
+Mock classes are useful in testing frameworks when you want to test functionality provided by a legitimate, user-accessible class, 
+by creating a new class (many times a child class) to help with the testing. However, what if a class is marked as `final` or a method in a 
+class is marked as `final`? Your mocking framework would generally be out of luck.
+
+The `__MockClass` attribute allows you to override the restriction of `final` on a class or method within a class, so that a 
+mock class can exist.
+
+@@ predefined-attributes/mock.php @@
 
 ## __Override
 

@@ -1,4 +1,4 @@
-An attribute list is a comma-separates set of attribute specifiers enclosed in `<< ... >>`, where each attribute specifier has a name and an 
+An attribute list is a comma-separated set of attribute specifiers enclosed in `<< ... >>`, where each attribute specifier has a name and an 
 optional comma-separated list of values inside parentheses.  For example:
 
 ```Hack
