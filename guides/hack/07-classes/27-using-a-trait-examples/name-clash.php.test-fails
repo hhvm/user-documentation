@@ -1,0 +1,24 @@
+<?hh // strict
+
+namespace Hack\UserDocumentation\Classes\Traits\Examples\NameClash;
+
+trait T1 {
+  public function f(): void {}
+}
+
+trait T2 {
+  public function f(): void {}
+}
+
+class C {
+  use T1, T2 {
+    T2::f as g;      // Checker error; aliasing is not supported in this context
+  }
+}
+
+<<__Entrypoint>>
+function main(): void {
+  $c = new C();
+  \var_dump($c);
+  $c->f();
+}

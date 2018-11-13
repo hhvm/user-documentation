@@ -12,8 +12,8 @@ The members of a trait each have visibility, which applies once they are used by
 visibility of any of that trait's members, by widening or narrowing that visibility. For example, a private trait member can be made public 
 in the using class, and a public trait member can be made private in that class.
 
-Once implementation comes from both a base class and one or more traits, name conflicts can occur. However, trait usage provides a means of 
-disambiguating such conflicts. Names gotten from a trait can also be given aliases. 
+Once implementation comes from both a base class and one or more traits, name conflicts can occur. However, currently, there is no mechanism to 
+disambiguate such names. 
 
 A class member with a given name overrides one with the same name in any traits that class uses, which, in turn, overrides any such name from base classes. 
 
