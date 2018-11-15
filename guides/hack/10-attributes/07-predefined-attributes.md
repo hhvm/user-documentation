@@ -131,6 +131,8 @@ mock class can exist.
 
 @@ predefined-attributes/mock.php @@
 
+Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack legacy types `Vector`, `Map`, and `Set`.
+
 ## __Override
 
 The presence of this attribute indicates that the designated method is intended to override a method having the same name in a direct 
