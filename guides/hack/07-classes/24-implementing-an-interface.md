@@ -26,3 +26,5 @@ clause allows a comma-separated list of base interfaces, so an interface can hav
 interface are those specified by its own declaration, and the members inherited from its base interfaces.
 
 Interfaces are designed to support classes; an interface cannot be instantiated directly.
+
+An interface can have usage requirements placed on it; see [$$](trait-and-interface-requirements.md) for more information.
