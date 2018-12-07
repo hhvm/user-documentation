@@ -50,7 +50,7 @@ Hack requires class properties to be initialized to a value of its proper annota
 - Nullable *static* class properties that don't have an initial value has a `null` value by default.
 - All non-nullable *non-static* class properties must be initialized in a constructor.
 - Nullable *non-static* class properties that are not initialized in a constructor will have a `null` value by default.
-- You cannot call *public* or *private* instance methods on a class before its properties are initialized in the constructor.
+- You cannot call *public* or *protected* instance methods on a class before its properties are initialized in the constructor.
 - You can call *private* instance methods before properties are initialized in the constructor, as long as the properties are initialized somewhere along that private call chain before a property is accessed.
 
 # Method Inheritance
