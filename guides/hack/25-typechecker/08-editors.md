@@ -41,3 +41,4 @@ For HHAST, we recommend looking for `$PROJECT_ROOT/vendor/bin/hhast-lint`, and:
 [Visual Studio Code]: https://code.visualstudio.com
 [vscode-hack]: https://marketplace.visualstudio.com/items?itemName=pranayagarwal.vscode-hack
 [ALE]: https://github.com/w0rp/ale
+[vim-hack]: https://github.com/hhvm/vim-hack/

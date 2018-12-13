@@ -20,7 +20,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
     $sources = new Set($sources);
 
-    expect(      $response->getStatusCode())->toBeSame(
+    expect($response->getStatusCode())->toBeSame(
       200,
       \sprintf(
         ">>> 404: %s\n>>> Linked from:\n%s",
@@ -31,15 +31,20 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
   }
 
   public function testDoesNotBreakExternalMarkdownLinks(): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync('/hack/typechecker/editors'));
-    $body = (string) $response->getBody();
-    expect($body)->toContain('Vim users');
-    expect(      $body,
-)->toContain(
-      'https://github.com/hhvm/vim-hack/blob/master/README'    );
-    expect(      $body,
-)->toContain(
-      'https://github.com/hhvm/vim-hack/blob/master/README.md'    );
+    $response =
+      \HH\Asio\join(PageLoader::getPageAsync('/hack/typechecker/editors'));
+    $body = (string)$response->getBody();
+    expect($body)->toContain('Language Server Protocol');
+    // short reference link:
+    //   foo [bar] baz, with `[bar]: https://example.com` elsewhere
+    expect($body)->toContain(
+      'href="https://neovim.io"'
+    );
+    // full link:
+    // foo [bar](https://example.com) baz`
+    expect($body)->toContain(
+      'href="https://github.com/hhvm/hack-mode"',
+    );
   }
 
   public function testCanGetLinksList(): void {
@@ -48,15 +53,14 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
   private static ?array<(string, array<string>)> $linksCache = null;
 
-  public function internalLinksList(
-  ): array<(string, array<string>)> {
+  public function internalLinksList(): array<(string, array<string>)> {
     PageLoader::assertLocal();
     $cached = self::$linksCache;
     if ($cached !== null) {
       return $cached;
     }
 
-    $loaders = Map { };
+    $loaders = Map {};
 
     $api_pages = APIPagesTest::allAPIPages();
     foreach ($api_pages as $call) {
@@ -73,7 +77,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
     $urls = \HH\Asio\join(\HH\Asio\m($loaders));
 
-    $targets_to_sources = Map { };
+    $targets_to_sources = Map {};
     foreach ($urls as $source => $targets) {
       foreach ($targets as $target) {
         if (!$targets_to_sources->containsKey($target)) {
@@ -102,7 +106,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
     if ($response->getStatusCode() === 301) {
       return await $this->getInternalLinksOnPageAsync(
-        $response->getHeaderLine('Location')
+        $response->getHeaderLine('Location'),
       );
     }
 
@@ -117,7 +121,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     $xpath = new \DOMXPath($dom);
     $hrefs = $xpath->query('//a/@href');
 
-    $links = Vector { };
+    $links = Vector {};
     foreach ($hrefs as $node) {
       $url = $node->value;
 
