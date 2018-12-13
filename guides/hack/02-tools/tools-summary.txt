@@ -1,1 +1,1 @@
-Tools to help you build Hack apps, like Nuclide - our IDE - or PHP to Hack migration helpers. 
+Tools to help you build Hack apps, such as IDEs and editors

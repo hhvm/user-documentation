@@ -6,7 +6,8 @@ The prerequisites you need to write and execute Hack code is pretty straightforw
 
 * The [HHVM runtime](../../hhvm/getting-started/getting-started.md)
 * The Hack [typechecker](../typechecker/introduction.md) (included as part of the build of the HHVM runtime)
-* Optionally, a Hack-aware editor. We recommend [Nuclide](https://github.com/facebook/nuclide), with its first-class [support for Hack](https://nuclide.io/docs/languages/hack/).
+* Optionally, a Hack-aware editor. We recommend [Visual Studio Code] with
+  [vscode-hack], and Vim with [ALE] also offers an excellent experience.
 
 The HHVM runtime is required for both (1) executing Hack code (2) to run the Hack typechecker, which is the cornerstone benefit of using the Hack language -- to make sure your code is well written, safe and consistent.
 
@@ -32,7 +33,7 @@ Choose a directory where you want to store your Hack code. In this directory, ru
 
 ### 3. Write your first Hack program
 
-Using the editor of your choice (e.g., Nuclide, vim, Sublime Text), let's create a file called `first.php` with the following code:
+Using the editor of your choice (e.g., VSCode orvim), let's create a file called `first.php` with the following code:
 
 @@ getting-started-examples/first.php @@
 
@@ -45,7 +46,7 @@ This getting started guide assumes some knowledge of programming (e.g., what a c
 
 ### 4. Run the Typechecker
 
-If you are using an editor like Nuclide, you will be seeing typechecking information as you write the program. If you run the typechecker from the command line, the command is just:
+If you are using Visual Studio Code with vscode-hack or Vim with ALE, you will be seeing typechecking information as you write the program. If you run the typechecker from the command line, the command is just:
 
 ```
 % hh_client
@@ -94,3 +95,6 @@ Now that you have gotten your feet wet with a simple Hack program, the best reso
 
 There is also an awesome [book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team. For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online. [Hack has an online interactive tutorial](http://hacklang.org/tutorial.html) as well.
 
+[Visual Studio Code]: https://code.visualstudio.com
+[vscode-hack]: https://marketplace.visualstudio.com/items?itemName=pranayagarwal.vscode-hack
+[ALE]: https://github.com/w0rp/ale
