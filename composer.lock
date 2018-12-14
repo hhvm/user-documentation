@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "571f6a6443c3874049097c25380f2781",
+    "content-hash": "32bb468e03419f9e09db5cc901f794ff",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -444,16 +444,16 @@
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v1.6.9",
+            "version": "v1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "d1dd7ffd5fa831c011266bf417231bdc4eccde87"
+                "reference": "2e8b1ec08f00101d63f5ec797d9db47faa99a6dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/d1dd7ffd5fa831c011266bf417231bdc4eccde87",
-                "reference": "d1dd7ffd5fa831c011266bf417231bdc4eccde87",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/2e8b1ec08f00101d63f5ec797d9db47faa99a6dc",
+                "reference": "2e8b1ec08f00101d63f5ec797d9db47faa99a6dc",
                 "shasum": ""
             },
             "require": {
@@ -491,7 +491,7 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2018-10-18T18:10:50+00:00"
+            "time": "2018-12-14T20:41:25+00:00"
         },
         {
             "name": "hhvm/hsl",
