@@ -10,21 +10,19 @@ use function Facebook\FBExpect\expect;
  * @small
  */
 class RobotsTxtTest extends \Facebook\HackTest\HackTest {
-  public function testMainDomainAllowsCrawling(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt'),
+  public async function testMainDomainAllowsCrawling(): Awaitable<void> {
+    list($_, $body) =
+      await PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt');
+    expect($body)->toBeSame(
+      \file_get_contents(RobotsTxtController::DEFAULT_FILE),
     );
-    expect(      (string) $response->getBody(),
-)->toBeSame(
-      \file_get_contents(RobotsTxtController::DEFAULT_FILE)    );
   }
 
-  public function testStagingDoesNotAllowCrawling(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('http://staging.docs.hhvm.com/robots.txt'),
+  public async function testStagingDoesNotAllowCrawling(): Awaitable<void> {
+    list($_, $body) =
+      await PageLoader::getPageAsync('http://staging.docs.hhvm.com/robots.txt');
+    expect($body)->toBeSame(
+      \file_get_contents(RobotsTxtController::DO_NOT_CRAWL_FILE),
     );
-    expect(      (string) $response->getBody(),
-)->toBeSame(
-      \file_get_contents(RobotsTxtController::DO_NOT_CRAWL_FILE)    );
   }
 }

@@ -3,11 +3,7 @@
 namespace HHVM\UserDocumentation\Tests;
 use function Facebook\FBExpect\expect;
 
-use type HHVM\UserDocumentation\{
-  APINavData,
-  APIProduct,
-  NavDataNode,
-};
+use type HHVM\UserDocumentation\{APINavData, APIProduct, NavDataNode};
 
 /**
  * @small

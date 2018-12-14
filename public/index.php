@@ -1,9 +1,10 @@
-<?hh
+<?hh // strict
 
 require_once(__DIR__.'/../vendor/hh_autoload.php');
 
-$request = \Zend\Diactoros\ServerRequestFactory::fromGlobals();
-
-HH\Asio\join(
-  HHVMDocumentationSite::respondToAsync($request)
-);
+<<__Entrypoint>>
+async function site_main_async(): Awaitable<noreturn> {
+  $request = Usox\HackTTP\ServerRequest::createFromGlobals();
+  await HHVMDocumentationSite::respondToAsync($request);
+  exit(0);
+}

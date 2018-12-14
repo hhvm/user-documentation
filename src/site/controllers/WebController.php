@@ -16,10 +16,11 @@ use function HHVM\UserDocumentation\{
 };
 use type Facebook\HackRouter\{RequestParameter, RequestParameters};
 use type Facebook\TypeAssert\IncorrectTypeException;
-use type Psr\Http\Message\ResponseInterface;
-use type Psr\Http\Message\ServerRequestInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\Experimental\IO;
 
 <<__ConsistentConstruct>>
 abstract class WebController {
@@ -88,7 +89,9 @@ abstract class WebController {
     return shape('required' => ImmVector {}, 'optional' => ImmVector {});
   }
 
-  abstract public function getResponseAsync(): Awaitable<ResponseInterface>;
+  abstract public function getResponseAsync(
+    ResponseInterface $response
+  ): Awaitable<ResponseInterface>;
 
   final protected function getRequestedPath(): string {
     return $this->request->getUri()->getPath();

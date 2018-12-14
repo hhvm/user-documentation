@@ -10,11 +10,11 @@
  */
 
 use type HHVM\UserDocumentation\LegacyRedirects;
-use type Psr\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
 
 final class LegacyRedirectController
-extends WebController
-implements RoutableGetController {
+  extends WebController
+  implements RoutableGetController {
   use LegacyRedirectControllerParametersTrait;
 
   public static function getUriPattern(): UriPattern {
@@ -25,7 +25,9 @@ implements RoutableGetController {
   }
 
   <<__Override>>
-  public async function getResponseAsync(): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(
+    ResponseInterface $_,
+  ): Awaitable<ResponseInterface> {
     $id = $this->getParameters()['LegacyId'];
 
     $url = LegacyRedirects::getUrlForId($id);

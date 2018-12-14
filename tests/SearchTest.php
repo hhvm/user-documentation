@@ -9,15 +9,13 @@ use function Facebook\FBExpect\expect;
  */
 final class SearchTest extends \Facebook\HackTest\HackTest {
   <<DataProvider('expectedResults')>>
-  public function testSearchTerm(
+  public async function testSearchTerm(
     string $term,
     array<string> $expected,
-  ): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('/search?term='.\urlencode($term)),
-    );
+  ): Awaitable<void> {
+    list($response, $body) =
+      await PageLoader::getPageAsync('/search?term='.\urlencode($term));
     expect($response->getStatusCode())->toBeSame(200);
-    $body = (string) $response->getBody();
     foreach ($expected as $substr) {
       expect($body)->toContain($substr);
     }
@@ -29,58 +27,23 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
         'array_filter',
         ['http://php.net/manual/en/function.array-filter.php'],
       ),
-      tuple(
-        'mysqli',
-        ['http://php.net/manual/en/class.mysqli.php'],
-      ),
-      tuple(
-        'vw',
-        [
-          '/hack/reference/function/HH.Asio.vw/',
-        ],
-      ),
-      tuple(
-        'HH\Asio\vw',
-        [
-          '/hack/reference/function/HH.Asio.vw/',
-        ],
-      ),
-      tuple(
-        'async',
-        ['/hack/async/introduction'],
-      ),
+      tuple('mysqli', ['http://php.net/manual/en/class.mysqli.php']),
+      tuple('vw', ['/hack/reference/function/HH.Asio.vw/']),
+      tuple('HH\Asio\vw', ['/hack/reference/function/HH.Asio.vw/']),
+      tuple('async', ['/hack/async/introduction']),
       tuple(
         'string contains',
-        [
-          'HH\\Lib\\Str\\contains',
-          'HH\\Lib\\Str\\contains_ci',
-        ]
+        ['HH\\Lib\\Str\\contains', 'HH\\Lib\\Str\\contains_ci'],
       ),
-      tuple(
-        'vector contains',
-        [
-          'HH\\Lib\\C\\contains',
-        ]
-      ),
-      tuple(
-        'vector contains',
-        [
-          'HH\\Lib\\C\\contains',
-        ]
-      ),
+      tuple('vector contains', ['HH\\Lib\\C\\contains']),
+      tuple('vector contains', ['HH\\Lib\\C\\contains']),
       tuple(
         'set contains',
-        [
-          'HH\\Lib\\C\\contains',
-          'HH\\Lib\\C\\contains_key',
-        ]
+        ['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
       tuple(
         'keyset contains',
-        [
-          'HH\\Lib\\C\\contains',
-          'HH\\Lib\\C\\contains_key',
-        ]
+        ['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
     ];
   }

@@ -11,10 +11,10 @@
 
 use type HHVM\UserDocumentation\LocalConfig;
 use type HHVM\UserDocumentation\UIGlyphIcon;
-use type Psr\Http\Message\ResponseInterface;
-use type Psr\Http\Message\ServerRequestInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 
-use namespace HH\Lib\C;
+use namespace HH\Lib\{C, Experimental\IO};
 
 abstract class NonRoutableWebPageController extends WebController {
   protected abstract function getTitleAsync(): Awaitable<string>;
@@ -58,8 +58,11 @@ EOF;
   }
 
   <<__Override>>
-  final public async function getResponseAsync(): Awaitable<ResponseInterface> {
-    list($title, $content) = await \HH\Asio\va($this->getTitleAsync(), $this->getContentPaneAsync());
+  final public async function getResponseAsync(
+    ResponseInterface $response,
+  ): Awaitable<ResponseInterface> {
+    list($title, $content) =
+      await \HH\Asio\va($this->getTitleAsync(), $this->getContentPaneAsync());
     $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();
@@ -71,7 +74,7 @@ EOF;
     switch ($this->getRequestedHost()) {
       case 'beta.docs.hhvm.com':
         throw new RedirectException(
-          'http://docs.hhvm.com'.$this->getRequestedPath()
+          'http://docs.hhvm.com'.$this->getRequestedPath(),
         );
       case 'docs.hhvm.com':
         $google_analytics =
@@ -82,7 +85,7 @@ EOF;
             type="application/opensearchdescription+xml"
             href="/search.xml"
           />;
-          $require_secure = true;
+        $require_secure = true;
         break;
       case 'staging.docs.hhvm.com':
         $require_secure = true;
@@ -108,22 +111,22 @@ EOF;
             <x:comment>
               Build ID: {LocalConfig::getBuildID()}
             </x:comment>
-            <static:stylesheet
-              path="/css/main.css"
-              media="screen"
-            />
+            <static:stylesheet path="/css/main.css" media="screen" />
             <link
-              href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700"
+              href=
+                "https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700"
               rel="stylesheet"
             />
             {$google_analytics}
             <link
-              href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css"
+              href=
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css"
               rel="stylesheet"
               type="text/css"
             />
             <script
-              src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+              src=
+                "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
             />
           </head>
           <body class={$body_class}>
@@ -137,13 +140,18 @@ EOF;
     $xhp->setContext('ServerRequestInterface', $this->request);
     $html = await $xhp->asyncToString();
 
-    $response = Response::newWithStringBody($html)
+    await $response->getBody()->writeAsync($html);
+    $response = $response
       ->withStatus($this->getStatusCode())
-      ->withHeader('Cache-Control', 'max-age=60'); // enough for pre-fetching :)
+      ->withHeader(
+        'Cache-Control',
+        vec['max-age=60'],
+      ); // enough for pre-fetching :)
 
     if ($require_secure) {
       $response = $response->withHeader(
-        'Strict-Transport-Security', 'max-age='.(60 * 60  * 24 * 28), // 4 weeks
+        'Strict-Transport-Security',
+        vec['max-age='.(60 * 60 * 24 * 28)], // 4 weeks
       );
     }
 
@@ -155,7 +163,8 @@ EOF;
   }
 
   final protected async function getContentPaneAsync(): Awaitable<XHPRoot> {
-    list($heading, $body) = await \HH\Asio\va($this->getHeadingAsync(), $this->getBodyAsync());
+    list($heading, $body) =
+      await \HH\Asio\va($this->getHeadingAsync(), $this->getBodyAsync());
 
     $breadcrumbs = $this->getBreadcrumbs();
     if ($breadcrumbs !== null) {
@@ -179,9 +188,8 @@ EOF;
   }
 
   private function getBodyClass(?string $extra_class): string {
-    $class = 'bodyClass'.ucwords(
-      $this->getRawParameter_UNSAFE('product') ?? 'Default',
-    );
+    $class = 'bodyClass'.
+      ucwords($this->getRawParameter_UNSAFE('product') ?? 'Default');
     if ($extra_class !== null) {
       $class = $class.' '.$extra_class;
     }
@@ -208,8 +216,7 @@ EOF;
     return <x:frag />;
   }
 
-  protected function getBreadcrumbs(
-  ): ?vec<(string, ?string)> {
+  protected function getBreadcrumbs(): ?vec<(string, ?string)> {
     return null;
   }
 
@@ -273,7 +280,7 @@ EOF;
    * - if there isn't an existing abstraction that fits your needs, add one
    */
   final public function __construct(
-    ImmMap<string,string> $parameters,
+    ImmMap<string, string> $parameters,
     private ServerRequestInterface $request,
   ) {
     parent::__construct($parameters, $request);
@@ -283,9 +290,7 @@ EOF;
     return
       <div class="footerPanel footerPanelFullWidth">
         <h2>See something wrong?</h2>
-        <ui:button
-          className="gitHubIssueButton"
-          glyph={UIGlyphIcon::BUG}>
+        <ui:button className="gitHubIssueButton" glyph={UIGlyphIcon::BUG}>
           <span>
             <github-issue-link
               issueTitle={$this->getGithubIssueTitle()}

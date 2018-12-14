@@ -25,8 +25,11 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
    * @large
    */
   <<DataProvider('allGuidePages')>>
-  public function testGuidePage(string $name, string $path): void {
-    $this->testGuidePageQuick($name, $path);
+  public async function testGuidePage(
+    string $name,
+    string $path,
+  ): Awaitable<void> {
+    await $this->testGuidePageQuick($name, $path);
   }
 
   public function shortListOfGuidePages(): array<(string, string)> {
@@ -50,30 +53,31 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
    * @small
    */
   <<DataProvider('shortListOfGuidePages')>>
-  public function testGuidePageQuick(string $name, string $path): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync($path));
+  public async function testGuidePageQuick(
+    string $name,
+    string $path,
+  ): Awaitable<void> {
+    list($response, $body) = await PageLoader::getPageAsync($path);
 
     // /hack/foo/ => /hack/foo/introduction
     if ($response->getStatusCode() === 301) {
-      $response = \HH\Asio\join(
-        PageLoader::getPageAsync($response->getHeaderLine('Location')),
-      );
+      list($response, $body) =
+        await PageLoader::getPageAsync($response->getHeaderLine('Location'));
     }
 
     expect($response->getStatusCode())->toBeSame(200);
-    expect((string) $response->getBody())->toContain($name);
+    expect($body)->toContain($name);
   }
 
   /**
    * @group remote
    * @small
    */
-  public function testExamplesRender(): void {
-    $response =
-      \HH\Asio\join(PageLoader::getPageAsync('/hack/async/introduction'));
+  public async function testExamplesRender(): Awaitable<void> {
+    list($response, $body) =
+      await PageLoader::getPageAsync('/hack/async/introduction');
     expect($response->getStatusCode())->toBeSame(200);
 
-    $body = (string) $response->getBody();
     expect($body)->toContain('highlight');
     // Namespace declaration
     expect($body)->toContain('Hack\UserDocumentation\Async\Intro\Examples');
@@ -83,28 +87,18 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
    * @group remote
    * @small
    */
-  public function testGeneratedGuidesRender(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('/hhvm/configuration/INI-settings'),
-    );
+  public async function testGeneratedGuidesRender(): Awaitable<void> {
+    list($response, $body) =
+      await PageLoader::getPageAsync('/hhvm/configuration/INI-settings');
     expect($response->getStatusCode())->toBeSame(200);
-
-    $body = (string) $response->getBody();
     expect($body)->toContain('allow_url_fopen</a></td>');
   }
 
-  public function testCachedNavDataIsNotJustByName(): void {
-    list(
-      $hack,
-      $hhvm,
-    ) = \HH\Asio\join(
-      Tuple\from_async(
-        PageLoader::getPageAsync('/hack/typechecker/introduction'),
-        PageLoader::getPageAsync('/hhvm/configuration/INI-settings'),
-      ),
+  public async function testCachedNavDataIsNotJustByName(): Awaitable<void> {
+    list(list($_, $hack), list($_, $hhvm)) = await Tuple\from_async(
+      PageLoader::getPageAsync('/hack/typechecker/introduction'),
+      PageLoader::getPageAsync('/hhvm/configuration/INI-settings'),
     );
-    $hack = (string) $hack->getBody();
-    $hhvm = (string) $hhvm->getBody();
     expect($hack)->toContain('/hack/getting-started/getting-started');
     expect($hhvm)->toContain('/hhvm/getting-started/getting-started');
   }

@@ -8,14 +8,14 @@ use function Facebook\FBExpect\expect;
  */
 final class InternalLinksTest extends \Facebook\HackTest\HackTest {
   <<DataProvider('internalLinksList')>>
-  public function testInternalLink(
+  public async function testInternalLink(
     string $target,
     array<string> $sources,
-  ): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync($target));
+  ): Awaitable<void> {
+    list($response, $body) = await PageLoader::getPageAsync($target);
     if ($response->getStatusCode() === 301) {
       $target = $response->getHeaderLine('Location');
-      $response = \HH\Asio\join(PageLoader::getPageAsync($target));
+      list($response, $body) = await PageLoader::getPageAsync($target);
     }
 
     $sources = new Set($sources);
@@ -30,24 +30,20 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     );
   }
 
-  public function testDoesNotBreakExternalMarkdownLinks(): void {
-    $response =
-      \HH\Asio\join(PageLoader::getPageAsync('/hack/typechecker/editors'));
-    $body = (string)$response->getBody();
+  public async function testDoesNotBreakExternalMarkdownLinks(
+  ): Awaitable<void> {
+    list($response, $body) =
+      await PageLoader::getPageAsync('/hack/typechecker/editors');
     expect($body)->toContain('Language Server Protocol');
     // short reference link:
     //   foo [bar] baz, with `[bar]: https://example.com` elsewhere
-    expect($body)->toContain(
-      'href="https://neovim.io"'
-    );
+    expect($body)->toContain('href="https://neovim.io"');
     // full link:
     // foo [bar](https://example.com) baz`
-    expect($body)->toContain(
-      'href="https://github.com/hhvm/hack-mode"',
-    );
+    expect($body)->toContain('href="https://github.com/hhvm/hack-mode"');
   }
 
-  public function testCanGetLinksList(): void {
+  public async function testCanGetLinksList(): Awaitable<void> {
     $_ = $this->internalLinksList();
   }
 
@@ -102,7 +98,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
   ): Awaitable<Vector<string>> {
     PageLoader::assertLocal();
 
-    $response = await PageLoader::getPageAsync($page);
+    list($response, $body) = await PageLoader::getPageAsync($page);
 
     if ($response->getStatusCode() === 301) {
       return await $this->getInternalLinksOnPageAsync(
@@ -115,7 +111,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
     \libxml_use_internal_errors(true); // No support for HTML5 tags
-    $dom->loadHTML($response->getBody());
+    $dom->loadHTML($body);
     \libxml_clear_errors();
     /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $xpath = new \DOMXPath($dom);
@@ -160,11 +156,11 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
    * Testing the test...
    */
   <<DataProvider('pathNormalizationTestCases')>>
-  public function testPathNormalization(
+  public async function testPathNormalization(
     string $context,
     string $in,
     ?string $expected,
-  ): void {
+  ): Awaitable<void> {
     $out = $this->normalizePath($context, $in);
     expect($out)->toBeSame($expected);
   }

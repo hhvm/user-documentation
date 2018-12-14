@@ -8,17 +8,17 @@ use function Facebook\FBExpect\expect;
  * @small
  */
 final class OpenSearchTest extends \Facebook\HackTest\HackTest {
-  public function testNoOpenSearchOnStaging(): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync('https://staging.docs.hhvm.com/'));
+  public async function testNoOpenSearchOnStaging(): Awaitable<void> {
+    list($response, $body) =
+      await PageLoader::getPageAsync('https://staging.docs.hhvm.com/');
     expect($response->getStatusCode())->toBeSame(200);
-    $body = (string) $response->getBody();
     expect($body)->toNotContain('application/opensearchdescription+xml');
   }
 
-  public function testOpenSearchOnProd(): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync('https://docs.hhvm.com/'));
+  public async function testOpenSearchOnProd(): Awaitable<void> {
+    list($response, $body) =
+      await PageLoader::getPageAsync('https://docs.hhvm.com/');
     expect($response->getStatusCode())->toBeSame(200);
-    $body = (string) $response->getBody();
     expect($body)->toContain('application/opensearchdescription+xml');
   }
 
@@ -40,22 +40,17 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
         'array_filter',
         'http://php.net/manual/en/function.array-filter.php',
       ),
-      'Search term' => tuple(
-        '=>foobar',
-        '/search?term=%3D%3Efoobar',
-      ),
-      'Special attribute' => tuple(
-        '__memoize',
-        '/hack/attributes/special#__memoize',
-      ),
+      'Search term' => tuple('=>foobar', '/search?term=%3D%3Efoobar'),
+      'Special attribute' =>
+        tuple('__memoize', '/hack/attributes/special#__memoize'),
     ];
   }
 
   <<DataProvider('jumpProvider')>>
-  public function testJump(string $keyword, string $to): void {
-    $jump_url= '/j/'.$keyword;
+  public async function testJump(string $keyword, string $to): Awaitable<void> {
+    $jump_url = '/j/'.$keyword;
 
-    $response = \HH\Asio\join(PageLoader::getPageAsync($jump_url));
+    list($response, $body) = await PageLoader::getPageAsync($jump_url);
     expect($response->getStatusCode())->toBeSame(301);
 
     $target = $response->getHeaderLine('Location');

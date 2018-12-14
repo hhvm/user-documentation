@@ -92,7 +92,7 @@ final class DocBlockTest extends \Facebook\HackTest\HackTest {
         tuple('$nothing', vec[], null),
         tuple('$generics', vec['dict<string, string>'], null),
         tuple('$generics_and_text', vec['dict<string, string>'], 'foo bar'),
-      ]
+      ],
     );
   }
 

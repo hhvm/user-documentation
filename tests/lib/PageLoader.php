@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type Psr\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
 
 abstract class PageLoader {
   <<__Memoize>>
@@ -17,13 +17,13 @@ abstract class PageLoader {
 
   public static function getPageAsync(
     string $url,
-  ): Awaitable<ResponseInterface> {
+  ): Awaitable<(ResponseInterface, string)> {
     return self::get()->getPageImplAsync($url);
   }
 
   abstract protected function getPageImplAsync(
     string $url,
-  ): Awaitable<ResponseInterface>;
+  ): Awaitable<(ResponseInterface, string)>;
 
   <<__Memoize>>
   protected static function getHost(): ?string {
@@ -31,7 +31,7 @@ abstract class PageLoader {
     if ($host === false) {
       return null;
     }
-    return (string) $host;
+    return (string)$host;
   }
 
   public static function assertLocal(): void {

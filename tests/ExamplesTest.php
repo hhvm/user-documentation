@@ -24,13 +24,16 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       |> Str\join($$, '|')
       |> '/('.$$.')$/';
     $this->runExamples(Vector {
-      '--exclude-pattern', $exclude_regexp,
+      '--exclude-pattern',
+      $exclude_regexp,
     });
   }
 
   public function testExamplesTypecheck(): void {
     if (HHVM_VERSION_ID >= 32600 && HHVM_VERSION_ID <= 32602) {
-      static::markTestSkipped('This versions of HHVM is unable to run the test runner');
+      static::markTestSkipped(
+        'This versions of HHVM is unable to run the test runner',
+      );
     }
     $hh_server = \dirname(\PHP_BINARY).'/hh_server';
     if (!\file_exists($hh_server)) {
@@ -39,8 +42,10 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
 
     $this->runExamples(Vector {
       '--typechecker',
-      '--exclude', '.inc.php',
-      '--vendor', LocalConfig::ROOT.'/api-sources/hsl/src',
+      '--exclude',
+      '.inc.php',
+      '--vendor',
+      LocalConfig::ROOT.'/api-sources/hsl/src',
     });
   }
 
@@ -56,10 +61,13 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
   private function runExamples(Vector<string> $extra_args): void {
     $command = Vector {
       \PHP_BINARY,
-      '-d', 'hhvm.hack.lang.look_for_typechecker=0',
+      '-d',
+      'hhvm.hack.lang.look_for_typechecker=0',
       self::TEST_RUNNER,
-      '-m', 'interp',
-      '--vendor', LocalConfig::ROOT.'/vendor/',
+      '-m',
+      'interp',
+      '--vendor',
+      LocalConfig::ROOT.'/vendor/',
     };
     $command->addAll($extra_args);
     $command[] = LocalConfig::ROOT.'/guides';
@@ -73,8 +81,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       'HH_SERVER_BIN='.\escapeshellarg($this->getHHServerPath()),
     };
 
-    $command_str =
-      \implode('', $env->map($x ==> $x.' ')).$command_str.' 2>&1';
+    $command_str = \implode('', $env->map($x ==> $x.' ')).$command_str.' 2>&1';
 
     \exec($command_str, /*&*/ &$output, /*&*/ &$exit_code);
 

@@ -18,10 +18,10 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   }
 
   <<DataProvider('notFoundPathProvider')>>
-  public function testNotFoundPages(string $path): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync($path));
+  public async function testNotFoundPages(string $path): Awaitable<void> {
+    list($response, $body) = await PageLoader::getPageAsync($path);
     expect($response->getStatusCode())->toBeSame(404);
-    expect((string) $response->getBody())->toContain("does not exist");
+    expect($body)->toContain("does not exist");
   }
 
   public function redirectProvider(): array<string, (string, string)> {
@@ -30,10 +30,8 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
         '/manual/en/class.hack.maptktv.php',
         '/hack/reference/class/HH.Map/',
       ),
-      'Hack class moved to HH namespace' => tuple(
-        '/hack/reference/class/Map/',
-        '/hack/reference/class/HH.Map/',
-      ),
+      'Hack class moved to HH namespace' =>
+        tuple('/hack/reference/class/Map/', '/hack/reference/class/HH.Map/'),
       'Method in Hack class moved to HH namespace' => tuple(
         '/hack/reference/class/Map/filter/',
         '/hack/reference/class/HH.Map/filter/',
@@ -42,10 +40,8 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
         '/manual/en/class.hack.iterabletv.php',
         '/hack/reference/interface/HH.Iterable/',
       ),
-      'Hack function reference' => tuple(
-        '/manual/en/hackfuncref.php',
-        '/hack/reference/',
-      ),
+      'Hack function reference' =>
+        tuple('/manual/en/hackfuncref.php', '/hack/reference/'),
       'Hack function reference with preserved namespace' => tuple(
         '/manual/en/hack.asio.function.v.php',
         '/hack/reference/function/HH.Asio.v/',
@@ -88,12 +84,10 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
       ),
       'PHP appendix' => tuple(
         '/manual/en/stream.constants.php',
-        'http://php.net/manual/en/stream.constants.php'
+        'http://php.net/manual/en/stream.constants.php',
       ),
-      'Beta redirect root' => tuple(
-        'http://beta.docs.hhvm.com/',
-        'http://docs.hhvm.com/',
-      ),
+      'Beta redirect root' =>
+        tuple('http://beta.docs.hhvm.com/', 'http://docs.hhvm.com/'),
       'Beta redirect page' => tuple(
         'http://beta.docs.hhvm.com/hack/reference/',
         'http://docs.hhvm.com/hack/reference/',
@@ -102,10 +96,8 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
         '/manual/en/hack.collections.vector.php',
         '/hack/reference/class/Vector/',
       ),
-      'Missing trailing /' => tuple(
-        '/hack/reference/class/HH.Map',
-        '/hack/reference/class/HH.Map/',
-      ),
+      'Missing trailing /' =>
+        tuple('/hack/reference/class/HH.Map', '/hack/reference/class/HH.Map/'),
       'PHP bad punctuation' => tuple(
         '/manual/en/debugger.about.php',
         'http://php.net/manual/en/debugger-about.php',
@@ -114,10 +106,8 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
         '/manual/en/debugger-about.php',
         'http://php.net/manual/en/debugger-about.php',
       ),
-      'Case insensitive redirect' => tuple(
-        '/manual/en/HaCk.LAMbda.php',
-        '/hack/lambdas/introduction',
-      ),
+      'Case insensitive redirect' =>
+        tuple('/manual/en/HaCk.LAMbda.php', '/hack/lambdas/introduction'),
       'HSL function with Hack product' => tuple(
         '/hack/reference/function/HH.Lib.Str.length/',
         '/hsl/reference/function/HH.Lib.Str.length/',
@@ -126,8 +116,11 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   }
 
   <<DataProvider('redirectProvider')>>
-  public function testRedirects(string $from, string $to): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync($from));
+  public async function testRedirects(
+    string $from,
+    string $to,
+  ): Awaitable<void> {
+    list($response, $body) = await PageLoader::getPageAsync($from);
     expect($response->getStatusCode())->toBeSame(301);
 
     $target = $response->getHeaderLine('Location');
@@ -136,8 +129,9 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     expect($target)->toBeSame($to);
   }
 
-  public function testStaticResource404(): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync('/s/deadbeef/notfound'));
+  public async function testStaticResource404(): Awaitable<void> {
+    list($response, $body) =
+      await PageLoader::getPageAsync('/s/deadbeef/notfound');
     expect($response->getStatusCode())->toBeSame(404);
   }
 
@@ -149,14 +143,12 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   }
 
   <<DataProvider('notFoundSuggestions')>>
-  public function testNotFoundSuggestion(
+  public async function testNotFoundSuggestion(
     string $notfound,
     string $suggestion,
-  ): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync($notfound));
+  ): Awaitable<void> {
+    list($response, $body) = await PageLoader::getPageAsync($notfound);
     expect($response->getStatusCode())->toBeSame(404);
-
-    $body = (string) $response->getBody();
     expect($body)->toContain($suggestion);
   }
 }

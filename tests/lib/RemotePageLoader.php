@@ -2,9 +2,10 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type Psr\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Response;
 use namespace Facebook\TypeAssert;
+use namespace HH\Lib\Experimental\Filesystem;
 
 final class RemotePageLoader extends PageLoader {
   protected function __construct() {}
@@ -12,7 +13,7 @@ final class RemotePageLoader extends PageLoader {
   <<__Override>>
   protected async function getPageImplAsync(
     string $url,
-  ): Awaitable<ResponseInterface> {
+  ): Awaitable<(ResponseInterface, string)> {
     $host_header = \parse_url($url, \PHP_URL_HOST);
     $scheme = \parse_url($url, \PHP_URL_SCHEME);
     $path = \parse_url($url, \PHP_URL_PATH);
@@ -43,13 +44,9 @@ final class RemotePageLoader extends PageLoader {
     }
 
     $response = await \HH\Asio\curl_exec($ch);
-    $status = (int) \curl_getinfo($ch, \CURLINFO_HTTP_CODE);
+    $status = (int)\curl_getinfo($ch, \CURLINFO_HTTP_CODE);
 
-    invariant(
-      $status !== 0,
-      '%s',
-      \curl_error($ch),
-    );
+    invariant($status !== 0, '%s', \curl_error($ch));
 
     $header_size = \curl_getinfo($ch, \CURLINFO_HEADER_SIZE);
     $header_blob = \substr($response, 0, $header_size);
@@ -62,13 +59,19 @@ final class RemotePageLoader extends PageLoader {
       $body = \substr($response, $header_size);
     }
 
-    $response = Response::newWithStringBody($body)->withStatus($status);
+    $response = new \Usox\HackTTP\Response(
+      Filesystem\open_write_only_non_disposable(
+        '/dev/null',
+        Filesystem\FileWriteMode::APPEND,
+      ),
+      $status,
+    );
 
     foreach ($header_lines as $header_line) {
       list($name, $value) = \explode(": ", $header_line);
       $response = $response->withAddedHeader($name, $value);
     }
 
-    return $response;
+    return tuple($response, $body);
   }
 }

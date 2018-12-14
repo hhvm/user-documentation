@@ -28,7 +28,7 @@ final class IPUtilsTest extends \Facebook\HackTest\HackTest {
   ): void {
     $range = cidr_to_bitstring_and_bitmask($subnet_cidr);
 
-    foreach($ips_in_subnet as $ip) {
+    foreach ($ips_in_subnet as $ip) {
       expect(is_ip_in_range($ip, $range))->toBeTrue(
         '%s is not in %s, but should be; subnet: %s, subnet mask: %s',
         $ip,
@@ -37,7 +37,7 @@ final class IPUtilsTest extends \Facebook\HackTest\HackTest {
         \inet_ntop($range[1]),
       );
     }
-    foreach($ips_not_in_subnet as $ip) {
+    foreach ($ips_not_in_subnet as $ip) {
       expect(is_ip_in_range($ip, $range))->toBeFalse(
         '%s is in %s, but should not be; subnet: %s, subnet mask: %s',
         $ip,
@@ -66,38 +66,22 @@ final class IPUtilsTest extends \Facebook\HackTest\HackTest {
         vec['10.0.0.1', '10.0.1.1', '10.0.1.255', '10.0.3.255'],
         vec['10.0.10.1', '10.0.4.0'],
       ),
-      tuple(
-        '199.201.64.0/24',
-        vec['199.201.64.123'],
-        vec['127.0.0.1'],
-      ),
+      tuple('199.201.64.0/24', vec['199.201.64.123'], vec['127.0.0.1']),
       tuple(
         'abcd::0/16',
         vec['abcd::1', 'abcd:1::0', 'abcd::'],
-        vec['0.0.0.0', 'abce::1', 'abc::0' ],
+        vec['0.0.0.0', 'abce::1', 'abc::0'],
       ),
-      tuple(
-        '2620:10d:c092::/48',
-        vec['2620:10d:c092::123'],
-        vec['::0'],
-      ),
+      tuple('2620:10d:c092::/48', vec['2620:10d:c092::123'], vec['::0']),
     ];
   }
 
   public function getExampleFacebookIPAddresses(): array<array<string>> {
-    return [
-      ['199.201.64.1'],
-      ['2620:10d:c092::1'],
-    ];
+    return [['199.201.64.1'], ['2620:10d:c092::1']];
   }
 
   public function getExampleNonFacebookIPAddresses(): array<array<string>> {
-    return [
-      ['192.168.0.1'],
-      ['127.0.0.1'],
-      ['::1'],
-      ['dead:beef::1'],
-    ];
+    return [['192.168.0.1'], ['127.0.0.1'], ['::1'], ['dead:beef::1']];
   }
 
   <<DataProvider('getExampleFacebookIPAddresses')>>

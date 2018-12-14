@@ -10,24 +10,44 @@
  */
 
 use namespace Facebook\HackRouter;
-use type Psr\Http\Message\ResponseInterface;
-use type Psr\Http\Message\ServerRequestInterface;
-use type Zend\Diactoros\Response\SapiEmitter;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use namespace HH\Lib\Math;
+use namespace HH\Lib\Experimental\{Filesystem, IO};
 
 final class HHVMDocumentationSite {
   public static async function respondToAsync(
     ServerRequestInterface $request,
   ): Awaitable<void> {
-    $response = await self::getResponseForRequestAsync($request);
-    /* HH_IGNORE_ERROR[2049] no HHI for Diactoros */
-    (new SapiEmitter())->emit($response);
+    // TODO: add Filesystem\temporary_file_non_disposable() to the HSL
+    $buffer_path = \sys_get_temp_dir().'/'.\bin2hex(\random_bytes(16));
+    $write_handle = Filesystem\open_write_only_non_disposable(
+      $buffer_path,
+      Filesystem\FileWriteMode::MUST_CREATE,
+    );
+    $response = (new \Usox\HackTTP\Response($write_handle));
+    $response = await self::getResponseForRequestAsync($request, $response);
+    \http_response_code($response->getStatusCode());
+    foreach ($response->getHeaders() as $key => $values) {
+      foreach ($values as $value) {
+        \header($key.': '.$value, /* replace = */ false);
+      }
+    }
+    await $write_handle->closeAsync();
+    await using ($read_handle = Filesystem\open_read_only($buffer_path)) {
+      $out = IO\request_output();
+      $content = await $read_handle->readAsync(Math\INT64_MAX);
+      await $out->writeAsync($content);
+      await $out->flushAsync();
+    };
+    \unlink($buffer_path);
   }
 
   private static function routeRequest(
     ServerRequestInterface $request,
   ): (classname<RoutableController>, ImmMap<string, string>) {
     try {
-      return (new Router())->routePsr7Request($request);
+      return (new Router())->routeRequest($request);
     } catch (HackRouter\NotFoundException $e) {
       throw new HTTPNotFoundException('', 0, $e);
     } catch (HackRouter\MethodNotAllowedException $e) {
@@ -37,6 +57,7 @@ final class HHVMDocumentationSite {
 
   public static async function getResponseForRequestAsync(
     ServerRequestInterface $request,
+    ResponseInterface $response,
   ): Awaitable<ResponseInterface> {
     try {
       try {
@@ -50,9 +71,9 @@ final class HHVMDocumentationSite {
         try {
           list($controller, $vars) = self::routeRequest($with_trailing_slash);
           // If we're here, it's routable with a trailing /
-          return await (new RedirectException(
-            $with_trailing_slash->getUri()->getPath())
-          )->getResponseAsync($request);
+          return await (
+            new RedirectException($with_trailing_slash->getUri()->getPath())
+          )->getResponseAsync($request, $response);
         } catch (HTTPException $f) {
           throw $e; // original exception, not the new one
         }
@@ -60,9 +81,10 @@ final class HHVMDocumentationSite {
 
       // This is outside of the try so that we don't try adding a trailing
       // slash if the controller itself throws a 404
-      return await (new $controller($vars, $request))->getResponseAsync();
+      return
+        await (new $controller($vars, $request))->getResponseAsync($response);
     } catch (HTTPException $e) {
-      return await $e->getResponseAsync($request);
+      return await $e->getResponseAsync($request, $response);
     }
   }
 }

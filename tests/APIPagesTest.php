@@ -62,8 +62,11 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
    * @large
    */
   <<DataProvider('allAPIPages')>>
-  public function testAPIPage(string $name, NavDataNode $node): void {
-    $this->testAPIPageQuick($name, $node);
+  public async function testAPIPage(
+    string $name,
+    NavDataNode $node,
+  ): Awaitable<void> {
+    await $this->testAPIPageQuick($name, $node);
   }
 
   /**
@@ -71,33 +74,37 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
    * @small
    */
   <<DataProvider('shortListOfAPIPages')>>
-  public function testAPIPageQuick(string $_, NavDataNode $node): void {
-    $response = \HH\Asio\join(PageLoader::getPageAsync($node['urlPath']));
+  public async function testAPIPageQuick(
+    string $_,
+    NavDataNode $node,
+  ): Awaitable<void> {
+    list($response, $body) = await PageLoader::getPageAsync($node['urlPath']);
     expect($response->getStatusCode())->toBeSame(200);
 
     // Top-level pages don't contain their own name in the output - eg 'Classes'
     // is 'Class Reference'
-    $blacklist = (new Set(APIDefinitionType::getValues()))->map($x ==>
-      APINavData::get(APIProduct::HACK)->getRootNameForType($x));
+    $blacklist = (new Set(APIDefinitionType::getValues()))->map(
+      $x ==> APINavData::get(APIProduct::HACK)->getRootNameForType($x),
+    );
     if (!$blacklist->contains($node['name'])) {
-      expect((string)$response->getBody())->toContain($node['name']);
+      expect($body)->toContain($node['name']);
     }
   }
 
-  public function testMethodDeprecated(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('/hack/reference/class/HH.Vector/fromArray/'),
+  public async function testMethodDeprecated(): Awaitable<void> {
+    list($_, $body) = await PageLoader::getPageAsync(
+      '/hack/reference/class/HH.Vector/fromArray/',
     );
 
-    expect((string)$response->getBody())->toContain('Deprecated');
+    expect($body)->toContain('Deprecated');
   }
 
-  public function testNullableTypeMerged(): void {
-    $response = \HH\Asio\join(
-      PageLoader::getPageAsync('/hack/reference/class/HH.Vector/firstValue/'),
+  public async function testNullableTypeMerged(): Awaitable<void> {
+    list($_, $body) = await PageLoader::getPageAsync(
+      '/hack/reference/class/HH.Vector/firstValue/',
     );
 
-    expect((string)$response->getBody())->toContain('<code>?Tv</code>');
+    expect($body)->toContain('<code>?Tv</code>');
   }
 
   public function getDoNotDocument(): vec<(string, APIDefinitionType)> {
@@ -113,23 +120,28 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
   }
 
   <<DataProvider('getDoNotDocument')>>
-  public function testDoesNotDocument(
+  public async function testDoesNotDocument(
     string $name,
     APIDefinitionType $type,
-  ): void {
+  ): Awaitable<void> {
     switch ($type) {
       case APIDefinitionType::CLASS_DEF:
       case APIDefinitionType::TRAIT_DEF:
       case APIDefinitionType::INTERFACE_DEF:
-        $url =
-          URLBuilder::getPathForClass(APIProduct::HACK, shape('name' => $name, 'type' => $type));
+        $url = URLBuilder::getPathForClass(
+          APIProduct::HACK,
+          shape('name' => $name, 'type' => $type),
+        );
         break;
       case APIDefinitionType::FUNCTION_DEF:
-        $url = URLBuilder::getPathForFunction(APIProduct::HACK, shape('name' => $name));
+        $url = URLBuilder::getPathForFunction(
+          APIProduct::HACK,
+          shape('name' => $name),
+        );
         break;
     }
-    $response = \HH\Asio\join(PageLoader::getPageAsync($url));
-    expect(      $response->getStatusCode())->toBeSame(
+    list($response, $_) = await PageLoader::getPageAsync($url);
+    expect($response->getStatusCode())->toBeSame(
       404,
       \sprintf('"%s" should not be documented', $name),
     );

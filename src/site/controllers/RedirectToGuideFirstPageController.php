@@ -12,10 +12,11 @@
 use type HHVM\UserDocumentation\GuidesIndex;
 use type HHVM\UserDocumentation\GuidesProduct;
 use type HHVM\UserDocumentation\URLBuilder;
-use type Psr\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
 
 final class RedirectToGuideFirstPageController
-extends WebController implements RoutableGetController {
+  extends WebController
+  implements RoutableGetController {
   use RedirectToGuideFirstPageControllerParametersTrait;
 
   public static function getUriPattern(): UriPattern {
@@ -28,7 +29,9 @@ extends WebController implements RoutableGetController {
   }
 
   <<__Override>>
-  public async function getResponseAsync(): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(
+    ResponseInterface $_,
+  ): Awaitable<ResponseInterface> {
     $params = $this->getParameters();
     $product = GuidesProduct::assert($params['Product']);
     $guide = $params['Guide'];

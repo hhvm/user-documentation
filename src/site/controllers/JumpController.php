@@ -11,13 +11,13 @@
 
 use type HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\JumpIndexData;
-use type Psr\Http\Message\ResponseInterface;
+use type Facebook\Experimental\Http\Message\ResponseInterface;
 
 require_once(BuildPaths::JUMP_INDEX);
 
 final class JumpController
-extends WebController
-implements RoutableGetController {
+  extends WebController
+  implements RoutableGetController {
   use JumpControllerParametersTrait;
 
   public static function getUriPattern(): UriPattern {
@@ -27,7 +27,9 @@ implements RoutableGetController {
   }
 
   <<__Override>>
-  public function getResponseAsync(): Awaitable<ResponseInterface> {
+  public function getResponseAsync(
+    ResponseInterface $_,
+  ): Awaitable<ResponseInterface> {
     $keyword = $this->getParameters()['Keyword'];
 
     $data = JumpIndexData::getIndex();
@@ -36,8 +38,6 @@ implements RoutableGetController {
       throw new RedirectException($url);
     }
 
-    throw new RedirectException(
-      '/search?term='.urlencode($keyword)
-    );
+    throw new RedirectException('/search?term='.urlencode($keyword));
   }
 }
