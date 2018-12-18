@@ -22,10 +22,10 @@ You need both the standard AWS tools, and the 'EB' (elastic beanstalk) tools.
 
 ## Create AWS accounts
 
-Our AWS login page is at https://fb-oss.signin.aws.amazon.com - first, get an existing admin to create an admin account for you:
+Our AWS login page is at https://fb-oss-hhvm.signin.aws.amazon.com/console - first, get an existing admin to create an admin account for you:
 
  - go to IAM (Identity & Access Mangement)
- - Create a new user (usually `yourfbunixname`) - untick `Generate an access key for each user`
+ - Create a new user (usually `yourfbunixname`) - untick `Programmatic Access`
  - Set a password, and tick 'require user to change their password on next login'
  - Enable two-factor authentication (aka multi-factor authentication, MFA); you can use the Duo app on your phone, or a hardware device if one is available. We generally recommend a hardware device as resetting MFA is a pain with AWS, and neccessary if your phone is lost, upgraded, wiped, or restored from backup.
  - Add this account to the 'admins' group
@@ -34,11 +34,10 @@ Our AWS login page is at https://fb-oss.signin.aws.amazon.com - first, get an ex
 You should then login as your new admin account, and create yourself a less privileged account:
 
  - go to IAM
- - Create a new user (usually `yourfbunixname_non_admin`) - leave `Generate an access key for each user` ticked
+ - Create a new user (usually `yourfbunixname_non_admin`) - leave `Programmatic Access` ticked
+ - Add the new user to the 'EB-hhvm-docs' group
  - **DO NOT** set a password or associate a two-factor device
  - You'll then be given an API keypair
- - Open up another tab, and go to IAM again
- - Add the new user to the 'EB-hhvm-docs' group
  - Open a terminal
  - run `aws configure` and enter the API credentials IAM gave you in the first tab; leave the other options at their default
  - close both tabs, and remove any other copies of those new credentials
