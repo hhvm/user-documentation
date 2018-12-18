@@ -113,67 +113,13 @@ e.g., `/hack/lambdas/creation-story`
 
 ## Testing Changes
 
-We use PHPUnit to ensure consistency across the changes we make to the guides, API references, and examples.
+We have a test suite to ensure consistency across the changes we make to the guides, API references, and examples.
 
-### Full Test Suite
-
-If you change any content or want to thoroughly test the code, run the full test suite:
+You can run it as follows:
 
 ```
-$ hhvm vendor/bin/phpunit
+$ hhvm vendor/bin/hacktest tests/
 ```
-
-### Small Test Suite
-
-If you make a small change to the Hack code (excluding examples), you can run a smaller set of tests:
-
-```
-$ hhvm vendor/bin/phpunit --group small
-```
-
-Almost none of the content tests will run - eg internal links and examples will not be tested.
-
-It is still good practice to run the full test suite before commit, but the small suite is handy when iterating.
-
-### Running against an HTTP server
-
-A subset of the tests can be ran against an HTTP server instead of locally:
-
-```
-$ REMOTE_TEST_HOST=staging.docs.hhvm.com hhvm vendor/bin/phpunit --group remote
-```
-
-### Adding new tests
-
-Follow the examples in the other tests. Please annotate your tests with:
-
-```
- /**
-  * @large
-  *
-  * Add this annotation if your test takes a long time to run.
-  */
-
- /**
-  * @small
-  *
-  * Add this annotation if your test is quick
-  */
-
- /**
-  * @group remote
-  *
-  * Add this if:
-  *  - your test only checks the output of page loads
-  *  - your test only loads a few pages
-  *
-  * This will make your test automatically run against staging during the deploy process.
-  *
-  * If you don't want @small, you don't want this.
-  */
-```
-
-These attributes can be applied to entire classes or specific methods. You might want to use `@large` for a class, but mark a specific method as `@small` `@group remote`. If you only have a `@large` test, consider making a `@group remote` test that only checks a small amount of this data. The data should be intentionally chosen, not random, as we hate intermittent failures.
 
 ## Running the Examples
 
@@ -242,7 +188,7 @@ Each example is structured to be run with the [HHVM test runner](https://github.
 
 You can run the HHVM test runner on the entire suite of examples, on one directory of examples or just one example itself. 
 
-*Normally you will use our PHPUnit testing described [above](#testing-changes) to test any changes you make (because it tests our examples as well). However, sometimes it is actually faster and more explicit to test one example directly with the HHVM test runner.*
+*Normally you will use our test suit described [above](#testing-changes) to test any changes you make (because it tests our examples as well). However, sometimes it is actually faster and more explicit to test one example directly with the HHVM test runner.*
 
 Assuming you have installed and **compiled** HHVM from source, here is how you can run the examples with the test runner:
 
@@ -250,11 +196,11 @@ Assuming you have installed and **compiled** HHVM from source, here is how you c
 # Assuming you are in the user-documentation repo root
 
 # This runs every example in the test runner.
-# Won't normally need to do this; just use our PHPUnit testing instead.
+# Won't normally need to do this; just use our test suite instead.
 % hhvm /path/to/hhvm/source/hphp/test/run .
 
 # This runs every example in the test runner in typechecker mode
-# Won't normally need to do this; just use our PHPUnit testing instead.
+# Won't normally need to do this; just use our test suite instead.
 % hhvm /path/to/hhvm/source/hphp/test/run --typechecker .
 
 # This runs all collections topic examples in the test runner

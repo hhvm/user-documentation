@@ -8,7 +8,7 @@ if [ ! -e /docker_build ]; then
 fi
 
 cd /var/www
-# init.sh removes dev dependencies like phpunit as they are not required
+# init.sh removes dev dependencies as they are not required
 # to run the site, but we need them here.
 hhvm /opt/composer/composer.phar install
 exec bin/test-staging.sh
