@@ -1,6 +1,5 @@
-Inside a lengthy async function, it's generally a good idea to group together data fetches that are independent of the rest of the function. This reduces unneeded waiting for I/O. 
-
-To express this grouping inline, you would usually have to use a helper function. Async blocks allow for the immediate execution of a grouping of code, possibly within zero-argument, async lambdas.
+Async blocks are syntactic sugar for defining an async function and
+immediately calling it.
 
 ## Syntax
 
@@ -8,31 +7,72 @@ The syntax for an async block is:
 
 ```
 async {
-  // grouped together calls, usually await.
+  // Any statement, typically await statements.
   < statements >
 }
 ```
 
 ## Usage
 
-Async blocks have two primary use cases. Remember this is essentially syntatic sugar to make your life easier.
+Async blocks are great for code that is conditionally asynchronous:
 
-- Inline simple async statements that would before have required a function call to execute.
-- Replace the call required by an async lambda to return an actual `Awaitable<T>`.
+```
+$fetch ? gen_from_database() : async { return null; };
 
-@@ blocks-examples/syntactic-sugar.php @@
+// This is a type error, because null is not an Awaitable value
+$fetch ? gen_from_database() : null;
+```
+
+You can also use them to group your asynchronous logic together:
+
+```
+list($x, $y) = Asio\va(
+    gen_from_database(),
+    async {
+        $foo = gen_count_from_database('foo');
+        $bar = gen_count_from_database('bar');
+        return $foo + $bar;
+    }
+);
+```
+
+Without an async block, you'd need an asynchronous lambda:
+
+```
+list($x, $y) = Asio\va(
+    gen_from_database(),
+    (async () ==> {
+        $foo = gen_count_from_database('foo');
+        $bar = gen_count_from_database('bar');
+        return $foo + $bar;
+    })()
+);
+```
+
+## Behavior
+
+Async blocks behave the exactly same as anonymous functions that are
+immediately called.
+
+```
+$x = async {
+    return foo();
+};
+
+// Equivalent to:
+$x = (async () ==> {
+    return foo();
+})();
+```
 
 ## Limitations
 
-The typechecker does not allow the use of an async block immediately on the right-hand side of the `==>` in a lambda.
-
-In async functions declared with the `function` keyword, `async` immediately precedes `function`, which in turn immediately precedes the arguments. In async lambdas, `async` also immediately precedes the arguments.
-
-So:
+Hack does not allow the use of an async block immediately after `==>`
+in a lambda. This is to prevent confusion. Asynchronous anonymous
+functions should start with `async`.
 
 ```
-$x = async () ==> {...} // good
-$x = () ==> async {...} // bad  
-```
+$x = async () ==> {...} // correct
 
-Basically this is just a safety guard to reduce the likelihood of unintended behavior.
+$x = () ==> async {...} // syntax error
+```
