@@ -118,7 +118,7 @@ The interface type `IMemoizeParam` assists with memorizing objects passed to asy
 
 ## __MemoizeLSB
 
-This is like [<<__Memoize>>](#__memoize), but the cache has Late Static Binding. Each subclass has its own memoize cache
+This is like [<<__Memoize>>](#__memoize), but the cache has Late Static Binding. Each subclass has its own memoize cache.
 
 ## __MockClass
 
