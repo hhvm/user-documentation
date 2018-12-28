@@ -2,7 +2,7 @@ The following attributes are defined:
 * [__AcceptDisposable](#__acceptdisposable)
 * [__ConsistentConstruct](#__consistentconstruct)
 * [__Deprecated](#__deprecated)
-* [__Entrypoint](#__entrypoint)
+* [__EntryPoint](#__entrypoint)
 * [__LateInit](#__lateinit)
 * [__Memoize](#__memoize)
 * [__MemoizeLSB](#__memoizelsb)
@@ -65,13 +65,13 @@ function, the type checker issues a diagnostic containing the text from the firs
 value (in this case, 7) indicates a *sample rate*. Assuming the program will still execute, every 1/sample-rate calls (as in, 1/7) to that 
 function will be diagnosed at runtime.
 
-## __Entrypoint
+## __EntryPoint
 
 A Hack program begins execution at a top-level function referred to as the *entry-point function*. A top-level function can be designated as such using this attribute, which 
 has no attribute values. For example:
 
 ```Hack
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \printf("Hello, World!\n");
 }
