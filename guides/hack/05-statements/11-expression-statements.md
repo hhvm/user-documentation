@@ -9,7 +9,7 @@ While the following expression statements are syntactically correct, they serve 
 
 In all cases, there are no side-effects, and the result is discarded.
 
-If an expression statement contains no expression (that is, it’s just a semicolon), we have a *null statement*.  Consider the following:
+If an expression statement contains no expression (that is, it's just a semicolon), we have a *null statement*.  Consider the following:
 
 ```Hack
 while ((c = getNextCharacter()) === " " || c === "\t")

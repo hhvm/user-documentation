@@ -12,7 +12,7 @@ function distance((float, float) $p1, (float, float) $p2): float {
 }
 ```
 
-The function’s name is `distance`, parameters `$p1` and `$p2` have type *tuple of two `float`s*, and the return type is `float`.  The 
+The function's name is `distance`, parameters `$p1` and `$p2` have type *tuple of two `float`s*, and the return type is `float`.  The 
 body of the function---that is, the set of statements executed when this function is called---is enclosed in the brace pair.  A function's 
 body may be empty.  Each parameter is a variable local to the parent function.
 

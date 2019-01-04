@@ -201,7 +201,7 @@ Name | Description
 
 ## Legacy Vector, Map, and Set
 
-Early in Hack’s life, the library provided mutable and immutable generic class types called: `Vector`, `ImmVector`, `Map`, `ImmMap`, `Set`, 
+Early in Hack's life, the library provided mutable and immutable generic class types called: `Vector`, `ImmVector`, `Map`, `ImmMap`, `Set`, 
 and `ImmSet`. However, these have been replaced by `vec`, `dict`, and `keyset`, whose use is recommended in all new code. Each generic type 
 had a corresponding literal form. For example, a variable of type `vector<int>` might be initialized using `Vector {22, 33, $v}`, where `$v` 
 is a variable of type `int`.
@@ -229,7 +229,8 @@ This is a *vector-like* array, and it has an implicit key type of `int`, and an 
 and initialized using the array-creation intrinsic function, `array(...)`.  (There is an equivalent array-creation operator `[...]`.) 
 There are three elements, and their corresponding keys are 0, 1, and 2.
 
-An array’s key type can be declared explicitly; for example:
+An array's key type can be declared explicitly; for example:
+
 
 ```Hack
 private array<int, string> $colorsMap = array("red", "white", "blue");
@@ -255,7 +256,7 @@ The key type can be other than `int`; for example:
 private array<string, int> $fruitMap = array('oranges' => 25, 'apples' => 12, 'pears' => 17);
 ```
 
-Although we can use any type as an array’s key type, behind the scenes, the key is actually represented as an `int` or `string`, 
+Although we can use any type as an array's key type, behind the scenes, the key is actually represented as an `int` or `string`, 
 so---possibly surprising, or at least, unexpected---conversions occur when other key types are specified. **Programmers are strongly 
 advised to avoid using key types other than `int` or `string`.**
 

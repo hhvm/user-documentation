@@ -40,7 +40,7 @@ The `==>` operator is right-associative, and lambda expressions can be chained t
 @@ anonymous-functions-examples/chaining.php @@
 
 Note that all the parameter types and return types are absent in the lambda-creation expression; they can be omitted, in which case, they are 
-inferred. For completeness, here’s the same expression written with explicit type information:
+inferred. For completeness, here's the same expression written with explicit type information:
 
 ```Hack
 $lam1 = (int $x): (function(int): int) ==> (int $y): int ==> $x + $y;

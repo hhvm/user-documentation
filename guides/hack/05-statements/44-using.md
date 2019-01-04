@@ -12,7 +12,7 @@ the `using` block, and at the end of that scope, `__dispose` (or `__disposeAsync
 omitted, we cannot access the object directly inside the block.
 
 Within the block, there are limits to what we can do with `$f1`. Specifically, we *cannot* assign to it again or make copies of it.  And to 
-pass it to a function, we must mark the function’s corresponding parameter with the 
+pass it to a function, we must mark the function's corresponding parameter with the 
 [attribute __AcceptDisposable](../attributes/predefined-attributes.md#__AcceptDisposable).  We can also call methods on the object 
 that `$f1` designates.  Consider the following:
 
@@ -25,7 +25,7 @@ that `$f1` designates.  Consider the following:
 ```
 
 Note the commented-out trace statement at the start of the block. Under the hood, we're trying to pass a copy of a TextFile to `echo`, but 
-`echo` doesn't know anything about TextFile’s object cleanup, so that is rejected. We can, however, directly call a method on that object, 
+`echo` doesn't know anything about TextFile's object cleanup, so that is rejected. We can, however, directly call a method on that object, 
 which is why `__toString` is called explicitly in the statement following.
 
 Here is an example of the non-block form:

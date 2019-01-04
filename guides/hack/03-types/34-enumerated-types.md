@@ -1,5 +1,5 @@
 The core primitive types are not always the best type for a variable or property. Yes, `bool` allows us to store answers to Yes/No questions, 
-and `?bool` allows us to store an extra value, “don’t know/not available”, but what is the best way to represent something like a variable 
+and `?bool` allows us to store an extra value, (don't know/not available), but what is the best way to represent something like a variable 
 that has more than three, but less than say 10 states? For example, when working with some sort of windowing system, we might want placement-direction 
 values like Top, Bottom, Left, Right, and Center.  And while we could use `int`, that type allows far more invalid values than there are valid ones. 
 The solution is to use an enumerated type and its associated values. For example:
@@ -24,11 +24,11 @@ in the same enumerated type.  For example:
 @@ enumerated-types-examples/BitFlags.php @@
 
 Here, the underlying type has a *type constraint* (via an `as` clause). In the absence of the constraint, the type of `F1`, `F2`, and `F3` 
-is `enum BitFlags`, which is not an integer type.  So, it can’t be involved in bit-shifting. However, with the constraint, their type is 
+is `enum BitFlags`, which is not an integer type.  So, it can't be involved in bit-shifting. However, with the constraint, their type is 
 that of the constraint, in this case, `int`.  This allows these enumeration constants to be used in the context of an `int` (such as with 
 the relational or bitwise operators), but not vice versa.
 
-Here’s an example that uses enumeration constants with `string` values:
+Here's an example that uses enumeration constants with `string` values:
 
 @@ enumerated-types-examples/Permission.php @@
 

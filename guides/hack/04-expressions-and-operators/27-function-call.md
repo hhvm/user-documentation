@@ -13,7 +13,7 @@ distance(tuple($v++, -6.2), tuple(-$v, 3.6))
 ```
 
 Ordinarily, the function-call operator is preceded by the name of the function to be called; however, what that operator really needs is an 
-expression that designates a function, and alternative approaches are available beside using that function’s name. Consider the following example, 
+expression that designates a function, and alternative approaches are available beside using that function's name. Consider the following example, 
 which indexes into an array of anonymous-function objects, and calls the resulting unnamed function:
 
 @@ function-call-examples/array-of-closures.php @@

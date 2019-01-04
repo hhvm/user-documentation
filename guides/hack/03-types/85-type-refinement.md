@@ -16,7 +16,7 @@ Consider the following:
 
 @@ type-refinement-examples/f2.php @@
 
-The first assignment is rejected, not because we don’t know `$p`'s type, but because we know its type is not `int`. See how an opposite 
+The first assignment is rejected, not because we don't know `$p`'s type, but because we know its type is not `int`. See how an opposite 
 type refinement occurs with the `else`.  Similarly, we can write the following:
 
 @@ type-refinement-examples/f3.php @@

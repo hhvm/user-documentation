@@ -6,7 +6,7 @@ can contain one or more `return` statements, provided none of them return a valu
 As is often the case, a function like `draw_line` causes something to happen but does not need to return a result or success code, so its return 
 type is `void`. Likewise, for method `move`.
 
-Here’s another example, involving a generic stack type:
+Here's another example, involving a generic stack type:
 
 ```
 class Stack<T> {

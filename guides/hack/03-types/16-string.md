@@ -1,5 +1,5 @@
 The string type, `string`, is used to represent a sequence of zero or more characters. Conceptually, a string can be considered as an array of 
-characters—the *elements*—whose keys are the `int` values starting at zero. The type of each element is `string`. A string whose length is zero 
+characters -- the *elements* -- whose keys are the `int` values starting at zero. The type of each element is `string`. A string whose length is zero 
 is an *empty string*.
 
 A *numeric string* is a string containing the following: optional leading whitespace, followed by an optional sign, followed by a base-10 integer 

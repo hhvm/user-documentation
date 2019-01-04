@@ -7,7 +7,7 @@ $dy = 2.7;
 $hypot = \sqrt($dx*$dx + $dy*$dy);
 ```
 
-Here, we use Pythagoras’ Theorem to find the hypotenuse of a right-triangle.  The call to the library function `sqrt` contains one argument, 
+Here, we use Pythagoras' Theorem to find the hypotenuse of a right-triangle.  The call to the library function `sqrt` contains one argument, 
 of type `float`, and it returns a value of the same type.
 
 Hack supports recursion; that is, a function can call itself directly or indirectly. For example:

@@ -1,4 +1,4 @@
-The `++` and `--` operands are short-hand notation for “add 1 or 1.0” and “subtract 1 or 1.0”, respectively, but with a slight twist, 
+The `++` and `--` operands are short-hand notation for 'add 1 or 1.0' and 'subtract 1 or 1.0', respectively, but with a slight twist, 
 as we shall see. Consider the following, which uses the prefix version of `++`:
 
 ```Hack

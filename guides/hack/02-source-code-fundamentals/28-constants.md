@@ -5,7 +5,7 @@ of two ways: inside a class or interface using `const`, or by calling the librar
 
 ## Context-Dependent Constants
 
-The following constants—sometimes referred to as *magic constants*---are automatically available to all scripts; their values 
+The following constants --- sometimes referred to as *magic constants* --- are automatically available to all scripts; their values 
 are not fixed:
 
  Constant Name                    | Description                     

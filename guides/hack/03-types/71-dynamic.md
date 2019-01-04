@@ -30,7 +30,7 @@ dynamic, results in another dynamic.
 In the type hierarchy, `dynamic` is a supertype of all types. If a function accepts or returns a 
 dynamic type, any value can be used without performing a cast.
 
-`dynamic` is permissive locally, so we don’t have to null-check it. That said, this means there 
+`dynamic` is permissive locally, so we don't have to null-check it. That said, this means there 
 are no guarantees by the type checker that our type is actually `nonnull`.
 
 Unlike untyped expressions, `dynamic` is not a subtype of any regular type. That is, we cannot pass 

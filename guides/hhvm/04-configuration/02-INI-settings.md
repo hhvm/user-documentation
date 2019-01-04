@@ -400,7 +400,7 @@ These settings enable various features in the runtime, including [Hack](/hack/)-
 | `hhvm.log.admin_log.format` | `string` | `%h %t %s %U` | The admin access log format.
 | `hhvm.log.admin_log.sym_link` | `string` | `''` | You can provide a symlink to the `hhvm.log.admin_log.file`.
 | `hhvm.log.always_escape_log` | `bool` | `true` | By default, escape characters in the logs are escaped. Disable this to not escape them.
-| `hhvm.log.always_log_unhandled_exceptions` | `bool` | `hhvm.force_hh` | Unhandled exceptions are HHVM fatal errors, and AlwaysLogUnhandledExceptions will make sure they get logged even if a user’s error handler is installed for them. The default value is equivalent to what you set for `hhvm.force_hh`.
+| `hhvm.log.always_log_unhandled_exceptions` | `bool` | `hhvm.force_hh` | Unhandled exceptions are HHVM fatal errors, and AlwaysLogUnhandledExceptions will make sure they get logged even if a user's error handler is installed for them. The default value is equivalent to what you set for `hhvm.force_hh`.
 | `hhvm.log.drop_cache_chunk_size` | `int` | `1 << 20` (1 MB) | When dropping the cache, logging will happen after this many bytes have been written.
 | `hhvm.log.file` | `string` | standard error (`stderr`) | The location of the HHVM error log file. If `hhvm.log.use_cronolog` is set, then this setting will be used as the cron output file.
 | `hhvm.log.force_error_reporting_level` | `int` | `0` | A bitmask that will be ORed (`|`) with `hhvm.log.runtime_error_reporting_level` to determine the actual error reporting level.

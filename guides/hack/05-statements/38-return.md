@@ -1,7 +1,7 @@
 A `return` statement can only occur inside a function, in which case, it causes that function to terminate normally.  The function can 
 optionally return a single value (but one which could contain other values, as in a tuple, a shape, or an object of some user-defined 
-type), whose type must be compatible with the function’s declared return type.  If the `return` statement contains no value, or there 
-is no `return` statement (in which case, execution drops into the function’s closing brace), no value is returned.  For example:
+type), whose type must be compatible with the function's declared return type.  If the `return` statement contains no value, or there 
+is no `return` statement (in which case, execution drops into the function's closing brace), no value is returned.  For example:
 
 @@ return-examples/return.php @@
 

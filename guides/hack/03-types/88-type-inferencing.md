@@ -90,4 +90,4 @@ is inferred as `int`. In the third case, as the return type is declared as `int`
 inferred as `int`, so that must also be the type of the parameter.
 
 While all three of these cases allow a call such as `$doubler(3)`, none of them allow a call such as `$doubler(4.2)`. So, the fact that 
-type information can be provided explicitly in these cases doesn’t mean it's necessarily a good idea to do so.
+type information can be provided explicitly in these cases doesn't mean it's necessarily a good idea to do so.
