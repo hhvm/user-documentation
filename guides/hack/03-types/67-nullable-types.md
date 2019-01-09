@@ -7,8 +7,8 @@ Likewise, an application that processes employee information might contain date-
 each represented by an instance of some user-defined type `Date`. To allow for such information to be unknown/not available, we could use the nullable 
 type `?Date`.
 
-A variable of type `mixed` can represent the values of any other type, including any nullable type, which makes `mixed` a nullable type. (However, 
-there is no such type `?mixed`.)
+A variable of type `mixed` can represent the values of any other type, including any nullable type, which makes `mixed` a nullable type. To represent
+a value of any type except `null`, you can use `nonnull`. `mixed` is therefore the same as `?nonnull`, and there is no such type as `?mixed`.
 
 Note that `?void` is *not* permitted.
 
