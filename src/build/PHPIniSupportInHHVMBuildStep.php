@@ -61,8 +61,8 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
     \libxml_use_internal_errors(true);
     // UNSAFE
     $dom = new \DomDocument();
-    $html_content = \file_get_contents(
-      'http://php.net/manual/en/ini.list.php'
+    $html_content = \HH\Asio\join(
+      \HH\Asio\curl_exec('http://php.net/manual/en/ini.list.php')
     );
     $dom->loadHTML($html_content);
     // UNSAFE
