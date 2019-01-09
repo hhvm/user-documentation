@@ -1,22 +1,22 @@
 {
   "require": {
-    "facebook/xhp-lib": "^2.3.2",
-    "hhvm": "^3.23.1",
+    "facebook/xhp-lib": "^2.3",
+    "hhvm": "^3.23",
     "zendframework/zend-diactoros": "^1.1",
     "hhvm/hhvm-autoload": "^1.5",
-    "hhvm/type-assert": "^3.1.0",
-    "facebook/hack-codegen": "^3.0.1",
+    "hhvm/type-assert": "^3.1",
+    "facebook/hack-codegen": "^3.0",
     "facebook/hack-router-codegen": ">= 0.11 < 1.0",
     "facebook/hack-router": ">= 0.14",
-    "hhvm/hsl": "^3.27.0",
+    "hhvm/hsl": "^3.27",
     "facebook/fbmarkdown": "^1.0"
   },
   "require-dev": {
-    "hhvm/hhast": "^3.27.0",
-    "facebook/definition-finder": "^2.0.0",
-    "hack-psr/psr7-http-message-hhi": "^1.0.0",
+    "hhvm/hhast": "^3.27",
+    "facebook/definition-finder": "^2.0",
+    "hack-psr/psr7-http-message-hhi": "^1.0",
     "phpunit/phpunit": "^5.1",
     "91carriage/phpunit-hhi": "^5.1",
-    "facebook/fbexpect": "^0.4.0|^1.0.0"
+    "facebook/fbexpect": "^0.4|^1.0"
   }
 }
