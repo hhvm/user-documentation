@@ -5,14 +5,13 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<122928e149985a1b17b42aea62105326>>
+ * @generated SignedSource<<33b21c68da967fe42bd6a072c1a00d15>>
  */
 
 abstract final class APIFullListControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
-    \APIFullListController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \APIFullListController::class;
   const type TParameters = shape(
     'Product' => \HHVM\UserDocumentation\APIProduct,
   );

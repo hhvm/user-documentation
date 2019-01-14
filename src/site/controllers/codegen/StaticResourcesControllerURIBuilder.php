@@ -5,14 +5,13 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<125b985c0ea70d7c9c5481b6987be252>>
+ * @generated SignedSource<<fe4dac19a35d48f879e41d2e640b651a>>
  */
 
 abstract final class StaticResourcesControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
-    \StaticResourcesController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \StaticResourcesController::class;
   const type TParameters = shape(
     'Checksum' => string,
     'File' => string,

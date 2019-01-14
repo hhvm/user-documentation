@@ -5,14 +5,13 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<34bdcd1b7f346f3f6f62deefe83a673b>>
+ * @generated SignedSource<<3a927271fe396fefae4a80d0da7bc413>>
  */
 
 abstract final class LegacyRedirectControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
-    \LegacyRedirectController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \LegacyRedirectController::class;
   const type TParameters = shape(
     'LegacyId' => string,
   );
