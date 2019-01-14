@@ -34,7 +34,7 @@ final class JumpController
 
     $data = JumpIndexData::getIndex();
     $url = idx($data, strtolower($keyword));
-    if (is_string($url)) {
+    if ($url is string) {
       throw new RedirectException($url);
     }
 

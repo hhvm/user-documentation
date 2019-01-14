@@ -2,7 +2,7 @@
 
 require_once(__DIR__.'/../vendor/hh_autoload.php');
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function site_main_async(): Awaitable<noreturn> {
   $request = Usox\HackTTP\ServerRequest::createFromGlobals();
   await HHVMDocumentationSite::respondToAsync($request);

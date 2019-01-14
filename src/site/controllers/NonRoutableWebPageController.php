@@ -14,7 +14,7 @@ use type HHVM\UserDocumentation\UIGlyphIcon;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 
-use namespace HH\Lib\{C, Experimental\IO};
+use namespace HH\Lib\C;
 
 abstract class NonRoutableWebPageController extends WebController {
   protected abstract function getTitleAsync(): Awaitable<string>;

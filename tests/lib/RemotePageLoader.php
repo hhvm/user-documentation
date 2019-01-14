@@ -3,7 +3,6 @@
 namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\Experimental\Http\Message\ResponseInterface;
-use type Response;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\Experimental\Filesystem;
 

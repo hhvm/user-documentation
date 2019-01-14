@@ -25,7 +25,7 @@ function bar(): string {
   if (is_float($v)) {
     return "No String";
   }
-  invariant(is_string($v), "Something went wrong if this isn't true");
+  invariant($v is string, "Something went wrong if this isn't true");
   return "Good " . $v;
 }
 

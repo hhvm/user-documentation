@@ -20,8 +20,6 @@ use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
-use namespace HH\Lib\Experimental\IO;
-
 <<__ConsistentConstruct>>
 abstract class WebController {
   const type TParameterDefinitions = shape(

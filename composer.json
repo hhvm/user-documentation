@@ -1,18 +1,18 @@
 {
   "require": {
     "facebook/xhp-lib": "^2.3.2",
-    "hhvm": "^3.23.1",
+    "hhvm": "^3.30.2",
     "usox/hackttp": "0.1",
     "hhvm/hhvm-autoload": "^1.7",
     "hhvm/type-assert": "^3.1.0",
     "facebook/hack-codegen": "^4.0",
     "facebook/hack-router-codegen": ">=0.14 <1.0",
     "facebook/hack-router": ">=0.17 <1.0",
-    "hhvm/hsl": "^3.29.0",
+    "hhvm/hsl": "^3.30.0",
     "facebook/fbmarkdown": "^1.0"
   },
   "require-dev": {
-    "hhvm/hhast": "^3.29.0",
+    "hhvm/hhast": "^3.30.0",
     "facebook/definition-finder": "^2.0.0",
     "hhvm/hacktest": "^1.1",
     "facebook/fbexpect": "^2.1"

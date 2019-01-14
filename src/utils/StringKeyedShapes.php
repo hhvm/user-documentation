@@ -20,7 +20,7 @@ final class StringKeyedShapes {
     $ret = Map { };
     foreach (Shapes::toArray($shape) as $key => $value) {
       invariant(
-        is_string($key),
+        $key is string,
         'non-string key %s passed as key',
         \var_export($key, true),
       );
