@@ -1,7 +1,7 @@
 File "%sconcrete.php", line 18, characters 7-14:
-Class Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\BadChild does not correctly implement all required methods  (Typing[4110])
+Class Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\BadChild does not correctly implement all required members  (Typing[4110])
 File "%sconcrete.php", line 18, characters 24-46:
-Some methods are incompatible with those declared in type Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\ParentWithoutConstraint
+Some members are incompatible with those declared in type Hack\UserDocumentation\TypeConstants\Constraints\Examples\ConcClass\ParentWithoutConstraint
 Read the following to see why:
 File "%sconcrete.php", line 21, characters 14-16:
 The assigned type of this type constant is inconsistent with its parent

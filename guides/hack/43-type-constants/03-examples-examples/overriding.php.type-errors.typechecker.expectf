@@ -1,7 +1,7 @@
 File "%soverriding.php", line 20, characters 7-41:
-Class Hack\UserDocumentation\TypeConstants\Exampes\Examples\Overriding\ChildOfChildOfChildWithNoConstraint does not correctly implement all required methods  (Typing[4110])
+Class Hack\UserDocumentation\TypeConstants\Exampes\Examples\Overriding\ChildOfChildOfChildWithNoConstraint does not correctly implement all required members  (Typing[4110])
 File "%soverriding.php", line 20, characters 51-78:
-Some methods are incompatible with those declared in type Hack\UserDocumentation\TypeConstants\Exampes\Examples\Overriding\ChildOfChildWithNoConstraint
+Some members are incompatible with those declared in type Hack\UserDocumentation\TypeConstants\Exampes\Examples\Overriding\ChildOfChildWithNoConstraint
 Read the following to see why:
 File "%soverriding.php", line 22, characters 14-14:
 The assigned type of this type constant is inconsistent with its parent

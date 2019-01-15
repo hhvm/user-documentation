@@ -1,7 +1,7 @@
 File "%sabstract.php", line 13, characters 7-17:
-Class Hack\UserDocumentation\TypeConstants\Constraints\Examples\AbsClass\SecondChild does not correctly implement all required methods  (Typing[4110])
+Class Hack\UserDocumentation\TypeConstants\Constraints\Examples\AbsClass\SecondChild does not correctly implement all required members  (Typing[4110])
 File "%sabstract.php", line 13, characters 27-35:
-Some methods are incompatible with those declared in type Hack\UserDocumentation\TypeConstants\Constraints\Examples\AbsClass\AbsParent
+Some members are incompatible with those declared in type Hack\UserDocumentation\TypeConstants\Constraints\Examples\AbsClass\AbsParent
 Read the following to see why:
 File "%sabstract.php", line 6, characters 23-25:
 Unable to satisfy constraint on this type constant

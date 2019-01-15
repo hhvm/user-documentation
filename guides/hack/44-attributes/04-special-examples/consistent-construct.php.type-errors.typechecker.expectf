@@ -1,7 +1,7 @@
 File "%sconsistent-construct.php", line 13, characters 7-7:
-Class Hack\UserDocumentation\Attributes\Special\Examples\ConsistentConstr\C does not correctly implement all required methods  (Typing[4041])
+Class Hack\UserDocumentation\Attributes\Special\Examples\ConsistentConstr\C does not correctly implement all required members  (Typing[4041])
 File "%sconsistent-construct.php", line 13, characters 17-17:
-Some methods are incompatible with those declared in type Hack\UserDocumentation\Attributes\Special\Examples\ConsistentConstr\A
+Some members are incompatible with those declared in type Hack\UserDocumentation\Attributes\Special\Examples\ConsistentConstr\A
 Read the following to see why:
 File "%sconsistent-construct.php", line 17, characters 19-29:
 Member __construct has the wrong type

@@ -32,4 +32,7 @@ function baz(): int {
   return $x;
 }
 
-var_dump(baz()); // Typechecker errors. HHVM returns int(6)
+<<__EntryPoint>>
+function main(): noreturn {
+  \var_dump(baz()); // Typechecker errors. HHVM returns int(6)
+}
