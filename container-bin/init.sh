@@ -68,7 +68,9 @@ rm -rf build/scratch
 echo "** Cleaning up..."
 pkill hh_server || true
 rm -rf /root/.composer
-rm -rf /var/www/{.git,api-sources,api-examples,guides} /tmp/hh_server
+rm -rf /var/www/{.git,api-sources,api-examples} /tmp/hh_server
+find /var/www/guides -type f -name '*.php' -o -name '*.php.*' -o -name '*.md' \
+  | xargs rm
 apt-get remove -y $APT_DEPS
 SUDO_FORCE_REMOVE=yes apt-get autoremove -y
 apt-get clean
