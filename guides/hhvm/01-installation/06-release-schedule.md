@@ -8,6 +8,7 @@ We offer "long term support" (LTS) for every third releases - so roughly twice a
 
 | Version | LTS | Release Date | Expected End Of Support |
 |---------|-----|--------------|-------------------------|
+| [3.30]  | Yes | 2018-12-17   | 2019-11-19              |
 | [3.29]  | No  | 2018-10-22   | 2018-11-05              |
 | [3.27]  | Yes | 2018-06-18   | 2019-09-05              |
 | [3.24]  | Yes | 2018-01-16   | 2018-12-17              |
@@ -16,8 +17,8 @@ We offer "long term support" (LTS) for every third releases - so roughly twice a
 
 | Version | LTS | Branch Cut Date | Expected Release Date | Expected End Of Support |
 |---------|-----|-----------------|-----------------------|-------------------------|
-| 3.30    | Yes | 2018-12-03      | 2018-12-17            | 2019-11-19              |
-| 3.31/4.0| No  | 2019-01-28      | 2019-02-11            | 2019-04-08              |
+| 4.0     | No  | 2019-01-28      | 2019-02-11            | 2019-04-08              |
+| 4.1     | No  | 2019-03-25      | 2019-04-08            | 2019-06-03              |
 
 
 ## Unsupported Releases
@@ -30,6 +31,7 @@ All versions not listed above are unsupported; support for the following release
 | [3.26]  | No  | 2018-05-07   | 2018-07-02     |
 | [3.21]  | Yes | 2017-08-02   | 2018-07-02     |
 
+[3.30]: https://hhvm.com/blog/2018/12/17/hhvm-3.30.html
 [3.29]: https://hhvm.com/blog/2018/10/22/hhvm-3.29.html
 [3.28]: https://hhvm.com/blog/2018/08/28/hhvm-3.28.0.html
 [3.27]: https://hhvm.com/blog/2018/06/18/hhvm-3.27.0.html
