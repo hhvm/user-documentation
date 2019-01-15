@@ -83,6 +83,9 @@ abstract final class ScannedDefinitionFilters {
     if (!$def instanceof ScannedFunction) {
       return false;
     }
+    if (self::isHHSpecific($def)) {
+      return false;
+    }
     $path = $def->getFileName();
     if (!(
       Str\starts_with($path, BuildPaths::HHVM_TREE)

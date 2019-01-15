@@ -24,7 +24,7 @@ use type Facebook\DefinitionFinder\{
 use namespace Facebook\HHAPIDoc;
 use namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\HHAPIDoc\Documentable;
-use namespace HH\Lib\{Dict, Str, Tuple, Vec};
+use namespace HH\Lib\{C, Dict, Str, Tuple, Vec};
 use namespace Facebook\TypeAssert;
 
 final class HHAPIDocBuildStep extends BuildStep {
@@ -32,7 +32,7 @@ final class HHAPIDocBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nHHAPIDocBuildStep");
 
-    $exts = ImmSet { 'php', 'hhi', 'hh' };
+    $exts = ImmSet {'php', 'hhi', 'hh'};
 
     Log::i("\nFinding Builtin Sources");
     $runtime_sources = Vec\concat(
@@ -48,6 +48,7 @@ final class HHAPIDocBuildStep extends BuildStep {
     ));
     Log::i("\nDe-duping builtins");
     $builtin_defs = DataMerger::mergeAll(Vec\concat($runtime_defs, $hhi_defs));
+
     Log::i("\nFiltering out PHP builtins");
     $builtin_defs = Vec\filter(
       $builtin_defs,
@@ -56,7 +57,8 @@ final class HHAPIDocBuildStep extends BuildStep {
         if ($parent !== null) {
           return ScannedDefinitionFilters::isHHSpecific($parent);
         }
-        return ScannedDefinitionFilters::isHHSpecific($documentable['definition']);
+        return
+          ScannedDefinitionFilters::isHHSpecific($documentable['definition']);
       },
     );
 
@@ -181,11 +183,8 @@ final class HHAPIDocBuildStep extends BuildStep {
                 )),
               );
             },
-            $method ==> Str\replace(
-              $method['definition']->getName(),
-              "\\",
-              '.',
-            ),
+            $method ==>
+              Str\replace($method['definition']->getName(), "\\", '.'),
           ),
         );
       },
@@ -209,15 +208,45 @@ final class HHAPIDocBuildStep extends BuildStep {
         return shape(
           'name' => $function_name,
           'htmlPath' => $html_paths->getPathForFunction($function_name),
-          'urlPath' => \APIClassPageControllerURIBuilder::getPath(shape(
-            'Product' => $product,
-            'Name' => Str\replace($function_name, "\\", '.'),
-            'Type' => APIDefinitionType::FUNCTION_DEF,
+          'urlPath' => \APIClassPageControllerURIBuilder::getPath(
+            shape(
+              'Product' => $product,
+              'Name' => Str\replace($function_name, "\\", '.'),
+              'Type' => APIDefinitionType::FUNCTION_DEF,
+            ),
           ),
-        ));
+        );
       },
       $function ==> Str\replace($function['definition']->getName(), "\\", '.'),
     );
+  }
+
+  private static function correctHHIOnlyDefs(Documentable $def): Documentable {
+    $obj = $def['definition'];
+    if (!$obj instanceof ScannedFunction) {
+      return $def;
+    }
+    $to_fix = keyset[
+      'fun',
+      'meth_caller',
+      'class_meth',
+      'inst_meth',
+    ];
+    if (!C\contains_key($to_fix, $obj->getName())) {
+      return $def;
+    }
+    \var_dump('found def!');
+    $def['definition'] = new ScannedFunction(
+      $obj->getAST(),
+      "HH\\".$obj->getName(),
+      $obj->getContext(),
+      $obj->getAttributes(),
+      $obj->getDocComment(),
+      $obj->getGenericTypes(),
+      $obj->getReturnType(),
+      $obj->getParameters(),
+    );
+    return $def;
   }
 
   private static async function parseAsync(
@@ -234,13 +263,14 @@ final class HHAPIDocBuildStep extends BuildStep {
     return $parsers
       |> Vec\map($$, $parser ==> Documentables\from_parser($parser))
       |> Vec\flatten($$)
+      |> Vec\map($$, $def ==> self::correctHHIOnlyDefs($def))
       |> Vec\filter(
         $$,
         $documentable ==> {
           $parent = $documentable['parent'];
           if (
-            $parent !== null
-            && ScannedDefinitionFilters::shouldNotDocument($parent)
+            $parent !== null &&
+            ScannedDefinitionFilters::shouldNotDocument($parent)
           ) {
             return false;
           }
@@ -261,9 +291,7 @@ final class HHAPIDocBuildStep extends BuildStep {
       \mkdir($root, /* mode = */ 0755, /* recursive = */ true);
     }
     $md_paths = MarkdownPaths::get($product);
-    $ctx = new HHAPIDoc\MarkdownBuilderContext(
-      new HHAPIDocExt\PathProvider()
-    );
+    $ctx = new HHAPIDoc\MarkdownBuilderContext(new HHAPIDocExt\PathProvider());
     $builder = new HHAPIDocExt\MarkdownBuilder($ctx);
 
     return Vec\map($documentables, $documentable ==> {
@@ -279,8 +307,8 @@ final class HHAPIDocBuildStep extends BuildStep {
         );
       } else if ($what instanceof ScannedFunction) {
         $path = $md_paths->getPathForFunction($what->getName());
-        } else if ($what instanceof ScannedClassish) {
-          $path = $md_paths->getPathForClassish(
+      } else if ($what instanceof ScannedClassish) {
+        $path = $md_paths->getPathForClassish(
           self::getClassishAPIDefinitionType($what),
           $what->getName(),
         );
@@ -307,9 +335,6 @@ final class HHAPIDocBuildStep extends BuildStep {
     if ($definition instanceof ScannedTrait) {
       return APIDefinitionType::TRAIT_DEF;
     }
-    invariant_violation(
-      "Can't handle type %s",
-      \get_class($definition),
-    );
+    invariant_violation("Can't handle type %s", \get_class($definition));
   }
 }
