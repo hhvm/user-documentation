@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bc35a39c969e315d39c215dbd75013b",
+    "content-hash": "7f55c10aa874238685e119e2d3cfd2b9",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -646,28 +646,28 @@
         },
         {
             "name": "usox/hackttp",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/usox/hackttp.git",
-                "reference": "c83c31abec98c76e6eb557e8330990f8106de1ad"
+                "reference": "1fda438e9cf83df75d9e6a9170731128aea16cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackttp/zipball/c83c31abec98c76e6eb557e8330990f8106de1ad",
-                "reference": "c83c31abec98c76e6eb557e8330990f8106de1ad",
+                "url": "https://api.github.com/repos/usox/hackttp/zipball/1fda438e9cf83df75d9e6a9170731128aea16cd5",
+                "reference": "1fda438e9cf83df75d9e6a9170731128aea16cd5",
                 "shasum": ""
             },
             "require": {
-                "facebook/hack-http-request-response-interfaces": "0.1",
-                "hhvm": "^3.29",
-                "hhvm/hsl": "^3.29",
-                "hhvm/hsl-experimental": "^3.29.3",
+                "facebook/hack-http-request-response-interfaces": "^0.1",
+                "hhvm": "^3.30",
+                "hhvm/hsl": "^3.30",
+                "hhvm/hsl-experimental": "^3.30",
                 "hhvm/type-assert": "^3.2",
                 "usox/hack-http-factory-interfaces": "^0.1"
             },
             "require-dev": {
-                "hhvm/hhast": "^3.29",
+                "hhvm/hhast": "^3.30",
                 "usox/hackmock": "^1"
             },
             "type": "library",
@@ -699,7 +699,7 @@
                 "response",
                 "stream"
             ],
-            "time": "2018-12-09T11:57:41+00:00"
+            "time": "2019-01-16T20:12:24+00:00"
         }
     ],
     "packages-dev": [

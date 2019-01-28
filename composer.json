@@ -2,7 +2,7 @@
   "require": {
     "facebook/xhp-lib": "^2.3.2",
     "hhvm": "^3.30.2",
-    "usox/hackttp": "0.1",
+    "usox/hackttp": "0.2",
     "hhvm/hhvm-autoload": "^1.7",
     "hhvm/type-assert": "^3.1.0",
     "facebook/hack-codegen": "^4.0",

@@ -12,35 +12,14 @@
 use namespace Facebook\HackRouter;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
-use namespace HH\Lib\Math;
-use namespace HH\Lib\Experimental\{Filesystem, IO};
 
 final class HHVMDocumentationSite {
   public static async function respondToAsync(
     ServerRequestInterface $request,
   ): Awaitable<void> {
-    // TODO: add Filesystem\temporary_file_non_disposable() to the HSL
-    $buffer_path = \sys_get_temp_dir().'/'.\bin2hex(\random_bytes(16));
-    $write_handle = Filesystem\open_write_only_non_disposable(
-      $buffer_path,
-      Filesystem\FileWriteMode::MUST_CREATE,
-    );
-    $response = (new \Usox\HackTTP\Response($write_handle));
-    $response = await self::getResponseForRequestAsync($request, $response);
-    \http_response_code($response->getStatusCode());
-    foreach ($response->getHeaders() as $key => $values) {
-      foreach ($values as $value) {
-        \header($key.': '.$value, /* replace = */ false);
-      }
-    }
-    await $write_handle->closeAsync();
-    await using ($read_handle = Filesystem\open_read_only($buffer_path)) {
-      $out = IO\request_output();
-      $content = await $read_handle->readAsync(Math\INT64_MAX);
-      await $out->writeAsync($content);
-      await $out->flushAsync();
-    };
-    \unlink($buffer_path);
+    $response = await self::getResponseForRequestAsync($request, \Usox\HackTTP\createResponse());
+
+    await(new \Usox\HackTTP\Response\TemporaryFileSapiEmitter())->emitAsync($response);
   }
 
   private static function routeRequest(
