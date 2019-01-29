@@ -36,7 +36,7 @@ IMAGE_TAG=$(date +%Y-%m-%d)-$DEPLOY_REV
 IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 
 echo "** Fetching updated base image"
-docker pull $(awk '/^FROM /{print $2}' "$CLEAN_DIR/Dockerfile")
+docker pull $(awk '/^FROM /{print $2}' "$CLEAN_DIR/hhvm-docs/Dockerfile")
 echo "** Building image"
 docker build \
   -t $IMAGE_NAME "$CLEAN_DIR/hhvm-docs"
