@@ -88,4 +88,5 @@ eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
 #docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh
 echo "** Next steps:"
 echo "**  - $ git push # pushes the updated AWS configuration"
-echo "**  - $ eb swap # swaps staging.docs.hhvm.com and docs.hhvm.com"
+echo "**  - $ eb swap # swaps staging.docs.hhvm.com and docs.hhvm.com; this"
+echo "**      also be used to revert a bad push"
