@@ -33,7 +33,7 @@ Choose a directory where you want to store your Hack code. In this directory, ru
 
 ### 3. Write your first Hack program
 
-Using the editor of your choice (e.g., VSCode orvim), let's create a file called `first.php` with the following code:
+Using the editor of your choice (e.g., VSCode or vim), let's create a file called `first.php` with the following code:
 
 @@ getting-started-examples/first.php @@
 
