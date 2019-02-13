@@ -3,7 +3,7 @@
 namespace HHVM\UserDocumentation\BasicUsage\Examples\CommandLine;
 
 function fibonacci(int $number): int {
-  return \intval(\round(\pow((\sqrt(5) + 1) / 2, $number) / \sqrt(5)));
+  return \intval(\round(\pow((\sqrt(5.0) + 1) / 2, $number) / \sqrt(5.0)));
 }
 
 function main(array<string> $argv) {

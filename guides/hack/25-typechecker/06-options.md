@@ -19,7 +19,7 @@ The following example will be used in discussion of these options:
 All of the options below (except the starting and stopping of the server) are actually options to this `--check` command. The following are equivalent
 
 ```
-% hh_client --check [OPTION]
+% hh_client --check [OPTIONk
 % hh_client [OPTION]
 ```
 
@@ -34,12 +34,9 @@ All of the options below (except the starting and stopping of the server) are ac
 ```
 :
 :
-strict  user-documentation/hack/16-typechecker/modes-examples/call-into-decl.php
-decl    user-documentation/hack/16-typechecker/modes-examples/decl.inc.php
 partial user-documentation/hack/16-typechecker/modes-examples/main-function.inc.php
 php user-documentation/hack/16-typechecker/modes-examples/multiple-modes.php
 php user-documentation/hack/16-typechecker/modes-examples/non-hack-code.php
-partial user-documentation/hack/16-typechecker/modes-examples/partial.php
 strict  user-documentation/hack/16-typechecker/modes-examples/strict.php
 :
 :

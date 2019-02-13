@@ -12,6 +12,7 @@ use type HHVM\UserDocumentation\{
 
 use namespace HH\Lib\Vec;
 use function Facebook\FBExpect\expect;
+use type Facebook\HackTest\DataProvider;
 
 class APIPagesTest extends \Facebook\HackTest\HackTest {
   public static function allAPIPages(): array<(string, NavDataNode)> {

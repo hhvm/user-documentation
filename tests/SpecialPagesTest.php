@@ -2,6 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 use function Facebook\FBExpect\expect;
+use type Facebook\HackTest\DataProvider;
 
 /**
  * @group remote

@@ -1,6 +1,7 @@
 <?hh // strict
 
 namespace HHVM\UserDocumentation\Tests;
+use type Facebook\HackTest\DataProvider;
 use function Facebook\FBExpect\expect;
 
 /**

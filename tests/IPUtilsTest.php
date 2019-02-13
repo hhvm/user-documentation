@@ -11,6 +11,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+use type Facebook\HackTest\DataProvider;
 use function HHVM\UserDocumentation\{
   cidr_to_bitstring_and_bitmask,
   is_fb_ip_address,

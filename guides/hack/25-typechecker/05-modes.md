@@ -39,32 +39,6 @@ Strict is the mode you want to strive to. The entire typechecker goodness is at 
 
 Notice that we cannot call into the `<?php` file any longer and that all entities in the Hack file are annotated.
 
-## Decl Mode
-
-Hack code starting with
-
-```
-<?hh // decl
-```
-
-is in decl mode. Decl mode code is not typechecked. However, the *signatures* of functions, classes, etc in decl mode are extracted, and are used by the typechecker when checking other code. Decl mode is most useful when converting over code written in PHP: although the body of that code might have type errors that you don't want to deal with right away, it's still beneficial to make the signature of that code, or at the very least its mere *existence*, visible to other code. In fact, one very basic migration path to Hack is to just change all your `<?php` files to decl mode, then start taking each file one-by-one and making them partial.
-
-New Hack code should **never** be written in decl mode.
-
-@@ modes-examples/decl.inc.php @@
-
-@@ modes-examples/call-into-decl.php @@
-
-@@ modes-examples/main-function.inc.php @@
-
-*Output*
-
-```
-string(2) "ab"
-```
-
-The example shows all three modes. First it shows a decl mode file that used to be in `<?php`. Nothing else was added except the header change. Then it shows a strict mode file calling into the decl mode file. The typechecker knows the signatures of the functions and classes and can ensure basic things like whether you are calling a named entity and passing the right number of arguments. Finally, we have a partial mode file that actually calls the function in strict mode because we cannot have top-level function calls in strict mode.
-
 ## Mixing Modes
 
 As shown in the example above, modes can be freely mixed; each file in your project can be in a different typechecker mode.
