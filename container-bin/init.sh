@@ -19,13 +19,13 @@ apt-get update -y
 # The highlighting gem installs its' own version of pygments so we don't actually
 # use pygments, but this is a handy way to make sure all the dependencies are
 # installed.
-APT_DEPS="ruby bundler"
+APT_DEPS="ruby bundler php-cli zip unzip"
 
 # Install Ruby and Bundler (Ruby package manager)
 apt-get install -y $APT_DEPS
 
 mkdir /opt/composer
-wget -qO /dev/stdout https://getcomposer.org/installer | hhvm --php -- --install-dir=/opt/composer
+wget -qO /dev/stdout https://getcomposer.org/installer | php -- --install-dir=/opt/composer
 if [ ! -e /opt/composer/composer.phar ]; then
   echo "Failed to install composer"
   exit 1
@@ -45,7 +45,7 @@ cp hhvm.${DOCKER_BUILD_ENV}.ini /etc/hhvm/site.ini
 
 # Install direct dependencies
 touch /opt/composer/.hhconfig
-hhvm /opt/composer/composer.phar install
+php /opt/composer/composer.phar install
 hh_client
 bundle --path vendor-rb/
 
