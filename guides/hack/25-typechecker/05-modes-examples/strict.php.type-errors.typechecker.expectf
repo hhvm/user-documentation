@@ -1,7 +1,7 @@
 File "%sstrict.php", line 13, characters 3-10:
 an int does not allow array append (Typing[4006])
 File "%sstrict.php", line 10, characters 8-8:
-You might want to check this out
+Definition is here
 
 File "%sstrict.php", line 43, characters 8-16:
 Unbound name: Hack\UserDocumentation\TypeChecker\Modes\Examples\NonHack\B (an object type) (Naming[2049])

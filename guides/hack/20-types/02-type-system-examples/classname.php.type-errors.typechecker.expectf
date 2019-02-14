@@ -10,4 +10,6 @@ Invalid argument (Typing[4110])
 File "%sclassname.php", line 22, characters 36-36:
 This is an object of type Hack\UserDocumentation\Types\TypeSystem\Examples\CN\I
 File "%sclassname.php", line 34, characters 19-19:
-It is incompatible with an object of type Hack\UserDocumentation\Types\TypeSystem\Examples\CN\D
+It is incompatible with an object of exactly the class Hack\UserDocumentation\Types\TypeSystem\Examples\CN\D
+File "%s/classname.php", line 34, characters 19-19:
+  where the class 'Hack\UserDocumentation\Types\TypeSystem\Examples\CN\D' was referenced here
