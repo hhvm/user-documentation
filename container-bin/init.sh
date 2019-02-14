@@ -58,10 +58,9 @@ hhvm vendor/bin/hacktest tests/
 
 # Clean up
 echo "** Removing build-only PHP dependencies"
-hhvm /opt/composer/composer.phar \
+php /opt/composer/composer.phar \
   install \
-  --no-dev \
-  --optimize-autoloader
+  --no-dev
 rm -rf vendor-rb/
 echo "** Removing intermediate build products"
 rm -rf build/scratch
