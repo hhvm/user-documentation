@@ -37,6 +37,7 @@ final class Guides {
     return dict[
       GuidesProduct::HACK => dict[
         'async' => tuple('asynchronous-operations', null),
+        'collections' => tuple('types', 'arrays'),
         'overview' => tuple('getting-started', null),
       ],
     ][$product] ??
@@ -49,6 +50,9 @@ final class Guides {
     return dict[
       GuidesProduct::HACK => dict[
         'async' => dict[
+          'async-vs-awaitable' =>
+            tuple('asynchronous-operations', 'async-vs.-awaitable'),
+          'awaitables' => tuple('asynchronous-operations', 'awaitables'),
           'exceptions' => tuple('asynchronous-operations', 'exceptions'),
           'extensions' => tuple('asynchronous-operations', 'extensions'),
           'utility-functions' =>
