@@ -8,7 +8,7 @@ final class XHPUnsafeExample implements XHPUnsafeRenderable {
 }
 
 <<__EntryPoint>>
-function main(): void {
+function all_in_one_xhp_example_main(): void {
   $inputs = Map {
     '<div />' => <div />,
     '<x:frag />' => <x:frag />,
@@ -34,4 +34,3 @@ function main(): void {
     );
   }
 }
-
