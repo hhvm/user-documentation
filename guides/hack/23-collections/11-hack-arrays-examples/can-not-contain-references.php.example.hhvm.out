@@ -1,4 +1,0 @@
-
-Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Vecs cannot contain references' in /Users/fredemmott/code/user-documentation/guides/hack/23-collections/11-hack-arrays-examples/can-not-contain-references.php:10
-Stack trace:
-#0 {main}

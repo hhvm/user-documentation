@@ -1,1 +1,0 @@
-Warning: Argument 1 to Hack\UserDocumentation\Types\AdvancedRules\Examples\SoftHint\foo() must be of type @int, bool given in /data/users/joelm/user-documentation/guides/hack/20-types/08-advanced-rules-examples/softhint.php.type-errors on line 9

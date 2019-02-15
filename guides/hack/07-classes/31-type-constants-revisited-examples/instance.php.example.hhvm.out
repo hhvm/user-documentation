@@ -1,0 +1,8 @@
+object(Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\IntBox)#1 (1) {
+  ["value":"Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\Box":private]=>
+  int(10)
+}
+object(Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\IntBox)#1 (1) {
+  ["value":"Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\Box":private]=>
+  int(123)
+}

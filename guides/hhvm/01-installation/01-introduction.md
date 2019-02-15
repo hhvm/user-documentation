@@ -19,7 +19,7 @@ If we support a prebuilt package for a distribution, we support [compiling](/hhv
 
 ### Hack Typechecker
 
-Whether you are using a [prebuilt package](#prebuilt-packages) or compiling from source, the [Hack Typechecker](/hack/typechecker/introduction) is also part of the installation of HHVM.
+Whether you are using a [prebuilt package](#prebuilt-packages) or compiling from source, the Hack Typechecker is also part of the installation of HHVM.
 
 ## Unsupported Distributions
 

@@ -1,0 +1,6 @@
+Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php:7
+Stack trace:
+#0 /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(15): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable\exception_thrower()
+#1 /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(24): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable\multiple_waithandle_exception()
+#2 (): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable\main()
+#3 {main}

@@ -1,6 +1,0 @@
-File "%s/xhp.php", line 32, characters 12-28:
-Invalid return type (Typing[4110])
-File "%s/xhp.php", line 31, characters 33-39:
-This is an object of type XHPRoot
-File "%s/xhp.php", line 32, characters 13-25:
-It is incompatible with an object of exactly the class :ts-simple-xhp

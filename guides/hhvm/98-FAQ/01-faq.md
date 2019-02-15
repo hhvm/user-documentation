@@ -135,7 +135,7 @@ You may have hit the [sorting inconsistency](/hhvm/inconsistencies/arrays-and-fo
 
 > It is not safe to rely on the system's timezone settings. Please use the date.timezone setting....
 
-This should be fixed in HHVM 3.12+ with [this commit](https://github.com/facebook/hhvm/commit/90509bc46a3ded9e6a95d4d406715ff0c059576d), but if you are using an earlier version, then update your `/etc/hhvm/php.ini` file to add:
+This should be fixed in HHVM 3.12+ with [this commit](https://github.com/facebook/hhvm/commit/90509bc46a3ded9e6a95d4d406715ff0c059576d), but if you are using an earlier version, then update your `/etc/hhvm/php.ini` file to add:
 
 ```
 date.timezone=America/Los_Angeles # or your appropriate timezone
@@ -147,6 +147,6 @@ date.timezone=America/Los_Angeles # or your appropriate timezone
 
 This means you are trying to run files with HHVM, either local or via server requests, that are `<?hh` files, but are not being typechecked by `hh_client`. 
 
-Ensure that you have the typechecker [installed](/hack/typechecker/install) and [setup](/hack/typechecker/setup) as well.
+Ensure that you have the typechecker installed and setup as well.
 
 Make sure there is an `.hhconfig` somewhere in the root of your project.

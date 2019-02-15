@@ -1,4 +1,0 @@
-Fatal error: Uncaught exception 'BadMethodCallException' with message 'Call to a member function foo() on a non-object (null)' in /data/users/joelm/user-documentation/guides/hack/25-typechecker/01-introduction-examples/runtime-fail.php:17
-Stack trace:
-#0 /data/users/joelm/user-documentation/guides/hack/25-typechecker/01-introduction-examples/runtime-fail.php(20): Hack\UserDocumentation\TypeChecker\Intro\Examples\RuntimeFail\failing()
-#1 {main}

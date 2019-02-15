@@ -1,4 +1,0 @@
-File "%sdeprecated.php", line 29, characters 12-20:
-The method bar is deprecated: Call baz() instead (Typing[4128])
-File "%sdeprecated.php", line 11, characters 19-21:
-Definition is here

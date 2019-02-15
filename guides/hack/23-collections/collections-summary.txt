@@ -1,2 +1,0 @@
-Improving upon PHP’s arrays with Vectors, Sets, 
-Maps, and other Collections.

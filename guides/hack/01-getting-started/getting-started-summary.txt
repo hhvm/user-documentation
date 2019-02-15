@@ -1,1 +1,2 @@
-Five simple steps to installing Hack, and making your first program.
+Some simple steps to install Hack, writing and running your first program, and 
+some information about Hack-related tools.

@@ -1,1 +1,0 @@
-Adding structure and type-checking to arrays used as structs or records.

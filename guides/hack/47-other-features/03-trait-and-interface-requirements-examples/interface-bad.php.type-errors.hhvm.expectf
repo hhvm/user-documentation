@@ -1,1 +1,0 @@
-Fatal error: Class 'Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Paper' required to extend class 'Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Machine' by interface 'Hack\UserDocumentation\OtherFeatures\TIR\Examples\InterfaceReqBad\Fliers' in %sinterface-bad.php.type-errors on line 21

@@ -1,7 +1,0 @@
-File "%smock.php", line 11, characters 3-13:
-Unrecognized user attribute: __MockClass starts with __ but is not a standard attribute (Naming[2049])
-
-File "%smock.php", line 12, characters 22-38:
-You cannot extend final class AbsFinalClass (Typing[4035])
-File "%smock.php", line 3, characters 22-34:
-Declaration is here

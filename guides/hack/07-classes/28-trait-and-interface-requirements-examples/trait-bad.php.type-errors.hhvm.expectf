@@ -1,0 +1,3 @@
+Fatal error: Uncaught Error: Class 'Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Paper' required to extend class 'Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Machine' by trait 'Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Plane' in /home/ubuntu/user-documentation-2018-09-07/guides/hack/07-classes/31-trait-and-interface-requirements-examples/trait-bad.php:%d
+Stack trace:
+#0 {main}

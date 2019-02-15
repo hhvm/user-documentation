@@ -1,0 +1,6 @@
+Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/basic-exception.php:6
+Stack trace:
+#0 /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/basic-exception.php(14): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\BasicException\exception_thrower()
+#1 /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/basic-exception.php(19): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\BasicException\basic_exception()
+#2 (): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\BasicException\main()
+#3 {main}

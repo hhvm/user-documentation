@@ -1,2 +1,0 @@
-File "%sp", line 9, characters 1-10:
-Toplevel statements besides requires are not allowed in strict files (Parsing[1002])

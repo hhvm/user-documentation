@@ -1,6 +1,0 @@
-<?php
-
-// Need to figure out a proxy plan
-if (!get_headers("www.example.com")) {
-  print "skip";
-}

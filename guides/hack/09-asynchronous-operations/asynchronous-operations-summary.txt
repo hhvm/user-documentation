@@ -1,0 +1,1 @@
+How async programming lets apps scale better and reduces blocking.

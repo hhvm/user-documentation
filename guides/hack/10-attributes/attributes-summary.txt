@@ -1,0 +1,1 @@
+Declarative information that can be attached to various program entities, and retrieved at run-time via reflection.

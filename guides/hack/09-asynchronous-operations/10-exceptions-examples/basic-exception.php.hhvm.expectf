@@ -1,0 +1,6 @@
+Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in %s:%d
+Stack trace:
+#0 %s(%d): %s
+#1 %s(%d): %s
+#2 (): %s
+#3 {main}

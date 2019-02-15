@@ -1,9 +1,0 @@
-int(123)
-string(3) "abc"
-
-Fatal error: Uncaught exception 'HH\InvariantException' with message 'unexpected null' in /Users/fredemmott/code/user-documentation/guides/hack/40-generics/02-entities-examples/functions.php:6
-Stack trace:
-#0 /Users/fredemmott/code/user-documentation/guides/hack/40-generics/02-entities-examples/functions.php(6): HH\invariant_violation()
-#1 /Users/fredemmott/code/user-documentation/guides/hack/40-generics/02-entities-examples/functions.php(13): Hack\UserDocumentation\Generics\Entities\Examples\Functions\nullthrows()
-#2 /Users/fredemmott/code/user-documentation/guides/hack/40-generics/02-entities-examples/functions.php(16): Hack\UserDocumentation\Generics\Entities\Examples\Functions\run()
-#3 {main}

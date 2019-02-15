@@ -1,1 +1,0 @@
-Tools to help you build Hack apps, such as IDEs and editors

@@ -1,1 +1,0 @@
-Catchable fatal error: Argument 1 to Hack\UserDocumentation\TypeChecker\Special\Examples\Unsafe\annotating() must be of type ?string, int given in %s on line 21

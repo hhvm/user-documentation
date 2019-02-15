@@ -1,0 +1,11 @@
+string(167) "C:79:"Hack\UserDocumentation\Classes\Serialization\Examples\ColoredPoint\ColoredPoint":75:{a:2:{s:5:"color";i:3;s:8:"baseData";s:30:"a:2:{s:1:"y";d:8;s:1:"x";d:9;}";}}"
+object(Hack\UserDocumentation\Classes\Serialization\Examples\ColoredPoint\ColoredPoint)#2 (4) {
+  ["color":"Hack\UserDocumentation\Classes\Serialization\Examples\ColoredPoint\ColoredPoint":private]=>
+  int(3)
+  ["id":"Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point":private]=>
+  int(2)
+  ["x":"Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point":private]=>
+  float(9)
+  ["y":"Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point":private]=>
+  float(8)
+}

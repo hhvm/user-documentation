@@ -1,9 +1,0 @@
-object(Hack\UserDocumentation\Generics\Subtypes\Examples\CounterIntuitive\Box)#%d (1) {
-  ["box":"Hack\UserDocumentation\Generics\Subtypes\Examples\CounterIntuitive\Box":private]=>
-  object(HH\Vector)#%d (2) {
-    [0]=>
-    int(3)
-    [1]=>
-    int(%d)
-  }
-}
