@@ -39,7 +39,8 @@ final class Guides {
         'async' => 'asynchronous-operations',
         'overview' => 'getting-started',
       ],
-    ][$product] ?? dict[];
+    ][$product] ??
+      dict[];
   }
 
   public static function getGuidePageRedirects(
@@ -49,6 +50,9 @@ final class Guides {
       GuidesProduct::HACK => dict[
         'async' => dict[
           'exceptions' => tuple('asynchronous-operations', 'exceptions'),
+          'extensions' => tuple('asynchronous-operations', 'extensions'),
+          'utility-functions' =>
+            tuple('asynchronous-operations', 'utility-functions'),
         ],
         'other-features' => dict[
           'constructor-parameter-promotion' => tuple('classes', 'constructors'),
@@ -57,7 +61,8 @@ final class Guides {
           'typing' => tuple('types', 'introduction'),
         ],
       ],
-    ][$product] ?? dict[];
+    ][$product] ??
+      dict[];
   }
 
 }
