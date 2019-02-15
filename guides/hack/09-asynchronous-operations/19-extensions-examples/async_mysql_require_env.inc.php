@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql;
 
@@ -12,4 +12,3 @@ if (!extension_loaded('mysql') || !function_exists('mysqli_connect')) {
 if (!mysqli_connect(CI::$host, CI::$user, CI::$passwd, CI::$db, CI::$port)) {
   die('Skip');
 }
-
