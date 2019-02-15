@@ -8,7 +8,7 @@ function series(int $start, int $end, int $incr = 1): \Generator<int, int, void>
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   foreach (series(5, 15, 2) as $key => $val) {
     echo "key: $key, value: $val\n";

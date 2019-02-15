@@ -30,7 +30,7 @@ function writeText(string $text, Position $pos): void {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   writeText("Hello", Position::Bottom);
   writeText("Today", Position::Left);

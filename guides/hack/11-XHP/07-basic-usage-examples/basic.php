@@ -2,7 +2,7 @@
 
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function basic_usage_examples_basic_xhp(): void {
   var_dump(
     <div>

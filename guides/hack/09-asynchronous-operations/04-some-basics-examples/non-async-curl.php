@@ -16,7 +16,7 @@ function curl_B(): mixed {
   return \curl_exec($ch);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $start = \microtime(true);
   $a = curl_A();

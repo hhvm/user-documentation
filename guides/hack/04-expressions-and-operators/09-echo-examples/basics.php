@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\ExpAndOps\Echo\Examples\Basics;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $v1 = true;
   $v2 = 123.45;

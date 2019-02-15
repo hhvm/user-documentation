@@ -12,7 +12,7 @@ class :user-info extends :x:element {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function extending_examples_attributes_run(): void {
   $uinfo = <user-info />;
   // Can't render :user-info for an echo without setting the required userid

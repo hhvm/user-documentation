@@ -11,7 +11,7 @@ function maximum(int $val1, int ... $vals): int {
   return $retVal;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   echo "max = " . maximum(100) . "\n";
   echo "max = " . maximum(100, 75) . "\n";

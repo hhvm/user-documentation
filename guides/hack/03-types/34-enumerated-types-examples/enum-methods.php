@@ -5,7 +5,7 @@ namespace Hack\UserDocumentation\Types\Enums\Examples\TestMethods;
 include_once("Positions.php");
 use Hack\UserDocumentation\Types\Enums\Examples\Positions\Position as Position;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $names = Position::getNames();
   echo " Position::getNames() ---\n";

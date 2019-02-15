@@ -40,7 +40,7 @@ async function use_lambdas(): Awaitable<void> {
   \var_dump($lc);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(use_lambdas());
 }

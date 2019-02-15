@@ -21,7 +21,7 @@ class AppUser extends User implements IUser {
   use UserTrait;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   $au = new AppUser(-1);
   \var_dump($au->getID());

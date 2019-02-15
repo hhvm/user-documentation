@@ -36,7 +36,7 @@ use type UseNS\C;
 use type UseNS\{D, E};
 use namespace Hack\UserDocumentation\Statements\use\Examples\XXX;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
 
 // access const CON by fully qualified and abbreviated names

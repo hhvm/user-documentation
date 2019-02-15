@@ -38,7 +38,7 @@ async function run(): Awaitable<void> {
   $name = await get_user_name($mcr, 1);
   \var_dump($name); // Should print "Joel"
 }
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(run());
 }

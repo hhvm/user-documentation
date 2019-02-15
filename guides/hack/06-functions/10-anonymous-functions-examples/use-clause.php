@@ -14,7 +14,7 @@ function get_process_2(int $val1): (function (int): int) {
   return $af;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $proc = get_process_1(2);
   $result = $proc(4);

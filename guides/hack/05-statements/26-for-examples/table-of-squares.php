@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Statements\For\Examples\TableOfSquares;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   for ($i = 1; $i <= 5; ++$i) {
     echo "$i\t".($i * $i)."\n"; // output a table of squares

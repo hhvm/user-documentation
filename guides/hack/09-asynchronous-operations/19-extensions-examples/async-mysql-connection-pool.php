@@ -29,7 +29,7 @@ async function run(): Awaitable<void> {
   \var_dump($conn);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(run());
 }

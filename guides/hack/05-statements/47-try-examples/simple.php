@@ -20,7 +20,7 @@ function do_it(int $x, int $y): void {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   do_it(100, 5);
 //  do_it(6, 0);

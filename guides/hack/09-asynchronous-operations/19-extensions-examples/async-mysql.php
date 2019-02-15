@@ -57,7 +57,7 @@ async function async_mysql_tutorial(): Awaitable<void> {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(async_mysql_tutorial());
 }

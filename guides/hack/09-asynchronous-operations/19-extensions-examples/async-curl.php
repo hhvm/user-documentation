@@ -18,7 +18,7 @@ async function get_combined_contents(vec<string> $urls): Awaitable<vec<string>> 
   return $contents;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(get_combined_contents(get_urls()));
 }

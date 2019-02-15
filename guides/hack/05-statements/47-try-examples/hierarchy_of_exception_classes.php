@@ -11,7 +11,7 @@ function process(): void {
   throw new DeviceException();
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   try {
     process(); // call a function that might generate a disk-related exception

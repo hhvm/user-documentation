@@ -18,7 +18,7 @@ class Point {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $p = new Point();
   $p->move(-2.2, -4);

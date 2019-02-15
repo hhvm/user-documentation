@@ -19,7 +19,7 @@ function getTextFileLines(string $filename): \Generator<int, string, void> {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   foreach (getTextFileLines(__DIR__ . "/Testfile.txt") as $line) {
     echo ">$line<\n";

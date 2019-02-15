@@ -8,7 +8,7 @@ function f(): void {
   ++$fs;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   for ($i = 1; $i <= 3; ++$i)
     f();

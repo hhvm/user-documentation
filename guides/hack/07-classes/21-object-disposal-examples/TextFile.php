@@ -53,7 +53,7 @@ class TextFile implements \IDisposable {
   // other methods, such as read and write
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   using ($f1 = new TextFile("file1.txt", "rw")) {
 //  echo "\$f1 is >" . $f1 . "<\n";  // usage not permitted

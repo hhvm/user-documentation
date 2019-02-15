@@ -47,7 +47,7 @@ async function polling_example(): Awaitable<void> {
   $results = await Vec\from_async($handles);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(polling_example());
 }

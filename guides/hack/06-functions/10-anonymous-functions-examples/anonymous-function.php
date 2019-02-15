@@ -6,7 +6,7 @@ function do_it((function (int): int) $process, int $value): int {
 	return $process($value);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $closure = function (int $p): int { return $p * 2; };
   $result = $closure(5);

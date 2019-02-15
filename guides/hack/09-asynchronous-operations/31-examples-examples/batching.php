@@ -20,7 +20,7 @@ async function batching(): Awaitable<void> {
   \printf("%s\n%s\n", $results[0], $results[1]);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(batching());
 }

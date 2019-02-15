@@ -18,7 +18,7 @@ async function proximity(): Awaitable<void> {
   await $handle; // instead you should await get_curl_data("....") here
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(proximity());
 }

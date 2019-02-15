@@ -13,7 +13,7 @@ class :ui-my-box extends :x:element {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function extending_examples_bad_attribute_transfer_run(): void {
   $my_box = <ui-my-box title="My box" />;
   // This will only bring <div class="my-box"></div> ... title= will be

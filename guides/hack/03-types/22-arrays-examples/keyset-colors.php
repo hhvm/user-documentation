@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Types\Arrays\Examples\KeysetColors;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $colors = keyset[];    // create an empty keyset
   \var_dump($colors);

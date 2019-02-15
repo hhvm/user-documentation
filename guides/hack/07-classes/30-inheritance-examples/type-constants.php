@@ -21,7 +21,7 @@ class Cint extends CBase {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run2(): void {
   \var_dump((new Cstring('abc'))->get_string());
   \var_dump((new Cint(123))->get_int());

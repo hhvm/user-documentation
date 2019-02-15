@@ -7,7 +7,7 @@ class C {
   const float UPPER_LIMIT = C::MAX_HEIGHT;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
 
   \define('COEFFICIENT_1', 2.345, false);

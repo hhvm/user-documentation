@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\ExpAndOps\FunctionCall\Examples\Closures;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $table = vec[
     (function (int $p) { return $p * 2; }),  // doubles

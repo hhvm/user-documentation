@@ -1,7 +1,7 @@
 <?hh
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function intro_examples_a_a_post() {
   $get_link =
    <a href="http://www.example.com">I'm a normal link</a>;

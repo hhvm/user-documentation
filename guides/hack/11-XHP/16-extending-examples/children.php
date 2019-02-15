@@ -29,7 +29,7 @@ class :my-html extends :x:element {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function extending_examples_children_run(): void {
   $my_br = <my-br />;
   // Even though my-br does not take any children, you can still call the

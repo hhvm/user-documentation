@@ -18,7 +18,7 @@ class Point {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   draw_line(new Point(1.2, 3.3), new Point(6.2, -4.5));
 }

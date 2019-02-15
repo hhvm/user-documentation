@@ -20,7 +20,7 @@ async function async_curl(): Awaitable<void> {
   echo "Total time taken: " . \strval($end - $start) . " seconds\n";
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main():void {
   \HH\Asio\join(async_curl());
 }

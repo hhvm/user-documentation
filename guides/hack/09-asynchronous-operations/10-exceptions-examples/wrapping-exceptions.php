@@ -22,7 +22,7 @@ async function wrapping_exceptions(): Awaitable<void> {
   \var_dump($results);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(wrapping_exceptions());
 }

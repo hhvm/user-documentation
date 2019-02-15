@@ -6,7 +6,7 @@ function get_hello(): string {
   return "Hello";
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run_na_hello(): void {
   \var_dump(get_hello());
 }

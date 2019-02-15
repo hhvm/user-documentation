@@ -7,7 +7,7 @@ class Automobile {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $col = Automobile::DEFAULT_COLOR;
   echo "\$col = $col\n";

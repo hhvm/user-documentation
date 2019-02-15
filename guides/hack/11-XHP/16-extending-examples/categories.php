@@ -12,7 +12,7 @@ class :my-text extends :x:element {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function extending_examples_categories_run(): void {
   $my_text = <my-text />;
   $my_text->appendChild(<em>"Hello!"</em>); // This is a %phrase

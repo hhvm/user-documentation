@@ -26,7 +26,7 @@ async function load_users_await_loop(vec<int> $ids): Awaitable<vec<User>> {
   return $result;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function runMe(): void {
   $ids = vec[1, 2, 5, 99, 332];
   $result = \HH\Asio\join(load_users_await_loop($ids));

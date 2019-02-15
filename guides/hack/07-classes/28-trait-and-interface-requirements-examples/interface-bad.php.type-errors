@@ -24,7 +24,7 @@ class Paper implements Fliers {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   // This code will actually not run in HHVM because of the fatal mentioned
   // above.

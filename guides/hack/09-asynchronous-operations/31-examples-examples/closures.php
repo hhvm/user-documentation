@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Closures;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function closure_async(): Awaitable<void> {
   // closure
   $hello = async function(): Awaitable<string> {

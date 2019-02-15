@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Types\Arrays\Examples\VecColors;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $colors = vec[];       // create an empty vec
   \var_dump($colors);

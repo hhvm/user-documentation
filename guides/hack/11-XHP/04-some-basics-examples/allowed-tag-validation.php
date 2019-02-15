@@ -15,7 +15,7 @@ function intro_examples_allowed_tag_validation_using_xhp(): void {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function intro_examples_allowed_tag_validation_run(): void {
   intro_examples_allowed_tag_validation_using_string();
   echo PHP_EOL . PHP_EOL;

@@ -18,7 +18,7 @@ class IntBox extends Box {
   const type T = int;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   $ibox = new IntBox(10);
   \var_dump($ibox);

@@ -13,7 +13,7 @@ class :my-cls-adder extends :x:element {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function extending_examples_add_class_run(): void {
   echo <my-cls-adder />;
 }

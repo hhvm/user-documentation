@@ -14,7 +14,7 @@ async function basic_exception(): Awaitable<void> {
   await exception_thrower();
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(basic_exception());
 }

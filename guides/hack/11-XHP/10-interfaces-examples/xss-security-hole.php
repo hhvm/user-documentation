@@ -19,7 +19,7 @@ class ExamplePotentialXSSSecurityHole implements XHPUnsafeRenderable {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function start(): void {
   echo (
     <div class="markdown">

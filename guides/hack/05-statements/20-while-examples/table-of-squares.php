@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Statements\While\Examples\TableOfSquares;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $i = 1;
   while ($i <= 10) {

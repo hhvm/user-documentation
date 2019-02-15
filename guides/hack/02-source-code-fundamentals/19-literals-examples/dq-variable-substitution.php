@@ -6,7 +6,7 @@ class C {
     public int $p1 = 2;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $x = 123;
   echo ">\$x.$x"."<\n";

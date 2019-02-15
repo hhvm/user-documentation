@@ -8,7 +8,7 @@ function squares(int $start, int $end, string $keyPrefix = ""): \Generator<strin
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   foreach (squares(-2, 3, "X") as $key => $val) {
     echo "key: $key, value: $val\n";

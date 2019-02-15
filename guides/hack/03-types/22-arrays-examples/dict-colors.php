@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Types\Arrays\Examples\DictColors;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $colors = dict[];       // create an empty dict
   \var_dump($colors);

@@ -22,7 +22,7 @@ class Point {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $p1 = new Point(3.4, 5.6);
   $p1->move(-2.2, -4);         // access instance method

@@ -8,7 +8,7 @@ function swap(inout int $i1, inout int $i2): void {
   $i2 = $temp;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $v1 = -10; $v2 = 123;
   echo "\$v1 = " . $v1 . ", \$v2 = " . $v2 . "\n";

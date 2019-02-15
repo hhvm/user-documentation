@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Types\Arrays\Examples\LegAryFruits;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $fruits = array();        // create an empty array
   \var_dump($fruits);

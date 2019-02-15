@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Functions\Anonymous\Examples\Chaining;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $lam1 = $x ==> $y ==> $x + $y;
   $lam2 = $lam1(10);

@@ -7,7 +7,7 @@ async function quads(float $n): Awaitable<float> {
   return $n * 4.0;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function quads_m(): Awaitable<void> {
   $awaitables = dict['five' => quads(5.0), 'nine' => quads(9.0)];
   $results = await Dict\from_async($awaitables);

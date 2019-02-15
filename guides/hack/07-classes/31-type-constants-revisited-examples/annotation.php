@@ -29,7 +29,7 @@ class Inty extends Base {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   $s = new Stringy();
   $i = new Inty();

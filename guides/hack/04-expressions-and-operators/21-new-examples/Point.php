@@ -19,7 +19,7 @@ class Point {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $p1 = new Point();       // create Point(0.0, 0.0)
   echo "\$p1 is $p1\n";

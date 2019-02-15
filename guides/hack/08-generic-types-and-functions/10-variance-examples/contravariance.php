@@ -19,7 +19,7 @@ class C<-T> {
 class Animal {}
 class Cat extends Animal {}
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $animal = new Animal();
   $cat = new Cat();

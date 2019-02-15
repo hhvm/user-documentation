@@ -7,7 +7,7 @@ final class XHPUnsafeExample implements XHPUnsafeRenderable {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $inputs = Map {
     '<div />' => <div />,

@@ -55,7 +55,7 @@ async function use_async_block_2(): Awaitable<void> {
   \var_dump($x);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(use_async_lambda());
   \HH\Asio\join(use_async_block());

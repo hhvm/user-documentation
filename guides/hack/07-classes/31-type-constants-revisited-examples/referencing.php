@@ -18,7 +18,7 @@ function get_id_from_userTC(AppUserTC $uc): AppUserTC::Ttc {
   return $uc->getID();
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   $autc = new AppUserTC(10);
   \var_dump(get_id_from_userTC($autc));

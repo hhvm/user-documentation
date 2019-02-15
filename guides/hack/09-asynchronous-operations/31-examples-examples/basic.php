@@ -8,7 +8,7 @@ async function trivial(): Awaitable<string> {
   return "Hello";
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function call_trivial(): Awaitable<void> {
   // These first two lines could be combined into
   //     $result = await trivial();

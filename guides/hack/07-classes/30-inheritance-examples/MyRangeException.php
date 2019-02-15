@@ -10,7 +10,7 @@ class MyRangeException extends \Exception {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   try {
     throw new MyRangeException("xyz", 123);

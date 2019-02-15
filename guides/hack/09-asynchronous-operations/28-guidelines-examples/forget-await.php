@@ -11,7 +11,7 @@ async function speak(): Awaitable<void> {
   echo "three";
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 async function forget_await(): Awaitable<void> {
   $handle = speak(); // This just gets you the handle
 }

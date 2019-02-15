@@ -41,7 +41,7 @@ function guidelines_examples_context_run(string $s): void {
   echo $xhp;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function startHere(): void {
   guidelines_examples_context_run('No');
   echo "\n\n";

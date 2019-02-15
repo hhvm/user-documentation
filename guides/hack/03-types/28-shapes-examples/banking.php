@@ -13,7 +13,7 @@ type Deposit = shape('trtype' => Bank, 'toaccnum' => int, 'amount' => float);
 type Withdrawal = shape('trtype' => Bank, 'fromaccnum' => int, 'amount' => float);
 type Transfer = shape('trtype' => Bank, 'fromaccnum' => int, 'toaccnum' => int, 'amount' => float);
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   process_transaction(shape('trtype' => Bank::DEPOSIT, 'toaccnum' => 23456, 'amount' => 100.00));
   process_transaction(shape('trtype' => Bank::WITHDRAWAL, 'fromaccnum' => 3157, 'amount' => 100.00));

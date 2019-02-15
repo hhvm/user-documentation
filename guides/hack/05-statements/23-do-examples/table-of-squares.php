@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Statements\Do\Examples\TableOfSquares;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $i = 1;
   do {

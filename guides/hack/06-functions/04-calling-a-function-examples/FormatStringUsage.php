@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\PLAY\FormatStringUsage;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \printf("Hello, World!\n");
   \printf("Value is %d\n", 6 + 4);

@@ -31,7 +31,7 @@ async function run(): Awaitable<void> {
   print("End of main()\n");
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(run());
 }

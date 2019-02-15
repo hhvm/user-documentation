@@ -18,7 +18,7 @@ class ExampleMarkdownXHPWrapper implements XHPUnsafeRenderable {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   echo (
     <div class="markdown">

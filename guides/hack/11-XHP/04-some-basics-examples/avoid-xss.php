@@ -17,7 +17,7 @@ function intro_examples_avoid_xss_using_xhp(string $could_be_bad): void {
     </html>;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function intro_examples_avoid_xss_run(string $could_be_bad): void {
   intro_examples_avoid_xss_using_string($could_be_bad);
   echo PHP_EOL . PHP_EOL;

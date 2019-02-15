@@ -18,7 +18,7 @@ function f(C<Animal> $p1): void { \var_dump($p1); }
 
 function g(array<Animal> $p1): void { \var_dump($p1); }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   f(new C(new Animal()));
   f(new C(new Cat()));  // accepted

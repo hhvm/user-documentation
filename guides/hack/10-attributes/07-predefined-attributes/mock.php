@@ -24,7 +24,7 @@ final class MockFinalClass extends FinalClass {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $o = new MockFinalClass();
   $o::f();

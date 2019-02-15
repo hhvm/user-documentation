@@ -6,7 +6,7 @@ namespace Hack\UserDocumentation\Fundamentals\Inclusion\Examples\Main;
 require_once('Point.php');
 require_once('Circle.php');
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $p1 = new \Hack\UserDocumentation\Fundamentals\Inclusion\Examples\Point\Point(10, 20);
   $p2 = new \Hack\UserDocumentation\Fundamentals\Inclusion\Examples\Point\Point(5, 6);

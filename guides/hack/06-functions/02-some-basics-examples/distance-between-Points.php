@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Functions\Introduction\Examples\Distance;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $pA = create_point(3.5, -6.2);
   $pB = create_point(-2.4, 3.6);

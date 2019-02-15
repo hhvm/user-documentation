@@ -14,7 +14,7 @@ function distance(Point $p1, Point $p2): float {
   return \sqrt($dx*$dx + $dy*$dy);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   echo "Distance is " . distance(tuple(3.5, -6.2), tuple(-2.4, 3.6)) . "\n";
 }

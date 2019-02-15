@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Fundamentals\ProgramStructure\Examples\HelloWorld;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \printf("Hello, World!\n");
 }

@@ -10,7 +10,7 @@ function xhp_object_methods_build_list(Vector<string> $names): XHPRoot {
   return $list;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function xhp_object_methods_run(): void {
   $names = Vector {'Sara', 'Fred', 'Josh', 'Scott', 'Paul', 'David', 'Matthew'};
   $list = xhp_object_methods_build_list($names);

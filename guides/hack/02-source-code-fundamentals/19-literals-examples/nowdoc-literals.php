@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Fundamentals\Literals\Examples\NowdocLiterals;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $v = 123;
   $s = <<<    'ID'

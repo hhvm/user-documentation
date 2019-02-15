@@ -22,7 +22,7 @@ async function write_all(vec<resource> $resources): Awaitable<void> {
   await Vec\from_async(\array_map($write_single_resource, $resources));
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(write_all(get_resources()));
 }

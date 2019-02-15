@@ -16,7 +16,7 @@ class :intro-plain-str extends :x:element {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function extending_examples_basic_run(): void {
   echo <introduction />;
   echo PHP_EOL . PHP_EOL;

@@ -11,7 +11,7 @@ async function f(): Awaitable<int> {
 // this case, explicitly join since this call is not in an async function) to get
 // the explicit result of the function call, we will get back 2.
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function join_main(): void {
   \var_dump(\HH\Asio\join(f()));
 }

@@ -15,7 +15,7 @@ function memoize_handle(): Awaitable<string> {
   return $handle;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function runMe(): void {
   $t1 = \microtime(true);
   \HH\Asio\join(memoize_handle());

@@ -22,7 +22,7 @@ class Point {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $p1 = new Point(3.4, 5.6);
   $p2 = new Point(3.4);

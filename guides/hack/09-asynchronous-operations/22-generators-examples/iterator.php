@@ -27,7 +27,7 @@ async function happy_new_year(int $start): Awaitable<void> {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   \HH\Asio\join(happy_new_year(5)); // 5 second countdown
 }

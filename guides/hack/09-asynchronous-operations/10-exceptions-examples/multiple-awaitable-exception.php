@@ -19,7 +19,7 @@ async function multiple_waithandle_exception(): Awaitable<void> {
   \var_dump($results);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(multiple_waithandle_exception());
 }

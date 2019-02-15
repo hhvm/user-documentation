@@ -35,7 +35,7 @@ class Paper implements Fliers {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   // This code will not run in HHVM because of the problem mentioned above.
   $p = new Paper();

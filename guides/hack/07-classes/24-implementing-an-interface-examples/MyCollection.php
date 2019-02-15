@@ -25,7 +25,7 @@ function process_collection(MyCollection $p1): void {
   $p1->put(123);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   process_collection(new MyList());
   process_collection(new MyQueue());

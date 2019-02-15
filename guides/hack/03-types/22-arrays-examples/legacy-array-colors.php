@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Types\Arrays\Examples\LegAryColors;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $colors = array();      // create an empty array
   \var_dump($colors);

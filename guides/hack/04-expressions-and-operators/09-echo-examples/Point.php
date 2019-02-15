@@ -17,7 +17,7 @@ class Point {
   // ...
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $p1 = new Point(20.5, 30.33);
   echo $p1 . "\n";  // implicit call to __toString()

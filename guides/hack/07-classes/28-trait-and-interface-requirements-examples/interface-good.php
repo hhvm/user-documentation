@@ -27,7 +27,7 @@ class AirBus extends Machine implements Fliers {
   }
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   $ab = new AirBus();
   \var_dump($ab);

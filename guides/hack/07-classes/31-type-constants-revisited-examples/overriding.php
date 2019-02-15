@@ -17,7 +17,7 @@ class ChildOfChildWithNoConstraint extends ChildWithConstraint {
   const type T = arraykey;
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function run(): void {
   echo "No real output!";
 }

@@ -6,7 +6,7 @@ function is_leap_year(int $yy): bool {
 	return ((($yy & 3) === 0) && (($yy % 100) !== 0)) || (($yy % 400) === 0);
 }
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function main(): void {
   $year = 2001;
   $result = is_leap_year($year);
