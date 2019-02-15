@@ -9,9 +9,12 @@
  *
  */
 
-use type HHVM\UserDocumentation\GuidesIndex;
-use type HHVM\UserDocumentation\GuidesProduct;
-use type HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\{
+  Guides,
+  GuidesIndex,
+  GuidesProduct,
+  URLBuilder,
+};
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 
 final class RedirectToGuideFirstPageController
@@ -35,6 +38,7 @@ final class RedirectToGuideFirstPageController
     $params = $this->getParameters();
     $product = GuidesProduct::assert($params['Product']);
     $guide = $params['Guide'];
+    $guide = Guides::getGuideRedirects($product)[$guide] ?? $guide;
     $path = self::invariantTo404(() ==> {
       $pages = GuidesIndex::getPages($product, $guide);
       $page = $pages[0];

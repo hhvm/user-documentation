@@ -19,18 +19,45 @@ final class Guides {
   ): string {
     // If the guide name and the page name are the same, only print one of them.
     // If there is only one page in a guide, only print the guide name.
-    return
-      (
-        \strcasecmp($guide, $page) === 0
-        || \count(GuidesIndex::getPages($product, $guide)) === 1
-      )
-        ? \ucwords(\strtr($guide, '-', ' '))
-        : \ucwords(\strtr($guide.': '.$page, '-', ' '));
+    return (
+      \strcasecmp($guide, $page) === 0 ||
+      \count(GuidesIndex::getPages($product, $guide)) === 1
+    )
+      ? \ucwords(\strtr($guide, '-', ' '))
+      : \ucwords(\strtr($guide.': '.$page, '-', ' '));
   }
 
-  public static function normalizePart(
-    string $part,
-  ): string {
+  public static function normalizePart(string $part): string {
     return \ucwords(\strtr($part, '-', ' '));
   }
+
+  public static function getGuideRedirects(
+    GuidesProduct $product,
+  ): dict<string, string> {
+    return dict[
+      GuidesProduct::HACK => dict[
+        'async' => 'asynchronous-operations',
+        'overview' => 'getting-started',
+      ],
+    ][$product] ?? dict[];
+  }
+
+  public static function getGuidePageRedirects(
+    GuidesProduct $product,
+  ): dict<string, dict<string, (string, string)>> {
+    return dict[
+      GuidesProduct::HACK => dict[
+        'async' => dict[
+          'exceptions' => tuple('asynchronous-operations', 'exceptions'),
+        ],
+        'other-features' => dict[
+          'constructor-parameter-promotion' => tuple('classes', 'constructors'),
+        ],
+        'overview' => dict[
+          'typing' => tuple('types', 'introduction'),
+        ],
+      ],
+    ][$product] ?? dict[];
+  }
+
 }
