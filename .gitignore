@@ -16,6 +16,8 @@ www.pid
 bourbon/
 .DS_Store
 *~
+*.orig
+*.rej
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
