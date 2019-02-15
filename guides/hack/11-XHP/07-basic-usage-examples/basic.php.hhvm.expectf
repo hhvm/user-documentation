@@ -24,7 +24,7 @@ object(xhp_div)#%d (%d) {
       object(HH\Map)#%d (0) {
       }
       ["source"]=>
-      string(%d) "%s:9"
+      string(%d) "%s:10"
     }
     [2]=>
     object(xhp_i)#%d (%d) {
@@ -42,12 +42,12 @@ object(xhp_div)#%d (%d) {
       object(HH\Map)#%d (0) {
       }
       ["source"]=>
-      string(%d) "%s:10"
+      string(%d) "%s:11"
     }
   }
   ["context":"xhp_x__composable_element":private]=>
   object(HH\Map)#%d (0) {
   }
   ["source"]=>
-  string(%d) "%s:11"
+  string(%d) "%s:12"
 }

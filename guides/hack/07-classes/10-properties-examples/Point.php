@@ -18,4 +18,5 @@ class Point {
 <<__EntryPoint>>
 function main(): void {
   $p1 = new Point(3.4, 5.6);
+  \var_dump($p1);
 }

@@ -17,9 +17,14 @@ function intro_examples_avoid_xss_using_xhp(string $could_be_bad): void {
     </html>;
 }
 
-<<__EntryPoint>>
 function intro_examples_avoid_xss_run(string $could_be_bad): void {
   intro_examples_avoid_xss_using_string($could_be_bad);
   echo PHP_EOL . PHP_EOL;
   intro_examples_avoid_xss_using_xhp($could_be_bad);
+}
+
+<<__EntryPoint>>
+function main(): noreturn {
+  intro_examples_avoid_xss_run('<blink>Ugh</blink>');
+  exit(0);
 }
