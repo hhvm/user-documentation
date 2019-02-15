@@ -33,11 +33,11 @@ final class Guides {
 
   public static function getGuideRedirects(
     GuidesProduct $product,
-  ): dict<string, string> {
+  ): dict<string, (string, ?string)> {
     return dict[
       GuidesProduct::HACK => dict[
-        'async' => 'asynchronous-operations',
-        'overview' => 'getting-started',
+        'async' => tuple('asynchronous-operations', null),
+        'overview' => tuple('getting-started', null),
       ],
     ][$product] ??
       dict[];
@@ -45,7 +45,7 @@ final class Guides {
 
   public static function getGuidePageRedirects(
     GuidesProduct $product,
-  ): dict<string, dict<string, (string, string)>> {
+  ): dict<string, dict<string, (string, ?string)>> {
     return dict[
       GuidesProduct::HACK => dict[
         'async' => dict[

@@ -4,7 +4,6 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\HackTest\DataProvider;
 use type HHVM\UserDocumentation\GuidesNavData;
-use namespace HH\Lib\Tuple;
 use function Facebook\FBExpect\expect;
 
 class GuidePagesTest extends \Facebook\HackTest\HackTest {

@@ -60,22 +60,20 @@ final class GuidePageController extends WebPageController {
     $redirect_to = Guides::getGuidePageRedirects(
       $params['Product'],
     )[$params['Guide']][$params['Page']] ??
+      Guides::getGuideRedirects($params['Product'])[$params['Guide']] ??
       null;
-    if ($redirect_to !== null) {
-      list($params['Guide'], $params['Page']) = $redirect_to;
-      throw
-        new RedirectException(GuidePageControllerURIBuilder::getPath($params));
+
+    if ($redirect_to === null) {
+      return;
     }
-    $redirect_to =
-      Guides::getGuideRedirects($params['Product'])[$params['Guide']] ?? null;
-    if ($redirect_to !== null) {
-      $index = GuidesIndex::getPages($params['Product'], $redirect_to);
-      throw new RedirectException(GuidePageControllerURIBuilder::getPath(shape(
-        'Product' => $params['Product'],
-        'Guide' => $redirect_to,
-        'Page' => C\firstx($index),
-      )));
-    }
+    list($guide, $page) = $redirect_to;
+    $page =
+      $page ?? C\firstx(GuidesIndex::getPages($params['Product'], $guide));
+    throw new RedirectException(GuidePageControllerURIBuilder::getPath(shape(
+      'Product' => $params['Product'],
+      'Guide' => $guide,
+      'Page' => $page,
+    )));
   }
 
   <<__Override>>

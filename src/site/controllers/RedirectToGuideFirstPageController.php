@@ -38,10 +38,19 @@ final class RedirectToGuideFirstPageController
     $params = $this->getParameters();
     $product = GuidesProduct::assert($params['Product']);
     $guide = $params['Guide'];
-    $guide = Guides::getGuideRedirects($product)[$guide] ?? $guide;
-    $path = self::invariantTo404(() ==> {
+    $guide_redirect = Guides::getGuideRedirects($product)[$guide] ?? null;
+    $page = null;
+
+    if ($guide_redirect !== null) {
+      list($guide, $page) = $guide_redirect;
+    }
+
+    if ($page === null) {
       $pages = GuidesIndex::getPages($product, $guide);
       $page = $pages[0];
+    }
+
+    $path = self::invariantTo404(() ==> {
       return URLBuilder::getPathForGuidePage($product, $guide, $page);
     });
     throw new RedirectException($path);
