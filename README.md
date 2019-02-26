@@ -58,10 +58,8 @@ requests that don't match a file being served by `index.php`. For local
 development, HHVM's built-in webserver should be sufficient:
 
 ```
-$ cd user-documentation/public
-user-documentation/public$ hhvm -m server \
-  -p 8080 \
-  -c ../hhvm.dev.ini
+$ cd public
+$ hhvm -m server -p 8080 -c ../hhvm.dev.ini
 ```
 
 ## Contributing Content
