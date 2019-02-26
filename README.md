@@ -2,6 +2,8 @@
 
 This is the repo for the [HHVM and Hack user documentation](http://docs.hhvm.com). [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
 
+If you see anything egregious, you can [file an issue](https://github.com/hhvm/user-documentation/issues/new) or ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
+
 ## What?
 
 There are three keys areas to this repo:
@@ -61,15 +63,3 @@ development, HHVM's built-in webserver should be sufficient:
 $ cd public
 $ hhvm -m server -p 8080 -c ../hhvm.dev.ini
 ```
-
-## Contributing Content
-
-Check out the [contribution guidelines](CONTRIBUTING.md).
-
-You can contribute to the site through [pull requests](https://github.com/hhvm/user-documentation/pulls).
-
-## Follow Along
-
-Follow along with our progress. We have made this repo open from the start and you will see everything that happens from our very first commit.
-
-If you see anything egregious, you can [file an issue](https://github.com/hhvm/user-documentation/issues/new) or ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
