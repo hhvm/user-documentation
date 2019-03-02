@@ -16,7 +16,7 @@ function get_Bar(): ?Bar {
 
 function foo(): ?string {
   $b = get_Bar();
-  // Use the null-safe operator to access a proprety of a class.
+  // Use the null-safe operator to access a property of a class.
   return $b?->str;
 }
 
