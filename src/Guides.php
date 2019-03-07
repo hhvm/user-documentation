@@ -39,6 +39,7 @@ final class Guides {
         'async' => tuple('asynchronous-operations', null),
         'collections' => tuple('types', 'arrays'),
         'overview' => tuple('getting-started', null),
+        'tools' => tuple('getting-started', 'tools'),
       ],
     ][$product] ??
       dict[];
