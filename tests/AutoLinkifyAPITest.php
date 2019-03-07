@@ -14,18 +14,18 @@ class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
   ): array<string, (string, string, string)> {
     return [
       'PHP function' => tuple(
-        '/hack/async/utility-functions',
-        'array_filter()',
-        'http://php.net/manual/en/function.array-filter.php',
+        '/hack/asynchronous-operations/some-basics',
+        'sleep()',
+        'http://php.net/manual/en/function.sleep.php',
       ),
       'Hack class' => tuple(
-        '/hack/async/extensions',
+        '/hack/asynchronous-operations/extensions',
         'MCRouter',
         '/hack/reference/class/MCRouter/',
       ),
       'Namespaced Hack function' => tuple(
-        '/hack/async/extensions',
-        'HH\Asio\curl_exec()',
+        '/hack/asynchronous-operations/extensions',
+        'HH\Asio\curl_exec',
         '/hack/reference/function/HH.Asio.curl_exec/',
       ),
       'Hack fully-qualified method' => tuple(
@@ -44,28 +44,22 @@ class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
         '/hack/reference/class/AsyncMysqlConnection/escapeString/',
       ),
       'Hack function with parameter information' => tuple(
-        '/hack/async/utility-functions',
+        '/hack/asynchronous-operations/utility-functions',
         'HH\Asio\wrap(Awaitable<Tv>)',
         '/hack/reference/function/HH.Asio.wrap/',
       ),
       'Hack class with type parameter' => tuple(
-        '/hack/collections/classes',
-        'ImmSet<T>',
+        '/hack/reference/class/HH.ImmSet/skip/',
+        'ImmSet<Tv>',
         '/hack/reference/class/HH.ImmSet/',
       ),
-      'Hack class with a class with type parameter as its type parameter' =>
-        tuple(
-          '/hack/collections/interfaces',
-          'ConstCollection<Pair<Tk, Tv>>',
-          '/hack/reference/interface/ConstCollection/',
-        ),
       'Hack class method with missing HH namespace' => tuple(
-        '/hack/FAQ/faq',
-        'KeyedIterable::map()',
-        '/hack/reference/interface/HH.KeyedIterable/map/',
+        '/hack/reference/function/HH.Asio.vm/',
+        'Vector::map()',
+        '/hack/reference/class/HH.Vector/map/',
       ),
-      'Default Namepsace' => tuple(
-        '/hack/async/awaitables',
+      'Default Namespace' => tuple(
+        '/hack/asynchronous-operations/awaitables',
         'join',
         '/hack/reference/function/HH.Asio.join/',
       ),
