@@ -46,7 +46,8 @@ final class RedirectToGuideFirstPageController
     }
 
     if ($page === null) {
-      $pages = GuidesIndex::getPages($product, $guide);
+      $pages =
+        self::invariantTo404(() ==> GuidesIndex::getPages($product, $guide));
       $page = $pages[0];
     }
 
