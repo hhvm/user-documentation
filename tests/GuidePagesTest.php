@@ -74,8 +74,9 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
    * @small
    */
   public async function testExamplesRender(): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('/hack/async/introduction');
+    list($response, $body) = await PageLoader::getPageAsync(
+      '/hack/asynchronous-operations/introduction',
+    );
     expect($response->getStatusCode())->toBeSame(200);
 
     expect($body)->toContain('highlight');
