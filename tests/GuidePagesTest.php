@@ -75,13 +75,13 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
    */
   public async function testExamplesRender(): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync(
-      '/hack/asynchronous-operations/introduction',
+      '/hack/asynchronous-operations/examples',
     );
     expect($response->getStatusCode())->toBeSame(200);
 
     expect($body)->toContain('highlight');
     // Namespace declaration
-    expect($body)->toContain('Hack\UserDocumentation\Async\Intro\Examples');
+    expect($body)->toContain('Hack\UserDocumentation\AsyncOps\Examples\Examples');
   }
 
   /**
