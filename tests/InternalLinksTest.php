@@ -35,11 +35,6 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
   ): Awaitable<void> {
     list($response, $body) =
       await PageLoader::getPageAsync('/hack/getting-started/tools');
-    // short reference link:
-    //   foo [bar] baz, with `[bar]: https://example.com` elsewhere
-    expect($body)->toContain('href="https://neovim.io"');
-    // full link:
-    // foo [bar](https://example.com) baz`
     expect($body)->toContain('href="https://github.com/hhvm/hack-mode"');
   }
 
