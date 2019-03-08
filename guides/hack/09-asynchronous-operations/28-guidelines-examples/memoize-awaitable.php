@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\MemoizeAwaitable;
 
 abstract final class MemoizeAwaitable {
   private static async function time_consuming(): Awaitable<string> {
-    \sleep(5);
+    await \HH\Asio\usleep(5000000);
     return "Not really time consuming but sleep."; // For type-checking purposes
   }
 

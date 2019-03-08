@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\MemoizeResult;
 
 abstract final class MemoizeResult {
   private static async function time_consuming(): Awaitable<string> {
-    \sleep(5);
+    await \HH\Asio\usleep(5000000);
     return "This really is not time consuming, but the sleep fakes it.";
   }
 
