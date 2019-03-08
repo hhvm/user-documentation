@@ -1,8 +1,0 @@
-object(HH\Map)#1 (1) {
-  [0]=>
-  string(4) "Joel"
-}
-array(1) {
-  [0]=>
-  string(4) "Fred"
-}

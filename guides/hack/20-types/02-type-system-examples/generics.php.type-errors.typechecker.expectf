@@ -1,6 +1,0 @@
-File "%sgenerics.php", line 40, characters 10-20:
-Invalid return type (Typing[4110])
-File "%sgenerics.php", line 31, characters 33-38:
-This is a string
-File "%sgenerics.php", line 39, characters 14-14:
-It is incompatible with an int

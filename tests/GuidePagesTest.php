@@ -4,7 +4,6 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\HackTest\DataProvider;
 use type HHVM\UserDocumentation\GuidesNavData;
-use namespace HH\Lib\Tuple;
 use function Facebook\FBExpect\expect;
 
 class GuidePagesTest extends \Facebook\HackTest\HackTest {
@@ -36,14 +35,14 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
   public function shortListOfGuidePages(): array<(string, string)> {
     return [
       // Root of a guide
-      tuple('Overview: Typing', '/hack/overview/'),
+      tuple('Getting Started', '/hack/overview/'),
       // First page of a guide
-      tuple('Overview: Typing', '/hack/overview/typing'),
+      tuple('Types: Introduction', '/hack/overview/typing'),
       // Last page of a guide
-      tuple('Async: Exceptions', '/hack/async/exceptions'),
+      tuple('Asynchronous Operations: Exceptions', '/hack/async/exceptions'),
       // Spaces
       tuple(
-        'Other Features: Constructor Parameter Promotion',
+        'Classes: Constructors',
         '/hack/other-features/constructor-parameter-promotion',
       ),
     ];
@@ -75,13 +74,14 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
    * @small
    */
   public async function testExamplesRender(): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('/hack/async/introduction');
+    list($response, $body) = await PageLoader::getPageAsync(
+      '/hack/asynchronous-operations/examples',
+    );
     expect($response->getStatusCode())->toBeSame(200);
 
     expect($body)->toContain('highlight');
     // Namespace declaration
-    expect($body)->toContain('Hack\UserDocumentation\Async\Intro\Examples');
+    expect($body)->toContain('Hack\UserDocumentation\AsyncOps\Examples\Examples');
   }
 
   /**
@@ -93,14 +93,5 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
       await PageLoader::getPageAsync('/hhvm/configuration/INI-settings');
     expect($response->getStatusCode())->toBeSame(200);
     expect($body)->toContain('allow_url_fopen</a></td>');
-  }
-
-  public async function testCachedNavDataIsNotJustByName(): Awaitable<void> {
-    list(list($_, $hack), list($_, $hhvm)) = await Tuple\from_async(
-      PageLoader::getPageAsync('/hack/typechecker/introduction'),
-      PageLoader::getPageAsync('/hhvm/configuration/INI-settings'),
-    );
-    expect($hack)->toContain('/hack/getting-started/getting-started');
-    expect($hhvm)->toContain('/hhvm/getting-started/getting-started');
   }
 }

@@ -1,0 +1,12 @@
+keyset(0) {
+}
+keyset(3) {
+  string(3) "red"
+  string(5) "white"
+  string(4) "blue"
+}
+keyset(2) {
+  string(5) "green"
+  string(6) "yellow"
+}
+$colors["green"] = green

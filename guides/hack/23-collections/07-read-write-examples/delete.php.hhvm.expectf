@@ -1,7 +1,0 @@
-string(1) "C"
-bool(false)
-object(HH\Set)#%d (3) {
-  int(1000)
-  int(2000)
-  int(4000)
-}

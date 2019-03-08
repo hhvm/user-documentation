@@ -1,1 +1,0 @@
-Fatal error: Call to undefined method Hack\UserDocumentation\Operators\NullSafe\Examples\UndefinedMethods\Bar::foobar() in /data/users/joelm/user-documentation/guides/hack/45-operators/03-null-safe-examples/undefined-methods.php.type-errors on line 22

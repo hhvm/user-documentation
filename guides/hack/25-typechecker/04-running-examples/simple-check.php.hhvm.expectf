@@ -1,1 +1,0 @@
-Catchable fatal error: Argument 1 passed to Hack\UserDocumentation\TypeChecker\Running\Examples\Simple\a() must be an instance of int, string given in %s on line 7

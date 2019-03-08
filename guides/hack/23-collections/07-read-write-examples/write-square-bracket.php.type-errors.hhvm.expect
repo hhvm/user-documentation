@@ -1,4 +1,0 @@
-string(1) "D"
-int(3)
-int(4)
-string(46) "Cannot modify immutable object of type HH\Pair"

@@ -1,3 +1,0 @@
-Deprecated: Hack\UserDocumentation\Attributes\Special\Examples\Deprecated\A::bar: Call baz() instead in %s on line 13
-string(10) "Deprecated"
-string(14) "Not Deprecated"

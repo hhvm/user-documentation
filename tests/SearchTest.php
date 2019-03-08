@@ -31,7 +31,7 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
       tuple('mysqli', ['http://php.net/manual/en/class.mysqli.php']),
       tuple('vw', ['/hack/reference/function/HH.Asio.vw/']),
       tuple('HH\Asio\vw', ['/hack/reference/function/HH.Asio.vw/']),
-      tuple('async', ['/hack/async/introduction']),
+      tuple('async', ['/hack/asynchronous-operations/introduction']),
       tuple(
         'string contains',
         ['HH\\Lib\\Str\\contains', 'HH\\Lib\\Str\\contains_ci'],

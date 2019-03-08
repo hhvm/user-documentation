@@ -1,2 +1,0 @@
-%ssimple.php:23:5,22: Unrecognized user attribute: __ReturnDisposable starts with __ but is not a standard attribute (Naming[2049])
-%ssimple.php:25:12,32: 'new' must not be used for disposable objects except in a 'using' statement (Typing[4187])

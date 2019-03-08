@@ -1,5 +1,0 @@
-Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/multiple-awaitable-exception.php:6
-Stack trace:
-#0 /data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/multiple-awaitable-exception.php(14): Hack\UserDocumentation\Async\Exceptions\Examples\MultipleAwaitable\exception_thrower()
-#1 /data/users/joelm/user-documentation/guides/hack/22-async/03-exceptions-examples/multiple-awaitable-exception.php(21): Hack\UserDocumentation\Async\Exceptions\Examples\MultipleAwaitable\multiple_waithandle_exception()
-#2 {main}

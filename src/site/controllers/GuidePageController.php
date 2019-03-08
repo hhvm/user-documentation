@@ -23,7 +23,7 @@ use function HHVM\UserDocumentation\type_alias_structure;
 
 
 use namespace Facebook\{TypeAssert, TypeSpec};
-use namespace HH\Lib\Dict;
+use namespace HH\Lib\{C, Dict};
 
 final class GuidePageController extends WebPageController {
   use GuidePageControllerParametersTrait;
@@ -55,14 +55,33 @@ final class GuidePageController extends WebPageController {
   }
 
   <<__Override>>
+  protected async function beforeResponseAsync(): Awaitable<void> {
+    $params = $this->getParameters();
+    $redirect_to = Guides::getGuidePageRedirects(
+      $params['Product'],
+    )[$params['Guide']][$params['Page']] ??
+      Guides::getGuideRedirects($params['Product'])[$params['Guide']] ??
+      null;
+
+    if ($redirect_to === null) {
+      return;
+    }
+    list($guide, $page) = $redirect_to;
+    $page =
+      $page ?? C\firstx(GuidesIndex::getPages($params['Product'], $guide));
+    throw new RedirectException(GuidePageControllerURIBuilder::getPath(shape(
+      'Product' => $params['Product'],
+      'Guide' => $guide,
+      'Page' => $page,
+    )));
+  }
+
+  <<__Override>>
   public async function getTitleAsync(): Awaitable<string> {
-    list($product, $guide, $page) = tuple(
-      $this->getProduct(),
-      $this->getGuide(),
-      $this->getPage(),
-    );
+    list($product, $guide, $page) =
+      tuple($this->getProduct(), $this->getGuide(), $this->getPage());
     return self::invariantTo404(
-      () ==> Guides::normalizeName($product, $guide, $page)
+      () ==> Guides::normalizeName($product, $guide, $page),
     );
   }
 
@@ -92,10 +111,10 @@ final class GuidePageController extends WebPageController {
       )->assertType($$);
 
     $paging->appendChild(
-      $this->getPaginationLink($nav_data, $guide, $page, false)
+      $this->getPaginationLink($nav_data, $guide, $page, false),
     );
     $paging->appendChild(
-      $this->getPaginationLink($nav_data, $guide, $page, true)
+      $this->getPaginationLink($nav_data, $guide, $page, true),
     );
     return $paging;
   }
@@ -178,7 +197,7 @@ final class GuidePageController extends WebPageController {
         );
       }
     } else {
-      foreach($sibling_pages as $sibling => $sibling_data) {
+      foreach ($sibling_pages as $sibling => $sibling_data) {
         if ($sibling === $page) {
           break;
         }
@@ -198,7 +217,7 @@ final class GuidePageController extends WebPageController {
   ): (?string, ?NavDataNode) {
     $adj_guide = tuple(null, null);
     $guides = $next ? array_reverse($guides) : $guides;
-    foreach($guides as $guide => $data) {
+    foreach ($guides as $guide => $data) {
       if ($guide === $current_guide) {
         break;
       }
@@ -250,8 +269,7 @@ final class GuidePageController extends WebPageController {
         $this->getGuide(),
         $this->getPage(),
       );
-      return
-        <div class="innerContent">{new HTMLFileRenderable($path)}</div>;
+      return <div class="innerContent">{new HTMLFileRenderable($path)}</div>;
     });
   }
 }

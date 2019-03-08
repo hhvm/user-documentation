@@ -1,0 +1,14 @@
+array(0) {
+}
+array(1) {
+  ["oranges"]=>
+  int(22)
+}
+array(3) {
+  ["oranges"]=>
+  int(18)
+  ["apples"]=>
+  int(15)
+  ["pears"]=>
+  int(12)
+}

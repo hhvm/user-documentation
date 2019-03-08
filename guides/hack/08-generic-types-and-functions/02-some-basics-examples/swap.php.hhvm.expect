@@ -1,0 +1,4 @@
+$v1 = -10, $v2 = 123
+$v1 = 123, $v2 = -10
+$v3 = red, $v4 = purple
+$v3 = purple, $v4 = red

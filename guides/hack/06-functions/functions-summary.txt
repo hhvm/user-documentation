@@ -1,0 +1,1 @@
+Defining and calling functions and methods, and anonymous functions (writing closures and lambdas).

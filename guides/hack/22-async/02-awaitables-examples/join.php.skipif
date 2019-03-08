@@ -1,6 +1,0 @@
-<?php
-
-// Check for internet connection
-if (!get_headers("www.example.com")) {
-  print "skip";
-}

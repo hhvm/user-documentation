@@ -1,8 +1,0 @@
-object(Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box)#%d (1) {
-  ["x":"Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box":private]=>
-  int(4)
-}
-object(Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box)#%d (1) {
-  ["x":"Hack\UserDocumentation\Generics\Erasure\Examples\TypeErasure\Box":private]=>
-  string(2) "hi"
-}

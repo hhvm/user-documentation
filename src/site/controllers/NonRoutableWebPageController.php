@@ -43,6 +43,10 @@ abstract class NonRoutableWebPageController extends WebController {
     return null;
   }
 
+  /** Extend this if you want custom logic (e.g. redirects) before anything
+   * else happens. */
+  protected async function beforeResponseAsync(): Awaitable<void> {}
+
   protected function getGithubIssueBody(): string {
     return <<<EOF
 Please complete the information below:
@@ -61,6 +65,7 @@ EOF;
   final public async function getResponseAsync(
     ResponseInterface $response,
   ): Awaitable<ResponseInterface> {
+    await $this->beforeResponseAsync();
     list($title, $content) =
       await \HH\Asio\va($this->getTitleAsync(), $this->getContentPaneAsync());
     $content->appendChild($this->getFooter());
@@ -314,7 +319,6 @@ EOF;
               <li><a href="/hack/overview/">Overview</a></li>
               <li><a href="/hack/getting-started/">Getting Started</a></li>
               <li><a href="/hack/tools/">Tools</a></li>
-              <li><a href="/hack/FAQ/">FAQ</a></li>
               <li><a href="/hack/reference/">API Reference</a></li>
             </ul>
           </div>

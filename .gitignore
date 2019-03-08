@@ -2,6 +2,7 @@ vendor
 vendor-rb
 composer.phar
 .commit-template
+www.pid
 *.swp
 *.php.diff
 *.php.out
@@ -15,6 +16,8 @@ composer.phar
 bourbon/
 .DS_Store
 *~
+*.orig
+*.rej
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
