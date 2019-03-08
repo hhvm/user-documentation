@@ -65,6 +65,9 @@ final class Guides {
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
         ],
+        'typechecker' => dict[
+          'editors' => tuple('getting-started', 'tools'),
+        ],
         'types' => dict[
           'refining' => tuple('types', 'type-refinement'),
         ],
