@@ -65,6 +65,9 @@ final class Guides {
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
         ],
+        'types' => dict[
+          'refining' => tuple('types', 'type-refinement'),
+        ],
       ],
     ][$product] ??
       dict[];
