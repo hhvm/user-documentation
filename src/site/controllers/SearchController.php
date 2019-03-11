@@ -121,8 +121,8 @@ final class SearchController extends WebPageController {
     return vec[
       new GuidePageSearchResult(
         GuidesProduct::HACK,
-        'collections',
-        'hack-arrays',
+        'types',
+        'arrays',
         SearchScores::HARDCODED_RESULT_SCORE,
       ),
     ];
