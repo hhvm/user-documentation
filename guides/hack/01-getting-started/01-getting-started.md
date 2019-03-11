@@ -59,7 +59,6 @@ function main(): void {
 This guide assumes some knowledge of programming. Hack has a very similar look and feel to PHP, which in
 turn, supports a lot of syntax shared by C, C++, C#, Java, and JavaScript. Here are the key points to note about this example:
 
-* We declare that we're working in strict mode (which gives us strict type checking).
 * This code belongs to the unique, but arbitrary, namespace called `Hack\GettingStarted\MyFirstProgram`.
 * `main` is a function that has no parameters and, being `void`, returns no value. Furthermore, this function
 is where the program will begin execution; that is, `main` is the entry-point function.
