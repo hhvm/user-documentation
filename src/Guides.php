@@ -40,6 +40,7 @@ final class Guides {
         'collections' => tuple('types', 'arrays'),
         'overview' => tuple('getting-started', null),
         'tools' => tuple('getting-started', 'tools'),
+        'shapes' => tuple('types', 'shapes'),
       ],
     ][$product] ??
       dict[];
