@@ -41,6 +41,7 @@ final class Guides {
         'overview' => tuple('getting-started', null),
         'tools' => tuple('getting-started', 'tools'),
         'shapes' => tuple('types', 'shapes'),
+        'enums' => tuple('types', 'enumerated-types'),
       ],
     ][$product] ??
       dict[];
