@@ -16,8 +16,11 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
   public function testExamplesOutput(): void {
     $exclude_suffixes = vec[
       '.inc.php',
+      '.inc.hack',
       '.php.type-errors',
+      '.hack.type-errors',
       '.noexec.php',
+      '.noexec.hack',
     ];
     $exclude_regexp = $exclude_suffixes
       |> Vec\map($$, $suffix ==> \preg_quote($suffix, '/'))
