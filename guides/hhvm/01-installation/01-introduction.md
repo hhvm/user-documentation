@@ -1,4 +1,4 @@
-HHVM is officially supported on most major [linux platforms](./linux.md). There is experimental, hope-to-be official support on [Mac OS X 10.10](./mac.md). And work is being done to support [HHVM on Windows](./windows.md).
+HHVM is officially supported on most major [linux platforms](./linux.md) and recent versions of [MacOS](./mac.md).
 
 ## Prebuilt Packages
 
