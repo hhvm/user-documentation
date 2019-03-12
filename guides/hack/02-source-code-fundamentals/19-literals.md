@@ -111,8 +111,8 @@ For example:
 
 The start and end id must be the same. Only horizontal white space is permitted between `<<<` and the start id. No
 white space is permitted between the start id and the new-line that follows. No white space is permitted between the
-new-line and the end id that follows. Except for an optional semicolon (`;`), no characters---not even comments or white
-space---are permitted between the end id and the new-line that terminates that source line.
+new-line and the end id that follows. Except for an optional semicolon (`;`), no characters&mdash;not even comments or white
+space&mdash;are permitted between the end id and the new-line that terminates that source line.
 
 ### Nowdoc String Literals
 

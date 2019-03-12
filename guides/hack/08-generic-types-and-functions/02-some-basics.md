@@ -1,5 +1,5 @@
 Certain types (classes, interfaces, and traits) and their methods can be *parameterized*; that is, their declarations can have one or more
-placeholder names---called *type parameters*---that are associated with types via *type arguments* when a class is instantiated, or a method
+placeholder names&mdash;called *type parameters*---that are associated with types via *type arguments* when a class is instantiated, or a method
 is called. A type or method having such placeholder names is called a *generic type* or *generic method*, respectively. Top-level functions
 can also be parameterized giving rise to *generic functions*.
 

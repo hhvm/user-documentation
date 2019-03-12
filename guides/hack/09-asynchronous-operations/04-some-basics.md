@@ -2,7 +2,7 @@ Asynchronous operations allow cooperative multi-tasking. Code that utilizes the 
 fetching.  So, if we have code that has operations that involve some sort of waiting (e.g., network access or database queries), async
 minimizes the downtime our program has to be stalled because of it as the program will go do other things, most likely other I/O somewhere else.
 
-Async is **not multithreading**---HHVM still executes a program's code in one main request thread---but other operations (e.g., MySQL queries)
+Async is **not multithreading**---HHVM still executes a program's code in one main request thread&mdash;but other operations (e.g., MySQL queries)
 can now execute without taking up time in that thread that code could be using for other purposes.
 
 ## A Page as A Dependency Tree

@@ -101,7 +101,7 @@ Function `\printf` is declared, as follows:
 function printf(\HH\FormatString<PlainSprintf> $fmt, ...$fmt_args): int;
 ```
 
-`FormatString` is a generic library type, and while we don't need to understand it to use `\printf`, clearly, the string literals---which
+`FormatString` is a generic library type, and while we don't need to understand it to use `\printf`, clearly, the string literals&mdash;which
 have type `string`---we've been passing as the first argument are permitted when this type is expected, but a variable of type `string` is rejected.
 
 Examples of other functions that take an argument of this type are `invariant` and `queryf`.

@@ -40,7 +40,7 @@ need have a constructor.  For example:
 
 @@ inheritance-examples/ColoredPoint.php @@
 
-A base class can define an abstract type constant---essentially a name without a concrete type attached---and subclasses each override
+A base class can define an abstract type constant&mdash;essentially a name without a concrete type attached&mdash;and subclasses each override
 that with a concrete type constant. Conceptually, type constants are to types, as abstract methods are to methods.  A type constant has
 public visibility and is implicitly static.  By convention, a type constant's name begins with an uppercase `T`.  Consider the following:
 

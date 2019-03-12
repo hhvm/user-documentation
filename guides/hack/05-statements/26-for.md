@@ -20,7 +20,7 @@ value being tested. If that tests `true`, the loop body is executed, and the gro
 left-to-right, for their side-effects only. Then the process is repeated starting with *for-control*. If the right-most expression in
 *for-control* tests `false`, control transfers to the point immediately following the end of the for statement. The loop body is executed zero or more times.
 
-The controlling expression---the right-most expression in *for-control*---must have type `bool` or be implicitly convertible to that type.
+The controlling expression&mdash;the right-most expression in *for-control*---must have type `bool` or be implicitly convertible to that type.
 
 Any or all of the three parts of the first line of a for statement can be omitted, as shown. If *for-initializer* is omitted, no action
 is taken at the start of the loop processing. If *for-control* is omitted, this is treated as if *for-control* was an expression with the

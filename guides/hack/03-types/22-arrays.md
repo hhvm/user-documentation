@@ -257,7 +257,7 @@ private array<string, int> $fruitMap = array('oranges' => 25, 'apples' => 12, 'p
 ```
 
 Although we can use any type as an array's key type, behind the scenes, the key is actually represented as an `int` or `string`,
-so---possibly surprising, or at least, unexpected---conversions occur when other key types are specified. **Programmers are strongly
+so&mdash;possibly surprising, or at least, unexpected&mdash;conversions occur when other key types are specified. **Programmers are strongly
 advised to avoid using key types other than `int` or `string`.**
 
 Each element in an array must have a value type that is the exact type indicated by the array declaration, or a

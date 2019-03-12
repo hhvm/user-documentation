@@ -12,7 +12,7 @@ Consider the following example:
 @@ int-examples/leap-year-test.php @@
 
 When called, function `is_leap_year` takes one argument, of type `int`, and returns a value of type `bool`. (A year is a leap year if it is a
-multiple of 4 but not a multiple of 100---for example, 1700, 1800, and 1900 were *not* leap years---or it's a multiple of 400. Some redundant
+multiple of 4 but not a multiple of 100&mdash;for example, 1700, 1800, and 1900 were *not* leap years&mdash;or it's a multiple of 400. Some redundant
 grouping parentheses have been added to aid readability.)
 
 The bitwise AND operator, `&`, and the remainder operator, `%`, require operands of type `int`.

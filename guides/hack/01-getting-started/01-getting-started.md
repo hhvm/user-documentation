@@ -8,7 +8,7 @@ The prerequisites you need to write and execute Hack code are pretty straightfor
   [vscode-hack], and Vim with [ALE] also offers an excellent experience.
 
 The HHVM runtime is required for both (1) executing Hack code (2) to run the Hack typechecker, which
-is the main benefit of using the Hack language---to make sure your code is well written, safe and consistent.
+is the main benefit of using the Hack language&mdash;to make sure your code is well written, safe and consistent.
 
 ## Your First Hack Program
 

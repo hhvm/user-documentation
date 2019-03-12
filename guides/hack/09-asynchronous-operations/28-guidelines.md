@@ -1,5 +1,5 @@
 It might be tempting to just sprinkle `async`, `await` and `Awaitable` on all code. And while it is OK to have more `async` functions than
-not---in fact, we should generally *not be afraid* to make a function `async` since there is no performance penalty for doing so---there are
+not&mdash;in fact, we should generally *not be afraid* to make a function `async` since there is no performance penalty for doing so&mdash;there are
 some guidelines to follow in order to make the most efficient use of `async`.
 
 ## Be Liberal, but Careful, with Async

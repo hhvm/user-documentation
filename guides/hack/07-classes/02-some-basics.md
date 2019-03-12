@@ -1,7 +1,7 @@
 A *class* is an object type that contains the data and function members associated with that type.  (A function defined inside a class is
 called a *method*.)  A class supports the object-oriented ideas of *encapsulation* and *data hiding*.
 
-An object---often called an *instance*---of a class type is created (i.e., *instantiated*) via the [new operator](../expressions-and-operators/new.md).
+An object&mdash;often called an *instance*---of a class type is created (i.e., *instantiated*) via the [new operator](../expressions-and-operators/new.md).
 
 Hack supports [*inheritance*](inheritance.md), a means by which a *derived class* can *extend* and specialize a single *base class*.
 

@@ -1,5 +1,5 @@
-The ternary operator `?:` takes three operands.  Based on the value of the first operand, either the second or third operand---but *not*
-both---is evaluated, and their result becomes the result of the whole expression.  For example:
+The ternary operator `?:` takes three operands.  Based on the value of the first operand, either the second or third operand&mdash;but *not*
+both&mdash;is evaluated, and their result becomes the result of the whole expression.  For example:
 
 ```Hack
 $daysInFeb = is_leap_year($year) ? 29 : 28

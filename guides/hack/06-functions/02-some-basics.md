@@ -39,7 +39,7 @@ Here, method `move` has two parameters of type `num`, so it can accept `int`s, `
 is called to move a Point (such as `$p` in `main`) to a given location using an expression like `$p->move(-2.2, -4)`, which involves the
 [member-selection operator, `->`](../expressions-and-operators/member-selection.md).
 
-A function can be *parameterized*; that is, its definition can have one or more placeholder names---called *type parameters*---that are associated
+A function can be *parameterized*; that is, its definition can have one or more placeholder names&mdash;called *type parameters*---that are associated
 with types via *type arguments* when that function is called. A function having such placeholder names is called a *generic function*.  For
 more information, see [generic types and functions](../generic-types-and-functions/introduction.md).
 

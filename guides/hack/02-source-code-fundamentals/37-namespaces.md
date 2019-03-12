@@ -58,7 +58,7 @@ namespace NS3\Sub1;
 
 In this case, the namespace extends from the opening brace to the closing brace.
 
-A namespace can import---that is, get access to---one or more names into a scope, optionally giving them each an alias.
+A namespace can import&mdash;that is, get access to&mdash;one or more names into a scope, optionally giving them each an alias.
 Each of those names may designate a namespace, a sub-namespace, a class, an interface, or a trait.  For example:
 
 @@ namespaces-examples/namespaces.php @@

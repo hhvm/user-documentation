@@ -1,4 +1,4 @@
-Hack contains a mechanism to define generic---that is, type-less---classes, interfaces, and traits, and to create type-specific instances of
+Hack contains a mechanism to define generic&mdash;that is, type-less&mdash;classes, interfaces, and traits, and to create type-specific instances of
 them via type parameters.
 
 Consider the following example in which `Stack` is a generic class having one type parameter, `T`, and that implements a stack:

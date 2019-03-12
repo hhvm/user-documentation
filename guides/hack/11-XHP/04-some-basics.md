@@ -18,8 +18,8 @@ $user_name = 'Fred';
 echo <tt>Hello <strong>{$user_name}</strong></tt>;
 ```
 
-The first example uses string interpolation to output the HTML, while the second has no quotation marks---meaning that the syntax is
-fully understood by Hack---but this does not mean that all you need to do is remove quotation marks. Other steps needed include:
+The first example uses string interpolation to output the HTML, while the second has no quotation marks&mdash;meaning that the syntax is
+fully understood by Hack&mdash;but this does not mean that all you need to do is remove quotation marks. Other steps needed include:
  - Use curly braces to include variables - e.g., `"<a>$foo</a>"` becomes `<a>{$foo}</a>`.
  - As XHP is XML-like, all elements must be closed - e.g., `"<br>"` becomes `<br />`.
  - Make sure your HTML is properly nested.
