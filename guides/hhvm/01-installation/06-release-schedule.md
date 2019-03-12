@@ -21,9 +21,7 @@ After moving to a weekly regular release cycle with 4.2, we plan to continue off
 |---------|-----|--------------|-------------------------|
 | [4.0]   | No  | 2019-02-11   | 2019-04-08              |
 | [3.30]  | Yes | 2018-12-17   | 2019-11-19              |
-| [3.29]  | No  | 2018-10-22   | 2018-11-05              |
 | [3.27]  | Yes | 2018-06-18   | 2019-09-05              |
-| [3.24]  | Yes | 2018-01-16   | 2018-12-17              |
 
 ## Future Releases
 
@@ -38,9 +36,8 @@ All versions not listed above are unsupported; support for the following release
 
 | Version | LTS | Release Date | End Of Support |
 |---------|-----|--------------|----------------|
-| [3.28]  | No  | 2018-08-28   | 2018-10-22     |
-| [3.26]  | No  | 2018-05-07   | 2018-07-02     |
-| [3.21]  | Yes | 2017-08-02   | 2018-07-02     |
+| [3.29]  | No  | 2018-10-22   | 2018-12-17     |
+| [3.24]  | Yes | 2018-01-16   | 2018-12-17     |
 
 [4.0]: https://hhvm.com/blog/2019/02/11/hhvm-4.0.0.html
 [3.30]: https://hhvm.com/blog/2018/12/17/hhvm-3.30.html
