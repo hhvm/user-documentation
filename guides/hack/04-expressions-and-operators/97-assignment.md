@@ -53,7 +53,7 @@ $v -= 5;      // $v = 25
 $v .= 123.45; // $v = "25123.45"
 ```
 
-The expression `$v += 20` is equivalent to `$v = $v + 20`. Likewise for `$v -= 5` and `$v = $v - 5`, and $v .= 123.45` and 
+The expression `$v += 20` is equivalent to `$v = $v + 20`. Likewise for `$v -= 5` and `$v = $v - 5`, and `$v .= 123.45` and
 `$v = $v . 123.45`.  However, consider the following:
 
 ```Hack
