@@ -30,7 +30,7 @@ is very likely available there too, but you should check with your package maint
 ### 2. Setup for the Typechecker
 
 Choose a directory where you want to store your Hack code. In this directory, run `touch .hhconfig`. This
-creates an empty file that `hh_client` looks for as the *root* of your code to being typechecking. In
+creates an empty file that `hh_client` looks for as the *root* of your code to be typechecked. In
 order to properly analyze your code, the typechecker needs to do global analysis and be able to see
 all of your code. This means that it assumes a global autoloader for any code under this root, and
 checks all code recursively under this root together as one project.
