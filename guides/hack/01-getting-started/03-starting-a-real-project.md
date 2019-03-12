@@ -161,7 +161,7 @@ $ bin/square_some_things.hack
 
 Most projects use a linter to enforce some stylistic choices that are not
 required by the language, but help make the project consistent; [HHAST] is the
-recommending linter for Hack code. HHAST's linter is enabled by an
+recommended linter for Hack code. HHAST's linter is enabled by an
 `hhast-lint.json` file in the project root. A good starting project is to enable
 all linters for all directories that contain source code - to do this, save
 the following as `hhast-lint.json`:
