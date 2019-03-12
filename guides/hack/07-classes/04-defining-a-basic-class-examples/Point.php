@@ -27,7 +27,7 @@ function main(): void {
   $p1 = new Point(3.4, 5.6);
   $p2 = new Point(3.4);
   $p3 = new Point();
-  
+
   echo "\$p1 is $p1\n";  // implicit call to __toString()
   echo "\$p2 is $p2\n";  //   "          "         "
   echo "\$p3 is $p3\n";  //   "          "         "

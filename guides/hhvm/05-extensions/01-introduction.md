@@ -118,7 +118,7 @@ extension_dir = /etc/hhvm
 hhvm.extensions[extension_name] = extension.so
 ```
 
-or 
+or
 
 ```
 hhvm.dynamic_extensions[extension_name] = extension.so

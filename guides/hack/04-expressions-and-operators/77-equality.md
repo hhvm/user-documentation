@@ -1,4 +1,4 @@
-**Note: The semantics of operators `==` and `!=` were inherited from PHP, and are sometimes not 
+**Note: The semantics of operators `==` and `!=` were inherited from PHP, and are sometimes not
 what is expected. As such, use `===` and `!==` instead.** See the discussion below.
 
 The binary equality operators are, as follows:
@@ -8,10 +8,10 @@ The binary equality operators are, as follows:
 * `!==`, which represents *not-same-type-and-value-equality*.
 * `<=>`, which indicates less-than, equal-to, or greater-than (see later below)
 
-However, when comparing two objects, operator `===` represents *identity* and operator `!==` represents *non-identity*. Specifically, 
+However, when comparing two objects, operator `===` represents *identity* and operator `!==` represents *non-identity*. Specifically,
 in this context, these operators check to see if the two operands are the exact same object, not two different objects of the same type and value.
 
-The type of the result of `==`, `!=`, `===`, and `!==`, is `bool`. 
+The type of the result of `==`, `!=`, `===`, and `!==`, is `bool`.
 
 ```Hack
 null == 0   // result has value true
@@ -28,15 +28,15 @@ dict["red"=>0,"green"=>0] === dict["red"=>0,"green"=>0] // result has value true
 dict["red"=>0,"green"=>0] === dict["green"=>0,"red"=>0] // result has value false
 ```
 
-When using `==` and `!=` to compare strings that start with numeric digits, such strings 
+When using `==` and `!=` to compare strings that start with numeric digits, such strings
 are converted to `int` or `float` and then compared numerically. As such,
- 
+
 ```Hack
 '0e789' == '0e123'   // True
 '0e789' != '0e123'   // False
 ```
 
-because both strings actually have the same numeric value, zero! (Zero to the power 789 is the 
+because both strings actually have the same numeric value, zero! (Zero to the power 789 is the
 same as zero to the power 123.) However,
 
 ```Hack
@@ -46,8 +46,8 @@ same as zero to the power 123.) However,
 
 because there is no numeric conversion; the strings are compared character by character.
 
-Often referred to as the *spaceship operator*, the binary operator `<=>` compares the values of its operands and returns an `int` 
-result. If the left-hand value is less than the right-hand value, the result is some unspecified negative value; else, if the left-hand 
+Often referred to as the *spaceship operator*, the binary operator `<=>` compares the values of its operands and returns an `int`
+result. If the left-hand value is less than the right-hand value, the result is some unspecified negative value; else, if the left-hand
 value is greater than the right-hand value, the result is some unspecified positive value; otherwise, the values are equal and the result is zero. For example:
 
 ```Hack

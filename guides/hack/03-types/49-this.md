@@ -1,5 +1,5 @@
-The type name `this` refers to *the current class type at run time*. As such, it can only be used from within a class, an interface, or 
-a trait. (The type name `this` should not be confused with [`$this`](../source-code-fundamentals/names.md), which refers to *the current 
+The type name `this` refers to *the current class type at run time*. As such, it can only be used from within a class, an interface, or
+a trait. (The type name `this` should not be confused with [`$this`](../source-code-fundamentals/names.md), which refers to *the current
 instance*, whose type is `this`.)  For example:
 
 @@ this-examples/this.php @@

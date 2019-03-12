@@ -6,7 +6,7 @@ Imagine you have a program like this
 
 @@ examples-examples/force.php @@
 
-Notice that we are putting parameter and return types in a file that starts with `<?php`. 
+Notice that we are putting parameter and return types in a file that starts with `<?php`.
 
 If we run the program like this:
 

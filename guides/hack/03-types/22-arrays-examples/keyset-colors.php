@@ -11,7 +11,7 @@ function main(): void {
   $colors[] = "white";   // add element with key/value "white"
   $colors[] = "blue";    // add element with key/value "blue"
   \var_dump($colors);
-  
+
   $colors = keyset["green", "yellow", "green"]; // create a keyset of two elements
   \var_dump($colors);
 

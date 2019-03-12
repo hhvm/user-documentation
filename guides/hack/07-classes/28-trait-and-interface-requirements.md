@@ -1,5 +1,5 @@
-Trait and interface requirements allow you to restrict the use of these constructs by specifying what classes may actually use a trait or 
-implement an interface. This can simplify long lists of `abstract` method requirements, and provide a hint to the reader as to the 
+Trait and interface requirements allow you to restrict the use of these constructs by specifying what classes may actually use a trait or
+implement an interface. This can simplify long lists of `abstract` method requirements, and provide a hint to the reader as to the
 intended use of the trait or interface.
 
 ## Syntax
@@ -27,7 +27,7 @@ Here is an example of a trait that introduces a class and interface requirement,
 
 @@ trait-and-interface-requirements-examples/trait-bad.php.type-errors @@
 
-**NOTE**: `require extends` should be taken literally. The class *must* extend the required class; thus the actual required class 
+**NOTE**: `require extends` should be taken literally. The class *must* extend the required class; thus the actual required class
 **does not** meet that requirement. This is to avoid some subtle circular dependencies when checking requirements.
 
 ## Interfaces

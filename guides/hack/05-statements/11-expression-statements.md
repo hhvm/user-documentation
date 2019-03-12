@@ -1,4 +1,4 @@
-An *expression statement* is simply *any* expression followed by a semicolon (`;`).  The expression is evaluated for its side-effects *only*; 
+An *expression statement* is simply *any* expression followed by a semicolon (`;`).  The expression is evaluated for its side-effects *only*;
 any resulting value is discarded.  For example:
 
 @@ expression-statements-examples/useful.php @@
@@ -16,9 +16,9 @@ while ((c = getNextCharacter()) === " " || c === "\t")
   ;
 ```
 
-Here we skip all leading spaces and horizontal tabs, and since we do all the work in evaluating the controlling expression, we have nothing 
-left to do in the loop body. However, syntactically, a loop *must* have a body, so we give it one, a do-nothing null statement.  Be sure to 
-indent the semicolon to where the body would ordinarily go to make it obvious. The worst thing would be to put the semicolon at the end of 
+Here we skip all leading spaces and horizontal tabs, and since we do all the work in evaluating the controlling expression, we have nothing
+left to do in the loop body. However, syntactically, a loop *must* have a body, so we give it one, a do-nothing null statement.  Be sure to
+indent the semicolon to where the body would ordinarily go to make it obvious. The worst thing would be to put the semicolon at the end of
 the previous line where that meaning likely would be lost to the reader.
 
 Note, however, we can write this construct without using a null statement, by using an empty block, as follows:

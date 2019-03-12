@@ -23,7 +23,7 @@ function render_component($text, $uri) {
 }
 ```
 
-You are converting `render_component` into a safer function without the need for explicit escaping, etc. But you are still passing 
+You are converting `render_component` into a safer function without the need for explicit escaping, etc. But you are still passing
 strings around in the end.
 
 ## Use a Class
@@ -36,7 +36,7 @@ class :ui:component-link extends :x:element {
   attribute Uri $uri @required;
   attribute string $text @required;
   protected function render(): XHPRoot {
-    return 
+    return
       <a href={$this->:uri}>{$this->:text}</a>;
   }
 }

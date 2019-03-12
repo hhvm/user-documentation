@@ -1,7 +1,7 @@
-First, make sure that you have the [XHP Library](some-basics.md#the-xhp-lib-library) installed a dependency of your project---this defines 
+First, make sure that you have the [XHP Library](some-basics.md#the-xhp-lib-library) installed a dependency of your project---this defines
 the various core classes of XHP, and the standard HTML components.
 
-XHP is a syntax to create actual Hack objects, called *XHP objects*. They are meant to be used as a tree, where children can either be 
+XHP is a syntax to create actual Hack objects, called *XHP objects*. They are meant to be used as a tree, where children can either be
 other XHP objects or text nodes.
 
 ## Creating a Simple XHP Object
@@ -12,20 +12,20 @@ Instead of using the `new` operator, creating XHP looks very much like XML:
 $my_xhp_object = <p>Hello, world</p>;
 ```
 
-`$my_xhp_object` now contains an instance of the `:p` class; the initial `:` marks it as an XHP class, but is not needed when instantiating 
+`$my_xhp_object` now contains an instance of the `:p` class; the initial `:` marks it as an XHP class, but is not needed when instantiating
 it. It is a real object, meaning that `is_object` will return `true` and you can call methods on it.
 
-The following example utilizes three XHP classes: `:div`, `:strong`, `:i`. Whitespace is insignificant, so you can create a readable 
+The following example utilizes three XHP classes: `:div`, `:strong`, `:i`. Whitespace is insignificant, so you can create a readable
 tree structure in your code.
 
 @@ basic-usage-examples/basic.php @@
 
-The `var_dump` shows that a tree of objects has been created, not an HTML/XML string. An HTML string can be produced either by simply 
+The `var_dump` shows that a tree of objects has been created, not an HTML/XML string. An HTML string can be produced either by simply
 using `echo`/`print`, or by calling `$xhp_object->toString`.
 
 ## Dynamic Content
 
-The examples so far have only shown static content, but usually you'll need to include something that's generated at runtime; for this, 
+The examples so far have only shown static content, but usually you'll need to include something that's generated at runtime; for this,
 you can use Hack expressions directly within XHP with braces:
 
 ```
@@ -44,7 +44,7 @@ More complicated expressions are also supported, for example:
 
 ## Attributes
 
-Like HTML, XHP supports attributes on an XHP object. An XHP object can have zero or any number of attributes available to it. The XHP 
+Like HTML, XHP supports attributes on an XHP object. An XHP object can have zero or any number of attributes available to it. The XHP
 class defines what attributes are available to objects of that class:
 
 ```

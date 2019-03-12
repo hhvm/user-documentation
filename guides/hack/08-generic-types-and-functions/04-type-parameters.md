@@ -1,12 +1,12 @@
 A type parameter is a placeholder for a type that is supplied when a generic type is instantiated, or a generic method or function is invoked.
 
-A type parameter is a compile-time construct. At run-time, each type parameter is matched to a run-time type that was specified by a 
-type argument. Therefore, a type declared with a type parameter will, at run-time, be a closed generic type 
-([$$](open-and-closed-generic-types.md)), and execution involving a type parameter uses the actual type that was supplied as the type 
+A type parameter is a compile-time construct. At run-time, each type parameter is matched to a run-time type that was specified by a
+type argument. Therefore, a type declared with a type parameter will, at run-time, be a closed generic type
+([$$](open-and-closed-generic-types.md)), and execution involving a type parameter uses the actual type that was supplied as the type
 argument for that type parameter.
 
-The name of a type parameter is visible from its point of definition through the end of the type, method, or function declaration on 
-which it is defined. However, the name does not conflict with a name of the same spelling used in non-type contexts (such as the names 
+The name of a type parameter is visible from its point of definition through the end of the type, method, or function declaration on
+which it is defined. However, the name does not conflict with a name of the same spelling used in non-type contexts (such as the names
 of a class constant, an attribute, a method, an enum constant, or a namespace). All type-parameter names *must* begin with the letter T.
 
 In the following case, class `Vector` has one type parameter, `Tv`. Method `map` also has one type parameter, `Tu`.

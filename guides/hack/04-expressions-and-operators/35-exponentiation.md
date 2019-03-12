@@ -1,5 +1,5 @@
-The binary operator `**` produces the result of raising the value of its left-hand operand to the power of the right-hand one, 
-both of which must have arithmetic type. If both operands have non-negative integer values and the result can be represented as 
+The binary operator `**` produces the result of raising the value of its left-hand operand to the power of the right-hand one,
+both of which must have arithmetic type. If both operands have non-negative integer values and the result can be represented as
 an `int`, the result has type `int`; otherwise, the result has type `float`.  For example:
 
 ```Hack

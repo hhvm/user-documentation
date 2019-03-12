@@ -20,7 +20,7 @@ Take the following example:
 
 @@ classes-and-objects-examples/call.php @@
 
-Under HHVM, both checking and invocation of `__call()` happen on class G. In PHP, you will get a fatal error. 
+Under HHVM, both checking and invocation of `__call()` happen on class G. In PHP, you will get a fatal error.
 
 Difference: [https://3v4l.org/t9pba](https://3v4l.org/t9pba)
 

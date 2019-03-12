@@ -1,6 +1,6 @@
-The binary operator `-` produces the difference of its operands, which must have arithmetic type, when subtracting the right-hand 
-operand from the left-hand one. If either operand has type `float`, the other is converted to that type, and the result has type 
-`float`. Otherwise, both operands have type `int`, in which case, if the resulting value can be represented in type `int` that is 
+The binary operator `-` produces the difference of its operands, which must have arithmetic type, when subtracting the right-hand
+operand from the left-hand one. If either operand has type `float`, the other is converted to that type, and the result has type
+`float`. Otherwise, both operands have type `int`, in which case, if the resulting value can be represented in type `int` that is
 the result type. Otherwise, the type and value of [the result is implementation-defined](../types/int.md).
 
 ```Hack

@@ -1,5 +1,5 @@
-A variable is a named area of data storage that has a type and a value.  Distinct variables may have the same name provided 
-they are in different [scopes](scope.md).  A [constant](constants.md) is a variable that, once initialized, its value cannot 
+A variable is a named area of data storage that has a type and a value.  Distinct variables may have the same name provided
+they are in different [scopes](scope.md).  A [constant](constants.md) is a variable that, once initialized, its value cannot
 be changed.   Based on the context in which it is declared, a variable has a scope.
 
 The following kinds of variable may exist in a script:
@@ -12,8 +12,8 @@ The following kinds of variable may exist in a script:
 
 ## Local Variables
 
-Except for function parameters, a local variable is never defined explicitly; instead, it is created when it is first 
-assigned a value. A local variable can be assigned to as a parameter in the parameter list of a function definition or 
+Except for function parameters, a local variable is never defined explicitly; instead, it is created when it is first
+assigned a value. A local variable can be assigned to as a parameter in the parameter list of a function definition or
 inside any compound statement. It has function scope.
 
 Consider the following example:
@@ -31,7 +31,7 @@ function do_it(bool $p1): void {  // assigned the value true when called
 do_it(true);
 ```
 
-Here, the parameter `$p1` (which is a local variable) takes on the value `true` when `do_it` is called. The local 
+Here, the parameter `$p1` (which is a local variable) takes on the value `true` when `do_it` is called. The local
 variables `$count` and `$message` take on the type of the respective value being assigned to them.
 
 Consider the following example:
@@ -42,10 +42,10 @@ Unlike the equivalent [function static](#function-statics) version, this functio
 
 ## Array Elements
 
-An array is created via a vec-literal, a dict-literal, a set-literal, using `array`, or the 
-[array-creation operator](../expressions-and-operators/array-creation.md). At the same time, one or more elements 
-may be created for that array. New elements are inserted into an existing array via the 
-[simple-assignment](../expressions-and-operators/assignment.md) operator in conjunction with the 
+An array is created via a vec-literal, a dict-literal, a set-literal, using `array`, or the
+[array-creation operator](../expressions-and-operators/array-creation.md). At the same time, one or more elements
+may be created for that array. New elements are inserted into an existing array via the
+[simple-assignment](../expressions-and-operators/assignment.md) operator in conjunction with the
 [subscript `[]`](../expressions-and-operators/subscript.md) operator.
 
 The scope of an array element is the same as the scope of that array's name.

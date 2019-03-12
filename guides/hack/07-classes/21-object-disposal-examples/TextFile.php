@@ -20,7 +20,7 @@ class TextFile implements \IDisposable {
       return;
     }
 
-    // ... somehow close the file 
+    // ... somehow close the file
     $this->fileHandle = null;
     $this->openFlag = false;
 
@@ -28,7 +28,7 @@ class TextFile implements \IDisposable {
   }
 
   public function __toString(): string {
-    return 
+    return
     'fileName: ' . $this->fileName
     . ', openMode: ' . $this->openMode
     . ', fileHandle: '
@@ -41,7 +41,7 @@ class TextFile implements \IDisposable {
      $this->close();
   }
 
-  <<__ReturnDisposable>> 
+  <<__ReturnDisposable>>
   public static function open_TextFile(string $fileName, string $openMode): TextFile {
     return new TextFile($fileName, $openMode);
   }
@@ -62,7 +62,7 @@ function main(): void {
     $f1->close();  // close explicitly
     $f1->close();  // try to close again
   } // dispose called here
-  
+
   using ($f2 = new TextFile("file2.txt", "rw")) {
     echo "\$f2 is >" . $f2->__toString() . "<\n";
     // work with the file

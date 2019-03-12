@@ -1,4 +1,4 @@
-A class declaration defines a named-class type, and the data and method members associated with that type.  The following kinds of 
+A class declaration defines a named-class type, and the data and method members associated with that type.  The following kinds of
 members are permitted:
 * [Constants](constants.md) -- the constant values associated with the class.
 * [Properties](properties.md) -- the variables of the class or of each instance of that class.
@@ -10,11 +10,11 @@ Here's an extract from a Point class that supports a two-dimensional Cartesian p
 
 @@ defining-a-basic-class-examples/Point.php @@
 
-The complete set of members of a class are those specified in its declaration along with the [members inherited](inheritance.md) 
+The complete set of members of a class are those specified in its declaration along with the [members inherited](inheritance.md)
 from its base class, from the [interfaces it implements](implementing-an-interface.md), and from the [traits that it uses](using-a-trait.md).
 
-A number of names (such as `__construct` and `__toString`) are reserved for methods with required semantics, which user-defined 
+A number of names (such as `__construct` and `__toString`) are reserved for methods with required semantics, which user-defined
 versions must follow. These are described in [$$](methods-with-predefined-semantics.md).
 
-Methods and properties can either be *static* or *instance* members. A static member is declared using `static`. An instance 
+Methods and properties can either be *static* or *instance* members. A static member is declared using `static`. An instance
 member is one that is not static.  A static member belongs to the class as a whole, while an instance member applies to a particular instance.

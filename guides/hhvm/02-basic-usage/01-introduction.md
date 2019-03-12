@@ -7,7 +7,7 @@ For a majority of cases, you will run HHVM in one of two different ways:
 
 ## Default Configuration
 
-The default configuration for HHVM is `php.ini` for command-line mode and `server.ini` for server mode (both normally found in `/etc/hhvm/` on [Linux](../installation/linux.md) distros) 
+The default configuration for HHVM is `php.ini` for command-line mode and `server.ini` for server mode (both normally found in `/etc/hhvm/` on [Linux](../installation/linux.md) distros)
 
 The default configurations will be sufficient for a majority of use cases. Thus, you most likely will not need to tweak these INI settings, etc. They will be loaded automatically when you start HHVM.
 

@@ -42,7 +42,7 @@ Flag | Description
 ### Manual List of Files
 
 Instead of a directory, you can also pass it an explicit list of filenames to put in the repo or a master file that contains all of the files, one per line, that should be put in the repo. (Keep in mind that the commands below are generating two *separate* repos -- you can't add to or remove from a repo once it's been generated!)
- 
+
 ```
 hhvm --hphp -t hhbc -v AllVolatile=true file1.php file2.php
 hhvm --hphp -t hhbc -v AllVolatile=true --input-list master-file-list.txt
@@ -59,7 +59,7 @@ lib/c.php
 
 ## Manually Deploying the Repo
 
-After you build the repo, an SQLite3 database file called `hhvm.hhbc` is created. You copy this file to your production server. HHVM will use this file when serving requests and will not need the physical source files. 
+After you build the repo, an SQLite3 database file called `hhvm.hhbc` is created. You copy this file to your production server. HHVM will use this file when serving requests and will not need the physical source files.
 
 You must use the same HHVM version to run from the repo as you did to build the repo. In other words, a repo is tied to the version that built it. (Getting this wrong will lead to extremely cryptic errors about missing units in the repo.)
 

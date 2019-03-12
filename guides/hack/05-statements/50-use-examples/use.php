@@ -45,7 +45,7 @@ function main(): void {
   echo "CON = " . CON . "\n";
 
 // access function f by fully qualified and abbreviated names
-  
+
   \UseNS\f();
   f();
 
@@ -65,7 +65,7 @@ function main(): void {
   XXX\f();
 
 // access name CON2 by fully qualified and abbreviated names
-  
+
   echo "XXX\CON2 = " . \Hack\UserDocumentation\Statements\use\Examples\XXX\CON2 . "\n";
   echo "XXX\\CON2 = " . XXX\CON2 . "\n";
 }

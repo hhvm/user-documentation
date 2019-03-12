@@ -8,6 +8,6 @@ protected   public   require   require_once   return   self   shape   static   s
 tuple   type   use   while   yield
 ```
 
-Strictly speaking, `false`, `nonnull`, `null`, and `true` are *not* keywords; however, they do have predefined meanings, 
+Strictly speaking, `false`, `nonnull`, `null`, and `true` are *not* keywords; however, they do have predefined meanings,
 and can be thought of as keywords. Likewise, for the names of the intrinsic functions (such as `echo` and `invariant`).
 

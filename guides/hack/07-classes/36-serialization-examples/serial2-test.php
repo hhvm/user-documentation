@@ -5,7 +5,7 @@ include_once "ColoredPoint.php";
 
 <<__EntryPoint>>
 function main(): void {
-  $cp = new \Hack\UserDocumentation\Classes\Serialization\Examples\ColoredPoint\ColoredPoint(9, 8, 
+  $cp = new \Hack\UserDocumentation\Classes\Serialization\Examples\ColoredPoint\ColoredPoint(9, 8,
     \Hack\UserDocumentation\Classes\Serialization\Examples\ColoredPoint\Color::BLUE);
   $s = \serialize($cp);
   \var_dump($s);

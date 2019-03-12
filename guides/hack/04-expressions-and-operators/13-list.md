@@ -2,10 +2,10 @@ This intrinsic function assigns zero or more elements of its source to the corre
 
 ```Hack
 $v = vec[10, 20, 30, 40];
-list($_, $b, $_, $d) = $v; 
+list($_, $b, $_, $d) = $v;
 ```
 
-When the source is a vec, the element having an `int` key of 0 is assigned to the first target variable, the element having an `int` key 
+When the source is a vec, the element having an `int` key of 0 is assigned to the first target variable, the element having an `int` key
 of 1 is assigned to the second target variable, and so on, until all target variables have been assigned.
 
 If `$_` is used as a target variable, the value of the corresponding source element is ignored; no assignment takes place.

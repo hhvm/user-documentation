@@ -2,14 +2,14 @@ There are two forms of comments: delimited and single-line.  For example:
 
 @@ comments-examples/show-comment-styles.php @@
 
-A *delimited comment* starts with `/*` and ends with `*/`, and may span source lines. It may contain any characters except 
+A *delimited comment* starts with `/*` and ends with `*/`, and may span source lines. It may contain any characters except
 the sequence `*/`. A delimited comment may occur in *any* place in a script in which white space may occur. For example:
 
 ```Hack
 /*...*/$c/*...*/=/*...*/567/*...*/;/*...*/
 ```
 
-is interpreted as 
+is interpreted as
 
 ```Hack
 $c=567;

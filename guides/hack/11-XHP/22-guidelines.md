@@ -1,4 +1,4 @@
-Here are some general guidelines to know and follow when using XHP. In addition to its [basic usage](basic-usage.md), 
+Here are some general guidelines to know and follow when using XHP. In addition to its [basic usage](basic-usage.md),
 [available methods](methods.md) and [extending XHP with your own objects](extending.md), these are other tips to make the best use of XHP.
 
 ## Validation of Attributes and Children
@@ -16,12 +16,12 @@ This validation is on by default. You can turn it off by running the following c
 
 ## Use Contexts to Access Higher Level Information
 
-If you have a parent object, and you want to give information to some object further down the UI tree (e.g., `<ul>` to `<li>`), you 
+If you have a parent object, and you want to give information to some object further down the UI tree (e.g., `<ul>` to `<li>`), you
 can set a context for those lower objects and the lower objects can retrieve them. You use `setContext` and `getContext`
 
 @@ guidelines-examples/context.php @@
 
-Context is only passed down the tree at render time; this allows you to construct a tree without having to thread through data. In 
+Context is only passed down the tree at render time; this allows you to construct a tree without having to thread through data. In
 general, you should only call `getContext` in the `render` method of the child.
 
 Common uses include:
@@ -31,12 +31,12 @@ Common uses include:
 
 ## Don't Add Public Methods to Your XHP Components
 
-XHP objects should only be interacted with by their attributes, contexts, position in the tree, and rendering them. At Facebook, 
+XHP objects should only be interacted with by their attributes, contexts, position in the tree, and rendering them. At Facebook,
 we haven't yet come across any situations where public methods are a better solution than these interfaces.
 
 ## Use Inheritance Minimally
 
-If you need an XHP object to act like another, but slightly modified, use composition. Categories and attribute cloning can 
+If you need an XHP object to act like another, but slightly modified, use composition. Categories and attribute cloning can
 be used to provide a common interface.
 
 ## Remember No Dollar Signs

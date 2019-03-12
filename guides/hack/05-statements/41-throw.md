@@ -1,4 +1,4 @@
-A `throw` statement throws an exception immediately and unconditionally.  Control never reaches the statement immediately 
+A `throw` statement throws an exception immediately and unconditionally.  Control never reaches the statement immediately
 following the throw. See the [try statement](try.md) for more details of throwing and catching exceptions.  For example:
 
 ```Hack

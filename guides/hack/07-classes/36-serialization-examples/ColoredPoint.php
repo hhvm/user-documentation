@@ -6,7 +6,7 @@ include_once "Point.php";
 enum Color: int {
   RED = 1;
   WHITE = 2;
-  BLUE = 3;  
+  BLUE = 3;
 }
 
 class ColoredPoint extends \Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point implements \Serializable {

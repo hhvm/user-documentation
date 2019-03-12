@@ -13,13 +13,13 @@ The admin server uses the same protocol as the main server - so, if you're using
 
 ## Querying the Admin Server
 
-Once you have set up your admin server, you can query it via `curl`. 
+Once you have set up your admin server, you can query it via `curl`.
 
 ```
 curl http://localhost:9001/
 ```
 
-will bring up a list of commands you can use to control and query your admin server. 
+will bring up a list of commands you can use to control and query your admin server.
 
 The port associated with the `curl` command is the `hhvm.admin_server` port set above if you are using [Proxygen](/hhvm/basic-usage/proxygen). *If you are using [FastCGI](/hhvm/advanced-usage/fastCGI)*, then the port will be the webserver port that is the front end to FastCGI.
 

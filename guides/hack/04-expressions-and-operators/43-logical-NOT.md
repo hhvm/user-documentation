@@ -1,4 +1,4 @@
-The logical NOT operator, `!`, requires an operand of Boolean or arithmetic type. The type of the result is `bool`.  If the value of the 
+The logical NOT operator, `!`, requires an operand of Boolean or arithmetic type. The type of the result is `bool`.  If the value of the
 operand is `false` or non-zero, the value of the result is `true`; otherwise, the value of the result is `false`. Given the following:
 
 ```Hack

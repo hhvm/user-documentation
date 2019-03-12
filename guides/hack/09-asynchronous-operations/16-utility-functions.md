@@ -2,8 +2,8 @@ Async can be used effectively with the basic, built in infrastructure in HHVM, a
 * [`async`](../asynchronous-operations/introduction.md), [`await`](../asynchronous-operations/awaitables), [`Awaitable`](../asynchronous-operations/awaitables)
 * `HH\Lib\Vec\from_async()`, `HH\Lib\Dict\from_async()`
 
-However, there are cases when we want to convert some collection of values to awaitables or we want to filter some awaitables out 
-of a collection of awaitables. These types of scenarios come up when we are creating multiple awaitables to await in parallel. Some 
+However, there are cases when we want to convert some collection of values to awaitables or we want to filter some awaitables out
+of a collection of awaitables. These types of scenarios come up when we are creating multiple awaitables to await in parallel. Some
 of the functions that help with this are:
 
 Name | Returns | Description

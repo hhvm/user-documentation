@@ -17,7 +17,7 @@ final class FinalClass {
 final class MockFinalClass extends FinalClass {
   public static function f(): void {
     echo __METHOD__, "\n";
-    
+
     // Let's say we were testing the call to the parent class. We wouldn't
     // be able to do this in HHVM without the __MockClass attribute.
     parent::f();

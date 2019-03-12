@@ -34,6 +34,6 @@ class C {
 //  const Map<string, int> cMap = Map{'oranges' => 25, 'apples' => 12, 'pears' => 17};		// initializer is not a constant
   const dict<string, int> cDict = dict['oranges' => 25, 'apples' => 12, 'pears' => 17];
 //  const Set<arraykey> cSet = Set{"red", "white", 123}; 		// initializer is not a constant
-  const keyset<arraykey> cKeyset = keyset["red", "white", 123]; 
+  const keyset<arraykey> cKeyset = keyset["red", "white", 123];
 //  const B cB = new B();		// initializer is not a constant
 }

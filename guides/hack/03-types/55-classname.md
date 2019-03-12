@@ -27,8 +27,8 @@ class C2 {
   public static vec<classname<C1>> $p2 = vec[C1::class];}
 ```
 
-Here, class `C2` has three public members. The first is a property having a classname type, which is initialized using a special form of 
-the [scope-resolution operator, `::`](../expressions-and-operators/scope-resolution.md) ending in `class`.  The second is a function that 
+Here, class `C2` has three public members. The first is a property having a classname type, which is initialized using a special form of
+the [scope-resolution operator, `::`](../expressions-and-operators/scope-resolution.md) ending in `class`.  The second is a function that
 takes a nullable classname-typed argument, and returns a value of that classname type.  The third is a property whose type is a vec of one `classname<C1>`.
 
 The value of an expression of a classname type can be converted implicitly or explicitly to type `string`.

@@ -4,7 +4,7 @@ So, right now, we have no official Windows support for HHVM. But there is **grea
 
 ## MSVC
 
-Work is being done by a [community member](https://github.com/facebook/hhvm/pulls?page=1&q=is%3Apr+author%3AOrvid&utf8=%E2%9C%93) to port HHVM to native Windows using MSVC. We are getting close to having the pull requests merged that can get HHVM to actually build on Windows directly. 
+Work is being done by a [community member](https://github.com/facebook/hhvm/pulls?page=1&q=is%3Apr+author%3AOrvid&utf8=%E2%9C%93) to port HHVM to native Windows using MSVC. We are getting close to having the pull requests merged that can get HHVM to actually build on Windows directly.
 
 The first step will be getting HHVM to build on Windows. We have a [wiki of information](https://github.com/facebook/hhvm/wiki/Building-and-installing-HHVM-on-Windows-with-MSVC) about this. The next step is being able to run code in interpretive (interp) mode. Then JIT support would be the next step after that.
 

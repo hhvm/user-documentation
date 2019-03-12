@@ -1,5 +1,5 @@
-The `foreach` statement iterates over the set of elements in a given collection, starting at the beginning, executing a single statement 
-each iteration. On each iteration, the value of the current element is assigned to the corresponding variable, as specified.  The loop body 
+The `foreach` statement iterates over the set of elements in a given collection, starting at the beginning, executing a single statement
+each iteration. On each iteration, the value of the current element is assigned to the corresponding variable, as specified.  The loop body
 is executed zero or more times.  For example:
 
 ```Hack

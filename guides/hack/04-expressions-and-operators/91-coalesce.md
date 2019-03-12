@@ -1,4 +1,4 @@
-Given the expression `e1 ?? e2`, if `e1` is defined and not `null`, then the result is `e1`. Otherwise, `e2` is evaluated, and its 
+Given the expression `e1 ?? e2`, if `e1` is defined and not `null`, then the result is `e1`. Otherwise, `e2` is evaluated, and its
 value becomes the result. There is a sequence point after the evaluation of `e1`.
 
 ```Hack

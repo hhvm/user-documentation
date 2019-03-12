@@ -4,7 +4,7 @@ FastCGI provides a high performance interface between your codebase and web serv
 
 ## How FastCGI Works
 
-HHVM-FastCGI works much the same way as [PHP-FPM](http://php-fpm.org/). HHVM, running in FastCGI mode, is started independently of the web server (Apache, nginx, etc). It listens on either a TCP socket (conventionally localhost:9000) or a UNIX socket. The web server listens on port 80 or port 443 like it normally would. When a new request comes in, the web server either makes a connection to the application server or reuses one of the previously open connections, and communicates using FastCGI protocol. Therefore, the web server continues to decode HTTP protocol, and supplies HHVM with information like the path of the file to be executed, request headers, and body. HHVM computes the response and sends it back to the web server using FastCGI again. Finally, the web server is in charge of sending the HTTP response to the client. 
+HHVM-FastCGI works much the same way as [PHP-FPM](http://php-fpm.org/). HHVM, running in FastCGI mode, is started independently of the web server (Apache, nginx, etc). It listens on either a TCP socket (conventionally localhost:9000) or a UNIX socket. The web server listens on port 80 or port 443 like it normally would. When a new request comes in, the web server either makes a connection to the application server or reuses one of the previously open connections, and communicates using FastCGI protocol. Therefore, the web server continues to decode HTTP protocol, and supplies HHVM with information like the path of the file to be executed, request headers, and body. HHVM computes the response and sends it back to the web server using FastCGI again. Finally, the web server is in charge of sending the HTTP response to the client.
 
 ## Using FastCGI
 
@@ -38,7 +38,7 @@ The recommended way of integrating with Apache is using `mod_proxy` `mod_proxy_f
 
 This will route *all* the traffic to the FastCGI server. If you want to route only certain requests (e.g. only those from a subdirectory or ending *.php, you can use `ProxyPassMatch`, e.g.
 
-    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/$1 
+    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/$1
 
 Consult `mod_proxy_fcgi` docs for more details on how to use `ProxyPass` and `ProxyPassMatch`.
 
@@ -48,7 +48,7 @@ Also make sure to set up a `DirectoryIndex` in your Apache configuration like th
         DirectoryIndex index.php
     </Directory>
 
-This will try to access `index.php` when you send a request to a directory. 
+This will try to access `index.php` when you send a request to a directory.
 
 ### Making it work with nginx
 

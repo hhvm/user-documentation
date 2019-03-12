@@ -1,16 +1,16 @@
-A constant is a named value. Once defined, the value of the constant *cannot* be changed.  A constant can be defined in one 
+A constant is a named value. Once defined, the value of the constant *cannot* be changed.  A constant can be defined in one
 of two ways: inside a class or interface using `const`, or by calling the library function `define`. For example:
 
 @@ constants-examples/defining-constants.php @@
 
 ## Context-Dependent Constants
 
-The following constants --- sometimes referred to as *magic constants* --- are automatically available to all scripts; their values 
+The following constants --- sometimes referred to as *magic constants* --- are automatically available to all scripts; their values
 are not fixed:
 
- Constant Name                    | Description                     
- -----------------                | ---------                            
-`__CLASS__`                       | `string`; The name of the current class. From within a trait method, the name of the class in which that trait is used. If the current namespace is other than the default, the namespace name and "\\" are prepended, in that order. If used outside all classes, the value is the empty string. 
+ Constant Name                    | Description
+ -----------------                | ---------
+`__CLASS__`                       | `string`; The name of the current class. From within a trait method, the name of the class in which that trait is used. If the current namespace is other than the default, the namespace name and "\\" are prepended, in that order. If used outside all classes, the value is the empty string.
 `__DIR__`                         | `string`; The directory name of the script. A directory separator is only appended for the root directory.
 `__FILE__`                        | `string`; The full name of the script.
 `__FUNCTION__`                    | `string`; Inside a function, the name of the current function exactly as it was declared, with the following prepended: If a named namespace exists, that namespace name followed by "\". If used outside all functions, the result is the empty string. For a method, no parent-class prefix is present. (See `__METHOD__` and [anonymous functions](../functions/anonymous-functions.md).)

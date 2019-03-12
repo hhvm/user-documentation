@@ -1,4 +1,4 @@
-While certain kinds of variables must have their type declared explicitly, others can have their type inferred by having the implementation 
+While certain kinds of variables must have their type declared explicitly, others can have their type inferred by having the implementation
 look at the context in which those variables are used.  For example:
 
 ```Hack
@@ -29,7 +29,7 @@ function f(): void {
 }
 ```
 
-For each assignment, the type of `$v` is inferred from the type of the expression on the right-hand side, as shown in the comments. The type 
+For each assignment, the type of `$v` is inferred from the type of the expression on the right-hand side, as shown in the comments. The type
 of function statics is inferred in the same manner, as are function parameters. For example:
 
 ```Hack
@@ -61,10 +61,10 @@ $doubler(3);
 $doubler(4.2);
 ```
 
-The type of the parameter `$p` and the function's return type have been omitted. These types are inferred each time the anonymous function 
-is called through the variable `$doubler`. When `3` is passed, as that has type `int`, that is inferred as the type of `$p`. The literal `2` 
-also has type `int`, so the type of the value returned is the type of `$p * 2`, which is `int`, and that becomes the function's return type. 
-When `4.2` is passed, as that has type `float`, that is inferred as the type of `$p`. The literal `2` has type `int`, so the type of the value 
+The type of the parameter `$p` and the function's return type have been omitted. These types are inferred each time the anonymous function
+is called through the variable `$doubler`. When `3` is passed, as that has type `int`, that is inferred as the type of `$p`. The literal `2`
+also has type `int`, so the type of the value returned is the type of `$p * 2`, which is `int`, and that becomes the function's return type.
+When `4.2` is passed, as that has type `float`, that is inferred as the type of `$p`. The literal `2` has type `int`, so the type of the value
 returned is the type of `$p * 2`, which is `float`, and that becomes the function's return type.
 
 Consider the following, subtly different, version (note the literal 2.0 instead of 2):
@@ -73,7 +73,7 @@ Consider the following, subtly different, version (note the literal 2.0 instead 
 $doubler = (function ($p) { return $p * 2.0; });
 ```
 
-Whether an `int` or `float` value is passed, it matters not, as when either is multiplied by a `float`, the result is `float`, so that 
+Whether an `int` or `float` value is passed, it matters not, as when either is multiplied by a `float`, the result is `float`, so that
 becomes the function's return type.
 
 We can add partial explicit type information; the following all result in the same behavior:
@@ -84,10 +84,10 @@ $doubler = (function ($p = 0) { return $p * 2; });
 $doubler = (function ($p): int { return $p * 2; });
 ```
 
-In the first case, as `$p` has the declared type `int`, and `int * int` gives `int`, the return type is inferred as `int`. In the second 
-case, as the default value `0` has type `int`, `$p` is inferred to also have that type, and `int * int` gives `int`, so the return type 
-is inferred as `int`. In the third case, as the return type is declared as `int`, and `$p * 2` must have that type, the type of `$p` is 
+In the first case, as `$p` has the declared type `int`, and `int * int` gives `int`, the return type is inferred as `int`. In the second
+case, as the default value `0` has type `int`, `$p` is inferred to also have that type, and `int * int` gives `int`, so the return type
+is inferred as `int`. In the third case, as the return type is declared as `int`, and `$p * 2` must have that type, the type of `$p` is
 inferred as `int`, so that must also be the type of the parameter.
 
-While all three of these cases allow a call such as `$doubler(3)`, none of them allow a call such as `$doubler(4.2)`. So, the fact that 
+While all three of these cases allow a call such as `$doubler(3)`, none of them allow a call such as `$doubler(4.2)`. So, the fact that
 type information can be provided explicitly in these cases doesn't mean it's necessarily a good idea to do so.

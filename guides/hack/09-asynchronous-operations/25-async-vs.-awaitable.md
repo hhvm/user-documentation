@@ -1,4 +1,4 @@
-Why is the `async` keyword needed for functions that return `Awaitable`? Because it is possible to have non-async functions that 
+Why is the `async` keyword needed for functions that return `Awaitable`? Because it is possible to have non-async functions that
 return awaitables; the `async` keyword is merely an implementation detail. For this reason, `async` is not allowed in interfaces. For example:
 
 @@ async-vs.-awaitable-examples/interface.php @@

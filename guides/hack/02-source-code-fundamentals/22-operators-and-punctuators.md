@@ -1,4 +1,4 @@
-Operators are symbols used in expressions to describe operations involving one or more operands, and that yield a resulting 
+Operators are symbols used in expressions to describe operations involving one or more operands, and that yield a resulting
 value, produce a side-effect, or some combination thereof.  For example:
 
 ```Hack
@@ -16,8 +16,8 @@ function move(float $x, float $y): void { ... }
 
 where `(`, `,`, `)`, `:`, `{`, and `}` are punctuators.
 
-An operator or punctuator involving more than one character must be written *without* any embedded white space. For 
-example, `++` and `+ +` are *not* equivalent!  
+An operator or punctuator involving more than one character must be written *without* any embedded white space. For
+example, `++` and `+ +` are *not* equivalent!
 
 The complete set of operator and punctuators is:
 

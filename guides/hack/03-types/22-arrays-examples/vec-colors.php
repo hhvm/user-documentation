@@ -11,7 +11,7 @@ function main(): void {
   $colors[] = "white";   // add element 1 with value "white"
   $colors[] = "blue";    // add element 2 with value "blue"
   \var_dump($colors);
-  
+
   $colors[0] = "pink";   // change element 0's value to "pink"
   \var_dump($colors);
 

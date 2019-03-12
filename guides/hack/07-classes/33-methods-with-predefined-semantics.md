@@ -1,4 +1,4 @@
-If a class contains a definition for a method having one of the following names, that method must have the prescribed visibility, 
+If a class contains a definition for a method having one of the following names, that method must have the prescribed visibility,
 signature, and semantics:
 
 Method Name	| Description
@@ -14,28 +14,28 @@ See [Constructors](constructors.md).
 
 ## Method __dispose
 
-This public instance method is required if the class implements the interface `IDisposable`; the method is intended to perform object 
+This public instance method is required if the class implements the interface `IDisposable`; the method is intended to perform object
 cleanup. The method's signature is, as follows:
 
 ```Hack
 public function __dispose(): void;
 ```
 
-This method is called implicitly by the runtime when the instance goes out of scope, provided the attributes `<<__ReturnDisposable>>` 
+This method is called implicitly by the runtime when the instance goes out of scope, provided the attributes `<<__ReturnDisposable>>`
 and `<<__AcceptDisposable>>` are *not* present.
 
 See [$$](object-disposal.md) for an example of its use and a discussion of these attributes.
 
 ## Method __disposeAsync
 
-This public instance method is required if the class implements the interface `IAsyncDisposable`; the method is intended to perform 
+This public instance method is required if the class implements the interface `IAsyncDisposable`; the method is intended to perform
 object cleanup. The method's signature is, as follows:
 
 ```Hack
 public async function __disposeAsync(): Awaitable<void>;
 ```
 
-This method is called implicitly by the runtime when the instance goes out of scope, provided the attributes `<<__ReturnDisposable>>` 
+This method is called implicitly by the runtime when the instance goes out of scope, provided the attributes `<<__ReturnDisposable>>`
 and `<<__AcceptDisposable>>` are *not* present.
 
 See [$$](object-disposal.md) for a discussion of object disposal and these attributes.
@@ -46,10 +46,10 @@ This public instance method is intended to create a string representation of the
 
 @@ methods-with-predefined-semantics-examples/Point.php @@
 
-As shown, `echo` calls `__toString` to convert the value of a `Point` to `string`.  Such implicit conversions also occur in other places 
+As shown, `echo` calls `__toString` to convert the value of a `Point` to `string`.  Such implicit conversions also occur in other places
 in Hack.  That said, `__toString` can be called directly.
 
-If the instance's class is derived from a class that has or inherits a `__toString` method, the result of calling that method should be 
+If the instance's class is derived from a class that has or inherits a `__toString` method, the result of calling that method should be
 prepended to the returned string.  For example:
 
 @@ methods-with-predefined-semantics-examples/MyRangeException.php @@

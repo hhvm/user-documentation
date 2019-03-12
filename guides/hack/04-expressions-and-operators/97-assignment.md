@@ -4,15 +4,15 @@ The simple-assignment operator `=` assigns the value of the right-hand operand t
 $a = 10
 ```
 
-This form is commonly used in expression statements or as the first part of a `for` loop's controlling expressions.  This 
-operator involves a side-effect, that of assigning the value to `$a`.  And being a non-void expression, it also has a value, 
+This form is commonly used in expression statements or as the first part of a `for` loop's controlling expressions.  This
+operator involves a side-effect, that of assigning the value to `$a`.  And being a non-void expression, it also has a value,
 in this case, 10. However, that value is not used, so it is discarded.  However, consider the following:
 
 ```Hack
 $a = $b = 10    // equivalent to $a = ($b = 10)
 ```
 
-As indicated by the comment, this operator is right-associative, so 10 is first assigned to `$b`, whose value is assigned to `$a`, 
+As indicated by the comment, this operator is right-associative, so 10 is first assigned to `$b`, whose value is assigned to `$a`,
 whose value is *not* used, so it is discarded.
 
 We can assign to array elements, as follows:
@@ -23,7 +23,7 @@ $v[1] = 22;     // change the value of the element with int key 1
 $v[-10] = 19;   // insert a new element with int key -10
 ```
 
-For a dict, if the location designated by the left-hand operand is a non-existent array element, a new element is inserted with the 
+For a dict, if the location designated by the left-hand operand is a non-existent array element, a new element is inserted with the
 designated key and with a value being that of the right-hand operand. (For a vec, a new element can only be added to the right-hand end.)
 
 We can assign to the elements of a string, as follows:
@@ -38,12 +38,12 @@ $s[0] = "DEF";  // "r" -> "D"; only 1 char changed; "EF" ignored
 $s[0] = "";     // "D" -> "\0"
 ```
 
-The left-most single character from the right-hand operand is stored at the designated location; all other characters in the right-hand 
-operand string are ignored.  If the designated location is beyond the end of the destination string, that string is extended to the new 
-length with spaces (U+0020) added as padding beyond the old end and before the newly added character. If the right-hand operand is an 
+The left-most single character from the right-hand operand is stored at the designated location; all other characters in the right-hand
+operand string are ignored.  If the designated location is beyond the end of the destination string, that string is extended to the new
+length with spaces (U+0020) added as padding beyond the old end and before the newly added character. If the right-hand operand is an
 empty string, the null character \\0 (U+0000) is stored.
 
-A *compound-assignment* operator has the form *op*`=` and is a short-hand notation for situations in which we wish to operate on the 
+A *compound-assignment* operator has the form *op*`=` and is a short-hand notation for situations in which we wish to operate on the
 value of a variable and to store the resort back in that variable.  For example:
 
 ```Hack

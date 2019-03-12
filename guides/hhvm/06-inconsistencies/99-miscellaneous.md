@@ -18,13 +18,13 @@ Under different builds of HHVM, they will be consistent though.
 
 HHVM and PHP 5.5+ has deprecated support for `preg_replace()` with the `/e` modifier. PHP 7 removes support of it completely. Use `preg_replace_callback()` instead.
 
-## Converting $GLOBALS to bool 
+## Converting $GLOBALS to bool
 
 Converting `$GLOBALS` to `bool` will always evaluate to `true`, even if `$GLOBALS` is empty. Converting to `bool` can mean an explicit cast, or an implicit conversion inside the condition of an if statement or similar.
 
 ## Fatals and continued execution
 
-All fatals prevent further PHP code from executing, including `__destruct` methods. 
+All fatals prevent further PHP code from executing, including `__destruct` methods.
 
 **Note**: `exit()` is a fatal.
 
@@ -35,7 +35,7 @@ Loading of external entities in the libxml extension is disabled by default for 
 
 ## Local Variables containing a parameter
 
-If the value of a local variable containing a parameter changes, `func_get_args()` returns the new value. This behavior matches PHP7, but not PHP5 (in PHP5, the original parameter value is used). 
+If the value of a local variable containing a parameter changes, `func_get_args()` returns the new value. This behavior matches PHP7, but not PHP5 (in PHP5, the original parameter value is used).
 
 Differences: [https://3v4l.org/OgFts](https://3v4l.org/OgFts)
 

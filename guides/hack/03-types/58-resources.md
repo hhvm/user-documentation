@@ -1,7 +1,7 @@
-A resource is a descriptor to some sort of external entity. (Examples include files, databases, and sockets.) Resources are only created or 
+A resource is a descriptor to some sort of external entity. (Examples include files, databases, and sockets.) Resources are only created or
 consumed by the implementation; they are never created or consumed by Hack code. Each distinct resource has a unique ID of some unspecified form.
 
-When scripts execute in a mode having a command-line interface, the following predefined resource-like constants that correspond to file 
+When scripts execute in a mode having a command-line interface, the following predefined resource-like constants that correspond to file
 streams are automatically opened at program start-up:
 -   `STDIN`, which maps to standard input
 -   `STDOUT`, which maps to standard output

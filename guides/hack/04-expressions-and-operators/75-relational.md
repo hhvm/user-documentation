@@ -4,7 +4,7 @@ The binary relational operators are, as follows:
 * `<=`, which represents *less-than-or-equal-to*
 * `>=`, which represents *greater-than-or-equal-to*
 
-The type of the result is `bool`. 
+The type of the result is `bool`.
 
 ```Hack
 "" < "ab"       // result has value true

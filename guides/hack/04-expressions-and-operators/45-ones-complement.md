@@ -1,4 +1,4 @@
-The ones-complement operator, `~`, performs a bitwise complement on its `int` operand and produces an `int` result. (That 
+The ones-complement operator, `~`, performs a bitwise complement on its `int` operand and produces an `int` result. (That
 is, each bit in the result is set if and only if the corresponding bit in the operand is clear.) For example:
 
 ```Hack

@@ -42,10 +42,10 @@ At Facebook, HHVM is pushed every 2 weeks, but having everyone in the world upda
 
 ### What code does HHVM currently run?
 
-* **Facebook**: HHVM has run [www.facebook.com](https://www.facebook.com) in production since 2013. 
+* **Facebook**: HHVM has run [www.facebook.com](https://www.facebook.com) in production since 2013.
 * **WordPress**: [hhvm.com](http://hhvm.com), a WordPress blog, is running on HHVM.
 * **MediaWiki**: MediaWiki installations can run on HHVM, and [Wikipedia](http://wikipedia.org) has run on [HHVM since 2014](http://hhvm.com/blog/7205/wikipedia-on-hhvm).
-* Most other PHP frameworks. We run internal regression testing on 20 of the most popular ones to ensure continued compatibility. 
+* Most other PHP frameworks. We run internal regression testing on 20 of the most popular ones to ensure continued compatibility.
 
 Here are some other places HHVM is being used: [https://github.com/facebook/hhvm/wiki/Users](https://github.com/facebook/hhvm/wiki/Users)
 
@@ -54,7 +54,7 @@ Here are some other places HHVM is being used: [https://github.com/facebook/hhvm
 There are definitely issues that need to be addressed with HHVM. The [HHVM GitHub issues](https://github.com/facebook/hhvm/issues?labels=&page=1&state=open) describe bugs that exist with the current implementation.
 
 The HHVM team is working really hard to enhance functionality and fix bugs that currently exist.
- 
+
 ### What do I do if I run into a problem (e.g., an error, fatal or segfault)?
 
 Please [submit an issue](https://github.com/facebook/hhvm/wiki/How-to-Report-Issues).
@@ -72,7 +72,7 @@ For real-time discussion, the team tends to hang out in [#hhvm on IRC](http://we
 ### What PHP extensions does HHVM currently support?
 
 [Here is the list](/hhvm/extensions/introduction) of supported extensions.
- 
+
 ### What is the HHVM Wrapper?
 
 The HHVM wrapper provides a simpler interface to the HHVM binary for many common options (e.g., running in server or interp mode, compiling a repo-authoritative repo, dumping bytecode, running gdb). It is located at `hphp/tools/hhvm_wrapper.php`. You can see all of the available options by running:
@@ -145,7 +145,7 @@ date.timezone=America/Los_Angeles # or your appropriate timezone
 
 > Fatal error: /home/user/sites/www/index.php appears to be a Hack file, but you do not appear to be running the Hack typechecker.....You can also set hhvm.hack.lang.look_for_typechecker=0 to disable this check (not recommended).
 
-This means you are trying to run files with HHVM, either local or via server requests, that are `<?hh` files, but are not being typechecked by `hh_client`. 
+This means you are trying to run files with HHVM, either local or via server requests, that are `<?hh` files, but are not being typechecked by `hh_client`.
 
 Ensure that you have the typechecker installed and setup as well.
 

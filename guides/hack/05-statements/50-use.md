@@ -1,22 +1,22 @@
-The `use` statement permits names defined in one namespace to be introduced into another namespace, so they can be referenced 
-there by their simple name rather than their (sometimes very long) fully qualified name. The `use` statement can only be 
+The `use` statement permits names defined in one namespace to be introduced into another namespace, so they can be referenced
+there by their simple name rather than their (sometimes very long) fully qualified name. The `use` statement can only be
 present at the top level.
 
 Consider the following:
 
 @@ use-examples/use.php @@
 
-Namespace `UseNS` contains  a definition for a constant `CON`. From within namespace `Hack\UserDocumentation\Statements\use\Examples\test`, we 
-can access that constant by its fully qualified name, `\UseNS\CON`, as shown in `main`. However, if we write `use const UseNS\CON;`, we can 
+Namespace `UseNS` contains  a definition for a constant `CON`. From within namespace `Hack\UserDocumentation\Statements\use\Examples\test`, we
+can access that constant by its fully qualified name, `\UseNS\CON`, as shown in `main`. However, if we write `use const UseNS\CON;`, we can
 access that constant's name simply as `CON`.
 
-In the same manner, we can have `use type` and `use function` introduce type and function names, respectively. And as we can see 
+In the same manner, we can have `use type` and `use function` introduce type and function names, respectively. And as we can see
 with `use type UseNS\{D, E};`, we can introduce a comma-separated list of names of the same kind in a single statement.
 
-Note that we have two functions called `f`, defined in separate namespaces. If we attempt to introduce the same name from more than 
+Note that we have two functions called `f`, defined in separate namespaces. If we attempt to introduce the same name from more than
 one namespace, references to that name would be ambiguous, so this is disallowed.
 
-In the case of `use namespace`, we can implicitly reference names inside the given namespace by using a prefix that is the right-most 
+In the case of `use namespace`, we can implicitly reference names inside the given namespace by using a prefix that is the right-most
 part of the fully qualified name. For example, once
 
 ```Hack

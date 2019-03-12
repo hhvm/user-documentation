@@ -22,6 +22,6 @@ class Point {
     $this->x = (float)$x;	// sets private property $x
     $this->y = (float)$y; 	// sets private property $y
     return;  // return nothing
-  } 
+  }
   // ...
 }

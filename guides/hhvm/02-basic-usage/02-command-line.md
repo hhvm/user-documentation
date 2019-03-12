@@ -1,4 +1,4 @@
-In command-line (cli) mode, you run the `hhvm` binary from the command-line, execute the script and then exit HHVM immediately when the script completes. 
+In command-line (cli) mode, you run the `hhvm` binary from the command-line, execute the script and then exit HHVM immediately when the script completes.
 
 Here is an example of how to run a script in HHVM cli mode. Take the following PHP script:
 

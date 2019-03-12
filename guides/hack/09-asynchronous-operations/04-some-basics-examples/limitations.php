@@ -9,7 +9,7 @@ async function do_cpu_work(): Awaitable<void> {
   $b = 1;
 
   $list = vec[$a, $b];
- 
+
   for ($i = 0; $i < 1000; ++$i) {
     $c = $a + $b;
     $list[] = $c;

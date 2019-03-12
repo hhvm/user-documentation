@@ -1,5 +1,5 @@
-The binary operator `*` produces the product of its operands, which must have arithmetic type.  If either operand has type `float`, if 
-necessary the other is converted to that type; the result has type `float`. Otherwise, if either operand has type `int`, if necessary the 
+The binary operator `*` produces the product of its operands, which must have arithmetic type.  If either operand has type `float`, if
+necessary the other is converted to that type; the result has type `float`. Otherwise, if either operand has type `int`, if necessary the
 other is converted to that type; the result has type `int`. For example:
 
 ```Hack

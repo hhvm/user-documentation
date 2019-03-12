@@ -14,7 +14,7 @@ XHP presents a tree structure, and this interface defines what can be valid chil
  - strings, integers, floats
  - arrays of any of the above
 
-Despite strings, integers, floats, and arrays not being objects, both the typechecker and HHVM consider them to implement this interface, 
+Despite strings, integers, floats, and arrays not being objects, both the typechecker and HHVM consider them to implement this interface,
 for parameter/return types and for `instanceof`/`is` checks.
 
 ## Advanced Interfaces
@@ -35,17 +35,17 @@ If you need to render raw HTML strings, wrap them in a class that implements thi
 
 @@ interfaces-examples/xss-security-hole.php @@
 
-We do not provide an implementation of this interface as a generic implementation tends to be overused; instead, consider making more specific 
+We do not provide an implementation of this interface as a generic implementation tends to be overused; instead, consider making more specific
 implementations:
 
 @@ interfaces-examples/markdown-wrapper.php @@
 
 ## XHPAlwaysValidChild
 
-XHP's child validation can be bypassed by implementing this interface. Most classes that implement this interface are also implementations of 
+XHP's child validation can be bypassed by implementing this interface. Most classes that implement this interface are also implementations of
 `XHPUnsafeRenderable`, as the most common need is when a child is produced by another rendering or template system.
 
-This can also be implemented by XHP objects, but this usually indicates that a child class specification should be replaced with a category. This 
+This can also be implemented by XHP objects, but this usually indicates that a child class specification should be replaced with a category. This
 interface is intentionally breaking part of XHP's safety, so should be used as sparingly as possible.
 
 ## Example
