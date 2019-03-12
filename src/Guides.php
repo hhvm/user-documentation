@@ -38,10 +38,11 @@ final class Guides {
       GuidesProduct::HACK => dict[
         'async' => tuple('asynchronous-operations', null),
         'collections' => tuple('types', 'arrays'),
-        'overview' => tuple('getting-started', null),
-        'tools' => tuple('getting-started', 'tools'),
-        'shapes' => tuple('types', 'shapes'),
         'enums' => tuple('types', 'enumerated-types'),
+        'generics' => tuple('types', 'generic-types'),
+        'overview' => tuple('getting-started', null),
+        'shapes' => tuple('types', 'shapes'),
+        'tools' => tuple('getting-started', 'tools'),
       ],
     ][$product] ??
       dict[];
@@ -72,6 +73,7 @@ final class Guides {
         ],
         'types' => dict[
           'refining' => tuple('types', 'type-refinement'),
+          'type-system' => tuple('types', null),
         ],
       ],
     ][$product] ??
