@@ -3,38 +3,49 @@ manageable pieces each of which performs some specific task, and which can be sh
 deployed individually. For example, a programmer might define a series of useful constants and use them in numerous and
 possibly unrelated applications. Likewise, a set of class definitions can be shared among numerous applications needing to create objects of those types.
 
-An *include file* is a script that is suitable for *inclusion* by another script. The script doing the including is
-the *including file*, while the one being included is the *included file*. A script can be either an including file or
+An *include file* is a file that is suitable for *inclusion* by another file. The file doing the including is
+the *including file*, while the one being included is the *included file*. A file can be either an including file or
 an included file, both, or neither.
 
-It is important to understand that unlike the C/C++ (or similar) preprocessor, script inclusion in Hack is *not* a text
+The recommended way to approach this is to [use an autoloader](/hack/getting-started/starting-a-real-project#starting-a-real-project__autoloading) - however, first you need to include
+the autoloader itself.
+
+It is important to understand that unlike the C/C++ (or similar) preprocessor, file inclusion in Hack is *not* a text
 substitution process. That is, the contents of an included file are not treated as if they directly replaced the inclusion
 operation source in the including file.
 
-The name used to specify an include file may contain an absolute or relative path. In the latter case, an implementation may
-use the configuration directive [`include_path`](http://docs.hhvm.com/manual/en/ini.core.php#ini.include-path) to resolve the
-include file's location.
+The `require_once()` directive is used for this:
 
-Variables defined in an included file take on the scope of the source line on which the inclusion occurs in the including file.
-However, functions and classes defined in the included file are given global scope.
+```
+namespace MyProject;
 
-The library function [`get_included_files`](http://www.php.net/get_included_files) provides the names of all files included or required.
+require_once(__DIR__.'/../vendor/autoload.hack');
 
-The `require` directive involves `require` followed by a filename. For example:
-
-```Hack
-require 'Point.php';
+<<__EntryPoint>>
+function main(): noreturn {
+  \Facebook\AutoloadMap\initialize();
+  someFunction();
+  exit(0);
+}
 ```
 
-The filename must be a string that designates a file that exists, is accessible, and whose format is suitable for inclusion (that is, starts with a [Hack start-tag](program-structure.md)). If the designated file is not accessible, execution is terminated.
+The name used to specify an include file may contain an absolute or relative path; absolute paths are *strongly* recommended, using the `__DIR__` constant to resolve paths relative to the current file.
 
-The `require_once` directive is like `require` except that in the case of `require_once`, the include file is included
-once only during program execution.
+`require_once()` will raise an error if the file can not be loaded (e.g. if it is inaccessible or does not exist) , and will only load the file once, even if `require_once()` is used multiple times with the same file.
 
-Consider the following examples:
+## Future Changes
 
-@@ script-inclusion-examples/Point.php @@
+We expect to make autoloading fully-automatic, and remove inclusion directives from the language.
 
-@@ script-inclusion-examples/Circle.php @@
+## Legacy Issues
 
-@@ script-inclusion-examples/require-once.php @@
+For relative paths, the configuration directive [`include_path`](http://docs.hhvm.com/manual/en/ini.core.php#ini.include-path) is used to resolve the include file's location.
+
+It is currently possible (though strongly discoraged) for top-level code to exist in a file, without
+being in a function. In this cases, including a file may execute code, not just import definitions.
+
+Several additional directives exist, but are strongly discouraged:
+
+- `require()`: like `require_once()`, but will potentially include a file multiple times
+- `include()`: like `require()`, but does not raise an error if the file is inaccessible
+- `include_once()`: like `require_once()`, but does not raise an error if the file is inaccessible.
