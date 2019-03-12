@@ -18,7 +18,7 @@ use namespace HH\Lib\Str;
 final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
   const string PATTERN =
     '/^@@ (?<dir>[^@ ]+)'.
-    '(?<file>[^@ \\/]+\\.php'.
+    '(?<file>[^@ \\/]+\\.(php|hack)'.
       '(?:.type-errors)?'.
       '(?:.(hhvm|typechecker).expect[f]?)?'.
     ') @@$/';
