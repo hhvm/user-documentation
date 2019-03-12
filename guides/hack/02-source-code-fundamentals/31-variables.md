@@ -60,19 +60,6 @@ $colors3 = ["red", "white", "blue"]; // create array<string> with 3 elements
 $colors3[] = "green";                // insert a new element 3
 ```
 
-## Function Statics
-
-A function static may be defined inside any [compound statement](../statements/compound-statements).  A function static 
-has function scope.  The value of a function static is retained across calls to its parent function. Each time the function 
-containing a function-static declaration is called, that execution is dealing with an alias to that static variable. 
-The next time that function is called, a new alias is created.
-
-Consider the following example:
-
-@@ variables-examples/static-variables.php @@
-
-Unlike the equivalent [local variable](#local-variables) version, this function `f` retains the value of `$fs` across calls.
-
 ## Instance Properties
 
 These are described in the [class instance properties](../classes/properties.md) section. They have class scope.
