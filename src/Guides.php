@@ -45,6 +45,10 @@ final class Guides {
         'overview' => tuple('getting-started', null),
         'shapes' => tuple('types', 'shapes'),
         'tools' => tuple('getting-started', 'tools'),
+        'tuples' => tuple('types', 'tuples'),
+        'typechecker' => tuple('getting-started', 'tools'),
+        'type-aliases' => tuple('types', 'type-aliases'),
+        'type-constants' => tuple('classes', 'type-constants'),
       ],
     ][$product] ??
       dict[];
@@ -66,16 +70,25 @@ final class Guides {
         ],
         'attributes' => dict[
           'special' => tuple('attributes', 'predefined-attributes'),
+          'syntax' => tuple('attributes', 'attribute-specification'),
+        ],
+        'callables' => dict[
+          'special-functions' => tuple('types', 'anonymous-function-obejcts'),
         ],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),
+          'pipe' => tuple('expressions-and-operators', 'pipe'),
           'nullsafe' =>
             tuple('expressions-and-operators', 'null-safe-member-selection'),
         ],
         'other-features' => dict[
+          'autoloading' =>
+            tuple('soruce-code-fundamentals', 'script-inclusion'),
           'constructor-parameter-promotion' => tuple('classes', 'constructors'),
+          'placeholder-variable' => tuple('source-code-fundamentals', 'names'),
           'trait-and-interface-requirements' =>
             tuple('classes', 'trait-and-interface-requirements'),
+          'variadic-functions' => tuple('functions', 'defining-a-function'),
         ],
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
@@ -87,7 +100,9 @@ final class Guides {
         'types' => dict[
           'annotations' => tuple('functions', 'defining-a-function'),
           'casting' => tuple('types', 'type-conversion'),
+          'inference' => tuple('types', 'type-inferencing'),
           'refining' => tuple('types', 'type-refinement'),
+          'summary-table' => tuple('types', null),
           'type-system' => tuple('types', null),
         ],
       ],
