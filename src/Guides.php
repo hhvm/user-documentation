@@ -73,7 +73,7 @@ final class Guides {
           'syntax' => tuple('attributes', 'attribute-specification'),
         ],
         'callables' => dict[
-          'special-functions' => tuple('types', 'anonymous-function-obejcts'),
+          'special-functions' => tuple('types', 'anonymous-function-objects'),
         ],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),
@@ -83,7 +83,7 @@ final class Guides {
         ],
         'other-features' => dict[
           'autoloading' =>
-            tuple('soruce-code-fundamentals', 'script-inclusion'),
+            tuple('source-code-fundamentals', 'script-inclusion'),
           'constructor-parameter-promotion' => tuple('classes', 'constructors'),
           'placeholder-variable' => tuple('source-code-fundamentals', 'names'),
           'trait-and-interface-requirements' =>
