@@ -40,6 +40,8 @@ final class Guides {
         'collections' => tuple('types', 'arrays'),
         'enums' => tuple('types', 'enumerated-types'),
         'generics' => tuple('types', 'generic-types'),
+        'lambdas' => tuple('functions', 'anonymous-functions'),
+        'operators' => tuple('expressions-and-operators', null),
         'overview' => tuple('getting-started', null),
         'shapes' => tuple('types', 'shapes'),
         'tools' => tuple('getting-started', 'tools'),
@@ -62,16 +64,29 @@ final class Guides {
           'utility-functions' =>
             tuple('asynchronous-operations', 'utility-functions'),
         ],
+        'attributes' => dict[
+          'special' => tuple('attributes', 'predefined-attributes'),
+        ],
+        'operators' => dict[
+          'lambda' => tuple('functions', 'anonymous-functions'),
+          'nullsafe' =>
+            tuple('expressions-and-operators', 'null-safe-member-selection'),
+        ],
         'other-features' => dict[
           'constructor-parameter-promotion' => tuple('classes', 'constructors'),
+          'trait-and-interface-requirements' =>
+            tuple('classes', 'trait-and-interface-requirements'),
         ],
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
         ],
         'typechecker' => dict[
           'editors' => tuple('getting-started', 'tools'),
+          'modes' => tuple('source-code-fundamentals', 'program-structure'),
         ],
         'types' => dict[
+          'annotations' => tuple('functions', 'defining-a-function'),
+          'casting' => tuple('types', 'type-conversion'),
           'refining' => tuple('types', 'type-refinement'),
           'type-system' => tuple('types', null),
         ],
