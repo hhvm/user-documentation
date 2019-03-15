@@ -49,7 +49,7 @@ Name | Description
 `HH\Lib\Vec\map_async` | Returns a new vec where each value is the result of calling the given async function on the original value
 `HH\Lib\Vec\map_with_key` | Returns a new vec where each value is the result of calling the given function on the original key and value
 `HH\Lib\Vec\partition` | Returns a 2-tuple containing vecs for which the given predicate returned true and false, respectively
-`HH\Lib\Vec\range` | Returns a new vec containing the range of numbers from `$start` to `$end `inclusive, with the step between elements being `$step` if provided, or `1` by default
+`HH\Lib\Vec\range` | Returns a new vec containing the range of numbers from `$start` to `$end` inclusive, with the step between elements being `$step` if provided, or `1` by default
 `HH\Lib\Vec\reverse` | Returns a new vec with the values of the given Traversable in reversed order
 `HH\Lib\Vec\sample` | Returns a new vec containing an unbiased random sample of up to $sample_size elements (fewer iff `$sample_size` is larger than the size of `$traversable`)
 `HH\Lib\Vec\shuffle` | Returns a new vec with the values of the given Traversable in a random order
