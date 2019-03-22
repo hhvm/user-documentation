@@ -42,4 +42,4 @@ Here is an example of the non-block form:
 The difference here is that no parentheses are required around the controlling expression, we use a trailing semicolon instead of a block,
 and the scope of the assigned-to variables ends at the end of the parent block, which avoids the need to use nested `using` statements.
 
-See [$$](../classes/object-disposal) for a detailed example of the use of both forms.
+See [object disposal](../classes/object-disposal) for a detailed example of the use of both forms.
