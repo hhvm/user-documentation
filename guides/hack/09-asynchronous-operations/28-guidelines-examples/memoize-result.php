@@ -25,5 +25,5 @@ function runMe(): void {
   $t3 = \microtime(true);
   \HH\Asio\join(MemoizeResult::memoize_result());
   $t4 = \microtime(true) - $t3;
-  \var_dump($t4 < $t2); // The memmoized result will get here a lot faster
+  \var_dump($t4 < $t2); // The memoized result will get here a lot faster
 }
