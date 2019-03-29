@@ -15,4 +15,4 @@ Assuming we construct an instance for a `Stack` of `int`s, we can pass that to f
 values off, that stack, as shown. And in the same or different programs, we can have stacks of `string`, stacks of `?(int, float)`, stacks of
 `Employee`, and so on, without have to write type-specific code for each kind of stack.
 
-For more information, see [$$](../generic-types-and-functions/introduction.md).
+For more information, see [generic types overview](../generic-types-and-functions/introduction.md).

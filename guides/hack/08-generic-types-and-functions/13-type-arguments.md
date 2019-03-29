@@ -1,5 +1,5 @@
 A *generic type argument* can be a type-specifier or a name that is a type parameter. Either way, at runtime, it is used in place of the
-corresponding type parameter. A generic type argument can either be open or closed ([$$](open-and-closed-generic-types.md)).
+corresponding type parameter. A generic type argument can either be [open or closed](open-and-closed-generic-types.md).
 
 ```Hack
 final class Pair<Tv1, Tv2> implements ConstVector<mixed> {

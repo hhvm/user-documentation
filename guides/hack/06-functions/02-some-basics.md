@@ -46,4 +46,4 @@ more information, see [generic types and functions](../generic-types-and-functio
 Note, Hack does *not* support function overloading; that is, multiple functions having the same name provided each has a different signature
 (that is, a different order and set of parameter types), are *not* permitted.
 
-Asynchronous functions are discussed in [$$](../asynchronous-operations/introduction.md).
+Asynchronous functions are discussed in [asynchronous operations](../asynchronous-operations/introduction.md).

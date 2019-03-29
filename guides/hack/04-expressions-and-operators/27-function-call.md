@@ -75,4 +75,4 @@ When an instance method or constructor is called, the instance used becomes the 
 if no instance was used (for example, in the call `C::instance_method()`) the invoked instance has no `$this` defined.
 
 By default, arguments are passed by value; however, if a parameter contains the `inout` modifier, the corresponding argument must also contain
-that modifier. See the `swap` function in [$$](../functions/defining-a-function.md) for an example.
+that modifier. See the `swap` function in [defining a function](../functions/defining-a-function.md) for an example.

@@ -4,7 +4,7 @@ addressed by namespaces.
 
 A *namespace* is a container for a set of (typically related) definitions of classes, interfaces, traits, functions, and constants.
 
-See [$$](script-inclusion.md) for an example involving two class types, each defined in its own namespace, used by an application
+See [script inclusion](script-inclusion.md) for an example involving two class types, each defined in its own namespace, used by an application
 in a third namespace.
 
 A namespace may have *sub-namespaces*, where a sub-namespace name shares a common prefix with another namespace. For example, the

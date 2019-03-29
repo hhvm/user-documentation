@@ -15,7 +15,7 @@ The following attributes are defined:
 
 This attribute can be applied to a function parameter that has a type that implements interface `IDisposable` or `IAsyncDisposable`.
 
-See [$$](../classes/object-disposal.md) for an example of its use.
+See [object disposal](../classes/object-disposal.md) for an example of its use.
 
 ## __ConsistentConstruct
 
@@ -164,7 +164,7 @@ When `__Override` is applied to a method in a trait, the check for whether the o
 
 This attribute can be applied to a function that returns a value whose type implements interface `IDisposable` or `IAsyncDisposable`.
 
-See [$$](../classes/object-disposal.md) for an example of its use.
+See [object disposal](../classes/object-disposal.md) for an example of its use.
 
 ## __Sealed
 

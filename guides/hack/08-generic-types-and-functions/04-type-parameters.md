@@ -1,8 +1,8 @@
 A type parameter is a placeholder for a type that is supplied when a generic type is instantiated, or a generic method or function is invoked.
 
 A type parameter is a compile-time construct. At run-time, each type parameter is matched to a run-time type that was specified by a
-type argument. Therefore, a type declared with a type parameter will, at run-time, be a closed generic type
-([$$](open-and-closed-generic-types.md)), and execution involving a type parameter uses the actual type that was supplied as the type
+type argument. Therefore, a type declared with a type parameter will, at run-time, be a [closed generic type](open-and-closed-generic-types.md),
+and execution involving a type parameter uses the actual type that was supplied as the type
 argument for that type parameter.
 
 The name of a type parameter is visible from its point of definition through the end of the type, method, or function declaration on
@@ -33,4 +33,4 @@ In the following case, function `max_value` has one type parameter, `T`.
 function max_value<T>(T $p1, T $p2): T { ... }
 ```
 
-Generic type constraints are discussed in [$$](type-constraints.md).
+Generic type constraints are discussed in [type constraints](type-constraints.md).
