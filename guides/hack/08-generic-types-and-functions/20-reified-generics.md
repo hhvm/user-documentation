@@ -95,7 +95,7 @@ Notice that the reified type parameter has the attribute `<<__Newable>>`. In ord
 ```Hack
 final class A<reify T> {}
 
-function f<<<__Newable>> reify T as A<string>>(): T {
+function f<<<__Newable>> reify T as A<string>>(): A<string> {
   return new T();
 }
 
@@ -164,7 +164,7 @@ class C<reify T> {
 * Hack arrays cannot be reified when used as containers with `__Enforceable` or `__Newable`
 
 ```Hack
-function f<<<__Enforceable>> reify>(): void {
+function f<<<__Enforceable>> reify T>(): void {
     $x is vec<int>; // Cannot use vec<int>
     $x is T;
 }
