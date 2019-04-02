@@ -4,7 +4,7 @@
 
 Generics are currently implemented in HHVM through erasure, in which the runtime drops all information about generics. This means that generics are not available at runtime. Although the typechecker is able to use the generic types for static typechecking, we are unable to enforce generic types at runtime.
 
-The Hack Langugage is introducing opt-in reified generics to bridge the gap between generics and runtime availability while keeping erasure available to maintain performance when reification is not needed. To mark a generic as reified, simply add the `reify` keyword at the declaration site.
+The goal of opt-in reified generics to bridge the gap between generics and runtime availability while keeping erasure available to maintain performance when reification is not needed. To mark a generic as reified, simply add the `reify` keyword at the declaration site.
 
 ## Parameter and return type verification
 
@@ -37,7 +37,7 @@ f<string>("yep"); // return type hint violation
 
 ## Type testing and assertion with `is` & `as` expressions
 
-Suppose you have a `vec<mixed>` and you want to extract all type `T` from it. Prior to reified generics, you'd need to implement a new function for each type `T` but with reified generics you can do this in a generic way. Start by adding the keyword `reify` to the type parameter list.
+Suppose you have a `vec<mixed>` and you want to extract all types `T` from it. Prior to reified generics, you'd need to implement a new function for each type `T` but with reified generics you can do this in a generic way. Start by adding the keyword `reify` to the type parameter list.
 
 ```Hack
 function filter<<<__Enforceable>> reify T>(vec<mixed> $list): vec<T> {
