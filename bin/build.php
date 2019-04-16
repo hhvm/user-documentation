@@ -52,6 +52,9 @@ function build_site(?Traversable<string> $filters = null): void {
     // Needs the Markdown
     GuidesHTMLBuildStep::class,
     APIHTMLBuildStep::class,
+
+    // Needs to be done after all Hack codegen
+    UpdateAutoloaderBuildStep::class,
   };
 
   if ($filters !== null) {
