@@ -13,6 +13,7 @@ namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\{C, Str};
 use namespace Facebook\TypeAssert;
+use namespace Facebook\HackCodegen as CG;
 
 // Index of all definitions, so that markdown processing can
 // automatically linkify them
@@ -33,7 +34,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
       \json_encode($defs, \JSON_PRETTY_PRINT)
     );
 
-    $jump_index = [];
+    $jump_index = dict[];
     foreach ($defs as $name => $url) {
       $name = Str\lowercase($name);
       if (
@@ -44,14 +45,31 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
       }
     }
 
-    $code = $this->writeCode(
-      'JumpIndexData.hhi',
-      $jump_index,
-    );
-    \file_put_contents(
-      BuildPaths::JUMP_INDEX,
-      $code,
-    );
+    $cg = $this->getCodegenFactory();
+    $cg->codegenFile(BuildPaths::JUMP_INDEX)
+      ->setNamespace("HHVM\\UserDocumentation")
+      ->addClass(
+        $cg->codegenClass('JumpIndexData')
+          ->setIsFinal(true)
+          ->setIsAbstract(true)
+          ->addMethod(
+            $cg->codegenMethod('getIndex')
+              ->setIsStatic(true)
+              ->setReturnType('dict<string, string>')
+              ->setBody(
+                $cg->codegenHackBuilder()
+                  ->addReturn(
+                    $jump_index,
+                    CG\HackBuilderValues::dict(
+                      CG\HackBuilderKeys::export(),
+                      CG\HackBuilderValues::export(),
+                    ),
+                  )
+                  ->getCode(),
+              ),
+          ),
+      )
+      ->save();
   }
 
   private function getHackAPILinks(

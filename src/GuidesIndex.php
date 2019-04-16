@@ -11,18 +11,20 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\{C, Vec};
+
 final class GuidesIndex {
   public static function getIndex(
-  ): Map<GuidesProduct, Map<string, Map<string, string>>> {
-    return require(BuildPaths::GUIDES_INDEX);
+  ): dict<GuidesProduct, dict<string, dict<string, string>>> {
+    return GuidesIndexData::getIndex();
   }
 
   public static function getProductIndex(
     GuidesProduct $product,
-  ): Map<string, Map<string, string>> {
+  ): dict<string, dict<string, string>> {
     $index = self::getIndex();
     invariant(
-      $index->containsKey($product),
+      C\contains_key($index, $product),
       '%s is not in the guide index',
       $product,
     );
@@ -79,37 +81,37 @@ final class GuidesIndex {
     return $results;
   }
 
-  public static function getProducts(): ImmVector<string> {
-    return self::getIndex()->keys()->toImmVector();
+  public static function getProducts(): vec<string> {
+    return Vec\keys(self::getIndex());
   }
 
-  public static function getGuides(GuidesProduct $product): ImmVector<string> {
+  public static function getGuides(GuidesProduct $product): vec<string> {
     $index = self::getIndex();
     invariant(
-      $index->containsKey($product),
+      C\contains_key($index, $product),
       '%s is not in the guide index',
       $product,
     );
-    return $index[$product]->keys()->toImmVector();
+    return Vec\keys($index[$product]);
   }
 
   public static function getPages(
     GuidesProduct $product,
     string $guide,
-  ): ImmVector<string> {
+  ): vec<string> {
     $index = self::getIndex();
     invariant(
-      $index->containsKey($product),
+      C\contains_key($index, $product),
       'no guides for %s',
       $product,
     );
     invariant(
-      $index[$product]->containsKey($guide),
+      C\contains_key($index[$product], $guide),
       '%s does not contain a %s guide',
       $product,
       $guide,
     );
-    return self::getIndex()[$product][$guide]->keys()->toImmVector();
+    return Vec\keys(self::getIndex()[$product][$guide]);
   }
 
   public static function getFileForSummary(
@@ -137,24 +139,14 @@ final class GuidesIndex {
     string $page,
   ): string {
     $index = self::getIndex();
+    $entry = $index[$product][$guide][$page] ?? null;
     invariant(
-      $index->containsKey($product),
-      'Product %s does not exist',
-      $product,
-    );
-    invariant(
-      $index[$product]->containsKey($guide),
-      'Product %s does not contain guide %s',
-      $product,
-      $guide,
-    );
-    invariant(
-      $index[$product][$guide]->containsKey($page),
+      $entry !== null,
       'Guide %s/%s does not include page %s',
       $product,
       $guide,
       $page,
     );
-    return BuildPaths::GUIDES_HTML.'/'.$index[$product][$guide][$page];
+    return BuildPaths::GUIDES_HTML.'/'.$entry;
   }
 }

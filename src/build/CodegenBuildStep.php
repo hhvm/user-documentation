@@ -11,7 +11,16 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace Facebook\HackCodegen as CG;
+
 trait CodegenBuildStep {
+  protected function getCodegenFactory(): CG\HackCodegenFactory {
+    $config = new CG\HackCodegenConfig();
+    return new CG\HackCodegenFactory(
+      $config->withFormatter(new CG\HackfmtFormatter($config))
+    );
+  }
+
   protected function writeCode(
     string $hhi_filename,
     mixed $return_value,

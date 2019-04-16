@@ -28,7 +28,7 @@ final class GuidesNavData {
 
   private static function getNavDataForProduct(
     GuidesProduct $product,
-    Map<string, Map<string, string>> $product_guides,
+    dict<string, dict<string, string>> $product_guides,
   ): dict<string, NavDataNode> {
     $nav_data = dict[];
     foreach ($product_guides as $topic => $pages) {
@@ -49,7 +49,7 @@ final class GuidesNavData {
   private static function getNavDataForGuide(
     GuidesProduct $product,
     string $topic,
-    Map<string, string> $pages,
+    dict<string, string> $pages,
   ): dict<string, NavDataNode> {
     $nav_data = dict[];
     foreach ($pages as $title => $html_file) {
