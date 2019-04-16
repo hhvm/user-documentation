@@ -12,7 +12,6 @@
 use type HHVM\UserDocumentation\APIIndex;
 use type HHVM\UserDocumentation\APIDefinitionType;
 use type HHVM\UserDocumentation\APIProduct;
-use type HHVM\UserDocumentation\PHPAPIIndex;
 
 use namespace HH\Lib\C;
 
@@ -27,8 +26,6 @@ class :api-list extends :x:element {
       case APIProduct::HACK:
       case APIProduct::HSL:
         return $this->getHackDefinitions($this->:product);
-      case APIProduct::PHP:
-        return $this->getPHPDefinitions();
     }
   }
 
@@ -44,27 +41,6 @@ class :api-list extends :x:element {
       }
     }
     return $out;
-  }
-
-  final private function getPHPDefinitions(
-  ): Map<APIDefinitionType, Map<string, string>> {
-    $out = Map { };
-
-    foreach ($this->:types as $type) {
-      $out[$type] = Map { };
-    }
-
-    $index = PHPAPIIndex::getIndex();
-    foreach ($index as $name => $data) {
-      if (!$data['supportedInHHVM']) {
-        continue;
-      }
-      if (!$this->:types->contains($data['type'])) {
-        continue;
-      }
-      $out[$data['type']][$name] = $data['url'];
-    }
-    return $out->filter($map ==> $map->count() !== 0);
   }
 
   final private function getInnerContent(): XHPRoot {

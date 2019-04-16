@@ -69,10 +69,6 @@ final class URLBuilder {
   public static function getPathForProductAPIReference(
     APIProduct $product,
   ): string {
-    invariant(
-      $product !== APIProduct::PHP,
-      'No reference pages for PHP',
-    );
     return \APIFullListControllerURIBuilder::getPath(shape(
       'Product' => $product,
     ));

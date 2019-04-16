@@ -40,14 +40,6 @@ abstract final class LegacyRedirects {
       return $url;
     }
 
-    // Ditto for the articles; Ideally we'd give the HHVM/Hack list below
-    // priority in case we gave more specific articles, but this is safer
-    // given that we need a substring match for the manual list.
-    $url = idx(PHPDotNetArticleRedirectData::getIndex(), $id);
-    if ($url !== null) {
-      return $url;
-    }
-
     // If not, iterate through our manual redirects and see if we have
     // $from being a string part of $id. If so, then we can redirect to the
     // appropriate place.

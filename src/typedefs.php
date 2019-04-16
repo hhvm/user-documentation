@@ -85,7 +85,6 @@ enum APIDefinitionType: string as string {
 enum APIProduct: string as string {
   HACK = 'hack';
   HSL = 'hsl';
-  PHP = 'php';
 }
 
 enum SurveyMode: string {

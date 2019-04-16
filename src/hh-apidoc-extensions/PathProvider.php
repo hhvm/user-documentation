@@ -20,7 +20,6 @@ final class PathProvider implements HHAPIDoc\IPathProvider {
 
   public function __construct() {
     $this->providers = APIProduct::getValues()
-      |> Vec\filter($$, $p ==> $p !== APIProduct::PHP)
       |> Vec\map($$, $p ==> new ProductPathProvider($p));
   }
 

@@ -31,12 +31,8 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
   private function createIndex(
   ): void {
     $old_hack_docs_data = $this->generateOldHackDocsData();
-    $php_dot_net_data = $this->generatePHPDotNetData();
 
     $index = $old_hack_docs_data;
-    foreach ($php_dot_net_data as $id => $url) {
-      $index[$id] = $url;
-    }
 
     $code = $this->writeCode(
       'APILegacyRedirectData.hhi',
@@ -103,20 +99,5 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
     }
 
     return $old_ids_to_new_urls;
-  }
-
-  private function generatePHPDotNetData(): array<string, string> {
-    Log::v("\nProcessing PHP.net index");
-    $reader = new PHPDocsIndexReader(
-      \file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
-    );
-    $defs = $reader->getAllAPIDefinitions();
-
-    $index = [];
-    foreach ($defs as $_ => $id) {
-      $url = \sprintf('http://php.net/manual/en/%s.php', $id);
-      $index[$id] = $url;
-    }
-    return $index;
   }
 }

@@ -16,7 +16,6 @@ use type HHVM\UserDocumentation\{
   GuidesIndex,
   GuidesProduct,
   GuidePageSearchResult,
-  PHPAPIIndex,
   SearchResult,
   SearchScores,
 };
@@ -89,7 +88,6 @@ final class SearchController extends WebPageController {
     $results = vec[
       $this->getHardcodedResults(),
       GuidesIndex::search($term),
-      PHPAPIIndex::search($term),
       APIIndex::searchAllProducts($term),
     ]
       |> Vec\flatten($$)

@@ -25,7 +25,6 @@ function build_site(?Traversable<string> $filters = null): void {
   $steps = Vector {
     // No Dependencies
     HHAPIDocBuildStep::class,
-    FetchPHPDotNetIndexBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
     FacebookIPRangesBuildStep::class,
 
@@ -36,12 +35,10 @@ function build_site(?Traversable<string> $filters = null): void {
     GuidesIndexBuildStep::class,
 
     // Needs the indices
-    PHPDotNetAPIIndexBuildStep::class,
     UnifiedAPIIndexBuildStep::class,
     SiteMapBuildStep::class,
 
     APILegacyRedirectsBuildStep::class,
-    PHPDotNetArticleRedirectsBuildStep::class,
 
     // This needs to be able to invoke static methods on the controllers;
     // some of the controller files require_once() generated indicies, so the

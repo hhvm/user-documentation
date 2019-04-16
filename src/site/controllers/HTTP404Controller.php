@@ -13,7 +13,6 @@ use type HHVM\UserDocumentation\APILegacyRedirectData;
 use type HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\JumpIndexData;
 use type HHVM\UserDocumentation\LegacyRedirects;
-use type HHVM\UserDocumentation\PHPDotNetArticleRedirectData;
 
 require_once(BuildPaths::JUMP_INDEX);
 
@@ -43,12 +42,6 @@ final class HTTP404Controller extends NonRoutableWebPageController {
 
     $candidates = [];
     foreach (APILegacyRedirectData::getIndex() as $id => $url) {
-      if (stripos($id, $path) !== false) {
-        $candidates[$url] = $url;
-      }
-    }
-
-    foreach (PHPDotNetArticleRedirectData::getIndex() as $id => $url) {
       if (stripos($id, $path) !== false) {
         $candidates[$url] = $url;
       }

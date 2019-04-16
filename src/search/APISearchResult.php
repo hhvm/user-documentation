@@ -28,9 +28,6 @@ final class APISearchResult extends SearchResult {
       case APIProduct::HACK:
         $score *= SearchScores::HACK_API_MULTIPLIER;
         break;
-      case APIProduct::PHP:
-        $score *= SearchScores::PHP_API_MULTIPLIER;
-        break;
     }
 
     switch ($type) {
@@ -73,9 +70,6 @@ final class APISearchResult extends SearchResult {
         break;
       case APIProduct::HSL:
         $product = 'HSL';
-        break;
-      case APIProduct::PHP:
-        $product = 'PHP';
         break;
     }
     return $product.' '.$type;

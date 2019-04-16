@@ -24,7 +24,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
   public function buildAll(): void {
     Log::i("\nUnifiedAPIIndexBuildStep");
 
-    $defs = new Map($this->getPHPAPILinks());
+    $defs = Map {};
     $defs->setAll($this->getHackAPILinks(APIProduct::HACK));
     $defs->setAll($this->getHackAPILinks(APIProduct::HSL));
     $defs->setAll($this->getSpecialAttributeLinks());
@@ -116,19 +116,6 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
         }
       }
     }
-    return $out->toImmMap();
-  }
-
-  private function getPHPAPILinks(): ImmMap<string, string> {
-    Log::v("\nProcessing PHP.net API Index");
-
-    $index = PHPAPIIndex::getIndex();
-
-    $out = Map { };
-    foreach ($index as $name => $data) {
-      $out[$name] = $data['url'];
-    }
-
     return $out->toImmMap();
   }
 

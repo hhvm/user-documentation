@@ -27,8 +27,6 @@ final class APIIndex {
       case APIProduct::HSL:
         $this->index = $idx[APIProduct::HSL];
         break;
-      case APIProduct::PHP:
-        invariant_violation("Can't handle PHP index");
     }
   }
 

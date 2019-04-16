@@ -31,9 +31,6 @@ abstract final class BuildPaths {
   const string APIDOCS_LEGACY_REDIRECTS
     = self::FINAL_DIR.'/api-legacy-redirects.php';
 
-  const string PHP_DOT_NET_INDEX_JSON =
-    self::FINAL_DIR.'/php-dot-net-index.json';
-
   const string GUIDES_MARKDOWN = LocalConfig::ROOT.'/guides';
   const string GUIDES_GENERATED_MARKDOWN
     = self::SCRATCH_DIR.'/guides-generated-markdown';
@@ -48,10 +45,6 @@ abstract final class BuildPaths {
   const string JUMP_INDEX
     = self::FINAL_DIR.'/jump-index.php';
 
-  const string PHP_DOT_NET_API_INDEX_JSON
-    = self::FINAL_DIR.'/php-dot-net-api-index.json';
-  const string PHP_DOT_NET_ARTICLE_REDIRECTS
-    = self::FINAL_DIR.'/php-dot-net-article-redirects.php';
   const string PHP_INI_SUPPORT_IN_HHVM_JSON
     = self::FINAL_DIR.'/php-ini-support-in-hhvm.json';
 
