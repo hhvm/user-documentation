@@ -24,11 +24,6 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
 
   public function expectedResults(): array<(string, array<string>)> {
     return [
-      tuple(
-        'array_filter',
-        ['http://php.net/manual/en/function.array-filter.php'],
-      ),
-      tuple('mysqli', ['http://php.net/manual/en/class.mysqli.php']),
       tuple('vw', ['/hack/reference/function/HH.Asio.vw/']),
       tuple('HH\Asio\vw', ['/hack/reference/function/HH.Asio.vw/']),
       tuple('async', ['/hack/asynchronous-operations/introduction']),

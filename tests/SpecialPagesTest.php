@@ -51,42 +51,6 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
         '/hack/getting-started/',
         '/hack/getting-started/getting-started',
       ),
-      'PHP function documentation' => tuple(
-        '/manual/en/function.parse-url.php',
-        'http://php.net/manual/en/function.parse-url.php',
-      ),
-      'PHP refentry article' => tuple(
-        '/manual/en/mail.configuration.php',
-        'http://php.net/manual/en/mail.configuration.php',
-      ),
-      'PHP book' => tuple(
-        '/manual/en/book.apc.php',
-        'http://php.net/manual/en/book.apc.php',
-      ),
-      'PHP "sect1"' => tuple(
-        '/manual/en/language.oop5.constants.php',
-        'http://php.net/manual/en/language.oop5.constants.php',
-      ),
-      'PHP "set"' => tuple(
-        '/manual/en/refs.creditcard.php',
-        'http://php.net/manual/en/refs.creditcard.php',
-      ),
-      'PHP book chapter' => tuple(
-        '/manual/en/oci8.connection.php',
-        'http://php.net/manual/en/oci8.connection.php',
-      ),
-      'PHP topic reference' => tuple(
-        '/manual/en/ref.array.php',
-        'http://php.net/manual/en/ref.array.php',
-      ),
-      'PHP book section' => tuple(
-        '/manual/en/classkit.configuration.php',
-        'http://php.net/manual/en/classkit.configuration.php',
-      ),
-      'PHP appendix' => tuple(
-        '/manual/en/stream.constants.php',
-        'http://php.net/manual/en/stream.constants.php',
-      ),
       'Beta redirect root' =>
         tuple('http://beta.docs.hhvm.com/', 'http://docs.hhvm.com/'),
       'Beta redirect page' => tuple(
@@ -99,14 +63,6 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
       ),
       'Missing trailing /' =>
         tuple('/hack/reference/class/HH.Map', '/hack/reference/class/HH.Map/'),
-      'PHP bad punctuation' => tuple(
-        '/manual/en/debugger.about.php',
-        'http://php.net/manual/en/debugger-about.php',
-      ),
-      'PHP good punctuation' => tuple(
-        '/manual/en/debugger-about.php',
-        'http://php.net/manual/en/debugger-about.php',
-      ),
       'Case insensitive redirect' =>
         tuple('/manual/en/HaCk.LAMbda.php', '/hack/lambdas/introduction'),
       'HSL function with Hack product' => tuple(

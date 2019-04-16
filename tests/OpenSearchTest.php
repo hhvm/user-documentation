@@ -37,10 +37,6 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
         'resultorexceptionwrapper',
         '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',
       ),
-      'PHP function' => tuple(
-        'array_filter',
-        'http://php.net/manual/en/function.array-filter.php',
-      ),
       'Search term' => tuple('=>foobar', '/search?term=%3D%3Efoobar'),
       'Special attribute' =>
         tuple('__memoize', '/hack/attributes/special#__memoize'),
