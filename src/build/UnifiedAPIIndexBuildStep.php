@@ -23,29 +23,50 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nUnifiedAPIIndexBuildStep");
+    $cg = $this->getCodegenFactory();
 
     $defs = Map {};
     $defs->setAll($this->getHackAPILinks(APIProduct::HACK));
     $defs->setAll($this->getHackAPILinks(APIProduct::HSL));
     $defs->setAll($this->getSpecialAttributeLinks());
 
-    \file_put_contents(
-      BuildPaths::UNIFIED_INDEX_JSON,
-      \json_encode($defs, \JSON_PRETTY_PRINT)
-    );
+    $cg->codegenFile(BuildPaths::UNIFIED_INDEX)
+      ->setNamespace("HHVM\\UserDocumentation")
+      ->addClass(
+        $cg->codegenClass('UnifiedIndexData')
+          ->setIsFinal(true)
+          ->setIsAbstract(true)
+          ->addMethod(
+            $cg->codegenMethod('getIndex')
+              ->setIsStatic(true)
+              ->setReturnType('dict<string, string>')
+              ->setBody(
+                $cg->codegenHackBuilder()
+                  ->addReturn(
+                    dict($defs),
+                    CG\HackBuilderValues::dict(
+                      CG\HackBuilderKeys::export(),
+                      CG\HackBuilderValues::export(),
+                    ),
+                  )
+                  ->getCode(),
+              ),
+          ),
+      )
+      ->save();
+
 
     $jump_index = dict[];
     foreach ($defs as $name => $url) {
       $name = Str\lowercase($name);
       if (
-        (!C\contains_key($jump_index, $name))
-        || Str\length($jump_index[$name]) > Str\length($url)
+        (!C\contains_key($jump_index, $name)) ||
+        Str\length($jump_index[$name]) > Str\length($url)
       ) {
         $jump_index[$name] = $url;
       }
     }
 
-    $cg = $this->getCodegenFactory();
     $cg->codegenFile(BuildPaths::JUMP_INDEX)
       ->setNamespace("HHVM\\UserDocumentation")
       ->addClass(
@@ -77,11 +98,11 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
   ): ImmMap<string, string> {
     Log::v("\nProcessing %s API Index", $product);
 
-    $out = Map { };
+    $out = Map {};
     $maybe_set = ($name, $url) ==> {
       if (
-        (!C\contains_key($out, $name))
-        || Str\length($out[$name]) > Str\length($url)
+        (!C\contains_key($out, $name)) ||
+        Str\length($out[$name]) > Str\length($url)
       ) {
         $out[$name] = $url;
       }

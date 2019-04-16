@@ -39,8 +39,8 @@ abstract final class BuildPaths {
   const string GUIDES_SUMMARY = self::FINAL_DIR.'/guides-summary.php';
 
   // FooBar => URL (for markdown)
-  const string UNIFIED_INDEX_JSON
-    = self::FINAL_DIR.'/unified-index.json';
+  const string UNIFIED_INDEX
+    = self::FINAL_DIR.'/unified-index.php';
   // foobar => URL (for /j/ URLs)
   const string JUMP_INDEX
     = self::FINAL_DIR.'/jump-index.php';
