@@ -32,8 +32,8 @@ final class GuidesIndex {
   }
 
   private static function getSummaries(
-  ): Map<string, Map<string, string>> {
-    return require(BuildPaths::GUIDES_SUMMARY);
+  ): dict<GuidesProduct, dict<string, string>> {
+    return GuidesSummaryData::getData();
   }
 
   public static function search(
@@ -115,17 +115,13 @@ final class GuidesIndex {
   }
 
   public static function getFileForSummary(
-    string $product,
+    GuidesProduct $product,
     string $guide,
   ): string {
     $summaries = self::getSummaries();
+    $path = $summaries[$product][$guide] ?? null;
     invariant(
-      $summaries->containsKey($product),
-      'Product %s does not exist',
-      $product,
-    );
-    invariant(
-      $summaries[$product]->containsKey($guide),
+      $path !== null,
       'Product %s does not contain summary %s',
       $product,
       $guide,
