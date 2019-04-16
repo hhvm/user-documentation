@@ -214,7 +214,7 @@ final class MyTest extends HackTest {
 We can then use HackTest to run the tests:
 
 ```
-$ hhvm vendor/bin/hacktest tests/
+$ vendor/bin/hacktest tests/
 ..
 
 Summary: 2 test(s), 2 passed, 0 failed, 0 skipped, 0 error(s).
@@ -224,7 +224,7 @@ If we intentionally add a failure, such as `tuple(vec[1, 2, 3], vec[1,2,3])`,
 HackTest reports this:
 
 ```
-$ hhvm vendor/bin/hacktest tests/
+$ vendor/bin/hacktest tests/
 ..F
 
 1) MyTest::testSquares with data set #3 (vec [
@@ -312,9 +312,9 @@ php --version
 composer install
 
 hh_client
-hhvm vendor/bin/hacktest tests/
+vendor/bin/hacktest tests/
 if !(hhvm --version | grep -q -- -dev); then
-  hhvm vendor/bin/hhast-lint
+  vendor/bin/hhast-lint
 fi
 ```
 
