@@ -1,6 +1,6 @@
 $p: ID:1(2,5)
 string(108) "C:65:"Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point":30:{a:2:{s:1:"y";d:5;s:1:"x";d:2;}}"
-object(Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point)#%d (3) {
+object(Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point) (3) {
   ["id":"Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point":private]=>
   int(2)
   ["x":"Hack\UserDocumentation\Classes\Serialization\Examples\Point\Point":private]=>

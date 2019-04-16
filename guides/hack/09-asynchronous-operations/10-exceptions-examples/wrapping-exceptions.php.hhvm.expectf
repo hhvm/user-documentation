@@ -1,7 +1,7 @@
 vec(2) {
-  object(HH\Asio\WrappedException)#%d (%d) {
+  object(HH\Asio\WrappedException) (%d) {
     ["exception":"HH\Asio\WrappedException":private]=>
-    object(Exception)#%d (%d) {
+    object(Exception) (%d) {
       ["message":protected]=>
       string(0) ""
       ["string":"Exception":private]=>
@@ -53,7 +53,7 @@ vec(2) {
       NULL
     }
   }
-  object(HH\Asio\WrappedResult)#%d (%d) {
+  object(HH\Asio\WrappedResult) (%d) {
     ["result":"HH\Asio\WrappedResult":private]=>
     int(2)
   }
