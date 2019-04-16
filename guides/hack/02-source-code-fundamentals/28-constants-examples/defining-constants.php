@@ -12,5 +12,4 @@ class C {
 function main(): void {
   echo "    MAX_COUNT = " . MAX_COUNT. "\n";
   echo "   MAX_HEIGHT = " . C::MAX_HEIGHT . "\n";
-  echo "COEFFICIENT_1 = " . \constant("COEFFICIENT_1") . "\n";
 }
