@@ -12,7 +12,6 @@
 namespace HHVM\UserDocumentation;
 
 require_once(BuildPaths::APIDOCS_LEGACY_REDIRECTS);
-require_once(BuildPaths::PHP_DOT_NET_ARTICLE_REDIRECTS);
 
 abstract final class LegacyRedirects {
   public static function getUrlForId(string $id): ?string {
@@ -138,7 +137,6 @@ abstract final class LegacyRedirects {
       'intro.asio' => '/hack/async/utility-functions',
       'hack.ref.asio' => '/hack/async/utility-functions',
       'hack.asio.function' => '/hack/async/utility-functions',
-      'migrationhhvm' => '/hhvm/inconsistencies/introduction',
       'ini.list' => '/hhvm/configuration/INI-settings',
       'install.fastcgi' => '/hhvm/advanced-usage/fastCGI',
       'install.linux' => '/hhvm/installation/linux',

@@ -127,10 +127,6 @@ This isn't necessary when using Hack syntax in Hack (`<?hh`) files, only when wa
 
 ## Running Code
 
-### Why are there sometimes array sorting differences between HHVM and PHP?
-
-You may have hit the [sorting inconsistency](/hhvm/inconsistencies/arrays-and-foreach#sorting).
-
 ### How do I fix these timezone warnings?
 
 > It is not safe to rely on the system's timezone settings. Please use the date.timezone setting....

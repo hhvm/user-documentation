@@ -388,7 +388,6 @@ These settings enable various features in the runtime, including [Hack](/hack/)-
 | `hhvm.enable_short_tags` | `bool` | `false` | If enabled, this allows the `<?` tag.
 | `hhvm.enable_xhp` | `bool` | `false` | If `true`, this will enable XHP support in PHP files. (XHP is always enabled in Hack files.) If `hhvm.force_hh` is set to `true`, then this setting is automatically `true`.
 | `hhvm.enable_zend_compat` | `bool` | `false` | If `true`, this enable the support layer for Zend PHP extensions that we have directly [migrated to HHVM](https://github.com/facebook/hhvm/tree/master/hphp/runtime/ext_zend_compat) (e.g. FTP).
-| `hhvm.enable_zend_sorting` | `bool` | `false` | If `true`, support is enabled for Zend PHP sort stability. There are [cases](/hhvm/inconsistencies/arrays-and-foreach#sorting) where sorting output is indeterministic between HHVM and PHP.
 | `hhvm.authoritative_mode` | `bool` | `false` | If enabled, HHVM disallows constructs that are unavailable in [Repo Authoritative](/hhvm/advanced-usage/repo-authoritative) mode even when you are not in Repo Authoritative mode (i.e., when `hhvm.repo.authoritative` is `false`).
 
 ## Logging

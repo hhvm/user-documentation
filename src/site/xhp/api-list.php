@@ -69,18 +69,6 @@ class :api-list extends :x:element {
       );
     }
 
-    if ($this->:product === APIProduct::HACK) {
-      return (
-        <x:frag>
-          <p>
-            The following APIs are supported in addition to
-            <a href="/php/reference/">most PHP APIs</a>.
-          </p>
-          {$root}
-        </x:frag>
-      );
-    }
-
     return $root;
   }
 
