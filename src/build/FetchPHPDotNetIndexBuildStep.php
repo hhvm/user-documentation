@@ -20,12 +20,12 @@ final class FetchPHPDotNetIndexBuildStep extends BuildStep {
     $json = \file_get_contents(self::SOURCE);
     $data = \json_decode($json);
     invariant(
-      is_array($data),
+      \is_array($data),
       '%s is not a json array',
       self::SOURCE,
     );
     invariant(
-      is_array($data[0]),
+      \is_array($data[0]),
       '%s is not an array of arrays',
       self::SOURCE,
     );

@@ -1,4 +1,4 @@
-<?hh //strict
+<?hh // partial
 
 namespace Hack\UserDocumentation\AsyncOps\Awaitables\Examples\Join;
 

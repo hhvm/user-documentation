@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 <<__EntryPoint>>

@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 if (!extension_loaded('mcrouter') || !extension_loaded('memcached')) {
   echo 'skip';

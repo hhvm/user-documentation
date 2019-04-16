@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 function intro_examples_tag_matching_validation_using_string(): void {
   echo '<div class="section-header">';

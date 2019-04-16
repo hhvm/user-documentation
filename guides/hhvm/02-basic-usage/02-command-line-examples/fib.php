@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 namespace HHVM\UserDocumentation\BasicUsage\Examples\CommandLine;
 

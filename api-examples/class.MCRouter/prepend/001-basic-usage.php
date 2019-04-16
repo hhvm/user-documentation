@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouter\Prepend;
 

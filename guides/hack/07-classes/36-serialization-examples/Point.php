@@ -1,4 +1,4 @@
-<?hh /*// strict */
+<?hh // partial
 
 namespace Hack\UserDocumentation\Classes\Serialization\Examples\Point;
 

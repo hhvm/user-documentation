@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 namespace Hack\UserDocumentation\API\Examples\Set\ToArray;
 
@@ -7,7 +7,7 @@ function run() {
 
   $array = $s->toArray();
 
-  \var_dump(is_array($array));
+  \var_dump(\is_array($array));
   \var_dump($array);
 }
 

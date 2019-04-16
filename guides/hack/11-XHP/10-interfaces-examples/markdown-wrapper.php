@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
 require_once __DIR__ . '/md_render.inc.php';
