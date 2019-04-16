@@ -4,8 +4,7 @@ namespace Hack\UserDocumentation\Functions\Definition\Examples\Varargs;
 
 function maximum(int $val1, int ... $vals): int {
   $retVal = $val1;
-  $argList = \func_get_args();
-  foreach ($argList as $e) {
+  foreach ($vals as $e) {
     if ($e > $retVal) $retVal = $e;
   }
   return $retVal;

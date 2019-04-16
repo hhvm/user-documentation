@@ -41,10 +41,6 @@ ellipsis represents the variable part.  For example:
 
 @@ defining-a-function-examples/varargs.php @@
 
-There may be more arguments than parameters.  The library functions [`func_num_args`](http://www.php.net/func_num_args),
-[`func_get_arg`](http://www.php.net/func_get_arg), and [`func_get_args`](http://www.php.net/func_get_args) can be used to get access
-to the complete argument list that was passed.
-
 By default, arguments are passed by value; however, if a parameter contains the `inout` modifier, the corresponding argument must also
 contain that modifier. For example:
 
