@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{C, Str};
 use type HHVM\UserDocumentation\{Guides, GuidesIndex, GuidesProduct};
 use function Facebook\FBExpect\expect;
 use type Facebook\HackTest\DataProvider;
