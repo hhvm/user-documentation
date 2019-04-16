@@ -33,11 +33,6 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
   }
 
   public function testExamplesTypecheck(): void {
-    if (HHVM_VERSION_ID >= 32600 && HHVM_VERSION_ID <= 32602) {
-      static::markTestSkipped(
-        'This versions of HHVM is unable to run the test runner',
-      );
-    }
     $hh_server = \dirname(\PHP_BINARY).'/hh_server';
     if (!\file_exists($hh_server)) {
       static::markTestSkipped("Couldn't find hh_server");
@@ -48,7 +43,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       '--exclude',
       '.inc.php',
       '--vendor',
-      LocalConfig::ROOT.'/api-sources/hsl/src',
+      LocalConfig::ROOT.'/vendor'
     });
   }
 
