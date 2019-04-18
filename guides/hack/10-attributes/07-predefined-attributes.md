@@ -55,7 +55,7 @@ This attribute can be applied to a function to indicate that it has been *deprec
 revised. This attribute has two possible attribute values.  Consider the following example:
 
 ```Hack
-<<__Deprecated("This function has being replaced by do_that", 7)>>
+<<__Deprecated("This function has been replaced by do_that", 7)>>
 function do_this(): void { /* ... */ }
 
 ```
