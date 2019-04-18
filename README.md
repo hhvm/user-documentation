@@ -21,7 +21,7 @@ Our strategy to create better documentation begins with a re-thinking of our doc
 * Markdown instead of docbook provides an easier path for documentation source readability and updates.
     - Have extensions to support things like example insertion, etc.
 * Token scan our the HHVM code block documentation (instead of reflection) so that rebuilding HHVM isn't necessary to update the documentation.
-  - Use [phpDocumentor](http://www.phpdoc.org/) for docblock parsing
+  - Use [HHAST](https://github.com/hhvm/hhast) and [hh-apidoc](https://github.com/hhvm/hh-apidoc) for docblock parsing
 * Ensure the source code that builds the site is as reusable as possible, so that it has the potential to provide reusability to documentation projects beyond Hack and HHVM.
 
 Check out the [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site. [`bin/build.php`](https://github.com/hhvm/user-documentation/blob/master/bin/build.php) is where all the execution begins.
