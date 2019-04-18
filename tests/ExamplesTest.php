@@ -42,8 +42,6 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       '--typechecker',
       '--exclude',
       '.inc.php',
-      '--vendor',
-      LocalConfig::ROOT.'/vendor'
     });
   }
 
