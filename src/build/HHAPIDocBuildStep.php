@@ -235,7 +235,6 @@ final class HHAPIDocBuildStep extends BuildStep {
     if (!C\contains_key($to_fix, $obj->getName())) {
       return $def;
     }
-    \var_dump('found def!');
     $def['definition'] = new ScannedFunction(
       $obj->getAST(),
       "HH\\".$obj->getName(),
