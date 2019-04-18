@@ -14,4 +14,6 @@ bundle install --path vendor-rb
 
 hhvm bin/build.php
 hh_client
+ulimit -a
+free -m
 vendor/bin/hacktest tests/
