@@ -54,6 +54,8 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
           ),
       )
       ->save();
+    // Make it available to later build steps
+    require_once(BuildPaths::UNIFIED_INDEX);
 
 
     $jump_index = dict[];

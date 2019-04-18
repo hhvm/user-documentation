@@ -11,8 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-require_once(BuildPaths::APIDOCS_LEGACY_REDIRECTS);
-
 abstract final class LegacyRedirects {
   public static function getUrlForId(string $id): ?string {
     $ids = [

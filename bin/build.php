@@ -22,7 +22,7 @@ function build_site(?Traversable<string> $filters = null): void {
     \mkdir(BuildPaths::FINAL_DIR, 0755, /* recursive = */ true);
   }
 
-  $steps = Vector {
+  $steps = vec[
     // No Dependencies
     HHAPIDocBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
@@ -34,10 +34,9 @@ function build_site(?Traversable<string> $filters = null): void {
     // Needs the YAML
     GuidesIndexBuildStep::class,
 
-    // Needs the indices
+    // Needs the previous indices
     UnifiedAPIIndexBuildStep::class,
     SiteMapBuildStep::class,
-
     APILegacyRedirectsBuildStep::class,
 
     // This needs to be able to invoke static methods on the controllers;
@@ -55,11 +54,12 @@ function build_site(?Traversable<string> $filters = null): void {
 
     // Needs to be done after all Hack codegen
     UpdateAutoloaderBuildStep::class,
-  };
+  ];
 
   if ($filters !== null) {
-    $steps = $steps->filter(
-      function (classname<BuildStep> $step): bool use ($filters) {
+    $steps = Vec\filter(
+      $steps,
+      $step ==> {
         foreach ($filters as $filter) {
           if (\stripos($step, $filter) !== false) {
             return true;

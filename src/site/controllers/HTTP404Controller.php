@@ -14,8 +14,6 @@ use type HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\JumpIndexData;
 use type HHVM\UserDocumentation\LegacyRedirects;
 
-require_once(BuildPaths::JUMP_INDEX);
-
 final class HTTP404Controller extends NonRoutableWebPageController {
   <<__Override>>
   public async function getTitleAsync(): Awaitable<string> {

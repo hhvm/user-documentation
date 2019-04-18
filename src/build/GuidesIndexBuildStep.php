@@ -68,6 +68,8 @@ final class GuidesIndexBuildStep extends BuildStep {
           ),
       )
       ->save();
+    // Make it available to later build steps
+    require_once(BuildPaths::GUIDES_INDEX);
   }
 
   private function generateIndexData(
