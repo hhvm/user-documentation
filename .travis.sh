@@ -13,7 +13,5 @@ php /usr/local/bin/composer install
 bundle install --path vendor-rb
 
 hhvm bin/build.php
-hh_client
-ulimit -a
-free -m
+hh_server --check $(pwd)
 vendor/bin/hacktest tests/
