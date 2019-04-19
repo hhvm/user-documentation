@@ -1,6 +1,7 @@
 {
   "roots": [
     "src/",
+    "build/",
     "tests/"
   ],
   "extraFiles": [ "LocalConfig.php" ],
