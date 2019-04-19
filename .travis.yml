@@ -9,7 +9,7 @@ env:
 install:
 - docker pull hhvm/hhvm:$HHVM_VERSION
 script:
-- docker run -w /var/source -v $(pwd):/var/source hhvm/hhvm:$HHVM_VERSION ./.travis.sh
+- docker run -m 2048m -w /var/source -v $(pwd):/var/source hhvm/hhvm:$HHVM_VERSION ./.travis.sh
 notifications:
   slack:
     secure: p7mcZzvpD3Ku3Z/m5ktz2qUelCeZbM78bmuGM/7N3/5wd1BysfSG/ELi8hfc16e3ZBVJmnsDR7rhE4m5Lw3764zCgtk9Kx2Z8XWkolOedoPrQHIMspKYyJiNhraHTB1bfJB5VaRrjPyH/Z7krVefrfdJfI5YdnVZgmxaAfcojq+g9liDl6HhhgOFhyfNw9pSH/vs82tdYoLED7alardfVDkE2SwOKxjbJEpVApzn2jzC0XA+pyDlAU5wTSGs9WMEJIEzliWUbeuGT3ZkxJkazGFWOAHY0OXTXDfvcQJTn8aqB3Sy47lyCIsiGvR++dzAWtjCdISHXaIfcyy3oNq+NaNM0onOs6oFWRB6b8RHgkTwlJAF5LFrwqDH6xij6Cur5c5+Bpmb/jmeYG4EMCFp1ctIJJflB4SfcobcgIr00l9C8ezp5Gf2QVCEDVAewiCRshbEuIFpZ16w94SOj34f7CZX7p6WYR0JbTGFFlzS2GD/1jjx4XnTKVA6Kpr58RQUp4v/SrwlpJEE4RmmaTMfD3Qkh18MMHw8vOva3sSUzpDE+1mcsSF60fxITdGUEjKALWe0WfCBFdOIJF14w/vTDaVS9LeCdcfoUcmfr46pUWRpz8ASV3+hWVYVb3aUnGDS7Ws2l65h93e8QfWkuj9fAKmZUq4dZCEoifAUA14YSo4=
