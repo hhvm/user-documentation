@@ -9,7 +9,6 @@
  *
  */
 
-use type HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\JumpIndexData;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 
