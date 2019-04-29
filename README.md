@@ -21,7 +21,7 @@ Our strategy to create better documentation begins with a re-thinking of our doc
 * Markdown instead of docbook provides an easier path for documentation source readability and updates.
     - Have extensions to support things like example insertion, etc.
 * Token scan our the HHVM code block documentation (instead of reflection) so that rebuilding HHVM isn't necessary to update the documentation.
-  - Use [phpDocumentor](http://www.phpdoc.org/) for docblock parsing 
+  - Use [HHAST](https://github.com/hhvm/hhast) and [hh-apidoc](https://github.com/hhvm/hh-apidoc) for docblock parsing
 * Ensure the source code that builds the site is as reusable as possible, so that it has the potential to provide reusability to documentation projects beyond Hack and HHVM.
 
 Check out the [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site. [`bin/build.php`](https://github.com/hhvm/user-documentation/blob/master/bin/build.php) is where all the execution begins.
@@ -48,10 +48,12 @@ These are the basic step-by-step instructions to get you up and running. It assu
 1. Clone this repository
 2. `cd path/to/user-documentation`
 3. `git submodule update --init`
-4. `hhvm /path/to/composer.phar install` # Make sure you have composer downloaded
+4. `php /path/to/composer.phar install` # Make sure you have composer downloaded
 5. `sudo gem install bundler` # to get Ruby bundles
 6. `bundle --path vendor-rb/` # install required ruby bundles
 7. `hhvm bin/build.php` # build the site!
+
+Follow the next steps to access this build from a browser.
 
 ## Running The Site From A Checkout
 
@@ -63,3 +65,5 @@ development, HHVM's built-in webserver should be sufficient:
 $ cd public
 $ hhvm -m server -p 8080 -c ../hhvm.dev.ini
 ```
+
+Then, in your browser, go to http://localhost:8080
