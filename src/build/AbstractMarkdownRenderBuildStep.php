@@ -66,7 +66,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     $input = \str_replace(static::SOURCE_ROOT.'/', '', $input);
     $parts = (new Vector(\explode('/', $input)))
       ->map(
-        $part ==> \preg_match('/^[0-9]{2}-/', $part) ? \substr($part, 3) : $part
+        $part ==> \preg_match('/^[0-9]{2,}-/', $part) ? \substr($part, \strpos($part, '-') + 1) : $part
       );
 
     $output = \implode('/', $parts);
