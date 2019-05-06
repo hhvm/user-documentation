@@ -6,29 +6,29 @@ To strike a balance between flexibility, latency, and performance, we require th
 
 ```
 $sum =
-  await genx() +      // yes!
-  await geny();       // yes!
+  await x_async() +      // yes!
+  await y_async();       // yes!
 $tuple = tuple(
-  await gen_foo(),    // yes!
+  await foo_async(),     // yes!
   42,
 );
 $result = foo(
-  await gen_bar(),    // yes!
-  await gen_baz(),    // yes!
+  await bar_async(),     // yes!
+  await baz_async(),     // yes!
 );
-if (await genx()) {   // yes!
+if (await x_async()) {   // yes!
   // Conditional but seperate statement
-  await geny();       // yes!
+  await y_async();       // yes!
 }
 $x =
-  await genx() &&     // yes!
+  await x_async() &&     // yes!
   // Conditional expression
-  await geny();       // no!
-$y = await genx()     // yes!
-  ? await geny()      // no!
-  : await genz();     // no!
-$x = await async {    // yes!
-  await genx();       // yes!
+  await y_async();       // no!
+$y = await x_async()     // yes!
+  ? await y_async()      // no!
+  : await z_async();     // no!
+$x = await async {       // yes!
+  await x_async();       // yes!
 }
 ```
 
@@ -67,7 +67,7 @@ $x = f(inout $y, await x_async());
 await bar_async(baz(inout $x));
 ```
 
-Today we don't currently support nested `await`s, but might add support for this in the future.
+Hack doesn't currently support nested `await`s, but might add support for this in the future.
 
 ```
 $x = await foo_async(await bar_async()); // no!
