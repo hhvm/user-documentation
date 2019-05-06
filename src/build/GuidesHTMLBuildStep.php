@@ -74,7 +74,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
     foreach ($summaries as $summary) {
       $parts = (new Vector(\explode('/', $summary)))
         ->map(
-          $part ==> \preg_match('/^[0-9]{2}-/', $part) ? \substr($part, 3) : $part
+          $part ==> \preg_match('/^[0-9]{2,}-/', $part) ? \substr($part, \strpos($part, '-') + 1) : $part
         );
       if (\count($parts) !== 3) {
         continue;

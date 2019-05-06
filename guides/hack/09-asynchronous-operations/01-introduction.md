@@ -2,6 +2,8 @@
 * [Some basics](some-basics.md)
 * [Async vs. Awaitable](async-vs.-awaitable.md)
 * [Async blocks](blocks.md)
+* [Concurrent blocks](concurrent.md)
+* [Await-as-an-expression](await-as-an-expression.md)
 * [Awaitable](awaitables.md)
 * [Exception handing](exceptions.md)
 * [Extensions](extensions.md)
