@@ -30,7 +30,7 @@ hhvm -m server -p 8080
 Once you have HHVM running, write a simple "Hello World" program named `hello.php`:
 
 ```
-<?php
+<?pp
 echo "Hello World!";
 ```
 
