@@ -77,8 +77,8 @@ function build_site(?Traversable<string> $filters = null): void {
   }
 }
 
-if (array_key_exists(1, $argv)) {
-  build_site(array_slice($argv, 1));
+if (\array_key_exists(1, $argv)) {
+  build_site(\array_slice($argv, 1));
 } else {
   build_site();
 }
