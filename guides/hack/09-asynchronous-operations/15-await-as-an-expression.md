@@ -1,4 +1,4 @@
-Expected to launch with HHVM 4.5, it'll be possible to use `await` in many more expression positions. All `await`s within the same statement will execute concurrently (similar to `Tuple\from_async`).
+`await-as-an-expression` is a future feature, expected to launch with HHVM 4.5. It will enable using `await` in many more expression positions. All `await`s within the same statement will execute concurrently (similar to `Tuple\from_async`).
 
 To strike a balance between flexibility, latency, and performance, we require that the `await`s only appear in **unconditionally consumed expression positions**. This means that from the closest statement, the result of the `await` must be used under all non-throwing cases. This is important because all `await`s for a statement will run together, we don't want to over-run code if its result might not be utilized.
 
@@ -39,13 +39,13 @@ You can read more on the [exhaustive list of allowed positions in the specificat
 
 Similar to other aspects of `await`, we do not guarantee an order of execution of the expressions within a statement that contains `await`, but you should assume it could be significantly different than if the `await` wasn't present. **If you want stronger guarantees over order-of-execution, separate `await`s into their own statements.**
 
-In this example, you should make no assumptions about the order in which `a()`, `b()`, `c()` or `d()` are executed, but you can assume that both `await`'ed functions (`a()` and `c()`) will be concurrently awaited.
+In this example, you should make no assumptions about the order in which `a_async()`, `b()`, `c_async()` or `d()` are executed, but you can assume that both `await`'ed functions (`a_async()` and `c_async()`) will be concurrently awaited.
 
 ```
 $x = foo(
-  await a(),
+  await a_async(),
   b(),
-  await c(),
+  await c_async(),
   d(),
 );
 ```
@@ -56,19 +56,19 @@ To further help protect against depending on order-of-execution, we've banned as
 
 ```
 // Yes!
-$x = await genx();
+$x = await x_async();
 // No, assignment as an expression
-await foo($x = 42);
+await foo_async($x = 42);
 // No, we even disallow separate assignment
-(await bar()) + ($x = 42);     
+(await bar_async()) + ($x = 42);     
 // Yes!   
-$x = f(inout $y, await genx());
+$x = f(inout $y, await x_async());
 // Yes, embedded call w/ inout is considered an expression
-await bar(baz(inout $x));
+await bar_async(baz(inout $x));
 ```
 
 Today we don't currently support nested `await`s, but might add support for this in the future.
 
 ```
-$x = await gen_foo(await gen_bar()); // no!
+$x = await foo_async(await bar_async()); // no!
 ```

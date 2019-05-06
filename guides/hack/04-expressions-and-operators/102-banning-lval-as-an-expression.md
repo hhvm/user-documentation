@@ -1,9 +1,9 @@
 ## Why?
 
-1. We'd like to have various rules preventing things we know is unsafe in concurrent blocks. For example, assigning something twice in the middle of two different expressions in a concurrent block. `concurrent { $x1 = await genx($y = 42); $x2 = await geny($y = 43); }`
+1. We'd like to have various rules preventing things we know are unsafe in concurrent blocks. For example, assigning something twice in the middle of two different expressions in a concurrent block. `concurrent { $x1 = await x_async($y = 42); $x2 = await y_async($y = 43); }`
 2. Since we will be allowing `await-as-an-expression` outside of concurrent blocks, we'd like to not have to special case these rules so that they only kick in when adding an `await`  to a statement.
-3. There is a general belief that due to the scoping of variables we inherited from PHP, that complex assignment is very hard to reason about when writing Hack code.
-4. We considered having more pointed rules that allow much more complex rules that attempt to enable more possible usages of lval-as-an-expression, but based on initial testing, the level of usage of this feature in WWW is already very low, so it doesn't seem useful to support. As having simpler rules is a win in-and-of itself.
+3. There is a general belief that due to the current scoping of variables, complex assignment is very hard to reason about when writing Hack code.
+4. We considered having more pointed rules that would allow much more complex rules that attempt to enable more possible usages of lval-as-an-expression, but based on initial testing, the level of usage of this feature is already very low, so it doesn't seem useful to support. Having simpler rules is a win in-and-of itself.
 
 ## Definitions
 
@@ -35,6 +35,7 @@
     * Using:
         * `using $x = ...;`
         * `using ($x = ..., $y = ...) { ... }`
+        * `await using ($x = await ..., $y = await ...) { ... }`
 * Assignment:
     * If the assignment is directly in a final lval position
     * `<lval> <op>= ...;`
