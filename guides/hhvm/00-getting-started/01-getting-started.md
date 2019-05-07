@@ -37,7 +37,7 @@ function main(): noreturn{
 }
 ```
 
-Save this `hello.hack` in the same directory that you ran the `hhvm` command from above. Then, load [http://localhost:8080/hello.php](http://localhost:8080/hello.php) in your browser and verify you see "Hello World!" appear.
+Save this `hello.hack` in the same directory that you ran the `hhvm` command from above. Then, load [http://localhost:8080/hello.hack](http://localhost:8080/hello.hack) in your browser and verify you see "Hello World!" appear.
 
 ## Configure HHVM
 
