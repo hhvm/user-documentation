@@ -3,8 +3,8 @@
 namespace HHVM\UserDocumentation\Tests;
 
 use const HHVM_VERSION_ID;
-use function Facebook\FBExpect\expect;
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
+use type Facebook\HackTest\DataProvider;
 use namespace HH\Lib\{Str, Vec};
 
 /**
@@ -32,18 +32,68 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     });
   }
 
-  public function testExamplesTypecheck(): void {
-    static::markTestSkipped("Unreliable when containerized :'(");
-    $hh_server = \dirname(\PHP_BINARY).'/hh_server';
-    if (!\file_exists($hh_server)) {
-      static::markTestSkipped("Couldn't find hh_server");
+  public function getTypecheckerExamples(): vec<(string, string)> {
+    $ret = vec[];
+    $it = new \RecursiveIteratorIterator(
+      new \RecursiveDirectoryIterator(LocalConfig::ROOT.'/guides/'),
+    );
+    foreach ($it as $info) {
+      if (!$info->isFile()) {
+        continue;
+      }
+      $path = $info->getPathname();
+      $idx = Str\search($path, '.typechecker.expect');
+      if ($idx === null) {
+        continue;
+      }
+      $ret[] = tuple(Str\slice($path, 0, $idx), $path);
+    }
+    return $ret;
+  }
+
+  <<DataProvider('getTypecheckerExamples')>>
+  public async function testExamplesTypecheck(
+    string $in_file,
+    string $expect_file,
+  ): Awaitable<void> {
+    $source_dir = \dirname($in_file);
+    await using $tmp_dir = new TemporaryDirectory();
+    $work_dir = $tmp_dir->getPath();
+
+    \copy(
+      $in_file,
+      $work_dir.'/'.Str\strip_suffix(\basename($in_file), '.type-errors'),
+    );
+    if (\file_exists($in_file.'.hhconfig')) {
+      \copy($in_file, $work_dir.'/.hhconfig');
+    } else {
+      \touch($work_dir.'/.hhconfig');
+    }
+    foreach (\glob($source_dir.'/*.inc.php') as $include_file) {
+      \copy($include_file, $work_dir.'/'.\basename($include_file));
     }
 
-    $this->runExamples(Vector {
-      '--typechecker',
-      '--exclude',
-      '.inc.php',
-    });
+    list($_exit_code, $stdout, $stderr) = await execute_async(
+      $this->getHHServerPath(),
+      '--check',
+      '--config',
+      'extra_paths='.LocalConfig::ROOT.'/vendor/',
+      $work_dir,
+    );
+    \file_put_contents($in_file.'.typechecker.stdout', $stdout);
+    \file_put_contents($in_file.'.typechecker.stderr', $stderr);
+
+    if (Str\ends_with($expect_file, '.expect')) {
+      expect($stdout)->toMatchExpectFile($expect_file);
+    } else if (Str\ends_with($expect_file, '.expectf')) {
+      expect($stdout)->toMatchExpectfFile($expect_file);
+    } else {
+      expect(Str\ends_with($stdout, '.expectregex'))->toBeTrue(
+        "%s does not end with .expect, .expectf, or .expectregex",
+        $expect_file,
+      );
+      expect($stdout)->toMatchExpectregexFile($expect_file);
+    }
   }
 
   <<__Memoize>>

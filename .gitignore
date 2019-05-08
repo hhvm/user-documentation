@@ -13,6 +13,8 @@ www.pid
 *.hack.type-errors.diff
 *.hack.type-errors.out
 *.css.map
+*.stdout
+*.stderr
 /build/
 /public/www.pid
 .sass-cache
