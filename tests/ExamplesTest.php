@@ -58,6 +58,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
   ): Awaitable<void> {
     $source_dir = \dirname($in_file);
     await using $tmp_dir = new TemporaryDirectory();
+    await using $hh_tmp_dir = new TemporaryDirectory();
     $work_dir = $tmp_dir->getPath();
 
     \copy(
@@ -74,6 +75,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     }
 
     list($_exit_code, $stdout, $stderr) = await execute_async(
+      shape('environment' => dict['HH_TMPDIR' => $hh_tmp_dir->getPath()]),
       $this->getHHServerPath(),
       '--check',
       '--config',

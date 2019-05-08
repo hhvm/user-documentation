@@ -18,6 +18,6 @@ final class TemporaryDirectory implements \IAsyncDisposable {
   }
 
   public async function __disposeAsync(): Awaitable<void> {
-    await execute_async('rm', '-rf', '--', $this->path);
+    await execute_async(null, 'rm', '-rf', '--', $this->path);
   }
 }
