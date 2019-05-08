@@ -78,6 +78,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       shape('environment' => dict['HH_TMPDIR' => $hh_tmp_dir->getPath()]),
       $this->getHHServerPath(),
       '--check',
+      '--max-procs=1',
       '--config',
       'extra_paths='.LocalConfig::ROOT.'/vendor/',
       $work_dir,
