@@ -5,7 +5,7 @@ git:
 services:
 - docker
 env:
-- HHVM_VERSION=4.1-latest
+- HHVM_VERSION=4.4-latest
 install:
 - docker pull hhvm/hhvm:$HHVM_VERSION
 script:
