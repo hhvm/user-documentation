@@ -30,7 +30,7 @@ this extension *must* start with an optional shebang line (e.g. `#!/usr/bin/env 
 
 - `<?hh // strict`: this is currently the recommended header, and makes Hack work in the documented ways
 - `<?hh // partial`: this loosens several restrictions to ease migration from other languages. It is strongly
-  discoraged for new code.
+  discouraged for new code.
 - `<?hh`: depending on the version of HHVM/Hack, this may be equivalent to strict, partial, or throw an error. It is strongly discouraged for both new and existing code.
 - `<?hh // decl`: no longer supported
 
