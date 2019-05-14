@@ -15,7 +15,7 @@ function f(classname<Employee> $clsname): void {
 }
 ```
 
-For this to work, we need a type than can represent a class name, and that is the type `classname<`...`>`.
+For this to work, we need a type that can represent a class name, and that is the type `classname<`...`>`.
 
 Consider the following:
 
