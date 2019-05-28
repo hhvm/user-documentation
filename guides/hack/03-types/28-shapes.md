@@ -66,7 +66,7 @@ a type-aliasing capability via `type` (and `newtype`), which is demonstrated in 
 @@ shapes-examples/banking.php @@
 
 Type `Transaction` is a sort-of abstract type that only ever contains the transaction-type field. The `...` notation indicates that there
-maybe other, optional fields. This allows the types `Deposit`, `Withdrawal`, and `Transfer` to be considered subtypes of `Transaction` by having
+may be other, optional fields. This allows the types `Deposit`, `Withdrawal`, and `Transfer` to be considered subtypes of `Transaction` by having
 the same first field, and then adding other fields as well.
 
 Note carefully, that inside function `process_transaction`, even though the transaction passed in might have been a `Deposit`, a `Withdrawal`,
