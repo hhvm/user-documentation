@@ -1,4 +1,10 @@
-`concurrent` blocks are a future feature, expected to launch with HHVM 4.5. `concurrent` blocks are a replacement for the `Tuple\from_async` pattern that makes the behavior of the code much clearer. It concurrently awaits all `await`s within a `concurrent` block and it works with [`await`-as-an-expression](await-as-an-expression.md) as well!
+```yamlmeta
+{
+  "min-versions": { "HHVM": "4.6" }
+}
+```
+
+`concurrent` blocks are a replacement for the `Tuple\from_async` pattern that makes the behavior of the code much clearer. It concurrently awaits all `await`s within a `concurrent` block and it works with [`await`-as-an-expression](await-as-an-expression.md) as well!
 
 Note: [concurrent doesn't mean multithreading](some-basics#limitations)
 
