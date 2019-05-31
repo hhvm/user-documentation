@@ -16,8 +16,6 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     $exclude_suffixes = vec[
       '.inc.php',
       '.inc.hack',
-      '.php.type-errors',
-      '.hack.type-errors',
       '.noexec.php',
       '.noexec.hack',
     ];
