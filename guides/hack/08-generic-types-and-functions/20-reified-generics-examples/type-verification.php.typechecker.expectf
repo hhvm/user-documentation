@@ -1,0 +1,8 @@
+File "%s/type-verification.php", line 12, characters 5-7:
+Invalid argument (Typing[4110])
+File "%s/type-verification.php", line 5, characters 14-16:
+This is an int
+File "%s/type-verification.php", line 5, characters 14-16:
+Considering that this type argument is invariant with respect to C
+File "%s/type-verification.php", line 11, characters 15-20:
+It is incompatible with a string

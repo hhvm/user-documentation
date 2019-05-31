@@ -1,0 +1,1 @@
+Catchable fatal error: Argument 1 passed to f() must be an instance of int, given string in %s on line 12
