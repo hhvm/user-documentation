@@ -1,17 +1,17 @@
-File "%s/type-verification-2.php", line 12, characters 10-14:
+File "%s/type-verification-2.php", line 14, characters 10-14:
 Invalid argument (Typing[4110])
-File "%s/type-verification-2.php", line 12, characters 5-7:
+File "%s/type-verification-2.php", line 14, characters 5-7:
 This is an int
-File "%s/type-verification-2.php", line 5, characters 21-21:
+File "%s/type-verification-2.php", line 7, characters 21-21:
   via this generic T
-File "%s/type-verification-2.php", line 12, characters 10-14:
+File "%s/type-verification-2.php", line 14, characters 10-14:
 It is incompatible with a string
 
-File "%s/type-verification-2.php", line 6, characters 10-21:
+File "%s/type-verification-2.php", line 8, characters 10-21:
 Invalid return type (Typing[4110])
-File "%s/type-verification-2.php", line 5, characters 30-30:
+File "%s/type-verification-2.php", line 7, characters 30-30:
 This is a value of generic type T
-File "%s/type-verification-2.php", line 5, characters 30-30:
-Considering that this type argument is invariant with respect to C
-File "%s/type-verification-2.php", line 6, characters 16-18:
+File "%s/type-verification-2.php", line 7, characters 30-30:
+Considering that this type argument is invariant with respect to Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\TypeVerification2\C
+File "%s/type-verification-2.php", line 8, characters 16-18:
 It is incompatible with an int

@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\New;
+
 <<__ConsistentConstruct>>
 abstract class A {}
 

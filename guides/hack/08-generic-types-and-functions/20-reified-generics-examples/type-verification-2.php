@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\TypeVerification2;
+
 class C<reify T> {}
 
 function f<reify T>(T $x): C<T> {

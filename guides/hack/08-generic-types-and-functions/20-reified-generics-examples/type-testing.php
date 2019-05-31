@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\TypeTesting;
+
 function filter<<<__Enforceable>> reify T>(vec<mixed> $list): vec<T> {
   $ret = vec[];
   foreach ($list as $elem) {

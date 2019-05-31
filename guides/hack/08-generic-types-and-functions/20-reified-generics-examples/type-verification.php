@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\TypeVerification;
+
 class C<reify T> {}
 
 function f(C<int> $c): void {}

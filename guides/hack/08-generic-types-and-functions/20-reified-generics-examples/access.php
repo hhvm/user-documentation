@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\Access;
+
 class C {
   const string class_const = "hi";
   public static string $class_propery = "hi";
