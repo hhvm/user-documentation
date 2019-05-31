@@ -24,9 +24,11 @@ function build_site(?Traversable<string> $filters = null): void {
 
   $steps = vec[
     // No Dependencies
-    HHAPIDocBuildStep::class,
+    APISourcesBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
     FacebookIPRangesBuildStep::class,
+    // Just the API Sources
+    HHAPIDocBuildStep::class,
 
     // Needs getting the PHP ini settings HHVM supports
     PHPIniSupportInHHVMMarkdownBuildStep::class,

@@ -15,6 +15,7 @@ www.pid
 *.css.map
 *.stdout
 *.stderr
+/api-sources/
 /build/
 /public/www.pid
 .sass-cache

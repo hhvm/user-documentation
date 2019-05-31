@@ -1,7 +1,5 @@
 sudo: required
 language: generic
-git:
-  submodules: false
 services:
 - docker
 env:
