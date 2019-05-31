@@ -56,6 +56,7 @@ While we aren't 100% rigid on how we want contributions to come to us (we want t
     + `.php.typechecker.expect[f]`: An HHVM test runner [typechecker expect file](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md#file-layout) with the expected results of running the typechecker on your code (e.g., in `--typechecker` mode). Most of the time this should be a file that contains `No errors!`.
     + `.php.example.hhvm.out`: If you are using an `.hhvm.expectf` file, then this file will be a raw output version of that file without any patterns. i.e., the result of running `hhvm` on the source file.
     + `.php.no.auto.output`: Don't print out any output after the source code. This supercedes `.php.example.hhvm.out` and `.hhvm.expect` (i.e., those files will be ignored when it comes to printing raw output in the docs). Use this if you want to control where the output goes, or if you want no output at all. 
+Add `.type-errors` after `.php` or `.hack` if typechecker errors are expected.
 
 The [examples associated with the async introduction](https://github.com/hhvm/user-documentation/tree/master/guides/hack/22-async/01-introduction-examples) will give you a guide on how to structure these files.
 
@@ -190,34 +191,22 @@ You can run the HHVM test runner on the entire suite of examples, on one directo
 
 *Normally you will use our test suit described [above](#testing-changes) to test any changes you make (because it tests our examples as well). However, sometimes it is actually faster and more explicit to test one example directly with the HHVM test runner.*
 
-Assuming you have installed and **compiled** HHVM from source, here is how you can run the examples with the test runner:
-
 ```
 # Assuming you are in the user-documentation repo root
 
 # This runs every example in the test runner.
 # Won't normally need to do this; just use our test suite instead.
-% hhvm /path/to/hhvm/source/hphp/test/run .
 
-# This runs every example in the test runner in typechecker mode
-# Won't normally need to do this; just use our test suite instead.
-% hhvm /path/to/hhvm/source/hphp/test/run --typechecker .
-
-# This runs all collections topic examples in the test runner
-% hhvm /path/to/hhvm/source/hphp/test/run guides/hack/23-collections
-# This runs all collections topic examples in test runner in typechecker mode
-% hhvm /path/to/hhvm/source/hphp/test/run --typechecker guides/hack/23-collections
-
-# This runs the specific lazy.php example in the test runner
-% hhvm /path/to/hhvm/source/hphp/test/run guides/hack/23-collections/10-examples-examples/lazy.php
-# This runs the specific lazy.php example in the test runner in typechecker mode
-% hhvm /path/to/hhvm/source/hphp/test/run --typechecker guides/hack/23-collections/10-examples-examples/lazy.php
+# Test with the typechecker
+$ api-sources/hhvm/hphp/test/run --hhserver-binary-path $(which hh_server) --typechecker guides/hack/05-statements/
+# Test with the runtime
+$ api-sources/hhvm/hphp/test/run --hhvm-binary-path $(which hhvm) guides/hack/05-statements/
 ```
 
 Here is the output you should see when you run the test runner. Assume we are running the examples in the collections topic:
 
 ```
-$ hhvm ~/hhvm/hphp/test/run guides/hack/23-collections/
+$ hhvm api-sources/hhvm/hphp/test/run guides/hack/23-collections/
 Running 32 tests in 32 threads (0 in serial)
 
 All tests passed.
@@ -235,5 +224,3 @@ Total time for all executed tests as run: 11.57s
 ```
 
 You can use `--verbose` to see all the tests that are running.
-
-**NOTE** that due to some discovered bugs in HHVM and/or third-party libraries, running the test runner on *all* the examples may not give you a 100% pass rate. These bugs are being looked at.
