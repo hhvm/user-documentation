@@ -59,27 +59,8 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     return $ret;
   }
 
-  public async function testExamplesTypecheck(): Awaitable<void> {
-    // Ideally HackTest would support parallelism via xbox or async;
-    // statefullness needs to be avoid or managed first though :'(
-
-    $concurrency_limit = 10;
-    // TODO: on HSL 4.7, use HH\Lib\Ref
-    $todo = new \HH\Lib\_Private\Ref($this->getTypecheckerExamples());
-    await Vec\map_async(
-      Vec\range(1, $concurrency_limit),
-      async $_worker_id ==> {
-        while (!C\is_empty($todo->value)) {
-          list($in, $expect) = C\firstx($todo->value);
-          $todo->value = Vec\drop($todo->value, 1);
-          /* HHAST_IGNORE_LINT[DontAwaitInALoop] */
-          await $this->runSingleExampleThroughTypecheckerAsync($in, $expect);
-        }
-      },
-    );
-  }
-
-  private async function runSingleExampleThroughTypecheckerAsync(
+  <<\Facebook\HackTest\DataProvider('getTypecheckerExamples')>>
+  public async function testExampleTypechecks(
     string $in_file,
     string $expect_file,
   ): Awaitable<void> {
@@ -105,7 +86,6 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       shape('environment' => dict['HH_TMPDIR' => $hh_tmp_dir->getPath()]),
       $this->getHHServerPath(),
       '--check',
-      '--max-procs=1',
       '--config',
       'extra_paths='.LocalConfig::ROOT.'/vendor/',
       $work_dir,
