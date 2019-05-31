@@ -43,6 +43,17 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       if ($idx === null) {
         continue;
       }
+      if (!Str\contains($path, '.type-errors')) {
+        invariant(
+          \file_get_contents($path) === "No errors!\n",
+          "'%s' does not contain '.type-errors' in it's name, but does not ".
+          "exactly match \"No errors!\n\"",
+          $path,
+        );
+        // Trust the project-wide typechecker to pick up any problems in files
+        // with valid extensions
+        continue;
+      }
       $ret[] = tuple(Str\slice($path, 0, $idx), $path);
     }
     return $ret;
