@@ -19,5 +19,5 @@ function f(classname<C> $clsname): void {
 Any one of the keywords `parent`, `self`, and `static` can be used between the `new` and the constructor call, as follows. From within a
 method, the use of `static` corresponds to the class in the inheritance context in which the method is called. The type of the object
 created by an expression of the form `new static` is
-[`this`](../types/this.md). See [scope reoslution](scope-resolution.md) for a discussion of `parent`,
+[`this`](../types/this.md). See [scope resolution](scope-resolution.md) for a discussion of `parent`,
 `self`, and `static` in this context.

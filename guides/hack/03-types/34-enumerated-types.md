@@ -4,7 +4,7 @@ that has more than three, but less than say 10 states? For example, when working
 values like Top, Bottom, Left, Right, and Center.  And while we could use `int`, that type allows far more invalid values than there are valid ones.
 The solution is to use an enumerated type and its associated values. For example:
 
-@@ enumerated-types-examples/Positions.php @@
+@@ enumerated-types-examples/Positions.inc.php @@
 
 As multiple enumerated types can have enumeration constants of the same name, when referring to an enumeration constant, we must qualify it with
 its parent enumerated type name, as in `Position::Top`.

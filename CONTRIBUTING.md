@@ -118,7 +118,7 @@ We have a test suite to ensure consistency across the changes we make to the gui
 You can run it as follows:
 
 ```
-$ hhvm vendor/bin/hacktest tests/
+$ vendor/bin/hacktest tests/
 ```
 
 ## Running the Examples

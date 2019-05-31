@@ -43,17 +43,17 @@ final class HomePageController extends WebPageController {
           <div class="guideDescription">
             {$this->getGuideSummary($product, $guide)}
           </div>
-        </li>
+        </li>,
       );
     }
     return $root;
   }
 
-  protected function getGuideSummary(string $product, string $guide): ?XHPRoot {
-    $path = GuidesIndex::getFileForSummary(
-      $product,
-      $guide,
-    );
+  protected function getGuideSummary(
+    GuidesProduct $product,
+    string $guide,
+  ): ?XHPRoot {
+    $path = GuidesIndex::getFileForSummary($product, $guide);
     if (file_get_contents($path)) {
       return <x:frag>{file_get_contents($path)}</x:frag>;
     }

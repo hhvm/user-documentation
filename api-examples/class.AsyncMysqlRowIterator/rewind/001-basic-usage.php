@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\RowIt\Rewind;
 
@@ -36,7 +36,7 @@ async function iterate(): Awaitable<int> {
       $it = $row->getIterator();
       while ($it->valid()) {
         // current() will give you a string value of the field in the row
-        if ($it->key() > 0 && is_numeric($it->current())) {
+        if ($it->key() > 0 && \is_numeric($it->current())) {
           return \intval($it->current());
         }
         $it->next();
@@ -45,7 +45,7 @@ async function iterate(): Awaitable<int> {
       $it->rewind();
       while ($it->valid()) {
         // current() will give you a string value of the field in the row
-        if ($it->key() > 0 && is_string($it->current())) {
+        if ($it->key() > 0 && \is_string($it->current())) {
           return 1;
         }
         $it->next();

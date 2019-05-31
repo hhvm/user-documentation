@@ -11,9 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-require_once(BuildPaths::APIDOCS_LEGACY_REDIRECTS);
-require_once(BuildPaths::PHP_DOT_NET_ARTICLE_REDIRECTS);
-
 abstract final class LegacyRedirects {
   public static function getUrlForId(string $id): ?string {
     $ids = [
@@ -36,14 +33,6 @@ abstract final class LegacyRedirects {
     // Since the API redirects are quite specific, see if we are redirecting
     // from there first.
     $url = idx(APILegacyRedirectData::getIndex(), $id);
-    if ($url !== null) {
-      return $url;
-    }
-
-    // Ditto for the articles; Ideally we'd give the HHVM/Hack list below
-    // priority in case we gave more specific articles, but this is safer
-    // given that we need a substring match for the manual list.
-    $url = idx(PHPDotNetArticleRedirectData::getIndex(), $id);
     if ($url !== null) {
       return $url;
     }
@@ -146,7 +135,6 @@ abstract final class LegacyRedirects {
       'intro.asio' => '/hack/async/utility-functions',
       'hack.ref.asio' => '/hack/async/utility-functions',
       'hack.asio.function' => '/hack/async/utility-functions',
-      'migrationhhvm' => '/hhvm/inconsistencies/introduction',
       'ini.list' => '/hhvm/configuration/INI-settings',
       'install.fastcgi' => '/hhvm/advanced-usage/fastCGI',
       'install.linux' => '/hhvm/installation/linux',

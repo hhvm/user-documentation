@@ -49,8 +49,6 @@ final class APIListByTypeController extends WebPageController {
         return 'Hack APIs';
       case APIProduct::HSL:
         return 'The Hack Standard Library';
-      case APIProduct::PHP:
-        return 'Supported PHP APIs';
     }
   }
 

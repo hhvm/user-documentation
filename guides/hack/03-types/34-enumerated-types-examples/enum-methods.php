@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\Types\Enums\Examples\TestMethods;
 
-include_once("Positions.php");
+require_once("Positions.inc.php");
 use Hack\UserDocumentation\Types\Enums\Examples\Positions\Position as Position;
 
 <<__EntryPoint>>

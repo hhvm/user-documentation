@@ -13,7 +13,6 @@
 * [Methods](methods.md)
 * [Object disposal](object-disposal.md)
 * [Properties](properties.md)
-* [Serialization](serialization.md)
 * [__toString](methods-with-predefined-semantics#method-__toString)
 * [Trait requirements](trait-and-interface-requirements.md)
 * [Type constants](type-constants.md) and [$$](type-constants-revisited.md)

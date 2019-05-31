@@ -9,11 +9,8 @@
  *
  */
 
-use type HHVM\UserDocumentation\BuildPaths;
 use type HHVM\UserDocumentation\JumpIndexData;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
-
-require_once(BuildPaths::JUMP_INDEX);
 
 final class JumpController
   extends WebController

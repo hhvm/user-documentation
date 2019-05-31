@@ -13,6 +13,7 @@ namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\{C, Str};
 use namespace Facebook\TypeAssert;
+use namespace Facebook\HackCodegen as CG;
 
 // Index of all definitions, so that markdown processing can
 // automatically linkify them
@@ -22,36 +23,76 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nUnifiedAPIIndexBuildStep");
+    $cg = $this->getCodegenFactory();
 
-    $defs = new Map($this->getPHPAPILinks());
+    $defs = Map {};
     $defs->setAll($this->getHackAPILinks(APIProduct::HACK));
     $defs->setAll($this->getHackAPILinks(APIProduct::HSL));
     $defs->setAll($this->getSpecialAttributeLinks());
 
-    \file_put_contents(
-      BuildPaths::UNIFIED_INDEX_JSON,
-      \json_encode($defs, \JSON_PRETTY_PRINT)
-    );
+    $cg->codegenFile(BuildPaths::UNIFIED_INDEX)
+      ->setNamespace("HHVM\\UserDocumentation")
+      ->addClass(
+        $cg->codegenClass('UnifiedIndexData')
+          ->setIsFinal(true)
+          ->setIsAbstract(true)
+          ->addMethod(
+            $cg->codegenMethod('getIndex')
+              ->setIsStatic(true)
+              ->setReturnType('dict<string, string>')
+              ->setBody(
+                $cg->codegenHackBuilder()
+                  ->addReturn(
+                    dict($defs),
+                    CG\HackBuilderValues::dict(
+                      CG\HackBuilderKeys::export(),
+                      CG\HackBuilderValues::export(),
+                    ),
+                  )
+                  ->getCode(),
+              ),
+          ),
+      )
+      ->save();
+    // Make it available to later build steps
+    require_once(BuildPaths::UNIFIED_INDEX);
 
-    $jump_index = [];
+
+    $jump_index = dict[];
     foreach ($defs as $name => $url) {
       $name = Str\lowercase($name);
       if (
-        (!C\contains_key($jump_index, $name))
-        || Str\length($jump_index[$name]) > Str\length($url)
+        (!C\contains_key($jump_index, $name)) ||
+        Str\length($jump_index[$name]) > Str\length($url)
       ) {
         $jump_index[$name] = $url;
       }
     }
 
-    $code = $this->writeCode(
-      'JumpIndexData.hhi',
-      $jump_index,
-    );
-    \file_put_contents(
-      BuildPaths::JUMP_INDEX,
-      $code,
-    );
+    $cg->codegenFile(BuildPaths::JUMP_INDEX)
+      ->setNamespace("HHVM\\UserDocumentation")
+      ->addClass(
+        $cg->codegenClass('JumpIndexData')
+          ->setIsFinal(true)
+          ->setIsAbstract(true)
+          ->addMethod(
+            $cg->codegenMethod('getIndex')
+              ->setIsStatic(true)
+              ->setReturnType('dict<string, string>')
+              ->setBody(
+                $cg->codegenHackBuilder()
+                  ->addReturn(
+                    $jump_index,
+                    CG\HackBuilderValues::dict(
+                      CG\HackBuilderKeys::export(),
+                      CG\HackBuilderValues::export(),
+                    ),
+                  )
+                  ->getCode(),
+              ),
+          ),
+      )
+      ->save();
   }
 
   private function getHackAPILinks(
@@ -59,11 +100,11 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
   ): ImmMap<string, string> {
     Log::v("\nProcessing %s API Index", $product);
 
-    $out = Map { };
+    $out = Map {};
     $maybe_set = ($name, $url) ==> {
       if (
-        (!C\contains_key($out, $name))
-        || Str\length($out[$name]) > Str\length($url)
+        (!C\contains_key($out, $name)) ||
+        Str\length($out[$name]) > Str\length($url)
       ) {
         $out[$name] = $url;
       }
@@ -98,19 +139,6 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
         }
       }
     }
-    return $out->toImmMap();
-  }
-
-  private function getPHPAPILinks(): ImmMap<string, string> {
-    Log::v("\nProcessing PHP.net API Index");
-
-    $index = PHPAPIIndex::getIndex();
-
-    $out = Map { };
-    foreach ($index as $name => $data) {
-      $out[$name] = $data['url'];
-    }
-
     return $out->toImmMap();
   }
 

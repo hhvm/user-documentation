@@ -40,7 +40,6 @@ abstract final class SearchScores {
 
   const float HSL_API_MULTIPLIER = 4.0;
   const float HACK_API_MULTIPLIER = 1.0;
-  const float PHP_API_MULTIPLIER = 0.5;
 
   const float FUNCTION_MULTIPLIER = 1.0;
   const float METHOD_MULTIPLIER = 0.9;

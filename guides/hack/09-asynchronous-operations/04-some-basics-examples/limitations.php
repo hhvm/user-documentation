@@ -1,4 +1,4 @@
-<?hh //strict
+<?hh // partial
 
 namespace Hack\UserDocumentation\AsyncOps\Basics\Examples\Limitations;
 use namespace HH\Lib\Vec;

@@ -46,15 +46,17 @@ cp hhvm.${DOCKER_BUILD_ENV}.ini /etc/hhvm/site.ini
 # Install direct dependencies
 touch /opt/composer/.hhconfig
 php /opt/composer/composer.phar install
-hh_client
 bundle --path vendor-rb/
 
 echo "** Run build"
 hhvm bin/build.php
 
+echo "** Typecheck"
+hh_client
+
 # Run tests
 echo "** Run tests"
-hhvm vendor/bin/hacktest tests/
+vendor/bin/hacktest tests/
 
 # Clean up
 echo "** Removing build-only PHP dependencies"

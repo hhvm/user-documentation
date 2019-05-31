@@ -60,7 +60,7 @@ sudo apt-get install nginx
 
 Now nginx needs to be configured to know where your PHP files are and how to forward them to HHVM to execute. The relevant bit of nginx config lives at `/etc/nginx/sites-available/default` -- by default, it's looking in `/usr/share/nginx/html` for files to serve, but it doesn't know what to do with PHP.
 
-Our included script `sudo /usr/share/hhvm/install_fastcgi.sh` will configure nginx correctly for stock installs. The important part is that it adds `include hhvm.conf` near the top of of the nginx config mentioned above -- this will direct nginx to take any file that ends in `.hh` or `.php` and send it to HHVM via fastcgi.
+Our included script `sudo /opt/hhvm/<version>/share/hhvm/install_fastcgi.sh` will configure nginx correctly for stock installs. The important part is that it adds `include hhvm.conf` near the top of of the nginx config mentioned above -- this will direct nginx to take any file that ends in `.hh` or `.php` and send it to HHVM via fastcgi.
 
 The default FastCGI configuration from Nginx should work just fine with HHVM-FastCGI. For instance you might want to add the following directives inside one of your `location` directives:
 

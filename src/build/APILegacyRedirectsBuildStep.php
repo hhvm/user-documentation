@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace Facebook\HackCodegen as CG;
+
 final class APILegacyRedirectsBuildStep extends BuildStep {
   use CodegenBuildStep;
 
@@ -30,25 +32,34 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
   private function createIndex(
   ): void {
-    $old_hack_docs_data = $this->generateOldHackDocsData();
-    $php_dot_net_data = $this->generatePHPDotNetData();
-
-    $index = $old_hack_docs_data;
-    foreach ($php_dot_net_data as $id => $url) {
-      $index[$id] = $url;
-    }
-
-    $code = $this->writeCode(
-      'APILegacyRedirectData.hhi',
-      $index,
-    );
-    \file_put_contents(
-      BuildPaths::APIDOCS_LEGACY_REDIRECTS,
-      $code,
-    );
+    $cg = $this->getCodegenFactory();
+    $cg->codegenFile(BuildPaths::APIDOCS_LEGACY_REDIRECTS)
+      ->setNamespace("HHVM\\UserDocumentation")
+      ->addClass(
+        $cg->codegenClass('APILegacyRedirectData')
+          ->setIsFinal(true)
+          ->setIsAbstract(true)
+          ->addMethod(
+            $cg->codegenMethod('getIndex')
+              ->setIsStatic(true)
+              ->setReturnType('dict<string, string>')
+              ->setBody(
+                $cg->codegenHackBuilder()
+                  ->addReturn(
+                    $this->generateOldHackDocsData(),
+                    CG\HackBuilderValues::dict(
+                      CG\HackBuilderKeys::export(),
+                      CG\HackBuilderValues::export(),
+                    ),
+                  )
+                  ->getCode(),
+              ),
+          ),
+      )
+      ->save();
   }
 
-  private function generateOldHackDocsData(): array<string, string> {
+  private function generateOldHackDocsData(): dict<string, string> {
     Log::v("\nProcessing old site index");
     $reader = new PHPDocsIndexReader(\file_get_contents(self::LEGACY_INDEX));
     $old_classes = $reader->getClasses();
@@ -57,7 +68,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
 
     Log::v("\nCross-referencing with current site index");
 
-    $old_ids_to_new_urls = [];
+    $old_ids_to_new_urls = dict[];
 
     $index = APIIndex::get(APIProduct::HACK);
 
@@ -103,20 +114,5 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
     }
 
     return $old_ids_to_new_urls;
-  }
-
-  private function generatePHPDotNetData(): array<string, string> {
-    Log::v("\nProcessing PHP.net index");
-    $reader = new PHPDocsIndexReader(
-      \file_get_contents(BuildPaths::PHP_DOT_NET_INDEX_JSON)
-    );
-    $defs = $reader->getAllAPIDefinitions();
-
-    $index = [];
-    foreach ($defs as $_ => $id) {
-      $url = \sprintf('http://php.net/manual/en/%s.php', $id);
-      $index[$id] = $url;
-    }
-    return $index;
   }
 }

@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\RowBlock\GetIterator;
 
@@ -39,7 +39,7 @@ async function iterate(): Awaitable<int> {
       $rit = $rbit->current()->getIterator();
       while ($rit->valid()) {
         // current() will give you a string value of the field in the row
-        if ($rit->key() > 0 && is_numeric($rit->current())) {
+        if ($rit->key() > 0 && \is_numeric($rit->current())) {
           return \intval($rit->current());
         }
         $rit->next();

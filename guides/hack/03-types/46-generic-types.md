@@ -3,7 +3,7 @@ them via type parameters.
 
 Consider the following example in which `Stack` is a generic class having one type parameter, `T`, and that implements a stack:
 
-@@ generic-types-examples/Stack.php @@
+@@ generic-types-examples/Stack.inc.php @@
 
 As shown, the type parameter `T` (specified in `Stack<T>`) is used as a placeholder in the declaration of the instance property `$stack`, as
 the parameter type of the instance method `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use

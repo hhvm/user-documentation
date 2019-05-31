@@ -21,7 +21,10 @@ After moving to a weekly regular release cycle with 4.2, we plan to continue off
 |---------|-----|--------------|-------------------------|
 | [4.0]   | No  | 2019-02-11   | 2019-04-08              |
 | [3.30]  | Yes | 2018-12-17   | 2019-11-19              |
-| [3.27]  | Yes | 2018-06-18   | 2019-09-05              |
+| [3.27]  | Yes | 2018-06-18   | 2019-06-03              |
+
+3.27 was released 2 weeks early, so is supported for 50 weeks rather than the
+usual 48.
 
 ## Future Releases
 

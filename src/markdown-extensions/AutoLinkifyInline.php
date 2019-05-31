@@ -11,12 +11,10 @@
 
 namespace HHVM\UserDocumentation\MarkdownExt;
 
-use type HHVM\UserDocumentation\{BuildPaths, YAMLMeta};
+use type HHVM\UserDocumentation\{UnifiedIndexData, YAMLMeta};
 
 use namespace Facebook\Markdown\Inlines;
-use namespace Facebook\TypeAssert;
-use namespace HHVM\UserDocumentation\JSON;
-use namespace HH\Lib\{Dict, Str, Vec};
+use namespace HH\Lib\{Str, Vec};
 
 /**
  * Given something like `Vec\map()`, automatically make it a link
@@ -145,8 +143,6 @@ final class AutoLinkifyInline extends Inlines\Link {
 
   <<__Memoize>>
   private static function getIndex(): dict<string, string> {
-    return \file_get_contents(BuildPaths::UNIFIED_INDEX_JSON)
-      |> JSON\decode_as_dict($$)
-      |> Dict\map($$, $v ==> TypeAssert\string($v));
+    return UnifiedIndexData::getIndex();
   }
 }

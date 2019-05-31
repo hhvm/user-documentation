@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 /*
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
@@ -22,10 +22,9 @@ function build_site(?Traversable<string> $filters = null): void {
     \mkdir(BuildPaths::FINAL_DIR, 0755, /* recursive = */ true);
   }
 
-  $steps = Vector {
+  $steps = vec[
     // No Dependencies
     HHAPIDocBuildStep::class,
-    FetchPHPDotNetIndexBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
     FacebookIPRangesBuildStep::class,
 
@@ -35,13 +34,10 @@ function build_site(?Traversable<string> $filters = null): void {
     // Needs the YAML
     GuidesIndexBuildStep::class,
 
-    // Needs the indices
-    PHPDotNetAPIIndexBuildStep::class,
+    // Needs the previous indices
     UnifiedAPIIndexBuildStep::class,
     SiteMapBuildStep::class,
-
     APILegacyRedirectsBuildStep::class,
-    PHPDotNetArticleRedirectsBuildStep::class,
 
     // This needs to be able to invoke static methods on the controllers;
     // some of the controller files require_once() generated indicies, so the
@@ -55,11 +51,15 @@ function build_site(?Traversable<string> $filters = null): void {
     // Needs the Markdown
     GuidesHTMLBuildStep::class,
     APIHTMLBuildStep::class,
-  };
+
+    // Needs to be done after all Hack codegen
+    UpdateAutoloaderBuildStep::class,
+  ];
 
   if ($filters !== null) {
-    $steps = $steps->filter(
-      function (classname<BuildStep> $step): bool use ($filters) {
+    $steps = Vec\filter(
+      $steps,
+      $step ==> {
         foreach ($filters as $filter) {
           if (\stripos($step, $filter) !== false) {
             return true;
@@ -77,8 +77,8 @@ function build_site(?Traversable<string> $filters = null): void {
   }
 }
 
-if (array_key_exists(1, $argv)) {
-  build_site(array_slice($argv, 1));
+if (\array_key_exists(1, $argv)) {
+  build_site(\array_slice($argv, 1));
 } else {
   build_site();
 }

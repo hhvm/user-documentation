@@ -13,11 +13,6 @@ class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
   public function autoLinkifyExamplesProvider(
   ): array<string, (string, string, string)> {
     return [
-      'PHP function' => tuple(
-        '/hack/asynchronous-operations/some-basics',
-        'sleep()',
-        'http://php.net/manual/en/function.sleep.php',
-      ),
       'Hack class' => tuple(
         '/hack/asynchronous-operations/extensions',
         'MCRouter',

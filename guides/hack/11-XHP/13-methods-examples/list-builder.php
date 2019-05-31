@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 require __DIR__ . "/../../../../vendor/hh_autoload.php";
 
@@ -22,5 +22,5 @@ function xhp_object_methods_run(): void {
   foreach ($list->getAttributes() as $attr) {
     echo <ul><li>{(string) $attr}</li></ul> . "\n";
   }
-  echo <ul><li>{$list->getAttribute('id')}</li></ul> . "\n";
+  echo <ul><li>{$list->getAttribute('id') as string}</li></ul> . "\n";
 }

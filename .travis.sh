@@ -12,6 +12,6 @@ git submodule update --init
 php /usr/local/bin/composer install
 bundle install --path vendor-rb
 
-hh_client
 hhvm bin/build.php
-hhvm vendor/bin/hacktest tests/
+hh_server --check $(pwd)
+vendor/bin/hacktest tests/

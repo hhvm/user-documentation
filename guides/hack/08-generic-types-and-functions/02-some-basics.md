@@ -7,7 +7,7 @@ Generics allow programmers to write a class or method with the ability to be par
 
 Consider the following example in which `Stack` is a generic class having one type parameter, `T`:
 
-@@ some-basics-examples/Stack.php @@
+@@ some-basics-examples/Stack.inc.php @@
 
 As shown, the type parameter `T` is used in the declaration of the instance property `$stack`, as the parameter type of the instance method
 `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves

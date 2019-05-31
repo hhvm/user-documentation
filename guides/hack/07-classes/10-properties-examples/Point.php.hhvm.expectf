@@ -1,4 +1,4 @@
-object(Hack\UserDocumentation\Classes\Properties\Examples\Point\Point)#%d (2) {
+object(Hack\UserDocumentation\Classes\Properties\Examples\Point\Point) (2) {
   ["x":"Hack\UserDocumentation\Classes\Properties\Examples\Point\Point":private]=>
   float(3.4)
   ["y":"Hack\UserDocumentation\Classes\Properties\Examples\Point\Point":private]=>

@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<608f6c9f5efa9b8ff38ede30ac620b02>>
+ * @generated SignedSource<<9f4b7cbd8386cb761942da4f87cbb8ef>>
  */
 
 abstract class RouterCodegenBase
@@ -16,12 +16,12 @@ abstract class RouterCodegenBase
   ): ImmMap<\Facebook\HackRouter\HttpMethod, ImmMap<string, classname<\RoutableController>>> {
     $map = ImmMap {
       \Facebook\HackRouter\HttpMethod::GET => ImmMap {
-        '/{Product:(?:hack|hsl|php)}/reference/{Type:(?:class|trait|interface|function)}/{Name}/' =>
+        '/{Product:(?:hack|hsl)}/reference/{Type:(?:class|trait|interface|function)}/{Name}/' =>
           \APIClassPageController::class,
-        '/{Product:(?:hack|hsl|php)}/reference/' => \APIFullListController::class,
-        '/{Product:(?:hack|hsl|php)}/reference/{Type:(?:class|trait|interface|function)}/' =>
+        '/{Product:(?:hack|hsl)}/reference/' => \APIFullListController::class,
+        '/{Product:(?:hack|hsl)}/reference/{Type:(?:class|trait|interface|function)}/' =>
           \APIListByTypeController::class,
-        '/{Product:(?:hack|hsl|php)}/reference/{Type:(?:class|trait|interface|function)}/{Class}/{Method}/' =>
+        '/{Product:(?:hack|hsl)}/reference/{Type:(?:class|trait|interface|function)}/{Class}/{Method}/' =>
           \APIMethodPageController::class,
         '/{Product:(?:hhvm|hack)}/{Guide}/{Page}' => \GuidePageController::class,
         '/{Product:(?:hhvm|hack)}/' => \GuidesListController::class,

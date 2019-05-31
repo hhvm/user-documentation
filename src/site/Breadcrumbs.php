@@ -28,8 +28,6 @@ abstract final class Breadcrumbs {
         );
       case APIProduct::HSL:
         return tuple('HSL', null);
-      case APIProduct::PHP:
-        return tuple('PHP', null);
     }
   }
 }

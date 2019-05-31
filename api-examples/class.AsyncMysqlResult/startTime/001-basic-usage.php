@@ -1,4 +1,4 @@
-<?hh
+<?hh // partial
 
 echo "AsyncMysqlResult is abstract. See specific, concrete classes for " .
      "examples of startTime (e.g., AsyncMysqlConnectResult, " .

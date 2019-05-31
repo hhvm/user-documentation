@@ -14,7 +14,7 @@ primary method is the `async` [`connect`](../reference/class/AsyncMysqlClient/co
 
 The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the two main
 query methods, [`query`](../reference/class/AsyncMysqlConnection/query/) and [`queryf`](../reference/class/AsyncMysqlConnection/queryf/),
-both od which are `async`. There is also a function to ensure that queries to be executed are safe called
+both of which are `async`. There is also a function to ensure that queries to be executed are safe called
 [`escapeString`](../reference/class/AsyncMysqlConnection/escapeString/).
 
 The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete

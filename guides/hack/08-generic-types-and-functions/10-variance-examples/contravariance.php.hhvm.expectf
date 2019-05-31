@@ -1,6 +1,6 @@
-object(Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\C)#%d (1) {
+object(Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\C) (1) {
   ["t":"Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\C":private]=>
-  object(Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\Animal)#%d (0) {
+  object(Hack\UserDocumentation\Generics\Variance\Examples\Contravariance\Animal) (0) {
   }
 }
 

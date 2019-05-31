@@ -11,38 +11,77 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Str;
+use namespace Facebook\HackCodegen as CG;
+
 final class GuidesIndexBuildStep extends BuildStep {
+  use CodegenBuildStep;
 
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nGuidesIndexBuild");
 
-    $sources = self::findSources(BuildPaths::GUIDES_MARKDOWN, Set{'md'});
+    $sources = self::findSources(BuildPaths::GUIDES_MARKDOWN, Set {'md'});
     \sort(&$sources);
 
     $this->createIndex($sources);
   }
 
-  private function createIndex(
-    Traversable<string> $list,
-  ): void {
+  private function createIndex(Traversable<string> $list): void {
     $index = $this->generateIndexData($list);
 
-    \file_put_contents(
-      BuildPaths::GUIDES_INDEX,
-      '<?hh return '.\var_export($index, true).";",
-    );
+    $cg = $this->getCodegenFactory();
+    $cg->codegenFile(BuildPaths::GUIDES_INDEX)
+      ->setNamespace("HHVM\\UserDocumentation")
+      ->addClass(
+        $cg->codegenClass('GuidesIndexData')
+          ->setIsFinal(true)
+          ->setIsAbstract(true)
+          ->addMethod(
+            $cg->codegenMethod('getIndex')
+              ->setIsStatic(true)
+              ->setReturnType(
+                'dict<GuidesProduct, dict<string, dict<string, string>>>',
+              )
+              ->setBody(
+                $cg->codegenHackBuilder()
+                  ->addReturn(
+                    $index,
+                    CG\HackBuilderValues::dict(
+                      CG\HackBuilderKeys::lambda(
+                        ($_, $p) ==> Str\format(
+                          'GuidesProduct::%s',
+                          GuidesProduct::getNames()[$p],
+                        ),
+                      ),
+                      CG\HackBuilderValues::dict(
+                        CG\HackBuilderKeys::export(),
+                        CG\HackBuilderValues::dict(
+                          CG\HackBuilderKeys::export(),
+                          CG\HackBuilderValues::export(),
+                        ),
+                      ),
+                    ),
+                  )
+                  ->getCode(),
+              ),
+          ),
+      )
+      ->save();
+    // Make it available to later build steps
+    require_once(BuildPaths::GUIDES_INDEX);
   }
 
   private function generateIndexData(
     Traversable<string> $sources,
-  ): Map<string, Map<string, Map<string, string>>> {
-    $out = Map { };
+  ): dict<GuidesProduct, dict<string, dict<string, string>>> {
+    $out = dict[];
     foreach ($sources as $path) {
       $path = \str_replace(BuildPaths::GUIDES_MARKDOWN.'/', '', $path);
       $parts = (new Vector(\explode('/', $path)))
         ->map(
-          $part ==> \preg_match('/^[0-9]{2}-/', $part) ? \substr($part, 3) : $part
+          $part ==>
+            \preg_match('/^[0-9]{2,}-/', $part) ? \substr($part, \strpos($part, '-') + 1) : $part,
         );
       if (\count($parts) !== 3) {
         continue;
@@ -50,12 +89,8 @@ final class GuidesIndexBuildStep extends BuildStep {
 
       list($product, $section, $page) = $parts;
       $page = \basename($page, '.md');
-      if (!$out->contains($product)) {
-        $out[$product] = Map {};
-      }
-      if (!$out[$product]->contains($section)) {
-        $out[$product][$section] = Map { };
-      }
+      $out[$product] ??= dict[];
+      $out[$product][$section] ??= dict[];
 
       $absolute = GuidesHTMLBuildStep::getOutputFileName($path);
       $relative = \substr($absolute, \strlen(BuildPaths::GUIDES_HTML) + 1);

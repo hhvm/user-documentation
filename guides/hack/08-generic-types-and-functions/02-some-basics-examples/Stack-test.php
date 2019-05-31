@@ -1,7 +1,7 @@
 <?hh // strict
 
 namespace Hack\UserDocumentation\Generics\Introduction\Examples\StackTest;
-include_once "Stack.php";
+require_once("Stack.inc.php");
 
 function useIntStack(\Hack\UserDocumentation\Generics\Introduction\Examples\Stack\Stack<int> $stInt): void {
   $stInt->push(10);

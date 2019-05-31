@@ -1,5 +1,6 @@
 A constant is a named value. Once defined, the value of the constant *cannot* be changed.  A constant can be defined in one
-of two ways: inside a class or interface using `const`, or by calling the library function `define`. For example:
+of two ways: using the `const` keyword at the top level, or inside a class or
+interface. For example:
 
 @@ constants-examples/defining-constants.php @@
 

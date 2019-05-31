@@ -1,3 +1,4 @@
-trait-bad.php:%d:%d,%d: Failure to satisfy requirement: Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Machine (Typing[4111])
-  trait-bad.php:%d:%d,%d: Required here
-
+File "%s/trait-bad.php", line 31, characters 7-11:
+Failure to satisfy requirement: Hack\UserDocumentation\Classes\TIR\Examples\TraitReqBad\Machine (Typing[4111])
+File "%s/trait-bad.php", line 18, characters 19-25:
+Required here

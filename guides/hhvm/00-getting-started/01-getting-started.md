@@ -27,14 +27,17 @@ hhvm -m server -p 8080
 
 `-p` configures the TCP port that HHVM uses to listen to HTTP requests. The default port is 80, the standard HTTP port. However, that port requires root access, so for this example, we will use port 8080.
 
-Once you have HHVM running, write a simple "Hello World" program named `hello.php`:
+Once you have HHVM running, write a simple "Hello World" program named `hello.hack`:
 
 ```
-<?php
-echo "Hello World!";
+<<__EntryPoint>>
+function main(): noreturn{
+  echo "Hello World!";
+  exit(0);
+}
 ```
 
-Save this `hello.php` in the same directory that you ran the `hhvm` command from above. Then, load [http://localhost:8080/hello.php](http://localhost:8080/hello.php) in your browser and verify you see "Hello World!" appear.
+Save this `hello.hack` in the same directory that you ran the `hhvm` command from above. Then, load [http://localhost:8080/hello.hack](http://localhost:8080/hello.hack) in your browser and verify you see "Hello World!" appear.
 
 ## Configure HHVM
 
