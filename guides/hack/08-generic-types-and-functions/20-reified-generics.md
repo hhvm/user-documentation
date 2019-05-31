@@ -12,11 +12,11 @@ The goal of opt-in reified generics to bridge the gap between generics and runti
 
 ## Parameter and return type verification
 
-@@ reified-generics-examples/type-verification.php @@
+@@ reified-generics-examples/type-verification.php.type_errors @@
 
 The reified type parameter is checked as well:
 
-@@ reified-generics-examples/type-verification-2.php @@
+@@ reified-generics-examples/type-verification-2.php.type_errors @@
 
 ## Type testing and assertion with `is` and `as` expressions
 
@@ -42,7 +42,7 @@ C<int, string> // NOT enforceable as C's second generic is erased
 
 Prior to reified generics, in order to create a new instance of a class without a constant class name, you'd need to pass it as `classname<T>` which is not type safe. In the runtime, classnames are strings.
 
-@@ reified-generics-examples/new-reify.php @@
+@@ reified-generics-examples/new-reify.php.type_errors @@
 
 Notice that the reified type parameter has the attribute `<<__Newable>>`. In order for a type to be `<<__Newable>>`, the type must represent a class that's not abstract and has a consistent constructor or be a final class. Creating a new instance using the reified generics also carries across the generics given. For example,
 
