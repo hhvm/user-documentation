@@ -4,8 +4,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 use const HHVM_VERSION_ID;
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
-use type Facebook\HackTest\DataProvider;
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\{C, Str, Vec};
 
 /**
  * @large
@@ -17,8 +16,6 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     $exclude_suffixes = vec[
       '.inc.php',
       '.inc.hack',
-      '.php.type-errors',
-      '.hack.type-errors',
       '.noexec.php',
       '.noexec.hack',
     ];
@@ -46,13 +43,43 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       if ($idx === null) {
         continue;
       }
+      if (!Str\contains($path, '.type-errors')) {
+        invariant(
+          \file_get_contents($path) === "No errors!\n",
+          "'%s' does not contain '.type-errors' in it's name, but does not ".
+          "exactly match \"No errors!\n\"",
+          $path,
+        );
+        // Trust the project-wide typechecker to pick up any problems in files
+        // with valid extensions
+        continue;
+      }
       $ret[] = tuple(Str\slice($path, 0, $idx), $path);
     }
     return $ret;
   }
 
-  <<DataProvider('getTypecheckerExamples')>>
-  public async function testExamplesTypecheck(
+  public async function testExamplesTypecheck(): Awaitable<void> {
+    // Ideally HackTest would support parallelism via xbox or async;
+    // statefullness needs to be avoid or managed first though :'(
+
+    $concurrency_limit = 10;
+    // TODO: on HSL 4.7, use HH\Lib\Ref
+    $todo = new \HH\Lib\_Private\Ref($this->getTypecheckerExamples());
+    await Vec\map_async(
+      Vec\range(1, $concurrency_limit),
+      async $_worker_id ==> {
+        while (!C\is_empty($todo->value)) {
+          list($in, $expect) = C\firstx($todo->value);
+          $todo->value = Vec\drop($todo->value, 1);
+          /* HHAST_IGNORE_LINT[DontAwaitInALoop] */
+          await $this->runSingleExampleThroughTypecheckerAsync($in, $expect);
+        }
+      },
+    );
+  }
+
+  private async function runSingleExampleThroughTypecheckerAsync(
     string $in_file,
     string $expect_file,
   ): Awaitable<void> {
