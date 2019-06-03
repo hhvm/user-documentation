@@ -1,3 +1,9 @@
+```yamlmeta
+{
+  "min-versions": { "HHVM": "4.10" },
+  "experimental": true
+}
+```
 # Reified Generics
 
 ## How to enable
