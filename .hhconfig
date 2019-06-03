@@ -4,4 +4,4 @@ disallow_elvis_space=true
 disallow_non_arraykey_keys=true
 disallow_unsafe_comparisons=true
 decl_override_require_hint=true
-enable_experimental_tc_features=shape_field_check,sealed_classes
+enable_experimental_tc_features=shape_field_check,sealed_classes,reified_generics

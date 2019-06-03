@@ -5,6 +5,7 @@
 * [Covariance](variance.md#covariance)
 * [Generic type, closed](open-and-closed-generic-types.md)
 * [Generic type, open](open-and-closed-generic-types.md)
+* [Reified generics](reified-generics.md)
 * [Type arguments](type-arguments.md)
 * [Type constraints](type-constraints.md)
 * [Type erasure](type-erasure.md)

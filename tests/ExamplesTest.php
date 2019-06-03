@@ -93,7 +93,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       $work_dir.'/'.Str\strip_suffix(\basename($in_file), '.type-errors'),
     );
     if (\file_exists($in_file.'.hhconfig')) {
-      \copy($in_file, $work_dir.'/.hhconfig');
+      \copy($in_file.'.hhconfig', $work_dir.'/.hhconfig');
     } else {
       \touch($work_dir.'/.hhconfig');
     }
