@@ -11,7 +11,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
   <<DataProvider('internalLinksList')>>
   public async function testInternalLink(
     string $target,
-    array<string> $sources,
+    vec<string> $sources,
   ): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync($target);
     if ($response->getStatusCode() === 301) {
@@ -42,15 +42,10 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     $_ = $this->internalLinksList();
   }
 
-  private static ?array<(string, array<string>)> $linksCache = null;
 
-  public function internalLinksList(): array<(string, array<string>)> {
+  <<__Memoize>>
+  public function internalLinksList(): vec<(string, vec<string>)> {
     PageLoader::assertLocal();
-    $cached = self::$linksCache;
-    if ($cached !== null) {
-      return $cached;
-    }
-
     $loaders = Map {};
 
     $api_pages = APIPagesTest::allAPIPages();
@@ -72,18 +67,17 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     foreach ($urls as $source => $targets) {
       foreach ($targets as $target) {
         if (!$targets_to_sources->containsKey($target)) {
-          $targets_to_sources[$target] = [];
+          $targets_to_sources[$target] = vec[];
         }
         $targets_to_sources[$target][] = $source;
       }
     }
 
-    $ret = [];
+    $ret = vec[];
     foreach ($targets_to_sources as $target => $sources) {
       $ret[] = tuple($target, $sources);
     }
 
-    self::$linksCache = $ret;
     return $ret;
   }
 

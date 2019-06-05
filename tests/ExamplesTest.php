@@ -64,8 +64,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     // statefullness needs to be avoid or managed first though :'(
 
     $concurrency_limit = 10;
-    // TODO: on HSL 4.7, use HH\Lib\Ref
-    $todo = new \HH\Lib\_Private\Ref($this->getTypecheckerExamples());
+    $todo = new \HH\Lib\Ref($this->getTypecheckerExamples());
     await Vec\map_async(
       Vec\range(1, $concurrency_limit),
       async $_worker_id ==> {

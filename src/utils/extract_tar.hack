@@ -35,7 +35,7 @@ function parse_tar(
   (function(TarEntryMetadata, ?string): void) $callback,
 ): void {
   $len = Str\length($tar);
-  $pos = new \HH\Lib\_Private\Ref(0);
+  $pos = new \HH\Lib\Ref(0);
   $consume = (int $bytes) ==> {
     $wanted = Str\slice($tar, $pos->value, $bytes);
     $pos->value += $bytes;
