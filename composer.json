@@ -1,20 +1,20 @@
 {
-  "require": {
-    "facebook/xhp-lib": "^2.3.2",
-    "hhvm": "4.4.*",
-    "usox/hackttp": "0.3",
-    "hhvm/hhvm-autoload": "^2.0",
-    "hhvm/type-assert": "^3.1.0",
-    "facebook/hack-codegen": "^4.0",
-    "facebook/hack-router-codegen": ">=0.14 <1.0",
-    "facebook/hack-router": ">=0.17 <1.0",
-    "hhvm/hsl": "^4.0",
-    "facebook/fbmarkdown": "^1.0"
-  },
-  "require-dev": {
-    "hhvm/hhast": "^4.0",
-    "facebook/definition-finder": "^2.0.0",
-    "hhvm/hacktest": "^1.1",
-    "facebook/fbexpect": "^2.1"
-  }
+    "require": {
+        "facebook/xhp-lib": "^2.3.2",
+        "hhvm": "4.7.*",
+        "usox/hackttp": "0.3",
+        "hhvm/hhvm-autoload": "^2.0",
+        "hhvm/type-assert": "^3.1.0",
+        "facebook/hack-codegen": "^4.0",
+        "facebook/hack-router-codegen": ">=0.14 <1.0",
+        "facebook/hack-router": ">=0.17 <1.0",
+        "hhvm/hsl": "^4.0",
+        "facebook/fbmarkdown": "^1.0"
+    },
+    "require-dev": {
+        "hhvm/hhast": "^4.0",
+        "facebook/definition-finder": "^2.0.0",
+        "hhvm/hacktest": "^1.1",
+        "facebook/fbexpect": "^2.1"
+    }
 }
