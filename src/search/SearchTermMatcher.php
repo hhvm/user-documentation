@@ -54,6 +54,9 @@ abstract final class SearchTermMatcher {
     if (Str\ends_with($content, $term)) {
       return SearchScores::SUFFIX_MATCH_SCORE * $multi;
     }
+    if (C\contains(Str\split($content, ' '), $term)) {
+      return SearchScores::WORD_MATCH_SCORE * $multi;
+    }
 
     if (Str\contains($content, $term)) {
       return SearchScores::SUBSTRING_MATCH_SCORE * $multi;

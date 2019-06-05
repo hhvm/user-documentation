@@ -17,6 +17,7 @@ abstract final class SearchScores {
   const float EXACT_MATCH_SCORE = 100.0;
   const float PREFIX_MATCH_SCORE = 90.0;
   const float SUFFIX_MATCH_SCORE = 90.0;
+  const float WORD_MATCH_SCORE = 90;
   const float SUBSTRING_MATCH_SCORE = 1.0;
   const float HARDCODED_RESULT_SCORE = 200.0;
 

@@ -41,6 +41,10 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
         'keyset contains',
         ['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
+      tuple(
+        'reified',
+        ['/hack/generic-types-and-functions/reified-generics'],
+      ),
     ];
   }
 }
