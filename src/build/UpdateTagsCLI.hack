@@ -134,7 +134,6 @@ final class UpdateTagsCLI extends CLIBase {
             ),
           ),
       )
-      ->setDoClobber(true)
       ->save();
 
     await $stdout->writeAsync(
