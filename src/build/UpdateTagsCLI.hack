@@ -99,7 +99,10 @@ final class UpdateTagsCLI extends CLIBase {
       return 0;
     }
     await $stdout->writeAsync(
-      Dict\map_with_key($changes, ($k, $v) ==> Str\format('%s to %s', $k, $v))
+      Dict\map_with_key(
+        $changes,
+        ($k, $v) ==> Str\format('%s to tag "%s"', $k, $v),
+      )
         |> Str\join($$, ', and ')
         |> 'Changing '.$$."...\n",
     );
