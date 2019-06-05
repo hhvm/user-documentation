@@ -71,7 +71,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
         while (!C\is_empty($todo->value)) {
           list($in, $expect) = C\firstx($todo->value);
           $todo->value = Vec\drop($todo->value, 1);
-          /* HHAST_IGNORE_LINT[DontAwaitInALoop] */
+          /* HHAST_IGNORE_ERROR[DontAwaitInALoop] */
           await $this->runSingleExampleThroughTypecheckerAsync($in, $expect);
         }
       },

@@ -106,7 +106,7 @@ final class DataMerger {
 
     $parent = $a['parent'];
     if ($parent) {
-      $parent = self::mergeDefinitionPair($parent, $b['parent']);
+      $parent = self::mergeDefinitionPair($parent, $b['parent']) as ScannedClassish;
     } else {
       $parent = $b['parent'];
     }
@@ -122,7 +122,7 @@ final class DataMerger {
   private static function mergeDefinitionPair<T as ScannedDefinition>(
     T $a,
     ?T $b,
-  ): T {
+  ): ScannedDefinition {
     if ($b === null) {
       return $a;
     }
@@ -220,7 +220,7 @@ final class DataMerger {
       $key = self::normalizeNameForMerge($def->getName());
       $merged[$key] = self::mergeDefinitionPair($def, $merged[$key] ?? null);
     }
-    return vec($merged);
+    return vec(/* HH_FIXME[4110] need reified generics*/ $merged);
   }
 
   private static function mergeGenerics(
