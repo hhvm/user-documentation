@@ -15,3 +15,4 @@ bundle install --path vendor-rb
 hhvm bin/build.php
 hh_server --check $(pwd)
 vendor/bin/hacktest tests/
+vendor/bin/hhast-lint
