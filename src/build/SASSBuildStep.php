@@ -16,7 +16,7 @@ final class SASSBuildStep extends BuildStep {
 
   <<__Override>>
   public function buildAll(): void {
-    Log::i("\nSASS");
+    Log::i("\nBuilding SASS");
     $css = null;
     $exit_code = null;
     \exec(self::PROVIDER, /* & */ &$css, /* & */ &$exit_code);

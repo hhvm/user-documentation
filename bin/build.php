@@ -46,6 +46,9 @@ function build_site(?Traversable<string> $filters = null): void {
     // indices must be built before codegen can be updated.
     RoutingCodegenBuildStep::class,
 
+    // Needed by SASS
+    RubyDependenciesBuildStep::class,
+
     // Static Resources
     SASSBuildStep::class,
     StaticResourceMapBuildStep::class,

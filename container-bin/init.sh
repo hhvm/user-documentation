@@ -12,16 +12,7 @@ fi
 apt-get clean
 apt-get update -y
 
-# we depend on a recent version of the Nokogiri gem, which bundler will install
-# for us later; this needs to build it's own libxml so we need to install the
-# -dev versions of some dependencies
-#
-# The highlighting gem installs its' own version of pygments so we don't actually
-# use pygments, but this is a handy way to make sure all the dependencies are
-# installed.
-APT_DEPS="ruby bundler php-cli zip unzip"
-
-# Install Ruby and Bundler (Ruby package manager)
+APT_DEPS="ruby php-cli zip unzip"
 apt-get install -y $APT_DEPS
 
 mkdir /opt/composer
@@ -46,7 +37,6 @@ cp hhvm.${DOCKER_BUILD_ENV}.ini /etc/hhvm/site.ini
 # Install direct dependencies
 touch /opt/composer/.hhconfig
 php /opt/composer/composer.phar install
-bundle --path vendor-rb/
 
 echo "** Run build"
 hhvm bin/build.php

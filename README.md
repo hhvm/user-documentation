@@ -49,8 +49,6 @@ These are the basic step-by-step instructions to get you up and running. It assu
 2. `cd path/to/user-documentation`
 3. `git submodule update --init`
 4. `php /path/to/composer.phar install` # Make sure you have composer downloaded
-5. `sudo gem install bundler` # to get Ruby bundles
-6. `bundle --path vendor-rb/` # install required ruby bundles
 7. `hhvm bin/build.php` # build the site!
 
 Follow the next steps to access this build from a browser.
