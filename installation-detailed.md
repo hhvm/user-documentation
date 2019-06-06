@@ -10,7 +10,6 @@ First `apt-get update`.
 
 * `apt-get install ruby1.9.3`
 * `apt-get install build-essential zlib1g-dev`
-* `apt-get install python-pygments`
 * `apt-get install git` # You most likely have this already
 
 ## Configuration
