@@ -11,6 +11,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+use namespace HH\Lib\Str;
 use type Facebook\HackTest\DataProvider;
 use function HHVM\UserDocumentation\{
   cidr_to_bitstring_and_bitmask,
@@ -87,11 +88,17 @@ final class IPUtilsTest extends \Facebook\HackTest\HackTest {
 
   <<DataProvider('getExampleFacebookIPAddresses')>>
   public function testIsFacebookIPAddress(string $ip): void {
+    if (Str\ends_with(\php_uname('n'), '.facebook.com')) {
+      static::markTestSkipped("Can't run on FB infra");
+    }
     expect(is_fb_ip_address($ip))->toBeTrue();
   }
 
   <<DataProvider('getExampleNonFacebookIPAddresses')>>
   public function testIsNonFacebookIPAddress(string $ip): void {
+    if (Str\ends_with(\php_uname('n'), '.facebook.com')) {
+      static::markTestSkipped("Can't run on FB infra");
+    }
     expect(is_fb_ip_address($ip))->toBeFalse();
   }
 }
