@@ -128,10 +128,17 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
   <<__Memoize>>
   private function getHHServerPath(): string {
     $hh_server = \dirname(\PHP_BINARY).'/hh_server';
-    if (!\file_exists($hh_server)) {
-      static::markTestSkipped("Couldn't find hh_server");
+    if (\file_exists($hh_server)) {
+      return $hh_server;
     }
-    return $hh_server;
+
+    foreach (Str\split(\getenv('PATH'), ':') as $dir) {
+      $hh_server = $dir.'/hh_server';
+      if (\file_exists($hh_server)) {
+        return $hh_server;
+      }
+    }
+    static::markTestSkipped("Couldn't find hh_server");
   }
 
   private function runExamples(Vector<string> $extra_args): void {
