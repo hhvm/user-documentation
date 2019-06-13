@@ -17,11 +17,24 @@ final class FacebookIPRangesBuildStep extends BuildStep {
 
   <<__Override>>
   public function buildAll(): void {
+    if (Str\ends_with(\php_uname('n'), '.facebook.com')) {
+      Log::v("\nFBONLY: Creating empty list of FB employee IP addresses...");
+      \file_put_contents(BuildPaths::FB_IP_RANGES_JSON, \json_encode(
+        shape('ipv4' => vec[], 'ipv6' => vec[]),
+        \JSON_PRETTY_PRINT,
+      ));
+      return;
+    }
+
     Log::v("\nCreating list of FB employee IP addresses...");
 
     $errno = null;
     $errstr = null;
-    $handle = \stream_socket_client('tcp://whois.radb.net:43', &$errno, &$errstr);
+    $handle = \stream_socket_client(
+      'tcp://whois.radb.net:43',
+      &$errno,
+      &$errstr,
+    );
     if ($handle === false) {
       \fprintf(
         \STDERR,
@@ -43,31 +56,18 @@ final class FacebookIPRangesBuildStep extends BuildStep {
 
     \file_put_contents(
       BuildPaths::FB_IP_RANGES_JSON,
-      \json_encode(
-        shape('ipv4' => $ipv4, 'ipv6' => $ipv6),
-        \JSON_PRETTY_PRINT,
-      ),
+      \json_encode(shape('ipv4' => $ipv4, 'ipv6' => $ipv6), \JSON_PRETTY_PRINT),
     );
   }
 
-  private static function readRadbRanges(
-    resource $handle,
-  ): vec<string> {
+  private static function readRadbRanges(resource $handle): vec<string> {
     // Alength\nCONTENT\nC
     $first = \fgets($handle);
-    invariant(
-      Str\starts_with($first, 'A'),
-      'Expected ^A\d+$, got %s',
-      $first,
-    );
-    $length = (int) Str\strip_prefix(Str\trim_right($first), 'A');
+    invariant(Str\starts_with($first, 'A'), 'Expected ^A\d+$, got %s', $first);
+    $length = (int)Str\strip_prefix(Str\trim_right($first), 'A');
     $data = \fread($handle, $length);
     $rest = \fgets($handle);
-    invariant(
-      Str\trim($rest) === 'C',
-      'Expected just "C", got %s',
-      $rest,
-    );
+    invariant(Str\trim($rest) === 'C', 'Expected just "C", got %s', $rest);
 
     return $data |> Str\trim($$) |> Str\split($$, ' ');
   }
