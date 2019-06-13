@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Dict;
+
 use function HHVM\UserDocumentation\Tests\execute_async;
 
 final class RubyDependenciesBuildStep extends BuildStep {
@@ -35,10 +37,17 @@ final class RubyDependenciesBuildStep extends BuildStep {
     $bundler = $ruby_root.'/bin/bundle';
     $options = shape('environment' => dict[
       'GEM_HOME' => $ruby_root,
-    ]);
+      ]
+        |> Dict\merge($$, /* HH_FIXME[2050] */ $_ENV),
+    );
     if (!\file_exists($bundler)) {
       Log::v("\nInstalling bundler");
-      list($exit_code, $_, $_) = await execute_async($options, 'gem', 'install', 'bundler');
+      list($exit_code, $stdout, $stderr) = await execute_async(
+        $options,
+        'gem',
+        'install',
+        'bundler',
+      );
       if ($exit_code !== 0) {
         throw new \Facebook\CLILib\ExitException(1, 'gem install bundler failed');
       }
