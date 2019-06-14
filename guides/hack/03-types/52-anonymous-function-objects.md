@@ -6,7 +6,7 @@ and dictionary-sort), we can choose the desired approach, encapsulate it, and pa
 There are two ways to create an anonymous function object: via a [closure-creation](../expressions-and-operators/closure-creation.md) expression or
 a [lambda-creation](../expressions-and-operators/lambda-creation.md) expression.
 
-[$$](../functions/anonymous-functions.md) contains examples of creating and using anonymous-function objects using both closure and lambda notation.
+[Anonymous functions](../functions/anonymous-functions.md) contains examples of creating and using functions using both closure and lambda notation.
 
 Note: The library functions `class_meth`, `fun`, `inst_meth`, and `meth_caller` allow a string literal containing the name of a function to be
 turned into an anonymous function.
