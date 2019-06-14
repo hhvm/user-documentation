@@ -11,7 +11,7 @@ as parameters directly on the class itself, type constants allow the type to be 
 @@ type-constants-revisited-examples/type-constants.php @@
 
 Notice the syntax `abstract const type <name> [ as <constraint> ];`. All type constants are `const` and use the keyword `type`. You
-specify a name for the constant, along with any possible [constraints](/hack/generic-types-and-functions/type-constraints) that
+specify a name for the constant, along with any possible [constraints](/hack/generics/type-constraints) that
 must be adhered to.
 
 ## Using Type Constants
@@ -29,7 +29,7 @@ e.g.,
 this::T
 ```
 
-You can think of `this::` in a similar manner as the [`this` return type](/hack/types/this.md).
+You can think of `this::` in a similar manner as the [`this` return type](../built-in-types/this.md).
 
 This example shows the real benefit of type constants. The property is defined in `Base`, but can have different types depending
 on the context of where it is being used.

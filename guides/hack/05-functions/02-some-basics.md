@@ -41,7 +41,7 @@ is called to move a Point (such as `$p` in `main`) to a given location using an 
 
 A function can be *parameterized*; that is, its definition can have one or more placeholder names&mdash;called *type parameters*---that are associated
 with types via *type arguments* when that function is called. A function having such placeholder names is called a *generic function*.  For
-more information, see [generic types and functions](../generic-types-and-functions/introduction.md).
+more information, see [generic types and functions](../generics/introduction.md).
 
 Note, Hack does *not* support function overloading; that is, multiple functions having the same name provided each has a different signature
 (that is, a different order and set of parameter types), are *not* permitted.

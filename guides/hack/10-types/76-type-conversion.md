@@ -42,7 +42,7 @@ the precision can be preserved, the fractional part is rounded towards zero and 
 
 If the source value is `null`, the result value is 0.
 
-If the source is a [numeric string or leading-numeric string](string.md) having integer format, if the precision can be preserved the result
+If the source is a [numeric string or leading-numeric string](../built-in-types/string.md) having integer format, if the precision can be preserved the result
 value is that string's integer value; otherwise, the result is undefined. If the source is a numeric string or leading-numeric string having
 floating-point format, the string's floating-point value is treated as described above for a conversion from `float`. The trailing non-numeric
 characters in leading-numeric strings are ignored.  For any other string, the result value is 0.
@@ -60,7 +60,7 @@ No non-`float` type can be converted implicitly to `float`. All other conversion
 If the source type is `int`, if the precision can be preserved the result value is the closest approximation to the source value; otherwise, the
 result is undefined.
 
-If the source is a [numeric string or leading-numeric string](string.md) having integer format, the string's integer value is treated as described
+If the source is a [numeric string or leading-numeric string](../built-in-types/string.md) having integer format, the string's integer value is treated as described
 above for a conversion from `int`. If the source is a numeric string or leading-numeric string having floating-point format, the result value is
 the closest approximation to the string's floating-point value. The trailing non-numeric characters in leading-numeric strings are ignored. For
 any other string, the result value is 0.
@@ -78,7 +78,7 @@ are no explicit conversions.
 
 ## Converting to `string`
 
-Except for the type [`classname`](classname.md), no non-`string` type can be converted implicitly to `string`. All other conversions must be explicit.
+Except for the type [`classname`](../built-in-types/classname.md), no non-`string` type can be converted implicitly to `string`. All other conversions must be explicit.
 
 If the source type is `bool`, then if the source value is `false`, the result value is the empty string; otherwise, the result value is "1".
 
@@ -93,7 +93,7 @@ string returned by that method; otherwise, the conversion is invalid.
 
 If the source is a resource, the result value is an implementation-defined string.
 
-If the source type is the [`classname` type](classname.md), the result value is a string containing the corresponding fully qualified class or
+If the source type is the [`classname` type](../built-in-types/classname.md), the result value is a string containing the corresponding fully qualified class or
 interface name without any leading `\`.
 
 The library function `strval` allows values to be converted to `string`.
@@ -118,7 +118,7 @@ There are no other implicit or explicit conversions.
 
 ## Converting to Resource Type
 
-The [predefined resource-like constants](resources.md) `STDIN`, `STDOUT`, and `STDERR`, can be converted implicitly to resource. No other
+The [predefined resource-like constants](../built-in-types/resources.md) `STDIN`, `STDOUT`, and `STDERR`, can be converted implicitly to resource. No other
 non-resource type can be so converted. No explicit conversions exist.
 
 ## Converting to Mixed Type

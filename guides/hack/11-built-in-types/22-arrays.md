@@ -261,7 +261,7 @@ so&mdash;possibly surprising, or at least, unexpected&mdash;conversions occur wh
 advised to avoid using key types other than `int` or `string`.**
 
 Each element in an array must have a value type that is the exact type indicated by the array declaration, or a
-[subtype](./supertypes-and-subtypes.md) of that type. For example:
+[subtype](../types/supertypes-and-subtypes.md) of that type. For example:
 
 ```Hack
 private array<num> $numbers = array(5.4, 234);

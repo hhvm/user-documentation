@@ -14,4 +14,4 @@ Returning from a constructor behaves just like returning from a function having 
 The value returned by a [generator function](../expressions-and-operators/yield.md) must be the literal `null`.  A `return` statement
 inside a generator function causes the generator to terminate.
 
-A return statement must not occur in a finally block or in a function declared [`noreturn`](../types/noreturn.md).
+A return statement must not occur in a finally block or in a function declared [`noreturn`](../built-in-types/noreturn.md).

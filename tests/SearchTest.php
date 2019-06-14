@@ -43,7 +43,7 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
       ),
       tuple(
         'reified',
-        ['/hack/generic-types-and-functions/reified-generics'],
+        ['/hack/generics/reified-generics'],
       ),
     ];
   }

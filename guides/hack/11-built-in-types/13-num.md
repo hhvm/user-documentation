@@ -22,4 +22,4 @@ to be passed to its constructor and method `move`.
 
 When given a `num` value, to find out what type of value that `num` actually contains, use the `is` operator.
 
-See the discussion of [type refinement](type-refinement.md).
+See the discussion of [type refinement](../types/type-refinement.md).
