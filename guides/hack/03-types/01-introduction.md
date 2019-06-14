@@ -1,3 +1,8 @@
+This section covers the different types available in Hack.
+
+See also the [`is` operator](../expressions-and-operators/is.md) for
+checking the type of a value, and the [`as` operator](../expressions-and-operators/is.md)
+for asserting types.
 
 **Topics covered in this section**
 
