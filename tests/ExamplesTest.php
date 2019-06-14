@@ -139,6 +139,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       }
     }
     static::markTestSkipped("Couldn't find hh_server");
+    invariant_violation('unreachable');
   }
 
   private function runExamples(Vector<string> $extra_args): void {
