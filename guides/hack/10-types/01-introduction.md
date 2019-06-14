@@ -1,4 +1,5 @@
-This section covers the different types available in Hack.
+Hack includes a strong static type system. This section covers the
+basic features of the type checker.
 
 See also the [`is` operator](../expressions-and-operators/is.md) for
 checking the type of a value, and the [`as` operator](../expressions-and-operators/is.md)
@@ -6,29 +7,14 @@ for asserting types.
 
 **Topics covered in this section**
 
-* [Arrays](arrays.md)
-* [bool](bool.md)
-* [classname](classname.md)
-* [closure](anonymous-function-objects.md)
-* [dict](arrays.md#dict)
-* [dynamic](dynamic.md)
-* [Enumerated Types (`enum`)](enumerated-types.md)
-* [float](float.md)
-* [Generic Types](generic-types.md)
-* [int](int.md)
-* [keyset](arrays.md#keyset)
-* [lambda](anonymous-function-objects.md)
-* [noreturn](noreturn.md)
-* [Null Type](null.md)
+* [Subtyping](supertypes-and-subtypes.md)
+* [Classes](classes.md)
+* [Interfaces](interfaces.md)
+* [Traits](interfaces.md)
 * [Nullable Types](nullable-types.md)
-* [num](num.md)
-* [shape](shapes.md)
-* [string](string.md)
-* [this](this.md)
-* [Tuples](tuples.md)
 * [Type Aliases (`newtype` and `type`)](type-aliases.md)
 * [Type Conversion](type-conversion.md)
 * [Type Inferencing](type-inferencing.md)
 * [Type Refinement](type-refinement.md)
-* [vec](arrays.md#vec)
-* [void](void.md)
+* [lambda](anonymous-function-objects.md)
+* [Generic Types](generic-types.md)
