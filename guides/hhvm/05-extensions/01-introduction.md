@@ -17,7 +17,7 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [debugger](http://php.net/manual/en/book.debugger.php)
 * [dom](http://php.net/manual/en/book.dom.php)
 * domdocument
-* [enum](/hack/types/enumerated-types)
+* [enum](/hack/built-in-types/enumerated-types)
 * [exif](http://php.net/manual/en/book.exif.php)
 * fb
 * [fileinfo](http://php.net/manual/en/book.fileinfo.php)
