@@ -37,7 +37,7 @@ final class Guides {
     return dict[
       GuidesProduct::HACK => dict[
         'async' => tuple('asynchronous-operations', null),
-        'collections' => tuple('types', 'arrays'),
+        'collections' => tuple('built-in-types', 'arrays'),
         'enums' => tuple('built-in-types', 'enumerated-types'),
         'generics' => tuple('types', 'generic-types'),
         'lambdas' => tuple('functions', 'anonymous-functions'),
