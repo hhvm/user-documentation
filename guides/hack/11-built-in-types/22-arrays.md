@@ -173,7 +173,7 @@ $array = array('a', 'b', 'c');
 $set = keyset($array); // constructs $set from an array
 ```
 
-To check membership in a keyset, use `isset`. To remove an element from a keyset, use `unset`.
+To check membership in a keyset, use `C\contains` or `C\contains_key`. To remove an element from a keyset, use `unset`.
 
 Here is a list of library functions for manipulating keysets:
 
