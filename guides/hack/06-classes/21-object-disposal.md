@@ -15,8 +15,8 @@ define a public method called `__dispose`, with the signature as shown.
 As expected, the constructor initializes the new object's state. (Note that because the physical-file open details have been
 omitted, each instance gets the hard-coded handle value of 55 rather than a unique value.)
 
-Method `close` provides a way to do cleanup under programmer control, **presuming the programmer remembers to do that!** H
-owever, we provide a mechanism via the `openFlag` property to be sure we're not trying to cleanup more than once.
+Method `close` provides a way to do cleanup under programmer control, **presuming the programmer remembers to do that!** However,
+we provide a mechanism via the `openFlag` property to be sure we're not trying to cleanup more than once.
 
 Let's look at the `using` block at the start of function `main`. The expression controlling that construct *must* have a type
 that implements the interface `IDisposable`, and the scope of the local variable `$f1` is the using block.  Note the commented-out
