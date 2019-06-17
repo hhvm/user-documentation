@@ -38,4 +38,4 @@ Here is an example that uses several of these methods:
 
 @@ enumerated-types-examples/enum-methods.php @@
 
-For an example involving a banking application, see [$$](shapes.md).
+For an example involving a banking application, see [shapes](shapes.md).

@@ -82,7 +82,7 @@ $a - ($b / $c)
 ```
 
 because the division (`/`) operator has higher precedence than the binary subtraction `-` operator.  The precedence of all operators is
-defined in [$$](operator-precedence.md).
+defined in [operator precedence](operator-precedence.md).
 
 If an operand occurs between two operators having the same precedence, the order in which the operations are performed is defined by those
 operators' *associativity*. With *left-associative* operators, operations are performed left-to-right.  For example:

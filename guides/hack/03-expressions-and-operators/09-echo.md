@@ -2,8 +2,8 @@ This intrinsic function converts the value of an expression to `string` (if nece
 
 @@ echo-examples/basics.php @@
 
-For value substitution in string literals, see [$$](../source-code-fundamentals/literals.md#string-literals__double-quoted-string-literals).
-For conversion to string, see [$$](../types/type-conversion.md#conversion-to-string).
+For a discussion of value substitution in strings, see [string literals](../source-code-fundamentals/literals.md#string-literals__double-quoted-string-literals).
+For conversion to strings, see [type conversion](../types/type-conversion.md#converting-to-string).
 
 `echo` cannot output an array.  However, `echo` can output the value of an object *provided* its type defines
 a [`__toString` method](../classes/methods-with-predefined-semantics.md#method-__tostring).  For example:

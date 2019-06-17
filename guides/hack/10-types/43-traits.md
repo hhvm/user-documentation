@@ -4,7 +4,7 @@ class can implement contracts from one or more interfaces as well as from one or
 inheritance hierarchy, so unrelated classes can use the same trait. In summary, a trait is a set of methods and/or state information that can be
 reused. Traits are designed to support classes; a trait cannot be instantiated directly.
 
-Trait types are described in [$$](../classes/using-a-trait.md).
+Trait types are described in [using a trait](../classes/using-a-trait.md).
 
 Although traits are used to declare class and interface types, a trait type *cannot* be used in the usual context of a type name. However,
 for the purposes of [subtyping](supertypes-and-subtypes.md), traits are considered to be types.

@@ -15,5 +15,5 @@
 * [Properties](properties.md)
 * [__toString](methods-with-predefined-semantics#method-__toString)
 * [Trait requirements](trait-and-interface-requirements.md)
-* [Type constants](type-constants.md) and [$$](type-constants-revisited.md)
+* [Type constants](type-constants.md) and [type constants revisited](type-constants-revisited.md)
 * [Using a trait](using-a-trait.md)

@@ -43,7 +43,7 @@
 * [Ones-complement, `~`](ones-complement.md)
 * [Order of evaluation](some-basics.md)
 * [Pipe, `|>`](pipe.md)
-* [Precedence](some-basics.md); also [$$](operator-precedence.md)
+* [Precedence](some-basics.md); also [operator precedence](operator-precedence.md)
 * [Relational operators](relational.md)
 * [Remainder, `%`](remainder.md)
 * [Scope resolution, `::`](scope-resolution.md)

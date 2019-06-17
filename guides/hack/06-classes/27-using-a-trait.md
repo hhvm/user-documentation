@@ -24,4 +24,4 @@ Methods in a trait have full access to all members of any class in which that tr
 
 Traits are designed to support classes; a trait cannot be instantiated directly.
 
-A trait can have usage requirements placed on it; see [$$](trait-and-interface-requirements.md) for more information.
+A trait can have usage requirements placed on it; see [trait requirements](trait-and-interface-requirements.md) for more information.

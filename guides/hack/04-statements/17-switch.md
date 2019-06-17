@@ -102,4 +102,4 @@ case 30:    // <===== rather than this case matching with 30
 
 **Note carefully that the comparison of a switch value with its cases uses PHP's notion of
 equality, as implemented by the `==` operator, which can sometimes produce surprising
-results. See [$$](../expressions-and-operators/equality.md) for more details.**
+results. See [equality](../expressions-and-operators/equality.md) for more details.**

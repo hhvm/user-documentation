@@ -4,9 +4,9 @@ designates, that name is visible only within a part of the program called that n
 including any [included scripts](script-inclusion.md).
 -   Function, which means from the point of declaration/first initialization through to the end of that
 [function](../functions/defining-a-function).
--   Class, which means the body of that class and any classes derived from it ([$$](../classes/defining-a-basic-class.md)).
+-   Class, which means the body of that class and any classes derived from it ([defining a class](../classes/defining-a-basic-class.md)).
 -   Interface, which means the body of that interface, any interfaces derived from it, and any classes that implement it
-([$$](../classes/implementing-an-interface.md)).
+([implementing an interface](../classes/implementing-an-interface.md)).
 -   Namespace, which means from the point of declaration/first initialization through to the end of that
 [namespace](../source-code-fundamentals/namespaces.md).
 
@@ -18,10 +18,10 @@ separate from that of any function inside which that anonymous function is defin
 The scope of a parameter is the body of the function in which the parameter is declared. For the purposes of scope, a
 [catch-block](../statements/try.md) is treated like a function body.
 
-The scope of a class member ([$$](../classes/defining-a-basic-class.md)) declared in, or inherited by, a class type `C` is
+The scope of a class member ([defining a class](../classes/defining-a-basic-class.md)) declared in, or inherited by, a class type `C` is
 the body of `C`.
 
-The scope of an interface member ([$$](../classes/implementing-an-interface.md)) declared in, or inherited by, an interface
+The scope of an interface member ([implementing an interface](../classes/implementing-an-interface.md)) declared in, or inherited by, an interface
 type `I` is the body of `I`.
 
 When a [trait](../classes/using-a-trait.md) is used by a class or an interface, the trait's members take on the scope of a

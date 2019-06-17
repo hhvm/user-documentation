@@ -24,7 +24,7 @@ public function __dispose(): void;
 This method is called implicitly by the runtime when the instance goes out of scope, provided the attributes `<<__ReturnDisposable>>`
 and `<<__AcceptDisposable>>` are *not* present.
 
-See [$$](object-disposal.md) for an example of its use and a discussion of these attributes.
+See [object disposal](object-disposal.md) for an example of its use and a discussion of these attributes.
 
 ## Method __disposeAsync
 
@@ -38,7 +38,7 @@ public async function __disposeAsync(): Awaitable<void>;
 This method is called implicitly by the runtime when the instance goes out of scope, provided the attributes `<<__ReturnDisposable>>`
 and `<<__AcceptDisposable>>` are *not* present.
 
-See [$$](object-disposal.md) for a discussion of object disposal and these attributes.
+See [object disposal](object-disposal.md) for a discussion of disposal and these attributes.
 
 ## Method __toString
 

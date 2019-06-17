@@ -27,4 +27,4 @@ interface are those specified by its own declaration, and the members inherited 
 
 Interfaces are designed to support classes; an interface cannot be instantiated directly.
 
-An interface can have usage requirements placed on it; see [$$](trait-and-interface-requirements.md) for more information.
+An interface can have usage requirements placed on it; see [interface requirements](trait-and-interface-requirements.md) for more information.
