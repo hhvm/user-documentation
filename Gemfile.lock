@@ -16,6 +16,3 @@ DEPENDENCIES
   bourbon (~> 4.2.6)
   font-awesome-sass
   sass (~> 3.4.19)
-
-BUNDLED WITH
-   1.16.0
