@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+echo "** Installing ElasticBeanstalk CLI..."
+pip install awsebcli
+
 echo "** Logging in to dockerhub..."
 echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USER}" \
   --password-stdin
