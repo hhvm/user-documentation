@@ -5,7 +5,7 @@ if [ "$(uname -s)" == Darwin ]; then
   IS_MACOS=true
 fi
 
-if [ ! -e Dockerrun.aws.json ]; then
+if [ ! -e Dockerrun.aws.json.in ]; then
   echo "Run from root directory of checkout"
   exit 1
 fi
@@ -52,23 +52,8 @@ docker push hhvm/user-documentation:latest # push the alias too
 
 echo "** Updating AWS config"
 ## Update AWS config file
-if $IS_MACOS; then
-  # OSX sed:
-  #  - doesn't support -i
-  #  - requires -E to recognize '+'
-  #  - doesn't want a '\' before the '+'
-  SEDTEMP=$(mktemp)
-  sed -E 's_"hhvm/user-documentation:[^"]+"_"'$IMAGE_NAME'"_' \
-    Dockerrun.aws.json > $SEDTEMP
-  cat $SEDTEMP > Dockerrun.aws.json
-  rm $SEDTEMP
-else
-  sed -i 's_"hhvm/user-documentation:[^"]\+"_"'$IMAGE_NAME'"_' Dockerrun.aws.json
-fi
-
-git commit \
-  -m "[autocommit] AWS deploy $IMAGE_TAG" \
-  Dockerrun.aws.json
+sed -E 's,"hhvm/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
+  Dockerrun.aws.json.in > Dockerrun.aws.json
 
 echo "** Identifying environments"
 if eb status hhvm-hack-docs-a | grep -q 'CNAME: hhvm-hack-docs-staging.elasticbeanstalk.com'; then
