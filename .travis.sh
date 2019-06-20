@@ -16,3 +16,6 @@ hhvm bin/build.php
 hh_server --check $(pwd)
 vendor/bin/hacktest tests/
 vendor/bin/hhast-lint
+# Clean up now we're done; do it here so we don't get permission errors outside
+# of docker in the deploy step
+git clean -ffdx
