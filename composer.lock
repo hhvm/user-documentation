@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v2.8.0",
+            "version": "v2.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "702c071aeaa4627d80ef4c0d792fbf25631e5e53"
+                "reference": "58d5d79ddc6ac54243139518a61fe6f842373f67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/702c071aeaa4627d80ef4c0d792fbf25631e5e53",
-                "reference": "702c071aeaa4627d80ef4c0d792fbf25631e5e53",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/58d5d79ddc6ac54243139518a61fe6f842373f67",
+                "reference": "58d5d79ddc6ac54243139518a61fe6f842373f67",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2019-06-04T19:57:19+00:00"
+            "time": "2019-06-20T20:21:03+00:00"
         },
         {
             "name": "facebook/difflib",
@@ -569,16 +569,16 @@
         },
         {
             "name": "hhvm/type-assert",
-            "version": "v3.4.1",
+            "version": "v3.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/type-assert.git",
-                "reference": "ede976dec385f33931ea58dc1aad0902a07e1c58"
+                "reference": "aa7fa734bd553c64032107ce2ae10f9fac7c79bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/ede976dec385f33931ea58dc1aad0902a07e1c58",
-                "reference": "ede976dec385f33931ea58dc1aad0902a07e1c58",
+                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/aa7fa734bd553c64032107ce2ae10f9fac7c79bb",
+                "reference": "aa7fa734bd553c64032107ce2ae10f9fac7c79bb",
                 "shasum": ""
             },
             "require": {
@@ -606,7 +606,7 @@
                 "TypeAssert",
                 "hack"
             ],
-            "time": "2019-05-31T16:35:52+00:00"
+            "time": "2019-06-19T17:19:14+00:00"
         },
         {
             "name": "usox/hack-http-factory-interfaces",
@@ -713,16 +713,16 @@
     "packages-dev": [
         {
             "name": "facebook/fbexpect",
-            "version": "v2.5.7",
+            "version": "v2.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbexpect.git",
-                "reference": "3f75b474adde4f64e033e9e876359a171c402546"
+                "reference": "93dbffbbf6fe07d0e947befac9653139bb51f94a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/3f75b474adde4f64e033e9e876359a171c402546",
-                "reference": "3f75b474adde4f64e033e9e876359a171c402546",
+                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/93dbffbbf6fe07d0e947befac9653139bb51f94a",
+                "reference": "93dbffbbf6fe07d0e947befac9653139bb51f94a",
                 "shasum": ""
             },
             "require": {
@@ -741,7 +741,7 @@
                 "MIT"
             ],
             "description": "Unit test helpers for Facebook projects",
-            "time": "2019-05-28T16:16:14+00:00"
+            "time": "2019-05-28T22:10:51+00:00"
         },
         {
             "name": "hhvm/hacktest",
