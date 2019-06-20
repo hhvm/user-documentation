@@ -57,7 +57,10 @@ final class RubyDependenciesBuildStep extends BuildStep {
       return;
     }
     Log::v("\nInstalling dependencies using bundler");
-    await execute_async($options, $bundler, 'install', '--path', $ruby_root);
+    list($exit_code, $stdout, $stderr) = await execute_async($options, $bundler, 'install', '--path', $ruby_root);
+    if ($exit_code !== 0) {
+      invariant_violation("Bundler failed: %s", $stderr);
+    }
     invariant(\is_dir($ruby_root.'/ruby') && \file_exists(LocalConfig::ROOT.'/.bundle'), "bundler failed");
   }
 }
