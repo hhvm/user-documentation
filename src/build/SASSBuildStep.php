@@ -19,6 +19,7 @@ final class SASSBuildStep extends BuildStep {
     Log::i("\nBuilding SASS");
     $css = null;
     $exit_code = null;
+    \putenv('GEM_HOME='.LocalConfig::ROOT.'/vendor-rb');
     \exec(self::PROVIDER, /* & */ &$css, /* & */ &$exit_code);
     invariant(
       $exit_code === 0,
