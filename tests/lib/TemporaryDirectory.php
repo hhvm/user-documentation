@@ -3,6 +3,7 @@
 namespace HHVM\UserDocumentation\Tests;
 
 use namespace HH\Lib\PseudoRandom;
+use function HHVM\UserDocumentation\_Private\execute_async;
 
 final class TemporaryDirectory implements \IAsyncDisposable {
   private string $path;

@@ -5,6 +5,7 @@ namespace HHVM\UserDocumentation\Tests;
 use const HHVM_VERSION_ID;
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
 use namespace HH\Lib\{C, Str, Vec};
+use function HHVM\UserDocumentation\_Private\execute_async;
 
 /**
  * @large

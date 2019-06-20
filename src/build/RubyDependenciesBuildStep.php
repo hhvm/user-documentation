@@ -13,7 +13,7 @@ namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\Dict;
 
-use function HHVM\UserDocumentation\Tests\execute_async;
+use function HHVM\UserDocumentation\_Private\execute_async;
 
 final class RubyDependenciesBuildStep extends BuildStep {
   <<__Override>>

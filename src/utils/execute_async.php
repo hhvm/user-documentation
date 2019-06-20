@@ -1,6 +1,6 @@
 <?hh // strict
 
-namespace HHVM\UserDocumentation\Tests;
+namespace HHVM\UserDocumentation\_Private;
 
 use namespace HH\Lib\{Str, Vec};
 
