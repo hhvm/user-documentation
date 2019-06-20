@@ -11,6 +11,8 @@
 
 namespace HHVM\UserDocumentation;
 
+use namespace HH\Lib\Str;
+
 final class BuildIDBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
@@ -22,7 +24,13 @@ final class BuildIDBuildStep extends BuildStep {
       $docsite_rev = $this->getHead(__DIR__.'/../../');
     }
 
-    $build_id = \strftime('%FT%T%z').':'.$docsite_rev;
+    $build_id = Str\format(
+      'HHVM=%s:HSL=%s:%s:%s',
+      PRODUCT_TAGS[APIProduct::HACK],
+      PRODUCT_TAGS[APIProduct::HSL],
+      \strftime('%FT%T%z'),
+      $docsite_rev,
+    );
     \file_put_contents(BuildPaths::BUILD_ID_FILE, $build_id."\n");
   }
 

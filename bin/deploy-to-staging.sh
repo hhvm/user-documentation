@@ -32,7 +32,8 @@ CLEAN_DIR="$(mktemp -d)"
 
 export TZ=America/Los_Angeles
 DEPLOY_REV=$(git rev-parse --short HEAD)
-IMAGE_TAG=$(date +%Y-%m-%d)-$DEPLOY_REV
+HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
+IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
 IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 
 echo "** Fetching updated base image"
