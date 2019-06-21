@@ -1,6 +1,0 @@
-$result = 10
-do_it returned 10
-do_it returned 25
-$result = 10
-do_it returned 10
-do_it returned 25

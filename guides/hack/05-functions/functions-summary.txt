@@ -1,1 +1,1 @@
-Named functions, anonymous functions and methods.
+Named functions, anonymous functions and parameters.

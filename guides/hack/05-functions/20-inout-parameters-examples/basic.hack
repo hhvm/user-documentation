@@ -1,15 +1,12 @@
-function takes_inout(int $a, inout int $b): void {
-  ++$a;
-  ++$b;
+namespace Hack\UserDocumentation\Functions\InoutParams;
+
+function takes_inout(inout int $x): void {
+  $x = 1;
 }
 
-<<__EntryPoint>>
-function inout_test(): void {
-  $x = 0;
-  $y = 0;
+function call_it(): void {
+  $num = 0;
+  takes_inout(inout $num);
 
-  takes_inout($x, inout $y);
-
-  echo "x = $x\n";
-  echo "y = $y\n";
+  // $num is now 1.
 }

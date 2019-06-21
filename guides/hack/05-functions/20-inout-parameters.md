@@ -1,117 +1,101 @@
-In most cases, functions should use their return value to pass information back
-to their callers. If more than one piece of information needs to be passed back,
-a function could return a tuple, shape or an object.
-
-However, for cases where this is impossible or undesirable, Hack provides a
-feature called **inout parameters**.
+Hack functions normally pass arguments by value. `inout` provides
+"copy-in, copy-out" arguments, which allow you to modify the variable
+in the caller.
 
 @@ inout-parameters-examples/basic.hack @@
 
-An inout parameter has *copy-in copy-out* semantics. Roughly, this means:
+This is similar to copy-by-reference, but the copy-out only happens
+when the function returns. If the function throws an exception, no
+changes occur.
 
-- The value of an inout argument is copied into the function when it is called.
-- The function may mutate the copy arbitrarily.
-- When the function returns, the value of the copy is assigned back to the
-  argument.
+``` Hack
+function takes_inout(inout int $x): void {
+  $x = 1;
+  throw new Exception();
+}
 
-If the function call terminates abnormally, for instance it throws an exception,
-changes to the copy are not copied out, and will not be visible even if control
-flow resumes inside the caller's scope.
+<<__EntryPoint>>
+function call_it(): void {
+  $num = 0;
+  try {
+    takes_inout(inout $num);
+  } catch (Exception $_) {
+  }
 
-# Restrictions
-
-- Both the call site and the definition must explicitly use `inout` to agree on
-  whether an argument will be passed with these semantics. It is both a
-  typechecker and runtime error if a function expects an inout parameter but the
-  programmer fails to annotate the argument as inout, or vice versa.
-- Arguments for inout parameters are local variables with an arbitrary number of
-  index expressions allowed. In other words, they should be local variables
-  (`$x`) or indexed elements contained inside a local (`$vec[$y][z()][2]`).
-  Every intermediate base in the index chain should also be a value-typed
-  container (e.g. vec, dict, keyset, or array). If the argument expression
-  produces side effects, those effects are observed only once.
-- The same lvalue cannot be used for multiple inout arguments in the same
-  function call (more generally, the lvalue cannot appear more than once in any
-  lvalue context within the full expression, including other function calls or
-  assignments). This is a type error if the typechecker can statically prove
-  that the lvalues are equivalent, otherwise the behavior is undefined.
-- An inout parameter cannot have a default value.
-- Variadic parameters cannot be inout.
-- Methods with special semantics, such as constructors, cannot have inout
-  parameters.
-- Async functions and generators cannot have inout parameters.
-- Methods with inout parameters cannot be memoized using `<<__Memoize>>`.
-- It is impossible to call functions with inout parameters dynamically (e.g.
-  using `meth_caller()`, `call_user_func()` or `ReflectionFunction::invoke()`).
-- If the `unset` intrinsic is invoked on an inout parameter, and the variable is
-  not re-initialized before the function exits normally, a warning will be
-  raised upon return to the caller and the passed-in argument will be implicitly
-  assigned the `null` value.
-- Inout annotations on a parameter within a class hierarchy must be
-  consistent. Any derived class that overrides that method must declare the same
-  (invariant) type for its corresponding parameter&mdash;unlike non-inout
-  parameters, a supertype is not allowed (i.e., inout parameters are not
-  contravariant).
-- A function cannot take both inout parameters and parameters by reference (see
-  below). In particular, a parameter cannot be annotated with `inout` and `&`
-  simultaneously.
-
-# References (deprecated)
-
-In the past, similar behavior was achieved using *references*
-(`int &$parameter`). These are still supported by Hack, but their use is
-deprecated and they will be completely removed from the language in the future.
-They are not allowed in Hack strict mode.
-
-References enable access to the same variable content by different names. They
-bypass the copy-on-write nature of value types such as arrays and allow for
-modification of memory normally inaccessible from the current scope.
-
-References are a source of surprising runtime behaviors (especially when
-combined with Hack-specific features like async functions or `<<__Memoize>>`)
-and type unsoundness in the Hack language (Hack's type inference is designed not
-to cross function boundaries, but references can allow access to the same memory
-location from multiple functions).
-
-## Migrating to inout parameters
-
-In many cases, references can be completely replaced with patterns that are
-easier to understand&mdash;for example, a function could return a tuple, shape or
-object instead of assigning values to variables passed in by reference. But when
-this is not possible, they should be migrated to inout parameters.
-
-To make the migration easier, HHVM currently allows reference
-(`int &$parameter`) and inout (`inout int $parameter`) parameters to be used
-interchangeably&mdash;either one can be used, no matter if the function is
-declared to take a reference or inout argument.
-
-In most cases, you can migrate by simply replacing `&` with `inout` in all
-function declarations and calls. Due to the aforementioned interchangeability,
-it is not necessary to migrate a function's declaration and all its calls at the
-same time.
-
-In some cases, a straightforward migration is impossible because of the stricter
-restrictions on inout parameters (see above), so it might be necessary to change
-the function's signature. For example, an optional reference parameter
-(`int &$answer = 42`) may need to be removed or made required.
-
-For instance, the builtin function `preg_match()` was migrated to two functions,
-`preg_match()` and `preg_match_with_matches()`, which have a previously optional
-reference parameter removed and made required, respectively.
-
-```Hack
-function preg_match(
-  string $pattern,
-  string $subject,
-  int $flags = 0,
-  int $offset = 0,
-): int;
-
-function preg_match_with_matches(
-  string $pattern,
-  string $subject,
-  inout mixed $matches,
-  int $flags = 0,
-  int $offset = 0,
-): int;
+  // $num is still 0.
+}
 ```
+
+`inout` must be written in both the function signature and the
+function call. This is enforced in the typechecker and at runtime.
+
+## Indexing with `inout`
+
+In addition to local variables, `inout` supports indexes in value
+types.
+
+@@ inout-parameters-examples/value_index.hack @@
+
+This works for any value type: `vec`, `dict`, `keyset` or `array`. You
+can also do nested access e.g. `inout $foo[$y][z()]['stuff']`.
+
+## Dynamic Usage
+
+`inout` is a different calling convention, so dynamic calls will not
+work with `inout` parameters. For example, you cannot use
+`meth_caller`, `call_user_func` or `ReflectionFunction::invoke`.
+
+`unset` on a `inout` parameter will set the value to `null`. This is
+not recommended, and will raise a warning when the function returns.
+
+## References (deprecated)
+
+Hack used to support references in partial mode files.
+
+``` Hack
+function set_to_zero(int &$x): void {
+  $x = 0;
+}
+```
+
+References allowed multiple mutable accesses to the same value. This
+prevented HHVM relying on copy-on-write behaviors of value types,
+making it slower.
+
+It was also possible to confuse the typechecker (which assumed
+variable wouldn't change types across function calls) and readers of
+your code (especially when using `async` or `__Memoize`).
+
+### Migrating to `inout`
+
+HHVM allows references and `inout` parameters to be used
+interchangeably. This allows you to gradually migrate your code.
+
+`inout` parameters do not support default values, so you will need to
+split up functions that have optional references.
+
+``` Hack
+function call_foo(int $x, int &$result = null): void {
+  $foo_result = foo($x);
+  
+  // If provided, save the output to $result.
+  if ($result !== null) {
+    $result = $foo_result;
+  }
+}
+```
+
+Instead, write a separate function that makes the parameter required.
+
+``` Hack
+function call_foo(int $x): void {
+  foo($x);
+}
+
+function call_foo_save_result(int $x, inout int $result): void {
+  $foo_result = foo($x);
+  $result = $foo_result;
+}
+```
+
+This is how built-in functions like `preg_match` were migrated.

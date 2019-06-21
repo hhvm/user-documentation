@@ -105,6 +105,11 @@ final class Guides {
           'unary-plus' => tuple('expressions-and-operators', 'arithmetic'),
           'XHP-attribute-spread' => tuple('XHP', 'introduction'),
         ],
+	'functions' => dict[
+	  'defining-a-function' => tuple('functions', 'introduction'),
+	  'some-basics' => tuple('functions', 'introduction'),
+	  'calling-a-function' => tuple('functions', 'format-strings'),
+	],
         'generics' => dict[
           'constraints' => tuple('generics', 'type-constraints'),
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
@@ -123,7 +128,7 @@ final class Guides {
           'placeholder-variable' => tuple('source-code-fundamentals', 'names'),
           'trait-and-interface-requirements' =>
             tuple('classes', 'trait-and-interface-requirements'),
-          'variadic-functions' => tuple('functions', 'defining-a-function'),
+          'variadic-functions' => tuple('functions', 'introduction'),
         ],
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
@@ -139,7 +144,7 @@ final class Guides {
           'modes' => tuple('source-code-fundamentals', 'program-structure'),
         ],
         'types' => dict[
-          'annotations' => tuple('functions', 'defining-a-function'),
+          'annotations' => tuple('functions', 'introduction'),
           'arraykey' => tuple('built-in-types', 'arraykey'),
           'arrays' => tuple('built-in-types', 'arrays'),
           'bool' => tuple('built-in-types', 'bool'),
