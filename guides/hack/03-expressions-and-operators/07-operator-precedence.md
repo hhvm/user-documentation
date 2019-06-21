@@ -4,8 +4,8 @@ Operator | Associativity
 ------------ | ---------
 `new`  | none
 `()   []   ->   ?->   ++   --   **` | Left to Right
-`!   ~   +   -   ++   --   (`*type*`)   @   await`	| Right to Left
 `instanceof   is   as   ?as` | none
+`!   ~   +   -   ++   --   (`*type*`)   @   await`	| Right to Left
 `*   /   %`	| Left to Right
 `+   -   .`	| Left to Right
 `<<   >>`	| Left to Right
