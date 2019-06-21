@@ -72,8 +72,16 @@ final class Guides {
           'syntax' => tuple('attributes', 'attribute-specification'),
         ],
         'callables' => dict[
-          'special-functions' => tuple('types', 'anonymous-function-objects'),
-        ],
+          'special-functions' => tuple('functions', 'anonymous-functions'),
+          ],
+	'expressions-and-operators' => dict[
+	  'closure-creation' => tuple('functions', 'anonymous-functions'),
+	  'lambda-creation' => tuple('functions', 'anonymous-functions'),
+	],
+	'functions' => dict[
+	  'defining-a-function' => tuple('functions', 'introduction'),
+	  'some-basics' => tuple('functions', 'introduction'),
+	],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),
           'pipe' => tuple('expressions-and-operators', 'pipe'),
@@ -87,7 +95,7 @@ final class Guides {
           'placeholder-variable' => tuple('source-code-fundamentals', 'names'),
           'trait-and-interface-requirements' =>
             tuple('classes', 'trait-and-interface-requirements'),
-          'variadic-functions' => tuple('functions', 'defining-a-function'),
+          'variadic-functions' => tuple('functions', 'introduction'),
         ],
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
@@ -97,7 +105,7 @@ final class Guides {
           'modes' => tuple('source-code-fundamentals', 'program-structure'),
         ],
         'types' => dict[
-          'annotations' => tuple('functions', 'defining-a-function'),
+          'annotations' => tuple('functions', 'introduction'),
           'arraykey' => tuple('built-in-types', 'arraykey'),
           'arrays' => tuple('built-in-types', 'arrays'),
           'bool' => tuple('built-in-types', 'bool'),

@@ -8,6 +8,7 @@ for asserting types.
 **Topics covered in this section**
 
 * [Subtyping](supertypes-and-subtypes.md)
+* [Functions](functions.md)
 * [Classes](classes.md)
 * [Interfaces](interfaces.md)
 * [Traits](traits.md)
@@ -17,5 +18,4 @@ for asserting types.
 * [Type Conversion](type-conversion.md)
 * [Type Inferencing](type-inferencing.md)
 * [Type Refinement](type-refinement.md)
-* [lambda](anonymous-function-objects.md)
 * [Generic Types](generic-types.md)
