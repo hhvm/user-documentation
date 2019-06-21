@@ -342,6 +342,12 @@ EOF;
                   GitHub
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://github.com/hhvm/user-documentation">
+                  Docs on GitHub
+                </a>
+              </li>
             </ul>
           </div>
           <div class="footerPanel">
