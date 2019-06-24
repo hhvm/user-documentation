@@ -39,7 +39,6 @@ final class Guides {
         'async' => tuple('asynchronous-operations', null),
         'collections' => tuple('built-in-types', 'arrays'),
         'enums' => tuple('built-in-types', 'enumerated-types'),
-        'generics' => tuple('types', 'generic-types'),
         'lambdas' => tuple('functions', 'anonymous-functions'),
         'operators' => tuple('expressions-and-operators', null),
         'overview' => tuple('getting-started', null),
