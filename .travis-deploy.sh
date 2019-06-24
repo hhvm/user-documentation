@@ -3,7 +3,7 @@ set -e
 
 echo "** Installing ElasticBeanstalk CLI..."
 export PYTHONPATH="$(mktemp -d)"
-pip3 install \
+pip install \
   "--target=${PYTHONPATH}" \
   "--install-option=--install-scripts=${PYTHONPATH}/bin" \
   awsebcli
