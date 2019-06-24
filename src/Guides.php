@@ -103,7 +103,7 @@ final class Guides {
           'arrays' => tuple('built-in-types', 'arrays'),
           'bool' => tuple('built-in-types', 'bool'),
           'casting' => tuple('types', 'type-conversion'),
-          'classname' => tuple('built-in-types', 'classnam'),
+          'classname' => tuple('built-in-types', 'classname'),
           'dynamic' => tuple('built-in-types', 'dynamic'),
           'enumerated-types' => tuple('built-in-types', 'enumerated-types'),
           'float' => tuple('built-in-types', 'float'),

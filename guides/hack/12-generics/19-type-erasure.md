@@ -17,4 +17,4 @@ type erasure at runtime. A type parameter T *cannot* be used in the following si
  * As the type of the exception in a catch block (e.g., `catch (T $exception)`).
 
 For a possible alternative to instantiation, class scope and `instanceof` usage, Hack provides a construct called
-[`Classname<T>`](../types/classname.md) that extends the PHP representation of `Foo::class`.
+[`Classname<T>`](../built-in-types/classname.md) that extends the PHP representation of `Foo::class`.
