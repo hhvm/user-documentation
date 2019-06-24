@@ -2,7 +2,12 @@
 set -e
 
 echo "** Installing ElasticBeanstalk CLI..."
-pip install awsebcli
+export PYTHONPATH="$(mktemp -d)"
+pip3 install \
+  "--target=${PYTHONPATH}" \
+  "--install-option=--install-scripts=${PYTHONPATH}/bin" \
+  awsebcli
+export PATH="${PYTHONPATH}/bin:${PATH}"
 
 echo "** Logging in to dockerhub..."
 echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USER}" \
