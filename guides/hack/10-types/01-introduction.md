@@ -11,6 +11,7 @@ for asserting types.
 * [Classes](classes.md)
 * [Interfaces](interfaces.md)
 * [Traits](interfaces.md)
+* [Soft Types](soft-types.md)
 * [Nullable Types](nullable-types.md)
 * [Type Aliases (`newtype` and `type`)](type-aliases.md)
 * [Type Conversion](type-conversion.md)
