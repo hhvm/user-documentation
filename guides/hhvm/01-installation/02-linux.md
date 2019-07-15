@@ -50,7 +50,7 @@ It is generally recommended to follow the newest version possible, provided your
 So in order to get HHVM 4.8 on ubuntu bionic (18.04) you would use
 `deb https://dl.hhvm.com/ubuntu bionic-4.8`
 
-You will automatically receive patches such as HHVM 4.8.1, but your won't upgrade to HHVM 4.9 and up.
+You will automatically receive patches such as HHVM 4.8.1, but you won't be upgraded to HHVM 4.9 and up.
 
 In order to get HHVM 3.30 LTS use:
 `deb https://dl.hhvm.com/ubuntu bionic-lts-3.30 main`
