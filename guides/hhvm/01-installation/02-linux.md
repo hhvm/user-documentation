@@ -99,7 +99,7 @@ curl https://dl.hhvm.com/conf/hhvm.gpg.key | apt-key add -
 apt-key finger 'opensource+hhvm@fb.com'
 ```
 
-The 'fingerprint' shown by `apt-key finger` (the second line) should exactly match `0583 41C6 8FC8 DE60 17D7 75A1 B411 2585 D386 EB94`; for example:
+The 'fingerprint' shown by `apt-key finger` (the second line) should exactly match `0583 41C6 8FC8 DE60 17D7  75A1 B411 2585 D386 EB94`; for example:
 
 ```
 $ apt-key finger 'opensource+hhvm@fb.com'
