@@ -41,7 +41,7 @@ apt-get update
 apt-get install hhvm
 ```
 
-## Obtaining A Minor Release
+## Obtaining A Specific Release
 
 It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM 3.30) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
 
