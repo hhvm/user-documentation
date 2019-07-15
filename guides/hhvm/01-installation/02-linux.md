@@ -43,16 +43,16 @@ apt-get install hhvm
 
 ## Obtaining A Minor Release
 
-It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM3.30.x) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
+It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM 3.30) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
 
 `deb https://dl.hhvm.com/<%operating system%> <%operating system version%>-<%major%>.<%minor%>`
 
-So in order to get HHVM4.8 on ubuntu bionic (18.04) you would use
+So in order to get HHVM 4.8 on ubuntu bionic (18.04) you would use
 `deb https://dl.hhvm.com/ubuntu bionic-4.8`
 
-You will automatically receive patches such as HHVM 4.8.1, but your won't upgrade to HHVM4.9 and up.
+You will automatically receive patches such as HHVM 4.8.1, but your won't upgrade to HHVM 4.9 and up.
 
-In order to get HHVM3.30 use:
+In order to get HHVM 3.30 use:
 `deb https://dl.hhvm.com/ubuntu bionic-lts-3.30 main`
 This is how lts release were previously released.
 
@@ -99,7 +99,7 @@ curl https://dl.hhvm.com/conf/hhvm.gpg.key | apt-key add -
 apt-key finger 'opensource+hhvm@fb.com'
 ```
 
-The 'fingerprint' shown by `apt-key finger` (the second line) should exactly match `0583 41C6 8FC8 DE60 17D7  75A1 B411 2585 D386 EB94`; for example:
+The 'fingerprint' shown by `apt-key finger` (the second line) should exactly match `0583 41C6 8FC8 DE60 17D7 75A1 B411 2585 D386 EB94`; for example:
 
 ```
 $ apt-key finger 'opensource+hhvm@fb.com'
