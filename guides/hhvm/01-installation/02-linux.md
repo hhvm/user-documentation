@@ -5,7 +5,9 @@ While you can [build from source](/hhvm/installation/building-from-source), it i
 
 These instructions require root; use `su -` or `sudo -i` to get a root shell first.
 
-## Ubuntu
+## Obtaining The Latest Stable Version
+
+### Ubuntu
 
 ```
 apt-get update
@@ -17,7 +19,7 @@ apt-get update
 apt-get install hhvm
 ```
 
-## Debian 8 Jessie, Debian 9 Stretch
+### Debian 8 Jessie, Debian 9 Stretch
 
 ```
 apt-get update
@@ -29,7 +31,7 @@ apt-get update
 apt-get install hhvm
 ```
 
-## Debian 7 Wheezy
+### Debian 7 Wheezy
 
 ```
 apt-get update
@@ -45,21 +47,20 @@ apt-get install hhvm
 
 It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM 3.30) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
 
-`deb https://dl.hhvm.com/<%operating system%> <%operating system version%>-<%major%>.<%minor%>`
+`apt-add-repository "deb https://dl.hhvm.com/<%operating system%> <%operating system version%>-<%major%>.<%minor%>"`
 
 So in order to get HHVM 4.8 on ubuntu bionic (18.04) you would use
-`deb https://dl.hhvm.com/ubuntu bionic-4.8`
+`apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-4.8"`
 
 You will automatically receive patches such as HHVM 4.8.1, but you won't be upgraded to HHVM 4.9 and up.
 
 In order to get HHVM 3.30 LTS use:
-`deb https://dl.hhvm.com/ubuntu bionic-lts-3.30 main`
+`apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-lts-3.30 main"`
 This is how lts release were previously released.
 
 ## Choosing A Version
 
-If you are working on a new project, you can install the newest release version by not specifying a version number like so:
-`deb https://dl.hhvm.com/ubuntu bionic main`
+If you are working on a new project, you can install the [latest stable version](#Obtaining-The-Latest-Stable-Version).
 
 If you have an existing project, you can upgrade one release at a time using the [blog](/blog) to read up on breaking changes.
 
