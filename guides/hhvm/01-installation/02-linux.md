@@ -47,10 +47,10 @@ apt-get install hhvm
 
 It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM 3.30) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
 
-`apt-add-repository "deb https://dl.hhvm.com/<%operating system%> <%operating system version%>-<%major%>.<%minor%>"`
+`apt-add-repository "deb https://dl.hhvm.com/<%operating system%> <%operating system version%>-<%major%>.<%minor%> main"`
 
 So in order to get HHVM 4.8 on ubuntu bionic (18.04) you would use
-`apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-4.8"`
+`apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-4.8 main"`
 
 You will automatically receive patches such as HHVM 4.8.1, but you won't be upgraded to HHVM 4.9 and up.
 
