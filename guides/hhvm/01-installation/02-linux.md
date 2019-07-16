@@ -56,7 +56,7 @@ You will automatically receive patches such as HHVM 4.8.1, but you won't be upgr
 
 In order to get HHVM 3.30 LTS use:
 `apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-lts-3.30 main"`
-This is how lts release were previously released.
+This is how LTS release were previously released.
 
 ## Choosing A Version
 
