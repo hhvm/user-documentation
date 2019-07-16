@@ -62,11 +62,11 @@ This is how lts release were previously released.
 
 If you are working on a new project, you can install the [latest stable version](#Obtaining-The-Latest-Stable-Version).
 
-If you have an existing project, you can upgrade one release at a time using the [blog](/blog) to read up on breaking changes.
+If you have an existing project, you can upgrade one release at a time using the [blog](//hhvm.com/blog) to read up on breaking changes.
 
-If you are inheriting a project and you don't know what version it was written against, check the composer.json file. This file is usually found at the root of a project (right next to .hhconfig). This file ought to include a version requirement like `"hhvm": "^4.8"`. If not, check the last time a commit was made and find what HHVM version was recent at that time using the [blog](/blog).
+If you are inheriting a project and you don't know what version it was written against, check the composer.json file. This file is usually found at the root of a project (right next to .hhconfig). This file ought to include a version requirement like `"hhvm": "^4.8"`. If not, check the last time a commit was made and find what HHVM version was recent at that time using the [blog](//hhvm.com/blog).
 
-Whatever you do, please make sure that your chosen HHVM version is receiving security updates. The [blog](/blog) will inform you on what versions supported.
+Whatever you do, please make sure that your chosen HHVM version is receiving security updates. The [blog](//hhvm.com/blog) will inform you on what versions supported.
 
 ## Other Packages
 
