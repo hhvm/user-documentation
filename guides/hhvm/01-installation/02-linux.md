@@ -31,18 +31,6 @@ apt-get update
 apt-get install hhvm
 ```
 
-### Debian 7 Wheezy
-
-```
-apt-get update
-apt-get install -y apt-transport-https software-properties-common
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
-
-echo deb https://dl.hhvm.com/debian wheezy main > /etc/apt/sources.list.d/hhvm.list
-apt-get update
-apt-get install hhvm
-```
-
 ## Obtaining A Specific Release
 
 It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM 3.30) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
