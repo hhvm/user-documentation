@@ -19,3 +19,6 @@ echo "** Setting up ElasticBeanstalk..."
 echo -e "1\n1\nn\n" | eb init -r us-west-2
 echo "** Launching deploy script..."
 bin/deploy-to-staging.sh
+# deploy-to-staging ends with running the unit tests remotely
+echo "** Swapping prod and staging..."
+eb swap

@@ -10,5 +10,5 @@ fi
 cd /var/www
 # init.sh removes dev dependencies as they are not required
 # to run the site, but we need them here.
-hhvm /opt/composer/composer.phar install
+php /opt/composer/composer.phar install
 exec bin/test-staging.sh

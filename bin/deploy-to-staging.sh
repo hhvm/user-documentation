@@ -69,9 +69,9 @@ eb status $STAGING_ENV
 DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
 echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
 eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
-#echo "** Running test suite against staging:"
-#echo "**    docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh"
-#docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh
+echo "** Running test suite against staging:"
+echo "**    docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh"
+docker run $IMAGE_NAME /var/www/container-bin/test-staging.sh
 echo "** Next steps:"
 echo "**  - $ eb swap # swaps staging.docs.hhvm.com and docs.hhvm.com; this"
 echo "**      also be used to revert a bad push"
