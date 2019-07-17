@@ -3,21 +3,11 @@ Debian platforms.
 
 While you can [build from source](/hhvm/installation/building-from-source), it is generally advisable for ease of installation and stability to use a prebuilt package.
 
-Here are the supported distributions:
-
-| Distribution | HHVM 3.21 | HHVM 3.24 | HHVM 3.25 | Nightlies |
-|--------------|-----------|-----------|-----------|---------- |
-| Debian 7 Wheezy | Yes | Yes | No | No | No |
-| Debian 8 Jessie | Yes | Yes | Yes | Yes | Yes |
-| Debian 9 Stretch | No | Yes | Yes| Yes | Yes |
-| Ubuntu 14.04 Trusty | Yes | Yes | Yes | Yes | Yes |
-| Ubuntu 16.04 Xenial | Yes | Yes | Yes | Yes | Yes |
-| Ubuntu 17.10 Artful | No | Yes | Yes | Yes | Yes |
-| Ubuntu 18.04 Bionic | No | No | Yes | Yes | Yes |
-
 These instructions require root; use `su -` or `sudo -i` to get a root shell first.
 
-## Ubuntu
+## Obtaining The Latest Stable Version
+
+### Ubuntu
 
 ```
 apt-get update
@@ -29,7 +19,7 @@ apt-get update
 apt-get install hhvm
 ```
 
-## Debian 8 Jessie, Debian 9 Stretch
+### Debian 8 Jessie, Debian 9 Stretch
 
 ```
 apt-get update
@@ -41,29 +31,30 @@ apt-get update
 apt-get install hhvm
 ```
 
-## Debian 7 Wheezy
+## Obtaining A Specific Release
 
-```
-apt-get update
-apt-get install -y apt-transport-https software-properties-common
-apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94
+It is generally recommended to follow the newest version possible, provided your codebase is compatible with that version. You can fetch all supported versions (except for HHVM 3.30) by adding that version to `/etc/apt/sources.list`. The syntax you need is:
 
-echo deb https://dl.hhvm.com/debian wheezy main > /etc/apt/sources.list.d/hhvm.list
-apt-get update
-apt-get install hhvm
-```
+`apt-add-repository "deb https://dl.hhvm.com/<%operating system%> <%operating system version%>-<%major%>.<%minor%> main"`
 
-## Obtaining LTS Releases
+So in order to get HHVM 4.8 on ubuntu bionic (18.04) you would use
+`apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-4.8 main"`
 
-The commands above will get you the latest stable point release of HHVM. If you want an [LTS release](/hhvm/installation/introduction#prebuilt-packages__lts-releases), then append `-lts` and the LTS version in the `deb` line.
+You will automatically receive patches such as HHVM 4.8.1, but you won't be upgraded to HHVM 4.9 and up.
 
-e.g., the following `deb` line in `/etc/apt/sources.list` will get all stable updates on Ubuntu 16.04 "Xenial":
+In order to get HHVM 3.30 LTS use:
+`apt-add-repository "deb https://dl.hhvm.com/ubuntu bionic-lts-3.30 main"`
+This is how LTS releases were previously released.
 
-    deb https://dl.hhvm.com/ubuntu xenial main
+## Choosing A Version
 
-In order to get only LTS updates in the 3.15 series, change that to:
+If you are working on a new project, you can install the [latest stable version](#Obtaining-The-Latest-Stable-Version).
 
-    deb https://dl.hhvm.com/ubuntu xenial-lts-3.15 main
+If you have an existing project, you can upgrade one release at a time using the [blog](//hhvm.com/blog) to read up on breaking changes.
+
+If you are inheriting a project and you don't know what version it was written against, check the composer.json file. This file is usually found at the root of a project (right next to .hhconfig). This file ought to include a version requirement like `"hhvm": "^4.8"`. If not, check the last time a commit was made and find what HHVM version was recent at that time using the [blog](//hhvm.com/blog).
+
+Whatever you do, please make sure that your chosen HHVM version is receiving security updates. The [blog](//hhvm.com/blog) will inform you on what versions supported.
 
 ## Other Packages
 
