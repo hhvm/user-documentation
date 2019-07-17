@@ -13,9 +13,9 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\DefinitionFinder\{
   FileParser,
-  ScannedDefinition,
   ScannedClass,
   ScannedClassish,
+  ScannedDefinition,
   ScannedFunction,
   ScannedInterface,
   ScannedMethod,

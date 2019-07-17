@@ -2,12 +2,8 @@
 
 namespace HHVM\UserDocumentation\Tests;
 use function Facebook\FBExpect\expect;
-use type Facebook\HackTest\DataProvider;
+use type Facebook\HackTest\{DataProvider, TestGroup};
 
-/**
- * @group remote
- * @small
- */
 class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   public function notFoundPathProvider(): array<array<string>> {
     return [
@@ -18,7 +14,7 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     ];
   }
 
-  <<DataProvider('notFoundPathProvider')>>
+  <<DataProvider('notFoundPathProvider'), TestGroup('remote')>>
   public async function testNotFoundPages(string $path): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync($path);
     expect($response->getStatusCode())->toBeSame(404);
@@ -72,7 +68,7 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     ];
   }
 
-  <<DataProvider('redirectProvider')>>
+  <<DataProvider('redirectProvider'), TestGroup('remote')>>
   public async function testRedirects(
     string $from,
     string $to,
@@ -86,12 +82,14 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     expect($target)->toBeSame($to);
   }
 
+  <<TestGroup('remote')>>
   public async function testStaticResource404(): Awaitable<void> {
     list($response, $body) =
       await PageLoader::getPageAsync('/s/deadbeef/notfound');
     expect($response->getStatusCode())->toBeSame(404);
   }
 
+  <<TestGroup('remote')>>
   public function notFoundSuggestions(): array<(string, string)> {
     return [
       tuple('/map', '/hack/reference/class/HH.Map/'),
@@ -99,7 +97,7 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     ];
   }
 
-  <<DataProvider('notFoundSuggestions')>>
+  <<DataProvider('notFoundSuggestions'), TestGroup('remote')>>
   public async function testNotFoundSuggestion(
     string $notfound,
     string $suggestion,

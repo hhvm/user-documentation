@@ -4,12 +4,10 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type RobotsTxtController;
 use function Facebook\FBExpect\expect;
+use type Facebook\HackTest\TestGroup;
 
-/**
- * @group remote
- * @small
- */
 class RobotsTxtTest extends \Facebook\HackTest\HackTest {
+  <<TestGroup('remote')>>
   public async function testMainDomainAllowsCrawling(): Awaitable<void> {
     list($_, $body) =
       await PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt');
@@ -18,6 +16,7 @@ class RobotsTxtTest extends \Facebook\HackTest\HackTest {
     );
   }
 
+  <<TestGroup('remote')>>
   public async function testStagingDoesNotAllowCrawling(): Awaitable<void> {
     list($_, $body) =
       await PageLoader::getPageAsync('http://staging.docs.hhvm.com/robots.txt');

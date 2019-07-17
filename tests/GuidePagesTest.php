@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type Facebook\HackTest\DataProvider;
+use type Facebook\HackTest\{DataProvider, TestGroup};
 use type HHVM\UserDocumentation\GuidesNavData;
 use function Facebook\FBExpect\expect;
 
@@ -48,11 +48,7 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     ];
   }
 
-  /**
-   * @group remote
-   * @small
-   */
-  <<DataProvider('shortListOfGuidePages')>>
+  <<DataProvider('shortListOfGuidePages'), TestGroup('remote')>>
   public async function testGuidePageQuick(
     string $name,
     string $path,
@@ -69,10 +65,7 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     expect($body)->toContain($name);
   }
 
-  /**
-   * @group remote
-   * @small
-   */
+  <<TestGroup('remote')>>
   public async function testExamplesRender(): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync(
       '/hack/asynchronous-operations/examples',
@@ -84,10 +77,7 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     expect($body)->toContain('Hack\UserDocumentation\AsyncOps\Examples\Examples');
   }
 
-  /**
-   * @group remote
-   * @small
-   */
+  <<TestGroup('remote')>>
   public async function testGeneratedGuidesRender(): Awaitable<void> {
     list($response, $body) =
       await PageLoader::getPageAsync('/hhvm/configuration/INI-settings');

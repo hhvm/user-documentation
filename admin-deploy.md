@@ -59,5 +59,5 @@ Run `bin/deploy-to-staging.sh` - this will:
  - push the image to dockerhub
  - make a git commit updating the version in the AWS config
  - deploy it to staging.docs.hhvm.com
- - run a partial test suite remotely against staging.docs.hhvm.com (search the tests for `@group remote` to see what this does)
+ - run a partial test suite remotely against staging.docs.hhvm.com (search the tests for `<<TestGroup('remote')>>` to see what this does)
  - tell you the next steps :)

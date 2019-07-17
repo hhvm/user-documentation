@@ -2,13 +2,10 @@
 
 namespace HHVM\UserDocumentation\Tests;
 use function Facebook\FBExpect\expect;
-use type Facebook\HackTest\DataProvider;
+use type Facebook\HackTest\{DataProvider, TestGroup};
 
-/**
- * @group remote
- * @small
- */
 final class OpenSearchTest extends \Facebook\HackTest\HackTest {
+  <<TestGroup('remote')>>
   public async function testNoOpenSearchOnStaging(): Awaitable<void> {
     list($response, $body) =
       await PageLoader::getPageAsync('https://staging.docs.hhvm.com/');
@@ -16,6 +13,7 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
     expect($body)->toNotContain('application/opensearchdescription+xml');
   }
 
+  <<TestGroup('remote')>>
   public async function testOpenSearchOnProd(): Awaitable<void> {
     list($response, $body) =
       await PageLoader::getPageAsync('https://docs.hhvm.com/');
@@ -43,7 +41,7 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
     ];
   }
 
-  <<DataProvider('jumpProvider')>>
+  <<DataProvider('jumpProvider'), TestGroup('remote')>>
   public async function testJump(string $keyword, string $to): Awaitable<void> {
     $jump_url = '/j/'.$keyword;
 

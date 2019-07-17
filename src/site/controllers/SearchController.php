@@ -9,8 +9,10 @@
  *
  */
 
-use type Facebook\HackRouter\StringRequestParameter;
-use type Facebook\HackRouter\StringRequestParameterSlashes;
+use type Facebook\HackRouter\{
+  StringRequestParameter,
+  StringRequestParameterSlashes,
+};
 use type HHVM\UserDocumentation\{
   APIIndex,
   GuidePageSearchResult,

@@ -3,12 +3,8 @@
 namespace HHVM\UserDocumentation\Tests;
 
 use function Facebook\FBExpect\expect;
-use type Facebook\HackTest\DataProvider;
+use type Facebook\HackTest\{DataProvider, TestGroup};
 
-/**
- * @group remote
- * @small
- */
 class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
   public function autoLinkifyExamplesProvider(
   ): array<string, (string, string, string)> {
@@ -61,7 +57,7 @@ class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
     ];
   }
 
-  <<DataProvider('autoLinkifyExamplesProvider')>>
+  <<DataProvider('autoLinkifyExamplesProvider'), TestGroup('remote')>>
   public async function testAutoLinkify(
     string $source,
     string $keyword,

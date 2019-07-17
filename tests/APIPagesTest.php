@@ -12,7 +12,7 @@ use type HHVM\UserDocumentation\{
 
 use namespace HH\Lib\Vec;
 use function Facebook\FBExpect\expect;
-use type Facebook\HackTest\DataProvider;
+use type Facebook\HackTest\{DataProvider, TestGroup};
 
 class APIPagesTest extends \Facebook\HackTest\HackTest {
   public static function allAPIPages(): array<(string, NavDataNode)> {
@@ -70,11 +70,7 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
     await $this->testAPIPageQuick($name, $node);
   }
 
-  /**
-   * @group remote
-   * @small
-   */
-  <<DataProvider('shortListOfAPIPages')>>
+  <<DataProvider('shortListOfAPIPages'), TestGroup('remote')>>
   public async function testAPIPageQuick(
     string $_,
     NavDataNode $node,
