@@ -20,7 +20,7 @@ class FunctionishParameters extends PageSection {
   <<__Override>>
   public function getMarkdown(): ?string {
     $f = $this->definition;
-    if (!$f instanceof ScannedFunctionish) {
+    if (!$f is ScannedFunctionish) {
       return null;
     }
 

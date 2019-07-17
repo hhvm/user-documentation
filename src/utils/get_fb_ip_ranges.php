@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\{C, Vec, Str};
+use namespace HH\Lib\{C, Str, Vec};
 
 type TIPRange = (/* bitstring */ string, /* bitmask */ string);
 

@@ -13,8 +13,7 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\HackRouter\Codegen;
 
-use namespace Facebook\HackCodegen as hcg;
-use namespace Facebook\TypeAssert;
+use namespace Facebook\{HackCodegen as hcg, TypeAssert};
 
 final class RoutingCodegenBuildStep extends BuildStep {
   <<__Override>>

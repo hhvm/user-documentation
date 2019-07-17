@@ -24,7 +24,7 @@ async function simple_query_error(): Awaitable<int> {
   } catch (\AsyncMysqlQueryException $ex) {
     $qr = $ex->getResult();
     // Actually `AsyncMysqlQueryErrorResult`
-    \var_dump($qr instanceof \AsyncMysqlErrorResult);
+    \var_dump($qr is \AsyncMysqlErrorResult);
     \var_dump($qr->endTime());
     $conn->close();
     return 0;

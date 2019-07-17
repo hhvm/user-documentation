@@ -16,8 +16,10 @@ use function HHVM\UserDocumentation\{
 };
 use type Facebook\HackRouter\{RequestParameter, RequestParameters};
 use type Facebook\TypeAssert\IncorrectTypeException;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
-use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Facebook\Experimental\Http\Message\{
+  ResponseInterface,
+  ServerRequestInterface,
+};
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
 <<__ConsistentConstruct>>

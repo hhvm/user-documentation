@@ -9,8 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\GuidesIndex;
-use type HHVM\UserDocumentation\GuidesProduct;
+use type HHVM\UserDocumentation\{GuidesIndex, GuidesProduct};
 
 final class HomePageController extends WebPageController {
   <<__Override>>

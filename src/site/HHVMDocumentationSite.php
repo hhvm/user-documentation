@@ -10,8 +10,10 @@
  */
 
 use namespace Facebook\HackRouter;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
-use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type Facebook\Experimental\Http\Message\{
+  ResponseInterface,
+  ServerRequestInterface,
+};
 use namespace HH\Lib\Math;
 use namespace HH\Lib\Experimental\{Filesystem, IO};
 

@@ -14,13 +14,13 @@ namespace Facebook\HHAPIDoc\PageSections;
 use namespace Facebook\HHAPIDoc\DocBlock;
 use type Facebook\DefinitionFinder\ScannedFunctionish;
 
-use namespace HH\Lib\{C, Vec, Str};
+use namespace HH\Lib\{C, Str, Vec};
 
 class FunctionishReturnValues extends PageSection {
   <<__Override>>
   public function getMarkdown(): ?string {
     $f = $this->definition;
-    if (!$f instanceof ScannedFunctionish) {
+    if (!$f is ScannedFunctionish) {
       return null;
     }
 

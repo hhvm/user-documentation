@@ -53,7 +53,7 @@ final class AutoLinkifyInline extends Inlines\Link {
 
     $block_context = $context->getBlockContext();
     invariant(
-      $block_context instanceof BlockContext,
+      $block_context is BlockContext,
       'Expected block context to be a %s',
       BlockContext::class,
     );

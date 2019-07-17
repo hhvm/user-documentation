@@ -21,7 +21,7 @@ function construct_mcrouter(): \MCRouter {
     'enable_flush_cmd' => true, // Need this in order to use flushAll
   );
   $mc = new \MCRouter($options); // could also pass a persistence id string here
-  \var_dump($mc instanceof \MCRouter);
+  \var_dump($mc is \MCRouter);
   return $mc;
 }
 

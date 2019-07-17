@@ -9,9 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\APIIndex;
-use type HHVM\UserDocumentation\APIDefinitionType;
-use type HHVM\UserDocumentation\APIProduct;
+use type HHVM\UserDocumentation\{APIDefinitionType, APIIndex, APIProduct};
 
 use namespace HH\Lib\C;
 

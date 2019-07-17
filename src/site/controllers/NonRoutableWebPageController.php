@@ -9,10 +9,11 @@
  *
  */
 
-use type HHVM\UserDocumentation\LocalConfig;
-use type HHVM\UserDocumentation\UIGlyphIcon;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
-use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use type HHVM\UserDocumentation\{LocalConfig, UIGlyphIcon};
+use type Facebook\Experimental\Http\Message\{
+  ResponseInterface,
+  ServerRequestInterface,
+};
 
 use namespace HH\Lib\C;
 

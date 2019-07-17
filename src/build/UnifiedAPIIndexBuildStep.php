@@ -12,8 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\{C, Str};
-use namespace Facebook\TypeAssert;
-use namespace Facebook\HackCodegen as CG;
+use namespace Facebook\{HackCodegen as CG, TypeAssert};
 
 // Index of all definitions, so that markdown processing can
 // automatically linkify them

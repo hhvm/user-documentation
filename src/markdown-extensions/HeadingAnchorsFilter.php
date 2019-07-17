@@ -29,7 +29,7 @@ final class HeadingAnchorsFilter extends RenderFilter {
     RenderContext $_,
     ASTNode $heading,
   ): vec<ASTNode> {
-    if (!$heading instanceof Blocks\Heading) {
+    if (!$heading is Blocks\Heading) {
       return vec[$heading];
     }
 

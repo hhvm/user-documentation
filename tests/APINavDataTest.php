@@ -14,7 +14,9 @@ class APINavDataTest extends \Facebook\HackTest\HackTest {
       ->getNavData()['Classes']['children'];
     $have_ns_separator = false;
     foreach ($classes as $node) {
-      $node = (($x): NavDataNode ==> /* UNSAFE_EXPR */ $x)($node);
+      $node = (
+        ($x): NavDataNode ==> /* HH_FIXME[4110] need reified/enforceable */ $x
+      )($node);
       if (\strpos($node['name'], "HH\\") === 0) {
         $have_ns_separator = true;
         break;
@@ -29,7 +31,9 @@ class APINavDataTest extends \Facebook\HackTest\HackTest {
 
     $have_ns_separator = false;
     foreach ($classes as $node) {
-      $node = (($x): NavDataNode ==> /* UNSAFE_EXPR */ $x)($node);
+      $node = (
+        ($x): NavDataNode ==> /* HH_FIXME[4110] reified/enforceable */ $x
+      )($node);
       if (\strpos($node['name'], "HH\\") === 0) {
         $have_ns_separator = true;
 

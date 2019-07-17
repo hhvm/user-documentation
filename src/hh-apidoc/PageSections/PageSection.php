@@ -12,11 +12,11 @@
 namespace Facebook\HHAPIDoc\PageSections;
 
 use type Facebook\HHAPIDoc\{
-  Documentable,
   DocBlock\DocBlock,
+  Documentable,
   MarkdownBuilderContext,
 };
-use type Facebook\DefinitionFinder\{ScannedDefinition, ScannedClassish};
+use type Facebook\DefinitionFinder\{ScannedClassish, ScannedDefinition};
 
 <<__ConsistentConstruct>>
 abstract class PageSection {

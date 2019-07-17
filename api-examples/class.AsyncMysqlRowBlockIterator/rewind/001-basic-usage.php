@@ -56,7 +56,7 @@ async function iterate(): Awaitable<int> {
     if ($ret > -1) {
       $rbit->rewind(); // Go back to the beginning of AsyncMysqlBlockIterator
       while ($rbit->valid()) {
-        if ($rbit->current() instanceof \AsyncMysqlRow) {
+        if ($rbit->current() is \AsyncMysqlRow) {
           $ret++;
         }
         $rbit->next();

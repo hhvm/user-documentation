@@ -13,8 +13,8 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\DefinitionFinder\{
   HasScannedGenerics,
-  ScannedDefinition,
   ScannedClassish,
+  ScannedDefinition,
   ScannedFunction,
   ScannedFunctionish,
 };
@@ -35,11 +35,11 @@ abstract final class ScannedDefinitionFilters {
       return true;
     }
 
-    if ($def instanceof HasScannedGenerics && $def->getGenericTypes()) {
+    if ($def is HasScannedGenerics && $def->getGenericTypes()) {
       return true;
     }
 
-    if ($def instanceof ScannedClassish) {
+    if ($def is ScannedClassish) {
       foreach ($def->getMethods() as $method) {
         if (self::isHHSpecific($method)) {
           return true;
@@ -47,7 +47,7 @@ abstract final class ScannedDefinitionFilters {
       }
     }
 
-    if (!$def instanceof ScannedFunctionish) {
+    if (!$def is ScannedFunctionish) {
       return false;
     }
 
@@ -80,7 +80,7 @@ abstract final class ScannedDefinitionFilters {
   }
 
   private static function isUndefinedFunction(ScannedDefinition $def): bool {
-    if (!$def instanceof ScannedFunction) {
+    if (!$def is ScannedFunction) {
       return false;
     }
     if (self::isHHSpecific($def)) {

@@ -38,7 +38,7 @@ function from_parser(BaseParser $parser): vec<Documentable> {
     $top_level,
     $data ==>  {
       $class = $data['definition'];
-      if (!$class instanceof ScannedClassish) {
+      if (!$class is ScannedClassish) {
         return vec[];
       }
 

@@ -9,8 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\StaticResourceMap;
-use type HHVM\UserDocumentation\StaticResourceMapEntry;
+use type HHVM\UserDocumentation\{StaticResourceMap, StaticResourceMapEntry};
 
 abstract class :static:base extends :x:element {
   attribute

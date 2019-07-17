@@ -9,9 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\GuidesIndex;
-use type HHVM\UserDocumentation\GuidesProduct;
-use type HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\{GuidesIndex, GuidesProduct, URLBuilder};
 
 final class GuidesListController extends WebPageController {
   use GuidesListControllerParametersTrait;

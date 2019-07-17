@@ -9,18 +9,19 @@
  *
  */
 
-use type HHVM\UserDocumentation\Guides;
-use type HHVM\UserDocumentation\GuidesIndex;
-use type HHVM\UserDocumentation\GuidesNavData;
-use type HHVM\UserDocumentation\GuidesProduct;
-use type HHVM\UserDocumentation\HTMLFileRenderable;
-use type HHVM\UserDocumentation\NavDataNode;
-use type HHVM\UserDocumentation\PaginationDataNode;
-use type HHVM\UserDocumentation\UIGlyphIcon;
-use type HHVM\UserDocumentation\URLBuilder;
+use type HHVM\UserDocumentation\{
+  Guides,
+  GuidesIndex,
+  GuidesNavData,
+  GuidesProduct,
+  HTMLFileRenderable,
+  NavDataNode,
+  PaginationDataNode,
+  UIGlyphIcon,
+  URLBuilder,
+};
 
 use function HHVM\UserDocumentation\type_alias_structure;
-
 
 use namespace Facebook\{TypeAssert, TypeSpec};
 use namespace HH\Lib\{C, Dict};
@@ -67,8 +68,8 @@ final class GuidePageController extends WebPageController {
       return;
     }
     list($guide, $page) = $redirect_to;
-    $page =
-      $page ?? C\firstx(GuidesIndex::getPages($params['Product'], $guide));
+    $page = $page ??
+      C\firstx(GuidesIndex::getPages($params['Product'], $guide));
     throw new RedirectException(GuidePageControllerURIBuilder::getPath(shape(
       'Product' => $params['Product'],
       'Guide' => $guide,
@@ -78,8 +79,11 @@ final class GuidePageController extends WebPageController {
 
   <<__Override>>
   public async function getTitleAsync(): Awaitable<string> {
-    list($product, $guide, $page) =
-      tuple($this->getProduct(), $this->getGuide(), $this->getPage());
+    list($product, $guide, $page) = tuple(
+      $this->getProduct(),
+      $this->getGuide(),
+      $this->getPage(),
+    );
     return self::invariantTo404(
       () ==> Guides::normalizeName($product, $guide, $page),
     );
@@ -185,9 +189,9 @@ final class GuidePageController extends WebPageController {
     $head_page = key(&$sibling_pages);
 
     if ($page === $head_page) {
-      list($adjacent_guide, $adjacent_guide_data) =
-        $this->getAdjacentGuide($guides, $guide, $next);
-      if ($adjacent_guide_data !== null) {
+      $adj = $this->getAdjacentGuide($guides, $guide, $next);
+      if ($adj !== null) {
+        list($adjacent_guide, $adjacent_guide_data) = $adj;
         $guide_pages = $adjacent_guide_data['children'];
         $guide_pages = $next ? $guide_pages : array_reverse($guide_pages);
         $adjacent_data = reset(&$guide_pages);
@@ -214,8 +218,8 @@ final class GuidePageController extends WebPageController {
     dict<string, NavDataNode> $guides,
     string $current_guide,
     bool $next = false,
-  ): (?string, ?NavDataNode) {
-    $adj_guide = tuple(null, null);
+  ): ?(string, NavDataNode) {
+    $adj_guide = null;
     $guides = $next ? array_reverse($guides) : $guides;
     foreach ($guides as $guide => $data) {
       if ($guide === $current_guide) {

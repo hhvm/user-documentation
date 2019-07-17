@@ -23,7 +23,7 @@ class NameHeading extends PageSection {
     $def = $this->definition;
     $md .= $def->getName();
 
-    if ($def instanceof ScannedFunctionish) {
+    if ($def is ScannedFunctionish) {
       $md .= '()';
     }
 

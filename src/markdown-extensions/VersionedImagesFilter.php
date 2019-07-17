@@ -22,7 +22,7 @@ final class VersionedImagesFilter extends RenderFilter {
     RenderContext $_,
     ASTNode $node,
   ): vec<ASTNode> {
-    if (!$node instanceof Inlines\Image) {
+    if (!$node is Inlines\Image) {
       return vec[$node];
     }
 

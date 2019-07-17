@@ -15,5 +15,5 @@ $m = Map {
 
 $imm_set = $m->toImmSet();
 
-var_dump($imm_set instanceof \HH\ImmSet);
+var_dump($imm_set is \HH\ImmSet<_>);
 var_dump($imm_set);

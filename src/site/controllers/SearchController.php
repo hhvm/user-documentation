@@ -13,9 +13,9 @@ use type Facebook\HackRouter\StringRequestParameter;
 use type Facebook\HackRouter\StringRequestParameterSlashes;
 use type HHVM\UserDocumentation\{
   APIIndex,
+  GuidePageSearchResult,
   GuidesIndex,
   GuidesProduct,
-  GuidePageSearchResult,
   SearchResult,
   SearchScores,
 };

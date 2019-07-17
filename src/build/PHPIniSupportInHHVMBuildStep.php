@@ -59,14 +59,12 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
   private function getPHPSettingsWithURLs(): dict<string, string> {
     // The HTML is not well formatted. We know that. Turn off outputting errors.
     \libxml_use_internal_errors(true);
-    // UNSAFE
-    $dom = new \DomDocument();
+    $dom = new \DOMDocument();
     $html_content = \HH\Asio\join(
       \HH\Asio\curl_exec('http://php.net/manual/en/ini.list.php')
     );
     $dom->loadHTML($html_content);
-    // UNSAFE
-    $xpath = new \DomXPath($dom);
+    $xpath = new \DOMXPath($dom);
     // Query all the settings with URL references
     $nodes = $xpath->query("//tbody//tr//td//a");
 

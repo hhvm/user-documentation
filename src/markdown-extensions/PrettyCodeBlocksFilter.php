@@ -27,10 +27,10 @@ final class PrettyCodeBlocksFilter extends RenderFilter {
     RenderContext $_,
     ASTNode $node,
   ): vec<ASTNode> {
-    if (!$node instanceof Blocks\CodeBlock) {
+    if (!$node is Blocks\CodeBlock) {
       return vec[$node];
     }
-    if ($node instanceof PrettyCodeBlock) {
+    if ($node is PrettyCodeBlock) {
       return vec[$node];
     }
 

@@ -15,10 +15,10 @@ use type Facebook\HHAPIDoc\Documentable;
 use type Facebook\DefinitionFinder\{
   AbstractnessToken,
   FinalityToken,
-  ScannedDefinition,
   ScannedClass,
   ScannedClassish,
   ScannedConstant,
+  ScannedDefinition,
   ScannedFunction,
   ScannedGeneric,
   ScannedInterface,
@@ -71,7 +71,7 @@ final class DataMerger {
         $$,
         $parent ==> {
           $def = $parent['definition'];
-          if ($def instanceof ScannedClassish) {
+          if ($def is ScannedClassish) {
             // Type refinement
             $parent['definition'] = $def;
             return $parent;
@@ -127,23 +127,23 @@ final class DataMerger {
       return $a;
     }
 
-    if ($a instanceof ScannedClassish) {
+    if ($a is ScannedClassish) {
       return self::mergeClassishPair($a, $b);
     }
 
-    if ($a instanceof ScannedFunction) {
+    if ($a is ScannedFunction) {
       return self::mergeFunctionPair($a, $b);
     }
 
-    if ($a instanceof ScannedMethod) {
+    if ($a is ScannedMethod) {
       return self::mergeMethodPair($a, $b);
     }
 
-    if ($a instanceof ScannedConstant) {
+    if ($a is ScannedConstant) {
       return self::mergeConstantPair($a, $b);
     }
 
-    if ($a instanceof ScannedProperty) {
+    if ($a is ScannedProperty) {
       return self::mergePropertyPair($a, $b);
     }
 
@@ -154,7 +154,7 @@ final class DataMerger {
     ScannedProperty $a,
     ScannedDefinition $b,
   ): ScannedProperty {
-    assert($b instanceof ScannedProperty);
+    assert($b is ScannedProperty);
 
     invariant(
       $a->isStatic() === $b->isStatic(),
@@ -170,7 +170,7 @@ final class DataMerger {
     }
 
     return new ScannedProperty(
-      $a->getAST(),
+      $a->getASTx(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
@@ -186,7 +186,7 @@ final class DataMerger {
     ScannedConstant $a,
     ScannedDefinition $b,
   ): ScannedConstant {
-    assert($b instanceof ScannedConstant);
+    assert($b is ScannedConstant);
 
     $value = $a->getValue();
     if ($value->hasStaticValue()) {
@@ -197,7 +197,7 @@ final class DataMerger {
     }
 
     return new ScannedConstant(
-      $a->getAST(),
+      $a->getASTx(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
@@ -443,9 +443,9 @@ final class DataMerger {
     ScannedFunction $a,
     ScannedDefinition $b,
   ): ScannedFunction {
-    assert($b instanceof ScannedFunction);
+    assert($b is ScannedFunction);
     return new ScannedFunction(
-      $a->getAST(),
+      $a->getASTx(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
@@ -460,7 +460,7 @@ final class DataMerger {
     ScannedMethod $a,
     ScannedDefinition $b,
   ): ScannedMethod {
-    assert($b instanceof ScannedMethod);
+    assert($b is ScannedMethod);
 
     if ($a->isPrivate() || $b->isPrivate()) {
       $visibility = VisibilityToken::T_PRIVATE;
@@ -516,7 +516,7 @@ final class DataMerger {
     }
 
     return new ScannedMethod(
-      $a->getAST(),
+      $a->getASTx(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a_attributes, $b->getAttributes()),
@@ -578,7 +578,7 @@ final class DataMerger {
     }
 
     return new ScannedParameter(
-      $a->getAST(),
+      $a->getASTx(),
       self::mergeNames($a->getName(), $b->getName()),
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
@@ -596,7 +596,7 @@ final class DataMerger {
     ScannedClassish $a,
     ScannedDefinition $b,
   ): ScannedClassish {
-    assert($b instanceof ScannedClassish);
+    assert($b is ScannedClassish);
 
     $name = self::mergeNames($a->getName(), $b->getName());
 
@@ -608,18 +608,18 @@ final class DataMerger {
       $name,
     );
 
-    if ($a instanceof ScannedClass) {
+    if ($a is ScannedClass) {
       $class = ScannedClass::class;
-    } else if ($a instanceof ScannedInterface) {
+    } else if ($a is ScannedInterface) {
       $class = ScannedInterface::class;
-    } else if ($a instanceof ScannedTrait) {
+    } else if ($a is ScannedTrait) {
       $class = ScannedTrait::class;
     } else {
       invariant_violation("Don't know how to handle class %s", \get_class($a));
     }
 
     return new $class(
-      $a->getAST(),
+      $a->getASTx(),
       $name,
       $a->getContext(),
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),

@@ -17,7 +17,7 @@ trait XHPGetRequest {
   protected function getRequest(): ServerRequestInterface {
     $x = $this->getContext('ServerRequestInterface');
     invariant(
-      $x instanceof ServerRequestInterface,
+      $x is ServerRequestInterface,
       '%s is not a ServerRequestInterface',
       gettype($x).' ('.get_class($x).')',
     );

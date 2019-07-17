@@ -21,10 +21,10 @@ final class InternalMarkdownLinksFilter extends RenderFilter {
     RenderContext $_,
     ASTNode $node,
   ): vec<ASTNode> {
-    if ($node instanceof Inlines\Link) {
+    if ($node is Inlines\Link) {
       return $this->filterLink($node);
     }
-    if ($node instanceof Inlines\AutoLink) {
+    if ($node is Inlines\AutoLink) {
       return $this->filterAutoLink($node);
     }
     return vec[$node];

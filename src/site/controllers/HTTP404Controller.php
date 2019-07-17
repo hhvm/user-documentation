@@ -9,9 +9,11 @@
  *
  */
 
-use type HHVM\UserDocumentation\APILegacyRedirectData;
-use type HHVM\UserDocumentation\JumpIndexData;
-use type HHVM\UserDocumentation\LegacyRedirects;
+use type HHVM\UserDocumentation\{
+  APILegacyRedirectData,
+  JumpIndexData,
+  LegacyRedirects,
+};
 
 final class HTTP404Controller extends NonRoutableWebPageController {
   <<__Override>>

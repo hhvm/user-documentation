@@ -21,11 +21,10 @@ use type Facebook\DefinitionFinder\{
   ScannedMethod,
   ScannedTrait,
 };
-use namespace Facebook\HHAPIDoc;
+use namespace Facebook\{HHAPIDoc, TypeAssert};
 use namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\HHAPIDoc\Documentable;
 use namespace HH\Lib\{C, Dict, Str, Tuple, Vec};
-use namespace Facebook\TypeAssert;
 
 final class HHAPIDocBuildStep extends BuildStep {
   <<__Override>>
@@ -130,13 +129,13 @@ final class HHAPIDocBuildStep extends BuildStep {
       $documentables,
       $d ==> {
         if ($type === APIDefinitionType::CLASS_DEF) {
-          return $d['definition'] instanceof ScannedClass;
+          return $d['definition'] is ScannedClass;
         }
         if ($type === APIDefinitionType::INTERFACE_DEF) {
-          return $d['definition'] instanceof ScannedInterface;
+          return $d['definition'] is ScannedInterface;
         }
         if ($type === APIDefinitionType::TRAIT_DEF) {
-          return $d['definition'] instanceof ScannedTrait;
+          return $d['definition'] is ScannedTrait;
         }
         invariant_violation('unhandled type: %s', $type);
       },
@@ -198,7 +197,7 @@ final class HHAPIDocBuildStep extends BuildStep {
   ): dict<string, APIFunctionIndexEntry> {
     $functions = Dict\filter(
       $documentables,
-      $d ==> $d['definition'] instanceof ScannedFunction,
+      $d ==> $d['definition'] is ScannedFunction,
     );
     $html_paths = HTMLPaths::get($product);
     return Dict\pull(
@@ -223,7 +222,7 @@ final class HHAPIDocBuildStep extends BuildStep {
 
   private static function correctHHIOnlyDefs(Documentable $def): Documentable {
     $obj = $def['definition'];
-    if (!$obj instanceof ScannedFunction) {
+    if (!$obj is ScannedFunction) {
       return $def;
     }
     $to_fix = keyset[
@@ -236,7 +235,7 @@ final class HHAPIDocBuildStep extends BuildStep {
       return $def;
     }
     $def['definition'] = new ScannedFunction(
-      $obj->getAST(),
+      $obj->getASTx(),
       "HH\\".$obj->getName(),
       $obj->getContext(),
       $obj->getAttributes(),
@@ -297,16 +296,16 @@ final class HHAPIDocBuildStep extends BuildStep {
       Log::v('.');
       $md = $builder->getDocumentation($documentable);
       $what = $documentable['definition'];
-      if ($what instanceof ScannedMethod) {
+      if ($what is ScannedMethod) {
         $parent = TypeAssert\not_null($documentable['parent']);
         $path = $md_paths->getPathForClassishMethod(
           self::getClassishAPIDefinitionType($parent),
           $parent->getName(),
           $what->getName(),
         );
-      } else if ($what instanceof ScannedFunction) {
+      } else if ($what is ScannedFunction) {
         $path = $md_paths->getPathForFunction($what->getName());
-      } else if ($what instanceof ScannedClassish) {
+      } else if ($what is ScannedClassish) {
         $path = $md_paths->getPathForClassish(
           self::getClassishAPIDefinitionType($what),
           $what->getName(),
@@ -325,13 +324,13 @@ final class HHAPIDocBuildStep extends BuildStep {
   private static function getClassishAPIDefinitionType(
     ScannedDefinition $definition,
   ): APIDefinitionType {
-    if ($definition instanceof ScannedClass) {
+    if ($definition is ScannedClass) {
       return APIDefinitionType::CLASS_DEF;
     }
-    if ($definition instanceof ScannedInterface) {
+    if ($definition is ScannedInterface) {
       return APIDefinitionType::INTERFACE_DEF;
     }
-    if ($definition instanceof ScannedTrait) {
+    if ($definition is ScannedTrait) {
       return APIDefinitionType::TRAIT_DEF;
     }
     invariant_violation("Can't handle type %s", \get_class($definition));

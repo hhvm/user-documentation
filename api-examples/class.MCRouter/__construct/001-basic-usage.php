@@ -20,7 +20,7 @@ function construct_mcrouter(): void {
     ),
   );
   $mc = new \MCRouter($options); // could also pass a persistence id string here
-  \var_dump($mc instanceof \MCRouter);
+  \var_dump($mc is \MCRouter);
 }
 
 construct_mcrouter();

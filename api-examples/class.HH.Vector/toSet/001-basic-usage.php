@@ -7,5 +7,5 @@ $v = Vector {'red', 'green', 'red', 'blue', 'red', 'yellow', 'blue'};
 
 $set = $v->toSet();
 
-var_dump($set instanceof \HH\Set);
+var_dump($set is \HH\Set<_>);
 var_dump($set);

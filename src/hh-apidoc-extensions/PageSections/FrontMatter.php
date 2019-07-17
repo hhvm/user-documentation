@@ -43,7 +43,7 @@ final class FrontMatter extends PageSection {
     $class = $this->parent;
     if ($class) {
       $data['class'] = $class->getName();
-    } else if ($def instanceof ScannedClassish) {
+    } else if ($def is ScannedClassish) {
       $data['class'] = $def->getName();
     }
 

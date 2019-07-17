@@ -32,7 +32,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     }
 
     invariant(
-      $context instanceof BlockContext,
+      $context is BlockContext,
       'Expected context to be a %s',
       BlockContext::class,
     );

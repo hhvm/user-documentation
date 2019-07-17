@@ -15,5 +15,5 @@ $m = Map {
 
 $set = $m->toSet();
 
-var_dump($set instanceof \HH\Set);
+var_dump($set is \HH\Set<_>);
 var_dump($set);

@@ -10,11 +10,11 @@
  */
 
 use type HHVM\UserDocumentation\{
-  APIProduct,
   APIDefinitionType,
   APIIndex,
   APIIndexEntry,
   APINavData,
+  APIProduct,
   URLBuilder,
 };
 
