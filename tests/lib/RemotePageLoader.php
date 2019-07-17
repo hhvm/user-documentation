@@ -5,6 +5,7 @@ namespace HHVM\UserDocumentation\Tests;
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\Experimental\Filesystem;
+use namespace HH\Lib\Str;
 
 final class RemotePageLoader extends PageLoader {
   protected function __construct() {}
@@ -67,8 +68,8 @@ final class RemotePageLoader extends PageLoader {
     );
 
     foreach ($header_lines as $header_line) {
-      list($name, $value) = \explode(": ", $header_line);
-      $response = $response->withAddedHeader($name, $value);
+      list($name, $value) = Str\split($header_line, ": ");
+      $response = $response->withAddedHeader($name, vec[$value]);
     }
 
     return tuple($response, $body);
