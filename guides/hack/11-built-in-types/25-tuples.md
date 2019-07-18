@@ -1,7 +1,10 @@
 Suppose we wish to have a function return multiple values. We can do that by using a tuple containing two, three, four, or more elements. A
-tuple is an *ordered* set of two or more elements, which can have different types.  The number of elements in a particular tuple is fixed
-when that tuple is created.  After a tuple has been created, no elements can be added or removed, and the type of an existing element cannot
-be changed. However, the value of any element can be changed.
+tuple is an *ordered* set of two or more elements, which can have different types. The number of elements in a particular tuple is fixed
+when that tuple is created. After a tuple has been created, no elements can be added or removed. A tuple is a mutable value type. 
+This means that when you hand a tuple to a function or assign it to a local variable a logical copy is made.
+You can change the values at a given index by assigning using the subscript notation. This will change the type 
+of the value stored in the variable accordingly when needed. However you can not assign to an index that 
+did not exist when the tuple was created.
 
 Consider the case in which we want to have a pair of related values, one a string, the other an integer. For example:
 
@@ -12,7 +15,7 @@ function get_next_pair(): (string, int) { ... }
 ```
 
 A tuple value has the form of a comma-separated list of values delimited with parentheses and preceded by `tuple`, as in `tuple("apples", 25)`
-above.  As we can quickly deduce, that tuple has type *tuple of two elements, in the order `string` and `int`*, and that is the type of the
+above. As we can quickly deduce, that tuple has type *tuple of two elements, in the order `string` and `int`*, and that is the type of the
 argument expected by function `process_pair`, and returned by function `get_next_pair`.
 
 Note carefully that the tuple values `tuple("apples", 25)` and `tuple(25, "apples")` have *different and incompatible* types! Of course,
@@ -37,7 +40,7 @@ Here is a more exotic example of a type involve a tuple:
 This declares a nullable type for a tuple containing an `int` and a tuple, which in turn, contains a `string` and a `float`.
 
 For non-trivial tuple types, it can be cumbersome to write out the complete type. Fortunately, Hack provides a type-aliasing capability via
-`newtype` (and `type`).  For example:
+`newtype` (and `type`). For example:
 
 @@ tuples-examples/distance-between-Points.php @@
 
