@@ -1,5 +1,5 @@
-Suppose we wish to have a function return multiple values. We can do that by using a tuple containing two, three, four, or more elements. A
-tuple is an *ordered* set of two or more elements, which can have different types. The number of elements in a particular tuple is fixed
+Suppose we wish to have a function return multiple values. We can do that by using a tuple containing one or more elements. A
+tuple is an *ordered* set of one or more elements, which can have different types. The number of elements in a particular tuple is fixed
 when that tuple is created. After a tuple has been created, no elements can be added or removed. A tuple is a mutable value type. 
 This means that when you hand a tuple to a function or assign it to a local variable a logical copy is made.
 You can change the values at a given index by assigning using the subscript notation. This will change the type 
