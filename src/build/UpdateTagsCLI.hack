@@ -168,15 +168,16 @@ final class UpdateTagsCLI extends CLIBase {
     await $stdout->writeAsync(" - updating composer.json\n");
     $this->updateComposerJson($new_major_minor);
 
-    await $stdout->writeAsync(" - updating Dockerfile\n");
-    $path = LocalConfig::ROOT.'/Dockerfile';
-    \file_get_contents($path)
-      |> Str\replace(
-        $$,
-        'hhvm-proxygen:'.$old_major_minor.'-latest',
-        'hhvm-proxygen:'.$new_major_minor.'-latest',
-      )
-      |> \file_put_contents($path, $$);
+    await $stdout->writeAsync(" - updating Dockerfiles\n");
+    foreach (glob(LocalConfig::ROOT.'/.deploy/*.Dockerfile') as $path) {
+      \file_get_contents($path)
+        |> Str\replace(
+          $$,
+          'hhvm-proxygen:'.$old_major_minor.'-latest',
+          'hhvm-proxygen:'.$new_major_minor.'-latest',
+        )
+        |> \file_put_contents($path, $$);
+    }
     await $stdout->writeAsync(" - updating .travis.yml\n");
     $path = LocalConfig::ROOT.'/.travis.yml';
     \file_get_contents($path)
