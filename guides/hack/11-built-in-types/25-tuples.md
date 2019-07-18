@@ -1,4 +1,4 @@
-Suppose we wish to have a function return multiple values. We can do that by using a tuple containing one or more elements. A
+Suppose we wish to have a function return multiple values. We can do that by using a tuple containing two or more elements. A
 tuple is an *ordered* set of one or more elements, which can have different types. The number of elements in a particular tuple is fixed
 when that tuple is created. After a tuple has been created, no elements can be added or removed. A tuple is a mutable value type. 
 This means that when you hand a tuple to a function or assign it to a local variable a logical copy is made.
