@@ -169,7 +169,7 @@ final class UpdateTagsCLI extends CLIBase {
     $this->updateComposerJson($new_major_minor);
 
     await $stdout->writeAsync(" - updating Dockerfiles\n");
-    foreach (glob(LocalConfig::ROOT.'/.deploy/*.Dockerfile') as $path) {
+    foreach (\glob(LocalConfig::ROOT.'/.deploy/*.Dockerfile') as $path) {
       \file_get_contents($path)
         |> Str\replace(
           $$,
