@@ -15,7 +15,7 @@ Hack supports recursion; that is, a function can call itself directly or indirec
 @@ calling-a-function-examples/recursion.php @@
 
 By default, arguments are passed by value; however, if a parameter contains the `inout` modifier, the corresponding argument must also
-contain that modifier. See the `swap` function in [defining a fucntion](defining-a-function.md) for an example.
+contain that modifier. See the `swap` function in [defining a function](defining-a-function.md) for an example.
 
 ## Function calls in the presence of FormatString
 
