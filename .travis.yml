@@ -12,8 +12,10 @@ env:
   - secure: WXf08G5KtzKJSu74XAGkv8Cg/gUx1KjQ9g9a2mvAQDjWFsd0DZBCFqBAS0/po+Ukw/MogK1rze2sEx2/7xqnDl01N6J3QumFRhWAOu1HXByFpcT9dtSdeShjQhunx9hl7u9oPkWR17z8RjEzcV5RqH/8AnItqvYA4nhhNaQ1aMpxqsZD4zPWZqBVNqLEkeedxyePV5pAiAoCTnvmNe5uXo95JQaXzTkuERnUW5d0FzW/iYhVVYIz41N4uyhOVTVx9Jqm5re9xfj48ToaEkRuu1TpgPcg56tlK5XHZnSl8YKxLN0Ms7SeZURbfRZMuUx2gpid7vo+f6kUrzefA5vgwb3BYMMkQbC2huL4PxsBg36tbWVFBf5JLux39BcwCP6e0tgq50ahTXplvULLTzkNCEHHyA2QotaV0bx/+B0XgWSFyMi0QQiD8BF7H3fGcPjcVCNOHhkqylF10TpS40EFAxP/SGhKtgj+kky8OFfZKbMFvAXrRITDzDhWW/u3/E0tCFx3J0C3YXZsoNVKjdP03+bbDVWEaob9PcSZSn3FnQzXUIF201nzZ3klDgNvdNNdymyJn5+QixGWkAtehU51m9sJe9lsWOC6Ue3llW96IUxUcKK361jZ3ZzaW4J1Ayedkq01xogJQGeW3kcCLQkfc6ob/ri6Y6JBW6t9HyHDZIg=
 install:
 - docker pull hhvm/hhvm:$HHVM_VERSION
+- docker pull hhvm/hhvm-proxygen:$HHVM_VERSION
 script:
-- docker run --init -w /var/source -v $(pwd):/var/source hhvm/hhvm:$HHVM_VERSION ./.travis.sh
+- docker build -t hhvm/user-documentation:scratch -f .deploy/built-site.Dockerfile .
+- docker run --rm -w /var/www hhvm/user-documentation:scratch ./.travis-test.sh
 deploy:
   provider: script
   script: "./.travis-deploy.sh"
