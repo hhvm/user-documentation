@@ -3,7 +3,7 @@ provides the typechecker the necessary information to ensure that you are the co
 `Box<int>` as a parameter type to a function clearly shows the type that the `Box` should contain and the typechecker can use this information as well.
 
 However, with the exception of the return type for async functions `Awaitable<T>`, support for generics is only at the typechecker level
-via type annotations; they do not exist at runtime. Generic type parameters and arguments and stripped out (i.e., erased) before
+via type annotations; they do not exist at runtime. Generic type parameters and arguments are stripped out (i.e., erased) before
 execution. Using our Box example above, this means that `Box<int>` really becomes `Box` at runtime, and HHVM will allow you to pass
 non-`int` Boxes to the function.
 
