@@ -21,10 +21,13 @@ docker run --rm \
 
 echo "** Building Docker image..."
 cp hhvm.prod.ini "$REPO_OUT/"
-docker build \
-  -t "$IMAGE_NAME" \
-  -f .deploy/prod.Dockerfile \
-  "$REPO_OUT"
+cp .deploy/prod.Dockerfile "$REPO_OUT/Dockerfile"
+(
+  cd "$REPO_OUT"
+  docker build \
+    -t "$IMAGE_NAME" \
+    .
+)
 
 echo "** Installing ElasticBeanstalk CLI..."
 export PYTHONPATH="$(mktemp -d)"
