@@ -68,10 +68,12 @@ DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
 echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
 eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
 echo "** Running test suite against staging:"
-docker run --rm hhvm/user-documentation:scratch \
+docker run --rm \
   -w /var/www \
-  REMOTE_TEST_HOST=staging vendor/bin/hacktest \
- --filter-groups remote \
+  -e REMOTE_TEST_HOST=staging.docs.hhvm.com \
+  hhvm/user-documentation:scratch \
+  vendor/bin/hacktest \
+  --filter-groups remote \
  tests/
 echo "** Swapping prod and staging..."
 eb swap
