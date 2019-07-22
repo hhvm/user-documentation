@@ -86,8 +86,8 @@ constructor. It has no attribute values. Attempting to read the value of an unin
 
 ## __Memoize
 
-The presence of this attribute causes the designated method to cache automatically each value it looks up and returns, so future calls with 
-that same lookup can be retrieved more efficiently. The set of parameters is hashed into a single hash key, so changing the type, number,
+The presence of this attribute causes the designated method to automatically cache each value it looks up and returns, so future calls with
+that same parameters can be retrieved more efficiently. The set of parameters is hashed into a single hash key, so changing the type, number,
 and/or order of the parameters can change that key.
 
 This attribute can be applied to functions and static or instance methods; it has no attribute values.  Consider the following example:
