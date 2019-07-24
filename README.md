@@ -46,10 +46,9 @@ If you would like to build the site locally (e.g., to test your [content contrib
 These are the basic step-by-step instructions to get you up and running. It assumes certain packages are installed on your system. Click [here](installation-detailed.md) for detailed installation information.
 
 1. Clone this repository
-2. `cd path/to/user-documentation`
-3. `git submodule update --init`
-4. `php /path/to/composer.phar install` # Make sure you have composer downloaded
-7. `hhvm bin/build.php` # build the site!
+1. `cd path/to/user-documentation`
+1. `php /path/to/composer.phar install` # Make sure you have composer downloaded
+1. `hhvm bin/build.php` # build the site!
 
 Follow the next steps to access this build from a browser.
 
