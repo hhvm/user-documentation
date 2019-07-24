@@ -23,6 +23,13 @@ and the [ALE] project provides enhanced support for Hack.
 
 [hack-mode] provides a major mode for Emacs users.
 
+If you use a different editor or IDE with [LSP support], configure it
+to use `hh_client lsp`; if you use [HHAST], you might want to configure it to
+use `vendor/bin/hhast-lint --mode lsp`, but keep in mind this will lead to your
+editor automatically executing code from a project when that project is opened;
+for this reason, the ALE integration has HHAST disabled by default, and Visual
+Studio Code prompts to confirm before executing it.
+
 ### Dependency Management
 
 Hack dependencies are currently managed using [Composer], which must be executed
@@ -41,6 +48,7 @@ with PHP.  Composer can be thought of as an equivalent to `npm` or `yarn`.
 [HHAST]: https://github.com/hhvm/hhast
 [VSCode-Hack]: https://github.com/slackhq/vscode-hack/
 [Visual Studio Code]: https://code.visualstudio.com
+[LSP support]: https://microsoft.github.io/language-server-protocol/
 [fbexpect]: https://github.com/hhvm/fbexpect
 [hack-mode]: https://github.com/hhvm/hack-mode
 [hacktest]: https://github.com/hhvm/hacktest
