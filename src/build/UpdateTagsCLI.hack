@@ -176,6 +176,11 @@ final class UpdateTagsCLI extends CLIBase {
           'hhvm-proxygen:'.$old_major_minor.'-latest',
           'hhvm-proxygen:'.$new_major_minor.'-latest',
         )
+        |> Str\replace(
+          $$,
+          'hhvm:'.$old_major_minor.'-latest',
+          'hhvm:'.$new_major_minor.'-latest',
+        )
         |> \file_put_contents($path, $$);
     }
     await $stdout->writeAsync(" - updating .travis.yml\n");
