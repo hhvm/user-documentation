@@ -26,6 +26,7 @@ Flag | Description
 -----|------------
 `--hphp` | Signals to HHVM that we are doing an offline operation instead of executing PHP or Hack code.
 `-t hhbc` | `t` is for target. `hhbc` is for HHVM Bytecode. So the output of the repo will be HHVM bytecode.
+`--input-dir` | The directory containing the source files to compile into the repo.
 
 For a full list of options, see `hhvm --hphp --help`
 
@@ -55,8 +56,10 @@ hhvm --hphp -t hhbc --module src --module vendor --ffile public/index.php
 
 Flag | Description
 -----|------------
-`--module` | specifies a directory (module) to include in the repository
-`--ffile` | forces a specific file to include in the repository
+`--module` | specifies a directory (module) containing Hack code that should
+           | be added to the repository
+`--ffile`  | specifies a specific file containing Hack code that should be
+           | added to the repository
 
 ## Manually Deploying the Repo
 
@@ -95,7 +98,8 @@ There are two common complications:
 
 ### Entry point file must exist
 
-There are two alternative solutions:
+There are three alternative solutions:
+- `touch` the file (the content is irrelevant in repo-authoritative mode)
 - include the file in the static file cache (not usable in CLI mode).
 - use the `hhvm.server.allowed_files[]=` option to whitelist it
 
