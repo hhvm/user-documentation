@@ -16,14 +16,6 @@ Facebook's entire site runs on HHVM (desktop, API and mobile), both in developme
 * **Mac OS X**: HHVM has [experimental support](/hhvm/installation/mac) on Mac OS X.
 * **Windows**: HHVM is currently being ported over to [Windows](/hhvm/installation/windows).
 
-### Are there are any videos, presentations, etc. about HHVM?
-
-* For a discussion about HHVM and its benefits, please see [this PHP UK Conference 2013 presentation]
- (http://www.youtube.com/watch?v=Dwek7dZDFN0).
-* For a deep dive into the HHVM internals, please see [this QCon 2012 presentation](http://www.infoq.com/presentations/PHP-HHVM-Facebook).
-* Other information can be found in the references of [our Wikipedia page](http://en.wikipedia.org/wiki/HHVM).
-* Presentations from the [Hack Dev Day 2014](https://www.youtube.com/playlist?list=PLb0IAmt7-GS2fdbb1vVdP8Z8zx1l2L8YS).
-
 ## Users
 
 ### How do I install HHVM? Where are the binaries?
@@ -34,64 +26,46 @@ You can find more detailed installation information [here](/hhvm/installation/in
 
 ### When does HHVM release a new version?
 
-[Every 8 weeks](/hhvm/installation/release-schedule).
+[Every week](/hhvm/installation/release-schedule); each release is supported
+for 6 weeks.
 
-### Why is HHVM released every 8 weeks?
+### Why is HHVM released every week?
 
-At Facebook, HHVM is pushed every 2 weeks, but having everyone in the world update every 2 weeks would lead to too much testing and churn. After asking around this seems to be a good compromise between churn and getting new features. In the future we could switch to every 6 weeks or 10 weeks or any multiple of 2 that the community likes.
+This allows users to choose between many small updates, or fewer, larger
+updates.
 
 ### What code does HHVM currently run?
 
-* **Facebook**: HHVM has run [www.facebook.com](https://www.facebook.com) in production since 2013.
-* **WordPress**: [hhvm.com](http://hhvm.com), a WordPress blog, is running on HHVM.
-* **MediaWiki**: MediaWiki installations can run on HHVM, and [Wikipedia](http://wikipedia.org) has run on [HHVM since 2014](http://hhvm.com/blog/7205/wikipedia-on-hhvm).
-* Most other PHP frameworks. We run internal regression testing on 20 of the most popular ones to ensure continued compatibility.
+The following sites use Hack and HHVM:
 
-Here are some other places HHVM is being used: [https://github.com/facebook/hhvm/wiki/Users](https://github.com/facebook/hhvm/wiki/Users)
+* [Facebook](https://www.facebook.com)
+* [Slack](https://slack.com)
+* [Quizlet](https://quizlet.com)
+* This website - [source is available](https://github.com/hhvm/user-documentation).
 
-### What is known to be broken with HHVM?
-
-There are definitely issues that need to be addressed with HHVM. The [HHVM GitHub issues](https://github.com/facebook/hhvm/issues?labels=&page=1&state=open) describe bugs that exist with the current implementation.
-
-The HHVM team is working really hard to enhance functionality and fix bugs that currently exist.
+There is also [a wiki listing HHVM users](https://github.com/facebook/hhvm/wiki/Users).
 
 ### What do I do if I run into a problem (e.g., an error, fatal or segfault)?
 
-Please [submit an issue](https://github.com/facebook/hhvm/wiki/How-to-Report-Issues).
+If you believe you may have found a security issue, please [see HHVM's SECURITY.md](https://github.com/facebook/hhvm/blob/master/SECURITY.md); otherwise, please [submit an issue](https://github.com/facebook/hhvm/wiki/How-to-Report-Issues).
 
 For real-time discussion, the team tends to hang out in [#hhvm on IRC](http://webchat.freenode.net/?channels=hhvm) during working hours US Pacific time (and knowledgeable community members are often around at other times too).
 
 ### Should I use Proxygen or FastCGI?
 
-[Proxygen](/hhvm/basic-usage/proxygen) is full featured, very fast web server and generally easier to get started with out of the box. [FastCGI](/hhvm/advanced-usage/fastCGI) is a bit more configurable, but requires a separate web server (e.g., nginx) on the front of it.
+[Proxygen](/hhvm/basic-usage/proxygen) is strongly recommended, and used in production by Facebook.
+
+[FastCGI](/hhvm/advanced-usage/fastCGI) is not recommended, but available for
+legacy or niche use cases.
 
 ### When will HHVM support Apache or Nginx?
 
-[We do.](/hhvm/advanced-usage/fastCGI)
+HHVM can be used either with `mod_proxy` and the Proxygen server, or FastCGI.
 
-### What PHP extensions does HHVM currently support?
+Proxygen is recommended, but care is needed to forward headers appropriately.
 
-[Here is the list](/hhvm/extensions/introduction) of supported extensions.
-
-### What is the HHVM Wrapper?
-
-The HHVM wrapper provides a simpler interface to the HHVM binary for many common options (e.g., running in server or interp mode, compiling a repo-authoritative repo, dumping bytecode, running gdb). It is located at `hphp/tools/hhvm_wrapper.php`. You can see all of the available options by running:
-
-```
-./hphp/tools/hhvm_wrapper.php --help
-```
-
-### How do I resolve the "Failed to initialize central HHBC repository at `/var/www/.hhvm.hhbc`" error?
-
-Try deleting `/var/run/hhvm/hhvm.hhbc` and run your program again
 
 ## Configuration and Deployment
-
-### HHVM keeps crashing. Why?
-
-There can be many reasons. And it is tough to diagnose that general question. It could be a bug in HHVM. It could be that you need to increase the size of your [translation cache](/hhvm/configuration/INI-settings#jit-translation-cache-size). Or it could be other factors.
-
-The best thing to do is [file an issue](https://github.com/facebook/hhvm/issues) and at minimum give us the problem and a stack trace. You will get a much faster and more quality response if you also provide us as small as possible reproduction case with PHP or Hack code.
 
 ## Why is my code slow at startup?
 
@@ -102,47 +76,3 @@ So, in HHVM server mode, you start out by running the first couple requests in i
 After the first few requests, the JIT is on its way to optimizing.
 
 It is advisable, but not required, if you are running an HHVM server to send the server some explicit requests that are representative of what user requests will be coming through. You can use `curl`, for example, to send these requests. This way the JIT has the information necessary to make the best optimizations for your code before any requests are actually served.
-
-## Enabling Hack mode on PHP files in repo mode
-
-Have you seen an error like this?
-
-```
-Fatal error: Syntax only allowed in Hack files (<?hh) or with -v Eval.EnableHipHopSyntax=true
-```
-
-If you have a `<?php` file where you want to enable Hack syntax in [repo authoritative mode](/hhvm/advanced-usage/repo-authoritative), you have to make sure that you specify `hhvm.force_hh=true` in both the *repo compilation stage* and when *running code from the repo*.
-
-For example, if you have a file named `enable-hack-in-php.php` and you wanted to create a repo from that file and run it,  you would need to do something like the following:
-
-```
-# compilation of repo stage
-% hhvm --hphp -t hhbc -v AllVolatile=true -dhhvm.force_hh=true `enable-hack-in-php.php`
-
-# execution stage; hhvm.hhbc file location will vary
-% hhvm -dhhvm.force_hh=true  --file 'enable-hack-in-php.php' -vRepo.Authoritative=true -vRepo.Central.Path="/tmp/hphp_RdsESQ/hhvm.hhbc"
-```
-
-This isn't necessary when using Hack syntax in Hack (`<?hh`) files, only when wanting to use Hack syntax in PHP (`<?php`) files, which is unusual.
-
-## Running Code
-
-### How do I fix these timezone warnings?
-
-> It is not safe to rely on the system's timezone settings. Please use the date.timezone setting....
-
-This should be fixed in HHVM 3.12+ with [this commit](https://github.com/facebook/hhvm/commit/90509bc46a3ded9e6a95d4d406715ff0c059576d), but if you are using an earlier version, then update your `/etc/hhvm/php.ini` file to add:
-
-```
-date.timezone=America/Los_Angeles # or your appropriate timezone
-```
-
-### How do I fix the not running the Hack typechecker fatal error?
-
-> Fatal error: /home/user/sites/www/index.php appears to be a Hack file, but you do not appear to be running the Hack typechecker.....You can also set hhvm.hack.lang.look_for_typechecker=0 to disable this check (not recommended).
-
-This means you are trying to run files with HHVM, either local or via server requests, that are `<?hh` files, but are not being typechecked by `hh_client`.
-
-Ensure that you have the typechecker installed and setup as well.
-
-Make sure there is an `.hhconfig` somewhere in the root of your project.
