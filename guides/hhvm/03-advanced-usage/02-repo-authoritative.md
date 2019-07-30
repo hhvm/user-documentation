@@ -133,3 +133,79 @@ However, the downside to this is that all your code must be visible to HHVM ahea
 - `create_function()`
 - `require()`'ing or `include()`'ing files that are not in the repository
 - `fb_intercept`, `fb_rename_function` and similar
+
+## FastCGI
+
+We *strongly* recommend using the proxygen server instead of FastCGI; that said,
+repo-authoritative mode can be used in conjunction with FastCGI.
+
+The combination of repo-authoritative mode and FastCGI can lead to confusing
+path behavior:
+
+- if requested paths start with the `DOCUMENT_ROOT` FastCGI parameter, it is
+  removed from the start of the path
+- after transformation, the path is interpreted relative to the root of the
+  built repository - e.g. if `foo/index.hack` is in the repository, a request
+  for `foo/index.hack` will work even if HHVM's working directory or source root
+  is in `foo/`, or somewhere entirely different.
+- the `doc_root`/`hhvm.server.source_root` does affect file
+  operations, including reading or serving content from the static file cache.
+
+### NGINX
+
+For NGINX, a minimial configuration is:
+
+```
+events {
+    worker_connections  1024;
+}
+http {
+  server {
+    listen 8080;
+    server_name localhost;
+    location / {
+      fastcgi_pass localhost:9000;
+      include /usr/local/etc/nginx/fastcgi_params;
+    }
+  }
+}
+```
+
+This is assuming that hhvm is configured to handle any request, for example
+by using an `index.hack` document as the index document and 404 document.
+
+If you would prefer to map request URIs to Hack files inside NGINX, a
+configuration file like the following can be used:
+
+```
+events {
+    worker_connections  1024;
+}
+http {
+  server {
+    listen 8080;
+    server_name localhost;
+    location / {
+      root /var/www;
+      fastcgi_pass localhost:9000;
+      fastcgi_index public/index.hack;
+      fastcgi_param DOCUMENT_ROOT /var/www;
+      include /usr/local/etc/nginx/fastcgi_params;
+    }
+  }
+}
+```
+
+### Apache
+
+If using `mod_proxy_fcgi`, we recommend using the
+`ProxyFCGIBackendType GENERIC;` directive; alternatively, you can set the
+`hhvm.server.fix_path_info=true` to convert the default ('FPM') to the generic
+value within HHVM.
+
+For example:
+
+```
+ProxyFCGIBackendType GENERIC
+ProxyPass "/" "proxy:fcgi://localhost:9000/"
+```
