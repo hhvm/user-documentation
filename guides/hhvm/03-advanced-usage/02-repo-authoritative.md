@@ -143,11 +143,13 @@ The combination of repo-authoritative mode and FastCGI can lead to confusing
 path behavior:
 
 - if requested paths start with the `DOCUMENT_ROOT` FastCGI parameter, it is
-  is removed from the start of the path
+  removed from the start of the path
 - after transformation, the path is interpreted relative to the root of the
   built repository - e.g. if `foo/index.hack` is in the repository, a request
   for `foo/index.hack` will work even if HHVM's working directory or source root
   is in `foo/`, or somewhere entirely different.
+- the `doc_root`/`hhvm.server.source_root` does affect file
+  operations, including reading or serving content from the static file cache.
 
 ### NGINX
 
