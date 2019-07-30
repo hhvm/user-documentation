@@ -1,6 +1,10 @@
 #!/bin/bash
 set -e
 
+if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
+  exit 0
+fi
+
 DEPLOY_REV=$(git rev-parse --short HEAD)
 HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
 IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
