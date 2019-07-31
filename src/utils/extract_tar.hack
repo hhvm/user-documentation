@@ -102,6 +102,20 @@ function parse_tar(
         // tarballs with comment=COMMIT_HASH; just ignore it.
         $consume($size);
         break;
+      case 'x':
+        // Extended header, see https://tinyurl.com/pax-extended-header.
+        list($_, $extended_header_content) = Str\split($consume($size), ' ', 2);
+        list($key, $value) = Str\split($extended_header_content, '=', 2);
+        $value = Str\trim_right($value, "\n");
+        switch ($key) {
+          case 'path':
+            $next_file_name = $value;
+            break;
+          default:
+            throw
+              new \Exception("Tar extended header '$key' is not implemented");
+        }
+        break;
       default:
         throw new \Exception("Tar entry type '$type' is not implemented");
     }
