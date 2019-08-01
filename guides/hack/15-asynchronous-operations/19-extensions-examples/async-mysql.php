@@ -20,7 +20,7 @@ async function get_connection(): Awaitable<\AsyncMysqlConnection> {
 }
 
 async function fetch_user_name(\AsyncMysqlConnection $conn,
-                               int $user_id) : Awaitable<string> {
+                               int $user_id) : Awaitable<?string> {
   // Your table and column may differ, of course
   $result = await $conn->queryf(
     'SELECT name from test_table WHERE userID = %d',
@@ -35,7 +35,7 @@ async function fetch_user_name(\AsyncMysqlConnection $conn,
 }
 
 async function get_user_info(\AsyncMysqlConnection $conn,
-                             string $user): Awaitable<Vector<Map<string,string>>> {
+                             string $user): Awaitable<Vector<Map<string,?string>>> {
   $result = await $conn->queryf(
     'SELECT * from test_table WHERE name = %s',
     $conn->escapeString($user)

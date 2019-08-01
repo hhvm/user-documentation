@@ -35,7 +35,7 @@ async function get_num_rows(\AsyncMysqlConnection $conn): Awaitable<int> {
 }
 
 async function get_row_data(\AsyncMysqlConnection $conn):
-  Awaitable<Vector<Vector>> {
+  Awaitable<Vector<KeyedContainer<int, ?string>>> {
   $result = await $conn->query('SELECT * FROM test_table');
   return $result->vectorRows();
 }

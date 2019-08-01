@@ -25,7 +25,7 @@ async function simple_query(): Awaitable<?string> {
       'SELECT name FROM test_table WHERE userID = 1'
     );
     $conn->close();
-    return $result->vectorRows()[0];
+    return $result->vectorRows()[0][0];
   } catch (\AsyncMysqlConnectException $ex) { // implicitly constructed
     return "Connection Exception";
   } catch (\AsyncMysqlQueryException $ex) { // implicitly constructed
