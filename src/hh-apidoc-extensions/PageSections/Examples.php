@@ -18,19 +18,20 @@ use namespace HH\Lib\{C, Str, Vec};
 final class Examples extends PageSection {
   <<__Override>>
   public function getMarkdown(): ?string {
-    $path = LocalConfig::ROOT.'/api-examples/';
     if ($this->parent !== null) {
-      $path .= 'class.'.$this->parent->getName().'/';
+      $subdirectory = 'class.'.$this->parent->getName().'/';
     } else {
-      $path .= 'function';
+      $subdirectory = 'function.';
     }
-    $path .= Str\replace(
-      $this->definition->getName(),
-      "\\",
-      '.',
+    $subdirectory .= $this->definition->getName();
+
+    $path = Str\format(
+      '%s/api-examples/%s',
+      LocalConfig::ROOT,
+      Str\replace($subdirectory, '\\', '.'),
     );
 
-    $examples = Vec\concat(\glob($path.'/*.php'), \glob($path.'/*.php'))
+    $examples = Vec\concat(\glob($path.'/*.md'), \glob($path.'/*.php'))
       |> Vec\map($$, $file ==> \pathinfo($file, \PATHINFO_FILENAME))
       |> keyset($$);
 
