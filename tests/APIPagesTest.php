@@ -105,12 +105,46 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
   }
 
   public function getDoNotDocument(): vec<(string, APIDefinitionType)> {
-    // vec/dict/keyset are not classes; with HH prefix, they shouldn't exist
-    $classes = vec['vec', 'HH\\vec', 'dict', 'HH\\dict', 'keyset', 'HH\\keyset']
+    $classes = vec[
+      // vec/dict/keyset are not classes; with HH prefix, they shouldn't exist
+      'vec',
+      'HH\\vec',
+      'dict',
+      'HH\\dict',
+      'keyset',
+      'HH\\keyset',
+      // PHP classes
+      'DOMElement',
+      'IntlDateFormatter',
+      'SimpleXMLElement',
+      'stdClass',
+      // Explicitly excluded classes
+      '__PHP_Incomplete_Class',
+      'LazyIterable',
+      'LazyMapKeyedIterator',
+      'WaitHandle',
+    ]
       |> Vec\map($$, $x ==> tuple($x, APIDefinitionType::CLASS_DEF));
 
-    // Very unsupported
-    $functions = vec['type_structure', 'HH\\type_structure']
+    $functions = vec[
+      // Very unsupported
+      'type_structure',
+      'HH\\type_structure',
+      // PHP functions
+      'abs',
+      'array_slice',
+      'datefmt_create',
+      'dom_document_save_html',
+      'drawline',
+      'intlcal_get',
+      'memcache_get',
+      'mysql_query',
+      'pg_exec',
+      // Explicitly excluded functions
+      '_',
+      '__hhvm_intrinsics.id_string',
+
+    ]
       |> Vec\map($$, $x ==> tuple($x, APIDefinitionType::FUNCTION_DEF));
 
     return Vec\concat($classes, $functions);
