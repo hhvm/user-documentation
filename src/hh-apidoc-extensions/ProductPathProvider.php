@@ -19,7 +19,7 @@ use type HHVM\UserDocumentation\{
 };
 use namespace HH\Lib\Str;
 
-final class ProductPathProvider implements HHAPIDoc\IPathProvider {
+final class ProductPathProvider implements HHAPIDoc\IPathProvider<?string> {
   use APIDefinitionTypeBasedPathProvider<?string>;
   private APIIndex $index;
 

@@ -15,8 +15,8 @@ use type HHVM\UserDocumentation\APIProduct;
 use namespace Facebook\HHAPIDoc;
 use namespace HH\Lib\{C, Vec};
 
-final class PathProvider implements HHAPIDoc\IPathProvider {
-  private vec<HHAPIDoc\IPathProvider> $providers;
+final class PathProvider implements HHAPIDoc\IPathProvider<?string> {
+  private vec<HHAPIDoc\IPathProvider<?string>> $providers;
 
   public function __construct() {
     $this->providers = APIProduct::getValues()
@@ -72,5 +72,13 @@ final class PathProvider implements HHAPIDoc\IPathProvider {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForFunction($function))
       |> C\first($$);
+  }
+
+  public function getPathForOpaqueTypeAlias(string $_alias): ?string {
+    return null;
+  }
+
+  public function getPathForTransparentTypeAlias(string $_alias): ?string {
+    return null;
   }
 }

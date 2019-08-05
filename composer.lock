@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e2c2c0428207522eacbffaabf57f4ad",
+    "content-hash": "5ee8a9b3b3b675936c406c37d8a0d0c6",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -322,6 +322,42 @@
                 "routing"
             ],
             "time": "2019-07-17T16:26:37+00:00"
+        },
+        {
+            "name": "facebook/hh-apidoc",
+            "version": "v0.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hhvm/hh-apidoc.git",
+                "reference": "1e88409e451830a9ae88db2885c818193799445e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hhvm/hh-apidoc/zipball/1e88409e451830a9ae88db2885c818193799445e",
+                "reference": "1e88409e451830a9ae88db2885c818193799445e",
+                "shasum": ""
+            },
+            "require": {
+                "facebook/definition-finder": "^2.0.0",
+                "facebook/fbmarkdown": "^1.0",
+                "facebook/hh-clilib": "^2.1.0",
+                "hhvm": "^4.14",
+                "hhvm/hhast": "^4.14",
+                "hhvm/hsl": "^4.0"
+            },
+            "require-dev": {
+                "hhvm/hhvm-autoload": "^2.0"
+            },
+            "bin": [
+                "bin/hh-apidoc",
+                "bin/hh-apidoc.hack"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2019-07-17T16:45:11+00:00"
         },
         {
             "name": "facebook/hh-clilib",

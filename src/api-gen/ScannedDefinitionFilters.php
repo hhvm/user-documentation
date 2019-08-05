@@ -17,6 +17,8 @@ use type Facebook\DefinitionFinder\{
   ScannedDefinition,
   ScannedFunction,
   ScannedFunctionish,
+  ScannedNewtype,
+  ScannedType,
 };
 
 use namespace HH\Lib\{C, Regex, Str};
@@ -99,6 +101,8 @@ abstract final class ScannedDefinitionFilters {
         Str\starts_with($def->getName(), 'Lazy')
         && Str\contains($def->getName(), 'Itera')
       )
+      || $def is ScannedType
+      || $def is ScannedNewtype
     );
   }
 

@@ -15,7 +15,7 @@ use type HHVM\UserDocumentation\APIDefinitionType;
 use namespace Facebook\HHAPIDoc;
 
 trait APIDefinitionTypeBasedPathProvider<T as ?string> {
-  require implements HHAPIDoc\IPathProvider;
+  require implements HHAPIDoc\IPathProvider<T>;
 
   abstract protected function getPathForClassish(
     APIDefinitionType $type,
@@ -71,4 +71,19 @@ trait APIDefinitionTypeBasedPathProvider<T as ?string> {
       $method,
     );
   }
+
+	public function getPathForTransparentTypeAlias(string $alias): string {
+		invariant_violation(
+			'Transparent type aliases are not implemented: %s',
+			$alias,
+		);
+	}
+
+	public function getPathForOpaqueTypeAlias(string $alias): string {
+		invariant_violation(
+			'Opaque type aliases are not implemented: %s',
+			$alias,
+		);
+	}
+
 }

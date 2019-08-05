@@ -289,7 +289,25 @@ final class HHAPIDocBuildStep extends BuildStep {
       \mkdir($root, /* mode = */ 0755, /* recursive = */ true);
     }
     $md_paths = MarkdownPaths::get($product);
-    $ctx = new HHAPIDoc\MarkdownBuilderContext(new HHAPIDocExt\PathProvider());
+    $ctx = (
+      new HHAPIDoc\DocumentationBuilderContext(
+        // Empty index; this is used for auto-linking, but we do that when
+        // processing the markdown, instead of when generating it.
+        shape(
+          'types' => keyset[],
+          'newtypes' => keyset[],
+          'functions' => keyset[],
+          'classes' => dict[],
+          'interfaces' => dict[],
+          'traits' => dict[],
+        ),
+        new HHAPIDocExt\PathProvider(),
+        shape(
+          'format' => HHAPIDoc\OutputFormat::MARKDOWN,
+          'syntaxHighlighting' => true,
+        ),
+      )
+    );
     $builder = new HHAPIDocExt\MarkdownBuilder($ctx);
 
     return Vec\map($documentables, $documentable ==> {
