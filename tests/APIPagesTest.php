@@ -6,11 +6,12 @@ use type HHVM\UserDocumentation\{
   APIDefinitionType,
   APINavData,
   APIProduct,
+  LocalConfig,
   NavDataNode,
   URLBuilder,
 };
 
-use namespace HH\Lib\Vec;
+use namespace HH\Lib\{Str, Vec};
 use function Facebook\FBExpect\expect;
 use type Facebook\HackTest\{DataProvider, TestGroup};
 
@@ -176,5 +177,29 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
       404,
       \sprintf('"%s" should not be documented', $name),
     );
+  }
+
+  public function getPagesWithExamples(): vec<vec<string>> {
+    $root = LocalConfig::ROOT.'/api-examples';
+    $urls = keyset[];
+    foreach (\glob($root.'/class.*/*') as $dir) {
+      if (!\is_dir($dir)) {
+        continue;
+      }
+      $urls[] = Str\replace($dir, $root.'/class.', 'class/');
+    }
+    foreach (\glob($root.'/function.*') as $dir) {
+      $urls[] = Str\replace($dir, $root.'/function.', 'function/');
+    }
+    return Vec\map($urls, $url ==> vec['/hack/reference/'.$url.'/']);
+  }
+
+  <<DataProvider('getPagesWithExamples')>>
+  public async function testExamples(string $url): Awaitable<void> {
+    list($response, $body) = await PageLoader::getPageAsync($url);
+    expect($response->getStatusCode())
+      ->toBeSame(200, 'Examples provided for non-existent page %s.', $url);
+    expect(Str\contains($body, '<a href="#examples">'))
+      ->toBeTrue('Missing examples at %s.', $url);
   }
 }
