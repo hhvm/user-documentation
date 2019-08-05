@@ -9,7 +9,7 @@
 
 Generics are currently implemented in HHVM through erasure, in which the runtime drops all information about generics. This means that generics are not available at runtime. Although the typechecker is able to use the generic types for static typechecking, we are unable to enforce generic types at runtime.
 
-The goal of opt-in reified generics to bridge the gap between generics and runtime availability while keeping erasure available to maintain performance when reification is not needed. To mark a generic as reified, simply add the `reify` keyword at the declaration site.
+The goal of opt-in reified generics is to bridge the gap between generics and runtime availability while keeping erasure available to maintain performance when reification is not needed. To mark a generic as reified, simply add the `reify` keyword at the declaration site.
 
 ## Parameter and return type verification
 
@@ -75,7 +75,7 @@ function foo(): Box<vec<string>> {
   return new Box<vec<int>>(); // Type hint violation
 }
 
-foo(); 
+foo();
 ```
 
 # Limitations
