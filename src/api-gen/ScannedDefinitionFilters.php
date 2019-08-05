@@ -19,19 +19,29 @@ use type Facebook\DefinitionFinder\{
   ScannedFunctionish,
 };
 
-use namespace HH\Lib\{C, Str};
+use namespace HH\Lib\{C, Regex, Str};
 
 abstract final class ScannedDefinitionFilters {
   public static function isHHSpecific(ScannedDefinition $def): bool {
-    $name = $def->getName();
-    $is_hh_specific =
-      Str\contains($name, 'HH\\')
-      || Str\contains($name, '__SystemLib\\')
-      || C\contains_key($def->getAttributes(), '__HipHopSpecific')
-      || Str\contains($name, 'fb_')
-      || Str\contains($name, 'hphp_');
+    $normalized_name = $def->getName()
+      |> Str\lowercase($$)
+      |> Regex\replace($$, re"/[^a-z0-9]/", '-');
 
-    if ($is_hh_specific) {
+    if (
+      $def is ScannedClassish
+         && !C\contains_key(self::getPHPList('classes'), $normalized_name)
+      || $def is ScannedFunction
+         && !C\contains_key(self::getPHPList('functions'), $normalized_name)
+    ) {
+      // Function/class does not exist in PHP.
+      return true;
+    }
+
+    // At this point, we know the function/class exists in PHP, but the HHVM
+    // version might be sufficiently different (e.g. uses generics) to warrant
+    // inclusion in the HHVM docs anyway.
+
+    if (C\contains_key($def->getAttributes(), '__HipHopSpecific')) {
       return true;
     }
 
@@ -64,10 +74,19 @@ abstract final class ScannedDefinitionFilters {
     return false;
   }
 
+  <<__Memoize>>
+  private static function getPHPList(string $type): keyset<string> {
+    return Str\format('%s/api-php/php-%s.list', LocalConfig::ROOT, $type)
+      |> \file_get_contents($$)
+      |> Str\trim($$)
+      |> Str\split($$, "\n")
+      |> keyset($$);
+  }
+
   public static function shouldNotDocument(ScannedDefinition $def): bool {
     return (
-      Str\starts_with($def->getName(), "__SystemLib\\")
-      || Str\starts_with($def->getName(), "HH\\Lib\\_Private\\")
+      Str\starts_with($def->getName(), '_') // non-namespaced name starts with _
+      || Str\contains($def->getName(), '\\_') // namespaced name starts with _
       || Str\contains($def->getName(), 'WaitHandle')
       || Str\contains($def->getName(), "\\Rx\\")
       || ($def->getAttributes()['NoDoc'] ?? null) !== null
@@ -75,6 +94,10 @@ abstract final class ScannedDefinitionFilters {
       || (
         Str\contains($def->getFileName(), 'api-sources/hhvm/')
         && self::isUndefinedFunction($def)
+      )
+      || (
+        Str\starts_with($def->getName(), 'Lazy')
+        && Str\contains($def->getName(), 'Itera')
       )
     );
   }
