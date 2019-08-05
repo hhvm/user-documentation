@@ -12,9 +12,8 @@ Facebook's entire site runs on HHVM (desktop, API and mobile), both in developme
 
 ### What platforms is HHVM supported on?
 
-* **Linux**: HHVM has official [Linux](/hhvm/installation/linux) support on flavors of Ubuntu and Debian.
-* **Mac OS X**: HHVM has [experimental support](/hhvm/installation/mac) on Mac OS X.
-* **Windows**: HHVM is currently being ported over to [Windows](/hhvm/installation/windows).
+* **Linux**: HHVM has [Linux](/hhvm/installation/linux) support on flavors of Ubuntu and Debian.
+* **Mac OS X**: HHVM has [MacOS](/hhvm/installation/mac) support via Homebrew.
 
 ## Users
 
