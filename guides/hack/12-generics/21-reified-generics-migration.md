@@ -4,8 +4,8 @@ In order to make migrating to reified generics easier, we have added the followi
 
 * The `<<__Soft>>` annotation on a type parameter implies the intent to switch it to reified state. If generics at call sites are not provided the type checker will raise an error, and the runtime will raise a warning so you can capture these locations through logging. The generic cannot be used in the body of the function.
 * The `<<__Warn>>` annotation on a type parameter implies that if the reified generic is incorrect at parameter or return type hints locations, the runtime will raise a warning instead of type hint violation.
-* The `getType<reify T>()` function, given a reified type, returns the type structure representing the type.
-* The `getClassname<reify T>()` function, given a reified type, returns the name of the class represented by this type, or raises an exception if the type does not represent a class.
+* The `get_type_structure<reify T>()` function, given a reified type, returns the type structure representing the type.
+* The `get_classname<reify T>()` function, given a reified type, returns the name of the class represented by this type, or raises an exception if the type does not represent a class.
 
 ## Example Incremental Migration
 

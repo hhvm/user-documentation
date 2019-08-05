@@ -1,14 +1,9 @@
 ```yamlmeta
 {
-  "min-versions": { "HHVM": "4.10" },
-  "experimental": true
+  "min-versions": { "HHVM": "4.17" }
 }
 ```
 # Reified Generics
-
-## How to enable
-
-The feature is turned on by default in HHVM and setting `enable_experimental_tc_features = reified_generics` will turn the feature on for the typechecker. This feature is currently experimental and subject to change.
 
 ## Introduction
 
