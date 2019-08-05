@@ -12,13 +12,11 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\HHAPIDoc\IPathProvider;
 
-final class HTMLPaths implements IPathProvider {
+final class HTMLPaths implements IPathProvider<string> {
   use HHAPIDocExt\APIDefinitionTypeBasedPathProvider<string>;
   private MarkdownPaths $mdPaths;
 
-  private function __construct(
-    APIProduct $product,
-  ) {
+  private function __construct(APIProduct $product) {
     $this->mdPaths = MarkdownPaths::get($product);
   }
 
@@ -48,4 +46,5 @@ final class HTMLPaths implements IPathProvider {
     return $this->mdPaths->getPathForFunction($function)
       |> APIHTMLBuildStep::getOutputFileName($$);
   }
+
 }

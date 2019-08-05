@@ -23,9 +23,11 @@ use type Facebook\DefinitionFinder\{
   ScannedGeneric,
   ScannedInterface,
   ScannedMethod,
+  ScannedNewtype,
   ScannedParameter,
   ScannedProperty,
   ScannedTrait,
+  ScannedType,
   ScannedTypehint,
   StaticityToken,
   VarianceToken,
@@ -48,7 +50,14 @@ final class DataMerger {
      * the children are de-duped as part of that process, so we can extract
      * them from the parents after */
     $top_level = $in
-      |> Vec\filter($$, $d ==> $d['parent'] === null)
+      |> Vec\filter(
+        $$,
+        $d ==> $d['parent'] === null &&
+          !(
+            $d['definition'] is ScannedType ||
+            $d['definition'] is ScannedNewtype
+          ),
+      )
       |> Dict\group_by($$, $item ==> self::getMergeKey($item))
       |> Vec\map(
         $$,
@@ -106,7 +115,8 @@ final class DataMerger {
 
     $parent = $a['parent'];
     if ($parent) {
-      $parent = self::mergeDefinitionPair($parent, $b['parent']) as ScannedClassish;
+      $parent = self::mergeDefinitionPair($parent, $b['parent'])
+        as ScannedClassish;
     } else {
       $parent = $b['parent'];
     }
@@ -323,8 +333,10 @@ final class DataMerger {
             }
 
             $nullable = $nullable || $th->isNullable();
-            $generics =
-              self::mergeTypehintLists($generics, $th->getGenericTypes());
+            $generics = self::mergeTypehintLists(
+              $generics,
+              $th->getGenericTypes(),
+            );
             if ($th->isShape()) {
               $shape_fields = $th->getShapeFields();
             }

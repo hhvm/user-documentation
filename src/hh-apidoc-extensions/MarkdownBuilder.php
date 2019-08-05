@@ -14,7 +14,7 @@ namespace HHVM\UserDocumentation\HHAPIDocExt;
 use namespace Facebook\HHAPIDoc;
 use namespace HH\Lib\Keyset;
 
-final class MarkdownBuilder extends HHAPIDoc\MarkdownBuilder {
+final class MarkdownBuilder extends HHAPIDoc\DocumentationBuilder {
   <<__Override>>
   protected function getPageSections(
   ): keyset<classname<HHAPIDoc\PageSections\PageSection>> {

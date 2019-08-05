@@ -13,7 +13,7 @@ namespace HHVM\UserDocumentation;
 use type Facebook\HHAPIDoc\IPathProvider;
 use namespace HH\Lib\Str;
 
-final class MarkdownPaths implements IPathProvider {
+final class MarkdownPaths implements IPathProvider<string> {
   use HHAPIDocExt\APIDefinitionTypeBasedPathProvider<string>;
 
   private function __construct(
