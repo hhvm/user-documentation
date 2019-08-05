@@ -13,8 +13,8 @@ Consider the following:
 ```Hack
 
 function f(dynamic $x) : void {
-  $y = $x + 5;            // $y is a num
-  $y = $x . "hello!";     // $y is a string
+  $n = $x + 5;            // $n is a num
+  $s = $x . "hello!";     // $s is a string
   $y = $x->anyMethod();   // $y is dynamic
 }
 ```
