@@ -61,10 +61,7 @@ trait APIDefinitionTypeBasedPathProvider<T as ?string> {
       $method,
     );
   }
-  public function getPathForTraitMethod(
-    string $trait,
-    string $method,
-  ): T {
+  public function getPathForTraitMethod(string $trait, string $method): T {
     return $this->getPathForClassishMethod(
       APIDefinitionType::TRAIT_DEF,
       $trait,
@@ -72,18 +69,15 @@ trait APIDefinitionTypeBasedPathProvider<T as ?string> {
     );
   }
 
-	public function getPathForTransparentTypeAlias(string $alias): string {
-		invariant_violation(
-			'Transparent type aliases are not implemented: %s',
-			$alias,
-		);
-	}
+  public function getPathForTransparentTypeAlias(string $alias): string {
+    invariant_violation(
+      'Transparent type aliases are not implemented: %s',
+      $alias,
+    );
+  }
 
-	public function getPathForOpaqueTypeAlias(string $alias): string {
-		invariant_violation(
-			'Opaque type aliases are not implemented: %s',
-			$alias,
-		);
-	}
+  public function getPathForOpaqueTypeAlias(string $alias): string {
+    invariant_violation('Opaque type aliases are not implemented: %s', $alias);
+  }
 
 }
