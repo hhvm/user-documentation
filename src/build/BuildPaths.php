@@ -18,6 +18,7 @@ abstract final class BuildPaths {
   const string BUILD_ROOT_DIR = LocalConfig::ROOT.'/build';
   const string SCRATCH_DIR = self::BUILD_ROOT_DIR.'/scratch';
   const string FINAL_DIR = self::BUILD_ROOT_DIR.'/final';
+  const string CACHED_DIR = self::BUILD_ROOT_DIR.'/cached';
   const string CODEGEN_DIR = self::FINAL_DIR.'/codegen';
 
   const string DIR_INDEX_ROOT = self::SCRATCH_DIR.'/dir-index';
@@ -26,9 +27,10 @@ abstract final class BuildPaths {
   const string HHI_YAML = self::SCRATCH_DIR.'/unmerged-api-data/hhi';
 
   const string APIDOCS_DATA = self::SCRATCH_DIR.'/api-data';
-  const string APIDOCS_MARKDOWN = self::SCRATCH_DIR.'/api-markdown';
+  const string APIDOCS_MARKDOWN = self::CACHED_DIR.'/api-markdown';
   const string APIDOCS_HTML = self::FINAL_DIR.'/api-html';
-  const string APIDOCS_INDEX_JSON = self::FINAL_DIR.'/api-index.json';
+  const string APIDOCS_INDEX_JSON = self::CACHED_DIR.'/api-index.json';
+  const string APIDOCS_TAG = self::CACHED_DIR.'/.api.tag';
   const string APIDOCS_LEGACY_REDIRECTS
     = self::CODEGEN_DIR.'/api-legacy-redirects.php';
 
