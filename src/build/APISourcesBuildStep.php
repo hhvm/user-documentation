@@ -40,6 +40,11 @@ final class APISourcesBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nFetching API sources...");
+    if (HHAPIDocBuildStep::shouldSkip()) {
+      Log::i("\n  ...not needed because the dependent step is being skipped.");
+      return;
+    }
+
     foreach (self::REPOSITORIES as $product => $spec) {
       $repo = $spec['name'];
       $local = C\lastx(Str\split($repo, '/'));
@@ -47,16 +52,9 @@ final class APISourcesBuildStep extends BuildStep {
       Log::i("\n  Fetching %s@%s...", $repo, $tag);
       $local_abs = Str\format('%s/api-sources/%s', LocalConfig::ROOT, $local);
       $tag_file = $local_abs.'/.tag';
-      // Include the hash of this file so that we refetch+extract if the
-      // prefix list changes
-      $tag_file_contents = Str\format(
-        "tag: %s\nbuild step source hash: %s\n",
-        $tag,
-        \sha1(\file_get_contents(__FILE__)),
-      );
       if (
         \file_exists($tag_file) &&
-        \file_get_contents($tag_file) === $tag_file_contents
+        \file_get_contents($tag_file) === self::getTagFileContent($product)
       ) {
         Log::i("\n  ...already present.");
         continue;
@@ -99,7 +97,18 @@ final class APISourcesBuildStep extends BuildStep {
           \chmod($path, $metadata['mode']);
         },
       );
-      \file_put_contents($tag_file, $tag_file_contents);
+      \file_put_contents($tag_file, self::getTagFileContent($product));
     }
+  }
+
+  <<__Memoize>>
+  public static function getTagFileContent(APIProduct $product): string {
+    // Include the hash of this file so that we refetch+extract if the
+    // prefix list changes
+    return Str\format(
+      "tag: %s\nbuild step source hash: %s\n",
+      PRODUCT_TAGS[$product],
+      \sha1(\file_get_contents(__FILE__)),
+    );
   }
 }
