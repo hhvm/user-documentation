@@ -56,7 +56,7 @@ class C {
 Let's consider types in closures:
 
 ```Hack
-$doubler = (function ($p) { return $p * 2; });
+$doubler = $p ==> $p * 2;
 $doubler(3);
 $doubler(4.2);
 ```
@@ -70,7 +70,7 @@ returned is the type of `$p * 2`, which is `float`, and that becomes the functio
 Consider the following, subtly different, version (note the literal 2.0 instead of 2):
 
 ```Hack
-$doubler = (function ($p) { return $p * 2.0; });
+$doubler = $p ==> $p * 2.0;
 ```
 
 Whether an `int` or `float` value is passed, it matters not, as when either is multiplied by a `float`, the result is `float`, so that
@@ -79,9 +79,9 @@ becomes the function's return type.
 We can add partial explicit type information; the following all result in the same behavior:
 
 ```Hack
-$doubler = (function (int $p) { return $p * 2; });
-$doubler = (function ($p = 0) { return $p * 2; });
-$doubler = (function ($p): int { return $p * 2; });
+$doubler = (int $p) ==> $p * 2;
+$doubler = ($p = 0) ==> $p * 2;
+$doubler = ($p): int ==> $p * 2;
 ```
 
 In the first case, as `$p` has the declared type `int`, and `int * int` gives `int`, the return type is inferred as `int`. In the second
