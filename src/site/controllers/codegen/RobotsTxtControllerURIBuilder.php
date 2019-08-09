@@ -11,9 +11,9 @@
 abstract final class RobotsTxtControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \RobotsTxtController::class;
-  const type TParameters = shape(
-  );
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \RobotsTxtController::class;
+  const type TParameters = shape();
 
   public static function getPath(): string {
     return self::createInnerBuilder()

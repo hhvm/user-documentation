@@ -11,13 +11,15 @@
 abstract final class LegacyRedirectControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \LegacyRedirectController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \LegacyRedirectController::class;
   const type TParameters = shape(
     'LegacyId' => string,
   );
 
   public static function getPath(self::TParameters $parameters): string {
     return self::createInnerBuilder()
-      ->setString('LegacyId', $parameters['LegacyId'])->getPath();
+      ->setString('LegacyId', $parameters['LegacyId'])
+      ->getPath();
   }
 }

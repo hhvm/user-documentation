@@ -9,10 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\{
-  APIDefinitionType,
-  APIProduct,
-};
+use type HHVM\UserDocumentation\{APIDefinitionType, APIProduct};
 
 final class APIFullListController extends WebPageController {
   use APIFullListControllerParametersTrait;

@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\cma;
 
-require __DIR__ . "/../../vendor/autoload.php";
+require __DIR__."/../../vendor/autoload.php";
 
 async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
 
@@ -37,7 +37,7 @@ async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
   $content = Vector {};
 
   foreach ($chs as $ch) {
-    $str = (string) \curl_multi_getcontent($ch);
+    $str = (string)\curl_multi_getcontent($ch);
     $content[] = \substr($str, 0, 10);
     \curl_multi_remove_handle($mh, $ch);
   }

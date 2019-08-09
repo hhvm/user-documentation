@@ -12,18 +12,16 @@
 namespace HHVM\UserDocumentation;
 
 final class PHPDocsIndexReader {
-  private Map<string, string> $classes = Map { };
-  private Map<string, string> $functions = Map { };
-  private Map<string, string> $methods = Map { };
-  private Map<string, string> $articles = Map { };
+  private Map<string, string> $classes = Map {};
+  private Map<string, string> $functions = Map {};
+  private Map<string, string> $methods = Map {};
+  private Map<string, string> $articles = Map {};
 
-  public function __construct(
-    string $content,
-  ) {
+  public function __construct(string $content) {
     $old_index = \json_decode($content);
 
     foreach ($old_index as $entry) {
-      list ($name, $id, $type) = $entry;
+      list($name, $id, $type) = $entry;
       if (!$type) {
         continue;
       }
@@ -76,7 +74,7 @@ final class PHPDocsIndexReader {
   }
 
   public function getAllAPIDefinitions(): ImmMap<string, string> {
-    $defs = Map { };
+    $defs = Map {};
     $defs->setAll($this->getClasses());
     $defs->setAll($this->getMethods());
     $defs->setAll($this->getFunctions());

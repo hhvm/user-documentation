@@ -84,8 +84,9 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
 
   <<TestGroup('remote')>>
   public async function testStaticResource404(): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('/s/deadbeef/notfound');
+    list($response, $body) = await PageLoader::getPageAsync(
+      '/s/deadbeef/notfound',
+    );
     expect($response->getStatusCode())->toBeSame(404);
   }
 

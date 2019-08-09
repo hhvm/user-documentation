@@ -10,18 +10,17 @@ function getTextFileLines(string $filename): \Generator<int, string, void> {
 
   try {
     while ($textLine = \fgets($infile)) { // while not EOF
-      $textLine = \rtrim($textLine, "\r\n");	// strip off line terminator
+      $textLine = \rtrim($textLine, "\r\n"); // strip off line terminator
       yield $textLine;
     }
-  }
-  finally {
+  } finally {
     \fclose($infile);
   }
 }
 
 <<__EntryPoint>>
 function main(): void {
-  foreach (getTextFileLines(__DIR__ . "/Testfile.txt") as $line) {
+  foreach (getTextFileLines(__DIR__."/Testfile.txt") as $line) {
     echo ">$line<\n";
   }
 }

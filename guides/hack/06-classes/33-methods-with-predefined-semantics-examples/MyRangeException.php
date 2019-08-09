@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\Classes\PredefinedMethods\Examples\MyRangeExcep
 
 class MyRangeException extends \Exception {
   public function __toString(): string {
-    return parent::__toString() . ">>MyRangeException stuff<<";
+    return parent::__toString().">>MyRangeException stuff<<";
   }
   // ...
 }

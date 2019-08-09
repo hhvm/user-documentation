@@ -19,8 +19,10 @@ final class APIListByTypeControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
-      "Type" => $p->getEnum(\HHVM\UserDocumentation\APIDefinitionType::class, 'Type'),
+      "Product" =>
+        $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
+      "Type" =>
+        $p->getEnum(\HHVM\UserDocumentation\APIDefinitionType::class, 'Type'),
     );
   }
 }

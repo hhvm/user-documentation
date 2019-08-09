@@ -11,13 +11,11 @@
 final class HomePageControllerParameters
   extends \Facebook\HackRouter\RequestParametersCodegen {
 
-  const type TParameters = shape(
-  );
+  const type TParameters = shape();
 
   public function get(): self::TParameters {
     $p = $this->getParameters();
-    return shape(
-    );
+    return shape();
   }
 }
 

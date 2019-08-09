@@ -3,13 +3,13 @@
 namespace NS1 {
   const int CON1 = 100;
   function f(): void {
-    echo "In " . __FUNCTION__ . "\n";
+    echo "In ".__FUNCTION__."\n";
   }
 
   class C {
     const int C_CON = 200;
     public function f(): void {
-      echo "In " . __NAMESPACE__ . "..." . __METHOD__ . "\n";
+      echo "In ".__NAMESPACE__."...".__METHOD__."\n";
     }
   }
 
@@ -19,7 +19,7 @@ namespace NS1 {
 
   trait T {
     public function f(): void {
-      echo "In " . __TRAIT__ . "..." . __NAMESPACE__ . "..." . __METHOD__ . "\n";
+      echo "In ".__TRAIT__."...".__NAMESPACE__."...".__METHOD__."\n";
     }
   }
 }
@@ -33,7 +33,7 @@ namespace NS2 {
 
   function f(): void {
     $d = new D();
-    echo "CON1 = " . \NS1\CON1 . "\n";
+    echo "CON1 = ".\NS1\CON1."\n";
     \NS1\f();
   }
 }

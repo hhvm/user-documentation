@@ -5,7 +5,9 @@ namespace Hack\UserDocumentation\Classes\Traits\Examples\Common;
 trait Common {
   private int $size = 1000;
   public function compute(): void { /* ... */ }
-  public static function getData(): int { /* ... */ return 0; }
+  public static function getData(): int { /* ... */
+    return 0;
+  }
 }
 
 trait T1 { /* ... */ }

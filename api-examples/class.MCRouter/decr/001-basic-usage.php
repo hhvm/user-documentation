@@ -3,13 +3,16 @@
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouter\Decr;
 
 function get_simple_mcrouter(): \MCRouter {
-  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);
   return $mc;
 }
 
-async function set_value(\MCRouter $mc, string $key,
-                         string $value): Awaitable<void> {
+async function set_value(
+  \MCRouter $mc,
+  string $key,
+  string $value,
+): Awaitable<void> {
   // can also pass optional int flags and int expiration time (in seconds)
   await $mc->set($key, $value);
 }

@@ -25,9 +25,10 @@ final class RubyDependenciesBuildStep extends BuildStep {
     Log::i("\nInstalling Ruby dependencies for SASS");
 
     // Check for ruby first to give a clear error
-    list($exit_code, $_, $_) =  await execute_async(
+    list($exit_code, $_, $_) = await execute_async(
       /* options = */ null,
-      'ruby', '--version'
+      'ruby',
+      '--version',
     );
     if ($exit_code !== 0) {
       throw new \Facebook\CLILib\ExitException(1, "ruby --version failed");
@@ -35,8 +36,9 @@ final class RubyDependenciesBuildStep extends BuildStep {
 
     $ruby_root = LocalConfig::ROOT.'/vendor-rb';
     $bundler = $ruby_root.'/bin/bundle';
-    $options = shape('environment' => dict[
-      'GEM_HOME' => $ruby_root,
+    $options = shape(
+      'environment' => dict[
+        'GEM_HOME' => $ruby_root,
       ]
         |> Dict\merge($$, /* HH_FIXME[2050] */ $_ENV),
     );
@@ -49,18 +51,32 @@ final class RubyDependenciesBuildStep extends BuildStep {
         'bundler',
       );
       if ($exit_code !== 0) {
-        throw new \Facebook\CLILib\ExitException(1, 'gem install bundler failed');
+        throw new \Facebook\CLILib\ExitException(
+          1,
+          'gem install bundler failed',
+        );
       }
       invariant(\file_exists($bundler), "bundler executable not found");
     }
-    if (\is_dir($ruby_root.'/ruby') && \file_exists(LocalConfig::ROOT.'/.bundle')) {
+    if (
+      \is_dir($ruby_root.'/ruby') && \file_exists(LocalConfig::ROOT.'/.bundle')
+    ) {
       return;
     }
     Log::v("\nInstalling dependencies using bundler");
-    list($exit_code, $stdout, $stderr) = await execute_async($options, $bundler, 'install', '--path', $ruby_root);
+    list($exit_code, $stdout, $stderr) = await execute_async(
+      $options,
+      $bundler,
+      'install',
+      '--path',
+      $ruby_root,
+    );
     if ($exit_code !== 0) {
       invariant_violation("Bundler failed: %s", $stderr);
     }
-    invariant(\is_dir($ruby_root.'/ruby') && \file_exists(LocalConfig::ROOT.'/.bundle'), "bundler failed");
+    invariant(
+      \is_dir($ruby_root.'/ruby') && \file_exists(LocalConfig::ROOT.'/.bundle'),
+      "bundler failed",
+    );
   }
 }

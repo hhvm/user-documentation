@@ -11,7 +11,8 @@
 abstract final class APIListByTypeControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \APIListByTypeController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \APIListByTypeController::class;
   const type TParameters = shape(
     'Product' => \HHVM\UserDocumentation\APIProduct,
     'Type' => \HHVM\UserDocumentation\APIDefinitionType,
@@ -28,6 +29,7 @@ abstract final class APIListByTypeControllerURIBuilder
         \HHVM\UserDocumentation\APIDefinitionType::class,
         'Type',
         $parameters['Type'],
-      )->getPath();
+      )
+      ->getPath();
   }
 }

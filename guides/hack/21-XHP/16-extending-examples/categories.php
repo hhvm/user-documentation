@@ -1,14 +1,13 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 class :my-text extends :x:element {
   category %phrase;
   children (pcdata | %phrase); // prefixed colon ommitted purposely on pcdata
 
   protected function render(): \XHPRoot {
-    return
-      <x:frag>{$this->getChildren('%phrase')}</x:frag>;
+    return <x:frag>{$this->getChildren('%phrase')}</x:frag>;
   }
 }
 
@@ -23,5 +22,3 @@ function extending_examples_categories_run(): void {
   // Won't print out "Bye!" because render is only returing %phrase children
   echo $my_text;
 }
-
-

@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Polling;
 use namespace HH\Lib\Vec;
 
 // For asio-utilities function later(), etc.
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 // Of course, this is all made up :)
 class Polling {
@@ -21,13 +21,13 @@ class Polling {
 }
 
 async function do_polling(Polling $p): Awaitable<int> {
-  echo "do polling 1" . \PHP_EOL;
+  echo "do polling 1".\PHP_EOL;
   // No async function in Polling, so loop until we are ready, but let
   // other awaitables go via later()
   while (!$p->isReady()) {
     await \HH\Asio\later();
   }
-  echo "\ndo polling 2" . \PHP_EOL;
+  echo "\ndo polling 2".\PHP_EOL;
   return $p->getResult();
 }
 

@@ -11,9 +11,9 @@
 abstract final class HomePageControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \HomePageController::class;
-  const type TParameters = shape(
-  );
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \HomePageController::class;
+  const type TParameters = shape();
 
   public static function getPath(): string {
     return self::createInnerBuilder()

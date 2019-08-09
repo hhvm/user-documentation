@@ -31,7 +31,7 @@ class Stringify {
           $$,
           $sub ==> TypeAssert\matches_type_structure(
             type_alias_structure(TypehintDocumentation::class),
-            $sub ,
+            $sub,
           ),
         )
         |> Vec\map($$, $sub ==> Stringify::typehint($sub))
@@ -50,7 +50,7 @@ class Stringify {
     $s = '';
     $types = $info['types'] ?? null;
     if ($types !== null && !C\is_empty($types)) {
-      $s .= Str\join($types, '|'). ' ';
+      $s .= Str\join($types, '|').' ';
     } else {
       $th = $param['typehint'];
       if ($th !== null) {
@@ -75,10 +75,7 @@ class Stringify {
       if ($default === "") {
         $default = "\"\"";
       }
-      invariant(
-        $default !== null,
-        'optional parameter without a default',
-      );
+      invariant($default !== null, 'optional parameter without a default');
       $s .= ' = '.$default;
     }
     return $s;
@@ -123,24 +120,22 @@ class Stringify {
     return $ret;
   }
 
-  public static function interfaceSignature(
-    ClassDocumentation $iface,
-  ): string {
+  public static function interfaceSignature(ClassDocumentation $iface): string {
     $ret = '';
     $ns = $iface['namespace'];
     if ($ns !== '') {
-      $ret .= 'namespace ' . $ns . " { ";
+      $ret .= 'namespace '.$ns." { ";
     }
-    $ret .= $iface['type'] . ' ' . $iface['shortName'] . ' ';
+    $ret .= $iface['type'].' '.$iface['shortName'].' ';
     $parent = $iface['parent'];
     if ($parent !== null) {
-      $ret .= 'extends ' . $parent['typename'] . ' ';
+      $ret .= 'extends '.$parent['typename'].' ';
     }
     $implInterfaces = $iface['interfaces'];
     if (\count($implInterfaces) > 0) {
       $ret .= 'implements ';
       foreach ($implInterfaces as $implInterface) {
-        $ret .= $implInterface['typename'] . ', ';
+        $ret .= $implInterface['typename'].', ';
       }
       $ret = \substr($ret, 0, -2); // remove trailing ', ''
     }
@@ -167,10 +162,9 @@ class Stringify {
       return '()';
     }
 
-    switch($format) {
+    switch ($format) {
       case StringifyFormat::MULTI_LINE:
-        return
-          "(\n".
+        return "(\n".
           \implode("\n", \array_map($x ==> '  '.$x.',', $params)).
           "\n)";
       case StringifyFormat::ONE_LINE:

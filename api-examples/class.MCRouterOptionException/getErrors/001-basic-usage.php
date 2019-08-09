@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouterOptEx\GetErrors;
 
 function construct_mcrouter(): void {
-  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   // For many use cases, calling MCRouter::createSimple($servers) would
   // suffice here. But this shows you how to explicitly create the configuration
   // options for creating an instance of MCRouter

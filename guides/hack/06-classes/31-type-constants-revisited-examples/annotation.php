@@ -25,7 +25,7 @@ class Inty extends Base {
     $this->value = 4;
   }
   public function getInt(): int {
-    return $this->value;  // property of type int
+    return $this->value; // property of type int
   }
 }
 

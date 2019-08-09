@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouter\Version;
 
 function get_simple_mcrouter(): \MCRouter {
-  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);
   return $mc;
 }

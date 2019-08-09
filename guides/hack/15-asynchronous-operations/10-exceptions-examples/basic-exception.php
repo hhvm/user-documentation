@@ -18,4 +18,3 @@ async function basic_exception(): Awaitable<void> {
 function main(): void {
   \HH\Asio\join(basic_exception());
 }
-

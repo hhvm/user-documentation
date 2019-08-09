@@ -1,13 +1,12 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 class :my-br extends :x:element {
   children empty; // no children allowed
 
   protected function render(): \XHPRoot {
-    return
-      <x:frag>PHP_EOL</x:frag>;
+    return <x:frag>PHP_EOL</x:frag>;
   }
 }
 
@@ -15,8 +14,7 @@ class :my-ul extends :x:element {
   children (:li)+; // one or more
 
   protected function render(): \XHPRoot {
-    return
-      <ul>{$this->getChildren()}</ul>;
+    return <ul>{$this->getChildren()}</ul>;
   }
 }
 
@@ -24,8 +22,7 @@ class :my-html extends :x:element {
   children (:head, :body);
 
   protected function render(): \XHPRoot {
-    return
-      <html>{$this->getChildren()}</html>;
+    return <html>{$this->getChildren()}</html>;
   }
 }
 
@@ -43,7 +40,7 @@ function extending_examples_children_run(): void {
   }
   $my_ul = <my-ul />;
   $my_ul->appendChild(<li />);
-   $my_ul->appendChild(<li />);
+  $my_ul->appendChild(<li />);
   echo $my_ul;
   echo PHP_EOL;
   $my_html = <my-html />;

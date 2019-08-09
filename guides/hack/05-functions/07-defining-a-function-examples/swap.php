@@ -10,8 +10,9 @@ function swap(inout int $i1, inout int $i2): void {
 
 <<__EntryPoint>>
 function main(): void {
-  $v1 = -10; $v2 = 123;
-  echo "\$v1 = " . $v1 . ", \$v2 = " . $v2 . "\n";
+  $v1 = -10;
+  $v2 = 123;
+  echo "\$v1 = ".$v1.", \$v2 = ".$v2."\n";
   swap(inout $v1, inout $v2);
-  echo "\$v1 = " . $v1 . ", \$v2 = " . $v2 . "\n";
+  echo "\$v1 = ".$v1.", \$v2 = ".$v2."\n";
 }

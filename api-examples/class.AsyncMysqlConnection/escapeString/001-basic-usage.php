@@ -2,23 +2,26 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Conn\EscapeString;
 
-require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
+require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
-async function connect(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function connect(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   return await $pool->connect(
     CI::$host,
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd
+    CI::$passwd,
   );
 }
 
-async function get_data(\AsyncMysqlConnection $conn, string $name):
-  Awaitable<\AsyncMysqlQueryResult> {
+async function get_data(
+  \AsyncMysqlConnection $conn,
+  string $name,
+): Awaitable<\AsyncMysqlQueryResult> {
   /* DON'T DO THIS!
    *
    * Use AsyncMysqlConnection::queryf() instead, which automatically escapes

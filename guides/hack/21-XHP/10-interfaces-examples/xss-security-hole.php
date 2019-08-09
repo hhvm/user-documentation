@@ -1,7 +1,7 @@
 <?hh // partial
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
-require_once __DIR__ . '/md_render.inc.php';
+require_once __DIR__.'/md_render.inc.php';
 
 /* YOU PROBABLY SHOULDN'T DO THIS
  *
@@ -9,9 +9,7 @@ require_once __DIR__ . '/md_render.inc.php';
  * See below for an alternative.
  */
 class ExamplePotentialXSSSecurityHole implements XHPUnsafeRenderable {
-  public function __construct(
-    private string $html,
-  ) {
+  public function __construct(private string $html) {
   }
 
   public function toHTMLString(): string {
@@ -24,8 +22,9 @@ function start(): void {
   echo (
     <div class="markdown">
       {new ExamplePotentialXSSSecurityHole(
-        HHVM\UserDocumentation\XHP\Examples\md_render('Markdown goes here')
+        HHVM\UserDocumentation\XHP\Examples\md_render('Markdown goes here'),
       )}
     </div>
-  )."\n";
+  ).
+    "\n";
 }

@@ -1,6 +1,6 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 class :introduction extends :x:element {
   protected function render(): \XHPRoot {
@@ -19,7 +19,6 @@ class :intro-plain-str extends :x:element {
 <<__EntryPoint>>
 function extending_examples_basic_run(): void {
   echo <introduction />;
-  echo PHP_EOL . PHP_EOL;
+  echo PHP_EOL.PHP_EOL;
   echo <intro-plain-str />;
 }
-

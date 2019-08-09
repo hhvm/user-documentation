@@ -35,7 +35,7 @@ final class APIMethodPageController extends APIPageController {
       ->literal('/');
   }
 
-  <<__Memoize,__Override>>
+  <<__Memoize, __Override>>
   protected function getRootDefinition(): APIClassIndexEntry {
     $this->redirectIfAPIRenamed();
     $definition_name = $this->getParameters()['Class'];
@@ -59,8 +59,7 @@ final class APIMethodPageController extends APIPageController {
 
   <<__Override>>
   public async function getTitleAsync(): Awaitable<string> {
-    return
-      $this->getRootDefinition()['name'].
+    return $this->getRootDefinition()['name'].
       '::'.
       $this->getMethodDefinition()['name'];
   }

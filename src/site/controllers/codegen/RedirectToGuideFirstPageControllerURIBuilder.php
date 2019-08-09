@@ -11,7 +11,8 @@
 abstract final class RedirectToGuideFirstPageControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \RedirectToGuideFirstPageController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \RedirectToGuideFirstPageController::class;
   const type TParameters = shape(
     'Product' => \HHVM\UserDocumentation\GuidesProduct,
     'Guide' => string,
@@ -24,6 +25,7 @@ abstract final class RedirectToGuideFirstPageControllerURIBuilder
         'Product',
         $parameters['Product'],
       )
-      ->setString('Guide', $parameters['Guide'])->getPath();
+      ->setString('Guide', $parameters['Guide'])
+      ->getPath();
   }
 }

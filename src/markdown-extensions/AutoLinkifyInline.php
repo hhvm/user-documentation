@@ -45,7 +45,7 @@ final class AutoLinkifyInline extends Inlines\Link {
     if (\preg_match('/^[^(<]+/', $content, &$matches) !== 1) {
       return null;
     }
-    $definition = (string) $matches[0];
+    $definition = (string)$matches[0];
 
     if (Str\contains($definition, ' ')) {
       return null;
@@ -71,7 +71,8 @@ final class AutoLinkifyInline extends Inlines\Link {
       '',
       "HH",
       "HH\\Lib",
-    ] |> Vec\filter_nulls($$);
+    ]
+      |> Vec\filter_nulls($$);
 
     $suffixes = vec[$definition, $method]
       |> Vec\filter_nulls($$);
@@ -91,10 +92,7 @@ final class AutoLinkifyInline extends Inlines\Link {
     foreach ($to_try as $def) {
       $target = $index[$def] ?? null;
       if ($target !== null) {
-        return tuple(
-          self::makeAutoLink($quoted, $target),
-          $offset,
-        );
+        return tuple(self::makeAutoLink($quoted, $target), $offset);
       }
     }
 
@@ -103,10 +101,10 @@ final class AutoLinkifyInline extends Inlines\Link {
 
   private static function product2<Tv1, Tv2>(
     Traversable<Tv1> $first,
-    Traversable<Tv2> $second
+    Traversable<Tv2> $second,
   ): Iterator<(Tv1, Tv2)> {
-    foreach($first as $f) {
-      foreach($second as $s) {
+    foreach ($first as $f) {
+      foreach ($second as $s) {
         yield tuple($f, $s);
       }
     }
@@ -134,11 +132,7 @@ final class AutoLinkifyInline extends Inlines\Link {
     Inlines\CodeSpan $code,
     string $target,
   ): Inlines\Link {
-    return new Inlines\Link(
-      vec[$code],
-      $target,
-      null,
-    );
+    return new Inlines\Link(vec[$code], $target, null);
   }
 
   <<__Memoize>>

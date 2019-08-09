@@ -26,8 +26,9 @@ final class :a:post extends :x:element {
         method="post"
         action={$this->:href}
         target={$this->:target}
-        class="postLink"
-      >{$anchor}</form>
+        class="postLink">
+        {$anchor}
+      </form>
     );
 
     $this->transferAllAttributes($anchor);

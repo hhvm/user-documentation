@@ -18,7 +18,8 @@ final class APIFullListControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
+      "Product" =>
+        $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
     );
   }
 }

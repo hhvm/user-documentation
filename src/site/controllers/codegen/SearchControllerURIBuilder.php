@@ -11,9 +11,9 @@
 abstract final class SearchControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \SearchController::class;
-  const type TParameters = shape(
-  );
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \SearchController::class;
+  const type TParameters = shape();
 
   public static function getPath(): string {
     return self::createInnerBuilder()

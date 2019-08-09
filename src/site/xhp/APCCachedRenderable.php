@@ -11,10 +11,9 @@
 
 use type HHVM\UserDocumentation\LocalConfig;
 
-class APCCachedRenderable implements \XHPUnsafeRenderable, \XHPAlwaysValidChild {
-  private function __construct(
-    private string $str,
-  ) {
+class APCCachedRenderable
+  implements \XHPUnsafeRenderable, \XHPAlwaysValidChild {
+  private function __construct(private string $str) {
   }
 
   public function toHTMLString(): string {

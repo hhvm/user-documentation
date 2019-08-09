@@ -27,7 +27,7 @@ type TIPRangesJSON = shape(
 
 function cidr_to_bitstring_and_bitmask(string $cidr): (string, string) {
   list($addr, $bits) = Str\split($cidr, '/');
-  $bits = (int) $bits;
+  $bits = (int)$bits;
   $addr = \inet_pton($addr);
 
   $mask = Str\repeat("\xff", \intdiv($bits, 8));

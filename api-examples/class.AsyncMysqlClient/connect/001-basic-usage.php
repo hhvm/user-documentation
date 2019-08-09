@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\Conn;
 
-require __DIR__ . "/../../__includes/async_mysql_connect.inc.php";
+require __DIR__."/../../__includes/async_mysql_connect.inc.php";
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
@@ -13,7 +13,8 @@ async function do_connect(): Awaitable<\AsyncMysqlQueryResult> {
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd);
+    CI::$passwd,
+  );
   return await $conn->query('SELECT * FROM test_table');
 }
 

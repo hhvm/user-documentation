@@ -9,14 +9,18 @@ interface MyCollection {
 }
 
 class MyList implements MyCollection {
-  public function put(int $item): void  { /* implement method */ }
-  public function get(): int            { /* implement method */ return 0; }
+  public function put(int $item): void { /* implement method */ }
+  public function get(): int { /* implement method */
+    return 0;
+  }
   // ...
 }
 
 class MyQueue implements MyCollection {
-  public function put(int $item): void  { /* implement method */ }
-  public function get(): int            { /* implement method */ return 0;  }
+  public function put(int $item): void { /* implement method */ }
+  public function get(): int { /* implement method */
+    return 0;
+  }
   // ...
 }
 

@@ -11,7 +11,8 @@
 abstract final class GuidesListControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \GuidesListController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \GuidesListController::class;
   const type TParameters = shape(
     'Product' => \HHVM\UserDocumentation\GuidesProduct,
   );
@@ -22,6 +23,7 @@ abstract final class GuidesListControllerURIBuilder
         \HHVM\UserDocumentation\GuidesProduct::class,
         'Product',
         $parameters['Product'],
-      )->getPath();
+      )
+      ->getPath();
   }
 }

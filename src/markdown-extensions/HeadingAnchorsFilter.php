@@ -25,10 +25,7 @@ final class HeadingAnchorsFilter extends RenderFilter {
   }
 
   <<__Override>>
-  public function filter(
-    RenderContext $_,
-    ASTNode $heading,
-  ): vec<ASTNode> {
+  public function filter(RenderContext $_, ASTNode $heading): vec<ASTNode> {
     if (!$heading is Blocks\Heading) {
       return vec[$heading];
     }

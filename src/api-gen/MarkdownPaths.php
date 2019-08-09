@@ -16,9 +16,7 @@ use namespace HH\Lib\Str;
 final class MarkdownPaths implements IPathProvider<string> {
   use HHAPIDocExt\APIDefinitionTypeBasedPathProvider<string>;
 
-  private function __construct(
-    private APIProduct $product,
-  ) {
+  private function __construct(private APIProduct $product) {
   }
 
   <<__Memoize>>

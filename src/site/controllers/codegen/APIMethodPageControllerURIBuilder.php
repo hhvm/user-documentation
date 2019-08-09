@@ -11,7 +11,8 @@
 abstract final class APIMethodPageControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \APIMethodPageController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \APIMethodPageController::class;
   const type TParameters = shape(
     'Product' => \HHVM\UserDocumentation\APIProduct,
     'Type' => \HHVM\UserDocumentation\APIDefinitionType,
@@ -32,6 +33,7 @@ abstract final class APIMethodPageControllerURIBuilder
         $parameters['Type'],
       )
       ->setString('Class', $parameters['Class'])
-      ->setString('Method', $parameters['Method'])->getPath();
+      ->setString('Method', $parameters['Method'])
+      ->getPath();
   }
 }

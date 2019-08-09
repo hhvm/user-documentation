@@ -13,7 +13,10 @@ abstract class RouterCodegenBase
 
   <<__Override>>
   final public function getRoutes(
-  ): ImmMap<\Facebook\HackRouter\HttpMethod, ImmMap<string, classname<\RoutableController>>> {
+  ): ImmMap<
+    \Facebook\HackRouter\HttpMethod,
+    ImmMap<string, classname<\RoutableController>>,
+  > {
     $map = ImmMap {
       \Facebook\HackRouter\HttpMethod::GET => ImmMap {
         '/{Product:(?:hack|hsl)}/reference/{Type:(?:class|trait|interface|function)}/{Name}/' =>
@@ -23,7 +26,8 @@ abstract class RouterCodegenBase
           \APIListByTypeController::class,
         '/{Product:(?:hack|hsl)}/reference/{Type:(?:class|trait|interface|function)}/{Class}/{Method}/' =>
           \APIMethodPageController::class,
-        '/{Product:(?:hhvm|hack)}/{Guide}/{Page}' => \GuidePageController::class,
+        '/{Product:(?:hhvm|hack)}/{Guide}/{Page}' =>
+          \GuidePageController::class,
         '/{Product:(?:hhvm|hack)}/' => \GuidesListController::class,
         '/' => \HomePageController::class,
         '/j/{Keyword}' => \JumpController::class,

@@ -13,11 +13,7 @@ namespace HHVM\UserDocumentation;
 
 abstract final class LegacyRedirects {
   public static function getUrlForId(string $id): ?string {
-    $ids = [
-      $id,
-      \strtr($id, '.', '-'),
-      \strtr($id, '-', '.'),
-    ];
+    $ids = [$id, \strtr($id, '.', '-'), \strtr($id, '-', '.')];
 
     foreach ($ids as $id) {
       $url = self::getUrlForExactId($id);
@@ -52,36 +48,36 @@ abstract final class LegacyRedirects {
     return Map {
       'index' => '/',
       'hacklangref' => '/hack/',
-      'asio.wrappedexception'
-        => '/hack/reference/class/HH.Asio.WrappedException/',
+      'asio.wrappedexception' =>
+        '/hack/reference/class/HH.Asio.WrappedException/',
       'asio.wrappedresult' => '/hack/reference/class/HH.Asio.WrappedResult/',
-      'asio.resultexceptionwrapper'
-        => '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',
-      'asio.resultorexceptionwrapper'
-        => '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',
-      'async.mysql.asyncmysqlclient'
-        => '/hack/reference/class/AsyncMysqlClient/',
-      'async.mysql.asyncmysqlclientstats'
-        => '/hack/reference/class/AsyncMysqlClientStats/',
-      'async.mysql.asyncmysqlconnectresult'
-				=> '/hack/reference/class/AsyncMysqlConnectResult/',
-      'async.mysql.asyncmysqlconnection'
-				=> '/hack/reference/class/AsyncMysqlConnection/',
-      'async.mysql.asyncmysqlconnectionpool'
-				=> '/hack/reference/class/AsyncMysqlConnectionPool/',
-      'async.mysql.asyncmysqlerrorresult'
-				=> '/hack/reference/class/AsyncMysqlErrorResult/',
-      'async.mysql.asyncmysqlqueryerrorresult'
-				=> '/hack/reference/class/AsyncQueryErrorResult/',
-      'async.mysql.asyncmysqlqueryresult'
-				=> '/hack/reference/class/AsyncMysqlQueryResult/',
+      'asio.resultexceptionwrapper' =>
+        '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',
+      'asio.resultorexceptionwrapper' =>
+        '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',
+      'async.mysql.asyncmysqlclient' =>
+        '/hack/reference/class/AsyncMysqlClient/',
+      'async.mysql.asyncmysqlclientstats' =>
+        '/hack/reference/class/AsyncMysqlClientStats/',
+      'async.mysql.asyncmysqlconnectresult' =>
+        '/hack/reference/class/AsyncMysqlConnectResult/',
+      'async.mysql.asyncmysqlconnection' =>
+        '/hack/reference/class/AsyncMysqlConnection/',
+      'async.mysql.asyncmysqlconnectionpool' =>
+        '/hack/reference/class/AsyncMysqlConnectionPool/',
+      'async.mysql.asyncmysqlerrorresult' =>
+        '/hack/reference/class/AsyncMysqlErrorResult/',
+      'async.mysql.asyncmysqlqueryerrorresult' =>
+        '/hack/reference/class/AsyncQueryErrorResult/',
+      'async.mysql.asyncmysqlqueryresult' =>
+        '/hack/reference/class/AsyncMysqlQueryResult/',
       'async.mysql.asyncmysqlrow' => '/hack/reference/class/AsyncMysqlRow/',
-      'async.mysql.asyncmysqlrowblock'
-				=> '/hack/reference/class/AsyncMysqlRowBlock/',
-      'async.mysql.asyncmysqlrowblockiterator'
-				=> '/hack/reference/class/AsyncMysqlRowBlockIterator/',
-      'async.mysql.asyncmysqlrowiterator'
-				=> '/hack/reference/class/AsyncMysqlRowIterator/',
+      'async.mysql.asyncmysqlrowblock' =>
+        '/hack/reference/class/AsyncMysqlRowBlock/',
+      'async.mysql.asyncmysqlrowblockiterator' =>
+        '/hack/reference/class/AsyncMysqlRowBlockIterator/',
+      'async.mysql.asyncmysqlrowiterator' =>
+        '/hack/reference/class/AsyncMysqlRowIterator/',
       'hack.intro' => '/hack/overview/introduction',
       'hack.arrays' => '/hack/collections/introduction',
       'hack.async' => '/hack/async/introduction',
@@ -94,8 +90,8 @@ abstract final class LegacyRedirects {
       'hack.collections.immset' => '/hack/reference/class/ImmSet/',
       'hack.collections.immmap' => '/hack/reference/class/ImmMap/',
       'hack.collections' => '/hack/collections/introduction',
-      'hack.constructorargumentpromotion'
-				=> '/hack/other-features/constructor-parameter-promotion',
+      'hack.constructorargumentpromotion' =>
+        '/hack/other-features/constructor-parameter-promotion',
       'hack.enums' => '/hack/enums/introduction',
       'hack.generics' => '/hack/generics/introduction',
       'modes' => '/hack/typechecker/modes',
@@ -146,8 +142,8 @@ abstract final class LegacyRedirects {
       'install.hack.conversion' => '/hack/tools/introduction',
       'install.hack' => '/hack/getting-started/getting-started',
       'hack' => '/hack/',
-      'configuration.zend.compat'
-        => '/hhvm/configuration/INI-settings#feature-flags',
+      'configuration.zend.compat' =>
+        '/hhvm/configuration/INI-settings#feature-flags',
       'intro-what-can-hhvm-do' => '/hhvm/getting-started/getting-started',
       'docshhvmimprovedsearch' => '/',
     };

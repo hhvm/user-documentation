@@ -1,6 +1,6 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 class :ui-myparent extends :x:element {
   attribute string text @required;
@@ -23,11 +23,9 @@ class :ui-mychild extends :x:element {
 
   protected function render(): XHPRoot {
     if ($this->getContext('hint') === 'Yes') {
-      return
-        <x:frag>{$this->:text . '...and more'}</x:frag>;
+      return <x:frag>{$this->:text.'...and more'}</x:frag>;
     }
-    return
-      <x:frag>{$this->:text}</x:frag>;
+    return <x:frag>{$this->:text}</x:frag>;
   }
 }
 

@@ -12,8 +12,7 @@
 use type HHVM\UserDocumentation\{StaticResourceMap, StaticResourceMapEntry};
 
 abstract class :static:base extends :x:element {
-  attribute
-    string path @required;
+  attribute string path @required;
 
   abstract protected function getAllowedMimeTypes(): Set<string>;
 
@@ -28,17 +27,9 @@ abstract class :static:base extends :x:element {
 
     $mtime = filemtime($local_path);
     if ($info['mtime'] !== $mtime) {
-      $url = sprintf(
-        '/s/local-changes%s?mtime=%d',
-        $relative_path,
-        $mtime
-      );
+      $url = sprintf('/s/local-changes%s?mtime=%d', $relative_path, $mtime);
     } else {
-      $url = sprintf(
-        '/s/%s%s',
-        $info['checksum'],
-        $relative_path,
-      );
+      $url = sprintf('/s/%s%s', $info['checksum'], $relative_path);
     }
     return $url;
   }

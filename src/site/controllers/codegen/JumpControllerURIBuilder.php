@@ -11,13 +11,15 @@
 abstract final class JumpControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \JumpController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \JumpController::class;
   const type TParameters = shape(
     'Keyword' => string,
   );
 
   public static function getPath(self::TParameters $parameters): string {
     return self::createInnerBuilder()
-      ->setString('Keyword', $parameters['Keyword'])->getPath();
+      ->setString('Keyword', $parameters['Keyword'])
+      ->getPath();
   }
 }

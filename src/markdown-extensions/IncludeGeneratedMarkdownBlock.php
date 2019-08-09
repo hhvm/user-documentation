@@ -15,9 +15,9 @@ use type HHVM\UserDocumentation\BuildPaths;
 use namespace Facebook\Markdown\UnparsedBlocks;
 use namespace HH\Lib\Str;
 
-final class IncludeGeneratedMarkdownBlock implements UnparsedBlocks\BlockProducer {
-  const string PATTERN =
-    '/^@@ guides-generated-markdown\/(?<file>[^ @]+) @@$/';
+final class IncludeGeneratedMarkdownBlock
+  implements UnparsedBlocks\BlockProducer {
+  const string PATTERN = '/^@@ guides-generated-markdown\/(?<file>[^ @]+) @@$/';
 
   public static function consume(
     UnparsedBlocks\Context $context,
@@ -37,10 +37,7 @@ final class IncludeGeneratedMarkdownBlock implements UnparsedBlocks\BlockProduce
       $context->getFilePath(),
     );
 
-    $inner_doc = UnparsedBlocks\parse(
-      $context,
-      \file_get_contents($file),
-    );
+    $inner_doc = UnparsedBlocks\parse($context, \file_get_contents($file));
 
     return tuple($inner_doc, $rest);
   }
@@ -65,13 +62,16 @@ final class IncludeGeneratedMarkdownBlock implements UnparsedBlocks\BlockProduce
     invariant(
       !($out_exists && $expect_exists),
       'both %s and %s exist.',
-      $out, $expect,
+      $out,
+      $expect,
     );
 
     invariant(
       $out_exists || $expect_exists || Str\contains($file, '.inc.php'),
       'none of %s, %s, or %s exist.',
-      $out, $expect, $file.'.no.auto.output',
+      $out,
+      $expect,
+      $file.'.no.auto.output',
     );
     if (!($out_exists || $expect_exists)) {
       return null;

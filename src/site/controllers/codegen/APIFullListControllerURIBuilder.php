@@ -11,7 +11,8 @@
 abstract final class APIFullListControllerURIBuilder
   extends \Facebook\HackRouter\UriBuilderCodegen {
 
-  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER = \APIFullListController::class;
+  const classname<\Facebook\HackRouter\HasUriPattern> CONTROLLER =
+    \APIFullListController::class;
   const type TParameters = shape(
     'Product' => \HHVM\UserDocumentation\APIProduct,
   );
@@ -22,6 +23,7 @@ abstract final class APIFullListControllerURIBuilder
         \HHVM\UserDocumentation\APIProduct::class,
         'Product',
         $parameters['Product'],
-      )->getPath();
+      )
+      ->getPath();
   }
 }

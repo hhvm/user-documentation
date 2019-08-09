@@ -1,6 +1,6 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 class :user-info extends :x:element {
   attribute int userid @required;
@@ -26,4 +26,3 @@ function extending_examples_attributes_run(): void {
   $uinfo->setAttribute('name', 'Joel');
   echo $uinfo;
 }
-

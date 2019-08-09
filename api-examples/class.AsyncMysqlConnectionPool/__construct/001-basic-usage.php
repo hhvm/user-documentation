@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ConnPool\construct;
 
-require __DIR__ . "/../../__includes/async_mysql_connect.inc.php";
+require __DIR__."/../../__includes/async_mysql_connect.inc.php";
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
@@ -10,14 +10,15 @@ function set_connection_pool(darray $options): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool($options);
 }
 
-async function connect_with_pool(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function connect_with_pool(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   return await $pool->connect(
     CI::$host,
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd
+    CI::$passwd,
   );
 }
 
@@ -29,7 +30,7 @@ function run_it(): void {
   $options = array(
     'pool_connection_limit' => 2,
   );
-   // We will have a 2 pool connection limit
+  // We will have a 2 pool connection limit
   $pool = set_connection_pool($options);
   $conn_awaitables = Vector {};
   try {
@@ -41,15 +42,17 @@ function run_it(): void {
     $conns = \HH\Asio\join(\HH\Asio\v($conn_awaitables));
   } catch (\AsyncMysqlConnectException $ex) {
     $stats = get_stats($pool);
-    echo "Allowed pool connections: " . $stats['created_pool_connections'] .
-         \PHP_EOL .
-         "Requested pool connections: " . $stats['connections_requested'] .
-         \PHP_EOL;
+    echo "Allowed pool connections: ".
+      $stats['created_pool_connections'].
+      \PHP_EOL.
+      "Requested pool connections: ".
+      $stats['connections_requested'].
+      \PHP_EOL;
   }
 
   $options = array(
     'idle_timeout_micros' => 2000000,
-    'expiration_policy' => 'IdleTime'
+    'expiration_policy' => 'IdleTime',
   );
   $pool = set_connection_pool($options);
   $conn = \HH\Asio\join(connect_with_pool($pool));

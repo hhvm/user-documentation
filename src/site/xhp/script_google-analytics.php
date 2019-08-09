@@ -10,8 +10,7 @@
  */
 
 class :script:google-analytics extends :x:element {
-  attribute
-    string trackingID @required;
+  attribute string trackingID @required;
 
   protected function render(): XHPRoot {
     $tracking_id = json_encode($this->:trackingID);

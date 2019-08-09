@@ -14,7 +14,7 @@ class Point {
 
 class ColoredPoint extends Point {
   public function __construct(num $x, num $y, Color $col) {
-    parent::__construct($x, $y);  // initialize the base Point
+    parent::__construct($x, $y); // initialize the base Point
     // ...
   }
 }

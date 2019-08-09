@@ -2,18 +2,19 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Conn\IsReusable;
 
-require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
+require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
-async function connect(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function connect(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   $conn = await $pool->connect(
     CI::$host,
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd
+    CI::$passwd,
   );
   // By default pool connections are automatically set to be reusable
   $conn->setReusable(false);
@@ -30,14 +31,15 @@ async function simple_query_2(\AsyncMysqlConnection $conn): Awaitable<int> {
   return $result->numRows();
 }
 
-async function get_connection(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function get_connection(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   return await connect($pool);
 }
 
 function get_pool(): \AsyncMysqlConnectionPool {
   $options = array(
-    'pool_connection_limit' => 1
+    'pool_connection_limit' => 1,
   );
   return new \AsyncMysqlConnectionPool($options);
 }

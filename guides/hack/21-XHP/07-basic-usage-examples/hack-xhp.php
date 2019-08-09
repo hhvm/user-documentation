@@ -1,6 +1,6 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 class MyBasicUsageExampleClass {
   public function getInt(): int {
@@ -21,7 +21,7 @@ function basic_usage_examples_embed_hack(): void {
   $xhp_float = <i>{basic_usage_examples_get_float()}</i>;
   $a = new MyBasicUsageExampleClass();
 
-  echo (
+  echo(
     <div>
       {(new MyBasicUsageExampleClass())->getInt()}
       <strong>{basic_usage_examples_get_string()}</strong>

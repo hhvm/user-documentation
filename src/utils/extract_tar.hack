@@ -112,8 +112,9 @@ function parse_tar(
             $next_file_name = $value;
             break;
           default:
-            throw
-              new \Exception("Tar extended header '$key' is not implemented");
+            throw new \Exception(
+              "Tar extended header '$key' is not implemented",
+            );
         }
         break;
       default:

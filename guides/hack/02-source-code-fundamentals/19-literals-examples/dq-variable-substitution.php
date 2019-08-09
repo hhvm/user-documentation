@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Fundamentals\Literals\Examples\DQVariableSubstitution;
 
 class C {
-    public int $p1 = 2;
+  public int $p1 = 2;
 }
 
 <<__EntryPoint>>

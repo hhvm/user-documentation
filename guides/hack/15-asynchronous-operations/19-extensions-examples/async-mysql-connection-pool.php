@@ -2,13 +2,14 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MySQLConnectionPool;
 
-require __DIR__ . '/async_mysql_connect.inc.php';
+require __DIR__.'/async_mysql_connect.inc.php';
 
-use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI;
+use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
+;
 
 function get_pool(): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool(
-    array('pool_connection_limit' => 100)
+    array('pool_connection_limit' => 100),
   ); // See API for more pool options
 }
 

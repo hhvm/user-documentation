@@ -5,10 +5,12 @@ namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AwaitLoop;
 class User {
   public string $name;
 
-  protected function __construct(string $name) { $this->name = $name; }
+  protected function __construct(string $name) {
+    $this->name = $name;
+  }
 
   public static function get_name(int $id): User {
-    return new User(\str_shuffle("ABCDEFGHIJ") . \strval($id));
+    return new User(\str_shuffle("ABCDEFGHIJ").\strval($id));
   }
 }
 

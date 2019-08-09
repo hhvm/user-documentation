@@ -18,8 +18,7 @@ async function site_main_async(): Awaitable<noreturn> {
   // We just use this to figure out if we should do a redirect - if we were
   // doing something more important, we should make sure that the remote end
   // is from a local-use IP range.
-  $https =
-    /* HH_FIXME[2050] */ $_SERVER['HTTP_X_FORWARDED_PROTO'] ??
+  $https = /* HH_FIXME[2050] */ $_SERVER['HTTP_X_FORWARDED_PROTO'] ??
     /* HH_FIXME[2050] */ $_SERVER['HTTPS'] ??
     /* HH_FIXME[2050] */ $_SERVER['https'] ??
     false;

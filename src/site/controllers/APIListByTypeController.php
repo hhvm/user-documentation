@@ -57,7 +57,7 @@ final class APIListByTypeController extends WebPageController {
     return
       <api-list
         product={$this->getParameters()['Product']}
-        types={ImmSet{$this->getParameters()['Type']}}
+        types={ImmSet {$this->getParameters()['Type']}}
       />;
   }
 }

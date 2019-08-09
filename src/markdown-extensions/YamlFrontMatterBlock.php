@@ -37,10 +37,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       BlockContext::class,
     );
 
-    $data = JSON\decode_as_shape(
-      YAMLMeta::class,
-      $block->getContent(),
-    );
+    $data = JSON\decode_as_shape(YAMLMeta::class, $block->getContent());
     $context->setYamlMeta($data);
 
     $messages = Vec\filter_nulls(vec[
@@ -79,14 +76,17 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     return UnparsedBlocks\BlockSequence::flatten(
       new UnparsedBlocks\HTMLBlock('<div class="apiTopMessage apiFromLib">'),
       new UnparsedBlocks\InlineSequenceBlock(
-        'This functionality requires '.(
+        'This functionality requires '.
+        (
           $versions
           |> Dict\map_with_key(
             $$,
             ($name, $ver) ==> \sprintf('%s %s or later', $name, $ver),
           )
           |> Str\join($$, ', ')
-        ).$experimental.'.'
+        ).
+        $experimental.
+        '.',
       ),
       new UnparsedBlocks\HTMLBlock('</div>'),
     );
@@ -101,15 +101,19 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     // TODO: fix XHP in namespaces
     return new UnparsedBlocks\HTMLBlock(
       '<div class="apiTopMessage apiFromLib">'.
-        'Requires '.
-        '<a href="https://github.com/'.$lib['github'].'/">'.
-        $lib['name'].
-        '</a> to be installed.'.
+      'Requires '.
+      '<a href="https://github.com/'.
+      $lib['github'].
+      '/">'.
+      $lib['name'].
+      '</a> to be installed.'.
       '</div>',
     );
   }
 
-  private static function getFacebookMessages(YAMLMeta $data): ?UnparsedBlocks\Block {
+  private static function getFacebookMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
     $messages = $data['fbonly messages'] ?? null;
     if ($messages === null) {
       return null;
@@ -121,7 +125,9 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       $message ==> new UnparsedBlocks\InlineSequenceBlock(
         '<div class="apiTopMessage fbOnly">'.
         "**Facebook Engineer?**\n\n".
-        '<p>'.$message."</p>\n".
+        '<p>'.
+        $message.
+        "</p>\n".
         '<!-- '.
         'Not a Facebook engineer... yet? https://www.facebook.com/careers/'.
         " -->\n".

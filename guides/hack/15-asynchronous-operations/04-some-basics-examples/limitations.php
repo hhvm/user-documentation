@@ -35,4 +35,3 @@ async function run(): Awaitable<void> {
 function main(): void {
   \HH\Asio\join(run());
 }
-

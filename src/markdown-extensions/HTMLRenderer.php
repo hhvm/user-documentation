@@ -19,8 +19,7 @@ final class HTMLRenderer extends Markdown\HTMLRenderer {
   protected function renderTableExtension(
     Markdown\Blocks\TableExtension $table,
   ): string {
-    return
-      '<div class="tableWrapper">'.
+    return '<div class="tableWrapper">'.
       parent::renderTableExtension($table).
       '</div>';
   }
@@ -39,8 +38,11 @@ final class HTMLRenderer extends Markdown\HTMLRenderer {
     $heading = $table->getHeader()[$col_idx]
       |> Vec\map($$, $part ==> $part->getContentAsPlainText())
       |> Str\join($$, '');
-    return
-      '<td'.$align.' data-heading="'.self::escapeAttribute($heading).'">'.
+    return '<td'.
+      $align.
+      ' data-heading="'.
+      self::escapeAttribute($heading).
+      '">'.
       $this->renderNodes($cell).
       '</td>';
   }

@@ -17,7 +17,7 @@ $handles = \HH\Asio\vw(Vector {
 });
 
 $results = \HH\Asio\join($handles);
-foreach($results as $result) {
+foreach ($results as $result) {
   if ($result->isSucceeded()) {
     echo "Success: ";
     var_dump($result->getResult());

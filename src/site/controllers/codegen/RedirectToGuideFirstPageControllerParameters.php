@@ -19,7 +19,8 @@ final class RedirectToGuideFirstPageControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
+      "Product" =>
+        $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
       "Guide" => $p->getString('Guide'),
     );
   }

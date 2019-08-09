@@ -37,10 +37,7 @@ function encode_dict<Tk as arraykey, Tv>(dict<Tk, Tv> $data): string {
   );
 }
 
-function encode_shape<T as shape(...)>(
-  typename<T> $type,
-  T $data,
-): string {
+function encode_shape<T as shape(...)>(typename<T> $type, T $data): string {
   return \json_encode(
     TypeAssert\matches_type_structure(
       \HHVM\UserDocumentation\type_alias_structure($type),

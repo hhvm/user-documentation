@@ -43,7 +43,7 @@ final class SearchController extends WebPageController {
           'term',
         ),
       },
-      'optional' => ImmVector { },
+      'optional' => ImmVector {},
     );
   }
 
@@ -110,9 +110,15 @@ final class SearchController extends WebPageController {
       'vec',
       'dict',
       'keyset',
-      'vector', 'immvector', 'constvector',
-      'map', 'immmap', 'constmap',
-      'set', 'immset', 'constset',
+      'vector',
+      'immvector',
+      'constvector',
+      'map',
+      'immmap',
+      'constmap',
+      'set',
+      'immset',
+      'constset',
     ];
     if (!C\contains_key($hack_array_keywords, $term)) {
       return vec[];

@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Batching;
 use namespace HH\Lib\Vec;
 
 // For asio-utilities function later(), etc.
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);
@@ -53,8 +53,9 @@ class Batcher {
   }
 }
 
-async function multi_key_lookup(vec<string> $keys)
-  : Awaitable<dict<string, string>> {
+async function multi_key_lookup(
+  vec<string> $keys,
+): Awaitable<dict<string, string>> {
 
   // lookup multiple keys, but, for now, return something random
   $r = dict[];

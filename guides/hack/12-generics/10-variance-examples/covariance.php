@@ -14,14 +14,18 @@ class C<+T> {
 class Animal {}
 class Cat extends Animal {}
 
-function f(C<Animal> $p1): void { \var_dump($p1); }
+function f(C<Animal> $p1): void {
+  \var_dump($p1);
+}
 
-function g(array<Animal> $p1): void { \var_dump($p1); }
+function g(array<Animal> $p1): void {
+  \var_dump($p1);
+}
 
 <<__EntryPoint>>
 function run(): void {
   f(new C(new Animal()));
-  f(new C(new Cat()));  // accepted
+  f(new C(new Cat())); // accepted
 
   g(array(new Animal(), new Animal()));
   g(array(new Cat(), new Cat(), new Animal())); // arrays are covariant

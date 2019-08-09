@@ -8,16 +8,11 @@ namespace Hack\UserDocumentation\API\Examples\HH\Asio\vm;
  *
  * Refer to \HH\Asio\v() for a more verbose version of this.
  */
-async function get_urls(
-  \ConstVector<string> $urls,
-): Awaitable<Vector<string>> {
+async function get_urls(\ConstVector<string> $urls): Awaitable<Vector<string>> {
 
   // Invoke \HH\Asio\curl_exec for each URL,
   // then await on each in parallel
-  return await \HH\Asio\vm(
-    $urls,
-    fun("\HH\Asio\curl_exec"),
-  );
+  return await \HH\Asio\vm($urls, fun("\HH\Asio\curl_exec"));
 }
 
 $urls = ImmVector {
@@ -28,6 +23,5 @@ $urls = ImmVector {
 
 $pages = \HH\Asio\join(get_urls($urls));
 foreach ($pages as $page) {
-  echo substr($page, 0, 15) . ' ... ' . substr($page, -8);
+  echo substr($page, 0, 15).' ... '.substr($page, -8);
 }
-
