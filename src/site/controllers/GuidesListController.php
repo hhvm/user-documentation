@@ -39,11 +39,7 @@ final class GuidesListController extends WebPageController {
     $root = <ul class="guideList" />;
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
-      $url = URLBuilder::getPathForGuidePage(
-        $product,
-        $guide,
-        $pages[0],
-      );
+      $url = URLBuilder::getPathForGuidePage($product, $guide, $pages[0]);
 
       $title = ucwords(strtr($guide, '-', ' '));
 
@@ -53,7 +49,7 @@ final class GuidesListController extends WebPageController {
           <div class="guideDescription">
             {$this->getGuideSummary($guide)}
           </div>
-        </li>
+        </li>,
       );
     }
     return $root;
@@ -85,17 +81,14 @@ final class GuidesListController extends WebPageController {
             Full reference docs for all functions, classes, interfaces, and
             traits in the Hack Standard Library.
           </p>
-        </div>
+        </div>,
       );
     }
     return $body;
   }
 
   protected function getGuideSummary(string $guide): ?XHPRoot {
-    $path = GuidesIndex::getFileForSummary(
-      $this->getProduct(),
-      $guide,
-    );
+    $path = GuidesIndex::getFileForSummary($this->getProduct(), $guide);
     if (file_get_contents($path)) {
       return <x:frag>{file_get_contents($path)}</x:frag>;
     }
@@ -106,7 +99,7 @@ final class GuidesListController extends WebPageController {
   protected function getBreadcrumbs(): vec<(string, ?string)> {
     $product = $this->getProduct();
     return vec[
-      tuple ($product, URLBuilder::getPathForProductGuides($product)),
+      tuple($product, URLBuilder::getPathForProductGuides($product)),
       tuple('Learn', null),
     ];
   }

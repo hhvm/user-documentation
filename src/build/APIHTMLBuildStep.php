@@ -20,7 +20,7 @@ final class APIHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nAPIHTMLBuild");
-    $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
+    $sources = self::findSources(self::SOURCE_ROOT, Set {'md'})
       |> Vec\filter($$, $path ==> \basename($path) !== 'README.md')
       |> Vec\filter($$, $path ==> \strpos($path, '-examples') === false)
       |> Vec\sort($$);

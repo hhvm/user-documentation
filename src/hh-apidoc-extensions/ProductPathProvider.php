@@ -12,20 +12,14 @@
 namespace HHVM\UserDocumentation\HHAPIDocExt;
 
 use namespace Facebook\HHAPIDoc;
-use type HHVM\UserDocumentation\{
-  APIDefinitionType,
-  APIIndex,
-  APIProduct,
-};
+use type HHVM\UserDocumentation\{APIDefinitionType, APIIndex, APIProduct};
 use namespace HH\Lib\Str;
 
 final class ProductPathProvider implements HHAPIDoc\IPathProvider<?string> {
   use APIDefinitionTypeBasedPathProvider<?string>;
   private APIIndex $index;
 
-  public function __construct(
-    APIProduct $product,
-  ) {
+  public function __construct(APIProduct $product) {
     $this->index = APIIndex::get($product);
   }
 
@@ -47,7 +41,8 @@ final class ProductPathProvider implements HHAPIDoc\IPathProvider<?string> {
     string $method,
   ): ?string {
     $class = $this->index
-      ->getClassIndex($type)[self::normalize($class)] ?? null;
+      ->getClassIndex($type)[self::normalize($class)] ??
+      null;
     if ($class === null) {
       return null;
     }

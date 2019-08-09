@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\Set\Map\Strings;
 
-$s  = Set {'red', 'green', 'blue', 'yellow'};
+$s = Set {'red', 'green', 'blue', 'yellow'};
 
 $capitalized = $s->map(fun('strtoupper'));
 var_dump($capitalized);

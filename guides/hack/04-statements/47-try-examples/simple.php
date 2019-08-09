@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\Statements\Try\Examples\Simple;
 
 function do_it(int $x, int $y): void {
   try {
-    $result = $x/$y;
+    $result = $x / $y;
     echo "\$result = $result\n";
     // ...
   }
@@ -23,5 +23,5 @@ function do_it(int $x, int $y): void {
 <<__EntryPoint>>
 function main(): void {
   do_it(100, 5);
-//  do_it(6, 0);
+  //  do_it(6, 0);
 }

@@ -16,9 +16,7 @@ use namespace HH\Lib\{Str, Vec};
 final class APIIndex {
   private ProductAPIIndexShape $index;
 
-  private function __construct(
-    private APIProduct $product,
-  ) {
+  private function __construct(private APIProduct $product) {
     $idx = self::getRawIndex();
     switch ($product) {
       case APIProduct::HACK:
@@ -47,8 +45,7 @@ final class APIIndex {
   }
 
   <<__Memoize>>
-  private static function getRawIndex(
-  ): APIIndexShape {
+  private static function getRawIndex(): APIIndexShape {
     return apc_fetch_or_set_class_data(
       self::class,
       () ==> JSON\decode_as_shape(
@@ -65,20 +62,19 @@ final class APIIndex {
     invariant(
       \array_key_exists($type, $index),
       'invalid type: %s',
-      (string) $type,
+      (string)$type,
     );
     return $index[$type];
   }
 
-  public function getFunctionIndex(
-  ): dict<string, APIFunctionIndexEntry> {
+  public function getFunctionIndex(): dict<string, APIFunctionIndexEntry> {
     return $this->index['function'];
   }
 
   public function getClassIndex(
     APIDefinitionType $type,
   ): dict<string, APIClassIndexEntry> {
-    switch($type) {
+    switch ($type) {
       case APIDefinitionType::FUNCTION_DEF:
         invariant_violation('functions are not classes');
       case APIDefinitionType::CLASS_DEF:
@@ -90,17 +86,13 @@ final class APIIndex {
     }
   }
 
-  public function search(
-    string $term,
-  ): vec<SearchResult> {
+  public function search(string $term): vec<SearchResult> {
     return APIDefinitionType::getValues()
       |> Vec\map($$, $type ==> $this->searchEntries($term, $type))
       |> Vec\flatten($$);
   }
 
-  private function getMethods(
-    APIIndexEntry $entry,
-  ): ?vec<APIMethodIndexEntry> {
+  private function getMethods(APIIndexEntry $entry): ?vec<APIMethodIndexEntry> {
     $arr = Shapes::toArray($entry);
     $methods = $arr['methods'] ?? null;
     if ($methods !== null) {
@@ -115,7 +107,7 @@ final class APIIndex {
     return null;
   }
 
-  private function searchEntries (
+  private function searchEntries(
     string $term,
     APIDefinitionType $type,
   ): vec<SearchResult> {
@@ -159,9 +151,7 @@ final class APIIndex {
     return $results;
   }
 
-  public function getDataForFunction(
-    string $name,
-  ): APIFunctionIndexEntry {
+  public function getDataForFunction(string $name): APIFunctionIndexEntry {
     $index = $this->index;
     invariant(
       \array_key_exists($name, $index['function']),

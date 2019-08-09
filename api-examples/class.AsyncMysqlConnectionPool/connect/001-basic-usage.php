@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\PoolConn\Connect;
 
-require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
+require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
@@ -18,13 +18,8 @@ class MyPool {
   }
 
   public async function connect(): Awaitable<\AsyncMysqlConnection> {
-    return await $this->pool->connect(
-      CI::$host,
-      CI::$port,
-      CI::$db,
-      CI::$user,
-      CI::$passwd
-    );
+    return await $this->pool
+      ->connect(CI::$host, CI::$port, CI::$db, CI::$user, CI::$passwd);
   }
 }
 
@@ -34,8 +29,9 @@ async function get_num_rows(\AsyncMysqlConnection $conn): Awaitable<int> {
   return $result->numRows();
 }
 
-async function get_row_data(\AsyncMysqlConnection $conn):
-  Awaitable<Vector<KeyedContainer<int, ?string>>> {
+async function get_row_data(
+  \AsyncMysqlConnection $conn,
+): Awaitable<Vector<KeyedContainer<int, ?string>>> {
   $result = await $conn->query('SELECT * FROM test_table');
   return $result->vectorRows();
 }

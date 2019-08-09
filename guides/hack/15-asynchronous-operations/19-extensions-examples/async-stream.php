@@ -15,7 +15,7 @@ async function write_all(vec<resource> $resources): Awaitable<void> {
   $write_single_resource = async function(resource $r) {
     $status = await \stream_await($r, \STREAM_AWAIT_WRITE, 1.0);
     if ($status === \STREAM_AWAIT_READY) {
-      \fwrite($r, \str_shuffle('ABCDEF') . \PHP_EOL);
+      \fwrite($r, \str_shuffle('ABCDEF').\PHP_EOL);
     }
   };
   // You will get 3 shuffled strings, each on a separate line.

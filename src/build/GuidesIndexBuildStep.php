@@ -80,8 +80,9 @@ final class GuidesIndexBuildStep extends BuildStep {
       $path = \str_replace(BuildPaths::GUIDES_MARKDOWN.'/', '', $path);
       $parts = (new Vector(\explode('/', $path)))
         ->map(
-          $part ==>
-            \preg_match('/^[0-9]{2,}-/', $part) ? \substr($part, \strpos($part, '-') + 1) : $part,
+          $part ==> \preg_match('/^[0-9]{2,}-/', $part)
+            ? \substr($part, \strpos($part, '-') + 1)
+            : $part,
         );
       if (\count($parts) !== 3) {
         continue;

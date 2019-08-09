@@ -27,6 +27,6 @@ class PassengerJet extends Aircraft {
 <<__EntryPoint>>
 function main(): void {
   $pj = new PassengerJet();
-  echo "\$pj's maximum speed: " . $pj->get_max_speed() . "\n";
-  echo "\$pj's maximum altitude: " . $pj->get_max_altitude() . "\n";
+  echo "\$pj's maximum speed: ".$pj->get_max_speed()."\n";
+  echo "\$pj's maximum altitude: ".$pj->get_max_altitude()."\n";
 }

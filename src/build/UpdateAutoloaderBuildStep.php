@@ -11,11 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use type Facebook\AutoloadMap\{
-  IncludedRoots,
-  RootImporter,
-  Writer,
-};
+use type Facebook\AutoloadMap\{IncludedRoots, RootImporter, Writer};
 
 /** Update the HHVM autoload map.
  *
@@ -33,7 +29,9 @@ final class UpdateAutoloaderBuildStep extends BuildStep {
     );
 
     $config = $importer->getConfig();
-    $handler = $dev ?  ($config['devFailureHandler'] ?? null) : ($config['failureHandler'] ?? null);
+    $handler = $dev
+      ? ($config['devFailureHandler'] ?? null)
+      : ($config['failureHandler'] ?? null);
 
     (new Writer())
       ->setBuilder($importer)

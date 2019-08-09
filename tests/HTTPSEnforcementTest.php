@@ -7,8 +7,9 @@ use function Facebook\FBExpect\expect;
 final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function testNoEnforcementByDefault(): Awaitable<void> {
-    list($response, $_) =
-      await PageLoader::getPageAsync('http://example.com/hack/reference/');
+    list($response, $_) = await PageLoader::getPageAsync(
+      'http://example.com/hack/reference/',
+    );
     expect($response->getStatusCode())->toBeSame(200);
   }
 
@@ -18,8 +19,9 @@ final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
 
   <<DataProvider('httpsDomains'), TestGroup('remote')>>
   public async function testEnforcedOnDomain(string $domain): Awaitable<void> {
-    list($response, $_) =
-      await PageLoader::getPageAsync('http://'.$domain.'/hack/reference/');
+    list($response, $_) = await PageLoader::getPageAsync(
+      'http://'.$domain.'/hack/reference/',
+    );
     expect($response->getStatusCode())->toBeSame(301);
 
     $location = $response->getHeaderLine('Location');
@@ -35,8 +37,9 @@ final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
 
   <<TestGroup('remote')>>
   public async function testNotEnforcedOnRobotsTxt(): Awaitable<void> {
-    list($response, $_) =
-      await PageLoader::getPageAsync('http://docs.hhvm.com/robots.txt');
+    list($response, $_) = await PageLoader::getPageAsync(
+      'http://docs.hhvm.com/robots.txt',
+    );
     expect($response->getStatusCode())->toBeSame(200);
   }
 

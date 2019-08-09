@@ -57,8 +57,9 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
 
     // /hack/foo/ => /hack/foo/introduction
     if ($response->getStatusCode() === 301) {
-      list($response, $body) =
-        await PageLoader::getPageAsync($response->getHeaderLine('Location'));
+      list($response, $body) = await PageLoader::getPageAsync(
+        $response->getHeaderLine('Location'),
+      );
     }
 
     expect($response->getStatusCode())->toBeSame(200);
@@ -74,13 +75,16 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
 
     expect($body)->toContain('highlight');
     // Namespace declaration
-    expect($body)->toContain('Hack\UserDocumentation\AsyncOps\Examples\Examples');
+    expect($body)->toContain(
+      'Hack\UserDocumentation\AsyncOps\Examples\Examples',
+    );
   }
 
   <<TestGroup('remote')>>
   public async function testGeneratedGuidesRender(): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('/hhvm/configuration/INI-settings');
+    list($response, $body) = await PageLoader::getPageAsync(
+      '/hhvm/configuration/INI-settings',
+    );
     expect($response->getStatusCode())->toBeSame(200);
     expect($body)->toContain('allow_url_fopen</a></td>');
   }

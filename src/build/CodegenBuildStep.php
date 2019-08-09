@@ -17,7 +17,7 @@ trait CodegenBuildStep {
   protected function getCodegenFactory(): CG\HackCodegenFactory {
     $config = new CG\HackCodegenConfig();
     return new CG\HackCodegenFactory(
-      $config->withFormatter(new CG\HackfmtFormatter($config))
+      $config->withFormatter(new CG\HackfmtFormatter($config)),
     );
   }
 }

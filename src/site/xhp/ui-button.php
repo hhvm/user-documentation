@@ -28,8 +28,10 @@ final class :ui:button extends :x:element {
     $holder_class = ($this->:className !== null)
       ? "buttonHolder ".$this->:className
       : "buttonHolder";
-    $button_class =
-      "button button".ucfirst($this->:use)." button".ucfirst($this->:size);
+    $button_class = "button button".
+      ucfirst($this->:use).
+      " button".
+      ucfirst($this->:size);
 
     if ($this->:href !== null) {
       $button =
@@ -42,9 +44,7 @@ final class :ui:button extends :x:element {
         </a>;
     } else {
       $button =
-        <div
-          class={$button_class}
-          role="button">
+        <div class={$button_class} role="button">
           <span class="buttonText">{$this->getChildren()}</span>
         </div>;
     }

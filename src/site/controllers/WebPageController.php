@@ -10,6 +10,6 @@
  */
 
 abstract class WebPageController
-extends NonRoutableWebPageController
-implements RoutableGetController {
+  extends NonRoutableWebPageController
+  implements RoutableGetController {
 }

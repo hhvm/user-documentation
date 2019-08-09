@@ -2,18 +2,19 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\QueryResult\NumRowsA;
 
-require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
+require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
-async function connect(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function connect(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   return await $pool->connect(
     CI::$host,
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd
+    CI::$passwd,
   );
 }
 async function simple_query(): Awaitable<int> {
@@ -21,8 +22,11 @@ async function simple_query(): Awaitable<int> {
   $conn = await connect($pool);
   $id = \rand(100, 60000); // userID is a SMALLINT
   $name = \str_shuffle("ABCDEFGHIJ");
-  $query = 'INSERT INTO test_table (userID, name) VALUES ('
-         . $id . ', "' . $name . '")';
+  $query = 'INSERT INTO test_table (userID, name) VALUES ('.
+    $id.
+    ', "'.
+    $name.
+    '")';
   try {
     $result = await $conn->query($query);
     // How many rows were affected? Should be 1.

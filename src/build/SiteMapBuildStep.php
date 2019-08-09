@@ -25,7 +25,7 @@ final class SiteMapBuildStep extends BuildStep {
       $this->getGuidePages(),
     };
 
-    $combined = Vector { };
+    $combined = Vector {};
     foreach ($url_lists as $url_list) {
       $combined->addAll($url_list);
     }
@@ -44,10 +44,7 @@ final class SiteMapBuildStep extends BuildStep {
       'site map > 50MB, need to split sitemap for Google',
     );
 
-    \file_put_contents(
-      BuildPaths::SITE_MAP,
-      $text,
-    );
+    \file_put_contents(BuildPaths::SITE_MAP, $text);
   }
 
   private function getIndexPages(): ImmVector<string> {
@@ -77,7 +74,7 @@ final class SiteMapBuildStep extends BuildStep {
   private function getPagesFromNavData(
     dict<string, NavDataNode> $roots,
   ): ImmVector<string> {
-    $out = Vector { };
+    $out = Vector {};
     $to_visit = \array_values($roots);
     while ($node = \array_shift(&$to_visit)) {
       foreach ($node['children'] as $child) {

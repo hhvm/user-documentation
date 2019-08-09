@@ -13,7 +13,7 @@ namespace HHVM\UserDocumentation;
 
 function apc_fetch_or_set_class_data<Tclass, Tdata>(
   classname<Tclass> $class,
-  (function():Tdata) $fetcher,
+  (function(): Tdata) $fetcher,
 ): Tdata {
   return _Private\apc_fetch_or_set_raw('class!'.$class, $fetcher);
 }
@@ -21,17 +21,14 @@ function apc_fetch_or_set_class_data<Tclass, Tdata>(
 function apc_fetch_or_set_method_data<Tclass, Tdata>(
   classname<Tclass> $class,
   string $method,
-  (function():Tdata) $fetcher,
+  (function(): Tdata) $fetcher,
 ): Tdata {
-  return _Private\apc_fetch_or_set_raw(
-    'fun!'.$class.'::'.$method,
-    $fetcher,
-  );
+  return _Private\apc_fetch_or_set_raw('fun!'.$class.'::'.$method, $fetcher);
 }
 
 function apc_fetch_or_set_function_data<Tclass, Tdata>(
   string $fun,
-  (function():Tdata) $fetcher,
+  (function(): Tdata) $fetcher,
 ): Tdata {
   return _Private\apc_fetch_or_set_raw('fun!'.$fun, $fetcher);
 }

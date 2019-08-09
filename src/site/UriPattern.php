@@ -9,10 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\{APIDefinitionType,
-  APIProduct,
-  GuidesProduct
-};
+use type HHVM\UserDocumentation\{APIDefinitionType, APIProduct, GuidesProduct};
 
 final class UriPattern extends \Facebook\HackRouter\UriPattern {
   public function apiProduct(string $name): this {

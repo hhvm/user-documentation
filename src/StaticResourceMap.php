@@ -25,7 +25,7 @@ class StaticResourceMap {
             type_alias_structure(StaticResourceMapEntry::class),
             $value,
           ),
-        )
+        ),
     );
   }
 
@@ -33,10 +33,7 @@ class StaticResourceMap {
     string $filename,
   ): StaticResourceMapEntry {
     $entry = self::getNullableEntryForFile($filename);
-    invariant(
-      $entry !== null,
-      "Couldn't find entry in static resources map",
-    );
+    invariant($entry !== null, "Couldn't find entry in static resources map");
     return $entry;
   }
 

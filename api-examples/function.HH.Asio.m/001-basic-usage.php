@@ -24,7 +24,6 @@ $urls = ImmMap {
 
 $pages = \HH\Asio\join(get_urls($urls));
 foreach ($pages as $name => $page) {
-  echo $name . ': ';
-  echo substr($page, 0, 15) . ' ... ' . substr($page, -8);
+  echo $name.': ';
+  echo substr($page, 0, 15).' ... '.substr($page, -8);
 }
-

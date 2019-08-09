@@ -30,10 +30,10 @@ abstract final class ScannedDefinitionFilters {
       |> Regex\replace($$, re"/[^a-z0-9]/", '-');
 
     if (
-      $def is ScannedClassish
-         && !C\contains_key(self::getPHPList('classes'), $normalized_name)
-      || $def is ScannedFunction
-         && !C\contains_key(self::getPHPList('functions'), $normalized_name)
+      $def is ScannedClassish &&
+        !C\contains_key(self::getPHPList('classes'), $normalized_name) ||
+      $def is ScannedFunction &&
+        !C\contains_key(self::getPHPList('functions'), $normalized_name)
     ) {
       // Function/class does not exist in PHP.
       return true;
@@ -88,21 +88,23 @@ abstract final class ScannedDefinitionFilters {
   public static function shouldNotDocument(ScannedDefinition $def): bool {
     return (
       Str\starts_with($def->getName(), '_') // non-namespaced name starts with _
-      || Str\contains($def->getName(), '\\_') // namespaced name starts with _
-      || Str\contains($def->getName(), 'WaitHandle')
-      || Str\contains($def->getName(), "\\Rx\\")
-      || ($def->getAttributes()['NoDoc'] ?? null) !== null
-      || self::isBlacklisted($def)
-      || (
-        Str\contains($def->getFileName(), 'api-sources/hhvm/')
-        && self::isUndefinedFunction($def)
-      )
-      || (
-        Str\starts_with($def->getName(), 'Lazy')
-        && Str\contains($def->getName(), 'Itera')
-      )
-      || $def is ScannedType
-      || $def is ScannedNewtype
+      ||
+      Str\contains($def->getName(), '\\_') // namespaced name starts with _
+      ||
+      Str\contains($def->getName(), 'WaitHandle') ||
+      Str\contains($def->getName(), "\\Rx\\") ||
+      ($def->getAttributes()['NoDoc'] ?? null) !== null ||
+      self::isBlacklisted($def) ||
+      (
+        Str\contains($def->getFileName(), 'api-sources/hhvm/') &&
+        self::isUndefinedFunction($def)
+      ) ||
+      (
+        Str\starts_with($def->getName(), 'Lazy') &&
+        Str\contains($def->getName(), 'Itera')
+      ) ||
+      $def is ScannedType ||
+      $def is ScannedNewtype
     );
   }
 
@@ -114,16 +116,18 @@ abstract final class ScannedDefinitionFilters {
       return false;
     }
     $path = $def->getFileName();
-    if (!(
-      Str\starts_with($path, BuildPaths::HHVM_TREE)
-      && Str\ends_with($path, '.hhi')
-    )) {
+    if (
+      !(
+        Str\starts_with($path, BuildPaths::HHVM_TREE) &&
+        Str\ends_with($path, '.hhi')
+      )
+    ) {
       return false;
     }
     $name = $def->getName();
     if (
-      \function_exists($name, /* autoload = */ false)
-      || \function_exists("HH\\".$name, /* autoload = */ false)
+      \function_exists($name, /* autoload = */ false) ||
+      \function_exists("HH\\".$name, /* autoload = */ false)
     ) {
       return false;
     }

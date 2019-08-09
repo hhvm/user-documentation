@@ -90,10 +90,7 @@ abstract final class SearchTermMatcher {
     $idx = 0;
     foreach ($parts as $part) {
       $new_idx = $part
-        |> Keyset\union(
-          vec[$$],
-          self::SYNONYMS[Str\lowercase($$)] ?? vec[],
-        )
+        |> Keyset\union(vec[$$], self::SYNONYMS[Str\lowercase($$)] ?? vec[])
         |> Vec\map($$, $part ==> Str\search($content, $part, $idx + 1))
         |> Vec\filter_nulls($$)
         |> Math\min($$);
@@ -158,10 +155,7 @@ abstract final class SearchTermMatcher {
   }
 
   <<__Memoize>>
-  public static function matchTerm(
-    string $content,
-    string $term,
-  ): ?float {
+  public static function matchTerm(string $content, string $term): ?float {
     $content = Str\lowercase($content);
     $term = Str\lowercase($term);
     return self::matchTermInner($content, $term, keyset[$term]);
@@ -204,8 +198,7 @@ abstract final class SearchTermMatcher {
       Str\split($term, ' ')
         |> Vec\map($$, $word ==> Str\length($word))
         |> Math\max($$)
-        |> TypeAssert\not_null($$)
-      ,
+        |> TypeAssert\not_null($$),
     );
     $diff = \levenshtein($content, $term);
     if ($diff >= Math\minva($length, 3)) {
@@ -215,7 +208,8 @@ abstract final class SearchTermMatcher {
       return null;
     }
 
-    return ((float) $length) / ((float) $diff)
-      * SearchScores::LEVENSHTEIN_MULTIPLIER;
+    return ((float)$length) /
+      ((float)$diff) *
+      SearchScores::LEVENSHTEIN_MULTIPLIER;
   }
 }

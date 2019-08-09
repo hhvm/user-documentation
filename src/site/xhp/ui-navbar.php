@@ -9,10 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\{
-  NavDataNode,
-  UIGlyphIcon,
-};
+use type HHVM\UserDocumentation\{NavDataNode, UIGlyphIcon};
 
 use namespace HH\Lib\Dict;
 
@@ -23,10 +20,7 @@ class :ui:navbar extends :x:element {
     string extraNavListClass;
 
   protected function render(): XHPRoot {
-    $roots = Dict\map(
-      $this->:data,
-      $node ==> $this->renderLevel1Item($node),
-    );
+    $roots = Dict\map($this->:data, $node ==> $this->renderLevel1Item($node));
 
     $nav_list_class = 'navList';
     $extra = $this->:extraNavListClass;
@@ -36,7 +30,7 @@ class :ui:navbar extends :x:element {
 
     $toggle_button =
       <div class="navToggleButton">
-         <ui:glyph icon={UIGlyphIcon::LIST} />
+        <ui:glyph icon={UIGlyphIcon::LIST} />
       </div>;
 
     $list = (
@@ -69,12 +63,12 @@ class :ui:navbar extends :x:element {
       <script language="javascript">
         var toggleButton = document.getElementById({$button_id});
         toggleButton.addEventListener(
-          'click',
-          function() {"{"}
-            var toggleContainer = document.getElementById({$container_id});
-            toggleContainer.classList.toggle('navToggleOff');
-            toggleContainer.classList.toggle('navToggleOn');
-          {"}"}
+        'click',
+        function() {"{"}
+        var toggleContainer = document.getElementById({$container_id});
+        toggleContainer.classList.toggle('navToggleOff');
+        toggleContainer.classList.toggle('navToggleOn');
+        {"}"}
         );
       </script>
     );
@@ -91,14 +85,14 @@ class :ui:navbar extends :x:element {
     return (
       <script language="javascript">
         var scrollToActive = function() {"{"}
-          var navList = document.getElementById({json_encode($list->getID())});
-          var activeNav = document.getElementById({json_encode($id)});
-          navList.scrollTop = activeNav.offsetTop - 10;
+        var navList = document.getElementById({json_encode($list->getID())});
+        var activeNav = document.getElementById({json_encode($id)});
+        navList.scrollTop = activeNav.offsetTop - 10;
         {"}"};
         scrollToActive();
         window.addEventListener(
-          'transitioned',
-          scrollToActive
+        'transitioned',
+        scrollToActive
         );
       </script>
     );
@@ -145,9 +139,7 @@ class :ui:navbar extends :x:element {
     return
       <li class={$class}>
         <h4 id={$node['name']}>
-          <a
-            class="navItem"
-            href={$node['urlPath']}>
+          <a class="navItem" href={$node['urlPath']}>
             {$node['name']}
           </a>
         </h4>
@@ -190,9 +182,7 @@ class :ui:navbar extends :x:element {
     return (
       <li class={$class} id={$id}>
         <h5>
-          <a
-            class="navItem"
-            href={$node['urlPath']}>
+          <a class="navItem" href={$node['urlPath']}>
             {$node['name']}
           </a>
         </h5>
@@ -236,7 +226,7 @@ class :ui:navbar extends :x:element {
     $root = <ul class={$list_class} />;
     foreach ($parent['children'] as $child) {
       $root->appendChild(
-        $render_func(/* HH_IGNORE_ERROR[4110] mixed to shape */ $child)
+        $render_func(/* HH_IGNORE_ERROR[4110] mixed to shape */ $child),
       );
     }
     return $root;
@@ -245,8 +235,8 @@ class :ui:navbar extends :x:element {
   private function cachedRender(
     string $cache_key,
     bool $is_active,
-    (function():XHPRoot) $callback,
-  ): XHPRoot  {
+    (function(): XHPRoot) $callback,
+  ): XHPRoot {
     if ($is_active) {
       return $callback();
     }

@@ -17,8 +17,9 @@ final class :search-bar extends :x:element {
     string placeholder = 'Search';
 
   protected function render(): XHPRoot {
-    $class =
-      ($this->:class !== null) ? "searchBar ".$this->:class : "searchBar";
+    $class = ($this->:class !== null)
+      ? "searchBar ".$this->:class
+      : "searchBar";
     return
       <div class={$class}>
         <form method="get" action="/search">

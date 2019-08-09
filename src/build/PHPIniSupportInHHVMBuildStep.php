@@ -39,16 +39,13 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
     $out = dict[];
     foreach ($php_supported_settings as $setting) {
       // default to here if no URL exists for specific setting
-      $url = idx(
-        $php_settings_with_urls,
-        $setting,
-      );
+      $url = idx($php_settings_with_urls, $setting);
       if ($url === null) {
         $url = 'http://php.net/manual/en/ini.list.php';
       } else {
         $url = \sprintf(
           'http://php.net/manual/en/%s',
-          $php_settings_with_urls[$setting]
+          $php_settings_with_urls[$setting],
         );
       }
       $out[$setting] = $url;
@@ -61,7 +58,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
     \libxml_use_internal_errors(true);
     $dom = new \DOMDocument();
     $html_content = \HH\Asio\join(
-      \HH\Asio\curl_exec('http://php.net/manual/en/ini.list.php')
+      \HH\Asio\curl_exec('http://php.net/manual/en/ini.list.php'),
     );
     $dom->loadHTML($html_content);
     $xpath = new \DOMXPath($dom);

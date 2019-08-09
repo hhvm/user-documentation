@@ -6,7 +6,7 @@ namespace Hack\UserDocumentation\API\Examples\HH\Asio\vfkw;
 // Positive evens and odds at every third index filtered out,
 // Negatives and zero cause exception
 $odds = \HH\Asio\join(\HH\Asio\vfkw(
-  Vector { -1, 0, 1, 2, 3, 4, 5 },
+  Vector {-1, 0, 1, 2, 3, 4, 5},
 
   async ($idx, $val) ==> {
     if ($val <= 0) {
@@ -17,7 +17,7 @@ $odds = \HH\Asio\join(\HH\Asio\vfkw(
   },
 ));
 
-foreach($odds as $result) {
+foreach ($odds as $result) {
   if ($result->isSucceeded()) {
     echo "Success: ";
     var_dump($result->getResult());

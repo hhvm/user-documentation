@@ -41,7 +41,8 @@ final class HHVMDocumentationSite {
       $content = await $read_handle->readAsync(Math\INT64_MAX);
       await $out->writeAsync($content);
       await $out->flushAsync();
-    };
+    }
+    ;
     \unlink($buffer_path);
   }
 
@@ -83,8 +84,9 @@ final class HHVMDocumentationSite {
 
       // This is outside of the try so that we don't try adding a trailing
       // slash if the controller itself throws a 404
-      return
-        await (new $controller($vars, $request))->getResponseAsync($response);
+      return await (new $controller($vars, $request))->getResponseAsync(
+        $response,
+      );
     } catch (HTTPException $e) {
       return await $e->getResponseAsync($request, $response);
     }

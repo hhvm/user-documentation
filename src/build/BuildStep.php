@@ -63,7 +63,7 @@ abstract class BuildStep {
     $rdi = new \RecursiveDirectoryIterator($root);
     $rii = new \RecursiveIteratorIterator(
       $rdi,
-      \RecursiveIteratorIterator::CHILD_FIRST
+      \RecursiveIteratorIterator::CHILD_FIRST,
     );
     $all_files = vec[];
     $files = vec[];
@@ -84,10 +84,7 @@ abstract class BuildStep {
       }
       \file_put_contents(
         $index,
-        JSON\encode_shape(
-          DirectoryIndex::class,
-          shape('files' => $all_files),
-        ),
+        JSON\encode_shape(DirectoryIndex::class, shape('files' => $all_files)),
       );
     }
 

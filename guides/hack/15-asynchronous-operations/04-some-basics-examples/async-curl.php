@@ -17,11 +17,10 @@ async function async_curl(): Awaitable<void> {
   $start = \microtime(true);
   list($a, $b) = await Vec\from_async(vec[curl_A(), curl_B()]);
   $end = \microtime(true);
-  echo "Total time taken: " . \strval($end - $start) . " seconds\n";
+  echo "Total time taken: ".\strval($end - $start)." seconds\n";
 }
 
 <<__EntryPoint>>
-function main():void {
+function main(): void {
   \HH\Asio\join(async_curl());
 }
-

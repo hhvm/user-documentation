@@ -36,9 +36,7 @@ final class GuidesIndex {
     return GuidesSummaryData::getData();
   }
 
-  public static function search(
-    string $term,
-  ): vec<SearchResult> {
+  public static function search(string $term): vec<SearchResult> {
     $results = vec[];
 
     $index = self::getIndex();
@@ -100,11 +98,7 @@ final class GuidesIndex {
     string $guide,
   ): vec<string> {
     $index = self::getIndex();
-    invariant(
-      C\contains_key($index, $product),
-      'no guides for %s',
-      $product,
-    );
+    invariant(C\contains_key($index, $product), 'no guides for %s', $product);
     invariant(
       C\contains_key($index[$product], $guide),
       '%s does not contain a %s guide',

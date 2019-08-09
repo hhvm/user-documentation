@@ -2,31 +2,32 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Conn\Queryf\PerEqual;
 
-require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
+require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
-async function connect(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function connect(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   return await $pool->connect(
     CI::$host,
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd
+    CI::$passwd,
   );
 }
 
 async function get_data(
   \AsyncMysqlConnection $conn,
   string $col,
-  ?string $email):
-  Awaitable<\AsyncMysqlQueryResult> {
+  ?string $email,
+): Awaitable<\AsyncMysqlQueryResult> {
   // %=s allows you to check an actual string value or IS NULL
   return await $conn->queryf(
     'SELECT %C FROM test_table where email %=s',
     $col,
-    $email
+    $email,
   );
 }
 

@@ -10,7 +10,7 @@ $m = Map {
 };
 
 $css_colors = $m->mapWithKey(
-  ($color, $hex_code) ==> "color: {$hex_code}; /* {$color} */"
+  ($color, $hex_code) ==> "color: {$hex_code}; /* {$color} */",
 );
 
 echo implode("\n", $css_colors)."\n";

@@ -2,9 +2,10 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MySQL;
 
-require __DIR__ . '/async_mysql_connect.inc.php';
+require __DIR__.'/async_mysql_connect.inc.php';
 
-use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI;
+use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
+;
 
 async function get_connection(): Awaitable<\AsyncMysqlConnection> {
   // Get a connection pool with default options
@@ -19,12 +20,14 @@ async function get_connection(): Awaitable<\AsyncMysqlConnection> {
   );
 }
 
-async function fetch_user_name(\AsyncMysqlConnection $conn,
-                               int $user_id) : Awaitable<?string> {
+async function fetch_user_name(
+  \AsyncMysqlConnection $conn,
+  int $user_id,
+): Awaitable<?string> {
   // Your table and column may differ, of course
   $result = await $conn->queryf(
     'SELECT name from test_table WHERE userID = %d',
-    $user_id
+    $user_id,
   );
   // There shouldn't be more than one row returned for one user id
   invariant($result->numRows() === 1, 'one row exactly');
@@ -34,11 +37,13 @@ async function fetch_user_name(\AsyncMysqlConnection $conn,
   return $vector[0][0]; // We had one column in our query
 }
 
-async function get_user_info(\AsyncMysqlConnection $conn,
-                             string $user): Awaitable<Vector<Map<string,?string>>> {
+async function get_user_info(
+  \AsyncMysqlConnection $conn,
+  string $user,
+): Awaitable<Vector<Map<string, ?string>>> {
   $result = await $conn->queryf(
     'SELECT * from test_table WHERE name = %s',
-    $conn->escapeString($user)
+    $conn->escapeString($user),
   );
   // A vector of map objects holding the string values of each column
   // in the query, and the keys being the column names
@@ -53,7 +58,7 @@ async function async_mysql_tutorial(): Awaitable<void> {
     \var_dump($result);
     $info = await get_user_info($conn, 'Fred Emmott');
     \var_dump($info is vec<_>);
-    \var_dump($info[0] is dict<_,_>);
+    \var_dump($info[0] is dict<_, _>);
   }
 }
 

@@ -1,10 +1,10 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 function intro_examples_avoid_xss_using_string(string $could_be_bad): void {
   // Could call htmlspecialchars() here
-  echo '<html><head/><body> ' . $could_be_bad . '</body></html>';
+  echo '<html><head/><body> '.$could_be_bad.'</body></html>';
 }
 
 function intro_examples_avoid_xss_using_xhp(string $could_be_bad): void {
@@ -12,14 +12,14 @@ function intro_examples_avoid_xss_using_xhp(string $could_be_bad): void {
   // <html><head></head><body>&lt;blink&gt;Ugh&lt;/blink&gt;</body></html>
   echo
     <html>
-      <head/>
+      <head />
       <body>{$could_be_bad}</body>
     </html>;
 }
 
 function intro_examples_avoid_xss_run(string $could_be_bad): void {
   intro_examples_avoid_xss_using_string($could_be_bad);
-  echo PHP_EOL . PHP_EOL;
+  echo PHP_EOL.PHP_EOL;
   intro_examples_avoid_xss_using_xhp($could_be_bad);
 }
 

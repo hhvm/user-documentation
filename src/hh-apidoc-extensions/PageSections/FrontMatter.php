@@ -12,10 +12,7 @@
 namespace HHVM\UserDocumentation\HHAPIDocExt\PageSections;
 
 use type Facebook\HHAPIDoc\PageSections\PageSection;
-use type HHVM\UserDocumentation\{
-  LocalConfig,
-  YAMLMeta,
-};
+use type HHVM\UserDocumentation\{LocalConfig, YAMLMeta};
 use type Facebook\DefinitionFinder\ScannedClassish;
 use namespace HHVM\UserDocumentation\JSON;
 use namespace HH\Lib\{C, Str, Vec};
@@ -23,10 +20,7 @@ use namespace HH\Lib\{C, Str, Vec};
 final class FrontMatter extends PageSection {
   <<__Override>>
   public function getMarkdown(): string {
-    $json = JSON\encode_shape(
-      YAMLMeta::class,
-      $this->getData(),
-    );
+    $json = JSON\encode_shape(YAMLMeta::class, $this->getData());
     return "```yamlmeta\n".$json."\n```";
   }
 
@@ -70,7 +64,7 @@ final class FrontMatter extends PageSection {
     if (Str\ends_with($name, '_async')) {
       $parts = Str\split($name, '\\');
       $last = C\lastx($parts);
-     $parts = Vec\take($parts, C\count($parts) - 1);
+      $parts = Vec\take($parts, C\count($parts) - 1);
 
       if ($last === 'from_async') {
         $parts[] = 'gen';
@@ -78,8 +72,10 @@ final class FrontMatter extends PageSection {
         $parts[] = 'gen_'.Str\strip_suffix($last, '_async');
       }
       $name = Str\join($parts, "\\");
-      $fbonly_messages[] = "This function is available as `".$name."()` in ".
-          "Facebook's www repository.";
+      $fbonly_messages[] = "This function is available as `".
+        $name.
+        "()` in ".
+        "Facebook's www repository.";
     }
 
     if (!C\is_empty($fbonly_messages)) {

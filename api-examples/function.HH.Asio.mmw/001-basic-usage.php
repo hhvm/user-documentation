@@ -21,7 +21,7 @@ $halves = \HH\Asio\join(\HH\Asio\mmw(
   },
 ));
 
-foreach($halves as $num => $result) {
+foreach ($halves as $num => $result) {
   if ($result->isSucceeded()) {
     echo "$num / two Success: ";
     var_dump($result->getResult());

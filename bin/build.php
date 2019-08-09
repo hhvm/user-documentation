@@ -71,7 +71,7 @@ function build_site(?Traversable<string> $filters = null): void {
           }
         }
         return false;
-      }
+      },
     );
   }
 

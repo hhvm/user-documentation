@@ -17,7 +17,7 @@ $handles = \HH\Asio\mw(Map {
 });
 
 $results = \HH\Asio\join($handles);
-foreach($results as $key => $result) {
+foreach ($results as $key => $result) {
   if ($result->isSucceeded()) {
     echo "$key Success: ";
     var_dump($result->getResult());

@@ -24,11 +24,10 @@ $fruits = ImmMap {
 // Similar to $times->filter(...)
 // But awaits the awaitable result of the callback
 // rather than using it directly
-$orange_fruits = \HH\Asio\join(\HH\Asio\mf(
-  $fruits,
-  async ($color) ==> ($color == COLOR::ORANGE),
-));
+$orange_fruits = \HH\Asio\join(
+  \HH\Asio\mf($fruits, async ($color) ==> ($color == COLOR::ORANGE)),
+);
 
-foreach($orange_fruits as $fruit => $color) {
+foreach ($orange_fruits as $fruit => $color) {
   echo $fruit, 's are ', COLOR::getNames()[$color], "\n";
 }

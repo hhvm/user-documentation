@@ -7,16 +7,18 @@ use type Facebook\HackTest\{DataProvider, TestGroup};
 final class OpenSearchTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function testNoOpenSearchOnStaging(): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('https://staging.docs.hhvm.com/');
+    list($response, $body) = await PageLoader::getPageAsync(
+      'https://staging.docs.hhvm.com/',
+    );
     expect($response->getStatusCode())->toBeSame(200);
     expect($body)->toNotContain('application/opensearchdescription+xml');
   }
 
   <<TestGroup('remote')>>
   public async function testOpenSearchOnProd(): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('https://docs.hhvm.com/');
+    list($response, $body) = await PageLoader::getPageAsync(
+      'https://docs.hhvm.com/',
+    );
     expect($response->getStatusCode())->toBeSame(200);
     expect($body)->toContain('application/opensearchdescription+xml');
   }

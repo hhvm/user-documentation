@@ -67,8 +67,10 @@ EOF;
     ResponseInterface $response,
   ): Awaitable<ResponseInterface> {
     await $this->beforeResponseAsync();
-    list($title, $content) =
-      await \HH\Asio\va($this->getTitleAsync(), $this->getContentPaneAsync());
+    list($title, $content) = await \HH\Asio\va(
+      $this->getTitleAsync(),
+      $this->getContentPaneAsync(),
+    );
     $content->appendChild($this->getFooter());
 
     $extra_class = $this->getExtraBodyClass();
@@ -169,8 +171,10 @@ EOF;
   }
 
   final protected async function getContentPaneAsync(): Awaitable<XHPRoot> {
-    list($heading, $body) =
-      await \HH\Asio\va($this->getHeadingAsync(), $this->getBodyAsync());
+    list($heading, $body) = await \HH\Asio\va(
+      $this->getHeadingAsync(),
+      $this->getBodyAsync(),
+    );
 
     $breadcrumbs = $this->getBreadcrumbs();
     if ($breadcrumbs !== null) {
@@ -208,8 +212,8 @@ EOF;
   }
 
   private function getTitleContent(string $title): XHPRoot {
-    $title_class =
-      "mainTitle mainTitle".$this->getRawParameter_UNSAFE('product');
+    $title_class = "mainTitle mainTitle".
+      $this->getRawParameter_UNSAFE('product');
     return
       <div class={$title_class}>
         <div class="widthWrapper">
@@ -227,8 +231,8 @@ EOF;
   }
 
   protected function getHeader(): XHPRoot {
-    $header_class =
-      "header headerType".$this->getRawParameter_UNSAFE('product');
+    $header_class = "header headerType".
+      $this->getRawParameter_UNSAFE('product');
     return
       <div class={$header_class}>
         <div class="widthWrapper">
@@ -344,8 +348,7 @@ EOF;
                 </a>
               </li>
               <li>
-                <a
-                  href="https://github.com/hhvm/user-documentation">
+                <a href="https://github.com/hhvm/user-documentation">
                   Docs on GitHub
                 </a>
               </li>

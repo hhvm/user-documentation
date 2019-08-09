@@ -8,7 +8,7 @@ async function foo(): Awaitable<int> {
 
 <<__EntryPoint>>
 async function single_awaitable_main(): Awaitable<void> {
-  $aw = foo();          // awaitable of type Awaitable<int>
-  $result = await $aw;  // an int after $aw completes
+  $aw = foo(); // awaitable of type Awaitable<int>
+  $result = await $aw; // an int after $aw completes
   \var_dump($result);
 }

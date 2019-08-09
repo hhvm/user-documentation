@@ -17,10 +17,7 @@ use namespace HH\Lib\Str;
 
 final class InternalMarkdownLinksFilter extends RenderFilter {
   <<__Override>>
-  public function filter(
-    RenderContext $_,
-    ASTNode $node,
-  ): vec<ASTNode> {
+  public function filter(RenderContext $_, ASTNode $node): vec<ASTNode> {
     if ($node is Inlines\Link) {
       return $this->filterLink($node);
     }
@@ -37,7 +34,7 @@ final class InternalMarkdownLinksFilter extends RenderFilter {
       return vec[$link];
     }
     return vec[
-      new Inlines\Link($link->getText(), $new, $link->getTitle())
+      new Inlines\Link($link->getText(), $new, $link->getTitle()),
     ];
   }
 
@@ -48,10 +45,7 @@ final class InternalMarkdownLinksFilter extends RenderFilter {
       return vec[$link];
     }
     return vec[
-      new Inlines\AutoLink(
-        $link->getText(),
-        $new,
-      )
+      new Inlines\AutoLink($link->getText(), $new),
     ];
   }
 
@@ -65,10 +59,6 @@ final class InternalMarkdownLinksFilter extends RenderFilter {
     if ($host !== null) {
       return $uri;
     }
-    return Str\replace(
-      $uri,
-      $path,
-      Str\strip_suffix($path, '.md'),
-    );
+    return Str\replace($uri, $path, Str\strip_suffix($path, '.md'));
   }
 }

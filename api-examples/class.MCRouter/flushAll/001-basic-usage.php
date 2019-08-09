@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouter\FlushAll;
 
 function construct_mcrouter(): \MCRouter {
-  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   // For many use cases, calling MCRouter::createSimple($servers) would
   // suffice here. But this shows you how to explicitly create the configuration
   // options for creating an instance of MCRouter
@@ -25,8 +25,11 @@ function construct_mcrouter(): \MCRouter {
   return $mc;
 }
 
-async function set_value(\MCRouter $mc, string $key,
-                         string $value): Awaitable<void> {
+async function set_value(
+  \MCRouter $mc,
+  string $key,
+  string $value,
+): Awaitable<void> {
   // can also pass optional int flags and int expiration time (in seconds)
   await $mc->set($key, $value);
 }

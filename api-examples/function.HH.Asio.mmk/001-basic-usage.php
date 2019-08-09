@@ -16,7 +16,7 @@ async function get_urls(
     $urls,
     async ($name, $url) ==> {
       $content = await \HH\Asio\curl_exec($url);
-      return $name . " => " . $content;
+      return $name." => ".$content;
     },
   );
 }
@@ -29,6 +29,5 @@ $urls = ImmMap {
 
 $pages = \HH\Asio\join(get_urls($urls));
 foreach ($pages as $page) {
-  echo substr($page, 0, 22) . ' ... ' . substr($page, -8);
+  echo substr($page, 0, 22).' ... '.substr($page, -8);
 }
-

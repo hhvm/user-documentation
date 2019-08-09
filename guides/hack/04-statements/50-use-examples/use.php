@@ -2,71 +2,75 @@
 
 namespace UseNS {
 
-const int CON = 100;
+  const int CON = 100;
 
-function f(): void {
-  echo "In function " . __FUNCTION__ . "\n";
-}
-
-class C {
-  public function f(): void {
-    echo "In method " . __METHOD__ . "\n";
+  function f(): void {
+    echo "In function ".__FUNCTION__."\n";
   }
-}
 
-class D {}
-class E {}
+  class C {
+    public function f(): void {
+      echo "In method ".__METHOD__."\n";
+    }
+  }
+
+  class D {}
+  class E {}
 }
 
 namespace Hack\UserDocumentation\Statements\use\Examples\XXX {
 
-const int CON2 = 500;
+  const int CON2 = 500;
 
-function f(): void {
-  echo "In function " . __FUNCTION__ . "\n";
-}
+  function f(): void {
+    echo "In function ".__FUNCTION__."\n";
+  }
 }
 
 namespace Hack\UserDocumentation\Statements\use\Examples\test {
 
-use const UseNS\CON;
-use function UseNS\f;
-//use function Hack\UserDocumentation\Statements\use\Examples\XXX\f;  // Error: name f already declared
-use type UseNS\C;
-use type UseNS\{D, E};
-use namespace Hack\UserDocumentation\Statements\use\Examples\XXX;
+  use const UseNS\CON;
+  use function UseNS\f;
+  //use function Hack\UserDocumentation\Statements\use\Examples\XXX\f;  // Error: name f already declared
+  use type UseNS\C;
+  use type UseNS\{D, E};
+  use namespace Hack\UserDocumentation\Statements\use\Examples\XXX;
 
-<<__EntryPoint>>
-function main(): void {
+  <<__EntryPoint>>
+  function main(): void {
 
-// access const CON by fully qualified and abbreviated names
+    // access const CON by fully qualified and abbreviated names
 
-  echo "CON = " . \UseNS\CON . "\n";
-  echo "CON = " . CON . "\n";
+    echo "CON = ".\UseNS\CON."\n";
+    echo "CON = ".CON."\n";
 
-// access function f by fully qualified and abbreviated names
+    // access function f by fully qualified and abbreviated names
 
-  \UseNS\f();
-  f();
+    \UseNS\f();
+    f();
 
-// access type C by fully qualified and abbreviated names
+    // access type C by fully qualified and abbreviated names
 
-  $c = new \UseNS\C(); $c->f();
-  $c = new C(); $c->f();
+    $c = new \UseNS\C();
+    $c->f();
+    $c = new C();
+    $c->f();
 
-// access type D by fully qualified and abbreviated names
+    // access type D by fully qualified and abbreviated names
 
-  $d = new \UseNS\D();
-  $d = new D();
+    $d = new \UseNS\D();
+    $d = new D();
 
-// access name f by fully qualified and abbreviated names
+    // access name f by fully qualified and abbreviated names
 
-  \Hack\UserDocumentation\Statements\use\Examples\XXX\f();
-  XXX\f();
+    \Hack\UserDocumentation\Statements\use\Examples\XXX\f();
+    XXX\f();
 
-// access name CON2 by fully qualified and abbreviated names
+    // access name CON2 by fully qualified and abbreviated names
 
-  echo "XXX\CON2 = " . \Hack\UserDocumentation\Statements\use\Examples\XXX\CON2 . "\n";
-  echo "XXX\\CON2 = " . XXX\CON2 . "\n";
-}
+    echo "XXX\CON2 = ".
+      \Hack\UserDocumentation\Statements\use\Examples\XXX\CON2.
+      "\n";
+    echo "XXX\\CON2 = ".XXX\CON2."\n";
+  }
 }

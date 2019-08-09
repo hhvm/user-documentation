@@ -15,7 +15,7 @@ final class :static:stylesheet extends :static:base {
   attribute :link;
 
   protected function getAllowedMimeTypes(): Set<string> {
-    return Set { 'text/css' };
+    return Set {'text/css'};
   }
 
   protected function render(): XHPRoot {

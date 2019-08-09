@@ -14,7 +14,10 @@ namespace HHVM\UserDocumentation;
 require_once(__DIR__.'/../vendor/hh_autoload.php');
 
 function cli_markdown_render(string $file): string {
-  return (new MarkdownRenderer())->renderMarkdownToHTML($file, \file_get_contents($file));
+  return (new MarkdownRenderer())->renderMarkdownToHTML(
+    $file,
+    \file_get_contents($file),
+  );
 }
 
 $file = $argv[1] ?? '/dev/stdin';

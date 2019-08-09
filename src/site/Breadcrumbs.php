@@ -9,10 +9,7 @@
  *
  */
 
-use type HHVM\UserDocumentation\{
-  APIProduct,
-  GuidesProduct,
-};
+use type HHVM\UserDocumentation\{APIProduct, GuidesProduct};
 
 abstract final class Breadcrumbs {
   public static function getRootAPIBreadcrumb(

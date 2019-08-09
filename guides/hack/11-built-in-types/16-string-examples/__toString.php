@@ -10,7 +10,7 @@ class Point {
     $this->y = (float)$y;
   }
   public function __toString(): string {
-    return '(' . $this->x . ',' . $this->y . ')';
+    return '('.$this->x.','.$this->y.')';
   }
   // ...
 }
@@ -18,5 +18,5 @@ class Point {
 <<__EntryPoint>>
 function main(): void {
   $p1 = new Point(1.2, 3.3);
-  echo "\$p1 = " . $p1 . "\n";
+  echo "\$p1 = ".$p1."\n";
 }

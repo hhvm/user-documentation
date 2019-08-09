@@ -30,8 +30,7 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
     $this->createIndex();
   }
 
-  private function createIndex(
-  ): void {
+  private function createIndex(): void {
     $cg = $this->getCodegenFactory();
     $cg->codegenFile(BuildPaths::APIDOCS_LEGACY_REDIRECTS)
       ->setNamespace("HHVM\\UserDocumentation")

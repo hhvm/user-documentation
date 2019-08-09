@@ -23,7 +23,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("\nGuidesHTMLBuild");
-    $sources = self::findSources(self::SOURCE_ROOT, Set{'md'})
+    $sources = self::findSources(self::SOURCE_ROOT, Set {'md'})
       |> Vec\filter($$, $path ==> \basename($path) !== 'README.md')
       |> Vec\sort($$);
 
@@ -74,7 +74,9 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
     foreach ($summaries as $summary) {
       $parts = (new Vector(\explode('/', $summary)))
         ->map(
-          $part ==> \preg_match('/^[0-9]{2,}-/', $part) ? \substr($part, \strpos($part, '-') + 1) : $part
+          $part ==> \preg_match('/^[0-9]{2,}-/', $part)
+            ? \substr($part, \strpos($part, '-') + 1)
+            : $part,
         );
       if (\count($parts) !== 3) {
         continue;

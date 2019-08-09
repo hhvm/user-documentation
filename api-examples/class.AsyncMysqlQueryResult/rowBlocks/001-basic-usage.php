@@ -2,26 +2,25 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\QueryResult\rowBlocks;
 
-require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
+require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
-async function connect(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function connect(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   return await $pool->connect(
     CI::$host,
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd
+    CI::$passwd,
   );
 }
 async function simple_query(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
-  $result = await $conn->query(
-    'SELECT * FROM test_table WHERE userID < 50'
-  );
+  $result = await $conn->query('SELECT * FROM test_table WHERE userID < 50');
   // A call to $result->rowBlocks() actually pops the first element of the
   // row block Vector. So it mutates it.
   $row_blocks = $result->rowBlocks();

@@ -11,9 +11,10 @@ $m->addAll(array(Pair {'red', '#ff0000'}));
 $m->addAll(Vector {
   Pair {'green', '#00ff00'},
   Pair {'blue', '#0000ff'},
-})->addall(ImmVector {
-  Pair {'yellow', '#ffff00'},
-  Pair {'purple', '#663399'},
-});
+})
+  ->addall(ImmVector {
+    Pair {'yellow', '#ffff00'},
+    Pair {'purple', '#663399'},
+  });
 
 var_dump($m);

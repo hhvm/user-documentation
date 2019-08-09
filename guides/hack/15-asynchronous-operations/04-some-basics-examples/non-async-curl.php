@@ -22,5 +22,5 @@ function main(): void {
   $a = curl_A();
   $b = curl_B();
   $end = \microtime(true);
-  echo "Total time taken: " . \strval($end - $start) . " seconds\n";
+  echo "Total time taken: ".\strval($end - $start)." seconds\n";
 }

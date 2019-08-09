@@ -10,14 +10,14 @@ abstract class CBase {
 class Cstring extends CBase {
   const type T = string;
   public function get_string(): string {
-    return $this->value;	// gets the string
+    return $this->value; // gets the string
   }
 }
 
 class Cint extends CBase {
   const type T = int;
   public function get_int(): int {
-    return $this->value;	// gets the int
+    return $this->value; // gets the int
   }
 }
 

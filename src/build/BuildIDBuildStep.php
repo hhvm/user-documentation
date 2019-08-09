@@ -36,10 +36,7 @@ final class BuildIDBuildStep extends BuildStep {
 
   private function getHead(string $path): string {
     $rev = \shell_exec(
-      \sprintf(
-        "GIT_DIR=%s git rev-parse HEAD",
-        \escapeshellarg($path.'/.git'),
-      )
+      \sprintf("GIT_DIR=%s git rev-parse HEAD", \escapeshellarg($path.'/.git')),
     );
     return \trim($rev);
   }

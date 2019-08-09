@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping;
 use namespace HH\Lib\Vec;
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception();
@@ -14,8 +14,10 @@ async function non_exception_thrower(): Awaitable<int> {
 }
 
 async function wrapping_exceptions(): Awaitable<void> {
-  $handles = vec[\HH\Asio\wrap(exception_thrower()),
-              \HH\Asio\wrap(non_exception_thrower())];
+  $handles = vec[
+    \HH\Asio\wrap(exception_thrower()),
+    \HH\Asio\wrap(non_exception_thrower()),
+  ];
   // Since we wrapped, the results will contain both the exception and the
   // integer result
   $results = await Vec\from_async($handles);

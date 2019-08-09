@@ -15,7 +15,7 @@ use type HHVM\UserDocumentation\LocalConfig;
 
 function apc_fetch_or_set_raw<Tdata>(
   string $key,
-  (function():Tdata) $fetcher,
+  (function(): Tdata) $fetcher,
 ): Tdata {
   $key .= '!'.LocalConfig::getBuildID();
   $success = false;

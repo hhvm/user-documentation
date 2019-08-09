@@ -19,10 +19,8 @@ use type HHVM\UserDocumentation\{
 abstract class APIPageController extends WebPageController {
   <<__Memoize>>
   final protected function getDefinitionType(): APIDefinitionType {
-    return $this->getParameters_PRIVATE_IMPL()->getEnum(
-      APIDefinitionType::class,
-      'Type',
-    );
+    return $this->getParameters_PRIVATE_IMPL()
+      ->getEnum(APIDefinitionType::class, 'Type');
   }
 
   abstract protected function getRootDefinition(): APIIndexEntry;
@@ -31,7 +29,7 @@ abstract class APIPageController extends WebPageController {
   final protected async function getBodyAsync(): Awaitable<XHPRoot> {
     return
       <div class="referencePageWrapper">
-          {$this->getInnerContent()}
+        {$this->getInnerContent()}
       </div>;
   }
 
