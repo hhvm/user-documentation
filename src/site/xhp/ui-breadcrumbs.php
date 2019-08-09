@@ -9,12 +9,12 @@
  *
  */
 
- use namespace HH\Lib\{C, Vec};
+use namespace HH\Lib\{C, Vec};
 
 final class :ui:breadcrumbs extends :x:element {
   attribute vec<(string, ?string)> stack @required;
 
-  public function render(): XHPRoot{
+  public function render(): XHPRoot {
     $stack = $this->:stack;
     list($current, $_) = C\lastx($stack);
     $ancestors = Vec\take($stack, C\count($stack) - 1);
@@ -30,14 +30,14 @@ final class :ui:breadcrumbs extends :x:element {
         <x:frag>
           <i class="breadcrumbSeparator" />
           {$link}
-        </x:frag>
+        </x:frag>,
       );
     }
     $container->appendChild(
       <x:frag>
         <i class="breadcrumbSeparator" />
         {$current}
-      </x:frag>
+      </x:frag>,
     );
     return (
       <div class="breadcrumbNav">

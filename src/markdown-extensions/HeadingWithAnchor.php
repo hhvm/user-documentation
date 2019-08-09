@@ -15,8 +15,8 @@ use namespace Facebook\Markdown;
 use namespace HH\Lib\{Str, Vec};
 
 final class HeadingWithAnchor
-extends Markdown\Blocks\LeafBlock
-implements Markdown\RenderableAsHTML {
+  extends Markdown\Blocks\LeafBlock
+  implements Markdown\RenderableAsHTML {
   public function __construct(
     private int $level,
     private vec<Markdown\Inlines\Inline> $heading,
@@ -40,12 +40,18 @@ implements Markdown\RenderableAsHTML {
       |> Vec\map($$, $part ==> $renderer->render($part))
       |> Str\join($$, '');
     $id = Markdown\_Private\plain_text_to_html_attribute($this->id);
-    return
-      '<h'.$this->level.
+    return '<h'.
+      $this->level.
       ' class="headingWithAnchor"'.
-      ' id="'.$id.'">'.
+      ' id="'.
+      $id.
+      '">'.
       $contents.
-      '<a href="#'.$id.'"><i class="glyphIcon fa fa-link"></i></a>'.
-      '</h'.$this->level.">\n";
+      '<a href="#'.
+      $id.
+      '"><i class="glyphIcon fa fa-link"></i></a>'.
+      '</h'.
+      $this->level.
+      ">\n";
   }
 }

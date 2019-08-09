@@ -2,7 +2,11 @@
 
 namespace Hack\UserDocumentation\ExpAndOps\Yield\Examples\Series;
 
-function series(int $start, int $end, int $incr = 1): \Generator<int, int, void> {
+function series(
+  int $start,
+  int $end,
+  int $incr = 1,
+): \Generator<int, int, void> {
   for ($i = $start; $i <= $end; $i += $incr) {
     yield $i;
   }

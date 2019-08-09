@@ -22,13 +22,13 @@ final class :ui:notice extends :x:element {
     $holder_class = ($this->:className !== null)
       ? "noticeHolder ".$this->:className
       : "noticeHolder";
-    $notice_class = 
-      "notice notice".ucfirst($this->:use)." notice".ucfirst($this->:size);
+    $notice_class = "notice notice".
+      ucfirst($this->:use).
+      " notice".
+      ucfirst($this->:size);
 
     $notice =
-      <div
-        class={$notice_class}
-        role="note">
+      <div class={$notice_class} role="note">
         {$this->getChildren()}
       </div>;
 

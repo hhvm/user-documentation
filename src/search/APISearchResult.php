@@ -49,11 +49,7 @@ final class APISearchResult extends SearchResult {
         break;
     }
 
-    parent::__construct(
-      $name,
-      $href,
-      $score,
-    );
+    parent::__construct($name, $href, $score);
   }
 
   <<__Override>>
@@ -64,7 +60,7 @@ final class APISearchResult extends SearchResult {
         $type = 'method';
       }
     }
-    switch($this->product) {
+    switch ($this->product) {
       case APIProduct::HACK:
         $product = 'Hack';
         break;

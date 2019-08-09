@@ -33,7 +33,7 @@ abstract class WebController {
   private ImmMap<string, string> $rawParameters;
 
   public function __construct(
-    ImmMap<string,string> $parameters,
+    ImmMap<string, string> $parameters,
     private ServerRequestInterface $request,
   ) {
     $combined_params = $parameters->toMap();
@@ -41,7 +41,7 @@ abstract class WebController {
       if (is_array($value)) {
         continue;
       }
-      $combined_params[(string) $key] = (string) $value;
+      $combined_params[(string)$key] = (string)$value;
     }
 
     $spec = self::getParametersSpec();
@@ -90,7 +90,7 @@ abstract class WebController {
   }
 
   abstract public function getResponseAsync(
-    ResponseInterface $response
+    ResponseInterface $response,
   ): Awaitable<ResponseInterface>;
 
   final protected function getRequestedPath(): string {
@@ -101,17 +101,11 @@ abstract class WebController {
     return $this->request->getUri()->getHost();
   }
 
-  protected static function invariantTo404<T>(
-    (function():T) $what,
-  ) :T {
+  protected static function invariantTo404<T>((function(): T) $what): T {
     try {
       return $what();
     } catch (/* HH_FIXME[2049] */ \HH\InvariantException $e) {
-      throw new HTTPNotFoundException(
-        $e->getMessage(),
-        $e->getCode(),
-        $e
-      );
+      throw new HTTPNotFoundException($e->getMessage(), $e->getCode(), $e);
     }
   }
 
@@ -144,9 +138,9 @@ abstract class WebController {
     if ($ip === null) {
       return null;
     }
-    $ip = (string) $ip;
+    $ip = (string)$ip;
     $stack = ($this->request->getServerParams()['HTTP_X_FORWARDED_FOR'] ?? '')
-      |> Str\split((string) $$, ',')
+      |> Str\split((string)$$, ',')
       |> Vec\map($$, $part ==> Str\trim($part))
       |> Vec\filter($$, $part ==> !Str\is_empty($part));
     $stack[] = $ip;

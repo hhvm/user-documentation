@@ -23,10 +23,7 @@ use namespace HH\Lib\{Str, Vec};
  */
 final class PrettyCodeBlocksFilter extends RenderFilter {
   <<__Override>>
-  public function filter(
-    RenderContext $_,
-    ASTNode $node,
-  ): vec<ASTNode> {
+  public function filter(RenderContext $_, ASTNode $node): vec<ASTNode> {
     if (!$node is Blocks\CodeBlock) {
       return vec[$node];
     }
@@ -38,12 +35,12 @@ final class PrettyCodeBlocksFilter extends RenderFilter {
     $classes = 'highlight fbgfm';
     $code = $node->getCode();
     if (
-      $info_string !== null
-      && (
-        Str\lowercase($info_string) === 'hack'
-        || Str\lowercase($info_string) === 'hacksignature'
+      $info_string !== null &&
+      (
+        Str\lowercase($info_string) === 'hack' ||
+        Str\lowercase($info_string) === 'hacksignature'
       )
-    ){
+    ) {
       if (Str\lowercase($info_string) === 'hacksignature') {
         $code = Str\split($code, "\n") |> Vec\drop($$, 1) |> Str\join($$, "\n");
       }

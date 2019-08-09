@@ -33,8 +33,9 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
   public async function testDoesNotBreakExternalMarkdownLinks(
   ): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('/hack/getting-started/tools');
+    list($response, $body) = await PageLoader::getPageAsync(
+      '/hack/getting-started/tools',
+    );
     expect($body)->toContain('href="https://github.com/hhvm/hack-mode"');
   }
 

@@ -12,7 +12,7 @@ $times = ImmVector {
   700000000, // Sat, 07 Mar 1992 20:26:40
   800000000, // Tue, 09 May 1995 06:13:20
   900000000, // Thu, 09 Jul 1998 16:00:00
- 1000000000, // Sun, 09 Sep 2001 01:46:40
+  1000000000, // Sun, 09 Sep 2001 01:46:40
 };
 
 // Similar to $times->filter(...)
@@ -24,6 +24,6 @@ $saturdays = \HH\Asio\join(\HH\Asio\vfk(
   async ($idx, $time) ==> ($idx > 0) && (gmdate('w', $time) == 6),
 ));
 
-foreach($saturdays as $time) {
+foreach ($saturdays as $time) {
   echo gmdate('r', $time), "\n";
 }

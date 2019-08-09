@@ -6,9 +6,7 @@ namespace Hack\UserDocumentation\API\Examples\HH\Asio\vmk;
  * Query an arbitrary number of URLs in parallel
  * returning them as a Vector of string responses.
  */
-async function get_urls(
-  \ConstVector<string> $urls,
-): Awaitable<Vector<string>> {
+async function get_urls(\ConstVector<string> $urls): Awaitable<Vector<string>> {
 
   // Await on curl requests in parallel and
   // prepend the request ID index
@@ -16,7 +14,7 @@ async function get_urls(
     $urls,
     async ($idx, $url) ==> {
       $content = await \HH\Asio\curl_exec($url);
-      return $idx . " => " . $content;
+      return $idx." => ".$content;
     },
   );
 }
@@ -29,6 +27,5 @@ $urls = ImmVector {
 
 $pages = \HH\Asio\join(get_urls($urls));
 foreach ($pages as $page) {
-  echo substr($page, 0, 20) . ' ... ' . substr($page, -8);
+  echo substr($page, 0, 20).' ... '.substr($page, -8);
 }
-

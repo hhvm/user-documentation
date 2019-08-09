@@ -20,4 +20,3 @@ async function call_trivial(): Awaitable<void> {
   $result = await $aw;
   echo $result; // "Hello"
 }
-

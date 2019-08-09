@@ -11,6 +11,6 @@
 
 use type Facebook\HackRouter\SupportsGetRequests;
 
-interface RoutableGetController extends
-RoutableController, SupportsGetRequests {
+interface RoutableGetController
+  extends RoutableController, SupportsGetRequests {
 }

@@ -31,6 +31,6 @@ $not_self_named = \HH\Asio\join(\HH\Asio\mfk(
   async ($name, $color) ==> strcasecmp($name, COLOR::getNames()[$color]),
 ));
 
-foreach($not_self_named as $fruit => $color) {
+foreach ($not_self_named as $fruit => $color) {
   echo $fruit, 's are ', COLOR::getNames()[$color], "\n";
 }

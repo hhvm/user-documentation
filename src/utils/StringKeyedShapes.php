@@ -12,12 +12,12 @@
 namespace HHVM\UserDocumentation;
 
 final class StringKeyedShapes {
-  public static function toArray(shape(...) $shape): array<string,mixed> {
+  public static function toArray(shape(...) $shape): array<string, mixed> {
     return self::toMap($shape)->toArray();
   }
 
-  public static function toMap(shape(...) $shape): Map<string,mixed> {
-    $ret = Map { };
+  public static function toMap(shape(...) $shape): Map<string, mixed> {
+    $ret = Map {};
     foreach (Shapes::toArray($shape) as $key => $value) {
       invariant(
         $key is string,

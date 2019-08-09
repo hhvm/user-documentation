@@ -2,13 +2,15 @@
 
 namespace Hack\UserDocumentation\Functions\Anonymous\Examples\UseClause;
 
-function get_process_1(int $val1): (function (int): int) {
+function get_process_1(int $val1): (function(int): int) {
   $val2 = $val1 * 3;
-  $af = function (int $p): int use ($val1, $val2) { return $p + $val1 + $val2; };
+  $af = function(int $p): int use ($val1, $val2) {
+    return $p + $val1 + $val2;
+  };
   return $af;
 }
 
-function get_process_2(int $val1): (function (int): int) {
+function get_process_2(int $val1): (function(int): int) {
   $val2 = $val1 * 3;
   $af = (int $p): int ==> $p + $val1 + $val2;
   return $af;

@@ -42,8 +42,9 @@ final class StaticResourcesController
     $checksum = $params['Checksum'];
     $file = '/'.$params['File'];
 
-    $entry =
-      self::invariantTo404(() ==> StaticResourceMap::getEntryForFile($file));
+    $entry = self::invariantTo404(
+      () ==> StaticResourceMap::getEntryForFile($file),
+    );
 
     if (
       $checksum !== $entry['checksum'] &&

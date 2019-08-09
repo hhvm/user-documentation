@@ -18,10 +18,7 @@ use namespace HH\Lib\Str;
 
 final class VersionedImagesFilter extends RenderFilter {
   <<__Override>>
-  public function filter(
-    RenderContext $_,
-    ASTNode $node,
-  ): vec<ASTNode> {
+  public function filter(RenderContext $_, ASTNode $node): vec<ASTNode> {
     if (!$node is Inlines\Image) {
       return vec[$node];
     }

@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Generators\Examples\Raise;
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 const int HALF_SECOND = 500000; // microseconds
 
@@ -37,7 +37,7 @@ async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
   foreach ($ids as $id) {
     if ($id === 3) {
       $result = await $async_generator->raise(
-        new \Exception("Id of 3 is bad!")
+        new \Exception("Id of 3 is bad!"),
       );
     } else {
       $result = await $async_generator->send($id);

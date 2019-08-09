@@ -15,24 +15,19 @@ function process(): void {
 function main(): void {
   try {
     process(); // call a function that might generate a disk-related exception
-  }
-  catch (FloppyDiskException $fde) {
+  } catch (FloppyDiskException $fde) {
     echo "In handler for FloppyDiskException\n";
     // ...
-  }
-  catch (RemovableDiskException $rde) {
+  } catch (RemovableDiskException $rde) {
     echo "In handler for RemovableDiskException\n";
     // ...
-  }
-  catch (DiskException $de) {
+  } catch (DiskException $de) {
     echo "In handler for DiskException\n";
     // ...
-  }
-  catch (DeviceException $dve) {
+  } catch (DeviceException $dve) {
     echo "In handler for DeviceException\n";
     // ...
-  }
-  finally {
+  } finally {
     echo "In finally block\n";
     // perform some cleanup
   }

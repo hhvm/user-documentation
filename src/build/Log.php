@@ -24,10 +24,10 @@ enum Color: string {
 }
 
 class Log {
-  const int NONE =    0;
-  const int ERROR =   1;
-  const int WARN =    3;
-  const int INFO =    7;
+  const int NONE = 0;
+  const int ERROR = 1;
+  const int WARN = 3;
+  const int INFO = 7;
   const int VERBOSE = 15;
 
   public static int $loglevel = self::VERBOSE;
@@ -72,6 +72,6 @@ class Log {
   }
 
   private static function color(Color $color, string $msg): string {
-    return \chr(27) . $color . $msg . \chr(27) . Color::RESET;
+    return \chr(27).$color.$msg.\chr(27).Color::RESET;
   }
 }

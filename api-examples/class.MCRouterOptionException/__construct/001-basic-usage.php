@@ -13,7 +13,7 @@ function construct_mcrouter(array<string, mixed> $options): void {
 }
 
 function run(): void {
-  $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
+  $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   // For many use cases, calling MCRouter::createSimple($servers) would
   // suffice here. But this shows you how to explicitly create the configuration
   // options for creating an instance of MCRouter

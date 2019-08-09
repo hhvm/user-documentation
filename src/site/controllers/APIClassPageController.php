@@ -35,7 +35,7 @@ final class APIClassPageController extends APIPageController {
       ->literal('/');
   }
 
-  <<__Memoize,__Override>>
+  <<__Memoize, __Override>>
   protected function getRootDefinition(): APIIndexEntry {
     $this->redirectIfAPIRenamed();
     $definition_name = $this->getParameters()['Name'];

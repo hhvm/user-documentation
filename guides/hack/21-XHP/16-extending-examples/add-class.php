@@ -1,6 +1,6 @@
 <?hh // partial
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 class :my-cls-adder extends :x:element {
   attribute :div;

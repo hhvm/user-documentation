@@ -12,7 +12,8 @@ abstract final class MemoizeResult {
 
   public static async function memoize_result(): Awaitable<string> {
     if (self::$result === null) {
-      self::$result = await self::time_consuming(); // don't memoize the resulting data
+      self::$result =
+        await self::time_consuming(); // don't memoize the resulting data
     }
     return self::$result;
   }

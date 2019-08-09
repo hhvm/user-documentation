@@ -2,9 +2,13 @@
 
 namespace Hack\UserDocumentation\ExpAndOps\Yield\Examples\Squares;
 
-function squares(int $start, int $end, string $keyPrefix = ""): \Generator<string, int, void> {
+function squares(
+  int $start,
+  int $end,
+  string $keyPrefix = "",
+): \Generator<string, int, void> {
   for ($i = $start; $i <= $end; ++$i) {
-    yield $keyPrefix . $i => $i * $i;  // specify a key/value pair
+    yield $keyPrefix.$i => $i * $i; // specify a key/value pair
   }
 }
 

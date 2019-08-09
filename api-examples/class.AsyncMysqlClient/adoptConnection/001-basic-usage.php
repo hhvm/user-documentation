@@ -2,20 +2,13 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\AdoptConn;
 
-require __DIR__ . "/../../__includes/async_mysql_connect.inc.php";
+require __DIR__."/../../__includes/async_mysql_connect.inc.php";
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function get_synchronous_connection(): resource {
-  $conn = \mysql_connect(
-    CI::$host,
-    CI::$user,
-    CI::$passwd
-  );
-  \mysql_select_db(
-    CI::$db,
-    $conn
-  );
+  $conn = \mysql_connect(CI::$host, CI::$user, CI::$passwd);
+  \mysql_select_db(CI::$db, $conn);
   return $conn;
 }
 
@@ -23,8 +16,9 @@ function use_async_connection(resource $sync_conn): \AsyncMysqlConnection {
   return \AsyncMysqlClient::adoptConnection($sync_conn);
 }
 
-async function get_rows(\AsyncMysqlConnection $conn):
-  Awaitable<\AsyncMysqlQueryResult> {
+async function get_rows(
+  \AsyncMysqlConnection $conn,
+): Awaitable<\AsyncMysqlQueryResult> {
   return await $conn->query('SELECT * FROM test_table');
 }
 

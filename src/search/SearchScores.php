@@ -54,4 +54,5 @@ abstract final class SearchScores {
   const float GUIDES_BOOST = 5.0;
   // e.g. async/introduction before async/extensions
   const float GUIDE_INTRODUCTION_MULTIPLIER = 1.1;
-};
+}
+;

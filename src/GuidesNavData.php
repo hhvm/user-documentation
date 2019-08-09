@@ -36,11 +36,7 @@ final class GuidesNavData {
       $nav_data[$name] = shape(
         'name' => $name,
         'urlPath' => URLBuilder::getPathForGuide($product, $topic),
-        'children' => self::getNavDataForGuide(
-          $product,
-          $topic,
-          $pages,
-        ),
+        'children' => self::getNavDataForGuide($product, $topic, $pages),
       );
     }
     return $nav_data;

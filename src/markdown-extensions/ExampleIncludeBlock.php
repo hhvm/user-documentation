@@ -16,11 +16,10 @@ use namespace Facebook\Markdown\UnparsedBlocks;
 use namespace HH\Lib\Str;
 
 final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
-  const string PATTERN =
-    '/^@@ (?<dir>[^@ ]+)'.
+  const string PATTERN = '/^@@ (?<dir>[^@ ]+)'.
     '(?<file>[^@ \\/]+\\.(php|hack)'.
-      '(?:.type-errors)?'.
-      '(?:.(hhvm|typechecker).expect[f]?)?'.
+    '(?:.type-errors)?'.
+    '(?:.(hhvm|typechecker).expect[f]?)?'.
     ') @@$/';
 
   public static function consume(
@@ -33,8 +32,8 @@ final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
       return null;
     }
 
-    $dir = (string) $matches['dir'];
-    $file = (string) $matches['file'];
+    $dir = (string)$matches['dir'];
+    $file = (string)$matches['file'];
 
     if (Str\starts_with($dir, '/')) {
       $file = $dir.$file;
@@ -91,13 +90,16 @@ final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
     invariant(
       !($out_exists && $expect_exists),
       'both %s and %s exist.',
-      $out, $expect,
+      $out,
+      $expect,
     );
 
     invariant(
       $out_exists || $expect_exists || Str\contains($file, '.inc.php'),
       'none of %s, %s, or %s exist.',
-      $out, $expect, $file.'.no.auto.output',
+      $out,
+      $expect,
+      $file.'.no.auto.output',
     );
     if (!($out_exists || $expect_exists)) {
       return null;

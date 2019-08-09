@@ -2,24 +2,26 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ConnPool\Stats;
 
-require __DIR__ .'/../../__includes/async_mysql_connect.inc.php';
+require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 
-function set_connection_pool(array<string, mixed> $options = array()):
-  \AsyncMysqlConnectionPool {
+function set_connection_pool(
+  array<string, mixed> $options = array(),
+): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool($options);
 }
 
-async function connect_with_pool(\AsyncMysqlConnectionPool $pool):
-  Awaitable<\AsyncMysqlConnection> {
+async function connect_with_pool(
+  \AsyncMysqlConnectionPool $pool,
+): Awaitable<\AsyncMysqlConnection> {
   return await $pool->connect(
     CI::$host,
     CI::$port,
     CI::$db,
     CI::$user,
-    CI::$passwd
+    CI::$passwd,
   );
 }
 

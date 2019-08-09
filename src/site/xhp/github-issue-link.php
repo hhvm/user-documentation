@@ -17,7 +17,7 @@ final class :github-issue-link extends :x:element {
     string issueBody @required,
     classname<WebController> controller;
 
-  children (:ui:glyph?,pcdata);
+  children (:ui:glyph?, pcdata);
 
   use XHPGetRequest;
 

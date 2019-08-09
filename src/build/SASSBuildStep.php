@@ -25,24 +25,18 @@ final class SASSBuildStep extends BuildStep {
     Log::i("\nBuilding SASS");
     $css = null;
     $exit_code = null;
-    $options = shape('environment' => dict[
-      'GEM_HOME' => LocalConfig::ROOT.'/vendor-rb',
+    $options = shape(
+      'environment' => dict[
+        'GEM_HOME' => LocalConfig::ROOT.'/vendor-rb',
       ]
         |> Dict\merge($$, /* HH_FIXME[2050] */ $_ENV),
-      );
+    );
     list($exit_code, $stdout, $stderr) = await _Private\execute_async(
       $options,
       self::PROVIDER,
     );
-    invariant(
-      $exit_code === 0,
-      'Failed to build core CSS: %s',
-      $stderr,
-    );
+    invariant($exit_code === 0, 'Failed to build core CSS: %s', $stderr);
 
-    \file_put_contents(
-      BuildPaths::CORE_CSS,
-      $stdout,
-    );
+    \file_put_contents(BuildPaths::CORE_CSS, $stdout);
   }
 }

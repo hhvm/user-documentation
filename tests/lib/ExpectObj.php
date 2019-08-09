@@ -43,10 +43,6 @@ final class ExpectObj<T> extends \Facebook\FBExpect\ExpectObj<T> {
         '%%' => '%%?',
       ])
       |> '/'.$$.'/';
-    $this->toMatchRegExp(
-      $pattern,
-      "Did not match pattern in file '%s'",
-      $file,
-    );
+    $this->toMatchRegExp($pattern, "Did not match pattern in file '%s'", $file);
   }
 }

@@ -14,8 +14,7 @@ class MyRangeException extends \Exception {
 function main(): void {
   try {
     throw new MyRangeException("xyz", 123);
-  }
-  catch (MyRangeException $e) {
+  } catch (MyRangeException $e) {
     // ...
   }
 }

@@ -24,7 +24,7 @@ $odds = \HH\Asio\join(\HH\Asio\mfkw(
   },
 ));
 
-foreach($odds as $num => $result) {
+foreach ($odds as $num => $result) {
   if ($result->isSucceeded()) {
     echo "$num Success: ";
     var_dump($result->getResult());

@@ -14,7 +14,7 @@ async function gen_string(): Awaitable<string> {
   return "Hello";
 }
 
-async function gen_call<Tv>((function (): Awaitable<Tv>) $gen): Awaitable<Tv> {
+async function gen_call<Tv>((function(): Awaitable<Tv>) $gen): Awaitable<Tv> {
   return await $gen();
 }
 
@@ -26,7 +26,7 @@ async function use_async_lambda(): Awaitable<void> {
       $y = await gen_float();
       $z = await gen_int();
       return \round($y) + $z;
-    }
+    },
   );
   \var_dump($x);
 }
@@ -51,7 +51,9 @@ async function call_async_function(): Awaitable<void> {
 
 async function use_async_block_2(): Awaitable<void> {
   // Here we can inline our function right in the async block
-  $x = await async { return "Hello"; };
+  $x = await async {
+    return "Hello";
+  };
   \var_dump($x);
 }
 

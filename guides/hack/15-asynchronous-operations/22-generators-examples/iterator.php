@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Generators\Examples\Iterator;
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 const int SECOND = 1000000; // microseconds
 
@@ -20,7 +20,7 @@ async function happy_new_year(int $start): Awaitable<void> {
   foreach ($ait await as $time) {
     // we are awaiting the returned awaitable, so this will be an int
     if ($time > 0) {
-      echo $time . "\n";
+      echo $time."\n";
     } else {
       echo "HAPPY NEW YEAR!!!\n";
     }

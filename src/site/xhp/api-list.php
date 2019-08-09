@@ -33,7 +33,7 @@ class :api-list extends :x:element {
     $out = Map {};
     foreach ($this->:types as $type) {
       $index = APIIndex::get($product)->getIndexForType($type);
-      $out[$type] = Map { };
+      $out[$type] = Map {};
       foreach ($index as $node) {
         $out[$type][$node['name']] = $node['urlPath'];
       }
@@ -55,7 +55,7 @@ class :api-list extends :x:element {
         $type_list->appendChild(
           <li>
             <a href={$url}>{$name}</a>
-          </li>
+          </li>,
         );
       }
 
@@ -63,7 +63,7 @@ class :api-list extends :x:element {
         <div class="referenceType">
           <h3 class="listTitle">{$title}</h3>
           {$type_list}
-        </div>
+        </div>,
       );
     }
 

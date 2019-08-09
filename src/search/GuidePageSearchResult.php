@@ -24,11 +24,7 @@ final class GuidePageSearchResult extends SearchResult {
 
     $title = Guides::normalizeName($product, $guide, $page);
     $href = URLBuilder::getPathForGuidePage($product, $guide, $page);
-    parent::__construct(
-      $title,
-      $href,
-      $score,
-    );
+    parent::__construct($title, $href, $score);
   }
 
   <<__Override>>

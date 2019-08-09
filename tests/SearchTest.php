@@ -14,8 +14,9 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
     string $term,
     array<string> $expected,
   ): Awaitable<void> {
-    list($response, $body) =
-      await PageLoader::getPageAsync('/search?term='.\urlencode($term));
+    list($response, $body) = await PageLoader::getPageAsync(
+      '/search?term='.\urlencode($term),
+    );
     expect($response->getStatusCode())->toBeSame(200);
     foreach ($expected as $substr) {
       expect($body)->toContain($substr);
@@ -41,10 +42,7 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
         'keyset contains',
         ['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
-      tuple(
-        'reified',
-        ['/hack/generics/reified-generics'],
-      ),
+      tuple('reified', ['/hack/generics/reified-generics']),
     ];
   }
 }

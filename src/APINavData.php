@@ -12,9 +12,7 @@ namespace HHVM\UserDocumentation;
 
 final class APINavData {
   private APIIndex $index;
-  private function __construct(
-    APIProduct $product,
-  ) {
+  private function __construct(APIProduct $product) {
     $this->index = APIIndex::get($product);
   }
 
@@ -26,7 +24,8 @@ final class APINavData {
   public function getNavData(): dict<string, NavDataNode> {
     return dict[
       'Classes' => $this->getNavDataForClasses(APIDefinitionType::CLASS_DEF),
-      'Interfaces' => $this->getNavDataForClasses(APIDefinitionType::INTERFACE_DEF),
+      'Interfaces' =>
+        $this->getNavDataForClasses(APIDefinitionType::INTERFACE_DEF),
       'Traits' => $this->getNavDataForClasses(APIDefinitionType::TRAIT_DEF),
       'Functions' => shape(
         'name' => 'Functions',
@@ -36,9 +35,7 @@ final class APINavData {
     ];
   }
 
-  public function getRootNameForType(
-    APIDefinitionType $class_type,
-  ): string {
+  public function getRootNameForType(APIDefinitionType $class_type): string {
     switch ($class_type) {
       case APIDefinitionType::CLASS_DEF:
         return 'Classes';
@@ -85,8 +82,7 @@ final class APINavData {
     return $nav_data;
   }
 
-  private function getNavDataForFunctions(
-  ): dict<string, NavDataNode> {
+  private function getNavDataForFunctions(): dict<string, NavDataNode> {
     $functions = $this->index->getFunctionIndex();
 
     $nav_data = dict[];

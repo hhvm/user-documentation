@@ -15,8 +15,10 @@ final class LegacyRedirectsTest extends \Facebook\HackTest\HackTest {
     ) {
       foreach ($pages as $page => $target) {
         $old = Str\format('/%s/%s/%s', GuidesProduct::HACK, $guide, $page);
-        $ret[$old] =
-          tuple($old, self::getTargetURL(GuidesProduct::HACK, $target));
+        $ret[$old] = tuple(
+          $old,
+          self::getTargetURL(GuidesProduct::HACK, $target),
+        );
       }
     }
     foreach (

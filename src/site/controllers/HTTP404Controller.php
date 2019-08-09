@@ -26,9 +26,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
     return 'notFoundErrorPage';
   }
 
-  private function getSuggestedUrl(
-    string $path,
-  ): ?string {
+  private function getSuggestedUrl(string $path): ?string {
     $url = idx(JumpIndexData::getIndex(), strtolower($path));
     if ($url !== null) {
       return $url;
@@ -49,7 +47,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
     if ($candidates) {
       uksort(
         &$candidates,
-        function (string $a, string $b): int {
+        function(string $a, string $b): int {
           $a = strlen($a);
           $b = strlen($b);
           if ($a > $b) {
@@ -101,14 +99,15 @@ final class HTTP404Controller extends NonRoutableWebPageController {
         {$this->getNotFoundMessage()}
         <p class="notFoundMessage">
           You might want to try finding what you need from <a href="/">the
-          front page</a> or the Hack or HHVM links above.
+            front page</a> or the Hack or HHVM links above.
         </p>
         <p class="notFoundMessage">
           If you think you're seeing this page in error, please
           <github-issue-link
             issueTitle={$this->getGithubIssueTitle()}
-            issueBody={$this->getGithubIssueBody()}
-          >file an issue</github-issue-link>.
+            issueBody={
+              $this->getGithubIssueBody()
+            }>file an issue</github-issue-link>.
         </p>
       </x:frag>;
   }

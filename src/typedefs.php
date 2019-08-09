@@ -44,18 +44,21 @@ type YAMLMeta = shape(
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';
-};
+}
+;
 
 enum StringifyFormat: string {
   ONE_LINE = 'oneline';
   MULTI_LINE = 'multiline';
-};
+}
+;
 
 enum MemberVisibility: string {
   PRIVATE = 'private';
   PROTECTED = 'protected';
   PUBLIC = 'public';
-};
+}
+;
 
 enum GuidesProduct: string as string {
   HHVM = 'hhvm';
@@ -194,7 +197,7 @@ type DocumentationIndexEntry = shape(
 );
 
 type DocumentationIndex = shape(
-  'types' => dict<string,DocumentationIndexEntry>,
+  'types' => dict<string, DocumentationIndexEntry>,
 );
 
 type APIIndexEntry = shape(

@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Generators\Examples\Send;
 
-require __DIR__ . "/../../../../vendor/hh_autoload.php";
+require __DIR__."/../../../../vendor/hh_autoload.php";
 
 const int HALF_SECOND = 500000; // microseconds
 

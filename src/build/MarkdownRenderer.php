@@ -23,12 +23,11 @@ final class MarkdownRenderer {
             MarkdownExt\YamlFrontMatterBlock::class,
             MarkdownExt\ExamplesIncludeBlock::class,
             MarkdownExt\IncludeGeneratedMarkdownBlock::class,
-          )
+          ),
       )
       ->enableHTML_UNSAFE();
-    $parser_ctx->getInlineContext()->prependInlineTypes(
-      MarkdownExt\AutoLinkifyInline::class,
-    );
+    $parser_ctx->getInlineContext()
+      ->prependInlineTypes(MarkdownExt\AutoLinkifyInline::class);
     return $parser_ctx;
   }
 
@@ -44,10 +43,7 @@ final class MarkdownRenderer {
     return $render_ctx;
   }
 
-  public function renderMarkdownToHTML(
-    string $file,
-    string $markdown,
-  ): string {
+  public function renderMarkdownToHTML(string $file, string $markdown): string {
     $parser_ctx = $this->getParserContext()
       ->resetFileData()
       ->setFilePath($file);

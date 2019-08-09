@@ -3,7 +3,9 @@
 namespace Hack\UserDocumentation\Attributes\__MockClass\Examples\MockClass;
 
 final class FinalClass {
-  public static function f(): void { echo __METHOD__, "\n"; }
+  public static function f(): void {
+    echo __METHOD__, "\n";
+  }
 }
 
 // Without this attribute HHVM would throw a fatal error since you are trying
