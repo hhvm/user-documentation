@@ -19,7 +19,7 @@ vec(2) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(17)
+          int(18)
           ["function"]=>
           string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
           ["args"]=>
@@ -31,7 +31,7 @@ vec(2) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(27)
+          int(29)
           ["function"]=>
           string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
           ["args"]=>
