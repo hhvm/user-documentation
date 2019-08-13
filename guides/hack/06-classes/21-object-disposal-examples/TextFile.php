@@ -72,8 +72,8 @@ function main(): void {
   using ($f3 = TextFile::open_TextFile("file3.txt", "rw")) {
     echo "\$f3 is >" . $f3->__toString() . "<\n";
     // work with the file
-     // no explicit close
-  }  // dispose called here
+    // no explicit close
+  } // dispose called here
 
   using $f4 = TextFile::open_TextFile("file4.txt", "rw");
   echo "\$f4 is >" . $f4->__toString() . "<\n";
