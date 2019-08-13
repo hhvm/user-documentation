@@ -220,7 +220,7 @@ $ vendor/bin/hacktest tests/
 Summary: 2 test(s), 2 passed, 0 failed, 0 skipped, 0 error(s).
 ```
 
-If we intentionally add a failure, such as `tuple(vec[1, 2, 3], vec[1,2,3])`,
+If we intentionally add a failure, such as `tuple(vec[1, 2, 3], vec[1, 2, 3])`,
 HackTest reports this:
 
 ```
