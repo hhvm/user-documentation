@@ -62,4 +62,31 @@ $list[$i++] += 10;
 
 When the left-hand expression contains a side-effect, that side-effect is performed only once.
 
-The complete set of compound-assignment operators is: `**=`, `*=`, `/=`, `%=`, `+=`, `-=`, `.=`, `<<;=`, `>>=`, `&=`, `^=`, and `|=`.
+The complete set of compound-assignment operators is: `??=`, `**=`, `*=`, `/=`, `%=`, `+=`, `-=`, `.=`, `<<;=`, `>>=`, `&=`, `^=`, and `|=`.
+
+## Operator ??=
+
+The `??=` operator can be used for conditionally writing to a variable if it is null or not _set_.
+The rules around when something is _set_ are rather complex.
+
+```HACK
+$nully = null;
+$nully ??= 'I assign'; // Assigns "I assign" to $nully
+$nully ??= 'I do not assign' // Does not assign, since $nully is set
+
+
+$dict = dict['key' => 'value'];
+$dict['not_key'] ??= 'I assign'; // Assigns "I assign" to $dict['not_key']
+$dict['not_key'] ??= "I do not assign"; // Does not assign, since $dict['not_key'] is set
+```
+
+It might be helpful to think about it in the expanded form:
+ - `$nully = $nully ?? 'value';`
+ - `$dict['not_key'] = $dict['not_key'] ?? 'value';`
+
+For the exact rules of what is _set_, visit [operator ??](/hack/expressions-and-operators/coalesce).
+
+It is important to keep in mind that the expression on the RHS is only evaluated if the RHS is not _set_.
+So if your RHS is a function call, it will be called conditionally.
+
+
