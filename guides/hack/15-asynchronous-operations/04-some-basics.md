@@ -68,7 +68,13 @@ from `curl_A`, it has to sit around waiting for `curl_A` to finish before beginn
 
 Fortunately, HHVM provides an async version of `curl_exec`:
 
-@@ some-basics-examples/async-curl.php @@
+`async-curl.hack` file: 
+
+@@ some-basics-examples/async-curl.hack @@
+
+`async-curl-caller.hack` file: 
+
+@@ some-basics-examples/async-curl-caller.hack @@
 
 The async version allows the scheduler to run other code while waiting for a response from cURL. The most likely behavior is that as we're
 also awaiting a call to `curl_B`, the scheduler will choose to call it, which in turn starts another async call to `curl_exec`. As HTTP requests
