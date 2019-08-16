@@ -10,7 +10,7 @@ $nonnull ?? 10; // 'a string' as $nonnull is `nonnull`
 $arr = dict["black" => 10, "white" => null];
 $arr["black"] ?? -100;  // 10 as $arr["black"] is defined and not null
 $arr["white"] ?? -200;  // -200 as $arr["white"] is null
-$arr["green"] ?? -300;  // -300 as $arr["blue"] is not defined
+$arr["green"] ?? -300;  // -300 as $arr["green"] is not defined
 ```
 
 It is important to note that the RHS of the `??` operator will be conditionally evaluated.
