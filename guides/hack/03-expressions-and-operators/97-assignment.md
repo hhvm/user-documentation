@@ -76,4 +76,4 @@ It might be helpful to think about it in the expanded form:
 For the exact rules of what is _set_, visit [operator ??](/hack/expressions-and-operators/coalesce).
 
 It is important to keep in mind that the expression on the RHS is only evaluated if the RHS is not _set_.
-So if your RHS is a function call, it will be called conditionally.
+So if your RHS is a function call, it will be conditionally invoked.
