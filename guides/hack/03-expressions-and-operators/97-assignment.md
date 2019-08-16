@@ -72,7 +72,7 @@ The rules around when something is _set_ are rather complex.
 ```HACK
 $nully = null;
 $nully ??= 'I assign'; // Assigns "I assign" to $nully
-$nully ??= 'I do not assign' // Does not assign, since $nully is set
+$nully ??= 'I do not assign'; // Does not assign, since $nully is set
 
 
 $dict = dict['key' => 'value'];
