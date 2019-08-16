@@ -1,6 +1,34 @@
 The preferred object types for providing array-like storage and operations are `vec`, `dict`, and `keyset`.  These supersede the earlier Hack
 types `Vector`, `Map`, and `Set`, and the legacy `array` type inherited from PHP.
 
+## Reference vs. value semantics
+
+`Vector`, `Map`, and `Set` are, at the time of writing, the only array-like structures with reference semantics.
+
+```Hack
+function i_change_the_map_you_give_me(Map $map): void {
+  $map['example_key'] = 'example_value';
+}
+
+$map = Map{};
+i_change_the_map_you_give_me($map);
+$map; // Map{'example_key' => 'example_value'}
+```
+
+The other array-like structures `vec`, `dict`, `keyset`, and `array` have value semantics.
+This means that a logical copy is made when passing them as an argument, returning them, or assigning them to a new variable.
+
+```Hack
+$vec1 = vec[];
+$vec2 = $vec1;
+$vec1[] = 'example_value';
+$vec1; // vec['example_value'];
+$vec2; // vec[];
+```
+
+This is also true for all other structures that are currently backed by these types at runtime.
+Think hereby of `darray`, `varray`, `tuple`, and `shape`.
+
 ## vec
 
 A vec (short for vector) is a data structure that contains a collection of zero or more elements whose values are each accessed through a
