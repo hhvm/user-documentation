@@ -34,6 +34,6 @@ $ cd user-documentation
 user-documentation$ php /path/to/composer.phar install
 ```
 
-**NOTE**: We try to keep this entire repo typechecker clean. i.e., if you run `hh_client`, you should see `No errors!`. If you are seeing errors in `vendor/`, then first try to run `hhvm composer.phar install` or `hhvm composer install` in the repo to make sure all dependencies are up to date.
+**NOTE**: We try to keep this entire repo typechecker clean. i.e., if you run `hh_client`, you should see `No errors!`. If you are seeing errors in `vendor/`, then first try to run `php composer.phar install` or `php composer install` in the repo to make sure all dependencies are up to date.
 
-**NOTE**: If you add, delete or rename a class in the primary source tree `src/`, you should run `hhvm composer.phar dump-autoload` in order to make the autoload maps refresh correctly; otherwise you will get class not found exceptions.
+**NOTE**: If you add, delete or rename a class in the primary source tree `src/`, you should run `php composer.phar dump-autoload` in order to make the autoload maps refresh correctly; otherwise you will get class not found exceptions.
