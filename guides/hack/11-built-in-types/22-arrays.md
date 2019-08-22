@@ -143,7 +143,7 @@ Name | Description
 
 ## keyset
 
-A keyset is a data structure that contains a collection of zero or more elements whose values are the keys. And as array keys must have
+A keyset is a data structure that contains an ordered collection of zero or more elements whose values are the keys. And as array keys must have
 type `int` or `string`, keysets are restricted to homogenous collections of values of those types. As the number of elements in a keyset
 can change at runtime, a keyset type declaration does *not* include an element count.  Consider the following class properties:
 
@@ -174,6 +174,8 @@ $set = keyset($array); // constructs $set from an array
 ```
 
 To check membership in a keyset, use `C\contains` or `C\contains_key`. To remove an element from a keyset, use `unset`.
+
+Similar to `dict`, the order of the elements in a keyset is the order in which the elements were inserted.
 
 Here is a list of library functions for manipulating keysets:
 
