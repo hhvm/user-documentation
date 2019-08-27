@@ -22,11 +22,14 @@ class Point {
 <<__EntryPoint>>
 function main(): void {
   $p1 = new Point(); // create Point(0.0, 0.0)
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p1 is $p1\n";
 
   $p2 = new Point(12.3); // create Point(12.3, 0.0)
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p2 is $p2\n";
 
   $p3 = new Point(5, 6.7); // create Point(5.0, 6.7)
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p3 is $p3\n";
 }

@@ -4,12 +4,7 @@ File "%s/interface-bad.php", line 14, characters 19-25:
 Required here
 
 File "%s/interface-bad.php", line 21, characters 7-11:
-Class Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Paper does not correctly implement all required members  (Typing[4054])
-File "%s/interface-bad.php", line 21, characters 24-29:
-Some members are incompatible with those declared in type Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Fliers
-Read the following to see why:
-File "%s/interface-bad.php", line 21, characters 7-11:
-This type doesn't implement the method closeDoors
+This type doesn't implement the method closeDoors (Typing[4054])
 File "%s/interface-bad.php", line 21, characters 24-29:
 Which is required by this interface
 File "%s/interface-bad.php", line 9, characters 19-28:

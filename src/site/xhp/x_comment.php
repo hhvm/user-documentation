@@ -15,7 +15,7 @@ class :x:comment extends :x:primitive implements XHPAlwaysValidChild {
   protected function stringify(): string {
     $html = '<!--';
     foreach ($this->getChildren() as $child) {
-      $html .= htmlspecialchars((string)$child);
+      $html .= htmlspecialchars($child as string);
     }
     $html .= '-->';
     return $html;

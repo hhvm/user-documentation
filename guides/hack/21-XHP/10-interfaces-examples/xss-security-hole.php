@@ -20,6 +20,7 @@ class ExamplePotentialXSSSecurityHole implements XHPUnsafeRenderable {
 <<__EntryPoint>>
 function start(): void {
   echo (
+    /* HH_FIXME[4067] implicit __toString() is now deprecated */
     <div class="markdown">
       {new ExamplePotentialXSSSecurityHole(
         HHVM\UserDocumentation\XHP\Examples\md_render('Markdown goes here'),

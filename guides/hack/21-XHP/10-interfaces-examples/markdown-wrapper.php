@@ -19,6 +19,7 @@ class ExampleMarkdownXHPWrapper implements XHPUnsafeRenderable {
 <<__EntryPoint>>
 function run(): void {
   echo (
+    /* HH_FIXME[4067] implicit __toString() is now deprecated */
     <div class="markdown">
       {new ExampleMarkdownXHPWrapper('Markdown goes here')}
     </div>

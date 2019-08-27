@@ -22,5 +22,6 @@ class Point {
 <<__EntryPoint>>
 function main(): void {
   $p1 = new Point(2.3);
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p1 is $p1\n";
 }

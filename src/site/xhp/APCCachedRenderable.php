@@ -21,7 +21,8 @@ class APCCachedRenderable
   }
 
   public static function get(string $key): ?\XHPRoot {
-    $str = apc_fetch(self::makeKey($key));
+    $success = null;
+    $str = apc_fetch(self::makeKey($key), inout $success);
     if (is_string($str)) {
       $ret = <x:frag>{new APCCachedRenderable($str)}</x:frag>;
       return $ret;

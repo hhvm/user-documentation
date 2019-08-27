@@ -28,7 +28,10 @@ function main(): void {
   $p2 = new Point(3.4);
   $p3 = new Point();
 
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p1 is $p1\n"; // implicit call to __toString()
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p2 is $p2\n"; //   "          "         "
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p3 is $p3\n"; //   "          "         "
 }

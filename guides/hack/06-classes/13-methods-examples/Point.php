@@ -34,6 +34,7 @@ function main(): void {
   $p2 = new Point();
   $p3 = new Point();
   $p2->move(-2.2, -4);
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p2 is $p2\n"; // implicit call to __toString()
   echo "The number of Points is ".Point::get_point_count()."\n";
 }

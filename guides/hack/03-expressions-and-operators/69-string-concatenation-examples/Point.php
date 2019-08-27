@@ -20,5 +20,6 @@ class Point {
 <<__EntryPoint>>
 function main(): void {
   $p1 = new Point(20, 30);
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo $p1."\n"; // implicit call to __toString()
 }
