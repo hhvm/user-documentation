@@ -59,9 +59,12 @@ function f<<<__Newable>> reify T as A<string>>(): A<string> {
 f<A<int>>();
 ```
 
-## Accessing a class constant / static class property / static class method
+## Accessing a class constant / static class method
 
 @@ reified-generics-examples/access.php @@
+
+Accessing static class properties (`T::$class_property`) is currently not
+supported.
 
 ## Hack Arrays
 
