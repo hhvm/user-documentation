@@ -47,7 +47,7 @@ final class LegacyRedirectsTest extends \Facebook\HackTest\HackTest {
     string $in,
     string $target,
   ): Awaitable<void> {
-    list($response, $body) = await PageLoader::getPageAsync($in);
+    list($response, $_body) = await PageLoader::getPageAsync($in);
     expect($response->getStatusCode())->toBeSame(301);
     $actual_target = $response->getHeaderLine('Location');
     expect($actual_target)->toBeSame($target);

@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<2cb68ad86b8331a4a8bd86a3a1b95165>>
+ * @generated SignedSource<<b514353f3e28ff1df3a4dd2658ef926d>>
  */
 
 final class HomePageControllerParameters
@@ -15,7 +15,6 @@ final class HomePageControllerParameters
   );
 
   public function get(): self::TParameters {
-    $p = $this->getParameters();
     return shape(
     );
   }

@@ -11,7 +11,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace Facebook\TypeAssert;
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\Vec;
 
 final class APIIndex {
   private ProductAPIIndexShape $index;
@@ -111,7 +111,6 @@ final class APIIndex {
     string $term,
     APIDefinitionType $type,
   ): vec<SearchResult> {
-    $terms = Str\split($term, ' ');
     $results = vec[];
 
     $entries = $this->getIndexForType($type);

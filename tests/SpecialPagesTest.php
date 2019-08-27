@@ -73,7 +73,7 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     string $from,
     string $to,
   ): Awaitable<void> {
-    list($response, $body) = await PageLoader::getPageAsync($from);
+    list($response, $_body) = await PageLoader::getPageAsync($from);
     expect($response->getStatusCode())->toBeSame(301);
 
     $target = $response->getHeaderLine('Location');
@@ -84,7 +84,7 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
 
   <<TestGroup('remote')>>
   public async function testStaticResource404(): Awaitable<void> {
-    list($response, $body) = await PageLoader::getPageAsync(
+    list($response, $_body) = await PageLoader::getPageAsync(
       '/s/deadbeef/notfound',
     );
     expect($response->getStatusCode())->toBeSame(404);

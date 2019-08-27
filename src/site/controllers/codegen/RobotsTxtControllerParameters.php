@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<ce5f2990b422f586026d9f55d5b28a77>>
+ * @generated SignedSource<<b1e07f39d3f813eaf8cf22aef14b9d18>>
  */
 
 final class RobotsTxtControllerParameters
@@ -15,7 +15,6 @@ final class RobotsTxtControllerParameters
   );
 
   public function get(): self::TParameters {
-    $p = $this->getParameters();
     return shape(
     );
   }

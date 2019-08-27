@@ -66,7 +66,7 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
     $nodes = $xpath->query("//tbody//tr//td//a");
 
     $settings = dict[];
-    foreach ($nodes as $i => $node) {
+    foreach ($nodes as $node) {
       // settingName => URL
       $settings[$node->nodeValue] = $node->attributes->item(0)->nodeValue;
     }

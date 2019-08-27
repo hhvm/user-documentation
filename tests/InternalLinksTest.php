@@ -13,10 +13,10 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     string $target,
     vec<string> $sources,
   ): Awaitable<void> {
-    list($response, $body) = await PageLoader::getPageAsync($target);
+    list($response, $_body) = await PageLoader::getPageAsync($target);
     if ($response->getStatusCode() === 301) {
       $target = $response->getHeaderLine('Location');
-      list($response, $body) = await PageLoader::getPageAsync($target);
+      list($response, $_body) = await PageLoader::getPageAsync($target);
     }
 
     $sources = new Set($sources);
@@ -33,7 +33,7 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
   public async function testDoesNotBreakExternalMarkdownLinks(
   ): Awaitable<void> {
-    list($response, $body) = await PageLoader::getPageAsync(
+    list($_response, $body) = await PageLoader::getPageAsync(
       '/hack/getting-started/tools',
     );
     expect($body)->toContain('href="https://github.com/hhvm/hack-mode"');
@@ -181,8 +181,6 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     }
 
     if (\substr($path, 0, 3) === '../') {
-      $orig_path = $path;
-
       if ($in_dir) {
         // /foo/bar/ + ../baz => /foo/baz
         $context = \dirname($source);

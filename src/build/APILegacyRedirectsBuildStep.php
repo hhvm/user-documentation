@@ -94,7 +94,6 @@ final class APILegacyRedirectsBuildStep extends BuildStep {
       }
 
       $old_ids_to_new_urls[$old_id] = $class['urlPath'];
-      $old_class_id = $old_id;
 
       foreach ($class['methods'] as $method) {
         $old_id = idx($old_methods, $old_class_name.'::'.$method['name']);

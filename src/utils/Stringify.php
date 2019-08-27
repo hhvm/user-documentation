@@ -45,8 +45,6 @@ class Stringify {
     ParameterDocumentation $param,
     ?DocBlock\ParameterInfo $info,
   ): string {
-    $name = $param['name'];
-
     $s = '';
     $types = $info['types'] ?? null;
     if ($types !== null && !C\is_empty($types)) {

@@ -44,7 +44,7 @@ final class RubyDependenciesBuildStep extends BuildStep {
     );
     if (!\file_exists($bundler)) {
       Log::v("\nInstalling bundler");
-      list($exit_code, $stdout, $stderr) = await execute_async(
+      list($exit_code, $_stdout, $stderr) = await execute_async(
         $options,
         'gem',
         'install',
@@ -64,7 +64,7 @@ final class RubyDependenciesBuildStep extends BuildStep {
       return;
     }
     Log::v("\nInstalling dependencies using bundler");
-    list($exit_code, $stdout, $stderr) = await execute_async(
+    list($exit_code, $_stdout, $stderr) = await execute_async(
       $options,
       $bundler,
       'install',

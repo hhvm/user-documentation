@@ -23,7 +23,6 @@ final class SASSBuildStep extends BuildStep {
 
   private async function buildAllAsync(): Awaitable<void> {
     Log::i("\nBuilding SASS");
-    $css = null;
     $exit_code = null;
     $options = shape(
       'environment' => dict[

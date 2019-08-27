@@ -47,7 +47,7 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
   public async function testJump(string $keyword, string $to): Awaitable<void> {
     $jump_url = '/j/'.$keyword;
 
-    list($response, $body) = await PageLoader::getPageAsync($jump_url);
+    list($response, $_body) = await PageLoader::getPageAsync($jump_url);
     expect($response->getStatusCode())->toBeSame(301);
 
     $target = $response->getHeaderLine('Location');

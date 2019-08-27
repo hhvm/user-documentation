@@ -48,7 +48,7 @@ final class GuidesNavData {
     dict<string, string> $pages,
   ): dict<string, NavDataNode> {
     $nav_data = dict[];
-    foreach ($pages as $title => $html_file) {
+    foreach ($pages as $title => $_html_file) {
       $name = self::pathToName($title);
       $nav_data[$name] = shape(
         'name' => $name,

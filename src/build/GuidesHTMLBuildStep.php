@@ -27,7 +27,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
       |> Vec\filter($$, $path ==> \basename($path) !== 'README.md')
       |> Vec\sort($$);
 
-    $list = $this->renderFiles($sources);
+    $this->renderFiles($sources);
 
     Log::i("\nCreating summaries");
     $summaries = \glob(self::SOURCE_ROOT.'/*/*/*-summary.txt')
@@ -81,7 +81,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
       if (\count($parts) !== 3) {
         continue;
       }
-      list($product, $section, $page) = $parts;
+      list($product, $section, $_page) = $parts;
       $out[$product] ??= dict[];
       $out[$product][$section] = $summary;
     }

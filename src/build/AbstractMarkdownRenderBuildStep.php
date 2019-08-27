@@ -57,7 +57,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
       return null;
     }
     Log::v('-');
-    list($in, $out) = \explode(' -> ', $line);
+    list($_in, $out) = \explode(' -> ', $line);
     // $in still has 'OK] ' prefix, but we don't need it now anyway
     return $out;
   }

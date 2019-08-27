@@ -63,7 +63,7 @@ class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
     string $keyword,
     string $dest,
   ): Awaitable<void> {
-    list($page, $body) = await PageLoader::getPageAsync($source);
+    list($_page, $body) = await PageLoader::getPageAsync($source);
 
     /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
