@@ -19,7 +19,7 @@ function apc_fetch_or_set_raw<Tdata>(
 ): Tdata {
   $key .= '!'.LocalConfig::getBuildID();
   $success = false;
-  $data = \apc_fetch($key, &$success);
+  $data = \apc_fetch($key, inout $success);
   if ($success) {
     return $data;
   }

@@ -228,16 +228,16 @@
         },
         {
             "name": "facebook/hack-router",
-            "version": "v0.19.1",
+            "version": "v0.19.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-router.git",
-                "reference": "f8912b028cb3eca661e2dff32ecdc47c6f53dbab"
+                "reference": "afa5fa468c3cbc30d0b455270082095d47de948a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/f8912b028cb3eca661e2dff32ecdc47c6f53dbab",
-                "reference": "f8912b028cb3eca661e2dff32ecdc47c6f53dbab",
+                "url": "https://api.github.com/repos/hhvm/hack-router/zipball/afa5fa468c3cbc30d0b455270082095d47de948a",
+                "reference": "afa5fa468c3cbc30d0b455270082095d47de948a",
                 "shasum": ""
             },
             "require": {
@@ -270,7 +270,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2019-07-22T14:28:39+00:00"
+            "time": "2019-08-27T22:01:37+00:00"
         },
         {
             "name": "facebook/hack-router-codegen",
