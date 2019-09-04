@@ -14,7 +14,7 @@ namespace HHVM\UserDocumentation\MarkdownExt;
 use type HHVM\UserDocumentation\{UnifiedIndexData, YAMLMeta};
 
 use namespace Facebook\Markdown\Inlines;
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\{Regex, Str, Vec};
 
 /**
  * Given something like `Vec\map()`, automatically make it a link
@@ -41,11 +41,11 @@ final class AutoLinkifyInline extends Inlines\Link {
       return null;
     }
 
-    $matches = [];
-    if (\preg_match('/^[^(<]+/', $content, &$matches) !== 1) {
+    $matches = Regex\first_match($content, re"/^[^(<]+/");
+    if ($matches is null) {
       return null;
     }
-    $definition = (string)$matches[0];
+    $definition = $matches[0];
 
     if (Str\contains($definition, ' ')) {
       return null;
