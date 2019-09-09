@@ -320,18 +320,15 @@ final class DataMerger {
           $rest = Vec\drop($typehints, 1);
 
           $generics = $first->getGenericTypes();
+          $kind = $first->getKind();
           $name = $first->getTypeName();
-          $base = $first->getTypeTextBase();
           $nullable = $first->isNullable();
           $shape_fields = $first->isShape() ? $first->getShapeFields() : null;
+          $function_typehints = $first->getFunctionTypehints();
 
           foreach ($rest as $th) {
-            $new_name = self::mergeNames($name, $th->getTypeName());
-            if ($new_name !== $name) {
-              $name = $new_name;
-              $base = $th->getTypeTextBase();
-            }
-
+            $name = self::mergeNames($name, $th->getTypeName());
+            $kind ??= $th->getKind();
             $nullable = $nullable || $th->isNullable();
             $generics = self::mergeTypehintLists(
               $generics,
@@ -340,14 +337,16 @@ final class DataMerger {
             if ($th->isShape()) {
               $shape_fields = $th->getShapeFields();
             }
+            $function_typehints ??= $th->getFunctionTypehints();
           }
           return new ScannedTypehint(
             $first->getAST(),
+            $kind,
             $name,
-            $base,
             $generics,
             $name !== 'mixed' && $nullable,
             $shape_fields,
+            $function_typehints,
           );
         },
       );
@@ -386,20 +385,16 @@ final class DataMerger {
       return $b;
     }
 
-    $name = self::mergeNames($a->getTypeName(), $b->getTypeName());
-    $base = ($name === $a->getTypeName())
-      ? $a->getTypeTextBase()
-      : $b->getTypeTextBase();
-
     return new ScannedTypehint(
       $a->getAST(),
-      $name,
-      $base,
+      $a->getKind() ?? $b->getKind(),
+      self::mergeNames($a->getTypeName(), $b->getTypeName()),
       self::mergeTypehintLists($a->getGenericTypes(), $b->getGenericTypes()),
       ($a->isNullable() || $b->isNullable()),
       $a->isShape()
         ? $a->getShapeFields()
         : ($b->isShape() ? $b->getShapeFields() : null),
+      $a->getFunctionTypehints() ?? $b->getFunctionTypehints(),
     );
   }
 

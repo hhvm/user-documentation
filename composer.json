@@ -1,7 +1,7 @@
 {
     "require": {
         "facebook/xhp-lib": "^2.3.2",
-        "hhvm": "4.21.*",
+        "hhvm": "4.22.*",
         "usox/hackttp": "0.3",
         "hhvm/hhvm-autoload": "^2.0",
         "hhvm/type-assert": "^3.1.0",
@@ -10,7 +10,7 @@
         "facebook/hack-router": ">=0.17 <1.0",
         "hhvm/hsl": "^4.0",
         "facebook/fbmarkdown": "^1.0",
-        "facebook/hh-apidoc": "^0.5.0"
+        "facebook/hh-apidoc": "^0.5.1"
     },
     "require-dev": {
         "hhvm/hhast": "^4.0",
