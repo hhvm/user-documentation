@@ -53,6 +53,6 @@ To test and run a Hack file, make sure you are running the `hh_client` typecheck
 
 ## Learning Hack and PHP
 
-Learning to program in PHP or Hack is beyond the scope of this guide. The best resource for doing so is the [official Hack documentation](/hack/getting-started/getting-started) and we highly recommend the [O'Reilly book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team at Facebook. Hack has an [online interactive tutorial](http://hacklang.org/tutorial.html) as well.
+Learning to program in PHP or Hack is beyond the scope of this guide. The best resource for doing so is the [official Hack documentation](/hack/getting-started/getting-started) and we highly recommend the [O'Reilly book on HHVM and Hack](http://www.amazon.com/Hack-HHVM-Programming-Productivity-Breaking/dp/1491920874/), written by an engineer on the HHVM team at Facebook.
 
 For PHP, [PHP's documentation](http://docs.php.net/manual/en/getting-started.php) contains an introduction to PHP, and there are numerous tutorials online.
