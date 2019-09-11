@@ -9,6 +9,7 @@
  *
  */
 
+use namespace HH\Lib\C;
 use type HHVM\UserDocumentation\{
   APILegacyRedirectData,
   JumpIndexData,
@@ -58,7 +59,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
           return 0;
         },
       );
-      return key($candidates);
+      return C\first_key($candidates);
     }
 
     return null;
