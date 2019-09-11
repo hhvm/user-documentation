@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55c70c6d9527a13b9ae8c875d57f12f8",
+    "content-hash": "5213c30c2bc3aad392a6cb253d2ad056",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -692,29 +692,29 @@
         },
         {
             "name": "usox/hackttp",
-            "version": "v0.3.0",
+            "version": "0.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/usox/hackttp.git",
-                "reference": "dbb0575a88c85cd5a0b7e3f7fd863db0bcf80cd9"
+                "reference": "63f3e1e4d62ca498f61878be4a09b0084cb0311f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackttp/zipball/dbb0575a88c85cd5a0b7e3f7fd863db0bcf80cd9",
-                "reference": "dbb0575a88c85cd5a0b7e3f7fd863db0bcf80cd9",
+                "url": "https://api.github.com/repos/usox/hackttp/zipball/63f3e1e4d62ca498f61878be4a09b0084cb0311f",
+                "reference": "63f3e1e4d62ca498f61878be4a09b0084cb0311f",
                 "shasum": ""
             },
             "require": {
                 "facebook/hack-http-request-response-interfaces": "^0.2",
-                "hhvm": "^4.0",
-                "hhvm/hsl": "^4.0",
-                "hhvm/hsl-experimental": "^4.0",
-                "hhvm/type-assert": "^3.2",
+                "hhvm": "^4.1",
+                "hhvm/hsl": "^4.1",
+                "hhvm/hsl-experimental": "^4.1",
+                "hhvm/type-assert": "^3.3",
                 "usox/hack-http-factory-interfaces": "^0.2"
             },
             "require-dev": {
-                "hhvm/hhast": "^4.0",
-                "usox/hackmock": "^1.2"
+                "hhvm/hhast": "^4.1",
+                "usox/hackmock": "^1.3"
             },
             "type": "library",
             "autoload": {
@@ -745,7 +745,7 @@
                 "response",
                 "stream"
             ],
-            "time": "2019-02-13T10:19:01+00:00"
+            "time": "2019-09-11T20:56:36+00:00"
         }
     ],
     "packages-dev": [

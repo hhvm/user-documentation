@@ -192,9 +192,9 @@ final class GuidePageController extends WebPageController {
       if ($adj !== null) {
         list($adjacent_guide, $adjacent_guide_data) = $adj;
         $guide_pages = $adjacent_guide_data['children'];
-        $guide_pages = $next ? $guide_pages : Dict\reverse($guide_pages);
+        $guide_pages = $next ? $guide_pages : array_reverse($guide_pages);
         $adjacent_page = shape(
-          'page' => array(C\first_keyx($guide_pages) => $guide_pages),
+          'page' => array(C\first_keyx($guide_pages) => C\firstx($guide_pages)),
           'guide' => array($adjacent_guide => $adjacent_guide_data),
         );
       }

@@ -7,7 +7,7 @@ use namespace HH\Lib\Str;
 <<__EntryPoint>>
 async function site_main_async(): Awaitable<noreturn> {
   \Facebook\AutoloadMap\initialize();
-  $request = Usox\HackTTP\createServerRequestFromGlobals();
+  $request = Usox\HackTTP\create_server_request_from_globals();
   // header is of the form HOST:PORT - for `parse_url`, we need
   // `http://HOST:port/` as `parse_url()` is unable to parse IPv6
   // strings like `[::1]:8080
