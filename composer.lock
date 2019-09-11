@@ -441,16 +441,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.21.5",
+            "version": "v4.21.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "c60088b68da63c42a9e1eae5e175185d0f1dfd76"
+                "reference": "2ab41c8e821620f638cdc6c0972854635775298a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/c60088b68da63c42a9e1eae5e175185d0f1dfd76",
-                "reference": "c60088b68da63c42a9e1eae5e175185d0f1dfd76",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/2ab41c8e821620f638cdc6c0972854635775298a",
+                "reference": "2ab41c8e821620f638cdc6c0972854635775298a",
                 "shasum": ""
             },
             "require": {
@@ -485,7 +485,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-09T16:09:25+00:00"
+            "time": "2019-09-11T17:06:29+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -729,8 +729,8 @@
             "authors": [
                 {
                     "name": "Daniel Jakob",
-                    "role": "Developer",
-                    "email": "dev@usox.org"
+                    "email": "dev@usox.org",
+                    "role": "Developer"
                 }
             ],
             "description": "Work in progress demo implementation of facebookexperimental/hack-http-request-response-interfaces",
