@@ -50,7 +50,7 @@ flow resumes inside the caller's scope.
   assigned the `null` value.
 - Inout annotations on a parameter within a class hierarchy must be
   consistent. Any derived class that overrides that method must declare the same
-  (invariant) type for its corresponding parameter -- unlike non-inout
+  (invariant) type for its corresponding parameter&mdash;unlike non-inout
   parameters, a supertype is not allowed (i.e., inout parameters are not
   contravariant).
 - A function cannot take both inout parameters and parameters by reference (see
@@ -77,14 +77,14 @@ location from multiple functions).
 ## Migrating to inout parameters
 
 In many cases, references can be completely replaced with patterns that are
-easier to understand -- for example, a function could return a tuple, shape or
+easier to understand&mdash;for example, a function could return a tuple, shape or
 object instead of assigning values to variables passed in by reference. But when
 this is not possible, they should be migrated to inout parameters.
 
 To make the migration easier, HHVM currently allows reference
 (`int &$parameter`) and inout (`inout int $parameter`) parameters to be used
-interchangeably -- either one can be used, no matter if the function is declared
-to take a reference or inout argument.
+interchangeably&mdash;either one can be used, no matter if the function is
+declared to take a reference or inout argument.
 
 In most cases, you can migrate by simply replacing `&` with `inout` in all
 function declarations and calls. Due to the aforementioned interchangeability,
