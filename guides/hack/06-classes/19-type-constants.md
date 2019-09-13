@@ -9,4 +9,4 @@ A type constant has public visibility and is implicitly static.
 
 By convention, type constant names begin with an uppercase `T`.
 
-See [inheriance](inheritance.md) and [type constants revisited](type-constants-revisited.md) for more information.
+See [inheritance](inheritance.md) and [type constants revisited](type-constants-revisited.md) for more information.
