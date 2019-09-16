@@ -51,7 +51,7 @@ final class RemotePageLoader extends PageLoader {
     $header_size = \curl_getinfo($ch, \CURLINFO_HEADER_SIZE);
     $header_blob = \substr($response, 0, $header_size);
     $header_lines = \explode("\r\n", \trim($header_blob));
-    \array_shift(&$header_lines); // status code and http ver
+    \array_shift(inout $header_lines); // status code and http ver
 
     if ($header_size === \strlen($response)) {
       $body = '';

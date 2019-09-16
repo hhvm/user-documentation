@@ -27,7 +27,7 @@ async function update_versions_main_async(): Awaitable<noreturn> {
       break;
     }
     $parts = \explode('/', $root);
-    \array_pop(&$parts);
+    \array_pop(inout $parts);
     $root = \implode('/', $parts);
   }
 

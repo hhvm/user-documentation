@@ -17,7 +17,7 @@ final class LocalPageLoader extends PageLoader {
     $query_params = [];
     $query_part = \parse_url($url, \PHP_URL_QUERY);
     if ($query_part !== null) {
-      \parse_str($query_part, &$query_params);
+      \parse_str($query_part, inout $query_params);
     }
 
     $request = (new \Usox\HackTTP\ServerRequestFactory())->createServerRequest(

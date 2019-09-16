@@ -24,7 +24,7 @@ async function execute_async(
   $proc = \proc_open(
     $command,
     $spec,
-    &$pipes,
+    inout $pipes,
     $options['working_directory'] ?? null,
     $options['environment'] ?? null,
   );

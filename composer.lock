@@ -441,16 +441,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.21.6",
+            "version": "v4.21.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "2ab41c8e821620f638cdc6c0972854635775298a"
+                "reference": "bb3446a37258a9006692b359c42a21f89098e476"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/2ab41c8e821620f638cdc6c0972854635775298a",
-                "reference": "2ab41c8e821620f638cdc6c0972854635775298a",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/bb3446a37258a9006692b359c42a21f89098e476",
+                "reference": "bb3446a37258a9006692b359c42a21f89098e476",
                 "shasum": ""
             },
             "require": {
@@ -485,7 +485,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-11T17:06:29+00:00"
+            "time": "2019-09-16T22:12:56+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",

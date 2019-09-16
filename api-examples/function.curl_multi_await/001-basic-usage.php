@@ -20,7 +20,7 @@ async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
 
   $active = -1;
   do {
-    $ret = \curl_multi_exec($mh, &$active);
+    $ret = \curl_multi_exec($mh, inout $active);
   } while ($ret == \CURLM_CALL_MULTI_PERFORM);
 
   while ($active && $ret == \CURLM_OK) {
@@ -30,7 +30,7 @@ async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
       await \HH\Asio\usleep(100);
     }
     do {
-      $ret = \curl_multi_exec($mh, &$active);
+      $ret = \curl_multi_exec($mh, inout $active);
     } while ($ret == \CURLM_CALL_MULTI_PERFORM);
   }
 

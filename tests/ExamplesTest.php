@@ -168,7 +168,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
 
     $command_str = \implode('', $env->map($x ==> $x.' ')).$command_str.' 2>&1';
 
-    \exec($command_str, /*&*/ &$output, /*&*/ &$exit_code);
+    \exec($command_str, inout $output, inout $exit_code);
 
     // Get full output in case of failure
     \stream_set_blocking(\STDOUT, true);
