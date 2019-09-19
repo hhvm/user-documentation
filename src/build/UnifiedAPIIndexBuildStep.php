@@ -115,12 +115,6 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
         $name = $def['name'];
         $maybe_set($name, $def['urlPath']);
 
-        $ns_pos = \strrpos($name, "\\");
-        if ($ns_pos !== false) {
-          $name = \substr($name, $ns_pos + 1);
-          $maybe_set($name, $def['urlPath']);
-        }
-
         if ($type === APIDefinitionType::FUNCTION_DEF) {
           continue;
         }
