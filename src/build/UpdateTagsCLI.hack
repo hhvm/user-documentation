@@ -43,7 +43,10 @@ final class UpdateTagsCLI extends CLIBase {
     string $project,
     string $prefix,
   ): Awaitable<string> {
-    $url = Str\format('https://api.github.com/repos/%s/tags', $project);
+    $url = Str\format(
+      'https://api.github.com/repos/%s/tags?per_page=100',
+      $project,
+    );
 
     $req = \curl_init($url);
     \curl_setopt($req, \CURLOPT_USERAGENT, "docs.hhvm.com update-versions.h");
