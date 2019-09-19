@@ -10,6 +10,7 @@ The following attributes are defined:
 * [__Override](#__override)
 * [__ReturnDisposable](#__returndisposable)
 * [__Sealed](#__sealed)
+* [__Enforceable](#__sealed)
 
 ## __AcceptDisposable
 
@@ -134,7 +135,7 @@ class is marked as `final`? Your mocking framework would generally be out of luc
 The `__MockClass` attribute allows you to override the restriction of `final` on a class or method within a class, so that a
 mock class can exist.
 
-@@ predefined-attributes/mock.php @@
+@@ predefined-attributes-examples/mock.php @@
 
 Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack legacy types `Vector`, `Map`, and `Set`.
 
@@ -182,3 +183,11 @@ interface I { ... }
 ```
 
 Only classes `X` and `Y` can directly extend class `A`, and only class `Z` can directly implement interface `I`.
+
+## __Enforceable
+
+This attribute is used to annotate abstract type constants so they can be used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
+
+@@ predefined-attributes-examples/enforceable.php.type-errors @@
+
+This attribute can also be used for reified generics, and it similarly allows the generic to be used in a type test expression.
