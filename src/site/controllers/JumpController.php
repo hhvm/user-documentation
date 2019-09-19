@@ -17,6 +17,8 @@ final class JumpController
   implements RoutableGetController {
   use JumpControllerParametersTrait;
 
+  const keyset<string> PREFIXES = keyset['', 'HH\\', 'HH\\Lib\\', 'HH\\Asio\\'];
+
   public static function getUriPattern(): UriPattern {
     return (new UriPattern())
       ->literal('/j/')
@@ -30,9 +32,11 @@ final class JumpController
     $keyword = $this->getParameters()['Keyword'];
 
     $data = JumpIndexData::getIndex();
-    $url = idx($data, strtolower($keyword));
-    if ($url is string) {
-      throw new RedirectException($url);
+    foreach (self::PREFIXES as $prefix) {
+      $url = idx($data, strtolower($prefix.$keyword));
+      if ($url is string) {
+        throw new RedirectException($url);
+      }
     }
 
     throw new RedirectException('/search?term='.urlencode($keyword));
