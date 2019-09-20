@@ -1,0 +1,7 @@
+File "%s/coercion_from_union.php", line 16, characters 17-18:
+Invalid argument (Typing[4110])
+File "%s/coercion_from_union.php", line 4, characters 24-29:
+Expected string
+File "%s/coercion_from_union.php", line 6, characters 26-32:
+But got dynamic
+
