@@ -24,13 +24,12 @@ flow resumes inside the caller's scope.
   whether an argument will be passed with these semantics. It is both a
   typechecker and runtime error if a function expects an inout parameter but the
   programmer fails to annotate the argument as inout, or vice versa.
-- An inout argument must be a *modifiable lvalue*, e.g. variables and other
-  expressions that can appear on the left-hand side of an assignment expression
-  in Hack. If the expression produces side effects, those effects are observed
-  only once. If the lvalue's type cannot change (e.g. it is a class property or
-  a variable whose lifetime extends beyond the enclosing scope), then that type
-  must be the same as the type of the corresponding inout parameter. Otherwise,
-  the lvalue's type may initially be a subtype of the parameter's type.
+- Arguments for inout parameters are local variables with an arbitrary number of
+  index expressions allowed. In other words, they should be local variables
+  (`$x`) or indexed elements contained inside a local (`$vec[$y][z()][2]`).
+  Every intermediate base in the index chain should also be a value-typed
+  container (e.g. vec, dict, keyset, or array). If the argument expression
+  produces side effects, those effects are observed only once.
 - The same lvalue cannot be used for multiple inout arguments in the same
   function call (more generally, the lvalue cannot appear more than once in any
   lvalue context within the full expression, including other function calls or
