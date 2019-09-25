@@ -2,11 +2,11 @@
 /**
  * This file is generated. Do not modify it manually!
  *
- * @generated SignedSource<<cc126f0f22af3c0d303e040094b8f58d>>
+ * @generated SignedSource<<011704d0f9a0e2d26bb6f041a822b17c>>
  */
 namespace HHVM\UserDocumentation;
 
 const dict<APIProduct, string> PRODUCT_TAGS = dict[
-  APIProduct::HACK => 'HHVM-4.23.0',
+  APIProduct::HACK => 'HHVM-4.24.0',
   APIProduct::HSL => 'v4.15.2',
 ];

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "405d6d36e89ca26f755c238c1c0b30b0",
+    "content-hash": "c722fd57ae505465cc4f03f48acd50ae",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -783,16 +783,16 @@
         },
         {
             "name": "hhvm/hacktest",
-            "version": "v1.6.1",
+            "version": "v1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hacktest.git",
-                "reference": "72ab3990a6d4480d9f3a5be61c675b796d1d1314"
+                "reference": "2eeed386c75588471708226c479d2771692b8299"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/72ab3990a6d4480d9f3a5be61c675b796d1d1314",
-                "reference": "72ab3990a6d4480d9f3a5be61c675b796d1d1314",
+                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/2eeed386c75588471708226c479d2771692b8299",
+                "reference": "2eeed386c75588471708226c479d2771692b8299",
                 "shasum": ""
             },
             "require": {
@@ -821,7 +821,7 @@
                 "MIT"
             ],
             "description": "The Hack Test Library",
-            "time": "2019-07-18T18:28:33+00:00"
+            "time": "2019-09-20T19:52:49+00:00"
         }
     ],
     "aliases": [],
@@ -830,7 +830,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.23.*"
+        "hhvm": "4.24.*"
     },
     "platform-dev": []
 }
