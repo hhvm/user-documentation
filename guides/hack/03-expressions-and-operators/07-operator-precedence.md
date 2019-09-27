@@ -19,7 +19,7 @@ Operator | Associativity
 `?:   ??`	| Right to Left
 `\|>`	| Left to Right
 Lambdas     | Right to Left
-`=   +=   -=   .=   *=   /=   %=   <<=   >>=   &=   ^=   \|=`	| Right to Left
+`=   +=   -=   .=   *=   /=   %=   <<=   >>=   &=   ^=   \|=   ??=`	| Right to Left
 `yield`	| none
 
 The rows of operators in the table are shown in decreasing order of precedence, from top to bottom.  The ordering of operators in any

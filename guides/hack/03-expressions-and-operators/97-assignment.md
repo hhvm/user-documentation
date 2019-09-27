@@ -62,4 +62,5 @@ $list[$i++] += 10;
 
 When the left-hand expression contains a side-effect, that side-effect is performed only once.
 
-The complete set of compound-assignment operators is: `**=`, `*=`, `/=`, `%=`, `+=`, `-=`, `.=`, `<<;=`, `>>=`, `&=`, `^=`, and `|=`.
+The complete set of compound-assignment operators is: `**=`, `*=`, `/=`, `%=`, `+=`, `-=`, `.=`, `<<=`, `>>=`, `&=`, `^=`, `|=`, and
+[`??=`](https://docs.hhvm.com/hack/expressions-and-operators/coalesce#coalescing-assignment-operator).

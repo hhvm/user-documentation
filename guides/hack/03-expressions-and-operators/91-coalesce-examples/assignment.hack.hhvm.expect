@@ -1,0 +1,12 @@
+Dict
+(
+    [foo] => 3
+    [bar] => 2
+    [baz] => 1
+)
+Dict
+(
+    [35] => Arthur, Trillian
+    [110] => Ford
+    [120] => Zaphod
+)
