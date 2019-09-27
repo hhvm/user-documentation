@@ -2,17 +2,7 @@ Given the expression `e1 ?? e2`, if `e1` is defined and not `null`, then the
 result is `e1`. Otherwise, `e2` is evaluated, and its value becomes the result.
 There is a sequence point after the evaluation of `e1`.
 
-```Hack
-$nully = null;
-$nonnull = 'a string';
-$nully ?? 10;    // 10 as $nully is `null`
-$nonnull ?? 10;  // 'a string' as $nonnull is `nonnull`
-
-$arr = dict['black' => 10, 'white' => null];
-$arr['black'] ?? -100;  // 10 as $arr['black'] is defined and not null
-$arr['white'] ?? -200;  // -200 as $arr['white'] is null
-$arr['green'] ?? -300;  // -300 as $arr['blue'] is not defined
-```
+@@ coalesce-examples/basics.hack @@
 
 It is important to note that the right-hand side of the `??` operator will be
 conditionally evaluated. If the left-hand side is defined and not `null`, the
@@ -36,13 +26,7 @@ important difference is that `idx()` only falls back to the specified default
 value if the given key does not exist, while `??` uses the fallback value even
 if a key exists but has `null` value. Compare these examples to the ones above:
 
-```Hack
-$arr = dict['black' => 10, 'white' => null];
-idx($arr, 'black', -100);  // 10
-idx($arr, 'white', -200);  // null
-idx($arr, 'green', -300);  // -300
-idx($arr, 'green');        // null
-```
+@@ coalesce-examples/idx.hack @@
 
 
 ## Coalescing assignment operator

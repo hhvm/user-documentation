@@ -1,3 +1,4 @@
+namespace Hack\UserDocumentation\ExpAndOps\Coalesce\Assignment;
 use namespace HH\Lib\{Dict, Str};
 
 function get_counts_by_value(Traversable<string> $values): dict<string, int> {
@@ -21,9 +22,9 @@ function get_people_by_age(
 }
 
 <<__EntryPoint>>
-function coalescing_assignment_example(): void {
+function main(): void {
   $values = vec['foo', 'bar', 'foo', 'baz', 'bar', 'foo'];
-  print_r(get_counts_by_value($values));
+  \print_r(get_counts_by_value($values));
 
   $people = dict[
     'Arthur' => 35,
@@ -31,7 +32,7 @@ function coalescing_assignment_example(): void {
     'Trillian' => 35,
     'Zaphod' => 120,
   ];
-  print_r(
+  \print_r(
     get_people_by_age($people)
     |> Dict\map($$, $names ==> Str\join($names, ', '))
   );
