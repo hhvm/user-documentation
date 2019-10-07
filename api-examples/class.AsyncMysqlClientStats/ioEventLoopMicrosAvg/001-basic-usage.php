@@ -17,10 +17,10 @@ async function connect(
     CI::$passwd,
   );
 }
-async function get_loop_info(): Awaitable<float> {
+async function get_loop_info(): Awaitable<?float> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
-  $loop = $conn->connectResult()->clientStats()->ioEventLoopMicrosAvg();
+  $loop = $conn->connectResult()?->clientStats()?->ioEventLoopMicrosAvg();
   $conn->close();
   return $loop;
 }

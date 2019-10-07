@@ -69,14 +69,13 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function testExamplesRender(): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync(
-      '/hack/asynchronous-operations/examples',
+      '/hack/source-code-fundamentals/namespaces',
     );
     expect($response->getStatusCode())->toBeSame(200);
 
     expect($body)->toContain('highlight');
-    // Namespace declaration
     expect($body)->toContain(
-      'Hack\UserDocumentation\AsyncOps\Examples\Examples',
+      'namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;',
     );
   }
 

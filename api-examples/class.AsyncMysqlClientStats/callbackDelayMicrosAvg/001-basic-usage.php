@@ -17,10 +17,10 @@ async function connect(
     CI::$passwd,
   );
 }
-async function get_delay(): Awaitable<float> {
+async function get_delay(): Awaitable<?float> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
-  $delay = $conn->connectResult()->clientStats()->callbackDelayMicrosAvg();
+  $delay = $conn->connectResult()?->clientStats()?->callbackDelayMicrosAvg();
   $conn->close();
   return $delay;
 }

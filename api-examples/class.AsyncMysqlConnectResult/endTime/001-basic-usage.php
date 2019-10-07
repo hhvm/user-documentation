@@ -17,10 +17,10 @@ async function connect(
     CI::$passwd,
   );
 }
-async function get_connection_start_time(): Awaitable<float> {
+async function get_connection_start_time(): Awaitable<?float> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
-  $et = $conn->connectResult()->endTime();
+  $et = $conn->connectResult()?->endTime();
   $conn->close();
   return $et;
 }

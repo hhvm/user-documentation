@@ -17,11 +17,11 @@ async function connect(
     CI::$passwd,
   );
 }
-async function get_client_stats(): Awaitable<\AsyncMysqlClientStats> {
+async function get_client_stats(): Awaitable<?\AsyncMysqlClientStats> {
   $pool = new \AsyncMysqlConnectionPool(array());
   $conn = await connect($pool);
-  $cstats = $conn->connectResult()->clientStats();
-  \var_dump($cstats->callbackDelayMicrosAvg());
+  $cstats = $conn->connectResult()?->clientStats();
+  \var_dump($cstats?->callbackDelayMicrosAvg());
   $conn->close();
   return $cstats;
 }
