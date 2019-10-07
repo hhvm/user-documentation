@@ -64,7 +64,7 @@ An arbitrary number of statements can be associated with any case or default lab
 a set of such statements, control drops through into any following case or default label. Thus, if all cases and the default end in `break`
 and there are no duplicate-valued case labels, the order of case and default labels is insignificant.
 
-In no `break` statement is seen for a case or default before a subsequent case label, default label, or the switch-terminating `}` is
+If no `break` statement is seen for a case or default before a subsequent case label, default label, or the switch-terminating `}` is
 encountered, an implementation might issue a warning. However, such a warning can be suppressed by placing a source line containing the
 special comment `// FALLTHROUGH`, at the end of that case or default statement group.
 

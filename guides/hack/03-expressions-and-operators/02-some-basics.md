@@ -52,7 +52,7 @@ that result is *not* used! Similarly, given the expression statement
 ```
 
 the expression is evaluated to the result 11, and the side-effect is that `$v` is actually incremented. Again, the final result, 11, is not
-used.  [If you are confused by that explanation, consider that the perfectly well-formed expression statement `$v + 6;` has no affect; it
+used.  [If you are confused by that explanation, consider that the perfectly well-formed expression statement `$v + 6;` has no effect; it
 has no side-effect and its result is not used.]
 
 The occurrence of value computation and side-effects is delimited by *sequence points*, places in a program's execution at which all

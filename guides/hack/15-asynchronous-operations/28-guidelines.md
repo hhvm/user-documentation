@@ -90,7 +90,7 @@ What do you think happens here?
 
 The answer is, the behavior is undefined. We might get all three echoes; we might only get the first echo; we might get nothing at all. The
 only way to guarantee that `speak` runs to completion is to `await` it. `await` is the trigger to the async scheduler that allows HHVM to
-appropriately suspend and resume `speak`; otherwise, the async scheduler will be provide no guarantees with respect to `speak`.
+appropriately suspend and resume `speak`; otherwise, the async scheduler will provide no guarantees with respect to `speak`.
 
 ## Minimize Undesired Side Effects
 
