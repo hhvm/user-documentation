@@ -13,9 +13,13 @@ namespace HHVM\UserDocumentation\MarkdownExt;
 
 use namespace Facebook\Markdown\UnparsedBlocks;
 
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{C, Keyset, Regex, Str};
 
 final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
+
+  const START_MARKER = '@example-start';
+  const END_MARKER = '@example-end';
+
   const string PATTERN = '/^@@ (?<dir>[^@ ]+)'.
     '(?<file>[^@ \\/]+\\.(php|hack)'.
     '(?:.type-errors)?'.
@@ -71,11 +75,83 @@ final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
   }
 
   private static function getExampleBlock(string $file): UnparsedBlocks\Block {
-    return new UnparsedBlocks\FencedCodeBlock(
-      Str\trim(\file_get_contents($file)),
-      'Hack',
+    $code = \file_get_contents($file);
+
+    $start_pos = Str\search($code, self::START_MARKER);
+    if ($start_pos is nonnull) {
+      // Actual start should be the next line after the marker.
+      $start_pos = Str\search($code, "\n", $start_pos) as nonnull;
+      $code = Str\slice($code, $start_pos + 1);
+
+      invariant(
+        !Str\contains($code, self::START_MARKER),
+        '%s contains multiple %s',
+        $file,
+        self::START_MARKER,
+      );
+
+      $end_pos = Str\search($code, self::END_MARKER);
+      if ($end_pos is nonnull) {
+        $code = Str\slice($code, 0, $end_pos);
+        // Actual end should be the end of the previous line before the marker.
+        $end_pos = Str\search_last($code, "\n") as nonnull;
+        $code = Str\slice($code, 0, $end_pos + 1);
+      }
+    } else {
+      // No explicit start marker, use magic.
+
+      // First, strip initial boilerplate lines (<?hh/namespace/use/empty).
+      $code = Regex\replace(
+        $code,
+        re"/^( *(<\\?hh.*|namespace .+;|use namespace HH\\\\.+;|)\n)+/",
+        '',
+      );
+
+      // If the remaining code is a single <<__EntryPoint>> function, extract
+      // its body.
+      $match = Regex\first_match(
+        $code,
+        re"/^
+          \\s*
+          <<__EntryPoint>>
+          \\s*
+          function \\s+ [_a-zA-Z0-9]+\\(\\): \\s* void \\s* { \\n
+            (?<body>
+              # one or more indented or empty lines
+              (\\ \\ .*\\n|\\n)+
+            )
+          }
+          \\s*
+        $/x",
+      );
+
+      if ($match is nonnull) {
+        $code = $match['body'];
+      }
+    }
+
+    invariant(
+      !Str\contains($code, self::END_MARKER),
+      '%s contains %s without a matching %s',
+      $file,
+      self::END_MARKER,
+      self::START_MARKER,
     );
+
+    // If all (non-empty) lines are indented (usually happens if we extracted a
+    // function body above), find the minimum indentation and unindent by that
+    // amount.
+    if (!Regex\matches($code, re"/^[^ \n]/m")) {
+      $code = Regex\every_match($code, re"/^ +/m")
+        |> Keyset\map($$, $match ==> $match[0])
+        |> Keyset\sort($$)
+        |> C\firstx($$)
+        |> Str\replace($code, "\n".$$, "\n");
+    }
+
+    return new UnparsedBlocks\FencedCodeBlock(Str\trim($code), 'Hack');
   }
+
   private static function getOutputBlock(string $file): ?UnparsedBlocks\Block {
     if (\file_exists($file.'.no.auto.output')) {
       return null;
