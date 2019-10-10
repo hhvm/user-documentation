@@ -34,7 +34,7 @@ appropriate default action.
 The library function `trim` removes leading and trailing whitespace from a given string producing a new stripped-down string. By default,
 whitespace includes space, horizontal tab, newline, carriage return, zero-valued byte, and vertical tab. However, the set of characters to
 be stripped out can be specified using the optional second argument, whose type is a nullable `string`. This allows `null` to be passed
-explicitly (or implicitly of the second argument is omitted) to indicate the default behavior should be used:
+explicitly (or implicitly if the second argument is omitted) to indicate the default behavior should be used:
 
 ```Hack
 function trim(string $string, ?string $char_mask = null): string;
