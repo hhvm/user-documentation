@@ -5,7 +5,6 @@ be changed.   Based on the context in which it is declared, a variable has a sco
 The following kinds of variable may exist in a script:
 -   [Local variable](#local-variables)
 -   [Array element](#array-elements)
--   [Function static](#function-statics)
 -   [Instance property](#instance-properties)
 -   [Static property](#static-properties)
 -   [Class and interface constant](#class-and-interface-constants)
@@ -38,7 +37,8 @@ Consider the following example:
 
 @@ variables-examples/local-variables.php @@
 
-Unlike the equivalent [function static](#function-statics) version, this function `f` outputs "`$lv = 1`" each time.
+As you can see, the value of the local variable `$lv` is not preserved between
+the function calls, so this function `f` outputs "`$lv = 1`" each time.
 
 ## Array Elements
 
