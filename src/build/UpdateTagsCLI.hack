@@ -208,7 +208,8 @@ final class UpdateTagsCLI extends CLIBase {
     $composer['require']['hhvm'] = $hhvm_major_minor.'.*';
     \file_put_contents(
       $path,
-      \json_encode($composer, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES),
+      \json_encode($composer, \JSON_PRETTY_PRINT | \JSON_UNESCAPED_SLASHES).
+      "\n",
     );
   }
 }

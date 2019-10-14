@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8577ffcc11087c604a6c2b6d7545b5ad",
+    "content-hash": "bd7a73f4ac1893d50432859e3f0cab0f",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -141,16 +141,16 @@
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v4.3.3",
+            "version": "v4.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "3a0a7b0282ccf94cf9d112f41ce51e36608414fb"
+                "reference": "11d4f64ba5ffdb9609f89515ac6e979591e67e72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/3a0a7b0282ccf94cf9d112f41ce51e36608414fb",
-                "reference": "3a0a7b0282ccf94cf9d112f41ce51e36608414fb",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/11d4f64ba5ffdb9609f89515ac6e979591e67e72",
+                "reference": "11d4f64ba5ffdb9609f89515ac6e979591e67e72",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +198,7 @@
                 "code generation",
                 "hack"
             ],
-            "time": "2019-08-29T21:45:36+00:00"
+            "time": "2019-10-11T17:58:31+00:00"
         },
         {
             "name": "facebook/hack-http-request-response-interfaces",
@@ -441,16 +441,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.21.8",
+            "version": "v4.21.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "0548b5badc4f64efa3fe4aa463286b0136bad825"
+                "reference": "f5451d9069f839663fcc2c69c079d0a12f3cc2c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/0548b5badc4f64efa3fe4aa463286b0136bad825",
-                "reference": "0548b5badc4f64efa3fe4aa463286b0136bad825",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/f5451d9069f839663fcc2c69c079d0a12f3cc2c1",
+                "reference": "f5451d9069f839663fcc2c69c079d0a12f3cc2c1",
                 "shasum": ""
             },
             "require": {
@@ -485,7 +485,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-10-07T17:17:03+00:00"
+            "time": "2019-10-11T21:03:39+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -830,7 +830,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.25.*"
+        "hhvm": "4.27.*"
     },
     "platform-dev": []
 }
