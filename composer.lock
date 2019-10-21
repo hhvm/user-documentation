@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd7a73f4ac1893d50432859e3f0cab0f",
+    "content-hash": "500c6c8ffe29842895b4289a7f96cbc9",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -441,25 +441,25 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.21.10",
+            "version": "v4.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "f5451d9069f839663fcc2c69c079d0a12f3cc2c1"
+                "reference": "cda20941116da971a4a69d64115f16f6867b5fd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/f5451d9069f839663fcc2c69c079d0a12f3cc2c1",
-                "reference": "f5451d9069f839663fcc2c69c079d0a12f3cc2c1",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/cda20941116da971a4a69d64115f16f6867b5fd1",
+                "reference": "cda20941116da971a4a69d64115f16f6867b5fd1",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.0.0",
-                "hhvm": "^4.21",
+                "hhvm": "^4.25",
                 "hhvm/hhvm-autoload": "^2.0.4",
-                "hhvm/hsl": "^4.0",
-                "hhvm/hsl-experimental": "^4.5",
+                "hhvm/hsl": "^4.25",
+                "hhvm/hsl-experimental": "^4.25",
                 "hhvm/type-assert": "^3.4"
             },
             "require-dev": {
@@ -485,7 +485,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-10-11T21:03:39+00:00"
+            "time": "2019-10-14T21:06:37+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -536,25 +536,26 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v4.15.2",
+            "version": "v4.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "669c0c4297bcfdff0f2af9a86ed730511fbc0a96"
+                "reference": "99f223649efae32bdf028271ac95efb0ffffaa65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/669c0c4297bcfdff0f2af9a86ed730511fbc0a96",
-                "reference": "669c0c4297bcfdff0f2af9a86ed730511fbc0a96",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/99f223649efae32bdf028271ac95efb0ffffaa65",
+                "reference": "99f223649efae32bdf028271ac95efb0ffffaa65",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.18"
+                "hhvm": "^4.25"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.5.1",
                 "hhvm/hacktest": "^1.0",
-                "hhvm/hhvm-autoload": "^2.0"
+                "hhvm/hhvm-autoload": "^2.0",
+                "hhvm/hsl-experimental": "dev-master"
             },
             "type": "library",
             "extra": {
@@ -567,24 +568,24 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library",
-            "time": "2019-08-27T21:27:21+00:00"
+            "time": "2019-10-14T16:41:47+00:00"
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.15.0",
+            "version": "v4.25.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "1136ef5425f0d4029036780f1813680a05b3064f"
+                "reference": "68e12b7fcd7546bbf09b96deef4aa47d218ef983"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/1136ef5425f0d4029036780f1813680a05b3064f",
-                "reference": "1136ef5425f0d4029036780f1813680a05b3064f",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/68e12b7fcd7546bbf09b96deef4aa47d218ef983",
+                "reference": "68e12b7fcd7546bbf09b96deef4aa47d218ef983",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.20",
+                "hhvm": "^4.25",
                 "hhvm/hsl": "^4.15"
             },
             "require-dev": {
@@ -603,7 +604,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library - Experimental Additions",
-            "time": "2019-10-03T17:25:22+00:00"
+            "time": "2019-10-14T17:01:14+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -692,23 +693,23 @@
         },
         {
             "name": "usox/hackttp",
-            "version": "0.3.2",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/usox/hackttp.git",
-                "reference": "63f3e1e4d62ca498f61878be4a09b0084cb0311f"
+                "reference": "37a73b125859a0cf240413ada69bfa70ab378dc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackttp/zipball/63f3e1e4d62ca498f61878be4a09b0084cb0311f",
-                "reference": "63f3e1e4d62ca498f61878be4a09b0084cb0311f",
+                "url": "https://api.github.com/repos/usox/hackttp/zipball/37a73b125859a0cf240413ada69bfa70ab378dc9",
+                "reference": "37a73b125859a0cf240413ada69bfa70ab378dc9",
                 "shasum": ""
             },
             "require": {
                 "facebook/hack-http-request-response-interfaces": "^0.2",
                 "hhvm": "^4.1",
-                "hhvm/hsl": "^4.1",
-                "hhvm/hsl-experimental": "^4.1",
+                "hhvm/hsl": "^4.25",
+                "hhvm/hsl-experimental": "^4.25",
                 "hhvm/type-assert": "^3.3",
                 "usox/hack-http-factory-interfaces": "^0.2"
             },
@@ -745,7 +746,7 @@
                 "response",
                 "stream"
             ],
-            "time": "2019-09-11T20:56:36+00:00"
+            "time": "2019-10-21T17:41:28+00:00"
         }
     ],
     "packages-dev": [
@@ -830,7 +831,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.27.*"
+        "hhvm": "4.28.*"
     },
     "platform-dev": []
 }

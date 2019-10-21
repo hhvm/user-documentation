@@ -15,7 +15,7 @@ use type Facebook\Experimental\Http\Message\{
   ServerRequestInterface,
 };
 use namespace HH\Lib\Math;
-use namespace HH\Lib\Experimental\{Filesystem, IO};
+use namespace HH\Lib\Experimental\{File, IO};
 
 final class HHVMDocumentationSite {
   public static async function respondToAsync(
@@ -23,9 +23,9 @@ final class HHVMDocumentationSite {
   ): Awaitable<void> {
     // TODO: add Filesystem\temporary_file_non_disposable() to the HSL
     $buffer_path = \sys_get_temp_dir().'/'.\bin2hex(\random_bytes(16));
-    $write_handle = Filesystem\open_write_only_non_disposable(
+    $write_handle = File\open_write_only_nd(
       $buffer_path,
-      Filesystem\FileWriteMode::MUST_CREATE,
+      File\WriteMode::MUST_CREATE,
     );
     $response = (new \Usox\HackTTP\Response($write_handle));
     $response = await self::getResponseForRequestAsync($request, $response);
@@ -36,7 +36,7 @@ final class HHVMDocumentationSite {
       }
     }
     await $write_handle->closeAsync();
-    await using ($read_handle = Filesystem\open_read_only($buffer_path)) {
+    await using ($read_handle = File\open_read_only($buffer_path)) {
       $out = IO\request_output();
       $content = await $read_handle->readAsync(Math\INT64_MAX);
       await $out->writeAsync($content);

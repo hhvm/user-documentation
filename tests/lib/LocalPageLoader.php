@@ -5,7 +5,7 @@ namespace HHVM\UserDocumentation\Tests;
 use type Facebook\Experimental\Http\Message\{HTTPMethod, ResponseInterface};
 
 use namespace HH\Lib\Math;
-use namespace HH\Lib\Experimental\Filesystem;
+use namespace HH\Lib\Experimental\File;
 
 final class LocalPageLoader extends PageLoader {
   protected function __construct() {}
@@ -25,12 +25,12 @@ final class LocalPageLoader extends PageLoader {
       (new \Usox\HackTTP\UriFactory())->createUri($url),
       dict[],
     )
-      ->withBody(Filesystem\open_read_only_non_disposable('/dev/null'))
+      ->withBody(File\open_read_only_nd('/dev/null'))
       ->withQueryParams(dict($query_params));
     $buffer_path = \sys_get_temp_dir().'/'.\bin2hex(\random_bytes(16));
-    $write_handle = Filesystem\open_write_only_non_disposable(
+    $write_handle = File\open_write_only_nd(
       $buffer_path,
-      Filesystem\FileWriteMode::MUST_CREATE,
+      File\WriteMode::MUST_CREATE,
     );
     $response = (new \Usox\HackTTP\Response($write_handle));
     $response = await \HHVMDocumentationSite::getResponseForRequestAsync(
@@ -38,7 +38,7 @@ final class LocalPageLoader extends PageLoader {
       $response,
     );
     await $write_handle->closeAsync();
-    await using ($read_handle = Filesystem\open_read_only($buffer_path));
+    await using ($read_handle = File\open_read_only($buffer_path));
     $content = await $read_handle->readAsync(Math\INT64_MAX);
     return tuple($response, $content);
   }

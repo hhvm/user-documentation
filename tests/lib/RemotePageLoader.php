@@ -4,7 +4,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use namespace Facebook\TypeAssert;
-use namespace HH\Lib\Experimental\Filesystem;
+use namespace HH\Lib\Experimental\File;
 use namespace HH\Lib\Str;
 
 final class RemotePageLoader extends PageLoader {
@@ -60,9 +60,9 @@ final class RemotePageLoader extends PageLoader {
     }
 
     $response = new \Usox\HackTTP\Response(
-      Filesystem\open_write_only_non_disposable(
+      File\open_write_only_nd(
         '/dev/null',
-        Filesystem\FileWriteMode::APPEND,
+        File\WriteMode::APPEND,
       ),
       $status,
     );
