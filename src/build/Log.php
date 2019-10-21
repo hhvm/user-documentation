@@ -32,7 +32,7 @@ class Log {
 
   public static int $loglevel = self::VERBOSE;
 
-  private static \ImmMap<int, Color> $color = ImmMap {
+  private static ImmMap<int, Color> $color = ImmMap {
     self::ERROR => Color::RED,
     self::WARN => Color::YELLOW,
     self::INFO => Color::GREEN,
