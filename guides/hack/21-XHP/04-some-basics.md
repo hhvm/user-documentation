@@ -36,21 +36,16 @@ We [plan to support namespaces](https://github.com/facebook/xhp-lib/issues/64) i
 
 ## The XHP-Lib Library
 
-While the XHP syntax is part of Hack, a large part of the implementation is in a library called XHP-Lib that needs to be installed via composer:
+While the XHP syntax is part of Hack, a large part of the implementation is in a library called XHP-Lib that needs to be installed via composer;
+add `xhp-lib` to your `composer.json`, e.g:
 
 ```
-"require": {
-  "facebook/xhp-lib": "~2.2"
-}
-```
-
-Run Composer commands using HHVM like so:
-
-```
-$ hhvm $(which composer) install;
+$ composer require facebook/xhp-lib
 ```
 
 This includes the base classes and interfaces, and definitions of standard HTML elements.
+
+Do not use HHVM to execute composer.
 
 ## Why use XHP?
 
