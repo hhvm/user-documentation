@@ -118,7 +118,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
     $parts = explode('/', $path);
 
     if (count($parts) === 2) {
-      list($_, $id) = $parts;
+      $id = $parts[1];
       $url = $this->getSuggestedUrl($id);
       if ($url !== null) {
         return (

@@ -36,7 +36,7 @@ abstract class WebController {
     ImmMap<string, string> $parameters,
     private ServerRequestInterface $request,
   ) {
-    $combined_params = $parameters->toMap();
+    $combined_params = new Map($parameters);
     foreach ($request->getQueryParams() as $key => $value) {
       if (is_array($value)) {
         continue;
