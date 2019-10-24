@@ -85,7 +85,7 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
       $x ==> APINavData::get(APIProduct::HACK)->getRootNameForType($x),
     );
     if (!$blacklist->contains($node['name'])) {
-      expect($body)->toContain($node['name']);
+      expect($body)->toContainSubstring($node['name']);
     }
   }
 
@@ -94,7 +94,7 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
       '/hack/reference/class/HH.Vector/fromArray/',
     );
 
-    expect($body)->toContain('Deprecated');
+    expect($body)->toContainSubstring('Deprecated');
   }
 
   public async function testNullableTypeMerged(): Awaitable<void> {
@@ -102,7 +102,7 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
       '/hack/reference/class/HH.Vector/firstValue/',
     );
 
-    expect($body)->toContain('<code>?Tv</code>');
+    expect($body)->toContainSubstring('<code>?Tv</code>');
   }
 
   public function getDoNotDocument(): vec<(string, APIDefinitionType)> {

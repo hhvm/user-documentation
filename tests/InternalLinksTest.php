@@ -36,7 +36,8 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     list($_response, $body) = await PageLoader::getPageAsync(
       '/hack/getting-started/tools',
     );
-    expect($body)->toContain('href="https://github.com/hhvm/hack-mode"');
+    expect($body)
+      ->toContainSubstring('href="https://github.com/hhvm/hack-mode"');
   }
 
   public async function testCanGetLinksList(): Awaitable<void> {

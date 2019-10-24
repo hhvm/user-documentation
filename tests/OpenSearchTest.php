@@ -11,7 +11,8 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
       'https://staging.docs.hhvm.com/',
     );
     expect($response->getStatusCode())->toBeSame(200);
-    expect($body)->toNotContain('application/opensearchdescription+xml');
+    expect($body)
+      ->toNotContainSubstring('application/opensearchdescription+xml');
   }
 
   <<TestGroup('remote')>>
@@ -20,7 +21,7 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
       'https://docs.hhvm.com/',
     );
     expect($response->getStatusCode())->toBeSame(200);
-    expect($body)->toContain('application/opensearchdescription+xml');
+    expect($body)->toContainSubstring('application/opensearchdescription+xml');
   }
 
   public function jumpProvider(): array<string, (string, string)> {

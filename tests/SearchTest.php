@@ -19,7 +19,7 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
     );
     expect($response->getStatusCode())->toBeSame(200);
     foreach ($expected as $substr) {
-      expect($body)->toContain($substr);
+      expect($body)->toContainSubstring($substr);
     }
   }
 

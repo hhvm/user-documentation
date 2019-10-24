@@ -18,7 +18,7 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   public async function testNotFoundPages(string $path): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync($path);
     expect($response->getStatusCode())->toBeSame(404);
-    expect($body)->toContain("does not exist");
+    expect($body)->toContainSubstring("does not exist");
   }
 
   public function redirectProvider(): array<string, (string, string)> {
@@ -105,6 +105,6 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   ): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync($notfound);
     expect($response->getStatusCode())->toBeSame(404);
-    expect($body)->toContain($suggestion);
+    expect($body)->toContainSubstring($suggestion);
   }
 }

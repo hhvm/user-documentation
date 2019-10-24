@@ -38,7 +38,7 @@ class APINavDataTest extends \Facebook\HackTest\HackTest {
         $have_ns_separator = true;
 
         $url_pattern = \strtr($node['name'], "\\", '.');
-        expect($node['urlPath'])->toContain($url_pattern);
+        expect($node['urlPath'])->toContainSubstring($url_pattern);
         break;
       }
     }

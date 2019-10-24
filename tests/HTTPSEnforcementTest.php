@@ -31,7 +31,7 @@ final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
     expect($response->getStatusCode())->toBeSame(200);
 
     $hsts = $response->getHeaderLine('Strict-Transport-Security');
-    expect($hsts)->toContain('max-age=');
+    expect($hsts)->toContainSubstring('max-age=');
     expect($hsts)->toNotBeSame('max-age=0');
   }
 

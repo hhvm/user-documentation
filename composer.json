@@ -17,6 +17,6 @@
         "hhvm/hhast": "^4.0",
         "facebook/definition-finder": "^2.0.0",
         "hhvm/hacktest": "^1.1",
-        "facebook/fbexpect": "^2.1"
+        "facebook/fbexpect": "^2.6.1"
     }
 }

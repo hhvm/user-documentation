@@ -63,7 +63,7 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     }
 
     expect($response->getStatusCode())->toBeSame(200);
-    expect($body)->toContain($name);
+    expect($body)->toContainSubstring($name);
   }
 
   <<TestGroup('remote')>>
@@ -73,8 +73,8 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     );
     expect($response->getStatusCode())->toBeSame(200);
 
-    expect($body)->toContain('highlight');
-    expect($body)->toContain(
+    expect($body)->toContainSubstring('highlight');
+    expect($body)->toContainSubstring(
       'namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;',
     );
   }
@@ -85,6 +85,6 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
       '/hhvm/configuration/INI-settings',
     );
     expect($response->getStatusCode())->toBeSame(200);
-    expect($body)->toContain('allow_url_fopen</a></td>');
+    expect($body)->toContainSubstring('allow_url_fopen</a></td>');
   }
 }
