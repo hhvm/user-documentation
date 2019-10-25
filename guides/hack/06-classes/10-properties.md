@@ -31,3 +31,9 @@ object-oriented programming.
 All properties of non-nullable type *must* be initialized during object creation either by an explicit initializer or
 by the constructor, except that properties of nullable type that are *not* initialized either way take on the value `null`.
 
+## Constructor parameter promotion
+
+Hack also supports a short-hand syntax for declaring a constructor that
+automatically assigns values of its parameters to the new instance's
+properties&mdash;see
+[constructors](constructors#constructor-parameter-promotion).
