@@ -325,16 +325,16 @@
         },
         {
             "name": "facebook/hh-apidoc",
-            "version": "v0.5.2",
+            "version": "v0.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hh-apidoc.git",
-                "reference": "2b5f57f43bfd707025d103d8173d23cdadd6cd78"
+                "reference": "16362a9386ae3bf951e3dda409bbcc8242102d77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hh-apidoc/zipball/2b5f57f43bfd707025d103d8173d23cdadd6cd78",
-                "reference": "2b5f57f43bfd707025d103d8173d23cdadd6cd78",
+                "url": "https://api.github.com/repos/hhvm/hh-apidoc/zipball/16362a9386ae3bf951e3dda409bbcc8242102d77",
+                "reference": "16362a9386ae3bf951e3dda409bbcc8242102d77",
                 "shasum": ""
             },
             "require": {
@@ -357,7 +357,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-09-13T20:06:29+00:00"
+            "time": "2019-10-25T20:22:10+00:00"
         },
         {
             "name": "facebook/hh-clilib",
@@ -784,16 +784,16 @@
         },
         {
             "name": "hhvm/hacktest",
-            "version": "v1.6.2",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hacktest.git",
-                "reference": "2eeed386c75588471708226c479d2771692b8299"
+                "reference": "3e7f2b566cb32670193060c6167b4e2cc8ab7409"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/2eeed386c75588471708226c479d2771692b8299",
-                "reference": "2eeed386c75588471708226c479d2771692b8299",
+                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/3e7f2b566cb32670193060c6167b4e2cc8ab7409",
+                "reference": "3e7f2b566cb32670193060c6167b4e2cc8ab7409",
                 "shasum": ""
             },
             "require": {
@@ -822,7 +822,7 @@
                 "MIT"
             ],
             "description": "The Hack Test Library",
-            "time": "2019-09-20T19:52:49+00:00"
+            "time": "2019-10-24T21:10:59+00:00"
         }
     ],
     "aliases": [],
