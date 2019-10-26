@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Classes\Constructors\Examples\ParmVisibiity;
 
 class C {
-  private int $pr1;
+  protected int $pr1;
   public int $pr2;
 
   public function __construct(int $p1, private int $p2, int $p3) {

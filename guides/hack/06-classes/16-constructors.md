@@ -17,8 +17,11 @@ Consider the following example in which one of the constructor parameter declara
 
 The second parameter contains the visibility modifier `private`, which causes a corresponding private property called `$p2` to be
 added to the class, and which is initialized automatically by the value of the second argument passed in.  This simply provides a
-programming shortcut by having the implementation declare and initialize such properties.  However, this approach violates data hiding
-by admitting publicly in the constructor's calling interface the name and type of a private data member.
+programming shortcut by having the implementation declare and initialize such properties.  The shortcut exists for public and protected members too:
+
+@@ constructors-examples/visibility-on-all-parameters.php @@
+
+However, this approach violates data hiding by admitting publicly in the constructor's calling interface the name and type of a private data member, so using this shortcut for private members is not recommended.
 
 Can we use this approach with the `Point` class?
 No, not as we've designed it.  Our private properties have type `float`, so any arithmetic coordinate value can be
