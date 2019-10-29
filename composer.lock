@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02521b1772d6606c57628f24d545fb9a",
+    "content-hash": "85c27994fb688b2b8485a556b3dc4340",
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v2.12.6",
+            "version": "v2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "28baaf3a16006642ab0f07595896a0b02f65c73d"
+                "reference": "f6d81a2ac7445c3e5392b2db9a86aee2c6e0fae1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/28baaf3a16006642ab0f07595896a0b02f65c73d",
-                "reference": "28baaf3a16006642ab0f07595896a0b02f65c73d",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/f6d81a2ac7445c3e5392b2db9a86aee2c6e0fae1",
+                "reference": "f6d81a2ac7445c3e5392b2db9a86aee2c6e0fae1",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.15",
+                "hhvm": "^4.29",
                 "hhvm/hhast": "^4.21.4",
                 "hhvm/hhvm-autoload": "^2.0",
                 "hhvm/hsl": "^4.0",
@@ -57,7 +57,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2019-10-24T18:13:19+00:00"
+            "time": "2019-10-29T19:29:19+00:00"
         },
         {
             "name": "facebook/difflib",
@@ -325,23 +325,23 @@
         },
         {
             "name": "facebook/hh-apidoc",
-            "version": "v0.5.3",
+            "version": "v0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hh-apidoc.git",
-                "reference": "16362a9386ae3bf951e3dda409bbcc8242102d77"
+                "reference": "7aec065b1a28f57ce2a6066dd8af2ddf8ae480eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hh-apidoc/zipball/16362a9386ae3bf951e3dda409bbcc8242102d77",
-                "reference": "16362a9386ae3bf951e3dda409bbcc8242102d77",
+                "url": "https://api.github.com/repos/hhvm/hh-apidoc/zipball/7aec065b1a28f57ce2a6066dd8af2ddf8ae480eb",
+                "reference": "7aec065b1a28f57ce2a6066dd8af2ddf8ae480eb",
                 "shasum": ""
             },
             "require": {
-                "facebook/definition-finder": "^2.12.3",
+                "facebook/definition-finder": "^2.13.0",
                 "facebook/fbmarkdown": "^1.0",
                 "facebook/hh-clilib": "^2.1.0",
-                "hhvm": "^4.14",
+                "hhvm": "^4.29",
                 "hhvm/hhast": "^4.14",
                 "hhvm/hsl": "^4.0"
             },
@@ -357,7 +357,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-10-25T20:22:10+00:00"
+            "time": "2019-10-29T20:59:29+00:00"
         },
         {
             "name": "facebook/hh-clilib",
@@ -441,22 +441,22 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.25.0",
+            "version": "v4.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "cda20941116da971a4a69d64115f16f6867b5fd1"
+                "reference": "a40862ea2fec3dbf53b044ccba1777ad4b15e298"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/cda20941116da971a4a69d64115f16f6867b5fd1",
-                "reference": "cda20941116da971a4a69d64115f16f6867b5fd1",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/a40862ea2fec3dbf53b044ccba1777ad4b15e298",
+                "reference": "a40862ea2fec3dbf53b044ccba1777ad4b15e298",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.0.0",
-                "hhvm": "^4.25",
+                "hhvm": "^4.29",
                 "hhvm/hhvm-autoload": "^2.0.4",
                 "hhvm/hsl": "^4.25",
                 "hhvm/hsl-experimental": "^4.25",
@@ -485,7 +485,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-10-14T21:06:37+00:00"
+            "time": "2019-10-29T18:10:27+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -831,7 +831,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.28.*"
+        "hhvm": "4.29.*"
     },
     "platform-dev": []
 }

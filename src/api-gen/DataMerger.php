@@ -591,7 +591,6 @@ final class DataMerger {
       self::mergeAttributes($a->getAttributes(), $b->getAttributes()),
       self::mergeDocComments($a->getDocComment(), $b->getDocComment()),
       self::mergeTypehintPair($a->getTypehint(), $b->getTypehint()),
-      $a->isPassedByReference() || $b->isPassedByReference(),
       $a->isInOut() || $b->isInOut(),
       $a->isVariadic() || $b->isVariadic(),
       $default,

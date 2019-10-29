@@ -159,7 +159,6 @@ type ParameterDocumentation = shape(
   'name' => string,
   'typehint' => ?TypehintDocumentation,
   'isVariadic' => bool,
-  'isPassedByReference' => bool,
   'isOptional' => bool,
   'default' => ?string,
 );

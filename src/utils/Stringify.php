@@ -59,9 +59,6 @@ class Stringify {
     if ($param['isVariadic']) {
       $s .= '...';
     }
-    if ($param['isPassedByReference']) {
-      $s .= '&';
-    }
     $s .= '$'.$param['name'];
 
     if ($param['isOptional']) {
