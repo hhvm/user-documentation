@@ -11,28 +11,47 @@ being incremented.  Note that a constructor may call any *private* method in its
 
 A constructor does not require a return type, but if one is included, it must be `void`.
 
-Consider the following example in which one of the constructor parameter declarations contains a visibility modifier:
+## Constructor parameter promotion
 
-@@ constructors-examples/visibility-on-parameter.php @@
+If you have created a class in Hack, you have probably seen a pattern like this:
 
-The second parameter contains the visibility modifier `private`, which causes a corresponding private property called `$p2` to be
-added to the class, and which is initialized automatically by the value of the second argument passed in.  This simply provides a
-programming shortcut by having the implementation declare and initialize such properties.  However, this approach violates data hiding
-by admitting publicly in the constructor's calling interface the name and type of a private data member.
+@@ constructors-examples/duplication.noexec.hack @@
 
-Can we use this approach with the `Point` class?
-No, not as we've designed it.  Our private properties have type `float`, so any arithmetic coordinate value can be
-represented, yet we've declared the parameters to the constructor to have type `num`, so either integer or floating-point values can
-be passed in.  Specifically, the type of the private members is *not* the same as their corresponding parameters!  Using the following
-short-hand notation:
+The class properties are essentially repeated multiple times: at declaration, in
+the constructor parameters and in the assignment. This can be quite cumbersome.
 
-```Hack
-public function __construct(private num $x = 0, private num $y = 0) { ... }
-```
+With *constructor parameter promotion*, all that repetitive boilerplate is
+removed.
 
-this results in both private properties having type `num` instead of `float`, and that we don't want!
+@@ constructors-examples/promotion.noexec.hack @@
 
-While it is often the case that there is a one-for-one correspondence between a constructor's parameters and the class's private
-properties, this need not be so.  In fact, that's one reason to use data hiding.  For example, an alternate way of representing a
-point is to use Polar Coordinates; that is, using an angle and a distance from the origin.  **Don't advertise/promise the internal
-representation of an object in its constructor argument list!**
+All you do is put a visibility modifier in front of the constructor parameter
+and everything else in the previous example is done automatically, including the
+actual creation of the property.
+
+**Note:** Promotion can only be used for constructor parameters with name and
+type that exactly match the respective class property. For example, we couldn't
+use it in the `Point` class above because we wanted the properties to have type
+`float`, so any arithmetic coordinate value can be represented, yet we wanted
+the constructor parameters to have type `num`, so either integer or
+floating-point values can be passed in.
+
+Don't hesistate to &ldquo;un-promote&rdquo; a constructor parameter if it later
+turns out that a different internal data representation would be better. For
+example, if we later decided to store `$name` in a structured form instead of a string, we could easily make that change while keeping the public-facing
+constructor parameters unchanged (and therefore backwards-compatible).
+
+@@ constructors-examples/unpromotion.noexec.hack @@
+
+### Rules
+
+* A modifier of `private`, `protected` or `public` must precede the parameter
+  declaration in the constructor.
+* Other, non-class-property parameters may also exist in the constructor, as
+  normal.
+* Type annotations must go between the modifier and the parameter's name.
+* The parameters can have a default value.
+* Other code in the constructor is run **after** the parameter promotion
+  assignment.
+
+@@ constructors-examples/promotion-rules.noexec.hack @@
