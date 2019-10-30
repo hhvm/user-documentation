@@ -11,16 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-use type Facebook\DefinitionFinder\ScannedDefinition;
-
-type PHPDotNetAPIIndexEntry = shape(
-  'type' => APIDefinitionType,
-  'url' => string,
-  'supportedInHHVM' => bool,
-);
-
-type ScannedDefinitionFilter = (function(ScannedDefinition): bool);
-
 type DirectoryIndex = shape(
   'files' => Traversable<string>,
 );
@@ -40,25 +30,10 @@ type YAMLMeta = shape(
   ?'namespace' => string,
 );
 
-
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';
 }
-;
-
-enum StringifyFormat: string {
-  ONE_LINE = 'oneline';
-  MULTI_LINE = 'multiline';
-}
-;
-
-enum MemberVisibility: string {
-  PRIVATE = 'private';
-  PROTECTED = 'protected';
-  PUBLIC = 'public';
-}
-;
 
 enum GuidesProduct: string as string {
   HHVM = 'hhvm';
@@ -90,18 +65,6 @@ enum APIProduct: string as string {
   HSL = 'hsl';
 }
 
-enum SurveyMode: string {
-  ACTIVE = 'active';
-  DISABLED = 'disabled';
-  ALWAYS = 'always';
-}
-
-enum SurveyUserState: string {
-  ACTIVE = 'active';
-  TAKEN = 'taken';
-  NO_THANKS = 'no_thanks';
-}
-
 type DocumentationSource = shape(
   'type' => DocumentationSourceType,
   'name' => string,
@@ -112,91 +75,6 @@ type BaseYAML = shape(
   'sources' => vec<DocumentationSource>,
   'type' => APIDefinitionType,
   'data' => shape('name' => string, ...),
-);
-
-type ClassYAML = shape(
-  'sources' => vec<DocumentationSource>,
-  'type' => APIDefinitionType,
-  'data' => ClassDocumentation,
-);
-
-type FunctionYAML = shape(
-  'sources' => vec<DocumentationSource>,
-  'data' => FunctionDocumentation,
-  'type' => APIDefinitionType,
-);
-
-type BaseDocumentation = shape(
-  'name' => string,
-  ...
-);
-
-type ClassDocumentation = shape(
-  'name' => string,
-  'namespace' => string,
-  'shortName' => string,
-  'type' => APIDefinitionType,
-  'methods' => vec<MethodDocumentation>,
-  'generics' => vec<GenericDocumentation>,
-  'docComment' => ?string,
-  'parent' => ?TypehintDocumentation,
-  'interfaces' => vec<TypehintDocumentation>,
-);
-
-type TypehintDocumentation = shape(
-  'typename' => string,
-  'typetext' => string,
-  'nullable' => bool,
-  'genericTypes' => vec<mixed /* cyclic: TypehintDocumentation*/>,
-);
-
-type GenericDocumentation = shape(
-  'name' => string,
-  'constraint' => ?string,
-);
-
-type ParameterDocumentation = shape(
-  'name' => string,
-  'typehint' => ?TypehintDocumentation,
-  'isVariadic' => bool,
-  'isOptional' => bool,
-  'default' => ?string,
-);
-
-type FunctionDocumentation = shape(
-  'name' => string,
-  'returnType' => ?TypehintDocumentation,
-  'generics' => vec<GenericDocumentation>,
-  'docComment' => ?string,
-  'parameters' => vec<ParameterDocumentation>,
-  ?'className' => string,
-  ?'classType' => APIDefinitionType,
-  ?'visibility' => MemberVisibility,
-  ?'static' => bool,
-  'deprecation' => ?string,
-);
-
-type MethodDocumentation = shape(
-  'name' => string,
-  'returnType' => ?TypehintDocumentation,
-  'generics' => vec<GenericDocumentation>,
-  'docComment' => ?string,
-  'parameters' => vec<ParameterDocumentation>,
-  'className' => string,
-  'classType' => APIDefinitionType,
-  'visibility' => MemberVisibility,
-  'static' => bool,
-  'deprecation' => ?string,
-);
-
-type DocumentationIndexEntry = shape(
-  'path' => string,
-  'name' => string,
-  'type' => string,
-);
-
-type DocumentationIndex = shape(
-  'types' => dict<string, DocumentationIndexEntry>,
 );
 
 type APIIndexEntry = shape(
