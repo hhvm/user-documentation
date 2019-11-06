@@ -1,5 +1,14 @@
-The preferred object types for providing array-like storage and operations are `vec`, `dict`, and `keyset`.  These supersede the earlier Hack
-types `Vector`, `Map`, and `Set`, and the legacy `array` type inherited from PHP.
+The preferred object types for providing array-like storage and operations are
+`vec`, `dict`, and `keyset`.  These supersede the earlier Hack types
+[Vector, Map, and Set](#legacy-vector-map-and-set), and the
+[legacy array](#legacy-array) type inherited from PHP. Additional special types,
+[varray and darray](#migrating-from-legacy-arrays), exist to provide a migration
+path for code that currently relies on legacy arrays, and should not be used
+otherwise.
+
+Note that the plan is for both legacy arrays, and these migration types, to be
+eventually removed from the Hack language. We expect this to happen at some
+point during 2020.
 
 ## vec
 
@@ -308,3 +317,98 @@ Two arrays can be compared using [relational operators](../expressions-and-opera
 [equality operators](../expressions-and-operators/equality.md).
 
 Numerous library functions are available that manipulate arrays.
+
+## Migrating from legacy arrays
+
+Two special types, `varray` and `darray`, currently exist to facilitate
+migration from the legacy `array` type towards a more type-safe codebase (note
+that both legacy `array` and these migration types are temporary, the plan is
+for all of them to be removed from tha Hack language eventually).
+
+While migrating straight to `vec` and `dict` would be preferable (and may be
+possible for smaller projects), it is usually not possible without manual review
+and testing of the changes. In contrast, `varray` and `darray` are designed to
+be drop-in replacements for the `array` type, so an automated migration is
+feasible.
+
+In general, `array`, `varray` and `darray` can be used interchangeably at
+runtime (which makes such automated migration safe), but they are recognized as
+different types by the typechecker&mdash;resulting in a more type-safe codebase.
+See below for a more detailed description.
+
+### Usage
+
+`varray` represents a &ldquo;vec-like array&rdquo; and must always be used with
+a single generic type parameter (e.g. `varray<int>`, `varray<MyClass>`,
+`varray<mixed>`). `darray` represents a &ldquo;dict-like array&rdquo; and must
+be used with two generic type parameters, the first being a valid key type
+(`int`, `string` or `arraykey`), e.g. `darray<string, MyClass>` or
+`darray<arraykey, mixed>`.
+
+Values can be initialized using literals:
+
+```Hack
+$numbers = varray[1, 1, 2, 3, 5, 8, 14];
+$words = varray['foo', 'bar'];
+$options = darray['yes' => 1, 'no' => 2];
+```
+
+Or from values of any other array-like types:
+
+```Hack
+$vee = varray($traversable);
+$dee = darray($keyed_traversable);
+```
+
+(not to be confused with `array('foo', 'bar')`, where rounded brackets are used
+for literal values)
+
+### Runtime behavior
+
+- At runtime, all `array`, `varray` and `darray` values are mutually compatible,
+  so there is no risk of causing a breaking change by migrating between them.
+- Note that this means that `varray` and `darray` preserve all quirks of legacy
+  arrays (such as their &ldquo;magical&rdquo; conversions between key types).
+  This is why migrating to `vec` and `dict` would be preferable, but is not
+  backwards-compatible.
+- The built-in function `\is_array()` returns `true` for all three types (again,
+  preserving backwards-compatibility).
+- Two new built-in functions, `HH\is_varray()` and `HH\is_darray()`, return
+  `true` only if passed the respective type of array (neither returns `true`
+  for a plain `array` value).
+
+### Typechecker behavior
+
+- As of HHVM 4.28, the typechecker treats `array<T>` (`array` with one generic
+  type parameter) as an alias of `varray<T>`, and `array<Tk, Tv>` (with two
+  generic type parameters) as an alias of `darray<Tk, Tv>`. This means that the
+  typechecker output will always show `varray`/`darray` in error messages, even
+  for code that uses `array`s.
+- There is one additional special type, only recognized by the typechecker (does
+  not exist at runtime): `array` with missing generic type parameters is
+  considered a `varray_or_darray`, which is, roughly, treated as a supertype of
+  both `varray` and `darray` (`varray`/`darray` can be used where
+  `varray_or_darray` is expected but not vice-versa).
+- `varray_or_darray` can be used as a typehint (for example, when an automated
+  migration can't reliably determine whether `varray` or `darray` is correct),
+  but there is no literal syntax.
+- There is special handling for empty `array` literals (`array()` or `[]`) in
+  the typechecker&mdash;generally, they're allowed everywhere any of the above
+  types is used.
+- Note that these rules don't apply to HHVM versions prior to 4.28. Previously,
+  the typechecker recognized `array`, `varray`, `darray` and `varray_or_darray`
+  as separate types that couldn't always be used interchangeably.
+
+### `.hhconfig` options
+
+- `disallow_array_literal=true` disallows `array(...)` and `[...]`, forcing all
+  such literals to be converted to either `varray[...]` or `darray[...]`. This
+  option causes errors on HHVM versions prior to 4.25 due to various `array`
+  literals in built-in functions, so it's only useful with newer versions of
+  HHVM.
+- `disallow_array_typehint=true` disallows using `array`, with or without
+  generic type parameters, in any type annotations (function parameters, return
+  values, instance variables, etc.). Currently, this option also causes errors
+  because of various `array` typehints in built-in functions, which makes it
+  hard to use, but will likely become more useful in the future, as these
+  functions are migrated.
