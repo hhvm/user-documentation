@@ -87,7 +87,11 @@ The key type can be `string`; for example:
 private dict<string, int> $fruitDict = dict['oranges' => 25, 'apples' => 12, 'pears' => 17];
 ```
 
-The key type **must** be `int` or `string`.
+The key type **must** be `int` or `string`. The `arraykey` type, representing a
+union of `int` and `string`, is also allowed, resulting in a dict that accepts
+both `int` and `string` keys (but, barring some special cases such as migrating
+from untyped code, it's usually better to be explicit and choose only one key
+type).
 
 A dict is represented as an ordered map in which each entry is a key/value pair that represents an element. Duplicate keys are not permitted.
 The order of the elements in the map is the order in which the elements were inserted into the dict. An element is said to *exist* once it has
@@ -144,7 +148,10 @@ Name | Description
 ## keyset
 
 A keyset is a data structure that contains an ordered collection of zero or more elements whose values are the keys. And as array keys must have
-type `int` or `string`, keysets are restricted to homogenous collections of values of those types. As the number of elements in a keyset
+type `int` or `string`, keysets are restricted to homogenous collections of
+values of those types (the `arraykey` type can be used to declare a keyset that
+accepts both `int` and `string` values, but it's usually better to be explicit
+and choose only one type). As the number of elements in a keyset
 can change at runtime, a keyset type declaration does *not* include an element count.  Consider the following class properties:
 
 ```Hack
