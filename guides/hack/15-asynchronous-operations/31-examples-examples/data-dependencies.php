@@ -37,11 +37,16 @@ async function fetch_page_data(
   // An async closure that will turn a post ID into a tuple of
   // post data and comment count
   $post_fetcher = async function(int $post_id): Awaitable<(PostData, int)> {
-    list($post_data, $comment_count) = await Tuple\from_async(
-      fetch_post_data($post_id),
-      fetch_comment_count($post_id),
-    );
+    concurrent {
+      $post_data = await fetch_post_data($post_id);
+      $comment_count = await fetch_comment_count($post_id);
+    }
     return tuple($post_data, $comment_count);
+    // alternatively:
+    $_return = tuple(
+      await fetch_post_data($post_id),
+      await fetch_comment_count($post_id),
+    );
   };
 
   // Transform the array of post IDs into a vec of results,

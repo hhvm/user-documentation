@@ -12,7 +12,7 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\CLILib\CLIBase;
 use namespace Facebook\CLILib\CLIOptions;
-use namespace HH\Lib\{C, Dict, Str, Tuple, Vec};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 use namespace Facebook\HackCodegen as CG;
 
 final class UpdateTagsCLI extends CLIBase {
@@ -84,10 +84,10 @@ final class UpdateTagsCLI extends CLIBase {
 
   <<__Override>>
   public async function mainAsync(): Awaitable<int> {
-    list($hhvm_tag, $hsl_tag) = await Tuple\from_async(
-      $this->getHHVMTagAsync(),
-      $this->getHSLTagAsync(),
-    );
+    concurrent {
+      $hhvm_tag = await $this->getHHVMTagAsync();
+      $hsl_tag = await $this->getHSLTagAsync();
+    }
     $changes = dict[];
     if (PRODUCT_TAGS[APIProduct::HACK] !== $hhvm_tag) {
       $changes[APIProduct::HACK] = $hhvm_tag;

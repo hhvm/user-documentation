@@ -24,7 +24,7 @@ use type Facebook\DefinitionFinder\{
 use namespace Facebook\{HHAPIDoc, TypeAssert};
 use namespace Facebook\HHAPIDoc\Documentables;
 use type Facebook\HHAPIDoc\Documentable;
-use namespace HH\Lib\{C, Dict, Str, Tuple, Vec};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 
 final class HHAPIDocBuildStep extends BuildStep {
   <<__Override>>
@@ -47,10 +47,12 @@ final class HHAPIDocBuildStep extends BuildStep {
       $exts,
     );
     Log::i("\nParsing builtins");
-    list($runtime_defs, $hhi_defs) = \HH\Asio\join(Tuple\from_async(
-      self::parseAsync($runtime_sources),
-      self::parseAsync($hhi_sources),
-    ));
+    list($runtime_defs, $hhi_defs) = \HH\Asio\join(async {
+      return tuple(
+        await self::parseAsync($runtime_sources),
+        await self::parseAsync($hhi_sources),
+      );
+    });
     Log::i("\nDe-duping builtins");
     $builtin_defs = DataMerger::mergeAll(Vec\concat($runtime_defs, $hhi_defs));
 

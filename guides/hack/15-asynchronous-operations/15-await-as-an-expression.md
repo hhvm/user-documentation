@@ -6,7 +6,7 @@
 
 To strike a balance between flexibility, latency, and performance, we require that the `await`s only appear in **unconditionally consumed expression positions**. This means that from the closest statement, the result of the `await` must be used under all non-throwing cases. This is important because all `await`s for a statement will run together, we don't want to over-run code if its result might not be utilized.
 
-All `await`s within the same statement will execute concurrently (similar to `Tuple\from_async`).
+All `await`s within the same statement will execute concurrently.
 
 ## Examples
 
@@ -66,8 +66,8 @@ $x = await x_async();
 // No, assignment as an expression
 await foo_async($x = 42);
 // No, we even disallow separate assignment
-(await bar_async()) + ($x = 42);     
-// Yes!   
+(await bar_async()) + ($x = 42);
+// Yes!
 $x = f(inout $y, await x_async());
 // Yes, embedded call w/ inout is considered an expression
 await bar_async(baz(inout $x));

@@ -19,7 +19,6 @@ Name | Returns | Description
 `HH\Lib\Keyset\filter_async<Tv as arraykey>` | `Awaitable<keyset<Tv>>` | Returns a new keyset containing only the values for which the given async predicate returns `true`.
 `HH\Lib\Keyset\from_async<Tv as arraykey>` | `Awaitable<keyset<Tv>>` | Returns a new keyset containing the awaited result of the given Awaitables.
 `HH\Lib\Keyset\map_async<Tv, Tk as arraykey>` | `Awaitable<keyset<Tk>>` | Returns a new keyset where the value is the result of calling the given async function on the original values in the given traversable.
-`HH\Lib\Tuple\from_async` | `Awaitable<mixed>` | Create an awaitable tuple from variadic awaitables.
 
 ## Other Convenience Functions
 
