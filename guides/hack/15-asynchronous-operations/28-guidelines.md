@@ -162,9 +162,6 @@ multitasking). Async still lives in the single-threaded world of normal Hack!
 
 ## `await` Is Not a General Expression
 
-`await` can be used in three contexts:
-1. As a statement by itself (e.g., `await func()`)
-2. On the right-hand side (RHS) of an assignment (e.g., `$r = await func()`)
-3. As an argument to `return` (e.g., `return await func()`)
-
-We cannot, for example, use `await` as an argument to `var_dump()`.
+To strike a balance between flexibility, latency, and performance, we require
+that `await`s only appear in **unconditionally consumed expression positions**.
+For more details, see [Await As An Expression](await-as-an-expression).
