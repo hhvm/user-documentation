@@ -373,9 +373,6 @@ for literal values)
   backwards-compatible.
 - The built-in function `\is_array()` returns `true` for all three types (again,
   preserving backwards-compatibility).
-- Two new built-in functions, `HH\is_varray()` and `HH\is_darray()`, return
-  `true` only if passed the respective type of array (neither returns `true`
-  for a plain `array` value).
 
 ### Typechecker behavior
 
