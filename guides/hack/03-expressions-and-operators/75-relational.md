@@ -10,7 +10,7 @@ The type of the result is `bool`.
 "" < "ab"       // result has value true
 "a" > "A"       // result has value true
 "a0" < "ab"     // result has value true
-"aA <= "abc"    // result has value true
+"aA" <= "abc"   // result has value true
 // -----------------------------------------
 10 <= 0         // result has value false
 '123' <= '4'    // false; is doing a numeric comparison
