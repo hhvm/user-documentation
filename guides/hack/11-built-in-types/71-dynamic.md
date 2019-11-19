@@ -1,16 +1,26 @@
-**This type is intended to help with code being transitioned from untyped mode to strict
-mode.**
-
 Although `dynamic` can be used as the type of a class constant or property, or a function
 return type, its primary use is as a parameter type.
 
-This special type is used to help capture dynamism in the existing codebase in typed code, in
-a more manageable manner than `mixed`. With `dynamic`, the presence of dynamism in a function
-is local to the function, and dynamic behaviors cannot leak into code that does not know about it.
+This special type is used to help capture dynamism in the existing codebase in
+typed code, in a more manageable - though less safe - manner than `mixed`. With
+`dynamic`, the presence of dynamism in a function is local to the function, and
+dynamic behaviors cannot leak into code that does not know about it.
+
+**This type is intended to help with code being transitioned from untyped mode
+to strict mode** in situations when directly migrating to `mixed` or a
+more-specific type is impractical.
+
+Prefer, in order:
+
+1. specific types if possible
+2. generics
+3. `mixed` with refinement as needed
+4. `dynamic` if migrating to `mixed` is impractical and the code is currently
+   untyped.
 
 Consider the following:
-```Hack
 
+```Hack
 function f(dynamic $x) : void {
   $n = $x + 5;            // $n is a num
   $s = $x . "hello!";     // $s is a string
