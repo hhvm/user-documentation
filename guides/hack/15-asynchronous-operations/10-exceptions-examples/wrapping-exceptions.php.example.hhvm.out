@@ -15,36 +15,27 @@ vec(2) {
       ["trace":"Exception":private]=>
       array(3) {
         [0]=>
-        array(4) {
+        array(3) {
           ["file"]=>
           string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
           int(17)
           ["function"]=>
           string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
-          ["args"]=>
-          array(0) {
-          }
         }
         [1]=>
-        array(4) {
+        array(3) {
           ["file"]=>
           string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
           int(27)
           ["function"]=>
           string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
-          ["args"]=>
-          array(0) {
-          }
         }
         [2]=>
-        array(2) {
+        array(1) {
           ["function"]=>
           string(65) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\main"
-          ["args"]=>
-          array(0) {
-          }
         }
       }
       ["previous":"Exception":private]=>
