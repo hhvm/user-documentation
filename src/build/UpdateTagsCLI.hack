@@ -12,7 +12,7 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\CLILib\CLIBase;
 use namespace Facebook\CLILib\CLIOptions;
-use namespace HH\Lib\{C, Dict, Str, Vec};
+use namespace HH\Lib\{C, Dict, Keyset, Str, Vec};
 use namespace Facebook\HackCodegen as CG;
 
 final class UpdateTagsCLI extends CLIBase {
@@ -43,25 +43,41 @@ final class UpdateTagsCLI extends CLIBase {
     string $project,
     string $prefix,
   ): Awaitable<string> {
-    $url = Str\format(
-      'https://api.github.com/repos/%s/tags?per_page=100',
+    $tags = keyset[];
+    for ($page = 1; $page <= 10; ++$page) {
+      $url = Str\format(
+        'https://api.github.com/repos/%s/tags?per_page=100&page=%d',
+        $project,
+        $page,
+      );
+
+      $req = \curl_init($url);
+      \curl_setopt($req, \CURLOPT_USERAGENT, "docs.hhvm.com update-versions.h");
+
+      /* HHAST_IGNORE_ERROR[DontAwaitInALoop] */
+      $json = await \HH\Asio\curl_exec($req);
+      $more_tags = \json_decode(
+        $json, /* assoc = */
+        true, /* depth = */
+        512,
+        \JSON_FB_HACK_ARRAYS,
+      )
+        |> Vec\map($$, $tag ==> $tag['name'] as string);
+
+      if (C\is_empty($more_tags)) {
+        // We reached the last page.
+        return Vec\filter($tags, $tag ==> Str\starts_with($tag, $prefix))
+          |> Vec\sort($$, ($a, $b) ==> \version_compare($a, $b))
+          |> C\lastx($$);
+      }
+
+      $tags = Keyset\union($tags, $more_tags);
+    }
+
+    invariant_violation(
+      'GitHub project %s has too many tags to process, giving up.',
       $project,
     );
-
-    $req = \curl_init($url);
-    \curl_setopt($req, \CURLOPT_USERAGENT, "docs.hhvm.com update-versions.h");
-
-    $json = await \HH\Asio\curl_exec($req);
-    return \json_decode(
-      $json, /* assoc = */
-      true, /* depth = */
-      512,
-      \JSON_FB_HACK_ARRAYS,
-    )
-      |> Vec\map($$, $tag ==> $tag['name'] as string)
-      |> Vec\filter($$, $tag ==> Str\starts_with($tag, $prefix))
-      |> Vec\sort($$, ($a, $b) ==> \version_compare($a, $b))
-      |> C\lastx($$);
   }
 
   private async function getHHVMTagAsync(): Awaitable<string> {
