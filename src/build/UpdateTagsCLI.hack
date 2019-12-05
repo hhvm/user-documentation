@@ -54,6 +54,7 @@ final class UpdateTagsCLI extends CLIBase {
       $req = \curl_init($url);
       \curl_setopt($req, \CURLOPT_USERAGENT, "docs.hhvm.com update-versions.h");
 
+      /* HHAST_IGNORE_ERROR[DontAwaitInALoop] */
       $json = await \HH\Asio\curl_exec($req);
       $more_tags = \json_decode(
         $json, /* assoc = */
