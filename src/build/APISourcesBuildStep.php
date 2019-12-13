@@ -35,6 +35,18 @@ final class APISourcesBuildStep extends BuildStep {
       'name' => 'hhvm/hsl',
       'prefixes' => keyset['src/'],
     ),
+    APIProduct::HSL_EXPERIMENTAL => shape(
+      'name' => 'hhvm/hsl-experimental',
+      'prefixes' => keyset[
+        'src/debug/',
+        'src/file/',
+        'src/io/',
+        'src/network/',
+        'src/os/',
+        'src/tcp/',
+        'src/unix/',
+      ],
+    ),
   ];
 
   <<__Override>>

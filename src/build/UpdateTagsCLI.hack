@@ -16,33 +16,49 @@ use namespace HH\Lib\{C, Dict, Keyset, Str, Vec};
 use namespace Facebook\HackCodegen as CG;
 
 final class UpdateTagsCLI extends CLIBase {
-  private ?string $forcedHHVMTag;
-  private ?string $forcedHSLTag;
+  const dict<APIProduct, (string, string)> REPOS_AND_TAG_PREFIXES = dict[
+    APIProduct::HACK => tuple('facebook/hhvm', 'HHVM-'),
+    APIProduct::HSL => tuple('hhvm/hsl', 'v'),
+    APIProduct::HSL_EXPERIMENTAL => tuple('hhvm/hsl-experimental', 'v'),
+  ];
+  private dict<APIProduct, string> $forcedTags = dict[];
 
   <<__Override>>
   protected function getSupportedOptions(): vec<CLIOptions\CLIOption> {
     return vec[
       CLIOptions\with_required_string(
         $version ==> {
-          $this->forcedHHVMTag = $version;
+          $this->forcedTags[APIProduct::HACK] = $version;
         },
         'Use the specified HHVM tag instead of the latest release',
         '--hhvm-tag',
       ),
       CLIOptions\with_required_string(
         $version ==> {
-          $this->forcedHSLTag = $version;
+          $this->forcedTags[APIProduct::HSL] = $version;
         },
         'Use the specified HSL version instead of the latest release',
         '--hsl-tag',
       ),
+      CLIOptions\with_required_string(
+        $version ==> {
+          $this->forcedTags[APIProduct::HSL_EXPERIMENTAL] = $version;
+        },
+        'Use the specified HSL-Experimental version instead of the latest release',
+        '--hsl-experimental-tag',
+      ),
+
     ];
   }
 
-  private async function getLatestTagAsync(
-    string $project,
-    string $prefix,
-  ): Awaitable<string> {
+  private async function getTagAsync(APIProduct $product): Awaitable<string> {
+    $forced = $this->forcedTags[$product] ?? null;
+    if ($forced !== null) {
+      return $forced;
+    }
+    list($project, $prefix) = self::REPOS_AND_TAG_PREFIXES[$product];
+
+
     $tags = keyset[];
     for ($page = 1; $page <= 10; ++$page) {
       $url = Str\format(
@@ -80,36 +96,18 @@ final class UpdateTagsCLI extends CLIBase {
     );
   }
 
-  private async function getHHVMTagAsync(): Awaitable<string> {
-    $v = $this->forcedHHVMTag;
-    if ($v !== null) {
-      return $v;
-    }
-
-    return await $this->getLatestTagAsync('facebook/hhvm', 'HHVM-');
-  }
-
-  private async function getHSLTagAsync(): Awaitable<string> {
-    $v = $this->forcedHSLTag;
-    if ($v !== null) {
-      return $v;
-    }
-
-    return await $this->getLatestTagAsync('hhvm/hsl', 'v');
-  }
-
   <<__Override>>
   public async function mainAsync(): Awaitable<int> {
-    concurrent {
-      $hhvm_tag = await $this->getHHVMTagAsync();
-      $hsl_tag = await $this->getHSLTagAsync();
-    }
+    $new_tags = await Dict\map_with_key_async(
+      self::REPOS_AND_TAG_PREFIXES,
+      async ($product, $_) ==> await $this->getTagAsync($product),
+    );
+
     $changes = dict[];
-    if (PRODUCT_TAGS[APIProduct::HACK] !== $hhvm_tag) {
-      $changes[APIProduct::HACK] = $hhvm_tag;
-    }
-    if (PRODUCT_TAGS[APIProduct::HSL] !== $hsl_tag) {
-      $changes[APIProduct::HSL] = $hsl_tag;
+    foreach ($new_tags as $product => $new_tag) {
+      if ((PRODUCT_TAGS[$product] ?? null) !== $new_tag) {
+        $changes[$product] = $new_tag;
+      }
     }
     $stdout = $this->getTerminal()->getStdout();
 
@@ -127,7 +125,7 @@ final class UpdateTagsCLI extends CLIBase {
     );
 
     if (C\contains_key($changes, APIProduct::HACK)) {
-      await $this->updateHHVMVersionAsync($hhvm_tag);
+      await $this->updateHHVMVersionAsync($changes[APIProduct::HACK]);
     }
 
     $tags_file = LocalConfig::ROOT.'/src/codegen/PRODUCT_TAGS.php';
@@ -142,12 +140,7 @@ final class UpdateTagsCLI extends CLIBase {
         $cg->codegenConstant('PRODUCT_TAGS')
           ->setType('dict<APIProduct, string>')
           ->setValue(
-            dict[
-              APIProduct::HACK =>
-                $changes[APIProduct::HACK] ?? PRODUCT_TAGS[APIProduct::HACK],
-              APIProduct::HSL =>
-                $changes[APIProduct::HSL] ?? PRODUCT_TAGS[APIProduct::HSL],
-            ],
+            $new_tags,
             CG\HackBuilderValues::dict(
               CG\HackBuilderKeys::lambda(
                 ($_, $p) ==> 'APIProduct::'.APIProduct::getNames()[$p],

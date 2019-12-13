@@ -71,14 +71,26 @@ final class HHAPIDocBuildStep extends BuildStep {
     );
 
     Log::i("\nFinding HSL sources");
+    // prefixe whitelisted are handled when extracting the tarballs
     $hsl_sources = self::findSources(BuildPaths::HSL_TREE.'/src/', $exts);
+    $hsl_experimental_sources = self::findSources(
+      BuildPaths::HSL_EXPERIMENTAL_TREE.'/src/',
+      $exts,
+    );
     Log::i("\nParsing HSL sources");
     $hsl_defs = \HH\Asio\join(self::parseAsync($hsl_sources));
+    $hsl_experimental_defs = \HH\Asio\join(
+      self::parseAsync($hsl_experimental_sources),
+    );
 
     Log::i("\nGenerating index for builtins");
     $builtin_index = self::createProductIndex(APIProduct::HACK, $builtin_defs);
     Log::i("\nGenerating index for the HSL");
     $hsl_index = self::createProductIndex(APIProduct::HSL, $hsl_defs);
+    $hsl_experimental_index = self::createProductIndex(
+      APIProduct::HSL_EXPERIMENTAL,
+      $hsl_experimental_defs,
+    );
     Log::i("\nWriting index file");
     \file_put_contents(
       BuildPaths::APIDOCS_INDEX_JSON,
@@ -87,6 +99,7 @@ final class HHAPIDocBuildStep extends BuildStep {
         shape(
           APIProduct::HACK => $builtin_index,
           APIProduct::HSL => $hsl_index,
+          APIProduct::HSL_EXPERIMENTAL => $hsl_experimental_index,
         ),
       ),
     );
@@ -95,12 +108,18 @@ final class HHAPIDocBuildStep extends BuildStep {
     $builtin_md = self::buildMarkdown(APIProduct::HACK, $builtin_defs);
     Log::i("\nGenerating Markdown for the HSL");
     $hsl_md = self::buildMarkdown(APIProduct::HSL, $hsl_defs);
+    $hsl_experimental_md = self::buildMarkdown(
+      APIProduct::HSL_EXPERIMENTAL,
+      $hsl_experimental_defs,
+    );
 
     \file_put_contents(
       BuildPaths::APIDOCS_MARKDOWN.'/index.json',
       JSON\encode_shape(
         DirectoryIndex::class,
-        shape('files' => Vec\concat($builtin_md, $hsl_md)),
+        shape(
+          'files' => Vec\concat($builtin_md, $hsl_md, $hsl_experimental_md),
+        ),
       ),
     );
 

@@ -14,6 +14,8 @@ namespace HHVM\UserDocumentation;
 abstract final class BuildPaths {
   const string HHVM_TREE = LocalConfig::ROOT.'/api-sources/hhvm';
   const string HSL_TREE = LocalConfig::ROOT.'/api-sources/hsl';
+  const string HSL_EXPERIMENTAL_TREE =
+    LocalConfig::ROOT.'/api-sources/hsl-experimental';
 
   const string BUILD_ROOT_DIR = LocalConfig::ROOT.'/build';
   const string SCRATCH_DIR = self::BUILD_ROOT_DIR.'/scratch';

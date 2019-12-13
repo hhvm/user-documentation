@@ -23,6 +23,7 @@ class :api-list extends :x:element {
     switch ($this->:product) {
       case APIProduct::HACK:
       case APIProduct::HSL:
+      case APIProduct::HSL_EXPERIMENTAL:
         return $this->getHackDefinitions($this->:product);
     }
   }

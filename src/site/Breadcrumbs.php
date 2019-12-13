@@ -25,6 +25,8 @@ abstract final class Breadcrumbs {
         );
       case APIProduct::HSL:
         return tuple('HSL', null);
+      case APIProduct::HSL_EXPERIMENTAL:
+        return tuple('HSL (Experimental)', null);
     }
   }
 }

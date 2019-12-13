@@ -57,7 +57,19 @@ final class FrontMatter extends PageSection {
         'github' => 'hhvm/hsl',
         'composer' => 'hhvm/hsl',
       );
+    } else if (
+      C\any(
+        $data['sources'],
+        $s ==> Str\starts_with($s, 'api-sources/hsl-experimental/'),
+      )
+    ) {
+      $data['lib'] = shape(
+        'name' => 'the Hack Standard Library - Experimental Additions',
+        'github' => 'hhvm/hsl-experimental',
+        'composer' => 'hhvm/hsl-experimental',
+      );
     }
+
 
     $fbonly_messages = vec[];
     $fb_alias = \HHVM\UserDocumentation\get_fbonly_alias($data['name']);

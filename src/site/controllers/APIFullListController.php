@@ -38,6 +38,8 @@ final class APIFullListController extends WebPageController {
         return 'Hack APIs';
       case APIProduct::HSL:
         return 'The Hack Standard Library';
+      case APIProduct::HSL_EXPERIMENTAL:
+        return 'The Hack Standard Library - Experimental Additions';
     }
   }
 

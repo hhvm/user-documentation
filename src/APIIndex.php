@@ -25,6 +25,9 @@ final class APIIndex {
       case APIProduct::HSL:
         $this->index = $idx[APIProduct::HSL];
         break;
+      case APIProduct::HSL_EXPERIMENTAL:
+        $this->index = $idx[APIProduct::HSL_EXPERIMENTAL];
+        break;
     }
   }
 

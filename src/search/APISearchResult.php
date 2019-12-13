@@ -23,6 +23,7 @@ final class APISearchResult extends SearchResult {
   ) {
     switch ($product) {
       case APIProduct::HSL:
+      case APIProduct::HSL_EXPERIMENTAL:
         $score *= SearchScores::HSL_API_MULTIPLIER;
         break;
       case APIProduct::HACK:
@@ -65,6 +66,7 @@ final class APISearchResult extends SearchResult {
         $product = 'Hack';
         break;
       case APIProduct::HSL:
+      case APIProduct::HSL_EXPERIMENTAL:
         $product = 'HSL';
         break;
     }

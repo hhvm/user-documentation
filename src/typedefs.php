@@ -63,6 +63,7 @@ enum APIDefinitionType: string as string {
 enum APIProduct: string as string {
   HACK = 'hack';
   HSL = 'hsl';
+  HSL_EXPERIMENTAL = 'hsl-experimental';
 }
 
 type DocumentationSource = shape(
@@ -116,6 +117,7 @@ type ProductAPIIndexShape = shape(
 type APIIndexShape = shape(
   APIProduct::HACK => ProductAPIIndexShape,
   APIProduct::HSL => ProductAPIIndexShape,
+  APIProduct::HSL_EXPERIMENTAL => ProductAPIIndexShape,
 );
 
 type StaticResourceMapEntry = shape(
