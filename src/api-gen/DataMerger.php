@@ -40,6 +40,7 @@ use namespace HH\Lib\{C, Dict, Keyset, Math, Str, Vec};
 final class DataMerger {
   private static function normalizeNameForMerge(string $name): string {
     return $name
+      |> Str\strip_prefix($$, "HH\\Lib\\Experimental\\")
       |> Str\strip_prefix($$, "HH\\Lib\\")
       |> Str\strip_prefix($$, "HH\\");
   }

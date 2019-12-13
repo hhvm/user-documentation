@@ -71,6 +71,7 @@ final class AutoLinkifyInline extends Inlines\Link {
       '',
       "HH",
       "HH\\Lib",
+      "HH\\Lib\\Experimental",
     ]
       |> Vec\filter_nulls($$);
 
