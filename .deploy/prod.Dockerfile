@@ -1,4 +1,4 @@
-FROM hhvm/hhvm-proxygen:4.34-latest
+FROM hhvm/hhvm-proxygen:4.35-latest
 
 ADD hhvm.prod.ini /etc/hhvm/site.ini
 ADD hhvm.hhbc /var/www/hhvm.hhbc
