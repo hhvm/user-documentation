@@ -11,7 +11,7 @@
 
 use type HHVM\UserDocumentation\{APIDefinitionType, APIIndex, APIProduct};
 
-use namespace HH\Lib\C;
+use namespace HH\Lib\{C, Str};
 
 class :api-list extends :x:element {
   attribute
@@ -54,7 +54,11 @@ class :api-list extends :x:element {
       foreach ($api_references as $name => $url) {
         $type_list->appendChild(
           <li>
-            <a href={$url}>{$name}</a>
+            <a href={$url}>
+              {$name
+                |> Str\strip_prefix($$, "HH\\Lib\\Experimental\\")
+                |> Str\strip_prefix($$, "HH\\Lib\\")}
+            </a>
           </li>,
         );
       }
