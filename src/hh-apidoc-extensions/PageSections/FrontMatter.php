@@ -60,20 +60,10 @@ final class FrontMatter extends PageSection {
     }
 
     $fbonly_messages = vec[];
-    $name = Str\strip_prefix($data['name'], "HH\\Lib\\");
-    if (Str\ends_with($name, '_async')) {
-      $parts = Str\split($name, '\\');
-      $last = C\lastx($parts);
-      $parts = Vec\take($parts, C\count($parts) - 1);
-
-      if ($last === 'from_async') {
-        $parts[] = 'gen';
-      } else {
-        $parts[] = 'gen_'.Str\strip_suffix($last, '_async');
-      }
-      $name = Str\join($parts, "\\");
+    $fb_alias = \HHVM\UserDocumentation\get_fbonly_alias($data['name']);
+    if ($fb_alias !== null) {
       $fbonly_messages[] = "This function is available as `".
-        $name.
+        $fb_alias.
         "()` in ".
         "Facebook's www repository.";
     }

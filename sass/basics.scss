@@ -46,6 +46,25 @@ a {
   padding: 0.5em;
 }
 
+.fbOnly.apiAlias {
+  display: block;
+  padding-left: 1em;
+  font-style: italic;
+}
+.fbOnly.apiAlias:before {
+  content: 'f';
+  margin-right: 0.25em;
+  font-style: normal;
+  background: linear-gradient(to top, #4267b2, #5890ff);
+  width: 1em;
+  display: inline-block;
+  text-align: center;
+  border-radius: 3px;
+  color: white;
+  font-family: Helvetica;
+  font-size: 120%;
+}
+
 .apiTopMessage:nth-child(n+2) {
   border-top: none;
 }

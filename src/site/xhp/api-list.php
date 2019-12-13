@@ -52,13 +52,18 @@ class :api-list extends :x:element {
       $title = ucwords($type.' Reference');
       $type_list = <ul class="apiList" />;
       foreach ($api_references as $name => $url) {
+        $name = $name
+          |> Str\strip_prefix($$, "HH\\Lib\\Experimental\\")
+          |> Str\strip_prefix($$, "HH\\Lib\\");
+        $fb_alias = \HHVM\UserDocumentation\get_fbonly_alias($name);
+        if ($fb_alias !== null) {
+          $fbonly = <span class="fbOnly apiAlias">{$fb_alias}</span>;
+        } else {
+          $fbonly = null;
+        }
         $type_list->appendChild(
           <li>
-            <a href={$url}>
-              {$name
-                |> Str\strip_prefix($$, "HH\\Lib\\Experimental\\")
-                |> Str\strip_prefix($$, "HH\\Lib\\")}
-            </a>
+            <a href={$url}>{$name}{$fbonly}</a>
           </li>,
         );
       }
