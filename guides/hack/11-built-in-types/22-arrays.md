@@ -323,7 +323,7 @@ Numerous library functions are available that manipulate arrays.
 Two special types, `varray` and `darray`, currently exist to facilitate
 migration from the legacy `array` type towards a more type-safe codebase (note
 that both legacy `array` and these migration types are temporary, the plan is
-for all of them to be removed from tha Hack language eventually).
+for all of them to be removed from the Hack language eventually).
 
 While migrating straight to `vec` and `dict` would be preferable (and may be
 possible for smaller projects), it is usually not possible without manual review
