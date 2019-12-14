@@ -135,6 +135,10 @@ final class HHAPIDocBuildStep extends BuildStep {
     APIProduct $product,
     vec<Documentable> $documentables,
   ): ProductAPIIndexShape {
+    $documentables = Vec\sort_by(
+      $documentables,
+      $d ==> $d['definition']->getName(),
+    );
     return shape(
       'class' => self::createClassishIndex(
         $product,
