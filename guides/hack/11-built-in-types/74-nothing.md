@@ -6,7 +6,7 @@ In the following example, we create a variable `$number_of_boats` with the type 
 
 You might be understandably confused why we were allowed to call a method on something that you assumed to be an int. Any other language with static types would be screaming at you and refusing to compile/run. Hack however, understands that reporting an error on this code will not save you trouble at runtime. This code will never do something to `$number_of_boats` that is not allowed. Therefore, the typechecker will not report an error here.
 
-You should almost never have to annotate your code with `nothing`, since it does not make sense as a class member, function/method parameter or return type. It _can_ sometimes be used in places where a generic is expected. You'll most often encounter this type when creating an empty `Container<T>` of something.
+You should almost never have to annotate your code with `nothing`, since it does not make sense as a class member, function/method parameter or return type. It _can_ sometimes be used in places where a generic is expected. You'll most often encounter this type when creating an empty `Container<T>`.
 
 @@ nothing-examples/empty-container.php @@
 
