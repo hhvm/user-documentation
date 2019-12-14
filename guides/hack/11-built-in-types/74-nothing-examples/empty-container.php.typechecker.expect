@@ -1,0 +1,21 @@
+Typing[4053] No method 'getOutOfMyCar' in Hack\UserDocumentation\Types\Nothing\Examples\EmptyContainer\Person
+   --> guides/hack/11-built-in-types/74-nothing-examples/empty-container.php
+ 17 |   $people_in_my_car[] = new Person('You');
+    |                             ^^^^^^ This is why I think it is an object of type Hack\UserDocumentation\Types\Nothing\Examples\EmptyContainer\Person
+ 21 |     $person->getOutOfMyCar();
+    |              ^^^^^^^^^^^^^
+ 27 | class Person{
+    |       ^^^^^^ Declaration of Hack\UserDocumentation\Types\Nothing\Examples\EmptyContainer\Person is here
+   --> /tmp/hh_server/hhi_1a09b2e9/hackarray.hhi
+ 15 | abstract final class vec<+T> implements KeyedContainer<int, T>, \XHPChild {}
+    |                                                             ^   via this generic T
+   --> /tmp/hh_server/hhi_1a09b2e9/interfaces.hhi
+120 | interface KeyedContainer<+Tk as arraykey, +Tv> extends \HH\Rx\KeyedTraversable<Tk, Tv>, Container<Tv> {}
+    |                                                                                    ^^   via this generic Tv
+   --> /tmp/hh_server/hhi_1a09b2e9/rx/interfaces.hhi
+ 26 | interface Traversable<+Tv> extends \HH\Traversable<Tv> {}
+    |                                                    ^^   via this generic Tv
+ 35 |   extends namespace\Traversable<Tv>, \HH\KeyedTraversable<Tk, Tv> {}
+    |                                 ^^   via this generic Tv
+
+1 error found.
