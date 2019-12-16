@@ -1,4 +1,4 @@
-The `nothing` type is the bottom type. It is _not_ impossible to create a **value** of type `nothing`. It is only possible for something that usually holds a value, to be typed as nothing. The typechecker uses this type to model the fact that certain expressions will not ever have a value that can be observed.
+The `nothing` type is the bottom type. It is impossible to create a **value** of type `nothing`. It is only possible for something that usually holds a value, to be typed as nothing. The typechecker uses this type to model the fact that certain expressions will not ever have a value that can be observed.
 
 In the following example, we create a variable `$number_of_boats` with the type int. We then create a region of code that is unreachable (if false). The typechecker is able to pick up that we will never enter the body of the if. Therefore, the types of all the locals are set to `nothing`.
 
