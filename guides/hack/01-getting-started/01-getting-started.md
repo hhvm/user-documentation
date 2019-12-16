@@ -1,3 +1,10 @@
+```yamlmeta
+{
+  "fbonly messages": [
+    "Unless you are specifically working on open source Hack code, you want [Facebook's internal documentation](https://our.internmc.facebook.com/intern/wiki/First-app/) instead."
+  ]
+}
+```
 ## Overview
 
 The prerequisites you need to write and execute Hack code are pretty straightforward:
