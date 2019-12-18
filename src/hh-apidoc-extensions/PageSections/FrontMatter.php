@@ -28,6 +28,7 @@ final class FrontMatter extends PageSection {
     $def = $this->definition;
     $data = shape(
       'name' => $def->getName(),
+      'namespace' => $def->getNamespaceName(),
       'sources' => Vec\map(
         $this->documentable['sources'],
         $source ==> Str\strip_prefix($source, LocalConfig::ROOT.'/'),
