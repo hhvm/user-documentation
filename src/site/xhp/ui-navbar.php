@@ -11,7 +11,7 @@
 
 use type HHVM\UserDocumentation\{NavDataNode, UIGlyphIcon};
 
-use namespace HH\Lib\Dict;
+use namespace HH\Lib\{Dict, Str};
 
 class :ui:navbar extends :x:element {
   attribute
@@ -80,7 +80,7 @@ class :ui:navbar extends :x:element {
       return <script />;
     }
 
-    $id = implode('/', $path);
+    $id = Str\join($path, '/');
 
     return (
       <script language="javascript">
@@ -96,6 +96,12 @@ class :ui:navbar extends :x:element {
         );
       </script>
     );
+  }
+
+  private static function getDisplayName(NavDataNode $node): string {
+    return $node['name']
+      |> Str\strip_prefix($$, "HH\\Lib\\Experimental\\")
+      |> Str\strip_prefix($$, "HH\\Lib\\");
   }
 
   private function isActive(NavDataNode ...$nodes): bool {
@@ -140,7 +146,7 @@ class :ui:navbar extends :x:element {
       <li class={$class}>
         <h4 id={$node['name']}>
           <a class="navItem" href={$node['urlPath']}>
-            {$node['name']}
+            {self::getDisplayName($node)}
           </a>
         </h4>
         {$children}
@@ -183,7 +189,7 @@ class :ui:navbar extends :x:element {
       <li class={$class} id={$id}>
         <h5>
           <a class="navItem" href={$node['urlPath']}>
-            {$node['name']}
+            {self::getDisplayName($node)}
           </a>
         </h5>
         {$children}
@@ -208,7 +214,9 @@ class :ui:navbar extends :x:element {
     return (
       <li class={$class} id={$id}>
         <h6>
-          <a class="navItem" href={$node['urlPath']}>{$node['name']}</a>
+          <a class="navItem" href={$node['urlPath']}>
+            {self::getDisplayName($node)}
+          </a>
         </h6>
       </li>
     );
