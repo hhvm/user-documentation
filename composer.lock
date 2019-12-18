@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93b96f43d10d961b12675619a8712621",
+    "content-hash": "3e91dbf9dfdecfc11acfe3b22ab727ba",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -536,16 +536,16 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v4.25.2",
+            "version": "v4.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "82343bc9edcd047c36858021ee3ee3117f8c79f9"
+                "reference": "e6abfdebc88f150c86d635c6f4086ea99be626e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/82343bc9edcd047c36858021ee3ee3117f8c79f9",
-                "reference": "82343bc9edcd047c36858021ee3ee3117f8c79f9",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/e6abfdebc88f150c86d635c6f4086ea99be626e4",
+                "reference": "e6abfdebc88f150c86d635c6f4086ea99be626e4",
                 "shasum": ""
             },
             "require": {
@@ -553,7 +553,7 @@
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.5.1",
-                "hhvm/hacktest": "^1.0",
+                "hhvm/hacktest": "^1.0|^2.0",
                 "hhvm/hhvm-autoload": "^2.0",
                 "hhvm/hsl-experimental": "dev-master"
             },
@@ -568,7 +568,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library",
-            "time": "2019-10-24T20:20:47+00:00"
+            "time": "2019-12-13T18:13:46+00:00"
         },
         {
             "name": "hhvm/hsl-experimental",
@@ -832,7 +832,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.35.*"
+        "hhvm": "4.36.*"
     },
     "platform-dev": []
 }
