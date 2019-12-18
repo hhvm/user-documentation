@@ -33,7 +33,7 @@ final class MarkdownRenderer {
 
   <<__Memoize>>
   private function getRenderContext(): Markdown\RenderContext {
-    $render_ctx = (new Markdown\RenderContext())
+    $render_ctx = (new MarkdownExt\RenderContext())
       ->appendFilters(
         new MarkdownExt\HeadingAnchorsFilter(),
         new MarkdownExt\VersionedImagesFilter(),

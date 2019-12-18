@@ -27,6 +27,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     $defs = Map {};
     $defs->setAll($this->getHackAPILinks(APIProduct::HACK));
     $defs->setAll($this->getHackAPILinks(APIProduct::HSL));
+    $defs->setAll($this->getHackAPILinks(APIProduct::HSL_EXPERIMENTAL));
     $defs->setAll($this->getSpecialAttributeLinks());
 
     $cg->codegenFile(BuildPaths::UNIFIED_INDEX)

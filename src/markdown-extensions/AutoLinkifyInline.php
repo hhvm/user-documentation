@@ -89,7 +89,6 @@ final class AutoLinkifyInline extends Inlines\Link {
 
     $index = self::getIndex();
 
-
     foreach ($to_try as $def) {
       $target = $index[$def] ?? null;
       if ($target !== null) {
