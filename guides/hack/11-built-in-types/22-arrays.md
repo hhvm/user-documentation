@@ -144,7 +144,7 @@ Hack arrays are generally manipulated using the `C\`, `Dict\`, `Keyset\` and `Ve
 
 ## Legacy Vector, Map, and Set
 
-**These container types should be avoided in new code.**
+**These container types should be avoided in new code; use `dict<Tk, Tv>`, `keyset<T>`, and `vec<T>` instead.**
 
 Early in Hack's life, the library provided mutable and immutable generic class types called: `Vector`, `ImmVector`, `Map`, `ImmMap`, `Set`,
 and `ImmSet`. However, these have been replaced by `vec`, `dict`, and `keyset`, whose use is recommended in all new code. Each generic type
@@ -161,25 +161,44 @@ is a variable of type `int`.
 
 ## PHP arrays: array, varray and darray
 
-**These container types should not be used in new code, and we aim to remove them from the language**
+**These container types should not be used in new code, and we aim to remove them from the language; use `dict<Tk, Tv>`, `keyset<T>`, and `vec<T>`**
 
 An `array` is a legacy container type inherited from PHP; it can represent a keyed container (`array<Tk, Tv>` like `dict<Tk, Tv>`) or
 an unkeyed container (`array<Tv>` like `vec<Tv>`) - or these behaviors can be mixed, or unspecified (`array` without generics).
 
-We aim to remove `array` from the language by making it practical to replace `array`s with either `vec` or `dict`; the current recommended
-approach is:
+We aim to remove `array` from the language by making it practical to replace `array`s with either `vec` or `dict`; the `varray` (vec-like array) and `darray`
+(dict-like array) types exist to make this practical.
+
+While migrating directly from `array`, `varray`, and `darray` to `vec`/`dict`/`keyset` may be desirable and practical in small projects, it is extremely difficult
+to make this change safely in large legacy codebases, so we are instead adjusting the way the types work over time:
 
 1. identify which `array`s should probably be `vec`s and which should be `dict`s
-2. mark these with the special types `varray<T>` and `darray<Tk, Tv>`
+2. mark these with the special types `varray<T>` (instead of `vec<T>`) and `darray<Tk, Tv>` (instead of `dict<Tk, Tv>`)
 3. use runtime logging to locate when a `varray` is used like a keyed container and when a `darray` is used like an unkeyed container (e.g. when appended to)
 4. gradually make `varray` behave more like `vec` and `darray` behave more like `dict`
 5. remove the `varray` type when it behaves identically to `vec`, and remove the `darray` type when it behaves identically to `dict`
+
+
+Common operations include:
 
 | Operation                 | `varray`                | `darray`
 | ---------                 | -----                   | ------
 | Initialize empty          | `$v = varray[];`        | `$m = darray[];`
 | Literal                   | `$v = varray[1, 2, 3];` | `$m = darray['foo' => 1];`
 | Add Elements              | `$v[] = 4;`             | `$m['baz'] = 2;`
+| Remove elements           | `unset($v[$x]);` (may convert to `darray` if not last element) | `unset($m['baz'])`
+
+`varray` and `darray` also include additional legacy behaviors from PHP arrays that do not fit with the Hack type system; for example, in HHVM 4.36, invalid array keys can be used at runtime
+and are silently converted to a valid `arraykey`:
+
+```Hack
+$x = darray[false => 123];
+var_dump(array_keys($x)[0]);
+// int(0), not `bool(false)`
+```
+
+Additionally, the `varray_or_darray<T>` type is an alias of `varray<T> | darray<_, T>`; on HHVM 4.36, `array` is an alias of this type, but this will be removed in the near future. This type should
+be avoided wherever possible.
 
 ### Runtime options
 
