@@ -1,4 +1,4 @@
-The preferred object types for providing array-like storage and operations are
+The preferred object types for providing container-like storage and operations are
 `vec`, `dict`, and `keyset`.  These supersede the earlier Hack types
 [Vector, Map, and Set](#legacy-vector-map-and-set), and the
 [legacy array](#legacy-array) type inherited from PHP. Additional special types,
@@ -140,7 +140,7 @@ Hack arrays are generally manipulated using the `C\`, `Dict\`, `Keyset\` and `Ve
 | Type Refinement           | `$v is vec<_>`               | `$d is dict<_, _>`             | `$k is keyset<_>`
 | `Awaitable` Consolidation | `Vec\from_async($v)`<span class="fbOnly apiAlias">`Vec\gen($v)`</span> | `Dict\from_async($d)`<span class="fbOnly apiAlias">`Dict\gen($d)`</span> | `Keyset\from_async($x)`<span class="fbOnly apiAlias">`Keyset\gen($x)`</span>
 
-`$container` can be a `dict`, `keyset`, `vec`, or one of the legacy types of collections described below.
+`$container` can be a `dict`, `keyset`, `vec`, or one of the legacy types of containers described below.
 
 ## Legacy Vector, Map, and Set
 
@@ -223,7 +223,7 @@ The available runtime options change frequently; to get an up-to-date list, sear
   hard to use, but will likely become more useful in the future, as these
   functions are migrated.
 
-## Converting to legacy containers and PHP arrays
+## Converting to legacy collections and PHP arrays
 
 | Converting    | To `Vector`              | To `Map`      | To `Set`              | To `varray`          | To `darray`
 | ----------    | -----------              | --------      | --------              | ----------           | ------
