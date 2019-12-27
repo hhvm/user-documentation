@@ -75,7 +75,6 @@ Valid positions:
     * Null Coalescing Assignment is both, so it doesn't allow either:
         * `??=`: `(await $no) ??= (await $no)`
     * Binary operators that allow await in both positions:
-        * `XOR`: `(await $yes) XOR (await $yes)`
         * `+`: `(await $yes) + (await $yes)`
         * `-`: `(await $yes) - (await $yes)`
         * `*`: `(await $yes) * (await $yes)`
