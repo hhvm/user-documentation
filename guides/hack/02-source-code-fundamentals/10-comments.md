@@ -31,5 +31,6 @@ A *single-line comment* starts with `//` or `#`, and ends with a new line, which
 
 A number of special comments are recognized; they are:
 * [`// FALLTHROUGH`](../statements/switch.md)
-* [`// strict`](program-structure.md)
-* `/* HH_IGNORE_ERROR[`*nnn*`] */`, where *nnn* is the compiler error number that is to be ignored.
+* [`// strict` or `// partial`](program-structure.md)
+* `/* HH_FIXME[`*nnnn*`] */` or `/* HH_IGNORE_ERROR[`*nnnn*`] */`, where *nnnn*
+  is the type checker error number that is to be ignored.
