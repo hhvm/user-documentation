@@ -11,7 +11,7 @@ function getTextFileLines(string $filename): \Generator<int, string, void> {
   try {
     while (true) {
       $textLine = \fgets($infile);
-      if (!$textLine) {
+      if ($textLine === false) {
         break;
       }
       $textLine = \rtrim($textLine, "\r\n"); // strip off line terminator
