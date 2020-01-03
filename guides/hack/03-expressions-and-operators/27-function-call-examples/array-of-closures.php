@@ -17,10 +17,22 @@ function main(): void {
     ), // times 5
   ];
 
-  $i = 0;
-  $v = $table[$i++]($i); // eval is L-to-R
+  $incr = new Incrementer();
+
+  $v = $table[$incr->next()]($incr->value()); // eval is L-to-R
   echo "\$v = $v\n";
 
-  $v = $table[$i](++$i); // eval is L-to-R
+  $v = $table[$incr->value()]($incr->next()); // eval is L-to-R
   echo "\$v = $v\n";
+}
+
+class Incrementer {
+  private int $counter = 0;
+  public function next(): int {
+    $this->counter++;
+    return $this->counter;
+  }
+  public function value(): int {
+    return $this->counter;
+  }
 }

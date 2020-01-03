@@ -2,6 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
+use namespace HH\Lib\C;
 use type Facebook\HackTest\{DataProvider, TestGroup};
 use type HHVM\UserDocumentation\GuidesNavData;
 use function Facebook\FBExpect\expect;
@@ -11,7 +12,8 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     $to_visit = \array_values(GuidesNavData::getNavData());
     $out = [];
 
-    while ($node = \array_pop(inout $to_visit)) {
+    while (!C\is_empty($to_visit)) {
+      $node = \array_pop(inout $to_visit);
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

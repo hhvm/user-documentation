@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\Vec;
+use namespace HH\Lib\{C, Vec};
 
 final class SiteMapBuildStep extends BuildStep {
   const string ROOT = 'https://docs.hhvm.com';
@@ -76,7 +76,8 @@ final class SiteMapBuildStep extends BuildStep {
   ): ImmVector<string> {
     $out = Vector {};
     $to_visit = \array_values($roots);
-    while ($node = \array_shift(inout $to_visit)) {
+    while (!C\is_empty($to_visit)) {
+      $node = \array_shift(inout $to_visit);
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

@@ -38,7 +38,7 @@ final class LocalPageLoader extends PageLoader {
       $response,
     );
     await $write_handle->closeAsync();
-    await using ($read_handle = File\open_read_only($buffer_path));
+    await using $read_handle = File\open_read_only($buffer_path);
     $content = await $read_handle->readAsync(Math\INT64_MAX);
     return tuple($response, $content);
   }

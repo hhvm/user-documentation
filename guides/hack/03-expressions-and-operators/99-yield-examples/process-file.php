@@ -9,7 +9,11 @@ function getTextFileLines(string $filename): \Generator<int, string, void> {
   }
 
   try {
-    while ($textLine = \fgets($infile)) { // while not EOF
+    while (true) {
+      $textLine = \fgets($infile);
+      if (!$textLine) {
+        break;
+      }
       $textLine = \rtrim($textLine, "\r\n"); // strip off line terminator
       yield $textLine;
     }
