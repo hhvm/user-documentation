@@ -19,16 +19,21 @@ function main(): void {
 
   $incr = new Incrementer();
 
-  $v = $table[$incr->next()]($incr->value()); // eval is L-to-R
+  $v = $table[$incr->postIncr()]($incr->value()); // eval is L-to-R
   echo "\$v = $v\n";
 
-  $v = $table[$incr->value()]($incr->next()); // eval is L-to-R
+  $v = $table[$incr->value()]($incr->preIncr()); // eval is L-to-R
   echo "\$v = $v\n";
 }
 
 class Incrementer {
   private int $counter = 0;
-  public function next(): int {
+  public function postIncr(): int {
+    $ret = $this->counter;
+    $this->counter++;
+    return $ret;
+  }
+  public function preIncr(): int {
     $this->counter++;
     return $this->counter;
   }
