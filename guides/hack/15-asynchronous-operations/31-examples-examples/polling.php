@@ -11,7 +11,7 @@ class Polling {
   private int $count = 0;
   public function isReady(): bool {
     $this->count++;
-    if ($this->count === 11) {
+    if ($this->count > 10) {
       return true;
     }
     return false;
