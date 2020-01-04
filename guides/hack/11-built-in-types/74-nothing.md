@@ -1,6 +1,6 @@
 The type `nothing` is the bottom type in the Hack typesystem. This means that there is no way to create a value of the type `nothing`. `nothing` only exists in the typesystem, not in the runtime.
 
-The concept of a bottom type is quite difficult to grasp, so I'll first compare it to the supertype of everything `mixed`. `mixed` is the most general thing you can imagine with the hack typesystem. Everything "extends" `mixed` if you will. `nothing` is the exact opposite of that.
+The concept of a bottom type is quite difficult to grasp, so I'll first compare it to the supertype of everything `mixed`. `mixed` is the most general thing you can imagine within the hack typesystem. Everything "extends" `mixed` if you will. `nothing` is the exact opposite of that.
 
 Let's work out the hierarchy of scalar types. Forget about nullable types and `dynamic` for the moment, they would make this example far more complex without adding much value.
 
@@ -11,12 +11,9 @@ Let's work out the hierarchy of scalar types. Forget about nullable types and `d
  - `int` is a subtype of `num` and `arraykey`.
  - `float` is a subtype of `num`.
  - `string` is a subtype of `arraykey`.
- - `nothing` is a subtype of `int`.
- - `nothing` is subtype of `float`.
- - `nothing` is a subtype of `string`.
- - `nothing` is a subtype of `bool`.
+ - `nothing` is a subtype of `int`, `float`, `string`, and `bool`.
 
-The important thing to note here is that `nothing` is never inbetween two types. `nothing` ony shows up right below a type with no other subtypes.
+The important thing to note here is that `nothing` is never inbetween two types. `nothing` only shows up right below a type with no other subtypes.
 
 Okay that was all very academical, but "what can I use it for?", I hear you ask.
 
