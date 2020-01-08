@@ -2,42 +2,33 @@
 
 namespace Hack\UserDocumentation\ExpAndOps\FunctionCall\Examples\Closures;
 
+use type HH\Lib\Ref;
+
 <<__EntryPoint>>
 function main(): void {
   $table = vec[
-    (
-      function(int $p) {
-        return $p * 2;
-      }
-    ), // doubles
-    (
-      function(int $p) {
-        return $p * 5;
-      }
-    ), // times 5
+    (int $p) ==> $p * 2, // doubler
+    (int $p) ==> $p * 3, // tripler
+    (int $p) ==> $p * 4, // quadrupler
   ];
 
-  $incr = new Incrementer();
+  $next = sequence();
 
-  $v = $table[$incr->postIncr()]($incr->value()); // eval is L-to-R
+  $v = $table[$next()]($next()); // eval is L-to-R
   echo "\$v = $v\n";
 
-  $v = $table[$incr->value()]($incr->preIncr()); // eval is L-to-R
+  $v = $table[$next()]($next()); // eval is L-to-R
   echo "\$v = $v\n";
 }
 
-class Incrementer {
-  private int $counter = 0;
-  public function postIncr(): int {
-    $ret = $this->counter;
-    $this->counter++;
-    return $ret;
-  }
-  public function preIncr(): int {
-    $this->counter++;
-    return $this->counter;
-  }
-  public function value(): int {
-    return $this->counter;
-  }
+/**
+ * Returns a function which will return the next
+ * number in a sequence, starting at 0, 1, 2, 3, etc.
+ */
+function sequence(): (function(): int) {
+  $ticket = new Ref(-1);
+  return () ==> {
+    $ticket->value++;
+    return $ticket->value;
+  };
 }
