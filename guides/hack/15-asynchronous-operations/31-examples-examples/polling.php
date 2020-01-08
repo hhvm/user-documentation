@@ -10,7 +10,8 @@ require __DIR__."/../../../../vendor/hh_autoload.php";
 class Polling {
   private int $count = 0;
   public function isReady(): bool {
-    if ($this->count++ === 10) {
+    $this->count++;
+    if ($this->count === 11) {
       return true;
     }
     return false;

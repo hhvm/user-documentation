@@ -11,7 +11,11 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     $to_visit = \array_values(GuidesNavData::getNavData());
     $out = [];
 
-    while ($node = \array_pop(inout $to_visit)) {
+    while (true) {
+      $node = \array_pop(inout $to_visit);
+      if (!$node) {
+        break;
+      }
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

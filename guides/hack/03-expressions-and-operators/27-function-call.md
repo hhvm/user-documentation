@@ -18,34 +18,6 @@ which indexes into an array of anonymous-function objects, and calls the resulti
 
 @@ function-call-examples/array-of-closures.php @@
 
-In the function call,
-
-```Hack
-$table[$i++]($i)
-```
-
-the expression designating the function is evaluated before the expressions in the argument list, so given that `$i` has value 0, the call is
-
-```Hack
-$table[0](1)
-```
-
-which calls the doubler function, which returns 1x2=2.
-
-In the second call,
-
-```Hack
-$table[$i](++$i)
-```
-
-given that `$i` has value 1, the call is
-
-```Hack
-$table[1](2)
-```
-
-which calls the times-5 function and results in 2x5=10.
-
 When a function is called, the value of each argument passed to it is assigned to the corresponding parameter in that function's definition,
 if such a parameter exists.  Any parameter having a default value, but no corresponding argument, takes on that default value.  For example:
 

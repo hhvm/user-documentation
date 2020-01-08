@@ -18,9 +18,10 @@ function main(): void {
   ];
 
   $i = 0;
-  $v = $table[$i++]($i); // eval is L-to-R
+  $v = $table[$i]($i + 1);
   echo "\$v = $v\n";
 
-  $v = $table[$i](++$i); // eval is L-to-R
+  $i++;
+  $v = $table[$i]($i + 1);
   echo "\$v = $v\n";
 }
