@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\ExpAndOps\FunctionCall\Examples\Closures;
 
-use type HH\Lib\Ref;
-
 <<__EntryPoint>>
 function main(): void {
   $table = vec[
@@ -12,23 +10,19 @@ function main(): void {
     (int $p) ==> $p * 4, // quadrupler
   ];
 
-  $next = sequence();
+  $seq = new Sequence();
 
-  $v = $table[$next()]($next()); // eval is L-to-R
+  $v = $table[$seq->next()]($seq->next()); // eval is L-to-R
   echo "\$v = $v\n";
 
-  $v = $table[$next()]($next()); // eval is L-to-R
+  $v = $table[$seq->next()]($seq->next()); // eval is L-to-R
   echo "\$v = $v\n";
 }
 
-/**
- * Returns a function which will return the next
- * number in a sequence, starting at 0, 1, 2, 3, etc.
- */
-function sequence(): (function(): int) {
-  $ticket = new Ref(-1);
-  return () ==> {
-    $ticket->value++;
-    return $ticket->value;
-  };
+class Sequence {
+  private int $last = -1;
+  public function next(): int {
+    $this->last++;
+    return $this->last;
+  }
 }
