@@ -21,10 +21,10 @@ which indexes into an array of anonymous-function objects, and calls the resulti
 In the function call,
 
 ```Hack
-$table[$next()]($next())
+$table[$seq->next()]($seq->next())
 ```
 
-the expression designating the function is evaluated before the expressions in the argument list, so given that `$next` has not been called before, the call is
+the expression designating the function is evaluated before the expressions in the argument list, so given that `$seq->next()` has not been called before, the call is
 
 ```Hack
 $table[0](1)
@@ -35,7 +35,7 @@ which calls the doubler function, which returns 1x2=2.
 In the second call,
 
 ```Hack
-$table[$next()]($next())
+$table[$seq->next()]($seq->next())
 ```
 
 given that `$i` has been called twice, the call is
