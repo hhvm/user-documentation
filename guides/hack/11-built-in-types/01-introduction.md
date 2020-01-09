@@ -11,6 +11,7 @@ This section covers the different types available in Hack.
 * [float](float.md)
 * [int](int.md)
 * [keyset](arrays.md#keyset)
+* [nothing](nothing.md)
 * [noreturn](noreturn.md)
 * [Null Type](null.md)
 * [num](num.md)
