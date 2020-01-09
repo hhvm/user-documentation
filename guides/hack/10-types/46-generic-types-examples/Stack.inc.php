@@ -14,12 +14,14 @@ class Stack<T> {
   }
 
   public function push(T $value): void {
-    $this->stack[$this->stackPtr++] = $value;
+    $this->stack[$this->stackPtr] = $value;
+    $this->stackPtr++;
   }
 
   public function pop(): T {
     if ($this->stackPtr > 0) {
-      return $this->stack[--$this->stackPtr];
+      $this->stackPtr--;
+      return $this->stack[$this->stackPtr];
     } else {
       throw new StackUnderflowException();
     }

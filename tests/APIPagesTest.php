@@ -11,7 +11,7 @@ use type HHVM\UserDocumentation\{
   URLBuilder,
 };
 
-use namespace HH\Lib\{Str, Vec};
+use namespace HH\Lib\{C, Str, Vec};
 use function Facebook\FBExpect\expect;
 use type Facebook\HackTest\{DataProvider, TestGroup};
 
@@ -20,7 +20,8 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
     $to_visit = \array_values(APINavData::get(APIProduct::HACK)->getNavData());
     $out = [];
 
-    while ($node = \array_pop(inout $to_visit)) {
+    while (!C\is_empty($to_visit)) {
+      $node = \array_pop(inout $to_visit);
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }

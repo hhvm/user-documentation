@@ -21,10 +21,10 @@ which indexes into an array of anonymous-function objects, and calls the resulti
 In the function call,
 
 ```Hack
-$table[$i++]($i)
+$table[$next()]($next())
 ```
 
-the expression designating the function is evaluated before the expressions in the argument list, so given that `$i` has value 0, the call is
+the expression designating the function is evaluated before the expressions in the argument list, so given that `$next` has not been called before, the call is
 
 ```Hack
 $table[0](1)
@@ -35,16 +35,16 @@ which calls the doubler function, which returns 1x2=2.
 In the second call,
 
 ```Hack
-$table[$i](++$i)
+$table[$next()]($next())
 ```
 
-given that `$i` has value 1, the call is
+given that `$i` has been called twice, the call is
 
 ```Hack
-$table[1](2)
+$table[2](3)
 ```
 
-which calls the times-5 function and results in 2x5=10.
+which calls the quadrupler function and results in 3x4=12.
 
 When a function is called, the value of each argument passed to it is assigned to the corresponding parameter in that function's definition,
 if such a parameter exists.  Any parameter having a default value, but no corresponding argument, takes on that default value.  For example:
