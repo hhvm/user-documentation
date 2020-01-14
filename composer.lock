@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1808262169c5426a88ae55bae143fe9",
+    "content-hash": "448147ec501e41a523bf16c0f21d871c",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -536,16 +536,16 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v4.36.0",
+            "version": "v4.40.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "e6abfdebc88f150c86d635c6f4086ea99be626e4"
+                "reference": "b14a430062ad95c378765899f955457f3454f2f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/e6abfdebc88f150c86d635c6f4086ea99be626e4",
-                "reference": "e6abfdebc88f150c86d635c6f4086ea99be626e4",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/b14a430062ad95c378765899f955457f3454f2f9",
+                "reference": "b14a430062ad95c378765899f955457f3454f2f9",
                 "shasum": ""
             },
             "require": {
@@ -568,7 +568,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library",
-            "time": "2019-12-13T18:13:46+00:00"
+            "time": "2020-01-08T23:12:08+00:00"
         },
         {
             "name": "hhvm/hsl-experimental",
@@ -608,20 +608,20 @@
         },
         {
             "name": "hhvm/type-assert",
-            "version": "v3.6.5",
+            "version": "v3.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/type-assert.git",
-                "reference": "9847869675beb609b1627ec3927c8fd3fe8d5677"
+                "reference": "e076c42ed718929dbea96c0b354ebe96cccc2335"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/9847869675beb609b1627ec3927c8fd3fe8d5677",
-                "reference": "9847869675beb609b1627ec3927c8fd3fe8d5677",
+                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/e076c42ed718929dbea96c0b354ebe96cccc2335",
+                "reference": "e076c42ed718929dbea96c0b354ebe96cccc2335",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.17",
+                "hhvm": "^4.30",
                 "hhvm/hsl": "^4.0"
             },
             "require-dev": {
@@ -645,7 +645,7 @@
                 "TypeAssert",
                 "hack"
             ],
-            "time": "2019-11-22T01:15:49+00:00"
+            "time": "2020-01-13T21:48:58+00:00"
         },
         {
             "name": "usox/hack-http-factory-interfaces",
@@ -832,7 +832,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.39.*"
+        "hhvm": "4.40.*"
     },
     "platform-dev": []
 }
