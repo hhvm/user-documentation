@@ -45,8 +45,6 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [mcrypt](http://php.net/manual/en/book.mcrypt.php)
 * [memcache](http://php.net/manual/en/book.memcache.php)
 * [memcached](http://php.net/manual/en/book.memcached.php)
-* [mysql](http://php.net/manual/en/book.mysql.php)
-* [mysqli](http://php.net/manual/en/book.mysqli.php)
 * objprof
 * [openssl](http://php.net/manual/en/book.openssl.php)
 * [pcntl](http://php.net/manual/en/book.pcntl.php)
@@ -56,7 +54,6 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * [pdo_pgsql](http://php.net/manual/en/ref.pdo-pgsql.php)
 * [pdo_sqlite](http://php.net/manual/en/ref.pdo-sqlite.php)
 * [pgsql](http://php.net/manual/en/book.pgsql.php)
-* [phar](http://php.net/manual/en/book.phar.php)
 * [posix](http://php.net/manual/en/book.posix.php)
 * [readline](http://php.net/manual/en/book.readline.php)
 * [redis](https://pecl.php.net/package/redis)
