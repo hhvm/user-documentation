@@ -4,7 +4,7 @@ Operator | Associativity
 ------------ | ---------
 `new`  | none
 `()   []   ->   ?->   ++   --   **` | Left to Right
-`instanceof   is   as   ?as` | none
+`is   as   ?as` | none
 `!   ~   +   -   ++   --   (`*type*`)   @   await`	| Right to Left
 `*   /   %`	| Left to Right
 `+   -   .`	| Left to Right

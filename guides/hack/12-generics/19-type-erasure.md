@@ -12,9 +12,9 @@ type erasure at runtime. A type parameter T *cannot* be used in the following si
  * Creating instances using `new` (e.g., `new T()`).
  * Casting (e.g., `(T) $value`).
  * In a class scope, e.g., `T::aStaticMethod()`.
- * As the right-hand side of an `instanceof` or `is` check.
+ * As the right-hand side of an `is` check.
  * As the type of a static property.
  * As the type of the exception in a catch block (e.g., `catch (T $exception)`).
 
-For a possible alternative to instantiation, class scope and `instanceof` usage, Hack provides a construct called
+For a possible alternative to instantiation and class scope Hack provides a construct called
 [`Classname<T>`](../built-in-types/classname.md) that extends the PHP representation of `Foo::class`.

@@ -17,7 +17,6 @@ Valid positions:
     * CastExpression: `(<token>)(await $yes)`
     * MemberSelectionExpression: `(await $yes)->(await $yes)`
     * ScopeResolutionExpression: `(await $yes)::(await $yes)`
-    * InstanceofExpression: `(await $yes) instanceof (await $yes)`
     * IsExpression: `(await $yes) is Int`
     * AsExpression: `(await $yes) as Int`
     * NullableAsExpression: `(await $yes) ?as Int`

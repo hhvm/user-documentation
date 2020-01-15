@@ -28,7 +28,6 @@
 * [Function-call, `()`](function-call.md)
 * [Grouping of terms](some-basics.md)
 * [Increment, `++`](incrementing-and-decrementing.md)
-* [instanceof](instanceof.md)
 * [invariant intrinsic function](invariant.md)
 * [is](is.md)
 * [Lambda creation](lambda-creation.md)
