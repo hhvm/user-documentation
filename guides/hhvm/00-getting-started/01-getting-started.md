@@ -5,7 +5,7 @@ If you are new to HHVM, this getting started guide should help get you up an run
 The infrastructure you need to run code with HHVM is pretty simple:
 
 * HHVM itself
-* Some Hack or PHP code
+* Some Hack code
 
 For this setup, although various flavors of Debian and Ubuntu are supported with [official packages](../installation/introduction.md#prebuilt-packages), the most recent [Ubuntu LTS](../installation/linux.md#obtaining-lts-releases) and the most recent [Ubuntu stable release](../installation/linux.md#ubuntu-15.04-vivid) are likely to be the *best* supported and easiest to install.
 
@@ -47,9 +47,9 @@ Running HHVM automatically at boot as a service (instead of just on the command 
 
 ## Running Hack files
 
-HHVM runs both PHP and [Hack](/hack/getting-started/getting-started). Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack/). We created a simple Hack program above when testing HHVM.
+HHVM runs [Hack](/hack/getting-started/getting-started) code. Hack is Facebook's language that extends the syntax of PHP to offer type-checking as well as numerous [additional language features](/hack/). We created a simple Hack program above when testing HHVM.
 
-To test and run a Hack file, make sure you are running the `hh_client` typechecker; otherwise you'll be missing out on a lot of your type errors in your Hack code. The simplest way to make a PHP program a Hack program is to simply change the prologue of the file to `<?hh` to indicate it's Hack. Then you can immediately start benefiting from these features.
+To test and run a Hack file, make sure you are running the `hh_client` typechecker; otherwise you'll be missing out on a lot of your type errors in your Hack code.
 
 ## Learning Hack and PHP
 
