@@ -1,4 +1,5 @@
 **The use of `instanceof` has been deprecated; use operator [`is`](is.md) instead.**
+**It does NOT exist in HHVM 4.15 and up and will result in a parse error.**
 
 Operator `instanceof` determines if the variable designated by its left-hand operand is an object having the type specified by the right-hand
 one.  It returns a `bool` result.  For example:

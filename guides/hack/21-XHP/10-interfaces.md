@@ -15,7 +15,7 @@ XHP presents a tree structure, and this interface defines what can be valid chil
  - arrays of any of the above
 
 Despite strings, integers, floats, and arrays not being objects, both the typechecker and HHVM consider them to implement this interface,
-for parameter/return types and for `instanceof`/`is` checks.
+for parameter/return types and for `is` checks.
 
 ## Advanced Interfaces
 
