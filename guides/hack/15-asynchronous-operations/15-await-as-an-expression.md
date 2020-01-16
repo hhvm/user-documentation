@@ -73,8 +73,13 @@ $x = f(inout $y, await x_async());
 await bar_async(baz(inout $x));
 ```
 
-Hack doesn't currently support nested `await`s, but might add support for this in the future.
+Hack doesn't currently support nested `await`s.
 
 ```
-$x = await foo_async(await bar_async()); // no!
+// Syntax error.
+$y = await foo_async(await bar_async());
+
+// Must be written as this instead.
+$x = await bar_async();
+$y = await foo_async($x);
 ```
