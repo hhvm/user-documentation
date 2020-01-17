@@ -141,25 +141,62 @@ Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack lega
 
 ## __Override
 
-The presence of this attribute indicates that the designated method is intended to override a method having the same name in a direct
-or indirect base class. If no such base-class method exists, a compile-time error occurs.
+Methods marked with `__Override` must be used with inheritance.
 
-This attribute can be applied to static or instance methods; it has no attribute values.  Consider the following example:
+For classes, `__Override` ensures that a parent class has a method
+with the same name.
 
 ```Hack
 class Button {
+  // If we rename 'draw' to 'render' in the parent class,
   public function draw(): void { /* ... */ }
 }
 class CustomButton extends Button {
+  // then the child class would get a type error.
   <<__Override>>
   public function draw(): void { /* ... */ }
 }
 ```
 
-If a subsequent refactoring of class `Button` results in the removal of method `draw`, the presence of the attribute in class `CustomButton`
-will cause the dependence to be reported.
+For traits, `__Override` ensures that trait users have a method that
+is overridden.
 
-When `__Override` is applied to a method in a trait, the check for whether the overridden method exists takes place when a class uses that trait.
+```Hack
+class Button {
+  public function draw(): void { /* ... */ }
+}
+
+trait MyButtonTrait {
+  <<__Override>>
+  public function draw(): void { /* ... */ }
+}
+
+class ExampleButton extends Button {
+  // If ExampleButton did not have an inherited method
+  // called 'draw', this would be an error.
+  use MyButtonTrait;
+}
+```
+
+It is often clearer to use constraints on traits instead. The above
+trait could also be written like this.
+
+```Hack
+class Button {
+  public function draw(): void { /* ... */ }
+}
+
+trait MyButtonTrait {
+  // This makes the relationship with Button explicit.
+  require extends Button;
+
+  public function draw(): void { /* ... */ }
+}
+
+class ExampleButton extends Button {
+  use MyButtonTrait;
+}
+```
 
 ## __ReturnDisposable
 
