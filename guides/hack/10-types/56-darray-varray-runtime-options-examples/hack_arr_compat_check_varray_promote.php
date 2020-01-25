@@ -33,7 +33,7 @@ EOF;
 
     /*HH_IGNORE_ERROR[4324] This is banned in Hack, but needs to be illustated.*/
     $varray['string'] = <<<EOF
-Writing to a string key in a will always escalate it to a darray<_>.
+Writing to a string key in a will escalate it to a darray<_, _>.
 A vec would throw an exception here.
 EOF;
 }
