@@ -11,3 +11,18 @@ This relies on the settings being in your `server.ini`.
 The output will look something like this.
 
 @@ darray-varray-runtime-options-examples/get_all_runtime_options.php @@
+
+An important note: These settings will not work when you set them at runtime using ini_set(). You must set these in your configuration file or pass them in using the `-dsettinghere=value_here` command line argument when invoking your script from the command line.
+
+## Check implicit varray append
+
+Fullname: hhvm.hack_arr_compat_check_implicit_varray_append
+
+This setting will raise a notice under the following condition.
+If it does not raise a warning, this options is not available in your version of hhvm.
+
+@@ darray-varray-runtime-options-examples/hack_arr_compat_check_implicit_varray_append.php @@
+
+A `vec<_>` does not support implicitly appending. You can only append using an empty subscript operator `$x[] = ''` and update using a keyed subscript operator `$x[2] = ''`. The runtime will throw when you use the updating syntax in order to append. `'OutOfBoundsException' with message 'Out of bounds vec access: invalid index 2'`.
+
+A `varray<_>` will, as of now, accept you implicitly appending a key. It will remain a `varray<_>`. This is the only case where writing to a non existant index in a `varray<_>` will not cause the `varray<_>` to escalate to a `darray<_>`. More information about array escalation can be found below. (Has yet to be written.)
