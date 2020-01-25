@@ -6,3 +6,8 @@ If you notice that an options doesn't apply anymore and you are running a very m
 
 The [runtime options](arrays.md#php-arrays-array-varray-and-darray__runtime-options) were briefly introduced in the article on `varray` and `darray`. This article builds upon the information given there.
 
+You can get a list of the runtime options that your current hhvm recognizes from this script.
+This relies on the settings being in your `server.ini`.
+The output will look something like this.
+
+@@ darray-varray-runtime-options-examples/get_all_runtime_options.php @@
