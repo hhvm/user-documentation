@@ -36,4 +36,5 @@ async function site_main_async(): Awaitable<noreturn> {
 
   await HHVMDocumentationSite::respondToAsync($request);
   exit(0);
+
 }
