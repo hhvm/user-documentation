@@ -3,9 +3,9 @@ should never occur.  For example:
 
 ```Hack
 invariant($obj is B, "Object must have type B");
-invariant(!\is_null($p), "Value can't be null");
+invariant(!$p is null, "Value can't be null");
 $max = 100;
-invariant(!\is_null($p) && $p <= $max, "\$p's value %d must be <= %d", $p, $max);
+invariant(!$p is null && $p <= $max, "\$p's value %d must be <= %d", $p, $max);
 ```
 
 If the first argument value tests true, the program continues execution; otherwise, the library function
