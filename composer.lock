@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "448147ec501e41a523bf16c0f21d871c",
+    "content-hash": "0efe780b56a2e99e14dea7d124cdd747",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -441,16 +441,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.33.2",
+            "version": "v4.33.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "9f639a0f28cfc0a888cb86046dee636ec34eabb2"
+                "reference": "3a2a80ab5845a6a4aa35e10cc5f3586f965d931e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/9f639a0f28cfc0a888cb86046dee636ec34eabb2",
-                "reference": "9f639a0f28cfc0a888cb86046dee636ec34eabb2",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/3a2a80ab5845a6a4aa35e10cc5f3586f965d931e",
+                "reference": "3a2a80ab5845a6a4aa35e10cc5f3586f965d931e",
                 "shasum": ""
             },
             "require": {
@@ -485,7 +485,8 @@
             "license": [
                 "MIT"
             ],
-            "time": "2019-12-19T17:55:05+00:00"
+            "description": "A mutable AST library for Hack with linting and code migrations",
+            "time": "2020-01-24T18:17:24+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -572,16 +573,16 @@
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.37.0",
+            "version": "v4.37.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "636d713c128bd23638a0926d284d23dea40f9ded"
+                "reference": "ffbafdfc3d53fc1426f8e88129513e20320c95bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/636d713c128bd23638a0926d284d23dea40f9ded",
-                "reference": "636d713c128bd23638a0926d284d23dea40f9ded",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/ffbafdfc3d53fc1426f8e88129513e20320c95bb",
+                "reference": "ffbafdfc3d53fc1426f8e88129513e20320c95bb",
                 "shasum": ""
             },
             "require": {
@@ -604,7 +605,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library - Experimental Additions",
-            "time": "2019-12-18T18:10:56+00:00"
+            "time": "2020-01-27T22:15:58+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -832,7 +833,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.40.*"
+        "hhvm": "4.42.*"
     },
     "platform-dev": []
 }
