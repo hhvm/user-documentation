@@ -11,7 +11,7 @@
 * [Bitwise exclusive OR, `^`](bitwise-exclusive-OR.md)
 * [Bitwise inclusive OR, `|`](bitwise-inclusive-OR.md)
 * [Bitwise left-shift, `<<`](bitwise-left-shift.md)
-* [Bitwise right-shift, `<<`](bitwise-right-shift.md)
+* [Bitwise right-shift, `>>`](bitwise-right-shift.md)
 * [Casting, `(int)` etc](casting.md)
 * [Closure creation](closure-creation.md)
 * [Coalesce, `??`](coalesce.md)
