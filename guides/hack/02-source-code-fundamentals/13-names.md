@@ -1,6 +1,7 @@
 Names are used to label variables, constants, functions, and user-defined types, among other things. A name *must* begin
 with an upper- or lowercase letter or underscore, which can optionally be followed by those same characters or decimal digits.
-Furthermore, variable names (which includes function parameter names) and property names *must* be preceded by `$`.  For example:
+
+Local variable names, function parameter names and property names *must* be preceded by `$`. For example:
 
 @@ names-examples/various-names.php @@
 
@@ -12,3 +13,8 @@ The name `$this` is predefined inside any instance method or constructor when th
 `$this` is [`this`](../built-in-types/this.md).
 
 Names beginning with two underscores (__) are reserved by the Hack language.
+
+Note that [XHP classes](../XHP/introduction) have different name
+constraints. Class names may contain `:`, and must start with
+`:`. [XHP categories](../XHP/extending#children__categories) names
+start with `%`.
