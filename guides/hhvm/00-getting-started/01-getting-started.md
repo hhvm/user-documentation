@@ -11,9 +11,9 @@ For this setup, although various flavors of Debian and Ubuntu are supported with
 
 ## Install HHVM
 
-Refer to [our directions on installing a prebuilt package](../installation/linux.md).
+Refer to [our directions on installing a prebuilt package](../installation).
 
-It is of course possible to [build HHVM from source](../installation/introduction.md), but this is much more complicated and time consuming. For this reason, building from source isn't recommended until you get a basic install working and have a better feel for what you're doing.
+It is of course possible to [build HHVM from source](../installation/building-from-source.md), but this is much more complicated and time consuming. For this reason, building from source isn't recommended until you get a basic install working and have a better feel for what you're doing.
 
 ## Test HHVM
 
