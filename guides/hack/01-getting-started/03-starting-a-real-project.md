@@ -4,7 +4,7 @@ Real projects generally aren't a single file in isolation; they tend to have
 dependencies such as the [Hack Standard Library], and various optional tools.
 
 A good starting point is to:
-- [install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos)
+- [install Composer]
 - create an empty `.hhconfig` file
 - create `src/` and `tests/` subdirectories
 - configure autoloading
@@ -334,4 +334,4 @@ Hack which change frequently.
 [HHAST]: https://github.com/hhvm/hhast
 [Hack Standard Library]: https://github.com/hhvm/hsl/
 [hhvm-autoload]: https://github.com/hhvm/hhvm-autoload
-[install Composer]: https://getcomposer.org/download/
+[install Composer]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos
