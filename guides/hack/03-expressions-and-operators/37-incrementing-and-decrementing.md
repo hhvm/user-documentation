@@ -17,7 +17,7 @@ $i = $i - 1;
 $i -= 1;
 $i--;
 --$i;
-``
+```
 
 This is typically used in for loops:
 
