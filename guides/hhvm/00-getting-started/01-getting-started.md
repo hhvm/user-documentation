@@ -7,11 +7,11 @@ The infrastructure you need to run code with HHVM is pretty simple:
 * HHVM itself
 * Some Hack code
 
-For this setup, although various flavors of Debian and Ubuntu are supported with [official packages](../installation/introduction.md#prebuilt-packages), the most recent [Ubuntu LTS](../installation/linux.md#obtaining-lts-releases) and the most recent [Ubuntu stable release](../installation/linux.md#ubuntu-15.04-vivid) are likely to be the *best* supported and easiest to install.
+For this setup, although various flavors of Debian and Ubuntu are supported with [official packages](../installation/introduction.md#prebuilt-packages), the most recent Ubuntu LTS and the most recent Ubuntu stable release are likely to be the *best* supported and easiest to install.
 
 ## Install HHVM
 
-Refer to [our directions on installing a prebuilt package](../installation).
+Refer to [our directions on installing a prebuilt package](../installation/introduction.md#prebuilt-packages).
 
 It is of course possible to [build HHVM from source](../installation/building-from-source.md), but this is much more complicated and time consuming. For this reason, building from source isn't recommended until you get a basic install working and have a better feel for what you're doing.
 
