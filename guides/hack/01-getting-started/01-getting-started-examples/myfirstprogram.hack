@@ -3,7 +3,7 @@
 namespace Hack\GettingStarted\MyFirstProgram;
 
 <<__EntryPoint>>
-function main(): noreturn{
+function main(): void {
   echo "Welcome to Hack!\n\n";
 
   \printf("Table of Squares\n" .
