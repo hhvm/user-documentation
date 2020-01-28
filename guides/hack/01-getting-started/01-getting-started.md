@@ -76,7 +76,7 @@ After you get your Hack program to typecheck clean with no errors, you can then 
 program in HHVM, as follows:
 
 ```
-% hhvm first.hack
+$ hhvm first.hack
 ```
 
 Here is the output:
