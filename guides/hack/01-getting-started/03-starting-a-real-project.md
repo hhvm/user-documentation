@@ -17,7 +17,13 @@ Currently, HHVM needs to be given a map of what files define which classes,
 functions and so on - for example, to execute the code `new Foo()`, HHVM needs
 to know that the class `Foo` is defined in `src/Foo.hack`.
 
-[hhvm-autoload] generates this map, using an `hh_autoload.json` configuration
+[hhvm-autoload] generates this map. To add it to your project, run:
+
+```
+$ php /path/to/composer.phar require hhvm/hhvm-autoload
+```
+
+hhvm-autoload needs an `hh_autoload.json` configuration
 file. For most projects, a minimal example is:
 
 ```JSON
@@ -328,4 +334,4 @@ Hack which change frequently.
 [HHAST]: https://github.com/hhvm/hhast
 [Hack Standard Library]: https://github.com/hhvm/hsl/
 [hhvm-autoload]: https://github.com/hhvm/hhvm-autoload
-[install Composer]: https://getcomposer.org/download/
+[install Composer]: https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos
