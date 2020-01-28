@@ -4,7 +4,7 @@ Real projects generally aren't a single file in isolation; they tend to have
 dependencies such as the [Hack Standard Library], and various optional tools.
 
 A good starting point is to:
-- [install Composer]
+- [install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-macos)
 - create an empty `.hhconfig` file
 - create `src/` and `tests/` subdirectories
 - configure autoloading
@@ -17,7 +17,13 @@ Currently, HHVM needs to be given a map of what files define which classes,
 functions and so on - for example, to execute the code `new Foo()`, HHVM needs
 to know that the class `Foo` is defined in `src/Foo.hack`.
 
-[hhvm-autoload] generates this map, using an `hh_autoload.json` configuration
+[hhvm-autoload] generates this map. To add it to your project, run:
+
+```
+$ php /path/to/composer.phar require hhvm/hhvm-autoload
+```
+
+hhvm-autoload needs an `hh_autoload.json` configuration
 file. For most projects, a minimal example is:
 
 ```JSON
