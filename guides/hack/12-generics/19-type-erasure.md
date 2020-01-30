@@ -33,7 +33,7 @@ Erasure prevents you using a generic type parameter `T` in the
 following situations:
 
  * Creating instances: `new T()`
- * Conversions: `(T) $value`
+ * Conversions: `(T)$value`
  * Calling static methods: `T::aStaticMethod()`
  * Type checks: `is T`
  * As the type of a static property.
