@@ -82,8 +82,44 @@ Note: An entry-point function will *not* be automatically executed if the file c
 
 ## __LateInit
 
-This attribute marks a property as being initialized via a non-standard mechanism, i.e., not via standard assignment in the
-constructor. It has no attribute values. Attempting to read the value of an uninitialized <<__LateInit>> properties is a runtime error.
+Hack normally requires properties to be initialized, either with an
+initial value on the property definition or inside the constructor.
+
+`__LateInit` disables this check.
+
+```Hack
+class Foo {}
+
+class Bar {
+  <<__LateInit>> private Foo $f;
+
+  public function trustMeThisIsCalledEarly(): void {
+    $this->f = new Foo();
+  }
+}
+```
+
+**This is intended for testing**, where it's common to have a setup
+function that initializes values.
+
+Accessing a property that is not initialized produces a runtime error.
+
+`__LateInit` can also be used with static properties.
+
+```Hack
+class Foo {}
+
+class Bar {
+  <<__LateInit>> private static Foo $f;
+
+  public static function trustMeThisIsCalledEarly(): void {
+    self::$f = new Foo();
+  }
+}
+```
+
+It may be clearer to write your code using a memoized static method
+instead of a static property with `__LateInit`.
 
 ## __Memoize
 
