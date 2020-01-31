@@ -76,6 +76,7 @@ final class Guides {
         ],
         'generics' => dict[
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
+          'type-arguments' => tuple('generics', 'type-parameters'),
         ],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),

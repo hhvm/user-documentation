@@ -28,5 +28,4 @@ the type corresponding to the type parameter `T`. In the case of the call with t
 `string` is inferred as the type corresponding to the type parameter `T`.
 
 Type parameters are discussed further in [type
-parameters](type-parameters.md), and type arguments are discussed
-further in [type arguments](type-arguments.md).
+parameters](type-parameters.md).
