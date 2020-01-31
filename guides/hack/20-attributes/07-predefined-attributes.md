@@ -1,13 +1,19 @@
 The following attributes are defined:
 * [__AcceptDisposable](#__acceptdisposable)
+* [__AllowStatic](#__allowstatic)
 * [__ConsistentConstruct](#__consistentconstruct)
 * [__Deprecated](#__deprecated)
+* [__DynamicallyCallable](#__dynamicallycallable)
+* [__DynamicallyConstructible](#__dynamicallyconstructible)
+* [__Enforceable](#__enforceable)
 * [__EntryPoint](#__entrypoint)
+* [__Explicit](#__explicit)
 * [__LateInit](#__lateinit)
 * [__Memoize](#__memoize)
 * [__MemoizeLSB](#__memoizelsb)
 * [__MockClass](#__mockclass)
 * [__Override](#__override)
+* [__PHPStdLib](#__phpstdlib)
 * [__ReturnDisposable](#__returndisposable)
 * [__Sealed](#__sealed)
 * [__Enforceable](#__sealed)
@@ -17,6 +23,11 @@ The following attributes are defined:
 This attribute can be applied to a function parameter that has a type that implements interface `IDisposable` or `IAsyncDisposable`.
 
 See [object disposal](../classes/object-disposal.md) for an example of its use.
+
+## __AllowStatic
+
+Allows an instance method to be called statically on the class. This
+is purely for PHP compatibility.
 
 ## __ConsistentConstruct
 
@@ -65,6 +76,29 @@ The presence of this attribute on a function has no effect, unless that function
 function, the type checker issues a diagnostic containing the text from the first attribute value.  The optional `int`-typed second attribute
 value (in this case, 7) indicates a *sample rate*. Assuming the program will still execute, every 1/sample-rate calls (as in, 1/7) to that
 function will be diagnosed at runtime.
+
+## __DynamicallyCallable
+
+Allows a function or method to be called dynamically, based on a
+string of its name. HHVM will warn on error (depending on
+configuration) on dynamic calls to functions or methods without this attribute.
+
+## __DynamicallyConstructible
+
+Allows this class to be instantiated dynamically, based on a string of
+its name. HHVM will warn on error (depending on configuration) on
+dynamic instantiations of classes without this attribute.
+
+## __Enforceable
+
+Ensure that a type is enforceable. Enforceable types can be used with
+`is` and `as`. This forbids usage of function types and erased (not
+reified) generica.
+
+## __Explicit
+
+Requires callers to explicitly specify the value for a generic
+type. Normally Hack allows generics to be inferred at the call site.
 
 ## __EntryPoint
 
@@ -233,6 +267,16 @@ class ExampleButton extends Button {
   use MyButtonTrait;
 }
 ```
+
+## __PHPStdLib
+
+This attribute tells the type checker to ignore a function or class,
+so type errors are reported on any code that uses it.
+
+This is useful when gradually deprecating PHP features.
+
+`__PHPStdLib` only applies on `.hhi` files by default, but can apply
+everywhere with the option `deregister_php_stdlib`.
 
 ## __ReturnDisposable
 
