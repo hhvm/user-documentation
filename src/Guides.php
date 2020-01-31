@@ -74,6 +74,9 @@ final class Guides {
         'callables' => dict[
           'special-functions' => tuple('types', 'anonymous-function-objects'),
         ],
+        'generics' => dict[
+          'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
+        ],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),
           'pipe' => tuple('expressions-and-operators', 'pipe'),
