@@ -18,8 +18,10 @@ class C {
 Function `do_it` takes two arguments, the first of which is an anonymous function taking one `int` argument and returning an `int` result.
 The instance property `$af` in class `C` has the same type.
 
-There are two ways to create an anonymous function object: via a [closure-creation](../expressions-and-operators/closure-creation.md) expression
-or a [lambda-creation](../expressions-and-operators/lambda-creation.md) expression. Consider the following example which shows both approaches:
+There are two ways to create an anonymous function object: via a
+closure creation expression or a lambda creation expression.
+
+Consider the following example which shows both approaches:
 
 @@ anonymous-functions-examples/anonymous-function.php @@
 

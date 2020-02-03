@@ -80,6 +80,8 @@ final class Guides {
           'bitwise-inclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-left-shift' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-right-shift' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'closure-creation' => tuple('functions', 'anonymous-functions'),
+          'lambda-creation' => tuple('functions', 'anonymous-functions'),
           'ones-complement' => tuple('expressions-and-operators', 'bitwise-operators'),
           'relational' => tuple('expressions-and-operators', 'comparisons'),
         ],
