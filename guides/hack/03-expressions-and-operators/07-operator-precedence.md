@@ -26,6 +26,3 @@ The rows of operators in the table are shown in decreasing order of precedence, 
 given table row is arbitrary.  Associativity applies to the order in which operators exist in a given expression, not in a row of the precedence table.
 
 Postfix versions of `++` and `--` have higher precedence than their prefix counterparts.
-
-Precedence is used by the compiler to construct an expression tree and has nothing whatsoever to do with order of evaluation.  It
-is a very common mistake to say, *order of evaluation*, when we really mean *precedence*. The two are unrelated in Hack.
