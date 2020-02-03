@@ -74,6 +74,14 @@ final class Guides {
         'callables' => dict[
           'special-functions' => tuple('types', 'anonymous-function-objects'),
         ],
+        'expressions-and-operators' => dict[
+          'bitwise-AND' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'bitwise-exclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'bitwise-inclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'bitwise-left-shift' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'bitwise-right-shift' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'ones-complement' => tuple('expressions-and-operators', 'bitwise-operators'),
+        ],
         'generics' => dict[
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
           'type-arguments' => tuple('generics', 'type-parameters'),
