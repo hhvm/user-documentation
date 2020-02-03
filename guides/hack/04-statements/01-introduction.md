@@ -9,7 +9,6 @@
 * [for](for.md)
 * [foreach](foreach.md)
 * [if/elseif/else](if.md)
-* [Labeled statement (case, default)](labeled-statements.md)
 * [Null statement](expression-statements.md)
 * [return](return.md)
 * [switch](switch.md)

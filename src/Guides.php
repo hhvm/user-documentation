@@ -104,6 +104,9 @@ final class Guides {
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
         ],
+        'statements' => dict[
+          'labeled-statements' => tuple('statements', 'switch'),
+        ],
         'typechecker' => dict[
           'editors' => tuple('getting-started', 'tools'),
           'modes' => tuple('source-code-fundamentals', 'program-structure'),
