@@ -81,6 +81,7 @@ final class Guides {
           'bitwise-left-shift' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-right-shift' => tuple('expressions-and-operators', 'bitwise-operators'),
           'ones-complement' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'relational' => tuple('expressions-and-operators', 'comparisons'),
         ],
         'generics' => dict[
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
