@@ -1,66 +1,55 @@
-The simple-assignment operator `=` assigns the value of the right-hand operand to the left-hand operand.  For example:
+The assignment operator `=` assigns the value of the right-hand operand to the left-hand operand.  For example:
 
 ```Hack
-$a = 10
+$a = 10;
 ```
 
-This form is commonly used in expression statements or as the first part of a `for` loop's controlling expressions.  This
-operator involves a side-effect, that of assigning the value to `$a`.  And being a non-void expression, it also has a value,
-in this case, 10. However, that value is not used, so it is discarded.  However, consider the following:
-
-```Hack
-$a = $b = 10    // equivalent to $a = ($b = 10)
-```
-
-As indicated by the comment, this operator is right-associative, so 10 is first assigned to `$b`, whose value is assigned to `$a`,
-whose value is *not* used, so it is discarded.
+## Element Assignment
 
 We can assign to array elements, as follows:
 
 ```Hack
+$v = vec[1, 2, 3];
+
+$v[0] = 42; // $v is now vec[42, 2, 3]
+
 $v = dict[0 => 10, 1 => 20, 2 => 30];
-$v[1] = 22;     // change the value of the element with int key 1
-$v[-10] = 19;   // insert a new element with int key -10
+$v[1] = 22;     // change the value of the element with key 1
+$v[-10] = 19;   // insert a new element with key -10
 ```
 
-For a dict, if the location designated by the left-hand operand is a non-existent array element, a new element is inserted with the
-designated key and with a value being that of the right-hand operand. (For a vec, a new element can only be added to the right-hand end.)
+For `vec` and `varray`, indexes must be within the range of the
+existing values. Use `$v[] = new_value;` to append new values.
 
-We can assign to the elements of a string, as follows:
+For a `dict` or a `darray`, we can insert at arbitrary keys.
 
-```Hack
-$s = "red";
-$s[1] = "X";    // OK; "e" -> "X"
-$s[5] = "Z";    // extends string with "Z", padding with spaces in [3]-[4]
-
-$s = "red";
-$s[0] = "DEF";  // "r" -> "D"; only 1 char changed; "EF" ignored
-$s[0] = "";     // "D" -> "\0"
+``` Hack
+$d = dict['x' => 1];
+$d['y'] = 42; // $d is now dict['x' => 1, 'y' => 42]
 ```
 
-The left-most single character from the right-hand operand is stored at the designated location; all other characters in the right-hand
-operand string are ignored.  If the designated location is beyond the end of the destination string, that string is extended to the new
-length with spaces (U+0020) added as padding beyond the old end and before the newly added character. If the right-hand operand is an
-empty string, the null character \\0 (U+0000) is stored.
+Strings can also be assigned like arrays. However, it is possible to
+assign beyond the end of the string. The string will be extended with
+spaces as necessary.
 
-A *compound-assignment* operator has the form *op*`=` and is a short-hand notation for situations in which we wish to operate on the
-value of a variable and to store the resort back in that variable.  For example:
-
-```Hack
-$v = 10;
-$v += 20;     // $v = 30
-$v -= 5;      // $v = 25
-$v .= 123.45; // $v = "25123.45"
+``` Hack
+$s = "ab";
+$s[0] = "x"; // in bounds
+$s[3] = "y"; // $s is now "xb y"
 ```
 
-The expression `$v += 20` is equivalent to `$v = $v + 20`. Likewise for `$v -= 5` and `$v = $v - 5`, and `$v .= 123.45` and
-`$v = $v . 123.45`.  However, consider the following:
+## Compound Assignments
 
-```Hack
-$list[$i++] += 10;
+Infix operators in Hack have a corresponding compound assignment
+operator. For example, `+` has compound assignment operator `+=`.
+
+``` Hack
+$x += 10;
+
+// Equivalent to:
+$tmp = $x + 10;
+$x = $tmp;
 ```
-
-When the left-hand expression contains a side-effect, that side-effect is performed only once.
 
 The complete set of compound-assignment operators is: `**=`, `*=`, `/=`, `%=`, `+=`, `-=`, `.=`, `<<=`, `>>=`, `&=`, `^=`, `|=`, and
 [`??=`](https://docs.hhvm.com/hack/expressions-and-operators/coalesce#coalescing-assignment-operator).
