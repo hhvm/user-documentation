@@ -89,6 +89,7 @@ final class Guides {
           'multiplication' => tuple('expressions-and-operators', 'arithmetic'),
           'null-safe-member-selection' => tuple('expressions-and-operators', 'member-selection'),
           'ones-complement' => tuple('expressions-and-operators', 'bitwise-operators'),
+          'operations-on-operands-having-one-or-more-subtypes' => tuple('types', 'type-refinement'),
           'relational' => tuple('expressions-and-operators', 'comparisons'),
           'restrictions-on-arithmetic-operations' => tuple('expressions-and-operators', 'arithmetic'),
           'remainder' => tuple('expressions-and-operators', 'arithmetic'),
