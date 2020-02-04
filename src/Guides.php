@@ -87,6 +87,7 @@ final class Guides {
           'exponentiation' => tuple('expressions-and-operators', 'arithmetic'),
           'lambda-creation' => tuple('functions', 'anonymous-functions'),
           'multiplication' => tuple('expressions-and-operators', 'arithmetic'),
+          'null-safe-member-selection' => tuple('expressions-and-operators', 'member-selection'),
           'ones-complement' => tuple('expressions-and-operators', 'bitwise-operators'),
           'relational' => tuple('expressions-and-operators', 'comparisons'),
           'restrictions-on-arithmetic-operations' => tuple('expressions-and-operators', 'arithmetic'),
