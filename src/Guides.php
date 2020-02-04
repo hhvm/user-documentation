@@ -106,7 +106,7 @@ final class Guides {
           'lambda' => tuple('functions', 'anonymous-functions'),
           'pipe' => tuple('expressions-and-operators', 'pipe'),
           'nullsafe' =>
-            tuple('expressions-and-operators', 'null-safe-member-selection'),
+            tuple('expressions-and-operators', 'member-selection'),
         ],
         'other-features' => dict[
           'autoloading' =>
