@@ -93,7 +93,7 @@ dynamic instantiations of classes without this attribute.
 
 Ensure that a type is enforceable. Enforceable types can be used with
 `is` and `as`. This forbids usage of function types and erased (not
-reified) generica.
+reified) generics.
 
 ## __Explicit
 
