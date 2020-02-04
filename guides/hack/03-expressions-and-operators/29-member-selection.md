@@ -15,3 +15,7 @@ function my_example(?IntBox $ib): ?int {
   return $ib?->getX();
 }
 ```
+
+## XHP Attribute Access
+
+The operator `->:` is used for accessing XHP attributes.

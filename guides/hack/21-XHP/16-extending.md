@@ -45,7 +45,7 @@ The typechecker will raise errors if attributes are incorrect when instantiating
 attributes to be set in other ways (e.g., `setAttribute`), not all problems can be caught by the typechecker, and an `XHPInvalidAttributeException`
 will be thrown at runtime instead in those cases.
 
-The [`->:` operator](../expressions-and-operators/XHP-attribute-spread.md) can be used to retrieve the value of an attribute, and Hack will understand it's type.
+The `->:` operator can be used to retrieve the value of an attribute.
 
 ### Required Attributes
 

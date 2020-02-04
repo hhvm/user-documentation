@@ -96,6 +96,7 @@ final class Guides {
           'subtraction' => tuple('expressions-and-operators', 'arithmetic'),
           'unary-minus' => tuple('expressions-and-operators', 'arithmetic'),
           'unary-plus' => tuple('expressions-and-operators', 'arithmetic'),
+          'XHP-attribute-spread' => tuple('XHP', 'introduction'),
         ],
         'generics' => dict[
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
