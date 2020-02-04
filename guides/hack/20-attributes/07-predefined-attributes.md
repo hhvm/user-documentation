@@ -95,6 +95,8 @@ reified) generics.
 Requires callers to explicitly specify the value for a generic
 type. Normally Hack allows generics to be inferred at the call site.
 
+@@ predefined-attributes-examples/explicit.php @@
+
 ## __EntryPoint
 
 A Hack program begins execution at a top-level function referred to as the *entry-point function*. A top-level function can be designated as such using this attribute, which
