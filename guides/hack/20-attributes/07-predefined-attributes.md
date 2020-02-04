@@ -24,11 +24,6 @@ This attribute can be applied to a function parameter that has a type that imple
 
 See [object disposal](../classes/object-disposal.md) for an example of its use.
 
-## __AllowStatic
-
-Allows an instance method to be called statically on the class. This
-is purely for PHP compatibility.
-
 ## __ConsistentConstruct
 
 When a method is overridden in a derived class, it must have exactly the same number, type, and order of parameters as that in the base
