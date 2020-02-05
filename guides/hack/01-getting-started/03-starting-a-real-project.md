@@ -42,6 +42,29 @@ to generate or update the map, which is created as `vendor/autoload.hack`
 
 ### An Example
 
+The following sequence of commands could be used to fully initialize a Hack
+project with the most common dependencies:
+
+```
+$ touch .hhconfig
+$ mkdir bin src tests
+$ cat > hh_autoload.json
+{
+  "roots": [
+    "src/"
+  ],
+  "devRoots": [
+    "tests/"
+  ]
+}
+$ composer require hhvm/hsl hhvm/hhvm-autoload
+$ composer require --dev hhvm/hhast hhvm/hacktest facebook/fbexpect
+```
+
+You may need to use the full path to Composer, depending on how it's installed.
+
+The same commands with their expected output:
+
 ```
 $ touch .hhconfig
 $ mkdir bin src tests

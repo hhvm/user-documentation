@@ -1,3 +1,4 @@
+// @example-start Don't strip boilerplate since this is an introductory example.
 namespace Hack\GettingStarted\HSLIO;
 
 use namespace HH\Lib\Experimental\{File, IO};
