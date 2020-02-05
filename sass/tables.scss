@@ -23,7 +23,6 @@
             border-bottom: 1px dotted $lightgrey;
             display: block;
             padding: 5px 0;
-            text-align: right;
 
             &::before {
               color: $grey;
@@ -32,6 +31,7 @@
               font-family: $header-font;
               float: left;
               height: 100%;
+              padding-right: 15px;
               text-transform: uppercase;
             }
 
