@@ -192,7 +192,14 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
     foreach (\glob($root.'/function.*') as $dir) {
       $urls[] = Str\replace($dir, $root.'/function.', 'function/');
     }
-    return Vec\map($urls, $url ==> vec['/hack/reference/'.$url.'/']);
+    return Vec\map(
+      $urls,
+      $url ==> vec[Str\format(
+        '/%s/reference/%s/',
+        Str\contains($url, '/HH.Lib.') ? 'hsl' : 'hack',
+        $url,
+      )],
+    );
   }
 
   <<DataProvider('getPagesWithExamples')>>

@@ -31,7 +31,11 @@ final class Examples extends PageSection {
       Str\replace($subdirectory, '\\', '.'),
     );
 
-    $examples = Vec\concat(\glob($path.'/*.md'), \glob($path.'/*.php'))
+    $examples = Vec\concat(
+      \glob($path.'/*.md'),
+      \glob($path.'/*.hack'),
+      \glob($path.'/*.php'),
+    )
       |> Vec\map($$, $file ==> \pathinfo($file, \PATHINFO_FILENAME))
       |> keyset($$);
 
@@ -44,12 +48,14 @@ final class Examples extends PageSection {
     foreach ($examples as $example) {
       $base = $path.'/'.$example;
       $preamble = $base.'.md';
-      $code = $base.'.php';
       if (\file_exists($preamble)) {
         $md .= "\n\n".\file_get_contents($preamble);
       }
-      if (\file_exists($code)) {
-        $md .= "\n\n@@ ".$code." @@";
+      foreach (vec[$base.'.hack', $base.'.php'] as $code) {
+        if (\file_exists($code)) {
+          $md .= "\n\n@@ ".$code." @@";
+          break;
+        }
       }
     }
     return $md;
