@@ -13,6 +13,6 @@ If the first argument value tests true, the program continues execution; otherwi
 exception of type `\HH\InvariantException`, or calls the handler previously registered by the library function
 [`invariant_callback_register`](http://www.php.net/invariant_callback_register).
 
-The first argument can be *any* expression allowed as the operand of logical NOT, `!`. The second argument is a string that can contain
+The first argument is a boolean expression. The second argument is a string that can contain
 text and/or optional formatting information as understood by the library function [`sprintf`](http://www.php.net/sprintf).  The optional
 comma-separated list of values following the string must match the set of types expected by the optional formatting information inside that string.
