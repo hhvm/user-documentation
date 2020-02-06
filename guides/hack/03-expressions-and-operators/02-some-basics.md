@@ -15,9 +15,10 @@ produce a side-effect. The occurrence of value computation and side-effects is d
 the computations and side-effects previously promised are complete, and no computations or side-effects of future operations have yet
 begun.
 
-There is a sequence point at the end of each full expression. The [logical AND](logical-AND.md), [logical OR](logical-inclusive-OR.md),
-[ternary](ternary.md), and [function-call](function-call.md) operators each contain a sequence point. For example, in the following
-series of statements:
+There is a sequence point at the end of each full expression. The
+`&&`, `||`, `? :` and [function-call](function-call.md) operators each
+contain a sequence point. For example, in the following series of
+statements:
 
 ```Hack
 $a = 10; ++$a; $b = $a;
