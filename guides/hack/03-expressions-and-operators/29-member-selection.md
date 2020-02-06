@@ -16,6 +16,9 @@ function my_example(?IntBox $ib): ?int {
 }
 ```
 
+Note that arguments are always evaluated, even if the object is
+null. `$x?->foo(bar())` will call `bar()` even if `$x` is null.
+
 ## XHP Attribute Access
 
 The operator `->:` is used for accessing XHP attributes.
