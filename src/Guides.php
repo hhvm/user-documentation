@@ -76,6 +76,7 @@ final class Guides {
         ],
         'expressions-and-operators' => dict[
           'addition' => tuple('expressions-and-operators', 'arithmetic'),
+          'as' => tuple('expressions-and-operators', 'type-assertions'),
           'bitwise-AND' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-exclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-inclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
@@ -85,6 +86,8 @@ final class Guides {
           'conditional' => tuple('expressions-and-operators', 'ternary'),
           'division' => tuple('expressions-and-operators', 'arithmetic'),
           'exponentiation' => tuple('expressions-and-operators', 'arithmetic'),
+          'instanceof' => tuple('expressions-and-operators', 'type-assertions'),
+          'is' => tuple('expressions-and-operators', 'type-assertions'),
           'lambda-creation' => tuple('functions', 'anonymous-functions'),
           'logical-AND' => tuple('expressions-and-operators', 'logical-operators'),
           'logical-inclusive-OR' => tuple('expressions-and-operators', 'logical-operators'),
