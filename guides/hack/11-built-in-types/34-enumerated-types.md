@@ -40,7 +40,7 @@ Here is an example that uses several of these methods:
 
 You can refine to an enum using `as` or `?as`:
 
-@@ enumerated-types-examples/as.php @@
+@@ enumerated-types-examples/As.php @@
 
 And you can read more about refining types on the [as](/hack/expressions-and-operators/type-assertions#enforcing-types-with-as-and-as) page.
 
