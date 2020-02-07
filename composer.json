@@ -3,7 +3,7 @@
         "facebook/xhp-lib": "^3.0",
         "hhvm": "4.43.*",
         "usox/hackttp": "^0.3.3",
-        "hhvm/hhvm-autoload": "^2.0",
+        "hhvm/hhvm-autoload": "^2.0|^3.0",
         "hhvm/type-assert": "^3.1.0",
         "facebook/hack-codegen": "^4.0",
         "facebook/hack-router-codegen": ">=0.14 <1.0",
