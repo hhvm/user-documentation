@@ -1,4 +1,4 @@
-It is definitely possible that you have code that you would like to convert to XHP. You can do this piece meal in a few different ways.
+You can incrementally port code to use XHP.
 
 The basis for all these possibilities is this function:
 
