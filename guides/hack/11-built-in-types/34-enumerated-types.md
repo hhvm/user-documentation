@@ -38,10 +38,4 @@ Here is an example that uses several of these methods:
 
 @@ enumerated-types-examples/enum-methods.php @@
 
-You can refine to an enum using `as` or `?as`:
-
-@@ enumerated-types-examples/As.php @@
-
-And you can read more about refining types on the [as](/hack/expressions-and-operators/type-assertions#enforcing-types-with-as-and-as) page.
-
 For an example involving a banking application, see [shapes](shapes.md).
