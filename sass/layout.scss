@@ -5,9 +5,6 @@
 }
 
 .flexWrapper {
-  align-items: flex-start;
-  display: flex;
-  flex-flow: row nowrap;
   padding-bottom: 50px;
   padding-top: 50px;
 }
@@ -25,8 +22,6 @@
 }
 
 .mainWrapper {
-  flex: 1;
-  order: 2;
   max-width: $default-max-width;
 }
 
@@ -55,10 +50,6 @@
   body {
     display: flex;
     flex-flow: column wrap;
-  }
-
-  .flexWrapper {
-    display: block;
   }
 
   .mainContainer {
