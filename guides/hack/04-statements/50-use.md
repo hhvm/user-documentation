@@ -25,6 +25,5 @@ use namespace Hack\UserDocumentation\Statements\use\Examples\XXX;
 
 has been seen, we can access `CON2` via the abbreviated `XXX\CON2`.
 
-
-
-
+Note that names in `use` statements are always fully qualified, they don't need
+to be prefixed with `\`.

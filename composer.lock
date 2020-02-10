@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "469235f31d3ca6c38516334be4d4c7e4",
+    "content-hash": "fab021f28eec4dcdd45886e514cb042a",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -97,16 +97,16 @@
         },
         {
             "name": "facebook/fbmarkdown",
-            "version": "v1.6.2",
+            "version": "v1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbmarkdown.git",
-                "reference": "7915e2da4c5b877ac3eeb45eb6b1f9c8b6d53a2a"
+                "reference": "c25d39f3b38c4562b94243664651cff0710f95c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/7915e2da4c5b877ac3eeb45eb6b1f9c8b6d53a2a",
-                "reference": "7915e2da4c5b877ac3eeb45eb6b1f9c8b6d53a2a",
+                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/c25d39f3b38c4562b94243664651cff0710f95c6",
+                "reference": "c25d39f3b38c4562b94243664651cff0710f95c6",
                 "shasum": ""
             },
             "require": {
@@ -137,7 +137,7 @@
                 "hack",
                 "markdown"
             ],
-            "time": "2019-12-19T20:05:22+00:00"
+            "time": "2020-01-13T16:38:47+00:00"
         },
         {
             "name": "facebook/hack-codegen",
@@ -441,23 +441,23 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.33.4",
+            "version": "v4.33.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "3a2a80ab5845a6a4aa35e10cc5f3586f965d931e"
+                "reference": "a554cc92f714e76f3b81e074af93465025534cf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/3a2a80ab5845a6a4aa35e10cc5f3586f965d931e",
-                "reference": "3a2a80ab5845a6a4aa35e10cc5f3586f965d931e",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/a554cc92f714e76f3b81e074af93465025534cf0",
+                "reference": "a554cc92f714e76f3b81e074af93465025534cf0",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.0.0",
                 "hhvm": "^4.33",
-                "hhvm/hhvm-autoload": "^2.0.4",
+                "hhvm/hhvm-autoload": "^2.0.4|^3.0",
                 "hhvm/hsl": "^4.25",
                 "hhvm/hsl-experimental": "^4.25",
                 "hhvm/type-assert": "^3.4"
@@ -486,20 +486,20 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-01-24T18:17:24+00:00"
+            "time": "2020-02-07T22:29:53+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v2.0.11",
+            "version": "v2.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "2506257ca18034d01f7cfe424ae2cef91fe29881"
+                "reference": "816e33cd940844898b04e1c2101d2cfeb3879272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/2506257ca18034d01f7cfe424ae2cef91fe29881",
-                "reference": "2506257ca18034d01f7cfe424ae2cef91fe29881",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/816e33cd940844898b04e1c2101d2cfeb3879272",
+                "reference": "816e33cd940844898b04e1c2101d2cfeb3879272",
                 "shasum": ""
             },
             "require": {
@@ -529,11 +529,11 @@
             },
             "autoload": {
                 "classmap": [
-                    "src/ComposerPlugin.php"
+                    "ComposerPlugin.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2019-11-22T01:04:58+00:00"
+            "time": "2020-02-07T20:45:31+00:00"
         },
         {
             "name": "hhvm/hsl",
@@ -786,22 +786,22 @@
         },
         {
             "name": "hhvm/hacktest",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hacktest.git",
-                "reference": "2c70f92f235ea5bfb4d2d6f99ed83e44484cdcdf"
+                "reference": "cde86b675923d56955a2f0f95840206e52bd8618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/2c70f92f235ea5bfb4d2d6f99ed83e44484cdcdf",
-                "reference": "2c70f92f235ea5bfb4d2d6f99ed83e44484cdcdf",
+                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/cde86b675923d56955a2f0f95840206e52bd8618",
+                "reference": "cde86b675923d56955a2f0f95840206e52bd8618",
                 "shasum": ""
             },
             "require": {
                 "facebook/hh-clilib": "^2.0.0",
-                "hhvm": "^4.6",
-                "hhvm/hhvm-autoload": "^2.0.2",
+                "hhvm": "^4.15",
+                "hhvm/hhvm-autoload": "^2.0.2|^3.0",
                 "hhvm/hsl": "^4.0",
                 "hhvm/type-assert": "^3.2"
             },
@@ -816,7 +816,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -824,7 +824,7 @@
                 "MIT"
             ],
             "description": "The Hack Test Library",
-            "time": "2019-10-25T16:00:51+00:00"
+            "time": "2020-02-07T21:57:16+00:00"
         }
     ],
     "aliases": [],

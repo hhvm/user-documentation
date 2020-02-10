@@ -68,11 +68,11 @@ Each of those names may designate a namespace, a sub-namespace, a class, an inte
 When importing many member names from a given namespace, we can use a group form of `use`.  For example:
 
 ```Hack
-use \NS1\ { C, I, T };
+use NS1\{C, I, T};
 ```
 
 instead of
 
 ```Hack
-use \NS1\C, \NS1\I, \NS1\T;
+use NS1\C, NS1\I, NS1\T;
 ```

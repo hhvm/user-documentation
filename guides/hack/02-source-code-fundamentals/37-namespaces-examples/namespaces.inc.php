@@ -25,7 +25,7 @@ namespace NS1 {
 }
 
 namespace NS2 {
-  use type \NS1\{C, I, T};
+  use type NS1\{C, I, T};
 
   class D extends C implements I {
     use T;
