@@ -3,7 +3,7 @@ Invalid "as" expression hint (Typing[4195])
 File "%s/enforceable.php", line 4, characters 23-28:
 The "as" operator cannot be used with the abstract type constant Tnoenf because it is not marked <<__Enforceable>>
 
-File "%s/enforceable.php", line 17, characters 21-39:
+File "%s/enforceable.php", line 17, characters 14-17:
 Invalid type (Typing[4302])
 File "%s/enforceable.php", line 5, characters 5-17:
 Type constant Tenf was declared __Enforceable here

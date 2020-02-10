@@ -14,7 +14,7 @@ final class LocalPageLoader extends PageLoader {
   protected async function getPageImplAsync(
     string $url,
   ): Awaitable<(ResponseInterface, string)> {
-    $query_params = [];
+    $query_params = darray[];
     $query_part = \parse_url($url, \PHP_URL_QUERY);
     if ($query_part !== null) {
       \parse_str($query_part, inout $query_params);

@@ -128,8 +128,8 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
   }
 
   public function pathNormalizationTestCases(
-  ): array<(string, string, string)> {
-    return [
+  ): vec<(string, string, string)> {
+    return vec[
       tuple('/foo/bar', '/baz', '/baz'),
       tuple('/foo/bar', './baz', '/foo/baz'),
       tuple('/foo/bar/', './baz', '/foo/bar/baz'),

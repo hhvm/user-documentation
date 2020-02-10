@@ -16,16 +16,16 @@ use function Facebook\FBExpect\expect;
 use type Facebook\HackTest\{DataProvider, TestGroup};
 
 class APIPagesTest extends \Facebook\HackTest\HackTest {
-  public static function allAPIPages(): array<(string, NavDataNode)> {
+  public static function allAPIPages(): vec<(string, NavDataNode)> {
     $to_visit = \array_values(APINavData::get(APIProduct::HACK)->getNavData());
-    $out = [];
+    $out = vec[];
 
     while (!C\is_empty($to_visit)) {
       $node = \array_pop(inout $to_visit);
       foreach ($node['children'] as $child) {
         $to_visit[] = $child;
       }
-      $node['children'] = []; // make failure output easier to read
+      $node['children'] = varray[]; // make failure output easier to read
       $out[] = tuple($node['urlPath'], $node);
     }
     return $out;

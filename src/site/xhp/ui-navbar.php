@@ -48,7 +48,7 @@ class :ui:navbar extends :x:element {
       </div>
     );
 
-    $container->appendChild([
+    $container->appendChild(varray[
       $this->getToggleScript($toggle_button, $container),
       $this->getScrollToActiveScript($list),
     ]);

@@ -24,8 +24,8 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
     expect($body)->toContainSubstring('application/opensearchdescription+xml');
   }
 
-  public function jumpProvider(): array<string, (string, string)> {
-    return [
+  public function jumpProvider(): dict<string, (string, string)> {
+    return dict[
       'Hack class without namespace' => tuple(
         'ResultOrExceptionWrapper',
         '/hack/reference/interface/HH.Asio.ResultOrExceptionWrapper/',

@@ -38,7 +38,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
       return $url;
     }
 
-    $candidates = [];
+    $candidates = darray[];
     foreach (APILegacyRedirectData::getIndex() as $id => $url) {
       if (stripos($id, $path) !== false) {
         $candidates[$url] = $url;

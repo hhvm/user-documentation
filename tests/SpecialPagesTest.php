@@ -5,12 +5,12 @@ use function Facebook\FBExpect\expect;
 use type Facebook\HackTest\{DataProvider, TestGroup};
 
 class SpecialPagesTest extends \Facebook\HackTest\HackTest {
-  public function notFoundPathProvider(): array<array<string>> {
-    return [
-      ['/_I_DO_NOT_EXIST_FOR_TESTING_'],
-      ['/manual/en/_I_DO_NOT_EXIST_FOR_TESTING_.php'],
-      ['/hack/reference/_BAD_DEFINITION_TYPE_FOR_TESTING_/'],
-      ['/hack/reference/class/_BAD_CLASS_NAME_FOR_TESTING_/'],
+  public function notFoundPathProvider(): vec<(string)> {
+    return vec[
+      tuple('/_I_DO_NOT_EXIST_FOR_TESTING_'),
+      tuple('/manual/en/_I_DO_NOT_EXIST_FOR_TESTING_.php'),
+      tuple('/hack/reference/_BAD_DEFINITION_TYPE_FOR_TESTING_/'),
+      tuple('/hack/reference/class/_BAD_CLASS_NAME_FOR_TESTING_/'),
     ];
   }
 
@@ -21,8 +21,8 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     expect($body)->toContainSubstring("does not exist");
   }
 
-  public function redirectProvider(): array<string, (string, string)> {
-    return [
+  public function redirectProvider(): dict<string, (string, string)> {
+    return dict[
       'Hack class documentation' => tuple(
         '/manual/en/class.hack.maptktv.php',
         '/hack/reference/class/HH.Map/',
@@ -91,8 +91,8 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
   }
 
   <<TestGroup('remote')>>
-  public function notFoundSuggestions(): array<(string, string)> {
-    return [
+  public function notFoundSuggestions(): vec<(string, string)> {
+    return vec[
       tuple('/map', '/hack/reference/class/HH.Map/'),
       tuple('/maptktv.filter', '/hack/reference/class/HH.Map/filter/'),
     ];

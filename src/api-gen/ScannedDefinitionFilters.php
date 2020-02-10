@@ -150,7 +150,7 @@ abstract final class ScannedDefinitionFilters {
 
     // Do not include "HH\" in the blacklist - we automatically strip it.
 
-    $blacklist = [
+    $blacklist = keyset[
       /////////////
       // Classes //
       /////////////
@@ -248,13 +248,8 @@ abstract final class ScannedDefinitionFilters {
       'uksort',
       'usort',
     ];
-    $keyed = \array_flip($blacklist);
 
-    $name = $def->getName();
-    if (\strpos($name, "HH\\") === 0) {
-      $name = \substr($name, 3);
-    }
-
-    return \array_key_exists($name, $keyed);
+    $name = Str\strip_prefix($def->getName(), "HH\\");
+    return C\contains_key($blacklist, $name);
   }
 }

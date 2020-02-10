@@ -51,8 +51,8 @@ final class IPUtilsTest extends \Facebook\HackTest\HackTest {
   }
 
   public function getSubnetExamples(
-  ): array<(string, vec<string>, vec<string>)> {
-    return [
+  ): vec<(string, vec<string>, vec<string>)> {
+    return vec[
       tuple(
         '10.0.0.0/8',
         vec['10.0.0.1', '10.0.0.255', '10.255.255.255'],
@@ -78,12 +78,17 @@ final class IPUtilsTest extends \Facebook\HackTest\HackTest {
     ];
   }
 
-  public function getExampleFacebookIPAddresses(): array<array<string>> {
-    return [['199.201.64.1'], ['2620:10d:c092::1']];
+  public function getExampleFacebookIPAddresses(): vec<(string)> {
+    return vec[tuple('199.201.64.1'), tuple('2620:10d:c092::1')];
   }
 
-  public function getExampleNonFacebookIPAddresses(): array<array<string>> {
-    return [['192.168.0.1'], ['127.0.0.1'], ['::1'], ['dead:beef::1']];
+  public function getExampleNonFacebookIPAddresses(): vec<(string)> {
+    return vec[
+      tuple('192.168.0.1'),
+      tuple('127.0.0.1'),
+      tuple('::1'),
+      tuple('dead:beef::1'),
+    ];
   }
 
   <<DataProvider('getExampleFacebookIPAddresses')>>

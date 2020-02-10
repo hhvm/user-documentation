@@ -8,9 +8,9 @@ use type HHVM\UserDocumentation\GuidesNavData;
 use function Facebook\FBExpect\expect;
 
 class GuidePagesTest extends \Facebook\HackTest\HackTest {
-  public static function allGuidePages(): array<(string, string)> {
+  public static function allGuidePages(): vec<(string, string)> {
     $to_visit = \array_values(GuidesNavData::getNavData());
-    $out = [];
+    $out = vec[];
 
     while (!C\is_empty($to_visit)) {
       $node = \array_pop(inout $to_visit);
@@ -34,8 +34,8 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     await $this->testGuidePageQuick($name, $path);
   }
 
-  public function shortListOfGuidePages(): array<(string, string)> {
-    return [
+  public function shortListOfGuidePages(): vec<(string, string)> {
+    return vec[
       // Root of a guide
       tuple('Getting Started', '/hack/overview/'),
       // First page of a guide

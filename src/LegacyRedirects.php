@@ -13,7 +13,7 @@ namespace HHVM\UserDocumentation;
 
 abstract final class LegacyRedirects {
   public static function getUrlForId(string $id): ?string {
-    $ids = [$id, \strtr($id, '.', '-'), \strtr($id, '-', '.')];
+    $ids = vec[$id, \strtr($id, '.', '-'), \strtr($id, '-', '.')];
 
     foreach ($ids as $id) {
       $url = self::getUrlForExactId($id);

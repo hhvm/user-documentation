@@ -40,7 +40,7 @@ final class RemotePageLoader extends PageLoader {
     \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
 
     if ($host_header) {
-      \curl_setopt($ch, \CURLOPT_HTTPHEADER, ['Host: '.$host_header]);
+      \curl_setopt($ch, \CURLOPT_HTTPHEADER, varray['Host: '.$host_header]);
     }
 
     $response = await \HH\Asio\curl_exec($ch);

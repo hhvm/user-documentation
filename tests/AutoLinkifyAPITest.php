@@ -7,8 +7,8 @@ use type Facebook\HackTest\{DataProvider, TestGroup};
 
 class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
   public function autoLinkifyExamplesProvider(
-  ): array<string, (string, string, string)> {
-    return [
+  ): dict<string, (string, string, string)> {
+    return dict[
       'Hack class' => tuple(
         '/hack/asynchronous-operations/extensions',
         'MCRouter',

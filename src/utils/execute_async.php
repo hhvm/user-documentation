@@ -18,8 +18,12 @@ async function execute_async(
     |> Vec\map($$, $arg ==> \escapeshellarg($arg))
     |> Str\join($$, ' ');
 
-  $spec = [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']];
-  $pipes = [];
+  $spec = darray[
+    0 => varray['pipe', 'r'],
+    1 => varray['pipe', 'w'],
+    2 => varray['pipe', 'w'],
+  ];
+  $pipes = varray[];
 
   $proc = \proc_open(
     $command,

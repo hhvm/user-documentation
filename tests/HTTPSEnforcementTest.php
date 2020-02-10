@@ -13,8 +13,8 @@ final class HTTPSEnforcementTest extends \Facebook\HackTest\HackTest {
     expect($response->getStatusCode())->toBeSame(200);
   }
 
-  public function httpsDomains(): array<array<string>> {
-    return [['docs.hhvm.com'], ['staging.docs.hhvm.com']];
+  public function httpsDomains(): vec<(string)> {
+    return vec[tuple('docs.hhvm.com'), tuple('staging.docs.hhvm.com')];
   }
 
   <<DataProvider('httpsDomains'), TestGroup('remote')>>

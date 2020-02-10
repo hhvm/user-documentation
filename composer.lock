@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fab021f28eec4dcdd45886e514cb042a",
+    "content-hash": "f7c9d3bcc7b4f378fee9b0c97f576438",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -274,16 +274,16 @@
         },
         {
             "name": "facebook/hack-router-codegen",
-            "version": "v0.17.2",
+            "version": "v0.17.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-router-codegen.git",
-                "reference": "f80439ffe9c51c837af47d1c6ef8dbf7bc167b07"
+                "reference": "895fb7db8ff54735804f7ccd1856b889f986941e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-router-codegen/zipball/f80439ffe9c51c837af47d1c6ef8dbf7bc167b07",
-                "reference": "f80439ffe9c51c837af47d1c6ef8dbf7bc167b07",
+                "url": "https://api.github.com/repos/hhvm/hack-router-codegen/zipball/895fb7db8ff54735804f7ccd1856b889f986941e",
+                "reference": "895fb7db8ff54735804f7ccd1856b889f986941e",
                 "shasum": ""
             },
             "require": {
@@ -291,14 +291,14 @@
                 "facebook/hack-codegen": "^4.1.0",
                 "facebook/hack-http-request-response-interfaces": "^0.2",
                 "facebook/hack-router": "^0.19",
-                "hhvm": "^4.13",
+                "hhvm": "^4.25",
                 "hhvm/type-assert": "^3.0"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.6.1",
-                "hhvm/hacktest": "^1.1",
+                "hhvm/hacktest": "^2.0",
                 "hhvm/hhast": "^4.6",
-                "hhvm/hhvm-autoload": "^2.0",
+                "hhvm/hhvm-autoload": "^2.0|^3.0",
                 "usox/hackttp": "^0.3"
             },
             "type": "library",
@@ -321,7 +321,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2019-10-24T22:33:07+00:00"
+            "time": "2020-02-07T21:57:16+00:00"
         },
         {
             "name": "facebook/hh-apidoc",
@@ -833,7 +833,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.43.*"
+        "hhvm": "4.44.*"
     },
     "platform-dev": []
 }

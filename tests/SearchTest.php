@@ -12,7 +12,7 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
   <<DataProvider('expectedResults')>>
   public async function testSearchTerm(
     string $term,
-    array<string> $expected,
+    vec<string> $expected,
   ): Awaitable<void> {
     list($response, $body) = await PageLoader::getPageAsync(
       '/search?term='.\urlencode($term),
@@ -23,26 +23,26 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
     }
   }
 
-  public function expectedResults(): array<(string, array<string>)> {
-    return [
-      tuple('vw', ['/hack/reference/function/HH.Asio.vw/']),
-      tuple('HH\Asio\vw', ['/hack/reference/function/HH.Asio.vw/']),
-      tuple('async', ['/hack/asynchronous-operations/introduction']),
+  public function expectedResults(): vec<(string, vec<string>)> {
+    return vec[
+      tuple('vw', vec['/hack/reference/function/HH.Asio.vw/']),
+      tuple('HH\Asio\vw', vec['/hack/reference/function/HH.Asio.vw/']),
+      tuple('async', vec['/hack/asynchronous-operations/introduction']),
       tuple(
         'string contains',
-        ['HH\\Lib\\Str\\contains', 'HH\\Lib\\Str\\contains_ci'],
+        vec['HH\\Lib\\Str\\contains', 'HH\\Lib\\Str\\contains_ci'],
       ),
-      tuple('vector contains', ['HH\\Lib\\C\\contains']),
-      tuple('vector contains', ['HH\\Lib\\C\\contains']),
+      tuple('vector contains', vec['HH\\Lib\\C\\contains']),
+      tuple('vector contains', vec['HH\\Lib\\C\\contains']),
       tuple(
         'set contains',
-        ['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
+        vec['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
       tuple(
         'keyset contains',
-        ['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
+        vec['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
-      tuple('reified', ['/hack/generics/reified-generics']),
+      tuple('reified', vec['/hack/generics/reified-generics']),
     ];
   }
 }

@@ -17,7 +17,7 @@ function all_in_one_xhp_example_main(): void {
     'true' => true,
     'null' => null,
     'new stdClass()' => new stdClass(),
-    '[<li />, <li />, <li />]' => [<li />, <li />, <li />],
+    'vec[<li />, <li />, <li />]' => vec[<li />, <li />, <li />],
     'XHPUnsafeExample' => new XHPUnsafeExample(),
   };
 

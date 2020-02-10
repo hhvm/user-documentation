@@ -24,7 +24,7 @@ final class IncludeGeneratedMarkdownBlock
     UnparsedBlocks\Lines $lines,
   ): ?(UnparsedBlocks\Block, UnparsedBlocks\Lines) {
     list($first, $rest) = $lines->getFirstLineAndRest();
-    $matches = [];
+    $matches = darray[];
     if (\preg_match_with_matches(self::PATTERN, $first, inout $matches) !== 1) {
       return null;
     }
