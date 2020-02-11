@@ -102,10 +102,11 @@ class C<reify T> {
 * Hack arrays cannot be reified when used as containers with `__Enforceable` or `__Newable`
 
 ```Hack
-function f<<<__Enforceable>> reify T>(): void {
+function f<<<__Enforceable>> reify T>(T $x): void {
   $x is vec<int>; // Cannot use vec<int>
   $x is T;
 }
+
 f<vec<int>>(); // not enforceable
 ```
 
