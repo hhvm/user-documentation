@@ -1,33 +1,11 @@
-There are two forms of comments: delimited and single-line.  For example:
+Hack has three comment syntaxes.
 
 @@ comments-examples/show-comment-styles.php @@
 
-A *delimited comment* starts with `/*` and ends with `*/`, and may span source lines. It may contain any characters except
-the sequence `*/`. A delimited comment may occur in *any* place in a script in which white space may occur. For example:
+Multi line comments start with `/*` and end with `*/`. Comments
+starting `/**` are also used for documentation.
 
-```Hack
-/*...*/$c/*...*/=/*...*/567/*...*/;/*...*/
-```
-
-is interpreted as
-
-```Hack
-$c=567;
-```
-
-and
-
-```Hack
-$k = $i+++/*...*/++$j;
-```
-
-is interpreted as
-
-```Hack
-$k = $i+++ ++$j;
-```
-
-A *single-line comment* starts with `//` or `#`, and ends with a new line, which is not part of the comment.
+Single-line comments start with `//` or `#`, and end with a newline.
 
 A number of special comments are recognized; they are:
 * [`// FALLTHROUGH`](../statements/switch.md)
