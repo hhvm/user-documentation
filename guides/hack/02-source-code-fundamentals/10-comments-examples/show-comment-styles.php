@@ -11,7 +11,7 @@
 /**
  * A doc comment starts with two asterisks.
  *
- * It summarises the purpose of a top level definition, such as a
- * function or class.
+ * It summarises the purpose of a definition, such as a
+ * function, class or method.
  */
 function foo(): void {}
