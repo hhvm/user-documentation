@@ -216,7 +216,7 @@ function f<<<__Newable>> reify T as A>(): T {
   return new T();
 }
 ```
-where the class `A` is either final or annotated with `__ConstantConstructor`.  As a result the function `f` can only be applied to a _non-abstract_ class `C`.  The `as A` constraint ensures that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`. 
+where the class `A` is either final or annotated with `__ConsistentConstructor`.  As a result the function `f` can only be applied to a _non-abstract_ class `C`.  The `as A` constraint ensures that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`. 
 See [Generics: Reified Generics](../generics/reified-generics.md) (Creating an instance of a class with `new`) for a complete example of its use.
 
 ## __Override
