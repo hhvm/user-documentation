@@ -12,11 +12,11 @@ The following attributes are defined:
 * [__Memoize](#__memoize)
 * [__MemoizeLSB](#__memoizelsb)
 * [__MockClass](#__mockclass)
+* [__Newable](#__newable)
 * [__Override](#__override)
 * [__PHPStdLib](#__phpstdlib)
 * [__ReturnDisposable](#__returndisposable)
 * [__Sealed](#__sealed)
-* [__Enforceable](#__sealed)
 
 ## __AcceptDisposable
 
@@ -86,9 +86,11 @@ dynamic instantiations of classes without this attribute.
 
 ## __Enforceable
 
-Ensure that a type is enforceable. Enforceable types can be used with
-`is` and `as`. This forbids usage of function types and erased (not
-reified) generics.
+A type is _enforceable_ if it can be used in `is` and `as` expressions.  Examples of non-enforceable types are function types and erased (non-reified) generics.  The `__Enforceable` attribute is used to annotate abstract type constants so they can only be instantiated with enforceable types, and thus used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
+
+@@ predefined-attributes-examples/enforceable.php.type-errors @@
+
+Similarly, the `__Enforceable` attribute can also be used to annotate reified generics, enabling the generic to be used in a type test expression.
 
 ## __Explicit
 
@@ -206,6 +208,17 @@ mock class can exist.
 
 Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack legacy types `Vector`, `Map`, and `Set`.
 
+## __Newable
+
+This attribute is used to annotate reified type parameters to ensure that they are only instantiated with classes on which `new` can be safely called.  A common pattern is:
+```Hack
+function f<<<__Newable>> reify T as A>(): T {
+  return new T();
+}
+```
+where the class `A` is either final or annotated with `__ConstantConstructor`.  As a result the function `f` can only be applied to a _non-abstract_ class `C`.  The `as A` constraint ensures that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`. 
+See [Generics: Reified Generics](../generics/reified-generics.ml) (Creating an instance of a class with `new`) for a complete example of its use.
+
 ## __Override
 
 Methods marked with `__Override` must be used with inheritance.
@@ -297,11 +310,3 @@ interface I { ... }
 ```
 
 Only classes `X` and `Y` can directly extend class `A`, and only class `Z` can directly implement interface `I`.
-
-## __Enforceable
-
-This attribute is used to annotate abstract type constants so they can be used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
-
-@@ predefined-attributes-examples/enforceable.php.type-errors @@
-
-This attribute can also be used for reified generics, and it similarly allows the generic to be used in a type test expression.
