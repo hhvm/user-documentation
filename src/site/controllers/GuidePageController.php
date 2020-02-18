@@ -194,8 +194,8 @@ final class GuidePageController extends WebPageController {
         $guide_pages = $adjacent_guide_data['children'];
         $guide_pages = $next ? $guide_pages : array_reverse($guide_pages);
         $adjacent_page = shape(
-          'page' => array(C\first_keyx($guide_pages) => C\firstx($guide_pages)),
-          'guide' => array($adjacent_guide => $adjacent_guide_data),
+          'page' => darray[C\first_keyx($guide_pages) => C\firstx($guide_pages)],
+          'guide' => darray[$adjacent_guide => $adjacent_guide_data],
         );
       }
     } else {
@@ -204,8 +204,8 @@ final class GuidePageController extends WebPageController {
           break;
         }
         $adjacent_page = shape(
-          'page' => array($sibling => $sibling_data),
-          'guide' => array($guide => $guides[$guide]),
+          'page' => darray[$sibling => $sibling_data],
+          'guide' => darray[$guide => $guides[$guide]],
         );
       }
     }
