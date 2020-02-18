@@ -131,47 +131,46 @@ final class GuidePageController extends WebPageController {
   ): XHPRoot {
     $adjacent_page = $this->getAdjacentPage($guides, $guide, $page, $next);
 
-    if (is_array($adjacent_page)) {
-      $page = $adjacent_page['page'];
-      $guide = $adjacent_page['guide'];
+    if ($adjacent_page === null) {
+      return <x:frag />;
+    }
+    $page = $adjacent_page['page'];
+    $guide = $adjacent_page['guide'];
 
-      $guide_title = array_keys($guide)[0];
-      $page_title = <x:frag />;
-      if ($guide_title !== array_keys($page)[0]) {
-        $guide_title .= ':';
-        $page_title =
-          <span class="paginationPageTitle">
-            {array_keys($page)[0]}
-          </span>;
-      }
-
-      $class = "paginationLink ";
-      $class = $class.($next ? "next" : "previous");
-
-      if ($next) {
-        $align = 'right';
-        $glyph = UIGlyphIcon::RIGHT;
-      } else {
-        $align = 'left';
-        $glyph = UIGlyphIcon::LEFT;
-      }
-
-      return
-        <div class={$class}>
-          <ui:button
-            align={$align}
-            href={array_values($page)[0]['urlPath']}
-            glyph={$glyph}
-            size="medium">
-            {$page_title}
-            <span class="paginationGuideTitle">
-              {$guide_title}
-            </span>
-          </ui:button>
-        </div>;
+    $guide_title = $guide[0];
+    $page_title = <x:frag />;
+    if ($guide_title !== $page[0]) {
+      $guide_title .= ':';
+      $page_title =
+        <span class="paginationPageTitle">
+          {$page[0]}
+        </span>;
     }
 
-    return <x:frag />;
+    $class = "paginationLink ";
+    $class = $class.($next ? "next" : "previous");
+
+    if ($next) {
+      $align = 'right';
+      $glyph = UIGlyphIcon::RIGHT;
+    } else {
+      $align = 'left';
+      $glyph = UIGlyphIcon::LEFT;
+    }
+
+    return
+      <div class={$class}>
+        <ui:button
+          align={$align}
+          href={$page[1]['urlPath']}
+          glyph={$glyph}
+          size="medium">
+          {$page_title}
+          <span class="paginationGuideTitle">
+            {$guide_title}
+          </span>
+        </ui:button>
+      </div>;
   }
 
   protected function getAdjacentPage(
@@ -194,8 +193,8 @@ final class GuidePageController extends WebPageController {
         $guide_pages = $adjacent_guide_data['children'];
         $guide_pages = $next ? $guide_pages : array_reverse($guide_pages);
         $adjacent_page = shape(
-          'page' => array(C\first_keyx($guide_pages) => C\firstx($guide_pages)),
-          'guide' => array($adjacent_guide => $adjacent_guide_data),
+          'page' => tuple(C\first_keyx($guide_pages), C\firstx($guide_pages)),
+          'guide' => tuple($adjacent_guide, $adjacent_guide_data),
         );
       }
     } else {
@@ -204,8 +203,8 @@ final class GuidePageController extends WebPageController {
           break;
         }
         $adjacent_page = shape(
-          'page' => array($sibling => $sibling_data),
-          'guide' => array($guide => $guides[$guide]),
+          'page' => tuple($sibling, $sibling_data),
+          'guide' => tuple($guide, $guides[$guide]),
         );
       }
     }

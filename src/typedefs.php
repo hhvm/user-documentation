@@ -127,6 +127,22 @@ type StaticResourceMapEntry = shape(
   'mimeType' => string,
 );
 
+/** An enforceable supertype of `NavDataNode`.
+ *
+ * Use `NavDataNode` instead if possible.
+ */
+<<__Enforceable>>
+type NavDataNodeIsh = shape(
+  'name' => string,
+  'urlPath' => string,
+  /** actually `dict<string, NavDataNode>`, or `dict<string, NavDataNodeIsh>`,
+   * but:
+   * - recursive types aren't allowed
+   * - dicts aren't enforceable as they have erased generics
+   */
+  'children' => mixed,
+);
+
 type NavDataNode = shape(
   'name' => string,
   'urlPath' => string,
@@ -135,10 +151,10 @@ type NavDataNode = shape(
    * allowed. Given we only read this from JS, not a big deal, just be careful
    * writing it.
    */
-  'children' => dict<string, mixed>,
+  'children' => dict<string, NavDataNodeIsh>,
 );
 
 type PaginationDataNode = shape(
-  'page' => array<string, mixed>,
-  'guide' => array<string, mixed>,
+  'page' => (string, NavDataNodeIsh),
+  'guide' => (string, NavDataNodeIsh),
 );
