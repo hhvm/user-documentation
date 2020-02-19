@@ -14,7 +14,7 @@ use type HHVM\UserDocumentation\UIGlyphIcon;
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
 final class :ui:button extends :x:element {
-  use XHPChildDeclarationConsistencyValidation;
+  use XHPChildValidation;
   attribute
     enum {'left', 'right'} align = 'left',
     string className,
@@ -24,8 +24,6 @@ final class :ui:button extends :x:element {
     enum {'small', 'medium', 'large'} size = 'medium',
     string target = "_self",
     enum {'default', 'confirm', 'special', 'delete'} use = 'default';
-
-  children (pcdata | :span+);
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
     return XHPChild\anyOf(
