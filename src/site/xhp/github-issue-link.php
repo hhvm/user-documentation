@@ -14,13 +14,11 @@ use type HHVM\UserDocumentation\LocalConfig;
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
 final class :github-issue-link extends :x:element {
-  use XHPChildDeclarationConsistencyValidation;
+  use XHPChildValidation;
   attribute
     string issueTitle,
     string issueBody @required,
     classname<WebController> controller;
-
-  children (:ui:glyph?, pcdata);
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
     return XHPChild\sequence(
