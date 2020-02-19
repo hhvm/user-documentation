@@ -9,8 +9,16 @@
  *
  */
 
+use namespace Facebook\XHP\ChildValidation as XHPChild;
+
 class :x:comment extends :x:primitive implements XHPAlwaysValidChild {
+  use XHPChildDeclarationConsistencyValidation;
   children (pcdata*);
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\anyNumberOf(XHPChild\pcdata());
+  }
+
 
   protected function stringify(): string {
     $html = '<!--';
