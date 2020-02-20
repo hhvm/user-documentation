@@ -210,14 +210,18 @@ Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack lega
 
 ## __Newable
 
-This attribute is used to annotate reified type parameters to ensure that they are only instantiated with classes on which `new` can be safely called.  A common pattern is:
-```Hack
-function f<<<__Newable>> reify T as A>(): T {
-  return new T();
-}
-```
-where the class `A` is either final or annotated with `__ConsistentConstruct`.  As a result the function `f` can only be applied to a _non-abstract_ class `C`.  The `as A` constraint ensures that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`. 
-See [Generics: Reified Generics](../generics/reified-generics.md) (Creating an instance of a class with `new`) for a complete example of its use.
+This attribute is used to annotate reified type parameters to ensure that they are only instantiated with classes on which `new` can be safely called.  A common pattern, defining a function that creates instances of a class passed as type parameter, is:
+
+@@ predefined-attributes-examples/newable.php @@
+
+The class `A` must either be final or annotated with `__ConsistentConstruct`.  The `__Newable` attribute ensures that the function `f` is only be applied to a _non-abstract_ class, say `C`, while the `as A` constraint guarantees that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`.  The generic type `T` must be reified so that the runtime has access to it, refer to [Generics: Reified Generics](../generics/reified-generics.md) for details.
+
+A complete example thus is:
+
+@@ predefined-attributes-examples/newable-complete.php @@
+
+Omitting either the `__Newable` attribute for `T`, or the `__ConsistentConstruct` for the abstract class `A` will result in a type-checker error.
+
 
 ## __Override
 

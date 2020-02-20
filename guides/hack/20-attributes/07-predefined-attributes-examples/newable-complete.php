@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\Attributes\NewableComplete;
+
 <<__ConsistentConstruct>>
 abstract class A {
   public function __construct(int $x, int $y) {}
