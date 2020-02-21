@@ -26,7 +26,7 @@ We could have removed the `-p 8080` and explicitly appended:
 
 to the command above. While this is a more verbose way to accomplish the same command, there might be reasons to be explicit. And, of course, you can change various [other settings](../configuration/introduction.md) with `-d` as well.
 
-HHVM will also use the default INI configuration `server.ini` (normally found in `/etc/hhvm/` in [Linux](../installation/linux.md) distros).
+HHVM will also use the default INI configuration `server.ini` (normally found in `/etc/hhvm/` in Linux distros).
 
 ## Client access to HHVM in server mode
 
