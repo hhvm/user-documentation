@@ -100,6 +100,7 @@ These are settings that are available to you when running HHVM in [server mode](
 | `hhvm.server.force_compression.param` | `string` | `''` | For compression, if this string is set and the parameter is present in the request, then compression should happen.
 | `hhvm.server.force_compression.url` | `string` | `''` | For compression, if this URL is set and the request matches exactly, then compression has to happen.
 | `hhvm.server.force_server_name_to_header` | `bool` | `false` | If enabled, then `$_SERVER['SERVER_NAME']` must come from the request header.
+| `hhvm.server.global_document` | `string` | `''` | If specified, the document that handles every URI.
 | `hhvm.server.graceful_shutdown_wait` | `int` | `0` | The amount of time to wait for a graceful shutdown of a server. If it doesn't shutdown during that period of time, then `hhvm.server.harsh_shutdown` may be invoked.
 | `hhvm.server.gzip_compression_level` | `int` | `3` | When compression with gzip, this is the level of compression that will be used. `1` is fastest. `9` is best.
 | `hhvm.server.harsh_shutdown` | `bool` | `true` | When stopping a server, HHVM first tries to gracefully shutdown any previous incarnation of the server. If that doesn't work, and `hhvm.server.harsh_shutdown` is enabled, it will try to kill the `pid` file associated with the server process.
