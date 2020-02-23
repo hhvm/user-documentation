@@ -45,11 +45,11 @@ development or testing, but not when you are running your code in production.
 
 The "devFailureHandler" key is the fully qualified name of a fallback strategy.
 When you add a new class or function and don't run `hh-autoload`, the autoloadmap is not automatically updated.
-The fallback is called when hhvm can't find your class or function in the autoloadmap.
+The fallback is called when hhvm can't find your type, constant or function in the autoloadmap.
 
-The fallback then may attempt to load the class or function at runtime.
+The fallback then may attempt to load the type, constant or function at runtime.
 (This process will slow down your execution considerably and should therefore not used in production.)
-Not all classes / functions can / will be found by HHClientFallbackHandler, see the [repository](https://github.com/hhvm/hhvm-autoload) for more details.
+Not all contants and functions can / will be found by HHClientFallbackHandler, see the [repository](https://github.com/hhvm/hhvm-autoload) for more details.
 
 Once this configuration file is created, `vendor/bin/hh-autoload` can be executed
 to generate or update the map, which is created as `vendor/autoload.hack`
