@@ -33,9 +33,23 @@ file. For most projects, a minimal example is:
   ],
   "devRoots": [
     "tests/"
-  ]
+  ],
+  "devFailureHandler": "Facebook\\AutoloadMap\\HHClientFallbackHandler"
 }
 ```
+
+The "roots" key provides folders that need to be loadable in a production environment.
+
+The "devRoots" key is for folders that you want to be autoloaded during
+development or testing, but not when you are running your code in production.
+
+The "devFailureHandler" key is the fully qualified name of a fallback strategy.
+When you add a new class or function and don't run `hh-autoload`, the autoloadmap is not automatically updated.
+The fallback is called when hhvm can't find your type, constant or function in the autoloadmap.
+
+The fallback then may attempt to load the type, constant or function at runtime.
+(This process will slow down your execution considerably and should therefore not used in production.)
+Not all contants and functions can / will be found by HHClientFallbackHandler, see the [repository](https://github.com/hhvm/hhvm-autoload) for more details.
 
 Once this configuration file is created, `vendor/bin/hh-autoload` can be executed
 to generate or update the map, which is created as `vendor/autoload.hack`
@@ -55,7 +69,8 @@ $ cat > hh_autoload.json
   ],
   "devRoots": [
     "tests/"
-  ]
+  ],
+  "devFailureHandler": "Facebook\\AutoloadMap\\HHClientFallbackHandler"
 }
 $ composer require hhvm/hsl hhvm/hhvm-autoload
 $ composer require --dev hhvm/hhast hhvm/hacktest facebook/fbexpect
@@ -75,7 +90,8 @@ $ cat > hh_autoload.json
   ],
   "devRoots": [
     "tests/"
-  ]
+  ],
+  "devFailureHandler": "Facebook\\AutoloadMap\\HHClientFallbackHandler"
 }
 $ composer require hhvm/hsl hhvm/hhvm-autoload
 Using version ^4.0 for hhvm/hsl
@@ -243,11 +259,18 @@ final class MyTest extends HackTest {
 We can then use HackTest to run the tests:
 
 ```
+$ vendor/bin/hh-autoload
 $ vendor/bin/hacktest tests/
 ..
 
 Summary: 2 test(s), 2 passed, 0 failed, 0 skipped, 0 error(s).
 ```
+
+Regenerating the autoloadmap (with hh-autoload) is not always required,
+but if classes are not in the autoloadmap,
+you may get exceptions about reflected classes not existing.
+It is generally recommended to make sure that the autoloadmap is complete,
+before running the test suite.
 
 If we intentionally add a failure, such as `tuple(vec[1, 2, 3], vec[1, 2, 3])`,
 HackTest reports this:
