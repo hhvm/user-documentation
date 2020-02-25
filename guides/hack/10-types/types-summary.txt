@@ -1,1 +1,1 @@
-An introduction to basic features of the type checker.
+The type checker.

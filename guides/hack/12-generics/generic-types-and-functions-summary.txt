@@ -1,1 +1,1 @@
-Generic types and functions, type parameters, type constraints, type arguments, and variance.
+Generic types, where constraints, and variance.

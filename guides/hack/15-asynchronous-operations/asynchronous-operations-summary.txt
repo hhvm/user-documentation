@@ -1,1 +1,1 @@
-How async programming lets apps scale better and reduces blocking.
+Asynchronous functions, await, and the concurrent keyword.

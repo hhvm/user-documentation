@@ -1,1 +1,1 @@
-Full expressions, side-effects, precedence and associativity, order-of-evaluation, and all the operators.
+Expressions, operators, associativity, and precedence.

@@ -1,1 +1,1 @@
-Loops, conditionals, and blocks.
+Simple statements, blocks, and loops.
