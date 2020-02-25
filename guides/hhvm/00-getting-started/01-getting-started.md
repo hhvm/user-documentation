@@ -41,7 +41,7 @@ Save this `hello.hack` in the same directory that you ran the `hhvm` command fro
 
 ## Configure HHVM
 
-The out-of-the-box HHVM configuration won't need tweaking by most new users. Notably, the JIT compiler that gives HHVM its speed is on by default. If you want to take a look at the configuration used, it's at `/etc/hhvm/php.ini`.
+The out-of-the-box HHVM configuration won't need tweaking by most new users. Notably, the JIT compiler that gives HHVM its speed is on by default. If you want to take a look at the configuration used, it's at `/etc/hhvm/php.ini` in Linux distros and `/usr/local/etc/hhvm/php.ini` in MacOS.
 
 Running HHVM automatically at boot as a service (instead of just on the command line as above) unfortunately does require some configuration. See the [proxygen documentation](../basic-usage/proxygen) for details.
 
