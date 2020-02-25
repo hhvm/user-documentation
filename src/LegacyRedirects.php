@@ -105,7 +105,7 @@ abstract final class LegacyRedirects {
       'hack.tuples' => '/hack/tuples/introduction',
       'hack.typealiasing' => '/hack/type-aliases/introduction',
       'hack.annotations' => '/hack/types/annotations',
-      'hack.unsupported' => '/hack/unsupported/introduction',
+      'hack.unsupported' => '/hack/',
       'hack.xhp' => '/hack/XHP/introduction',
       'hackfuncref' => '/hack/reference/',
       'book.hackcollections' => '/hack/collections/introduction',
