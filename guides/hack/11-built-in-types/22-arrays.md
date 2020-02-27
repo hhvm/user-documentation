@@ -129,7 +129,7 @@ Hack arrays are generally manipulated using the `C\`, `Dict\`, `Keyset\` and `Ve
 | Keys from Container*      | `$v = Vec\keys($container);` | N/A                            | `$k = Keyset\keys($container);`
 | Add Elements              | `$v[] = 4;`                  | `$d['baz'] = 2;`               | `$k[] = 'baz';`
 | Bulk Add Elements         | `$v = Vec\concat($t1, $t2)`  | `$d = Dict\merge($kt1, $kt2)`  | `$k = Keyset\union($t1, $t2)`
-| Remove Elements           | `$v = Vec\concat(Vec\take($t1, $n), Vec\drop($t1, $n + 1)` | `unset($d['baz']);` | `unset($k['baz']);`
+| Remove Elements           | `$v = Vec\concat(Vec\take($t1, $n), Vec\drop($t1, $n + 1))` | `unset($d['baz']);` | `unset($k['baz']);`
 | Key Existence             | `C\contains_key($v, 1)`      | `C\contains_key($d, 'foo')`    | `C\contains_key($k, 'foo')`
 | Value Existence           | `C\contains($v, 3)`          | `C\contains($d, 2)`            | N/A
 | Get or default            | `idx($v, 0, 999)`            | `idx($d, 'foo', 'default')`    | N/A
