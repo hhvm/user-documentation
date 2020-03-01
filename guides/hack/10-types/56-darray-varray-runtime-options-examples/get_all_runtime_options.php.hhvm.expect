@@ -1,4 +1,4 @@
-hhvm.arr_prov_hack_arrays-----------------------------------> global_value(1), local_value(1), access(4)
+hhvm.arr_prov_hack_arrays-----------------------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_array_producing_func_notices-----------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_check_array_key_cast-------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_check_array_plus-----------------------> global_value(), local_value(), access(4)
