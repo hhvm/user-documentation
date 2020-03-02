@@ -1,0 +1,3 @@
+E_NOTICE "Hack Array Compat: varray promoting to darray: out of bounds key 3" in file "hack_arr_compat_check_varray_promote.php" at line 19
+E_NOTICE "Hack Array Compat: varray promoting to darray: removing key" in file "hack_arr_compat_check_varray_promote.php" at line 30
+E_NOTICE "Hack Array Compat: varray promoting to darray: invalid key: expected int, got string" in file "hack_arr_compat_check_varray_promote.php" at line 39
