@@ -23,7 +23,7 @@ function print_short_errors(): _Private\ScopeExit {
     int $line,
   ) ==> {
     $short_path = Str\search_last($path, '/')
-      |> Str\slice($path, $$ as nonnull);
+      |> Str\slice($path, $$ as nonnull + 1);
     \fprintf(
       \STDERR,
       "%s \"%s\" in file \"%s\" at line %d\n",
