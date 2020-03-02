@@ -4,7 +4,7 @@ _These runtime options are a migrational feature. This means that they come and 
 
 If you notice that an option doesn't apply anymore and you are running a very modern version of HHVM, please open an issue or pull request against this repository. We'll mark the EOL date of that given runtime option in the documentation. We thank you in advance.
 
-The [runtime options](arrays.md#php-arrays-array-varray-and-darray__runtime-options) were briefly introduced in the article on [arrays](arrays.md). This article builds upon the information given there.
+The [runtime options](arrays.md#php-arrays-array-varray-and-darray__runtime-options) were briefly introduced in the article on `varray<_>` and `darray<_, _>`. This article builds upon the information given there.
 
 You can get a list of the runtime options that your current hhvm recognizes from this script.
 This relies on the settings being in your `server.ini`.
