@@ -211,6 +211,8 @@ The available runtime options change frequently; to get an up-to-date list, sear
 
 The `hhvm.hack_arr_compat_notices` option must be set to true for any of the `hhvm.hack_arr_` options to have an effect.
 
+Individual runtime settings are documented [here](darray-varray-runtime-options.md).
+
 ### `.hhconfig` options
 
 - `disallow_array_literal=true` disallows `array(...)` and `[...]`, forcing all
