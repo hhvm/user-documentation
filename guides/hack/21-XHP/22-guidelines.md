@@ -8,10 +8,14 @@ The constraints of XHP object children and attributes are done at various times:
 * Attribute names and types are validated when the attributes are set in a tag or via `setAttribute`.
 * `@required` is validated when the required attributes are read.
 
-This validation is on by default. You can turn it off by running the following code before using XHP:
+Attribute validation will be removed in a future version and the types will be enforced by the hhvm runtime.
+This child validation is on by default and attribute validation is off by default. You can turn it on/off by running the following code snippets before using XHP:
 
 ```Hack
-:xhp::$ENABLE_VALIDATION=false
+:xhp::disableChildValidation();
+:xhp::disableAttributeValidation();
+:xhp::enableChildValidation();
+:xhp::enableAttributeValidation();
 ```
 
 ## Use Contexts to Access Higher Level Information
