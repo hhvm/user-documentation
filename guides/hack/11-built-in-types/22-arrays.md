@@ -10,6 +10,31 @@ Note that the plan is for both legacy arrays, and these migration types, to be
 eventually removed from the Hack language. We expect this to happen at some
 point during 2020.
 
+## Nomenclature
+
+When talking about Container types, Hack programmers have names for different categories of types. They overlap and are confusing to the uninitiated. Here are some of the most common terms.
+
+`Arrays`: When not prefixed with any modifiers or other context usually refers to the value Containers. The value Containers are
+
+ - The (Legacy) PHP `array`
+ - `darray` and `varray`
+ - `dict`, `keyset`, and `vec`
+
+`Hack arrays`: This specifically refers to the last three (`dict`, `keyset`, and `vec`).
+
+`Hack Collections` or `Legacy Hack Collections`: This refers to the non-value type Containers from Hack's early life. The Hack Collection types are:
+
+ - `ConstMap`, `MutableMap`, `ImmMap`, and `Map`
+ - `ConstSet`, `MutableSet`, `ImmSet`, and `Set`
+ - `ConstVector`, `MutableVector`, `ImmVector`, and `Vector`
+ - `Pair`
+
+ The `Const?` and `Mutable?` are interfaces. The `Imm?` implements `Const` and the unprefixed version implements both.
+
+`Hack Containers`: This is a combination of the `Hack arrays` and `Hack collections`.
+
+`Value Containers`: See arrays.
+
 ## vec
 
 A vec (short for vector) is a data structure that contains a collection of zero or more elements whose values are each accessed through a
