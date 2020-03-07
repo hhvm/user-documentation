@@ -1,27 +1,30 @@
-This intrinsic function assigns zero or more elements of its source to the corresponding target variable(s). It returns a copy of the source.  For example:
+`list()` is special syntax for unpacking tuples. It looks like a function, but it isn't one. It can be used in positions where you would assign into.
+
+@@ list-examples/basic-tuple-assignment.php @@
+
+The `list()` will consume the `tuple` on the right and assign the variables inside of itself in turn.
+If the types of the tuple elements differ, the `list()` syntax will make sure that the type information is preserved.
+
+@@ list-examples/typed-tuple-assignment.php @@
+
+You can use the special `$_` variable to ignore certain elements of the `tuple`. You can use `$_` multiple times in one assignment and have the types be different. You **MUST** use `$_` if you want to ignore the elements at the end. You are not allowed to use a `list()` with fewer elements than the length of the `tuple`.
+
+@@ list-examples/ignored-tuple-assignment.php @@
+
+If the RHS and the LHS of a `list()` are referring to the same variables, the behavior is undefined. As of hhvm 4.46, the typechecker will **NOT** warn you when you make this mistake! HHVM will also not understand what you mean. Do **NOT** do this.
 
 ```Hack
-$v = vec[10, 20, 30, 40];
-list($_, $b, $_, $d) = $v;
+$a = tuple(1, 2);
+// BAD, since $a is used on the right and on the left!
+list($a, $b) = $a;
 ```
 
-When the source is a vec, the element having an `int` key of 0 is assigned to the first target variable, the element having an `int` key
-of 1 is assigned to the second target variable, and so on, until all target variables have been assigned.
+You may also use `list()` on a `vec<T>`, but it is not recommended.
 
-If `$_` is used as a target variable, the value of the corresponding source element is ignored; no assignment takes place.
+`list()` can be nested inside of another `list()` to unpack `tuples` from within `tuples`.
 
-If the source elements and the target variables overlap in any way, the behavior is unspecified.
+@@ list-examples/list-within-list.php @@
 
-Here is an example of a source tuple:
+My personal favorite place to put a `list()` is inside a `foreach($vec_of_tuples as list($one, $two, $three))`.
 
-```Hack
-list($x1, $x2, $x3) = tuple(123, "red", tuple(2.5, 999));
-```
-
-Elements 0, 1, and 2, respectively, of the tuple are assigned to `$x1`, `$x2`, and `$x3`, which have types `int`, `string`, and tuple-of-`float`-and-`int`.
-
-```Hack
-list($y1, $y2, list($y3, $y4)) = tuple(123, "red", tuple(2.5, 999));
-```
-
-Here, the target contains a nested list, in which case, elements 0 and 1 of the nested tuple are assigned to `$y3` and `$y4`, respectively.
+@@ list-examples/list-within-foreach.php @@
