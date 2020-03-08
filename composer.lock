@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4772b5e9bfb8720e47da92b9002cecb4",
+    "content-hash": "43b4eea0259a6632f0dc68c4569e9508",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -141,27 +141,27 @@
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v4.3.8",
+            "version": "v4.3.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "df42dc9fe2bb6bf15ffb482637238d8378a7e4a7"
+                "reference": "d86a4e52e2695afc8bd3d0182ed3175b306ee0ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/df42dc9fe2bb6bf15ffb482637238d8378a7e4a7",
-                "reference": "df42dc9fe2bb6bf15ffb482637238d8378a7e4a7",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/d86a4e52e2695afc8bd3d0182ed3175b306ee0ea",
+                "reference": "d86a4e52e2695afc8bd3d0182ed3175b306ee0ea",
                 "shasum": ""
             },
             "require": {
                 "hhvm": "^4.25",
-                "hhvm/hhvm-autoload": "^2.0",
+                "hhvm/hhvm-autoload": "^2.0|^3.0",
                 "hhvm/hsl": "^4.0"
             },
             "require-dev": {
                 "facebook/difflib": "^1.0",
                 "facebook/fbexpect": "^2.6.1",
-                "hhvm/hacktest": "^1.0",
+                "hhvm/hacktest": "^2.0",
                 "hhvm/hhast": "^4.0",
                 "hhvm/type-assert": "^3.1"
             },
@@ -198,7 +198,7 @@
                 "code generation",
                 "hack"
             ],
-            "time": "2019-10-31T20:25:15+00:00"
+            "time": "2020-02-25T18:51:24+00:00"
         },
         {
             "name": "facebook/hack-http-request-response-interfaces",
@@ -441,16 +441,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.33.6",
+            "version": "v4.33.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "6fb31c5b38162fb0236f62270d17d009533e0f76"
+                "reference": "9f586c80055f73c17b95742ec97627c1d11a1deb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/6fb31c5b38162fb0236f62270d17d009533e0f76",
-                "reference": "6fb31c5b38162fb0236f62270d17d009533e0f76",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/9f586c80055f73c17b95742ec97627c1d11a1deb",
+                "reference": "9f586c80055f73c17b95742ec97627c1d11a1deb",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +486,7 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-02-18T17:16:51+00:00"
+            "time": "2020-02-28T18:38:22+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -833,7 +833,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.44.*"
+        "hhvm": "4.47.*"
     },
     "platform-dev": []
 }
