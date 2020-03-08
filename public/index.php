@@ -11,16 +11,17 @@ async function site_main_async(): Awaitable<noreturn> {
   // header is of the form HOST:PORT - for `parse_url`, we need
   // `http://HOST:port/` as `parse_url()` is unable to parse IPv6
   // strings like `[::1]:8080
-  /* HH_FIXME[2050] $_SERVER */
-  $dummy_uri = 'http://'.$_SERVER['HTTP_HOST'].'/';
+
+  $server = HHVM\UserDocumentation\_Private\SuperGlobals\server_variables();
+  $dummy_uri = 'http://'.$server['HTTP_HOST'].'/';
   $host = \parse_url($dummy_uri, PHP_URL_HOST);
   $port = \parse_url($dummy_uri, PHP_URL_PORT);
   // We just use this to figure out if we should do a redirect - if we were
   // doing something more important, we should make sure that the remote end
   // is from a local-use IP range.
-  $https = /* HH_FIXME[2050] */ $_SERVER['HTTP_X_FORWARDED_PROTO'] ??
-    /* HH_FIXME[2050] */ $_SERVER['HTTPS'] ??
-    /* HH_FIXME[2050] */ $_SERVER['https'] ??
+  $https = $server['HTTP_X_FORWARDED_PROTO'] ??
+    $server['HTTPS'] ??
+    $server['https'] ??
     false;
   if ($https is string) {
     $https = Str\lowercase((string)$https);

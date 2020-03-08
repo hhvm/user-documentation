@@ -234,7 +234,8 @@ class :ui:navbar extends :x:element {
     $root = <ul class={$list_class} />;
     foreach ($parent['children'] as $child) {
       $root->appendChild(
-        $render_func(/* HH_IGNORE_ERROR[4110] mixed to shape */ $child),
+        /* HH_IGNORE_ERROR[4110] key children is typehinted as mixed to prevent infinite regress */
+        $render_func($child),
       );
     }
     return $root;

@@ -28,7 +28,7 @@ final class SASSBuildStep extends BuildStep {
       'environment' => dict[
         'GEM_HOME' => LocalConfig::ROOT.'/vendor-rb',
       ]
-        |> Dict\merge($$, /* HH_FIXME[2050] */ $_ENV),
+        |> Dict\merge($$, _Private\SuperGlobals\environment_variables()),
     );
     list($exit_code, $stdout, $stderr) = await _Private\execute_async(
       $options,

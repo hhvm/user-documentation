@@ -104,7 +104,7 @@ abstract class WebController {
   protected static function invariantTo404<T>((function(): T) $what): T {
     try {
       return $what();
-    } catch (/* HH_FIXME[2049] */ \HH\InvariantException $e) {
+    } catch (InvariantException $e) {
       throw new HTTPNotFoundException($e->getMessage(), $e->getCode(), $e);
     }
   }

@@ -82,6 +82,7 @@ type APIIndexEntry = shape(
   'name' => string,
   'htmlPath' => string,
   'urlPath' => string,
+  ?'methods' => dict<string, APIMethodIndexEntry>,
   ...
 );
 
