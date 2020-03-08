@@ -7,7 +7,7 @@
 namespace HHVM\UserDocumentation;
 
 const dict<APIProduct, string> PRODUCT_TAGS = dict[
-  APIProduct::HACK => 'HHVM-4.44.0',
+  APIProduct::HACK => 'HHVM-4.47.0',
   APIProduct::HSL => 'v4.40.0',
   APIProduct::HSL_EXPERIMENTAL => 'v4.37.1',
 ];
