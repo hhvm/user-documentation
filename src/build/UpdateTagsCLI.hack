@@ -69,11 +69,21 @@ final class UpdateTagsCLI extends CLIBase {
 
       $req = \curl_init($url);
       \curl_setopt($req, \CURLOPT_USERAGENT, "docs.hhvm.com update-versions.h");
+      \curl_setopt($req, \CURLOPT_RETURNTRANSFER, true);
+      \curl_setopt($req, \CURLOPT_HEADER, true);
 
       /* HHAST_IGNORE_ERROR[DontAwaitInALoop] */
-      $json = await \HH\Asio\curl_exec($req);
+      $http_header_and_body = await \HH\Asio\curl_exec($req);
+      $header_length = \curl_getinfo($req, \CURLINFO_HEADER_SIZE);
+      $header = Str\slice($http_header_and_body, 0, $header_length);
+      invariant(
+        !Str\contains($header, "\r\nX-RateLimit-Remaining: 0\r\n"),
+        'Ratelimit for the github API has been exceeded.',
+      );
+      $body = Str\slice($http_header_and_body, $header_length);
+
       $more_tags = \json_decode(
-        $json, /* assoc = */
+        $body, /* assoc = */
         true, /* depth = */
         512,
         \JSON_FB_HACK_ARRAYS,
