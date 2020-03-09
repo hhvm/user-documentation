@@ -1,6 +1,6 @@
 # Creates a docker image with a built copy of the site. Not repo-auth.
 # Useful as a scratch/testing area.
-FROM hhvm/hhvm:4.47-latest
+FROM hhvm/hhvm:4.48-latest
 ARG DOCKER_BUILD_ENV=prod
 ENV TZ UTC
 ENV DEBIAN_FRONTEND noninteractive
