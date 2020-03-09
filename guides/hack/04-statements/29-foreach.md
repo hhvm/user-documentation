@@ -1,6 +1,6 @@
 The `foreach` statement iterates over the set of elements in a given collection, starting at the beginning, executing a single statement
-each iteration. On each iteration, the value of the current element is assigned to the corresponding variable, as specified.  The loop body
-is executed zero or more times.  For example:
+each iteration. On each iteration, the value of the current element is assigned to the corresponding variable, as specified. The loop body
+is executed zero or more times. For example:
 
 ```Hack
 $colors = vec["red", "white", "blue"];
@@ -9,11 +9,11 @@ foreach ($colors as $color) {
 }
 ```
 
-Here, we iterate over a collection of three strings in a vec of `string`.  Inside the loop body, `$color` takes on the value of the current string.
+Here, we iterate over a collection of three strings in a vec of `string`. Inside the loop body, `$color` takes on the value of the current string.
 
 See [compound statements](compound-statements.md) for a discussion about the use of braces around the statement body.
 
-As each array element has an index as well as a value, we can access both.  For example:
+As each array element has an index as well as a value, we can access both. For example:
 
 ```Hack
 $colors = vec["red", "white", "blue"];
@@ -32,3 +32,6 @@ We can cause each element's value to be ignored, using `$_`, as follows:
     ...
   }
 ```
+
+We can also use `list()` here `foreach($vec_of_tuples as list($here, $there))` and here `foreach($vec_of_tuples as $key => list($here, $there))`.
+For more information about lists, see [list](../expressions-and-operators/list.md).
