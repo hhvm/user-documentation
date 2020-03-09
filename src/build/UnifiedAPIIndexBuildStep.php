@@ -101,7 +101,7 @@ final class UnifiedAPIIndexBuildStep extends BuildStep {
     Log::v("\nProcessing %s API Index", $product);
 
     $out = Map {};
-    $maybe_set = ($name, $url) ==> {
+    $maybe_set = (string $name, string $url) ==> {
       if (
         (!C\contains_key($out, $name)) ||
         Str\length($out[$name]) > Str\length($url)
