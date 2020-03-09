@@ -1,4 +1,4 @@
-`list()` is special syntax for unpacking tuples. It looks like a function, but it isn't one. It can be used in positions where you would assign into.
+`list()` is special syntax for unpacking tuples. It looks like a function, but it isn't one. It can be used in positions that you would assign into.
 
 @@ list-examples/basic-tuple-assignment.php @@
 
