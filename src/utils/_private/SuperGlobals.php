@@ -2,11 +2,11 @@
 
 namespace HHVM\UserDocumentation\_Private\SuperGlobals;
 
-use namespace Facebook\TypeAssert;
+use namespace Facebook\TypeCoerce;
 
-function environment_variables(): dict<string, arraykey> {
-  return TypeAssert\matches<dict<string, arraykey>>(
-    dict(\HH\global_get('_ENV') as KeyedContainer<_, _>),
+function environment_variables(): dict<string, string> {
+  return TypeCoerce\match<dict<string, string>>(
+    \HH\global_get('_ENV'),
   );
 }
 

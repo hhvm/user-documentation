@@ -6,7 +6,7 @@ use namespace HH\Lib\{Str, Vec};
 
 type SubprocessOptions = shape(
   ?'working_directory' => string,
-  ?'environment' => dict<string, arraykey>,
+  ?'environment' => dict<string, string>,
 );
 
 // A wrapper around the built-in exec with a nicer signature.
