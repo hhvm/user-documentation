@@ -6,31 +6,31 @@ use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
-    $john = new Person('John', 'Doe');
-    $emma = new Person('Emma', 'Smith');
+  $john = new Person('John', 'Doe');
+  $emma = new Person('Emma', 'Smith');
 
-    echo Str\format(
-        "%s's last name was %s before she got married.\n",
-        $emma->firstName,
-        $emma->lastName,
-    );
+  echo Str\format(
+    "%s's last name was %s before she got married.\n",
+    $emma->firstName,
+    $emma->lastName,
+  );
 
-    marry($john, $emma);
+  marry($john, $emma);
 
-    echo Str\format(
-        "%s's last name became %s after she got married.\n",
-        $emma->firstName,
-        $emma->lastName,
-    );
+  echo Str\format(
+    "%s's last name became %s after she got married.\n",
+    $emma->firstName,
+    $emma->lastName,
+  );
 }
 
 function marry(Person $a, Person $b): void {
-    $b->lastName = $a->lastName;
+  $b->lastName = $a->lastName;
 }
 
 class Person {
-    public function __construct(
-        public string $firstName,
-        public string $lastName,
-    ) {}
+  public function __construct(
+    public string $firstName,
+    public string $lastName,
+  ) {}
 }
