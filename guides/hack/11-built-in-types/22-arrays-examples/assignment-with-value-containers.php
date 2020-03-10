@@ -6,9 +6,6 @@ use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
-    require_once __DIR__.'/../../../../vendor/autoload.hack';
-    \Facebook\AutoloadMap\initialize();
-
     $emma = dict['first' => 'Emma', 'last' => 'Smith'];
     $another_emma = $emma;
 

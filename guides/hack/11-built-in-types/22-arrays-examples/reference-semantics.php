@@ -6,9 +6,6 @@ use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
-    require_once __DIR__.'/../../../../vendor/autoload.hack';
-    \Facebook\AutoloadMap\initialize();
-
     $john = new Person('John', 'Doe');
     $emma = new Person('Emma', 'Smith');
 
