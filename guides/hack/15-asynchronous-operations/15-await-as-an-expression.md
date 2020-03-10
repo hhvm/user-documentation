@@ -58,7 +58,12 @@ $x = foo(
 
 ## Limitations
 
-To further help protect against depending on order-of-execution, we've banned assignment or updating variables as-an-expression for statements that contain an `await`. You can [read the full spec for a complete list of position](../expressions-and-operators/banning-lval-as-an-expression.md) we allow updating local variables in statements that contain `await`.
+To further help protect against depending on order-of-execution, we've
+banned assignment or updating variables as-an-expression for
+statements that contain an `await`. You can [read the full spec for a
+complete list of
+positions](../expressions-and-operators/banning-lval-as-an-expression.md)
+where we allow updating local variables in statements that contain `await`.
 
 ```
 // Yes!
