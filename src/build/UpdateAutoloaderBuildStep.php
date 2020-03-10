@@ -37,7 +37,9 @@ final class UpdateAutoloaderBuildStep extends BuildStep {
       ->setBuilder($importer)
       ->setRoot(LocalConfig::ROOT)
       ->setRelativeAutoloadRoot($config['relativeAutoloadRoot'])
-      ->setFailureHandler(/* HH_IGNORE_ERROR[4110] */ $handler)
+      ->setFailureHandler(
+        /* HH_IGNORE_ERROR[4110] silent upcast from string to failure handler*/ $handler,
+      )
       ->setIsDev($dev)
       ->writeToDirectory(LocalConfig::ROOT.'/vendor/');
   }

@@ -65,10 +65,8 @@ class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
   ): Awaitable<void> {
     list($_page, $body) = await PageLoader::getPageAsync($source);
 
-    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
     $dom->loadHTML($body);
-    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $xpath = new \DOMXPath($dom);
 
     $nodes = $xpath->query(

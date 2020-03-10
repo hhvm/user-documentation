@@ -96,11 +96,10 @@ final class APIIndex {
   }
 
   private function getMethods(APIIndexEntry $entry): ?vec<APIMethodIndexEntry> {
-    $arr = Shapes::toArray($entry);
-    $methods = $arr['methods'] ?? null;
+    $methods = $entry['methods'] ?? null;
     if ($methods !== null) {
       return Vec\map(
-        /* HH_IGNORE_ERROR[4110] */ $methods,
+        $methods,
         $method ==> TypeAssert\matches_type_structure(
           type_alias_structure(APIMethodIndexEntry::class),
           $method,

@@ -40,7 +40,7 @@ final class RubyDependenciesBuildStep extends BuildStep {
       'environment' => dict[
         'GEM_HOME' => $ruby_root,
       ]
-        |> Dict\merge($$, /* HH_FIXME[2050] */ $_ENV),
+        |> Dict\merge($$, _Private\SuperGlobals\environment_variables()),
     );
     if (!\file_exists($bundler)) {
       Log::v("\nInstalling bundler");

@@ -99,12 +99,10 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
     expect($response->getStatusCode())->toBeSame(200, $page);
 
-    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $dom = new \DOMDocument();
     \libxml_use_internal_errors(true); // No support for HTML5 tags
     $dom->loadHTML($body);
     \libxml_clear_errors();
-    /* HH_FIXME[2049] No DOM HHI: facebook/hhvm#5322 */
     $xpath = new \DOMXPath($dom);
     $hrefs = $xpath->query('//a/@href');
 
