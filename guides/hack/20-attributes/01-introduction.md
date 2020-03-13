@@ -3,7 +3,6 @@
 * [Getting started](some-basics.md)
 * [Specifying an attribute](attribute-specification.md)
 * [Predefined attribute __AcceptDisposable](predefined-attributes#__acceptdisposable)
-* [Predefined attribute __AllowStatic](predefined-attributes#__allowstatic)
 * [Predefined attribute __ConsistentConstruct](predefined-attributes#__consistentconstruct)
 * [Predefined attribute __Deprecated](predefined-attributes#__deprecated)
 * [Predefined attribute __DynamicallyCallable](predefined-attributes#__dynamicallycallable)

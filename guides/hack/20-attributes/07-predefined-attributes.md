@@ -1,6 +1,5 @@
 The following attributes are defined:
 * [__AcceptDisposable](#__acceptdisposable)
-* [__AllowStatic](#__allowstatic)
 * [__ConsistentConstruct](#__consistentconstruct)
 * [__Deprecated](#__deprecated)
 * [__DynamicallyCallable](#__dynamicallycallable)
