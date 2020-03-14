@@ -1,75 +1,212 @@
-A *shape* consists of a group of zero or more data fields taken together as a whole. A shape type is an *unordered* set of fields each
-of which has a name and an associated type.  For example:
+A shape is a lightweight type with named fields. It's similar to
+structs or records in other programming languages.
 
 ```Hack
-$point1 = shape('x' => -3, 'y' => 6);
-function set_origin(shape('x' => int, 'y' => int) $p): void { ... }
-function get_origin(): shape('x' => int, 'y' => int) { ... }
+$my_point = shape('x' => -3, 'y' => 6, 'visible' => true);
 ```
 
-Here, we mimic a point with integer coordinates, by having a shape with two fields called `x` and `y`, each of which is an `int`. A shape
-value has the form of a comma-separated list of name/value pairs delimited with parentheses and preceded by `shape`, as in
-`shape('x' => -3, 'y' => 6)` above.  As we can quickly deduce, that shape has type *shape of two fields, both of type `int`,
-in some unknown order*, and that is the type of the argument expected by function `set_origin`, and returned by function `get_origin`.
+## Shape Values
 
-As the ordering of the fields is irrelevant, given the following:
+A shape is created with the `shape` keyword, with a series of field
+names and values.
 
-```Hack
-shape('x' => -3, 'y' => 6)
-shape('y' => 6, 'x' => -3)
+``` Hack
+$server = shape('name' => 'db-01', 'age' => 365);
+
+$empty = shape();
 ```
 
-the two shape values are identical.
+Shape fields are accessed with array indexing syntax, similar to
+`dict`. Note that field names must be string literals.
 
-A field in a shape is accessed using its name as the key in a subscript expression.  For example:
+``` Hack
+// OK.
+$n = $server['name'];
 
-```Hack
-function point_to_string(shape('x' => int, 'y' => int) $p): string {
-  return '(' . $p['x'] . ',' . $p['y'] . ')';
+// Not OK (type error).
+$field = 'name';
+$n = $server[$field];
+```
+
+Shapes are copy-on-write.
+
+``` Hack
+$s1 = shape('name' => 'db-01', 'age' => 365);
+$s2 = $s1;
+
+$s2['age'] = 42;
+// $s1['age'] is still 365.
+```
+
+A shape can be constructed incrementally. The type checker will infer
+a different type after each assignment.
+
+``` Hack
+// $s has type shape().
+$s = shape();
+
+// $s now has type shape('name' => string).
+$s['name'] = 'db-01';
+
+// $s now has type shape('name' => string, 'age' => int).
+$s['age'] = 365;
+```
+
+Shapes have the same runtime representation as `darray`, although this
+is considered an implementation detail. This representation means that
+shape order is observable.
+
+``` Hack
+$s1 = shape('name' => 'db-01', 'age' => 365);
+$s2 = shape('age' => 365, 'name' => 'db-01');
+
+$s1 === $s2; // false
+```
+
+## Shape Types
+
+Shape type declarations use a similar syntax to values.
+
+``` Hack
+function takes_server(shape('name' => string, 'age' => int) $s): void {
+  // ...
 }
-$point1 = shape('x' => -3, 'y' => 6);
-$s = point_to_string($point1);    // $s takes on the value "(-3,6)"
 ```
 
-A field whose name is preceded by `?` is optional, and need not be mentioned in any initializer of, or assignment to, a variable of that type;
-however, until its value is set explicitly, that field does not actually exist in the shape. Consider the following:
+Unlike classes, declaring a shape type is optional. You can start
+using shapes without defining any types.
 
-```Hack
-function f(shape('a' => int, ?'n' => string) $p): void {
-  echo "\$p['a']: " . $p['a'] . "\n";
-  echo "\$p['n']: " . $p['n'] . "\n";  // only permitted if n exists
+``` Hack
+function uses_shape_internally(): void {
+  $server = shape('name' => 'db-01', 'age' => 365);
+  print_server_name($server['name']);
+  print_server_age($server['age']);
 }
 ```
 
-Given the call `f(shape('a' => 10, 'n' => "xxx"))`, field `n` has its value set explicitly, and `f` works fine. However, given the
-call `f(shape('a' => 10))`, field `n` does not have its value set explicitly, in which case, attempting to access that field using `$p['n']`
-results in an "undefined index" error at runtime. To be certain such accesses succeed, first call `Shapes::keyExists`. (See the library class
-[`Shapes`](https://docs.hhvm.com/hack/shapes/functions).)
+For large shapes, it is often convenient to define a type alias.
 
-Here are some more, simple, shape-type examples:
+``` Hack
+type Server = shape('name' => string, 'age' => int);
 
-```Hack
-shape('real' => float, 'imag' => float)
-shape('id' => string, 'url' => string, 'count' => int)
-shape('name' => string, 'address' => shape('street' => string,
-  'city' => string, 'state' => string, 'postcode' => int))
+// Equivalent to the previous takes_server function.
+function takes_server(Server $s) {
+  // ...
+}
 ```
 
-In the final case above, we have a shape within a shape.
+Since shapes are copy-on-write, updates can change the type.
 
-Consider a shape type *S2* whose field set is a superset of that in shape type *S1*. As such, *S2* is a subtype of *S1*. (See the banking example
-below.) However, when an *S2* is used as an *S1*, only the *S1* fields in that *S2* are accessible.
+``` Hack
+// $s has type shape('name' => string, 'age' => int). 
+$s = shape('name' => 'db-01', 'age' => 365);
 
-For non-trivial shape types (like the name and address one above), it can be cumbersome to write out the complete type. Fortunately, Hack provides
-a type-aliasing capability via `type` (and `newtype`), which is demonstrated in the next example:
+// $s now has type shape('name' => string, 'age' => string). 
+$s['age'] = '1 year';
+```
 
-@@ shapes-examples/banking.php @@
+**Two shapes have the same type if they have the same fields and
+types**. This makes shapes convenient to create, but can cause
+surprises. This is called 'structural subtyping'.
 
-Type `Transaction` is a sort-of abstract type that only ever contains the transaction-type field. The `...` notation indicates that there
-may be other, optional fields. This allows the types `Deposit`, `Withdrawal`, and `Transfer` to be considered subtypes of `Transaction` by having
-the same first field, and then adding other fields as well.
+``` Hack
+type Server = shape('name' => string, 'age' => int);
+type Pet = shape('name' => string, 'age' => int);
 
-Note carefully, that inside function `process_transaction`, even though the transaction passed in might have been a `Deposit`, a `Withdrawal`,
-or a `Transfer`, it always appears as a `Transaction`, so the only field we can access in `$t` is `trtype`. However, using `Shapes::toArray`,
-we can convert the `Transaction` to an array, and then get read-access to the field values we know that array must contain by indexing it using
-the field names, as shown.
+function takes_server(Server $_): void {}
+
+function takes_pet(Pet $p): void {
+  // No error here.
+  takes_server($p);
+}
+```
+
+## Open and Closed Shapes
+
+Normally, the type checker will enforce that you provide exactly the
+fields specified. This is called a 'closed shape'.
+
+``` Hack
+function takes_named(shape('name' => string) $_): void {}
+
+// Type error: unexpected field 'age'.
+takes_named(shape('name' => 'db-01', 'age' => 365));
+```
+
+Shape types may include `...` to indicate that additional fields are
+permitted. This is called an 'open shape'.
+
+``` Hack
+function takes_named(shape('name' => string, ...) $_): void {}
+
+// OK.
+takes_named(shape('name' => 'db-01', 'age' => 365));
+```
+
+To access the additional fields in an open shape, you can use
+`Shapes::idx`.
+
+``` Hack
+function takes_named(shape('name' => string, ...) $n): void {
+  // The value in the shape, or null if field is absent.
+  $nullable_age = Shapes::idx($n, 'age');
+
+  // The value in the shape, or 0 if field is absent.
+  $age_with_default = Shapes::idx($n, 'age', 0);
+}
+
+```
+
+## Optional Fields
+
+A shape type may declare fields as optional.
+
+``` Hack
+function takes_server(shape('name' => string, ?'age' => int) $s): void {
+  $age = Shapes::idx($s, 'age', 0);
+}
+
+function example_usage(): void {
+  takes_server(shape('name' => 'db-01', 'age' => 365));
+  takes_server(shape('name' => 'db-02'));
+}
+```
+
+`takes_server` takes a closed shape, so any additional fields will be
+an error. The `age` field is optional though.
+
+Optional fields can be tricky to reason about, so your code may be
+clearer with nullable fields or open shapes.
+
+``` Hack
+function takes_server2(shape('name' => string, 'age' => ?int) $s): void {
+  $age = $s['age'] ?? 0;
+}
+
+function takes_server3(shape('name' => string, ...) $s): void {
+  $age = Shapes::idx($s, 'age', 0) as int;
+}
+```
+
+## Type Enforcement
+
+HHVM will check that arguments are shapes, but it will not deeply
+check fields.
+
+``` Hack
+// This produces a typehint violation at runtime.
+function returns_int_instead(): shape('x' => int) {
+  /* HH_FIXME[4410] Example invalid type. */
+  return 1;
+}
+
+// No runtime error.
+function returns_wrong_shape(): shape('x' => int) {
+  /* HH_FIXME[4410] Example invalid type. */
+  return shape('y' => 1);
+}
+```
+
+## Converting Shapes
+
+You can use `Shapes::toArray` to convert a shape to a `darray`.
