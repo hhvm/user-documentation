@@ -261,3 +261,52 @@ Individual runtime settings are documented [here](darray-varray-runtime-options.
 | `dict` values | `new Vector($d)`         | N/A           | `new Set($d)`         | `varray($d)`         | N/A
 | `vec`         | `new Vector($v)`         | `new Map($v)` | `new Set($v)`         | `varray($v)`         | `darray($v)`
 | `keyset`      | `new Vector($k)`         | `new Map($k)` | `new Set($k)`         | `varray($k)`         | `darray($k)`
+
+## Value vs. reference semantics
+
+An important distinction between `arrays` and `Collections` is their interation with value semantics.
+All `arrays` (recognizable by their lowercase names) have value semantics.
+All `Collections` (recognizable by their uppercase names) have reference semantics.
+
+### What are reference semantics (disambiguation)
+
+`Reference semantics` does **NOT** refer to the deprecated `&$references`.
+It addresses how an instance behaves when assigned / passed into or returned from functions.
+An object has reference semantics.
+If I pass you a `Person` instance and you set the last name to `"Doe"`, I'll be able to observe that change on my instance (`$emma`).
+
+@@ arrays-examples/reference-semantics.php @@
+
+However, if you were to do the same with an array type, you'd not observe the changes in your variable (`$emma`).
+
+@@ arrays-examples/dicts-have-value-semantics.php @@
+
+If you want to modify a value type parameter, see `inout`.
+This will _copy out_ the changes made in `marry()` when the function finishes.
+
+Watch out! Collections have reference semantics!
+
+@@ arrays-examples/maps-have-reference-semantics.php @@
+
+This difference makes it very difficult to migrate from Containers to arrays.
+It is recommended to not share a mutable reference to a Collection accross a codebase.
+If this is required for the correctness of your program, but you are migrating to Hack arrays, you can use `HH\Lib\Ref<T>`.
+Pass a `Ref<dict<string, string>>` around your program instead of a `Map<string, string>`.
+This makes it obvious that you intend to mutate the dict.
+
+### When do two value Containers become seperate things?
+
+From the perspective of the programmer, as soon as you give the value a (new) name.
+
+@@ arrays-examples/assignment-with-value-containers.php @@
+
+Within the assignment `$another_emma = $emma`, a logigal copy was made.
+From the programmer's perspective, you now have two copies of the emma dict.
+The hhvm engine is free to defer this copy at runtime until changes would be observable.
+If you'd never change any elements of `$emma`, `$another_emma` could point to the same memory as `$emma`.
+This saves memory and time.
+However, when you modify `$emma`, `$another_emma` **MUST NOT** reflect these changes.
+This optimization is called Copy on Write or `CoW` for short.
+This is also why you'll sometimes hear that arrays have copy-on-write semantics.
+This is however an implementation detail.
+HHVM _could_ just make a copy every time a logical copy is made and be correct.
