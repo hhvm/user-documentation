@@ -294,17 +294,18 @@ If this is required for the correctness of your program, but you are migrating t
 Pass a `Ref<dict<string, string>>` around your program instead of a `Map<string, string>`.
 This makes it obvious that you intend to mutate the dict.
 
-### When do two value Containers become seperate things?
+### When do two value Containers become separate things?
 
 From the perspective of the programmer, as soon as you give the value a (new) name.
 
 @@ arrays-examples/assignment-with-value-containers.php @@
 
-Within the assignment `$another_emma = $emma`, a logigal copy was made.
+Within the assignment `$another_emma = $emma`, a logical copy was made.
 From the programmer's perspective, you now have two copies of the emma dict.
 The hhvm engine is free to defer this copy at runtime until changes would be observable.
 If you'd never change any elements of `$emma`, `$another_emma` could point to the same memory as `$emma`.
 This saves memory and time.
+
 However, when you modify `$emma`, `$another_emma` **MUST NOT** reflect these changes.
 This optimization is called Copy on Write or `CoW` for short.
 This is also why you'll sometimes hear that arrays have copy-on-write semantics.
