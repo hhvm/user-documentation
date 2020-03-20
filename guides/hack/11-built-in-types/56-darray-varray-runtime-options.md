@@ -77,3 +77,28 @@ pass in the future - for this reason, the `hhvm.hack_arr_is_shape_tuple_notices`
 runtime option has been added to raise notices for these type tests:
 
 @@ darray-varray-runtime-options-examples/hack_arr_is_shape_tuple_notices.php @@
+
+## Check array key cast
+
+Fullname: hhvm.hack_arr_compat_check_array_key_cast
+
+This setting will raise a notice under the following condition.
+If it does not raise a warning, this option is not available in your version of hhvm.
+
+@@ darray-varray-runtime-options-examples/hack_arr_compat_check_array_key_cast.php @@
+
+A `vec<_>` and a `dict<_, _>` only allow `arraykey` keys.
+Because of legacy, the (d/v)array family needs to support non arraykey keys being set and read from.
+When you set `$varray[true] = 4;`, hhvm will cast your `true` to a valid arraykey `1`.
+The rules of casting are as follows:
+
+- floats are cast to ints using an `(int)` cast.
+- `true` becomes 1 and `false` becomes 0.
+- `null` becomes empty string.
+
+Deciding on the best course of action relies on context.
+If the value is coming from an untyped function, it is worth investigating if the returned type might have been a mistake.
+Keep in mind that a function that reaches the closing `}` before hitting a `return` statement returns `null`.
+
+If you want this error to go away, but you'd like to keep the current behavior (not recommended)
+you can use `HH\array_key_cast()`.
