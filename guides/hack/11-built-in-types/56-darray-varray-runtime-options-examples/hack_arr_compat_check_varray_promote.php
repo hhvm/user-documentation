@@ -1,6 +1,6 @@
 <?hh // strict
 
-namespace Hack\UserDocumentation\Types\VarrayDarrayRuntimeOptions\HackArrCompatCheckArrayKeyCast;
+namespace Hack\UserDocumentation\Types\VarrayDarrayRuntimeOptions\HackArrCompatCheckVarrayPromote;
 
 use namespace HHVM\UserDocumentation\_Private;
 
