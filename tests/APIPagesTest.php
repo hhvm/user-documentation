@@ -210,4 +210,18 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
     expect(Str\contains($body, '<a href="#examples">'))
       ->toBeTrue('Missing examples at %s.', $url);
   }
+
+  public async function testGuideLinks(): Awaitable<void> {
+    // page with 1 guide
+    $url = '/hack/reference/class/HH.AsyncGenerator/';
+    list($_, $body) = await PageLoader::getPageAsync($url);
+    expect(Str\contains($body, '<a href="#guide">'))
+      ->toBeTrue('Missing guide link at %s.', $url);
+
+    // page with multiple guides
+    $url = '/hack/reference/class/AsyncMysqlQueryResult/';
+    list($_, $body) = await PageLoader::getPageAsync($url);
+    expect(Str\contains($body, '<a href="#guides">'))
+      ->toBeTrue('Missing guide links at %s.', $url);
+  }
 }

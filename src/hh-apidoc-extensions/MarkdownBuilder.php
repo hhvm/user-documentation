@@ -12,7 +12,7 @@
 namespace HHVM\UserDocumentation\HHAPIDocExt;
 
 use namespace Facebook\HHAPIDoc;
-use namespace HH\Lib\Keyset;
+use namespace HH\Lib\{C, Keyset, Vec};
 
 final class MarkdownBuilder extends HHAPIDoc\DocumentationBuilder {
   <<__Override>>
@@ -22,14 +22,24 @@ final class MarkdownBuilder extends HHAPIDoc\DocumentationBuilder {
       parent::getPageSections(),
       $section ==> $section !== HHAPIDoc\PageSections\NameHeading::class,
     );
-    return Keyset\union(
-      keyset[
+    $sections = Vec\concat(
+      vec[
         PageSections\FrontMatter::class,
       ],
       $inherited,
-      keyset[
+      vec[
         PageSections\Examples::class,
       ],
+    );
+    // Insert "Guides" after description.
+    $desc_key = C\find_key(
+      $sections,
+      $s ==> $s === HHAPIDoc\PageSections\Description::class,
+    ) as nonnull;
+    return Keyset\union(
+      Vec\take($sections, $desc_key + 1),
+      vec[PageSections\Guides::class],
+      Vec\slice($sections, $desc_key + 1),
     );
   }
 }

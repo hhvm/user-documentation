@@ -105,6 +105,7 @@ final class Guides {
           'XHP-attribute-spread' => tuple('XHP', 'introduction'),
         ],
         'generics' => dict[
+          'constraints' => tuple('generics', 'type-constraints'),
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
           'type-arguments' => tuple('generics', 'type-parameters'),
         ],
