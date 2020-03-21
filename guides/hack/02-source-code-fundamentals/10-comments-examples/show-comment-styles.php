@@ -1,5 +1,7 @@
 <?hh
 
+namespace Hack\UserDocumentation\Comments;
+
 // A single line comment.
 
 # Also a single line comment.

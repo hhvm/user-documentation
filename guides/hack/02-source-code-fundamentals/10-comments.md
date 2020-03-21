@@ -8,7 +8,8 @@ starting `/**` are also used for documentation.
 Single-line comments start with `//` or `#`, and end with a newline.
 
 A number of special comments are recognized; they are:
-* [`// FALLTHROUGH`](../statements/switch.md)
-* [`// strict` or `// partial`](program-structure.md)
-* `/* HH_FIXME[`*nnnn*`] */` or `/* HH_IGNORE_ERROR[`*nnnn*`] */`, where *nnnn*
-  is the type checker error number that is to be ignored.
+
+* `// FALLTHROUGH` in [switch statements](../statements/switch.md)
+* `// strict` and `// partial` in [headers](program-structure.md)
+* `/* HH_FIXME[1234] */` or `/* HH_IGNORE_ERROR[1234] */`, which
+  suppresses typechecker error reporting for error 1234.
