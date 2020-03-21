@@ -126,6 +126,9 @@ final class Guides {
         'overview' => dict[
           'typing' => tuple('types', 'introduction'),
         ],
+        'source-code-fundamentals' => dict[
+          'white-space' => tuple('source-code-fundamentals', 'introduction'),
+        ],
         'statements' => dict[
           'labeled-statements' => tuple('statements', 'switch'),
         ],

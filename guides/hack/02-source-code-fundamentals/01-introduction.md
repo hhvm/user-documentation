@@ -11,4 +11,3 @@
 * [scope](scope.md)
 * [script inclusion](script-inclusion.md)
 * [variables](variables.md)
-* [white space](white-space.md)
