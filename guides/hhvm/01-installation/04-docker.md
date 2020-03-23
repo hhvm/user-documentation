@@ -26,7 +26,7 @@ EXPOSE 80
 *`public/index.php`*
 
 ```
-<?php
+<?hh
 echo "Hello World!";
 ```
 
