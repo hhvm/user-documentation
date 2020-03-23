@@ -27,7 +27,12 @@ EXPOSE 80
 
 ```
 <?hh
-echo "Hello World!";
+
+<<__EntryPoint>>
+function main(): noreturn {
+  echo "Hello World!";
+  exit(0);
+}
 ```
 
 Now in a shell run:
