@@ -14,7 +14,7 @@ use type Facebook\Experimental\Http\Message\{
   ResponseInterface,
   ServerRequestInterface,
 };
-use namespace HH\Lib\Math;
+use namespace HH\Lib\{Math, Str};
 use namespace HH\Lib\Experimental\{File, IO};
 
 final class HHVMDocumentationSite {
@@ -66,16 +66,19 @@ final class HHVMDocumentationSite {
       try {
         list($controller, $vars) = self::routeRequest($request);
       } catch (HTTPNotFoundException $e) {
-        // Try to add trailing if we couldn't find a controller
+        // Try to add/remove trailing slash if we couldn't find a controller
         $orig_uri = $request->getUri();
-        $with_trailing_slash = $request
-          ->withUri($orig_uri->withPath($orig_uri->getPath().'/'));
+        $orig_path = $orig_uri->getPath();
+        $alt_path = Str\ends_with($orig_path, '/')
+          ? Str\strip_suffix($orig_path, '/')
+          : $orig_path.'/';
+        $alt_request = $request->withUri($orig_uri->withPath($alt_path));
 
         try {
-          list($controller, $vars) = self::routeRequest($with_trailing_slash);
+          list($controller, $vars) = self::routeRequest($alt_request);
           // If we're here, it's routable with a trailing /
           return await (
-            new RedirectException($with_trailing_slash->getUri()->getPath())
+            new RedirectException($alt_path)
           )->getResponseAsync($request, $response);
         } catch (HTTPException $f) {
           throw $e; // original exception, not the new one
