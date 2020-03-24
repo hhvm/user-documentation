@@ -24,7 +24,8 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
     expect($response->getStatusCode())->toBeSame(
       200,
       \sprintf(
-        ">>> 404: %s\n>>> Linked from:\n%s",
+        ">>> %d: %s\n>>> Linked from:\n%s",
+        $response->getStatusCode(),
         $target,
         \implode("\n", $sources->map($x ==> '>>>  - '.$x)),
       ),
