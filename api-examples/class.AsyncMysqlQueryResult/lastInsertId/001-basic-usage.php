@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function simple_query(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $id = \rand(100, 60000); // userID is a SMALLINT
   $name = \str_shuffle("ABCDEFGHIJ");

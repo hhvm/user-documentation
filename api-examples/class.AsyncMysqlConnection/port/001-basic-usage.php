@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function get_port(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $port = $conn->port();
   $conn->close();

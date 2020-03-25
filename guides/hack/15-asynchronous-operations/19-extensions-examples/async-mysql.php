@@ -9,7 +9,7 @@ use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionIn
 
 async function get_connection(): Awaitable<\AsyncMysqlConnection> {
   // Get a connection pool with default options
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   // Change credentials to something that works in order to test this code
   return await $pool->connect(
     CI::$host,

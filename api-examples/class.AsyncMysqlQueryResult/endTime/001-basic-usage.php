@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function simple_query(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $result = await $conn->query('SELECT name FROM test_table WHERE userID = 1');
   // What time was it when we finally got this result?

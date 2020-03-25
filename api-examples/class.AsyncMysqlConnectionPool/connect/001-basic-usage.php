@@ -10,7 +10,7 @@ class MyPool {
   private \AsyncMysqlConnectionPool $pool;
 
   public function __construct() {
-    $this->pool = new \AsyncMysqlConnectionPool(array());
+    $this->pool = new \AsyncMysqlConnectionPool(darray[]);
   }
 
   public function getPool(): \AsyncMysqlConnectionPool {

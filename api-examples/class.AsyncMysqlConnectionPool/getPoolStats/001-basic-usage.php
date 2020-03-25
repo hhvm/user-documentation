@@ -8,7 +8,7 @@ use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 
 function set_connection_pool(
-  array<string, mixed> $options = array(),
+  darray<string, mixed> $options = darray[],
 ): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool($options);
 }

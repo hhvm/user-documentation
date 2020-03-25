@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function get_server_info(): Awaitable<string> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $info = $conn->serverInfo();
   $conn->close();

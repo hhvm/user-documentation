@@ -29,7 +29,7 @@ async function get_data(
 }
 
 async function percent_L_queryf(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $ids = Vector {1, 2};
   $result = await get_data($conn, $ids);

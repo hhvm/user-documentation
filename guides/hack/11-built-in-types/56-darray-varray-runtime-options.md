@@ -67,3 +67,13 @@ The third usecase used to be valid Hack. Unsetting the last index of a `varray<_
 The third situation, writing to a string key, is always a mistake.
 
 If this is a string literal, the actual type is most likely `darray<_, _>`. If this is an intergral string coming from an untyped function, it is worth investigating casting the value to an int.
+
+## Runtime typetests of shapes and tuples
+
+Shapes and tuples are currently implemented with `darray` and `varray`, however
+this is an implementation detail, and expected to change to `dict` and `vec`;
+this means that the following checks will currently always fail, but may
+pass in the future - for this reason, the `hhvm.hack_arr_is_shape_tuple_notices`
+runtime option has been added to raise notices for these type tests:
+
+@@ darray-varray-runtime-options-examples/hack_arr_is_shape_tuple_notices.php @@

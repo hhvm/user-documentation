@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function simple_query(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $result = await $conn->query('SELECT * FROM test_table WHERE userID < 50');
   $conn->close();

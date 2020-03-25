@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function get_delay(): Awaitable<?float> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $delay = $conn->connectResult()?->clientStats()?->callbackDelayMicrosAvg();
   $conn->close();

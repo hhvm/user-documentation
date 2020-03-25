@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function get_client_stats(): Awaitable<?\AsyncMysqlClientStats> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $cstats = $conn->connectResult()?->clientStats();
   \var_dump($cstats?->callbackDelayMicrosAvg());

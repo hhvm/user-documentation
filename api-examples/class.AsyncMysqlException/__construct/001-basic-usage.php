@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function simple_query(): Awaitable<?string> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = null;
   try {
     $conn = await connect($pool);

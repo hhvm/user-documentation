@@ -7,7 +7,7 @@ require __DIR__."/../../__includes/async_mysql_connect.inc.php";
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function set_connection_pool(): \AsyncMysqlConnectionPool {
-  return new \AsyncMysqlConnectionPool(array());
+  return new \AsyncMysqlConnectionPool(darray[]);
 }
 
 async function connect_with_pool(

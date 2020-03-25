@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function simple_query_error(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   try {
     $result = await $conn->query('SELECT bogus FROM bogus WHERE bogus = 1');

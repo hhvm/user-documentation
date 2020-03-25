@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function get_loop_info(): Awaitable<?float> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $loop = $conn->connectResult()?->clientStats()?->ioEventLoopMicrosAvg();
   $conn->close();

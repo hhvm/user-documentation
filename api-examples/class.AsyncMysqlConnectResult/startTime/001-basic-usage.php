@@ -18,7 +18,7 @@ async function connect(
   );
 }
 async function get_connection_start_time(): Awaitable<?float> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $st = $conn->connectResult()?->endTime();
   $conn->close();

@@ -34,7 +34,7 @@ async function get_data(
   );
 }
 async function simple_query(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $result = await get_data($conn, 'Joel Marcey');
   $x = $result->numRows();

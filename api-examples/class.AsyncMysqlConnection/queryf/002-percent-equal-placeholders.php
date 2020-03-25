@@ -32,7 +32,7 @@ async function get_data(
 }
 
 async function simple_queryf(): Awaitable<int> {
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $result = await get_data($conn, 'name', 'joelm@fb.com');
   $x = $result->numRows();

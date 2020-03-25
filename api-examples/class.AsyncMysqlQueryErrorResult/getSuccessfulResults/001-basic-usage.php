@@ -23,7 +23,7 @@ async function multi_query_error(): Awaitable<?int> {
     'SELECT age, email FROM test_table WHERE userID = 2',
     'SELECT bogus FROM bogus WHERE bogus = 1',
   };
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   try {
     $result = await $conn->multiQuery($queries);

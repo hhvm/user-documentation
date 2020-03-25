@@ -25,7 +25,7 @@ async function simple_multi_query(): Awaitable<int> {
     'SELECT age, email FROM test_table WHERE userID = 2',
     'SELECT name FROM test_table WHERE userID = 3',
   };
-  $pool = new \AsyncMysqlConnectionPool(array());
+  $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
   $results = await $conn->multiQuery($queries);
   $conn->close();
