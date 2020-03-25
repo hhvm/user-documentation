@@ -21,23 +21,39 @@ abstract class BuildStep {
     if (\file_exists($root.'/index.json')) {
       return $root.'/index.json';
     }
-    if (!\file_exists(LocalConfig::ROOT.'/.git')) {
-      return null;
-    }
 
     if (!Str\contains($root, 'api-sources/')) {
       return null;
     }
 
-    $head = Str\trim(\shell_exec(
-      \sprintf('cd %s; git rev-parse HEAD', \escapeshellarg($root)),
-    ));
-
-    if ($head === '') {
+    $cache_key = null;
+    $tag_file = $root
+      |> Str\strip_prefix($$, BuildPaths::API_SOURCES_DIR)
+      |> Str\strip_prefix($$, '/')
+      |> Str\split($$, '/')
+      |> C\firstx($$)
+      |> Str\format(
+        '%s/%s/.tag',
+        BuildPaths::API_SOURCES_DIR,
+        $$,
+      );
+    if (!\file_exists($tag_file)) {
       return null;
     }
 
-    return BuildPaths::DIR_INDEX_ROOT.'/'.\md5($root).'_'.$head.'.json';
+    $cache_key = \file_get_contents($tag_file)
+      |> \sodium_crypto_generichash($$)
+      |> \bin2hex($$);
+
+    return Str\format(
+      '%s/%s-%s.json',
+      BuildPaths::DIR_INDEX_ROOT,
+      $root
+        |> Str\strip_prefix($$, LocalConfig::ROOT)
+        |> Str\strip_prefix($$, '/')
+        |> Str\replace($$, '/', '_'),
+      $cache_key,
+    );
   }
 
   protected static function findSources(
