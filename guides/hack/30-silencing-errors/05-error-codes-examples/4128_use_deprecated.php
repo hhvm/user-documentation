@@ -2,7 +2,7 @@
 
 function foo_new(): void {}
 
-<<__Deprecated("Use foo_new instead'")>>
+<<__Deprecated("Use foo_new instead")>>
 function foo_old(): void {}
 
 function bar(): void {

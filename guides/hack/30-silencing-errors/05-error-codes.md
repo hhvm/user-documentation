@@ -113,7 +113,7 @@ Suggestions: Change your shape type to use optional fields.
 
 @@ error-codes-examples/4063_null_container.php @@
 
-Why it's bad: indexing in a null container returns null, leading to
+Why it's bad: indexing a `null` returns null, leading to
 runtime type errors later.
 
 Suggestions: Check that the value is non-null with `nullthrows` or
@@ -127,7 +127,7 @@ Why it's bad: Accessing a property or a method on `null` will throw an
 exception.
 
 Suggestions: Check that the value is non-null with `nullthrows` or
-assert with `$items as nonnull`.
+assert with `$m as nonnull`.
 
 ## 4101: Wrong number of type paramters
 
@@ -188,7 +188,7 @@ in these situations.
 
 ```
 function test(shape('a' => string) $s): shape() {
-  /* HH_FIXME[4168] Extra fields in the shape. */
+  /* HH_FIXME[4166] Extra fields in the shape. */
   return $s;
 }
 ```
