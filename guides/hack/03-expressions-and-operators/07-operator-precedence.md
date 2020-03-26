@@ -11,7 +11,7 @@ Operator | Associativity
 `()` | Left
 `clone` | None
 `await` `++` `--` (postfix) | Right
-`(int)` `(float)` `(string)` `**` `@` `++` `--` (prefix) | right
+`(int)` `(float)` `(string)` `**` `@` `++` `--` (prefix) | Right
 `is` `as` `?as` | Left
 `!` `~` `+` `-` (one argument) | Right
 `*` `/` `%` | Left
@@ -21,13 +21,13 @@ Operator | Associativity
 `===` `!==` `==` `!=` | None
 `&&` | Left
 `^` | Left
-`||` | Left
+`\|\|` | Left
 `&` | Left
-`|` | Left
+`\|` | Left
 `??` | Right
 `?` `:` `?:` | Left
 `|>` | Left
-`=` `+=` `-=` `.=` `*=` `/=` `%=` `<<=` `>>=` `&=` `^=` `|=` `??=` | Right
+`=` `+=` `-=` `.=` `*=` `/=` `%=` `<<=` `>>=` `&=` `^=` `\|=` `??=` | Right
 `print` | Right
 `include` `require` | Left
 
