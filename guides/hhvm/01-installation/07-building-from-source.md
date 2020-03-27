@@ -112,9 +112,11 @@ export CMAKE_PREFIX_PATH="$(echo "$HOMEBREW_DEPENDENCIES" | tr ',' "\n" | xargs 
 
 # Configure.
 # - If you install MySQL server from Homebrew, it uses /tmp/mysql.sock as the unix socket by default
+# - Make sure that CMake uses Homebrew's preferred OSX SDK
 # - set installation prefix for installing side-by-side with homebrew versions (optional)
 cmake . \
   -DMYSQL_UNIX_SOCK_ADDR=/tmp/mysql.sock \
+  -DCMAKE_OSX_SYSROOT=${HOMEBREW_SDKROOT} \
   $(brew diy --name=hhvm-local --version=$(date +%Y.%m.%d))
 make # you probably want `make -j<number of cores`, e.g. `make -j12`
 make install
