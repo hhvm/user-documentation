@@ -14,7 +14,6 @@
 * [Equality operators](equality.md)
 * [Error control, `@`](error-control.md)
 * [exit intrinsic function](exit.md)
-* [Function-call, `()`](function-call.md)
 * [Increment, `++`](incrementing-and-decrementing.md)
 * [invariant intrinsic function](invariant.md)
 * [list intrinsic function](list.md)

@@ -16,7 +16,7 @@ the computations and side-effects previously promised are complete, and no compu
 begun.
 
 There is a sequence point at the end of each full expression. The
-`&&`, `||`, `? :` and [function-call](function-call.md) operators each
+`&&`, `||`, `? :` and function-call operators each
 contain a sequence point. For example, in the following series of
 statements:
 

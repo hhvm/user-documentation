@@ -86,6 +86,7 @@ final class Guides {
           'conditional' => tuple('expressions-and-operators', 'ternary'),
           'division' => tuple('expressions-and-operators', 'arithmetic'),
           'exponentiation' => tuple('expressions-and-operators', 'arithmetic'),
+          'function-call' => tuple('functions', 'introduction'),
           'instanceof' => tuple('expressions-and-operators', 'type-assertions'),
           'is' => tuple('expressions-and-operators', 'type-assertions'),
           'lambda-creation' => tuple('functions', 'anonymous-functions'),

@@ -12,7 +12,7 @@ definition.  For example:
 @@ some-basics-examples/distance-between-Points.php @@
 
 Function `main` contains two calls to function `create_point`.  Let's consider the first.  Calling a function requires the use of the
-[function-call operator, `()`](../expressions-and-operators/function-call.md).  Typically, this operator is preceded by the name of the
+function-call operator, `()`.  Typically, this operator is preceded by the name of the
 function being called, in this case, `create_point `.  The comma-separated list of arguments goes inside the parentheses, as in `create_point(3.5, -6.2)`.
 
 The definition of function `create_point` shows that it has two parameters, `$x` and `$y`, each having type `float`.  When that function is

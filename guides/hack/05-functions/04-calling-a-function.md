@@ -1,4 +1,4 @@
-A function is called using the [function-call operator, `()`](../expressions-and-operators/function-call.md), which optionally contains a
+A function is called using the function-call operator, `()`, which optionally contains a
 comma-separated list of arguments.  For example:
 
 ```Hack
