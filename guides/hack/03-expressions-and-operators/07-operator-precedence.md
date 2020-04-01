@@ -1,5 +1,7 @@
-Each operator in Hack has a precedence and associativity. This table
-shows precedence (highest precedence first), and the relevant
+The precedence of Hack operators is shown in the table below.
+
+Operators higher in the table have a higher precedence (binding more
+tightly). Binary operators on the same row are evaluated according to their
 associativity.
 
 Operator | Associativity
@@ -26,11 +28,7 @@ Operator | Associativity
 `\|` | Left
 `??` | Right
 `?` `:` `?:` | Left
-`|>` | Left
+`\|>` | Left
 `=` `+=` `-=` `.=` `*=` `/=` `%=` `<<=` `>>=` `&=` `^=` `\|=` `??=` | Right
 `print` | Right
 `include` `require` | Left
-
-The ordering of operators in any given table row is arbitrary.
-Associativity applies to the order in which operators exist in a given
-expression, not in a row of the precedence table.
