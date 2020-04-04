@@ -19,3 +19,4 @@
 * [Predefined attribute __PHPStdLib](predefined-attributes#__phpstdlib)
 * [Predefined attribute __ReturnDisposable](predefined-attributes#__returndisposable)
 * [Predefined attribute __Sealed](predefined-attributes#__sealed)
+* [Predefined attribute __Soft](predefined-attributes#__soft)

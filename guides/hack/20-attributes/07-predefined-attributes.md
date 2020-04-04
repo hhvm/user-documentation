@@ -16,6 +16,7 @@ The following attributes are defined:
 * [__PHPStdLib](#__phpstdlib)
 * [__ReturnDisposable](#__returndisposable)
 * [__Sealed](#__sealed)
+* [__Soft](#__soft)
 
 ## __AcceptDisposable
 
@@ -313,3 +314,7 @@ interface I { ... }
 ```
 
 Only classes `X` and `Y` can directly extend class `A`, and only class `Z` can directly implement interface `I`.
+
+## __Soft
+
+Disable type enforcement. See [soft types](/hack/types/soft-types).
