@@ -22,10 +22,9 @@ namespace MyProject;
 require_once(__DIR__.'/../vendor/autoload.hack');
 
 <<__EntryPoint>>
-function main(): noreturn {
+function main(): void {
   \Facebook\AutoloadMap\initialize();
   someFunction();
-  exit(0);
 }
 ```
 

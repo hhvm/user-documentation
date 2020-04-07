@@ -162,14 +162,13 @@ Save the following as `bin/square_some_things.hack`:
 require_once(__DIR__.'/../vendor/autoload.hack');
 
 <<__EntryPoint>>
-async function main(): Awaitable<noreturn> {
+async function main(): Awaitable<void> {
   \Facebook\AutoloadMap\initialize();
 
   $squared = square_vec(vec[1, 2, 3, 4, 5]);
   foreach ($squared as $square) {
     printf("%d\n", $square);
   }
-  exit(0);
 }
 ```
 
@@ -178,7 +177,6 @@ This program:
    can be found
  - calls the function
  - prints the results
- - exits
 
 The `<<__EntryPoint>>` annotation marks this function as the point where
 execution starts - there is nothing special about the function name `main`.
@@ -229,7 +227,7 @@ Function "main()" does not match conventions; consider renaming to "main_async"
   Code:
   >
   ><<__EntryPoint>>
-  >async function main(): Awaitable<noreturn>
+  >async function main(): Awaitable<void>
 ```
 
 ### Unit Testing

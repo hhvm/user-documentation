@@ -31,9 +31,8 @@ Once you have HHVM running, write a simple "Hello World" program named `hello.ha
 
 ```
 <<__EntryPoint>>
-function main(): noreturn{
-  echo "Hello World!";
-  exit(0);
+function main(): void {
+  echo "Hello World!\n";
 }
 ```
 

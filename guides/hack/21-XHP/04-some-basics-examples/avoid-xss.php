@@ -24,7 +24,6 @@ function intro_examples_avoid_xss_run(string $could_be_bad): void {
 }
 
 <<__EntryPoint>>
-function intro_examples_avoid_xss_main(): noreturn {
+function intro_examples_avoid_xss_main(): void {
   intro_examples_avoid_xss_run('<blink>Ugh</blink>');
-  exit(0);
 }

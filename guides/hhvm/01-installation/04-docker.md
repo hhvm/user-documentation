@@ -29,9 +29,8 @@ EXPOSE 80
 <?hh
 
 <<__EntryPoint>>
-function main(): noreturn {
-  echo "Hello World!";
-  exit(0);
+function main(): void {
+  echo "Hello World!\n";
 }
 ```
 

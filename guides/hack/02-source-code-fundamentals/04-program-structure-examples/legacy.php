@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\Fundamentals\ProgramStructure\Examples\LegacyHelloWorld;
 
 <<__EntryPoint>>
-function main(): noreturn {
+function main(): void {
   print("Hello, World!\n");
   exit(0);
 }

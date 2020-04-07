@@ -12,7 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 <<__EntryPoint>>
-async function update_versions_main_async(): Awaitable<noreturn> {
+async function update_versions_main_async(): Awaitable<void> {
   $root = \realpath(__DIR__.'/..');
   $found_autoloader = false;
   while (true) {

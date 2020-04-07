@@ -5,7 +5,7 @@ require_once(__DIR__.'/../vendor/autoload.hack');
 use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
-async function site_main_async(): Awaitable<noreturn> {
+async function site_main_async(): Awaitable<void> {
   \Facebook\AutoloadMap\initialize();
   $request = Usox\HackTTP\create_server_request_from_globals();
   // header is of the form HOST:PORT - for `parse_url`, we need
