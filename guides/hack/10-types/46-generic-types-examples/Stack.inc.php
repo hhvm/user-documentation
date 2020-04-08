@@ -14,7 +14,7 @@ class Stack<T> {
   }
 
   public function push(T $value): void {
-    $this->stack[$this->stackPtr] = $value;
+    $this->stack[] = $value;
     $this->stackPtr++;
   }
 
