@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<07b40073324926b431547e7154b08ebe>>
+ * @generated SignedSource<<e08e44a55026311f7186261249a26fd0>>
  */
 
 final class SearchControllerParameters
@@ -18,7 +18,7 @@ final class SearchControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "term" => $p->getString('term'),
+      'term' => $p->getString('term'),
     );
   }
 }

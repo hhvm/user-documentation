@@ -4,8 +4,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\Experimental\Http\Message\ResponseInterface;
 use namespace Facebook\TypeAssert;
-use namespace HH\Lib\Experimental\File;
-use namespace HH\Lib\Str;
+use namespace HH\Lib\{File, Str};
 
 final class RemotePageLoader extends PageLoader {
   protected function __construct() {}

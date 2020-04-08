@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<ea337667c35f5161726420c237da7e65>>
+ * @generated SignedSource<<4ba96b2be5d45e12479df14e609f0642>>
  */
 
 final class APIFullListControllerParameters
@@ -18,7 +18,7 @@ final class APIFullListControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
+      'Product' => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
     );
   }
 }

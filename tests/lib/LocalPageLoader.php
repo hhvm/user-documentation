@@ -4,8 +4,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\Experimental\Http\Message\{HTTPMethod, ResponseInterface};
 
-use namespace HH\Lib\Math;
-use namespace HH\Lib\Experimental\File;
+use namespace HH\Lib\{File, Math};
 
 final class LocalPageLoader extends PageLoader {
   protected function __construct() {}

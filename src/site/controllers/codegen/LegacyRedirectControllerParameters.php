@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<9c986e567cc02430f744476d45acf652>>
+ * @generated SignedSource<<773209667ea5c9c37559be4bd5da164b>>
  */
 
 final class LegacyRedirectControllerParameters
@@ -18,7 +18,7 @@ final class LegacyRedirectControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "LegacyId" => $p->getString('LegacyId'),
+      'LegacyId' => $p->getString('LegacyId'),
     );
   }
 }

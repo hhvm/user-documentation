@@ -1,7 +1,7 @@
 // @example-start Don't strip boilerplate since this is an introductory example.
 namespace Hack\GettingStarted\HSLIO;
 
-use namespace HH\Lib\Experimental\{File, IO};
+use namespace HH\Lib\{File, IO};
 
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {

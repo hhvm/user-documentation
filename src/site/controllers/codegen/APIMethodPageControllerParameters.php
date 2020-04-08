@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<4fee165f5c3e6766720c186cb64d7694>>
+ * @generated SignedSource<<e8eff1a5063e5329f7bc738df3aa9e46>>
  */
 
 final class APIMethodPageControllerParameters
@@ -21,10 +21,10 @@ final class APIMethodPageControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
-      "Type" => $p->getEnum(\HHVM\UserDocumentation\APIDefinitionType::class, 'Type'),
-      "Class" => $p->getString('Class'),
-      "Method" => $p->getString('Method'),
+      'Product' => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
+      'Type' => $p->getEnum(\HHVM\UserDocumentation\APIDefinitionType::class, 'Type'),
+      'Class' => $p->getString('Class'),
+      'Method' => $p->getString('Method'),
     );
   }
 }

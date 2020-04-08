@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<9a695423671e28a71bb5fab31c4753bb>>
+ * @generated SignedSource<<7a2b542f84ac54da327f801e84404d63>>
  */
 
 final class GuidesListControllerParameters
@@ -18,7 +18,7 @@ final class GuidesListControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
+      'Product' => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
     );
   }
 }

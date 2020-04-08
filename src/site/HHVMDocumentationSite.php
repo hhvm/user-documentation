@@ -14,8 +14,7 @@ use type Facebook\Experimental\Http\Message\{
   ResponseInterface,
   ServerRequestInterface,
 };
-use namespace HH\Lib\Math;
-use namespace HH\Lib\Experimental\{File, IO};
+use namespace HH\Lib\{File, IO, Math};
 
 final class HHVMDocumentationSite {
   public static async function respondToAsync(

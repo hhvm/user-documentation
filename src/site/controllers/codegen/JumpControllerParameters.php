@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<c672bcf9e8158c3dab23832fb1190735>>
+ * @generated SignedSource<<6039f462ffeaf01ad233660e95c2691c>>
  */
 
 final class JumpControllerParameters
@@ -18,7 +18,7 @@ final class JumpControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Keyword" => $p->getString('Keyword'),
+      'Keyword' => $p->getString('Keyword'),
     );
   }
 }

@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<844c154527eef45aea84fba01a11871c>>
+ * @generated SignedSource<<f346b0f9dcb3678d208b4e8c5a73075a>>
  */
 
 final class RedirectToGuideFirstPageControllerParameters
@@ -19,8 +19,8 @@ final class RedirectToGuideFirstPageControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
-      "Guide" => $p->getString('Guide'),
+      'Product' => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
+      'Guide' => $p->getString('Guide'),
     );
   }
 }

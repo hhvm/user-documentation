@@ -5,14 +5,14 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<1fcd840e1fb734d43b318f1ecbf7f848>>
+ * @generated SignedSource<<fb5413d791dcce65673ce712ba927872>>
  */
 
 abstract class RouterCodegenBase
   extends \Facebook\HackRouter\BaseRouter<classname<\RoutableController>> {
 
   <<__Override>>
-  public function getRoutes(
+  final public function getRoutes(
   ): ImmMap<\Facebook\HackRouter\HttpMethod, ImmMap<string, classname<\RoutableController>>> {
     $map = ImmMap {
       \Facebook\HackRouter\HttpMethod::GET => ImmMap {
