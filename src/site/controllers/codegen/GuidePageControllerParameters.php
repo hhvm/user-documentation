@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<79b236ad2ea14bf8726058fdadf6ae5e>>
+ * @generated SignedSource<<824b4da62919118eb46c3095c2eddb22>>
  */
 
 final class GuidePageControllerParameters
@@ -20,9 +20,9 @@ final class GuidePageControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
-      "Guide" => $p->getString('Guide'),
-      "Page" => $p->getString('Page'),
+      'Product' => $p->getEnum(\HHVM\UserDocumentation\GuidesProduct::class, 'Product'),
+      'Guide' => $p->getString('Guide'),
+      'Page' => $p->getString('Page'),
     );
   }
 }

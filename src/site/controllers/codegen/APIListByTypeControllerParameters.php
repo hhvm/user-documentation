@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<1ce05b5d79c746c591c6d9c1660a7e01>>
+ * @generated SignedSource<<8ceefc812f94589b46cc192e0fbf6a00>>
  */
 
 final class APIListByTypeControllerParameters
@@ -19,8 +19,8 @@ final class APIListByTypeControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Product" => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
-      "Type" => $p->getEnum(\HHVM\UserDocumentation\APIDefinitionType::class, 'Type'),
+      'Product' => $p->getEnum(\HHVM\UserDocumentation\APIProduct::class, 'Product'),
+      'Type' => $p->getEnum(\HHVM\UserDocumentation\APIDefinitionType::class, 'Type'),
     );
   }
 }

@@ -5,7 +5,7 @@
  * To re-generate this file run bin/build.php
  *
  *
- * @generated SignedSource<<16379316d703ca381b8482ac8717d965>>
+ * @generated SignedSource<<0be4c50161c03e6fb7d852e425f83b1d>>
  */
 
 final class StaticResourcesControllerParameters
@@ -20,9 +20,9 @@ final class StaticResourcesControllerParameters
   public function get(): self::TParameters {
     $p = $this->getParameters();
     return shape(
-      "Checksum" => $p->getString('Checksum'),
-      "File" => $p->getString('File'),
-      "MTime" => $p->getOptionalInt('MTime'),
+      'Checksum' => $p->getString('Checksum'),
+      'File' => $p->getString('File'),
+      'MTime' => $p->getOptionalInt('MTime'),
     );
   }
 }
