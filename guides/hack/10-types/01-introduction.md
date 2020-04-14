@@ -8,9 +8,6 @@ for asserting types.
 **Topics covered in this section**
 
 * [Subtyping](supertypes-and-subtypes.md)
-* [Classes](classes.md)
-* [Interfaces](interfaces.md)
-* [Traits](traits.md)
 * [Soft Types](soft-types.md)
 * [Nullable Types](nullable-types.md)
 * [Type Aliases (`newtype` and `type`)](type-aliases.md)
