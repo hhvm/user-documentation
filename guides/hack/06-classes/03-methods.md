@@ -25,7 +25,7 @@ A static method is a function in a class that is called without an
 instance. Since there's no instance, `$this` is not available.
 
 ```
-class MyPerson {
+class Person {
   public static function typicalGreeting(): string {
     return "Hello";
   }
