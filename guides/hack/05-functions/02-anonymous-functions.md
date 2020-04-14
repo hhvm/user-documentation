@@ -29,7 +29,7 @@ be a single expression, or a block.
 ``` Hack
 $f1 = $x ==> $x + 1;
 
-$f2 = $x ==> { return $x + 1 };
+$f2 = $x ==> { return $x + 1; };
 ```
 
 ## Legacy PHP-Style Syntax
