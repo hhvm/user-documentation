@@ -74,6 +74,10 @@ final class Guides {
         'callables' => dict[
           'special-functions' => tuple('types', 'anonymous-function-objects'),
         ],
+        'classes' => dict[
+          'some-basics' => tuple('classes', 'introduction'),
+          'defining-a-basic-class' => tuple('classes', 'introduction'),
+        ],
         'expressions-and-operators' => dict[
           'addition' => tuple('expressions-and-operators', 'arithmetic'),
           'as' => tuple('expressions-and-operators', 'type-assertions'),

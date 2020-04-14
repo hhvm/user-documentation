@@ -1,10 +1,17 @@
+Classes provide a way to group functionality and state together.
+
+To define a class, use the `class` keyword.
+
+@@ introduction-examples/class.hack @@
+
+To create an instance of a class, use
+[`new`](../expressions-and-operators/new.md), e.g. `new Counter();`.
+
 **Topics covered in this section**
 
-* [Getting started](some-basics.md)
 * [Constants](constants.md)
 * [__construct](constructors.md)
 * [Constructors](constructors.md)
-* [Defining a class](defining-a-basic-class.md)
 * [__dispose](methods-with-predefined-semantics#method-__dispose)
 * [__disposeAsync](methods-with-predefined-semantics#method-__disposeAsync.md)
 * [Implementing an interface](implementing-an-interface.md)
