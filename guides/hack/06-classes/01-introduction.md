@@ -9,6 +9,7 @@ To create an instance of a class, use
 
 **Topics covered in this section**
 
+* [Methods](methods.md)
 * [Constants](constants.md)
 * [__construct](constructors.md)
 * [Constructors](constructors.md)
@@ -17,7 +18,6 @@ To create an instance of a class, use
 * [Implementing an interface](implementing-an-interface.md)
 * [Inheritance](inheritance.md)
 * [Interface requirements](trait-and-interface-requirements.md)
-* [Methods](methods.md)
 * [Object disposal](object-disposal.md)
 * [Properties](properties.md)
 * [__toString](methods-with-predefined-semantics#method-__toString)
