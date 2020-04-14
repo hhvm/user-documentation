@@ -1,5 +1,5 @@
-However, what if no answer was given (perhaps it simply is missing, or the question was deemed "not applicable"). In such cases, it can be useful to
 Consider an application that processes results from a questionnaire. To store the answer to a Yes/No question, it seems reasonable to use a `bool` type.
+However, what if no answer was given (perhaps it simply is missing, or the question was deemed "not applicable"). In such cases, it can be useful to
 have a special value to represent *this is not a real answer* or *the answer is unknown*. In Hack, we can solve this by using a nullable `bool` type,
 written as `?bool`. Such a type permits all the values of type `bool` plus `null` (the null literal value).
 
