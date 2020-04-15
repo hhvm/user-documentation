@@ -3,8 +3,10 @@ following the throw. See the [try statement](try.md) for more details of throwin
 
 ```Hack
 if ($denominator === 0) throw new HH\Lib\Math\DivisionByZeroException();
-class MyException extends \Exception { ... }
-throw new MyException;
+
+class MyException extends Exception { ... }
+
+throw new MyException();
 ```
 
-The type of the exception thrown must be `\Exception` or a subclass of that class.
+The type of the exception must be `Throwable` or a subclass of `Throwable`.
