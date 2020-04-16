@@ -162,7 +162,7 @@ If your class has subclasses, but you want to prevent additional
 subclasses, use `__Sealed`.
 
 You can also combine `final` and `abstract` on classes. This produces
-a class that cannot be instantiated or have subclasses. Your class is
+a class that cannot be instantiated or have subclasses. The class is
 effectively a namespace of grouped functionality.
 
 ``` Hack
