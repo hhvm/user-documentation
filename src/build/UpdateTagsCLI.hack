@@ -77,7 +77,7 @@ final class UpdateTagsCLI extends CLIBase {
       $header_length = \curl_getinfo($req, \CURLINFO_HEADER_SIZE);
       $header = Str\slice($http_header_and_body, 0, $header_length);
       invariant(
-        !Str\contains($header, "\r\nX-RateLimit-Remaining: 0\r\n"),
+        !Str\contains_ci($header, "\r\nX-Ratelimit-Remaining: 0\r\n"),
         'Ratelimit for the github API has been exceeded.',
       );
       $body = Str\slice($http_header_and_body, $header_length);

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f7163d6a1be03aebe1d25fbfaaf3bd2",
+    "content-hash": "327f56795eb9afb755004643547c8c64",
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v2.13.2",
+            "version": "v2.13.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "6d28cc9343bd0333924edeb65a3001f4d9ab3773"
+                "reference": "dcca6c27cd4e4f359fa14b5df856b865f08a5a73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/6d28cc9343bd0333924edeb65a3001f4d9ab3773",
-                "reference": "6d28cc9343bd0333924edeb65a3001f4d9ab3773",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/dcca6c27cd4e4f359fa14b5df856b865f08a5a73",
+                "reference": "dcca6c27cd4e4f359fa14b5df856b865f08a5a73",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2020-03-30T17:23:01+00:00"
+            "time": "2020-04-16T23:45:48+00:00"
         },
         {
             "name": "facebook/difflib",
@@ -441,22 +441,22 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.41.2",
+            "version": "v4.53.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "218a6d8f28cff5969f976f875e75eb00bd4cdcc5"
+                "reference": "64badd69b791d772afca25210d73bd53eda09a70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/218a6d8f28cff5969f976f875e75eb00bd4cdcc5",
-                "reference": "218a6d8f28cff5969f976f875e75eb00bd4cdcc5",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/64badd69b791d772afca25210d73bd53eda09a70",
+                "reference": "64badd69b791d772afca25210d73bd53eda09a70",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.0.0",
-                "hhvm": "^4.41",
+                "hhvm": "^4.53",
                 "hhvm/hhvm-autoload": "^2.0.4|^3.0",
                 "hhvm/hsl": "^4.25",
                 "hhvm/hsl-experimental": "^4.50",
@@ -486,7 +486,7 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-04-08T15:46:11+00:00"
+            "time": "2020-04-16T22:55:22+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -573,16 +573,16 @@
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.50.0",
+            "version": "v4.50.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "cf23c87c2b16cbffe067974b45beb5b512edd4eb"
+                "reference": "ddbd74463878f0bda076bf7e1c528eb1294b3769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/cf23c87c2b16cbffe067974b45beb5b512edd4eb",
-                "reference": "cf23c87c2b16cbffe067974b45beb5b512edd4eb",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/ddbd74463878f0bda076bf7e1c528eb1294b3769",
+                "reference": "ddbd74463878f0bda076bf7e1c528eb1294b3769",
                 "shasum": ""
             },
             "require": {
@@ -605,7 +605,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library - Experimental Additions",
-            "time": "2020-03-27T15:38:24+00:00"
+            "time": "2020-04-16T20:59:00+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -834,7 +834,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.52.*"
+        "hhvm": "4.53.*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
