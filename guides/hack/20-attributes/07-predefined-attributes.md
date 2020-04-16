@@ -193,7 +193,7 @@ instead of a static property with `__LateInit`.
 
 The presence of this attribute causes the designated method to automatically cache each value it looks up and returns, so future calls with
 the same parameters can be retrieved more efficiently. The set of parameters is hashed into a single hash key, so changing the type, number,
-and/or order of the parameters can change that key.
+and/or order of the parameters can change that key. Functions with variadic parameters can not be memoized.
 
 This attribute can be applied to functions and static or instance methods; it has no attribute values.  Consider the following example:
 
@@ -221,10 +221,73 @@ The types of the parameters are restricted to the following: `null`, `bool`, `in
 
 The interface type `IMemoizeParam` assists with memorizing objects passed to async functions.
 
-### Limitations
+### Exceptions
 
-- If an exception is thrown, this is not memoized.
-- Functions with variadic parameters can not be memoized
+Thrown exceptions are not memoized, showing by the increasing counter in this
+example:
+
+@@ predefined-attributes-examples/memoize-throw.hack @@
+
+### Awaitables
+
+An `Awaitable` represents a particular execution; this means that awaiting the
+same awaitable twice **will not** execute the code twice. For example,
+while the result of both `await`s below is `42`, the `print()` call (and the
+`return`) only happen once:
+
+```await-twice.hack
+$x = async { print("Hello, world\n"); return 42; };
+\var_dump(await $x);
+\var_dump(await $x);
+```
+
+This can be surprising when the result depends on the call stack; exceptions
+are the most common case of this.
+
+### Awaitables and Exceptions
+
+If an exception is thrown within an `async` function body, the function does not
+technically throw - it returns an `Awaitable` that throws when resolved. This
+means that if an `Awaitable` is resolved multiple times, the same exception
+object instance will be thrown every time; as it is the same object every time,
+its data will be unchanged, **including backtraces**.
+
+As memoize caches the awaitable itself, this means that **if an async function
+is memoized and throws, you will get the same exception backtrace on every
+failed call**.
+
+For example, both times an exception is caught here, `foo` is in the backtrace,
+but `bar` is not, as the call to `foo` led to the creation of the memoized
+awaitable:
+
+```memoized_async_throw.hack
+<<__Memoize>>
+async function throw_something(): Awaitable<int> {
+  throw new \Exception();
+}
+
+async function foo(): Awaitable<void> {
+  await throw_something();
+}
+
+async function bar(): Awaitable<void> {
+  await throw_something();
+}
+
+<<__EntryPoint>>
+async function main(): Awaitable<void> {
+  try {
+    await foo();
+  } catch (\Exception $e) {
+    \var_dump($e->getTrace()[2] as shape('function' => string, ...)['function']);
+  }
+  try {
+    await bar();
+  } catch (\Exception $e) {
+    \var_dump($e->getTrace()[2] as shape('function' => string, ...)['function']);
+  }
+}
+```
 
 ## __MemoizeLSB
 
