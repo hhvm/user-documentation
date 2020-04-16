@@ -103,5 +103,5 @@ Use parentheses to access and call the wrapped function.
 
 ```
 $b = new FunctionBox(() ==> { echo "hello"; });
-(b->value)();
+($b->value)();
 ```
