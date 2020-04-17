@@ -15,7 +15,10 @@ install:
 - docker pull hhvm/hhvm-proxygen:$HHVM_VERSION
 script:
 - docker build -t hhvm/user-documentation:scratch -f .deploy/built-site.Dockerfile .
-- docker run --rm -w /var/www hhvm/user-documentation:scratch ./.travis-test.sh
+- docker run --rm -w /var/www hhvm/user-documentation:scratch hh_server --check .
+- docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hacktest tests/
+- docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hhast-lint
+- docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
 deploy:
   provider: script
   script: "./.travis-deploy.sh"
