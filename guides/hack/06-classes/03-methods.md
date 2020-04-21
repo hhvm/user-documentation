@@ -2,10 +2,10 @@ A method is a function defined in a class.
 
 ```
 class Person {
-  public string $name;
+  public string $name = "anonymous";
 
   public function greeting(): string {
-    return "Hi, my name is".$this->name;
+    return "Hi, my name is ".$this->name;
   }
 }
 ```
