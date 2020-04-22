@@ -13,13 +13,13 @@ Let's work out the hierarchy of scalar types. Forget about nullable types and `d
  - `string` is a subtype of `arraykey`.
  - `nothing` is a subtype of `int`, `float`, `string`, and `bool`.
 
-The important thing to note here is that `nothing` is never inbetween two types. `nothing` only shows up right below a type with no other subtypes.
+The important thing to note here is that `nothing` is never between two types. `nothing` only shows up right below a type with no other subtypes.
 
 Okay that was all very academical, but "what can I use it for?", I hear you ask.
 
 When making a new / empty `Container<T>`, Hack will infer its type to be `Container<nothing>`. It is not that there are actual value of type `nothing` in the `Container<T>`, it is just that this is a very nice way of modeling empty `Container<T>`s.
 
-Should you be able to pass an empty vec where a `vec<string>` is expected? Yes, there is no element inside that is not a `string`, so that shoud be fine. You can even pass the same vec into a function that takes a `vec<bool>` since there are no elements that are not of type `bool`. What are you allowed to do with the `$nothing` of this foreach? Well, you can do anything to it. Since nothing is a subtype of everything, you can pass it to any method and do all the things you want to.
+Should you be able to pass an empty vec where a `vec<string>` is expected? Yes, there is no element inside that is not a `string`, so that should be fine. You can even pass the same vec into a function that takes a `vec<bool>` since there are no elements that are not of type `bool`. What are you allowed to do with the `$nothing` of this foreach? Well, you can do anything to it. Since nothing is a subtype of everything, you can pass it to any method and do all the things you want to.
 
 @@ nothing-examples/empty-vec.php @@
 

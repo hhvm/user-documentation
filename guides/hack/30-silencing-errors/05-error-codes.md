@@ -35,7 +35,7 @@ which the typechecker is unaware of.
 Suggestions: Check your spelling. Use safe Hack APIs rather than
 legacy PHP APIs.
 
-## 4005: Array acces on a type that doesn't support indexing
+## 4005: Array access on a type that doesn't support indexing
 
 @@ error-codes-examples/4005_array_access.php @@
 
@@ -129,7 +129,7 @@ exception.
 Suggestions: Check that the value is non-null with `nullthrows` or
 assert with `$m as nonnull`.
 
-## 4101: Wrong number of type paramters
+## 4101: Wrong number of type parameters
 
 @@ error-codes-examples/4101_type_params.php @@
 

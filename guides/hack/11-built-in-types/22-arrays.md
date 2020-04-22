@@ -106,7 +106,7 @@ To remove an element from a dict, use `unset`.
 ## keyset
 
 A keyset is a data structure that contains an ordered collection of zero or more elements whose values are the keys. And as array keys must have
-type `int` or `string`, keysets are restricted to homogenous collections of
+type `int` or `string`, keysets are restricted to homogeneous collections of
 values of those types (the `arraykey` type can be used to declare a keyset that
 accepts both `int` and `string` values, but it's usually better to be explicit
 and choose only one type). As the number of elements in a keyset
@@ -264,7 +264,7 @@ Individual runtime settings are documented [here](darray-varray-runtime-options.
 
 ## Value vs. reference semantics
 
-An important distinction between `arrays` and `Collections` is their interation with value semantics.
+An important distinction between `arrays` and `Collections` is their interaction with value semantics.
 All `arrays` (recognizable by their lowercase names) have value semantics.
 All `Collections` (recognizable by their uppercase names) have reference semantics.
 
@@ -289,7 +289,7 @@ Watch out! Collections have reference semantics!
 @@ arrays-examples/maps-have-reference-semantics.php @@
 
 This difference makes it very difficult to migrate from Containers to arrays.
-It is recommended to not share a mutable reference to a Collection accross a codebase.
+It is recommended to not share a mutable reference to a Collection across a codebase.
 If this is required for the correctness of your program, but you are migrating to Hack arrays, you can use `HH\Lib\Ref<T>`.
 Pass a `Ref<dict<string, string>>` around your program instead of a `Map<string, string>`.
 This makes it obvious that you intend to mutate the dict.
