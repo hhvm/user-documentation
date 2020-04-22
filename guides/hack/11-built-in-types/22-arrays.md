@@ -75,7 +75,7 @@ A dict has an explicit key type, as well as a value type.  In this example, the 
 has the general form `dict[`...`]`, in which explicit key values are required. Unlike a vec, key values in a dict need not start at 0, nor need
 they be consecutive.
 
-Note, carefully, that although `$colorsVect` and `$colorsDict` result in collections of `int`/`string` pairs, these variables do *not* have the
+Note, carefully, that although `$colorsVec` and `$colorsDict` result in collections of `int`/`string` pairs, these variables do *not* have the
 same (or even compatible) types! That said, there are library functions to convert between vec and dict objects.
 
 Consider the following:
