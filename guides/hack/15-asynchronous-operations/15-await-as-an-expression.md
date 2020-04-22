@@ -23,7 +23,7 @@ $result = foo(
   await baz_async(),     // yes!
 );
 if (await x_async()) {   // yes!
-  // Conditional but seperate statement
+  // Conditional but separate statement
   await y_async();       // yes!
 }
 $x =

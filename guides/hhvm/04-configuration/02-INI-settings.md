@@ -41,7 +41,7 @@ The vast majority of users will want to just set `hhvm.php7.all = 1` to fully en
 |---------|------|---------|-------------|----------
 | `hhvm.php7.all` | `bool` | `false` | Default value for all of the below | N/A
 | `hhvm.php7.deprecate_old_style_ctors` | `bool` | `hhvm.php7.all` | Disallow and warn when using old PHP 4 constructors | [Remove PHP 4 constructors](https://wiki.php.net/rfc/remove_php4_constructors)
-| `hhvm.php7.engine_exceptions` | `bool` | `hhvm.php7.all` | Enable throwing the new `Error` heirarchy of exceptions | [Engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7)
+| `hhvm.php7.engine_exceptions` | `bool` | `hhvm.php7.all` | Enable throwing the new `Error` hierarchy of exceptions | [Engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7)
 | `hhvm.php7.int_semantics` | `bool` | `hhvm.php7.all` | Change some edge-case int and float behavior, such as divide/mod by zero | [Integer semantics](https://wiki.php.net/rfc/integer_semantics) with some changes due to [engine exceptions](https://wiki.php.net/rfc/engine_exceptions_for_php7)
 | `hhvm.php7.ltr_assign` | `bool` | `hhvm.php7.all` | Make order of assignment in `list()` lvalues consistent | [Abstract syntax tree](https://wiki.php.net/rfc/abstract_syntax_tree)
 | `hhvm.php7.no_hex_numerics` | `bool` |`hhvm.php7.all` | Don't consider hex strings to be numeric | [Remove hex support in numeric strings](https://wiki.php.net/rfc/remove_hex_support_in_numeric_strings)
@@ -478,7 +478,7 @@ The [CLI server](/hhvm/advanced-usage/CLI-server) allows you to run command line
 | `hhvm.unix_server_workers` | `int` | CPU cores | The number of worker threads the CLI server will allow.
 | `hhvm.unix_server_quarantine_apc` | `bool` | `false` | Quarantine APC from the scripts being run.
 | `hhvm.unix_server_quarantine_units` | `bool` | `false` | Quarantine the loaded units from the scripts being run on a per user bases.
-| `hhvm.unix_server_verify_exe_access` | `bool` | `false` | Checks units are readable by client beforing executing them on the server.
+| `hhvm.unix_server_verify_exe_access` | `bool` | `false` | Checks units are readable by client before executing them on the server.
 | `hhvm.unix_server_fail_when_busy` | `bool` | `false` | Fail if there are no available workers.
 | `hhvm.unix_server_allowed_users` | `Vector<string>` | *empty* | Users allowed to use the CLI server.
 | `hhvm.unix_server_allowed_groups` | `Vector<string>` | *empty* | Groups allowed to use the CLI server.
@@ -516,7 +516,7 @@ A sandbox in HHVM is a set of configuration options (document root, log file pat
 Here are a few **important** points:
 
 - The sandbox configuration file must end in `.hdf` or `.hphp`. Most people name it `.hphp`.
-- Having a configuration file end in `.ini` is currently broken, but a fix is being worked on now. When HDF is removed in favor of INI, this wil be fixed.
+- Having a configuration file end in `.ini` is currently broken, but a fix is being worked on now. When HDF is removed in favor of INI, this will be fixed.
 - A user is always appended to `hhvm.sandbox.home`. So if you set that setting to `/home`, it will end up being `/home/user`. Thus the `hhvm.sandbox.conf_file` will end up having an absolute path of `/home/user/.hphp`.
 - The sandbox pattern assumes that you have valid URLs that can be associated with that pattern. You would need to have those URLs bound in something like `/etc/hosts` (e.g., `127.0.0.1 user-another_site.localhost.com`).
 - If you do not specify a sandbox name in the URL, it assumes the default sandbox. e.g., if you type or `curl` `user.localhost.com`, that will assume your default sandbox.
@@ -559,7 +559,7 @@ another_site.accesslog = /home/user/sites/another-site/logs/access_log
 | `hhvm.sandbox.home` | `string` | `''` | The home directory of your sandbox. e.g., If this is set to `/home`, then your sandbox path will be something like `/home/joelm/`.
 | `hhvm.sandbox.conf_file` | `string` | `''` | The file which contains sandbox information like the path to the default sandbox, the path to other sandboxes, log paths, etc. You can use this file in conjunction with some of some of the other specific sandbox options. For example, if `hhvm.sandbox.home` is set, then this setting is *relative* to that path.
 | `hhvm.sandbox.pattern` | `string` | `''` | The URL pattern of your sandbox host. It is a generally a regex pattern with at least one capture group. For example `www.[user]-[sandbox].[machine].yourdomain.com` or `www.([^-]*(-[^-]*)?).yourdomain.com`
-| `hhvm.sandbox.from_common_root` | `bool` | `false` | If enabled, your sandboxes will be created from a common root path. This root path is based upon the `hhvm.sandbox.pattern` that you specify and the value of it will be the root string before the first `.` in the pattern. If you have a pattern like `([^-]*(-[^-]*)?).localhost.com` which maps to a sandbox at `user-another_site.localhost.com`, the root that is established by enabling this setting is `/joelm-another_site`. This setting as `true` supercedes any setting you have for `hhvm.sandbox.conf_file`.
+| `hhvm.sandbox.from_common_root` | `bool` | `false` | If enabled, your sandboxes will be created from a common root path. This root path is based upon the `hhvm.sandbox.pattern` that you specify and the value of it will be the root string before the first `.` in the pattern. If you have a pattern like `([^-]*(-[^-]*)?).localhost.com` which maps to a sandbox at `user-another_site.localhost.com`, the root that is established by enabling this setting is `/joelm-another_site`. This setting as `true` supersedes any setting you have for `hhvm.sandbox.conf_file`.
 | `hhvm.sandbox.directories_root` | `string` | `''` | If you have `hhvm.sandbox.from_common_root` enabled, this value will be prepended to your common root.
 | `hhvm.sandbox.logs_root` | `string` | `''` | If you have `hhvm.sandbox.from_common_root` enabled, this value will be prepended to your common root.
 | `hhvm.sandbox.fallback` | `string` | `''` | If for some reason your home path in `hhvm.sandbox.home` cannot be accessed, this will be your fallback to set as your home path.
@@ -664,7 +664,7 @@ The following are settings that you can use for `libxml` or `simplexml`, as spec
 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
-| `hhvm.libxml.ext_entity_whitelist` | `string` | `'data'` | Loading of external entities in the libxml extension is disabled by default for security reasons. It can be re-enabled on a per-protocal basis with this setting. It is a comma separated list of protocols. The common ones are `file`, `http`, `compress.zlib`. An example of how the setting is set is: `hhvm._libxml.ext_entity.whitelist=file,http`. **This setting is currently not retrievable via `ini_get()`**.
+| `hhvm.libxml.ext_entity_whitelist` | `string` | `'data'` | Loading of external entities in the libxml extension is disabled by default for security reasons. It can be re-enabled on a per-protocol basis with this setting. It is a comma separated list of protocols. The common ones are `file`, `http`, `compress.zlib`. An example of how the setting is set is: `hhvm._libxml.ext_entity.whitelist=file,http`. **This setting is currently not retrievable via `ini_get()`**.
 | `hhvm.simple_xml.empty_namespace_matches_all` | `bool` | `false` | If enabled, an empty XML namespace matches all namespaces.
 
 ## JIT Settings
@@ -762,7 +762,7 @@ When using HHVM's [Repo-Authoritative](/hhvm/advanced-usage/repo-authoritative) 
 |---------|------|---------|------------
 | `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo- authoritative mode to serve requests.
 | `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
-| `hhvm.repo.commit` | `bool` | `true` | If enabled, this will commit newly emmited units to the repo.
+| `hhvm.repo.commit` | `bool` | `true` | If enabled, this will commit newly emitted units to the repo.
 | `hhvm.repo.debug_info` | `bool` | `true` | If enabled, the full source locations will be stored in the repo; otherwise, only line numbers will be stored.
 | `hhvm.repo.journal` | `string` | `delete` | If `delete`, then delete the on-disk SQLite journal upon each successful transaction commit. If `memory`, then store the SQLite journal in memory. `delete` is the safer mode to use.
 | `hhvm.repo.local.mode` | `string` | `r-` | `rw` to use the local repo for reading and writing (if file permissions allow). `r-` to use the local repo for reading (if it exists and is readable). `--`` to completely ignore the local repo, even if it exists.
@@ -993,7 +993,7 @@ Here are some other HHVM settings that may be useful in an advanced situation.
 | `hhvm.gdb_sync_chunks` | `int` | `128` | This forces the VM to sync debug info synchronously with gdb, this many chunks at a time.
 | `hhvm.hhbc_arena_chunk_size` | `int` | `10485760` (1 MB) | The chunk size for the HHBC arena.
 | `hhvm.initial_named_entity_table_size` | `int` | `30000` | The initial size of the named entity table.
-| `hhvm.initial_static_string_table_size` | `int` | `500000` | The intial size of the static string table.
+| `hhvm.initial_static_string_table_size` | `int` | `500000` | The initial size of the static string table.
 | `hhvm.map_tc_huge` | `bool` | `false`
 | `hhvm.map_tgt_cache_huge` | `bool` | `false`
 | `hhvm.max_low_mem_huge_pages` | `int` | `0`

@@ -49,7 +49,7 @@ The fallback is called when hhvm can't find your type, constant or function in t
 
 The fallback then may attempt to load the type, constant or function at runtime.
 (This process will slow down your execution considerably and should therefore not used in production.)
-Not all contants and functions can / will be found by HHClientFallbackHandler, see the [repository](https://github.com/hhvm/hhvm-autoload) for more details.
+Not all constants and functions can / will be found by HHClientFallbackHandler, see the [repository](https://github.com/hhvm/hhvm-autoload) for more details.
 
 Once this configuration file is created, `vendor/bin/hh-autoload` can be executed
 to generate or update the map, which is created as `vendor/autoload.hack`

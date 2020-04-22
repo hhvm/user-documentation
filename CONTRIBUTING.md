@@ -55,7 +55,7 @@ While we aren't 100% rigid on how we want contributions to come to us (we want t
     + `.php.hhvm.expect[f]`: An HHVM test runner [hhvm expect file](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md#file-layout) with the expected results of running your code in HHVM.
     + `.php.typechecker.expect[f]`: An HHVM test runner [typechecker expect file](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md#file-layout) with the expected results of running the typechecker on your code (e.g., in `--typechecker` mode). Most of the time this should be a file that contains `No errors!`.
     + `.php.example.hhvm.out`: If you are using an `.hhvm.expectf` file, then this file will be a raw output version of that file without any patterns. i.e., the result of running `hhvm` on the source file.
-    + `.php.no.auto.output`: Don't print out any output after the source code. This supercedes `.php.example.hhvm.out` and `.hhvm.expect` (i.e., those files will be ignored when it comes to printing raw output in the docs). Use this if you want to control where the output goes, or if you want no output at all. 
+    + `.php.no.auto.output`: Don't print out any output after the source code. This supersedes `.php.example.hhvm.out` and `.hhvm.expect` (i.e., those files will be ignored when it comes to printing raw output in the docs). Use this if you want to control where the output goes, or if you want no output at all. 
 Add `.type-errors` after `.php` or `.hack` if typechecker errors are expected.
 
 The [examples associated with the async introduction](https://github.com/hhvm/user-documentation/tree/master/guides/hack/22-async/01-introduction-examples) will give you a guide on how to structure these files.

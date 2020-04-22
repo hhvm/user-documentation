@@ -153,7 +153,7 @@ path behavior:
 
 ### NGINX
 
-For NGINX, a minimial configuration is:
+For NGINX, a minimal configuration is:
 
 ```
 events {

@@ -39,6 +39,6 @@ following situations:
  * As the type of a static property.
  * As the type of the exception in a catch block: `catch (T $exception)`
 
-For passing around class names for for instantation, Hack provides
+For passing around class names for for instantiation, Hack provides
 [`Classname<T>`](../built-in-types/classname.md) that extends the
 representation of `Foo::class`.
