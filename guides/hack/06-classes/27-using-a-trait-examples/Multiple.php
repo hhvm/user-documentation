@@ -21,7 +21,7 @@ trait T2 {
 }
 
 trait T3 {
-  static function is_odd(int $x) : bool {
+  public static function is_odd(int $x) : bool {
     if ($x % 2 == 1) {
       return true;
     } else {
