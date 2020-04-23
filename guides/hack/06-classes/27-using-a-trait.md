@@ -1,27 +1,27 @@
-Hack's class model allows single inheritance with contracts being enforced separately via [interfaces](implementing-an-interface.md). A *trait* can provide
-both implementation and contracts. Specifically, a class can inherit from a base class while getting implementation from one or more traits.
-At the same time, that class can implement contracts from one or more interfaces as well as from one or more traits. The use of a trait by a
-class does not involve any inheritance hierarchy, so unrelated classes can use the same trait. In summary, a trait is a set of methods and/or
-state information that can be reused.  For example:
+Traits are a mechanism for code reuse that overcomes some limitations of Hack single inheritance model.
 
-@@ using-a-trait-examples/Common.php @@
+In its simplest form a trait defines properties and method declarations.  A trait cannot be instantiated with `new`, but it can be _used_ inside one or more classes, via the `use` clause.  Informally, whenever a trait is used by a class, the property and method definitions of the trait are inlined (copy/pasted) inside the class itself.  The example below shows a simple trait defining a method that returns even numbers.  The trait is used by two, unrelated, classes.
 
-As shown, a trait can *use* one or more traits, and a class can also use one or more traits, via one or more `use` clauses:
+@@ using-a-trait-example/Simple.php @@
 
-The members of a trait each have visibility, which applies once they are used by a given class. The class that uses a trait can change the
-visibility of any of that trait's members, by widening or narrowing that visibility. For example, a private trait member can be made public
-in the using class, and a public trait member can be made private in that class.
+A class can use multiple traits, and traits themselves can use one or more traits.  The example below uses three traits, to generate even numbers, to generate odd numbers given a generator of even numbers, and to test if a number is odd:
 
-Once implementation comes from both a base class and one or more traits, name conflicts can occur. However, currently, there is no mechanism to
-disambiguate such names.
+@@ using-a-trait-examples/Multiple.php @@
 
-A class member with a given name overrides one with the same name in any traits that class uses, which, in turn, overrides any such name from base classes.
+Traits can contain both instance and static members. If a trait defines a static property, then each class using the trait has its own instance of the static property.
 
-Traits can contain both instance and static members, including both methods and properties. In the case of a trait with a static property,
-each class using that trait has its own instance of that property.
+A trait can access methods and properties of the class that uses it, but these dependencies must be declared using [trait requirements](trait-and-interface-requirements.md).
 
-Methods in a trait have full access to all members of any class in which that trait is used.
+### Resolution of naming conflicts
 
-Traits are designed to support classes; a trait cannot be instantiated directly.
+A trait can insert arbitrary properties and methods inside a class, and naming conflicts may arise.  Conflict resolution rules are different according whether the conflict concern a property or a method.
 
-A trait can have usage requirements placed on it; see [trait requirements](trait-and-interface-requirements.md) for more information.
+If a class uses multiple traits that define the same property, say `$x`, then every trait must define the property `$x` with the same type, visibility modifier (CHECK), and initialization value.  The class itself may, or not, define again the property `$x`, subject to the same conditions as above.
+
+Beware that at runtime all the instances of the multiply defined property `$x` are _aliased_. This might be source of unexpected interference between traits implementing unrelated services: in the example below the trait `T2` breaks the invariant of trait `T1` whenever both are used by the same class.
+
+@@ using-a-trait-examples/PropertyConflict.php @@
+
+For methods, a rule of thumb is "traits provide a method implementation unless the class itself does not".  If the class implements a method `m`, then traits used by the class can define methods named `m` provided that their interfaces are compatible (more precisely _super types_ of the type of the method defined in the class.  At runtime methods inserted by traits are ignored, and dispatch selects the method defined in the class.
+
+If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.
