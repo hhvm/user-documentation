@@ -31,5 +31,9 @@ class C {
 
 <<__EntryPoint>>
 function main() : void {
-  C::foo();
+  try {
+    C::foo();
+  } catch (\Exception $ex) {
+    echo "Caught an exception\n";
+  }
 }

@@ -16,7 +16,7 @@ A trait can access methods and properties of the class that uses it, but these d
 
 A trait can insert arbitrary properties and methods inside a class, and naming conflicts may arise.  Conflict resolution rules are different according whether the conflict concern a property or a method.
 
-If a class uses multiple traits that define the same property, say `$x`, then every trait must define the property `$x` with the same type, visibility modifier (CHECK), and initialization value.  The class itself may, or not, define again the property `$x`, subject to the same conditions as above.
+If a class uses multiple traits that define the same property, say `$x`, then every trait must define the property `$x` with the same type, visibility modifier, and initialization value.  The class itself may, or not, define again the property `$x`, subject to the same conditions as above.
 
 Beware that at runtime all the instances of the multiply defined property `$x` are _aliased_. This might be source of unexpected interference between traits implementing unrelated services: in the example below the trait `T2` breaks the invariant of trait `T1` whenever both are used by the same class.
 

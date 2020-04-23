@@ -6,9 +6,9 @@ trait T1 {
   public int $x = 0;
 
   public function return_even() : int {
-    invariant($this->$x % 2 == 0, 'error, not even\n');
-    $this->$x = $this->$x + 2;
-    return $this->$x;
+    invariant($this->x % 2 == 0, 'error, not even\n');
+    $this->x = $this->x + 2;
+    return $this->x;
   }
 }
 
@@ -22,9 +22,11 @@ trait T2 {
 
 trait T3 {
   static function is_odd(int $x) : bool {
-    if ($x % 2 == 1)
-    then return true;
-    else return false;
+    if ($x % 2 == 1) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
