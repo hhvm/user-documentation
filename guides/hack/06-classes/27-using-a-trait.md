@@ -2,7 +2,7 @@ Traits are a mechanism for code reuse that overcomes some limitations of Hack si
 
 In its simplest form a trait defines properties and method declarations.  A trait cannot be instantiated with `new`, but it can be _used_ inside one or more classes, via the `use` clause.  Informally, whenever a trait is used by a class, the property and method definitions of the trait are inlined (copy/pasted) inside the class itself.  The example below shows a simple trait defining a method that returns even numbers.  The trait is used by two, unrelated, classes.
 
-@@ using-a-trait-example/Simple.php @@
+@@ using-a-trait-examples/Simple.php @@
 
 A class can use multiple traits, and traits themselves can use one or more traits.  The example below uses three traits, to generate even numbers, to generate odd numbers given a generator of even numbers, and to test if a number is odd:
 
