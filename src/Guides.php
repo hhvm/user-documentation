@@ -139,6 +139,7 @@ final class Guides {
         ],
         'source-code-fundamentals' => dict[
           'white-space' => tuple('source-code-fundamentals', 'introduction'),
+          'operators-and-punctuators' => tuple('source-code-fundamentals', 'introduction'),
         ],
         'statements' => dict[
           'labeled-statements' => tuple('statements', 'switch'),
