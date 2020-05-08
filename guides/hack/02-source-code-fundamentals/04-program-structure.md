@@ -32,7 +32,6 @@ this extension *must* start with an optional shebang line (e.g. `#!/usr/bin/env 
 - `<?hh // partial`: this loosens several restrictions to ease migration from other languages. It is strongly
   discouraged for new code.
 - `<?hh`: depending on the version of HHVM/Hack, this may be equivalent to strict, partial, or throw an error. It is strongly discouraged for both new and existing code.
-- `<?hh // decl`: no longer supported
 
 The following file is equivalent to the earlier example:
 
