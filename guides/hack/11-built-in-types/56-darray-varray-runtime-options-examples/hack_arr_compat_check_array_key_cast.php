@@ -22,8 +22,11 @@ async function main_async(): Awaitable<void> {
 
   $darray = darray[];
 
+  /*HH_IGNORE_ERROR[4298]*/
   $darray[1.1] = 'A float?!?';
+  /*HH_IGNORE_ERROR[4298]*/
   $darray[true] = 'A bool?!?';
+  /*HH_IGNORE_ERROR[4298]*/
   $darray[null] = 'null?!?';
 
 }
