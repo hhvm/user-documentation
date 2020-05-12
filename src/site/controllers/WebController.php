@@ -16,12 +16,10 @@ use function HHVM\UserDocumentation\{
 };
 use type Facebook\HackRouter\{RequestParameter, RequestParameters};
 use type Facebook\TypeAssert\IncorrectTypeException;
-use type Facebook\Experimental\Http\Message\{
-  ResponseInterface,
-  ServerRequestInterface,
-};
+use namespace Nuxed\Contract\Http\Message;
 use namespace Facebook\TypeAssert;
 use namespace HH\Lib\{C, Str, Vec};
+
 <<__ConsistentConstruct>>
 abstract class WebController {
   const type TParameterDefinitions = shape(
@@ -34,14 +32,11 @@ abstract class WebController {
 
   public function __construct(
     ImmMap<string, string> $parameters,
-    private ServerRequestInterface $request,
+    private Message\IServerRequest $request,
   ) {
     $combined_params = new Map($parameters);
     foreach ($request->getQueryParams() as $key => $value) {
-      if (is_array($value)) {
-        continue;
-      }
-      $combined_params[(string)$key] = (string)$value;
+      $combined_params[$key] = $value;
     }
 
     $spec = self::getParametersSpec();
@@ -89,15 +84,13 @@ abstract class WebController {
     return shape('required' => ImmVector {}, 'optional' => ImmVector {});
   }
 
-  abstract public function getResponseAsync(
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface>;
+  abstract public function getResponseAsync(): Awaitable<Message\IResponse>;
 
   final protected function getRequestedPath(): string {
     return $this->request->getUri()->getPath();
   }
 
-  final protected function getRequestedHost(): string {
+  final protected function getRequestedHost(): ?string {
     return $this->request->getUri()->getHost();
   }
 

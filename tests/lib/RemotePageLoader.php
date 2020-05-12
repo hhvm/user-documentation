@@ -2,9 +2,10 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use namespace Nuxed\Contract\Http\Message;
+use namespace Nuxed\Http;
 use namespace Facebook\TypeAssert;
-use namespace HH\Lib\{File, Str};
+use namespace HH\Lib\Str;
 
 final class RemotePageLoader extends PageLoader {
   protected function __construct() {}
@@ -12,34 +13,27 @@ final class RemotePageLoader extends PageLoader {
   <<__Override>>
   protected async function getPageImplAsync(
     string $url,
-  ): Awaitable<(ResponseInterface, string)> {
-    $host_header = \parse_url($url, \PHP_URL_HOST);
-    $scheme = \parse_url($url, \PHP_URL_SCHEME);
-    $path = \parse_url($url, \PHP_URL_PATH);
-    $query = \parse_url($url, \PHP_URL_QUERY);
-
+  ): Awaitable<(Message\IResponse, string)> {
+    $uri = Http\Message\uri($url);
     $test_host = TypeAssert\not_null(self::getHost());
-    if ($scheme === null) {
+    if ($uri->getScheme() is null) {
       switch ($test_host) {
         case 'docs.hhvm.com':
         case 'staging.docs.hhvm.com':
-          $scheme = 'https';
+          $uri = $uri->withScheme('https');
           break;
         default:
-          $scheme = 'http';
+          $uri = $uri->withScheme('http');
       }
     }
-    $url = $scheme.'://'.$test_host.$path;
-    if ($query !== null) {
-      $url .= '?'.$query;
-    }
 
-    $ch = \curl_init($url);
+    $ch = \curl_init($uri->toString());
     \curl_setopt($ch, \CURLOPT_HEADER, 1);
     \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
 
-    if ($host_header) {
-      \curl_setopt($ch, \CURLOPT_HTTPHEADER, varray['Host: '.$host_header]);
+    $host = $uri->getHost();
+    if ($host is nonnull) {
+      \curl_setopt($ch, \CURLOPT_HTTPHEADER, varray['Host: '.$host]);
     }
 
     $response = await \HH\Asio\curl_exec($ch);
@@ -58,14 +52,7 @@ final class RemotePageLoader extends PageLoader {
       $body = \substr($response, $header_size);
     }
 
-    $response = new \Usox\HackTTP\Response(
-      File\open_write_only_nd(
-        '/dev/null',
-        File\WriteMode::APPEND,
-      ),
-      $status,
-    );
-
+    $response = Http\Message\response($status);
     foreach ($header_lines as $header_line) {
       list($name, $value) = Str\split($header_line, ": ");
       $response = $response->withAddedHeader($name, vec[$value]);

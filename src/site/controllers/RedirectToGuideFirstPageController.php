@@ -15,7 +15,7 @@ use type HHVM\UserDocumentation\{
   GuidesProduct,
   URLBuilder,
 };
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use namespace Nuxed\Contract\Http\Message;
 
 final class RedirectToGuideFirstPageController
   extends WebController
@@ -32,9 +32,7 @@ final class RedirectToGuideFirstPageController
   }
 
   <<__Override>>
-  public async function getResponseAsync(
-    ResponseInterface $_,
-  ): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<Message\IResponse> {
     $params = $this->getParameters();
     $product = GuidesProduct::assert($params['Product']);
     $guide = $params['Guide'];

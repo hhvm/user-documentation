@@ -2,9 +2,10 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type Facebook\Experimental\Http\Message\{HTTPMethod, ResponseInterface};
-
-use namespace HH\Lib\{File, Math};
+use namespace AzJezz\HttpNormalizer;
+use namespace Nuxed\Http;
+use namespace Nuxed\Contract\Http\Message;
+use namespace HH\Lib\Math;
 
 final class LocalPageLoader extends PageLoader {
   protected function __construct() {}
@@ -12,33 +13,22 @@ final class LocalPageLoader extends PageLoader {
   <<__Override>>
   protected async function getPageImplAsync(
     string $url,
-  ): Awaitable<(ResponseInterface, string)> {
-    $query_params = darray[];
-    $query_part = \parse_url($url, \PHP_URL_QUERY);
+  ): Awaitable<(Message\IResponse, string)> {
+    $query_params = dict[];
+    $url = Http\Message\uri($url);
+    $query_part = $url->getQuery();
     if ($query_part !== null) {
-      \parse_str($query_part, inout $query_params);
+      $query_params = HttpNormalizer\parse($query_part);
     }
 
-    $request = (new \Usox\HackTTP\ServerRequestFactory())->createServerRequest(
-      HTTPMethod::GET,
-      (new \Usox\HackTTP\UriFactory())->createUri($url),
-      dict[],
-    )
-      ->withBody(File\open_read_only_nd('/dev/null'))
-      ->withQueryParams(dict($query_params));
-    $buffer_path = \sys_get_temp_dir().'/'.\bin2hex(\random_bytes(16));
-    $write_handle = File\open_write_only_nd(
-      $buffer_path,
-      File\WriteMode::MUST_CREATE,
-    );
-    $response = (new \Usox\HackTTP\Response($write_handle));
-    $response = await \HHVMDocumentationSite::getResponseForRequestAsync(
-      $request,
-      $response,
-    );
-    await $write_handle->closeAsync();
-    await using $read_handle = File\open_read_only($buffer_path);
-    $content = await $read_handle->readAsync(Math\INT64_MAX);
+    $request = new Http\Message\ServerRequest(Message\RequestMethod::Get, $url)
+      |> $$->withQueryParams(dict($query_params));
+
+    $response = await (new \HHVMDocumentationSite())->handle($request);
+    $body = $response->getBody();
+    await $body->seekAsync(0);
+    $content = await $body->readAsync(Math\INT64_MAX);
+
     return tuple($response, $content);
   }
 }

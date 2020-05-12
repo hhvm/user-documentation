@@ -9,38 +9,35 @@
  *
  */
 
-use type Facebook\Experimental\Http\Message\{
-  ResponseInterface,
-  ServerRequestInterface,
-};
+use namespace Nuxed\Contract\Http;
+use namespace Nuxed\Http\Message;
+use namespace Nuxed\Http\Message\Response;
 
 abstract class HTTPException extends \Exception {
   abstract public function getResponseAsync(
-    ServerRequestInterface $request,
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface>;
+    Http\Message\IServerRequest $request,
+  ): Awaitable<Http\Message\IResponse>;
 }
 abstract class RoutingException extends HTTPException {}
 
 final class HTTPNotFoundException extends RoutingException {
   <<__Override>>
   public async function getResponseAsync(
-    ServerRequestInterface $request,
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface> {
-    return await (new HTTP404Controller(ImmMap {}, $request))->getResponseAsync(
-      $response,
-    );
+    Http\Message\IServerRequest $request,
+  ): Awaitable<Http\Message\IResponse> {
+    return await (
+      new HTTP404Controller(ImmMap {}, $request)
+    )->getResponseAsync();
   }
 }
 
 final class HTTPMethodNotAllowedException extends RoutingException {
   <<__Override>>
   public async function getResponseAsync(
-    ServerRequestInterface $_,
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface> {
-    return $response->withStatus(405);
+    Http\Message\IServerRequest $_request,
+  ): Awaitable<Http\Message\IResponse> {
+    return Response\empty()
+      ->withStatus(Http\Message\StatusCode::MethodNotAllowed);
   }
 }
 
@@ -51,11 +48,11 @@ final class RedirectException extends HTTPException {
 
   <<__Override>>
   public async function getResponseAsync(
-    ServerRequestInterface $_,
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface> {
-    return $response
-      ->withStatus(301)
-      ->withHeader('Location', vec[$this->destination]);
+    Http\Message\IServerRequest $_request,
+  ): Awaitable<Http\Message\IResponse> {
+    return Response\redirect(
+      Message\uri($this->destination),
+      Http\Message\StatusCode::MovedPermanently,
+    );
   }
 }

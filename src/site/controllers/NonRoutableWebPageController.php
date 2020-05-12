@@ -10,10 +10,8 @@
  */
 
 use type HHVM\UserDocumentation\{LocalConfig, UIGlyphIcon};
-use type Facebook\Experimental\Http\Message\{
-  ResponseInterface,
-  ServerRequestInterface,
-};
+use namespace Nuxed\Contract\Http\Message;
+use namespace Nuxed\Http\Message\Response;
 
 use namespace HH\Lib\C;
 
@@ -63,9 +61,7 @@ EOF;
   }
 
   <<__Override>>
-  final public async function getResponseAsync(
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface> {
+  final public async function getResponseAsync(): Awaitable<Message\IResponse> {
     await $this->beforeResponseAsync();
     concurrent {
       $title = await $this->getTitleAsync();
@@ -145,16 +141,14 @@ EOF;
           </body>
         </html>
       </x:doctype>;
-    $xhp->setContext('ServerRequestInterface', $this->request);
+    $xhp->setContext('IServerRequest', $this->request);
     $html = await $xhp->asyncToString();
 
-    await $response->getBody()->writeAsync($html);
-    $response = $response
-      ->withStatus($this->getStatusCode())
-      ->withHeader(
-        'Cache-Control',
-        vec['max-age=60'],
-      ); // enough for pre-fetching :)
+    $response = Response\html($html)
+      ->withStatus($this->getStatusCode());
+
+    // enough for pre-fetching :)
+    $response = Response\with_max_age($response, 60);
 
     if ($require_secure) {
       $response = $response->withHeader(
@@ -167,7 +161,7 @@ EOF;
   }
 
   protected function getStatusCode(): int {
-    return 200;
+    return Message\StatusCode::Ok;
   }
 
   final protected async function getContentPaneAsync(): Awaitable<XHPRoot> {
@@ -291,7 +285,7 @@ EOF;
    */
   final public function __construct(
     ImmMap<string, string> $parameters,
-    private ServerRequestInterface $request,
+    private Message\IServerRequest $request,
   ) {
     parent::__construct($parameters, $request);
   }

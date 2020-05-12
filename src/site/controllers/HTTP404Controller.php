@@ -10,6 +10,7 @@
  */
 
 use namespace HH\Lib\C;
+use namespace Nuxed\Contract\Http\Message;
 use type HHVM\UserDocumentation\{
   APILegacyRedirectData,
   JumpIndexData,
@@ -139,7 +140,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
 
   <<__Override>>
   protected function getStatusCode(): int {
-    return 404;
+    return Message\StatusCode::NotFound;
   }
 
   <<__Override>>

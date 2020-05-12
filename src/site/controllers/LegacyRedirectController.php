@@ -10,7 +10,7 @@
  */
 
 use type HHVM\UserDocumentation\LegacyRedirects;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use namespace Nuxed\Contract\Http\Message;
 
 final class LegacyRedirectController
   extends WebController
@@ -25,9 +25,7 @@ final class LegacyRedirectController
   }
 
   <<__Override>>
-  public async function getResponseAsync(
-    ResponseInterface $_,
-  ): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<Message\IResponse> {
     $id = $this->getParameters()['LegacyId'];
 
     $url = LegacyRedirects::getUrlForId($id);

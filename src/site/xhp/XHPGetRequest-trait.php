@@ -9,16 +9,16 @@
  *
  */
 
-use type Facebook\Experimental\Http\Message\ServerRequestInterface;
+use namespace Nuxed\Contract\Http\Message;
 
 trait XHPGetRequest {
   require extends :x:element;
 
-  protected function getRequest(): ServerRequestInterface {
-    $x = $this->getContext('ServerRequestInterface');
+  protected function getRequest(): Message\IServerRequest {
+    $x = $this->getContext('IServerRequest');
     invariant(
-      $x is ServerRequestInterface,
-      '%s is not a ServerRequestInterface',
+      $x is Message\IServerRequest,
+      '%s is not a server request',
       gettype($x).' ('.get_class($x).')',
     );
     return $x;

@@ -9,5 +9,18 @@
  *
  */
 
+use namespace Nuxed\Contract\Http\Message;
+use namespace Facebook\HackRouter;
+
 final class Router extends RouterCodegenBase {
+  final public function match(
+    Message\IServerRequest $request,
+  ): (classname<\RoutableController>, ImmMap<string, string>) {
+    $method = HackRouter\HttpMethod::coerce($request->getMethod());
+    if ($method === null) {
+      throw new HackRouter\MethodNotAllowedException(keyset[]);
+    }
+
+    return $this->routeMethodAndPath($method, $request->getUri()->getPath());
+  }
 }

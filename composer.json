@@ -2,7 +2,6 @@
     "require": {
         "facebook/xhp-lib": "^3.1.1",
         "hhvm": "4.53.*",
-        "usox/hackttp": "*",
         "hhvm/hhvm-autoload": "^2.0|^3.0",
         "hhvm/type-assert": "^3.1.0",
         "facebook/hack-codegen": "^4.0",
@@ -11,7 +10,10 @@
         "hhvm/hsl": "^4.25",
         "hhvm/hsl-experimental": "^4.41",
         "facebook/fbmarkdown": "^1.0",
-        "facebook/hh-apidoc": ">=0.6 <1.0"
+        "facebook/hh-apidoc": ">=0.6 <1.0",
+        "nuxed/http-message": "^1.1",
+        "nuxed/http-emitter": "^1.0",
+        "nuxed/contract": "^1.0"
     },
     "require-dev": {
         "hhvm/hhast": "^4.0",

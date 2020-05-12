@@ -11,7 +11,10 @@
 
 use type Facebook\HackRouter\IntRequestParameter;
 use type HHVM\UserDocumentation\StaticResourceMap;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use namespace Nuxed\Contract\Http\Message;
+use namespace Nuxed\Http\Message\{Body, Response};
+
+use function Nuxed\Http\Message\response;
 
 final class StaticResourcesController
   extends WebController
@@ -35,9 +38,7 @@ final class StaticResourcesController
   }
 
   <<__Override>>
-  public async function getResponseAsync(
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<Message\IResponse> {
     $params = $this->getParameters();
     $checksum = $params['Checksum'];
     $file = '/'.$params['File'];
@@ -54,24 +55,23 @@ final class StaticResourcesController
       throw new HTTPNotFoundException();
     }
 
-    await $response->getBody()
-      ->writeAsync(\file_get_contents($entry['localPath']));
-    $response = $response->withHeader('Content-Type', vec[$entry['mimeType']]);
+    $response = response(
+      Message\StatusCode::Ok,
+      dict['Content-Type' => vec[$entry['mimeType']]],
+      Body\file($entry['localPath']),
+    );
 
     if (
       $checksum === 'local-changes' && $this->getParameters()['MTime'] === null
     ) {
-      $response = $response->withAddedHeader(
-        'Cache-Control',
-        vec['max-age=0, no-cache, no-store'],
-      );
+      $response = Response\with_max_age($response, 0)
+        |> Response\with_cache_control_directive($$, 'no-cache')
+        |> Response\with_cache_control_directive($$, 'no-store');
     } else {
-      $response = $response->withAddedHeader(
-        'Cache-Control',
-        vec['max-age=31556926'], // 1 year
-      )
-        ->withAddedHeader('ETag', vec['"'.$checksum.'"']);
+      $response = Response\with_max_age($response, 31556926) // 1 year
+        |> Response\with_etag($$, $checksum);
     }
+
     return $response;
   }
 }

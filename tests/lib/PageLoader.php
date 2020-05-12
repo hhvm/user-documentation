@@ -2,7 +2,7 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use namespace Nuxed\Contract\Http\Message;
 
 abstract class PageLoader {
   <<__Memoize>>
@@ -17,13 +17,13 @@ abstract class PageLoader {
 
   public static function getPageAsync(
     string $url,
-  ): Awaitable<(ResponseInterface, string)> {
+  ): Awaitable<(Message\IResponse, string)> {
     return self::get()->getPageImplAsync($url);
   }
 
   abstract protected function getPageImplAsync(
     string $url,
-  ): Awaitable<(ResponseInterface, string)>;
+  ): Awaitable<(Message\IResponse, string)>;
 
   <<__Memoize>>
   protected static function getHost(): ?string {

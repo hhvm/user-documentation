@@ -10,7 +10,8 @@
  */
 
 use type HHVM\UserDocumentation\LocalConfig;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use namespace Nuxed\Contract\Http\Message;
+use namespace Nuxed\Http\Message\Response;
 
 final class RobotsTxtController
   extends WebController
@@ -24,16 +25,11 @@ final class RobotsTxtController
   const string DEFAULT_FILE = LocalConfig::ROOT.'/public/robots.txt-default';
 
   <<__Override>>
-  public async function getResponseAsync(
-    ResponseInterface $response,
-  ): Awaitable<ResponseInterface> {
+  public async function getResponseAsync(): Awaitable<Message\IResponse> {
     if ($this->getRequestedHost() === 'docs.hhvm.com') {
-      $source = self::DEFAULT_FILE;
-    } else {
-      $source = self::DO_NOT_CRAWL_FILE;
+      return Response\text_file(self::DEFAULT_FILE);
     }
 
-    await $response->getBody()->writeAsync(\file_get_contents($source));
-    return $response->withHeader('Content-Type', vec['text/plain']);
+    return Response\text_file(self::DO_NOT_CRAWL_FILE);
   }
 }

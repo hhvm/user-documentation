@@ -10,7 +10,7 @@
  */
 
 use type HHVM\UserDocumentation\JumpIndexData;
-use type Facebook\Experimental\Http\Message\ResponseInterface;
+use namespace Nuxed\Contract\Http\Message;
 
 final class JumpController
   extends WebController
@@ -26,11 +26,8 @@ final class JumpController
   }
 
   <<__Override>>
-  public function getResponseAsync(
-    ResponseInterface $_,
-  ): Awaitable<ResponseInterface> {
+  public function getResponseAsync(): Awaitable<Message\IResponse> {
     $keyword = $this->getParameters()['Keyword'];
-
     $data = JumpIndexData::getIndex();
     foreach (self::PREFIXES as $prefix) {
       $url = idx($data, strtolower($prefix.$keyword));

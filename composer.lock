@@ -4,8 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "327f56795eb9afb755004643547c8c64",
+    "content-hash": "822c6bf9a86609cb9a8a66178a7b48e3",
     "packages": [
+        {
+            "name": "azjezz/http-normalizer",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/azjezz/http-normalizer.git",
+                "reference": "f4777d8da99b78e41f846318b87b55cd71b42668"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/azjezz/http-normalizer/zipball/f4777d8da99b78e41f846318b87b55cd71b42668",
+                "reference": "f4777d8da99b78e41f846318b87b55cd71b42668",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^4.25",
+                "hhvm/hhvm-autoload": "^2.0|^3.0",
+                "hhvm/hsl": "^4.25",
+                "hhvm/type-assert": "^3.6"
+            },
+            "require-dev": {
+                "hhvm/hhast": "^4.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "azjezz",
+                    "email": "azjezz@protonmail.com"
+                }
+            ],
+            "description": "Normalize Http super globals",
+            "time": "2020-04-17T20:41:34+00:00"
+        },
         {
             "name": "facebook/definition-finder",
             "version": "v2.13.3",
@@ -361,22 +398,22 @@
         },
         {
             "name": "facebook/hh-clilib",
-            "version": "v2.3.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hh-clilib.git",
-                "reference": "10845e8780436728cdc0b9abbe20446777bdb199"
+                "reference": "86e28eab4be539ee517d9abb5832b676088d6591"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hh-clilib/zipball/10845e8780436728cdc0b9abbe20446777bdb199",
-                "reference": "10845e8780436728cdc0b9abbe20446777bdb199",
+                "url": "https://api.github.com/repos/hhvm/hh-clilib/zipball/86e28eab4be539ee517d9abb5832b676088d6591",
+                "reference": "86e28eab4be539ee517d9abb5832b676088d6591",
                 "shasum": ""
             },
             "require": {
                 "hhvm": "^4.41",
                 "hhvm/hsl": "^4.0",
-                "hhvm/hsl-experimental": "^4.50",
+                "hhvm/hsl-experimental": "^4.52",
                 "hhvm/type-assert": "^3.2"
             },
             "require-dev": {
@@ -394,7 +431,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-03-27T16:47:22+00:00"
+            "time": "2020-05-05T20:17:54+00:00"
         },
         {
             "name": "facebook/xhp-lib",
@@ -441,16 +478,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.53.1",
+            "version": "4.53.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "64badd69b791d772afca25210d73bd53eda09a70"
+                "reference": "877787140f0d2c177fbde142a8e7eb47a2a94ee1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/64badd69b791d772afca25210d73bd53eda09a70",
-                "reference": "64badd69b791d772afca25210d73bd53eda09a70",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/877787140f0d2c177fbde142a8e7eb47a2a94ee1",
+                "reference": "877787140f0d2c177fbde142a8e7eb47a2a94ee1",
                 "shasum": ""
             },
             "require": {
@@ -486,7 +523,7 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-04-16T22:55:22+00:00"
+            "time": "2020-05-06T18:44:23+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -537,26 +574,26 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v4.40.0",
+            "version": "v4.41.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "b14a430062ad95c378765899f955457f3454f2f9"
+                "reference": "80a42c02f036f72a42f0415e80d6b847f4bf62d5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/b14a430062ad95c378765899f955457f3454f2f9",
-                "reference": "b14a430062ad95c378765899f955457f3454f2f9",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/80a42c02f036f72a42f0415e80d6b847f4bf62d5",
+                "reference": "80a42c02f036f72a42f0415e80d6b847f4bf62d5",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.25"
+                "hhvm": "^4.41"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.5.1",
                 "hhvm/hacktest": "^1.0|^2.0",
-                "hhvm/hhvm-autoload": "^2.0",
-                "hhvm/hsl-experimental": "dev-master"
+                "hhvm/hhvm-autoload": "^2.0|^3.0",
+                "hhvm/hsl-experimental": "^4.37|dev-master"
             },
             "type": "library",
             "extra": {
@@ -569,24 +606,24 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library",
-            "time": "2020-01-08T23:12:08+00:00"
+            "time": "2020-05-01T23:05:23+00:00"
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.50.1",
+            "version": "v4.52.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "ddbd74463878f0bda076bf7e1c528eb1294b3769"
+                "reference": "88507ba41b17579cd548c712dade22a53d349f64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/ddbd74463878f0bda076bf7e1c528eb1294b3769",
-                "reference": "ddbd74463878f0bda076bf7e1c528eb1294b3769",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/88507ba41b17579cd548c712dade22a53d349f64",
+                "reference": "88507ba41b17579cd548c712dade22a53d349f64",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.41",
+                "hhvm": "^4.52",
                 "hhvm/hsl": "^4.15"
             },
             "require-dev": {
@@ -605,7 +642,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library - Experimental Additions",
-            "time": "2020-04-16T20:59:00+00:00"
+            "time": "2020-05-01T23:44:28+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -649,121 +686,193 @@
             "time": "2020-01-13T21:48:58+00:00"
         },
         {
-            "name": "usox/hack-http-factory-interfaces",
-            "version": "v0.2.2",
+            "name": "nuxed/contract",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/usox/hack-http-factory-interfaces.git",
-                "reference": "412fdeb8d85c83bef558223bf5ed25e5e7e37692"
+                "url": "https://github.com/nuxed/contract.git",
+                "reference": "360148de5529baa3848c38b2ca56da83e9259b41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hack-http-factory-interfaces/zipball/412fdeb8d85c83bef558223bf5ed25e5e7e37692",
-                "reference": "412fdeb8d85c83bef558223bf5ed25e5e7e37692",
+                "url": "https://api.github.com/repos/nuxed/contract/zipball/360148de5529baa3848c38b2ca56da83e9259b41",
+                "reference": "360148de5529baa3848c38b2ca56da83e9259b41",
                 "shasum": ""
             },
             "require": {
-                "facebook/hack-http-request-response-interfaces": "^0.2|^0.3",
-                "hhvm": "^4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Usox\\HackHttpFactory\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Daniel Jakob",
-                    "email": "dev@usox.org"
-                }
-            ],
-            "description": "PSR-17 like http factory interfaces",
-            "homepage": "https://github.com/usox/hack-http-factory-interfaces",
-            "keywords": [
-                "factory",
-                "hack",
-                "hhvm",
-                "http"
-            ],
-            "time": "2020-04-08T16:17:10+00:00"
-        },
-        {
-            "name": "usox/hackttp",
-            "version": "v0.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/usox/hackttp.git",
-                "reference": "745189ad8d06744763fa18fc1e65a8eb073a1907"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackttp/zipball/745189ad8d06744763fa18fc1e65a8eb073a1907",
-                "reference": "745189ad8d06744763fa18fc1e65a8eb073a1907",
-                "shasum": ""
-            },
-            "require": {
-                "facebook/hack-http-request-response-interfaces": "^0.3",
-                "hhvm": "^4.1",
-                "hhvm/hsl": "^4.25",
-                "hhvm/hsl-experimental": "^4.50",
-                "hhvm/type-assert": "^3.3",
-                "usox/hack-http-factory-interfaces": "^0.2"
+                "hhvm": "^4.56",
+                "hhvm/hsl": "^4.41",
+                "hhvm/hsl-experimental": "^4.52"
             },
             "require-dev": {
-                "hhvm/hacktest": "^1.4|^2.0",
-                "hhvm/hhast": "^4.1",
-                "usox/hackmock": "^1.3"
+                "hhvm/hhast": "^4.50"
             },
             "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Usox\\HackTTP\\": "src/"
-                }
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
-                    "name": "Daniel Jakob",
-                    "email": "dev@usox.org",
-                    "role": "Developer"
+                    "name": "azjezz",
+                    "email": "azjezz@protonmail.com"
+                },
+                {
+                    "name": "Nuxed Community",
+                    "homepage": "https://github.com/nuxed/contract/graphs/contributors"
                 }
             ],
-            "description": "Work in progress demo implementation of facebookexperimental/hack-http-request-response-interfaces",
-            "homepage": "https://github.com/usox/hackttp",
-            "keywords": [
-                "hack",
-                "hacklang",
-                "hhvm",
-                "http",
-                "message",
-                "request",
-                "response",
-                "stream"
+            "description": "Nuxed Contract",
+            "time": "2020-05-09T11:51:52+00:00"
+        },
+        {
+            "name": "nuxed/http-emitter",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nuxed/http-emitter.git",
+                "reference": "f4acd9baf59c7a45bd799b4d180272a436a32cca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nuxed/http-emitter/zipball/f4acd9baf59c7a45bd799b4d180272a436a32cca",
+                "reference": "f4acd9baf59c7a45bd799b4d180272a436a32cca",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^4.56",
+                "hhvm/hsl": "^4.40",
+                "hhvm/hsl-experimental": "^4.50",
+                "nuxed/contract": "^1.0"
+            },
+            "require-dev": {
+                "facebook/fbexpect": "^2.7",
+                "hhvm/hacktest": "^2.0",
+                "hhvm/hhast": "^4.25",
+                "nuxed/http-message": "^1.0"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
             ],
-            "time": "2020-04-08T16:21:17+00:00"
+            "authors": [
+                {
+                    "name": "azjezz",
+                    "email": "azjezz@protonmail.com"
+                },
+                {
+                    "name": "Nuxed Community",
+                    "homepage": "https://github.com/nuxed/http-emitter/graphs/contributors"
+                }
+            ],
+            "description": "Nuxed Http Emitter",
+            "time": "2020-05-09T16:21:20+00:00"
+        },
+        {
+            "name": "nuxed/http-message",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nuxed/http-message.git",
+                "reference": "11c4ca810a2a5bdbc417ed06e9d1acf65b3be4c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nuxed/http-message/zipball/11c4ca810a2a5bdbc417ed06e9d1acf65b3be4c6",
+                "reference": "11c4ca810a2a5bdbc417ed06e9d1acf65b3be4c6",
+                "shasum": ""
+            },
+            "require": {
+                "azjezz/http-normalizer": "^1.0",
+                "hhvm": "^4.56",
+                "hhvm/hsl": "^4.40",
+                "hhvm/hsl-experimental": "^4.50",
+                "nuxed/contract": "^1.0",
+                "nuxed/json": "^1.0"
+            },
+            "conflict": {
+                "hhvm/hsl-experimental": "<4.31.1"
+            },
+            "require-dev": {
+                "facebook/fbexpect": "^2.7",
+                "hhvm/hacktest": "^2.0",
+                "hhvm/hhast": "^4.25",
+                "nuxed/filesystem": "^1.2"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "azjezz",
+                    "email": "azjezz@protonmail.com"
+                },
+                {
+                    "name": "Nuxed Community",
+                    "homepage": "https://github.com/nuxed/http-message/graphs/contributors"
+                }
+            ],
+            "description": "Nuxed Http Message",
+            "time": "2020-05-12T06:51:43+00:00"
+        },
+        {
+            "name": "nuxed/json",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nuxed/json.git",
+                "reference": "8dd4040fc9c5e4cf43aed07fe2f3b858725421d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nuxed/json/zipball/8dd4040fc9c5e4cf43aed07fe2f3b858725421d4",
+                "reference": "8dd4040fc9c5e4cf43aed07fe2f3b858725421d4",
+                "shasum": ""
+            },
+            "require": {
+                "hhvm": "^4.25",
+                "hhvm/type-assert": "^3.6"
+            },
+            "require-dev": {
+                "facebook/fbexpect": "^2.7",
+                "hhvm/hacktest": "^2.0",
+                "hhvm/hhast": "^4.25"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "azjezz",
+                    "email": "azjezz@protonmail.com"
+                },
+                {
+                    "name": "Nuxed Community",
+                    "homepage": "https://github.com/nuxed/json/graphs/contributors"
+                }
+            ],
+            "description": "Nuxed Json",
+            "time": "2020-05-09T20:04:52+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "facebook/fbexpect",
-            "version": "v2.7.3",
+            "version": "v2.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbexpect.git",
-                "reference": "11a1fcf64286943382ac2496b4c8c981763c218d"
+                "reference": "02a831d27bc928460c1407e0d48d02d339b03798"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/11a1fcf64286943382ac2496b4c8c981763c218d",
-                "reference": "11a1fcf64286943382ac2496b4c8c981763c218d",
+                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/02a831d27bc928460c1407e0d48d02d339b03798",
+                "reference": "02a831d27bc928460c1407e0d48d02d339b03798",
                 "shasum": ""
             },
             "require": {
@@ -774,7 +883,7 @@
             },
             "require-dev": {
                 "hhvm/hhast": "^4.0",
-                "hhvm/hhvm-autoload": "^2.0"
+                "hhvm/hhvm-autoload": "^2.0|^3.0"
             },
             "type": "library",
             "notification-url": "https://packagist.org/downloads/",
@@ -782,20 +891,20 @@
                 "MIT"
             ],
             "description": "Unit test helpers for Facebook projects",
-            "time": "2019-11-04T22:11:28+00:00"
+            "time": "2020-04-23T03:58:41+00:00"
         },
         {
             "name": "hhvm/hacktest",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hacktest.git",
-                "reference": "15663bc7fb2b35e1ab7c48089db7e674ac024482"
+                "reference": "e3fd815762cc09f72b65cbd676d39eb491c0c62b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/15663bc7fb2b35e1ab7c48089db7e674ac024482",
-                "reference": "15663bc7fb2b35e1ab7c48089db7e674ac024482",
+                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/e3fd815762cc09f72b65cbd676d39eb491c0c62b",
+                "reference": "e3fd815762cc09f72b65cbd676d39eb491c0c62b",
                 "shasum": ""
             },
             "require": {
@@ -825,7 +934,7 @@
                 "MIT"
             ],
             "description": "The Hack Test Library",
-            "time": "2020-03-27T17:07:28+00:00"
+            "time": "2020-04-28T15:49:47+00:00"
         }
     ],
     "aliases": [],
