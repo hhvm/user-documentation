@@ -149,6 +149,7 @@ final class Guides {
           'modes' => tuple('source-code-fundamentals', 'program-structure'),
         ],
         'types' => dict[
+          'anonymous-function-objects' => tuple('functions', 'anonymous-functions'),
           'annotations' => tuple('functions', 'introduction'),
           'arraykey' => tuple('built-in-types', 'arraykey'),
           'arrays' => tuple('built-in-types', 'arrays'),
