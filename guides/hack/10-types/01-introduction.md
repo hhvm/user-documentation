@@ -14,5 +14,4 @@ for asserting types.
 * [Type Conversion](type-conversion.md)
 * [Type Inferencing](type-inferencing.md)
 * [Type Refinement](type-refinement.md)
-* [lambda](anonymous-function-objects.md)
 * [Generic Types](generic-types.md)
