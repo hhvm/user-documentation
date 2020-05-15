@@ -7,10 +7,11 @@ function fibonacci(int $number): int {
 }
 
 function main(array<string> $argv) {
+  $n = (int) ($argv[1] ?? 10);
   echo 'The '.
-    $argv[1].
+    $n.
     ' number in fibonacci is: '.
-    fibonacci((int)$argv[1]).
+    fibonacci($n).
     \PHP_EOL;
 }
 
