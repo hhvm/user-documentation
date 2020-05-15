@@ -694,23 +694,23 @@
         },
         {
             "name": "usox/hackttp",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/usox/hackttp.git",
-                "reference": "745189ad8d06744763fa18fc1e65a8eb073a1907"
+                "reference": "dda7511aca8f00c05bcb4c184619c7bbe8e6db0d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackttp/zipball/745189ad8d06744763fa18fc1e65a8eb073a1907",
-                "reference": "745189ad8d06744763fa18fc1e65a8eb073a1907",
+                "url": "https://api.github.com/repos/usox/hackttp/zipball/dda7511aca8f00c05bcb4c184619c7bbe8e6db0d",
+                "reference": "dda7511aca8f00c05bcb4c184619c7bbe8e6db0d",
                 "shasum": ""
             },
             "require": {
                 "facebook/hack-http-request-response-interfaces": "^0.3",
-                "hhvm": "^4.1",
+                "hhvm": "^4.52",
                 "hhvm/hsl": "^4.25",
-                "hhvm/hsl-experimental": "^4.50",
+                "hhvm/hsl-experimental": "^4.52",
                 "hhvm/type-assert": "^3.3",
                 "usox/hack-http-factory-interfaces": "^0.2"
             },
@@ -748,7 +748,7 @@
                 "response",
                 "stream"
             ],
-            "time": "2020-04-08T16:21:17+00:00"
+            "time": "2020-05-15T05:54:17+00:00"
         }
     ],
     "packages-dev": [
@@ -836,5 +836,6 @@
     "platform": {
         "hhvm": "4.56.*"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
