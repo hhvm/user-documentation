@@ -132,7 +132,6 @@ type StaticResourceMapEntry = shape(
  *
  * Use `NavDataNode` instead if possible.
  */
-<<__Enforceable>>
 type NavDataNodeIsh = shape(
   'name' => string,
   'urlPath' => string,
