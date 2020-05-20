@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60712df9e6a9a2a6bf9c20e8f030274f",
+    "content-hash": "885091c4f59d2268c9d87c128179c295",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -361,22 +361,23 @@
         },
         {
             "name": "facebook/hh-clilib",
-            "version": "v2.4.0",
+            "version": "v2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hh-clilib.git",
-                "reference": "86e28eab4be539ee517d9abb5832b676088d6591"
+                "reference": "c4f36c5cfab77d0cdb29b3b4446eebbaf6d4a61a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hh-clilib/zipball/86e28eab4be539ee517d9abb5832b676088d6591",
-                "reference": "86e28eab4be539ee517d9abb5832b676088d6591",
+                "url": "https://api.github.com/repos/hhvm/hh-clilib/zipball/c4f36c5cfab77d0cdb29b3b4446eebbaf6d4a61a",
+                "reference": "c4f36c5cfab77d0cdb29b3b4446eebbaf6d4a61a",
                 "shasum": ""
             },
             "require": {
                 "hhvm": "^4.41",
                 "hhvm/hsl": "^4.0",
                 "hhvm/hsl-experimental": "^4.52",
+                "hhvm/hsl-io": "^0.1.0",
                 "hhvm/type-assert": "^3.2"
             },
             "require-dev": {
@@ -394,7 +395,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2020-05-05T20:17:54+00:00"
+            "time": "2020-05-19T21:27:45+00:00"
         },
         {
             "name": "facebook/xhp-lib",
@@ -573,21 +574,24 @@
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.52.0",
+            "version": "v4.52.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "88507ba41b17579cd548c712dade22a53d349f64"
+                "reference": "ba8cfb8b920af493c51ed11b3a7ac09f8d7f67c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/88507ba41b17579cd548c712dade22a53d349f64",
-                "reference": "88507ba41b17579cd548c712dade22a53d349f64",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/ba8cfb8b920af493c51ed11b3a7ac09f8d7f67c6",
+                "reference": "ba8cfb8b920af493c51ed11b3a7ac09f8d7f67c6",
                 "shasum": ""
             },
             "require": {
                 "hhvm": "^4.52",
                 "hhvm/hsl": "^4.15"
+            },
+            "provide": {
+                "hhvm/hsl-io": "0.1.0"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.7.0",
@@ -605,7 +609,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library - Experimental Additions",
-            "time": "2020-05-01T23:44:28+00:00"
+            "time": "2020-05-19T21:08:17+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -834,7 +838,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.57.*"
+        "hhvm": "4.58.*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
