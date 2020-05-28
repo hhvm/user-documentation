@@ -34,3 +34,39 @@ concurrent {
   $result[] = await z_async();
 }
 ```
+
+## Exceptions
+
+If any statement in a `concurrent` block throws, there are no guarantees about which (if any) awaited values were assigned or which exception will be propagated if more than one of them threw. For example if you have:
+
+```
+$x = 0;
+try {
+  concurrent {
+    $x = await async { return 1; };
+    await async { throw new Exception('foo'); }
+    await async { throw new Exception('bar'); }
+  }
+} catch (Exception $e) {
+  var_dump($x, $e->getMessage());
+}
+```
+Then it is explicitly undefined whether `var_dump` will see `$x === 0` or `$x === 1` and whether the message will be 'foo' or 'bar'.
+
+If you need granular exception handling, consider using nested try-cath blocks inside the concurrent block:
+
+```
+concurrent {
+  $x = await async {
+    try {
+      ...
+      return <success path>;
+    } catch (...) {
+      return <fallback>;
+    }
+  };
+  $y = await async {
+    // same here
+  };
+}
+```
