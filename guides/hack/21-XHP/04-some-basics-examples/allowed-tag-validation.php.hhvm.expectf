@@ -7,7 +7,7 @@ string(%d) "Element `ul` was rendered with invalid children.
 Verified 0 children before failing.
 
 Children expected:
-(:li)*
+:li*
 
 Children received:
 :i[%s,%s]"
