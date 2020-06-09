@@ -38,7 +38,7 @@ export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update -y
 sudo apt-get install -y python3 python3-pip python3-setuptools
 export PYTHONPATH="$(mktemp -d)"
-git clone --shallow https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
+git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
 ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
 export PATH="${PYTHONPATH}/bin:${PATH}"
 
