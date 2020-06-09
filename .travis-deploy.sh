@@ -35,7 +35,7 @@ cp .deploy/prod.Dockerfile "$REPO_OUT/Dockerfile"
 
 echo "** Installing ElasticBeanstalk CLI..."
 export PYTHONPATH="$(mktemp -d)"
-pip install \
+pip3 install \
   "--target=${PYTHONPATH}" \
   "--install-option=--install-scripts=${PYTHONPATH}/bin" \
   awsebcli
