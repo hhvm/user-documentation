@@ -13,8 +13,7 @@ echo "** Installing apt dependencies"
 apt-get clean
 apt-get update -y
 
-APT_DEPS="ruby php-cli zip unzip locales"
-apt-get install -y $APT_DEPS
+apt-get install -y ruby php-cli zip unzip locales python3
 
 echo "** Updating locales"
 locale-gen en_US.UTF-8
