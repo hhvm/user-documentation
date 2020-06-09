@@ -133,16 +133,16 @@
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v4.3.9",
+            "version": "v4.3.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "d86a4e52e2695afc8bd3d0182ed3175b306ee0ea"
+                "reference": "0e73e6249e791204f697eba03f2f31e8f914787a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/d86a4e52e2695afc8bd3d0182ed3175b306ee0ea",
-                "reference": "d86a4e52e2695afc8bd3d0182ed3175b306ee0ea",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/0e73e6249e791204f697eba03f2f31e8f914787a",
+                "reference": "0e73e6249e791204f697eba03f2f31e8f914787a",
                 "shasum": ""
             },
             "require": {
@@ -155,7 +155,7 @@
                 "facebook/fbexpect": "^2.6.1",
                 "hhvm/hacktest": "^2.0",
                 "hhvm/hhast": "^4.0",
-                "hhvm/type-assert": "^3.1"
+                "hhvm/type-assert": "^3.1|^4.0"
             },
             "bin": [
                 "bin/hh-codegen-verify-signatures",
@@ -190,7 +190,7 @@
                 "code generation",
                 "hack"
             ],
-            "time": "2020-02-25T18:51:24+00:00"
+            "time": "2020-06-09T16:57:33+00:00"
         },
         {
             "name": "facebook/hack-http-request-response-interfaces",
