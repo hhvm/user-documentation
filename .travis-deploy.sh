@@ -36,7 +36,7 @@ cp .deploy/prod.Dockerfile "$REPO_OUT/Dockerfile"
 echo "** Installing ElasticBeanstalk CLI..."
 export DEBIAN_FRONTEND=noninteractive
 sudo apt-get update -y
-sudo apt-get install -y python3
+sudo apt-get install -y python3 python3-pip
 export PYTHONPATH="$(mktemp -d)"
 pip3 install \
   "--target=${PYTHONPATH}" \
