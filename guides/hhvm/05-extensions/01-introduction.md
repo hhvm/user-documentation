@@ -4,6 +4,16 @@ HHVM provides dozens of built-in, integrated extensions and allows for other ext
 
 If you call `get_loaded_extensions()` from HHVM, you will find that the following extensions are integrated into HHVM
 
+This documentation links to the PHP documentation about PHP extensions.
+It is however important to keep in mind that hhvm has been slowly drifting away from PHP.
+Most extensions have the features that they had in PHP 7.0 or 7.1.
+Features added in newer releases of PHP may not have been implemented.
+Some functionality may be missing or may not have typechecker definitions.
+
+Some APIs may have changed (think of `&$references` to `inout` changes).
+Some functions may have been split up into multiple functions if the PHP function took an optional `&$reference` argument.
+For the most up-to-date function signatures, please refer to your version of the typechecker definitions.
+
 * [apache](http://php.net/manual/en/book.apache.php)
 * [apc](http://php.net/manual/en/book.apc.php)
 * [array](http://php.net/manual/en/book.array.php)
@@ -74,7 +84,6 @@ If you call `get_loaded_extensions()` from HHVM, you will find that the followin
 * thrift_protocol
 * [tokenizer](http://php.net/manual/en/book.tokenizer.php)
 * [url](http://php.net/manual/en/book.url.php)
-* [wddx](http://php.net/manual/en/book.wddx.php)
 * xenon
 * [xhprof](http://php.net/manual/en/book.xhprof.php)
 * [xml](http://php.net/manual/en/book.xml.php)
