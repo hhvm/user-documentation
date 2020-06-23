@@ -38,11 +38,11 @@ function f(C<int> $x) {}
 f(new C<string>()); // Runtime warning: string incompatible with int
 ```
 
-3) By using logging, you have added `@` to everywhere its used and now it will be safe to remove `__Warn`.
+3) By using logging, you have added `__Soft` to everywhere it's used and now it will be safe to remove `__Warn`.
 
 ```Hack
 class C<<<__Warn>> reify T> {}
-function f(C<@int> $x) {}
+function f(C< <<__Soft>> int> $x) {}
 
 f(new C<string>()); // Runtime warning: string incompatible with int
 ```
@@ -51,7 +51,7 @@ f(new C<string>()); // Runtime warning: string incompatible with int
 
 ```Hack
 class C<reify T> {}
-function f(C<@int> $x) {}
+function f(C< <<__Soft>> int> $x) {}
 
 f(new C<string>()); // Runtime warning: string incompatible with int
 ```
