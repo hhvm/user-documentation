@@ -4,7 +4,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 use const HHVM_VERSION_ID;
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{C, Regex, Str, Vec};
 use function HHVM\UserDocumentation\_Private\execute_async;
 
 /**
@@ -92,11 +92,18 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       $in_file,
       $work_dir.'/'.Str\strip_suffix(\basename($in_file), '.type-errors'),
     );
-    if (\file_exists($in_file.'.hhconfig')) {
-      \copy($in_file.'.hhconfig', $work_dir.'/.hhconfig');
-    } else {
-      \touch($work_dir.'/.hhconfig');
+
+    $hhconfig = \file_exists($in_file.'.hhconfig')
+      ? \file_get_contents($in_file.'.hhconfig')."\n"
+      : '';
+    if (
+      !Str\contains($hhconfig, 'allowed_decl_fixme_codes') &&
+      !Str\contains($hhconfig, 'allowed_fixme_codes_strict')
+    ) {
+      $hhconfig .= self::getHHConfigWhitelists();
     }
+    \file_put_contents($work_dir.'/.hhconfig', $hhconfig);
+
     foreach (\glob($source_dir.'/*.inc.php') as $include_file) {
       \copy($include_file, $work_dir.'/'.\basename($include_file));
     }
@@ -124,6 +131,16 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       );
       expect($stdout)->toMatchExpectregexFile($expect_file);
     }
+  }
+
+  <<__Memoize>>
+  private static function getHHConfigWhitelists(): string {
+    $hhconfig = \file_get_contents(LocalConfig::ROOT.'/.hhconfig');
+    return
+      Regex\first_match($hhconfig, re"/^allowed_decl_fixme_codes=.*\$/m")
+        as nonnull[0]."\n".
+      Regex\first_match($hhconfig, re"/^allowed_fixme_codes_strict=.*\$/m")
+        as nonnull[0]."\n";
   }
 
   <<__Memoize>>
