@@ -11,14 +11,13 @@ async function main_async(): Awaitable<void> {
 
   using _Private\print_short_errors();
 
+  /* Before HHVM 4.64, this also applied to varrays.
   $varray = varray[];
 
-  /*HH_IGNORE_ERROR[4324]*/
   $varray[1.1] = 'A float?!?';
-  /*HH_IGNORE_ERROR[4324]*/
   $varray[true] = 'A bool?!?';
-  /*HH_IGNORE_ERROR[4324]*/
   $varray[null] = 'null?!?';
+  */
 
   $darray = darray[];
 
