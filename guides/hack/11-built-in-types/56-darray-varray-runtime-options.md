@@ -18,23 +18,105 @@ An important note: These settings will not work when you set them at runtime usi
 
 Fullname: hhvm.hack_arr_compat_check_implicit_varray_append
 
-This setting will raise a notice under the following condition.
+**WARNING: This option was removed in HHVM 4.64. It is now always a fatal error.**
+
+Before HHVM 4.64, this setting will raise a notice under the following condition.
 If it does not raise a warning, this option is not available in your version of hhvm.
 
-@@ darray-varray-runtime-options-examples/hack_arr_compat_check_implicit_varray_append.php @@
+```hack
+use namespace HHVM\UserDocumentation\_Private;
+
+<<__EntryPoint>>
+async function main_async(): Awaitable<void> {
+  require_once __DIR__.'/../../../../vendor/autoload.hack';
+  \Facebook\AutoloadMap\initialize();
+
+  using _Private\print_short_errors();
+
+  $varray = varray[
+    'HHVM',
+    'HACK',
+  ];
+
+  $varray[2] = <<<EOF
+Writing to the first unused key of a varray.
+Varray's behave differently here than vecs.
+EOF;
+}
+```
+
+*Output (before HHVM 4.64)*
+
+```
+E_NOTICE "Hack Array Compat: Implicit append to varray" in file "hack_arr_compat_check_implicit_varray_append.php" at line 19
+```
+
+**(fatal error in HHVM 4.64 or newer)**
 
 A `vec<_>` does not support implicitly appending. You can only append using an empty subscript operator `$x[] = ''` and update using a keyed subscript operator `$x[2] = ''`. The runtime will throw when you use the updating syntax in order to append. `'OutOfBoundsException' with message 'Out of bounds vec access: invalid index 2'`.
 
-A `varray<_>` will, as of now, accept you implicitly appending a key. It will remain a `varray<_>`. This is the only case where writing to a non existent index in a `varray<_>` will not cause the `varray<_>` to escalate to a `darray<_, _>`. More information about array escalation can be found below.
+A `varray<_>` will, before HHVM 4.64, accept you implicitly appending a key. It will remain a `varray<_>`. This is the only case where writing to a non existent index in a `varray<_>` will not cause the `varray<_>` to escalate to a `darray<_, _>`. More information about array escalation can be found below.
 
 ## Check varray promote
 
 Fullname: hhvm.hack_arr_compat_check_varray_promote
 
-This setting will raise a notice under the following condition.
+**WARNING: This option was removed in HHVM 4.64. It is now always a fatal error.**
+
+Before HHVM 4.64, this setting will raise a notice under the following condition.
 If it does not raise a warning, this option is not available in your version of hhvm.
 
-@@ darray-varray-runtime-options-examples/hack_arr_compat_check_varray_promote.php @@
+```hack
+use namespace HHVM\UserDocumentation\_Private;
+
+<<__EntryPoint>>
+async function main_async(): Awaitable<void> {
+  require_once __DIR__.'/../../../../vendor/autoload.hack';
+  \Facebook\AutoloadMap\initialize();
+
+  using _Private\print_short_errors();
+
+  $varray = varray[
+    'HHVM',
+    'HACK',
+  ];
+
+  $varray[3] = <<<EOF
+Writing to a key that is not already in use nor the first unused key.
+A vec<_> would throw an exception here.
+EOF;
+
+  $varray = varray[
+    'HHVM',
+    'HACK',
+  ];
+
+  /*HH_IGNORE_ERROR[4135] This is banned in strict mode, but needs to be illustated.*/
+  unset($varray[0]);
+  // Using unset on an index that is not the greatest index.
+
+  $varray = varray[
+    'HHVM',
+    'HACK',
+  ];
+
+  /*HH_IGNORE_ERROR[4324] This is banned in Hack, but needs to be illustated.*/
+  $varray['string'] = <<<EOF
+Writing to a string key in a will escalate it to a darray<_, _>.
+A vec would throw an exception here.
+EOF;
+}
+```
+
+*Output (before HHVM 4.64)*
+
+```
+E_NOTICE "Hack Array Compat: varray promoting to darray: out of bounds key 3" in file "hack_arr_compat_check_varray_promote.php" at line 19
+E_NOTICE "Hack Array Compat: varray promoting to darray: removing key" in file "hack_arr_compat_check_varray_promote.php" at line 30
+E_NOTICE "Hack Array Compat: varray promoting to darray: invalid key: expected int, got string" in file "hack_arr_compat_check_varray_promote.php" at line 39
+```
+
+**(fatal error in HHVM 4.64 or newer)**
 
 These situations are sadly very common in grandfathered PHP code.
 
@@ -87,9 +169,9 @@ If it does not raise a warning, this option is not available in your version of 
 
 @@ darray-varray-runtime-options-examples/hack_arr_compat_check_array_key_cast.php @@
 
-A `vec<_>` and a `dict<_, _>` only allow `arraykey` keys.
-Because of legacy, the (d/v)array family needs to support non arraykey keys being set and read from.
-When you set `$varray[true] = 4;`, hhvm will cast your `true` to a valid arraykey `1`.
+A `dict<_, _>` only allows `arraykey` keys.
+Because of legacy, `darray` needs to support non arraykey keys being set and read from.
+When you set `$darray[true] = 4;`, hhvm will cast your `true` to a valid arraykey `1`.
 The rules of casting are as follows:
 
 - floats are cast to ints using an `(int)` cast.
