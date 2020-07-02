@@ -136,11 +136,19 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
   <<__Memoize>>
   private static function getHHConfigWhitelists(): string {
     $hhconfig = \file_get_contents(LocalConfig::ROOT.'/.hhconfig');
-    return
-      Regex\first_match($hhconfig, re"/^allowed_decl_fixme_codes=.*\$/m")
-        as nonnull[0]."\n".
-      Regex\first_match($hhconfig, re"/^allowed_fixme_codes_strict=.*\$/m")
-        as nonnull[0]."\n";
+    $ret = '';
+    foreach (
+      vec[
+        re"/^allowed_decl_fixme_codes=.*\$/m",
+        re"/^allowed_fixme_codes_strict=.*\$/m",
+      ] as $regex
+    ) {
+      $m = Regex\first_match($hhconfig, $regex);
+      if ($m is nonnull) {
+        $ret .= $m[0]."\n";
+      }
+    }
+    return $ret;
   }
 
   <<__Memoize>>
