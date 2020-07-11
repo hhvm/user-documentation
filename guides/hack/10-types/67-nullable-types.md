@@ -1,41 +1,44 @@
-Consider an application that processes results from a questionnaire. To store the answer to a Yes/No question, it seems reasonable to use a `bool` type.
-However, what if no answer was given (perhaps it simply is missing, or the question was deemed "not applicable"). In such cases, it can be useful to
-have a special value to represent *this is not a real answer* or *the answer is unknown*. In Hack, we can solve this by using a nullable `bool` type,
-written as `?bool`. Such a type permits all the values of type `bool` plus `null` (the null literal value).
+A type `?Foo` is either a value of type `Foo`, or `null`.
 
-Likewise, an application that processes employee information might contain date-related fields like date-of-birth, date-of-hire, and date-of-last-review,
-each represented by an instance of some user-defined type `Date`. To allow for such information to be unknown/not available, we could use the nullable
-type `?Date`.
-
-A variable of type `mixed` can represent the values of any other type, including any nullable type, which makes `mixed` a nullable type. To represent
-a value of any type except `null`, you can use `nonnull`. `mixed` is therefore the same as `?nonnull`, and there is no such type as `?mixed`.
-
-Note that `?void` is *not* permitted.
-
-```Hack
-?bool $nbool;                        // nullable bool
-class Date { ... }
-?Date $nDate;                        // nullable class
-?(int, ?string, ?(bool, int)) $nTup; // nullable tuple whose
-    // second element has type "nullable string", and whose third element
-    // has type "nullable tuple of bool and int"
+``` Hack
+function takes_nullable_str(?string $s): string {
+  if ($s is null){
+    return "default";
+  } else {
+    return $s;
+  }
+}
 ```
 
-Consider the following function declaration from the math library:
+`nonnull` is any value except `null`. You can use it to check if a
+value is not `null`:
 
-```Hack
-function log(num $arg, ?num $base = null): float;
+``` Hack
+function takes_nullable_str2(?string $s): string {
+  if ($s is nonnull){
+    return $s;
+  } else {
+    return "default";
+  }
+}
 ```
 
-As shown, the log-to-any-base function `log` takes a `num` and a nullable-of-`num`, and returns a `float`. The second argument is optional,
-and if none is provided when the function is called, `null` is used instead. This situation is tested for inside `log`, which then takes some
-appropriate default action.
+This is slightly better than writing `$s is string`, as you don't need
+to repeat the type name.
 
-The library function `trim` removes leading and trailing whitespace from a given string producing a new stripped-down string. By default,
-whitespace includes space, horizontal tab, newline, carriage return, zero-valued byte, and vertical tab. However, the set of characters to
-be stripped out can be specified using the optional second argument, whose type is a nullable `string`. This allows `null` to be passed
-explicitly (or implicitly if the second argument is omitted) to indicate the default behavior should be used:
+`nonnull` is also useful when using generics.
 
-```Hack
-function trim(string $string, ?string $char_mask = null): string;
+``` Hack
+function my_filter_nulls<T as nonnull>(vec<?T> $items): vec<T> {
+  $result = vec[];
+  foreach ($items as $item) {
+    if ($item is null) {
+      // Discard it.
+    } else {
+      $result[] = $item;
+    }
+  }
+  return $result;
+}
 ```
+
