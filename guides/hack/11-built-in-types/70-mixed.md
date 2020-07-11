@@ -1,5 +1,19 @@
-Strictly speaking, the type `mixed` is a [nullable type](../types/nullable-types.md) in that a variable of type `mixed` can contain a value of *any* data
-type, including `null`.
+The `mixed` type represents any value at all in Hack.
 
-Although there are rare-but-valid uses for `mixed`, we should be as specific as possible with choosing an appropriate type for some purpose. As
-such, the use of `mixed` is discouraged unless there is no other type-safe alternative.
+For example, the following function can be passed anything.
+
+```
+function takes_anything(mixed $m): void {}
+
+function call_it(): void {
+  takes_anything("foo");
+  takes_anything(42);
+  takes_anything(new MyClass());
+}
+```
+
+`mixed` is equivalent to `?nonnull`. `nonnull` represents any value
+except `null`.
+
+We recommend you avoid using `mixed` whenever you can use a more
+specific type.
