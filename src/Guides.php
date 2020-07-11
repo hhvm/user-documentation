@@ -78,6 +78,9 @@ final class Guides {
           'some-basics' => tuple('classes', 'introduction'),
           'defining-a-basic-class' => tuple('classes', 'introduction'),
         ],
+        'disposables' => dict[
+          'introduction' => tuple('classes', 'object-disposal'),
+        ],
         'expressions-and-operators' => dict[
           'addition' => tuple('expressions-and-operators', 'arithmetic'),
           'as' => tuple('expressions-and-operators', 'type-assertions'),
