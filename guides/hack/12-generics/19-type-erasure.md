@@ -40,5 +40,5 @@ following situations:
  * As the type of the exception in a catch block: `catch (T $exception)`
 
 For passing around class names for instantiation, Hack provides
-[`Classname<T>`](../built-in-types/classname.md) that extends the
+[`classname<T>`](../built-in-types/classname.md) that extends the
 representation of `Foo::class`.
