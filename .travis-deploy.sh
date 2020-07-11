@@ -41,8 +41,8 @@ git checkout v1.2.19
 
 git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
 ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
-# Update '3.7.2' to match whatever the elasticbeanstalk installer provides
-export PATH="/opt/pyenv/versions/3.7.2/bin:${PATH}"
+
+export PATH="/home/travis/.ebcli-virtual-env/executables:$PATH"
 
 echo "** Logging in to dockerhub..."
 echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USER}" \
