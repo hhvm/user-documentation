@@ -35,11 +35,11 @@ cp .deploy/prod.Dockerfile "$REPO_OUT/Dockerfile"
 
 echo "** Installing ElasticBeanstalk CLI..."
 
-pushd .
-cd $(pyenv root)
-git fetch --tags
-git checkout v1.2.19
-popd
+(
+  cd "$(pyenv root)"
+  git fetch --tags
+  git checkout v1.2.19
+)
 
 git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
 ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
