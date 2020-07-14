@@ -59,7 +59,7 @@ final class RemotePageLoader extends PageLoader {
     }
 
     $response = new \Usox\HackTTP\Response(
-      File\open_write_only_nd(
+      File\open_write_only(
         '/dev/null',
         File\WriteMode::APPEND,
       ),

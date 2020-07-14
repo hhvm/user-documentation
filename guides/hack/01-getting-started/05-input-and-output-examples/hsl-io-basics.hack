@@ -14,10 +14,12 @@ async function main_async(): Awaitable<void> {
   await $out->writeAsync($message);
 
   // copy to a temporary file, automatically closed at scope exit
-  await using ($f = File\temporary_file()) {
+  using ($tf = File\temporary_file()) {
+    $f = $tf->getHandle();
+
     await $f->writeAsync($message);
 
-    await $f->seekAsync(0);
+    $f->seek(0);
     $content = await $f->readAsync();
     await $out->writeAsync($content);
   }

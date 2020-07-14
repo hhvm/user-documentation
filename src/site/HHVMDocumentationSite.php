@@ -22,7 +22,7 @@ final class HHVMDocumentationSite {
   ): Awaitable<void> {
     // TODO: add Filesystem\temporary_file_non_disposable() to the HSL
     $buffer_path = \sys_get_temp_dir().'/'.\bin2hex(\random_bytes(16));
-    $write_handle = File\open_write_only_nd(
+    $write_handle = File\open_write_only(
       $buffer_path,
       File\WriteMode::MUST_CREATE,
     );
@@ -34,14 +34,13 @@ final class HHVMDocumentationSite {
         \header($key.': '.$value, /* replace = */ false);
       }
     }
-    await $write_handle->closeAsync();
-    await using ($read_handle = File\open_read_only($buffer_path)) {
+    $write_handle->close();
+    $read_handle = File\open_read_only($buffer_path);
+    using ($read_handle->closeWhenDisposed()) {
       $out = IO\request_output();
       $content = await $read_handle->readAsync(Math\INT64_MAX);
       await $out->writeAsync($content);
-      await $out->flushAsync();
     }
-    ;
     \unlink($buffer_path);
   }
 
