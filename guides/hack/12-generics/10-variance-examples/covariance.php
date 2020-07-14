@@ -27,6 +27,6 @@ function run(): void {
   f(new C(new Animal()));
   f(new C(new Cat())); // accepted
 
-  g(array(new Animal(), new Animal()));
-  g(array(new Cat(), new Cat(), new Animal())); // arrays are covariant
+  g(varray[new Animal(), new Animal()]);
+  g(varray[new Cat(), new Cat(), new Animal()]); // arrays are covariant
 }

@@ -8,7 +8,7 @@ $v = Vector {'red'};
 $v1 = $v->concat(Set {'green', 'blue'});
 
 // Add all the values in an array
-$v2 = $v1->concat(array('yellow', 'purple'));
+$v2 = $v1->concat(varray['yellow', 'purple']);
 
 var_dump($v); // $v contains 'red'
 var_dump($v1); // $v1 contains 'red', 'green', 'blue'

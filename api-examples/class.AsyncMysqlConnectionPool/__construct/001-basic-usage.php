@@ -27,9 +27,9 @@ function get_stats(\AsyncMysqlConnectionPool $pool): dict<string, int> {
 }
 
 function run_it(): void {
-  $options = array(
+  $options = darray[
     'pool_connection_limit' => 2,
-  );
+  ];
   // We will have a 2 pool connection limit
   $pool = set_connection_pool($options);
   $conn_awaitables = Vector {};
@@ -50,10 +50,10 @@ function run_it(): void {
       \PHP_EOL;
   }
 
-  $options = array(
+  $options = darray[
     'idle_timeout_micros' => 2000000,
     'expiration_policy' => 'IdleTime',
-  );
+  ];
   $pool = set_connection_pool($options);
   $conn = \HH\Asio\join(connect_with_pool($pool));
   \sleep(10); // Idle for 5 seconds. So should timeout here.

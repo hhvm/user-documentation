@@ -38,9 +38,9 @@ async function get_connection(
 }
 
 function get_pool(): \AsyncMysqlConnectionPool {
-  $options = array(
+  $options = darray[
     'pool_connection_limit' => 1,
-  );
+  ];
   return new \AsyncMysqlConnectionPool($options);
 }
 

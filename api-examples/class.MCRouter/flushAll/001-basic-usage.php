@@ -7,19 +7,19 @@ function construct_mcrouter(): \MCRouter {
   // For many use cases, calling MCRouter::createSimple($servers) would
   // suffice here. But this shows you how to explicitly create the configuration
   // options for creating an instance of MCRouter
-  $options = array(
+  $options = darray[
     'config_str' => \json_encode(
-      array(
-        'pools' => array(
-          'P' => array(
+      darray[
+        'pools' => darray[
+          'P' => darray[
             'servers' => $servers,
-          ),
-        ),
+          ],
+        ],
         'route' => 'PoolRoute|P',
-      ),
+      ],
     ),
     'enable_flush_cmd' => true, // Need this in order to use flushAll
-  );
+  ];
   $mc = new \MCRouter($options); // could also pass a persistence id string here
   \var_dump($mc is \MCRouter);
   return $mc;

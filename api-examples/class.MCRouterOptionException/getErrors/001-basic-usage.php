@@ -9,7 +9,7 @@ function construct_mcrouter(): void {
   // options for creating an instance of MCRouter
 
   // This has a bad option setup
-  $options = array('asynclog_disable' => 'purple');
+  $options = darray['asynclog_disable' => 'purple'];
 
   $mc = null;
 

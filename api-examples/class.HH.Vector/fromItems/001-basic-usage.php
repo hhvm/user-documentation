@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\Vector\FromItems;
 
 // Create a new Vector from an array
-$v = Vector::fromItems(array('red', 'green', 'blue', 'yellow'));
+$v = Vector::fromItems(varray['red', 'green', 'blue', 'yellow']);
 var_dump($v);
 
 // Create a new Vector from a Set

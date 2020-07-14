@@ -16,9 +16,9 @@ $m->setAll(Map {
 });
 
 // Set the values at keys 'blue' and 'yellow' with an associative array
-$m->setAll(array(
+$m->setAll(darray[
   'blue' => 'rgb(0, 0, 255)',
   'yellow' => 'rgb(255, 255, 0)',
-));
+]);
 
 var_dump($m);

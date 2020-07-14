@@ -3,12 +3,12 @@
 namespace Hack\UserDocumentation\API\Examples\Map\FromItems;
 
 // Create a new Map from an array of key-value pairs
-$m = Map::fromItems(array(
+$m = Map::fromItems(varray[
   Pair {'red', '#ff0000'},
   Pair {'green', '#00ff00'},
   Pair {'blue', '#0000ff'},
   Pair {'yellow', '#ffff00'},
-));
+]);
 var_dump($m);
 
 // Create a new Map from a Vector of key-value pairs

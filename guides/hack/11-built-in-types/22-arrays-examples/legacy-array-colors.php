@@ -4,7 +4,7 @@ namespace Hack\UserDocumentation\Types\Arrays\Examples\LegAryColors;
 
 <<__EntryPoint>>
 function main(): void {
-  $colors = array(); // create an empty array
+  $colors = darray[]; // create an empty array
   \var_dump($colors);
 
   $colors[4] = "black"; // create element 4 with value "black"
