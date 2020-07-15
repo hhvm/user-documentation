@@ -148,7 +148,7 @@ EOF;
     $xhp->setContext('ServerRequestInterface', $this->request);
     $html = await $xhp->asyncToString();
 
-    await $response->getBody()->writeAsync($html);
+    await $response->getBody()->writeAllAsync($html);
     $response = $response
       ->withStatus($this->getStatusCode())
       ->withHeader(

@@ -11,16 +11,16 @@ async function main_async(): Awaitable<void> {
   $out = IO\request_output();
 
   $message = "Hello, world\n";
-  await $out->writeAsync($message);
+  await $out->writeAllAsync($message);
 
   // copy to a temporary file, automatically closed at scope exit
   using ($tf = File\temporary_file()) {
     $f = $tf->getHandle();
 
-    await $f->writeAsync($message);
+    await $f->writeAllAsync($message);
 
     $f->seek(0);
     $content = await $f->readAsync();
-    await $out->writeAsync($content);
+    await $out->writeAllAsync($content);
   }
 }

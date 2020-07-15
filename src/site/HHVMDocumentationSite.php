@@ -39,7 +39,7 @@ final class HHVMDocumentationSite {
     using ($read_handle->closeWhenDisposed()) {
       $out = IO\request_output();
       $content = await $read_handle->readAsync(Math\INT64_MAX);
-      await $out->writeAsync($content);
+      await $out->writeAllAsync($content);
     }
     \unlink($buffer_path);
   }
