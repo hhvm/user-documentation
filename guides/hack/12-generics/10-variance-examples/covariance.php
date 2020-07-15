@@ -18,7 +18,7 @@ function f(C<Animal> $p1): void {
   \var_dump($p1);
 }
 
-function g(array<Animal> $p1): void {
+function g(varray<Animal> $p1): void {
   \var_dump($p1);
 }
 
