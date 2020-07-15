@@ -10,11 +10,20 @@
  */
 namespace HHVM\UserDocumentation;
 
-require(__DIR__.'/../vendor/hh_autoload.php');
-
 use namespace HH\Lib\Vec;
 
-function build_site(?Traversable<string> $filters = null): void {
+<<__EntryPoint>>
+function build_site(): void {
+  require_once(__DIR__.'/../vendor/autoload.hack');
+  \Facebook\AutoloadMap\initialize();
+
+  $argv = \HH\global_get('argv') as KeyedContainer<_, _>;
+  if (\array_key_exists(1, $argv)) {
+    $filters = \array_slice($argv, 1);
+  } else {
+    $filters = null;
+  }
+
   if (!\is_dir(BuildPaths::SCRATCH_DIR)) {
     \mkdir(BuildPaths::SCRATCH_DIR, 0755, /* recursive = */ true);
   }
@@ -80,12 +89,6 @@ function build_site(?Traversable<string> $filters = null): void {
   foreach ($steps as $step) {
     (new $step())->buildAll();
   }
-}
 
-if (\array_key_exists(1, $argv)) {
-  build_site(\array_slice($argv, 1));
-} else {
-  build_site();
+  echo "\n"; // Make the bash prompt nice after :p
 }
-
-echo "\n"; // Make the bash prompt nice after :p
