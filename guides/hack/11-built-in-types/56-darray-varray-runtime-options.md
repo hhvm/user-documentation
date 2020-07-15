@@ -164,15 +164,59 @@ runtime option has been added to raise notices for these type tests:
 
 Fullname: hhvm.hack_arr_compat_check_array_key_cast
 
-This setting will raise a notice under the following condition.
+**WARNING: This option was removed in HHVM 4.66. It is now always a fatal error.**
+
+Before HHVM 4.66, this setting will raise a notice under the following condition.
 If it does not raise a warning, this option is not available in your version of hhvm.
 
-@@ darray-varray-runtime-options-examples/hack_arr_compat_check_array_key_cast.php @@
+```hack
+use namespace HHVM\UserDocumentation\_Private;
 
-A `dict<_, _>` only allows `arraykey` keys.
-Because of legacy, `darray` needs to support non arraykey keys being set and read from.
-When you set `$darray[true] = 4;`, hhvm will cast your `true` to a valid arraykey `1`.
-The rules of casting are as follows:
+<<__EntryPoint>>
+async function main_async(): Awaitable<void> {
+  require_once __DIR__.'/../../../../vendor/autoload.hack';
+  \Facebook\AutoloadMap\initialize();
+
+  using _Private\print_short_errors();
+
+  $varray = varray[];
+
+  /*HH_IGNORE_ERROR[4324]*/
+  $varray[1.1] = 'A float?!?';
+  /*HH_IGNORE_ERROR[4324]*/
+  $varray[true] = 'A bool?!?';
+  /*HH_IGNORE_ERROR[4324]*/
+  $varray[null] = 'null?!?';
+
+  $darray = darray[];
+
+  /*HH_IGNORE_ERROR[4371]*/
+  $darray[1.1] = 'A float?!?';
+  /*HH_IGNORE_ERROR[4371]*/
+  $darray[true] = 'A bool?!?';
+  /*HH_IGNORE_ERROR[4371]*/
+  $darray[null] = 'null?!?';
+
+}
+```
+
+*Output (before HHVM 4.66)*
+
+```
+E_NOTICE "Hack Array Compat: Implicit conversion of double to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 17
+E_NOTICE "Hack Array Compat: Implicit conversion of bool to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 19
+E_NOTICE "Hack Array Compat: Implicit conversion of null to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 21
+E_NOTICE "Hack Array Compat: Implicit conversion of double to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 26
+E_NOTICE "Hack Array Compat: Implicit conversion of bool to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 28
+E_NOTICE "Hack Array Compat: Implicit conversion of null to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 30
+```
+
+**(fatal error in HHVM 4.66 or newer)**
+
+A `vec<_>` and a `dict<_, _>` only allow `arraykey` keys.
+Because of legacy, the (d/v)array family needed to support non arraykey keys being set and read from.
+When you set `$varray[true] = 4;`, before HHVM 4.66, hhvm will cast your `true` to a valid arraykey `1`.
+The rules of casting were as follows:
 
 - floats are cast to ints using an `(int)` cast.
 - `true` becomes 1 and `false` becomes 0.
