@@ -133,16 +133,16 @@
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v4.3.10",
+            "version": "v4.3.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "0e73e6249e791204f697eba03f2f31e8f914787a"
+                "reference": "ac9e8133259858795cee2176675c96f296be5c9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/0e73e6249e791204f697eba03f2f31e8f914787a",
-                "reference": "0e73e6249e791204f697eba03f2f31e8f914787a",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/ac9e8133259858795cee2176675c96f296be5c9d",
+                "reference": "ac9e8133259858795cee2176675c96f296be5c9d",
                 "shasum": ""
             },
             "require": {
@@ -190,7 +190,7 @@
                 "code generation",
                 "hack"
             ],
-            "time": "2020-06-09T16:57:33+00:00"
+            "time": "2020-07-15T20:13:12+00:00"
         },
         {
             "name": "facebook/hack-http-request-response-interfaces",
