@@ -1,3 +1,0 @@
-E_NOTICE "Hack Array Compat: Implicit conversion of double to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 25
-E_NOTICE "Hack Array Compat: Implicit conversion of bool to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 27
-E_NOTICE "Hack Array Compat: Implicit conversion of null to array key" in file "hack_arr_compat_check_array_key_cast.php" at line 29

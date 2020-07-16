@@ -18,7 +18,7 @@ function f(C<Animal> $p1): void {
   \var_dump($p1);
 }
 
-function g(array<Animal> $p1): void {
+function g(varray<Animal> $p1): void {
   \var_dump($p1);
 }
 
@@ -27,6 +27,6 @@ function run(): void {
   f(new C(new Animal()));
   f(new C(new Cat())); // accepted
 
-  g(array(new Animal(), new Animal()));
-  g(array(new Cat(), new Cat(), new Animal())); // arrays are covariant
+  g(varray[new Animal(), new Animal()]);
+  g(varray[new Cat(), new Cat(), new Animal()]); // arrays are covariant
 }

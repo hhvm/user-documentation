@@ -24,10 +24,10 @@ final class LocalPageLoader extends PageLoader {
       (new \Usox\HackTTP\UriFactory())->createUri($url),
       dict[],
     )
-      ->withBody(File\open_read_only_nd('/dev/null'))
+      ->withBody(File\open_read_only('/dev/null'))
       ->withQueryParams(dict($query_params));
     $buffer_path = \sys_get_temp_dir().'/'.\bin2hex(\random_bytes(16));
-    $write_handle = File\open_write_only_nd(
+    $write_handle = File\open_write_only(
       $buffer_path,
       File\WriteMode::MUST_CREATE,
     );
@@ -36,8 +36,9 @@ final class LocalPageLoader extends PageLoader {
       $request,
       $response,
     );
-    await $write_handle->closeAsync();
-    await using $read_handle = File\open_read_only($buffer_path);
+    $write_handle->close();
+    $read_handle = File\open_read_only($buffer_path);
+    using $read_handle->closeWhenDisposed();
     $content = await $read_handle->readAsync(Math\INT64_MAX);
     return tuple($response, $content);
   }

@@ -5,7 +5,7 @@ namespace Hack\UserDocumentation\API\Examples\Map\AddAll;
 $m = Map {};
 
 // Add all the key-value pairs in an array
-$m->addAll(array(Pair {'red', '#ff0000'}));
+$m->addAll(varray[Pair {'red', '#ff0000'}]);
 
 // Map::addAll returns the Map so it can be chained
 $m->addAll(Vector {

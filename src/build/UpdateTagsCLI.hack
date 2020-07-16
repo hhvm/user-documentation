@@ -122,10 +122,10 @@ final class UpdateTagsCLI extends CLIBase {
     $stdout = $this->getTerminal()->getStdout();
 
     if (C\is_empty($changes)) {
-      await $stdout->writeAsync("Nothing to do.\n");
+      await $stdout->writeAllAsync("Nothing to do.\n");
       return 0;
     }
-    await $stdout->writeAsync(
+    await $stdout->writeAllAsync(
       Dict\map_with_key(
         $changes,
         ($k, $v) ==> Str\format('%s to tag "%s"', $k, $v),
@@ -139,7 +139,7 @@ final class UpdateTagsCLI extends CLIBase {
     }
 
     $tags_file = LocalConfig::ROOT.'/src/codegen/PRODUCT_TAGS.php';
-    await $stdout->writeAsync(' - Updating '.$tags_file."\n");
+    await $stdout->writeAllAsync(' - Updating '.$tags_file."\n");
     $config = new CG\HackCodegenConfig();
     $cg = new CG\HackCodegenFactory(
       $config->withFormatter(new CG\HackfmtFormatter($config)),
@@ -161,7 +161,7 @@ final class UpdateTagsCLI extends CLIBase {
       )
       ->save();
 
-    await $stdout->writeAsync(
+    await $stdout->writeAllAsync(
       "Done! Next steps:\n".
       " - update your HHVM installation if needed\n".
       " - php composer.phar update\n".
@@ -187,10 +187,10 @@ final class UpdateTagsCLI extends CLIBase {
       |> Str\join($$, '.');
     $stdout = $this->getTerminal()->getStdout();
 
-    await $stdout->writeAsync(" - updating composer.json\n");
+    await $stdout->writeAllAsync(" - updating composer.json\n");
     $this->updateComposerJson($new_major_minor);
 
-    await $stdout->writeAsync(" - updating Dockerfiles\n");
+    await $stdout->writeAllAsync(" - updating Dockerfiles\n");
     foreach (\glob(LocalConfig::ROOT.'/.deploy/*.Dockerfile') as $path) {
       \file_get_contents($path)
         |> Str\replace(
@@ -205,7 +205,7 @@ final class UpdateTagsCLI extends CLIBase {
         )
         |> \file_put_contents($path, $$);
     }
-    await $stdout->writeAsync(" - updating .travis.yml\n");
+    await $stdout->writeAllAsync(" - updating .travis.yml\n");
     $path = LocalConfig::ROOT.'/.travis.yml';
     \file_get_contents($path)
       |> Str\replace(

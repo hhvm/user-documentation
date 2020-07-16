@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\Set\FromItems;
 
 // Create a new Set from an array
-$s = Set::fromItems(array('red', 'green', 'red', 'blue', 'blue', 'yellow'));
+$s = Set::fromItems(varray['red', 'green', 'red', 'blue', 'blue', 'yellow']);
 var_dump($s);
 
 // Create a new Set from a Vector

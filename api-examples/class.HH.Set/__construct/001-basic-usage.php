@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\Set\__construct;
 
 // Create a new Set from an array
-$s = new Set(array('red', 'green', 'red', 'blue', 'blue', 'yellow'));
+$s = new Set(varray['red', 'green', 'red', 'blue', 'blue', 'yellow']);
 var_dump($s);
 
 // Create a new Set from a Vector

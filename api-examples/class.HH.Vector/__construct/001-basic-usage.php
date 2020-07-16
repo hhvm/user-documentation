@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\Vector\__construct;
 
 // Create a new Vector from an array
-$v = new Vector(array('red', 'green', 'blue', 'yellow'));
+$v = new Vector(varray['red', 'green', 'blue', 'yellow']);
 var_dump($v);
 
 // Create a new Vector from a Set

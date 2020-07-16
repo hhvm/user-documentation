@@ -9,7 +9,7 @@ use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionIn
 
 function get_pool(): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool(
-    array('pool_connection_limit' => 100),
+    darray['pool_connection_limit' => 100],
   ); // See API for more pool options
 }
 

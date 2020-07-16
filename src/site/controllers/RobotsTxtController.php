@@ -33,7 +33,7 @@ final class RobotsTxtController
       $source = self::DO_NOT_CRAWL_FILE;
     }
 
-    await $response->getBody()->writeAsync(\file_get_contents($source));
+    await $response->getBody()->writeAllAsync(\file_get_contents($source));
     return $response->withHeader('Content-Type', vec['text/plain']);
   }
 }

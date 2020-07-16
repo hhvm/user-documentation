@@ -14,7 +14,7 @@ $v->addAll(Vector {'c', 'd'});
 $v->addAll(Map {'foo' => 'e', 'bar' => 'f'});
 
 // Add all the values in an array
-$v->addAll(array('g', 'h'));
+$v->addAll(varray['g', 'h']);
 
 // Vector::addAll returns the Vector so it can be chained
 $v->addAll(ImmSet {'i', 'j'})

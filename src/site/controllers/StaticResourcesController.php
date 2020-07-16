@@ -55,7 +55,7 @@ final class StaticResourcesController
     }
 
     await $response->getBody()
-      ->writeAsync(\file_get_contents($entry['localPath']));
+      ->writeAllAsync(\file_get_contents($entry['localPath']));
     $response = $response->withHeader('Content-Type', vec[$entry['mimeType']]);
 
     if (

@@ -3,9 +3,9 @@
 namespace Hack\UserDocumentation\API\Examples\Set\FromArrays;
 
 $s = Set::fromArrays(
-  array('red'),
-  array('green', 'blue'),
-  array('yellow', 'red'), // Duplicate 'red' will be ignored
+  varray['red'],
+  varray['green', 'blue'],
+  varray['yellow', 'red'], // Duplicate 'red' will be ignored
 );
 
 var_dump($s);

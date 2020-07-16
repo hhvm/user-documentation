@@ -7,10 +7,10 @@ $fruit_calories = Map {
   'orange' => 45,
 };
 
-$vegetable_calories = array(
+$vegetable_calories = darray[
   'cabbage' => 176,
   'potato' => 163,
-);
+];
 
 // Create a Set from the keys of a Map
 $fruit_names = Set::fromKeysOf($fruit_calories);

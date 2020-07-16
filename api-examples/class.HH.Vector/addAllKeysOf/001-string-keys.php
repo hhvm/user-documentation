@@ -7,10 +7,10 @@ $fruit_calories = Map {
   'orange' => 45,
 };
 
-$vegetable_calories = array(
+$vegetable_calories = darray[
   'cabbage' => 176,
   'potato' => 163,
-);
+];
 
 $food_names = Vector {};
 

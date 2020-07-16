@@ -7,10 +7,10 @@ $uploaders_by_id = Map {
   9361760 => 'John Doe',
 };
 
-$commenters_by_id = array(
+$commenters_by_id = darray[
   7424854 => 'Jane Roe',
   5740542 => 'Joe Bloggs',
-);
+];
 
 // Create a Vector from the integer keys of a Map
 $uploader_ids = Vector::fromKeysOf($uploaders_by_id);
