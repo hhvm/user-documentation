@@ -11,6 +11,7 @@ echo "** Building repository"
 set -x
 hhvm --hphp --target hhbc \
   -l3 \
+  -d hhvm.check_return_type_hints=3 \
   --module src \
   --module vendor \
   --module build/final \
