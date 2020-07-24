@@ -69,7 +69,9 @@ final class Guides {
         ],
         'attributes' => dict[
           'special' => tuple('attributes', 'predefined-attributes'),
-          'syntax' => tuple('attributes', 'attribute-specification'),
+          'syntax' => tuple('attributes', 'introduction'),
+          'some-basics' => tuple('attributes', 'introduction'),
+          'attribute-specification' => tuple('attributes', 'introduction'),
         ],
         'callables' => dict[
           'special-functions' => tuple('functions', 'anonymous-functions'),
