@@ -82,7 +82,7 @@ echo "** About to deploy to $STAGING_ENV"
 eb status $STAGING_ENV
 DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
 echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
-eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE"
+eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE" -v
 echo "** Running test suite against staging:"
 docker run --rm \
   -w /var/www \
