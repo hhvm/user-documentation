@@ -27,8 +27,3 @@ bourbon/
 *.orig
 *.rej
 Dockerrun.aws.json
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml

@@ -61,12 +61,6 @@ else
   docker push "hhvm/user-documentation:latest"
 fi
 
-echo "** Setting up ElasticBeanstalk..."
-# Select an application to use: 1) hhvm-hack-docs
-# Select the default environment: 1) ... doesn't matter, managed by script
-# Do you want to continue with CodeCommit? n
-echo -e "1\n1\nn\n" | eb init -r us-west-2
-
 echo "** Updating AWS config"
 sed -E 's,"hhvm/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
   Dockerrun.aws.json.in > Dockerrun.aws.json
@@ -81,8 +75,8 @@ fi
 echo "** About to deploy to $STAGING_ENV"
 eb status $STAGING_ENV
 DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
-echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE"
-eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE" -v
+echo "**    eb deploy $STAGING_ENV -m $DEPLOY_MESSAGE --staged -v"
+eb deploy $STAGING_ENV -m "$DEPLOY_MESSAGE" --staged -v
 echo "** Running test suite against staging:"
 docker run --rm \
   -w /var/www \
