@@ -1,13 +1,16 @@
 #!/bin/bash
 set -e
 
-if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
-  exit 0
-fi
-
 DEPLOY_REV=$(git rev-parse --short HEAD)
 HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
-IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
+
+if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
+  # We don't push to Docker in cron runs, so use the image from the last real
+  # deployment.
+  IMAGE_TAG=latest
+else
+  IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
+fi
 IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 
 echo "** Building repo..."
@@ -46,13 +49,17 @@ git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
 
 export PATH="/home/travis/.ebcli-virtual-env/executables:$PATH"
 
-echo "** Logging in to dockerhub..."
-echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USER}" \
-  --password-stdin
-echo "** Pushing image to DockerHub..."
-docker tag $IMAGE_NAME hhvm/user-documentation:latest
-docker push "$IMAGE_NAME"
-docker push "hhvm/user-documentation:latest"
+if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
+  echo "** Skipping Docker push because this is a cron run."
+else
+  echo "** Logging in to dockerhub..."
+  echo "${DOCKERHUB_PASSWORD}" | docker login -u "${DOCKERHUB_USER}" \
+    --password-stdin
+  echo "** Pushing image to DockerHub..."
+  docker tag $IMAGE_NAME hhvm/user-documentation:latest
+  docker push "$IMAGE_NAME"
+  docker push "hhvm/user-documentation:latest"
+fi
 
 echo "** Setting up ElasticBeanstalk..."
 # Select an application to use: 1) hhvm-hack-docs
@@ -84,5 +91,10 @@ docker run --rm \
   vendor/bin/hacktest \
   --filter-groups remote \
  tests/
-echo "** Swapping prod and staging..."
-eb swap
+
+if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
+  echo "** Skipping 'eb swap' because this is a cron run."
+else
+  echo "** Swapping prod and staging..."
+  eb swap
+fi
