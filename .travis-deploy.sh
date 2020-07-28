@@ -38,6 +38,11 @@ cp .deploy/prod.Dockerfile "$REPO_OUT/Dockerfile"
 
 echo "** Installing ElasticBeanstalk CLI..."
 
+sudo apt-get update
+sudo apt-get install -y \
+    build-essential zlib1g-dev libssl-dev libncurses-dev \
+    libffi-dev libsqlite3-dev libreadline-dev libbz2-dev
+
 (
   cd "$(pyenv root)"
   git fetch --tags
