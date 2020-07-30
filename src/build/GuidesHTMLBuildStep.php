@@ -82,6 +82,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
         continue;
       }
       list($product, $section, $_page) = $parts;
+      $product as GuidesProduct;
       $out[$product] ??= dict[];
       $out[$product][$section] = $summary;
     }

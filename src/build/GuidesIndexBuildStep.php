@@ -89,6 +89,7 @@ final class GuidesIndexBuildStep extends BuildStep {
       }
 
       list($product, $section, $page) = $parts;
+      $product as GuidesProduct;
       $page = \basename($page, '.md');
       $out[$product] ??= dict[];
       $out[$product][$section] ??= dict[];
