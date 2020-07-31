@@ -6,6 +6,7 @@ use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
+  \__init_autoload();
   $john = make_person('John', 'Doe');
   $emma = make_person('Emma', 'Smith');
 

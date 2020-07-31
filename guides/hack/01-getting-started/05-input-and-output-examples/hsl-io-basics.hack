@@ -5,6 +5,7 @@ use namespace HH\Lib\{File, IO};
 
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
+  \__init_autoload();
   // STDIN for CLI, or HTTP POST data
   $_in = IO\request_input();
   // STDOUT for CLI, or HTTP response

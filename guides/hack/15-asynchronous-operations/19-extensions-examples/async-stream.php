@@ -24,5 +24,6 @@ async function write_all(vec<resource> $resources): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \__init_autoload();
   \HH\Asio\join(write_all(get_resources()));
 }

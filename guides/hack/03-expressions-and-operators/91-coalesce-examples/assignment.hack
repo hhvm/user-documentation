@@ -23,6 +23,7 @@ function get_people_by_age(
 
 <<__EntryPoint>>
 function main(): void {
+  \__init_autoload();
   $values = vec['foo', 'bar', 'foo', 'baz', 'bar', 'foo'];
   \print_r(get_counts_by_value($values));
 

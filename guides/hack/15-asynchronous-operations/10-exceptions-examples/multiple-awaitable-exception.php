@@ -21,5 +21,6 @@ async function multiple_waithandle_exception(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \__init_autoload();
   \HH\Asio\join(multiple_waithandle_exception());
 }

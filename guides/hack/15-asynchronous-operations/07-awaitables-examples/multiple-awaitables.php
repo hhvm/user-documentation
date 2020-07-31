@@ -9,6 +9,7 @@ async function quads(float $n): Awaitable<float> {
 
 <<__EntryPoint>>
 async function quads_m(): Awaitable<void> {
+  \__init_autoload();
   $awaitables = dict['five' => quads(5.0), 'nine' => quads(9.0)];
   $results = await Dict\from_async($awaitables);
 
