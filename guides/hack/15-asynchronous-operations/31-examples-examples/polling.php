@@ -3,9 +3,6 @@
 namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Polling;
 use namespace HH\Lib\Vec;
 
-// For asio-utilities function later(), etc.
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 // Of course, this is all made up :)
 class Polling {
   private int $count = 0;
@@ -50,5 +47,6 @@ async function polling_example(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \__init_autoload();
   \HH\Asio\join(polling_example());
 }

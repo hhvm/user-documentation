@@ -1,7 +1,4 @@
 <?hh // partial
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
-require_once __DIR__.'/md_render.inc.php';
 
 class ExampleMarkdownXHPWrapper implements XHPUnsafeRenderable {
   private string $html;
@@ -18,6 +15,9 @@ class ExampleMarkdownXHPWrapper implements XHPUnsafeRenderable {
 
 <<__EntryPoint>>
 function run(): void {
+  \__init_autoload();
+
+  require_once __DIR__.'/md_render.inc.php';
   echo (
     /* HH_FIXME[4067] implicit __toString() is now deprecated */
     <div class="markdown">

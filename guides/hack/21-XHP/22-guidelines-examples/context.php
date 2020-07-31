@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class :ui-myparent extends :x:element {
   attribute string text @required;
   children (:ui-mychild);
@@ -41,6 +39,7 @@ function guidelines_examples_context_run(string $s): void {
 
 <<__EntryPoint>>
 function startHere(): void {
+  \__init_autoload();
   guidelines_examples_context_run('No');
   echo "\n\n";
   guidelines_examples_context_run('Yes');

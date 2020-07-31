@@ -1,5 +1,4 @@
 <?hh // partial
-require __DIR__."/../../../../vendor/hh_autoload.php";
 
 final class XHPUnsafeExample implements XHPUnsafeRenderable {
   public function toHTMLString(): string {
@@ -9,6 +8,7 @@ final class XHPUnsafeExample implements XHPUnsafeRenderable {
 
 <<__EntryPoint>>
 function all_in_one_xhp_example_main(): void {
+  \__init_autoload();
   $inputs = Map {
     '<div />' => <div />,
     '<x:frag />' => <x:frag />,

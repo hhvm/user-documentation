@@ -1,9 +1,8 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 <<__EntryPoint>>
 function basic_usage_examples_basic_xhp(): void {
+  \__init_autoload();
   var_dump(
     <div>
       My Text

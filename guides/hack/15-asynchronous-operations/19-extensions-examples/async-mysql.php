@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MySQL;
 
-require __DIR__.'/async_mysql_connect.inc.php';
-
 use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
 ;
 
@@ -51,7 +49,9 @@ async function get_user_info(
   return $map;
 }
 
+<<__EntryPoint>>
 async function async_mysql_tutorial(): Awaitable<void> {
+  require __DIR__.'/async_mysql_connect.inc.php';
   $conn = await get_connection();
   if ($conn !== null) {
     $result = await fetch_user_name($conn, 2);
@@ -60,9 +60,4 @@ async function async_mysql_tutorial(): Awaitable<void> {
     \var_dump($info is vec<_>);
     \var_dump($info[0] is dict<_, _>);
   }
-}
-
-<<__EntryPoint>>
-function main(): void {
-  \HH\Asio\join(async_mysql_tutorial());
 }

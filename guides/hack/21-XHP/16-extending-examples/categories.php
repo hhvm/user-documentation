@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class :my-text extends :x:element {
   category %phrase;
   children (pcdata | %phrase); // prefixed colon ommitted purposely on pcdata
@@ -13,6 +11,7 @@ class :my-text extends :x:element {
 
 <<__EntryPoint>>
 function extending_examples_categories_run(): void {
+  \__init_autoload();
   $my_text = <my-text />;
   $my_text->appendChild(<em>"Hello!"</em>); // This is a %phrase
   echo $my_text;

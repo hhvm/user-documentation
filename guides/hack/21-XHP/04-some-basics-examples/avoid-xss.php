@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 function intro_examples_avoid_xss_using_string(string $could_be_bad): void {
   // Could call htmlspecialchars() here
   echo '<html><head/><body> '.$could_be_bad.'</body></html>';
@@ -25,5 +23,6 @@ function intro_examples_avoid_xss_run(string $could_be_bad): void {
 
 <<__EntryPoint>>
 function intro_examples_avoid_xss_main(): void {
+  \__init_autoload();
   intro_examples_avoid_xss_run('<blink>Ugh</blink>');
 }

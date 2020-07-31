@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class :my-cls-adder extends :x:element {
   attribute :div;
   use XHPHelpers;
@@ -15,5 +13,6 @@ class :my-cls-adder extends :x:element {
 
 <<__EntryPoint>>
 function extending_examples_add_class_run(): void {
+  \__init_autoload();
   echo <my-cls-adder />;
 }

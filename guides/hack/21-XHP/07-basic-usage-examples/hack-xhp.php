@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class MyBasicUsageExampleClass {
   public function getInt(): int {
     return 4;
@@ -18,6 +16,7 @@ function basic_usage_examples_get_float(): float {
 
 <<__EntryPoint>>
 function basic_usage_examples_embed_hack(): void {
+  \__init_autoload();
   $xhp_float = <i>{basic_usage_examples_get_float()}</i>;
   $a = new MyBasicUsageExampleClass();
 

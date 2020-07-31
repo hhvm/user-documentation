@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\ForgetAwait;
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 async function speak(): Awaitable<void> {
   echo "one";
   await \HH\Asio\later();
@@ -13,5 +11,6 @@ async function speak(): Awaitable<void> {
 
 <<__EntryPoint>>
 async function forget_await(): Awaitable<void> {
+  \__init_autoload();
   $handle = speak(); // This just gets you the handle
 }

@@ -3,8 +3,6 @@
 namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping;
 use namespace HH\Lib\Vec;
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception();
 }
@@ -26,5 +24,6 @@ async function wrapping_exceptions(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \__init_autoload();
   \HH\Asio\join(wrapping_exceptions());
 }

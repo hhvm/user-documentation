@@ -3,8 +3,6 @@
 namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AwaitNoLoop;
 use namespace HH\Lib\Vec;
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class User {
   public string $name;
 
@@ -34,6 +32,7 @@ async function load_users_no_loop(vec<int> $ids): Awaitable<vec<User>> {
 
 <<__EntryPoint>>
 function runMe(): void {
+  \__init_autoload();
   $ids = vec[1, 2, 5, 99, 332];
   $result = \HH\Asio\join(load_users_no_loop($ids));
   \var_dump($result[4]->name);

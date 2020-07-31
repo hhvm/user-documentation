@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 function xhp_object_methods_build_list(Vector<string> $names): XHPRoot {
   $list = <ul id="names" />;
   foreach ($names as $name) {
@@ -12,6 +10,7 @@ function xhp_object_methods_build_list(Vector<string> $names): XHPRoot {
 
 <<__EntryPoint>>
 function xhp_object_methods_run(): void {
+  \__init_autoload();
   $names = Vector {'Sara', 'Fred', 'Josh', 'Scott', 'Paul', 'David', 'Matthew'};
   $list = xhp_object_methods_build_list($names);
   foreach ($list->getChildren() as $child) {

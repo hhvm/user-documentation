@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class :ui:get-status extends :x:element {
 
   use XHPAsync;
@@ -16,6 +14,7 @@ class :ui:get-status extends :x:element {
 
 <<__EntryPoint>>
 async function extending_examples_async_run(): Awaitable<void> {
+  \__init_autoload();
   $status = <ui:get-status />;
   $html = await $status->asyncToString();
   // This can be long, so just show a bit for illustrative purposes

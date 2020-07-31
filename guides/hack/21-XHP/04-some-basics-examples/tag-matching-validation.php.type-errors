@@ -15,9 +15,8 @@ function intro_examples_tag_matching_validation_using_xhp(): void {
     </div>;
 }
 
+<<__EntryPoint>>
 function intro_examples_tag_matching_validation_run(): void {
   intro_examples_tag_matching_validation_using_string();
   intro_examples_tag_matching_validation_using_xhp();
 }
-
-intro_examples_tag_matching_validation_run();

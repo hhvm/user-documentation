@@ -3,9 +3,6 @@
 namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Batching;
 use namespace HH\Lib\Vec;
 
-// For asio-utilities function later(), etc.
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);
   return await Batcher::lookup($subkey);
@@ -22,6 +19,7 @@ async function batching(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \__init_autoload();
   \HH\Asio\join(batching());
 }
 

@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Generators\Examples\Raise;
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 const int HALF_SECOND = 500000; // microseconds
 
 async function get_name_string(int $id): Awaitable<string> {
@@ -48,6 +46,7 @@ async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
 
 <<__EntryPoint>>
 function run(): void {
+  \__init_autoload();
   $ids = vec[1, 2, 3, 4];
   \HH\Asio\join(associate_ids_to_names($ids));
 }

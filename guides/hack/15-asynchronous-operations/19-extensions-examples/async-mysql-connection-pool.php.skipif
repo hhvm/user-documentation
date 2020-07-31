@@ -1,2 +1,7 @@
 <?hh // strict
-require(__DIR__ . '/async_mysql_require_env.inc.php');
+
+<<__EntryPoint>>
+function async_mysql_connection_pool_php_skipif_main(): void {
+  require(__DIR__ . '/async_mysql_require_env.inc.php');
+  async_mysql_skipif();
+}

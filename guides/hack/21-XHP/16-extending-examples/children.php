@@ -1,7 +1,5 @@
 <?hh // partial
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class :my-br extends :x:element {
   children empty; // no children allowed
 
@@ -28,6 +26,7 @@ class :my-html extends :x:element {
 
 <<__EntryPoint>>
 function extending_examples_children_run(): void {
+  \__init_autoload();
   $my_br = <my-br />;
   // Even though my-br does not take any children, you can still call the
   // appendChild method with no consequences. The consequence will come when
