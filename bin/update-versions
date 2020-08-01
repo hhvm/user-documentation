@@ -11,11 +11,10 @@
 
 namespace HHVM\UserDocumentation;
 
-require_once(__DIR__.'/update-versions.hack');
-
 // As this file does not have an extension, it is not typechecked. Delegate
 // to the typechecked one.
 <<__EntryPoint>>
 async function update_versions_main_async_UNSAFE(): Awaitable<void> {
+  require_once(__DIR__.'/update-versions.hack');
   await update_versions_main_async();
 }
