@@ -33,11 +33,13 @@ The `XHPUnsafeRenderable` and `XHPAlwaysValidChild` interfaces allow bypassing t
 
 If you need to render raw HTML strings, wrap them in a class that implements this interface and provides a `toHTMLString: string` method:
 
+@@ interfaces-examples/xss-security-hole.inc.php @@
 @@ interfaces-examples/xss-security-hole.php @@
 
 We do not provide an implementation of this interface as a generic implementation tends to be overused; instead, consider making more specific
 implementations:
 
+@@ interfaces-examples/markdown-wrapper.inc.php @@
 @@ interfaces-examples/markdown-wrapper.php @@
 
 ## XHPAlwaysValidChild
@@ -50,4 +52,5 @@ interface is intentionally breaking part of XHP's safety, so should be used as s
 
 ## Example
 
+@@ interfaces-examples/all-in-one.inc.php @@
 @@ interfaces-examples/all-in-one.php @@

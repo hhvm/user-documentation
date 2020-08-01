@@ -82,6 +82,7 @@ The above code won't typecheck or run because the XHP validator will see that `<
 the following code will typecheck correctly but fail to run, because while the tags are matched, they are not nested correctly
 (according to the HTML specification), and nesting verification only happens at runtime:
 
+@@ some-basics-examples/allowed-tag-validation.inc.php @@
 @@ some-basics-examples/allowed-tag-validation.php @@
 
 ## Security

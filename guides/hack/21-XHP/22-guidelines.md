@@ -19,6 +19,7 @@ This validation is on by default. You can turn it off by running the following c
 If you have a parent object, and you want to give information to some object further down the UI tree (e.g., `<ul>` to `<li>`), you
 can set a context for those lower objects and the lower objects can retrieve them. You use `setContext` and `getContext`
 
+@@ guidelines-examples/context.inc.php @@
 @@ guidelines-examples/context.php @@
 
 Context is only passed down the tree at render time; this allows you to construct a tree without having to thread through data. In

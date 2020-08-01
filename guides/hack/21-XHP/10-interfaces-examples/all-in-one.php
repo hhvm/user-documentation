@@ -1,11 +1,5 @@
 <?hh // partial
 
-final class XHPUnsafeExample implements XHPUnsafeRenderable {
-  public function toHTMLString(): string {
-    return '<script>'.$_GET['I_LOVE_XSS'].'</script>';
-  }
-}
-
 <<__EntryPoint>>
 function all_in_one_xhp_example_main(): void {
   \__init_autoload();

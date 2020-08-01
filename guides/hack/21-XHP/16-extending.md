@@ -10,6 +10,7 @@ A custom XHP class needs to do two things:
 * extend `:x:element`.
 * implement the method `render` to return an XHP Object via `XHPRoot`.
 
+@@ extending-examples/basic.inc.php @@
 @@ extending-examples/basic.php @@
 
 ## Attributes
@@ -52,6 +53,7 @@ The `->:` operator can be used to retrieve the value of an attribute.
 You can specify an attribute as required with the `@required` declaration after the attribute name. If you try to render the XHP object and
 have not set the required attribute, then an `XHPAttributeRequiredException` will be thrown.
 
+@@ extending-examples/required-attributes.inc.php @@
 @@ extending-examples/required-attributes.php @@
 
 ### Nullable Attributes
@@ -84,6 +86,7 @@ that doesn't allow one or doesn't exist in its declaration list, then an `XHPInv
 
 You can use the standard regex operators `*` (zero or more), `+` (one or more) `|` (this or that) when declaring your children.
 
+@@ extending-examples/children.inc.php @@
 @@ extending-examples/children.php @@
 
 ### Categories
@@ -97,6 +100,7 @@ category %name1, %name2,...., %$nameN;
 
 The categories are taken from the HTML specification (e.g., `%flow`, `%phrase`).
 
+@@ extending-examples/categories.inc.php @@
 @@ extending-examples/categories.php @@
 
 ## Async
@@ -105,6 +109,7 @@ XHP and [async](../asynchronous-operations/introduction.md) co-exist well togeth
 * use the `XHPAsync` trait
 * implement `asyncRender: Awaitable<XHPRoot>` instead of `render: XHPRoot`
 
+@@ extending-examples/xhp-async.inc.php @@
 @@ extending-examples/xhp-async.php @@
 
 ## XHP Helpers
@@ -118,6 +123,7 @@ The `XHPHelpers` trait implements three behaviors:
 
 Let's say you have a class that wants to inherit attributes from `:div`. You could do something like this:
 
+@@ extending-examples/bad-attribute-transfer.inc.php @@
 @@ extending-examples/bad-attribute-transfer.php @@
 
 The issue above is that any attribute set on `:ui:my-custom` will be lost because the `<div>` returned from `render` will not automatically
@@ -125,6 +131,7 @@ get those attributes.
 
 Instead, you should use `XHPHelpers`.
 
+@@ extending-examples/attribute-transfer.inc.php @@
 @@ extending-examples/attribute-transfer.php @@
 
 Now, when `:ui:my-custom` is rendered, each `:div` attribute will be transferred over, assuming that it was declared in the `render`
@@ -135,6 +142,7 @@ function. Also, an `:ui:my-custom` attribute value that is set will override the
 `XHPHelpers` has a method `getID` that you can call to give your rendered custom XHP object a unique ID that can be referred to in other
 parts of your code or UI framework (e.g., CSS).
 
+@@ extending-examples/get-id.inc.php @@
 @@ extending-examples/get-id.php @@
 
 ### Class Attribute Management
@@ -143,4 +151,5 @@ parts of your code or UI framework (e.g., CSS).
 declares the `class` attribute directly or through inheritance. `addClass` takes a `string` and appends that `string` to the `class`
 attribute; `conditionClass` takes a `string` and a `bool` appends that `string` to the `class` attribute if the `bool` is `true`.
 
+@@ extending-examples/add-class.inc.php @@
 @@ extending-examples/add-class.php @@
