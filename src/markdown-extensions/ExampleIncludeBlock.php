@@ -149,6 +149,8 @@ final class ExamplesIncludeBlock implements UnparsedBlocks\BlockProducer {
         |> Str\replace($code, "\n".$$, "\n");
     }
 
+    $code = Regex\replace($code, re"/ *\\\\__init_autoload\\(\\);\n/", '');
+
     return new UnparsedBlocks\FencedCodeBlock(Str\trim($code), 'Hack');
   }
 
