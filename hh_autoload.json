@@ -2,6 +2,7 @@
   "roots": [
     "src/",
     "build/final/codegen/",
+    "guides/",
     "tests/"
   ],
   "extraFiles": [ "LocalConfig.php" ],
