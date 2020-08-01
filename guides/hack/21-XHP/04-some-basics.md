@@ -58,7 +58,7 @@ For users experienced with XHP, the biggest advantage is that it is easy to add 
 which can then be used like plain HTML elements. For example, this site defines an `<a:post>` tag that has the same interface
 as a standard `<a>` tag, but makes a POST request instead of a GET request:
 
-@@ some-basics-examples/a_post.php @@
+@@ some-basics-examples/a_post.inc.php @@
 
 A little CSS is needed so that the `<form>` doesn't create a block element:
 
