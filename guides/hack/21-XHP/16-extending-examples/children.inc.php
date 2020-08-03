@@ -1,7 +1,14 @@
 <?hh // partial
 
+use namespace Facebook\XHP\ChildValidation as XHPChild;
+
 class :my-br extends :x:element {
-  children empty; // no children allowed
+  use XHPChildValidation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\empty();
+  }
+
 
   protected function render(): \XHPRoot {
     return <x:frag>PHP_EOL</x:frag>;
@@ -9,7 +16,12 @@ class :my-br extends :x:element {
 }
 
 class :my-ul extends :x:element {
-  children (:li)+; // one or more
+  use XHPChildValidation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\atLeastOneOf(XHPChild\ofType<:li>());
+  }
+
 
   protected function render(): \XHPRoot {
     return <ul>{$this->getChildren()}</ul>;
@@ -17,7 +29,12 @@ class :my-ul extends :x:element {
 }
 
 class :my-html extends :x:element {
-  children (:head, :body);
+  use XHPChildValidation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\sequence(XHPChild\ofType<:head>(), XHPChild\ofType<:body>(), );
+  }
+
 
   protected function render(): \XHPRoot {
     return <html>{$this->getChildren()}</html>;

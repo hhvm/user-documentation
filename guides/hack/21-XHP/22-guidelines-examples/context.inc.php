@@ -1,8 +1,15 @@
 <?hh // partial
 
+use namespace Facebook\XHP\ChildValidation as XHPChild;
+
 class :ui-myparent extends :x:element {
+  use XHPChildValidation;
   attribute string text @required;
-  children (:ui-mychild);
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\ofType<:ui-mychild>();
+  }
+
 
   protected function render(): XHPRoot {
     return (
