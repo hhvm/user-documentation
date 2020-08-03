@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0251a8ea090ceb9d46cd9110a29acd8b",
+    "content-hash": "9f2b37fbc79b090e0334841a91d015ea",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -391,31 +391,32 @@
         },
         {
             "name": "facebook/xhp-lib",
-            "version": "v3.2.1",
+            "version": "v4.0.0rc1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/xhp-lib.git",
-                "reference": "23f0fa709102d1955538eb6644e6214a924e41cb"
+                "reference": "f233e39b476a1b72e4357620e50daaba1248db05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/23f0fa709102d1955538eb6644e6214a924e41cb",
-                "reference": "23f0fa709102d1955538eb6644e6214a924e41cb",
+                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/f233e39b476a1b72e4357620e50daaba1248db05",
+                "reference": "f233e39b476a1b72e4357620e50daaba1248db05",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.32",
+                "hhvm": "^4.46",
                 "hhvm/type-assert": "^3.0|^4.0"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.0.0",
                 "hhvm/hacktest": "^2.0",
+                "hhvm/hhast": "^4.0",
                 "hhvm/hhvm-autoload": "^2.0|^3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "3.x": "3.x-dev"
+                    "dev-master": "4.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -430,20 +431,20 @@
                 "hhvm",
                 "xhp"
             ],
-            "time": "2020-07-15T00:33:38+00:00"
+            "time": "2020-07-22T19:52:23+00:00"
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.64.3",
+            "version": "v4.64.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "5fc9b528b71d44c864d71c600e794804e872a226"
+                "reference": "64782a555e3bf6b6da5c983cbf53ab2c63b4e4d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/5fc9b528b71d44c864d71c600e794804e872a226",
-                "reference": "5fc9b528b71d44c864d71c600e794804e872a226",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/64782a555e3bf6b6da5c983cbf53ab2c63b4e4d9",
+                "reference": "64782a555e3bf6b6da5c983cbf53ab2c63b4e4d9",
                 "shasum": ""
             },
             "require": {
@@ -480,7 +481,7 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-07-20T17:11:05+00:00"
+            "time": "2020-08-03T17:37:49+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -828,7 +829,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "facebook/xhp-lib": 5
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
