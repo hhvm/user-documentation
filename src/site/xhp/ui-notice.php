@@ -11,7 +11,7 @@
 
 use type HHVM\UserDocumentation\UIGlyphIcon;
 
-final class :ui:notice extends :x:element {
+final xhp class ui:notice extends :x:element {
   attribute
     string className,
     UIGlyphIcon glyph,

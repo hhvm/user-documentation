@@ -13,7 +13,7 @@ use type HHVM\UserDocumentation\{NavDataNode, UIGlyphIcon};
 
 use namespace HH\Lib\{Dict, Str};
 
-class :ui:navbar extends :x:element {
+xhp class ui:navbar extends :x:element {
   attribute
     dict<string, NavDataNode> data @required,
     vec<string> activePath @required,

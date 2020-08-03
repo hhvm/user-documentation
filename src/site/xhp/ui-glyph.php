@@ -11,7 +11,7 @@
 
 use type HHVM\UserDocumentation\UIGlyphIcon;
 
-final class :ui:glyph extends :x:element {
+final xhp class ui:glyph extends :x:element {
   attribute UIGlyphIcon icon @required;
 
   protected function render(): XHPRoot {

@@ -9,7 +9,7 @@
  *
  */
 
-final class :a:post extends :x:element {
+final xhp class a:post extends :x:element {
   attribute :a;
 
   use XHPHelpers;
