@@ -9,7 +9,7 @@
  *
  */
 
-class :script:google-analytics extends :x:element {
+class :script:google_analytics extends :x:element {
   attribute string trackingID @required;
 
   protected function render(): XHPRoot {

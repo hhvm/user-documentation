@@ -1,6 +1,6 @@
 <?hh // partial
 
-class :my-cls-adder extends :x:element {
+class :my_cls_adder extends :x:element {
   attribute :div;
   use XHPHelpers;
   protected function render(): \XHPRoot {

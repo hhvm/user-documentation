@@ -3,7 +3,7 @@
 <<__EntryPoint>>
 async function extending_examples_async_run(): Awaitable<void> {
   \init_docs_autoloader();
-  $status = <ui:get-status />;
+  $status = <ui:get_status />;
   $html = await $status->asyncToString();
   // This can be long, so just show a bit for illustrative purposes
   $sub_status = substr($html, 0, 100);

@@ -13,7 +13,7 @@ use type HHVM\UserDocumentation\LocalConfig;
 
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
-final class :github-issue-link extends :x:element {
+final class :github_issue_link extends :x:element {
   use XHPChildValidation;
   attribute
     string issueTitle,

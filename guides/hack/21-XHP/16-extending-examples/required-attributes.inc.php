@@ -1,6 +1,6 @@
 <?hh // partial
 
-class :user-info extends :x:element {
+class :user_info extends :x:element {
   attribute int userid @required;
   attribute string name = "";
 

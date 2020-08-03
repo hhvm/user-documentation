@@ -104,11 +104,11 @@ final class HTTP404Controller extends NonRoutableWebPageController {
         </p>
         <p class="notFoundMessage">
           If you think you're seeing this page in error, please
-          <github-issue-link
+          <github_issue_link
             issueTitle={$this->getGithubIssueTitle()}
             issueBody={
               $this->getGithubIssueBody()
-            }>file an issue</github-issue-link>.
+            }>file an issue</github_issue_link>.
         </p>
       </x:frag>;
   }
