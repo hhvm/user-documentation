@@ -1,8 +1,15 @@
 <?hh // partial
 
+use namespace Facebook\XHP\ChildValidation as XHPChild;
+
 class :my-text extends :x:element {
+  use XHPChildValidation;
   category %phrase;
-  children (pcdata | %phrase); // prefixed colon ommitted purposely on pcdata
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\anyOf(XHPChild\pcdata(), XHPChild\category('%phrase'), );
+  }
+
 
   protected function render(): \XHPRoot {
     return <x:frag>{$this->getChildren('%phrase')}</x:frag>;
