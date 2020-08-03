@@ -24,6 +24,6 @@ async function wrapping_exceptions(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   \HH\Asio\join(wrapping_exceptions());
 }

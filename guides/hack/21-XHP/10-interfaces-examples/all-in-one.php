@@ -2,7 +2,7 @@
 
 <<__EntryPoint>>
 function all_in_one_xhp_example_main(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   $inputs = Map {
     '<div />' => <div />,
     '<x:frag />' => <x:frag />,

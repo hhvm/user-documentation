@@ -47,6 +47,6 @@ async function polling_example(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   \HH\Asio\join(polling_example());
 }

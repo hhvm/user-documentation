@@ -2,7 +2,7 @@
 
 <<__EntryPoint>>
 function extending_examples_attributes_run(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   $uinfo = <user-info />;
   // Can't render :user-info for an echo without setting the required userid
   // attribute

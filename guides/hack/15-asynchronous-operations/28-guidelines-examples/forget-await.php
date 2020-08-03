@@ -11,6 +11,6 @@ async function speak(): Awaitable<void> {
 
 <<__EntryPoint>>
 async function forget_await(): Awaitable<void> {
-  \__init_autoload();
+  \init_docs_autoloader();
   $handle = speak(); // This just gets you the handle
 }

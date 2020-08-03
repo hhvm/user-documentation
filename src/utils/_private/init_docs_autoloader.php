@@ -18,7 +18,7 @@
  *
  * Calls to this function are removed from the example code when it's rendered.
  */
-function __init_autoload(): void {
+function init_docs_autoloader(): void {
   require_once __DIR__.'/../../../vendor/autoload.hack';
   \Facebook\AutoloadMap\initialize();
 }

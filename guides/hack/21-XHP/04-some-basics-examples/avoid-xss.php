@@ -23,6 +23,6 @@ function intro_examples_avoid_xss_run(string $could_be_bad): void {
 
 <<__EntryPoint>>
 function intro_examples_avoid_xss_main(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   intro_examples_avoid_xss_run('<blink>Ugh</blink>');
 }

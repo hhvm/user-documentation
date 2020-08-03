@@ -65,6 +65,6 @@ async function generate_page(int $author_id): Awaitable<string> {
 
 <<__EntryPoint>>
 function main(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   print \HH\Asio\join(generate_page(13324)); // just made up a user id
 }

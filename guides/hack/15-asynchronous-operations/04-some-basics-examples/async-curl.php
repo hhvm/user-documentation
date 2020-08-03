@@ -22,6 +22,6 @@ async function async_curl(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   \HH\Asio\join(async_curl());
 }

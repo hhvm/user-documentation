@@ -2,7 +2,7 @@
 
 <<__EntryPoint>>
 function start(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
 
   require_once __DIR__.'/md_render.inc.php';
   echo (

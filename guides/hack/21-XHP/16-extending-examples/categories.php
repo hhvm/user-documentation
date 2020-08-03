@@ -2,7 +2,7 @@
 
 <<__EntryPoint>>
 function extending_examples_categories_run(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   $my_text = <my-text />;
   $my_text->appendChild(<em>"Hello!"</em>); // This is a %phrase
   echo $my_text;

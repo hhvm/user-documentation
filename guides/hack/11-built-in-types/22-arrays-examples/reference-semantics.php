@@ -6,7 +6,7 @@ use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   $john = new Person('John', 'Doe');
   $emma = new Person('Emma', 'Smith');
 

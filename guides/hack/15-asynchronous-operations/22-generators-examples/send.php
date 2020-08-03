@@ -35,7 +35,7 @@ async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
 
 <<__EntryPoint>>
 function run(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   $ids = vec[1, 2, 3, 4];
   \HH\Asio\join(associate_ids_to_names($ids));
 }

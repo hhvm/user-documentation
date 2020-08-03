@@ -2,7 +2,7 @@
 
 <<__EntryPoint>>
 function extending_examples_children_run(): void {
-  \__init_autoload();
+  \init_docs_autoloader();
   $my_br = <my-br />;
   // Even though my-br does not take any children, you can still call the
   // appendChild method with no consequences. The consequence will come when
