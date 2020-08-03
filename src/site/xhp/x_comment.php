@@ -11,7 +11,7 @@
 
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
-class :x:comment extends :x:primitive implements XHPAlwaysValidChild {
+xhp class x:comment extends :x:primitive implements XHPAlwaysValidChild {
   use XHPChildValidation;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {

@@ -2,7 +2,7 @@
 
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
-class :my_br extends :x:element {
+xhp class my_br extends :x:element {
   use XHPChildValidation;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
@@ -15,7 +15,7 @@ class :my_br extends :x:element {
   }
 }
 
-class :my_ul extends :x:element {
+xhp class my_ul extends :x:element {
   use XHPChildValidation;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
@@ -28,7 +28,7 @@ class :my_ul extends :x:element {
   }
 }
 
-class :my_html extends :x:element {
+xhp class my_html extends :x:element {
   use XHPChildValidation;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {

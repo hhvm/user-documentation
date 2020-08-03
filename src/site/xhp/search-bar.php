@@ -11,7 +11,7 @@
 
 use type HHVM\UserDocumentation\UIGlyphIcon;
 
-final class :search_bar extends :x:element {
+final xhp class search_bar extends :x:element {
   attribute
     string class,
     string placeholder = 'Search';

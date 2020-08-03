@@ -9,7 +9,7 @@
  *
  */
 
-final class :static:stylesheet extends :static:base {
+final xhp class static:stylesheet extends :static:base {
   use XHPHelpers;
 
   attribute :link;

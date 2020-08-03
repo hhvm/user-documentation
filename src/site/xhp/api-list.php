@@ -13,7 +13,7 @@ use type HHVM\UserDocumentation\{APIDefinitionType, APIIndex, APIProduct};
 
 use namespace HH\Lib\{C, Str};
 
-class :api_list extends :x:element {
+xhp class api_list extends :x:element {
   attribute
     APIProduct product @required,
     ImmSet<APIDefinitionType> types @required;

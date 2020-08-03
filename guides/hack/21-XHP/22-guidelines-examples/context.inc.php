@@ -2,7 +2,7 @@
 
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
-class :ui_myparent extends :x:element {
+xhp class ui_myparent extends :x:element {
   use XHPChildValidation;
   attribute string text @required;
 
@@ -23,7 +23,7 @@ class :ui_myparent extends :x:element {
   }
 }
 
-class :ui_mychild extends :x:element {
+xhp class ui_mychild extends :x:element {
   attribute string text @required;
 
   protected function render(): XHPRoot {

@@ -11,7 +11,7 @@
 
 use type HHVM\UserDocumentation\{StaticResourceMap, StaticResourceMapEntry};
 
-abstract class :static:base extends :x:element {
+abstract xhp class static:base extends :x:element {
   attribute string path @required;
 
   abstract protected function getAllowedMimeTypes(): Set<string>;

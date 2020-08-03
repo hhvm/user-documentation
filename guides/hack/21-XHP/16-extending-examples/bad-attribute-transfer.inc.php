@@ -1,6 +1,6 @@
 <?hh // partial
 
-class :ui_my_box extends :x:element {
+xhp class ui_my_box extends :x:element {
   attribute :div; // inherit from attributes from <div>
 
   protected function render(): \XHPRoot {

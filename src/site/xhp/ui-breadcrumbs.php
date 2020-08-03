@@ -11,7 +11,7 @@
 
 use namespace HH\Lib\{C, Vec};
 
-final class :ui:breadcrumbs extends :x:element {
+final xhp class ui:breadcrumbs extends :x:element {
   attribute vec<(string, ?string)> stack @required;
 
   public function render(): XHPRoot {

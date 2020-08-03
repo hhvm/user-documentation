@@ -13,7 +13,7 @@ use type HHVM\UserDocumentation\UIGlyphIcon;
 
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
-final class :ui:button extends :x:element {
+final xhp class ui:button extends :x:element {
   use XHPChildValidation;
   attribute
     enum {'left', 'right'} align = 'left',

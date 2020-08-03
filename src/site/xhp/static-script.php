@@ -9,7 +9,7 @@
  *
  */
 
-final class :static:script extends :static:base {
+final xhp class static:script extends :static:base {
   protected function getAllowedMimeTypes(): Set<string> {
     return Set {'application/javascript'};
   }
