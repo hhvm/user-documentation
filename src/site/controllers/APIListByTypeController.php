@@ -57,7 +57,7 @@ final class APIListByTypeController extends WebPageController {
   <<__Override>>
   final protected async function getBodyAsync(): Awaitable<XHPRoot> {
     return
-      <api-list
+      <api_list
         product={$this->getParameters()['Product']}
         types={ImmSet {$this->getParameters()['Type']}}
       />;

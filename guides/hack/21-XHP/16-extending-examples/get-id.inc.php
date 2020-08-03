@@ -1,6 +1,6 @@
 <?hh // partial
 
-class :my-id extends :x:element {
+class :my_id extends :x:element {
   attribute string id;
   use XHPHelpers;
   protected function render(): \XHPRoot {

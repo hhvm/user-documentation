@@ -2,12 +2,12 @@
 
 use namespace Facebook\XHP\ChildValidation as XHPChild;
 
-class :ui-myparent extends :x:element {
+class :ui_myparent extends :x:element {
   use XHPChildValidation;
   attribute string text @required;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
-    return XHPChild\ofType<:ui-mychild>();
+    return XHPChild\ofType<:ui_mychild>();
   }
 
 
@@ -23,7 +23,7 @@ class :ui-myparent extends :x:element {
   }
 }
 
-class :ui-mychild extends :x:element {
+class :ui_mychild extends :x:element {
   attribute string text @required;
 
   protected function render(): XHPRoot {
@@ -36,9 +36,9 @@ class :ui-mychild extends :x:element {
 
 function guidelines_examples_context_run(string $s): void {
   $xhp = (
-    <ui-myparent text={$s}>
-      <ui-mychild text="Go" />
-    </ui-myparent>
+    <ui_myparent text={$s}>
+      <ui_mychild text="Go" />
+    </ui_myparent>
   );
   $xhp->setContext('hint', $s);
   echo $xhp;

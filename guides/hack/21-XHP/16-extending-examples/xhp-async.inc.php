@@ -1,6 +1,6 @@
 <?hh // partial
 
-class :ui:get-status extends :x:element {
+class :ui:get_status extends :x:element {
 
   use XHPAsync;
 

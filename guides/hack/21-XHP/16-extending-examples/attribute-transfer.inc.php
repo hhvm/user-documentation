@@ -1,6 +1,6 @@
 <?hh // partial
 
-class :ui-my-good-box extends :x:element {
+class :ui_my_good_box extends :x:element {
   attribute :div; // inherit from attributes from <div>
   // Make sure that attributes are transferred automatically when rendering.
   use XHPHelpers;

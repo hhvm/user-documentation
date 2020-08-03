@@ -86,7 +86,7 @@ EOF;
         );
       case 'docs.hhvm.com':
         $google_analytics =
-          <script:google-analytics trackingID="UA-49208336-3" />;
+          <script:google_analytics trackingID="UA-49208336-3" />;
         $open_search =
           <link
             rel="search"
@@ -268,15 +268,15 @@ EOF;
             </a>
           </div>
           <div class="headerElement githubIssueLink">
-            <github-issue-link
+            <github_issue_link
               issueTitle={$this->getGithubIssueTitle()}
               issueBody={$this->getGithubIssueBody()}
               controller={static::class}>
               <ui:glyph icon={UIGlyphIcon::BUG} />
               report a problem or make a suggestion
-            </github-issue-link>
+            </github_issue_link>
           </div>
-          <search-bar
+          <search_bar
             class="headerElement"
             placeholder="Search our Documentation"
           />
@@ -304,12 +304,12 @@ EOF;
         <h2>See something wrong?</h2>
         <ui:button className="gitHubIssueButton" glyph={UIGlyphIcon::BUG}>
           <span>
-            <github-issue-link
+            <github_issue_link
               issueTitle={$this->getGithubIssueTitle()}
               issueBody={$this->getGithubIssueBody()}
               controller={static::class}>
               Report a problem or make a suggestion.
-            </github-issue-link>
+            </github_issue_link>
           </span>
         </ui:button>
       </div>;

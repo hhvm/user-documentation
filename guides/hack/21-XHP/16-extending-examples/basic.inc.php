@@ -6,7 +6,7 @@ class :introduction extends :x:element {
   }
 }
 
-class :intro-plain-str extends :x:element {
+class :intro_plain_str extends :x:element {
   protected function render(): \XHPRoot {
     // Since this function returns an XHPRoot, if you want to return a primitive
     // like a string, wrap it around <x:frag>
