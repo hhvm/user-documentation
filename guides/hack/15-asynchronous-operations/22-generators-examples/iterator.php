@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\AsyncOps\Generators\Examples\Iterator;
 
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 const int SECOND = 1000000; // microseconds
 
 async function countdown(int $from): AsyncIterator<int> {
@@ -29,5 +27,6 @@ async function happy_new_year(int $start): Awaitable<void> {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
   \HH\Asio\join(happy_new_year(5)); // 5 second countdown
 }

@@ -3,9 +3,6 @@
 namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\DataDependencies;
 use namespace HH\Lib\Vec;
 
-// So we can use function Vec\map_async()
-require __DIR__."/../../../../vendor/hh_autoload.php";
-
 class PostData {
   // using constructor argument promotion
   public function __construct(public string $text) {}
@@ -65,5 +62,6 @@ async function generate_page(int $author_id): Awaitable<string> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
   print \HH\Asio\join(generate_page(13324)); // just made up a user id
 }

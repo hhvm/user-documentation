@@ -41,5 +41,6 @@ async function use_lambdas(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
   \HH\Asio\join(use_lambdas());
 }

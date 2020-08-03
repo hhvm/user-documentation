@@ -1,10 +1,10 @@
-array(0) {
+darray(0) {
 }
-array(1) {
+darray(1) {
   [4]=>
   string(5) "black"
 }
-array(3) {
+darray(3) {
   [4]=>
   string(3) "red"
   [8]=>

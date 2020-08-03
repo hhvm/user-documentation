@@ -25,5 +25,6 @@ async function get_combined_contents(
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
   \HH\Asio\join(get_combined_contents(get_urls()));
 }

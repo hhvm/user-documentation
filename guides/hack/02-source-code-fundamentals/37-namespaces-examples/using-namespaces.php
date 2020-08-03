@@ -4,9 +4,8 @@
 
 namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;
 
-require_once("namespaces.inc.php");
-
 <<__EntryPoint>>
 function main(): void {
+  require_once("namespaces.inc.php");
   \NS2\f();
 }

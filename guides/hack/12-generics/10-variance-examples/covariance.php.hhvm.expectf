@@ -8,22 +8,17 @@ object(Hack\UserDocumentation\Generics\Variance\Examples\Covariance\C) (1) {
   object(Hack\UserDocumentation\Generics\Variance\Examples\Covariance\Cat) (0) {
   }
 }
-array(2) {
-  [0]=>
+varray(2) {
   object(Hack\UserDocumentation\Generics\Variance\Examples\Covariance\Animal) (0) {
   }
-  [1]=>
   object(Hack\UserDocumentation\Generics\Variance\Examples\Covariance\Animal) (0) {
   }
 }
-array(3) {
-  [0]=>
+varray(3) {
   object(Hack\UserDocumentation\Generics\Variance\Examples\Covariance\Cat) (0) {
   }
-  [1]=>
   object(Hack\UserDocumentation\Generics\Variance\Examples\Covariance\Cat) (0) {
   }
-  [2]=>
   object(Hack\UserDocumentation\Generics\Variance\Examples\Covariance\Animal) (0) {
   }
 }

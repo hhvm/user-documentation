@@ -33,5 +33,6 @@ async function run(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
   \HH\Asio\join(run());
 }

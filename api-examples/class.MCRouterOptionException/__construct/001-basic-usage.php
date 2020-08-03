@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouterOptEx\Construct;
 
-function construct_mcrouter(array<string, mixed> $options): void {
+function construct_mcrouter(darray<string, mixed> $options): void {
   if (!\array_key_exists('config_str', $options)) {
     // You can have multiple string => string errors in the array
     $errors = varray[darray['format' => 'Need config string']];

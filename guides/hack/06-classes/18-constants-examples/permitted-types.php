@@ -24,7 +24,7 @@ class C {
   const num cNum = -5;
   const num cNum2 = C::cInt;
   //  const boid cVoid = ???;
-  const array<bool> cString = varray[true, false];
+  const varray<bool> cString = varray[true, false];
   const (int, string) cTuple = tuple(5, "xxx");
   const shape('x' => int, 'y' => int) cShape = shape('x' => -3, 'y' => 6);
   const arraykey cArraykey = "key";

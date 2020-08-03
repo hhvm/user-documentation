@@ -9,8 +9,6 @@
  *
  */
 
-require_once(__DIR__."/../../../vendor/hh_autoload.php");
-
 final class :a:post extends :x:element {
   attribute :a;
 

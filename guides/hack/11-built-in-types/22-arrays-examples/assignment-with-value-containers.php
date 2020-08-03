@@ -6,6 +6,7 @@ use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
   $emma = dict['first' => 'Emma', 'last' => 'Smith'];
   $another_emma = $emma;
 

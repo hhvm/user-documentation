@@ -11,29 +11,26 @@ vec(2) {
       ["file":protected]=>
       string(%d) "%s"
       ["line":protected]=>
-      int(9)
+      int(7)
       ["trace":"Exception":private]=>
-      array(3) {
-        [0]=>
-        array(3) {
+      varray(3) {
+        darray(3) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(18)
+          int(16)
           ["function"]=>
           string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
         }
-        [1]=>
-        array(3) {
+        darray(3) {
           ["file"]=>
           string(%d) "%s"
           ["line"]=>
-          int(29)
+          int(28)
           ["function"]=>
           string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
         }
-        [2]=>
-        array(1) {
+        darray(1) {
           ["function"]=>
           string(65) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\main"
         }

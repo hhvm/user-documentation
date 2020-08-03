@@ -180,8 +180,9 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       self::TEST_RUNNER,
       '-m',
       'interp',
-      '--vendor',
-      LocalConfig::ROOT.'/vendor/',
+      '--args',
+      '-d auto_prepend_file='.
+        LocalConfig::ROOT.'/src/utils/_private/init_docs_autoloader.php',
     };
     $command->addAll($extra_args);
     $command[] = LocalConfig::ROOT.'/guides';

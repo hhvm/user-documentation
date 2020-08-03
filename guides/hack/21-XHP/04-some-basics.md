@@ -58,7 +58,7 @@ For users experienced with XHP, the biggest advantage is that it is easy to add 
 which can then be used like plain HTML elements. For example, this site defines an `<a:post>` tag that has the same interface
 as a standard `<a>` tag, but makes a POST request instead of a GET request:
 
-@@ some-basics-examples/a_post.php @@
+@@ some-basics-examples/a_post.inc.php @@
 
 A little CSS is needed so that the `<form>` doesn't create a block element:
 
@@ -82,6 +82,7 @@ The above code won't typecheck or run because the XHP validator will see that `<
 the following code will typecheck correctly but fail to run, because while the tags are matched, they are not nested correctly
 (according to the HTML specification), and nesting verification only happens at runtime:
 
+@@ some-basics-examples/allowed-tag-validation.inc.php @@
 @@ some-basics-examples/allowed-tag-validation.php @@
 
 ## Security

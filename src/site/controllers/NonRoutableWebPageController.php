@@ -98,6 +98,8 @@ EOF;
       case 'staging.docs.hhvm.com':
         $require_secure = true;
         break;
+      default: // probably dev environment
+        break;
     }
 
     if ($require_secure) {

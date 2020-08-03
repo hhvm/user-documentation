@@ -1,31 +1,21 @@
-array(2) {
-  [0]=>
+varray(2) {
   int(0)
-  [1]=>
   string(0) ""
 }
-array(2) {
-  [0]=>
+varray(2) {
   int(1)
-  [1]=>
   string(7) "%s"
 }
-array(2) {
-  [0]=>
+varray(2) {
   int(2)
-  [1]=>
   string(7) "%s"
 }
 string(15) "Id of 3 is bad!"
-array(2) {
-  [0]=>
+varray(2) {
   int(0)
-  [1]=>
   string(0) ""
 }
-array(2) {
-  [0]=>
+varray(2) {
   int(4)
-  [1]=>
   string(7) "%s"
 }

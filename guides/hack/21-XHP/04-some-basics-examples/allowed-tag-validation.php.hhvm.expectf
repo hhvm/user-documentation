@@ -2,7 +2,7 @@
 
 string(%d) "Element `ul` was rendered with invalid children.
 
-%sallowed-tag-validation.php:11
+%sallowed-tag-validation.inc.php:9
 
 Verified 0 children before failing.
 

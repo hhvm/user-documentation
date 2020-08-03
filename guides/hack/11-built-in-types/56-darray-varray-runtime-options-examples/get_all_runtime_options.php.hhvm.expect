@@ -1,4 +1,3 @@
-hhvm.arr_prov_hack_arrays-----------------------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_check_array_plus-----------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_check_compare--------------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_compact_serialize_notices--------------> global_value(), local_value(), access(4)
@@ -9,6 +8,6 @@ hhvm.hack_arr_compat_is_vec_dict_notices--------------------> global_value(), lo
 hhvm.hack_arr_compat_notices--------------------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_serialize_notices----------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_dv_arr_mark-----------------------------------> global_value(), local_value(), access(4)
-hhvm.hack_arr_dv_arr_var_dump-------------------------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_dv_arr_var_dump-------------------------------> global_value(1), local_value(1), access(4)
 hhvm.hack_arr_dv_arrs---------------------------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_is_shape_tuple_notices------------------------> global_value(), local_value(), access(4)

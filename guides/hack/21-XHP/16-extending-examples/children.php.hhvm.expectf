@@ -1,6 +1,6 @@
 string(%d) "Element `my-br` was rendered with invalid children.
 
-%schildren.php:31
+%schildren.php:6
 
 Verified 0 children before failing.
 
