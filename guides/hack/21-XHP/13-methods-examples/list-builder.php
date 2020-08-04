@@ -1,6 +1,9 @@
 <?hh // partial
 
-function xhp_object_methods_build_list(Vector<string> $names): XHPRoot {
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{li, ul};
+
+function xhp_object_methods_build_list(Vector<string> $names): x\node {
   $list = <ul id="names" />;
   foreach ($names as $name) {
     $list->appendChild(<li>{$name}</li>);

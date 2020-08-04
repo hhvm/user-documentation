@@ -1,5 +1,7 @@
 <?hh // partial
 
+use type Facebook\XHP\HTML\{div, i, strong};
+
 class MyBasicUsageExampleClass {
   public function getInt(): int {
     return 4;

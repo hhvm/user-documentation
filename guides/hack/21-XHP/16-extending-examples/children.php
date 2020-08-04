@@ -1,5 +1,8 @@
 <?hh // partial
 
+use namespace Facebook\XHP;
+use type Facebook\XHP\HTML\{body, head, li, ul};
+
 <<__EntryPoint>>
 function extending_examples_children_run(): void {
   \init_docs_autoloader();
@@ -10,7 +13,7 @@ function extending_examples_children_run(): void {
   $my_br->appendChild(<ul />);
   try {
     echo $my_br;
-  } catch (\XHPInvalidChildrenException $ex) {
+  } catch (XHP\InvalidChildrenException $ex) {
     var_dump($ex->getMessage());
   }
   $my_ul = <my_ul />;

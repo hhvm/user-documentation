@@ -6,5 +6,5 @@ function extending_examples_bad_attribute_transfer_run(): void {
   $my_box = <ui_my_box title="My box" />;
   // This will only bring <div class="my-box"></div> ... title= will be
   // ignored.
-  echo $my_box->toString();
+  echo $my_box;
 }

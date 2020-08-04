@@ -1,5 +1,7 @@
 <?hh // partial
 
+use type Facebook\XHP\HTML\div;
+
 <<__EntryPoint>>
 function run(): void {
   \init_docs_autoloader();

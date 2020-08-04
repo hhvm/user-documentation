@@ -1,5 +1,7 @@
 <?hh // partial
 
+use type Facebook\XHP\HTML\{body, head, html};
+
 function intro_examples_avoid_xss_using_string(string $could_be_bad): void {
   // Could call htmlspecialchars() here
   echo '<html><head/><body> '.$could_be_bad.'</body></html>';
