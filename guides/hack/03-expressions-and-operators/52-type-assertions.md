@@ -40,10 +40,10 @@ an explicit type.
 
 ``` Hack
 function transport(?Car $c): void {
-  if ($v is nonnull) {
-    // Infers that $v is Car, but saves us
+  if ($c is nonnull) {
+    // Infers that $c is Car, but saves us
     // repeating the name of the type.
-    $v->drive();
+    $c->drive();
   }
 }
 ```
