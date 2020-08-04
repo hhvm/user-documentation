@@ -16,9 +16,9 @@ install:
 script:
 - docker build -t hhvm/user-documentation:scratch -f .deploy/built-site.Dockerfile .
 - docker run --rm -w /var/www hhvm/user-documentation:scratch hh_server --check .
-- docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hacktest tests/
-- docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hhast-lint
-- docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
+- docker run --rm -w /var/www hhvm/user-documentation:scratch hhvm -d hhvm.hack.lang.enable_xhp_class_modifier=true -d hhvm.hack.lang.disable_xhp_element_mangling=true vendor/bin/hacktest tests/
+- docker run --rm -w /var/www hhvm/user-documentation:scratch hhvm -d hhvm.hack.lang.enable_xhp_class_modifier=true -d hhvm.hack.lang.disable_xhp_element_mangling=true vendor/bin/hhast-lint
+- docker run --rm -w /var/www hhvm/user-documentation:scratch hhvm -d hhvm.hack.lang.enable_xhp_class_modifier=true -d hhvm.hack.lang.disable_xhp_element_mangling=true vendor/bin/hh-codegen-verify-signatures src
 deploy:
   provider: script
   script: "./.travis-deploy.sh"

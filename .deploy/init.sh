@@ -36,4 +36,7 @@ hhvm \
   vendor/bin/hh-autoload
 
 echo "** Run build"
-hhvm bin/build.php
+hhvm \
+  -d hhvm.hack.lang.enable_xhp_class_modifier=true \
+  -d hhvm.hack.lang.disable_xhp_element_mangling=true \
+  bin/build.php

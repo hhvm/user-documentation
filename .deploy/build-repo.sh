@@ -18,6 +18,8 @@ set -x
 hhvm --hphp --target hhbc \
   -l3 \
   -d hhvm.check_return_type_hints=3 \
+  -d hhvm.hack.lang.enable_xhp_class_modifier=true \
+  -d hhvm.hack.lang.disable_xhp_element_mangling=true \
   --module src \
   --module vendor \
   --module build/final \
