@@ -1,53 +1,54 @@
-object(Facebook\\XHP\\HTML\\div) (%d) {
+object(Facebook\XHP\HTML\div) (%d) {
   ["tagName":protected]=>
   string(3) "div"
-  ["attributes":"xhp_x__composable_element":private]=>
-  object(HH\Map) (0) {
+  ["__isRendered":protected]=>
+  bool(false)
+  ["attributes":"Facebook\XHP\Core\node":private]=>
+  dict(0) {
   }
-  ["children":"xhp_x__composable_element":private]=>
-  object(HH\Vector) (%d) {
-    [0]=>
+  ["children":"Facebook\XHP\Core\node":private]=>
+  vec(3) {
     string(9) " My Text "
-    [1]=>
-    object(xhp_strong) (%d) {
+    object(Facebook\XHP\HTML\strong) (%d) {
       ["tagName":protected]=>
       string(6) "strong"
-      ["attributes":"xhp_x__composable_element":private]=>
-      object(HH\Map) (0) {
+      ["__isRendered":protected]=>
+      bool(false)
+      ["attributes":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
       }
-      ["children":"xhp_x__composable_element":private]=>
-      object(HH\Vector) (%d) {
-        [0]=>
+      ["children":"Facebook\XHP\Core\node":private]=>
+      vec(1) {
         string(12) "My Bold Text"
       }
-      ["context":"xhp_x__composable_element":private]=>
-      object(HH\Map) (0) {
+      ["context":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
       }
       ["source"]=>
-      string(%d) "%s:9"
+      string(%d) "%s:11"
     }
-    [2]=>
-    object(xhp_i) (%d) {
+    object(Facebook\XHP\HTML\i) (%d) {
       ["tagName":protected]=>
       string(1) "i"
-      ["attributes":"xhp_x__composable_element":private]=>
-      object(HH\Map) (0) {
+      ["__isRendered":protected]=>
+      bool(false)
+      ["attributes":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
       }
-      ["children":"xhp_x__composable_element":private]=>
-      object(HH\Vector) (%d) {
-        [0]=>
+      ["children":"Facebook\XHP\Core\node":private]=>
+      vec(1) {
         string(14) "My Italic Text"
       }
-      ["context":"xhp_x__composable_element":private]=>
-      object(HH\Map) (0) {
+      ["context":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
       }
       ["source"]=>
-      string(%d) "%s:10"
+      string(%d) "%s:12"
     }
   }
-  ["context":"xhp_x__composable_element":private]=>
-  object(HH\Map) (0) {
+  ["context":"Facebook\XHP\Core\node":private]=>
+  dict(0) {
   }
   ["source"]=>
-  string(%d) "%s:11"
+  string(%d) "%s:13"
 }
