@@ -1,2 +1,2 @@
 <a href="http://www.example.com">I'm a normal link</a>
-<form id="%s" method="post" action="http://www.example.com" class="postLink"><a href="#" id="%s" onclick="document.getElementById(&quot;%s&quot;).submit(); return false;">I make a POST REQUEST</a></form>
+<form method="post" action="http://www.example.com" class="postLink" id="%s"><a onclick="document.getElementById(&quot;%s&quot;).submit(); return false;" href="#">I make a POST REQUEST</a></form>

@@ -14,6 +14,9 @@ async function extending_examples_attributes_run(): Awaitable<void> {
   } catch (XHP\AttributeRequiredException $ex) {
     var_dump($ex->getMessage());
   }
+
+  /* HH_FIXME[4314] This is a typechecker error but not a runtime error. */
+  $uinfo = <user_info />;
   $uinfo->setAttribute('userid', 1000);
   $uinfo->setAttribute('name', 'Joel');
   echo await $uinfo->toStringAsync();

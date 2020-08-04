@@ -1,13 +1,13 @@
 <ul><i>Item 1</i></ul>
 
-string(%d) "Element `ul` was rendered with invalid children.
+string(%d) "Element `Facebook\XHP\HTML\ul` was rendered with invalid children.
 
-%sallowed-tag-validation.inc.php:9
+%sallowed-tag-validation.inc.php:13
 
 Verified 0 children before failing.
 
 Children expected:
-:li*
+\Facebook\XHP\HTML\li*
 
 Children received:
-:i[%s,%s]"
+\Facebook\XHP\HTML\i[%s]"

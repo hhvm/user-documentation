@@ -1,4 +1,4 @@
-string(%d) "Required attribute `userid` was not specified in element `user-info`.
+string(%d) "Required attribute `userid` was not specified in element `user_info`.
 
-%sattributes.php:6"
+%sattributes.php:9"
 User with id 1000 has name Joel
