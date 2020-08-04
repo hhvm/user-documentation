@@ -151,5 +151,4 @@ parts of your code or UI framework (e.g., CSS).
 declares the `class` attribute directly or through inheritance. `addClass` takes a `string` and appends that `string` to the `class`
 attribute; `conditionClass` takes a `string` and a `bool` appends that `string` to the `class` attribute if the `bool` is `true`.
 
-@@ extending-examples/add-class.inc.php @@
 @@ extending-examples/add-class.php @@
