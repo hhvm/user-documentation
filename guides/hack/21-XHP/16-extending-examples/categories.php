@@ -3,14 +3,14 @@
 use type Facebook\XHP\HTML\em;
 
 <<__EntryPoint>>
-function extending_examples_categories_run(): void {
+async function extending_examples_categories_run(): Awaitable<void> {
   \init_docs_autoloader();
   $my_text = <my_text />;
-  $my_text->appendChild(<em>"Hello!"</em>); // This is a %phrase
-  echo $my_text;
+  $my_text->appendChild(<em>"Hello!"</em>); // This is a Category\Phrase
+  echo await $my_text->toStringAsync();
 
   $my_text = <my_text />;
   $my_text->appendChild("Bye!"); // This is pcdata, not a phrase
-  // Won't print out "Bye!" because render is only returing %phrase children
-  echo $my_text;
+  // Won't print out "Bye!" because render is only returing Phrase children
+  echo await $my_text->toStringAsync();
 }

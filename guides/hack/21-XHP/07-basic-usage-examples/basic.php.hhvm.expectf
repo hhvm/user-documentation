@@ -1,4 +1,4 @@
-object(xhp_div) (%d) {
+object(Facebook\\XHP\\HTML\\div) (%d) {
   ["tagName":protected]=>
   string(3) "div"
   ["attributes":"xhp_x__composable_element":private]=>
