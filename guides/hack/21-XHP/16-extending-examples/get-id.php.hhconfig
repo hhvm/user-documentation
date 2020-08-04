@@ -1,0 +1,4 @@
+disable_xhp_element_mangling=true
+enable_xhp_class_modifier=true
+disable_xhp_children_declarations=true
+check_xhp_attribute = true
