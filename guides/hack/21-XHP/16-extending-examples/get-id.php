@@ -3,8 +3,10 @@
 <<__EntryPoint>>
 async function extending_examples_get_id_run(): Awaitable<void> {
   \init_docs_autoloader();
-  // This will print something like:
-  // <span id="8b95a23bc0">This has a random id</span>
-  $xhp = <my_id />;
-  echo await $xhp->toStringAsync();
+  $with_id = <my_id />;
+  echo 'ID: '.$with_id->getID()."\n";
+  echo await $with_id->toStringAsync()."\n";
+
+  $without_id = <my_id />;
+  echo await $without_id->toStringAsync()."\n";
 }
