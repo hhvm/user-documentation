@@ -182,7 +182,9 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       'interp',
       '--args',
       '-d auto_prepend_file='.
-        LocalConfig::ROOT.'/src/utils/_private/init_docs_autoloader.php',
+        LocalConfig::ROOT.'/src/utils/_private/init_docs_autoloader.php'.
+        ' -d hhvm.hack.lang.enable_xhp_class_modifier=true'.
+        ' -d hhvm.hack.lang.disable_xhp_element_mangling=true',
     };
     $command->addAll($extra_args);
     $command[] = LocalConfig::ROOT.'/guides';
