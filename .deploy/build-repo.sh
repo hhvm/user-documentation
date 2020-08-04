@@ -2,7 +2,13 @@
 set -e
 
 echo "** Uninstalling dev-dependencies"
-php /opt/composer/composer.phar install --no-dev
+php /opt/composer/composer.phar install --no-dev --no-autoloader
+
+echo "** Regenerating autoload map"
+hhvm \
+  -d hhvm.hack.lang.enable_xhp_class_modifier=true \
+  -d hhvm.hack.lang.disable_xhp_element_mangling=true \
+  vendor/bin/hh-autoload
 
 echo "** Marking revision"
 git rev-parse HEAD > DOCSITE_REV
