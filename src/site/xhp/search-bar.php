@@ -9,14 +9,18 @@
  *
  */
 
+namespace HHVM\UserDocumentation;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{div, form, input, label};
 use type HHVM\UserDocumentation\UIGlyphIcon;
 
-final xhp class search_bar extends :x:element {
+final xhp class search_bar extends x\element {
   attribute
     string class,
     string placeholder = 'Search';
 
-  protected function render(): XHPRoot {
+  protected async function renderAsync(): Awaitable<x\node> {
     $class = ($this->:class !== null)
       ? "searchBar ".$this->:class
       : "searchBar";

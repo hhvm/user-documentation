@@ -9,38 +9,41 @@
  *
  */
 
+namespace HHVM\UserDocumentation\ui;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\div;
 use type HHVM\UserDocumentation\UIGlyphIcon;
 
-final xhp class ui:notice extends :x:element {
+final xhp class notice extends x\element {
   attribute
     string className,
     UIGlyphIcon glyph,
     enum {'small', 'medium', 'large'} size = 'medium',
     enum {'default', 'success', 'special', 'warning'} use = 'default';
 
-  protected function render(): XHPRoot {
+  protected async function renderAsync(): Awaitable<x\node> {
     $holder_class = ($this->:className !== null)
       ? "noticeHolder ".$this->:className
       : "noticeHolder";
     $notice_class = "notice notice".
-      ucfirst($this->:use).
+      \ucfirst($this->:use).
       " notice".
-      ucfirst($this->:size);
+      \ucfirst($this->:size);
 
-    $notice =
-      <div class={$notice_class} role="note">
-        {$this->getChildren()}
-      </div>;
-
-    $glyph = $this->:glyph;
-    if ($glyph !== null) {
+    $glyph = null;
+    $glyph_icon = $this->:glyph;
+    if ($glyph_icon !== null) {
       $holder_class .= " noticeWithGlyph";
-      $notice->prependChild(<ui:glyph icon={$glyph} />);
+      $glyph = <glyph icon={$glyph_icon} />;
     }
 
     return
       <div class={$holder_class}>
-        {$notice}
+        <div class={$notice_class} role="note">
+          {$glyph}
+          {$this->getChildren()}
+        </div>
       </div>;
   }
 }

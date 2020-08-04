@@ -9,12 +9,14 @@
  *
  */
 
+namespace HHVM\UserDocumentation\ui;
+
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use type Facebook\XHP\HTML\{a, div, span};
 use type HHVM\UserDocumentation\UIGlyphIcon;
 
-use namespace Facebook\XHP\ChildValidation as XHPChild;
-
-final xhp class ui:button extends :x:element {
-  use XHPChildValidation;
+final xhp class button extends x\element {
+  use XHPChild\Validation;
   attribute
     enum {'left', 'right'} align = 'left',
     string className,
@@ -26,21 +28,28 @@ final xhp class ui:button extends :x:element {
     enum {'default', 'confirm', 'special', 'delete'} use = 'default';
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
-    return XHPChild\anyOf(
+    return XHPChild\any_of(
       XHPChild\pcdata(),
-      XHPChild\atLeastOneOf(XHPChild\ofType<:span>()),
+      XHPChild\at_least_one_of(XHPChild\of_type<span>()),
     );
   }
 
 
-  protected function render(): XHPRoot {
+  protected async function renderAsync(): Awaitable<x\node> {
     $holder_class = ($this->:className !== null)
       ? "buttonHolder ".$this->:className
       : "buttonHolder";
     $button_class = "button button".
-      ucfirst($this->:use).
+      \ucfirst($this->:use).
       " button".
-      ucfirst($this->:size);
+      \ucfirst($this->:size);
+
+    $glyph = null;
+    $glyph_icon = $this->:glyph;
+    if ($glyph_icon !== null) {
+      $holder_class .= " buttonWithGlyph";
+      $glyph = <glyph icon={$glyph_icon} />;
+    }
 
     if ($this->:href !== null) {
       $button =
@@ -49,19 +58,15 @@ final xhp class ui:button extends :x:element {
           href={$this->:href}
           role="button"
           target={$this->:target}>
+          {$glyph}
           <span class="buttonText">{$this->getChildren()}</span>
         </a>;
     } else {
       $button =
         <div class={$button_class} role="button">
+          {$glyph}
           <span class="buttonText">{$this->getChildren()}</span>
         </div>;
-    }
-
-    $glyph = $this->:glyph;
-    if ($glyph !== null) {
-      $holder_class .= " buttonWithGlyph";
-      $button->prependChild(<ui:glyph icon={$glyph} />);
     }
 
     if ($this->:inline) {

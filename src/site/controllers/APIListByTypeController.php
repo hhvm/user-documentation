@@ -9,7 +9,9 @@
  *
  */
 
-use type HHVM\UserDocumentation\APIProduct;
+
+use namespace Facebook\XHP\Core as x;
+use type HHVM\UserDocumentation\{APIProduct, api_list};
 
 final class APIListByTypeController extends WebPageController {
   use APIListByTypeControllerParametersTrait;
@@ -55,7 +57,7 @@ final class APIListByTypeController extends WebPageController {
   }
 
   <<__Override>>
-  final protected async function getBodyAsync(): Awaitable<XHPRoot> {
+  final protected async function getBodyAsync(): Awaitable<x\node> {
     return
       <api_list
         product={$this->getParameters()['Product']}

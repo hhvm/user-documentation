@@ -11,7 +11,9 @@
 
 namespace HHVM\UserDocumentation;
 
-class HTMLFileRenderable implements \XHPUnsafeRenderable {
+use namespace Facebook\XHP;
+
+class HTMLFileRenderable implements XHP\UnsafeRenderable {
   public function __construct(
     private string $htmlFile,
     private string $htmlRoot = BuildPaths::GUIDES_HTML,
@@ -27,7 +29,7 @@ class HTMLFileRenderable implements \XHPUnsafeRenderable {
     );
   }
 
-  public function toHTMLString(): string {
+  public async function toHTMLStringAsync(): Awaitable<string> {
     return \file_get_contents($this->htmlFile);
   }
 }

@@ -9,11 +9,15 @@
  *
  */
 
+namespace HHVM\UserDocumentation;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{a, div, h3, li, span, ul};
 use type HHVM\UserDocumentation\{APIDefinitionType, APIIndex, APIProduct};
 
 use namespace HH\Lib\{C, Str};
 
-xhp class api_list extends :x:element {
+xhp class api_list extends x\element {
   attribute
     APIProduct product @required,
     ImmSet<APIDefinitionType> types @required;
@@ -42,7 +46,7 @@ xhp class api_list extends :x:element {
     return $out;
   }
 
-  final private function getInnerContent(): XHPRoot {
+  final private function getInnerContent(): x\node {
     $defs = $this->getDefinitions();
 
     $root = <div class="referenceList" />;
@@ -50,7 +54,7 @@ xhp class api_list extends :x:element {
       if (C\is_empty($api_references)) {
         continue;
       }
-      $title = ucwords($type.' Reference');
+      $title = \ucwords($type.' Reference');
       $type_list = <ul class="apiList" />;
       foreach ($api_references as $name => $url) {
         $name = $name
@@ -80,7 +84,7 @@ xhp class api_list extends :x:element {
     return $root;
   }
 
-  final protected function render(): XHPRoot {
+  final protected async function renderAsync(): Awaitable<x\node> {
     return
       <div class="apiListWrapper">
         {$this->getInnerContent()}

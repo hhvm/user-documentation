@@ -9,6 +9,8 @@
  *
  */
 
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\div;
 use type HHVM\UserDocumentation\{
   APIDefinitionType,
   APIIndexEntry,
@@ -26,7 +28,7 @@ abstract class APIPageController extends WebPageController {
   abstract protected function getRootDefinition(): APIIndexEntry;
 
   <<__Override>>
-  final protected async function getBodyAsync(): Awaitable<XHPRoot> {
+  final protected async function getBodyAsync(): Awaitable<x\node> {
     return
       <div class="referencePageWrapper">
         {$this->getInnerContent()}
@@ -35,7 +37,7 @@ abstract class APIPageController extends WebPageController {
 
   abstract protected function getHTMLFilePath(): string;
 
-  final protected function getInnerContent(): XHPRoot {
+  final protected function getInnerContent(): x\node {
     return self::invariantTo404(() ==> {
       $path = $this->getHTMLFilePath();
       return

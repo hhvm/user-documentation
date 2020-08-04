@@ -9,21 +9,28 @@
  *
  */
 
-final xhp class static:stylesheet extends :static:base {
-  use XHPHelpers;
+namespace HHVM\UserDocumentation\static;
 
-  attribute :link;
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\link;
+
+final xhp class stylesheet extends base {
+  attribute string media;
 
   protected function getAllowedMimeTypes(): Set<string> {
     return Set {'text/css'};
   }
 
-  protected function render(): XHPRoot {
-    return
+  protected async function renderAsync(): Awaitable<x\node> {
+    $ret =
       <link
         rel="stylesheet"
         type={$this->getMimeType()}
         href={$this->getVersionedURL()}
       />;
+    if ($this->:media is nonnull) {
+      $ret->setAttribute('media', $this->:media);
+    }
+    return $ret;
   }
 }
