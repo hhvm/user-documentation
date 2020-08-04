@@ -1,10 +1,10 @@
 <?hh // partial
 
-xhp class ui:get_status extends :x:element {
+use namespace Facebook\XHP\Core as x;
 
-  use XHPAsync;
+final xhp class ui_get_status extends x\element {
 
-  protected async function asyncRender(): Awaitable<\XHPRoot> {
+  protected async function renderAsync(): Awaitable<x\node> {
     $ch = curl_init('https://developers.facebook.com/status/');
     curl_setopt($ch, CURLOPT_USERAGENT, 'hhvm/user-documentation example');
     $status = await HH\Asio\curl_exec($ch);

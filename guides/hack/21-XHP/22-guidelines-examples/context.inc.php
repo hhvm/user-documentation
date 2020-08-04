@@ -1,17 +1,17 @@
 <?hh // partial
 
-use namespace Facebook\XHP\ChildValidation as XHPChild;
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use type Facebook\XHP\HTML\{dd, dl, dt};
 
-xhp class ui_myparent extends :x:element {
-  use XHPChildValidation;
+final xhp class ui_myparent extends x\element {
+  use XHPChild\Validation;
   attribute string text @required;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
-    return XHPChild\ofType<:ui_mychild>();
+    return XHPChild\of_type<ui_mychild>();
   }
 
-
-  protected function render(): XHPRoot {
+  protected async function renderAsync(): Awaitable<x\node> {
     return (
       <dl>
         <dt>Text</dt>
@@ -23,10 +23,10 @@ xhp class ui_myparent extends :x:element {
   }
 }
 
-xhp class ui_mychild extends :x:element {
+final xhp class ui_mychild extends x\element {
   attribute string text @required;
 
-  protected function render(): XHPRoot {
+  protected async function renderAsync(): Awaitable<x\node> {
     if ($this->getContext('hint') === 'Yes') {
       return <x:frag>{$this->:text.'...and more'}</x:frag>;
     }

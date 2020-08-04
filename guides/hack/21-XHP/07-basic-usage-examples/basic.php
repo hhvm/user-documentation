@@ -1,5 +1,7 @@
 <?hh // partial
 
+use type Facebook\XHP\HTML\{div, i, strong};
+
 <<__EntryPoint>>
 function basic_usage_examples_basic_xhp(): void {
   \init_docs_autoloader();

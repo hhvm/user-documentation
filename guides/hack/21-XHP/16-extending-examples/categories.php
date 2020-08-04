@@ -1,5 +1,7 @@
 <?hh // partial
 
+use type Facebook\XHP\HTML\em;
+
 <<__EntryPoint>>
 function extending_examples_categories_run(): void {
   \init_docs_autoloader();
