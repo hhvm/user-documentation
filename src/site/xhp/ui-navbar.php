@@ -260,8 +260,6 @@ final xhp class navbar extends x\element {
       return $stored;
     }
 
-    $result = $callback();
-    APCCachedRenderable::store($cache_key, $result);
-    return $result;
+    return APCCachedRenderable::store($cache_key, $callback());
   }
 }
