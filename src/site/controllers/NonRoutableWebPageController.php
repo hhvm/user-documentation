@@ -18,8 +18,7 @@ use type Facebook\XHP\HTML\{a, body, div, doctype, footer, h1, h2, head, html, i
 
 use namespace HH\Lib\C;
 use namespace Facebook\XHP\Core as x;
-use namespace HHVM\UserDocumentation\{script, ui};
-use namespace HHVM\UserDocumentation\static;
+use namespace HHVM\UserDocumentation\{script, static_res, ui};
 
 abstract class NonRoutableWebPageController extends WebController {
   protected abstract function getTitleAsync(): Awaitable<string>;
@@ -125,7 +124,7 @@ EOF;
             <comment>
               Build ID: {LocalConfig::getBuildID()}
             </comment>
-            <static:stylesheet path="/css/main.css" media="screen" />
+            <static_res:stylesheet path="/css/main.css" media="screen" />
             <link
               href=
                 "https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700"

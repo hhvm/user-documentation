@@ -9,7 +9,7 @@
  *
  */
 
-namespace HHVM\UserDocumentation\static;
+namespace HHVM\UserDocumentation\static_res;
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\link;
