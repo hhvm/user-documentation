@@ -1,9 +1,9 @@
 <?hh // partial
 
 <<__EntryPoint>>
-function startHere(): void {
+async function startHere(): Awaitable<void> {
   \init_docs_autoloader();
-  guidelines_examples_context_run('No');
+  await guidelines_examples_context_run('No');
   echo "\n\n";
-  guidelines_examples_context_run('Yes');
+  await guidelines_examples_context_run('Yes');
 }

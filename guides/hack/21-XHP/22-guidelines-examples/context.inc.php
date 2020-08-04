@@ -34,12 +34,12 @@ final xhp class ui_mychild extends x\element {
   }
 }
 
-function guidelines_examples_context_run(string $s): void {
+async function guidelines_examples_context_run(string $s): Awaitable<void> {
   $xhp = (
     <ui_myparent text={$s}>
       <ui_mychild text="Go" />
     </ui_myparent>
   );
   $xhp->setContext('hint', $s);
-  echo $xhp;
+  echo await $xhp->toStringAsync();
 }

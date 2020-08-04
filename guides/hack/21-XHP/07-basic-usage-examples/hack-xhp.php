@@ -17,16 +17,16 @@ function basic_usage_examples_get_float(): float {
 }
 
 <<__EntryPoint>>
-function basic_usage_examples_embed_hack(): void {
+async function basic_usage_examples_embed_hack(): Awaitable<void> {
   \init_docs_autoloader();
   $xhp_float = <i>{basic_usage_examples_get_float()}</i>;
   $a = new MyBasicUsageExampleClass();
 
-  echo(
+  $xhp =
     <div>
       {(new MyBasicUsageExampleClass())->getInt()}
       <strong>{basic_usage_examples_get_string()}</strong>
       {$xhp_float /* this embeds the <i /> element as a child of the <div /> */}
-    </div>
-  );
+    </div>;
+  echo await $xhp->toStringAsync();
 }

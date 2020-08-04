@@ -1,5 +1,7 @@
 <?hh // partial
 
+namespace Hack\UserDocumentation\XHP\MarkdownWrapper;
+
 use namespace Facebook\XHP;
 
 /* YOU PROBABLY SHOULDN'T DO THIS

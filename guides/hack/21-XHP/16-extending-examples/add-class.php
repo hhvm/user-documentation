@@ -11,9 +11,11 @@ function get_header(string $section_name): h1 {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   \init_docs_autoloader();
-  echo get_header('Home');
-  echo "\n";
-  echo get_header('Contact');
+  $xhp = get_header('Home');
+  echo await $xhp->toStringAsync()."\n";
+
+  $xhp = get_header('Contact');
+  echo await $xhp->toStringAsync()."\n";
 }

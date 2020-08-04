@@ -12,22 +12,29 @@ function xhp_object_methods_build_list(Vector<string> $names): x\node {
 }
 
 <<__EntryPoint>>
-function xhp_object_methods_run(): void {
+async function xhp_object_methods_run(): Awaitable<void> {
   \init_docs_autoloader();
   $names = Vector {'Sara', 'Fred', 'Josh', 'Scott', 'Paul', 'David', 'Matthew'};
+
   $list = xhp_object_methods_build_list($names);
   foreach ($list->getChildren() as $child) {
-    /* HH_FIXME[4067] implicit __toString() is now deprecated */
-    echo <ul>{$child}</ul>."\n";
+    $xhp = <ul>{$child}</ul>;
+    echo await $xhp->toStringAsync()."\n";
   }
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo <ul>{$list->getFirstChild()}</ul>."\n";
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo <ul>{$list->getLastChild()}</ul>."\n";
+
+  $list = xhp_object_methods_build_list($names);
+  $xhp = <ul>{$list->getFirstChild()}</ul>;
+  echo await $xhp->toStringAsync()."\n";
+
+  $list = xhp_object_methods_build_list($names);
+  $xhp = <ul>{$list->getLastChild()}</ul>;
+  echo await $xhp->toStringAsync()."\n";
+
   foreach ($list->getAttributes() as $attr) {
-    /* HH_FIXME[4067] implicit __toString() is now deprecated */
-    echo <ul><li>{(string)$attr}</li></ul>."\n";
+    $xhp = <ul><li>{(string)$attr}</li></ul>;
+    echo await $xhp->toStringAsync()."\n";
   }
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo <ul><li>{$list->getAttribute('id') as string}</li></ul>."\n";
+
+  $xhp = <ul><li>{$list->getAttribute('id') as string}</li></ul>;
+  echo await $xhp->toStringAsync()."\n";
 }
