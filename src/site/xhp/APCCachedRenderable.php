@@ -34,10 +34,16 @@ final class APCCachedRenderable
     return null;
   }
 
-  public static function store(string $key, x\node $content): void {
+  /**
+   * This renders (stringifies) $content, making it impossible to render it
+   * again. If you need that, render the returned x\node instead, which provides
+   * identical output.
+   */
+  public static function store(string $key, x\node $content): x\node {
     $str = \HH\Asio\join($content->toStringAsync());
     $key = self::makeKey($key);
     \apc_store($key, $str);
+    return <x:frag>{new self($str)}</x:frag>;
   }
 
   private static function makeKey(string $key): string {
