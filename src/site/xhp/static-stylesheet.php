@@ -17,10 +17,12 @@ use type Facebook\XHP\HTML\link;
 final xhp class stylesheet extends base {
   attribute string media;
 
+  <<__Override>>
   protected function getAllowedMimeTypes(): Set<string> {
     return Set {'text/css'};
   }
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $ret =
       <link

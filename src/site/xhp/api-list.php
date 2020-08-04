@@ -84,6 +84,7 @@ xhp class api_list extends x\element {
     return $root;
   }
 
+  <<__Override>>
   final protected async function renderAsync(): Awaitable<x\node> {
     return
       <div class="apiListWrapper">

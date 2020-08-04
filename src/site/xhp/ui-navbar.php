@@ -23,6 +23,7 @@ final xhp class navbar extends x\element {
     vec<string> activePath @required,
     string extraNavListClass;
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $roots = Dict\map($this->:data, $node ==> $this->renderLevel1Item($node));
 

@@ -35,6 +35,7 @@ final xhp class button extends x\element {
   }
 
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $holder_class = ($this->:className !== null)
       ? "buttonHolder ".$this->:className

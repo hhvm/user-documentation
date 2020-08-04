@@ -20,6 +20,7 @@ final xhp class search_bar extends x\element {
     string class,
     string placeholder = 'Search';
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $class = ($this->:class !== null)
       ? "searchBar ".$this->:class

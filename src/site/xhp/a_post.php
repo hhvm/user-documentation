@@ -12,13 +12,14 @@
 namespace HHVM\UserDocumentation;
 
 use namespace Facebook\XHP\Core as x;
-use type Facebook\XHP\HTML\{XHPHTMLHelpers, a, form};
+use type Facebook\XHP\HTML\{a, form};
 
 
 final xhp class a_post extends x\element {
   attribute string href @required;
   attribute string target;
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $anchor = <a>{$this->getChildren()}</a>;
     $form =
