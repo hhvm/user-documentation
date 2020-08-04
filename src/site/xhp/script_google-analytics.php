@@ -17,6 +17,7 @@ use type Facebook\XHP\HTML\script;
 xhp class google_analytics extends x\element {
   attribute string trackingID @required;
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $tracking_id = \json_encode($this->:trackingID);
     $js = <<<EOF

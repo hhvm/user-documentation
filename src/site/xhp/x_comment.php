@@ -21,6 +21,7 @@ final xhp class comment extends x\primitive implements XHP\AlwaysValidChild {
     return XHPChild\any_number_of(XHPChild\pcdata());
   }
 
+  <<__Override>>
   protected async function stringifyAsync(): Awaitable<string> {
     $html = '<!--';
     foreach ($this->getChildren() as $child) {

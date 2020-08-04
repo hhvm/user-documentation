@@ -19,6 +19,7 @@ use type HHVM\UserDocumentation\UIGlyphIcon;
 final xhp class glyph extends x\element {
   attribute UIGlyphIcon icon @required;
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $class = "glyphIcon fa fa-".$this->:icon;
     return <i class={$class}></i>;

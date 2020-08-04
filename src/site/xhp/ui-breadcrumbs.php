@@ -18,6 +18,7 @@ use namespace HH\Lib\{C, Vec};
 final xhp class breadcrumbs extends x\element {
   attribute vec<(string, ?string)> stack @required;
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $stack = $this->:stack;
     list($current, $_) = C\lastx($stack);

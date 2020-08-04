@@ -32,6 +32,7 @@ final xhp class github_issue_link extends x\element {
 
   use XHPGetRequest;
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $body = $this->:issueBody."\n\n".$this->getMetadataForBody();
 

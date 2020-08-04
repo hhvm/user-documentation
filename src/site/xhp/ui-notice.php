@@ -22,6 +22,7 @@ final xhp class notice extends x\element {
     enum {'small', 'medium', 'large'} size = 'medium',
     enum {'default', 'success', 'special', 'warning'} use = 'default';
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     $holder_class = ($this->:className !== null)
       ? "noticeHolder ".$this->:className

@@ -14,10 +14,12 @@ namespace HHVM\UserDocumentation\static;
 use namespace Facebook\XHP\{Core as x, HTML};
 
 final xhp class script extends base {
+  <<__Override>>
   protected function getAllowedMimeTypes(): Set<string> {
     return Set {'application/javascript'};
   }
 
+  <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
     return
       <HTML:script type={$this->getMimeType()} src={$this->getVersionedURL()} />;

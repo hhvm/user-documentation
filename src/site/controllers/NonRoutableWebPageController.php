@@ -17,7 +17,7 @@ use type Facebook\Experimental\Http\Message\{
 use type Facebook\XHP\HTML\{a, body, div, doctype, footer, h1, h2, head, html, i, li, link, meta, script, span, strong, title, ul};
 
 use namespace HH\Lib\C;
-use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use namespace Facebook\XHP\Core as x;
 use namespace HHVM\UserDocumentation\{script, ui};
 use namespace HHVM\UserDocumentation\static;
 
