@@ -9,17 +9,20 @@
  *
  */
 
+namespace HHVM\UserDocumentation;
+
+use namespace Facebook\XHP\Core as x;
 use type Facebook\Experimental\Http\Message\ServerRequestInterface;
 
 trait XHPGetRequest {
-  require extends :x:element;
+  require extends x\element;
 
   protected function getRequest(): ServerRequestInterface {
     $x = $this->getContext('ServerRequestInterface');
     invariant(
       $x is ServerRequestInterface,
       '%s is not a ServerRequestInterface',
-      gettype($x).' ('.get_class($x).')',
+      \gettype($x).' ('.\get_class($x).')',
     );
     return $x;
   }

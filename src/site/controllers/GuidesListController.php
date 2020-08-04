@@ -9,6 +9,8 @@
  *
  */
 
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{a, div, h3, h4, li, p, ul};
 use type HHVM\UserDocumentation\{GuidesIndex, GuidesProduct, URLBuilder};
 
 final class GuidesListController extends WebPageController {
@@ -32,7 +34,7 @@ final class GuidesListController extends WebPageController {
     }
   }
 
-  protected function getInnerContent(): XHPRoot {
+  protected function getInnerContent(): x\node {
     $product = $this->getProduct();
     $guides = GuidesIndex::getGuides($product);
 
@@ -56,7 +58,7 @@ final class GuidesListController extends WebPageController {
   }
 
   <<__Override>>
-  protected async function getBodyAsync(): Awaitable<XHPRoot> {
+  protected async function getBodyAsync(): Awaitable<x\node> {
     $body =
       <x:frag>
         <div class="guideListWrapper">
@@ -87,7 +89,7 @@ final class GuidesListController extends WebPageController {
     return $body;
   }
 
-  protected function getGuideSummary(string $guide): ?XHPRoot {
+  protected function getGuideSummary(string $guide): ?x\node {
     $path = GuidesIndex::getFileForSummary($this->getProduct(), $guide);
     if (file_get_contents($path)) {
       return <x:frag>{file_get_contents($path)}</x:frag>;

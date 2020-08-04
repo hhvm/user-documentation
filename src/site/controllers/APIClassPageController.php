@@ -19,6 +19,8 @@ use type HHVM\UserDocumentation\{
 };
 
 use namespace HH\Lib\{C, Str};
+use namespace Facebook\XHP\Core as x;
+use namespace HHVM\UserDocumentation\ui;
 
 final class APIClassPageController extends APIPageController {
   use APIClassPageControllerParametersTrait;
@@ -66,7 +68,7 @@ final class APIClassPageController extends APIPageController {
   }
 
   <<__Override>>
-  protected function getSideNav(): XHPRoot {
+  protected function getSideNav(): x\node {
     $api_nav_data = APINavData::get($this->getParameters()['Product']);
     $path = vec[
       $api_nav_data->getRootNameForType($this->getDefinitionType()),
