@@ -9,12 +9,37 @@
  *
  */
 
-use type HHVM\UserDocumentation\{LocalConfig, UIGlyphIcon, comment, github_issue_link, search_bar};
+use type HHVM\UserDocumentation\{
+  LocalConfig,
+  UIGlyphIcon,
+  comment,
+  github_issue_link,
+  search_bar,
+};
 use type Facebook\Experimental\Http\Message\{
   ResponseInterface,
   ServerRequestInterface,
 };
-use type Facebook\XHP\HTML\{a, body, div, doctype, footer, h1, h2, head, html, i, li, link, meta, script, span, strong, title, ul};
+use type Facebook\XHP\HTML\{
+  a,
+  body,
+  div,
+  doctype,
+  footer,
+  h1,
+  h2,
+  head,
+  html,
+  i,
+  li,
+  link,
+  meta,
+  script,
+  span,
+  strong,
+  title,
+  ul,
+};
 
 use namespace HH\Lib\C;
 use namespace Facebook\XHP\Core as x;
