@@ -435,16 +435,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.64.4",
+            "version": "v4.64.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "64782a555e3bf6b6da5c983cbf53ab2c63b4e4d9"
+                "reference": "c3a958432d76d44a38b6ace2a49ceaded1b8ce62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/64782a555e3bf6b6da5c983cbf53ab2c63b4e4d9",
-                "reference": "64782a555e3bf6b6da5c983cbf53ab2c63b4e4d9",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/c3a958432d76d44a38b6ace2a49ceaded1b8ce62",
+                "reference": "c3a958432d76d44a38b6ace2a49ceaded1b8ce62",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +481,7 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-08-03T17:37:49+00:00"
+            "time": "2020-08-04T23:27:55+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
