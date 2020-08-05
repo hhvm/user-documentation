@@ -4,15 +4,10 @@ Here are some general guidelines to know and follow when using XHP. In addition 
 ## Validation of Attributes and Children
 
 The constraints of XHP object children and attributes are done at various times:
-* Children constraints are validated at render-time (when `toString` is called explicitly or implicitly).
-* Attribute names and types are validated when the attributes are set in a tag or via `setAttribute`.
-* `@required` is validated when the required attributes are read.
-
-This validation is on by default. You can turn it off by running the following code before using XHP:
-
-```Hack
-:xhp::$ENABLE_VALIDATION=false
-```
+* Children constraints are validated at render-time (when `toStringAsync` is called).
+* Attributes provided directly (`<your_class attr="value">`) are validated by
+  the typechecker.
+* Attribute names set by `setAttribute` are only validated at render-time.
 
 ## Use Contexts to Access Higher Level Information
 
@@ -37,8 +32,9 @@ we haven't yet come across any situations where public methods are a better solu
 
 ## Use Inheritance Minimally
 
-If you need an XHP object to act like another, but slightly modified, use composition. Categories and attribute cloning can
-be used to provide a common interface.
+If you need an XHP object to act like another, but slightly modified, use
+composition (the would-be subclass can instead return an instance of the
+original XHP class from its `renderAsync` method).
 
 ## Remember No Dollar Signs
 

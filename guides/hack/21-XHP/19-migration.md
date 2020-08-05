@@ -1,6 +1,7 @@
 You can incrementally port code to use XHP.
 
-The basis for all these possibilities is this function:
+Assume your output is currently handled by the following function, which might
+be called from many places.
 
 ```Hack
 function render_component($text, $uri) {
@@ -10,16 +11,15 @@ function render_component($text, $uri) {
 }
 ```
 
-This could be called from many places.
-
 ## Convert Leaf Functions
 
-You can simply use XHP in `render_component`:
+You can start by simply using XHP in `render_component`:
 
 ```Hack
-function render_component($text, $uri) {
+async function render_component($text, $uri) {
   $link = <a href={$uri}>{$text}</a>;
-  return $link->toString();
+  return await $link->toStringAsync();
+  // or HH\Asio\join if converting all callers to async is hard
 }
 ```
 
@@ -31,11 +31,12 @@ strings around in the end.
 You could make `render_component` into a class:
 
 ```Hack
-// Assume class Uri
-class :ui:component-link extends :x:element {
-  attribute Uri $uri @required;
+namespace ui;
+
+class link extends x\element {
+  attribute Uri $uri @required;  // Assume class Uri
   attribute string $text @required;
-  protected function render(): XHPRoot {
+  protected async function renderAsync(): Awaitable<x\node> {
     return
       <a href={$this->:uri}>{$this->:text}</a>;
   }
@@ -45,7 +46,7 @@ class :ui:component-link extends :x:element {
 Keep a legacy `render_component` around while you are converting the old code that uses `render_component` to use the class.
 
 ```Hack
-function render_component(string $text, Uri $uri): string {
-  return (<ui:component-link uri={$uri} text={$text} />)->toString();
+async function render_component(string $text, Uri $uri): Awaitable<string> {
+  return await (<ui:link uri={$uri} text={$text} />)->toStringAsync();
 }
 ```

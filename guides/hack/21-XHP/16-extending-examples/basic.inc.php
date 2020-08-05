@@ -9,10 +9,8 @@ final xhp class introduction extends x\element {
   }
 }
 
-final xhp class intro_plain_str extends x\element {
-  protected async function renderAsync(): Awaitable<x\node> {
-    // Since this function returns an XHPRoot, if you want to return a primitive
-    // like a string, wrap it around <x:frag>
-    return <x:frag>Hello!</x:frag>;
+final xhp class intro_plain_str extends x\primitive {
+  protected async function stringifyAsync(): Awaitable<string> {
+    return 'Hello!';
   }
 }
