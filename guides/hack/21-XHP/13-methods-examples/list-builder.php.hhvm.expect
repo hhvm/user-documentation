@@ -1,11 +1,11 @@
-<ul><li>Sara</li></ul>
-<ul><li>Fred</li></ul>
-<ul><li>Josh</li></ul>
-<ul><li>Scott</li></ul>
-<ul><li>Paul</li></ul>
-<ul><li>David</li></ul>
-<ul><li>Matthew</li></ul>
-<ul><li>Sara</li></ul>
-<ul><li>Matthew</li></ul>
-<ul><li>names</li></ul>
-<ul><li>names</li></ul>
+Child: <li>Sara</li>
+Child: <li>Fred</li>
+Child: <li>Josh</li>
+Child: <li>Scott</li>
+Child: <li>Paul</li>
+Child: <li>David</li>
+Child: <li>Matthew</li>
+First child: <li>Sara</li>
+Last child: <li>Matthew</li>
+Attribute id = names
+ID: names

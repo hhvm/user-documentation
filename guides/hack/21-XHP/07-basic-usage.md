@@ -1,8 +1,5 @@
-First, make sure that you have the [XHP Library](some-basics.md#the-xhp-lib-library) installed a dependency of your project&mdash;this defines
-the various core classes of XHP, and the standard HTML components.
-
 XHP is a syntax to create actual Hack objects, called *XHP objects*. They are meant to be used as a tree, where children can either be
-other XHP objects or text nodes.
+other XHP objects or text nodes (or, rarely, other non-XHP objects).
 
 ## Creating a Simple XHP Object
 
@@ -12,16 +9,69 @@ Instead of using the `new` operator, creating XHP looks very much like XML:
 $my_xhp_object = <p>Hello, world</p>;
 ```
 
-`$my_xhp_object` now contains an instance of the `:p` class; the initial `:` marks it as an XHP class, but is not needed when instantiating
-it. It is a real object, meaning that `is_object` will return `true` and you can call methods on it.
+`$my_xhp_object` now contains an instance of the `p` class.
+It is a real object, meaning that `is_object` will return `true` and you can call methods on it.
 
-The following example utilizes three XHP classes: `:div`, `:strong`, `:i`. Whitespace is insignificant, so you can create a readable
+**Historical note:** Before XHP namespace support (in XHP-Lib v3), XHP classes
+lived in a separate (but still global) namespace from regular classes, denoted
+by a `:` prefix in the typechecker and an `xhp_` prefix at runtime. `<p>` would
+therefore instantiate a class named `:p` in Hack code and `xhp_p` at runtime. It
+would therefore not conflict with a global non-XHP class named `p`, but would
+conflict with a class named `xhp_p`.
+
+The following example utilizes three XHP classes: `div`, `strong`, `i`. Whitespace is insignificant, so you can create a readable
 tree structure in your code.
 
 @@ basic-usage-examples/basic.php @@
 
-The `var_dump` shows that a tree of objects has been created, not an HTML/XML string. An HTML string can be produced either by simply
-using `echo`/`print`, or by calling `$xhp_object->toString`.
+The `var_dump` shows that a tree of objects has been created, not an HTML/XML string. An HTML string can be produced by calling `await $xhp_object->toStringAsync()`.
+
+## Namespace Syntax
+
+When instantiating an XHP class using the `<ClassName>` syntax, `:` must be used
+instead of `\` as a namespace separator (this mirrors XML's namespace syntax).
+These are all equivalent ways to instantiate a `Facebook\XHP\HTML\p` object:
+
+```
+use type Facebook\XHP\HTML\p;
+$xhp = <p>Hello, world</p>;
+```
+
+```
+use namespace Facebook\XHP\HTML;
+$xhp = <HTML:p>Hello, world</HTML:p>;
+```
+
+```
+use namespace Facebook\XHP\HTML as h;
+$xhp = <h:p>Hello, world</h:p>;
+```
+
+```
+// from global namespace:
+$xhp = <Facebook:XHP:HTML:p>Hello, world</Facebook:XHP:HTML:p>;
+```
+
+```
+namespace CustomNamespace;  // from any namespace:
+$xhp = <:Facebook:XHP:HTML:p>Hello, world</:Facebook:XHP:HTML:p>;
+```
+
+In all other contexts, `\` must be used, for example:
+
+```
+if ($obj is HTML\p) { ... }
+h\p::staticMethod();
+$class_name = Facebook\XHP\HTML\p::class;
+final xhp class my_element extends \Facebook\XHP\Core\element { ... }
+```
+
+**Historical note:** Before XHP namespace support (in XHP-Lib v3), `:` is
+allowed as part of an XHP class name, but it is *not* a namespace separator. It
+is simply translated to `__` at runtime (this is called "name mangling"). For
+example, `<ui:table>` would instantiate a global class named `xhp_ui__table`. In
+all other contexts, XHP classes must be referenced with the `:` prefix (e.g.
+`if ($obj is :ui:table) { ... }`).
 
 ## Dynamic Content
 
@@ -51,9 +101,11 @@ class defines what attributes are available to objects of that class:
 echo <input type="button" name="submit" value="OK" />;
 ```
 
-Here the `:input` class has the attributes `type`, `name` and `value` as part of its class properties.
+Here the `input` class has the attributes `type`, `name` and `value` as part of its class properties.
 
-Some attributes are required, and XHP will throw an error if you use an XHP object with a required attribute but without the attribute.
+Some attributes are required, and XHP will throw an error if you use an XHP object with a required attribute but without the attribute. Depending on the exact HHVM
+version and configuration, this may or may not be a typechecker error, but is
+always a runtime error.
 
 ## HTML Character References
 

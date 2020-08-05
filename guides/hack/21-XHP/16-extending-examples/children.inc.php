@@ -1,17 +1,19 @@
 <?hh // partial
 
+// Conventionally aliased to XHPChild, which makes the children declarations
+// easier to read (more fluid).
 use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
 use type Facebook\XHP\HTML\{body, head, html, li, ul};
 
-xhp class my_br extends x\element {
+xhp class my_br extends x\primitive {
   use XHPChild\Validation;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
     return XHPChild\empty();
   }
 
-  protected async function renderAsync(): Awaitable<x\node> {
-    return <x:frag>PHP_EOL</x:frag>;
+  protected async function stringifyAsync(): Awaitable<string> {
+    return "\n";
   }
 }
 
