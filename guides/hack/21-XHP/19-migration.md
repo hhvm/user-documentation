@@ -4,8 +4,8 @@ Assume your output is currently handled by the following function, which might
 be called from many places.
 
 ```Hack
-function render_component($text, $uri) {
-  $uri = htmlspecialchars($uri);
+function render_component(string $text, Uri $uri): string {
+  $uri = htmlspecialchars($uri->toString());
   $text = htmlspecialchars($text);
   return "<a href=\"$uri\">$text</a>";
 }
@@ -16,8 +16,8 @@ function render_component($text, $uri) {
 You can start by simply using XHP in `render_component`:
 
 ```Hack
-async function render_component($text, $uri) {
-  $link = <a href={$uri}>{$text}</a>;
+async function render_component(string $text, Uri $uri): Awaitable<string> {
+  $link = <a href={$uri->toString()}>{$text}</a>;
   return await $link->toStringAsync();
   // or HH\Asio\join if converting all callers to async is hard
 }
@@ -34,11 +34,11 @@ You could make `render_component` into a class:
 namespace ui;
 
 class link extends x\element {
-  attribute Uri $uri @required;  // Assume class Uri
-  attribute string $text @required;
+  attribute Uri uri @required;
+  attribute string text @required;
   protected async function renderAsync(): Awaitable<x\node> {
     return
-      <a href={$this->:uri}>{$this->:text}</a>;
+      <a href={$this->:uri->toString()}>{$this->:text}</a>;
   }
 }
 ```

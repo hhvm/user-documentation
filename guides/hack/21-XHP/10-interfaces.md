@@ -28,7 +28,9 @@ one of its two subclasses:
   a `stringifyAsync()` method that returns a `string` and must manually deal with
   any children
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), the names of
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), the names of
 `node`, `element` and `primitive` are `\XHPRoot`, `:x:element` and
 `:x:primitive` respectively.
 
@@ -47,7 +49,9 @@ XHP usually gets in the way of this by:
 
 The `\Facebook\XHP\UnsafeRenderable` and `\Facebook\XHP\XHPAlwaysValidChild` interfaces allow bypassing these safety mechanisms.
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), the names of
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), the names of
 these interfaces are `\XHPUnsafeRenderable` and `\XHPAlwaysValidChild`.
 
 ### `\Facebook\XHP\UnsafeRenderable`

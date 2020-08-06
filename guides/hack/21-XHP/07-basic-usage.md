@@ -12,7 +12,9 @@ $my_xhp_object = <p>Hello, world</p>;
 `$my_xhp_object` now contains an instance of the `p` class.
 It is a real object, meaning that `is_object` will return `true` and you can call methods on it.
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), XHP classes
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), XHP classes
 lived in a separate (but still global) namespace from regular classes, denoted
 by a `:` prefix in the typechecker and an `xhp_` prefix at runtime. `<p>` would
 therefore instantiate a class named `:p` in Hack code and `xhp_p` at runtime. It
@@ -66,7 +68,9 @@ $class_name = Facebook\XHP\HTML\p::class;
 final xhp class my_element extends \Facebook\XHP\Core\element { ... }
 ```
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), `:` is
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), `:` is
 allowed as part of an XHP class name, but it is *not* a namespace separator. It
 is simply translated to `__` at runtime (this is called "name mangling"). For
 example, `<ui:table>` would instantiate a global class named `xhp_ui__table`. In
@@ -101,11 +105,12 @@ class defines what attributes are available to objects of that class:
 echo <input type="button" name="submit" value="OK" />;
 ```
 
-Here the `input` class has the attributes `type`, `name` and `value` as part of its class properties.
+Here the `input` class has the attributes `type`, `name` and `value`.
 
-Some attributes are required, and XHP will throw an error if you use an XHP object with a required attribute but without the attribute. Depending on the exact HHVM
-version and configuration, this may or may not be a typechecker error, but is
-always a runtime error.
+Some attributes are required, and XHP will throw an exception when an XHP object
+is rendered (`toStringAsync()` is called) with any required attributes missing.
+With `check_xhp_attribute=true` (available since HHVM 4.8) this is also a
+typechecker error.
 
 ## HTML Character References
 

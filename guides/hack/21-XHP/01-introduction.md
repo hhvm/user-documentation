@@ -13,7 +13,8 @@ However, with XHP, it looks like this:
 
 ```
 $user_name = 'Fred';
-echo <tt>Hello <strong>{$user_name}</strong></tt>;
+$xhp = <tt>Hello <strong>{$user_name}</strong></tt>;
+echo await $xhp->toStringAsync();
 ```
 
 The first example uses string interpolation to output the HTML, while the second has no quotation marks&mdash;meaning that the syntax is

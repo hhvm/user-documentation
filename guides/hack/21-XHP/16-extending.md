@@ -6,7 +6,9 @@ items that are not in the standard HTML specification.
 XHP class names must follow the same rules as any other Hack class names:
 Letters, numbers and `_` are allowed and the name mustn't start with a number.
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), XHP class
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), XHP class
 names could also contain `:` (now a namespace separator) and `-` (now disallowed
 completely). These were translated to `__` and `_` respectively at runtime (this
 is called "name mangling"). For example, `<ui:big-table>` would instantiate a
@@ -22,7 +24,9 @@ A custom XHP class needs to do three things:
 @@ extending-examples/basic.inc.php @@
 @@ extending-examples/basic.php @@
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), use
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), use
 `class :intro_plain_str` instead of `xhp class intro_plain_str` (no `xhp`
 keyword, but requires a `:` prefix in the class name).
 
@@ -87,15 +91,22 @@ You can declare the types that your custom class is allowed to have as children
 by using the `Facebook\XHP\ChildValidation\Validation` trait and implementing the
 `getChildrenDeclaration()` method.
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), a special
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), a special
 `children` keyword with a regex-like syntax could be used instead
 ([examples](https://github.com/hhvm/xhp-lib/blob/v3.x/tests/ChildRuleTest.php)).
 However, XHP-Lib v3 also supports `Facebook\XHP\ChildValidation\Validation`, and
 it is therefore recommended to use it everywhere.
 
 If you don't use the child validation trait, then your class can have any
-children. If you try to add a child to an object
-that doesn't allow one or it doesn't exist in its declaration list, then an `InvalidChildrenException` will be thrown during rendering.
+children. However, child validation still applies to any XHP objects returned
+by your `renderAsync()` method that use the trait.
+
+If an element is rendered (`toStringAsync()` is called) with children that don't
+satisfy the rules in its `getChildrenDeclaration()`, an `InvalidChildrenException`
+is thrown. Note that child validation only happens during rendering, no
+exception is thrown before that, e.g. when the invalid child is added.
 
 @@ extending-examples/children.inc.php @@
 @@ extending-examples/children.php @@
@@ -113,7 +124,9 @@ of which may not even exist yet.
 @@ extending-examples/categories.inc.php @@
 @@ extending-examples/categories.php @@
 
-**Historical note:** Before XHP namespace support (in XHP-Lib v3), a special
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+Before XHP namespace support (in XHP-Lib v3), a special
 `category` keyword could be used instead of an interface
 (`category %name1, %name2;`).
 
@@ -127,7 +140,9 @@ functions and use `await`.
 @@ extending-examples/xhp-async.inc.php @@
 @@ extending-examples/xhp-async.php @@
 
-**Historical note:** In XHP-Lib v3, most rendering methods are not async, and
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+In XHP-Lib v3, most rendering methods are not async, and
 therefore a special `\XHPAsync` trait must be used in XHP classes that need to
 `await` something during rendering.
 
@@ -137,7 +152,9 @@ The `Facebook\XHP\HTML\XHPHTMLHelpers` trait implements two behaviors:
 * Giving each object a unique `id` attribute.
 * Managing the `class` attribute.
 
-**Historical note:** In XHP-Lib v3, this trait is called `\XHPHelpers`.
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+In XHP-Lib v3, this trait is called `\XHPHelpers`.
 
 ### Unique IDs
 
@@ -151,7 +168,7 @@ parts of your code or UI framework (e.g., CSS).
 
 `XHPHTMLHelpers` has two methods to add a class name to the `class` attribute of
 an XHP object. `addClass` takes a `string` and appends that `string` to the
-`class` attribute; `conditionClass` takes a `bool` and a `string`, and only
+`class` attribute (space-separated); `conditionClass` takes a `bool` and a `string`, and only
 appends that `string` to the `class` attribute if the `bool` is `true`.
 
 This is best illustrated with a standard HTML element, all of which have a
@@ -183,5 +200,7 @@ This can be addressed by using the `XHPAttributeClobbering_DEPRECATED` trait.
 Now, when `<ui:my-custom>` is rendered, each `<div>` attribute will be transferred over.
 Also, any explicitly set `<ui:my-custom>` attribute value will override the same `<div>` attribute set in the `render` function.
 
-**Historical note:** In XHP-Lib v3, this is provided by the `\XHPHelpers` trait
+**Historical note:**
+<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+In XHP-Lib v3, this is provided by the `\XHPHelpers` trait
 instead of a separate one.

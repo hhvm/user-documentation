@@ -38,12 +38,8 @@ whether XHP namespace support is enabled in your HHVM version.
 
 While the XHP syntax is part of Hack, a large part of the implementation is in a
 library called [XHP-Lib](https://github.com/hhvm/xhp-lib/) that needs to be
-installed via composer; add `xhp-lib` to your `composer.json`, e.g:
-
-```
-$ composer require facebook/xhp-lib
-# note: make sure to use PHP, not HHVM, to execute composer
-```
+installed via Composer (add `facebook/xhp-lib` to your `composer.json` manually
+or by running `composer require facebook/xhp-lib ^4.0` or `^3.0`).
 
 This includes the base classes and interfaces, and definitions of standard HTML elements.
 
@@ -63,3 +59,6 @@ There are currently two major supported versions of XHP-Lib:
 All the following guides are written with the assumption that XHP namespace
 support is enabled and XHP-Lib v4 is used, but there are notes pointing out any
 major differences&mdash;look for **Historical note** sections.
+
+<span class="fbOnly fbIcon">XHP namespaces are not enabled in Facebook's WWW
+repository, so all **Historical note** sections apply.</span>
