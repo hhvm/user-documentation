@@ -25,7 +25,7 @@ Each of the statements in a `concurrent` block should be thought of as running c
 
 Similar to `await`-as-an-expression, `concurrent` blocks don't provide a guaranteed order-of-execution between expressions being evaluated for any statement in the `concurrent` block. We guarantee that modifications to locals will happen after all other expressions resolve and will happen in the order in which they would happen outside a `concurrent` block.
 
-For this example, we provide no guarantee on the order `x()`, `y_async()` or `z_async()` will be executed, but the assignments into `$result` are guaranteed to be well ordered.
+For this example, we provide no guarantee on the execution order of the calls to `x()`, `y_async()` and `z_async()`. The assignments into `$result` are guaranteed to be well ordered however.
 
 ```
 $result = vec[];
