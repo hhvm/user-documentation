@@ -3,14 +3,7 @@ set -e
 
 DEPLOY_REV=$(git rev-parse --short HEAD)
 HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
-
-if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
-  # We don't push to Docker in cron runs, so use the image from the last real
-  # deployment.
-  IMAGE_TAG=latest
-else
-  IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
-fi
+IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
 IMAGE_NAME=hhvm/user-documentation:$IMAGE_TAG
 
 echo "** Building repo..."
@@ -78,6 +71,11 @@ else
   STAGING_ENV=hhvm-hack-docs-b
 fi
 
+if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
+  echo "** Skipping deployment because this is a cron run."
+  exit 0
+fi
+
 echo "** About to deploy to $STAGING_ENV"
 eb status $STAGING_ENV
 DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
@@ -91,10 +89,5 @@ docker run --rm \
   vendor/bin/hacktest \
   --filter-groups remote \
  tests/
-
-if [ "${TRAVIS_EVENT_TYPE}" == "cron" ]; then
-  echo "** Skipping 'eb swap' because this is a cron run."
-else
-  echo "** Swapping prod and staging..."
-  eb swap
-fi
+echo "** Swapping prod and staging..."
+eb swap
