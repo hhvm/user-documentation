@@ -66,10 +66,8 @@ For the most up-to-date function signatures, please refer to your version of the
 * [pgsql](http://php.net/manual/en/book.pgsql.php)
 * [posix](http://php.net/manual/en/book.posix.php)
 * [readline](http://php.net/manual/en/book.readline.php)
-* [redis](https://pecl.php.net/package/redis)
 * [reflection](http://php.net/manual/en/book.reflection.php)
 * server
-* [session](http://php.net/manual/en/book.session.php)
 * [SimpleXML](http://php.net/manual/en/book.simplexml.php)
 * [soap](http://php.net/manual/en/book.soap.php)
 * [sockets](http://php.net/manual/en/book.sockets.php)
@@ -82,7 +80,6 @@ For the most up-to-date function signatures, please refer to your version of the
 * sysvshm
 * [thread](http://php.net/manual/en/class.thread.php)
 * thrift_protocol
-* [tokenizer](http://php.net/manual/en/book.tokenizer.php)
 * [url](http://php.net/manual/en/book.url.php)
 * xenon
 * [xhprof](http://php.net/manual/en/book.xhprof.php)
@@ -98,8 +95,6 @@ For the most up-to-date function signatures, please refer to your version of the
 * [dbase](https://github.com/skyfms/hhvm-ext_dbase)
 * [geoip](https://github.com/vipsoft/hhvm-ext-geoip)
 * [msgpack](https://github.com/reeze/msgpack-hhvm)
-* [mongodb](http://github.com/mongodb/mongo-hhvm-driver): Official MongoDB driver as HNI extension
-* [mongofill](https://github.com/mongofill/mongofill-hhvm): Implementation of legacy MongoDB driver in pure PHP
 * [shp](https://github.com/skyfms/hhvm-ext_shape)
 * [ssdeep](https://github.com/treffynnon/hhvm-ssdeep)
 * [uuid](https://github.com/vipsoft/hhvm-ext-uuid)
