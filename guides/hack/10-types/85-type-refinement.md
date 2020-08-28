@@ -33,7 +33,7 @@ with one operand of `null`, `is`, and simple assignment `=`. [Note that if `$x` 
 logical test `if ($x)` is equivalent to `if ($x is nonnull)`.]
 * The operators `&&`, `||`, and `?:`.
 * The intrinsic function `invariant`.
-* The library functions `is_array`, `is_bool`, `is_float`, `is_int`, `is_resource`, and `is_string`.
+* Some built-in functions like `Shapes::keyExists()` and `\HH\is_any_array()` have special typechecking rules, but others, like `is_string()` and `is_null()` don't.
 
 Thus far, all the examples use the value of an expression that designates a parameter (which is a local variable). Consider the following
 case, which involves a property:
