@@ -45,8 +45,8 @@ them in any new Hack projects:
   allowed children, which has been deprecated in favor of the `Facebook\XHP\ChildValidation\Validation` trait.
   See [Children](extending#children) for more information.
 - `check_xhp_attribute = true` enables the typechecker to check that all
-  required attributes are provided and all attribute values are of the correct
-  type. Otherwise, these would only be errors at runtime.
+  required attributes are provided.
+  Otherwise, these would only be errors at runtime.
 
 ## The XHP-Lib Library
 
