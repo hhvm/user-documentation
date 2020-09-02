@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d83787e471a3f88d0521f6b27d4ba89d",
+    "content-hash": "60364e6e26861ab54bbf2c932adef915",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -692,16 +692,16 @@
         },
         {
             "name": "usox/hackttp",
-            "version": "v0.5.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/usox/hackttp.git",
-                "reference": "bbf8b5e06e4e07d4bdf198e8ad82f70f5da1178f"
+                "reference": "a4bbea9d3f6207799900c5119d6a8360d79da77e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackttp/zipball/bbf8b5e06e4e07d4bdf198e8ad82f70f5da1178f",
-                "reference": "bbf8b5e06e4e07d4bdf198e8ad82f70f5da1178f",
+                "url": "https://api.github.com/repos/usox/hackttp/zipball/a4bbea9d3f6207799900c5119d6a8360d79da77e",
+                "reference": "a4bbea9d3f6207799900c5119d6a8360d79da77e",
                 "shasum": ""
             },
             "require": {
@@ -747,7 +747,7 @@
                 "response",
                 "stream"
             ],
-            "time": "2020-07-13T10:20:44+00:00"
+            "time": "2020-08-18T04:09:25+00:00"
         }
     ],
     "packages-dev": [
@@ -825,12 +825,67 @@
             ],
             "description": "The Hack Test Library",
             "time": "2020-07-01T22:27:25+00:00"
+        },
+        {
+            "name": "usox/hackmock",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/usox/hackmock.git",
+                "reference": "16feaf03e2239cb114598373d81112ea598eaccd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/usox/hackmock/zipball/16feaf03e2239cb114598373d81112ea598eaccd",
+                "reference": "16feaf03e2239cb114598373d81112ea598eaccd",
+                "shasum": ""
+            },
+            "require": {
+                "facebook/fbexpect": "^2.3",
+                "facebook/hack-codegen": "^4",
+                "hhvm": "^4.1",
+                "hhvm/hacktest": "^1.4|^2.0",
+                "hhvm/hsl": "^4.1",
+                "hhvm/type-assert": "^3.2|^4.0"
+            },
+            "require-dev": {
+                "hhvm/hhast": "^4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Usox\\HackMock\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Jakob",
+                    "email": "dev@usox.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Mocking framework for hacklang",
+            "homepage": "https://github.com/usox/hackmock",
+            "keywords": [
+                "hack",
+                "hacklang",
+                "hhvm",
+                "mock",
+                "testing"
+            ],
+            "time": "2020-08-18T04:07:53+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "facebook/xhp-lib": 5
+        "facebook/xhp-lib": 5,
+        "usox/hackttp": 20,
+        "usox/hackmock": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
