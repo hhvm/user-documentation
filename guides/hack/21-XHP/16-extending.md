@@ -85,6 +85,42 @@ attribute
   string butIAmNullable;
 ```
 
+### Inheritance
+
+An XHP class can inherit all attributes of another XHP class using the
+following syntax:
+
+```
+// inherit all attributes from the <div> HTML element
+attribute :Facebook:XHP:HTML:div;
+```
+
+This is most useful for XHP elements that wrap another XHP element, usually to
+extend its functionality. In such cases, it should be combined with *attribute transfer*.
+
+### Attribute Transfer
+
+Let's say you have a class that wants to inherit attributes from `<div>`. You could do something like this:
+
+@@ extending-examples/bad-attribute-transfer.inc.php @@
+@@ extending-examples/bad-attribute-transfer.php @@
+
+`attribute :Facebook:XHP:HTML:div` causes your class to inherit all `<div>` attributes,
+however, any attribute set on `<ui_my_good_box>` will be lost because the `<div>` returned from `render` will not automatically
+get those attributes.
+
+This can be addressed by using the `...` operator.
+
+@@ extending-examples/attribute-transfer.inc.php @@
+@@ extending-examples/attribute-transfer.php @@
+
+Now, when `<ui_my_good_box>` is rendered, each `<div>` attribute will be transferred over.
+
+Observe that `extra_attr`, which doesn't exist on `<div>`, is not transferred.
+Also note that the position of `{...$this}` matters&mdash;it overrides any
+duplicate attributes specified earlier, but attributes specified later override
+it.
+
 ## Children
 
 You can declare the types that your custom class is allowed to have as children
@@ -177,30 +213,3 @@ XHP class, as long as it uses the trait and declares the `class` attribute
 directly or through inheritance.
 
 @@ extending-examples/add-class.php @@
-
-## Attribute Transfer (deprecated)
-
-*This feature is deprecated! We recommend declaring all attributes explicitly in
-new XHP classes.*
-
-Let's say you have a class that wants to inherit attributes from `<div>`. You could do something like this:
-
-@@ extending-examples/bad-attribute-transfer.inc.php @@
-@@ extending-examples/bad-attribute-transfer.php @@
-
-`:Facebook:XHP:HTML:div` causes your class to inherit all `<div>` attributes,
-however, any attribute set on `<ui:my-custom>` will be lost because the `<div>` returned from `render` will not automatically
-get those attributes.
-
-This can be addressed by using the `XHPAttributeClobbering_DEPRECATED` trait.
-
-@@ extending-examples/attribute-transfer.inc.php @@
-@@ extending-examples/attribute-transfer.php @@
-
-Now, when `<ui:my-custom>` is rendered, each `<div>` attribute will be transferred over.
-Also, any explicitly set `<ui:my-custom>` attribute value will override the same `<div>` attribute set in the `render` function.
-
-**Historical note:**
-<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
-In XHP-Lib v3, this is provided by the `\XHPHelpers` trait
-instead of a separate one.
