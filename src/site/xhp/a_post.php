@@ -12,7 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace Facebook\XHP\Core as x;
-use type Facebook\XHP\HTML\{a, form};
+use type Facebook\XHP\HTML\{XHPHTMLHelpers, a, form};
 
 
 final xhp class a_post extends x\element {
