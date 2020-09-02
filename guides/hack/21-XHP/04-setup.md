@@ -1,14 +1,16 @@
 ## Namespace Support
 
-Support for namespaced XHP classes (elements) has only recently been added to
-HHVM (as of HHVM 4.68). Depending on the exact HHVM version, it may not be
-enabled by default, so make sure to add these flags to your `.hhconfig`:
+Support for namespaced XHP classes (elements) is enabled by default since
+HHVM 4.73.
+
+We recommend using this version or newer, since it's more thoroughly
+tested and doesn't require any extra configuration, but XHP namespace support
+can also be enabled in older HHVM versions (since around HHVM 4.46) by adding
+the following flags to your `.hhconfig`:
 
 ```
-enable_xhp_class_modifier=true
-disable_xhp_element_mangling=true
-disable_xhp_children_declarations=true
-check_xhp_attribute=true
+enable_xhp_class_modifier = true
+disable_xhp_element_mangling = true
 ```
 
 And to `hhvm.ini` (or provided via `-d` when executing `hhvm`):
@@ -18,8 +20,8 @@ hhvm.hack.lang.enable_xhp_class_modifier=true
 hhvm.hack.lang.disable_xhp_element_mangling=true
 ```
 
-Using a subset of these flags might work, but is not officially supported and
-tested, so we currently recommend using either all or none of them.
+In HHVM 4.73 or newer, XHP namespace support can be disabled by setting these to
+`false`.
 
 If these flags are disabled, or using an older version of HHVM:
 
@@ -33,6 +35,18 @@ If these flags are disabled, or using an older version of HHVM:
 
 Make sure to also use the correct version of XHP-Lib (see below) based on
 whether XHP namespace support is enabled in your HHVM version.
+
+## Additional Configuration Flags
+
+These are not enabled by default in any HHVM version, but we recommend enabling
+them in any new Hack projects:
+
+- `disable_xhp_children_declarations = true` disables the old way of declaring
+  allowed children, which has been deprecated in favor of the `Facebook\XHP\ChildValidation\Validation` trait.
+  See [Children](extending#children) for more information.
+- `check_xhp_attribute = true` enables the typechecker to check that all
+  required attributes are provided and all attribute values are of the correct
+  type. Otherwise, these would only be errors at runtime.
 
 ## The XHP-Lib Library
 
@@ -51,7 +65,7 @@ There are currently two major supported versions of XHP-Lib:
   base classes, interfaces and elements in namespaces (e.g. standard HTML
   elements are in `Facebook\XHP\HTML`). It is also more strict (e.g. disallows
   most mutations after an element is rendered) and deprecates some features
-  (e.g. attribute transfer).
+  (e.g. attribute "clobbering" in `XHPHTMLHelpers`).
 - **XHP-Lib v3:** to be used in older HHVM versions or when XHP namespace
   support is disabled. Declares everything in the global namespace, with the
   exception of `Facebook\XHP\ChildValidation`.
