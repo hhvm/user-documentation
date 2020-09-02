@@ -4,22 +4,24 @@ File "%s/interface-bad.php", line 14, characters 19-25:
 Required here
 
 File "%s/interface-bad.php", line 21, characters 7-11:
-This type doesn't implement the method closeDoors (Typing[4054])
+This type doesn't implement the method `closeDoors` (Typing[4054])
 File "%s/interface-bad.php", line 21, characters 24-29:
 Which is required by this interface
 File "%s/interface-bad.php", line 9, characters 19-28:
 As defined here
 
 File "%s/interface-bad.php", line 21, characters 7-11:
-This type doesn't implement the method openDoors (Typing[4054])
+This type doesn't implement the method `openDoors` (Typing[4054])
 File "%s/interface-bad.php", line 21, characters 24-29:
 Which is required by this interface
 File "%s/interface-bad.php", line 6, characters 19-27:
 As defined here
 
 File "%s/interface-bad.php", line 33, characters 17-23:
-No method 'takeOff' in Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Paper (did you mean 'fly'?) (Typing[4053])
+No method `takeOff` in `Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Paper` (Typing[4053])
+File "%s/interface-bad.php", line 22, characters 19-21:
+Did you mean `fly` instead?
 File "%s/interface-bad.php", line 31, characters 12-16:
 This is why I think it is an object of type Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Paper
 File "%s/interface-bad.php", line 21, characters 7-11:
-Declaration of Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Paper is here
+Declaration of `Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Paper` is here
