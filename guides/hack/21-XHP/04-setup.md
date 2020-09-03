@@ -1,7 +1,9 @@
 ## Namespace Support
 
 Support for namespaced XHP classes (elements) is enabled by default since
-HHVM 4.73.
+HHVM 4.73. It comes with many related
+[XHP changes](https://hhvm.com/blog/2020/09/02/XHP-namespaces-and-syntax.html)
+compared to previous versions.
 
 We recommend using this version or newer, since it's more thoroughly
 tested and doesn't require any extra configuration, but XHP namespace support
