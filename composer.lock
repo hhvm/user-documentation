@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "60364e6e26861ab54bbf2c932adef915",
+    "content-hash": "00331700999975644302c678342d0943",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -391,20 +391,20 @@
         },
         {
             "name": "facebook/xhp-lib",
-            "version": "v4.0.0rc2",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/xhp-lib.git",
-                "reference": "e29d4e234915f995f2e3e54f452e7031a428e8c8"
+                "reference": "315627606308a44326dc6bd827bcafce0d978cd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/e29d4e234915f995f2e3e54f452e7031a428e8c8",
-                "reference": "e29d4e234915f995f2e3e54f452e7031a428e8c8",
+                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/315627606308a44326dc6bd827bcafce0d978cd7",
+                "reference": "315627606308a44326dc6bd827bcafce0d978cd7",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.46",
+                "hhvm": "^4.73",
                 "hhvm/type-assert": "^3.0|^4.0"
             },
             "require-dev": {
@@ -431,20 +431,20 @@
                 "hhvm",
                 "xhp"
             ],
-            "time": "2020-08-28T20:48:00+00:00"
+            "time": "2020-08-31T17:33:47+00:00"
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.72.0",
+            "version": "v4.72.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "bfce62e63fed745b7c4fbaab44c2b8bf793739f8"
+                "reference": "13e7450930157c306bbb90702bf2fa5d75a3862e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/bfce62e63fed745b7c4fbaab44c2b8bf793739f8",
-                "reference": "bfce62e63fed745b7c4fbaab44c2b8bf793739f8",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/13e7450930157c306bbb90702bf2fa5d75a3862e",
+                "reference": "13e7450930157c306bbb90702bf2fa5d75a3862e",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +481,7 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-08-25T17:55:58+00:00"
+            "time": "2020-09-03T19:46:54+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -568,20 +568,20 @@
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.58.1",
+            "version": "v4.66.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "35a7464627d65504d90a6859e7dbf3eaf7880375"
+                "reference": "1491b97fffd1db91fd7254d2bae10c20eb01e3e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/35a7464627d65504d90a6859e7dbf3eaf7880375",
-                "reference": "35a7464627d65504d90a6859e7dbf3eaf7880375",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/1491b97fffd1db91fd7254d2bae10c20eb01e3e0",
+                "reference": "1491b97fffd1db91fd7254d2bae10c20eb01e3e0",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.59",
+                "hhvm": "^4.66",
                 "hhvm/hsl": "^4.15"
             },
             "provide": {
@@ -603,7 +603,7 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library - Experimental Additions",
-            "time": "2020-07-07T22:10:55+00:00"
+            "time": "2020-09-02T18:55:57+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -832,12 +832,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/usox/hackmock.git",
-                "reference": "16feaf03e2239cb114598373d81112ea598eaccd"
+                "reference": "e34b812ab1e4b877945151d9c15739c1ce919b38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackmock/zipball/16feaf03e2239cb114598373d81112ea598eaccd",
-                "reference": "16feaf03e2239cb114598373d81112ea598eaccd",
+                "url": "https://api.github.com/repos/usox/hackmock/zipball/e34b812ab1e4b877945151d9c15739c1ce919b38",
+                "reference": "e34b812ab1e4b877945151d9c15739c1ce919b38",
                 "shasum": ""
             },
             "require": {
@@ -850,6 +850,9 @@
             },
             "require-dev": {
                 "hhvm/hhast": "^4.1"
+            },
+            "suggest": {
+                "slack/hack-sql-fake": "Database Testing library for Hacklang"
             },
             "type": "library",
             "autoload": {
@@ -877,13 +880,12 @@
                 "mock",
                 "testing"
             ],
-            "time": "2020-08-18T04:07:53+00:00"
+            "time": "2020-09-03T06:46:08+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "facebook/xhp-lib": 5,
         "usox/hackttp": 20,
         "usox/hackmock": 20
     },
