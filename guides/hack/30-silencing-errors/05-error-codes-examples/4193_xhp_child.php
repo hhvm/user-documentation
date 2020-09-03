@@ -8,4 +8,4 @@ function foo(mixed $m): void {
   $my_div = <div>{$m}</div>;
 }
 
-class :div {}
+xhp class div {}

@@ -6,17 +6,19 @@ function intro_examples_tag_matching_validation_using_string(): void {
   echo '</div>';
 }
 
-function intro_examples_tag_matching_validation_using_xhp(): void {
+async function intro_examples_tag_matching_validation_using_xhp(
+): Awaitable<void> {
   // Typechecker error
   // Fatal syntax error at runtime
-  echo
+  $xhp =
     <div class="section-header">
       <a href="#use">You should have used <span class="xhp">XHP</naps></a>
     </div>;
+  echo await $xhp->toStringAsync();
 }
 
 <<__EntryPoint>>
 function intro_examples_tag_matching_validation_run(): void {
   intro_examples_tag_matching_validation_using_string();
-  intro_examples_tag_matching_validation_using_xhp();
+  await intro_examples_tag_matching_validation_using_xhp();
 }

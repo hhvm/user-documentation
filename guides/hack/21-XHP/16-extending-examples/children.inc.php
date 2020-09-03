@@ -1,25 +1,45 @@
 <?hh // partial
 
-class :my-br extends :x:element {
-  children empty; // no children allowed
+// Conventionally aliased to XHPChild, which makes the children declarations
+// easier to read (more fluid).
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use type Facebook\XHP\HTML\{body, head, html, li, ul};
 
-  protected function render(): \XHPRoot {
-    return <x:frag>PHP_EOL</x:frag>;
+xhp class my_br extends x\primitive {
+  use XHPChild\Validation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\empty();
+  }
+
+  protected async function stringifyAsync(): Awaitable<string> {
+    return "\n";
   }
 }
 
-class :my-ul extends :x:element {
-  children (:li)+; // one or more
+xhp class my_ul extends x\element {
+  use XHPChild\Validation;
 
-  protected function render(): \XHPRoot {
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\at_least_one_of(XHPChild\of_type<li>());
+  }
+
+  protected async function renderAsync(): Awaitable<x\node> {
     return <ul>{$this->getChildren()}</ul>;
   }
 }
 
-class :my-html extends :x:element {
-  children (:head, :body);
+xhp class my_html extends x\element {
+  use XHPChild\Validation;
 
-  protected function render(): \XHPRoot {
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\sequence(
+      XHPChild\of_type<head>(),
+      XHPChild\of_type<body>(),
+    );
+  }
+
+  protected async function renderAsync(): Awaitable<x\node> {
     return <html>{$this->getChildren()}</html>;
   }
 }

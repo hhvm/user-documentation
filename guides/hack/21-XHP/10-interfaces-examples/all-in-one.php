@@ -1,5 +1,8 @@
 <?hh // partial
 
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{div, li};
+
 <<__EntryPoint>>
 function all_in_one_xhp_example_main(): void {
   \init_docs_autoloader();
@@ -23,7 +26,7 @@ function all_in_one_xhp_example_main(): void {
     printf(
       " %s | %-7s | %s\n",
       \HH\Lib\Str\pad_left($label, $max_label_len, ' '),
-      $input is XHPRoot ? 'yes' : 'no',
+      $input is x\node ? 'yes' : 'no',
       $input is XHPChild ? 'yes' : 'no',
     );
   }

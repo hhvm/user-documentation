@@ -51,7 +51,8 @@ a {
   padding-left: 1em;
   font-style: italic;
 }
-.fbOnly.apiAlias:before {
+
+.fbOnly.apiAlias:before, .fbIcon:before {
   content: 'f';
   margin-right: 0.25em;
   font-style: normal;

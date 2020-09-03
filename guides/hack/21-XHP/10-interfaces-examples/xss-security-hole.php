@@ -1,17 +1,17 @@
 <?hh // partial
 
-<<__EntryPoint>>
-function start(): void {
-  \init_docs_autoloader();
+namespace Hack\UserDocumentation\XHP\MarkdownWrapper;
 
-  require_once __DIR__.'/md_render.inc.php';
-  echo (
-    /* HH_FIXME[4067] implicit __toString() is now deprecated */
+use type Facebook\XHP\HTML\div;
+
+<<__EntryPoint>>
+async function start(): Awaitable<void> {
+  \init_docs_autoloader();
+  $xhp =
     <div class="markdown">
       {new ExamplePotentialXSSSecurityHole(
-        HHVM\UserDocumentation\XHP\Examples\md_render('Markdown goes here'),
+        md_render('Markdown goes here'),
       )}
-    </div>
-  ).
-    "\n";
+    </div>;
+  echo await $xhp->toStringAsync();
 }

@@ -9,11 +9,17 @@
  *
  */
 
-class :script:google-analytics extends :x:element {
+namespace HHVM\UserDocumentation\script;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\script;
+
+xhp class google_analytics extends x\element {
   attribute string trackingID @required;
 
-  protected function render(): XHPRoot {
-    $tracking_id = json_encode($this->:trackingID);
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
+    $tracking_id = \json_encode($this->:trackingID);
     $js = <<<EOF
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

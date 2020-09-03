@@ -9,12 +9,18 @@
  *
  */
 
+namespace HHVM\UserDocumentation\ui;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\i;
+
 use type HHVM\UserDocumentation\UIGlyphIcon;
 
-final class :ui:glyph extends :x:element {
+final xhp class glyph extends x\element {
   attribute UIGlyphIcon icon @required;
 
-  protected function render(): XHPRoot {
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
     $class = "glyphIcon fa fa-".$this->:icon;
     return <i class={$class}></i>;
   }

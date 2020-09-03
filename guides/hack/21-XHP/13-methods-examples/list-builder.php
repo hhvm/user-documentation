@@ -1,6 +1,11 @@
 <?hh // partial
 
-function xhp_object_methods_build_list(Vector<string> $names): XHPRoot {
+namespace Hack\UserDocumentation\XHP\Methods;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{li, p, ul};
+
+function build_list(vec<string> $names): x\node {
   $list = <ul id="names" />;
   foreach ($names as $name) {
     $list->appendChild(<li>{$name}</li>);
@@ -9,22 +14,24 @@ function xhp_object_methods_build_list(Vector<string> $names): XHPRoot {
 }
 
 <<__EntryPoint>>
-function xhp_object_methods_run(): void {
+async function xhp_object_methods_run(): Awaitable<void> {
   \init_docs_autoloader();
-  $names = Vector {'Sara', 'Fred', 'Josh', 'Scott', 'Paul', 'David', 'Matthew'};
-  $list = xhp_object_methods_build_list($names);
-  foreach ($list->getChildren() as $child) {
-    /* HH_FIXME[4067] implicit __toString() is now deprecated */
-    echo <ul>{$child}</ul>."\n";
+  $names = vec['Sara', 'Fred', 'Josh', 'Scott', 'Paul', 'David', 'Matthew'];
+
+  foreach (build_list($names)->getChildren() as $child) {
+    $child as x\node;
+    echo 'Child: '.await $child->toStringAsync()."\n";
   }
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo <ul>{$list->getFirstChild()}</ul>."\n";
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo <ul>{$list->getLastChild()}</ul>."\n";
-  foreach ($list->getAttributes() as $attr) {
-    /* HH_FIXME[4067] implicit __toString() is now deprecated */
-    echo <ul><li>{(string)$attr}</li></ul>."\n";
+
+  echo 'First child: '.
+    await (build_list($names)->getFirstChild() as x\node->toStringAsync())."\n";
+
+  echo 'Last child: '.
+    await (build_list($names)->getLastChild() as x\node->toStringAsync())."\n";
+
+  foreach (build_list($names)->getAttributes() as $name => $value) {
+    echo 'Attribute '.$name.' = '.$value as string."\n";
   }
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo <ul><li>{$list->getAttribute('id') as string}</li></ul>."\n";
+
+  echo 'ID: '.build_list($names)->getAttribute('id') as string."\n";
 }

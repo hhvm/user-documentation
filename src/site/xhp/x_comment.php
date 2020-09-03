@@ -9,20 +9,23 @@
  *
  */
 
-use namespace Facebook\XHP\ChildValidation as XHPChild;
+namespace HHVM\UserDocumentation;
 
-class :x:comment extends :x:primitive implements XHPAlwaysValidChild {
-  use XHPChildValidation;
+use namespace Facebook\XHP;
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+
+final xhp class comment extends x\primitive implements XHP\AlwaysValidChild {
+  use XHPChild\Validation;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
-    return XHPChild\anyNumberOf(XHPChild\pcdata());
+    return XHPChild\any_number_of(XHPChild\pcdata());
   }
 
-
-  protected function stringify(): string {
+  <<__Override>>
+  protected async function stringifyAsync(): Awaitable<string> {
     $html = '<!--';
     foreach ($this->getChildren() as $child) {
-      $html .= htmlspecialchars($child as string);
+      $html .= \htmlspecialchars($child as string);
     }
     $html .= '-->';
     return $html;

@@ -9,9 +9,12 @@
  *
  */
 
+namespace HHVM\UserDocumentation\static_res;
+
+use namespace Facebook\XHP\Core as x;
 use type HHVM\UserDocumentation\{StaticResourceMap, StaticResourceMapEntry};
 
-abstract class :static:base extends :x:element {
+abstract xhp class base extends x\element {
   attribute string path @required;
 
   abstract protected function getAllowedMimeTypes(): Set<string>;
@@ -25,11 +28,11 @@ abstract class :static:base extends :x:element {
     $local_path = $info['localPath'];
     $relative_path = $this->:path;
 
-    $mtime = filemtime($local_path);
+    $mtime = \filemtime($local_path);
     if ($info['mtime'] !== $mtime) {
-      $url = sprintf('/s/local-changes%s?mtime=%d', $relative_path, $mtime);
+      $url = \sprintf('/s/local-changes%s?mtime=%d', $relative_path, $mtime);
     } else {
-      $url = sprintf('/s/%s%s', $info['checksum'], $relative_path);
+      $url = \sprintf('/s/%s%s', $info['checksum'], $relative_path);
     }
     return $url;
   }

@@ -9,6 +9,9 @@
  *
  */
 
+use namespace Facebook\XHP\Core as x;
+use namespace HHVM\UserDocumentation\ui;
+use type Facebook\XHP\HTML\{div, span};
 use type HHVM\UserDocumentation\{
   Guides,
   GuidesIndex,
@@ -90,7 +93,7 @@ final class GuidePageController extends WebPageController {
   }
 
   <<__Override>>
-  protected async function getBodyAsync(): Awaitable<XHPRoot> {
+  protected async function getBodyAsync(): Awaitable<x\node> {
     return
       <div class="guidePageWrapper">
         {$this->getInnerContent()}
@@ -98,7 +101,7 @@ final class GuidePageController extends WebPageController {
       </div>;
   }
 
-  protected function getPaginationLinks(): XHPRoot {
+  protected function getPaginationLinks(): x\node {
     list($product, $guide, $page) = tuple(
       $this->getProduct(),
       GuidesNavData::pathToName($this->getGuide()),
@@ -128,7 +131,7 @@ final class GuidePageController extends WebPageController {
     string $guide,
     string $page,
     bool $next = false,
-  ): XHPRoot {
+  ): x\node {
     $adjacent_page = $this->getAdjacentPage($guides, $guide, $page, $next);
 
     if ($adjacent_page === null) {
@@ -246,7 +249,7 @@ final class GuidePageController extends WebPageController {
   }
 
   <<__Override>>
-  protected function getSideNav(): XHPRoot {
+  protected function getSideNav(): x\node {
     $ts = type_alias_structure(NavDataNode::class);
     $data = Dict\map(
       GuidesNavData::getNavData()[$this->getProduct()]['children'],
@@ -263,7 +266,7 @@ final class GuidePageController extends WebPageController {
     );
   }
 
-  protected function getInnerContent(): XHPRoot {
+  protected function getInnerContent(): x\node {
     return self::invariantTo404(() ==> {
       $path = GuidesIndex::getFileForPage(
         $this->getProduct(),

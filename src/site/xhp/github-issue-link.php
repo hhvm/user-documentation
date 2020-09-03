@@ -9,20 +9,22 @@
  *
  */
 
+namespace HHVM\UserDocumentation;
+
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use type Facebook\XHP\HTML\a;
 use type HHVM\UserDocumentation\LocalConfig;
 
-use namespace Facebook\XHP\ChildValidation as XHPChild;
-
-final class :github-issue-link extends :x:element {
-  use XHPChildValidation;
+final xhp class github_issue_link extends x\element {
+  use XHPChild\Validation;
   attribute
     string issueTitle,
     string issueBody @required,
-    classname<WebController> controller;
+    classname<\WebController> controller;
 
   protected static function getChildrenDeclaration(): XHPChild\Constraint {
     return XHPChild\sequence(
-      XHPChild\optional(XHPChild\ofType<:ui:glyph>()),
+      XHPChild\optional(XHPChild\of_type<ui\glyph>()),
       XHPChild\pcdata(),
     );
   }
@@ -30,14 +32,15 @@ final class :github-issue-link extends :x:element {
 
   use XHPGetRequest;
 
-  protected function render(): XHPRoot {
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
     $body = $this->:issueBody."\n\n".$this->getMetadataForBody();
 
-    $new_issue_prefill_url = sprintf(
+    $new_issue_prefill_url = \sprintf(
       '%s?title=%s&body=%s',
       'https://github.com/hhvm/user-documentation/issues/new',
-      urlencode($this->:issueTitle ?? ''),
-      urlencode($body),
+      \urlencode($this->:issueTitle ?? ''),
+      \urlencode($body),
     );
 
     return (
@@ -49,9 +52,9 @@ final class :github-issue-link extends :x:element {
 
   private function getMetadataForBody(): string {
     $build_id = LocalConfig::getBuildID();
-    $request_time = (new DateTime())
-      ->setTimezone(new DateTimeZone('Etc/UTC'))
-      ->format(DateTime::RFC2822);
+    $request_time = (new \DateTime())
+      ->setTimezone(new \DateTimeZone('Etc/UTC'))
+      ->format(\DateTime::RFC2822);
     $request_path = $this->getRequest()->getUri()->getPath();
 
     $rows = Vector {
@@ -65,7 +68,7 @@ final class :github-issue-link extends :x:element {
       $rows[] = 'Controller: '.$controller;
     }
 
-    $rows = implode("\n", $rows->map($x ==> ' - '.$x));
+    $rows = \implode("\n", $rows->map($x ==> ' - '.$x));
 
     return <<<EOF
 --------------------------------

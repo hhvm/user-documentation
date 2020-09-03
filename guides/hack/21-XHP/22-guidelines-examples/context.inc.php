@@ -1,10 +1,17 @@
 <?hh // partial
 
-class :ui-myparent extends :x:element {
-  attribute string text @required;
-  children (:ui-mychild);
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use type Facebook\XHP\HTML\{dd, dl, dt};
 
-  protected function render(): XHPRoot {
+final xhp class ui_myparent extends x\element {
+  use XHPChild\Validation;
+  attribute string text @required;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\of_type<ui_mychild>();
+  }
+
+  protected async function renderAsync(): Awaitable<x\node> {
     return (
       <dl>
         <dt>Text</dt>
@@ -16,10 +23,10 @@ class :ui-myparent extends :x:element {
   }
 }
 
-class :ui-mychild extends :x:element {
+final xhp class ui_mychild extends x\element {
   attribute string text @required;
 
-  protected function render(): XHPRoot {
+  protected async function renderAsync(): Awaitable<x\node> {
     if ($this->getContext('hint') === 'Yes') {
       return <x:frag>{$this->:text.'...and more'}</x:frag>;
     }
@@ -27,12 +34,12 @@ class :ui-mychild extends :x:element {
   }
 }
 
-function guidelines_examples_context_run(string $s): void {
+async function guidelines_examples_context_run(string $s): Awaitable<void> {
   $xhp = (
-    <ui-myparent text={$s}>
-      <ui-mychild text="Go" />
-    </ui-myparent>
+    <ui_myparent text={$s}>
+      <ui_mychild text="Go" />
+    </ui_myparent>
   );
   $xhp->setContext('hint', $s);
-  echo $xhp;
+  echo await $xhp->toStringAsync();
 }

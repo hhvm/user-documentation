@@ -9,13 +9,19 @@
  *
  */
 
-final class :static:script extends :static:base {
+namespace HHVM\UserDocumentation\static_res;
+
+use namespace Facebook\XHP\{Core as x, HTML};
+
+final xhp class script extends base {
+  <<__Override>>
   protected function getAllowedMimeTypes(): Set<string> {
     return Set {'application/javascript'};
   }
 
-  protected function render(): XHPRoot {
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
     return
-      <script type={$this->getMimeType()} src={$this->getVersionedURL()} />;
+      <HTML:script type={$this->getMimeType()} src={$this->getVersionedURL()} />;
   }
 }

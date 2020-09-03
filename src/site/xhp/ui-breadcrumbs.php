@@ -9,12 +9,17 @@
  *
  */
 
+namespace HHVM\UserDocumentation\ui;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{a, div, i};
 use namespace HH\Lib\{C, Vec};
 
-final class :ui:breadcrumbs extends :x:element {
+final xhp class breadcrumbs extends x\element {
   attribute vec<(string, ?string)> stack @required;
 
-  public function render(): XHPRoot {
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
     $stack = $this->:stack;
     list($current, $_) = C\lastx($stack);
     $ancestors = Vec\take($stack, C\count($stack) - 1);

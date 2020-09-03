@@ -1,9 +1,9 @@
 {
     "require": {
-        "facebook/xhp-lib": "^3.1.1",
-        "hhvm": "4.68.*",
-        "usox/hackttp": "*",
-        "hhvm/hhvm-autoload": "^2.0|^3.0",
+        "facebook/xhp-lib": "^4.0",
+        "hhvm": "4.73.*",
+        "usox/hackttp": "dev-master",
+        "hhvm/hhvm-autoload": "^3.0",
         "hhvm/type-assert": "^4.0",
         "facebook/hack-codegen": "^4.0",
         "facebook/hack-router-codegen": ">=0.14 <1.0",
@@ -17,6 +17,7 @@
         "hhvm/hhast": "^4.0",
         "facebook/definition-finder": "^2.0.0",
         "hhvm/hacktest": "^2.0",
+        "usox/hackmock": "dev-master",
         "facebook/fbexpect": "^2.6.1"
     }
 }

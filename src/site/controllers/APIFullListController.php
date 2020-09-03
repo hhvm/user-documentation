@@ -9,7 +9,8 @@
  *
  */
 
-use type HHVM\UserDocumentation\{APIDefinitionType, APIProduct};
+use namespace Facebook\XHP\Core as x;
+use type HHVM\UserDocumentation\{APIDefinitionType, APIProduct, api_list};
 
 final class APIFullListController extends WebPageController {
   use APIFullListControllerParametersTrait;
@@ -44,9 +45,9 @@ final class APIFullListController extends WebPageController {
   }
 
   <<__Override>>
-  final protected async function getBodyAsync(): Awaitable<XHPRoot> {
+  final protected async function getBodyAsync(): Awaitable<x\node> {
     return
-      <api-list
+      <api_list
         product={$this->getParameters()['Product']}
         types={new ImmSet(APIDefinitionType::getValues())}
       />;

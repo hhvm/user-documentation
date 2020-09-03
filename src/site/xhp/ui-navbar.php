@@ -9,17 +9,22 @@
  *
  */
 
+namespace HHVM\UserDocumentation\ui;
+
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{a, div, h4, h5, h6, li, script, ul};
 use type HHVM\UserDocumentation\{NavDataNode, UIGlyphIcon};
 
 use namespace HH\Lib\{Dict, Str};
 
-class :ui:navbar extends :x:element {
+final xhp class navbar extends x\element {
   attribute
     dict<string, NavDataNode> data @required,
     vec<string> activePath @required,
     string extraNavListClass;
 
-  protected function render(): XHPRoot {
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
     $roots = Dict\map($this->:data, $node ==> $this->renderLevel1Item($node));
 
     $nav_list_class = 'navList';
@@ -30,7 +35,7 @@ class :ui:navbar extends :x:element {
 
     $toggle_button =
       <div class="navToggleButton">
-        <ui:glyph icon={UIGlyphIcon::LIST} />
+        <glyph icon={UIGlyphIcon::LIST} />
       </div>;
 
     $list = (
@@ -56,9 +61,9 @@ class :ui:navbar extends :x:element {
     return $container;
   }
 
-  private function getToggleScript(:div $button, :div $container): :script {
-    $button_id = json_encode($button->getID());
-    $container_id = json_encode($container->getID());
+  private function getToggleScript(div $button, div $container): script {
+    $button_id = \json_encode($button->getID());
+    $container_id = \json_encode($container->getID());
     return (
       <script language="javascript">
         var toggleButton = document.getElementById({$button_id});
@@ -74,7 +79,7 @@ class :ui:navbar extends :x:element {
     );
   }
 
-  private function getScrollToActiveScript(:ul $list): :script {
+  private function getScrollToActiveScript(ul $list): script {
     $path = $this->:activePath;
     if (!$path) {
       return <script />;
@@ -85,8 +90,8 @@ class :ui:navbar extends :x:element {
     return (
       <script language="javascript">
         var scrollToActive = function() {"{"}
-        var navList = document.getElementById({json_encode($list->getID())});
-        var activeNav = document.getElementById({json_encode($id)});
+        var navList = document.getElementById({\json_encode($list->getID())});
+        var activeNav = document.getElementById({\json_encode($id)});
         navList.scrollTop = activeNav.offsetTop - 10;
         {"}"};
         scrollToActive();
@@ -108,7 +113,7 @@ class :ui:navbar extends :x:element {
     $idx = 0;
     $active = $this->:activePath;
     foreach ($nodes as $node) {
-      if (!array_key_exists($idx, $active)) {
+      if (!\array_key_exists($idx, $active)) {
         return false;
       }
       if ($active[$idx] !== $node['name']) {
@@ -122,7 +127,7 @@ class :ui:navbar extends :x:element {
   /* Caching: the uncached performance is completely fine for prod, but much too
    * slow when opening every possible page in the test suite.
    */
-  private function renderLevel1Item(NavDataNode $node): XHPRoot {
+  private function renderLevel1Item(NavDataNode $node): x\node {
     return $this->cachedRender(
       $node['name'].'//'.$node['urlPath'],
       $this->isActive($node),
@@ -130,7 +135,7 @@ class :ui:navbar extends :x:element {
     );
   }
 
-  private function renderLevel1ItemImpl(NavDataNode $node): XHPRoot {
+  private function renderLevel1ItemImpl(NavDataNode $node): x\node {
     $children = $this->renderChildren(
       'subList',
       $node,
@@ -159,7 +164,7 @@ class :ui:navbar extends :x:element {
   private function renderLevel2Item(
     NavDataNode $parent,
     NavDataNode $node,
-  ): XHPRoot {
+  ): x\node {
     return $this->cachedRender(
       $parent['name'].'//'.$node['name'].'//'.$node['urlPath'],
       $this->isActive($parent, $node),
@@ -171,7 +176,7 @@ class :ui:navbar extends :x:element {
   private function renderLevel2ItemImpl(
     NavDataNode $parent,
     NavDataNode $node,
-  ): XHPRoot {
+  ): x\node {
     $id = $parent['name'].'/'.$node['name'];
 
     $children = $this->renderChildren(
@@ -201,7 +206,7 @@ class :ui:navbar extends :x:element {
     NavDataNode $grandparent,
     NavDataNode $parent,
     NavDataNode $node,
-  ): :li {
+  ): li {
     $id = $grandparent['name'].'/'.$parent['name'].'/'.$node['name'];
     $class = 'secondLevelListItem';
     if ($this->isActive($grandparent, $parent)) {
@@ -225,8 +230,8 @@ class :ui:navbar extends :x:element {
   private function renderChildren(
     string $list_class,
     NavDataNode $parent,
-    (function(NavDataNode): XHPChild) $render_func,
-  ): ?XHPChild {
+    (function(NavDataNode): x\node) $render_func,
+  ): ?x\node {
     if (!$parent['children']) {
       return null;
     }
@@ -244,8 +249,8 @@ class :ui:navbar extends :x:element {
   private function cachedRender(
     string $cache_key,
     bool $is_active,
-    (function(): XHPRoot) $callback,
-  ): XHPRoot {
+    (function(): x\node) $callback,
+  ): x\node {
     if ($is_active) {
       return $callback();
     }
@@ -256,8 +261,6 @@ class :ui:navbar extends :x:element {
       return $stored;
     }
 
-    $result = $callback();
-    APCCachedRenderable::store($cache_key, $result);
-    return $result;
+    return APCCachedRenderable::store($cache_key, $callback());
   }
 }

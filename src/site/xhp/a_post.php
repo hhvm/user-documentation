@@ -9,12 +9,20 @@
  *
  */
 
-final class :a:post extends :x:element {
-  attribute :a;
+namespace HHVM\UserDocumentation;
 
-  use XHPHelpers;
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{XHPHTMLHelpers, a, form};
 
-  protected function render(): XHPRoot {
+
+final xhp class a_post extends x\element {
+  use XHPHTMLHelpers;
+
+  attribute string href @required;
+  attribute string target;
+
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
     $id = $this->getID();
 
     $anchor = <a>{$this->getChildren()}</a>;
@@ -29,7 +37,6 @@ final class :a:post extends :x:element {
       </form>
     );
 
-    $this->transferAllAttributes($anchor);
     $anchor->setAttribute(
       'onclick',
       'document.getElementById("'.$id.'").submit(); return false;',

@@ -1,4 +1,4 @@
-string(166) "Required attribute `userid` was not specified in element `user-info`.
+string(180) "Required attribute `userid` was not specified in element `user_info`.
 
-/data/users/joelm/user-documentation/guides/hack/24-XHP/04-extending-examples/required-attributes.php:16"
+/home/analbumcover/user-documentation/guides/hack/21-XHP/16-extending-examples/required-attributes.php:9"
 User with id 1000 has name Joel

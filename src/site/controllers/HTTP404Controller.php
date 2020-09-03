@@ -10,10 +10,13 @@
  */
 
 use namespace HH\Lib\C;
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{a, div, i, p, span};
 use type HHVM\UserDocumentation\{
   APILegacyRedirectData,
   JumpIndexData,
   LegacyRedirects,
+  github_issue_link,
 };
 
 final class HTTP404Controller extends NonRoutableWebPageController {
@@ -66,7 +69,7 @@ final class HTTP404Controller extends NonRoutableWebPageController {
   }
 
   <<__Override>>
-  public async function getBodyAsync(): Awaitable<\XHPRoot> {
+  public async function getBodyAsync(): Awaitable<x\node> {
     return
       <x:frag>
         <div class="notFoundIcon">
@@ -104,16 +107,16 @@ final class HTTP404Controller extends NonRoutableWebPageController {
         </p>
         <p class="notFoundMessage">
           If you think you're seeing this page in error, please
-          <github-issue-link
+          <github_issue_link
             issueTitle={$this->getGithubIssueTitle()}
             issueBody={
               $this->getGithubIssueBody()
-            }>file an issue</github-issue-link>.
+            }>file an issue</github_issue_link>.
         </p>
       </x:frag>;
   }
 
-  protected function getNotFoundMessage(): XHPRoot {
+  protected function getNotFoundMessage(): x\node {
     $path = $this->getRequestedPath();
     $parts = explode('/', $path);
 

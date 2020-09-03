@@ -9,17 +9,45 @@
  *
  */
 
-use type HHVM\UserDocumentation\{LocalConfig, UIGlyphIcon};
+use type HHVM\UserDocumentation\{
+  LocalConfig,
+  UIGlyphIcon,
+  comment,
+  github_issue_link,
+  search_bar,
+};
 use type Facebook\Experimental\Http\Message\{
   ResponseInterface,
   ServerRequestInterface,
 };
+use type Facebook\XHP\HTML\{
+  a,
+  body,
+  div,
+  doctype,
+  footer,
+  h1,
+  h2,
+  head,
+  html,
+  i,
+  li,
+  link,
+  meta,
+  script,
+  span,
+  strong,
+  title,
+  ul,
+};
 
 use namespace HH\Lib\C;
+use namespace Facebook\XHP\Core as x;
+use namespace HHVM\UserDocumentation\{script, static_res, ui};
 
 abstract class NonRoutableWebPageController extends WebController {
   protected abstract function getTitleAsync(): Awaitable<string>;
-  protected abstract function getBodyAsync(): Awaitable<\XHPRoot>;
+  protected abstract function getBodyAsync(): Awaitable<x\node>;
 
   protected function getHeadingAsync(): Awaitable<string> {
     return $this->getTitleAsync();
@@ -86,7 +114,7 @@ EOF;
         );
       case 'docs.hhvm.com':
         $google_analytics =
-          <script:google-analytics trackingID="UA-49208336-3" />;
+          <script:google_analytics trackingID="UA-49208336-3" />;
         $open_search =
           <link
             rel="search"
@@ -107,7 +135,7 @@ EOF;
     }
 
     $xhp =
-      <x:doctype>
+      <doctype>
         <html>
           <head>
             <title>{$title}</title>
@@ -118,10 +146,10 @@ EOF;
             />
             <link rel="shortcut icon" href="/favicon.png" />
             {$open_search}
-            <x:comment>
+            <comment>
               Build ID: {LocalConfig::getBuildID()}
-            </x:comment>
-            <static:stylesheet path="/css/main.css" media="screen" />
+            </comment>
+            <static_res:stylesheet path="/css/main.css" media="screen" />
             <link
               href=
                 "https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic|Roboto:700"
@@ -146,9 +174,9 @@ EOF;
             {$this->getEagerFetchScript()}
           </body>
         </html>
-      </x:doctype>;
+      </doctype>;
     $xhp->setContext('ServerRequestInterface', $this->request);
-    $html = await $xhp->asyncToString();
+    $html = await $xhp->toStringAsync();
 
     await $response->getBody()->writeAllAsync($html);
     $response = $response
@@ -172,7 +200,7 @@ EOF;
     return 200;
   }
 
-  final protected async function getContentPaneAsync(): Awaitable<XHPRoot> {
+  final protected async function getContentPaneAsync(): Awaitable<x\node> {
     concurrent {
       $heading = await $this->getHeadingAsync();
       $body = await $this->getBodyAsync();
@@ -213,7 +241,7 @@ EOF;
     return $class;
   }
 
-  private function getTitleContent(string $title): XHPRoot {
+  private function getTitleContent(string $title): x\node {
     $title_class = "mainTitle mainTitle".
       $this->getRawParameter_UNSAFE('product');
     return
@@ -224,7 +252,7 @@ EOF;
       </div>;
   }
 
-  protected function getSideNav(): XHPRoot {
+  protected function getSideNav(): x\node {
     return <x:frag />;
   }
 
@@ -232,7 +260,7 @@ EOF;
     return null;
   }
 
-  protected function getHeader(): XHPRoot {
+  protected function getHeader(): x\node {
     $header_class = "header headerType".
       $this->getRawParameter_UNSAFE('product');
     return
@@ -268,15 +296,15 @@ EOF;
             </a>
           </div>
           <div class="headerElement githubIssueLink">
-            <github-issue-link
+            <github_issue_link
               issueTitle={$this->getGithubIssueTitle()}
               issueBody={$this->getGithubIssueBody()}
               controller={static::class}>
               <ui:glyph icon={UIGlyphIcon::BUG} />
               report a problem or make a suggestion
-            </github-issue-link>
+            </github_issue_link>
           </div>
-          <search-bar
+          <search_bar
             class="headerElement"
             placeholder="Search our Documentation"
           />
@@ -298,24 +326,24 @@ EOF;
     parent::__construct($parameters, $request);
   }
 
-  private function getFeedbackFooter(): XHPRoot {
+  private function getFeedbackFooter(): x\node {
     return
       <div class="footerPanel footerPanelFullWidth">
         <h2>See something wrong?</h2>
         <ui:button className="gitHubIssueButton" glyph={UIGlyphIcon::BUG}>
           <span>
-            <github-issue-link
+            <github_issue_link
               issueTitle={$this->getGithubIssueTitle()}
               issueBody={$this->getGithubIssueBody()}
               controller={static::class}>
               Report a problem or make a suggestion.
-            </github-issue-link>
+            </github_issue_link>
           </span>
         </ui:button>
       </div>;
   }
 
-  private function getFooter(): :footer {
+  private function getFooter(): footer {
     return
       <footer class="footerWrapper">
         <div class="mainWrapper">
@@ -369,7 +397,7 @@ EOF;
       </footer>;
   }
 
-  private function getEagerFetchScript(): :script {
+  private function getEagerFetchScript(): script {
     $code = <<<EOF
 // Prefetch pages on this site for performance
 if (document.querySelectorAll) {

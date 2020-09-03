@@ -36,21 +36,16 @@ abstract class WebController {
     ImmMap<string, string> $parameters,
     private ServerRequestInterface $request,
   ) {
-    $combined_params = new Map($parameters);
-    foreach ($request->getQueryParams() as $key => $value) {
-      if (is_array($value)) {
-        continue;
-      }
-      $combined_params[(string)$key] = (string)$value;
-    }
+    $combined_params =
+      (new Map($parameters))->setAll($request->getQueryParams())->immutable();
 
     $spec = self::getParametersSpec();
     $this->parameters = new RequestParameters(
       $spec['required'],
       $spec['optional'],
-      $combined_params->immutable(),
+      $combined_params,
     );
-    $this->rawParameters = $combined_params->immutable();
+    $this->rawParameters = $combined_params;
   }
 
   final public static function getParametersSpec(

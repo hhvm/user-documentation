@@ -181,7 +181,10 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       '-m',
       'interp',
       '--args',
-      '-d auto_prepend_file='.
+      // disable_xhp_element_mangling=true is default, but test/run.php
+      // overrides it to false, so we have to override it back here
+      '-d hhvm.hack.lang.disable_xhp_element_mangling=true '.
+        '-d auto_prepend_file='.
         LocalConfig::ROOT.'/src/utils/_private/init_docs_autoloader.php',
     };
     $command->addAll($extra_args);

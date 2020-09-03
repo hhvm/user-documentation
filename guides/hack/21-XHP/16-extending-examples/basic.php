@@ -1,9 +1,11 @@
 <?hh // partial
 
 <<__EntryPoint>>
-function extending_examples_basic_run(): void {
+async function extending_examples_basic_run(): Awaitable<void> {
   \init_docs_autoloader();
-  echo <introduction />;
-  echo PHP_EOL.PHP_EOL;
-  echo <intro-plain-str />;
+  $xhp = <introduction />;
+  echo await $xhp->toStringAsync()."\n";
+
+  $xhp = <intro_plain_str />;
+  echo await $xhp->toStringAsync()."\n";
 }

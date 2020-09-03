@@ -9,6 +9,8 @@
  *
  */
 
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{a, div, li, p, span, ul};
 use type Facebook\HackRouter\{
   StringRequestParameter,
   StringRequestParameterSlashes,
@@ -53,7 +55,7 @@ final class SearchController extends WebPageController {
   }
 
   <<__Override>>
-  protected async function getBodyAsync(): Awaitable<XHPRoot> {
+  protected async function getBodyAsync(): Awaitable<x\node> {
     $search_results = $this->getSearchResults();
 
     if (C\is_empty($search_results)) {
