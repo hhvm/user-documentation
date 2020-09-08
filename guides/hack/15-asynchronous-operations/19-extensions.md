@@ -31,7 +31,7 @@ This should be your preferred method. It is powerful enough to express all queri
 For example:
  - selecting a post by ID
  - selecting the post with the most likes made within the last _n_ days by user _x_
- - updating all profiles from users who have been active in the last _n_ days with by giving them a badge
+ - updating all profiles from users who have been active in the last _n_ days by giving them a badge
 
 ### [`queryAsync`](../references/class/AsyncMysqlConnection/queryAsync)
 This method is a lot more powerful than `queryf` and should be used when the structure of your query is not known in advance. The `%Q` modifier can be used to insert query fragments into other query fragments.
@@ -55,7 +55,7 @@ This method can also be used to create queries by doing string manipulation. If 
 The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete
 subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryResult/) and
 [`AsyncMysqlErrorResult`](../reference/class/AsyncMysqlErrorResult/). The main methods on these classes are
-[`vectorRows`](../reference/class/AsyncMysqlQueryResult/vectorRows/) | [`vectorRowsTyped`](../reference/class/AsyncMysqlQueryResult/vectorRowsTyped/) and [`mapRows`](../reference/class/AsyncMysqlQueryResult/mapRows/) | [`mapRows`](../reference/class/AsyncMysqlQueryResult/mapRowsTyped/), which are *non-async*.
+[`vectorRows`](../reference/class/AsyncMysqlQueryResult/vectorRows/) | [`vectorRowsTyped`](../reference/class/AsyncMysqlQueryResult/vectorRowsTyped/) and [`mapRows`](../reference/class/AsyncMysqlQueryResult/mapRows/) | [`mapRowsTyped`](../reference/class/AsyncMysqlQueryResult/mapRowsTyped/), which are *non-async*.
 
 ### When to use the `____Typed` variant over its untyped counterpart.
 
