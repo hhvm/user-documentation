@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00331700999975644302c678342d0943",
+    "content-hash": "d26e5f2a9f61b2cba2aa7cb70015fb17",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -435,16 +435,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.72.1",
+            "version": "v4.72.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "13e7450930157c306bbb90702bf2fa5d75a3862e"
+                "reference": "1efa83d718b0ba057e9d394877233211cfd45b41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/13e7450930157c306bbb90702bf2fa5d75a3862e",
-                "reference": "13e7450930157c306bbb90702bf2fa5d75a3862e",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/1efa83d718b0ba057e9d394877233211cfd45b41",
+                "reference": "1efa83d718b0ba057e9d394877233211cfd45b41",
                 "shasum": ""
             },
             "require": {
@@ -481,7 +481,7 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-09-03T19:46:54+00:00"
+            "time": "2020-09-09T20:45:28+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -892,7 +892,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.73.*"
+        "hhvm": "4.74.*"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"
