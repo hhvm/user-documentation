@@ -37,5 +37,3 @@ All enumerated types behave as if they contain a set of public static methods.
 Here is an example that uses several of these methods:
 
 @@ enumerated-types-examples/enum-methods.php @@
-
-For an example involving a banking application, see [shapes](shapes.md).
