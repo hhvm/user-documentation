@@ -32,7 +32,7 @@ final class MarkdownRenderer {
   }
 
   <<__Memoize>>
-  private function getRenderContext(): Markdown\RenderContext {
+  private function getRenderContext(): MarkdownExt\RenderContext {
     $render_ctx = (new MarkdownExt\RenderContext())
       ->appendFilters(
         new MarkdownExt\HeadingAnchorsFilter(),
@@ -48,7 +48,8 @@ final class MarkdownRenderer {
       ->resetFileData()
       ->setFilePath($file);
     $render_ctx = $this->getRenderContext()
-      ->resetFileData();
+      ->resetFileData()
+      ->setFilePath($file);
 
     $doc = Markdown\parse($parser_ctx, $markdown);
     return (new MarkdownExt\HTMLRenderer($render_ctx))->render($doc);
