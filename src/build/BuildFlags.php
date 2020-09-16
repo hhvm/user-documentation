@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh
 /*
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
@@ -11,16 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-require_once(__DIR__.'/../vendor/hh_autoload.php');
-
-function cli_markdown_render(string $file): string {
-  return (new MarkdownRenderer())->renderMarkdownToHTML(
-    $file,
-    \file_get_contents($file),
-    keyset[],
-  );
+enum BuildFlags: string {
+  AUTOMATED = '--auto';
 }
-
-$file = $argv[1] ?? '/dev/stdin';
-
-print(cli_markdown_render($file));

@@ -30,4 +30,4 @@ echo "** Installing Hack dependencies"
 php /opt/composer/composer.phar install
 
 echo "** Run build"
-hhvm bin/build.php
+hhvm bin/build.php --auto

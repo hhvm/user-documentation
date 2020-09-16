@@ -10,18 +10,24 @@
  */
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\Vec;
+use namespace HH\Lib\{C, Vec};
 
 <<__EntryPoint>>
 function build_site(): void {
   require_once(__DIR__.'/../vendor/autoload.hack');
   \Facebook\AutoloadMap\initialize();
 
-  $argv = \HH\global_get('argv') as KeyedContainer<_, _>;
-  if (\array_key_exists(1, $argv)) {
-    $filters = \array_slice($argv, 1);
-  } else {
-    $filters = null;
+  $argv = \HH\global_get('argv') as KeyedContainer<_, _>
+    |> Vec\drop($$, 1);
+
+  $filters = keyset[];
+  $flags = keyset[];
+  foreach ($argv as $arg) {
+    if ($arg is BuildFlags) {
+      $flags[] = $arg;
+    } else {
+      $filters[] = $arg;
+    }
   }
 
   if (!\is_dir(BuildPaths::SCRATCH_DIR)) {
@@ -70,7 +76,7 @@ function build_site(): void {
     UpdateAutoloaderBuildStep::class,
   ];
 
-  if ($filters !== null) {
+  if (!C\is_empty($filters)) {
     $steps = Vec\filter(
       $steps,
       $step ==> {
@@ -87,7 +93,7 @@ function build_site(): void {
   $steps = Vec\concat(vec[BuildIDBuildStep::class], $steps);
 
   foreach ($steps as $step) {
-    (new $step())->buildAll();
+    (new $step($flags))->buildAll();
   }
 
   echo "\n"; // Make the bash prompt nice after :p
