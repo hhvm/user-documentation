@@ -16,6 +16,12 @@ use namespace HH\Lib\{C, Str, Vec};
 abstract class BuildStep {
   abstract public function buildAll(): void;
 
+  final public function __construct(private keyset<BuildFlags> $flags) {}
+
+  final protected function getBuildFlags(): keyset<BuildFlags> {
+    return $this->flags;
+  }
+
   <<__Memoize>>
   protected static function getIndexFile(string $root): ?string {
     if (\file_exists($root.'/index.json')) {

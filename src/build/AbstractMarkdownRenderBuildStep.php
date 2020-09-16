@@ -39,7 +39,7 @@ abstract class AbstractMarkdownRenderBuildStep extends BuildStep {
     $renderer = new MarkdownRenderer();
     foreach ($files as $in => $out) {
       $md = \file_get_contents($in);
-      $html = $renderer->renderMarkdownToHTML($in, $md);
+      $html = $renderer->renderMarkdownToHTML($in, $md, $this->getBuildFlags());
       \file_put_contents(
         $out,
         '<!-- fbgfm -->'.
