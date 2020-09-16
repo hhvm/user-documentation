@@ -1,5 +1,3 @@
-// @example-start We want a complete example program so don't strip boilerplate.
-
 namespace Hack\GettingStarted\MyFirstProgram;
 
 <<__EntryPoint>>
@@ -14,4 +12,3 @@ function main(): void {
   \printf("----------------\n");
   exit(0);
 }
-

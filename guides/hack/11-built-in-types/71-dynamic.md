@@ -50,6 +50,28 @@ Hack approximates this runtime behavior by allowing values of type `dynamic` to 
 
 Unions with dynamic are also allowed to coerce to enforceable types provided that each element of the union can coerce.
 
-@@ dynamic-examples/coercion_from_union.php.type-errors @@
+```hack coercion_from_union.php.type-errors
+<?hh
+
+function expect_int(int $i): void {}
+function expect_string(string $s): void {}
+
+function choose(bool $b, dynamic $d, int $i): void {
+  if ($b) {
+    $x = $d;
+  } else {
+    $x = $i;
+  }
+  expect_int($x); // (dynamic | int) ~> int
+  // dynamic ~> int because int is enforced
+  // int ~> int because int <: int
+
+  expect_string($x); // Hack error, (dynamic | int) ~/> string because int ~/> string
+}
+```.hhconfig
+coercion_from_dynamic = true
+coercion_from_union = true
+complex_coercion = true
+```
 
 Notably, unlike subtyping, coercion is *not* transitive, meaning that `int ~> dynamic` and `dynamic ~> string` does not imply that `int ~> string`.
