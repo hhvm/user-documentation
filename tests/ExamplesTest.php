@@ -4,8 +4,8 @@ namespace HHVM\UserDocumentation\Tests;
 
 use const HHVM_VERSION_ID;
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
-use namespace HH\Lib\{C, Regex, Str, Vec};
-use function HHVM\UserDocumentation\_Private\execute_async;
+use namespace HH\Lib\{C, Str, Vec};
+use namespace HHVM\UserDocumentation\ExampleTypechecker;
 
 /**
  * @large
@@ -83,40 +83,11 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     string $in_file,
     string $expect_file,
   ): Awaitable<void> {
-    $source_dir = \dirname($in_file);
-    await using $tmp_dir = new TemporaryDirectory();
-    await using $hh_tmp_dir = new TemporaryDirectory();
-    $work_dir = $tmp_dir->getPath();
+    $this->getHHServerPath(); // marks test skipped instead of failing below
 
-    \copy(
-      $in_file,
-      $work_dir.'/'.Str\strip_suffix(\basename($in_file), '.type-errors'),
-    );
+    list($stdout, $stderr) =
+      await ExampleTypechecker\typecheck_example_async($in_file);
 
-    $hhconfig = \file_exists($in_file.'.hhconfig')
-      ? \file_get_contents($in_file.'.hhconfig')."\n"
-      : '';
-    if (
-      !Str\contains($hhconfig, 'allowed_decl_fixme_codes') &&
-      !Str\contains($hhconfig, 'allowed_fixme_codes_strict')
-    ) {
-      $hhconfig .= self::getHHConfigWhitelists();
-    }
-    \file_put_contents($work_dir.'/.hhconfig', $hhconfig);
-
-    foreach (\glob($source_dir.'/*.inc.php') as $include_file) {
-      \copy($include_file, $work_dir.'/'.\basename($include_file));
-    }
-
-    list($_exit_code, $stdout, $stderr) = await execute_async(
-      shape('environment' => dict['HH_TMPDIR' => $hh_tmp_dir->getPath()]),
-      $this->getHHServerPath(),
-      '--check',
-      '--max-procs=1',
-      '--config',
-      'extra_paths='.LocalConfig::ROOT.'/vendor/',
-      $work_dir,
-    );
     \file_put_contents($in_file.'.typechecker.stdout', $stdout);
     \file_put_contents($in_file.'.typechecker.stderr', $stderr);
 
@@ -133,39 +104,12 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     }
   }
 
-  <<__Memoize>>
-  private static function getHHConfigWhitelists(): string {
-    $hhconfig = \file_get_contents(LocalConfig::ROOT.'/.hhconfig');
-    $ret = '';
-    foreach (
-      vec[
-        re"/^allowed_decl_fixme_codes=.*\$/m",
-        re"/^allowed_fixme_codes_strict=.*\$/m",
-      ] as $regex
-    ) {
-      $m = Regex\first_match($hhconfig, $regex);
-      if ($m is nonnull) {
-        $ret .= $m[0]."\n";
-      }
-    }
-    return $ret;
-  }
-
-  <<__Memoize>>
   private function getHHServerPath(): string {
-    $hh_server = \dirname(\PHP_BINARY).'/hh_server';
-    if (\file_exists($hh_server)) {
+    $hh_server = ExampleTypechecker\get_hh_server_path();
+    if ($hh_server is nonnull) {
       return $hh_server;
     }
-
-    foreach (Str\split(\getenv('PATH'), ':') as $dir) {
-      $hh_server = $dir.'/hh_server';
-      if (\file_exists($hh_server)) {
-        return $hh_server;
-      }
-    }
     static::markTestSkipped("Couldn't find hh_server");
-    invariant_violation('unreachable');
   }
 
   private function runExamples(Vector<string> $extra_args): void {
