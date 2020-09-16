@@ -43,7 +43,22 @@ checks all code recursively under this root together as one project.
 
 Using the editor of your choice (e.g., VSCode or vim), let's create a file called `first.hack` with the following code:
 
-@@ getting-started-examples/myfirstprogram.hack @@
+``` myfirstprogram.hack no-auto-output
+namespace Hack\GettingStarted\MyFirstProgram;
+
+<<__EntryPoint>>
+function main(): void {
+  echo "Welcome to Hack!\n\n";
+
+  \printf("Table of Squares\n" .
+          "----------------\n");
+  for ($i = -5; $i <= 5; ++$i) {
+    \printf("  %2d        %2d  \n", $i, $i * $i);
+  }
+  \printf("----------------\n");
+  exit(0);
+}
+```
 
 This guide assumes some knowledge of programming. Hack has a very similar look and feel to PHP, which in
 turn, supports a lot of syntax shared by C, C++, C#, Java, and JavaScript. Here are the key points to note about this example:
