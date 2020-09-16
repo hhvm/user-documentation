@@ -14,6 +14,33 @@ namespace HHVM\UserDocumentation\MarkdownExt;
 use namespace HH\Lib\Keyset;
 
 final class RenderContext extends \Facebook\HHAPIDoc\MarkdownExt\RenderContext {
+
+  private ?string $filePath;
+
+  public function setFilePath(string $file_path): this {
+    invariant(
+      $this->filePath is null,
+      'Tried to set new path without calling resetFileData()',
+    );
+    $this->filePath = $file_path;
+    return $this;
+  }
+
+  public function getFilePath(): string {
+    invariant(
+      $this->filePath is nonnull,
+      'getFilePath() called without calling setFilePath() first',
+    );
+    return $this->filePath;
+  }
+
+  <<__Override>>
+  public function resetFileData(): this {
+    parent::resetFileData();
+    $this->filePath = null;
+    return $this;
+  }
+
   <<__Override>>
   public function getImplicitPrefixes(): keyset<string> {
     return Keyset\union(
