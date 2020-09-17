@@ -18,12 +18,14 @@ namespace HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks;
  */
 enum Files: string as string {
   HHCONFIG = 'hhconfig';
+  INI = 'ini';
   HHVM_EXPECT = 'hhvm.expect';
   HHVM_EXPECTF = 'hhvm.expectf';
-  HHVM_EXPECTREGEX = 'hhvm.expectregex';
+  HHVM_EXPECTREGEX = 'expectregex';
   EXAMPLE_HHVM_OUT = 'example.hhvm.out';
   TYPECHECKER_EXPECT = 'typechecker.expect';
   TYPECHECKER_EXPECTF = 'typechecker.expectf';
   TYPECHECKER_EXPECTREGEX = 'typechecker.expectregex';
   EXAMPLE_TYPECHECKER_OUT = 'example.typechecker.out';
+  SKIPIF = 'skipif';
 }

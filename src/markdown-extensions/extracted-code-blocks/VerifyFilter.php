@@ -37,6 +37,7 @@ final class VerifyFilter extends FilterBase {
   <<__Override>>
   protected static function processMissingTypecheckerOutput(
     string $hack_file_path,
+    bool $_needs_example,
   ): void {
     invariant_violation(
       'No typechecker output files found for %s. %s',
@@ -48,6 +49,7 @@ final class VerifyFilter extends FilterBase {
   <<__Override>>
   protected static function processMissingHHVMOutput(
     string $hack_file_path,
+    bool $_needs_example,
   ): void {
     invariant_violation(
       'No output files found for %s. %s',

@@ -62,6 +62,15 @@ abstract class FilterBase extends Markdown\RenderFilter {
     'example.out' => Files::EXAMPLE_HHVM_OUT,
   ];
 
+  const keyset<string> COMMON_HSL_NAMESPACES = keyset[
+    'C',
+    'Dict',
+    'Keyset',
+    'Regex',
+    'Str',
+    'Vec',
+  ];
+
   <<__Override>>
   public function filter(
     Markdown\RenderContext $context,
@@ -108,6 +117,18 @@ abstract class FilterBase extends Markdown\RenderFilter {
       }
     }
 
+    // To preserve old behavior, we also allow flags inside the filename.
+    foreach (Flags::getValues() as $flag) {
+      if (Str\contains($hack_filename, '.'.$flag.'.')) {
+        $flags[] = $flag;
+      }
+    }
+
+    // Another historical edge case: .inc files are never executed.
+    if (Str\contains($hack_filename, '.inc.')) {
+      $flags[] = Flags::NO_EXEC;
+    }
+
     $file_lines = dict[$hack_filename => vec[]];
     $current_file = $hack_filename;
     foreach (Str\split($node->getCode(), "\n") as $line) {
@@ -149,11 +170,9 @@ abstract class FilterBase extends Markdown\RenderFilter {
       $lines ==> Str\join($lines, "\n") |> Str\trim($$)."\n",
     );
 
-    // Add some default files if they weren't explicitly overridden.
-    $files[$hack_filename.'.'.Files::HHCONFIG] ??= '';
-    if (!$expected_type_errors) {
-      $files[$hack_filename.'.'.Files::TYPECHECKER_EXPECT] = "No errors!\n";
-    }
+    $original_code = $files[$hack_filename];
+    $files[$hack_filename] =
+      self::addBoilerplate($hack_file_path, $files[$hack_filename]);
 
     // Write or verify files.
     foreach ($files as $name => $content) {
@@ -161,6 +180,10 @@ abstract class FilterBase extends Markdown\RenderFilter {
     }
 
     // Auto-generate or verify *existence* of output files if missing.
+    $output_title = 'Output';
+    $output = '';
+
+    // Generate/verify typechecker output, if type errors are expected.
     if ($expected_type_errors) {
       if (
         !self::hasValidOutputFileSet(
@@ -169,17 +192,24 @@ abstract class FilterBase extends Markdown\RenderFilter {
           Files::EXAMPLE_TYPECHECKER_OUT,
           Files::TYPECHECKER_EXPECTF,
           Files::TYPECHECKER_EXPECTREGEX,
+          false, // needs example (TODO: see below)
         )
       ) {
-        static::processMissingTypecheckerOutput($hack_file_path);
+        static::processMissingTypecheckerOutput($hack_file_path, false /*TODO*/);
       }
+      /* TODO: Test if this is preferable to the HHVM output.
       $output_title = 'Typechecker output';
       $output = \file_exists($hack_file_path.'.'.Files::TYPECHECKER_EXPECT)
         ? \file_get_contents($hack_file_path.'.'.Files::TYPECHECKER_EXPECT)
         : \file_get_contents(
             $hack_file_path.'.'.Files::EXAMPLE_TYPECHECKER_OUT,
           );
-    } else {
+      */
+    }
+
+    // Generate/verify HHVM output.
+    if (!C\contains_key($flags, Flags::NO_EXEC)) {
+      $show_output = !C\contains_key($flags, Flags::NO_AUTO_OUTPUT);
       if (
         !self::hasValidOutputFileSet(
           $hack_file_path,
@@ -187,19 +217,22 @@ abstract class FilterBase extends Markdown\RenderFilter {
           Files::EXAMPLE_HHVM_OUT,
           Files::HHVM_EXPECTF,
           Files::HHVM_EXPECTREGEX,
+          // don't generate .example.out if output is not shown in the guide
+          $show_output,
         )
       ) {
-        static::processMissingHHVMOutput($hack_file_path);
+        static::processMissingHHVMOutput($hack_file_path, $show_output);
       }
-      $output_title = 'Output';
-      $output = \file_exists($hack_file_path.'.'.Files::HHVM_EXPECT)
-        ? \file_get_contents($hack_file_path.'.'.Files::HHVM_EXPECT)
-        : \file_get_contents($hack_file_path.'.'.Files::EXAMPLE_HHVM_OUT);
+      if ($show_output) {
+        $output = \file_exists($hack_file_path.'.'.Files::HHVM_EXPECT)
+          ? \file_get_contents($hack_file_path.'.'.Files::HHVM_EXPECT)
+          : \file_get_contents($hack_file_path.'.'.Files::EXAMPLE_HHVM_OUT);
+      }
     }
     $output = Str\trim($output);
 
     $ret = vec[
-      new Blocks\FencedCodeBlock('hack', Str\trim($files[$hack_filename])),
+      new Blocks\FencedCodeBlock('Hack', Str\trim($original_code)),
     ];
     if ($output !== '' && !C\contains_key($flags, Flags::NO_AUTO_OUTPUT)) {
       $ret[] = new Blocks\HTMLBlock('<em>'.$output_title.'</em>');
@@ -208,16 +241,132 @@ abstract class FilterBase extends Markdown\RenderFilter {
     return $ret;
   }
 
+  /**
+   * If you're reading this because this method caused an invalid Hack file to
+   * be extracted from a code block in your .md file, please try to either fix
+   * this method, or modify your example to work around the issue, e.g. by
+   * adding explicit declarations to prevent them from being auto-generated.
+   */
+  private static function addBoilerplate(
+    string $path,
+    string $extracted_code,
+  ): string {
+    // Strip #! and <?hh lines so that we don't insert any code before them
+    // below. The stripped lines are added back at the end.
+    $m = Regex\first_match($extracted_code, re"/^(#!.*\n|)(<\\?hh.*\n|)\\s*/");
+    $headers = $m is nonnull ? $m[0] : '';
+    $code = Str\strip_prefix($extracted_code, $headers);
+
+    // If we can't find any top-level declarations, assume the code block
+    // contains top-level code that needs to be wrapped in an <<__EntryPoint>>
+    // function. This would ideally be done using HHAST, but that would be too
+    // expensive.
+    if (!Regex\matches(
+      $code,
+      re"/^(namespace|use|const|(async |)function|[a-z ]*class|interface|trait|enum) /m",
+    )) {
+      $code = Str\trim_right($code)
+        |> Str\split($$, "\n")
+        |> Vec\map($$, $line ==> Str\trim_right('  '.$line))
+        |> Str\join($$, "\n");
+      $code = "<<__EntryPoint>>\nfunction _main(): void {\n$code\n}\n";
+    }
+
+    // Insert \init_docs_autoloader() call at the beginning of the
+    // <<__EntryPoint>> function (if there is one).
+    if (
+      !Str\ends_with($path, '.'.self::TYPE_ERRORS) &&
+      Str\contains($code, '<<__EntryPoint>>') &&
+      !Str\contains($code, 'init_docs_autoloader()')
+    ) {
+      $entrypoint_opening_brace = Str\search(
+        $code,
+        '{',
+        Str\search($code, '<<__EntryPoint>>') as nonnull
+      );
+      invariant(
+        $entrypoint_opening_brace is nonnull,
+        'Failed to locate <<__EntryPoint>> opening brace.',
+      );
+      $code = Str\slice($code, 0, $entrypoint_opening_brace + 1).
+        "\n  \\init_docs_autoloader();\n".
+        Str\slice($code, $entrypoint_opening_brace + 1);
+    }
+
+    // Insert `use` clauses for common HSL namespaces. There might be some false
+    // positives here, but that's fine.
+    $uses = vec[];
+    foreach (self::COMMON_HSL_NAMESPACES as $ns) {
+      if (
+        Str\contains($code, $ns.'\\') &&
+        !\preg_match('/^use namespace HH\\\\Lib\\\\.*'.$ns.'/m', $code)
+      ) {
+        $uses[] = $ns;
+      }
+    }
+    if (!C\is_empty($uses)) {
+      $uses_str = Str\join($uses, ', ');
+      if (C\count($uses) > 1) {
+        $uses_str = '{'.$uses_str.'}';
+      }
+      $code = 'use namespace HH\\Lib\\'.$uses_str.";\n\n$code";
+    }
+
+    // Generate a unique namespace name (unless one is already specified),
+    // e.g. HHVM\UserDocumentation\Guides\Hack\GettingStarted\MyFirstProgram.
+    if (
+      !Str\starts_with($code, 'namespace ') &&
+      !Str\contains($code, "\nnamespace ")
+    ) {
+      // Cut off anything after the first period. This makes it possible to
+      // force multiple examples to use the same namespace, e.g. example.hack
+      // and example.inc.hack.
+      $ns = Str\slice($path, 0, Str\search($path, '.') as nonnull)
+        |> Str\split($$, '/')
+        |> Vec\drop($$, C\find_key($$, $v ==> $v === 'guides') as nonnull)
+        |> Vec\map(
+          $$,
+          $part ==> Str\trim_left($part, '0123456789-_')
+            |> Str\strip_suffix($$, '-examples')
+            |> Str\capitalize($$)
+            |> Regex\replace_with( // convert to CamelCase
+              $$,
+              re"/[^a-zA-Z0-9]+([a-zA-Z0-9])/",
+              $match ==> Str\uppercase($match[1]),
+            ),
+        )
+        |> Str\join($$, '\\');
+      $code = 'namespace HHVM\\UserDocumentation\\'.$ns.";\n\n$code";
+    }
+
+    if ($code !== $extracted_code) {
+      $code =
+        "// WARNING: Contains some auto-generated boilerplate code, see:\n".
+        '// '.__METHOD__."\n\n".
+        $code;
+    }
+
+    if (Str\contains($path, '.php') && !Str\contains($headers, '<?hh')) {
+      $code = "<?hh\n\n".$code;
+    }
+
+    return $headers.$code;
+  }
+
   private static function hasValidOutputFileSet(
     string $hack_file_path,
     Files $expect,
     Files $example,
     Files $expectf,
     Files $expectregex,
+    bool $needs_example,
   ): bool {
     return \file_exists($hack_file_path.'.'.$expect) ||
       (
-        \file_exists($hack_file_path.'.'.$example) &&
+        (
+          !$needs_example ||
+          \file_exists($hack_file_path.'.'.$example)
+        ) &&
         (
           \file_exists($hack_file_path.'.'.$expectf) ||
           \file_exists($hack_file_path.'.'.$expectregex)
@@ -232,9 +381,11 @@ abstract class FilterBase extends Markdown\RenderFilter {
 
   abstract protected static function processMissingTypecheckerOutput(
     string $hack_filename,
+    bool $needs_example,
   ): void;
 
   abstract protected static function processMissingHHVMOutput(
     string $hack_filename,
+    bool $needs_example,
   ): void;
 }
