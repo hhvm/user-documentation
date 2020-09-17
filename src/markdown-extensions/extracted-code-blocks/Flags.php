@@ -17,4 +17,5 @@ namespace HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks;
  */
 enum Flags: string as string {
   NO_AUTO_OUTPUT = 'no-auto-output';
+  NO_EXEC = 'noexec';
 }
