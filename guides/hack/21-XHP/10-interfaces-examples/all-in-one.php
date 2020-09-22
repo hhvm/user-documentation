@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{div, li};
