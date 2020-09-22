@@ -1,8 +1,6 @@
-namespace Hack\UserDocumentation\Classes\Constructors\Examples\Unpromotion;
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\Constructors\Unpromotion;
 
 use namespace HH\Lib\{C, Str, Vec};
-
-// @example-start
 
 final class User {
   private ParsedName $name;
@@ -13,13 +11,4 @@ final class User {
   ) {
     $this->name = parse_name($name);
   }
-}
-
-// @example-end
-// the rest is not relevant for a guide about constructor parameter promotion
-
-final class ParsedName {}
-
-function parse_name(string $name): ParsedName {
-  return new ParsedName();
 }
