@@ -24,7 +24,7 @@ async function intro_examples_avoid_xss_run(
   string $could_be_bad,
 ): Awaitable<void> {
   intro_examples_avoid_xss_using_string($could_be_bad);
-  echo PHP_EOL.PHP_EOL;
+  echo \PHP_EOL.\PHP_EOL;
   await intro_examples_avoid_xss_using_xhp($could_be_bad);
 }
 

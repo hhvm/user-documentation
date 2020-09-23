@@ -14,7 +14,7 @@ async function extending_examples_children_run(): Awaitable<void> {
   try {
     echo await $my_br->toStringAsync()."\n";
   } catch (XHP\InvalidChildrenException $ex) {
-    var_dump($ex->getMessage());
+    \var_dump($ex->getMessage());
   }
   $my_ul = <my_ul />;
   $my_ul->appendChild(<li />);

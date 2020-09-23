@@ -14,6 +14,6 @@ async function intro_examples_allowed_tag_validation_using_xhp(
     echo await $xhp->toStringAsync();
   } catch (XHP\InvalidChildrenException $ex) {
     // We will get here because an <i> cannot be nested directly below a <ul>
-    var_dump($ex->getMessage());
+    \var_dump($ex->getMessage());
   }
 }
