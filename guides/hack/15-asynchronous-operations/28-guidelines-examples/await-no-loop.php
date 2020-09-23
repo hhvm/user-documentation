@@ -24,9 +24,7 @@ async function load_user(int $id): Awaitable<User> {
 async function load_users_no_loop(vec<int> $ids): Awaitable<vec<User>> {
   return await Vec\map_async(
     $ids,
-    fun(
-      '\Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AwaitNoLoop\load_user',
-    ),
+    async $id ==> await load_user($id),
   );
 }
 
