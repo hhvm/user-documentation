@@ -13,7 +13,7 @@ As shown, the type parameter `T` is used in the declaration of the instance prop
 `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves
 generic methods.
 
-@@ some-basics-examples/Stack-test.php @@
+@@ some-basics-examples/Stack.test.php @@
 
 The line commented-out, attempts to call push with a non-`int` argument. This is rejected, because `$stInt` is a stack of `int`.
 
