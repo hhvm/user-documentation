@@ -1,6 +1,6 @@
 <?hh // strict
 
-namespace Hack\UserDocumentation\Types\Generics\Examples\Stk;
+namespace HHVM\UserDocumentation\Guides\Hack\Types\GenericTypes\Stack;
 
 class StackUnderflowException extends \Exception {}
 
