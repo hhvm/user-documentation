@@ -58,14 +58,14 @@ these interfaces are `\XHPUnsafeRenderable` and `\XHPAlwaysValidChild`.
 
 If you need to render raw HTML strings, wrap them in a class that implements this interface and provides a `toHTMLStringAsync()` method:
 
-@@ interfaces-examples/xss-security-hole.inc.php @@
-@@ interfaces-examples/xss-security-hole.php @@
+@@ interfaces-examples/md.xss-security-hole.inc.php @@
+@@ interfaces-examples/md.xss-security-hole.php @@
 
 We do not provide an implementation of this interface as a generic implementation tends to be overused; instead, consider making more specific
 implementations:
 
-@@ interfaces-examples/markdown-wrapper.inc.php @@
-@@ interfaces-examples/markdown-wrapper.php @@
+@@ interfaces-examples/md.markdown-wrapper.inc.php @@
+@@ interfaces-examples/md.markdown-wrapper.php @@
 
 ### `\Facebook\XHP\AlwaysValidChild`
 

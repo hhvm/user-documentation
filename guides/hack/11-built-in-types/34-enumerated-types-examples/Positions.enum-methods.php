@@ -1,11 +1,10 @@
 <?hh // strict
 
-namespace Hack\UserDocumentation\Types\Enums\Examples\TestMethods;
-use Hack\UserDocumentation\Types\Enums\Examples\Positions\Position as Position;
+namespace Hack\UserDocumentation\Types\Enums\Examples\Positions;
 
 <<__EntryPoint>>
-function main(): void {
-  require_once("Positions.inc.php");
+function run(): void {
+  \init_docs_autoloader();
   $names = Position::getNames();
   echo " Position::getNames() ---\n";
   foreach ($names as $key => $value) {
