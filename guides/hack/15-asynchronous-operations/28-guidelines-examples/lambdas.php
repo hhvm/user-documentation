@@ -1,5 +1,6 @@
 <?hh // strict
 
+// @example-start namespace is relevant here, don't strip it
 namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Lambdas;
 use namespace HH\Lib\Vec;
 
