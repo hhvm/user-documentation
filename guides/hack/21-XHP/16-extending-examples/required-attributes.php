@@ -12,7 +12,7 @@ async function extending_examples_attributes_run(): Awaitable<void> {
   try {
     echo await $uinfo->toStringAsync();
   } catch (XHP\AttributeRequiredException $ex) {
-    var_dump($ex->getMessage());
+    \var_dump($ex->getMessage());
   }
 
   /* HH_FIXME[4314] This is a typechecker error but not a runtime error. */
