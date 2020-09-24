@@ -20,7 +20,6 @@ function basic_usage_examples_get_float(): float {
 async function basic_usage_examples_embed_hack(): Awaitable<void> {
   \init_docs_autoloader();
   $xhp_float = <i>{basic_usage_examples_get_float()}</i>;
-  $a = new MyBasicUsageExampleClass();
 
   $xhp =
     <div>
