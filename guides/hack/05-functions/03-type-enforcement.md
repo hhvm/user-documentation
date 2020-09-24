@@ -22,6 +22,8 @@ disable this.
 In partial mode, type hints are optional.
 
 ```add_items_partial.php no-auto-output
+<?hh // partial
+
 function add_items($x, int $y) {
   return $x + $y;
 }
