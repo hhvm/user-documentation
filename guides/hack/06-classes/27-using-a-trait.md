@@ -22,6 +22,6 @@ Beware that at runtime all the instances of the multiply defined property `$x` a
 
 @@ using-a-trait-examples/PropertyConflict.php @@
 
-For methods, a rule of thumb is "traits provide a method implementation unless the class itself does not".  If the class implements a method `m`, then traits used by the class can define methods named `m` provided that their interfaces are compatible (more precisely _super types_ of the type of the method defined in the class.  At runtime methods inserted by traits are ignored, and dispatch selects the method defined in the class.
+For methods, a rule of thumb is "traits provide a method implementation if the class itself does not".  If the class implements a method `m`, then traits used by the class can define methods named `m` provided that their interfaces are compatible (more precisely _super types_ of the type of the method defined in the class.  At runtime methods inserted by traits are ignored, and dispatch selects the method defined in the class.
 
 If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.
