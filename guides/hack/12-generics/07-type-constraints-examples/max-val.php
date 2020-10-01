@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\Generics\TypeConstraints\Examples\MaxVal;
 

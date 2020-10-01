@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\Async\Examples\Examples\DataDependencies;
 use namespace HH\Lib\{Tuple, Vec};

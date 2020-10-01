@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\Fundamentals\Constants\Examples\DefiningConstants;
 

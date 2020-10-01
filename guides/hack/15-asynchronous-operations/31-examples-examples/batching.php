@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Batching;
 use namespace HH\Lib\Vec;

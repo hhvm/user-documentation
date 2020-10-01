@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 // @example-start Don't strip namespace declaration in this example.
 
