@@ -5,7 +5,7 @@ dependencies such as the [Hack Standard Library], and various optional tools.
 
 A good starting point is to:
 - [install Composer]
-- create an empty `.hhconfig` file
+- create an `.hhconfig` file
 - create `src/` and `tests/` subdirectories
 - configure autoloading
 - use Composer to install the common dependencies and tools
@@ -60,7 +60,7 @@ The following sequence of commands could be used to fully initialize a Hack
 project with the most common dependencies:
 
 ```
-$ touch .hhconfig
+$ curl https://raw.githubusercontent.com/hhvm/hhast/master/.hhconfig > .hhconfig
 $ mkdir bin src tests
 $ cat > hh_autoload.json
 {
@@ -74,20 +74,21 @@ $ cat > hh_autoload.json
 }
 $ composer require hhvm/hsl hhvm/hhvm-autoload
 $ composer require --dev hhvm/hhast hhvm/hacktest facebook/fbexpect
-$ cp vendor/hhvm/hhast/.hhconfig .hhconfig
-$ hh_client
 ```
 
 You may need to use the full path to Composer, depending on how it's installed.
 
-You might notice that we create an empty `.hhconfig` file first and overwrite it later (using `cp`). The reason for this is that starting with hhvm version [4.62](https://hhvm.com/blog/2020/06/16/hhvm-4.62.html) is no longer enough for projects that use external dependencies. Almost all packages you pull in using composer will have a suppression comment in them somewhere. You must whitelist these suppression comments in order to use these packages.
+We curl an existing hhconfig from hhast from github. The reason for this is that starting with hhvm version [4.62](https://hhvm.com/blog/2020/06/16/hhvm-4.62.html), it is no longer enough for projects that use external dependencies. Almost all packages you pull in using composer will have a suppression comment in them somewhere. You must whitelist these suppression comments in order to use these packages.
 
-The hhast `.hhconfig` file whitelists all suppression comments used by hsl, hhvm-autoload, hacktest, fbexpect, hhast and all dependencies of these. If the result of `hh_client` is not `No errors!` after the last step, please refer to the [error suppression docs](https://docs.hhvm.com/hack/silencing-errors/introduction).
+The hhast `.hhconfig` file whitelists all suppression comments used by hsl, hhvm-autoload, hacktest, fbexpect, hhast. Hhast depends on these packages itself, so this should stay up to date. If the result of `hh_client restart && hh_client` does not end with `No errors!` after the last step, please refer to the [error suppression docs](https://docs.hhvm.com/hack/silencing-errors/introduction).
 
 The same commands with their expected output:
 
 ```
-$ touch .hhconfig
+$ curl https://raw.githubusercontent.com/hhvm/hhast/master/.hhconfig > .hhconfig
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+xxx   xxx  xxx   xxx    x     x   xxxx      x --:--:-- --:--:-- --:--:--  xxxx
 $ mkdir bin src tests
 $ cat > hh_autoload.json
 {
@@ -129,9 +130,6 @@ Package operations: 7 installs, 0 updates, 0 removals
 Writing lock file
 Generating autoload files
 /private/var/folders/3l/2yk1tgkn7xdd76bs547d9j90fcbt87/T/tmp.xaQwE1xE/vendor/autoload.hack
-$ cp vendor/hhvm/hhast/.hhconfig .hhconfig
-$ hh_client
-No errors!
 ```
 
 ### Adding Functions or Classes
