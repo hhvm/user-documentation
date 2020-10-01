@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace NS1 {
   const int CON1 = 100;

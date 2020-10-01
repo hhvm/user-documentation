@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable;
 use namespace HH\Lib\Vec;

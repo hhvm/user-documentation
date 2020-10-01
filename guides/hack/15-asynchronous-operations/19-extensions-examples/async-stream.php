@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncStream;
 use namespace HH\Lib\Vec;

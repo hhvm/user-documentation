@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Awaitables\Examples\MultipleAwaitables;
 use namespace HH\Lib\Dict;

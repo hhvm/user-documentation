@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping;
 use namespace HH\Lib\Vec;

@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Examples\Examples\Polling;
 use namespace HH\Lib\Vec;

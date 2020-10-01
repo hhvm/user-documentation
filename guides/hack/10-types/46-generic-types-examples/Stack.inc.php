@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace HHVM\UserDocumentation\Guides\Hack\Types\GenericTypes\Stack;
 

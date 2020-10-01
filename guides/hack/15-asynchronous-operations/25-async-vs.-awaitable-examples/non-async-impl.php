@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\AsyncVsAwaitables\Examples\NonAsyncImpl;
 

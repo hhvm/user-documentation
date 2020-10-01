@@ -1,5 +1,5 @@
 #!/usr/bin/env hhvm
-<?hh // strict
+<?hh
 namespace Hack\UserDocumentation\Fundamentals\ProgramStructure\Examples\LegacyHelloWorld;
 
 <<__EntryPoint>>

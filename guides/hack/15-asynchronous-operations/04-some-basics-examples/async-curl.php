@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 namespace Hack\UserDocumentation\AsyncOps\Basics\Examples\AsyncCurl;
 use namespace HH\Lib\Vec;
