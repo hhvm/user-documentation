@@ -2,7 +2,7 @@
     "require": {
         "facebook/xhp-lib": "^4.0",
         "hhvm": "4.74.*",
-        "usox/hackttp": "dev-master",
+        "usox/hackttp": "^0.5.2",
         "hhvm/hhvm-autoload": "^3.0",
         "hhvm/type-assert": "^4.0",
         "facebook/hack-codegen": "^4.0",
@@ -17,7 +17,10 @@
         "hhvm/hhast": "^4.0",
         "facebook/definition-finder": "^2.0.0",
         "hhvm/hacktest": "^2.0",
-        "usox/hackmock": "dev-master",
         "facebook/fbexpect": "^2.6.1"
+    },
+    "scripts": {
+        "post-install-cmd": "patch --dry-run -R -p1 -i hackttp.patch || patch -p1 -i hackttp.patch",
+        "post-update-cmd": "patch --dry-run -R -p1 -i hackttp.patch || patch -p1 -i hackttp.patch"
     }
 }
