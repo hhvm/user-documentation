@@ -59,6 +59,36 @@ Error codes 4000 - 4999 are used for typing errors.
 
 ## Configuring Error Suppression
 
+Hack error suppression can be configured in the `.hhconfig` file at the root of a project.
+In hhvm version [4.62](https://hhvm.com/blog/2020/06/16/hhvm-4.62.html) and above, error suppression works on a whitelist system.
+Older hhvm versions used a blacklisting system instead.
+
+### How to whitelist suppression comments in hhvm 4.62 and above
+
+By default Hack will not accept a suppression comment, if that specific error code is not mentioned in the `.hhconfig` file.
+Attempting to suppress an unmentioned error will result in an extra error like this:
+
+```
+Typing[4110] You cannot use HH_FIXME or HH_IGNORE_ERROR comments to suppress error 4110
+```
+
+If the file in which this error resides is in **partial** mode, add `4110` to the `allowed_fixme_codes_partial` key in your `.hhconfig`.
+If the file in which this error resides is in **strict** mode, add `4110` to the `allowed_fixme_codes_strict` key in your `.hhconfig`.
+
+As described further in Best Practices, suppressing errors on declarations is generally a bad idea. However, some errors can only be suppressed at a declaration. When suppressing an error at a declaration, you'll get an error like this. 
+
+```
+Typing[4047] You cannot use HH_FIXME or HH_IGNORE_ERROR comments to suppress error 4047 in declarations
+```
+
+In such cases, you'll have to add `4047` to the `allowed_decl_fixme_codes` key, as well as to the `allowed_fixme_codes_xxx` key.
+
+An important note when using an external package. If a package uses a suppression comment and mentions this in its `.hhconfig`, this will not automatically update the `.hhconfig` settings for your project. In order to use this package, you'll need to add these codes to your own `.hhconfig`.
+
+### Historic note for hhvm 4.61 and below
+
+*If you are writing code on hhvm 4.62 or above, you may skip this section.*
+
 Once you have removed all the occurrences of a specific error code,
 you can ensure that no new errors are added.
 
