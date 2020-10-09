@@ -73,8 +73,8 @@ Here are the supported escape sequences:
 
 Escape sequence | Character name | Unicode character
 --------------- | --------------| ------
-\$  | Dollar sign | U+0024
-\"  | Double quote | U+0022
+\\\$  | Dollar sign | U+0024
+\\\"  | Double quote | U+0022
 \\\\  | Backslash | U+005C
 \e  | Escape | U+001B
 \f  | Form feed | U+000C
