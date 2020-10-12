@@ -8,20 +8,20 @@
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v2.13.5",
+            "version": "v2.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "cd96055a59949c129ee8c680282cb96126bed3d2"
+                "reference": "4a62ef2f75428e72188cf469988b118d3414ee92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/cd96055a59949c129ee8c680282cb96126bed3d2",
-                "reference": "cd96055a59949c129ee8c680282cb96126bed3d2",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/4a62ef2f75428e72188cf469988b118d3414ee92",
+                "reference": "4a62ef2f75428e72188cf469988b118d3414ee92",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.29",
+                "hhvm": "^4.78",
                 "hhvm/hhast": "^4.21.4",
                 "hhvm/hhvm-autoload": "^2.0|^3.0",
                 "hhvm/hsl": "^4.0",
@@ -49,7 +49,7 @@
                 "hack",
                 "hhvm"
             ],
-            "time": "2020-08-25T21:26:59+00:00"
+            "time": "2020-10-09T22:59:10+00:00"
         },
         {
             "name": "facebook/difflib",
