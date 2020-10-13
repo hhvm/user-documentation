@@ -29,12 +29,21 @@ You can define your own attribute by implementing an attribute
 interface in the HH namespace.
 
 ``` Hack
-class Maintainers implements HH\ClassAttribute {
-  public function __construct(string ...$args) {}
+class Contributors implements HH\ClassAttribute {
+  public function __construct(private string $author, private ?keyset<string> $maintainers = null) {}
+  public function getAuthor(): string {
+    return $this->author;
+  }
+  public function getMaintainers(): keyset<string> {
+    return $this->maintainers ?? keyset[$this->author];
+  }
 }
 
-<<Maintainers("Team X", "Team Y")>>
+<<Contributors("John Doe", keyset["ORM Team", "Core Library Team"])>>
 class MyClass {}
+
+<<Contributors("You")>>
+class YourClass {}
 ```
 
 Other common attribute interfaces are `HH\FunctionAttribute`,
@@ -50,5 +59,7 @@ Given the `MyClass` example defined above:
 
 ``` Hack
 $rc = new ReflectionClass('MyClass');
-$rc->getAttribute('Maintainers') // ["Team X", "Team Y"]
+$my_class_contributors = $rc->getAttributeClass(Contributors::class);
+$my_class_contributors->getAuthor(); // "John Doe"
+$my_class_contributors->getMaintainers(); // keyset["ORM Team", "Core Library Team"]
 ```
