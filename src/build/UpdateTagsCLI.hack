@@ -60,7 +60,7 @@ final class UpdateTagsCLI extends CLIBase {
 
 
     $tags = keyset[];
-    for ($page = 1; $page <= 10; ++$page) {
+    for ($page = 1; $page <= 20; ++$page) {
       $url = Str\format(
         'https://api.github.com/repos/%s/tags?per_page=100&page=%d',
         $project,
