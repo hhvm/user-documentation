@@ -7,6 +7,19 @@ can *catch* the thrown exception and service it. Among other things, the handler
 script to continue execution), it might perform some recovery and then throw an exception to get further help, or it might perform some
 cleanup action and terminate the script. Exceptions may be thrown on behalf of the runtime or by explicit code source code in the script.
 
+A `throw` statement throws an exception immediately and unconditionally.  Control never reaches the statement immediately
+following the throw. See the [try statement](try.md) for more details of throwing and catching exceptions.  For example:
+
+```Hack
+if ($denominator === 0) throw new HH\Lib\Math\DivisionByZeroException();
+
+class MyException extends Exception { ... }
+
+throw new MyException();
+```
+
+The type of the exception must be `Throwable` or a subclass of `Throwable`.
+
 Exception handling involves the use of the following keywords:
 * `try`, which allows a *try-block* of code containing one or more possible exception generations, to be tried
 * `catch`, which defines a handler for a specific type of exception thrown from the corresponding try-block or from some function it calls
@@ -43,3 +56,4 @@ execution of that catch-block can start, the runtime first executes, in order, a
 deeply than the one that caught the exception.
 
 If no matching catch-block is found, the behavior is implementation-defined.
+
