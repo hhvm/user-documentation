@@ -146,10 +146,10 @@ that are intended to be opaque. This means they cannot (or should not) be cast
 directly to a string or another type, or be accessed in any other way besides
 calling them.
 
-It is *sometimes* useful to determine what a function reference is pointing to,
-e.g. for use in logging messages. For these *limited* use cases, if you know
-enough about the input and output formats you expect, HHVM provides the
-following helpers (but note they are not well supported and may change):
+If you need to determine what a function reference is pointing to, e.g. for
+use in logging messages, and you know enough about the expected input and
+output formats, HHVM provides the following helpers (but note they are not
+well supported and may change):
 
 * `HH\is_fun`
 * `HH\fun_get_function`
@@ -158,8 +158,10 @@ following helpers (but note they are not well supported and may change):
 * `HH\class_meth_get_method`
 
 Be very careful and deliberate when using these, as they are loosely typed but
-will throw exceptions for bad arguments. Use of reflection APIs in production is
-also discouraged because it often has a large performance impact.
+will throw exceptions for bad arguments.
+
+<span class="fbOnly fbIcon">In Facebook's WWW repository, prefer using higher
+level wrappers such as the `HackCallable` class.</span>
 
 ## Old syntax
 
