@@ -4,7 +4,7 @@ without actually calling it&mdash;for example,
 as an argument for functions like `Vec\map`.
 
 **Note:** The following syntax is only supported since HHVM 4.79. For older HHVM
-version, see [old syntax](#old-syntax) below.
+versions, see [old syntax](#old-syntax) below.
 
 To refer to a top-level (global) function named `foo`, you can write:
 
@@ -63,7 +63,8 @@ MyClass::bar<>; // a reference to static method 'MyClass::bar'
 ```
 
 - **Private/protected** methods can be referenced using this syntax as long as
-  they are accessible to you in your local scope.
+  they are accessible to you in your local scope (the scope where the reference
+  is created). The returned reference can then be called from any scope.
 - **Abstract** static methods cannot be referenced. Such methods cannot be
   called, for they have no implementation. Invoking a hypothetical reference to
   one would also be an error, so we simply don’t allow a reference to be
@@ -137,7 +138,7 @@ buzz<mixed>;
 ## Introspection
 
 Function references can be cached in APC (the name will be resolved again when
-they are rehydrated) or passed to memoized functions. However, other
+they are retrieved) or passed to memoized functions. However, other
 serialization formats are not supported.
 
 Internally, function/method references are represented using special data types
