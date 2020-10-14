@@ -23,7 +23,7 @@ Note that to prevent ambiguity, all `function` type declarations have to be
 wrapped in parentheses.
 
 [Variadic functions](/hack/functions/introduction#variadic-functions) and
-[generic types](/hack/generics) are also supported.
+[generic types](/hack/generics/some-basics) are also supported.
 
 ```
 function takes_various_functions<T>(
