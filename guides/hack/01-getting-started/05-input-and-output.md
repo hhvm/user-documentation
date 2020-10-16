@@ -5,8 +5,11 @@ API, with a prototype available in [hsl-experimental], known as "HSL IO".
 
 [hsl-experimental]: https://github.com/hhvm/hsl-experimental/
 
-**HSL IO is currently not recommended in CLI server mode**: error handling is based on the `errno` C variable,
-which has unpredictable behavior in CLI server mode.
+**HSL IO is currently experimental and not recommended for general use.**.
+
+<p class="fbOnly">HSL IO should not yet be used in Facebook www; you want
+the Facebook-specific `Filesystem` class instead. Post in the usual groups
+if you can't find a suitable alternative for HSL IO.</p>
 
 HSL IO differs from most other language's standard IO libraries in two particularly significant ways:
 - provide as much safety as possible through the type system instead of runtime checking. For example,
