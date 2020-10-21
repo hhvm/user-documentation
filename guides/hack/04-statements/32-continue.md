@@ -5,6 +5,8 @@ A `continue` statement terminates the execution of the innermost enclosing `do`,
 Although a `continue` statement must not attempt to break out of a finally block, a `continue` statement can terminate a loop that is
 fully contained within a finally block.
 
+## `break`
+
 A `break` statement can be used to interrupt the iteration of a loop statement and to break-out to the statement immediately following
 that loop statement.  For example:
 
