@@ -148,6 +148,7 @@ final class Guides {
         ],
         'statements' => dict[
           'labeled-statements' => tuple('statements', 'switch'),
+          'throw' => tuple('statements', 'try'),
         ],
         'typechecker' => dict[
           'editors' => tuple('getting-started', 'tools'),
