@@ -8,7 +8,7 @@ $two = $f(1);
 
 ## Type Inference
 
-Unlike named functions, type anotations are optional on anonymous functions.
+Unlike named functions, type annotations are optional on anonymous functions.
 You can still add explicit types if you wish.
 
 ``` Hack
