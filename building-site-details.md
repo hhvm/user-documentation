@@ -17,7 +17,9 @@ This will:
 
 ## Local Snapshot of Site
 
-If you don't have any desire to [build the site](README.md#build-the-site-locally) (e.g., to test [content changes](#contributing-content)), but want to run a snapshot copy of the site locally, offline, then you can use Docker to do this.
+If you just want to run a local copy of the site and do not want to make
+any changes whatsoever, you can run a snapshot from Docker instead of
+building the site:
 
 - First, install the [Docker Engine](https://docs.docker.com/) on your platform
 - Then:
