@@ -7,12 +7,14 @@ Every 24 weeks (roughly twice a year), a release has "long term support" for
 roughly 48 weeks - until two more LTS releases have been made. If the release
 due at that time is delayed, support is extended.
 
-As of May 2020, the current LTS releases are:
+Here's a table of recent LTS releases as well as *expected* future LTS releases:
 
-- HHVM 4.32
-- HHVM 4.56
+| Version |    \*Release Date       |    \*End of Suppport       |
+| ------- | ----------------------- | -------------------------- |
+| 4.32    | November 19th, 2019     | October 21st, 2020         |
+| 4.56    | May 4th, 2020           | April 5th, 2021            |
+| 4.80    | October 21st, 2020      | *September 22nd, 2021*     | 
+| 4.104   | *April 5th, 2021*       | *March 7th, 2022*          |
+| 4.128   | *September 22nd, 2021*  | *August 24th, 2022*        |
 
-The following releases are expected to be LTS releases:
-
-- HHVM 4.80 (release marks end of support for 4.32)
-- HHVM 4.104 (release marks the end of support for 4.56)
+\* *Dates in italics signify an **expected** date.*
