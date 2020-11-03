@@ -49,6 +49,10 @@
                 "hack",
                 "hhvm"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/definition-finder/issues",
+                "source": "https://github.com/hhvm/definition-finder/tree/v2.14.0"
+            },
             "time": "2020-10-09T22:59:10+00:00"
         },
         {
@@ -85,6 +89,10 @@
             "license": [
                 "MIT"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/difflib/issues",
+                "source": "https://github.com/hhvm/difflib/tree/v1.2.0"
+            },
             "time": "2019-07-22T20:15:27+00:00"
         },
         {
@@ -129,6 +137,10 @@
                 "hack",
                 "markdown"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/fbmarkdown/issues",
+                "source": "https://github.com/hhvm/fbmarkdown/tree/master"
+            },
             "time": "2020-05-21T16:08:24+00:00"
         },
         {
@@ -190,6 +202,10 @@
                 "code generation",
                 "hack"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/hack-codegen/issues",
+                "source": "https://github.com/hhvm/hack-codegen/tree/v4.3.12"
+            },
             "time": "2020-09-21T21:12:16+00:00"
         },
         {
@@ -216,6 +232,10 @@
             "notification-url": "https://packagist.org/downloads/",
             "description": "Common interface for HTTP messages",
             "homepage": "https://github.com/facebookexperimental/hack-http-request-response-interfaces",
+            "support": {
+                "issues": "https://github.com/hhvm/hack-http-request-response-interfaces/issues",
+                "source": "https://github.com/hhvm/hack-http-request-response-interfaces/tree/master"
+            },
             "time": "2020-03-30T21:06:56+00:00"
         },
         {
@@ -262,6 +282,10 @@
                 "router",
                 "routing"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/hack-router/issues",
+                "source": "https://github.com/hhvm/hack-router/tree/v0.19.7"
+            },
             "time": "2020-07-29T17:25:41+00:00"
         },
         {
@@ -313,6 +337,10 @@
                 "router",
                 "routing"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/hack-router-codegen/issues",
+                "source": "https://github.com/hhvm/hack-router-codegen/tree/v0.17.5"
+            },
             "time": "2020-06-05T19:31:54+00:00"
         },
         {
@@ -349,6 +377,10 @@
             "license": [
                 "MIT"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/hh-apidoc/issues",
+                "source": "https://github.com/hhvm/hh-apidoc/tree/master"
+            },
             "time": "2020-03-17T22:33:25+00:00"
         },
         {
@@ -387,6 +419,10 @@
             "license": [
                 "MIT"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/hh-clilib/issues",
+                "source": "https://github.com/hhvm/hh-clilib/tree/v2.5.2"
+            },
             "time": "2020-09-21T20:44:02+00:00"
         },
         {
@@ -431,20 +467,24 @@
                 "hhvm",
                 "xhp"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/xhp-lib/issues",
+                "source": "https://github.com/hhvm/xhp-lib/tree/master"
+            },
             "time": "2020-08-31T17:33:47+00:00"
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.78.1",
+            "version": "v4.78.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "3944c2f9f3d946ebf049a5af7db30f2bef72e3b1"
+                "reference": "843dca1d735cb5e054c46ff392ce513fa37f911c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/3944c2f9f3d946ebf049a5af7db30f2bef72e3b1",
-                "reference": "3944c2f9f3d946ebf049a5af7db30f2bef72e3b1",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/843dca1d735cb5e054c46ff392ce513fa37f911c",
+                "reference": "843dca1d735cb5e054c46ff392ce513fa37f911c",
                 "shasum": ""
             },
             "require": {
@@ -481,24 +521,28 @@
                 "MIT"
             ],
             "description": "A mutable AST library for Hack with linting and code migrations",
-            "time": "2020-10-07T19:26:10+00:00"
+            "support": {
+                "issues": "https://github.com/hhvm/hhast/issues",
+                "source": "https://github.com/hhvm/hhast/tree/v4.78.2"
+            },
+            "time": "2020-10-14T23:16:53+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "37a994abc16eae898eb6692e1d2682496f01124c"
+                "reference": "3f74eb62cec10c89077ab0e88b0c59463650d5c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/37a994abc16eae898eb6692e1d2682496f01124c",
-                "reference": "37a994abc16eae898eb6692e1d2682496f01124c",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/3f74eb62cec10c89077ab0e88b0c59463650d5c0",
+                "reference": "3f74eb62cec10c89077ab0e88b0c59463650d5c0",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0",
+                "composer-plugin-api": "^1.0|^2.0",
                 "hhvm": "^4.25",
                 "hhvm/hsl": "^4.0"
             },
@@ -528,7 +572,11 @@
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2020-09-21T20:36:25+00:00"
+            "support": {
+                "issues": "https://github.com/hhvm/hhvm-autoload/issues",
+                "source": "https://github.com/hhvm/hhvm-autoload/tree/v3.1.5"
+            },
+            "time": "2020-10-28T21:35:18+00:00"
         },
         {
             "name": "hhvm/hsl",
@@ -564,6 +612,10 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library",
+            "support": {
+                "issues": "https://github.com/hhvm/hsl/issues",
+                "source": "https://github.com/hhvm/hsl/tree/v4.41.0"
+            },
             "time": "2020-05-01T23:05:23+00:00"
         },
         {
@@ -603,6 +655,10 @@
                 "MIT"
             ],
             "description": "The Hack Standard Library - Experimental Additions",
+            "support": {
+                "issues": "https://github.com/hhvm/hsl-experimental/issues",
+                "source": "https://github.com/hhvm/hsl-experimental/tree/v4.66.0"
+            },
             "time": "2020-09-02T18:55:57+00:00"
         },
         {
@@ -644,6 +700,10 @@
                 "TypeAssert",
                 "hack"
             ],
+            "support": {
+                "issues": "https://github.com/hhvm/type-assert/issues",
+                "source": "https://github.com/hhvm/type-assert/tree/master"
+            },
             "time": "2020-08-17T19:26:29+00:00"
         },
         {
@@ -688,6 +748,10 @@
                 "hhvm",
                 "http"
             ],
+            "support": {
+                "issues": "https://github.com/usox/hack-http-factory-interfaces/issues",
+                "source": "https://github.com/usox/hack-http-factory-interfaces/tree/master"
+            },
             "time": "2020-04-08T16:17:10+00:00"
         },
         {
@@ -747,6 +811,10 @@
                 "response",
                 "stream"
             ],
+            "support": {
+                "issues": "https://github.com/usox/hackttp/issues",
+                "source": "https://github.com/usox/hackttp/tree/v0.5.2"
+            },
             "time": "2020-07-13T10:20:44+00:00"
         }
     ],
@@ -781,6 +849,10 @@
                 "MIT"
             ],
             "description": "Unit test helpers for Facebook projects",
+            "support": {
+                "issues": "https://github.com/hhvm/fbexpect/issues",
+                "source": "https://github.com/hhvm/fbexpect/tree/v2.7.7"
+            },
             "time": "2020-09-11T00:43:51+00:00"
         },
         {
@@ -824,6 +896,10 @@
                 "MIT"
             ],
             "description": "The Hack Test Library",
+            "support": {
+                "issues": "https://github.com/hhvm/hacktest/issues",
+                "source": "https://github.com/hhvm/hacktest/tree/v2.2.0"
+            },
             "time": "2020-07-01T22:27:25+00:00"
         }
     ],
@@ -836,5 +912,5 @@
         "hhvm": "4.79.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }
