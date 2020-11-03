@@ -20,7 +20,7 @@
         "facebook/fbexpect": "^2.6.1"
     },
     "scripts": {
-        "post-install-cmd": "patch --dry-run -R -p1 -i hackttp.patch || patch -p1 -i hackttp.patch",
-        "post-update-cmd": "patch --dry-run -R -p1 -i hackttp.patch || patch -p1 -i hackttp.patch"
+        "post-install-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch",
+        "post-update-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch"
     }
 }
