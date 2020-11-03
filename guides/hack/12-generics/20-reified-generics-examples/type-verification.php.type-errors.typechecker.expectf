@@ -3,7 +3,6 @@ Invalid argument (Typing[4110])
   File "%s/type-verification.php", line 7, characters 14-16:
   Expected `int`
   File "%s/type-verification.php", line 7, characters 14-16:
-  Considering that this type argument is invariant with respect to `Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\TypeVerification\C`
+  This type argument to `Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\TypeVerification\C` must match exactly (it is invariant)
   File "%s/type-verification.php", line 13, characters 15-20:
   But got `string`
-

@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53ca9464b6d7dd46748d7eff86732a7c",
+    "content-hash": "b7c6ba6ff8eae8b748f09c2223368dea",
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v2.14.0",
+            "version": "v2.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "4a62ef2f75428e72188cf469988b118d3414ee92"
+                "reference": "168212cee5c318bce33ced49786312660bc14c43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/4a62ef2f75428e72188cf469988b118d3414ee92",
-                "reference": "4a62ef2f75428e72188cf469988b118d3414ee92",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/168212cee5c318bce33ced49786312660bc14c43",
+                "reference": "168212cee5c318bce33ced49786312660bc14c43",
                 "shasum": ""
             },
             "require": {
@@ -51,9 +51,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/definition-finder/issues",
-                "source": "https://github.com/hhvm/definition-finder/tree/v2.14.0"
+                "source": "https://github.com/hhvm/definition-finder/tree/v2.14.1"
             },
-            "time": "2020-10-09T22:59:10+00:00"
+            "time": "2020-11-03T23:22:43+00:00"
         },
         {
             "name": "facebook/difflib",
@@ -475,22 +475,22 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.78.2",
+            "version": "v4.82.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "843dca1d735cb5e054c46ff392ce513fa37f911c"
+                "reference": "ef14d3d24e154e4ee73ae0b5946451af9cbf985e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/843dca1d735cb5e054c46ff392ce513fa37f911c",
-                "reference": "843dca1d735cb5e054c46ff392ce513fa37f911c",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/ef14d3d24e154e4ee73ae0b5946451af9cbf985e",
+                "reference": "ef14d3d24e154e4ee73ae0b5946451af9cbf985e",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.5.0rc1",
-                "hhvm": "^4.78",
+                "hhvm": "^4.80",
                 "hhvm/hhvm-autoload": "^2.0.4|^3.0",
                 "hhvm/hsl": "^4.25",
                 "hhvm/hsl-experimental": "^4.58.0rc1",
@@ -505,8 +505,6 @@
             "bin": [
                 "bin/hhast-lint",
                 "bin/hhast-lint.hack",
-                "bin/hhast-inspect",
-                "bin/hhast-inspect.hack",
                 "bin/hhast-migrate",
                 "bin/hhast-migrate.hack"
             ],
@@ -523,9 +521,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.78.2"
+                "source": "https://github.com/hhvm/hhast/tree/v4.82.1"
             },
-            "time": "2020-10-14T23:16:53+00:00"
+            "time": "2020-11-03T22:26:09+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -909,7 +907,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.79.*"
+        "hhvm": "4.82.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
