@@ -50,3 +50,9 @@ To make an interface that requires that you implement a method, without saying a
 @@ nothing-examples/very-wide-interface.php @@
 
 It is important to note that `Software::shipIt()` is not directly callable without knowing what subtype of `Software` you have.
+
+<hr>
+
+Contravariant generic types can use `nothing` to allow all values to be passed. This acts in a similar way that `mixed` acts of covariant generics, such as `vec<mixed>`.
+
+@@ nothing-examples/contravariant.php @@
