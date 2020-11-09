@@ -55,6 +55,10 @@ subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryRe
 ### When to use the `____Typed` variant over its untyped counterpart.
 
 The typed functions will help you by turning database integers into Hack `int`s and _some, but not all_ fractional numbers into Hack `float`s.
+This is almost always preferred, except for cases where the result set includes unsigned 64-bit integers (UNSIGNED BIGINT).
+These numbers may be larger than the largest representable signed 64-bit integer and can therefore not be used in a Hack program.
+The runtime currently returns the largest signed 64-bit integer for all values which exceed the maximum signed 64-bit integer.
+
 The untyped function will return all fields as either a Hack `string` or a Hack `null`. So an integer `404` in the database would come back as `"404"`.
 
 Here is a simple example that shows how to get a user name from a database using this extension:
