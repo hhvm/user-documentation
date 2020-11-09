@@ -22,21 +22,13 @@ There is also a function to ensure that queries to be executed are safe called
 
 ## Choosing a query method
 
-Choosing the right tool for the job is very important.
-Each of the three methods has its strengths and weaknesses.
-
-### [`queryf`](../reference/class/AsyncMysqlConnection/queryf/)
-This should be your preferred method. It is powerful enough to express all queries with a known structure, but with unknown data.
+### [`queryAsync`](../references/class/AsyncMysqlConnection/queryAsync)
+This method is the go-to for safe SQL queries. It handles escaping user input automatically and the `%Q` modifier can be used to insert query fragments into other query fragments.
 
 For example:
  - selecting a post by ID
  - selecting the post with the most likes made within the last _n_ days by user _x_
  - updating all profiles from users who have been active in the last _n_ days by giving them a badge
-
-### [`queryAsync`](../references/class/AsyncMysqlConnection/queryAsync)
-This method is a lot more powerful than `queryf` and should be used when the structure of your query is not known in advance. The `%Q` modifier can be used to insert query fragments into other query fragments.
-
-For example:
  - Advanced search, which may allow the user to specify a handful of parameters
  - Inserting _n_ rows in one big INSERT INTO statement
 
@@ -47,9 +39,12 @@ If your query contains ANY unescaped input, you are putting your database at ris
 Using this method is preferred for one use case:
 
 When you can type out the query outright, without string interpolation or string concatenation.
-You can pass in a "hardcoded" query. This can be preferred over queryf, since you can write your SQL string literals without having to write a `%s` placeholder. Which makes it easier to change the query later without the risk of messing up which parameter goes with which `%s`.
+You can pass in a _hardcoded_ query. This can be preferred over `queryAsync` and `queryf`, since you can write your SQL string literals without having to write a `%s` placeholder. Which makes it easier to change the query later without the risk of messing up which parameter goes with which `%s`.
 
 This method can also be used to create queries by doing string manipulation. If you are doing this, you, the developer, must take responsibility for sanitizing the data. Escape everything that needs to be escaped and make triple sure there is not a sneaky way to get raw user data into the concatenated string at any point. As said, this method is dangerous and this is why.
+
+### [`queryf`](../reference/class/AsyncMysqlConnection/queryf/)
+Is an older API which does what `queryAsync` does, but with more restrictions. It uses Hack Collections instead of Hack arrays for its `%Lx` arguments. There is no way to create fragments of queries for safe query building. It is also not possible to build a query without having an `\AsyncMysqlConnection`. New code should use `queryAsync` instead.
 
 ## Getting results
 The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete
