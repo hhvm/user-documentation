@@ -25,9 +25,7 @@ When defining a function that will never return (it either throws, loops forever
 
 <hr>
 
-When writing a new bit of functionality, you may write an interface which does not have any classes implementing it yet. When trying to get some work done, you may find yourself wanting to call a method which requires such an interface in its arguments. You now have a choice. You can either ignore the typeerror and continue working on the thing you were trying to do. Or you stop doing what you were doing and write a class that implements this interface to satisfy the typehint. Both are not ideal. The first option keeps a typeerror, which may be distracting for you. The second option completely breaks your flow state and when you come back, you will be less effective while you're getting back into your flow.
-
-`nothing` is an amazing solution which allows you to keep working what you were working on, without having the nagging feeling of the typeerror that needs to be fixed. The trick is defining a function with the return type of `nothing`. This function may not return anything (just like a `noreturn` function). You can now use this function as a placeholder for the value which you could not create. I have called this function (and an opaque type alias) `undefined`, as an homage to Haskell [undefined](https://wiki.haskell.org/Undefined).
+When writing a new bit of functionality, you may need to pass a value to a function you can't produce without a lot of work. `nothing` can be used as a placeholder value in place of any type without causing type errors. The typechecker will continue checking the rest of your program and the runtime will throw if this code path gets executed. I have called this function `undefined`, as an homage to Haskell [undefined](https://wiki.haskell.org/Undefined).
 
 @@ nothing-examples/undefined.php @@
 

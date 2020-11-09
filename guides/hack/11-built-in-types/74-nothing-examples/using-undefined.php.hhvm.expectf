@@ -1,6 +1,6 @@
-Fatal error: Uncaught Error: NOT IMPLEMENTED: `undefined` can not be produced. in %sguides/hack/11-built-in-types/74-nothing-examples/undefined.php:8
+Fatal error: Uncaught Error: NOT IMPLEMENTED: `undefined` can not be produced. in %s/guides/hack/11-built-in-types/74-nothing-examples/undefined.php:8
 Stack trace:
-#0 %sguides/hack/11-built-in-types/74-nothing-examples/using-undefined.php(29): Hack\UserDocumentation\Types\Nothing\Examples\Undefined\undefined()
+#0 %s/guides/hack/11-built-in-types/74-nothing-examples/using-undefined.php(16): Hack\UserDocumentation\Types\Nothing\Examples\Undefined\undefined()
 #1 (): Hack\UserDocumentation\Types\Nothing\Examples\Undefined\main_async()
 #2 (): Closure$__SystemLib\enter_async_entry_point()
 #3 (): HH\Asio\join()
