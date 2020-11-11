@@ -28,7 +28,9 @@ Check out the [source code](https://github.com/hhvm/user-documentation/tree/mast
 
 ## Running A Local Copy
 
-If you just want to quickly run a copy and don't plan on contributing changes:
+If you just want to run a local copy of the site and do not want to make
+any changes whatsoever, you can run a snapshot from Docker instead of
+building the site:
 
 1. Install [Docker](https://docs.docker.com/engine/installation/)
 2. `docker run -p 8080:80 -d hhvm/user-documentation`; this will output a
