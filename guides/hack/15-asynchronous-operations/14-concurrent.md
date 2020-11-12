@@ -53,7 +53,7 @@ try {
 ```
 Then it is explicitly undefined whether `var_dump` will see `$x === 0` or `$x === 1` and whether the message will be 'foo' or 'bar'.
 
-If you need granular exception handling, consider using nested try-cath blocks inside the concurrent block:
+If you need granular exception handling, consider using nested try-catch blocks inside the concurrent block:
 
 ```
 concurrent {
