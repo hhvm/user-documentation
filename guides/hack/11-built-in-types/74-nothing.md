@@ -19,7 +19,7 @@ The important thing to note here is that `nothing` is never between two types. `
 
 When defining a function that will never return (it either throws, loops forever, or terminates the request) you can use `nothing` for the return type. This gives more information to the caller than `void` and is more flexible than [noreturn](./noreturn). `nothing` can be used in expressions (like `nullable T ?? nothing`) and it will typecheck "as if it wasn't there", since `(T & nothing)` is _just_ `T`.
 
-`nothing` can be used to create a `throw` expression in this way. 
+`nothing` can be used to create a `throw` expression in this way.
 
 @@ nothing-examples/throw-as-an-expression.php @@
 
@@ -31,7 +31,7 @@ When writing a new bit of functionality, you may need to pass a value to a funct
 
 And here is how to use it
 
-@@ nothing-examples/using-undefined.php @@
+@@ nothing-examples/undefined.usage.php @@
 
 You could make your staging environment remove the file which declared the `undefined()` function. That way you'll get a typechecker error when you accidentally push code that has these placeholders in it. This prevents you from accidentally deploying unfinished code to production.
 
