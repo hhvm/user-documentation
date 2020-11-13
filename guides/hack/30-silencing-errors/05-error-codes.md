@@ -5,6 +5,8 @@ them. You can see the full list of error codes in
 ## 1002: Top-level code
 
 ```1002_toplevel.php no-auto-output
+namespace HHVM\UserDocumentation\Guides\Hack\SilencingErrors\ErrorCodes\Toplevel;
+
 /* HH_FIXME[1002] Top-level code isn't checked. */
 echo "hello world\n";
 ```
