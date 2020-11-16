@@ -4,11 +4,11 @@ varray(2) {
 }
 varray(2) {
   int(1)
-  string(7) "FGEBDAC"
+  string(7) "BCEFADG"
 }
 varray(2) {
   int(2)
-  string(7) "CBEAFGD"
+  string(7) "DFEGCAB"
 }
 string(15) "Id of 3 is bad!"
 varray(2) {
@@ -17,5 +17,5 @@ varray(2) {
 }
 varray(2) {
   int(4)
-  string(7) "GFDCABE"
+  string(7) "GADBFCE"
 }

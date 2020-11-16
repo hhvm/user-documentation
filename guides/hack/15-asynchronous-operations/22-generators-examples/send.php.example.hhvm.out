@@ -4,17 +4,17 @@ varray(2) {
 }
 varray(2) {
   int(1)
-  string(7) "GACFBDE"
+  string(7) "CBGFEDA"
 }
 varray(2) {
   int(2)
-  string(7) "DEBGACF"
+  string(7) "BAGDCFE"
 }
 varray(2) {
   int(3)
-  string(7) "CEBAFDG"
+  string(7) "AEFCGBD"
 }
 varray(2) {
   int(4)
-  string(7) "BGDFAEC"
+  string(7) "EACFGDB"
 }

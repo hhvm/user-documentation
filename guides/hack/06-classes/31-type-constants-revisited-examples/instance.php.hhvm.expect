@@ -1,0 +1,8 @@
+object(HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Instance\IntBox) (1) {
+  ["value":"HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Instance\Box":private]=>
+  int(10)
+}
+object(HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Instance\IntBox) (1) {
+  ["value":"HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Instance\Box":private]=>
+  int(123)
+}

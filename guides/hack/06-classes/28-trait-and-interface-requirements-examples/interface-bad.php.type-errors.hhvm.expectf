@@ -1,1 +1,2 @@
-Fatal error: Class 'Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Paper' required to extend class 'Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Machine' by interface 'Hack\UserDocumentation\Classes\TIR\Examples\InterfaceReqBad\Fliers' in %sinterface-bad.php.type-errors on line 21
+
+Fatal error: Class 'HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Paper' required to extend class 'HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Machine' by interface 'HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Fliers' in %s/guides/hack/06-classes/28-trait-and-interface-requirements-examples/interface-bad.php.type-errors on line 24
