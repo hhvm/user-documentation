@@ -88,7 +88,7 @@ dynamic instantiations of classes without this attribute.
 
 A type is _enforceable_ if it can be used in `is` and `as` expressions.  Examples of non-enforceable types are function types and erased (non-reified) generics.  The `__Enforceable` attribute is used to annotate abstract type constants so they can only be instantiated with enforceable types, and thus used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
 
-```enforceable.php.type-errors no-auto-output
+```enforceable.php.type-errors
 abstract class A {
   abstract const type Tnoenf;
   <<__Enforceable>>

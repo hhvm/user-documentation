@@ -31,8 +31,8 @@ dynamic, results in another dynamic.
 # Coercion
 
 The `dynamic` type sits outside the normal type hierarchy. It is a supertype only of the bottom type `nothing`
-and a subtype only of the top type `mixed`. The type interfaces with other types via coercion (`~>` in the 
-examples). All types coerce to `dynamic`, which allows callers to pass any type into a function that expects dynamic. Also, any type 
+and a subtype only of the top type `mixed`. The type interfaces with other types via coercion (`~>` in the
+examples). All types coerce to `dynamic`, which allows callers to pass any type into a function that expects dynamic. Also, any type
 coerces to its supertypes. Coercion points include function calls, return statements, and property assignment.
 
 ```coercion_to_dynamic.php no-auto-output
@@ -54,7 +54,7 @@ The runtime enforces a set of types by throwing `TypeHintViolationException` whe
 
 Hack approximates this runtime behavior by allowing values of type `dynamic` to coerce to enforceable types at coercion points.
 
-```coercion_from_dynamic.php.type-errors no-auto-output
+```coercion_from_dynamic.php.type-errors
 function enforced(int $i): void {}
 function notEnforced(shape('a' => int) $s): void {}
 

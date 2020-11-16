@@ -13,7 +13,7 @@ The goal of opt-in reified generics is to bridge the gap between generics and ru
 
 ## Parameter and return type verification
 
-```type-verification.php.type-errors no-auto-output
+```type-verification.php.type-errors
 class C<reify T> {}
 
 function f(C<int> $c): void {}
@@ -31,7 +31,7 @@ enable_experimental_tc_features=reified_generics
 
 The reified type parameter is checked as well:
 
-```type-verification-2.php.type-errors no-auto-output
+```type-verification-2.php.type-errors
 class C<reify T> {}
 
 function f<reify T>(T $x): C<T> {
@@ -92,7 +92,7 @@ C<int, string> // NOT enforceable as C's second generic is erased
 
 Prior to reified generics, in order to create a new instance of a class without a constant class name, you'd need to pass it as `classname<T>` which is not type safe. In the runtime, classnames are strings.
 
-```new-reify.php.type-errors no-auto-output
+```new-reify.php.type-errors
 <<__ConsistentConstruct>>
 abstract class A {}
 
