@@ -36,7 +36,43 @@ For users experienced with XHP, the biggest advantage is that it is easy to add 
 which can then be used like plain HTML elements. For example, this site defines an `<a_post>` tag that has the same interface
 as a standard `<a>` tag, but makes a POST request instead of a GET request:
 
-@@ introduction-examples/a_post.inc.php @@
+```a_post.inc.php
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{XHPHTMLHelpers, a, form};
+
+
+final xhp class a_post extends x\element {
+  use XHPHTMLHelpers;
+
+  attribute string href @required;
+  attribute string target;
+
+  <<__Override>>
+  protected async function renderAsync(): Awaitable<x\node> {
+    $id = $this->getID();
+
+    $anchor = <a>{$this->getChildren()}</a>;
+    $form = (
+      <form
+        id={$id}
+        method="post"
+        action={$this->:href}
+        target={$this->:target}
+        class="postLink">
+        {$anchor}
+      </form>
+    );
+
+    $anchor->setAttribute(
+      'onclick',
+      'document.getElementById("'.$id.'").submit(); return false;',
+    );
+    $anchor->setAttribute('href', '#');
+
+    return $form;
+  }
+}
+```
 
 A little CSS is needed so that the `<form>` doesn't create a block element:
 
@@ -48,20 +84,85 @@ form.postLink {
 
 At this point, the new element can be used like any built-in element:
 
-@@ introduction-examples/a_post_usage.php @@
+```a_post_usage.php
+use type Facebook\XHP\HTML\a;
+use type HHVM\UserDocumentation\a_post;
+
+<<__EntryPoint>>
+async function intro_examples_a_a_post(): Awaitable<void> {
+  $get_link = <a href="http://www.example.com">I'm a normal link</a>;
+  $post_link =
+    <a_post href="http://www.example.com">I make a POST REQUEST</a_post>;
+
+  echo await $get_link->toStringAsync();
+  echo "\n";
+  echo await $post_link->toStringAsync();
+}
+```.expectf
+<a href="http://www.example.com">I'm a normal link</a>
+<form id="%s" method="post" action="http://www.example.com" class="postLink"><a onclick="document.getElementById(&quot;%s&quot;).submit(); return false;" href="#">I make a POST REQUEST</a></form>
+```
 
 ## Runtime Validation
 
 Since XHP objects are first-class and not just strings, a whole slew of validation can occur to ensure that your UI does not have subtle bugs:
 
-@@ introduction-examples/tag-matching-validation.php.type-errors @@
+```tag-matching-validation.php.type-errors
+function intro_examples_tag_matching_validation_using_string(): void {
+  echo '<div class="section-header">';
+  echo '<a href="#use">You should have used <span class="xhp">XHP</naps></a>';
+  echo '</div>';
+}
+
+async function intro_examples_tag_matching_validation_using_xhp(
+): Awaitable<void> {
+  // Typechecker error
+  // Fatal syntax error at runtime
+  $xhp =
+    <div class="section-header">
+      <a href="#use">You should have used <span class="xhp">XHP</naps></a>
+    </div>;
+  echo await $xhp->toStringAsync();
+}
+
+<<__EntryPoint>>
+function intro_examples_tag_matching_validation_run(): void {
+  intro_examples_tag_matching_validation_using_string();
+  await intro_examples_tag_matching_validation_using_xhp();
+}
+```
 
 The above code won't typecheck or run because the XHP validator will see that `<span>` and `<naps>` tags are mismatched; however,
 the following code will typecheck correctly but fail to run, because while the tags are matched, they are not nested correctly
 (according to the HTML specification), and nesting verification only happens at runtime:
 
-@@ introduction-examples/allowed-tag-validation.inc.php @@
-@@ introduction-examples/allowed-tag-validation.php @@
+```allowed-tag-validation.inc.php
+use namespace Facebook\XHP;
+use type Facebook\XHP\HTML\{i, ul};
+
+function intro_examples_allowed_tag_validation_using_string(): void {
+  echo '<ul><i>Item 1</i></ul>';
+}
+
+async function intro_examples_allowed_tag_validation_using_xhp(
+): Awaitable<void> {
+  try {
+    $xhp = <ul><i>Item 1</i></ul>;
+    echo await $xhp->toStringAsync();
+  } catch (XHP\InvalidChildrenException $ex) {
+    // We will get here because an <i> cannot be nested directly below a <ul>
+    \var_dump($ex->getMessage());
+  }
+}
+```
+```allowed-tag-validation.php
+<<__EntryPoint>>
+async function intro_examples_allowed_tag_validation_run(): Awaitable<void> {
+  intro_examples_allowed_tag_validation_using_string();
+  echo \PHP_EOL.\PHP_EOL;
+  await intro_examples_allowed_tag_validation_using_xhp();
+}
+```
 
 ## Security
 
@@ -69,4 +170,37 @@ String-based entry and validation are prime candidates for cross-site scripting 
 functions like [`htmlspecialchars`](http://php.net/manual/en/function.htmlspecialchars.php), but then you have to actually remember
 to use those functions. XHP automatically escapes reserved HTML characters to HTML entities before output.
 
-@@ introduction-examples/avoid-xss.php @@
+```avoid-xss.php
+use type Facebook\XHP\HTML\{body, head, html};
+
+function intro_examples_avoid_xss_using_string(string $could_be_bad): void {
+  // Could call htmlspecialchars() here
+  echo '<html><head/><body> '.$could_be_bad.'</body></html>';
+}
+
+async function intro_examples_avoid_xss_using_xhp(
+  string $could_be_bad,
+): Awaitable<void> {
+  // The string $could_be_bad will be escaped to HTML entities like:
+  // <html><head></head><body>&lt;blink&gt;Ugh&lt;/blink&gt;</body></html>
+  $xhp =
+    <html>
+      <head />
+      <body>{$could_be_bad}</body>
+    </html>;
+  echo await $xhp->toStringAsync();
+}
+
+async function intro_examples_avoid_xss_run(
+  string $could_be_bad,
+): Awaitable<void> {
+  intro_examples_avoid_xss_using_string($could_be_bad);
+  echo \PHP_EOL.\PHP_EOL;
+  await intro_examples_avoid_xss_using_xhp($could_be_bad);
+}
+
+<<__EntryPoint>>
+async function intro_examples_avoid_xss_main(): Awaitable<void> {
+  await intro_examples_avoid_xss_run('<blink>Ugh</blink>');
+}
+```

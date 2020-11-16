@@ -1,7 +1,25 @@
 The `for` statement is typically used to step through a range of values in ascending or descending increments, performing some set of operations
 on each value.  For example:
 
-@@ for-examples/table-of-squares.php @@
+```table-of-squares.php
+for ($i = 1; $i <= 5; ++$i) {
+  echo "$i\t".($i * $i)."\n"; // output a table of squares
+}
+
+$i = 1;
+for (; $i <= 5; ) {
+  echo "$i\t".($i * $i)."\n"; // output a table of squares
+  ++$i;
+}
+
+$i = 1;
+for (; ; ) {
+  if ($i > 5)
+    break;
+  echo "$i\t".($i * $i)."\n"; // output a table of squares
+  ++$i;
+}
+```
 
 See [compound statements](compound-statements.md) for a discussion about the use of braces around the statement body.
 

@@ -9,7 +9,18 @@ unary minus is applied to the smallest value.
 
 Consider the following example:
 
-@@ int-examples/leap-year-test.php @@
+```leap-year-test.php
+function is_leap_year(int $yy): bool {
+  return ((($yy & 3) === 0) && (($yy % 100) !== 0)) || (($yy % 400) === 0);
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $year = 2001;
+  $result = is_leap_year($year);
+  echo "$year is ".(($result === true) ? "" : "not ")."a leap year\n";
+}
+```
 
 When called, function `is_leap_year` takes one argument, of type `int`, and returns a value of type `bool`. (A year is a leap year if it is a
 multiple of 4 but not a multiple of 100&mdash;for example, 1700, 1800, and 1900 were *not* leap years&mdash;or it's a multiple of 400. Some redundant

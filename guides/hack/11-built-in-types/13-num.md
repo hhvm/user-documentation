@@ -15,7 +15,21 @@ type `Container`-of-type-`num` and returns a nullable-of-`float`.
 
 Consider the following example:
 
-@@ num-examples/num-argument-type.php @@
+```num-argument-type.php no-auto-output
+class Point {
+  private float $x;
+  private float $y;
+  public function __construct(num $x = 0, num $y = 0) {
+    $this->x = (float)$x;
+    $this->y = (float)$y;
+  }
+  public function move(num $x = 0, num $y = 0): void {
+    $this->x = (float)$x;
+    $this->y = (float)$y;
+  }
+  // ...
+}
+```
 
 Internally, class `Point` stores the x- and y-coordinates as `float`s, but, for convenience, it allows any combination of `int`s and `float`s
 to be passed to its constructor and method `move`.

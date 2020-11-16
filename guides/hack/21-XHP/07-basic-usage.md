@@ -24,7 +24,20 @@ conflict with a class named `xhp_p`.
 The following example utilizes three XHP classes: `div`, `strong`, `i`. Whitespace is insignificant, so you can create a readable
 tree structure in your code.
 
-@@ basic-usage-examples/basic.php @@
+```basic.php
+use type Facebook\XHP\HTML\{div, i, strong};
+
+<<__EntryPoint>>
+function basic_usage_examples_basic_xhp(): void {
+  \var_dump(
+    <div>
+      My Text
+      <strong>My Bold Text</strong>
+      <i>My Italic Text</i>
+    </div>,
+  );
+}
+```
 
 The `var_dump` shows that a tree of objects has been created, not an HTML/XML string. An HTML string can be produced by calling `await $xhp_object->toStringAsync()`.
 
@@ -94,7 +107,36 @@ This also works for attributes:
 
 More complicated expressions are also supported, for example:
 
-@@ basic-usage-examples/hack-xhp.php @@
+```hack-xhp.php
+use type Facebook\XHP\HTML\{div, i, strong};
+
+class MyBasicUsageExampleClass {
+  public function getInt(): int {
+    return 4;
+  }
+}
+
+function basic_usage_examples_get_string(): string {
+  return "Hello";
+}
+
+function basic_usage_examples_get_float(): float {
+  return 1.2;
+}
+
+<<__EntryPoint>>
+async function basic_usage_examples_embed_hack(): Awaitable<void> {
+  $xhp_float = <i>{basic_usage_examples_get_float()}</i>;
+
+  $xhp =
+    <div>
+      {(new MyBasicUsageExampleClass())->getInt()}
+      <strong>{basic_usage_examples_get_string()}</strong>
+      {$xhp_float /* this embeds the <i /> element as a child of the <div /> */}
+    </div>;
+  echo await $xhp->toStringAsync();
+}
+```
 
 ## Attributes
 

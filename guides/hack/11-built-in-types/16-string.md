@@ -15,7 +15,27 @@ trailing characters are non-numeric. A *non-numeric string* is a string that is 
 
 Consider the following example:
 
-@@ string-examples/__toString.php @@
+```__toString.php
+class Point {
+  private float $x;
+  private float $y;
+  public function __construct(num $x = 0, num $y = 0) {
+    $this->x = (float)$x;
+    $this->y = (float)$y;
+  }
+  public function __toString(): string {
+    return '('.$this->x.','.$this->y.')';
+  }
+  // ...
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $p1 = new Point(1.2, 3.3);
+  /* HH_FIXME[4067] implicit __toString() is now deprecated */
+  echo "\$p1 = ".$p1."\n";
+}
+```
 
 Method [`__toString`](../classes/methods-with-predefined-semantics.md#method-__toString) has a return type of `string`. The return expression results in
 the concatenation of the three string literals and the two `float` property values into a single string.

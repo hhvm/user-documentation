@@ -2,7 +2,19 @@ A constant is a named value. Once defined, the value of the constant *cannot* be
 of two ways: using the `const` keyword at the top level, or inside a class or
 interface. For example:
 
-@@ constants-examples/defining-constants.php @@
+```defining-constants.php
+const int MAX_COUNT = 123;
+class C {
+  const float MAX_HEIGHT = 10.5;
+  const float UPPER_LIMIT = C::MAX_HEIGHT;
+}
+
+<<__EntryPoint>>
+function main(): void {
+  echo "MAX_COUNT = ".MAX_COUNT."\n";
+  echo "MAX_HEIGHT = ".C::MAX_HEIGHT."\n";
+}
+```
 
 ## Context-Dependent Constants
 

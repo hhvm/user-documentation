@@ -14,8 +14,59 @@ The constraints of XHP object children and attributes are done at various times:
 If you have a parent object, and you want to give information to some object further down the UI tree (e.g., `<ul>` to `<li>`), you
 can set a context for those lower objects and the lower objects can retrieve them. You use `setContext` and `getContext`
 
-@@ guidelines-examples/context.inc.php @@
-@@ guidelines-examples/context.php @@
+```context.inc.php
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use type Facebook\XHP\HTML\{dd, dl, dt};
+
+final xhp class ui_myparent extends x\element {
+  use XHPChild\Validation;
+  attribute string text @required;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\of_type<ui_mychild>();
+  }
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    return (
+      <dl>
+        <dt>Text</dt>
+        <dd>{$this->:text}</dd>
+        <dt>Child</dt>
+        <dd>{$this->getChildren()}</dd>
+      </dl>
+    );
+  }
+}
+
+final xhp class ui_mychild extends x\element {
+  attribute string text @required;
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    if ($this->getContext('hint') === 'Yes') {
+      return <x:frag>{$this->:text.'...and more'}</x:frag>;
+    }
+    return <x:frag>{$this->:text}</x:frag>;
+  }
+}
+
+async function guidelines_examples_context_run(string $s): Awaitable<void> {
+  $xhp = (
+    <ui_myparent text={$s}>
+      <ui_mychild text="Go" />
+    </ui_myparent>
+  );
+  $xhp->setContext('hint', $s);
+  echo await $xhp->toStringAsync();
+}
+```
+```context.php
+<<__EntryPoint>>
+async function startHere(): Awaitable<void> {
+  await guidelines_examples_context_run('No');
+  echo "\n\n";
+  await guidelines_examples_context_run('Yes');
+}
+```
 
 Context is only passed down the tree at render time; this allows you to construct a tree without having to thread through data. In
 general, you should only call `getContext` in the `render` method of the child.

@@ -35,7 +35,15 @@ and a subtype only of the top type `mixed`. The type interfaces with other types
 examples). All types coerce to `dynamic`, which allows callers to pass any type into a function that expects dynamic. Also, any type 
 coerces to its supertypes. Coercion points include function calls, return statements, and property assignment.
 
-@@ dynamic-examples/coercion_to_dynamic.php @@
+```coercion_to_dynamic.php no-auto-output
+function f(dynamic $d): void {}
+function g(arraykey $a): void {}
+
+function caller(int $i): void {
+  f($i); // int ~> dynamic
+  g($i); // int ~> arraykey by subtyping
+}
+```
 
 The runtime enforces a set of types by throwing `TypeHintViolationException` when an incorrect type is provided. This set includes
 
@@ -46,7 +54,18 @@ The runtime enforces a set of types by throwing `TypeHintViolationException` whe
 
 Hack approximates this runtime behavior by allowing values of type `dynamic` to coerce to enforceable types at coercion points.
 
-@@ dynamic-examples/coercion_from_dynamic.php.type-errors @@
+```coercion_from_dynamic.php.type-errors no-auto-output
+function enforced(int $i): void {}
+function notEnforced(shape('a' => int) $s): void {}
+
+function caller(dynamic $d): void {
+  enforced($d); // dynamic ~> int, runtime will throw if $d is not an int
+
+  notEnforced($d); // Hack error, dynamic ~/> shape('a' => int), runtime will not throw if $d is not a shape
+}
+```.hhconfig
+coercion_from_dynamic = true
+```
 
 Unions with dynamic are also allowed to coerce to enforceable types provided that each element of the union can coerce.
 

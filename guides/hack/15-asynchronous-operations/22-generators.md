@@ -15,7 +15,35 @@ Here is an example of using the [async utility function](../asynchronous-operati
 [`usleep`](/hack/reference/function/HH.Asio.usleep/) to imitate a second-by-second countdown clock. Note that in the
 `happy_new_year` `foreach` loop we have the syntax `await as`. This is shorthand for calling `await $ait->next()`.
 
-@@ generators-examples/iterator.php @@
+```iterator.php
+const int SECOND = 1000000; // microseconds
+
+async function countdown(int $from): AsyncIterator<int> {
+  for ($i = $from; $i >= 0; --$i) {
+    await \HH\Asio\usleep(SECOND);
+    // Every second, a value will be yielded back to the caller, happy_new_year()
+    yield $i;
+  }
+}
+
+async function happy_new_year(int $start): Awaitable<void> {
+  // Get the AsyncIterator that enables the countdown
+  $ait = countdown($start);
+  foreach ($ait await as $time) {
+    // we are awaiting the returned awaitable, so this will be an int
+    if ($time > 0) {
+      echo $time."\n";
+    } else {
+      echo "HAPPY NEW YEAR!!!\n";
+    }
+  }
+}
+
+<<__EntryPoint>>
+function run(): void {
+  \HH\Asio\join(happy_new_year(5)); // 5 second countdown
+}
+```
 
 We must use `await as`; otherwise we'll not get the iterated value.
 
@@ -33,8 +61,136 @@ generator using [`raise`](/hack/reference/class/HH.AsyncGenerator/raise/).
 If we are doing either of these two things, our generator must return `AsyncGenerator`. An `AsyncGenenator` has three type
 parameters: the key, the value. And the type being passed to [`send`](/hack/reference/class/HH.AsyncGenerator/send/).
 
-@@ generators-examples/send.php @@
+```send.php
+const int HALF_SECOND = 500000; // microseconds
+
+async function get_name_string(int $id): Awaitable<string> {
+  // simulate fetch to database where we would actually use $id
+  await \HH\Asio\usleep(HALF_SECOND);
+  return \str_shuffle("ABCDEFG");
+}
+
+async function generate(): AsyncGenerator<int, string, int> {
+  $id = yield 0 => ''; // initialize $id
+  // $id is a ?int; you can pass null to send()
+  while ($id is nonnull) {
+    $name = await get_name_string($id);
+    $id = yield $id => $name; // key/string pair
+  }
+}
+
+async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
+  $async_generator = generate();
+  // You have to call next() before you send. So this is the priming step and
+  // you will get the initialization result from generate()
+  $result = await $async_generator->next();
+  \var_dump($result);
+
+  foreach ($ids as $id) {
+    // $result will be an array of ?int and string
+    $result = await $async_generator->send($id);
+    \var_dump($result);
+  }
+}
+
+<<__EntryPoint>>
+function run(): void {
+  $ids = vec[1, 2, 3, 4];
+  \HH\Asio\join(associate_ids_to_names($ids));
+}
+```.hhvm.expectf
+varray(2) {
+  int(0)
+  string(0) ""
+}
+varray(2) {
+  int(1)
+  string(7) "%s"
+}
+varray(2) {
+  int(2)
+  string(7) "%s"
+}
+varray(2) {
+  int(3)
+  string(7) "%s"
+}
+varray(2) {
+  int(4)
+  string(7) "%s"
+}
+```
 
 Here is how to raise an exception to an async generator.
 
-@@ generators-examples/raise.php @@
+```raise.php
+const int HALF_SECOND = 500000; // microseconds
+
+async function get_name_string(int $id): Awaitable<string> {
+  // simulate fetch to database where we would actually use $id
+  await \HH\Asio\usleep(HALF_SECOND);
+  return \str_shuffle("ABCDEFG");
+}
+
+async function generate(): AsyncGenerator<int, string, int> {
+  $id = yield 0 => ''; // initialize $id
+  // $id is a ?int; you can pass null to send()
+  while ($id is nonnull) {
+    $name = "";
+    try {
+      $name = await get_name_string($id);
+      $id = yield $id => $name; // key/string pair
+    } catch (\Exception $ex) {
+      \var_dump($ex->getMessage());
+      $id = yield 0 => '';
+    }
+  }
+}
+
+async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
+  $async_generator = generate();
+  // You have to call next() before you send. So this is the priming step and
+  // you will get the initialization result from generate()
+  $result = await $async_generator->next();
+  \var_dump($result);
+
+  foreach ($ids as $id) {
+    if ($id === 3) {
+      $result = await $async_generator->raise(
+        new \Exception("Id of 3 is bad!"),
+      );
+    } else {
+      $result = await $async_generator->send($id);
+    }
+    \var_dump($result);
+  }
+}
+
+<<__EntryPoint>>
+function run(): void {
+  $ids = vec[1, 2, 3, 4];
+  \HH\Asio\join(associate_ids_to_names($ids));
+}
+```.hhvm.expectf
+varray(2) {
+  int(0)
+  string(0) ""
+}
+varray(2) {
+  int(1)
+  string(7) "%s"
+}
+varray(2) {
+  int(2)
+  string(7) "%s"
+}
+string(15) "Id of 3 is bad!"
+varray(2) {
+  int(0)
+  string(0) ""
+}
+varray(2) {
+  int(4)
+  string(7) "%s"
+}
+```

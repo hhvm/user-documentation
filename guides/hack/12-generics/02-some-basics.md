@@ -7,13 +7,47 @@ Generics allow programmers to write a class or method with the ability to be par
 
 Consider the following example in which `Stack` is a generic class having one type parameter, `T`:
 
-@@ some-basics-examples/Stack.inc.php @@
+```Stack.inc.php no-auto-output
+class StackUnderflowException extends \Exception {}
+
+class Stack<T> {
+  private vec<T> $stack;
+  private int $stackPtr;
+
+  public function __construct() {
+    $this->stackPtr = 0;
+    $this->stack = vec[];
+  }
+
+  public function push(T $value): void {
+    $this->stack[] = $value;
+    $this->stackPtr++;
+  }
+
+  public function pop(): T {
+    if ($this->stackPtr > 0) {
+      $this->stackPtr--;
+      return $this->stack[$this->stackPtr];
+    } else {
+      throw new StackUnderflowException();
+    }
+  }
+}
+```
 
 As shown, the type parameter `T` is used in the declaration of the instance property `$stack`, as the parameter type of the instance method
 `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves
 generic methods.
 
-@@ some-basics-examples/Stack.test.php @@
+```Stack.test.php no-auto-output
+function useIntStack(Stack<int> $stInt): void {
+  $stInt->push(10);
+  $stInt->push(20);
+  $stInt->push(30);
+  echo 'pop => '.$stInt->pop()."\n";
+  //  $stInt->push(10.5); // rejected as not being type-safe
+}
+```
 
 The line commented-out, attempts to call push with a non-`int` argument. This is rejected, because `$stInt` is a stack of `int`.
 
@@ -21,7 +55,28 @@ The *arity* of a generic type or method is the number of type parameters declare
 
 Here is an example of a generic function, `swap`, having one type parameter, `T`:
 
-@@ some-basics-examples/swap.php @@
+```swap.php
+function swap<T>(inout T $i1, inout T $i2): void {
+  $temp = $i1;
+  $i1 = $i2;
+  $i2 = $temp;
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $v1 = -10;
+  $v2 = 123;
+  echo "\$v1 = ".$v1.", \$v2 = ".$v2."\n";
+  swap(inout $v1, inout $v2);
+  echo "\$v1 = ".$v1.", \$v2 = ".$v2."\n";
+
+  $v3 = "red";
+  $v4 = "purple";
+  echo "\$v3 = ".$v3.", \$v4 = ".$v4."\n";
+  swap(inout $v3, inout $v4);
+  echo "\$v3 = ".$v3.", \$v4 = ".$v4."\n";
+}
+```
 
 The function swaps the two arguments passed to it. In the case of the call with two `int` arguments, `int` is inferred as
 the type corresponding to the type parameter `T`. In the case of the call with two `string` arguments,

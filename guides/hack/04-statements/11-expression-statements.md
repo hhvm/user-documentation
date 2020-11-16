@@ -1,11 +1,31 @@
 An *expression statement* is simply *any* expression followed by a semicolon (`;`).  The expression is evaluated for its side-effects *only*;
 any resulting value is discarded.  For example:
 
-@@ expression-statements-examples/useful.php @@
+```useful.php no-auto-output
+function do_it(): int {
+  return 100;
+}
+
+function f(): void {
+  $i = 10; // $i is assigned the value 10; the result (10) is discarded
+  ++$i; // $i is incremented; result (11) is discarded
+  $i++; // $i is incremented; result (10) is discarded
+  do_it(); // function do_it is called; result (return value) is discarded
+}
+```
 
 While the following expression statements are syntactically correct, they serve no useful purpose:
 
-@@ expression-statements-examples/useless.php @@
+```useless.php no-auto-output
+function f(int $i): void {
+  $i;
+  -$i;
+  123 << $i;
+  34.5 * 12.6 + 11.987;
+  \sqrt(1.23);
+  !true;
+}
+```
 
 In all cases, there are no side-effects, and the result is discarded.
 

@@ -3,7 +3,25 @@ with an upper- or lowercase letter or underscore, which can optionally be follow
 
 Local variable names, function parameter names and property names *must* be preceded by `$`. For example:
 
-@@ names-examples/various-names.php @@
+```various-names.php no-auto-output
+class Data {
+  const int MAX_VALUE = 100;
+  private int $value = 0;
+  /* ... */
+}
+interface ICollection { /* ... */ }
+enum Position: int {
+  Top = 0;
+  Bottom = 1;
+  Left = 2;
+  Right = 3;
+  Center = 4;
+}
+function compute(int $val): void {
+  $count = $val + 1;
+  /* ... */
+}
+```
 
 The name `$_`, referred to as the *placeholder variable*, is reserved for use in the
 [list intrinsic function](../expressions-and-operators/list.md) and the [foreach statement](../statements/foreach.md).

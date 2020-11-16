@@ -35,7 +35,19 @@ variables `$count` and `$message` take on the type of the respective value being
 
 Consider the following example:
 
-@@ variables-examples/local-variables.php @@
+```local-variables.php
+function f(): void {
+  $lv = 1;
+  echo "\$lv = $lv\n";
+  ++$lv;
+}
+
+<<__EntryPoint>>
+function main(): void {
+  for ($i = 1; $i <= 3; ++$i)
+    f();
+}
+```
 
 As you can see, the value of the local variable `$lv` is not preserved between
 the function calls, so this function `f` outputs "`$lv = 1`" each time.

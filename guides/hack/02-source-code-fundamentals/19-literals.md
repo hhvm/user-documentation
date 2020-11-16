@@ -98,7 +98,20 @@ is performed.
 
 Consider the following example:
 
-@@ literals-examples/dq-variable-substitution.php @@
+```dq-variable-substitution.php
+class C {
+  public int $p1 = 2;
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $x = 123;
+  echo ">\$x.$x"."<\n";
+
+  $myC = new C();
+  echo "\$myC->p1 = >$myC->p1<\n";
+}
+```
 
 ### Heredoc String Literals
 
@@ -107,7 +120,17 @@ Certain other (and sometimes non-printable) characters can also be expressed as 
 A heredoc literal supports variable substitution as defined for [double-quoted string literals](#string-literals__double-quoted-string-literals).
 For example:
 
-@@ literals-examples/heredoc-literals.php @@
+```heredoc-literals.php
+<<__EntryPoint>>
+function main(): void {
+  $v = 123;
+  $s = <<<    ID
+S'o'me "\"t e\txt; \$v = $v"
+Some more text
+ID;
+  echo ">$s<\n";
+}
+```
 
 The start and end id must be the same. Only horizontal white space is permitted between `<<<` and the start id. No
 white space is permitted between the start id and the new-line that follows. No white space is permitted between the
@@ -120,7 +143,17 @@ A nowdoc string literal looks like a [heredoc string literal](#string-literals__
 id is enclosed in single quotes ('). The two forms of string literal have the same semantics and constraints except that a
 nowdoc string literal is not subject to variable substitution.  For example:
 
-@@ literals-examples/nowdoc-literals.php @@
+```nowdoc-literals.php
+<<__EntryPoint>>
+function main(): void {
+  $v = 123;
+  $s = <<<    'ID'
+S'o'me "\"t e\txt; \$v = $v"
+Some more text
+ID;
+  echo ">$s<\n\n";
+}
+```
 
 No white space is permitted between the start id and its enclosing single quotes (').
 
@@ -136,6 +169,12 @@ Here, `null` is used as a default argument value in the library function `log`.
 
 In the following example:
 
-@@ literals-examples/null-literal.php @@
+```null-literal.php no-auto-output
+type IdSet = shape('id' => ?string, 'url' => ?string, 'count' => int);
+
+function get_IdSet(): IdSet {
+  return shape('id' => null, 'url' => null, 'count' => 0);
+}
+```
 
 `null` is used to initialize two data fields in a shape.

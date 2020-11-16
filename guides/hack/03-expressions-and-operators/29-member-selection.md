@@ -1,7 +1,25 @@
 The operator `->` is used to access instance properties and instance
 methods on objects.
 
-@@ member-selection-examples/IntBox.php @@
+```IntBox.php no-auto-output
+class IntBox {
+  private int $x;
+
+  public function __construct(int $x) {
+    $this->x = $x; // Assigning to property.
+  }
+
+  public function getX(): int {
+    return $this->x; // Accessing property.
+  }
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $ib = new IntBox(42);
+  $x = $ib->getX(); // Calling instance method.
+}
+```
 
 ## Null Safe Member Access
 

@@ -21,7 +21,11 @@ disable this.
 
 In partial mode, type hints are optional.
 
-@@ type-enforcement-examples/add_items_partial.php @@
+```add_items_partial.php no-auto-output
+function add_items($x, int $y) {
+  return $x + $y;
+}
+```
 
 When `add_items` is called, HHVM will only check the type of `$y`. It
 also will not the check type when `add_items` returns.
