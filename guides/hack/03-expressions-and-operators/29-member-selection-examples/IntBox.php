@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Examples\IntBox;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\MemberSelection\IntBox;
 
 class IntBox {
   private int $x;
@@ -16,6 +19,8 @@ class IntBox {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $ib = new IntBox(42);
   $x = $ib->getX(); // Calling instance method.
 }

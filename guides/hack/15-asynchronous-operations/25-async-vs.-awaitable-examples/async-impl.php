@@ -1,12 +1,10 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\AsyncVsAwaitables\Examples\AsyncImpl;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-interface Car {
-  public function drive(): Awaitable<void>;
-}
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\AsyncVs;
 
-// @example-start
 class Ford implements Car {
   public async function drive(): Awaitable<void> {
     // ...

@@ -1,12 +1,16 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Arrays\Examples\DictsHaveValueSemantics;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\DictsHaveValueSemantics;
 
 use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   $john = make_person('John', 'Doe');
   $emma = make_person('Emma', 'Smith');
 

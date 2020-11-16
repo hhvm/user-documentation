@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExpAndOps\Yield\Examples\Series;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Yield\Series;
 
 function series(
   int $start,
@@ -14,6 +17,8 @@ function series(
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   foreach (series(5, 15, 2) as $key => $val) {
     echo "key: $key, value: $val\n";
   }

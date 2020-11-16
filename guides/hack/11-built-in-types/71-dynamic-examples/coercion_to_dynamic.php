@@ -1,5 +1,10 @@
 <?hh
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Dynamic\CoercionToDynamic;
+
 function f(dynamic $d): void {}
 function g(arraykey $a): void {}
 

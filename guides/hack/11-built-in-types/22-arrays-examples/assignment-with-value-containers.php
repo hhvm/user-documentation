@@ -1,12 +1,16 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Arrays\Examples\AssignmentWithValueContainers;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\AssignmentWithValueContainers;
 
 use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
-function main(): void {
+function _main(): void {
   \init_docs_autoloader();
+
   $emma = dict['first' => 'Emma', 'last' => 'Smith'];
   $another_emma = $emma;
 

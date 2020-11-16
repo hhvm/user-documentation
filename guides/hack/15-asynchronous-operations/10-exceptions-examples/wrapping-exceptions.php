@@ -1,6 +1,10 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions;
+
 use namespace HH\Lib\Vec;
 
 async function exception_thrower(): Awaitable<void> {
@@ -25,5 +29,6 @@ async function wrapping_exceptions(): Awaitable<void> {
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(wrapping_exceptions());
 }

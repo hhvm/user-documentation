@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Enums\Examples\Colors;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumeratedTypes\Colors;
 
 enum Colors: int {
   Red = 3;

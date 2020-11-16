@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Statements\Try\Examples\Classes;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Statements\Try\HierarchyOfExceptionClasses;
 
 class DeviceException extends \Exception { /*...*/ }
 class DiskException extends DeviceException { /*...*/ }
@@ -13,6 +16,8 @@ function process(): void {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   try {
     process(); // call a function that might generate a disk-related exception
   } catch (FloppyDiskException $fde) {

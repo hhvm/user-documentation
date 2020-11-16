@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Generics\Introduction\Examples\Swap;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\SomeBasics\Swap;
 
 function swap<T>(inout T $i1, inout T $i2): void {
   $temp = $i1;
@@ -10,6 +13,8 @@ function swap<T>(inout T $i1, inout T $i2): void {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $v1 = -10;
   $v2 = 123;
   echo "\$v1 = ".$v1.", \$v2 = ".$v2."\n";

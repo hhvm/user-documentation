@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\TIR\Examples\TraitReqGood;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\TraitGood;
 
 abstract class Machine {
   public function openDoors(): void {
@@ -35,6 +38,8 @@ class AirBus extends Machine implements Fliers {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
+
   $ab = new AirBus();
   \var_dump($ab);
   \var_dump($ab->takeOff());

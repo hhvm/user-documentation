@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\TypeConstants;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\TypeConstants;
 
 abstract class User {
   abstract const type T as arraykey;
@@ -36,6 +39,8 @@ class OtherUser extends User implements IUser {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
+
   $au = new AppUser(-1);
   \var_dump($au->getID());
   $wu = new WebUser('-1');

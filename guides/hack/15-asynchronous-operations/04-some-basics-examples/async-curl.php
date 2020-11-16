@@ -1,6 +1,10 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Basics\Examples\AsyncCurl;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\SomeBasics\AsyncCurl;
+
 use namespace HH\Lib\Vec;
 
 async function curl_A(): Awaitable<string> {
@@ -23,5 +27,6 @@ async function async_curl(): Awaitable<void> {
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(async_curl());
 }

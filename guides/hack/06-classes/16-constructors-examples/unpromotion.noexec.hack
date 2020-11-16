@@ -1,6 +1,7 @@
-namespace HHVM\UserDocumentation\Guides\Hack\Classes\Constructors\Unpromotion;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-use namespace HH\Lib\{C, Str, Vec};
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\Constructors\Unpromotion;
 
 final class User {
   private ParsedName $name;

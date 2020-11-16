@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\ObjectDisposal\Examples\TextFile;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\ObjectDisposal\TextFile;
 
 class TextFile implements \IDisposable {
   private ?int $fileHandle = null;
@@ -60,6 +63,8 @@ class TextFile implements \IDisposable {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   using ($f1 = new TextFile("file1.txt", "rw")) {
     //  echo "\$f1 is >" . $f1 . "<\n";  // usage not permitted
     echo "\$f1 is >".$f1->__toString()."<\n";

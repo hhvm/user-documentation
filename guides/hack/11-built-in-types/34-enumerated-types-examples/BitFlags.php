@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Enums\Examples\BitFlags;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumeratedTypes\BitFlags;
 
 enum BitFlags: int as int {
   F1 = 1; // value 1

@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Nothing\Examples\Undefined;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Nothing\Undefined;
 
 interface MyInterface {
   public function isAmazed(): bool;
@@ -13,6 +16,7 @@ function do_something(MyInterface $my_interface): bool {
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
   \init_docs_autoloader();
+
   $my_interface = undefined();
   // We won't ever reach this line, since `undefined()` will halt the program by throwing.
   // We can't produce a MyInterface just yet, since there are no classes which implement it.

@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\Traits\Examples\Simple;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\UsingATrait\Simple;
 
 trait T {
   public int $x = 0;
@@ -30,6 +33,8 @@ class C2 {
 
 <<__EntryPoint>>
 function main() : void {
+  \init_docs_autoloader();
+
   (new C1()) -> foo();
   (new C2()) -> bar();
 }

@@ -1,6 +1,10 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncStream;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncStream;
+
 use namespace HH\Lib\Vec;
 
 function get_resources(): vec<resource> {
@@ -25,5 +29,6 @@ async function write_all(vec<resource> $resources): Awaitable<void> {
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(write_all(get_resources()));
 }

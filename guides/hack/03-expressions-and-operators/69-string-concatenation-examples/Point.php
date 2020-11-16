@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExpAndOps\StringConcatenation\Examples\Point;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\StringConcatenation\Point;
 
 class Point {
   private float $x;
@@ -19,6 +22,8 @@ class Point {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $p1 = new Point(20, 30);
   /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo $p1."\n"; // implicit call to __toString()

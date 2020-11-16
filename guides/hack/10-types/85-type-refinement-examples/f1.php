@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\TypeRefinement\Examples\Test1;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Types\TypeRefinement\F1;
 
 function f1(?int $p): void {
   //  $x = $p % 3;       // rejected; % not defined for ?int

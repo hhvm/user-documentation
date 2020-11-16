@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Fundamentals\Literals\Examples\NullLiteral;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\SourceCodeFundamentals\Literals\NullLiteral;
 
 type IdSet = shape('id' => ?string, 'url' => ?string, 'count' => int);
 

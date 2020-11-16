@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Blocks\Examples\SyntaticSugar;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Blocks\SyntacticSugar;
 
 async function gen_int(): Awaitable<int> {
   return 4;
@@ -59,6 +62,8 @@ async function use_async_block_2(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   \HH\Asio\join(use_async_lambda());
   \HH\Asio\join(use_async_block());
   \HH\Asio\join(call_async_function());

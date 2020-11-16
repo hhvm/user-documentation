@@ -1,9 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExpAndOps\Echo\Examples\Basics;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Echo\Basics;
 
 <<__EntryPoint>>
-function main(): void {
+function _main(): void {
+  \init_docs_autoloader();
+
   $v1 = true;
   $v2 = 123.45;
   echo '>>'.$v1.'|'.$v2."<<\n"; // outputs ">>1|123.45<<"

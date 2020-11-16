@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Fundamentals\Names\Examples\SomeNames;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\SourceCodeFundamentals\Names\VariousNames;
 
 class Data {
   const int MAX_VALUE = 100;

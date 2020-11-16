@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Join;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Guidelines\Join;
 
 async function join_async(): Awaitable<string> {
   return "Hello";
@@ -12,6 +15,8 @@ async function join_async(): Awaitable<string> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $s = \HH\Asio\join(join_async());
   \var_dump($s);
 }

@@ -1,6 +1,9 @@
-<?hh // partial
+<?hh
 
-namespace Hack\UserDocumentation\Generics\Variance\Examples\Covariance;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Covariance;
 
 // This class is readonly. Had we put in a setter for $this->t, we could not
 // use covariance. e.g., if we had function setMe(T $x), you would get this
@@ -24,6 +27,8 @@ function g(varray<Animal> $p1): void {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
+
   f(new C(new Animal()));
   f(new C(new Cat())); // accepted
 

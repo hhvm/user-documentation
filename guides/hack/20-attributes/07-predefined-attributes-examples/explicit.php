@@ -1,5 +1,10 @@
 <?hh
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Attributes\PredefinedAttributes\Explicit;
+
 function values_are_equal<<<__Explicit>> T>(T $x, T $y): bool {
   return $x === $y;
 }

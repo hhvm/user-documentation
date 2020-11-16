@@ -1,4 +1,7 @@
-namespace Hack\UserDocumentation\Functions\InoutParams;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Functions\InoutParameters\Basic;
 
 function takes_inout(inout int $x): void {
   $x = 1;

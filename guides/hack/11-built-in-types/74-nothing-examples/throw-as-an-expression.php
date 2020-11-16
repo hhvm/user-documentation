@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Nothing\Examples\ThrowAsAnExpression;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Nothing\ThrowAsAnExpression;
 
 function throw_as_an_expression(\Throwable $t): nothing {
   throw $t;
@@ -23,5 +26,7 @@ function returns_an_int(?int $nullable_int): int {
 
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
+  \init_docs_autoloader();
+
   echo returns_an_int(1);
 }

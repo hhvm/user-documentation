@@ -1,6 +1,9 @@
-<?hh // partial
+<?hh
 
-namespace Hack\UserDocumentation\XHP\MarkdownWrapper;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\Interfaces\Md;
 
 use namespace Facebook\XHP;
 

@@ -1,4 +1,7 @@
-namespace Hack\UserDocumentation\Classes\Constructors\Examples\PromotionRules;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\Constructors\PromotionRules;
 
 final class User {
   private static dict<int, User> $allUsers = dict[];

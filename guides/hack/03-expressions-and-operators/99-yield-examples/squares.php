@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExpAndOps\Yield\Examples\Squares;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Yield\Squares;
 
 function squares(
   int $start,
@@ -14,6 +17,8 @@ function squares(
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   foreach (squares(-2, 3, "X") as $key => $val) {
     echo "key: $key, value: $val\n";
   }

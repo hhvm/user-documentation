@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\Interfaces\Examples\MyCollection;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\ImplementingAnInterface\MyCollection;
 
 interface MyCollection {
   const MAX_NUMBER_ITEMS = 1000;
@@ -31,6 +34,8 @@ function process_collection(MyCollection $p1): void {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   process_collection(new MyList());
   process_collection(new MyQueue());
 }

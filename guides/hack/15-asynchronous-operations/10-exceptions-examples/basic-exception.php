@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\BasicException;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\BasicException;
 
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception("Return exception handle");
@@ -16,5 +19,7 @@ async function basic_exception(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   \HH\Asio\join(basic_exception());
 }

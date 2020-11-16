@@ -1,9 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\Statements\For\Examples\TableOfSquares;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Statements\For\TableOfSquares;
 
 <<__EntryPoint>>
-function main(): void {
+function _main(): void {
+  \init_docs_autoloader();
+
   for ($i = 1; $i <= 5; ++$i) {
     echo "$i\t".($i * $i)."\n"; // output a table of squares
   }

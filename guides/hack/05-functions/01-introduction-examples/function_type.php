@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Functions\FunctionType;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Functions\Introduction\FunctionType;
 
 function apply_func(int $v, (function(int): int) $f): int {
   return $f($v);

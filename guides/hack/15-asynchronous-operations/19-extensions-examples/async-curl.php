@@ -1,6 +1,11 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncCurl;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncCurl;
+
+use namespace HH\Lib\{C, Vec};
 
 function get_urls(): vec<string> {
   return vec[
@@ -26,5 +31,6 @@ async function get_combined_contents(
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(get_combined_contents(get_urls()));
 }

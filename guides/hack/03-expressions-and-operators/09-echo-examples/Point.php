@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExprAndOps\Echo\Examples\Point;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Echo\Point;
 
 class Point {
   private float $x;
@@ -19,6 +22,8 @@ class Point {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $p1 = new Point(20.5, 30.33);
   /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo $p1."\n"; // implicit call to __toString()
