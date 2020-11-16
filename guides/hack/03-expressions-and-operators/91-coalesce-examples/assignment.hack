@@ -1,4 +1,8 @@
-namespace Hack\UserDocumentation\ExpAndOps\Coalesce\Assignment;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Coalesce\Assignment;
+
 use namespace HH\Lib\{Dict, Str};
 
 function get_counts_by_value(Traversable<string> $values): dict<string, int> {
@@ -24,6 +28,7 @@ function get_people_by_age(
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   $values = vec['foo', 'bar', 'foo', 'baz', 'bar', 'foo'];
   \print_r(get_counts_by_value($values));
 

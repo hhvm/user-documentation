@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\VarrayDarrayRuntimeOptions;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\DarrayVarrayRuntimeOptions\GetAllRuntimeOptions;
 
 use namespace HH\Lib\{Dict, Str};
 
@@ -16,6 +19,8 @@ function get_all_runtime_options(
 
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
+  \init_docs_autoloader();
+
   require_once __DIR__.'/../../../../vendor/autoload.hack';
   \Facebook\AutoloadMap\initialize();
 

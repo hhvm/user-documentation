@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Awaitables\Examples\AwaitableReturn;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Awaitables\AwaitableReturn;
 
 async function f(): Awaitable<int> {
   return 2;
@@ -13,5 +16,7 @@ async function f(): Awaitable<int> {
 
 <<__EntryPoint>>
 function join_main(): void {
+  \init_docs_autoloader();
+
   \var_dump(\HH\Asio\join(f()));
 }

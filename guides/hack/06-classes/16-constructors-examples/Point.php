@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\Constructors\Examples\Point;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\Constructors\Point;
 
 class Point {
   private static int $pointCount = 0; // static property with initializer
@@ -21,6 +24,8 @@ class Point {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $p1 = new Point(2.3);
   /* HH_FIXME[4067] implicit __toString() is now deprecated */
   echo "\$p1 is $p1\n";

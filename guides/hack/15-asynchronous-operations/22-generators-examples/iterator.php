@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Generators\Examples\Iterator;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Generators\Iterator;
 
 const int SECOND = 1000000; // microseconds
 
@@ -28,5 +31,6 @@ async function happy_new_year(int $start): Awaitable<void> {
 <<__EntryPoint>>
 function run(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(happy_new_year(5)); // 5 second countdown
 }

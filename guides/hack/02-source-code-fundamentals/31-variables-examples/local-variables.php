@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Fundamentals\Variables\Examples\LocalVar;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\SourceCodeFundamentals\Variables\LocalVariables;
 
 function f(): void {
   $lv = 1;
@@ -10,6 +13,8 @@ function f(): void {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   for ($i = 1; $i <= 3; ++$i)
     f();
 }

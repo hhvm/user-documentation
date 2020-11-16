@@ -1,5 +1,10 @@
 <?hh
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Dynamic\CoercionFromUnion;
+
 function expect_int(int $i): void {}
 function expect_string(string $s): void {}
 

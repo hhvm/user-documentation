@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Enums\Examples\Positions;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumeratedTypes\Positions;
 
 enum Position: int {
   Top = 0;
@@ -32,6 +35,8 @@ function writeText(string $text, Position $pos): void {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   writeText("Hello", Position::Bottom);
   writeText("Today", Position::Left);
 }

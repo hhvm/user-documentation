@@ -1,6 +1,9 @@
-<?hh // partial
+<?hh
 
-namespace Hack\UserDocumentation\Generics\Variance\Examples\Contravariance;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Contravariance;
 
 // This class is write only. Had we put in a getter for $this->t, we could not
 // use contravariance. e.g., if we had function getMe(T $x): T, you would get
@@ -21,6 +24,8 @@ class Cat extends Animal {}
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $animal = new Animal();
   $cat = new Cat();
   $c = new C($cat);

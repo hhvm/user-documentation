@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\Traits\Examples\Multiple;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\UsingATrait\Multiple;
 
 trait T1 {
   public int $x = 0;
@@ -41,5 +44,7 @@ class C {
 
 <<__EntryPoint>>
 function main() : void {
+  \init_docs_autoloader();
+
   (new C()) -> foo();
 }

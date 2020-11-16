@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Generics\ReifiedGenerics\Examples\TypeTesting;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\ReifiedGenerics\TypeTesting;
 
 function filter<<<__Enforceable>> reify T>(vec<mixed> $list): vec<T> {
   $ret = vec[];
@@ -14,6 +17,8 @@ function filter<<<__Enforceable>> reify T>(vec<mixed> $list): vec<T> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   filter<int>(vec[1, "hi", true]);
   // => vec[1]
   filter<string>(vec[1, "hi", true]);

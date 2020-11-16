@@ -1,4 +1,7 @@
-namespace Hack\UserDocumentation\Classes\Constructors\Examples\Duplication;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\Constructors\Duplication;
 
 final class User {
   private int $id;

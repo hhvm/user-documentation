@@ -1,4 +1,9 @@
-<?hh // partial
+<?hh
+
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\Extending\Children;
 
 use namespace Facebook\XHP;
 use type Facebook\XHP\HTML\{body, head, li, ul};
@@ -6,6 +11,7 @@ use type Facebook\XHP\HTML\{body, head, li, ul};
 <<__EntryPoint>>
 async function extending_examples_children_run(): Awaitable<void> {
   \init_docs_autoloader();
+
   $my_br = <my_br />;
   // Even though my-br does not take any children, you can still call the
   // appendChild method with no consequences. The consequence will come when

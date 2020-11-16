@@ -1,5 +1,10 @@
 <?hh
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\Extending\AttributeTransfer;
+
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{div, XHPAttributeClobbering_DEPRECATED};
 

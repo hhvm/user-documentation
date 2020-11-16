@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExpAndOps\Yield\Examples\ProcessFile;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Yield\ProcessFile;
 
 function getTextFileLines(string $filename): \Generator<int, string, void> {
   $infile = \fopen($filename, 'r');
@@ -24,6 +27,8 @@ function getTextFileLines(string $filename): \Generator<int, string, void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   foreach (getTextFileLines(__DIR__."/Testfile.txt") as $line) {
     echo ">$line<\n";
   }

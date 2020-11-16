@@ -1,7 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ErrorCodes\BadType;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
+namespace HHVM\UserDocumentation\Guides\Hack\SilencingErrors\ErrorCodes\BadType;
 
 function takes_int(int $_): void {}
 

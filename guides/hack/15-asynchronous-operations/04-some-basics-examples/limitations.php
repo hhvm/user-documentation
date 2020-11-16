@@ -1,6 +1,10 @@
-<?hh // partial
+<?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Basics\Examples\Limitations;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\SomeBasics\Limitations;
+
 use namespace HH\Lib\Vec;
 
 async function do_cpu_work(): Awaitable<void> {
@@ -34,5 +38,6 @@ async function run(): Awaitable<void> {
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(run());
 }

@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Annotate;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Annotation;
 
 abstract class Base {
   abstract const type T;
@@ -31,6 +34,8 @@ class Inty extends Base {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
+
   $s = new Stringy();
   $i = new Inty();
   \var_dump($s->getString());

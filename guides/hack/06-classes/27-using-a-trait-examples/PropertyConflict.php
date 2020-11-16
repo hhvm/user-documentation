@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\Traits\Examples\PropertyConflict;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\UsingATrait\PropertyConflict;
 
 trait T1 {
   public static int $x = 0;
@@ -31,6 +34,8 @@ class C {
 
 <<__EntryPoint>>
 function main() : void {
+  \init_docs_autoloader();
+
   try {
     C::foo();
   } catch (\Exception $ex) {

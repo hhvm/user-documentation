@@ -1,4 +1,6 @@
-// @example-start Don't strip boilerplate since this is an introductory example.
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
 namespace Hack\GettingStarted\HSLIO;
 
 use namespace HH\Lib\{File, IO};
@@ -6,6 +8,7 @@ use namespace HH\Lib\{File, IO};
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
   \init_docs_autoloader();
+
   // STDIN for CLI, or HTTP POST data
   $_in = IO\request_input();
   // STDOUT for CLI, or HTTP response

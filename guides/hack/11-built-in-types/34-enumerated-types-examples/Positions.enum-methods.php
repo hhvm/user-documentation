@@ -1,10 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Enums\Examples\Positions;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumeratedTypes\Positions;
 
 <<__EntryPoint>>
-function run(): void {
+function _main(): void {
   \init_docs_autoloader();
+
   $names = Position::getNames();
   echo " Position::getNames() ---\n";
   foreach ($names as $key => $value) {

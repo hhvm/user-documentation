@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Statements\Return\Examples\Various;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Statements\Return\Return;
 
 function average_float(float $p1, float $p2): float {
   return ($p1 + $p2) / 2.0;

@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Attributes\__MockClass\Examples\MockClass;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Attributes\PredefinedAttributes\Mock;
 
 final class FinalClass {
   public static function f(): void {
@@ -28,6 +31,8 @@ final class MockFinalClass extends FinalClass {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $o = new MockFinalClass();
   $o::f();
 }

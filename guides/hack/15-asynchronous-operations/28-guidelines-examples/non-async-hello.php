@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\NonAsyncHello;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Guidelines\NonAsyncHello;
 
 function get_hello(): string {
   return "Hello";
@@ -8,5 +11,7 @@ function get_hello(): string {
 
 <<__EntryPoint>>
 function run_na_hello(): void {
+  \init_docs_autoloader();
+
   \var_dump(get_hello());
 }

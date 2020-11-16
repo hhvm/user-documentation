@@ -1,9 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Arrays\Examples\KeysetColors;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\KeysetColors;
 
 <<__EntryPoint>>
-function main(): void {
+function _main(): void {
+  \init_docs_autoloader();
+
   $colors = keyset[]; // create an empty keyset
   \var_dump($colors);
 

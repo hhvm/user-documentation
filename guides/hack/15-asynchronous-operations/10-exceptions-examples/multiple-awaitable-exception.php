@@ -1,6 +1,10 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException;
+
 use namespace HH\Lib\Vec;
 
 async function exception_thrower(): Awaitable<void> {
@@ -22,5 +26,6 @@ async function multiple_waithandle_exception(): Awaitable<void> {
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(multiple_waithandle_exception());
 }

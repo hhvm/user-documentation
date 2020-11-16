@@ -1,6 +1,10 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Awaitables\Examples\MultipleAwaitables;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Awaitables\MultipleAwaitables;
+
 use namespace HH\Lib\Dict;
 
 async function quads(float $n): Awaitable<float> {
@@ -10,6 +14,7 @@ async function quads(float $n): Awaitable<float> {
 <<__EntryPoint>>
 async function quads_m(): Awaitable<void> {
   \init_docs_autoloader();
+
   $awaitables = dict['five' => quads(5.0), 'nine' => quads(9.0)];
   $results = await Dict\from_async($awaitables);
 

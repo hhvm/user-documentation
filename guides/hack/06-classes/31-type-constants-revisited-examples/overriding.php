@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Overriding;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Overriding;
 
 abstract class BaseAbstract {
   abstract const type T;
@@ -19,5 +22,7 @@ class ChildOfChildWithNoConstraint extends ChildWithConstraint {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
+
   echo "No real output!";
 }

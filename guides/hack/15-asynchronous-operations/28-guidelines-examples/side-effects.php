@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\SideEffects;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Guidelines\SideEffects;
 
 async function get_curl_data(string $url): Awaitable<string> {
   return await \HH\Asio\curl_exec($url);
@@ -20,5 +23,7 @@ async function proximity(): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   \HH\Asio\join(proximity());
 }

@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Basics\Examples\NonAsyncCurl;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\SomeBasics\NonAsyncCurl;
 
 function curl_A(): mixed {
   $ch = \curl_init();
@@ -18,6 +21,8 @@ function curl_B(): mixed {
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $start = \microtime(true);
   $a = curl_A();
   $b = curl_B();

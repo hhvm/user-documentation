@@ -1,4 +1,9 @@
-<?hh // partial
+<?hh
+
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\Introduction\AvoidXss;
 
 use type Facebook\XHP\HTML\{body, head, html};
 
@@ -31,5 +36,6 @@ async function intro_examples_avoid_xss_run(
 <<__EntryPoint>>
 async function intro_examples_avoid_xss_main(): Awaitable<void> {
   \init_docs_autoloader();
+
   await intro_examples_avoid_xss_run('<blink>Ugh</blink>');
 }

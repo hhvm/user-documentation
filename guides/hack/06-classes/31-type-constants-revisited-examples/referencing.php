@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\TypeConstantsRevisited\Exampes\Referencing;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Referencing;
 
 abstract class UserTC {
   abstract const type Ttc as arraykey;
@@ -20,6 +23,8 @@ function get_id_from_userTC(AppUserTC $uc): AppUserTC::Ttc {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
+
   $autc = new AppUserTC(10);
   \var_dump(get_id_from_userTC($autc));
 }

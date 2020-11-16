@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\MemoizeResult;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Guidelines\MemoizeResult;
 
 abstract final class MemoizeResult {
   private static async function time_consuming(): Awaitable<string> {
@@ -20,6 +23,8 @@ abstract final class MemoizeResult {
 }
 <<__EntryPoint>>
 function runMe(): void {
+  \init_docs_autoloader();
+
   $t1 = \microtime(true);
   \HH\Asio\join(MemoizeResult::memoize_result());
   $t2 = \microtime(true) - $t1;

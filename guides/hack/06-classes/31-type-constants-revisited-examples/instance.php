@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Classes\TypeConstantsRevisited\Instance;
 
 abstract class Box {
   abstract const type T;
@@ -20,6 +23,8 @@ class IntBox extends Box {
 
 <<__EntryPoint>>
 function run(): void {
+  \init_docs_autoloader();
+
   $ibox = new IntBox(10);
   \var_dump($ibox);
   $ibox->set(123);

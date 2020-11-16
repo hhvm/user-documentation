@@ -1,9 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Noreturn\Examples\Refinement;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Noreturn\Refinement;
 
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
+  \init_docs_autoloader();
+
   $nullable_int = '_' ? 0 : null;
   if (!($nullable_int is nonnull)) {
     invariant_violation('$nullable_int must not be null');

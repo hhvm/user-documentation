@@ -1,9 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Arrays\Examples\DictColors;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\DictColors;
 
 <<__EntryPoint>>
-function main(): void {
+function _main(): void {
+  \init_docs_autoloader();
+
   $colors = dict[]; // create an empty dict
   \var_dump($colors);
 

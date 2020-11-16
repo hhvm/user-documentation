@@ -1,4 +1,9 @@
-<?hh // partial
+<?hh
+
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\BasicUsage\HackXhp;
 
 use type Facebook\XHP\HTML\{div, i, strong};
 
@@ -19,6 +24,7 @@ function basic_usage_examples_get_float(): float {
 <<__EntryPoint>>
 async function basic_usage_examples_embed_hack(): Awaitable<void> {
   \init_docs_autoloader();
+
   $xhp_float = <i>{basic_usage_examples_get_float()}</i>;
 
   $xhp =

@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MySQLConnectionPool;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncMysqlConnectionPool;
 
 use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
 ;
@@ -25,6 +28,8 @@ async function get_connection(): Awaitable<\AsyncMysqlConnection> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
+  \init_docs_autoloader();
+
   require __DIR__.'/async_mysql_connect.inc.php';
   $conn = await get_connection();
   \var_dump($conn);

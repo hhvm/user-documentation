@@ -1,6 +1,9 @@
-<?hh // partial
+<?hh
 
-namespace Hack\UserDocumentation\XHP\Methods;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\Methods\ListBuilder;
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{li, p, ul};
@@ -16,6 +19,7 @@ function build_list(vec<string> $names): x\node {
 <<__EntryPoint>>
 async function xhp_object_methods_run(): Awaitable<void> {
   \init_docs_autoloader();
+
   $names = vec['Sara', 'Fred', 'Josh', 'Scott', 'Paul', 'David', 'Matthew'];
 
   foreach (build_list($names)->getChildren() as $child) {

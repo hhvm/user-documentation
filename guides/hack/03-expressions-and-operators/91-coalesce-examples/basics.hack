@@ -1,7 +1,12 @@
-namespace Hack\UserDocumentation\ExpAndOps\Coalesce\Basics;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Coalesce\Basics;
 
 <<__EntryPoint>>
-function main(): void {
+function _main(): void {
+  \init_docs_autoloader();
+
   $nully = null;
   $nonnull = 'a string';
   \print_r(vec[

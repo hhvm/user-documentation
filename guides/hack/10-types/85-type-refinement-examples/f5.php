@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\TypeRefinement\Examples\Test5;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Types\TypeRefinement\F5;
 
 class C {
   private ?int $p = 8; // holds an int, but type is ?int

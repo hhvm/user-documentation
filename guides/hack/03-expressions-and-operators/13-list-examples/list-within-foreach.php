@@ -1,9 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExprAndOps\List\ListWithinForeach;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\List\ListWithinForeach;
 
 <<__EntryPoint>>
-function main(): void {
+function _main(): void {
+  \init_docs_autoloader();
+
   $vec_of_tuples = vec[
     tuple('A', 'B', 'C'),
     tuple('a', 'b', 'c'),

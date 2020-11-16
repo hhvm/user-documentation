@@ -1,5 +1,8 @@
 <?hh
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
 namespace HHVM\UserDocumentation\Guides\Hack\Types\GenericTypes\Stack;
 
 function use_int_stack(Stack<int> $stInt): void {

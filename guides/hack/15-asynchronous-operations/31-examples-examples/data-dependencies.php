@@ -1,7 +1,11 @@
 <?hh
 
-namespace Hack\UserDocumentation\Async\Examples\Examples\DataDependencies;
-use namespace HH\Lib\{Tuple, Vec};
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Examples\DataDependencies;
+
+use namespace HH\Lib\Vec;
 
 class PostData {
   // using constructor argument promotion
@@ -66,5 +70,6 @@ async function generate_page(int $author_id): Awaitable<string> {
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   print \HH\Asio\join(generate_page(13324)); // just made up a user id
 }

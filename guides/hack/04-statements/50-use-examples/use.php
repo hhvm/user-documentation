@@ -1,5 +1,8 @@
 <?hh
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
 namespace UseNS {
 
   const int CON = 100;
@@ -38,6 +41,8 @@ namespace Hack\UserDocumentation\Statements\use\Examples\test {
 
   <<__EntryPoint>>
   function main(): void {
+  \init_docs_autoloader();
+
 
     // access const CON by fully qualified and abbreviated names
 

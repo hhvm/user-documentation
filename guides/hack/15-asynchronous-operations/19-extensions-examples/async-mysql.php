@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Extensions\Examples\MySQL;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncMysql;
 
 use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
 ;
@@ -51,6 +54,8 @@ async function get_user_info(
 
 <<__EntryPoint>>
 async function async_mysql_tutorial(): Awaitable<void> {
+  \init_docs_autoloader();
+
   require __DIR__.'/async_mysql_connect.inc.php';
   $conn = await get_connection();
   if ($conn !== null) {

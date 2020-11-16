@@ -1,5 +1,10 @@
 <?hh
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\Interfaces\AllInOne;
+
 use namespace Facebook\XHP;
 
 final class XHPUnsafeExample implements XHP\UnsafeRenderable {

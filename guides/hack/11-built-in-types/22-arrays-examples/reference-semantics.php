@@ -1,12 +1,16 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Arrays\Examples\ReferenceSemantics;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\ReferenceSemantics;
 
 use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   $john = new Person('John', 'Doe');
   $emma = new Person('Emma', 'Smith');
 

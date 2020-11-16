@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Statements\Expression\Examples\Useful;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Statements\ExpressionStatements\Useful;
 
 function do_it(): int {
   return 100;

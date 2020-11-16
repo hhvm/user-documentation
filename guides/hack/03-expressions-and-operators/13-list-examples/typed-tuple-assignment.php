@@ -1,9 +1,14 @@
 <?hh
 
-namespace Hack\UserDocumentation\ExprAndOps\List\TypedTupleAssignment;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\List\TypedTupleAssignment;
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
+
   $tuple = tuple('string', 1, false);
   list($string, $int, $bool) = $tuple;
   takes_string($string);

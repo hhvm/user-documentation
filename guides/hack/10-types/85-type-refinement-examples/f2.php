@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\TypeRefinement\Examples\Test2;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Types\TypeRefinement\F2;
 
 function f2(?int $p): void {
   if ($p is null) { // type refinement occurs; $p has type null

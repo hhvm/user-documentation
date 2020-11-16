@@ -1,6 +1,10 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\AwaitNoLoop;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Guidelines\AwaitNoLoop;
+
 use namespace HH\Lib\Vec;
 
 class User {
@@ -31,6 +35,7 @@ async function load_users_no_loop(vec<int> $ids): Awaitable<vec<User>> {
 <<__EntryPoint>>
 function runMe(): void {
   \init_docs_autoloader();
+
   $ids = vec[1, 2, 5, 99, 332];
   $result = \HH\Asio\join(load_users_no_loop($ids));
   \var_dump($result[4]->name);

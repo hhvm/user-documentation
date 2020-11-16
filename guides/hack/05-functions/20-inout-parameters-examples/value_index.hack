@@ -1,4 +1,7 @@
-namespace Hack\UserDocumentation\Functions\InoutParamsIndexing;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Functions\InoutParameters\ValueIndex;
 
 function set_to_value(inout int $item, int $value): void {
   $item = $value;

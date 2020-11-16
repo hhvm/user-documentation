@@ -1,4 +1,9 @@
-<?hh // partial
+<?hh
+
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\XHP\Introduction\AllowedTagValidation;
 
 use namespace Facebook\XHP;
 use type Facebook\XHP\HTML\{i, ul};

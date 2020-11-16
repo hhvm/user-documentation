@@ -1,6 +1,8 @@
 <?hh
 
-// @example-start namespace is relevant here, don't strip it
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
 namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Lambdas;
 use namespace HH\Lib\Vec;
 
@@ -43,5 +45,6 @@ async function use_lambdas(): Awaitable<void> {
 <<__EntryPoint>>
 function main(): void {
   \init_docs_autoloader();
+
   \HH\Asio\join(use_lambdas());
 }

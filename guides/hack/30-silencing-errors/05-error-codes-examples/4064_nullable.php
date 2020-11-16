@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ErrorCodes\NullableMember;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\SilencingErrors\ErrorCodes\Nullable;
 
 class MyClass {
   public int $x = 0;

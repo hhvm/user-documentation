@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\AsyncOps\Generators\Examples\Send;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Generators\Send;
 
 const int HALF_SECOND = 500000; // microseconds
 
@@ -36,6 +39,7 @@ async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
 <<__EntryPoint>>
 function run(): void {
   \init_docs_autoloader();
+
   $ids = vec[1, 2, 3, 4];
   \HH\Asio\join(associate_ids_to_names($ids));
 }

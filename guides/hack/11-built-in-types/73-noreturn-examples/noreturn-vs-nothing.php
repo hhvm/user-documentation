@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\Types\Noreturn\Examples\NoreturnVsNothing;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Noreturn\NoreturnVsNothing;
 
 function i_am_a_noreturn_function(): noreturn {
   throw new \Exception('stop right here');

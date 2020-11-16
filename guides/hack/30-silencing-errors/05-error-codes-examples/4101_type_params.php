@@ -1,6 +1,9 @@
 <?hh
 
-namespace Hack\UserDocumentation\ErrorCodes\TypeParamArity;
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\SilencingErrors\ErrorCodes\TypeParams;
 
 class MyBox<T> {
   public ?T $x = null;
