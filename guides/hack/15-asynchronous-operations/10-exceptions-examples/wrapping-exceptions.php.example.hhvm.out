@@ -1,7 +1,7 @@
 vec(2) {
-  object(HH\Asio\WrappedException)#5 (1) {
+  object(HH\Asio\WrappedException) (1) {
     ["exception":"HH\Asio\WrappedException":private]=>
-    object(Exception)#3 (8) {
+    object(Exception) (8) {
       ["message":protected]=>
       string(0) ""
       ["string":"Exception":private]=>
@@ -9,33 +9,30 @@ vec(2) {
       ["code":protected]=>
       int(0)
       ["file":protected]=>
-      string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
+      string(128) "/home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
       ["line":protected]=>
-      int(9)
+      int(11)
       ["trace":"Exception":private]=>
-      array(3) {
-        [0]=>
-        array(3) {
+      varray(3) {
+        darray(3) {
           ["file"]=>
-          string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
+          string(128) "/home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
-          int(17)
+          int(20)
           ["function"]=>
-          string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
+          string(105) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\exception_thrower"
         }
-        [1]=>
-        array(3) {
+        darray(3) {
           ["file"]=>
-          string(128) "/home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
+          string(128) "/home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
-          int(27)
+          int(33)
           ["function"]=>
-          string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
+          string(107) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\wrapping_exceptions"
         }
-        [2]=>
-        array(1) {
+        darray(1) {
           ["function"]=>
-          string(65) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\main"
+          string(92) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\main"
         }
       }
       ["previous":"Exception":private]=>
@@ -44,7 +41,7 @@ vec(2) {
       NULL
     }
   }
-  object(HH\Asio\WrappedResult)#8 (1) {
+  object(HH\Asio\WrappedResult) (1) {
     ["result":"HH\Asio\WrappedResult":private]=>
     int(2)
   }

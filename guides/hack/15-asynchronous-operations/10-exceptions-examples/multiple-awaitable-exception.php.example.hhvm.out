@@ -1,6 +1,7 @@
-Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php:7
+
+Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php:11
 Stack trace:
-#0 /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(15): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable\exception_thrower()
-#1 /home/ubuntu/user-documentation-2018-09-07/guides/hack/09-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(24): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable\multiple_waithandle_exception()
-#2 (): Hack\UserDocumentation\AsyncOps\Exceptions\Examples\MultipleAwaitable\main()
+#0 /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(19): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\exception_thrower()
+#1 /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(30): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\multiple_waithandle_exception()
+#2 (): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\main()
 #3 {main}

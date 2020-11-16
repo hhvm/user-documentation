@@ -1,38 +1,38 @@
 vec(2) {
-  object(HH\Asio\WrappedException) (%d) {
+  object(HH\Asio\WrappedException) (1) {
     ["exception":"HH\Asio\WrappedException":private]=>
-    object(Exception) (%d) {
+    object(Exception) (8) {
       ["message":protected]=>
-      string(0) ""
+      string(%d) ""
       ["string":"Exception":private]=>
-      string(0) ""
+      string(%d) ""
       ["code":protected]=>
       int(0)
       ["file":protected]=>
-      string(%d) "%s"
+      string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
       ["line":protected]=>
-      int(7)
+      int(11)
       ["trace":"Exception":private]=>
       varray(3) {
         darray(3) {
           ["file"]=>
-          string(%d) "%s"
+          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
-          int(16)
+          int(20)
           ["function"]=>
-          string(78) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\exception_thrower"
+          string(%d) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\exception_thrower"
         }
         darray(3) {
           ["file"]=>
-          string(%d) "%s"
+          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
           ["line"]=>
-          int(28)
+          int(33)
           ["function"]=>
-          string(80) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\wrapping_exceptions"
+          string(%d) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\wrapping_exceptions"
         }
         darray(1) {
           ["function"]=>
-          string(65) "Hack\UserDocumentation\AsyncOps\Exceptions\Examples\Wrapping\main"
+          string(%d) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\main"
         }
       }
       ["previous":"Exception":private]=>
@@ -41,7 +41,7 @@ vec(2) {
       NULL
     }
   }
-  object(HH\Asio\WrappedResult) (%d) {
+  object(HH\Asio\WrappedResult) (1) {
     ["result":"HH\Asio\WrappedResult":private]=>
     int(2)
   }

@@ -1,6 +1,6 @@
-object(Facebook\XHP\HTML\div) (%d) {
+object(Facebook\XHP\HTML\div) (6) {
   ["tagName":protected]=>
-  string(3) "div"
+  string(%d) "div"
   ["__isRendered":protected]=>
   bool(false)
   ["attributes":"Facebook\XHP\Core\node":private]=>
@@ -8,10 +8,10 @@ object(Facebook\XHP\HTML\div) (%d) {
   }
   ["children":"Facebook\XHP\Core\node":private]=>
   vec(3) {
-    string(9) " My Text "
-    object(Facebook\XHP\HTML\strong) (%d) {
+    string(%d) " My Text "
+    object(Facebook\XHP\HTML\strong) (6) {
       ["tagName":protected]=>
-      string(6) "strong"
+      string(%d) "strong"
       ["__isRendered":protected]=>
       bool(false)
       ["attributes":"Facebook\XHP\Core\node":private]=>
@@ -19,17 +19,17 @@ object(Facebook\XHP\HTML\div) (%d) {
       }
       ["children":"Facebook\XHP\Core\node":private]=>
       vec(1) {
-        string(12) "My Bold Text"
+        string(%d) "My Bold Text"
       }
       ["context":"Facebook\XHP\Core\node":private]=>
       dict(0) {
       }
       ["source"]=>
-      string(%d) "%s:11"
+      string(%d) "%s/guides/hack/21-XHP/07-basic-usage-examples/basic.php:17"
     }
-    object(Facebook\XHP\HTML\i) (%d) {
+    object(Facebook\XHP\HTML\i) (6) {
       ["tagName":protected]=>
-      string(1) "i"
+      string(%d) "i"
       ["__isRendered":protected]=>
       bool(false)
       ["attributes":"Facebook\XHP\Core\node":private]=>
@@ -37,18 +37,18 @@ object(Facebook\XHP\HTML\div) (%d) {
       }
       ["children":"Facebook\XHP\Core\node":private]=>
       vec(1) {
-        string(14) "My Italic Text"
+        string(%d) "My Italic Text"
       }
       ["context":"Facebook\XHP\Core\node":private]=>
       dict(0) {
       }
       ["source"]=>
-      string(%d) "%s:12"
+      string(%d) "%s/guides/hack/21-XHP/07-basic-usage-examples/basic.php:18"
     }
   }
   ["context":"Facebook\XHP\Core\node":private]=>
   dict(0) {
   }
   ["source"]=>
-  string(%d) "%s:13"
+  string(%d) "%s/guides/hack/21-XHP/07-basic-usage-examples/basic.php:19"
 }

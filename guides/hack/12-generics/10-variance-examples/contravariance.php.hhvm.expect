@@ -1,0 +1,5 @@
+object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Contravariance\C) (1) {
+  ["t":"HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Contravariance\C":private]=>
+  object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Contravariance\Animal) (0) {
+  }
+}

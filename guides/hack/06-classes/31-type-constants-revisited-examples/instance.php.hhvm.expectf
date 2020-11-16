@@ -1,8 +1,0 @@
-object(Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\IntBox) (%d) {
-  ["value":"Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\Box":private]=>
-  int(10)
-}
-object(Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\IntBox) (%d) {
-  ["value":"Hack\UserDocumentation\Classes\TypeConstantsRevisited\Examples\Instance\Box":private]=>
-  int(123)
-}

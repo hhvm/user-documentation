@@ -1,1 +1,5 @@
-%A
+File "%s/new-reify.php", line 20, characters 5-5:
+A newable type argument must be a concrete class or a newable type parameter. (Typing[4307])
+  File "%s/new-reify.php", line 14, characters 32-32:
+  Type parameter `T` was declared `__Newable` here
+
