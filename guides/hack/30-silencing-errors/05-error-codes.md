@@ -4,7 +4,10 @@ them. You can see the full list of error codes in
 
 ## 1002: Top-level code
 
-@@ error-codes-examples/1002_toplevel.php @@
+```1002_toplevel.php no-auto-output
+/* HH_FIXME[1002] Top-level code isn't checked. */
+echo "hello world\n";
+```
 
 Why it's bad: Top-level code is not type checked.
 
@@ -13,7 +16,13 @@ attribute.
 
 ## 2049: Unbound name
 
-@@ error-codes-examples/2049_unbound_name.php @@
+```2049_unbound_name.php no-auto-output
+function foo(): void {
+  /* HH_FIXME[4107] No such function (type checking). */
+  /* HH_FIXME[2049] No such function (global name check). */
+  nonexistent_function();
+}
+```
 
 Why it's bad: This is usually a sign that a name is incorrect.
 
@@ -25,7 +34,12 @@ legacy PHP APIs.
 
 ## 2050: Undefined Variable
 
-@@ error-codes-examples/2050_undefined_var.php @@
+```2050_undefined_var.php no-auto-output
+function foo(): mixed {
+  /* HH_FIXME[2050] This variable doesn't exist. */
+  return $no_such_var;
+}
+```
 
 Why it's bad: This is usually a sign that a variable name is incorrect.
 
@@ -37,7 +51,12 @@ legacy PHP APIs.
 
 ## 4005: Array access on a type that doesn't support indexing
 
-@@ error-codes-examples/4005_array_access.php @@
+```4005_array_access.php no-auto-output
+function foo(int $m): void {
+  /* HH_FIXME[4005] Indexing a type that isn't indexable. */
+  $value = $m['foo'];
+}
+```
 
 Why it's bad: Indexing values that don't support values can produce
 surprising behavior. The runtime will log a warning and return null,
@@ -48,7 +67,12 @@ Suggestions: Refactor the code to use a Hack array or a
 
 ## 4006: Array append on an inappropriate type
 
-@@ error-codes-examples/4006_array_append.php @@
+```4006_array_append.php no-auto-output
+function foo(mixed $m): void {
+  /* HH_FIXME[4006] $m may not be an array. */
+  $m[] = 1;
+}
+```
 
 Why it's bad: Appending to other types (e.g. `int`) is undefined and
 may throw an exception or convert the value to an array.
@@ -58,7 +82,12 @@ vec<_>`) to perform a runtime type check.
 
 ## 4032: Missing return type
 
-@@ error-codes-examples/4032_missing_return.php @@
+```4032_missing_return.php no-auto-output
+/* HH_FIXME[4030] Missing a return type declaration. */
+function foo() {
+  return 1;
+}
+```
 
 Why it's bad: When the typechecker does not know the return type, it
 cannot check operations on the value returned.
@@ -81,7 +110,12 @@ you still want to use `array`, specify the type e.g. `array<mixed>`.
 
 ## 4051: Accessing a shape with an invalid field name
 
-@@ error-codes-examples/4051_field_name.php @@
+```4051_field_name.php no-auto-output
+function foo(shape(...) $s): void {
+  /* HH_FIXME[4051] Invalid shape field name. */
+  $value = $s[1.0];
+}
+```
 
 Why it's bad: The runtime may coerce values and access other fields of
 your shape. The typechecker also does not know what type `$value` has.
@@ -91,7 +125,16 @@ integer, or a class constant.
 
 ## 4053: Member not found
 
-@@ error-codes-examples/4053_member_not_found.php @@
+```4053_member_not_found.php no-auto-output
+class MyClass {}
+
+function takes_myclass(MyClass $c): void {
+  /* HH_FIXME[4053] No such method. */
+  $c->someMethod();
+  /* HH_FIXME[4053] No such property. */
+  $x = $c->someProperty;
+}
+```
 
 Why it's bad: Accessing a non-existent method will cause a runtime
 error. Accessing a non-existent property will log a notice and return null.
@@ -101,7 +144,12 @@ type you're expecting.
 
 ## 4057: Missing shape field
 
-@@ error-codes-examples/4057_missing_field.php @@
+```4057_missing_field.php no-auto-output
+function foo(): shape('x' => int) {
+  /* HH_FIXME[4057] Missing the field `x`. */
+  return shape();
+}
+```
 
 Why it's bad: Returning a shape that's missing fields will cause
 errors when code tries to access those fields later. Note that shape
@@ -111,7 +159,12 @@ Suggestions: Change your shape type to use optional fields.
 
 ## 4063: Nullable container access
 
-@@ error-codes-examples/4063_null_container.php @@
+```4063_null_container.php no-auto-output
+function foo(?vec<int> $items): void {
+  /* HH_FIXME[4063] $items can be null. */
+  $x = $items[0];
+}
+```
 
 Why it's bad: indexing a `null` returns null, leading to
 runtime type errors later.
@@ -121,7 +174,20 @@ assert with `$items as nonnull`.
 
 ## 4064: Accessing members on a nullable object
 
-@@ error-codes-examples/4064_nullable.php @@
+```4064_nullable.php no-auto-output
+class MyClass {
+  public int $x = 0;
+  public function foo(): void {}
+}
+
+function foo(?MyClass $m): void {
+  /* HH_FIXME[4064] Accessing a property on a nullable object. */
+  $value = $m->x;
+
+  /* HH_FIXME[4064] Calling a method on a nullable object. */
+  $m->foo();
+}
+```
 
 Why it's bad: Accessing a property or a method on `null` will throw an
 exception.
@@ -131,7 +197,17 @@ assert with `$m as nonnull`.
 
 ## 4101: Wrong number of type parameters
 
-@@ error-codes-examples/4101_type_params.php @@
+```4101_type_params.php no-auto-output
+class MyBox<T> {
+  public ?T $x = null;
+}
+
+/* HH_FIXME[4101] Missing a type parameter. */
+class TooFewArguments extends MyBox {}
+
+/* HH_FIXME[4101] Too many type parameters. */
+class TooManyArguments extends MyBox<mixed, mixed> {}
+```
 
 Why it's bad: If the typechecker doesn't have full information about a
 class declaration, it cannot fully check code that uses the class.
@@ -144,7 +220,13 @@ parameters inside function and method bodies.
 
 ## 4107: Unbound name (type checking)
 
-@@ error-codes-examples/4107_unbound_name_typing.php @@
+```4107_unbound_name_typing.php no-auto-output
+function foo(): void {
+  /* HH_FIXME[4107] No such function (type checking). */
+  /* HH_FIXME[2049] No such function (global name check). */
+  nonexistent_function();
+}
+```
 
 Why it's bad: This is usually a sign that a name is incorrect.
 
@@ -156,7 +238,12 @@ legacy PHP APIs.
 
 ## 4108: Undefined shape field
 
-@@ error-codes-examples/4108_undef_field.php @@
+```4108_undef_field.php no-auto-output
+function foo(shape('x' => int) $s): void {
+  /* HH_FIXME[4108] No such field in this shape. */
+  $value = $s['not_x'];
+}
+```
 
 Why it's bad: Accessing an undefined field may throw an exception or
 return an unexpected value (for open shapes).
@@ -166,7 +253,16 @@ you're using.
 
 ## 4110: Bad type in expression
 
-@@ error-codes-examples/4110_bad_type.php @@
+```4110_bad_type.php no-auto-output
+function takes_int(int $_): void {}
+
+function foo(): void {
+  /* HH_FIXME[4110] Passing incorrect type to a function. */
+  takes_int("hello");
+  /* HH_FIXME[4110] Addition on a value that isn't a num. */
+  "1" + 3;
+}
+```
 
 Why it's bad: Using the wrong type can result in runtime errors (for
 enforced types), errors later (for unenforced types, such as erased
@@ -200,7 +296,17 @@ Suggestions: Use a field type declaration with optional fields instead.
 
 ## 4128: Using deprecated code
 
-@@ error-codes-examples/4128_use_deprecated.php @@
+```4128_use_deprecated.php no-auto-output
+function foo_new(): void {}
+
+<<__Deprecated("Use foo_new instead")>>
+function foo_old(): void {}
+
+function bar(): void {
+  /* HH_FIXME[4128] Calling a deprecated function. */
+  foo_old();
+}
+```
 
 Why it's bad: Using functions or classes that have been marked as
 deprecated prevents cleanup of old APIs.
@@ -211,7 +317,12 @@ API.
 
 ## 4165: Accessing optional shape field
 
-@@ error-codes-examples/4165_optional_field.php @@
+```4165_optional_field.php no-auto-output
+function foo(shape(?'x' => int) $s): void {
+  /* HH_FIXME[4165] This field may not be present. */
+  $value = $s['x'];
+}
+```
 
 Why it's bad: This code will throw an exception if the shape doesn't
 have this field.
@@ -221,7 +332,14 @@ the missing field.
 
 ## 4193: Illegal XHP child
 
-@@ error-codes-examples/4193_xhp_child.php @@
+```4193_xhp_child.php no-auto-output
+function foo(mixed $m): void {
+  /* HH_FIXME[4193] $m may not be an XHPChild.*/
+  $my_div = <div>{$m}</div>;
+}
+
+xhp class div {}
+```
 
 Why it's bad: XHP expects child elements to be instance of `XHPChild`.
 
@@ -254,7 +372,18 @@ for empty values.
 
 ## 4297: Type inference failed
 
-@@ error-codes-examples/4297_infer.php @@
+```4297_infer.php no-auto-output
+class MyA {
+  public function doStuff(): void {}
+}
+
+function foo(): void {
+  /* HH_FIXME[4297] Cannot infer the type of $x. */
+  $f = $x ==> $x->doStuff();
+
+  $f(new MyA());
+}
+```
 
 Why it's bad: If the type checker cannot infer the type, it cannot
 check usage of values with that type.
@@ -279,7 +408,10 @@ $d = dict<string, string>[];
 
 ## 4323: Type constraint violation
 
-@@ error-codes-examples/4323_constraints.php @@
+```4323_constraints.php no-auto-output
+/* HH_FIXME[4323] A dict must have arraykey, int or string keys. */
+function foo(dict<mixed, bool> $d): void {}
+```
 
 Why it's bad: if a type has constraints on how it can be used, and you
 break those constraints, it may not work as expected.

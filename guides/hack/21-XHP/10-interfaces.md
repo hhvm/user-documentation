@@ -58,14 +58,68 @@ these interfaces are `\XHPUnsafeRenderable` and `\XHPAlwaysValidChild`.
 
 If you need to render raw HTML strings, wrap them in a class that implements this interface and provides a `toHTMLStringAsync()` method:
 
-@@ interfaces-examples/md.xss-security-hole.inc.php @@
-@@ interfaces-examples/md.xss-security-hole.php @@
+```md.xss-security-hole.inc.php
+use namespace Facebook\XHP;
+
+/* YOU PROBABLY SHOULDN'T DO THIS
+ *
+ * Even with a scary (and accurate) name, it tends to be over-used.
+ * See below for an alternative.
+ */
+class ExamplePotentialXSSSecurityHole implements XHP\UnsafeRenderable {
+  public function __construct(private string $html) {
+  }
+
+  public async function toHTMLStringAsync(): Awaitable<string> {
+    return $this->html;
+  }
+}
+```
+```md.xss-security-hole.php no-auto-output
+use type Facebook\XHP\HTML\div;
+
+<<__EntryPoint>>
+async function start(): Awaitable<void> {
+  $xhp =
+    <div class="markdown">
+      {new ExamplePotentialXSSSecurityHole(
+        md_render('Markdown goes here'),
+      )}
+    </div>;
+  echo await $xhp->toStringAsync();
+}
+```
 
 We do not provide an implementation of this interface as a generic implementation tends to be overused; instead, consider making more specific
 implementations:
 
-@@ interfaces-examples/md.markdown-wrapper.inc.php @@
-@@ interfaces-examples/md.markdown-wrapper.php @@
+```md.markdown-wrapper.inc.php
+use namespace Facebook\XHP;
+
+final class ExampleMarkdownXHPWrapper implements XHP\UnsafeRenderable {
+  private string $html;
+
+  public function __construct(string $markdown_source) {
+    $this->html = md_render($markdown_source);
+  }
+
+  public async function toHTMLStringAsync(): Awaitable<string> {
+    return $this->html;
+  }
+}
+```
+```md.markdown-wrapper.php no-auto-output
+use type Facebook\XHP\HTML\div;
+
+<<__EntryPoint>>
+async function run(): Awaitable<void> {
+  $xhp =
+    <div class="markdown">
+      {new ExampleMarkdownXHPWrapper('Markdown goes here')}
+    </div>;
+  echo await $xhp->toStringAsync();
+}
+```
 
 ### `\Facebook\XHP\AlwaysValidChild`
 
@@ -77,5 +131,45 @@ This can also be implemented by XHP objects, but this usually indicates that som
 
 ## Example
 
-@@ interfaces-examples/all-in-one.inc.php @@
-@@ interfaces-examples/all-in-one.php @@
+```all-in-one.inc.php
+use namespace Facebook\XHP;
+
+final class XHPUnsafeExample implements XHP\UnsafeRenderable {
+  public async function toHTMLStringAsync(): Awaitable<string> {
+    /* HH_FIXME[2050] $_GET is not recognized by the typechecker */
+    return '<script>'.$_GET['I_LOVE_XSS'].'</script>';
+  }
+}
+```
+```all-in-one.php
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{div, li};
+
+<<__EntryPoint>>
+function all_in_one_xhp_example_main(): void {
+  $inputs = Map {
+    '<div />' => <div />,
+    '<x:frag />' => <x:frag />,
+    '"foo"' => 'foo',
+    '3' => 3,
+    'true' => true,
+    'null' => null,
+    'new stdClass()' => new \stdClass(),
+    'vec[<li />, <li />, <li />]' => vec[<li />, <li />, <li />],
+    'XHPUnsafeExample' => new XHPUnsafeExample(),
+  };
+
+  $max_label_len = \max($inputs->mapWithKey(($k, $_) ==> \strlen($k)));
+  print \HH\Lib\Str\repeat(' ', $max_label_len + 1)." | XHPRoot | XHPChild\n";
+  print \HH\Lib\Str\repeat('-', $max_label_len + 1)."-|---------|----------\n";
+
+  foreach ($inputs as $label => $input) {
+    \printf(
+      " %s | %-7s | %s\n",
+      \HH\Lib\Str\pad_left($label, $max_label_len, ' '),
+      $input is x\node ? 'yes' : 'no',
+      $input is \XHPChild ? 'yes' : 'no',
+    );
+  }
+}
+```

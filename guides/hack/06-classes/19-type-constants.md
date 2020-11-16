@@ -3,7 +3,17 @@ and inheritance hierarchies, so they are discussed under those topics.
 
 For now, the declaration of a type constant involves the keywords `const type`.  Without explanation, here's an example:
 
-@@ type-constants-examples/simple.php @@
+```simple.php no-auto-output
+abstract class CBase {
+  abstract const type T;
+  // ...
+}
+
+class CString extends CBase {
+  const type T = string;
+  // ...
+}
+```
 
 A type constant has public visibility and is implicitly static.
 

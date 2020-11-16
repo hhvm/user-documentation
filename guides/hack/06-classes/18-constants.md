@@ -1,7 +1,18 @@
 A class may contain definitions for named constants, which have public visibility.  A class constant belongs to the class
 as a whole, so it is implicitly `static`.  For example:
 
-@@ constants-examples/auto-color.php @@
+```auto-color.php
+class Automobile {
+  const DEFAULT_COLOR = "white";
+  // ...
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $col = Automobile::DEFAULT_COLOR;
+  echo "\$col = $col\n";
+}
+```
 
 If a class constant's type is omitted, it is inferred from the initializer, which must be present. In this case, that type is `string`.
 

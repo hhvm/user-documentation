@@ -22,7 +22,16 @@ Str\format($s, 1);
 
 You can define your own functions with format string arguments too.
 
-@@ format-strings-examples/define.php @@
+```define.php no-auto-output
+function takes_format_string(
+  \HH\FormatString<\PlainSprintf> $format,
+  mixed ...$args
+): void {}
+
+function use_it(): void {
+  takes_format_string("First: %d, second: %s", 1, "foo");
+}
+```
 
 `HH\FormatString<PlainSprintf>` will check that you've used the right
 number of arguments. `HH\FormatString<Str\SprintfFormat>` will also

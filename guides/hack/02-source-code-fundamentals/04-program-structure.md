@@ -14,7 +14,15 @@ in any order:
 
 Consider the following file:
 
-@@ program-structure-examples/hello-world.hack @@
+```hello-world.hack
+#!/usr/bin/env hhvm
+namespace Hack\UserDocumentation\Fundamentals\ProgramStructure\Examples\HelloWorld;
+
+<<__EntryPoint>>
+function main(): void {
+  print("Hello, World!\n");
+}
+```
 
 In this example, the start-up function is called `main`; however, that was an arbitrary choice of name; it could just as easily
 have been `run`, `do_it`, or `make_magic`. (What makes `main` the start-up function is the presence of the [attribute `__EntryPoint`](../attributes/predefined-attributes#__entrypoint).)
@@ -35,4 +43,14 @@ this extension *must* start with an optional shebang line (e.g. `#!/usr/bin/env 
 
 The following file is equivalent to the earlier example:
 
-@@ program-structure-examples/legacy.php @@
+```legacy.php
+#!/usr/bin/env hhvm
+<?hh
+namespace Hack\UserDocumentation\Fundamentals\ProgramStructure\Examples\LegacyHelloWorld;
+
+<<__EntryPoint>>
+function main(): void {
+  print("Hello, World!\n");
+  exit(0);
+}
+```

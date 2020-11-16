@@ -21,8 +21,32 @@ A custom XHP class needs to do three things:
 * implement the method `renderAsync` to return an XHP object (`x\node`) or the
   respective method of the chosen base class
 
-@@ extending-examples/basic.inc.php @@
-@@ extending-examples/basic.php @@
+```basic.inc.php
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\strong;
+
+final xhp class introduction extends x\element {
+  protected async function renderAsync(): Awaitable<x\node> {
+    return <strong>Hello!</strong>;
+  }
+}
+
+final xhp class intro_plain_str extends x\primitive {
+  protected async function stringifyAsync(): Awaitable<string> {
+    return 'Hello!';
+  }
+}
+```
+```basic.php
+<<__EntryPoint>>
+async function extending_examples_basic_run(): Awaitable<void> {
+  $xhp = <introduction />;
+  echo await $xhp->toStringAsync()."\n";
+
+  $xhp = <intro_plain_str />;
+  echo await $xhp->toStringAsync()."\n";
+}
+```
 
 **Historical note:**
 <span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
@@ -70,8 +94,41 @@ The `->:` operator can be used to retrieve the value of an attribute.
 You can specify an attribute as required with the `@required` declaration after the attribute name. If you try to render the XHP object and
 have not set the required attribute, then an `XHPAttributeRequiredException` will be thrown.
 
-@@ extending-examples/required-attributes.inc.php @@
-@@ extending-examples/required-attributes.php @@
+```required-attributes.inc.php
+use namespace Facebook\XHP\Core as x;
+
+final xhp class user_info extends x\element {
+  attribute int userid @required;
+  attribute string name = "";
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    return
+      <x:frag>User with id {$this->:userid} has name {$this->:name}</x:frag>;
+  }
+}
+```
+```required-attributes.php
+use namespace Facebook\XHP;
+
+<<__EntryPoint>>
+async function extending_examples_attributes_run(): Awaitable<void> {
+  /* HH_FIXME[4314] Missing required attribute is also a typechecker error. */
+  $uinfo = <user_info />;
+  // Can't render :user-info for an echo without setting the required userid
+  // attribute
+  try {
+    echo await $uinfo->toStringAsync();
+  } catch (XHP\AttributeRequiredException $ex) {
+    \var_dump($ex->getMessage());
+  }
+
+  /* HH_FIXME[4314] This is a typechecker error but not a runtime error. */
+  $uinfo = <user_info />;
+  $uinfo->setAttribute('userid', 1000);
+  $uinfo->setAttribute('name', 'Joel');
+  echo await $uinfo->toStringAsync();
+}
+```
 
 ### Nullable Attributes
 
@@ -102,8 +159,30 @@ extend its functionality. In such cases, it should be combined with *attribute t
 
 Let's say you have a class that wants to inherit attributes from `<div>`. You could do something like this:
 
-@@ extending-examples/bad-attribute-transfer.inc.php @@
-@@ extending-examples/bad-attribute-transfer.php @@
+```bad-attribute-transfer.inc.php
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\div;
+
+final xhp class ui_my_box extends x\element {
+  attribute :Facebook:XHP:HTML:div; // inherit attributes from <div>
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    // returning this will ignore any attribute set on this custom object
+    // They are not transferred automatically when returning the <div>
+    return <div class="my-box">{$this->getChildren()}</div>;
+  }
+}
+```
+```bad-attribute-transfer.php
+<<__EntryPoint>>
+async function extending_examples_bad_attribute_transfer_run(
+): Awaitable<void> {
+  $my_box = <ui_my_box title="My box" />;
+  // This will only bring <div class="my-box"></div> ... title= will be
+  // ignored.
+  echo await $my_box->toStringAsync();
+}
+```
 
 `attribute :Facebook:XHP:HTML:div` causes your class to inherit all `<div>` attributes,
 however, any attribute set on `<ui_my_good_box>` will be lost because the `<div>` returned from `render` will not automatically
@@ -111,8 +190,33 @@ get those attributes.
 
 This can be addressed by using the `...` operator.
 
-@@ extending-examples/attribute-transfer.inc.php @@
-@@ extending-examples/attribute-transfer.php @@
+```attribute-transfer.inc.php
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{div, XHPAttributeClobbering_DEPRECATED};
+
+final xhp class ui_my_good_box extends x\element {
+  attribute :Facebook:XHP:HTML:div; // inherit attributes from <div>
+  attribute int extra_attr;
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    // returning this will transfer any attribute set on this custom object
+    return <div id="id1" {...$this} class="class1">{$this->getChildren()}</div>;
+  }
+}
+```
+```attribute-transfer.php
+<<__EntryPoint>>
+async function extending_examples_good_attribute_transfer_run(
+): Awaitable<void> {
+  $my_box =
+    <ui_my_good_box
+      id="id2"
+      class="class2"
+      extra_attr={42}
+    />;
+  echo await $my_box->toStringAsync();
+}
+```
 
 Now, when `<ui_my_good_box>` is rendered, each `<div>` attribute will be transferred over.
 
@@ -144,8 +248,77 @@ satisfy the rules in its `getChildrenDeclaration()`, an `InvalidChildrenExceptio
 is thrown. Note that child validation only happens during rendering, no
 exception is thrown before that, e.g. when the invalid child is added.
 
-@@ extending-examples/children.inc.php @@
-@@ extending-examples/children.php @@
+```children.inc.php
+// Conventionally aliased to XHPChild, which makes the children declarations
+// easier to read (more fluid).
+use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
+use type Facebook\XHP\HTML\{body, head, html, li, ul};
+
+xhp class my_br extends x\primitive {
+  use XHPChild\Validation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\empty();
+  }
+
+  protected async function stringifyAsync(): Awaitable<string> {
+    return "\n";
+  }
+}
+
+xhp class my_ul extends x\element {
+  use XHPChild\Validation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\at_least_one_of(XHPChild\of_type<li>());
+  }
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    return <ul>{$this->getChildren()}</ul>;
+  }
+}
+
+xhp class my_html extends x\element {
+  use XHPChild\Validation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\sequence(
+      XHPChild\of_type<head>(),
+      XHPChild\of_type<body>(),
+    );
+  }
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    return <html>{$this->getChildren()}</html>;
+  }
+}
+```
+```children.php
+use namespace Facebook\XHP;
+use type Facebook\XHP\HTML\{body, head, li, ul};
+
+<<__EntryPoint>>
+async function extending_examples_children_run(): Awaitable<void> {
+  $my_br = <my_br />;
+  // Even though my-br does not take any children, you can still call the
+  // appendChild method with no consequences. The consequence will come when
+  // you try to render the object by something like an echo.
+  $my_br->appendChild(<ul />);
+  try {
+    echo await $my_br->toStringAsync()."\n";
+  } catch (XHP\InvalidChildrenException $ex) {
+    \var_dump($ex->getMessage());
+  }
+  $my_ul = <my_ul />;
+  $my_ul->appendChild(<li />);
+  $my_ul->appendChild(<li />);
+  echo await $my_ul->toStringAsync()."\n";
+  $my_html = <my_html />;
+  $my_html->appendChild(<head />);
+  $my_html->appendChild(<body />);
+  echo await $my_html->toStringAsync()."\n";
+}
+```
 
 ### Interfaces (categories)
 
@@ -157,8 +330,43 @@ Using such interfaces makes it possible to implement `getChildrenDeclaration()`
 in other elements without having to manually list all possible child types, some
 of which may not even exist yet.
 
-@@ extending-examples/categories.inc.php @@
-@@ extending-examples/categories.php @@
+```categories.inc.php
+use namespace Facebook\XHP\{
+  ChildValidation as XHPChild,
+  Core as x,
+  HTML\Category,
+};
+
+xhp class my_text extends x\element implements Category\Phrase {
+  use XHPChild\Validation;
+
+  protected static function getChildrenDeclaration(): XHPChild\Constraint {
+    return XHPChild\any_of(
+      XHPChild\pcdata(),
+      XHPChild\of_type<Category\Phrase>(),
+    );
+  }
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    return <x:frag>{$this->getChildrenOfType<Category\Phrase>()}</x:frag>;
+  }
+}
+```
+```categories.php
+use type Facebook\XHP\HTML\em;
+
+<<__EntryPoint>>
+async function extending_examples_categories_run(): Awaitable<void> {
+  $my_text = <my_text />;
+  $my_text->appendChild(<em>"Hello!"</em>); // This is a Category\Phrase
+  echo await $my_text->toStringAsync();
+
+  $my_text = <my_text />;
+  $my_text->appendChild("Bye!"); // This is pcdata, not a phrase
+  // Won't print out "Bye!" because render is only returing Phrase children
+  echo await $my_text->toStringAsync();
+}
+```
 
 **Historical note:**
 <span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
@@ -173,8 +381,29 @@ As you may have noticed, all rendering methods (`renderAsync`, `stringifyAsync`)
 are declared to return an `Awaitable` and can therefore be implemented as async
 functions and use `await`.
 
-@@ extending-examples/xhp-async.inc.php @@
-@@ extending-examples/xhp-async.php @@
+```xhp-async.inc.php
+use namespace Facebook\XHP\Core as x;
+
+final xhp class ui_get_status extends x\element {
+
+  protected async function renderAsync(): Awaitable<x\node> {
+    $ch = \curl_init('https://developers.facebook.com/status/');
+    \curl_setopt($ch, \CURLOPT_USERAGENT, 'hhvm/user-documentation example');
+    $status = await \HH\Asio\curl_exec($ch);
+    return <x:frag>Status is: {$status}</x:frag>;
+  }
+}
+```
+```xhp-async.php
+<<__EntryPoint>>
+async function extending_examples_async_run(): Awaitable<void> {
+  $status = <ui_get_status />;
+  $html = await $status->toStringAsync();
+  // This can be long, so just show a bit for illustrative purposes
+  $sub_status = \substr($html, 0, 100);
+  \var_dump($sub_status);
+}
+```
 
 **Historical note:**
 <span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
@@ -197,8 +426,29 @@ In XHP-Lib v3, this trait is called `\XHPHelpers`.
 `XHPHTMLHelpers` has a method `getID` that you can call to give your rendered custom XHP object a unique ID that can be referred to in other
 parts of your code or UI framework (e.g., CSS).
 
-@@ extending-examples/get-id.inc.php @@
-@@ extending-examples/get-id.php @@
+```get-id.inc.php
+use namespace Facebook\XHP\Core as x;
+use type Facebook\XHP\HTML\{span, XHPHTMLHelpers};
+
+xhp class my_id extends x\element {
+  attribute string id;
+  use XHPHTMLHelpers;
+  protected async function renderAsync(): Awaitable<x\node> {
+    return <span id={$this->getID()}>This has a random id</span>;
+  }
+}
+```
+```get-id.php
+<<__EntryPoint>>
+async function extending_examples_get_id_run(): Awaitable<void> {
+  // This will print something like:
+  // <span id="8b95a23bc0">This has a random id</span>
+  $xhp = <my_id />;
+  echo await $xhp->toStringAsync();
+}
+```.hhvm.expectf
+<span id="%s">This has a random id</span>
+```
 
 ### Class Attribute Management
 
@@ -212,4 +462,21 @@ This is best illustrated with a standard HTML element, all of which have a
 XHP class, as long as it uses the trait and declares the `class` attribute
 directly or through inheritance.
 
-@@ extending-examples/add-class.php @@
+```add-class.php
+use type Facebook\XHP\HTML\h1;
+
+function get_header(string $section_name): h1 {
+  return (<h1 class="initial-cls">{$section_name}</h1>)
+    ->addClass('added-cls')
+    ->conditionClass($section_name === 'Home', 'home-cls');
+}
+
+<<__EntryPoint>>
+async function run(): Awaitable<void> {
+  $xhp = get_header('Home');
+  echo await $xhp->toStringAsync()."\n";
+
+  $xhp = get_header('Contact');
+  echo await $xhp->toStringAsync()."\n";
+}
+```

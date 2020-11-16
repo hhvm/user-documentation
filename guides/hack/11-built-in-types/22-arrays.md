@@ -54,7 +54,21 @@ are 0 and 1.
 An existing element is accessed via the subscript operator, `[]`, and the value of an element can be changed; however, new values can only be added
 to the end by using subscript `[]`, and key values always start at 0, and go up in increments of 1. Consider the following:
 
-@@ arrays-examples/vec-colors.php @@
+```vec-colors.php
+$colors = vec[]; // create an empty vec
+\var_dump($colors);
+
+$colors[] = "red"; // add element 0 with value "red"
+$colors[] = "white"; // add element 1 with value "white"
+$colors[] = "blue"; // add element 2 with value "blue"
+\var_dump($colors);
+
+$colors[0] = "pink"; // change element 0's value to "pink"
+\var_dump($colors);
+
+$colors = vec["green", "yellow"]; // create a vec of two elements
+\var_dump($colors);
+```
 
 The `foreach` statement can be used to iterate over the elements in a vec, starting at the element with key 0. This statement provides a way to
 access the key and value for each element.
@@ -80,7 +94,25 @@ same (or even compatible) types! That said, there are library functions to conve
 
 Consider the following:
 
-@@ arrays-examples/dict-colors.php @@
+```dict-colors.php
+$colors = dict[]; // create an empty dict
+\var_dump($colors);
+
+$colors[4] = "black"; // create element 4 with value "black"
+\var_dump($colors);
+
+$colors[4] = "red"; // replace element 4's value with "red"
+$colors[8] = "white"; // create element 8 with value "white"
+$colors[-3] = "blue"; // create element -3 with value "blue"
+\var_dump($colors);
+
+$colors = dict[
+  -10 => "white",
+  12 => "blue",
+  0 => "red",
+]; // create a dict with 3 elements
+\var_dump($colors);
+```
 
 The key type can be `string`; for example:
 
@@ -125,7 +157,24 @@ form `keyset[`...`]`. There are three elements, and their corresponding keys are
 An existing element is accessed via the subscript operator, `[]`; the value of an element cannot be changed. And new values can only be added
 by using subscript `[]`. Consider the following:
 
-@@ arrays-examples/keyset-colors.php @@
+```keyset-colors.php
+$colors = keyset[]; // create an empty keyset
+\var_dump($colors);
+
+$colors[] = "red"; // add element with key/value "red"
+$colors[] = "white"; // add element with key/value "white"
+$colors[] = "blue"; // add element with key/value "blue"
+\var_dump($colors);
+
+$colors = keyset[
+  "green",
+  "yellow",
+  "green",
+]; // create a keyset of two elements
+\var_dump($colors);
+
+echo "\$colors[\"green\"] = ".$colors["green"]."\n";
+```
 
 Attempts to add duplicate keys are accepted but ignored.
 
@@ -288,18 +337,124 @@ It addresses how an instance behaves when assigned / passed into or returned fro
 An object has reference semantics.
 If I pass you a `Person` instance and you set the last name to `"Doe"`, I'll be able to observe that change on my instance (`$emma`).
 
-@@ arrays-examples/reference-semantics.php @@
+```reference-semantics.php
+<<__EntryPoint>>
+function main(): void {
+  $john = new Person('John', 'Doe');
+  $emma = new Person('Emma', 'Smith');
+
+  echo Str\format(
+    "%s's last name was %s before she got married.\n",
+    $emma->firstName,
+    $emma->lastName,
+  );
+
+  marry($john, $emma);
+
+  echo Str\format(
+    "%s's last name became %s after she got married.\n",
+    $emma->firstName,
+    $emma->lastName,
+  );
+}
+
+function marry(Person $a, Person $b): void {
+  $b->lastName = $a->lastName;
+}
+
+class Person {
+  public function __construct(
+    public string $firstName,
+    public string $lastName,
+  ) {}
+}
+```
 
 However, if you were to do the same with an array type, you'd not observe the changes in your variable (`$emma`).
 
-@@ arrays-examples/dicts-have-value-semantics.php @@
+```dicts-have-value-semantics.php
+<<__EntryPoint>>
+function main(): void {
+  $john = make_person('John', 'Doe');
+  $emma = make_person('Emma', 'Smith');
+
+  echo Str\format(
+    "%s's last name was %s before she got married.\n",
+    $emma['first'],
+    $emma['last'],
+  );
+
+  marry($john, $emma);
+
+  echo Str\format(
+    "%s's last name is still %s after she got married.\n",
+    $emma['first'],
+    $emma['last'],
+  );
+}
+
+/**
+ * This function is now not doing anything,
+ * since the modifications are function local.
+ */
+function marry(dict<string, string> $a, dict<string, string> $b): void {
+  $b['last'] = $a['last'];
+}
+
+function make_person(
+  string $first_name,
+  string $last_name,
+): dict<string, string> {
+  return dict[
+    'first' => $first_name,
+    'last' => $last_name,
+  ];
+}
+```
 
 If you want to modify a value type parameter, see `inout`.
 This will _copy out_ the changes made in `marry()` when the function finishes.
 
 Watch out! Collections have reference semantics!
 
-@@ arrays-examples/maps-have-reference-semantics.php @@
+```maps-have-reference-semantics.php
+<<__EntryPoint>>
+function main(): void {
+  $john = make_person('John', 'Doe');
+  $emma = make_person('Emma', 'Smith');
+
+  echo Str\format(
+    "%s's last name was %s before she got married.\n",
+    $emma['first'],
+    $emma['last'],
+  );
+
+  marry($john, $emma);
+
+  echo Str\format(
+    "%s's last name is now %s after she got married.\n",
+    $emma['first'],
+    $emma['last'],
+  );
+}
+
+/**
+ * I modify $b and you'll be able to observe these changes in your $emma.
+ */
+function marry(Map<string, string> $a, Map<string, string> $b): void {
+  $b['last'] = $a['last'];
+}
+
+function make_person(
+  string $first_name,
+  string $last_name,
+): Map<string, string> {
+  return Map {
+    'first' => $first_name,
+    'last' => $last_name,
+  };
+}
+```
 
 This difference makes it very difficult to migrate from Containers to arrays.
 It is recommended to not share a mutable reference to a Collection across a codebase.
@@ -311,7 +466,26 @@ This makes it obvious that you intend to mutate the dict.
 
 From the perspective of the programmer, as soon as you give the value a (new) name.
 
-@@ arrays-examples/assignment-with-value-containers.php @@
+```assignment-with-value-containers.php
+$emma = dict['first' => 'Emma', 'last' => 'Smith'];
+$another_emma = $emma;
+
+echo Str\format("$%s's last name is %s.\n", 'emma', $emma['last']);
+
+$emma['last'] = 'Doe';
+
+echo Str\format(
+  "$%s's last name has been changed to %s.\n",
+  'emma',
+  $emma['last'],
+);
+
+echo Str\format(
+  "$%s's last name has not been changed and is still %s.\n",
+  'another_emma',
+  $another_emma['last'],
+);
+```
 
 Within the assignment `$another_emma = $emma`, a logical copy was made.
 From the programmer's perspective, you now have two copies of the emma dict.

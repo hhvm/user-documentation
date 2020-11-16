@@ -14,12 +14,57 @@ function something_went_wrong(): noreturn {
 In combination with a conditional, you can refine variables, since the typesystem will take note.
 This is actually how [invariant](../expressions-and-operators/invariant) is [implemented](/hack/reference/function/HH.invariant).
 
-@@ noreturn-examples/refinement.php @@
+```refinement.php no-auto-output
+<<__EntryPoint>>
+async function main_async(): Awaitable<void> {
+  $nullable_int = '_' ? 0 : null;
+  if (!($nullable_int is nonnull)) {
+    invariant_violation('$nullable_int must not be null');
+  }
+  // If we didn't fall into the if above, $nullable_int must be an int.
+  takes_int($nullable_int);
+}
+
+function takes_int(int $int): void {
+  echo $int;
+}
+```
 
 If you want to, you can also use [nothing](./nothing) instead. This allows you use the return value of the function.
 This makes it more explicit to the reader of your code that you are depending on the fact that this function influences typechecking.
 
-@@ noreturn-examples/noreturn-vs-nothing.php @@
+```noreturn-vs-nothing.php no-auto-output
+function i_am_a_noreturn_function(): noreturn {
+  throw new \Exception('stop right here');
+}
+
+function i_return_nothing(): nothing {
+  i_am_a_noreturn_function();
+}
+
+const ?int NULLABLE_INT = 0;
+
+async function main_async(): Awaitable<void> {
+  example_noreturn();
+  example_nothing();
+}
+
+function example_noreturn(): int {
+  $nullable_int = NULLABLE_INT;
+  if ($nullable_int is null) {
+    i_am_a_noreturn_function();
+  }
+  return $nullable_int;
+}
+
+function example_nothing(): int {
+  $nullable_int = NULLABLE_INT;
+  if ($nullable_int is null) {
+    return i_return_nothing();
+  }
+  return $nullable_int;
+}
+```
 
 In this example the `noreturn` function is named very plain, so you can understand that this refines.
 However in the `nothing` version you don't need to know the signature of `i_return_nothing()`

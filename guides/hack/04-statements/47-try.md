@@ -29,14 +29,69 @@ occurred within that try-block
 
 Consider the following:
 
-@@ try-examples/simple.php @@
+```simple.php
+function do_it(int $x, int $y): void {
+  try {
+    $result = $x / $y;
+    echo "\$result = $result\n";
+    // ...
+  }
+  /*
+  catch (\HH\Lib\Math\DivisionByZeroException $ex) {
+    echo "Caught a DivisionByZeroException\n";
+    // ...
+  }
+  */
+  catch (\Exception $ex) {
+    echo "Caught an Exception\n";
+    // ...
+  }
+}
+
+<<__EntryPoint>>
+function main(): void {
+  do_it(100, 5);
+  //  do_it(6, 0);
+}
+```
 
 Here, we put the statement that might lead to an exception inside a try-block, which has associated with it one or more catch-blocks.  If and
 only an exception of that type is thrown, is the catch handler code executed.
 
 Consider the following hierarchy of exception-class types:
 
-@@ try-examples/hierarchy_of_exception_classes.php @@
+```hierarchy_of_exception_classes.php
+class DeviceException extends \Exception { /*...*/ }
+class DiskException extends DeviceException { /*...*/ }
+class RemovableDiskException extends DiskException { /*...*/ }
+class FloppyDiskException extends RemovableDiskException { /*...*/ }
+
+function process(): void {
+  throw new DeviceException();
+}
+
+<<__EntryPoint>>
+function main(): void {
+  try {
+    process(); // call a function that might generate a disk-related exception
+  } catch (FloppyDiskException $fde) {
+    echo "In handler for FloppyDiskException\n";
+    // ...
+  } catch (RemovableDiskException $rde) {
+    echo "In handler for RemovableDiskException\n";
+    // ...
+  } catch (DiskException $de) {
+    echo "In handler for DiskException\n";
+    // ...
+  } catch (DeviceException $dve) {
+    echo "In handler for DeviceException\n";
+    // ...
+  } finally {
+    echo "In finally block\n";
+    // perform some cleanup
+  }
+}
+```
 
 The order of the catch-blocks is important; they are in decreasing order of type specialization.  The optional finally-clause is executed
 **whether or not** an exception is caught.

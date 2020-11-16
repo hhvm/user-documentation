@@ -61,9 +61,55 @@ In this case, the namespace extends from the opening brace to the closing brace.
 A namespace can import&mdash;that is, get access to&mdash;one or more names into a scope, optionally giving them each an alias.
 Each of those names may designate a namespace, a sub-namespace, a class, an interface, or a trait.  For example:
 
-@@ namespaces-examples/namespaces.inc.php @@
+```namespaces.inc.php no-auto-output
+namespace NS1 {
+  const int CON1 = 100;
+  function f(): void {
+    echo "In ".__FUNCTION__."\n";
+  }
 
-@@ namespaces-examples/using-namespaces.php @@
+  class C {
+    const int C_CON = 200;
+    public function f(): void {
+      echo "In ".__NAMESPACE__."...".__METHOD__."\n";
+    }
+  }
+
+  interface I {
+    const int I_CON = 300;
+  }
+
+  trait T {
+    public function f(): void {
+      echo "In ".__TRAIT__."...".__NAMESPACE__."...".__METHOD__."\n";
+    }
+  }
+}
+
+namespace NS2 {
+  use type NS1\{C, I, T};
+
+  class D extends C implements I {
+    use T;
+  }
+
+  function f(): void {
+    $d = new D();
+    echo "CON1 = ".\NS1\CON1."\n";
+    \NS1\f();
+  }
+}
+```
+
+```using-namespaces.php
+namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;
+
+<<__EntryPoint>>
+function main(): void {
+  require_once("namespaces.inc.php");
+  \NS2\f();
+}
+```
 
 When importing many member names from a given namespace, we can use a group form of `use`.  For example:
 

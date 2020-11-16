@@ -6,7 +6,18 @@ The library functions `is_finite`, `is_infinite`, and `is_nan` indicate if a giv
 
 Consider the following example:
 
-@@ float-examples/average.php @@
+```average.php
+function average_float(float $p1, float $p2): float {
+  return ($p1 + $p2) / 2.0;
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $val = 3e6;
+  $result = average_float($val, 5.2E-2);
+  echo "\$result is ".$result."\n";
+}
+```
 
 When called, function `average_float` takes two arguments, of type `float`, and returns a value of type `float`.
 

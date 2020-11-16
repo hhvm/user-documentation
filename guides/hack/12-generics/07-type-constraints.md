@@ -9,7 +9,17 @@ A constraint can have one of three forms:
 
 Consider the following example in which function `max_val` has one type parameter, `T`, and that has a constraint, `num`:
 
-@@ type-constraints-examples/max-val.php @@
+```max-val.php
+function max_val<T as num>(T $p1, T $p2): T {
+  return $p1 > $p2 ? $p1 : $p2;
+}
+
+<<__EntryPoint>>
+function main(): void {
+  echo "max_val(10, 20) = ".max_val(10, 20)."\n";
+  echo "max_val(15.6, -20.78) = ".max_val(15.6, -20.78)."\n";
+}
+```
 
 Without the `num` constraint, the expression `$p1 > $p2` is ill-formed, as a greater-than operator is not defined for all types. By
 constraining the type of `T` to `num`, we limit `T` to being an `int` or `float`, both of which do have that operator defined.

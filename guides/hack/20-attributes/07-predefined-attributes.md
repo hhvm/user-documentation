@@ -88,7 +88,29 @@ dynamic instantiations of classes without this attribute.
 
 A type is _enforceable_ if it can be used in `is` and `as` expressions.  Examples of non-enforceable types are function types and erased (non-reified) generics.  The `__Enforceable` attribute is used to annotate abstract type constants so they can only be instantiated with enforceable types, and thus used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
 
-@@ predefined-attributes-examples/enforceable.php.type-errors @@
+```enforceable.php.type-errors no-auto-output
+abstract class A {
+  abstract const type Tnoenf;
+  <<__Enforceable>>
+  abstract const type Tenf;
+
+  public function f(mixed $m): void {
+    $m as this::Tenf; // OK
+
+    $m as this::Tnoenf; // Hack error
+  }
+}
+
+class B1 extends A {
+  const type Tnoenf = (function (): void); // ok
+  const type Tenf = (function (): void); // Hack error, function types cannot be used in type tests
+}
+
+class B2 extends A {
+  const type Tnoenf = (function (): void); // ok
+  const type Tenf = int; // ok
+}
+```
 
 Similarly, the `__Enforceable` attribute can also be used to annotate reified generics, enabling the generic to be used in a type test expression.
 
@@ -97,7 +119,20 @@ Similarly, the `__Enforceable` attribute can also be used to annotate reified ge
 Requires callers to explicitly specify the value for a generic
 type. Normally Hack allows generics to be inferred at the call site.
 
-@@ predefined-attributes-examples/explicit.php @@
+```explicit.php no-auto-output
+function values_are_equal<<<__Explicit>> T>(T $x, T $y): bool {
+  return $x === $y;
+}
+
+function example_usage(int $x, int $y, string $s): void {
+  values_are_equal<int>($x, $y);
+
+  // Without <<__Explicit>>, this code would be fine, even though
+  // it always returns false.
+  /* HH_FIXME[4347] Demonstrating the error. */
+  values_are_equal($x, $s);
+}
+```
 
 ## __EntryPoint
 
@@ -204,7 +239,37 @@ class is marked as `final`? Your mocking framework would generally be out of luc
 The `__MockClass` attribute allows you to override the restriction of `final` on a class or method within a class, so that a
 mock class can exist.
 
-@@ predefined-attributes-examples/mock.php @@
+```mock.php
+final class FinalClass {
+  public static function f(): void {
+    echo __METHOD__, "\n";
+  }
+}
+
+// Without this attribute HHVM would throw a fatal error since you are trying
+// to extend a final class. With it, you can run the code as you normally would.
+// That said, you will still get Hack typechecker errors, since it does not
+// recognize this attribute as anything intrinsic, but these can be suppressed.
+
+/* HH_IGNORE_ERROR [2049] */
+<<__MockClass>>
+/* HH_IGNORE_ERROR [4035] */
+final class MockFinalClass extends FinalClass {
+  public static function f(): void {
+    echo __METHOD__, "\n";
+
+    // Let's say we were testing the call to the parent class. We wouldn't
+    // be able to do this in HHVM without the __MockClass attribute.
+    parent::f();
+  }
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $o = new MockFinalClass();
+  $o::f();
+}
+```
 
 Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack legacy types `Vector`, `Map`, and `Set`.
 
@@ -212,13 +277,35 @@ Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack lega
 
 This attribute is used to annotate reified type parameters to ensure that they are only instantiated with classes on which `new` can be safely called.  A common pattern, defining a function that creates instances of a class passed as type parameter, is:
 
-@@ predefined-attributes-examples/newable.php @@
+```newable.php no-auto-output
+final class A {}
+
+function f<<<__Newable>> reify T as A>(): T {
+  return new T();
+}
+```
 
 The class `A` must either be final (as in the example) or annotated with `__ConsistentConstruct`.  The `__Newable` attribute ensures that the function `f` is only be applied to a _non-abstract_ class, say `C`, while the `as A` constraint guarantees that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`.  The generic type `T` must be reified so that the runtime has access to it, refer to [Generics: Reified Generics](../generics/reified-generics.md) for details.
 
 A complete example thus is:
 
-@@ predefined-attributes-examples/newable-complete.php @@
+```newable-complete.php no-auto-output
+<<__ConsistentConstruct>>
+abstract class A {
+  public function __construct(int $x, int $y) {}
+}
+
+class B extends A {}
+
+function f<<<__Newable>> reify T as A>(int $x, int $y): T {
+  return new T($x,$y);
+}
+
+<<__EntryPoint>>
+function main(): void {
+  f<B>(3,4);             // success, equivalent to new B(3,4)
+}
+```
 
 Omitting either the `__Newable` attribute for `T`, or the `__ConsistentConstruct` for the abstract class `A` will result in a type-checker error.
 

@@ -2,7 +2,18 @@ Hack functions normally pass arguments by value. `inout` provides
 "copy-in, copy-out" arguments, which allow you to modify the variable
 in the caller.
 
-@@ inout-parameters-examples/basic.hack @@
+```basic.hack no-auto-output
+function takes_inout(inout int $x): void {
+  $x = 1;
+}
+
+function call_it(): void {
+  $num = 0;
+  takes_inout(inout $num);
+
+  // $num is now 1.
+}
+```
 
 This is similar to copy-by-reference, but the copy-out only happens
 when the function returns. If the function throws an exception, no
@@ -34,7 +45,19 @@ function call. This is enforced in the typechecker and at runtime.
 In addition to local variables, `inout` supports indexes in value
 types.
 
-@@ inout-parameters-examples/value_index.hack @@
+```value_index.hack no-auto-output
+function set_to_value(inout int $item, int $value): void {
+  $item = $value;
+}
+
+function use_it(): void {
+  $items = vec[10, 11, 12];
+  $index = 1;
+  set_to_value(inout $items[$index], 42);
+
+  // $items is now vec[10, 42, 12].
+}
+```
 
 This works for any value type: `vec`, `dict`, `keyset` or `array`. You
 can also do nested access e.g. `inout $foo[$y][z()]['stuff']`.

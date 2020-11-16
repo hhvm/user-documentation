@@ -46,7 +46,40 @@ change the execution order of unrelated code that might not be designed for that
 
 For example, given the following code:
 
-@@ some-basics-examples/limitations.php @@
+```limitations.php
+async function do_cpu_work(): Awaitable<void> {
+  print("Start CPU work\n");
+  $a = 0;
+  $b = 1;
+
+  $list = vec[$a, $b];
+
+  for ($i = 0; $i < 1000; ++$i) {
+    $c = $a + $b;
+    $list[] = $c;
+    $a = $b;
+    $b = $c;
+  }
+  print("End CPU work\n");
+}
+
+async function do_sleep(): Awaitable<void> {
+  print("Start sleep\n");
+  \sleep(1);
+  print("End sleep\n");
+}
+
+async function run(): Awaitable<void> {
+  print("Start of main()\n");
+  await Vec\from_async(vec[do_cpu_work(), do_sleep()]);
+  print("End of main()\n");
+}
+
+<<__EntryPoint>>
+function main(): void {
+  \HH\Asio\join(run());
+}
+```
 
 New users often think of async as multithreading, so expect `do_cpu_work()` and `do_sleep()` to execute in parallel; however, this will not
 happen because there are no operations that can be moved to the background:
@@ -59,7 +92,34 @@ happen because there are no operations that can be moved to the background:
 
 A naive way to make two cURL requests without async could look like this:
 
-@@ some-basics-examples/non-async-curl.php @@
+```non-async-curl.php
+function curl_A(): mixed {
+  $ch = \curl_init();
+  \curl_setopt($ch, \CURLOPT_URL, "http://example.com/");
+  \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+  return \curl_exec($ch);
+}
+
+function curl_B(): mixed {
+  $ch = \curl_init();
+  \curl_setopt($ch, \CURLOPT_URL, "http://example.net/");
+  \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+  return \curl_exec($ch);
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $start = \microtime(true);
+  $a = curl_A();
+  $b = curl_B();
+  $end = \microtime(true);
+  echo "Total time taken: ".\strval($end - $start)." seconds\n";
+}
+```.example.hhvm.out
+Total time taken: 1.050155878067 seconds
+```.hhvm.expectf
+Total time taken: %f seconds
+```
 
 In the example above, the call to `curl_exec` in `curl_A` is blocking any other processing. Thus, even though `curl_B` is an independent call
 from `curl_A`, it has to sit around waiting for `curl_A` to finish before beginning its execution:
@@ -68,7 +128,33 @@ from `curl_A`, it has to sit around waiting for `curl_A` to finish before beginn
 
 Fortunately, HHVM provides an async version of `curl_exec`:
 
-@@ some-basics-examples/async-curl.php @@
+```async-curl.php
+async function curl_A(): Awaitable<string> {
+  $x = await \HH\Asio\curl_exec("http://example.com/");
+  return $x;
+}
+
+async function curl_B(): Awaitable<string> {
+  $y = await \HH\Asio\curl_exec("http://example.net/");
+  return $y;
+}
+
+async function async_curl(): Awaitable<void> {
+  $start = \microtime(true);
+  list($a, $b) = await Vec\from_async(vec[curl_A(), curl_B()]);
+  $end = \microtime(true);
+  echo "Total time taken: ".\strval($end - $start)." seconds\n";
+}
+
+<<__EntryPoint>>
+function main(): void {
+  \HH\Asio\join(async_curl());
+}
+```.example.hhvm.out
+Total time taken: 0.74790596961975 seconds
+```.hhvm.expectf
+Total time taken: %f seconds
+```
 
 The async version allows the scheduler to run other code while waiting for a response from cURL. The most likely behavior is that as we're
 also awaiting a call to `curl_B`, the scheduler will choose to call it, which in turn starts another async call to `curl_exec`. As HTTP requests

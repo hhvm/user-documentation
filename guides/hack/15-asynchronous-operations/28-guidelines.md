@@ -10,9 +10,28 @@ simply ready for any future changes that may require async.
 
 These two programs are, for all intents and purposes, equivalent.
 
-@@ guidelines-examples/non-async-hello.php @@
+```non-async-hello.php
+function get_hello(): string {
+  return "Hello";
+}
 
-@@ guidelines-examples/async-hello.php @@
+<<__EntryPoint>>
+function run_na_hello(): void {
+  \var_dump(get_hello());
+}
+```
+
+```async-hello.php
+async function get_hello(): Awaitable<string> {
+  return "Hello";
+}
+
+<<__EntryPoint>>
+async function run_a_hello(): Awaitable<void> {
+  $x = await get_hello();
+  \var_dump($x);
+}
+```
 
 Just make sure you are following the rest of the guidelines. Async is great, but you still have to consider things like caching, batching
 and efficiency.
@@ -34,7 +53,42 @@ If you only remember one rule, remember this:
 
 It totally defeats the purpose of async.
 
-@@ guidelines-examples/await-loop.php @@
+```await-loop.php
+class User {
+  public string $name;
+
+  protected function __construct(string $name) {
+    $this->name = $name;
+  }
+
+  public static function get_name(int $id): User {
+    return new User(\str_shuffle("ABCDEFGHIJ").\strval($id));
+  }
+}
+
+async function load_user(int $id): Awaitable<User> {
+  // Load user from somewhere (e.g., database).
+  // Fake it for now
+  return User::get_name($id);
+}
+
+async function load_users_await_loop(vec<int> $ids): Awaitable<vec<User>> {
+  $result = vec[];
+  foreach ($ids as $id) {
+    $result[] = await load_user($id);
+  }
+  return $result;
+}
+
+<<__EntryPoint>>
+function runMe(): void {
+  $ids = vec[1, 2, 5, 99, 332];
+  $result = \HH\Asio\join(load_users_await_loop($ids));
+  \var_dump($result[4]->name);
+}
+```.hhvm.expectf
+string(%d) "%s332"
+```
 
 In the above example, the loop is doing two things:
 1. Making the loop iterations the limiting factor on how this code is going to run. By the loop, we are guaranteed to get the users sequentially.
@@ -42,7 +96,41 @@ In the above example, the loop is doing two things:
 
 Instead, we will want to use our async-aware mapping function, `Vec\map_async`.
 
-@@ guidelines-examples/await-no-loop.php @@
+```await-no-loop.php
+class User {
+  public string $name;
+
+  protected function __construct(string $name) {
+    $this->name = $name;
+  }
+
+  public static function get_name(int $id): User {
+    return new User(\str_shuffle("ABCDEFGHIJ").\strval($id));
+  }
+}
+
+async function load_user(int $id): Awaitable<User> {
+  // Load user from somewhere (e.g., database).
+  // Fake it for now
+  return User::get_name($id);
+}
+
+async function load_users_no_loop(vec<int> $ids): Awaitable<vec<User>> {
+  return await Vec\map_async(
+    $ids,
+    async $id ==> await load_user($id),
+  );
+}
+
+<<__EntryPoint>>
+function runMe(): void {
+  $ids = vec[1, 2, 5, 99, 332];
+  $result = \HH\Asio\join(load_users_no_loop($ids));
+  \var_dump($result[4]->name);
+}
+```.hhvm.expectf
+string(%d) "%s332"
+```
 
 ## Considering Data Dependencies Is Important
 
@@ -58,7 +146,73 @@ Let's say we are getting blog posts of an author. This would involve the followi
 3. Get comment count for each post id.
 4. Generate final page of information
 
-@@ guidelines-examples/data-dependencies.php @@
+```data-dependencies.php
+class PostData {
+  // using constructor argument promotion
+  public function __construct(public string $text) {}
+}
+
+async function fetch_all_post_ids_for_author(
+  int $author_id,
+): Awaitable<vec<int>> {
+
+  // Query database, etc., but for now, just return made up stuff
+  return vec[4, 53, 99];
+}
+
+async function fetch_post_data(int $post_id): Awaitable<PostData> {
+  // Query database, etc. but for now, return something random
+  return new PostData(\str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ"));
+}
+
+async function fetch_comment_count(int $post_id): Awaitable<int> {
+  // Query database, etc., but for now, return something random
+  return \rand(0, 50);
+}
+
+async function fetch_page_data(
+  int $author_id,
+): Awaitable<vec<(PostData, int)>> {
+
+  $all_post_ids = await fetch_all_post_ids_for_author($author_id);
+  // An async closure that will turn a post ID into a tuple of
+  // post data and comment count
+  $post_fetcher = async function(int $post_id): Awaitable<(PostData, int)> {
+    list($post_data, $comment_count) = await Vec\from_async(vec[
+      fetch_post_data($post_id),
+      fetch_comment_count($post_id),
+    ]);
+    invariant($post_data is PostData, "This is good");
+    invariant($comment_count is int, "This is good");
+    return tuple($post_data, $comment_count);
+  };
+
+  // Transform the array of post IDs into an vec of results,
+  // using the Vec\map_async function
+  return await Vec\map_async($all_post_ids, $post_fetcher);
+}
+
+async function generate_page(int $author_id): Awaitable<string> {
+  $tuples = await fetch_page_data($author_id);
+  $page = "";
+  foreach ($tuples as $tuple) {
+    list($post_data, $comment_count) = $tuple;
+    // Normally render the data into HTML, but for now, just create a
+    // normal string
+    $page .= $post_data->text." ".$comment_count.\PHP_EOL;
+  }
+  return $page;
+}
+
+<<__EntryPoint>>
+function main(): void {
+  print \HH\Asio\join(generate_page(13324)); // just made up a user id
+}
+```.expectregex
+[A-Z]{26} \d+
+[A-Z]{26} \d+
+[A-Z]{26} \d+
+```
 
 The above example follows our flow:
 1. One function for each fetch operation (post ids, post text, comment count).
@@ -71,7 +225,69 @@ Wait handles can be rescheduled. This means that they can be sent back to the qu
 run. Batching can be a good use of rescheduling. For example, say we have high latency lookup of data, but we can send multiple keys for
 the lookup in a single request.
 
-@@ guidelines-examples/batching.php @@
+```batching.php
+async function b_one(string $key): Awaitable<string> {
+  $subkey = await Batcher::lookup($key);
+  return await Batcher::lookup($subkey);
+}
+
+async function b_two(string $key): Awaitable<string> {
+  return await Batcher::lookup($key);
+}
+
+async function batching(): Awaitable<void> {
+  $results = await Vec\from_async(vec[b_one('hello'), b_two('world')]);
+  \printf("%s\n%s\n", $results[0], $results[1]);
+}
+
+<<__EntryPoint>>
+function main(): void {
+  \HH\Asio\join(batching());
+}
+
+class Batcher {
+  private static vec<string> $pendingKeys = vec[];
+  private static ?Awaitable<dict<string, string>> $aw = null;
+
+  public static async function lookup(string $key): Awaitable<string> {
+    // Add this key to the pending batch
+    self::$pendingKeys[] = $key;
+    // If there's no awaitable about to start, create a new one
+    if (self::$aw === null) {
+      self::$aw = self::go();
+    }
+    // Wait for the batch to complete, and get our result from it
+    $results = await self::$aw;
+    return $results[$key];
+  }
+
+  private static async function go(): Awaitable<dict<string, string>> {
+    // Let other awaitables get into this batch
+    await \HH\Asio\later();
+    // Now this batch has started; clear the shared state
+    $keys = self::$pendingKeys;
+    self::$pendingKeys = vec[];
+    self::$aw = null;
+    // Do the multi-key roundtrip
+    return await multi_key_lookup($keys);
+  }
+}
+
+async function multi_key_lookup(
+  vec<string> $keys,
+): Awaitable<dict<string, string>> {
+
+  // lookup multiple keys, but, for now, return something random
+  $r = dict[];
+  foreach ($keys as $key) {
+    $r[$key] = \str_shuffle("ABCDEF");
+  }
+  return $r;
+}
+```.hhvm.expectf
+%s
+%s
+```
 
 In the example above, we reduce the number of roundtrips to the server containing the data information to two by batching the first lookup
 in `b_one` and the lookup in `b_two`. The `Batcher::lookup` method helps enable this reduction. The call to `await HH\Asio\later` in
@@ -86,7 +302,19 @@ fetches, and returns the result.
 
 What do you think happens here?
 
-@@ guidelines-examples/forget-await.php @@
+```forget-await.php
+async function speak(): Awaitable<void> {
+  echo "one";
+  await \HH\Asio\later();
+  echo "two";
+  echo "three";
+}
+
+<<__EntryPoint>>
+async function forget_await(): Awaitable<void> {
+  $handle = speak(); // This just gets you the handle
+}
+```
 
 The answer is, the behavior is undefined. We might get all three echoes; we might only get the first echo; we might get nothing at all. The
 only way to guarantee that `speak` runs to completion is to `await` it. `await` is the trigger to the async scheduler that allows HHVM to
@@ -97,7 +325,28 @@ appropriately suspend and resume `speak`; otherwise, the async scheduler will pr
 In order to minimize any unwanted side effects (e.g., ordering disparities), the creation and awaiting of awaitables should happen as close
 together as possible.
 
-@@ guidelines-examples/side-effects.php @@
+```side-effects.php
+async function get_curl_data(string $url): Awaitable<string> {
+  return await \HH\Asio\curl_exec($url);
+}
+
+function possible_side_effects(): int {
+  \sleep(1);
+  echo "Output buffer stuff";
+  return 4;
+}
+
+async function proximity(): Awaitable<void> {
+  $handle = get_curl_data("http://example.com");
+  possible_side_effects();
+  await $handle; // instead you should await get_curl_data("....") here
+}
+
+<<__EntryPoint>>
+function main(): void {
+  \HH\Asio\join(proximity());
+}
+```
 
 In the above example, `possible_side_effects` could cause some undesired behavior when we get to the point of awaiting the handle associated
 with getting the data from the website.
@@ -112,7 +361,34 @@ Given that async is commonly used in operations that are time-consuming, memoizi
 The [`<<__Memoize>>`](../attributes/predefined-attributes.md#__memoize) attribute does the right thing, so, use that. However, if to get
 explicit control of the memoization, *memoize the awaitable* and not the result of awaiting it.
 
-@@ guidelines-examples/memoize-result.php @@
+```memoize-result.php
+abstract final class MemoizeResult {
+  private static async function time_consuming(): Awaitable<string> {
+    await \HH\Asio\usleep(5000000);
+    return "This really is not time consuming, but the sleep fakes it.";
+  }
+
+  private static ?string $result = null;
+
+  public static async function memoize_result(): Awaitable<string> {
+    if (self::$result === null) {
+      self::$result =
+        await self::time_consuming(); // don't memoize the resulting data
+    }
+    return self::$result;
+  }
+}
+<<__EntryPoint>>
+function runMe(): void {
+  $t1 = \microtime(true);
+  \HH\Asio\join(MemoizeResult::memoize_result());
+  $t2 = \microtime(true) - $t1;
+  $t3 = \microtime(true);
+  \HH\Asio\join(MemoizeResult::memoize_result());
+  $t4 = \microtime(true) - $t3;
+  \var_dump($t4 < $t2); // The memoized result will get here a lot faster
+}
+```
 
 On the surface, this seems reasonable. We want to cache the actual data associated with the awaitable. However, this can cause an undesired
 race condition. Imagine that there are two other async functions awaiting the result of `memoize_result`, call them `A` and `B`.  The following
@@ -128,7 +404,34 @@ still a bug; the time-consuming operation is being done multiple times when it o
 
 Instead, memoize the awaitable:
 
-@@ guidelines-examples/memoize-awaitable.php @@
+```memoize-awaitable.php
+abstract final class MemoizeAwaitable {
+  private static async function time_consuming(): Awaitable<string> {
+    await \HH\Asio\usleep(5000000);
+    return "Not really time consuming but sleep."; // For type-checking purposes
+  }
+
+  private static ?Awaitable<string> $handle = null;
+
+  public static function memoize_handle(): Awaitable<string> {
+    if (self::$handle === null) {
+      self::$handle = self::time_consuming(); // memoize the awaitable
+    }
+    return self::$handle;
+  }
+}
+
+<<__EntryPoint>>
+function runMe(): void {
+  $t1 = \microtime(true);
+  \HH\Asio\join(MemoizeAwaitable::memoize_handle());
+  $t2 = \microtime(true) - $t1;
+  $t3 = \microtime(true);
+  \HH\Asio\join(MemoizeAwaitable::memoize_handle());
+  $t4 = \microtime(true) - $t3;
+  \var_dump($t4 < $t2); // The memoized result will get here a lot faster
+}
+```
 
 This simply caches the handle and returns it verbatim; [Async Vs Awaitable](async-vs.-awaitable.md) explains this in more detail.
 
@@ -144,14 +447,72 @@ The use of lambdas can cut down on code verbosity that comes with writing full c
 with the [async utility helpers](utility-functions.md).  For example, look how the following three ways to accomplish the same thing can be
 shortened using lambdas.
 
-@@ guidelines-examples/lambdas.php @@
+```lambdas.php
+namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Lambdas;
+use namespace HH\Lib\Vec;
+
+async function fourth_root(num $n): Awaitable<float> {
+  return \sqrt(\sqrt((float)$n));
+}
+
+async function normal_call(): Awaitable<vec<float>> {
+  $nums = vec[64, 81];
+  return await Vec\map_async(
+    $nums,
+    fun(
+      '\Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Lambdas\fourth_root',
+    ),
+  );
+}
+
+async function closure_call(): Awaitable<vec<float>> {
+  $nums = vec[64, 81];
+  $froots = async function(num $n): Awaitable<float> {
+    return \sqrt(\sqrt((float)$n));
+  };
+  return await Vec\map_async($nums, $froots);
+}
+
+async function lambda_call(): Awaitable<vec<float>> {
+  $nums = vec[64, 81];
+  return await Vec\map_async($nums, async $num ==> \sqrt(\sqrt((float)$num)));
+}
+
+async function use_lambdas(): Awaitable<void> {
+  $nc = await normal_call();
+  $cc = await closure_call();
+  $lc = await lambda_call();
+  \var_dump($nc);
+  \var_dump($cc);
+  \var_dump($lc);
+}
+
+<<__EntryPoint>>
+function main(): void {
+  \HH\Asio\join(use_lambdas());
+}
+```
 
 ## Use `join` in Non-async Functions
 
 Imagine we are making a call to an `async` function `join_async` from a non-async scope. In order to obtain the desired results, we must
 `join` in order to get the result from an awaitable.
 
-@@ guidelines-examples/join.php @@
+```join.php
+async function join_async(): Awaitable<string> {
+  return "Hello";
+}
+
+// In an async function, you would await an awaitable.
+// In a non-async function, or the global scope, you can
+// use `join` to force the the awaitable to run to its completion.
+
+<<__EntryPoint>>
+function main(): void {
+  $s = \HH\Asio\join(join_async());
+  \var_dump($s);
+}
+```
 
 This scenario normally occurs in the global scope, but can occur anywhere.
 

@@ -2,7 +2,21 @@ In command-line (cli) mode, you run the `hhvm` binary from the command-line, exe
 
 Here is an example of how to run a script in HHVM cli mode. Take the following Hack script:
 
-@@ command-line-examples/fib.hack @@
+```fib.hack
+function fibonacci(int $number): int {
+  return \intval(\round(\pow((\sqrt(5.0) + 1) / 2, $number) / \sqrt(5.0)));
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $n = (int) (vec(\HH\global_get('argv') as Container<_>)[1] ?? 10);
+  echo 'The '.
+    $n.
+    ' number in fibonacci is: '.
+    fibonacci($n).
+    \PHP_EOL;
+}
+```
 
 At the command-line, you would execute the script as follows:
 

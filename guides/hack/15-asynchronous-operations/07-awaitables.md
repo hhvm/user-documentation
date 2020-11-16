@@ -21,7 +21,21 @@ $x = foo();         // $x will be an Awaitable<int>
 $x = await foo();   // $x will be an int
 ```
 
-@@ awaitables-examples/awaitable-return.php @@
+```awaitable-return.php
+async function f(): Awaitable<int> {
+  return 2;
+}
+
+// We call f() and get back an Awaitable<int>
+// Once the function is finished executing and we await the awaitable (or in
+// this case, explicitly join since this call is not in an async function) to get
+// the explicit result of the function call, we will get back 2.
+
+<<__EntryPoint>>
+function join_main(): void {
+  \var_dump(\HH\Asio\join(f()));
+}
+```
 
 All `async` functions must return an `Awaitable<T>`. Calling an `async` function will therefore yield an object implementing the `Awaitable`
 interface, and we must `await` or `join` it to obtain an end result from the operation. When we `await`, we are pausing the current task until
@@ -38,7 +52,18 @@ such as a `main` block, we will need to use `join`, as will be shown below.
 
 Many times, we will `await` on one `Awaitable`, get the result, and move on. For example:
 
-@@ awaitables-examples/single-awaitable.php @@
+```single-awaitable.php
+async function foo(): Awaitable<int> {
+  return 3;
+}
+
+<<__EntryPoint>>
+async function single_awaitable_main(): Awaitable<void> {
+  $aw = foo(); // awaitable of type Awaitable<int>
+  $result = await $aw; // an int after $aw completes
+  \var_dump($result);
+}
+```
 
 We will normally see something like `await f();` which combines the retrieval of the awaitable with the waiting and retrieving of the result
 of that awaitable. The example above separates it out for illustration purposes.
@@ -49,7 +74,20 @@ Here we are using one of the library helper-functions in order to batch a bunch 
 * `HH\Lib\Vec\from_async`: vec of awaitables with consecutive integer keys
 * `HH\Lib\Dict\from_async`: dict of awaitables with integer or string keys
 
-@@ awaitables-examples/multiple-awaitables.php @@
+```multiple-awaitables.php
+async function quads(float $n): Awaitable<float> {
+  return $n * 4.0;
+}
+
+<<__EntryPoint>>
+async function quads_m(): Awaitable<void> {
+  $awaitables = dict['five' => quads(5.0), 'nine' => quads(9.0)];
+  $results = await Dict\from_async($awaitables);
+
+  \var_dump($results['five']); // float(20)
+  \var_dump($results['nine']); // float(36)
+}
+```
 
 ## Join
 
@@ -58,7 +96,17 @@ takes an `Awaitable` and blocks until it resolves to a result.
 
 This means that invocations of async functions from the top-level scope cannot be awaited, and must be joined.
 
-@@ awaitables-examples/join.php @@
+```join.php
+async function get_raw(string $url): Awaitable<string> {
+  return await \HH\Asio\curl_exec($url);
+}
+
+<<__EntryPoint>>
+function join_main(): void {
+  $result = \HH\Asio\join(get_raw("http://www.example.com"));
+  \var_dump(\substr($result, 0, 10));
+}
+```
 
 We should **not** call `join` inside an `async` function. This would defeat the purpose of `async`, as the awaitable and any dependencies will
 run to completion synchronously, stopping any other awaitables from running.
