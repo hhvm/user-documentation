@@ -185,6 +185,7 @@ abstract class FilterBase extends Markdown\RenderFilter {
 
     // Generate/verify typechecker output, if type errors are expected.
     if ($expected_type_errors) {
+      $show_output = !C\contains_key($flags, Flags::NO_AUTO_OUTPUT);
       if (
         !self::hasValidOutputFileSet(
           $hack_file_path,
@@ -192,24 +193,26 @@ abstract class FilterBase extends Markdown\RenderFilter {
           Files::EXAMPLE_TYPECHECKER_OUT,
           Files::TYPECHECKER_EXPECTF,
           Files::TYPECHECKER_EXPECTREGEX,
-          false, // needs example (TODO: see below)
+          // don't generate .example.out if output is not shown in the guide
+          $show_output,
         )
       ) {
-        static::processMissingTypecheckerOutput($hack_file_path, false /*TODO*/);
+        static::processMissingTypecheckerOutput($hack_file_path, $show_output);
       }
-      /* TODO: Test if this is preferable to the HHVM output.
-      $output_title = 'Typechecker output';
-      $output = \file_exists($hack_file_path.'.'.Files::TYPECHECKER_EXPECT)
-        ? \file_get_contents($hack_file_path.'.'.Files::TYPECHECKER_EXPECT)
-        : \file_get_contents(
-            $hack_file_path.'.'.Files::EXAMPLE_TYPECHECKER_OUT,
-          );
-      */
+      if ($show_output) {
+        $output_title = 'Typechecker output';
+        $output = \file_exists($hack_file_path.'.'.Files::TYPECHECKER_EXPECT)
+          ? \file_get_contents($hack_file_path.'.'.Files::TYPECHECKER_EXPECT)
+          : \file_get_contents(
+              $hack_file_path.'.'.Files::EXAMPLE_TYPECHECKER_OUT,
+            );
+      }
     }
 
     // Generate/verify HHVM output.
     if (!C\contains_key($flags, Flags::NO_EXEC)) {
-      $show_output = !C\contains_key($flags, Flags::NO_AUTO_OUTPUT);
+      $show_output = !$expected_type_errors &&
+        !C\contains_key($flags, Flags::NO_AUTO_OUTPUT);
       if (
         !self::hasValidOutputFileSet(
           $hack_file_path,
