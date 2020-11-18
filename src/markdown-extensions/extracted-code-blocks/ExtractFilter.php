@@ -94,9 +94,14 @@ final class ExtractFilter extends FilterBase {
       |> Vec\map($$, $arg ==> \escapeshellarg($arg))
       |> Str\join($$, ' ');
 
+    $env = vec[
+      'GLOG_minloglevel=3', // get rid of mcrouter examples log spew
+    ]
+      |> Str\join($$, ' ');
+
     $exit_code = null;
     $output = null;
-    \exec($command.' 2>&1', inout $output, inout $exit_code);
+    \exec($env.' '.$command.' 2>&1', inout $output, inout $exit_code);
 
     $match = Regex\first_match($hack_file_path, re"#(.*/user-documentation)/#");
 

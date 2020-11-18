@@ -12,8 +12,8 @@
 namespace HHVM\UserDocumentation\HHAPIDocExt\PageSections;
 
 use type Facebook\HHAPIDoc\PageSections\PageSection;
-use type HHVM\UserDocumentation\LocalConfig;
-use namespace HH\Lib\{C, Str, Vec};
+use type HHVM\UserDocumentation\BuildPaths;
+use namespace HH\Lib\Str;
 
 final class Examples extends PageSection {
   <<__Override>>
@@ -26,38 +26,13 @@ final class Examples extends PageSection {
     $subdirectory .= $this->definition->getName();
 
     $path = Str\format(
-      '%s/api-examples/%s',
-      LocalConfig::ROOT,
+      '%s/%s.md',
+      BuildPaths::API_EXAMPLES_DIR,
       Str\replace($subdirectory, '\\', '.'),
     );
 
-    $examples = Vec\concat(
-      \glob($path.'/*.md'),
-      \glob($path.'/*.hack'),
-      \glob($path.'/*.php'),
-    )
-      |> Vec\map($$, $file ==> \pathinfo($file, \PATHINFO_FILENAME))
-      |> keyset($$);
-
-    if (C\is_empty($examples)) {
-      return null;
-    }
-
-    $md = "## Examples";
-
-    foreach ($examples as $example) {
-      $base = $path.'/'.$example;
-      $preamble = $base.'.md';
-      if (\file_exists($preamble)) {
-        $md .= "\n\n".\file_get_contents($preamble);
-      }
-      foreach (vec[$base.'.hack', $base.'.php'] as $code) {
-        if (\file_exists($code)) {
-          $md .= "\n\n@@ ".$code." @@";
-          break;
-        }
-      }
-    }
-    return $md;
+    return \file_exists($path)
+      ? "## Examples\n\n".\file_get_contents($path)
+      : null;
   }
 }

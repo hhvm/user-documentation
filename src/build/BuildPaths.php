@@ -38,6 +38,7 @@ abstract final class BuildPaths {
     self::CODEGEN_DIR.'/api-legacy-redirects.php';
 
   const string API_EXAMPLES_DIR = LocalConfig::ROOT.'/api-examples';
+  const string API_EXAMPLES_EXTRACT_DIR = self::API_EXAMPLES_DIR.'/_extracted';
 
   const string GUIDES_MARKDOWN = LocalConfig::ROOT.'/guides';
   const string GUIDES_GENERATED_MARKDOWN =

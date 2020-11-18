@@ -14,6 +14,7 @@ namespace HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks;
 use namespace HH\Lib\{C, Dict, Keyset, Regex, Str, Vec};
 use namespace Facebook\{Markdown, Markdown\Blocks};
 use namespace HHVM\UserDocumentation\MarkdownExt;
+use type HHVM\UserDocumentation\BuildPaths;
 
 /**
  * Processes code blocks starting with one of:
@@ -160,7 +161,12 @@ abstract class FilterBase extends Markdown\RenderFilter {
     $md = $context as MarkdownExt\RenderContext->getFilePath();
     invariant($md is nonnull, 'RenderContext is missing file path');
     invariant(Str\ends_with($md, '.md'), 'Expected a .md file, got "%s"', $md);
-    $examples_dir = Str\strip_suffix($md, '.md').'-examples';
+    $examples_dir = Str\strip_suffix($md, '.md').'-examples'
+      |> Str\replace(
+        $$,
+        BuildPaths::APIDOCS_MARKDOWN,
+        BuildPaths::API_EXAMPLES_EXTRACT_DIR,
+      );
     $hack_file_path = $examples_dir.'/'.$hack_filename;
     $expected_type_errors =
       Str\ends_with($hack_filename, '.'.self::TYPE_ERRORS);
@@ -173,6 +179,11 @@ abstract class FilterBase extends Markdown\RenderFilter {
     $original_code = $files[$hack_filename];
     $files[$hack_filename] =
       self::addBoilerplate($hack_file_path, $files[$hack_filename]);
+
+    $skipif = $hack_filename.'.'.Files::SKIPIF;
+    if (C\contains_key($files, $skipif)) {
+      $files[$skipif] = self::addBoilerplate($hack_file_path, $files[$skipif]);
+    }
 
     // Write or verify files.
     foreach ($files as $name => $content) {
@@ -324,9 +335,15 @@ abstract class FilterBase extends Markdown\RenderFilter {
       // Cut off anything after the first period. This makes it possible to
       // force multiple examples to use the same namespace, e.g. example.hack
       // and example.inc.hack.
-      $ns = Str\slice($path, 0, Str\search($path, '.') as nonnull)
+      $suffix = Str\split(\basename($path), '.', 2)[1];
+      $ns = Str\strip_suffix($path, '.'.$suffix)
         |> Str\split($$, '/')
-        |> Vec\drop($$, C\find_key($$, $v ==> $v === 'guides') as nonnull)
+        |> Vec\drop(
+          $$,
+          C\find_key($$, $v ==> $v === '_extracted' || $v === 'guides')
+            as nonnull +
+            1,
+        )
         |> Vec\map(
           $$,
           $part ==> Str\trim_left($part, '0123456789-_')
@@ -339,7 +356,7 @@ abstract class FilterBase extends Markdown\RenderFilter {
             ),
         )
         |> Str\join($$, '\\');
-      $code = 'namespace HHVM\\UserDocumentation\\'.$ns.";\n\n$code";
+      $code = 'namespace HHVM\\UserDocumentation\\Guides\\'.$ns.";\n\n$code";
     }
 
     if ($code !== $extracted_code) {
