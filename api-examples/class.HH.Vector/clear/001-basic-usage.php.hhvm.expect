@@ -1,4 +1,4 @@
-object(HH\Vector)#1 (4) {
+object(HH\Vector) (4) {
   [0]=>
   string(3) "red"
   [1]=>
@@ -8,5 +8,5 @@ object(HH\Vector)#1 (4) {
   [3]=>
   string(6) "yellow"
 }
-object(HH\Vector)#1 (0) {
+object(HH\Vector) (0) {
 }

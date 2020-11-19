@@ -1,5 +1,5 @@
 bool(true)
-object(HH\ImmVector)#%d (4) {
+object(HH\ImmVector) (4) {
   [0]=>
   int(0)
   [1]=>
@@ -9,7 +9,7 @@ object(HH\ImmVector)#%d (4) {
   [3]=>
   int(3)
 }
-object(HH\ImmMap)#%d (4) {
+object(HH\ImmMap) (4) {
   [0]=>
   string(3) "red"
   [1]=>

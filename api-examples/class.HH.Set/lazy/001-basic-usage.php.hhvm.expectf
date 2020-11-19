@@ -1,4 +1,4 @@
-object(HH\Set)#%d (5) {
+object(HH\Set) (5) {
   int(0)
   int(2)
   int(4)
@@ -6,7 +6,7 @@ object(HH\Set)#%d (5) {
   int(8)
 }
 Time non-lazy: %f
-object(HH\Set)#%d (5) {
+object(HH\Set) (5) {
   int(0)
   int(2)
   int(4)

@@ -1,10 +1,10 @@
-object(HH\ImmVector)#%d (0) {
+object(HH\ImmVector) (0) {
 }
-object(HH\ImmVector)#%d (1) {
+object(HH\ImmVector) (1) {
   [0]=>
   string(3) "foo"
 }
-object(HH\ImmVector)#%d (2) {
+object(HH\ImmVector) (2) {
   [0]=>
   string(3) "foo"
   [1]=>

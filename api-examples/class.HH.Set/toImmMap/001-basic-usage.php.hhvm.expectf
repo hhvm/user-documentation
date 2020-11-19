@@ -1,5 +1,5 @@
 bool(true)
-object(HH\ImmMap)#%d (4) {
+object(HH\ImmMap) (4) {
   ["red"]=>
   string(3) "red"
   ["green"]=>

@@ -1,4 +1,4 @@
-object(HH\Set)#%d (1000) {
+object(HH\Set) (1000) {
   int(0)
   int(10)
   int(20)

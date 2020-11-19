@@ -1,8 +1,8 @@
-object(HH\Vector)#%d (1) {
+object(HH\Vector) (1) {
   [0]=>
   string(7) "#ff0000"
 }
-object(HH\Vector)#%d (3) {
+object(HH\Vector) (3) {
   [0]=>
   string(7) "#ff0000"
   [1]=>
@@ -10,7 +10,7 @@ object(HH\Vector)#%d (3) {
   [2]=>
   string(7) "#0000ff"
 }
-object(HH\Vector)#%d (3) {
+object(HH\Vector) (3) {
   [0]=>
   string(7) "#ff0000"
   [1]=>

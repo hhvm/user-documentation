@@ -1,5 +1,5 @@
 bool(true)
-object(HH\Map)#%d (4) {
+object(HH\Map) (4) {
   ["red"]=>
   string(3) "red"
   ["green"]=>

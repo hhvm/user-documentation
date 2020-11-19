@@ -1,11 +1,7 @@
 bool(true)
-array(4) {
-  [0]=>
+varray(4) {
   int(0)
-  [1]=>
   int(1)
-  [2]=>
   int(2)
-  [3]=>
   int(3)
 }

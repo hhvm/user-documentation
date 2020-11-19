@@ -1,5 +1,5 @@
 bool(true)
-array(5) {
+darray(5) {
   ["red"]=>
   string(7) "#ff0000"
   ["green"]=>
