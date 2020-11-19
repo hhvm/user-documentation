@@ -148,6 +148,7 @@ class ExamplesTest extends HackTest {
     $env = Vector {
       'HHVM_BIN='.\escapeshellarg(\PHP_BINARY),
       'HH_SERVER_BIN='.\escapeshellarg($this->getHHServerPath()),
+      'GLOG_minloglevel=3', // get rid of mcrouter examples log spew
     };
 
     $command_str = \implode('', $env->map($x ==> $x.' ')).$command_str.' 2>&1';

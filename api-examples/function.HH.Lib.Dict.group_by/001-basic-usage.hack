@@ -3,6 +3,7 @@ use namespace HH\Lib\Dict;
 
 <<__EntryPoint>>
 function main(): void {
+  \init_docs_autoloader();
   $numbers = vec[1, 1, 2, 3, 5, 8, 14];
   $groups = Dict\group_by($numbers, $value ==> $value % 2);
   \print_r($groups);

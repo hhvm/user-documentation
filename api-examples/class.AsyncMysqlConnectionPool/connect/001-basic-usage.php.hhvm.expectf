@@ -1,6 +1,6 @@
 int(%d)
 int(%d)
-array(5) {
+darray(5) {
   ["created_pool_connections"]=>
   int(1)
   ["destroyed_pool_connections"]=>
