@@ -5,11 +5,11 @@ namespace Hack\UserDocumentation\API\Examples\ImmVector\__toString;
 <<__EntryPoint>>
 function basic_usage_main(): void {
   $iv = ImmVector {1, 2, 3};
-  echo $iv."\n";
+  echo $iv->__toString()."\n";
 
   $iv2 = ImmVector {'a', 'b', 'c'};
-  echo $iv2."\n";
+  echo $iv2->__toString()."\n";
 
   $iv3 = ImmVector {};
-  echo $iv3."\n";
+  echo $iv3->__toString()."\n";
 }

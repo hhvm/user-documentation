@@ -50,7 +50,7 @@ async function run(): Awaitable<void> {
   $val = await $mc->get($unique_key);
   \var_dump($val);
   await del_key($mc, $unique_key);
-  await \flush($mc);
+  await flush($mc);
   try {
     $val = await $mc->get($unique_key);
     \var_dump($val); // Won't get here because exception will be thrown

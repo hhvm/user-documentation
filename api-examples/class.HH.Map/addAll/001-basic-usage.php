@@ -14,7 +14,7 @@ function basic_usage_main(): void {
     Pair {'green', '#00ff00'},
     Pair {'blue', '#0000ff'},
   })
-    ->addall(ImmVector {
+    ->addAll(ImmVector {
       Pair {'yellow', '#ffff00'},
       Pair {'purple', '#663399'},
     });

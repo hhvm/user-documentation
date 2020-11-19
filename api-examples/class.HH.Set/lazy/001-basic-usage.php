@@ -11,7 +11,7 @@ function basic_usage_main(): void {
   $e = \microtime(true);
 
   \var_dump($non_lazy);
-  echo "Time non-lazy: ".\strval($e - $s).PHP_EOL;
+  echo "Time non-lazy: ".\strval($e - $s).\PHP_EOL;
 
   // Using a lazy view of the Set can save us a bunch of time, possibly even
   // cutting this call time by 90%.
@@ -19,6 +19,6 @@ function basic_usage_main(): void {
   $lazy = $set->lazy()->filter($x ==> $x % 2 === 0)->take(5);
   $e = \microtime(true);
 
-  \var_dump($lazy->toSet());
-  echo "Time lazy: ".\strval($e - $s).PHP_EOL;
+  \var_dump(new Set($lazy));
+  echo "Time lazy: ".\strval($e - $s).\PHP_EOL;
 }
