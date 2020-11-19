@@ -21,13 +21,16 @@ async function get_urls(
   );
 }
 
-$urls = ImmMap {
-  'com' => "http://example.com",
-  'net' => "http://example.net",
-  'org' => "http://example.org",
-};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $urls = ImmMap {
+    'com' => "http://example.com",
+    'net' => "http://example.net",
+    'org' => "http://example.org",
+  };
 
-$pages = \HH\Asio\join(get_urls($urls));
-foreach ($pages as $page) {
-  echo substr($page, 0, 22).' ... '.substr($page, -8);
+  $pages = \HH\Asio\join(get_urls($urls));
+  foreach ($pages as $page) {
+    echo \substr($page, 0, 22).' ... '.\substr($page, -8);
+  }
 }

@@ -19,13 +19,16 @@ async function get_urls(\ConstVector<string> $urls): Awaitable<Vector<string>> {
   );
 }
 
-$urls = ImmVector {
-  "http://example.com",
-  "http://example.net",
-  "http://example.org",
-};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $urls = ImmVector {
+    "http://example.com",
+    "http://example.net",
+    "http://example.org",
+  };
 
-$pages = \HH\Asio\join(get_urls($urls));
-foreach ($pages as $page) {
-  echo substr($page, 0, 20).' ... '.substr($page, -8);
+  $pages = \HH\Asio\join(get_urls($urls));
+  foreach ($pages as $page) {
+    echo \substr($page, 0, 20).' ... '.\substr($page, -8);
+  }
 }

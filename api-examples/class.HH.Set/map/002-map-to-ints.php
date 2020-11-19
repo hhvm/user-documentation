@@ -2,7 +2,10 @@
 
 namespace Hack\UserDocumentation\API\Examples\Set\Map\Ints;
 
-$s = Set {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function map_to_ints_main(): void {
+  $s = Set {'red', 'green', 'blue', 'yellow'};
 
-$lengths = $s->map(fun('strlen'));
-var_dump($lengths);
+  $lengths = $s->map(fun('strlen'));
+  \var_dump($lengths);
+}

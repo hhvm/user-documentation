@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Conn\Queryf\PerEqual;
 
-require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(
@@ -46,4 +44,9 @@ function run(): void {
   \var_dump($r);
 }
 
-run();
+<<__EntryPoint>>
+function percent_equal_placeholders_main(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+
+  run();
+}

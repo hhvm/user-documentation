@@ -2,8 +2,11 @@
 
 namespace Hack\UserDocumentation\API\Examples\Set\ToVector;
 
-$s = Set {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $s = Set {'red', 'green', 'blue', 'yellow'};
 
-$v = $s->toVector();
+  $v = $s->toVector();
 
-var_dump($v);
+  \var_dump($v);
+}

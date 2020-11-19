@@ -25,4 +25,7 @@ async function run(): Awaitable<void> {
   \var_dump($ver);
 }
 
-\HH\Asio\join(run());
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  \HH\Asio\join(run());
+}

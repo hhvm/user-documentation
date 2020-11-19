@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\API\Examples\ce;
 
-require __DIR__."/../../vendor/autoload.php";
-
 async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
   $content = Vector {};
   foreach ($urls as $url) {
@@ -19,4 +17,9 @@ function run(): void {
   \var_dump($content);
 }
 
-run();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  require __DIR__."/../../vendor/autoload.php";
+
+  run();
+}

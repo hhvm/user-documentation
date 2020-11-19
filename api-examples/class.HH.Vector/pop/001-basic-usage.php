@@ -2,9 +2,12 @@
 
 namespace Hack\UserDocumentation\API\Examples\Vector\Pop\BasicUsage;
 
-$v = Vector {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $v = Vector {'red', 'green', 'blue', 'yellow'};
 
-$last_color = $v->pop();
+  $last_color = $v->pop();
 
-var_dump($last_color);
-var_dump($v);
+  \var_dump($last_color);
+  \var_dump($v);
+}

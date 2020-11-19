@@ -2,8 +2,11 @@
 
 namespace Hack\UserDocumentation\API\Examples\Vector\FirstKey;
 
-$v = Vector {'red', 'green', 'blue', 'yellow'};
-var_dump($v->firstKey());
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $v = Vector {'red', 'green', 'blue', 'yellow'};
+  \var_dump($v->firstKey());
 
-$v = Vector {};
-var_dump($v->firstKey());
+  $v = Vector {};
+  \var_dump($v->firstKey());
+}

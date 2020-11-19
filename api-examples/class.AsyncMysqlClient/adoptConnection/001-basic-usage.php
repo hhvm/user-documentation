@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\AdoptConn;
 
-require __DIR__."/../../__includes/async_mysql_connect.inc.php";
-
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function get_synchronous_connection(): resource {
@@ -29,4 +27,9 @@ function run_it(): void {
   \var_dump($rows->numRows()); // The number of rows from the SELECT statement
 }
 
-run_it();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
+
+  run_it();
+}

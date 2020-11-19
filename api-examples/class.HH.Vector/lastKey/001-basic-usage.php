@@ -11,8 +11,11 @@ function echoLastKey(Vector<string> $v): void {
   }
 }
 
-// Will print "Last key: 3"
-echoLastKey(Vector {'red', 'green', 'blue', 'yellow'});
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  // Will print "Last key: 3"
+  echoLastKey(Vector {'red', 'green', 'blue', 'yellow'});
 
-// Will print "No last key (Vector is empty)"
-echoLastKey(Vector {});
+  // Will print "No last key (Vector is empty)"
+  echoLastKey(Vector {});
+}

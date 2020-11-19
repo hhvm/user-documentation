@@ -2,9 +2,12 @@
 
 namespace Hack\UserDocumentation\API\Examples\Set\Slice;
 
-$s = Set {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $s = Set {'red', 'green', 'blue', 'yellow'};
 
-// Start at index 1 ('green') and include 3 elements
-$s2 = $s->slice(1, 3);
+  // Start at index 1 ('green') and include 3 elements
+  $s2 = $s->slice(1, 3);
 
-var_dump($s2);
+  \var_dump($s2);
+}

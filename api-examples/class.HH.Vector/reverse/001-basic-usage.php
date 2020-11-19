@@ -2,8 +2,11 @@
 
 namespace Hack\UserDocumentation\API\Examples\Vector\Reverse;
 
-$v = Vector {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $v = Vector {'red', 'green', 'blue', 'yellow'};
 
-$v->reverse();
+  $v->reverse();
 
-var_dump($v);
+  \var_dump($v);
+}

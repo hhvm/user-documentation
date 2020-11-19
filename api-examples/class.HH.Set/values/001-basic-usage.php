@@ -2,8 +2,11 @@
 
 namespace Hack\UserDocumentation\API\Examples\Set\Values;
 
-$s = Set {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $s = Set {'red', 'green', 'blue', 'yellow'};
 
-$v = $s->values();
+  $v = $s->values();
 
-var_dump($v);
+  \var_dump($v);
+}
