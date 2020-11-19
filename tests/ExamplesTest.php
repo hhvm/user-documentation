@@ -2,18 +2,27 @@
 
 namespace HHVM\UserDocumentation\Tests;
 
-use const HHVM_VERSION_ID;
+use type Facebook\HackTest\{DataProvider, HackTest};
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
-use namespace HH\Lib\{C, Str, Vec};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 use namespace HHVM\UserDocumentation\ExampleTypechecker;
 
 /**
  * @large
  */
-class ExamplesTest extends \Facebook\HackTest\HackTest {
+class ExamplesTest extends HackTest {
   const string TEST_RUNNER = BuildPaths::HHVM_TREE.'/hphp/test/run.php';
+  const vec<string> ROOTS = vec[
+    BuildPaths::GUIDES_MARKDOWN,
+    BuildPaths::API_EXAMPLES_DIR,
+  ];
 
-  public function testExamplesOutput(): void {
+  public static function provideExampleRoots(): dict<string, (string)> {
+    return Dict\from_keys(self::ROOTS, $root ==> tuple($root));
+  }
+
+  <<DataProvider('provideExampleRoots')>>
+  public function testExamplesOutput(string $root): void {
     $exclude_suffixes = vec[
       '.inc.php',
       '.inc.hack',
@@ -24,16 +33,13 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
       |> Vec\map($$, $suffix ==> \preg_quote($suffix, '/'))
       |> Str\join($$, '|')
       |> '/('.$$.')$/';
-    $this->runExamples(Vector {
-      '--exclude-pattern',
-      $exclude_regexp,
-    });
+    $this->runExamples($root, Vector {'--exclude-pattern', $exclude_regexp});
   }
 
-  public function getTypecheckerExamples(): vec<(string, string)> {
+  public function getTypecheckerExamples(string $root): vec<(string, string)> {
     $ret = vec[];
     $it = new \RecursiveIteratorIterator(
-      new \RecursiveDirectoryIterator(LocalConfig::ROOT.'/guides/'),
+      new \RecursiveDirectoryIterator($root),
     );
     foreach ($it as $info) {
       if (!$info->isFile()) {
@@ -60,12 +66,13 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     return $ret;
   }
 
-  public async function testExamplesTypecheck(): Awaitable<void> {
+  <<DataProvider('provideExampleRoots')>>
+  public async function testExamplesTypecheck(string $root): Awaitable<void> {
     // Ideally HackTest would support parallelism via xbox or async;
     // statefullness needs to be avoid or managed first though :'(
 
     $concurrency_limit = 10;
-    $todo = new \HH\Lib\Ref($this->getTypecheckerExamples());
+    $todo = new \HH\Lib\Ref($this->getTypecheckerExamples($root));
     await Vec\map_async(
       Vec\range(1, $concurrency_limit),
       async $_worker_id ==> {
@@ -112,7 +119,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
     static::markTestSkipped("Couldn't find hh_server");
   }
 
-  private function runExamples(Vector<string> $extra_args): void {
+  private function runExamples(string $root, Vector<string> $extra_args): void {
     $command = Vector {
       \PHP_BINARY,
       '-d',
@@ -132,7 +139,7 @@ class ExamplesTest extends \Facebook\HackTest\HackTest {
         LocalConfig::ROOT.'/src/utils/_private/init_docs_autoloader.php',
     };
     $command->addAll($extra_args);
-    $command[] = LocalConfig::ROOT.'/guides';
+    $command[] = $root;
 
     $command_str = \implode(' ', $command->map($arg ==> \escapeshellarg($arg)));
     $exit_code = null;
