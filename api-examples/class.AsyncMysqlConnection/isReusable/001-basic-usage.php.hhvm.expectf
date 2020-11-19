@@ -1,5 +1,5 @@
 bool(false)
-array(5) {
+darray(5) {
   ["created_pool_connections"]=>
   int(2)
   ["destroyed_pool_connections"]=>

@@ -26,7 +26,7 @@ async function simple_query(): Awaitable<int> {
   if ($row_blocks->count() > 0) {
     // An AsyncMysqlRowBlock
     $row_block = $row_blocks[0];
-    return $row_block->getFieldAsInt(1, 'age'); // int
+    return $row_block->getFieldAsInt(0, 'age');
   } else {
     return -1;
   }

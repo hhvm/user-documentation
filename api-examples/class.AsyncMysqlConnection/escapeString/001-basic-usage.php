@@ -28,7 +28,7 @@ async function get_data(
   $escaped_name = $conn->escapeString($name);
   \var_dump($escaped_name);
   return await $conn->query(
-    'SELECT age FROM test_table where name = '.$escaped_name,
+    "SELECT age FROM test_table where name = '".$escaped_name."'",
   );
 }
 async function simple_query(): Awaitable<int> {

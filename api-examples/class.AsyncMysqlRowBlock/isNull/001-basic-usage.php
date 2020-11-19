@@ -18,7 +18,7 @@ async function connect(
 async function simple_query(): Awaitable<int> {
   $pool = new \AsyncMysqlConnectionPool(darray[]);
   $conn = await connect($pool);
-  $result = await $conn->query('SELECT * FROM test_table');
+  $result = await $conn->query('SELECT * FROM test_table WHERE userID < 50');
   $conn->close();
   // A call to $result->rowBlocks() actually pops the first element of the
   // row block Vector. So the call actually mutates the Vector.
@@ -26,8 +26,8 @@ async function simple_query(): Awaitable<int> {
   if (!$row_blocks->isEmpty()) {
     // An AsyncMysqlRowBlock
     $row_block = $row_blocks[0];
-    if (!$row_block->isNull(1, 'age')) {
-      return $row_block->at(1, 'age'); // int
+    if (!$row_block->isNull(0, 'age')) {
+      return $row_block->getFieldAsInt(0, 'age');
     }
     return -1;
   } else {

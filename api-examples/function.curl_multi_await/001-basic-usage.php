@@ -45,15 +45,9 @@ async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
   return $content;
 }
 
+<<__EntryPoint>>
 function run(): void {
-  $urls = Set {'http://www.google.com', 'http://www.cnn.com'};
+  $urls = Set {'http://www.google.com', 'https://www.cnn.com'};
   $content = \HH\Asio\join(get_curl_content($urls));
   \var_dump($content);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__."/../../vendor/autoload.php";
-
-  run();
 }
