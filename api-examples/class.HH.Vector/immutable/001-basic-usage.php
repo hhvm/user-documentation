@@ -2,7 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\Vector\Immutable;
 
-function expects_immutable(ImmVector $iv): void {
+function expects_immutable(ImmVector<mixed> $iv): void {
   \var_dump($iv);
 }
 

@@ -4,7 +4,9 @@ namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ConnPool\construct;
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
-function set_connection_pool(darray $options): \AsyncMysqlConnectionPool {
+function set_connection_pool(
+  darray<string, mixed> $options,
+): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool($options);
 }
 

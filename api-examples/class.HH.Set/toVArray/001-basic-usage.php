@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\Set\ToVArray;
 
 <<__EntryPoint>>
-function run() {
+function run(): void {
   $s = Set {'red', 'green', 'blue', 'yellow'};
 
   $array = $s->toVArray();

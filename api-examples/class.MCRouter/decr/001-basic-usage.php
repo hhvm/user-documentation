@@ -17,7 +17,11 @@ async function set_value(
   await $mc->set($key, $value);
 }
 
-async function dec_value(\MCRouter $mc, string $key, int $amount) {
+async function dec_value(
+  \MCRouter $mc,
+  string $key,
+  int $amount,
+): Awaitable<void> {
   await $mc->decr($key, $amount);
 }
 
