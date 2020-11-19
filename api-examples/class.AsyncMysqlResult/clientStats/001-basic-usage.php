@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh
 
 <<__EntryPoint>>
 function basic_usage_main(): void {

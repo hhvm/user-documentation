@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh
 
 namespace Hack\UserDocumentation\API\Examples\Vector\SetAll;
 
