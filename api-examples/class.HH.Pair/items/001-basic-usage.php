@@ -11,6 +11,6 @@ function basic_usage_main(): void {
 
   // Print both values in the Iterable
   foreach ($iterable as $value) {
-    echo $value."\n";
+    echo (string)$value."\n";
   }
 }

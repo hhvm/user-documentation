@@ -11,7 +11,7 @@ function basic_usage_main(): void {
 
   // Print both keys and values
   while ($iterator->valid()) {
-    echo $iterator->key().' => '.$iterator->current()."\n";
+    echo $iterator->key().' => '.(string)$iterator->current()."\n";
     $iterator->next();
   }
 }

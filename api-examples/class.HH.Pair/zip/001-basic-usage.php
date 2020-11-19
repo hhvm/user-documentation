@@ -10,6 +10,6 @@ function basic_usage_main(): void {
   $labeled = $p->zip($labels);
 
   foreach ($labeled as list($value, $label)) {
-    echo $label.': '.$value."\n";
+    echo $label.': '.(string)$value."\n";
   }
 }

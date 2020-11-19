@@ -10,7 +10,7 @@ function basic_usage_main(): void {
   $m->reserve(MAP_SIZE);
 
   for ($i = 0; $i < MAP_SIZE; $i++) {
-    $m[] = Pair {$i, $i * 10};
+    $m[$i] = $i * 10;
   }
 
   \var_dump($m);

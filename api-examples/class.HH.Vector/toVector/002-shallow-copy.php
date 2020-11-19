@@ -5,7 +5,7 @@ namespace Hack\UserDocumentation\API\Examples\Vector\ToVector;
 <<__EntryPoint>>
 function shallow_copy_main(): void {
   $inner = Vector {1, 2, 3};
-  $v = Vector {'a', $inner, 'c'};
+  $v = Vector {Vector {'a'}, $inner, Vector {'c'}};
 
   // Make a Vector copy of $v
   $v2 = $v->toVector();
