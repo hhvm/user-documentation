@@ -2,13 +2,16 @@
 
 namespace Hack\UserDocumentation\API\Examples\Set\GetIterator;
 
-$s = Set {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $s = Set {'red', 'green', 'blue', 'yellow'};
 
-// Get an iterator for the Set of colors
-$iterator = $s->getIterator();
+  // Get an iterator for the Set of colors
+  $iterator = $s->getIterator();
 
-// Print each color using the iterator
-while ($iterator->valid()) {
-  echo $iterator->current()."\n";
-  $iterator->next();
+  // Print each color using the iterator
+  while ($iterator->valid()) {
+    echo $iterator->current()."\n";
+    $iterator->next();
+  }
 }

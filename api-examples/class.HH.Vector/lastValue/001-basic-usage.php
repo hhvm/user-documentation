@@ -11,8 +11,11 @@ function echoLastValue(Vector<string> $v): void {
   }
 }
 
-// Will print "Last value: yellow"
-echoLastValue(Vector {'red', 'green', 'blue', 'yellow'});
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  // Will print "Last value: yellow"
+  echoLastValue(Vector {'red', 'green', 'blue', 'yellow'});
 
-// Will print "No last value (Vector is empty)"
-echoLastValue(Vector {});
+  // Will print "No last value (Vector is empty)"
+  echoLastValue(Vector {});
+}

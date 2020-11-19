@@ -6,23 +6,26 @@ async function one(): Awaitable<int> {
   return 1;
 }
 
-$mcr = \MCRouter::createSimple(ImmVector {});
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $mcr = \MCRouter::createSimple(ImmVector {});
 
-$handles = \HH\Asio\vw(Vector {
-  // This will throw an exception, since there's no servers to speak to
-  $mcr->get("no-such-key"),
+  $handles = \HH\Asio\vw(Vector {
+    // This will throw an exception, since there's no servers to speak to
+    $mcr->get("no-such-key"),
 
-  // While this will obviously succeed
-  one(),
-});
+    // While this will obviously succeed
+    one(),
+  });
 
-$results = \HH\Asio\join($handles);
-foreach ($results as $result) {
-  if ($result->isSucceeded()) {
-    echo "Success: ";
-    var_dump($result->getResult());
-  } else {
-    echo "Failed: ";
-    var_dump($result->getException()->getMessage());
+  $results = \HH\Asio\join($handles);
+  foreach ($results as $result) {
+    if ($result->isSucceeded()) {
+      echo "Success: ";
+      \var_dump($result->getResult());
+    } else {
+      echo "Failed: ";
+      \var_dump($result->getException()->getMessage());
+    }
   }
 }

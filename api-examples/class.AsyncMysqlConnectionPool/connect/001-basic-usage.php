@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\PoolConn\Connect;
 
-require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 class MyPool {
@@ -56,4 +54,9 @@ function run(): void {
   \HH\Asio\join(run_it_2($pool));
 }
 
-run();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+
+  run();
+}

@@ -2,9 +2,12 @@
 
 namespace Hack\UserDocumentation\API\Examples\Vector\Shuffle;
 
-$v = Vector {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $v = Vector {'red', 'green', 'blue', 'yellow'};
 
-// Randomize the Vector elements in place
-$v->shuffle();
+  // Randomize the Vector elements in place
+  $v->shuffle();
 
-var_dump($v);
+  \var_dump($v);
+}

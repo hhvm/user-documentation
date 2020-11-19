@@ -8,4 +8,7 @@ function simple_mcrouter(): void {
   \var_dump($mc is \MCRouter);
 }
 
-simple_mcrouter();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  simple_mcrouter();
+}

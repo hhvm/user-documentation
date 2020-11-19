@@ -13,4 +13,7 @@ function run(shape('x' => int, 'y' => int, ?'z' => int) $point): void {
   \var_dump(Shapes::idx($point, 'z', 0));
 }
 
-run(shape('x' => 3, 'y' => -1));
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  run(shape('x' => 3, 'y' => -1));
+}

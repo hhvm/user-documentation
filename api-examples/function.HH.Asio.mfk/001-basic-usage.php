@@ -12,25 +12,28 @@ enum COLOR: int {
   VIOLET = 7;
 }
 
-$fruits = ImmMap {
-  'Apple' => COLOR::RED,
-  'Banana' => COLOR::YELLOW,
-  'Grape' => COLOR::GREEN,
-  'Orange' => COLOR::ORANGE,
-  'Pineapple' => COLOR::YELLOW,
-  'Tangerine' => COLOR::ORANGE,
-};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $fruits = ImmMap {
+    'Apple' => COLOR::RED,
+    'Banana' => COLOR::YELLOW,
+    'Grape' => COLOR::GREEN,
+    'Orange' => COLOR::ORANGE,
+    'Pineapple' => COLOR::YELLOW,
+    'Tangerine' => COLOR::ORANGE,
+  };
 
-// Similar to $times->filter(...)
-// But awaits the awaitable result of the callback
-// rather than using it directly
-$not_self_named = \HH\Asio\join(\HH\Asio\mfk(
-  $fruits,
+  // Similar to $times->filter(...)
+  // But awaits the awaitable result of the callback
+  // rather than using it directly
+  $not_self_named = \HH\Asio\join(\HH\Asio\mfk(
+    $fruits,
 
-  // Exclude fruits who's name is the same as their color
-  async ($name, $color) ==> strcasecmp($name, COLOR::getNames()[$color]),
-));
+    // Exclude fruits who's name is the same as their color
+    async ($name, $color) ==> \strcasecmp($name, COLOR::getNames()[$color]),
+  ));
 
-foreach ($not_self_named as $fruit => $color) {
-  echo $fruit, 's are ', COLOR::getNames()[$color], "\n";
+  foreach ($not_self_named as $fruit => $color) {
+    echo $fruit, 's are ', COLOR::getNames()[$color], "\n";
+  }
 }

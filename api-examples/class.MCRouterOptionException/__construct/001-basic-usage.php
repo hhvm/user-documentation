@@ -37,4 +37,7 @@ function run(): void {
   }
 }
 
-run();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  run();
+}

@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\Client\Conn;
 
-require __DIR__."/../../__includes/async_mysql_connect.inc.php";
-
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function do_connect(): Awaitable<\AsyncMysqlQueryResult> {
@@ -23,4 +21,9 @@ function run_it(): void {
   \var_dump($res->numRows()); // The number of rows from the SELECT statement
 }
 
-run_it();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
+
+  run_it();
+}

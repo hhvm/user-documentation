@@ -2,9 +2,12 @@
 
 namespace Hack\UserDocumentation\API\Examples\Pair\Set;
 
-$p = Pair {'foo', -1.5};
+<<__EntryPoint>>
+function runtime_fatal_main(): void {
+  $p = Pair {'foo', -1.5};
 
-// Fatal error will be thrown here
-$s = $p->toSet();
+  // Fatal error will be thrown here
+  $s = $p->toSet();
 
-var_dump($s);
+  \var_dump($s);
+}

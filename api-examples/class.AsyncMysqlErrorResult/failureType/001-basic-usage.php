@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ErrorResult\FailType;
 
-require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(
@@ -39,4 +37,9 @@ function run(): void {
   \var_dump($r);
 }
 
-run();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+
+  run();
+}

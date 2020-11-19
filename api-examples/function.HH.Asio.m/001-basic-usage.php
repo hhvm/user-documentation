@@ -16,14 +16,17 @@ async function get_urls(
   return await \HH\Asio\m($handles);
 }
 
-$urls = ImmMap {
-  'com' => "http://example.com",
-  'net' => "http://example.net",
-  'org' => "http://example.org",
-};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $urls = ImmMap {
+    'com' => "http://example.com",
+    'net' => "http://example.net",
+    'org' => "http://example.org",
+  };
 
-$pages = \HH\Asio\join(get_urls($urls));
-foreach ($pages as $name => $page) {
-  echo $name.': ';
-  echo substr($page, 0, 15).' ... '.substr($page, -8);
+  $pages = \HH\Asio\join(get_urls($urls));
+  foreach ($pages as $name => $page) {
+    echo $name.': ';
+    echo \substr($page, 0, 15).' ... '.\substr($page, -8);
+  }
 }

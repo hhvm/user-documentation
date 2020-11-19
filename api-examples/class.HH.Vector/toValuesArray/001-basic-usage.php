@@ -2,9 +2,12 @@
 
 namespace Hack\UserDocumentation\API\Examples\Vector\ToValuesArray;
 
-$v = Vector {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $v = Vector {'red', 'green', 'blue', 'yellow'};
 
-$array = $v->toValuesArray();
+  $array = $v->toValuesArray();
 
-var_dump(\HH\is_any_array($array));
-var_dump($array);
+  \var_dump(\HH\is_any_array($array));
+  \var_dump($array);
+}

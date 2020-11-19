@@ -2,9 +2,12 @@
 
 namespace Hack\UserDocumentation\API\Examples\Set\Take;
 
-$s = Set {'red', 'green', 'blue', 'yellow'};
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $s = Set {'red', 'green', 'blue', 'yellow'};
 
-// Take the first two elements
-$take2 = $s->take(2);
+  // Take the first two elements
+  $take2 = $s->take(2);
 
-var_dump($take2);
+  \var_dump($take2);
+}

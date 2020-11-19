@@ -2,8 +2,11 @@
 
 namespace Hack\UserDocumentation\API\Examples\Pair\__toString;
 
-$p = Pair {-1, 5};
-echo $p."\n";
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  $p = Pair {-1, 5};
+  echo $p."\n";
 
-$p2 = Pair {'foo', 'bar'};
-echo $p2."\n";
+  $p2 = Pair {'foo', 'bar'};
+  echo $p2."\n";
+}

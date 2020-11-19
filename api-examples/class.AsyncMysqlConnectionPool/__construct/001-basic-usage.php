@@ -2,8 +2,6 @@
 
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql\ConnPool\construct;
 
-require __DIR__."/../../__includes/async_mysql_connect.inc.php";
-
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function set_connection_pool(darray $options): \AsyncMysqlConnectionPool {
@@ -64,4 +62,9 @@ function run_it(): void {
   }
 }
 
-run_it();
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
+
+  run_it();
+}

@@ -13,4 +13,7 @@ function run(shape(?'x' => ?int, ?'y' => ?int, ?'z' => ?int) $point): void {
   \var_dump(Shapes::keyExists($point, 'y'));
 }
 
-run(shape('x' => 3, 'y' => null));
+<<__EntryPoint>>
+function basic_usage_main(): void {
+  run(shape('x' => 3, 'y' => null));
+}
