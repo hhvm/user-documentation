@@ -1,4 +1,4 @@
-object(HH\ImmSet)#%d (4) {
+object(HH\ImmSet) (4) {
   string(3) "red"
   string(5) "green"
   string(4) "blue"

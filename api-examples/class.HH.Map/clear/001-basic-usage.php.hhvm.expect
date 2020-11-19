@@ -1,4 +1,4 @@
-object(HH\Map)#1 (4) {
+object(HH\Map) (4) {
   ["red"]=>
   string(7) "#ff0000"
   ["green"]=>
@@ -8,5 +8,5 @@ object(HH\Map)#1 (4) {
   ["yellow"]=>
   string(7) "#ffff00"
 }
-object(HH\Map)#1 (0) {
+object(HH\Map) (0) {
 }
