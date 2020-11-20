@@ -4,6 +4,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\HackTest\{DataProvider, HackTest};
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
+use type HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\Files;
 use namespace HH\Lib\{C, Dict, Str, Vec};
 use namespace HHVM\UserDocumentation\ExampleTypechecker;
 
@@ -36,7 +37,14 @@ class ExamplesTest extends HackTest {
     $this->runExamples($root, Vector {'--exclude-pattern', $exclude_regexp});
   }
 
-  public function getTypecheckerExamples(string $root): vec<(string, string)> {
+  /**
+   * Find all examples that have the specified extra file (e.g. all examples
+   * with .typechecker.expect).
+   */
+  public static function getExamplesWith(
+    string $root,
+    Files $name_part,
+  ): vec<(string, string)> {
     $ret = vec[];
     $it = new \RecursiveIteratorIterator(
       new \RecursiveDirectoryIterator($root),
@@ -46,24 +54,55 @@ class ExamplesTest extends HackTest {
         continue;
       }
       $path = $info->getPathname();
-      $idx = Str\search($path, '.typechecker.expect');
+      $idx = Str\search($path, '.'.$name_part);
       if ($idx === null) {
-        continue;
-      }
-      if (!Str\contains($path, '.type-errors')) {
-        invariant(
-          \file_get_contents($path) === "No errors!\n",
-          "'%s' does not contain '.type-errors' in it's name, but does not ".
-          "exactly match \"No errors!\n\"",
-          $path,
-        );
-        // Trust the project-wide typechecker to pick up any problems in files
-        // with valid extensions
         continue;
       }
       $ret[] = tuple(Str\slice($path, 0, $idx), $path);
     }
     return $ret;
+  }
+
+  public static function provideExampleOutFiles(
+  ): dict<string, (string, string, Files)> {
+    $ret = dict[];
+    foreach (self::ROOTS as $root) {
+      foreach (
+        vec[Files::EXAMPLE_HHVM_OUT, Files::EXAMPLE_TYPECHECKER_OUT] as $type
+      ) {
+        foreach (
+          self::getExamplesWith($root, $type) as list($hack_file, $out_file)
+        ) {
+          $ret[$hack_file] = tuple($hack_file, $out_file, $type);
+        }
+      }
+    }
+    return $ret;
+  }
+
+  <<DataProvider('provideExampleOutFiles')>>
+  public function testExampleOutMatchesExpect(
+    string $hack_path,
+    string $example_out_path,
+    Files $type,
+  ): void {
+    $expectf = $hack_path.'.';
+    $expectf .= $type === Files::EXAMPLE_HHVM_OUT
+      ? Files::HHVM_EXPECTF
+      : Files::TYPECHECKER_EXPECTF;
+    $expectregex = $hack_path.'.';
+    $expectregex .= $type === Files::EXAMPLE_HHVM_OUT
+      ? Files::HHVM_EXPECTREGEX
+      : Files::TYPECHECKER_EXPECTREGEX;
+
+    $example_out = \file_get_contents($example_out_path);
+    if (\file_exists($expectf)) {
+      expect($example_out)->toMatchExpectfFile($expectf);
+    } else if (\file_exists($expectregex)) {
+      expect($example_out)->toMatchExpectregexFile($expectregex);
+    } else {
+      invariant_violation('Example has no .expectf or .expectregex file!');
+    }
   }
 
   <<DataProvider('provideExampleRoots')>>
@@ -72,13 +111,22 @@ class ExamplesTest extends HackTest {
     // statefullness needs to be avoid or managed first though :'(
 
     $concurrency_limit = 10;
-    $todo = new \HH\Lib\Ref($this->getTypecheckerExamples($root));
+    $todo = new \HH\Lib\Ref(
+      self::getExamplesWith($root, Files::TYPECHECKER_EXPECT),
+    );
     await Vec\map_async(
       Vec\range(1, $concurrency_limit),
       async $_worker_id ==> {
         while (!C\is_empty($todo->value)) {
           list($in, $expect) = C\firstx($todo->value);
           $todo->value = Vec\drop($todo->value, 1);
+          invariant(
+            Str\contains($expect, '.type-errors') ||
+              \file_get_contents($expect) === "No errors!\n",
+            "'%s' does not contain '.type-errors' in it's name, but does not ".
+            "exactly match \"No errors!\n\"",
+            $expect,
+          );
           /* HHAST_IGNORE_ERROR[DontAwaitInALoop] */
           await $this->runSingleExampleThroughTypecheckerAsync($in, $expect);
         }
