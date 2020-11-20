@@ -1,4 +1,4 @@
-object(HH\Set)#2 (4) {
+object(HH\Set) (4) {
   string(5) "apple"
   string(6) "orange"
   string(7) "cabbage"

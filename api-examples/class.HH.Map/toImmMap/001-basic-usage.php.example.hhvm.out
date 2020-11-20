@@ -1,4 +1,4 @@
-object(HH\ImmMap)#2 (4) {
+object(HH\ImmMap) (4) {
   ["red"]=>
   string(7) "#ff0000"
   ["green"]=>

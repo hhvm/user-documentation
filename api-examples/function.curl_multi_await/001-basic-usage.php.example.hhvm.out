@@ -1,4 +1,4 @@
-object(HH\Vector)#8 (2) {
+object(HH\Vector) (2) {
   [0]=>
   string(10) "<!doctype "
   [1]=>

@@ -1,4 +1,4 @@
-object(HH\Vector)#2 (5) {
+object(HH\Vector) (5) {
   [0]=>
   string(7) "#ff0000"
   [1]=>
@@ -10,7 +10,7 @@ object(HH\Vector)#2 (5) {
   [4]=>
   string(7) "#663399"
 }
-object(HH\Map)#1 (4) {
+object(HH\Map) (4) {
   ["red"]=>
   string(7) "#ff0000"
   ["green"]=>

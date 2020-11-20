@@ -1,4 +1,4 @@
-object(HH\Set)#2 (4) {
+object(HH\Set) (4) {
   int(3)
   int(5)
   int(4)

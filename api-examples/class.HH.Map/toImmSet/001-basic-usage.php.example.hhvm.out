@@ -1,5 +1,5 @@
 bool(true)
-object(HH\ImmSet)#2 (4) {
+object(HH\ImmSet) (4) {
   string(7) "#ff0000"
   string(7) "#00ff00"
   string(7) "#0000ff"

@@ -1,5 +1,5 @@
 bool(true)
-object(HH\Vector)#3 (4) {
+object(HH\Vector) (4) {
   [0]=>
   int(0)
   [1]=>
@@ -9,7 +9,7 @@ object(HH\Vector)#3 (4) {
   [3]=>
   int(3)
 }
-object(HH\Map)#2 (4) {
+object(HH\Map) (4) {
   [0]=>
   string(3) "red"
   [1]=>

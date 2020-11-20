@@ -1,4 +1,4 @@
-object(HH\ImmVector)#2 (4) {
+object(HH\ImmVector) (4) {
   [0]=>
   string(3) "foo"
   [1]=>
