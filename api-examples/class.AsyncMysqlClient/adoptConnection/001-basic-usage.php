@@ -21,10 +21,10 @@ async function get_rows(
 }
 
 <<__EntryPoint>>
-function run_it(): void {
+async function run_it(): Awaitable<void> {
   require __DIR__."/../../__includes/async_mysql_connect.inc.php";
   $sconn = get_synchronous_connection();
   $aconn = use_async_connection($sconn);
-  $rows = \HH\Asio\join(get_rows($aconn));
+  $rows = await get_rows($aconn);
   \var_dump($rows->numRows()); // The number of rows from the SELECT statement
 }

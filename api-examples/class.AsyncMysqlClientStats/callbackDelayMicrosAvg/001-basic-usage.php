@@ -24,8 +24,8 @@ async function get_delay(): Awaitable<?float> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $d = \HH\Asio\join(get_delay());
+  $d = await get_delay();
   \var_dump($d);
 }

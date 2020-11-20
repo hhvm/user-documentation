@@ -28,14 +28,14 @@ function get_stats(\AsyncMysqlConnectionPool $pool): mixed {
 }
 
 <<__EntryPoint>>
-function run_it(): void {
+async function run_it(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $pool = set_connection_pool();
   $conn_awaitables = Vector {};
   $conn_awaitables[] = connect_with_pool($pool);
   $conn_awaitables[] = connect_with_pool($pool);
   $conn_awaitables[] = connect_with_pool($pool);
-  $conns = \HH\Asio\join(\HH\Asio\v($conn_awaitables));
+  $conns = await \HH\Asio\v($conn_awaitables);
   // Get pool connection stats, like pool connections created, how many
   // connections were requested, etc.
   \var_dump(get_stats($pool));

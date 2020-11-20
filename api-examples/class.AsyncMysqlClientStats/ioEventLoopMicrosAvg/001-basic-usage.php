@@ -24,8 +24,8 @@ async function get_loop_info(): Awaitable<?float> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $l = \HH\Asio\join(get_loop_info());
+  $l = await get_loop_info();
   \var_dump($l);
 }

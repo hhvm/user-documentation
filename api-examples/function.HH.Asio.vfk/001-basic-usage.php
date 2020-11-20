@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\vfk;
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   $times = ImmVector {
     100000000, // Sat, 03 Mar 1973 09:46:40
     200000000, // Mon, 03 May 1976 19:33:20
@@ -20,11 +20,11 @@ function basic_usage_main(): void {
   // Similar to $times->filter(...)
   // But awaits the awaitable result of the callback
   // rather than using it directly
-  $saturdays = \HH\Asio\join(\HH\Asio\vfk(
+  $saturdays = await \HH\Asio\vfk(
     $times,
     // All saturdays EXCEPT the one which happens to be the first vector element
     async ($idx, $time) ==> ($idx > 0) && (\gmdate('w', $time) == 6),
-  ));
+  );
 
   foreach ($saturdays as $time) {
     echo \gmdate('r', $time), "\n";

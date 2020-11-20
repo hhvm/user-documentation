@@ -24,8 +24,8 @@ async function get_connection_time(): Awaitable<?int> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $em = \HH\Asio\join(get_connection_time());
+  $em = await get_connection_time();
   \var_dump($em);
 }

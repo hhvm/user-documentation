@@ -3,10 +3,10 @@
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\vmkw;
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   // Map a vector of numbers to their value divided by their index
   // throwing on division by zero.
-  $quotients = \HH\Asio\join(\HH\Asio\vmkw(
+  $quotients = await \HH\Asio\vmkw(
     Vector {1, 2, 6, 12},
 
     async ($idx, $val) ==> {
@@ -18,7 +18,7 @@ function basic_usage_main(): void {
         );
       }
     },
-  ));
+  );
 
   foreach ($quotients as $result) {
     if ($result->isSucceeded()) {

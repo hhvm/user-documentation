@@ -33,8 +33,8 @@ async function simple_query_error(): Awaitable<int> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $r = \HH\Asio\join(simple_query_error());
+  $r = await simple_query_error();
   \var_dump($r);
 }

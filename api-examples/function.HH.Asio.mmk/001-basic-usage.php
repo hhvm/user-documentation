@@ -22,14 +22,14 @@ async function get_urls(
 }
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   $urls = ImmMap {
     'com' => "http://example.com",
     'net' => "http://example.net",
     'org' => "http://example.org",
   };
 
-  $pages = \HH\Asio\join(get_urls($urls));
+  $pages = await get_urls($urls);
   foreach ($pages as $page) {
     echo \substr($page, 0, 22).' ... '.\substr($page, -8);
   }

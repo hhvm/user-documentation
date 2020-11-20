@@ -24,8 +24,8 @@ async function get_server_info(): Awaitable<string> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $info = \HH\Asio\join(get_server_info());
+  $info = await get_server_info();
   \var_dump($info);
 }

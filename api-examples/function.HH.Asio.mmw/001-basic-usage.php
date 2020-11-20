@@ -3,10 +3,10 @@
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\mmw;
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   // Map a map of numbers to their integer half
   // throwing if they can't be divided evenly
-  $halves = \HH\Asio\join(\HH\Asio\mmw(
+  $halves = await \HH\Asio\mmw(
     Map {
       'one' => 1,
       'two' => 2,
@@ -21,7 +21,7 @@ function basic_usage_main(): void {
         return $val / 2;
       }
     },
-  ));
+  );
 
   foreach ($halves as $num => $result) {
     if ($result->isSucceeded()) {

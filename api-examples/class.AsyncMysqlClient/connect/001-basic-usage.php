@@ -17,8 +17,8 @@ async function do_connect(): Awaitable<\AsyncMysqlQueryResult> {
 }
 
 <<__EntryPoint>>
-function run_it(): void {
+async function run_it(): Awaitable<void> {
   require __DIR__."/../../__includes/async_mysql_connect.inc.php";
-  $res = \HH\Asio\join(do_connect());
+  $res = await do_connect();
   \var_dump($res->numRows()); // The number of rows from the SELECT statement
 }

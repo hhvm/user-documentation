@@ -27,7 +27,7 @@ function get_stats(\AsyncMysqlConnectionPool $pool): dict<string, int> {
 }
 
 <<__EntryPoint>>
-function run_it(): void {
+async function run_it(): Awaitable<void> {
   require __DIR__."/../../__includes/async_mysql_connect.inc.php";
   $options = darray[
     'pool_connection_limit' => 2,
@@ -41,7 +41,7 @@ function run_it(): void {
     $conn_awaitables[] = connect_with_pool($pool);
     $conn_awaitables[] = connect_with_pool($pool);
     $conn_awaitables[] = connect_with_pool($pool);
-    $conns = \HH\Asio\join(\HH\Asio\v($conn_awaitables));
+    $conns = await \HH\Asio\v($conn_awaitables);
   } catch (\AsyncMysqlConnectException $ex) {
     $stats = get_stats($pool);
     echo "Allowed pool connections: ".
@@ -57,10 +57,10 @@ function run_it(): void {
     'expiration_policy' => 'IdleTime',
   ];
   $pool = set_connection_pool($options);
-  $conn = \HH\Asio\join(connect_with_pool($pool));
+  $conn = await connect_with_pool($pool);
   \sleep(10); // Idle for 5 seconds. So should timeout here.
   try {
-    $result = \HH\Asio\join($conn->query("SELECT * FROM test_table"));
+    $result = await $conn->query("SELECT * FROM test_table");
   } catch (\AsyncMysqlQueryException $ex) {
     echo "Hit idle limit";
   }

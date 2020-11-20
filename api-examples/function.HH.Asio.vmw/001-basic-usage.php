@@ -3,10 +3,10 @@
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\vmw;
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   // Map a vector of numbers to half integer half
   // throwing if they can't be divided evenly
-  $halves = \HH\Asio\join(\HH\Asio\vmw(
+  $halves = await \HH\Asio\vmw(
     Vector {1, 2, 3, 4},
 
     async ($val) ==> {
@@ -16,7 +16,7 @@ function basic_usage_main(): void {
         return $val / 2;
       }
     },
-  ));
+  );
 
   foreach ($halves as $result) {
     if ($result->isSucceeded()) {

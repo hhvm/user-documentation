@@ -3,11 +3,11 @@
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\vfw;
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   // Return all non-negative odd numbers
   // Positive evens filtered out,
   // Negatives and zero cause exception
-  $odds = \HH\Asio\join(\HH\Asio\vfw(
+  $odds = await \HH\Asio\vfw(
     Vector {-1, 0, 1, 2, 3, 4},
 
     async ($val) ==> {
@@ -17,7 +17,7 @@ function basic_usage_main(): void {
         return ($val % 2) == 1;
       }
     },
-  ));
+  );
 
   foreach ($odds as $result) {
     if ($result->isSucceeded()) {
