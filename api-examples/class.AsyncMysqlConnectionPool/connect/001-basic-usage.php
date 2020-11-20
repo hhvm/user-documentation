@@ -48,15 +48,10 @@ async function run_it_2(MyPool $pool): Awaitable<void> {
   \var_dump($pool->getPool()->getPoolStats());
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $pool = new MyPool();
   \HH\Asio\join(run_it_1($pool));
   \HH\Asio\join(run_it_2($pool));
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

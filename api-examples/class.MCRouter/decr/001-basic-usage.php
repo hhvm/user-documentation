@@ -25,6 +25,7 @@ async function dec_value(
   await $mc->decr($key, $amount);
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
@@ -48,9 +49,4 @@ async function run(): Awaitable<void> {
     \var_dump($ex->getMessage()); // can't decrement on a string
     \var_dump($val);
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

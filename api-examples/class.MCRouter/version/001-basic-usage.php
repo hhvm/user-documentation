@@ -19,13 +19,9 @@ async function get_version(\MCRouter $mc): Awaitable<?string> {
 
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $ver = await get_version($mc);
   \var_dump($ver);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

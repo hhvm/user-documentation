@@ -42,7 +42,9 @@ function get_pool(): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool($options);
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $pool = get_pool();
 
   $conn = \HH\Asio\join(get_connection($pool));
@@ -56,11 +58,4 @@ function run(): void {
   // and we didn't set it to be reusable
   \var_dump($pool->getPoolStats());
   $conn2->close();
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

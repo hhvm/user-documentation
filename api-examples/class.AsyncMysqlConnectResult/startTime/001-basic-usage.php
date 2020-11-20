@@ -23,14 +23,9 @@ async function get_connection_start_time(): Awaitable<?float> {
   return $st;
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $st = \HH\Asio\join(get_connection_start_time());
   \var_dump($st);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

@@ -25,6 +25,7 @@ async function replace_value(
   await $mc->replace($key, $value);
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
@@ -42,9 +43,4 @@ async function run(): Awaitable<void> {
   await replace_value($mc, $unique_key, "Bye");
   $val = await $mc->get($unique_key);
   \var_dump($val);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

@@ -43,6 +43,7 @@ async function flush(\MCRouter $mc): Awaitable<void> {
   await $mc->flushAll(); // can add an optional delay time in seconds
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = construct_mcrouter();
   $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
@@ -57,9 +58,4 @@ async function run(): Awaitable<void> {
   } catch (\MCRouterException $ex) {
     \var_dump($ex->getMessage()); // There are no more keys/values since flush
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

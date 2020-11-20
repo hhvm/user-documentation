@@ -38,14 +38,9 @@ async function simple_query(): Awaitable<?string> {
   }
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $r = \HH\Asio\join(simple_query());
   \var_dump($r);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

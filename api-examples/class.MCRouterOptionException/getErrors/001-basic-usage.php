@@ -2,6 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouterOptEx\GetErrors;
 
+<<__EntryPoint>>
 function construct_mcrouter(): void {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   // For many use cases, calling MCRouter::createSimple($servers) would
@@ -18,13 +19,4 @@ function construct_mcrouter(): void {
   } catch (\MCRouterOptionException $ex) {
     \var_dump($ex->getErrors());
   }
-}
-
-function run(): void {
-  construct_mcrouter();
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  run();
 }

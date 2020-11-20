@@ -26,7 +26,9 @@ function get_stats(\AsyncMysqlConnectionPool $pool): dict<string, int> {
   return dict($pool->getPoolStats());
 }
 
+<<__EntryPoint>>
 function run_it(): void {
+  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
   $options = darray[
     'pool_connection_limit' => 2,
   ];
@@ -62,11 +64,4 @@ function run_it(): void {
   } catch (\AsyncMysqlQueryException $ex) {
     echo "Hit idle limit";
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
-
-  run_it();
 }

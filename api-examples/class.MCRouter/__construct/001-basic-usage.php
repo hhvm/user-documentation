@@ -2,6 +2,7 @@
 
 namespace Hack\UserDocumentation\API\Examples\MCRouter\MCrouter\Construct;
 
+<<__EntryPoint>>
 function construct_mcrouter(): void {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   // For many use cases, calling MCRouter::createSimple($servers) would
@@ -21,9 +22,4 @@ function construct_mcrouter(): void {
   ];
   $mc = new \MCRouter($options); // could also pass a persistence id string here
   \var_dump($mc is \MCRouter);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  construct_mcrouter();
 }

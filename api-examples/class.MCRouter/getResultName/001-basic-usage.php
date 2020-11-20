@@ -12,6 +12,7 @@ function get_res_name(int $res_num): string {
   return \MCRouter::getResultName($res_num);
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
 
@@ -34,9 +35,4 @@ async function run(): Awaitable<void> {
     \var_dump($ex->getCode());
     \var_dump(get_res_name($ex->getCode()));
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

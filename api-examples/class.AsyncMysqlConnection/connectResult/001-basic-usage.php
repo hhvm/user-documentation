@@ -23,14 +23,9 @@ async function get_connect_time(): Awaitable<?int> {
   return $result?->elapsedMicros();
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $time = \HH\Asio\join(get_connect_time());
   \var_dump($time);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

@@ -27,7 +27,9 @@ function get_stats(\AsyncMysqlConnectionPool $pool): mixed {
   return $pool->getPoolStats();
 }
 
+<<__EntryPoint>>
 function run_it(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $pool = set_connection_pool();
   $conn_awaitables = Vector {};
   $conn_awaitables[] = connect_with_pool($pool);
@@ -37,11 +39,4 @@ function run_it(): void {
   // Get pool connection stats, like pool connections created, how many
   // connections were requested, etc.
   \var_dump(get_stats($pool));
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run_it();
 }
