@@ -1,7 +1,7 @@
-object(HH\Set)#1 (1) {
+object(HH\Set) (1) {
   string(3) "red"
 }
-object(HH\Vector)#3 (3) {
+object(HH\Vector) (3) {
   [0]=>
   string(3) "red"
   [1]=>
@@ -9,7 +9,7 @@ object(HH\Vector)#3 (3) {
   [2]=>
   string(4) "blue"
 }
-object(HH\Vector)#4 (5) {
+object(HH\Vector) (5) {
   [0]=>
   string(3) "red"
   [1]=>
