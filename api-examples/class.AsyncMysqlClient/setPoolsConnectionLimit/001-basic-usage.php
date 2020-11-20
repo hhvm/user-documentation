@@ -24,7 +24,9 @@ function get_stats(\AsyncMysqlConnectionPool $pool): dict<string, mixed> {
   return dict($pool->getPoolStats());
 }
 
+<<__EntryPoint>>
 function run_it(): void {
+  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
   \AsyncMysqlClient::setPoolsConnectionLimit(2); // limit two connections
   $pool = set_connection_pool();
   $conn_awaitables = Vector {};
@@ -37,11 +39,4 @@ function run_it(): void {
   } catch (\AsyncMysqlConnectException $ex) {
     \var_dump(get_stats($pool));
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
-
-  run_it();
 }

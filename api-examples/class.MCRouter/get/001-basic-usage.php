@@ -27,6 +27,7 @@ async function get_value(\MCRouter $mc, string $key): Awaitable<?string> {
   return $ret;
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
@@ -38,9 +39,4 @@ async function run(): Awaitable<void> {
   if (!$val) {
     echo "Key must not have existed\n";
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

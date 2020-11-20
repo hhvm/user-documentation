@@ -25,6 +25,7 @@ async function append_to_value(
   await $mc->append($key, $append_str);
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
@@ -38,9 +39,4 @@ async function run(): Awaitable<void> {
   } catch (\MCRouterException $ex) {
     \var_dump($ex->getMessage());
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

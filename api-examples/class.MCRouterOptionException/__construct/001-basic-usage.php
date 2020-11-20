@@ -12,6 +12,7 @@ function construct_mcrouter(darray<string, mixed> $options): void {
 
 }
 
+<<__EntryPoint>>
 function run(): void {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   // For many use cases, calling MCRouter::createSimple($servers) would
@@ -35,9 +36,4 @@ function run(): void {
     \var_dump($ex->getMessage());
     \var_dump($ex->getErrors()); // An array of 'format' => 'Need config string'
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  run();
 }

@@ -49,14 +49,9 @@ async function iterate(): Awaitable<int> {
   }
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $r = \HH\Asio\join(iterate());
   \var_dump($r);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

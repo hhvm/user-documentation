@@ -24,14 +24,9 @@ async function get_client_stats(): Awaitable<?\AsyncMysqlClientStats> {
   return $cstats;
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $cs = \HH\Asio\join(get_client_stats());
   \var_dump($cs);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

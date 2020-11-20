@@ -24,14 +24,9 @@ async function get_warning_count_on_query(): Awaitable<int> {
   return $wc;
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $wc = \HH\Asio\join(get_warning_count_on_query());
   \var_dump($wc);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

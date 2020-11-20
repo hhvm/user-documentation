@@ -17,6 +17,7 @@ async function add_value(
   await $mc->add($key, $value);
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
@@ -30,9 +31,4 @@ async function run(): Awaitable<void> {
     \var_dump($ex->getOp()); // will output an integer
     \var_dump(\MCRouter::getOpName($ex->getOp())); // will output friendlyt name
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

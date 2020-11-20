@@ -39,14 +39,9 @@ async function simple_queryf(): Awaitable<int> {
   return $x + $result->numRows();
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $r = \HH\Asio\join(simple_queryf());
   \var_dump($r);
-}
-
-<<__EntryPoint>>
-function percent_equal_placeholders_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

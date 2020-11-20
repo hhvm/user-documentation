@@ -32,14 +32,9 @@ async function simple_query_error(): Awaitable<int> {
   return $result->numRows();
 }
 
+<<__EntryPoint>>
 function run(): void {
+  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $r = \HH\Asio\join(simple_query_error());
   \var_dump($r);
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
 }

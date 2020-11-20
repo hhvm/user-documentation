@@ -41,13 +41,8 @@ async function simple_query(): Awaitable<int> {
   return $x + $result->numRows();
 }
 
-function run(): void {
-  $r = \HH\Asio\join(simple_query());
-}
-
 <<__EntryPoint>>
-function basic_usage_main(): void {
+function run(): void {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-
-  run();
+  $r = \HH\Asio\join(simple_query());
 }

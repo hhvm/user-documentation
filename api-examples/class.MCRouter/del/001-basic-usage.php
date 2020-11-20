@@ -22,6 +22,7 @@ async function del_key(\MCRouter $mc, string $key): Awaitable<void> {
   await $mc->del($key);
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
   $unique_key = \str_shuffle('ABCDEFGHIJKLMN');
@@ -36,9 +37,4 @@ async function run(): Awaitable<void> {
   } catch (\MCRouterException $ex) {
     \var_dump($ex->getMessage()); // We should get here because key was deleted
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }

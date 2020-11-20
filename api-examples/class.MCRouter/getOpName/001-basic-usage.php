@@ -12,6 +12,7 @@ function get_op_name(int $op_num): string {
   return \MCRouter::getOpName($op_num);
 }
 
+<<__EntryPoint>>
 async function run(): Awaitable<void> {
   $mc = get_simple_mcrouter();
 
@@ -34,9 +35,4 @@ async function run(): Awaitable<void> {
     \var_dump($ex->getOp());
     \var_dump(get_op_name($ex->getOp()));
   }
-}
-
-<<__EntryPoint>>
-function basic_usage_main(): void {
-  \HH\Asio\join(run());
 }
