@@ -7,7 +7,7 @@ async function one(): Awaitable<int> {
 }
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   $mcr = \MCRouter::createSimple(ImmVector {});
 
   $handles = \HH\Asio\vw(Vector {
@@ -18,7 +18,7 @@ function basic_usage_main(): void {
     one(),
   });
 
-  $results = \HH\Asio\join($handles);
+  $results = await $handles;
   foreach ($results as $result) {
     if ($result->isSucceeded()) {
       echo "Success: ";

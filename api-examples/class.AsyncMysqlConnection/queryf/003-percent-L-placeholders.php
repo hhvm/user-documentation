@@ -36,8 +36,8 @@ async function percent_L_queryf(): Awaitable<int> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $r = \HH\Asio\join(percent_L_queryf());
+  $r = await percent_L_queryf();
   \var_dump($r);
 }

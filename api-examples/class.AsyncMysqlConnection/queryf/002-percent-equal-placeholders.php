@@ -40,8 +40,8 @@ async function simple_queryf(): Awaitable<int> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $r = \HH\Asio\join(simple_queryf());
+  $r = await simple_queryf();
   \var_dump($r);
 }

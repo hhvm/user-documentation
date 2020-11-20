@@ -42,7 +42,7 @@ async function simple_query(): Awaitable<int> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $r = \HH\Asio\join(simple_query());
+  $r = await simple_query();
 }

@@ -49,9 +49,9 @@ async function run_it_2(MyPool $pool): Awaitable<void> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $pool = new MyPool();
-  \HH\Asio\join(run_it_1($pool));
-  \HH\Asio\join(run_it_2($pool));
+  await run_it_1($pool);
+  await run_it_2($pool);
 }

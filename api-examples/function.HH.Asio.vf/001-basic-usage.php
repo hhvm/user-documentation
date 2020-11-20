@@ -3,7 +3,7 @@
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\vf;
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   $times = ImmVector {
     100000000, // Sat, 03 Mar 1973 09:46:40
     200000000, // Mon, 03 May 1976 19:33:20
@@ -20,9 +20,8 @@ function basic_usage_main(): void {
   // Similar to $times->filter(...)
   // But awaits the awaitable result of the callback
   // rather than using it directly
-  $saturdays = \HH\Asio\join(
-    \HH\Asio\vf($times, async ($time) ==> (\gmdate('w', $time) == 6)),
-  );
+  $saturdays =
+    await \HH\Asio\vf($times, async ($time) ==> (\gmdate('w', $time) == 6));
 
   foreach ($saturdays as $time) {
     echo \gmdate('r', $time), "\n";

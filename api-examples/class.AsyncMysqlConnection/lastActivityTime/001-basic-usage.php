@@ -24,8 +24,8 @@ async function get_time(): Awaitable<float> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $t = \HH\Asio\join(get_time());
+  $t = await get_time();
   \var_dump($t);
 }

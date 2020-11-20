@@ -13,7 +13,7 @@ enum COLOR: int {
 }
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   $fruits = ImmMap {
     'Apple' => COLOR::RED,
     'Banana' => COLOR::YELLOW,
@@ -26,9 +26,8 @@ function basic_usage_main(): void {
   // Similar to $times->filter(...)
   // But awaits the awaitable result of the callback
   // rather than using it directly
-  $orange_fruits = \HH\Asio\join(
-    \HH\Asio\mf($fruits, async ($color) ==> ($color == COLOR::ORANGE)),
-  );
+  $orange_fruits =
+    await \HH\Asio\mf($fruits, async ($color) ==> ($color == COLOR::ORANGE));
 
   foreach ($orange_fruits as $fruit => $color) {
     echo $fruit, 's are ', COLOR::getNames()[$color], "\n";

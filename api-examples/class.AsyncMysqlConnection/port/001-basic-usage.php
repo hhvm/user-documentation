@@ -24,8 +24,8 @@ async function get_port(): Awaitable<int> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
-  $port = \HH\Asio\join(get_port());
+  $port = await get_port();
   \var_dump($port);
 }

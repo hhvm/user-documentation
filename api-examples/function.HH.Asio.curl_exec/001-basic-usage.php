@@ -12,8 +12,8 @@ async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   $urls = Set {'http://www.google.com', 'https://www.cnn.com'};
-  $content = \HH\Asio\join(get_curl_content($urls));
+  $content = await get_curl_content($urls);
   \var_dump($content);
 }

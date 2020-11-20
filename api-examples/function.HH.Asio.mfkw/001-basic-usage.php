@@ -3,11 +3,11 @@
 namespace Hack\UserDocumentation\API\Examples\HH\Asio\mfkw;
 
 <<__EntryPoint>>
-function basic_usage_main(): void {
+async function basic_usage_main(): Awaitable<void> {
   // Return all non-negative odd numbers
   // Positive evens filtered out,
   // Negatives and zero cause exception
-  $odds = \HH\Asio\join(\HH\Asio\mfkw(
+  $odds = await \HH\Asio\mfkw(
     Map {
       '-one' => -1,
       'zero' => 0,
@@ -24,7 +24,7 @@ function basic_usage_main(): void {
         return ($val % 2) == 1;
       }
     },
-  ));
+  );
 
   foreach ($odds as $num => $result) {
     if ($result->isSucceeded()) {

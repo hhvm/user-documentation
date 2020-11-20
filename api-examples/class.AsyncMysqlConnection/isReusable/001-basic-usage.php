@@ -43,18 +43,18 @@ function get_pool(): \AsyncMysqlConnectionPool {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
   $pool = get_pool();
 
-  $conn = \HH\Asio\join(get_connection($pool));
+  $conn = await get_connection($pool);
   // This will be false now
   \var_dump($conn->isReusable());
-  $r2 = \HH\Asio\join(simple_query($conn));
+  $r2 = await simple_query($conn);
   $conn->close();
 
-  $conn2 = \HH\Asio\join(get_connection($pool));
-  $r2 = \HH\Asio\join(simple_query_2($conn2));
+  $conn2 = await get_connection($pool);
+  $r2 = await simple_query_2($conn2);
   // You will see one destroyed pool connection since we close $conn above
   // and we didn't set it to be reusable
   \var_dump($pool->getPoolStats());
