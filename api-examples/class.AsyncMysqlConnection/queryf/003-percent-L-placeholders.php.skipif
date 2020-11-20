@@ -1,6 +1,7 @@
-<?hh // partial
+<?hh
 
 <<__EntryPoint>>
-function percent_L_placeholders_php_skipif_main(): void {
+async function basic_usage_php_skipif_main(): Awaitable<void> {
   require(__DIR__ . '/../../__includes/async_mysql_require_env.inc.php');
+  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 }
