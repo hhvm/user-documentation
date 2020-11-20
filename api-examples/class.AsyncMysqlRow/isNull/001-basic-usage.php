@@ -30,7 +30,7 @@ async function simple_query(): Awaitable<int> {
       // An AsyncMysqlRow
       $row = $row_block->getRow(0);
       if (!$row->isNull("age")) {
-        return $row->at("age"); // int
+        return $row->getFieldAsInt("age");
       }
       return -1;
     }
