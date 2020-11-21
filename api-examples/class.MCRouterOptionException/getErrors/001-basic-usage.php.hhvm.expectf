@@ -1,6 +1,5 @@
-array(1) {
-  [0]=>
-  array(3) {
+varray(1) {
+  darray(3) {
     ["option"]=>
     string(16) "asynclog_disable"
     ["value"]=>
