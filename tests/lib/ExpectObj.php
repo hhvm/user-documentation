@@ -15,7 +15,7 @@ final class ExpectObj<T> extends \Facebook\FBExpect\ExpectObj<T> {
 
   public function toMatchExpectregexFile(string $file): void where T = string {
     $this->toMatchRegExp(
-      \file_get_contents($file),
+      '/^'.\file_get_contents($file).'$/s',
       "Did not match regex in file '%s'",
       $file,
     );
@@ -24,6 +24,7 @@ final class ExpectObj<T> extends \Facebook\FBExpect\ExpectObj<T> {
   public function toMatchExpectfFile(string $file): void where T = string {
     // derived from hphp/test/run.php
     $pattern = \file_get_contents($file)
+      |> Str\trim($$)
       |> \preg_quote($$, '/')
       |> Str\replace_every($$, dict[
         // Stick to basics.
