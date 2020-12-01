@@ -138,10 +138,7 @@ async function run(): Awaitable<void> {
   $conn = await get_connection();
   \var_dump($conn);
 }
-```.example.hhvm.out
-object(AsyncMysqlConnection)#6 (0)
-}
-```.hhvm.expectf
+```.hhvm.expect
 object(AsyncMysqlConnection) (0) {
 }
 ```.skipif
