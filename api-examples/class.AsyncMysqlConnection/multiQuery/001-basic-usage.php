@@ -36,7 +36,7 @@ async function simple_multi_query(): Awaitable<int> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $r = await simple_multi_query();
   \var_dump($r);
 }

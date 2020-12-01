@@ -25,7 +25,7 @@ async function get_connect_time(): Awaitable<?int> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $time = await get_connect_time();
   \var_dump($time);
 }

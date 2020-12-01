@@ -25,7 +25,7 @@ async function get_server_info(): Awaitable<string> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $info = await get_server_info();
   \var_dump($info);
 }

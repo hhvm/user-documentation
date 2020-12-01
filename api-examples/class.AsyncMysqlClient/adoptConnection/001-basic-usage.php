@@ -22,7 +22,7 @@ async function get_rows(
 
 <<__EntryPoint>>
 async function run_it(): Awaitable<void> {
-  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
+  \init_docs_autoloader();
   $sconn = get_synchronous_connection();
   $aconn = use_async_connection($sconn);
   $rows = await get_rows($aconn);

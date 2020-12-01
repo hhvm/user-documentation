@@ -5,7 +5,7 @@ namespace Hack\UserDocumentation\API\Examples\AsyncMysql;
 use Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function skipif_async(): Awaitable<void> {
-  require __DIR__."/async_mysql_connect.inc.php";
+  \init_docs_autoloader();
 
   $pool = new \AsyncMysqlConnectionPool(darray[]);
   try {

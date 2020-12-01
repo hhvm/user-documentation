@@ -44,7 +44,7 @@ function get_pool(): \AsyncMysqlConnectionPool {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $pool = get_pool();
 
   $conn = await get_connection($pool);

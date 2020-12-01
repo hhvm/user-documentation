@@ -25,7 +25,7 @@ async function get_time(): Awaitable<float> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $t = await get_time();
   \var_dump($t);
 }

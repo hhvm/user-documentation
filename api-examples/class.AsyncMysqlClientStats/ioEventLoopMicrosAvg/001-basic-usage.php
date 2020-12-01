@@ -25,7 +25,7 @@ async function get_loop_info(): Awaitable<?float> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $l = await get_loop_info();
   \var_dump($l);
 }
