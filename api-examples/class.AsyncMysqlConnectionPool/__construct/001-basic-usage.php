@@ -28,7 +28,7 @@ function get_stats(\AsyncMysqlConnectionPool $pool): dict<string, int> {
 
 <<__EntryPoint>>
 async function run_it(): Awaitable<void> {
-  require __DIR__."/../../__includes/async_mysql_connect.inc.php";
+  \init_docs_autoloader();
   $options = darray[
     'pool_connection_limit' => 2,
   ];

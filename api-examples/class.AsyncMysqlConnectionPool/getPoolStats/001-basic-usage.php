@@ -29,7 +29,7 @@ function get_stats(\AsyncMysqlConnectionPool $pool): mixed {
 
 <<__EntryPoint>>
 async function run_it(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $pool = set_connection_pool();
   $conn_awaitables = Vector {};
   $conn_awaitables[] = connect_with_pool($pool);

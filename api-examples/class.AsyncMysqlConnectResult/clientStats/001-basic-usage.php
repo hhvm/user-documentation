@@ -26,7 +26,7 @@ async function get_client_stats(): Awaitable<?\AsyncMysqlClientStats> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $cs = await get_client_stats();
   \var_dump($cs);
 }

@@ -26,7 +26,7 @@ async function get_warning_count_on_query(): Awaitable<int> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $wc = await get_warning_count_on_query();
   \var_dump($wc);
 }

@@ -50,7 +50,7 @@ async function run_it_2(MyPool $pool): Awaitable<void> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $pool = new MyPool();
   await run_it_1($pool);
   await run_it_2($pool);

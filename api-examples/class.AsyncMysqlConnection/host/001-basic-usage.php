@@ -25,7 +25,7 @@ async function get_host(): Awaitable<string> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $info = await get_host();
   \var_dump($info);
 }

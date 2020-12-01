@@ -34,7 +34,7 @@ async function simple_query_error(): Awaitable<int> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/../../__includes/async_mysql_connect.inc.php';
+  \init_docs_autoloader();
   $r = await simple_query_error();
   \var_dump($r);
 }
