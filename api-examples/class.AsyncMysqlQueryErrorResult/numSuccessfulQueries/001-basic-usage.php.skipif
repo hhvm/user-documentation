@@ -2,6 +2,6 @@
 
 <<__EntryPoint>>
 async function basic_usage_php_skipif_main(): Awaitable<void> {
-  require(__DIR__ . '/../../__includes/async_mysql_require_env.inc.php');
+  \init_docs_autoloader();
   await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 }
