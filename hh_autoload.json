@@ -3,6 +3,7 @@
     "src/",
     "build/final/codegen/",
     "guides/",
+    "api-examples/",
     "tests/"
   ],
   "extraFiles": [ "LocalConfig.php" ],
