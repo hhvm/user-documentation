@@ -1,1 +1,0 @@
-When an error occurs when establishing a connection or on a query, and you catch the exception that is thrown, you will get an `AsyncMysqlErrorResult`. And one of the methods on an `AsyncMysqlErrorResult` is `failureType()`, which tells you whether the operation was a timeout (via the string `TimedOut`) or a server rejection of our connection or query (via the string `Failed`).

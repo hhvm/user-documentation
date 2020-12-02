@@ -1,1 +1,0 @@
-Most of the `MCRouter` examples use `MCRouter::get` in order to demonstrate other functions of the API. This example calls out `get` explicitly in its own function to show you how it works. If you try to `get` on a key that does not exist, an exception will be thrown.

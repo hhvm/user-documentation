@@ -1,1 +1,0 @@
-This example shows how to use the `AsyncMysqlQueryResult::lastInsertId` method to get the last primary id inserted into a table, if one exists. This will return `0` if your query did not actually insert an id, for example in a `SELECT` statement.

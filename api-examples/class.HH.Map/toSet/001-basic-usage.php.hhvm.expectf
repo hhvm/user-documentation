@@ -1,7 +1,0 @@
-bool(true)
-object(HH\Set) (4) {
-  string(7) "#ff0000"
-  string(7) "#00ff00"
-  string(7) "#0000ff"
-  string(7) "#ffff00"
-}

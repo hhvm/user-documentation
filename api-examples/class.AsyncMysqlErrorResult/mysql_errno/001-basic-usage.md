@@ -1,1 +1,0 @@
-When an error occurs when establishing a connection or on a query, and you catch the exception that is thrown, you will get an `AsyncMysqlErrorResult`. And one of the methods on an `AsyncMysqlErrorResult` is `mysql_errno()`, which gives you the MySQL error number. In this case, the error number is 1146, which represents a table not existing.

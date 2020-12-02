@@ -1,8 +1,0 @@
-object(HH\Vector) (3) {
-  [0]=>
-  string(5) "green"
-  [1]=>
-  string(4) "blue"
-  [2]=>
-  string(6) "yellow"
-}

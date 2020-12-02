@@ -1,8 +1,0 @@
-darray(3) {
-  ["name"]=>
-  string(8) "Jane Doe"
-  ["age"]=>
-  int(55)
-  ["points"]=>
-  float(25.3)
-}

@@ -1,1 +1,0 @@
-The following example shows how to use the `%L` placeholder for `AsyncMysqlConnection::queryf`. First you get a connection from an `AsyncMysqlConnectionPool`; then we are passing a vector of ids to used in the placeholder. The placeholder ends up being `%Ld` since the ids are integers.

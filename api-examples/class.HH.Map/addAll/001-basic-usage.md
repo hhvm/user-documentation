@@ -1,1 +1,0 @@
-The following example adds a collection of key-value pairs to the `Map` `$m` and also adds multiple collections of key-value pairs to `$m` through chaining. Since `Map::addAll()` returns a [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy) of `$m` itself, you can chain a bunch of `addAll()` calls together.

@@ -1,7 +1,0 @@
-string(23) "Failure parsing options"
-varray(1) {
-  darray(1) {
-    ["format"]=>
-    string(18) "Need config string"
-  }
-}
