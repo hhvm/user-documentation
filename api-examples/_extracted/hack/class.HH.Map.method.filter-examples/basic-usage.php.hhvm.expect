@@ -1,0 +1,6 @@
+object(HH\Map) (2) {
+  ["red"]=>
+  string(7) "#ff0000"
+  ["yellow"]=>
+  string(7) "#ffff00"
+}

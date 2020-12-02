@@ -1,0 +1,10 @@
+object(HH\ImmVector) (4) {
+  [0]=>
+  string(3) "foo"
+  [1]=>
+  float(-1.5)
+  [2]=>
+  int(100)
+  [3]=>
+  string(3) "bar"
+}

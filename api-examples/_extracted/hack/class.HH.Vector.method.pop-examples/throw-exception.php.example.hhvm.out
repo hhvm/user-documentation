@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught exception 'InvalidOperationException' with message 'Cannot pop empty Vector' in /home/example/api-examples/_extracted/hack/class.HH.Vector.method.pop-examples/throw-exception.php:14
+Stack trace:
+#0 /home/example/api-examples/_extracted/hack/class.HH.Vector.method.pop-examples/throw-exception.php(14): HH\Vector->pop()
+#1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodPop\ThrowException\_main()
+#2 {main}

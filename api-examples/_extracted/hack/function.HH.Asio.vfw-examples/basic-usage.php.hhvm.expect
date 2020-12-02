@@ -1,0 +1,4 @@
+Failed: string(18) "-1 is non-positive"
+Failed: string(17) "0 is non-positive"
+Success: int(1)
+Success: int(3)

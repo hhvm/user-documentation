@@ -1,0 +1,22 @@
+object(HH\Map) (4) {
+  ["red"]=>
+  string(7) "#ff0000"
+  ["green"]=>
+  string(7) "#00ff00"
+  ["blue"]=>
+  string(7) "#0000ff"
+  ["yellow"]=>
+  string(7) "#ffff00"
+}
+object(HH\Map) (5) {
+  ["red"]=>
+  string(7) "#ff0000"
+  ["green"]=>
+  string(7) "#00ff00"
+  ["blue"]=>
+  string(7) "#0000ff"
+  ["yellow"]=>
+  string(7) "#ffff00"
+  ["purple"]=>
+  string(7) "#663399"
+}

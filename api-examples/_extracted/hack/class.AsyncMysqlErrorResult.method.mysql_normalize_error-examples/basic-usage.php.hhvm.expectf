@@ -1,0 +1,3 @@
+bool(true)
+string(34) "Table 'testdb.bogus' doesn't exist"
+int(%d)

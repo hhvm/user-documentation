@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught exception 'OutOfBoundsException' with message 'String key "blurple" is not defined' in %s/api-examples/_extracted/hack/class.HH.Map.method.at-examples/missing-key.php:20
+Stack trace:
+#0 %s/api-examples/_extracted/hack/class.HH.Map.method.at-examples/missing-key.php(20): HH\Map->at()
+#1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHMapMethodAt\MissingKey\_main()
+#2 {main}

@@ -1,0 +1,26 @@
+object(HH\Vector) (5) {
+  [0]=>
+  int(0)
+  [1]=>
+  int(2)
+  [2]=>
+  int(4)
+  [3]=>
+  int(6)
+  [4]=>
+  int(8)
+}
+Time non-lazy: 0.053816556930542
+object(HH\Vector) (5) {
+  [0]=>
+  int(0)
+  [1]=>
+  int(2)
+  [2]=>
+  int(4)
+  [3]=>
+  int(6)
+  [4]=>
+  int(8)
+}
+Time lazy: 0.0069270133972168

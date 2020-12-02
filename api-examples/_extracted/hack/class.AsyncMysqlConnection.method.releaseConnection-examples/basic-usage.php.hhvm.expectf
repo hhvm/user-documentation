@@ -1,0 +1,3 @@
+resource(%d) of type (mysql link)
+Connection destroyed when released
+int(%d)

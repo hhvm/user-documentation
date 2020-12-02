@@ -1,0 +1,4 @@
+one / two Failed: string(18) "1 is an odd number"
+two / two Success: int(1)
+three / two Failed: string(18) "3 is an odd number"
+four / two Success: int(2)

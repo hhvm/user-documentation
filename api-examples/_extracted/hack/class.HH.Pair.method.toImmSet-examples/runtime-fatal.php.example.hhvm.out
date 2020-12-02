@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Only integer values and string values may be used with Sets' in /home/example/api-examples/_extracted/hack/class.HH.Pair.method.toImmSet-examples/runtime-fatal.php:15
+Stack trace:
+#0 /home/example/api-examples/_extracted/hack/class.HH.Pair.method.toImmSet-examples/runtime-fatal.php(15): HH\Pair->toImmSet()
+#1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHPairMethodToImmSet\RuntimeFatal\_main()
+#2 {main}

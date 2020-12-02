@@ -1,0 +1,12 @@
+object(HH\ImmVector) (2) {
+  [0]=>
+  string(3) "foo"
+  [1]=>
+  float(-1.5)
+}
+object(HH\ImmVector) (1) {
+  [0]=>
+  float(-1.5)
+}
+object(HH\ImmVector) (0) {
+}

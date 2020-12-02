@@ -1,0 +1,5 @@
+object(HH\Set) (3) {
+  string(5) "green"
+  string(4) "blue"
+  string(6) "yellow"
+}

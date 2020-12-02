@@ -1,0 +1,12 @@
+<?hh
+
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ClassAsyncMysqlConnectResultMethodElapsedMicros\BasicUsage;
+
+<<__EntryPoint>>
+async function basic_usage_php_skipif_main(): Awaitable<void> {
+  \init_docs_autoloader();
+  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
+}

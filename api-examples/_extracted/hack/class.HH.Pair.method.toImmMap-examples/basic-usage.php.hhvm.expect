@@ -1,0 +1,7 @@
+bool(true)
+object(HH\ImmMap) (2) {
+  [0]=>
+  string(3) "foo"
+  [1]=>
+  float(-1.5)
+}
