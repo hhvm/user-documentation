@@ -1,1 +1,0 @@
-The following example adds a collection of values to the `Vector` `$v` and also adds multiple collections of values to `$v` through chaining. Since `Vector::addAll()` returns a [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy) of `$v` itself, you can chain a bunch of `addAll()` calls together, and that will add all those collection of values to `$v`.

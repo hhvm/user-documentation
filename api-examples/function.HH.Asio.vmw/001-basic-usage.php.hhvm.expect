@@ -1,4 +1,0 @@
-Failed: string(18) "1 is an odd number"
-Success: int(1)
-Failed: string(18) "3 is an odd number"
-Success: int(2)

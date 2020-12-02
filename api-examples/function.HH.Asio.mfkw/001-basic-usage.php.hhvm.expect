@@ -1,4 +1,0 @@
--one Failed: string(20) "-one is non-positive"
-zero Failed: string(20) "zero is non-positive"
-one Success: int(1)
-three Success: int(3)

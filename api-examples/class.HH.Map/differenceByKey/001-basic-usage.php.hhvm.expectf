@@ -1,6 +1,0 @@
-object(HH\Map) (2) {
-  ["yellow"]=>
-  string(7) "#ffff00"
-  ["purple"]=>
-  string(7) "#663399"
-}

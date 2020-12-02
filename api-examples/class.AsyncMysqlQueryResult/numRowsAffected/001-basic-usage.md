@@ -1,1 +1,0 @@
-This example shows how to determine the number of rows affected by a given query using `AsyncMysqlQueryResult::numRowsAffected`. This is especially useful on an `INSERT` query or similar, where you won't get any rows back in your result, but you want to make sure your query did what it was supposed to do.

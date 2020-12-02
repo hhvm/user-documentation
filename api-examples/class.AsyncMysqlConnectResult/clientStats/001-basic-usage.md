@@ -1,1 +1,0 @@
-Every connection has a connection result. You get the connection result from a call to `AsyncMysqlConnection::connectResult`. And one of the methods on an `AsyncMysqlConnectResult` is `clientStats()`, which gives you some information about the client you are connecting too.

@@ -1,1 +1,0 @@
-If you ever want to get a plain, vanilla synchronous MySQL connection from your async connection, you call `AsyncMysqlConnection::releaseConnection`. This examples show how to get such a connection, noting too that your async connection is destroyed.

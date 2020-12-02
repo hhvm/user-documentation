@@ -1,1 +1,0 @@
-You normally will catch a `MCRouterOptionException` over constructing one explicitly, but it can be done. Here is an example where you can check the options and throw the exception with a custom error if you don't have good options.

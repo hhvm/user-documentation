@@ -1,5 +1,0 @@
-Fatal error: Uncaught exception 'InvalidOperationException' with message 'Cannot pop empty Vector' in %s:%d
-Stack trace:
-#0 %s(%d): HH\Vector->pop()
-#1 %s
-#2 {main}

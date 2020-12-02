@@ -1,1 +1,0 @@
-This example creates new `Vector`s by concatenating other `Traversable`s. Unlike `Vector::addAll()` this method returns a new `Vector` (not a [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy)).

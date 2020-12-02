@@ -1,1 +1,0 @@
-The following example describes how to get the average loop time of this SQL client's event handling (in this particular case, performing the connection) via `AsyncMysqlClientStats::ioEventLoopMicrosAvg`.

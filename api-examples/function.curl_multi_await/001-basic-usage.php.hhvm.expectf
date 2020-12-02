@@ -1,6 +1,0 @@
-object(HH\Vector) (2) {
-  [0]=>
-  string(%d) "%s"
-  [1]=>
-  string(%d) "%s"
-}

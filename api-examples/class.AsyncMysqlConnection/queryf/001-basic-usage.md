@@ -1,1 +1,0 @@
-The following example shows how to use `AsyncMysqlConnection::queryf`. First you get a connection from an `AsyncMysqlConnectionPool`; then you decide what parameters you want to pass as query placeholders.

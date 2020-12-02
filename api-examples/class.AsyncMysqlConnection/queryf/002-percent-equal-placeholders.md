@@ -1,1 +1,0 @@
-The following example uses the `%=s` placeholder in order to allow you to check whether an email address with the provided `string` exists in the table, or, if `null` is passed, whether there is a user with a `null` email address. 

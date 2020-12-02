@@ -1,1 +1,0 @@
-When an error occurs when establishing a connection or on a query, and you catch the exception that is thrown, you will get an `AsyncMysqlErrorResult`. And one of the methods on an `AsyncMysqlErrorResult` is `mysql_error()`, which gives you the MySQL error string. In this case, the error string is letting us know that the `bogus` table does not exist.

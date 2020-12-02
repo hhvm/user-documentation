@@ -1,1 +1,0 @@
-It is **highly recommended** that you use connection pools when using async MySQL. That way you don't have to create a new connection every time you want to make a query to the database. The following example shows you how to connect to a MySQL database using an `AsyncMySqlConnectionPool`.
