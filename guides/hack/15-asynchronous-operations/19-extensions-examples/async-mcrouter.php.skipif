@@ -1,7 +1,14 @@
 <?hh // strict
 
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncMcrouter;
+
 <<__EntryPoint>>
 function async_mcrouter_php_skipif_main(): void {
+  \init_docs_autoloader();
+
   if (!extension_loaded('mcrouter') || !extension_loaded('memcached')) {
     echo 'skip';
   }
