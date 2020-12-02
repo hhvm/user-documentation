@@ -3,7 +3,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\AsyncVs;
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\AsyncVsAwaitable\Car;
 
 class VolkswagenDiesel implements Car {
   public function drive(): Awaitable<void> {

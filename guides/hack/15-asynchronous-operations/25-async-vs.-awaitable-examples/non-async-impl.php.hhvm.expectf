@@ -1,2 +1,0 @@
-
-Fatal error: Undefined interface: HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\AsyncVs\Car in %s/guides/hack/15-asynchronous-operations/25-async-vs.-awaitable-examples/non-async-impl.php on line 8
