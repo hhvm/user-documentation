@@ -1,0 +1,10 @@
+object(HH\Vector) (4) {
+  [0]=>
+  string(6) "yellow"
+  [1]=>
+  string(4) "blue"
+  [2]=>
+  string(5) "green"
+  [3]=>
+  string(3) "red"
+}

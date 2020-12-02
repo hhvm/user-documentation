@@ -1,0 +1,12 @@
+object(HH\Set) (4) {
+  string(3) "RED"
+  string(5) "GREEN"
+  string(4) "BLUE"
+  string(6) "YELLOW"
+}
+object(HH\Set) (4) {
+  string(3) "red"
+  string(3) "gre"
+  string(3) "blu"
+  string(3) "yel"
+}

@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught exception 'OutOfBoundsException' with message 'Integer key 10 is out of bounds' in /home/example/api-examples/_extracted/hack/class.HH.Vector.method.at-examples/missing-key.php:15
+Stack trace:
+#0 /home/example/api-examples/_extracted/hack/class.HH.Vector.method.at-examples/missing-key.php(15): HH\Vector->at()
+#1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodAt\MissingKey\_main()
+#2 {main}

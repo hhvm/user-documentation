@@ -1,0 +1,11 @@
+bool(true)
+object(HH\ImmMap) (4) {
+  ["red"]=>
+  string(3) "red"
+  ["green"]=>
+  string(5) "green"
+  ["blue"]=>
+  string(4) "blue"
+  ["yellow"]=>
+  string(6) "yellow"
+}

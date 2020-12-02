@@ -1,0 +1,8 @@
+object(HH\Set) (2) {
+  string(5) "apple"
+  string(6) "orange"
+}
+object(HH\Set) (2) {
+  string(7) "cabbage"
+  string(6) "potato"
+}

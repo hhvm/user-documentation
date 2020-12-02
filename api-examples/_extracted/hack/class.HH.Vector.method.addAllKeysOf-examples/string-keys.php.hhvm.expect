@@ -1,0 +1,10 @@
+object(HH\Vector) (4) {
+  [0]=>
+  string(5) "apple"
+  [1]=>
+  string(6) "orange"
+  [2]=>
+  string(7) "cabbage"
+  [3]=>
+  string(6) "potato"
+}

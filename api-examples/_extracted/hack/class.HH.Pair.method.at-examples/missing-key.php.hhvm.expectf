@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught exception 'OutOfBoundsException' with message 'Integer key 2 is out of bounds' in %s/api-examples/_extracted/hack/class.HH.Pair.method.at-examples/missing-key.php:15
+Stack trace:
+#0 %s/api-examples/_extracted/hack/class.HH.Pair.method.at-examples/missing-key.php(15): HH\Pair->at()
+#1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHPairMethodAt\MissingKey\_main()
+#2 {main}

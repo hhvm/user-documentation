@@ -1,0 +1,4 @@
+Failed: string(21) "Division by zero: 1/0"
+Success: int(2)
+Success: int(3)
+Success: int(4)

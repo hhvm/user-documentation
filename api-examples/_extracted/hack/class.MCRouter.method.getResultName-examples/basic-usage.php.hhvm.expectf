@@ -1,0 +1,10 @@
+string(17) "mc_res_foundstale"
+string(13) "mc_res_stored"
+string(14) "mc_res_unknown"
+string(14) "mc_res_unknown"
+string(14) "mc_res_unknown"
+string(14) "mc_res_timeout"
+string(16) "mc_res_bad_flags"
+string(18) "mc_res_local_error"
+int(4)
+string(15) "mc_res_notfound"

@@ -1,0 +1,4 @@
+object(HH\Map) (1) {
+  ["yellow"]=>
+  string(7) "#ffff00"
+}

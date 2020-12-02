@@ -1,0 +1,18 @@
+<?hh
+
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\FunctionHHAsioM\BasicUsage;
+
+<<__EntryPoint>>
+function _main(): void {
+  \init_docs_autoloader();
+
+  <?php
+
+  // Skip if we don't have an internet connection
+  if (!get_headers("www.example.com")) {
+    print "skip";
+  }
+}
