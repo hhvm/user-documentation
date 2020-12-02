@@ -184,9 +184,6 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
     $root = LocalConfig::ROOT.'/api-examples';
     $urls = keyset[];
     foreach (\glob($root.'/class.*/*') as $dir) {
-      if (!\is_dir($dir)) {
-        continue;
-      }
       $urls[] = Str\replace($dir, $root.'/class.', 'class/');
     }
     foreach (\glob($root.'/function.*') as $dir) {
@@ -197,7 +194,7 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
       $url ==> vec[Str\format(
         '/%s/reference/%s/',
         Str\contains($url, '/HH.Lib.') ? 'hsl' : 'hack',
-        $url,
+        Str\strip_suffix($url, '.md'),
       )],
     );
   }
