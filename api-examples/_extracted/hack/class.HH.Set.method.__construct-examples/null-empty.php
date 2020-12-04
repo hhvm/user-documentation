@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ClassHHSetMethodConstruct\NullEmpty;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   // An empty Set is created if null is provided

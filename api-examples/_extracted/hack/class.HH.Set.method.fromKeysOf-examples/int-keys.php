@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ClassHHSetMethodFromKeysOf\IntKeys;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $uploaders_by_id = Map {

@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodFilter\BasicUsage;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $colors = Vector {'red', 'green', 'blue', 'yellow'};

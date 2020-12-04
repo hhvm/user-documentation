@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\KeysetColors;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $colors = keyset[]; // create an empty keyset

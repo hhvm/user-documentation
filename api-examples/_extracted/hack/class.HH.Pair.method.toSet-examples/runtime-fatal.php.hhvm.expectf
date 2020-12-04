@@ -3,4 +3,7 @@ Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Only in
 Stack trace:
 #0 %s/api-examples/_extracted/hack/class.HH.Pair.method.toSet-examples/runtime-fatal.php(15): HH\Pair->toSet()
 #1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHPairMethodToSet\RuntimeFatal\_main()
-#2 {main}
+#2 (): Closure$__SystemLib\enter_async_entry_point()
+#3 (): HH\Asio\join()
+#4 (): __SystemLib\enter_async_entry_point()
+#5 {main}

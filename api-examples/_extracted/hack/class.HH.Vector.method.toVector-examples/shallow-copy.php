@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodToVector\ShallowCopy;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $inner = Vector {1, 2, 3};

@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ClassHHSetMethodZip\EmptyUsage;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   // The $traversable is empty so the result will be empty

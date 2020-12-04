@@ -8,7 +8,7 @@ namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\AssignmentWithV
 use namespace HH\Lib\Str;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $emma = dict['first' => 'Emma', 'last' => 'Smith'];

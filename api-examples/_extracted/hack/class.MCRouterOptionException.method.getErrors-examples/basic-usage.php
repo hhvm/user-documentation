@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ClassMCRouterOptionExceptionMethodGetErrors\BasicUsage;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};

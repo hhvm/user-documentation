@@ -4,7 +4,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Coalesce\Basics;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $nully = null;

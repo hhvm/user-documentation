@@ -283,7 +283,8 @@ abstract class FilterBase extends Markdown\RenderFilter {
         |> Str\split($$, "\n")
         |> Vec\map($$, $line ==> Str\trim_right('  '.$line))
         |> Str\join($$, "\n");
-      $code = "<<__EntryPoint>>\nfunction _main(): void {\n$code\n}\n";
+      $code = "<<__EntryPoint>>\n".
+        "async function _main(): Awaitable<void> {\n$code\n}\n";
     }
 
     // Insert \init_docs_autoloader() call at the beginning of the

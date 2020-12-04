@@ -6,7 +6,7 @@ namespace HHVM\UserDocumentation\Guides\Hsl\FunctionHHLibDictGroupBy\BasicUsage;
 use namespace HH\Lib\Dict;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $numbers = vec[1, 1, 2, 3, 5, 8, 14];

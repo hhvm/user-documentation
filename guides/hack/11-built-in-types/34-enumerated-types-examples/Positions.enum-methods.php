@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumeratedTypes\Positions;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $names = Position::getNames();

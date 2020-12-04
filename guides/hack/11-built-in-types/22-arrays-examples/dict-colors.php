@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Arrays\DictColors;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $colors = dict[]; // create an empty dict

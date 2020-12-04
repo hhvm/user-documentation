@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\List\ListWithinForeach;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $vec_of_tuples = vec[

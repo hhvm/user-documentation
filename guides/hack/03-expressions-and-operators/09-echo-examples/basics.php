@@ -6,7 +6,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Echo\Basics;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $v1 = true;

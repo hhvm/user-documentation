@@ -4,7 +4,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Coalesce\Idx;
 
 <<__EntryPoint>>
-function _main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
   $arr = dict['black' => 10, 'white' => null];
