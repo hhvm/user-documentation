@@ -25,8 +25,7 @@ subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryRe
 Here is a simple example that shows how to get a user name from a database using this extension:
 
 ```async-mysql.php
-use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
-;
+use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function get_connection(): Awaitable<\AsyncMysqlConnection> {
   // Get a connection pool with default options
@@ -74,7 +73,6 @@ async function get_user_info(
 
 <<__EntryPoint>>
 async function async_mysql_tutorial(): Awaitable<void> {
-  require __DIR__.'/async_mysql_connect.inc.php';
   $conn = await get_connection();
   if ($conn !== null) {
     $result = await fetch_user_name($conn, 2);
@@ -105,8 +103,7 @@ The async MySQL extension provides a mechanism to pool connection objects so we 
 want to make a query. The class is [`AsyncMysqlConnectionPool`](../reference/class/AsyncMysqlConnectionPool/) and one can be created like this:
 
 ```async-mysql-connection-pool.php
-use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
-;
+use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function get_pool(): \AsyncMysqlConnectionPool {
   return new \AsyncMysqlConnectionPool(
@@ -128,7 +125,6 @@ async function get_connection(): Awaitable<\AsyncMysqlConnection> {
 
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
-  require __DIR__.'/async_mysql_connect.inc.php';
   $conn = await get_connection();
   \var_dump($conn);
 }

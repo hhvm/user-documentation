@@ -5,8 +5,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncMysql;
 
-use \Hack\UserDocumentation\AsyncOps\Extensions\Examples\AsyncMysql\ConnectionInfo as CI
-;
+use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function get_connection(): Awaitable<\AsyncMysqlConnection> {
   // Get a connection pool with default options
@@ -56,7 +55,6 @@ async function get_user_info(
 async function async_mysql_tutorial(): Awaitable<void> {
   \init_docs_autoloader();
 
-  require __DIR__.'/async_mysql_connect.inc.php';
   $conn = await get_connection();
   if ($conn !== null) {
     $result = await fetch_user_name($conn, 2);
