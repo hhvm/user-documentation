@@ -56,11 +56,5 @@ string(20) "Connection Exception"
 string(67) "Access denied for user 'testuser'@'localhost' (using password: YES)"
 string(20) "Connection Exception"
 ```.skipif
-<?hh
-
-<<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
-  \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```

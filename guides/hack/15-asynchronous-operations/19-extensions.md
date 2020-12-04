@@ -93,13 +93,7 @@ string(%d) "%s"
 bool(true)
 bool(true)
 ```.skipif
-<?hh // strict
-
-<<__EntryPoint>>
-function async_mysql_php_skipif_main(): void {
-  require(__DIR__ . '/async_mysql_require_env.inc.php');
-  async_mysql_skipif();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```
 
 ### Connection Pools
@@ -142,13 +136,7 @@ async function run(): Awaitable<void> {
 object(AsyncMysqlConnection) (0) {
 }
 ```.skipif
-<?hh // strict
-
-<<__EntryPoint>>
-function async_mysql_connection_pool_php_skipif_main(): void {
-  require(__DIR__ . '/async_mysql_require_env.inc.php');
-  async_mysql_skipif();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```
 
 It is ***highly recommended*** that connection pools are used for MySQL connections; if for some reason we really need one, single asynchronous
@@ -211,35 +199,7 @@ string(4) "Joel"
 ```.hhvm.expectf
 string(%d) "%s"
 ```.skipif
-<?hh // strict
-
-<<__EntryPoint>>
-function async_mcrouter_php_skipif_main(): void {
-  if (!extension_loaded('mcrouter') || !extension_loaded('memcached')) {
-    echo 'skip';
-  }
-
-  // e.g., export HHVM_TEST_MCROUTER=127.0.0.1:11211
-  if (!getenv('HHVM_TEST_MCROUTER')) {
-    echo 'skip';
-  }
-
-  $memc = new Memcached();
-  $memc->addServer('localhost', '11211');
-  $version = $memc->getVersion();
-  if (!$version) {
-    echo "SKIP No Memcached running";
-  } else {
-    $memc->quit();
-  }
-
-  try {
-    $servers = Vector{getenv('HHVM_TEST_MCROUTER')};
-    $mc = \MCRouter::createSimple($servers);
-  } catch (Exception $ex) {
-    echo 'skip';
-  }
-}
+\Hack\UserDocumentation\API\Examples\MCRouter\skipif();
 ```
 
 If an issue occurs when using this protocol, two possible exceptions can be thrown: `MCRouterException` when something goes wrong with

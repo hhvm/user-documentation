@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
@@ -6,9 +6,8 @@
 namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncMysql;
 
 <<__EntryPoint>>
-function async_mysql_php_skipif_main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
-  require(__DIR__ . '/async_mysql_require_env.inc.php');
-  async_mysql_skipif();
+  await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 }

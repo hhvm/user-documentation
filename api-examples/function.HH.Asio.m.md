@@ -28,10 +28,8 @@ async function basic_usage_main(): Awaitable<void> {
   }
 }
 ```.skipif
-<?php
-
 // Skip if we don't have an internet connection
-if (!get_headers("www.example.com")) {
+if (!\get_headers("www.example.com")) {
   print "skip";
 }
 ```

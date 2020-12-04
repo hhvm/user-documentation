@@ -9,10 +9,8 @@ namespace HHVM\UserDocumentation\Guides\Hack\FunctionHHAsioMmk\BasicUsage;
 async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
-  <?php
-
   // Skip if we don't have an internet connection
-  if (!get_headers("www.example.com")) {
+  if (!\get_headers("www.example.com")) {
     print "skip";
   }
 }

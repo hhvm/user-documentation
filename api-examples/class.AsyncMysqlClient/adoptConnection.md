@@ -33,11 +33,5 @@ int(%d)
 ```.example.hhvm.out
 int(21)
 ```.skipif
-<?hh
-
-<<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
-  \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```

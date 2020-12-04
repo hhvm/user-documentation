@@ -35,11 +35,5 @@ int(%d)
 float(21.760009765625)
 int(1)
 ```.skipif
-<?hh
-
-<<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
-  \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```

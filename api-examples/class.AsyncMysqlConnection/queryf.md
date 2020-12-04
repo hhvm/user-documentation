@@ -47,13 +47,7 @@ int(%d)
 ```.example.hhvm.out
 int(1)
 ```.skipif
-<?hh
-
-<<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
-  \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```
 
 The following example uses the `%=s` placeholder in order to allow you to check whether an email address with the provided `string` exists in the table, or, if `null` is passed, whether there is a user with a `null` email address.
@@ -106,13 +100,7 @@ int(%d)
 ```.example.hhvm.out
 int(18)
 ```.skipif
-<?hh
-
-<<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
-  \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```
 
 The following example shows how to use the `%L` placeholder for `AsyncMysqlConnection::queryf`. First you get a connection from an `AsyncMysqlConnectionPool`; then we are passing a vector of ids to used in the placeholder. The placeholder ends up being `%Ld` since the ids are integers.
@@ -161,11 +149,5 @@ int(%d)
 ```.example.hhvm.out
 int(1)
 ```.skipif
-<?hh
-
-<<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
-  \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```

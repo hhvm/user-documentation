@@ -51,11 +51,5 @@ resource(4) of type (mysql link)
 Connection destroyed when released
 int(2)
 ```.skipif
-<?hh
-
-<<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
-  \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
-}
+await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```

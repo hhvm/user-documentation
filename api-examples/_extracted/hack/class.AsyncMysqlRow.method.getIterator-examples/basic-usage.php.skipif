@@ -6,7 +6,8 @@
 namespace HHVM\UserDocumentation\Guides\Hack\ClassAsyncMysqlRowMethodGetIterator\BasicUsage;
 
 <<__EntryPoint>>
-async function basic_usage_php_skipif_main(): Awaitable<void> {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
-  await Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
+
+  await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 }

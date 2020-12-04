@@ -1,4 +1,4 @@
-<?hh // strict
+<?hh
 
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
@@ -6,31 +6,8 @@
 namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Extensions\AsyncMcrouter;
 
 <<__EntryPoint>>
-function async_mcrouter_php_skipif_main(): void {
+async function _main(): Awaitable<void> {
   \init_docs_autoloader();
 
-  if (!extension_loaded('mcrouter') || !extension_loaded('memcached')) {
-    echo 'skip';
-  }
-
-  // e.g., export HHVM_TEST_MCROUTER=127.0.0.1:11211
-  if (!getenv('HHVM_TEST_MCROUTER')) {
-    echo 'skip';
-  }
-
-  $memc = new Memcached();
-  $memc->addServer('localhost', '11211');
-  $version = $memc->getVersion();
-  if (!$version) {
-    echo "SKIP No Memcached running";
-  } else {
-    $memc->quit();
-  }
-
-  try {
-    $servers = Vector{getenv('HHVM_TEST_MCROUTER')};
-    $mc = \MCRouter::createSimple($servers);
-  } catch (Exception $ex) {
-    echo 'skip';
-  }
+  \Hack\UserDocumentation\API\Examples\MCRouter\skipif();
 }
