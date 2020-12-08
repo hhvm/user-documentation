@@ -18,7 +18,7 @@ This type doesn't implement the method `openDoors` (Typing[4054])
   As defined here
 
 File "/home/example/interface-bad.php", line 36, characters 17-23:
-No method `takeOff` in `HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Paper` (Typing[4053])
+No instance method `takeOff` in `HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Paper` (Typing[4053])
   File "/home/example/interface-bad.php", line 25, characters 19-21:
   Did you mean `fly` instead?
   File "/home/example/interface-bad.php", line 34, characters 12-16:

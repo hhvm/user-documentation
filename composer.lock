@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d7aef3c563f1fa8fae1748374de56b3f",
+    "content-hash": "49269cc9bf0a445b0c828bcdcc4f4d2b",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -475,16 +475,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.84.0",
+            "version": "v4.84.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "be354d65b55ed502f5b49695cf0fc36b1a377cfa"
+                "reference": "5ce1bd7d0eb6a75a30e1ff6e6adeedab2e4dd238"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/be354d65b55ed502f5b49695cf0fc36b1a377cfa",
-                "reference": "be354d65b55ed502f5b49695cf0fc36b1a377cfa",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/5ce1bd7d0eb6a75a30e1ff6e6adeedab2e4dd238",
+                "reference": "5ce1bd7d0eb6a75a30e1ff6e6adeedab2e4dd238",
                 "shasum": ""
             },
             "require": {
@@ -521,9 +521,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.84.0"
+                "source": "https://github.com/hhvm/hhast/tree/v4.84.1"
             },
-            "time": "2020-11-23T15:26:41+00:00"
+            "time": "2020-12-07T22:07:13+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -619,20 +619,20 @@
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.66.0",
+            "version": "v4.76.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "1491b97fffd1db91fd7254d2bae10c20eb01e3e0"
+                "reference": "b6b330bd3a46a98c5e9c91f7375ba0c1e0ff8f7f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/1491b97fffd1db91fd7254d2bae10c20eb01e3e0",
-                "reference": "1491b97fffd1db91fd7254d2bae10c20eb01e3e0",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/b6b330bd3a46a98c5e9c91f7375ba0c1e0ff8f7f",
+                "reference": "b6b330bd3a46a98c5e9c91f7375ba0c1e0ff8f7f",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.66",
+                "hhvm": "^4.76",
                 "hhvm/hsl": "^4.15"
             },
             "provide": {
@@ -656,9 +656,9 @@
             "description": "The Hack Standard Library - Experimental Additions",
             "support": {
                 "issues": "https://github.com/hhvm/hsl-experimental/issues",
-                "source": "https://github.com/hhvm/hsl-experimental/tree/v4.66.0"
+                "source": "https://github.com/hhvm/hsl-experimental/tree/v4.76.0"
             },
-            "time": "2020-09-02T18:55:57+00:00"
+            "time": "2020-12-08T01:23:24+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -908,7 +908,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.86.*"
+        "hhvm": "4.87.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
