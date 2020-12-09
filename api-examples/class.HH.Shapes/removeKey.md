@@ -1,6 +1,6 @@
 This example shows that `removeKey` directly removes a key from a `Shape`:
 
-```basic-usage.php
+```basic-usage.hack
 function run(shape('x' => int, 'y' => int) $point): void {
   // Prints the value at key 'y'
   \var_dump($point['y']);

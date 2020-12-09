@@ -1,6 +1,6 @@
 The following example describes how to get the average loop time of this SQL client's event handling (in this particular case, performing the connection) via `AsyncMysqlClientStats::ioEventLoopMicrosAvg`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

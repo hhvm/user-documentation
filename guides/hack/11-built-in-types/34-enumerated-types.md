@@ -4,7 +4,7 @@ that has more than three, but less than say 10 states? For example, when working
 values like Top, Bottom, Left, Right, and Center.  And while we could use `int`, that type allows far more invalid values than there are valid ones.
 The solution is to use an enumerated type and its associated values. For example:
 
-```Positions.inc.php no-auto-output
+```Positions.inc.hack no-auto-output
 enum Position: int {
   Top = 0;
   Bottom = 1;
@@ -50,7 +50,7 @@ type of `int`, and a set of five constant values `Top`, `Bottom`, `Left`, `Right
 of values is up to the programmer.) And while enumerated constant within any given enumerated type must be distinct, multiple constants *can*
 be given the *same* value. For example:
 
-```Colors.php no-auto-output
+```Colors.hack no-auto-output
 enum Colors: int {
   Red = 3;
   White = 5;
@@ -62,7 +62,7 @@ enum Colors: int {
 The initializer for an enumeration can contain non-trivial constant expressions including references to the names of other enumeration-constants
 in the same enumerated type.  For example:
 
-```BitFlags.php no-auto-output
+```BitFlags.hack no-auto-output
 enum BitFlags: int as int {
   F1 = 1; // value 1
   F2 = BitFlags::F1 << 1; // value 2
@@ -77,7 +77,7 @@ the relational or bitwise operators), but not vice versa.
 
 Here's an example that uses enumeration constants with `string` values:
 
-```Permission.php no-auto-output
+```Permission.hack no-auto-output
 enum Permission: string {
   Read = 'R';
   Write = 'W';
@@ -90,7 +90,7 @@ All enumerated types behave as if they contain a set of public static methods.
 
 Here is an example that uses several of these methods:
 
-```Positions.enum-methods.php
+```Positions.enum-methods.hack
 $names = Position::getNames();
 echo " Position::getNames() ---\n";
 foreach ($names as $key => $value) {

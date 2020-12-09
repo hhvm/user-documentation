@@ -15,7 +15,7 @@ type `Container`-of-type-`num` and returns a nullable-of-`float`.
 
 Consider the following example:
 
-```num-argument-type.php no-auto-output
+```num-argument-type.hack no-auto-output
 class Point {
   private float $x;
   private float $y;

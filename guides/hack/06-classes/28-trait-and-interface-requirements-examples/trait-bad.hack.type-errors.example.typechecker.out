@@ -1,0 +1,5 @@
+File "/home/example/trait-bad.hack", line 32, characters 7-11:
+Failure to satisfy requirement: HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\TraitBad\Machine (Typing[4111])
+  File "/home/example/trait-bad.hack", line 19, characters 19-25:
+  Required here
+

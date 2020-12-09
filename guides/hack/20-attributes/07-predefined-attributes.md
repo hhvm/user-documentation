@@ -88,7 +88,7 @@ dynamic instantiations of classes without this attribute.
 
 A type is _enforceable_ if it can be used in `is` and `as` expressions.  Examples of non-enforceable types are function types and erased (non-reified) generics.  The `__Enforceable` attribute is used to annotate abstract type constants so they can only be instantiated with enforceable types, and thus used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
 
-```enforceable.php.type-errors
+```enforceable.hack.type-errors
 abstract class A {
   abstract const type Tnoenf;
   <<__Enforceable>>
@@ -119,7 +119,7 @@ Similarly, the `__Enforceable` attribute can also be used to annotate reified ge
 Requires callers to explicitly specify the value for a generic
 type. Normally Hack allows generics to be inferred at the call site.
 
-```explicit.php no-auto-output
+```explicit.hack no-auto-output
 function values_are_equal<<<__Explicit>> T>(T $x, T $y): bool {
   return $x === $y;
 }
@@ -302,7 +302,7 @@ class is marked as `final`? Your mocking framework would generally be out of luc
 The `__MockClass` attribute allows you to override the restriction of `final` on a class or method within a class, so that a
 mock class can exist.
 
-```mock.php
+```mock.hack
 final class FinalClass {
   public static function f(): void {
     echo __METHOD__, "\n";
@@ -340,7 +340,7 @@ Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack lega
 
 This attribute is used to annotate reified type parameters to ensure that they are only instantiated with classes on which `new` can be safely called.  A common pattern, defining a function that creates instances of a class passed as type parameter, is:
 
-```newable.php no-auto-output
+```newable.hack no-auto-output
 final class A {}
 
 function f<<<__Newable>> reify T as A>(): T {
@@ -352,7 +352,7 @@ The class `A` must either be final (as in the example) or annotated with `__Cons
 
 A complete example thus is:
 
-```newable-complete.php no-auto-output
+```newable-complete.hack no-auto-output
 <<__ConsistentConstruct>>
 abstract class A {
   public function __construct(int $x, int $y) {}

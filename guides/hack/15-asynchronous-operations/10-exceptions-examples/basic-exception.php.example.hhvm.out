@@ -1,7 +1,0 @@
-
-Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/basic-exception.php:9
-Stack trace:
-#0 /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/basic-exception.php(17): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\BasicException\exception_thrower()
-#1 /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/basic-exception.php(24): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\BasicException\basic_exception()
-#2 (): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\BasicException\main()
-#3 {main}

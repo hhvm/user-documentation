@@ -1,6 +1,6 @@
 This example shows that `toMap` returns a deep copy of the `Map` `$m`. Mutating the new `Map` `$m2` doesn't affect the original `Map`.
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

@@ -1,6 +1,6 @@
 This example reserves space for 1000 elements and then fills the `Vector` with 1000 integers:
 
-```basic-usage.php no-auto-output
+```basic-usage.hack no-auto-output
 const int VECTOR_SIZE = 1000;
 
 <<__EntryPoint>>

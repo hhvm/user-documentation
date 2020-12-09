@@ -1,0 +1,21 @@
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\ReifiedGenerics\NewReify;
+
+<<__ConsistentConstruct>>
+abstract class A {}
+
+class B extends A {}
+class C extends A {}
+
+function f<<<__Newable>> reify T as A>(): T {
+  return new T();
+}
+
+<<__EntryPoint>>
+function main(): void {
+  f<A>(); // not newable since it is abstract class
+  f<B>(); // success
+  f<C>(); // success
+}

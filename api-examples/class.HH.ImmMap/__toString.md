@@ -1,6 +1,6 @@
 The string version of an `ImmMap` is always `"ImmMap"`:
 
-```basic-usage.php
+```basic-usage.hack
 $im = ImmMap {'a' => 1, 'b' => 2, 'c' => 3};
 echo $im->__toString()."\n";
 

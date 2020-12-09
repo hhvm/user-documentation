@@ -1,0 +1,2 @@
+
+Fatal error: Cannot instantiate abstract class HHVM\UserDocumentation\Guides\Hack\Generics\ReifiedGenerics\NewReify\A in %s/guides/hack/12-generics/20-reified-generics-examples/new-reify.hack.type-errors on line 13

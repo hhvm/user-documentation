@@ -1,6 +1,6 @@
 This example shows how `toVector()` returns a copy of `$v` (a new `Vector` object), so mutating this new `Vector` doesn't affect the original.
 
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 // Make a new Vector that is a copy of $v (i.e. contains the same elements)
@@ -20,7 +20,7 @@ rather than a deep copy (a new `Vector` object containing copies of the elements
 Thus, mutating an element of `$v` that is itself an object also mutates the corresponding element of `$v2`, since the element in `$v`
 is the same object as the element in `$v2`.
 
-```shallow-copy.php
+```shallow-copy.hack
 $inner = Vector {1, 2, 3};
 $v = Vector {Vector {'a'}, $inner, Vector {'c'}};
 

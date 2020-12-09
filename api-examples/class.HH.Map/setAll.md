@@ -1,6 +1,6 @@
 This example shows how `setAll()` can be used with any `KeyedTraversable`:
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

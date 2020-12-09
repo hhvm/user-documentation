@@ -1,6 +1,6 @@
 The following shows a scenario where you are going to wait for and return the result of activity on multiple curl handles. A bit of a simpler approach would be to use [`HH\Asio\curl_exec`](//hack/reference/function/HH.Asio.curl_exec/), which is a wrapper around `curl_multi_await`.
 
-```basic-usage.php
+```basic-usage.hack
 async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
 
   $chs = Vector {};

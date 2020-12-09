@@ -1,6 +1,6 @@
 This example shows how to get an iterator from a `Pair` and how to consume it:
 
-```basic-usage.php
+```basic-usage.hack
 $p = Pair {'foo', -1.5};
 
 // Get a KeyedIterator for the Pair

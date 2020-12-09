@@ -1,6 +1,6 @@
 This example shows that `keyExists` returns true if a key exists in the `Shape` (even if the corresponding value is `NULL`):
 
-```basic-usage.php
+```basic-usage.hack
 function run(shape(?'x' => ?int, ?'y' => ?int, ?'z' => ?int) $point): void {
   // The key 'x' exists in Shape $point
   \var_dump(Shapes::keyExists($point, 'x'));

@@ -1,6 +1,6 @@
 This example prints the first and second values of the `Pair`:
 
-```existing-key.php
+```existing-key.hack
 $p = Pair {'foo', -1.5};
 
 // Print the first element
@@ -12,7 +12,7 @@ $p = Pair {'foo', -1.5};
 
 This example throws an `OutOfBoundsException` because a `Pair` only has the indexes `0` and `1`:
 
-```missing-key.php
+```missing-key.hack
 $p = Pair {'foo', -1.5};
 
 // Index 2 doesn't exist because pairs always have exactly two elements

@@ -1,6 +1,6 @@
 This example shows that converting a `Vector` to a `Set` also removes duplicate values:
 
-```basic-usage.php
+```basic-usage.hack
 // This Vector contains repetitions of 'red' and 'blue'
 $v = Vector {'red', 'green', 'red', 'blue', 'red', 'yellow', 'blue'};
 

@@ -4,7 +4,7 @@ The following example shows how to use `AsyncMysqlException::mysqlErrorString` t
 Access denied for user 'testuser'@'localhost' (using password: YES)
 ```
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

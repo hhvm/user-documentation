@@ -22,7 +22,7 @@ Str\format($s, 1);
 
 You can define your own functions with format string arguments too.
 
-```define.php no-auto-output
+```define.hack no-auto-output
 function takes_format_string(
   \HH\FormatString<\PlainSprintf> $format,
   mixed ...$args

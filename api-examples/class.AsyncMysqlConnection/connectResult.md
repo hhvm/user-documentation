@@ -2,7 +2,7 @@ This example shows how to get data about the async MySQL connection you made via
 
 Interestingly, if you run this example twice or more, you may notice that the second time on will show a lower elapsed time than the first. This could be due to caching mechanisms, etc.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

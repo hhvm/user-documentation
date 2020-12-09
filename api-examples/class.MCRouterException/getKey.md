@@ -1,6 +1,6 @@
 The following example shows how to retrieve the key from an `MCRouterException` using its `getKey` method. If there is no key associated with the exception, then `""` will be returned.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

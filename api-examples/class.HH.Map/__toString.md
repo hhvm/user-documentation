@@ -1,6 +1,6 @@
 The string version of a `Map` is always `"Map"`:
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {'a' => 1, 'b' => 2, 'c' => 3};
 echo $m->__toString()."\n";
 

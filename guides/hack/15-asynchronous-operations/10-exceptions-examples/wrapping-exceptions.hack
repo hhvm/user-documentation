@@ -1,0 +1,32 @@
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions;
+
+use namespace HH\Lib\Vec;
+
+async function exception_thrower(): Awaitable<void> {
+  throw new \Exception();
+}
+
+async function non_exception_thrower(): Awaitable<int> {
+  return 2;
+}
+
+async function wrapping_exceptions(): Awaitable<void> {
+  $handles = vec[
+    \HH\Asio\wrap(exception_thrower()),
+    \HH\Asio\wrap(non_exception_thrower()),
+  ];
+  // Since we wrapped, the results will contain both the exception and the
+  // integer result
+  $results = await Vec\from_async($handles);
+  \var_dump($results);
+}
+
+<<__EntryPoint>>
+function main(): void {
+  \init_docs_autoloader();
+
+  \HH\Asio\join(wrapping_exceptions());
+}

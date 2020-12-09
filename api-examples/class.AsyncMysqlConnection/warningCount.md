@@ -1,6 +1,6 @@
 The following example shows how to get the number of errors or warnings on the last SQL query via `AsyncMysqlConnection::warningCount`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

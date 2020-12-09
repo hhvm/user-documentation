@@ -1,6 +1,6 @@
 In this example the `Pair`'s values are mapped to `0` if they're `NULL`:
 
-```basic-usage.php
+```basic-usage.hack
 $p = Pair {null, -1.5};
 
 $immutable_v = $p->map($value ==> {

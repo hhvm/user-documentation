@@ -3,7 +3,7 @@ and inheritance hierarchies, so they are discussed under those topics.
 
 For now, the declaration of a type constant involves the keywords `const type`.  Without explanation, here's an example:
 
-```simple.php no-auto-output
+```simple.hack no-auto-output
 abstract class CBase {
   abstract const type T;
   // ...

@@ -1,6 +1,6 @@
 The following example shows how to use `AsyncMysqlException::timedOut` to determine if the connection failed by a timeout.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

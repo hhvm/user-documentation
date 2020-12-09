@@ -1,0 +1,54 @@
+object(Facebook\XHP\HTML\div) (6) {
+  ["tagName":protected]=>
+  string(%d) "div"
+  ["__isRendered":protected]=>
+  bool(false)
+  ["attributes":"Facebook\XHP\Core\node":private]=>
+  dict(0) {
+  }
+  ["children":"Facebook\XHP\Core\node":private]=>
+  vec(3) {
+    string(%d) " My Text "
+    object(Facebook\XHP\HTML\strong) (6) {
+      ["tagName":protected]=>
+      string(%d) "strong"
+      ["__isRendered":protected]=>
+      bool(false)
+      ["attributes":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
+      }
+      ["children":"Facebook\XHP\Core\node":private]=>
+      vec(1) {
+        string(%d) "My Bold Text"
+      }
+      ["context":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
+      }
+      ["source"]=>
+      string(%d) "%s/guides/hack/21-XHP/07-basic-usage-examples/basic.hack:15"
+    }
+    object(Facebook\XHP\HTML\i) (6) {
+      ["tagName":protected]=>
+      string(%d) "i"
+      ["__isRendered":protected]=>
+      bool(false)
+      ["attributes":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
+      }
+      ["children":"Facebook\XHP\Core\node":private]=>
+      vec(1) {
+        string(%d) "My Italic Text"
+      }
+      ["context":"Facebook\XHP\Core\node":private]=>
+      dict(0) {
+      }
+      ["source"]=>
+      string(%d) "%s/guides/hack/21-XHP/07-basic-usage-examples/basic.hack:16"
+    }
+  }
+  ["context":"Facebook\XHP\Core\node":private]=>
+  dict(0) {
+  }
+  ["source"]=>
+  string(%d) "%s/guides/hack/21-XHP/07-basic-usage-examples/basic.hack:17"
+}

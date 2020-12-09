@@ -2,7 +2,7 @@ The type name `this` refers to *the current class type at run time*. As such, it
 a trait. (The type name `this` should not be confused with [`$this`](../source-code-fundamentals/names.md), which refers to *the current
 instance*, whose type is `this`.)  For example:
 
-```this.php no-auto-output
+```this.hack no-auto-output
 interface I1 {
   abstract const type T1 as arraykey;
   public function get_ID(): this::T1;

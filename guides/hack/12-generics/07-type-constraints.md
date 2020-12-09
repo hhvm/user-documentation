@@ -9,7 +9,7 @@ A constraint can have one of three forms:
 
 Consider the following example in which function `max_val` has one type parameter, `T`, and that has a constraint, `num`:
 
-```max-val.php
+```max-val.hack
 function max_val<T as num>(T $p1, T $p2): T {
   return $p1 > $p2 ? $p1 : $p2;
 }

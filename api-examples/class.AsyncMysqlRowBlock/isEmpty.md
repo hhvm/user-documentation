@@ -1,6 +1,6 @@
 The following example uses `AsyncMysqlRowBlock::isEmpty` to determine whether there are actually any row_blocks returned from the call to `AsyncMysqlRowBlock::rowBlocks()` method
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

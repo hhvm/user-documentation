@@ -6,7 +6,7 @@ in order to make sure any string pass to something like
 We *strongly* recommend using an API like `AsyncMysqlConnection::queryf` instead,
 which automatically escapes strings passed to `%s` placeholders.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

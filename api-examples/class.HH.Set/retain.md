@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 // Only keep values beginning with 'r' or 'b'

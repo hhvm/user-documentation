@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 <<__EntryPoint>>
 async function basic_usage_main(): Awaitable<void> {
   // Map a vector of numbers to half integer half

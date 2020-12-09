@@ -24,7 +24,7 @@ subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryRe
 
 Here is a simple example that shows how to get a user name from a database using this extension:
 
-```async-mysql.php
+```async-mysql.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function get_connection(): Awaitable<\AsyncMysqlConnection> {
@@ -102,7 +102,7 @@ does support connection pooling.
 The async MySQL extension provides a mechanism to pool connection objects so we don't have to create a new connection every time we
 want to make a query. The class is [`AsyncMysqlConnectionPool`](../reference/class/AsyncMysqlConnectionPool/) and one can be created like this:
 
-```async-mysql-connection-pool.php
+```async-mysql-connection-pool.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function get_pool(): \AsyncMysqlConnectionPool {
@@ -153,7 +153,7 @@ we can use the `async` versions of the core memcached protocol methods like [`ad
 
 Here is a simple example showing how one might get a user name from memcached:
 
-```async-mcrouter.php
+```async-mcrouter.hack
 function get_mcrouter_object(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);
@@ -229,7 +229,7 @@ namespace HH\Asio {
 Here is an example of getting a vector of URL contents, using a lambda expression to cut down on the code verbosity that would come with
 full closure syntax:
 
-```async-curl.php
+```async-curl.hack
 function get_urls(): vec<string> {
   return vec[
     "http://example.com",
@@ -271,7 +271,7 @@ async function stream_await(resource $fp, int $events, float $timeout = 0.0): Aw
 
 The following example shows how to use [`stream_await`](../reference/function/stream_await/) to write to resources:
 
-```async-stream.php
+```async-stream.hack
 function get_resources(): vec<resource> {
   $r1 = \fopen('php://stdout', 'w');
   $r2 = \fopen('php://stdout', 'w');

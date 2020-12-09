@@ -36,7 +36,7 @@ For users experienced with XHP, the biggest advantage is that it is easy to add 
 which can then be used like plain HTML elements. For example, this site defines an `<a_post>` tag that has the same interface
 as a standard `<a>` tag, but makes a POST request instead of a GET request:
 
-```a_post.inc.php
+```a_post.inc.hack
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{XHPHTMLHelpers, a, form};
 
@@ -84,7 +84,7 @@ form.postLink {
 
 At this point, the new element can be used like any built-in element:
 
-```a_post_usage.php
+```a_post_usage.hack
 use type Facebook\XHP\HTML\a;
 use type HHVM\UserDocumentation\a_post;
 
@@ -107,7 +107,7 @@ async function intro_examples_a_a_post(): Awaitable<void> {
 
 Since XHP objects are first-class and not just strings, a whole slew of validation can occur to ensure that your UI does not have subtle bugs:
 
-```tag-matching-validation.php.type-errors
+```tag-matching-validation.hack.type-errors
 function intro_examples_tag_matching_validation_using_string(): void {
   echo '<div class="section-header">';
   echo '<a href="#use">You should have used <span class="xhp">XHP</naps></a>';
@@ -136,7 +136,7 @@ The above code won't typecheck or run because the XHP validator will see that `<
 the following code will typecheck correctly but fail to run, because while the tags are matched, they are not nested correctly
 (according to the HTML specification), and nesting verification only happens at runtime:
 
-```allowed-tag-validation.inc.php
+```allowed-tag-validation.inc.hack
 use namespace Facebook\XHP;
 use type Facebook\XHP\HTML\{i, ul};
 
@@ -155,7 +155,7 @@ async function intro_examples_allowed_tag_validation_using_xhp(
   }
 }
 ```
-```allowed-tag-validation.php
+```allowed-tag-validation.hack
 <<__EntryPoint>>
 async function intro_examples_allowed_tag_validation_run(): Awaitable<void> {
   intro_examples_allowed_tag_validation_using_string();
@@ -170,7 +170,7 @@ String-based entry and validation are prime candidates for cross-site scripting 
 functions like [`htmlspecialchars`](http://php.net/manual/en/function.htmlspecialchars.php), but then you have to actually remember
 to use those functions. XHP automatically escapes reserved HTML characters to HTML entities before output.
 
-```avoid-xss.php
+```avoid-xss.hack
 use type Facebook\XHP\HTML\{body, head, html};
 
 function intro_examples_avoid_xss_using_string(string $could_be_bad): void {

@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 // Create a new Vector from an array
 $v = Vector::fromItems(varray['red', 'green', 'blue', 'yellow']);
 \var_dump($v);

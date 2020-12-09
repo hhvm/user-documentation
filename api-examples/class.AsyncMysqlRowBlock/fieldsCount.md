@@ -14,7 +14,7 @@ PRIMARY KEY (userID)
 
 So, in the example, given the table created with the SQL above, there are 4 fields.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

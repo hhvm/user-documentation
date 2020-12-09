@@ -1,6 +1,6 @@
 The following example shows how to use `AsyncMysqlRowIterator::rewind` to get back to the beginning of the iterator as necessary.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

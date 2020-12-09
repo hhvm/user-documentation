@@ -1,6 +1,6 @@
 This example adds `string` keys from a `Map` to a `Set` as its values:
 
-```string-keys.php
+```string-keys.hack
 $fruit_calories = Map {
   'apple' => 95,
   'orange' => 45,
@@ -24,7 +24,7 @@ $food_names->addAllKeysOf($vegetable_calories);
 
 This example adds `int` keys from a `Map` to a `Set` as its values:
 
-```int-keys.php
+```int-keys.hack
 $uploaders_by_id = Map {
   4993063 => 'Amy Smith',
   9361760 => 'John Doe',

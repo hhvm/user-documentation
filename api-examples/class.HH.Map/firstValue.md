@@ -1,6 +1,6 @@
 The following example gets the first value from a `Map`. An empty `Map` will return `null` as its first value.
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

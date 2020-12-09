@@ -1,6 +1,6 @@
 The string version of a `Pair` is always `"Pair"`:
 
-```basic-usage.php
+```basic-usage.hack
 $p = Pair {-1, 5};
 echo $p->__toString()."\n";
 

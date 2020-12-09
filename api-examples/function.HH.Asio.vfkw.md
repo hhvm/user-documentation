@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 <<__EntryPoint>>
 async function basic_usage_main(): Awaitable<void> {
   // Return all non-negative odd numbers

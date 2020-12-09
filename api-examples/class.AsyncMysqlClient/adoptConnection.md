@@ -2,7 +2,7 @@ This example shows how to take a synchronous MySQL connection and convert it to 
 
 **NOTE**: Right now this does not work with `mysqli` or `PDO` connections.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function get_synchronous_connection(): resource {

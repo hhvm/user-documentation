@@ -1,6 +1,6 @@
 This example shows that `toImmVector` returns an `ImmVector` containing the `Set`'s values. Mutating the original `Set` doesn't affect the `ImmVector`.
 
-```basic-usage.php
+```basic-usage.hack
 function expects_immutable(ImmVector<string> $iv): void {
   \var_dump($iv);
 }

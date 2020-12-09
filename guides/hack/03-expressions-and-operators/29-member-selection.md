@@ -1,7 +1,7 @@
 The operator `->` is used to access instance properties and instance
 methods on objects.
 
-```IntBox.php no-auto-output
+```IntBox.hack no-auto-output
 class IntBox {
   private int $x;
 

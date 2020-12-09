@@ -1,6 +1,6 @@
 A `continue` statement terminates the execution of the innermost enclosing `do`, `for`, `foreach`, or `while` statement.  For example:
 
-```odd-values.php
+```odd-values.hack
 for ($i = 1; $i <= 10; ++$i) {
   if (($i % 2) === 0)
     continue;

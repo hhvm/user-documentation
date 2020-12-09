@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 // Start at index 1 ('green') and include 3 elements

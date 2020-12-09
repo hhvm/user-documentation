@@ -42,7 +42,7 @@ PRIMARY KEY (userID)
 
 So, in our example, 253 would be returned for the `email` field.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

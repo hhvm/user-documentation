@@ -1,6 +1,6 @@
 This example shows how to get a `KeyedIterator` from a `Map` and how to consume it:
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

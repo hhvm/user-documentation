@@ -6,7 +6,7 @@ documentation; they are added here again for consolidation purposes.
 
 This example shows the basic tenants of async, particularly the keywords used:
 
-```basic.php
+```basic.hack
 // async specifies a function will return an awaitable. Awaitable<string> means
 // that the awaitable will ultimately return a string when complete
 async function trivial(): Awaitable<string> {
@@ -31,7 +31,7 @@ async function call_trivial(): Awaitable<void> {
 
 To get the result of an awaitable in a non-async function, use `join`:
 
-```join.php no-auto-output
+```join.hack no-auto-output
 async function join_async(): Awaitable<string> {
   return "Hello";
 }
@@ -51,7 +51,7 @@ function main(): void {
 
 Closure and lambda expressions can involve async functions:
 
-```closures.php
+```closures.hack
 <<__EntryPoint>>
 async function closure_async(): Awaitable<void> {
   // closure
@@ -73,7 +73,7 @@ async function closure_async(): Awaitable<void> {
 
 This shows a way to organize async functions such that we have a nice clean data dependency graph:
 
-```data-dependencies.php
+```data-dependencies.hack
 class PostData {
   // using constructor argument promotion
   public function __construct(public string $text) {}
@@ -149,7 +149,7 @@ function main(): void {
 Use rescheduling (via `HH\Asio\later`) to batch up operations to send multiple keys in a single request over a high latency network (for
 example purposes, the network isn't high latency, but just returns something random):
 
-```batching.php
+```batching.hack
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);
   return await Batcher::lookup($subkey);
@@ -218,7 +218,7 @@ async function multi_key_lookup(
 We can use rescheduling in a polling loop to allow other awaitables to run. A polling loop may be needed where a service does not have
 an async function to add to the scheduler:
 
-```polling.php
+```polling.hack
 // Of course, this is all made up :)
 class Polling {
   private int $count = 0;

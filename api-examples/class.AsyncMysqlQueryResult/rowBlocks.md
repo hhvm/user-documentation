@@ -19,7 +19,7 @@ object(HH\Vector)#9 (0) {
 
 and thus a subsequent call to `rowBlocks()` will return an empty `Vector`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

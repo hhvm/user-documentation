@@ -23,7 +23,7 @@ Note that all values in the `Vector` returned from `vectorRowsTyped` will be the
 
 Also understand that if you want the actual column names associated with the values in the `Vector`, you should use `mapRowsTyped` instead.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

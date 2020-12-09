@@ -1,7 +1,0 @@
-
-Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php:11
-Stack trace:
-#0 /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(19): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\exception_thrower()
-#1 /home/example/guides/hack/15-asynchronous-operations/10-exceptions-examples/multiple-awaitable-exception.php(30): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\multiple_waithandle_exception()
-#2 (): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\main()
-#3 {main}

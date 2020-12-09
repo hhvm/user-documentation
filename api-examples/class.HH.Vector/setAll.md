@@ -1,6 +1,6 @@
 This example shows how `setAll()` can be used with any `KeyedTraversable`:
 
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 // Set the elements at 0 and 1

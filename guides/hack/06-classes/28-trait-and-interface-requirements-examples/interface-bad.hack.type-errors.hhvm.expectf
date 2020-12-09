@@ -1,0 +1,2 @@
+
+Fatal error: Class 'HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Paper' required to extend class 'HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Machine' by interface 'HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Fliers' in %s/guides/hack/06-classes/28-trait-and-interface-requirements-examples/interface-bad.hack.type-errors on line 22

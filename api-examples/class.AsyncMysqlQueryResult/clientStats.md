@@ -1,6 +1,6 @@
 You can get some statistical information from the MySQL client when you get an `AsyncMysqlQueryResult` via the `clientStats()` method.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

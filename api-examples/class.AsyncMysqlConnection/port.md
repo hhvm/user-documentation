@@ -1,6 +1,6 @@
 The following example shows how to get the port of the MySQL server that this connection is associated with via `AsyncMysqlConnection::port`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

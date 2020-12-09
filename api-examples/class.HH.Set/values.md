@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 $v = $s->values();

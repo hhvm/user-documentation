@@ -10,7 +10,7 @@ simply ready for any future changes that may require async.
 
 These two programs are, for all intents and purposes, equivalent.
 
-```non-async-hello.php
+```non-async-hello.hack
 function get_hello(): string {
   return "Hello";
 }
@@ -21,7 +21,7 @@ function run_na_hello(): void {
 }
 ```
 
-```async-hello.php
+```async-hello.hack
 async function get_hello(): Awaitable<string> {
   return "Hello";
 }
@@ -53,7 +53,7 @@ If you only remember one rule, remember this:
 
 It totally defeats the purpose of async.
 
-```await-loop.php
+```await-loop.hack
 class User {
   public string $name;
 
@@ -96,7 +96,7 @@ In the above example, the loop is doing two things:
 
 Instead, we will want to use our async-aware mapping function, `Vec\map_async`.
 
-```await-no-loop.php
+```await-no-loop.hack
 class User {
   public string $name;
 
@@ -146,7 +146,7 @@ Let's say we are getting blog posts of an author. This would involve the followi
 3. Get comment count for each post id.
 4. Generate final page of information
 
-```data-dependencies.php
+```data-dependencies.hack
 class PostData {
   // using constructor argument promotion
   public function __construct(public string $text) {}
@@ -225,7 +225,7 @@ Wait handles can be rescheduled. This means that they can be sent back to the qu
 run. Batching can be a good use of rescheduling. For example, say we have high latency lookup of data, but we can send multiple keys for
 the lookup in a single request.
 
-```batching.php
+```batching.hack
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);
   return await Batcher::lookup($subkey);
@@ -302,7 +302,7 @@ fetches, and returns the result.
 
 What do you think happens here?
 
-```forget-await.php
+```forget-await.hack
 async function speak(): Awaitable<void> {
   echo "one";
   await \HH\Asio\later();
@@ -325,7 +325,7 @@ appropriately suspend and resume `speak`; otherwise, the async scheduler will pr
 In order to minimize any unwanted side effects (e.g., ordering disparities), the creation and awaiting of awaitables should happen as close
 together as possible.
 
-```side-effects.php
+```side-effects.hack
 async function get_curl_data(string $url): Awaitable<string> {
   return await \HH\Asio\curl_exec($url);
 }
@@ -361,7 +361,7 @@ Given that async is commonly used in operations that are time-consuming, memoizi
 The [`<<__Memoize>>`](../attributes/predefined-attributes.md#__memoize) attribute does the right thing, so, use that. However, if to get
 explicit control of the memoization, *memoize the awaitable* and not the result of awaiting it.
 
-```memoize-result.php
+```memoize-result.hack
 abstract final class MemoizeResult {
   private static async function time_consuming(): Awaitable<string> {
     await \HH\Asio\usleep(5000000);
@@ -404,7 +404,7 @@ still a bug; the time-consuming operation is being done multiple times when it o
 
 Instead, memoize the awaitable:
 
-```memoize-awaitable.php
+```memoize-awaitable.hack
 abstract final class MemoizeAwaitable {
   private static async function time_consuming(): Awaitable<string> {
     await \HH\Asio\usleep(5000000);
@@ -447,7 +447,7 @@ The use of lambdas can cut down on code verbosity that comes with writing full c
 with the [async utility helpers](utility-functions.md).  For example, look how the following three ways to accomplish the same thing can be
 shortened using lambdas.
 
-```lambdas.php
+```lambdas.hack
 namespace Hack\UserDocumentation\AsyncOps\Guidelines\Examples\Lambdas;
 use namespace HH\Lib\Vec;
 
@@ -498,7 +498,7 @@ function main(): void {
 Imagine we are making a call to an `async` function `join_async` from a non-async scope. In order to obtain the desired results, we must
 `join` in order to get the result from an awaitable.
 
-```join.php
+```join.hack
 async function join_async(): Awaitable<string> {
   return "Hello";
 }

@@ -7,7 +7,7 @@ Generics allow programmers to write a class or method with the ability to be par
 
 Consider the following example in which `Stack` is a generic class having one type parameter, `T`:
 
-```Stack.inc.php no-auto-output
+```Stack.inc.hack no-auto-output
 class StackUnderflowException extends \Exception {}
 
 class Stack<T> {
@@ -39,7 +39,7 @@ As shown, the type parameter `T` is used in the declaration of the instance prop
 `push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves
 generic methods.
 
-```Stack.test.php no-auto-output
+```Stack.test.hack no-auto-output
 function useIntStack(Stack<int> $stInt): void {
   $stInt->push(10);
   $stInt->push(20);
@@ -55,7 +55,7 @@ The *arity* of a generic type or method is the number of type parameters declare
 
 Here is an example of a generic function, `swap`, having one type parameter, `T`:
 
-```swap.php
+```swap.hack
 function swap<T>(inout T $i1, inout T $i2): void {
   $temp = $i1;
   $i1 = $i2;

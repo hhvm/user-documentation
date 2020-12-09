@@ -1,6 +1,6 @@
 The following example uses `MCRouter::del` to delete a key from the memcached server. Once the key is deleted, it is no longer accessible. Nor can you delete a non-existing key.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

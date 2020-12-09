@@ -13,7 +13,7 @@ The goal of opt-in reified generics is to bridge the gap between generics and ru
 
 ## Parameter and return type verification
 
-```type-verification.php.type-errors
+```type-verification.hack.type-errors
 class C<reify T> {}
 
 function f(C<int> $c): void {}
@@ -31,7 +31,7 @@ enable_experimental_tc_features=reified_generics
 
 The reified type parameter is checked as well:
 
-```type-verification-2.php.type-errors
+```type-verification-2.hack.type-errors
 class C<reify T> {}
 
 function f<reify T>(T $x): C<T> {
@@ -52,7 +52,7 @@ enable_experimental_tc_features=reified_generics
 
 Suppose you have a `vec<mixed>` and you want to extract all types `T` from it. Prior to reified generics, you'd need to implement a new function for each type `T` but with reified generics you can do this in a generic way. Start by adding the keyword `reify` to the type parameter list.
 
-```type-testing.php no-auto-output
+```type-testing.hack no-auto-output
 function filter<<<__Enforceable>> reify T>(vec<mixed> $list): vec<T> {
   $ret = vec[];
   foreach ($list as $elem) {
@@ -92,7 +92,7 @@ C<int, string> // NOT enforceable as C's second generic is erased
 
 Prior to reified generics, in order to create a new instance of a class without a constant class name, you'd need to pass it as `classname<T>` which is not type safe. In the runtime, classnames are strings.
 
-```new-reify.php.type-errors
+```new-reify.hack.type-errors
 <<__ConsistentConstruct>>
 abstract class A {}
 
@@ -129,7 +129,7 @@ f<A<int>>();
 
 ## Accessing a class constant / static class method
 
-```access.php no-auto-output
+```access.hack no-auto-output
 class C {
   const string class_const = "hi";
   public static function h<reify T>(): void {}

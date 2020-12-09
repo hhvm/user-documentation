@@ -1,7 +1,7 @@
 A constructor is a specially named instance method that is used to initialize the instance immediately after it has been created.  A
 constructor is called by the [`new` operator](../expressions-and-operators/new.md).  For example:
 
-```Point.php
+```Point.hack
 class Point {
   private static int $pointCount = 0; // static property with initializer
   private float $x; // instance property

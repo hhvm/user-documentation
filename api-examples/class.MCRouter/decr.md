@@ -2,7 +2,7 @@ The following example shows how to decrement a value of a key by a specified int
 
 Note that you can't decrement below 0. So if your value is 1 and you try to decrement 3, the value you get back will be 0.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

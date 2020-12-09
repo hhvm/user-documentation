@@ -1,0 +1,18 @@
+File "%s/type-verification-2.hack", line 15, characters 10-14:
+Invalid argument (Typing[4110])
+  File "%s/type-verification-2.hack", line 15, characters 5-7:
+  Expected `int`
+  File "%s/type-verification-2.hack", line 8, characters 21-21:
+    via this generic `T`
+  File "%s/type-verification-2.hack", line 15, characters 10-14:
+  But got `string`
+
+File "%s/type-verification-2.hack", line 9, characters 10-21:
+Invalid return type (Typing[4110])
+  File "%s/type-verification-2.hack", line 8, characters 30-30:
+  Expected `T`
+  File "%s/type-verification-2.hack", line 8, characters 30-30:
+  This type argument to `HHVM\UserDocumentation\Guides\Hack\Generics\ReifiedGenerics\TypeVerification2\C` must match exactly (it is invariant)
+  File "%s/type-verification-2.hack", line 9, characters 16-18:
+  But got `int`
+

@@ -58,7 +58,7 @@ these interfaces are `\XHPUnsafeRenderable` and `\XHPAlwaysValidChild`.
 
 If you need to render raw HTML strings, wrap them in a class that implements this interface and provides a `toHTMLStringAsync()` method:
 
-```md.xss-security-hole.inc.php
+```md.xss-security-hole.inc.hack
 use namespace Facebook\XHP;
 
 /* YOU PROBABLY SHOULDN'T DO THIS
@@ -75,7 +75,7 @@ class ExamplePotentialXSSSecurityHole implements XHP\UnsafeRenderable {
   }
 }
 ```
-```md.xss-security-hole.php no-auto-output
+```md.xss-security-hole.hack no-auto-output
 use type Facebook\XHP\HTML\div;
 
 <<__EntryPoint>>
@@ -93,7 +93,7 @@ async function start(): Awaitable<void> {
 We do not provide an implementation of this interface as a generic implementation tends to be overused; instead, consider making more specific
 implementations:
 
-```md.markdown-wrapper.inc.php
+```md.markdown-wrapper.inc.hack
 use namespace Facebook\XHP;
 
 final class ExampleMarkdownXHPWrapper implements XHP\UnsafeRenderable {
@@ -108,7 +108,7 @@ final class ExampleMarkdownXHPWrapper implements XHP\UnsafeRenderable {
   }
 }
 ```
-```md.markdown-wrapper.php no-auto-output
+```md.markdown-wrapper.hack no-auto-output
 use type Facebook\XHP\HTML\div;
 
 <<__EntryPoint>>
@@ -131,7 +131,7 @@ This can also be implemented by XHP objects, but this usually indicates that som
 
 ## Example
 
-```all-in-one.inc.php
+```all-in-one.inc.hack
 use namespace Facebook\XHP;
 
 final class XHPUnsafeExample implements XHP\UnsafeRenderable {
@@ -141,7 +141,7 @@ final class XHPUnsafeExample implements XHP\UnsafeRenderable {
   }
 }
 ```
-```all-in-one.php
+```all-in-one.hack
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{div, li};
 

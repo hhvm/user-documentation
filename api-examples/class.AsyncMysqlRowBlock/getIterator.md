@@ -2,7 +2,7 @@ The following example shows you how to get an iterator of an `AsyncMysqlRowBlock
 
 And then you can perform operations on that `AsyncMysqlRow`, including get an iterator of that as well.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

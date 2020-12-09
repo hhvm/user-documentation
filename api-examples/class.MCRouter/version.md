@@ -1,6 +1,6 @@
 The following example allows you to use `MCRouter::version` to get the version information of the memcached server you are connected to.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

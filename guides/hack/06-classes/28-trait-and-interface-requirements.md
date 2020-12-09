@@ -21,7 +21,7 @@ require extends <class name>;
 
 Here is an example of a trait that introduces a class and interface requirement, and shows a class that meets the requirement:
 
-```trait-good.php
+```trait-good.hack
 abstract class Machine {
   public function openDoors(): void {
     return;
@@ -63,7 +63,7 @@ function run(): void {
 
 Here is an example of a trait that introduces a class and interface requirement, and shows a class that *does not* meet the requirement:
 
-```trait-bad.php.type-errors
+```trait-bad.hack.type-errors
 abstract class Machine {
   public function openDoors(): void {
     return;
@@ -113,7 +113,7 @@ function run(): void {
 
 Here is an example of an interface that introduces a class requirement, and shows a class that meets the requirement:
 
-```interface-good.php
+```interface-good.hack
 abstract class Machine {
   public function openDoors(): void {
     return;
@@ -149,7 +149,7 @@ function run(): void {
 
 Here is an example of an interface that introduces a class requirement, and shows a class that *does not* meet the requirement:
 
-```interface-bad.php.type-errors
+```interface-bad.hack.type-errors
 abstract class Machine {
   public function openDoors(): void {
     return;

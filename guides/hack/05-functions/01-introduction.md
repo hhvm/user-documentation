@@ -1,6 +1,6 @@
 The `function` keyword defines a global function.
 
-```add_one.php no-auto-output
+```add_one.hack no-auto-output
 function add_one(int $x): int {
   return $x + 1;
 }
@@ -12,7 +12,7 @@ The `function` keyword can also be used to define [methods](/hack/classes/method
 
 Hack supports default values for parameters.
 
-```add_num.php no-auto-output
+```add_num.hack no-auto-output
 function add_value(int $x, int $y = 1): int {
   return $x + $y;
 }
@@ -34,7 +34,7 @@ function add_value_bad(int $x = 1, int $y): int {
 You can use `...` to define a function that takes a variable number of
 arguments.
 
-```varargs.php no-auto-output
+```varargs.hack no-auto-output
 function sum_ints(int $val, int ...$vals): int {
   $result = $val;
   
@@ -61,7 +61,7 @@ sum_ints(0, ...$args);
 
 Functions are values in Hack, so they can be passed as arguments too.
 
-```function_type.php no-auto-output
+```function_type.hack no-auto-output
 function apply_func(int $v, (function(int): int) $f): int {
   return $f($v);
 }

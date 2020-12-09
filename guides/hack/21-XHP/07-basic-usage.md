@@ -24,7 +24,7 @@ conflict with a class named `xhp_p`.
 The following example utilizes three XHP classes: `div`, `strong`, `i`. Whitespace is insignificant, so you can create a readable
 tree structure in your code.
 
-```basic.php
+```basic.hack
 use type Facebook\XHP\HTML\{div, i, strong};
 
 <<__EntryPoint>>
@@ -107,7 +107,7 @@ This also works for attributes:
 
 More complicated expressions are also supported, for example:
 
-```hack-xhp.php
+```hack-xhp.hack
 use type Facebook\XHP\HTML\{div, i, strong};
 
 class MyBasicUsageExampleClass {

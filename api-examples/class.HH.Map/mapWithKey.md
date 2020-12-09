@@ -1,6 +1,6 @@
 This example shows how `mapWithKey` can be used to create a new `Map` based on `$m`'s keys and values:
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 async function one(): Awaitable<int> {
   return 1;
 }

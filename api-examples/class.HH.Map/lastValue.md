@@ -1,6 +1,6 @@
 This example shows how `lastValue()` can be used even when a `Map` may be empty:
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

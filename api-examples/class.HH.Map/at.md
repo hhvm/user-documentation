@@ -1,6 +1,6 @@
 This example prints the values at the keys `red` and `green` in the `Map`:
 
-```existing-key.php
+```existing-key.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',
@@ -17,7 +17,7 @@ $m = Map {
 
 This example throws an `OutOfBoundsException` because the `Map` has no key 'blurple':
 
-```missing-key.php
+```missing-key.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

@@ -1,6 +1,6 @@
 This example shows that removing a value that doesn't exist in the `Set` has no effect:
 
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red', 'green'};
 
 // Remove 'red' from the Set

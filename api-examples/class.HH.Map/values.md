@@ -1,6 +1,6 @@
 This example shows how `values()` is identical to `toVector()`. It returns a new `Vector` of `$m`'s values, so mutating this new `Vector` doesn't affect the original `Map`.
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

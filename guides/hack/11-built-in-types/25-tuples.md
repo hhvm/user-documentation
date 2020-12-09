@@ -42,7 +42,7 @@ This declares a nullable type for a tuple containing an `int` and a tuple, which
 For non-trivial tuple types, it can be cumbersome to write out the complete type. Fortunately, Hack provides a type-aliasing capability via
 `newtype` (and `type`). For example:
 
-```distance-between-Points.php no-auto-output
+```distance-between-Points.hack no-auto-output
 newtype Point = (float, float);
 
 function create_point(float $x, float $y): Point {

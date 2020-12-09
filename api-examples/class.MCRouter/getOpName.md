@@ -33,7 +33,7 @@ Integer | Constant | Returned String
 26 | MCRouter::mc_op_gets | gets
 27 | MCRouter::mc_op_get_service_info | get-service-info
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

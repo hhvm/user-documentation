@@ -3,7 +3,7 @@ method declarations and constants.  Note that the methods are only declared, not
 of *abstract* methods, where those methods are implemented by client classes as they see fit. An interface allows unrelated classes to
 implement the same facilities with the same names and types without requiring those classes to share a common base class.  For example:
 
-```MyCollection.php no-auto-output
+```MyCollection.hack no-auto-output
 interface MyCollection {
   const MAX_NUMBER_ITEMS = 1000;
   public function put(int $item): void;

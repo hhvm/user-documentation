@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 /**
  * Query an arbitrary number of URLs in parallel
  * returning them as a Map of string responses.

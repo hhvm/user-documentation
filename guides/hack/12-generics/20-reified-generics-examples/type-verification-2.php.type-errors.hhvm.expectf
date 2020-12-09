@@ -1,2 +1,0 @@
-
-Catchable fatal error: Argument 1 passed to HHVM\UserDocumentation\Guides\Hack\Generics\ReifiedGenerics\TypeVerification2\f() must be an instance of int, string given in %s/guides/hack/12-generics/20-reified-generics-examples/type-verification-2.php.type-errors on line 17

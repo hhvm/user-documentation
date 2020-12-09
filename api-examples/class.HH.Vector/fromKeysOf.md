@@ -1,6 +1,6 @@
 This example adds `string` keys from a `Map` to a `Vector` as its values:
 
-```string-keys.php
+```string-keys.hack
 $fruit_calories = Map {
   'apple' => 95,
   'orange' => 45,
@@ -22,7 +22,7 @@ $vegetable_names = Vector::fromKeysOf($vegetable_calories);
 
 This example creates new `Vector`s from an int-keyed `Map` and an associative array:
 
-```int-keys.php
+```int-keys.hack
 $uploaders_by_id = Map {
   4993063 => 'Amy Smith',
   9361760 => 'John Doe',

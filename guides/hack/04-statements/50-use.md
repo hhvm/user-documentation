@@ -4,7 +4,7 @@ present at the top level.
 
 Consider the following:
 
-```use.php
+```use.hack
 namespace UseNS {
 
   const int CON = 100;

@@ -1,6 +1,6 @@
 In this example the `Set`'s elements are mapped to the same type (`string`s):
 
-```map-to-strings.php
+```map-to-strings.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 $capitalized = $s->map(fun('strtoupper'));
@@ -12,7 +12,7 @@ $shortened = $s->map($color ==> \substr($color, 0, 3));
 
 In this example the `Set`'s elements are mapped to a different type (`int`s):
 
-```map-to-ints.php
+```map-to-ints.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 $lengths = $s->map(fun('strlen'));

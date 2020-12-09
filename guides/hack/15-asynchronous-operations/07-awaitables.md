@@ -21,7 +21,7 @@ $x = foo();         // $x will be an Awaitable<int>
 $x = await foo();   // $x will be an int
 ```
 
-```awaitable-return.php
+```awaitable-return.hack
 async function f(): Awaitable<int> {
   return 2;
 }
@@ -52,7 +52,7 @@ such as a `main` block, we will need to use `join`, as will be shown below.
 
 Many times, we will `await` on one `Awaitable`, get the result, and move on. For example:
 
-```single-awaitable.php
+```single-awaitable.hack
 async function foo(): Awaitable<int> {
   return 3;
 }
@@ -74,7 +74,7 @@ Here we are using one of the library helper-functions in order to batch a bunch 
 * `HH\Lib\Vec\from_async`: vec of awaitables with consecutive integer keys
 * `HH\Lib\Dict\from_async`: dict of awaitables with integer or string keys
 
-```multiple-awaitables.php
+```multiple-awaitables.hack
 async function quads(float $n): Awaitable<float> {
   return $n * 4.0;
 }
@@ -96,7 +96,7 @@ takes an `Awaitable` and blocks until it resolves to a result.
 
 This means that invocations of async functions from the top-level scope cannot be awaited, and must be joined.
 
-```join.php
+```join.hack
 async function get_raw(string $url): Awaitable<string> {
   return await \HH\Asio\curl_exec($url);
 }

@@ -1,7 +1,7 @@
 The binary operator `.` creates a string that is the concatenation of the left-hand operand and the right-hand operand, in that order. If
 either or both operands have types other than `string`, their values are converted to type `string`. Consider the following example:
 
-```Point.php
+```Point.hack
 class Point {
   private float $x;
   private float $y;

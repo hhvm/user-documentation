@@ -1,6 +1,6 @@
 This example shows you how to use `lazy()` on a rather large `Vector` and the time for both a *strict* and *non-strict* version. Since we only need 5 of the elements in the end, the lazy view actually allows us to stop after we meet our required 5 without having to actually filter and allocate all 1000000 elements up front.
 
-```basic-usage.php
+```basic-usage.hack
 $vector = new Vector(\range(0, 1000000));
 
 $s = \microtime(true);

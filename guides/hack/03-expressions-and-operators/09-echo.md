@@ -1,6 +1,6 @@
 This intrinsic function converts the value of an expression to `string` (if necessary) and writes the string to standard output.  For example:
 
-```basics.php
+```basics.hack
 $v1 = true;
 $v2 = 123.45;
 echo '>>'.$v1.'|'.$v2."<<\n"; // outputs ">>1|123.45<<"
@@ -15,7 +15,7 @@ For conversion to strings, see [type conversion](../types/type-conversion.md#con
 `echo` cannot output an array.  However, `echo` can output the value of an object *provided* its type defines
 a [`__toString` method](../classes/methods-with-predefined-semantics.md#method-__tostring).  For example:
 
-```Point.php
+```Point.hack
 class Point {
   private float $x;
   private float $y;
