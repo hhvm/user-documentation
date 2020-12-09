@@ -21,9 +21,6 @@ function get_all_runtime_options(
 async function main_async(): Awaitable<void> {
   \init_docs_autoloader();
 
-  require_once __DIR__.'/../../../../vendor/autoload.hack';
-  \Facebook\AutoloadMap\initialize();
-
   foreach (get_all_runtime_options() as $name => $values) {
     echo Str\format(
       "%s> global_value(%s), local_value(%s), access(%s)\n",

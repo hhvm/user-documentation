@@ -9,6 +9,5 @@ namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;
 function main(): void {
   \init_docs_autoloader();
 
-  require_once("namespaces.inc.php");
   \NS2\f();
 }
