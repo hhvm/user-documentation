@@ -1,6 +1,6 @@
 This example shows that a `Map` can be created from any `Traversable` of key-value pairs:
 
-```basic-usage.php
+```basic-usage.hack
 // Create a new Map from an array of key-value pairs
 $m = Map::fromItems(varray[
   Pair {'red', '#ff0000'},

@@ -1,6 +1,6 @@
 This example shows that duplicate values in the input arrays only appear once in the final `Set`:
 
-```basic-usage.php
+```basic-usage.hack
 $s = Set::fromArrays(
   varray['red'],
   varray['green', 'blue'],

@@ -1,6 +1,6 @@
 In this example the `Map`'s values are mapped to the same type (`string`s):
 
-```map-to-strings.php
+```map-to-strings.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',
@@ -17,7 +17,7 @@ $css_colors = $capitalized->map($hex_code ==> "color: {$hex_code};");
 
 In this example the `Map`'s values are mapped to a different type (`int`s):
 
-```map-to-ints.php
+```map-to-ints.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

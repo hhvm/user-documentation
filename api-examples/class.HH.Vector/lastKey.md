@@ -1,6 +1,6 @@
 This example shows how `lastKey()` can be used even when a `Vector` may be empty:
 
-```basic-usage.php
+```basic-usage.hack
 function echoLastKey(Vector<string> $v): void {
   $last_key = $v->lastKey();
   if ($last_key !== null) {

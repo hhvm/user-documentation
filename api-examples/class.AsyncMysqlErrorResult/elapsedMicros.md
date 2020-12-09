@@ -1,6 +1,6 @@
 When an error occurs when establishing a connection or on a query, and you catch the exception that is thrown, you will get an `AsyncMysqlErrorResult`. And one of the methods on an `AsyncMysqlErrorResult` is `elapsedMicros()`, which tells you how long the operation took until the error occurred.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

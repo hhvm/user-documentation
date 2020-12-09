@@ -1,6 +1,6 @@
 This example shows that converting a `Map` to an `ImmSet` also removes duplicate values:
 
-```basic-usage.php
+```basic-usage.hack
 // This Map contains repetitions of the hex codes for 'red' and 'blue'
 $m = Map {
   'red' => '#ff0000',

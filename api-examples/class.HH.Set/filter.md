@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $colors = Set {'red', 'green', 'blue', 'yellow'};
 
 // Create a Set of colors that contain the letter 'l'

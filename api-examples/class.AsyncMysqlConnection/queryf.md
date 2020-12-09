@@ -1,6 +1,6 @@
 The following example shows how to use `AsyncMysqlConnection::queryf`. First you get a connection from an `AsyncMysqlConnectionPool`; then you decide what parameters you want to pass as query placeholders.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(
@@ -52,7 +52,7 @@ await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 
 The following example uses the `%=s` placeholder in order to allow you to check whether an email address with the provided `string` exists in the table, or, if `null` is passed, whether there is a user with a `null` email address.
 
-```percent-equal-placeholders.php
+```percent-equal-placeholders.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(
@@ -105,7 +105,7 @@ await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 
 The following example shows how to use the `%L` placeholder for `AsyncMysqlConnection::queryf`. First you get a connection from an `AsyncMysqlConnectionPool`; then we are passing a vector of ids to used in the placeholder. The placeholder ends up being `%Ld` since the ids are integers.
 
-```percent-L-placeholders.php
+```percent-L-placeholders.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

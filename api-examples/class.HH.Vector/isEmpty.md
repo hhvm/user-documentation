@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {};
 \var_dump($v->isEmpty());
 

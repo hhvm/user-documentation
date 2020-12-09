@@ -1,6 +1,6 @@
 This example shows how to create a `Set` from various `Traversable`s. Notice that duplicate values in the input `Traversable`s only appear once in the output `Set`.
 
-```basic-usage.php
+```basic-usage.hack
 // Create a new Set from an array
 $s = new Set(varray['red', 'green', 'red', 'blue', 'blue', 'yellow']);
 \var_dump($s);
@@ -23,7 +23,7 @@ $s = new Set(Map {
 
 This example shows how passing `null` to the constructor creates an empty `Set`:
 
-```null-empty.php
+```null-empty.hack
 // An empty Set is created if null is provided
 $s = new Set(null);
 \var_dump($s);

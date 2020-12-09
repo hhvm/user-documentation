@@ -1,6 +1,6 @@
 Most of the `MCRouter` examples use `MCRouter::get` in order to demonstrate other functions of the API. This example calls out `get` explicitly in its own function to show you how it works. If you try to `get` on a key that does not exist, an exception will be thrown.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

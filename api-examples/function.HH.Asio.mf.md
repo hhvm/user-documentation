@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 enum COLOR: int {
   RED = 1;
   ORANGE = 2;

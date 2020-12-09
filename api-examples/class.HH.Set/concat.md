@@ -1,6 +1,6 @@
 This example creates new `Set`s by concatenating other `Traversable`s. Unlike `Set::addAll()` this method returns a new `Set` (not a [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy)).
 
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red'};
 
 // Add all the values in a Vector

@@ -1,6 +1,6 @@
 This example shows how `resize` can be used to decrease and increase the size of a `Vector`:
 
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 // Resize the Vector to 2 (removing 'blue' and 'yellow')

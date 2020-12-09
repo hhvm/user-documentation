@@ -21,7 +21,7 @@ object(HH\Vector)#9 (2) {
 
 Note that all values in the `Map` returned from `mapRowsTyped` will be the actual typed representation of the database type, or `null`. Above you can see we have `string` and `int`. If you want just `string` values for everything, use `mapRows`
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

@@ -1,6 +1,6 @@
 The following example shows how to use `$offset` and `$len` together:
 
-```basic-usage.php
+```basic-usage.hack
 // Remove the element at index 2:
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 $v->splice(2, 1);

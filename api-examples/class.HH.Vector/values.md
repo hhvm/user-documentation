@@ -1,6 +1,6 @@
 This example shows how `values()` is identical to `toVector()`. It returns a deep copy of `$v`, so mutating this new `Vector` doesn't affect the original.
 
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 // Make a deep Vector copy of $v

@@ -1,6 +1,6 @@
 The following example shows how to retrieve the memcached operation from an `MCRouterException` using its `getOp` method. Then we get its friendly name via `MCRouter::getOpName()`.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

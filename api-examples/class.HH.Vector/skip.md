@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 // Create a new Vector after skipping the first two elements ('red' and 'green')

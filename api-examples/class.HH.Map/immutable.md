@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 function expects_immutable(ImmMap<string, string> $iv): void {
   \var_dump($iv);
 }

@@ -1,6 +1,6 @@
 This example shows that `toKeysArray` is the same as `toValuesArray` because `Set`s don't have keys:
 
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 $keys_array = $s->toKeysArray();

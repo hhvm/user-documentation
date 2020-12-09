@@ -1,6 +1,6 @@
 The following example shows you how to use `AsyncMysqlRowIterator::key` to get the actual `int` key pointing to the field within the row iterator.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

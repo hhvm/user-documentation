@@ -37,7 +37,7 @@ Integer | Constant | String
 30 | MCRouter::mc_res_waiting | mc_res_waiting
 31 | MCRouter::mc_nres | mc_nres
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

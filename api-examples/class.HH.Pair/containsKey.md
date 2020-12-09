@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $p = Pair {'foo', -1.5};
 
 // Prints "true", since index 0 is the first value

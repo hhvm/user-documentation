@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $m = Map {};
 \var_dump($m->isEmpty());
 

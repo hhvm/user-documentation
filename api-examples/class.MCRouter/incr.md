@@ -1,6 +1,6 @@
 The following example shows how to increment a value of a key by a specified integer using `MCRouter::incr`. The value **must** be numeric.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

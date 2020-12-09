@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 // Prints "true", since index 0 is the first element

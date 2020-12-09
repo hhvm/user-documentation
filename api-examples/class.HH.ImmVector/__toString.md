@@ -1,6 +1,6 @@
 The string version of a `Vector` is always `"Vector"`:
 
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {1, 2, 3};
 echo $v->__toString()."\n";
 

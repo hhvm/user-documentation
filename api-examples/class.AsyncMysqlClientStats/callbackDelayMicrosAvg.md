@@ -1,6 +1,6 @@
 The following example describes how to get the average delay time between when a callback is scheduled (in this case, performing the connection) and when the callback actual ran (in this case, when the connection was actually established) via `AsyncMysqlClientStats::callbackDelayMicrosAvg`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

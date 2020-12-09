@@ -1,6 +1,6 @@
 If you ever want to get a plain, vanilla synchronous MySQL connection from your async connection, you call `AsyncMysqlConnection::releaseConnection`. This examples show how to get such a connection, noting too that your async connection is destroyed.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

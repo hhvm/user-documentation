@@ -1,6 +1,6 @@
 The string version of an `ImmVector` is always `"ImmVector"`:
 
-```basic-usage.php
+```basic-usage.hack
 $iv = ImmVector {1, 2, 3};
 echo $iv->__toString()."\n";
 

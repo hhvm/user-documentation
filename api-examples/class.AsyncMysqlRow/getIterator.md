@@ -1,6 +1,6 @@
 The following example shows you how to get an iterator of an `AsyncMysqlRow` via `getIterator()`. Getting an iterator of an `AsyncMysqlRow` gives you an `AsyncMysqlRowIterator`, where each key of that iterator is an `int` representing the key to the field of the `AsyncMysqlRow`, and each value from `current()` is the value of the field of that `AsyncMysqlRow`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

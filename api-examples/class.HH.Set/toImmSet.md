@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 function expects_immutable(ImmSet<string> $is): void {
   \var_dump($is);
 }

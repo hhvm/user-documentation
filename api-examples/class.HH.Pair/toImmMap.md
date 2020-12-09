@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $p = Pair {'foo', -1.5};
 
 $imm_map = $p->toImmMap();

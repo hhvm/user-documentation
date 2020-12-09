@@ -1,6 +1,6 @@
 This example shows that `items()` returns an `Iterable` view of the `Vector`. The `Iterable` will produce the values of the `Vector` at the time it's iterated.
 
-```basic-usage.php
+```basic-usage.hack
 <<__EntryPoint>>
 function basic_usage_main(): void {
   $v = Vector {'red', 'green', 'blue', 'yellow'};

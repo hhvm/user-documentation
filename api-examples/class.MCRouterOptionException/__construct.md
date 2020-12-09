@@ -1,6 +1,6 @@
 You normally will catch a `MCRouterOptionException` over constructing one explicitly, but it can be done. Here is an example where you can check the options and throw the exception with a custom error if you don't have good options.
 
-```basic-usage.php
+```basic-usage.hack
 function construct_mcrouter(darray<string, mixed> $options): void {
   if (!\array_key_exists('config_str', $options)) {
     // You can have multiple string => string errors in the array

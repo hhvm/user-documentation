@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $colors = Vector {'red', 'green', 'blue', 'yellow'};
 $primary_colors = Set {'red', 'green', 'blue'};
 

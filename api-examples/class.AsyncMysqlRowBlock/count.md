@@ -1,6 +1,6 @@
 The following example shows how to use `AsyncMysqlRowBlock::count` to get the number of rows in the given row block.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

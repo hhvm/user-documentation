@@ -17,7 +17,7 @@ object(HH\Vector)#9 (2) {
 
 Note that all values in the `Map` returned from `mapRows` will be `string` or `null`. If you want specifically-typed values, use `mapRowsTyped`
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

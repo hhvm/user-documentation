@@ -1,6 +1,6 @@
 This example shows how `differenceByKey` can be used to get a new `Map` with some keys excluded:
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

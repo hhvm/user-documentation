@@ -4,7 +4,7 @@ It is **imperative** to note that you must manually construct the `MCRouter` ins
 
 You can add an optional delay time in seconds to your call to `flushAll` as well.
 
-```basic-usage.php
+```basic-usage.hack
 function construct_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   // For many use cases, calling MCRouter::createSimple($servers) would

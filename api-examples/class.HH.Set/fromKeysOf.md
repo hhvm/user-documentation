@@ -1,6 +1,6 @@
 This example creates new `Set`s from a string-keyed `Map` and associative array:
 
-```string-keys.php
+```string-keys.hack
 $fruit_calories = Map {
   'apple' => 95,
   'orange' => 45,
@@ -22,7 +22,7 @@ $vegetable_names = Set::fromKeysOf($vegetable_calories);
 
 This example creates new `Set`s from an int-keyed `Map` and associative array:
 
-```int-keys.php
+```int-keys.hack
 $uploaders_by_id = Map {
   4993063 => 'Amy Smith',
   9361760 => 'John Doe',

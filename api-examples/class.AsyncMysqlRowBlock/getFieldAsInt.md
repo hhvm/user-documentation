@@ -12,7 +12,7 @@ PRIMARY KEY (userID)
 
 In this case, we are actually getting a field that is an `int` (or `SMALLINT`).
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

@@ -1,6 +1,6 @@
 This example shows that `zip` won't thrown an `Exception` if at least one of the current `Set` or the `$traversable` is empty:
 
-```empty-usage.php
+```empty-usage.hack
 // The $traversable is empty so the result will be empty
 $s = Set {'red', 'green', 'blue', 'yellow'};
 $zipped = $s->zip(Vector {});
@@ -14,7 +14,7 @@ $zipped = $s->zip(Vector {'My Favorite', 'My Second Favorite'});
 
 This example shows that `zip` will throw an `Exception` if the result is non-empty:
 
-```nonempty-exception.php
+```nonempty-exception.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 $zipped = $s->zip(Vector {'My Favorite', 'My Second Favorite'});
 \var_dump($zipped);

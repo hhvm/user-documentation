@@ -1,6 +1,6 @@
 This example shows how to use `Shapes::idx` for keys that may or may not exist in a `Shape`:
 
-```basic-usage.php
+```basic-usage.hack
 function run(shape('x' => int, 'y' => int, ?'z' => int) $point): void {
   // The key 'x' exists in the Shape $point so it's returned
   \var_dump(Shapes::idx($point, 'x'));
@@ -20,7 +20,7 @@ function basic_usage_main(): void {
 
 This example shows that `Shapes::idx` will only return the default value if the key doesn't exist in the `Shape`. If the key exists but is `NULL` then `NULL` will be returned.
 
-```nullable-values.php
+```nullable-values.hack
 function runNullable(shape('x' => ?int, 'y' => ?int, ...) $point): void {
   // The key 'x' exists, so its value (3) is returned, not our explicit default 0
   \var_dump(Shapes::idx($point, 'x', 0));

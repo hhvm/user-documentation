@@ -1,6 +1,6 @@
 The following example shows how to use `AsyncMysqlRow:count` to get the number of fields in the given row.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

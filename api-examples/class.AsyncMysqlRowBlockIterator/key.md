@@ -1,6 +1,6 @@
 The following example shows you how to use `AsyncMysqlRowBlockIterator::key` to get the actual key pointing to an `AsyncMysqlRow` within the block iterator. The key will be an `int`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

@@ -1,6 +1,6 @@
 This example removes multiple values from a `Set` and shows that the list of values to be removed can contain duplicates:
 
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 $s->removeAll(Vector {

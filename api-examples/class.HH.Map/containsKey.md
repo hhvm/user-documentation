@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

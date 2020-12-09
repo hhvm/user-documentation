@@ -1,6 +1,6 @@
 The string version of an `ImmSet` is always `"ImmSet"`:
 
-```basic-usage.php
+```basic-usage.hack
 $is = ImmSet {1, 2, 3};
 echo $is->__toString()."\n";
 

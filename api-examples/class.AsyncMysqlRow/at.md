@@ -1,6 +1,6 @@
 The following example shows how to use `AsyncMysqlRow::at` to get a field value from the resulting row block. In this case, we get a `Vector` of `AsyncMysqlRowBlock`s, then the first row block in that `Vector`, then the first `AsyncMysqlRow` in that row block. Finally, we get the value of the `age` field in that row.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

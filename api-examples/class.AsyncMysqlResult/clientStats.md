@@ -1,6 +1,6 @@
 AsyncMysqlResult is abstract. See specific, concrete classes for examples of `AsyncMysqlResult::clientStats` (e.g., AsyncMysqlConnectResult, AsyncMysqlErrorResult)
 
-```basic-usage.php
+```basic-usage.hack
 echo "AsyncMysqlResult is abstract. See specific, concrete classes for ".
   "examples of clientStats (e.g., AsyncMysqlConnectResult, ".
   "AsyncMysqlErrorResult)".

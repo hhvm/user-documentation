@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $p = Pair {-1.5, null};
 
 $v = $p->filter($value ==> $value !== null);

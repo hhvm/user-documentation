@@ -6,7 +6,7 @@ Note that
   elapsedMicros() ~== endTime() - startTime()
 ```
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

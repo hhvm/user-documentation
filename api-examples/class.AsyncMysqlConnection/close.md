@@ -1,6 +1,6 @@
 Closing a database connection is usually a good idea. This example shows the closing of a connection using `AsyncMysqlConnection::close` and then tries to invoke a query on that connection afterwards.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

@@ -1,6 +1,6 @@
 This example shows how `lastValue()` can be used even when a `Vector` may be empty:
 
-```basic-usage.php
+```basic-usage.hack
 function echoLastValue(Vector<string> $v): void {
   $last_value = $v->lastValue();
   if ($last_value !== null) {

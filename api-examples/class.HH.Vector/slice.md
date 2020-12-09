@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 // Start at index 1 ('green') and include 3 elements

@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $s = Set {};
 \var_dump($s->count());
 

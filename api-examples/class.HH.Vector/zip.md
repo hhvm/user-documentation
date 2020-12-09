@@ -1,6 +1,6 @@
 This example shows how `zip` combines the values of the `Vector` and another `Traversable`. The resulting `Vector` `$labeled_colors` has three elements because `$labels` doesn't have a fourth element to pair with `$v`.
 
-```basic-usage.php
+```basic-usage.hack
 $v = Vector {'red', 'green', 'blue', 'yellow'};
 
 $labels = Vector {'My Favorite', 'My 2nd Favorite', 'My 3rd Favorite'};

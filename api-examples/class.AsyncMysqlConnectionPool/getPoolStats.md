@@ -1,6 +1,6 @@
 The following example shows how to gather `AsyncMySqlConnectionPool` statistics using its `getStats()` method. The statistics that are gathered are connection statistics.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 

@@ -1,6 +1,6 @@
 This example shows how to create a `Vector` from various `Traversable`s:
 
-```basic-usage.php
+```basic-usage.hack
 // Create a new Vector from an array
 $v = new Vector(varray['red', 'green', 'blue', 'yellow']);
 \var_dump($v);
@@ -21,7 +21,7 @@ $v = new Vector(Map {
 
 This example shows how passing `null` to the constructor creates an empty `Vector`:
 
-```null-empty.php
+```null-empty.hack
 // An empty Vector is created if null is provided
 $v = new Vector(null);
 \var_dump($v);

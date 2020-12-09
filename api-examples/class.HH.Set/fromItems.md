@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 // Create a new Set from an array
 $s = Set::fromItems(varray['red', 'green', 'red', 'blue', 'blue', 'yellow']);
 \var_dump($s);

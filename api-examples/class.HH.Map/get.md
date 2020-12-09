@@ -1,6 +1,6 @@
 This example shows how `get` can be used to access the value at a key that may not exist:
 
-```basic-usage.php
+```basic-usage.hack
 $m = Map {
   'red' => '#ff0000',
   'green' => '#00ff00',

@@ -1,6 +1,6 @@
 The string version of a `Set` is always `"Set"`:
 
-```basic-usage.php
+```basic-usage.hack
 $s = Set {1, 2, 3};
 echo $s->__toString()."\n";
 

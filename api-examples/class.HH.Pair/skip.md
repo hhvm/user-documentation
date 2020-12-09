@@ -1,4 +1,4 @@
-```basic-usage.php
+```basic-usage.hack
 $p = Pair {'foo', -1.5};
 
 // Skipping 0 returns an ImmVector of both values

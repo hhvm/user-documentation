@@ -1,6 +1,6 @@
 The following example shows how to use `AsyncMysqlException::getResult` to get the `AsyncMysqlErrorResult` object associated with this exception. Particularly, we call `elapsedMicros()` on that object.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(

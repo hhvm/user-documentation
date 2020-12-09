@@ -1,6 +1,6 @@
 This example shows that `toSet` returns a deep copy of the `Set`:
 
-```basic-usage.php
+```basic-usage.hack
 $s = Set {'red', 'green', 'blue', 'yellow'};
 
 // Make a deep copy of Set $s

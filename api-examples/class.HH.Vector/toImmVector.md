@@ -1,6 +1,6 @@
 This example shows that `toImmVector` returns an immutable copy of the `Vector`. Mutating the original `Vector` doesn't affect the immutable copy.
 
-```basic-usage.php
+```basic-usage.hack
 function expects_immutable(ImmVector<mixed> $iv): void {
   \var_dump($iv);
 }

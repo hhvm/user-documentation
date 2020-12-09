@@ -1,6 +1,6 @@
 You can use `AsyncMysqlClient::setPoolsConnectionLimit()` to toggle the number of allowed async connections on the client. In this example, we are setting the number of allowed pool connections to be 2, but trying to do 3 connections, and that ends up giving an exception.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function set_connection_pool(): \AsyncMysqlConnectionPool {

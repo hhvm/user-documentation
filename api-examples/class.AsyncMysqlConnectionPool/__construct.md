@@ -8,7 +8,7 @@ The following example shows you how to create an `AsyncMysqlConnectionPool` with
 
 This example focuses on the `connection_limit` and `idle_timeout_micros` options.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 function set_connection_pool(

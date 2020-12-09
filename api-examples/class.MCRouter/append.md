@@ -1,6 +1,6 @@
 The following example shows how to use the `MCRouter::append` function.
 
-```basic-usage.php
+```basic-usage.hack
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
   $mc = \MCRouter::createSimple($servers);

@@ -1,6 +1,6 @@
 This example shows how to create a `Map` from various `KeyedTraversable`s:
 
-```basic-usage.php
+```basic-usage.hack
 // Create a new string-keyed Map from an associative array
 $m = new Map(darray[
   'red' => '#ff0000',
@@ -17,7 +17,7 @@ $m = new Map(Vector {'red', 'green', 'blue', 'yellow'});
 
 This example shows how passing `null` to the constructor creates an empty `Map`:
 
-```null-empty.php
+```null-empty.hack
 // An empty Map is created if null is provided
 $m = new Map(null);
 \var_dump($m);

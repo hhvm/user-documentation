@@ -1,6 +1,6 @@
 This example shows how we can get the successful results of a multi-query, even though one of those queries gave us an error (which we caught in the exception). This is done via `AsyncMysqlQueryErrorResult::getSuccessfulResults`.
 
-```basic-usage.php
+```basic-usage.hack
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function connect(
