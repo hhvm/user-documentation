@@ -226,7 +226,28 @@ The interface type `IMemoizeParam` assists with memorizing objects passed to asy
 Thrown exceptions are not memoized, showing by the increasing counter in this
 example:
 
-@@ predefined-attributes-examples/memoize-throw.hack @@
+```memoize-throw.hack
+class CountThrows {
+  private int $count = -1;
+  <<__Memoize>>
+  public function doStuff(): void {
+    $this->count += 1;
+    throw new \Exception('Hello '.$this->count);
+  }
+}
+
+<<__EntryPoint>>
+function main(): void {
+  $x = new CountThrows();
+  for($i = 0; $i < 2; ++$i) {
+    try {
+      $x->doStuff();
+    } catch (\Exception $e) {
+      \var_dump($e->getMessage());
+    }
+  }
+}
+```
 
 ### Awaitables
 
