@@ -2,7 +2,7 @@
 Fatal error: Uncaught exception 'OutOfBoundsException' with message 'String key "blurple" is not defined' in %s/missing-key.hack:18
 Stack trace:
 #0 %s/missing-key.hack(18): HH\Map->at()
-#1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHMapMethodAt\MissingKey\_main()
+#1 (): HHVM\UserDocumentation\Api\Hack\ClassHHMapMethodAt\MissingKey\_main()
 #2 (): Closure$__SystemLib\enter_async_entry_point()
 #3 (): HH\Asio\join()
 #4 (): __SystemLib\enter_async_entry_point()
