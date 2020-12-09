@@ -1,7 +1,7 @@
 
-Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Only integer values and string values may be used with Sets' in %s/api-examples/_extracted/hack/class.HH.Pair.method.toSet-examples/runtime-fatal.hack:13
+Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Only integer values and string values may be used with Sets' in %s/runtime-fatal.hack:13
 Stack trace:
-#0 %s/api-examples/_extracted/hack/class.HH.Pair.method.toSet-examples/runtime-fatal.hack(13): HH\Pair->toSet()
+#0 %s/runtime-fatal.hack(13): HH\Pair->toSet()
 #1 (): HHVM\UserDocumentation\Guides\Hack\ClassHHPairMethodToSet\RuntimeFatal\_main()
 #2 (): Closure$__SystemLib\enter_async_entry_point()
 #3 (): HH\Asio\join()

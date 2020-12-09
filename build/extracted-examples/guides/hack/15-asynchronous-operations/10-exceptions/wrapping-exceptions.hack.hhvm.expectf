@@ -9,14 +9,14 @@ vec(2) {
       ["code":protected]=>
       int(0)
       ["file":protected]=>
-      string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.hack"
+      string(%d) "%s/wrapping-exceptions.hack"
       ["line":protected]=>
       int(9)
       ["trace":"Exception":private]=>
       varray(3) {
         darray(3) {
           ["file"]=>
-          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.hack"
+          string(%d) "%s/wrapping-exceptions.hack"
           ["line"]=>
           int(18)
           ["function"]=>
@@ -24,7 +24,7 @@ vec(2) {
         }
         darray(3) {
           ["file"]=>
-          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.hack"
+          string(%d) "%s/wrapping-exceptions.hack"
           ["line"]=>
           int(31)
           ["function"]=>

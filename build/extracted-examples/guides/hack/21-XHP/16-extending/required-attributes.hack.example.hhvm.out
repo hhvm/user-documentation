@@ -1,4 +1,4 @@
-string(250) "Required attribute `userid` was not specified in element `HHVM\UserDocumentation\Guides\Hack\XHP\Extending\RequiredAttributes\user_info`.
+string(266) "Required attribute `userid` was not specified in element `HHVM\UserDocumentation\Guides\Hack\XHP\Extending\RequiredAttributes\user_info`.
 
-/home/example/guides/hack/21-XHP/16-extending-examples/required-attributes.hack:13"
+/home/example/required-attributes.hack:13"
 User with id 1000 has name Joel
