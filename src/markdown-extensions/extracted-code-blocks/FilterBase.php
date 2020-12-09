@@ -72,6 +72,11 @@ abstract class FilterBase extends Markdown\RenderFilter {
     'Vec',
   ];
 
+  const dict<string, string> PATHS = dict[
+    BuildPaths::APIDOCS_MARKDOWN => BuildPaths::API_EXAMPLES_EXTRACT_DIR,
+    BuildPaths::GUIDES_MARKDOWN => BuildPaths::GUIDES_EXAMPLES_EXTRACT_DIR,
+  ];
+
   <<__Override>>
   public function filter(
     Markdown\RenderContext $context,
@@ -161,12 +166,8 @@ abstract class FilterBase extends Markdown\RenderFilter {
     $md = $context as MarkdownExt\RenderContext->getFilePath();
     invariant($md is nonnull, 'RenderContext is missing file path');
     invariant(Str\ends_with($md, '.md'), 'Expected a .md file, got "%s"', $md);
-    $examples_dir = Str\strip_suffix($md, '.md').'-examples'
-      |> Str\replace(
-        $$,
-        BuildPaths::APIDOCS_MARKDOWN,
-        BuildPaths::API_EXAMPLES_EXTRACT_DIR,
-      );
+    $examples_dir = Str\strip_suffix($md, '.md')
+      |> Str\replace_every($$, self::PATHS);
     $hack_file_path = $examples_dir.'/'.$hack_filename;
     $expected_type_errors =
       Str\ends_with($hack_filename, '.'.self::TYPE_ERRORS);
@@ -338,17 +339,11 @@ abstract class FilterBase extends Markdown\RenderFilter {
       // and example.inc.hack.
       $suffix = Str\split(\basename($path), '.', 2)[1];
       $ns = Str\strip_suffix($path, '.'.$suffix)
+        |> Str\strip_prefix($$, BuildPaths::EXAMPLES_EXTRACT_DIR.'/')
         |> Str\split($$, '/')
-        |> Vec\drop(
-          $$,
-          C\find_key($$, $v ==> $v === '_extracted' || $v === 'guides')
-            as nonnull +
-            1,
-        )
         |> Vec\map(
           $$,
           $part ==> Str\trim_left($part, '0123456789-_')
-            |> Str\strip_suffix($$, '-examples')
             |> Str\capitalize($$)
             |> Regex\replace_with( // convert to CamelCase
               $$,
@@ -357,7 +352,8 @@ abstract class FilterBase extends Markdown\RenderFilter {
             ),
         )
         |> Str\join($$, '\\');
-      $code = 'namespace HHVM\\UserDocumentation\\Guides\\'.$ns.";\n\n$code";
+      $ns = Str\replace($ns, 'Api\\', 'Guides\\'); // TODO: remove
+      $code = 'namespace HHVM\\UserDocumentation\\'.$ns.";\n\n$code";
     }
 
     if ($code !== $extracted_code) {

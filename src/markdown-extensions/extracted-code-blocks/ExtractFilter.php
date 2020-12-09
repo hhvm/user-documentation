@@ -31,7 +31,7 @@ final class ExtractFilter extends FilterBase {
       return;
     }
     if (!\file_exists(\dirname($path))) {
-      \mkdir(\dirname($path));
+      \mkdir(\dirname($path), 0777, true /* recursive */);
     }
     \file_put_contents($path, $content);
   }
@@ -103,11 +103,9 @@ final class ExtractFilter extends FilterBase {
     $output = null;
     \exec($env.' '.$command.' 2>&1', inout $output, inout $exit_code);
 
-    $match = Regex\first_match($hack_file_path, re"#(.*/user-documentation)/#");
-
     self::writeOutput(
       Str\join($output, "\n"),
-      $match is nonnull ? $match[1] : \dirname($hack_file_path),
+      \dirname($hack_file_path),
       $hack_file_path,
       Files::HHVM_EXPECT,
       Files::EXAMPLE_HHVM_OUT,

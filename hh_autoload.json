@@ -1,9 +1,8 @@
 {
   "roots": [
     "src/",
+    "build/extracted-examples/",
     "build/final/codegen/",
-    "guides/",
-    "api-examples/",
     "tests/"
   ],
   "extraFiles": [ "LocalConfig.php" ],
