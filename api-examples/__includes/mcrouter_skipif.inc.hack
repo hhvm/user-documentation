@@ -1,5 +1,3 @@
-<?hh
-
 namespace Hack\UserDocumentation\API\Examples\MCRouter;
 
 function skipif(): void {

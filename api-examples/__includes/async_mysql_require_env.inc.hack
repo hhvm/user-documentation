@@ -1,5 +1,3 @@
-<?hh
-
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql;
 
 use Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;

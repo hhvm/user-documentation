@@ -1,5 +1,3 @@
-<?hh
-
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql;
 
 class ConnectionInfo {
