@@ -25,7 +25,7 @@ object(Facebook\XHP\HTML\div) (6) {
       dict(0) {
       }
       ["source"]=>
-      string(98) "/home/example/guides/hack/21-XHP/07-basic-usage-examples/basic.php:17"
+      string(99) "/home/example/guides/hack/21-XHP/07-basic-usage-examples/basic.hack:15"
     }
     object(Facebook\XHP\HTML\i) (6) {
       ["tagName":protected]=>
@@ -43,12 +43,12 @@ object(Facebook\XHP\HTML\div) (6) {
       dict(0) {
       }
       ["source"]=>
-      string(98) "/home/example/guides/hack/21-XHP/07-basic-usage-examples/basic.php:18"
+      string(99) "/home/example/guides/hack/21-XHP/07-basic-usage-examples/basic.hack:16"
     }
   }
   ["context":"Facebook\XHP\Core\node":private]=>
   dict(0) {
   }
   ["source"]=>
-  string(98) "/home/example/guides/hack/21-XHP/07-basic-usage-examples/basic.php:19"
+  string(99) "/home/example/guides/hack/21-XHP/07-basic-usage-examples/basic.hack:17"
 }

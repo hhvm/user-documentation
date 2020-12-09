@@ -9,24 +9,24 @@ vec(2) {
       ["code":protected]=>
       int(0)
       ["file":protected]=>
-      string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
+      string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.hack"
       ["line":protected]=>
-      int(11)
+      int(9)
       ["trace":"Exception":private]=>
       varray(3) {
         darray(3) {
           ["file"]=>
-          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
+          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.hack"
           ["line"]=>
-          int(20)
+          int(18)
           ["function"]=>
           string(%d) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\exception_thrower"
         }
         darray(3) {
           ["file"]=>
-          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.php"
+          string(%d) "%s/guides/hack/15-asynchronous-operations/10-exceptions-examples/wrapping-exceptions.hack"
           ["line"]=>
-          int(33)
+          int(31)
           ["function"]=>
           string(%d) "HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\WrappingExceptions\wrapping_exceptions"
         }

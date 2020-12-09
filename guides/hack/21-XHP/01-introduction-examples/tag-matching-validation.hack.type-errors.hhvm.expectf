@@ -1,2 +1,2 @@
 
-Fatal error: XHP: mismatched tag: `naps` not the same as `span` in %s/guides/hack/21-XHP/01-introduction-examples/tag-matching-validation.php.type-errors on line 20
+Fatal error: XHP: mismatched tag: `naps` not the same as `span` in %s/guides/hack/21-XHP/01-introduction-examples/tag-matching-validation.hack.type-errors on line 18

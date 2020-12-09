@@ -1,28 +1,28 @@
-File "/home/example/interface-bad.php", line 24, characters 24-29:
+File "/home/example/interface-bad.hack", line 22, characters 24-29:
 Failure to satisfy requirement: HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Machine (Typing[4111])
-  File "/home/example/interface-bad.php", line 17, characters 19-25:
+  File "/home/example/interface-bad.hack", line 15, characters 19-25:
   Required here
 
-File "/home/example/interface-bad.php", line 24, characters 7-11:
+File "/home/example/interface-bad.hack", line 22, characters 7-11:
 This type doesn't implement the method `closeDoors` (Typing[4054])
-  File "/home/example/interface-bad.php", line 24, characters 24-29:
+  File "/home/example/interface-bad.hack", line 22, characters 24-29:
   Which is required by this interface
-  File "/home/example/interface-bad.php", line 12, characters 19-28:
+  File "/home/example/interface-bad.hack", line 10, characters 19-28:
   As defined here
 
-File "/home/example/interface-bad.php", line 24, characters 7-11:
+File "/home/example/interface-bad.hack", line 22, characters 7-11:
 This type doesn't implement the method `openDoors` (Typing[4054])
-  File "/home/example/interface-bad.php", line 24, characters 24-29:
+  File "/home/example/interface-bad.hack", line 22, characters 24-29:
   Which is required by this interface
-  File "/home/example/interface-bad.php", line 9, characters 19-27:
+  File "/home/example/interface-bad.hack", line 7, characters 19-27:
   As defined here
 
-File "/home/example/interface-bad.php", line 36, characters 17-23:
+File "/home/example/interface-bad.hack", line 34, characters 17-23:
 No instance method `takeOff` in `HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Paper` (Typing[4053])
-  File "/home/example/interface-bad.php", line 25, characters 19-21:
+  File "/home/example/interface-bad.hack", line 23, characters 19-21:
   Did you mean `fly` instead?
-  File "/home/example/interface-bad.php", line 34, characters 12-16:
+  File "/home/example/interface-bad.hack", line 32, characters 12-16:
   This is why I think it is an object of type HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Paper
-  File "/home/example/interface-bad.php", line 24, characters 7-11:
+  File "/home/example/interface-bad.hack", line 22, characters 7-11:
   Declaration of `HHVM\UserDocumentation\Guides\Hack\Classes\TraitAndInterfaceRequirements\InterfaceBad\Paper` is here
 

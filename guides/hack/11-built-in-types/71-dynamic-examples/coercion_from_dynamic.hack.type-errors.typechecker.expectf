@@ -1,7 +1,7 @@
-File "%s/coercion_from_dynamic.php", line 14, characters 15-16:
+File "%s/coercion_from_dynamic.hack", line 12, characters 15-16:
 Invalid argument (Typing[4110])
-  File "%s/coercion_from_dynamic.php", line 9, characters 22-38:
+  File "%s/coercion_from_dynamic.hack", line 7, characters 22-38:
   Expected `shape('a' => int)`
-  File "%s/coercion_from_dynamic.php", line 11, characters 17-23:
+  File "%s/coercion_from_dynamic.hack", line 9, characters 17-23:
   But got `dynamic`
 

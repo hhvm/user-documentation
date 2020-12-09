@@ -1,2 +1,2 @@
 
-Fatal error: Found top-level code in %s/guides/hack/30-silencing-errors/05-error-codes-examples/1002_toplevel.php on line 6
+Fatal error: Found top-level code in %s/guides/hack/30-silencing-errors/05-error-codes-examples/1002_toplevel.hack on line 4

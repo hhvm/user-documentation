@@ -1,7 +1,7 @@
-File "/home/example/coercion_from_union.php", line 21, characters 17-18:
+File "/home/example/coercion_from_union.hack", line 19, characters 17-18:
 Invalid argument (Typing[4110])
-  File "/home/example/coercion_from_union.php", line 9, characters 24-29:
+  File "/home/example/coercion_from_union.hack", line 7, characters 24-29:
   Expected `string`
-  File "/home/example/coercion_from_union.php", line 11, characters 38-40:
+  File "/home/example/coercion_from_union.hack", line 9, characters 38-40:
   But got `int`
 
