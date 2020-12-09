@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodLastKey\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHVectorMethodLastKey\BasicUsage;
 
 function echoLastKey(Vector<string> $v): void {
   $last_key = $v->lastKey();

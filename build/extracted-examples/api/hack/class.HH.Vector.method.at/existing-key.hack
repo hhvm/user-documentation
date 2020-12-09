@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodAt\ExistingKey;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHVectorMethodAt\ExistingKey;
 
 <<__EntryPoint>>
 async function _main(): Awaitable<void> {

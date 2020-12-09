@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodLastValue\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHVectorMethodLastValue\BasicUsage;
 
 function echoLastValue(Vector<string> $v): void {
   $last_value = $v->lastValue();

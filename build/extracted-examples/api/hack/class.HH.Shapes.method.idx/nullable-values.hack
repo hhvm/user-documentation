@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHShapesMethodIdx\NullableValues;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHShapesMethodIdx\NullableValues;
 
 function runNullable(shape('x' => ?int, 'y' => ?int, ...) $point): void {
   // The key 'x' exists, so its value (3) is returned, not our explicit default 0

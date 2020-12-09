@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\FunctionHHAsioVw\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\FunctionHHAsioVw\BasicUsage;
 
 async function one(): Awaitable<int> {
   return 1;

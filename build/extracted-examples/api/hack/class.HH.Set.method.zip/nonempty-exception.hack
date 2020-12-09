@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHSetMethodZip\NonemptyException;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHSetMethodZip\NonemptyException;
 
 <<__EntryPoint>>
 async function _main(): Awaitable<void> {

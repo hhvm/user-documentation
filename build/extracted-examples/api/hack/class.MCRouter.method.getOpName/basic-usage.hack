@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassMCRouterMethodGetOpName\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassMCRouterMethodGetOpName\BasicUsage;
 
 function get_simple_mcrouter(): \MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};

@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassAsyncMysqlConnectionMethodPort\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassAsyncMysqlConnectionMethodPort\BasicUsage;
 
 use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 

@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHMapMethodToImmSet\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHMapMethodToImmSet\BasicUsage;
 
 <<__EntryPoint>>
 async function _main(): Awaitable<void> {

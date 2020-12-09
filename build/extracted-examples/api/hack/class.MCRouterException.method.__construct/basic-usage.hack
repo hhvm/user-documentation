@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassMCRouterExceptionMethodConstruct\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassMCRouterExceptionMethodConstruct\BasicUsage;
 
 async function simple_mcrouter(): Awaitable<void> {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};

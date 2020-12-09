@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\FunctionCurlMultiAwait\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\FunctionCurlMultiAwait\BasicUsage;
 
 async function get_curl_content(Set<string> $urls): Awaitable<Vector<string>> {
 

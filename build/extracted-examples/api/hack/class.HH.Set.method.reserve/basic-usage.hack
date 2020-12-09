@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHSetMethodReserve\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHSetMethodReserve\BasicUsage;
 
 const int SET_SIZE = 1000;
 

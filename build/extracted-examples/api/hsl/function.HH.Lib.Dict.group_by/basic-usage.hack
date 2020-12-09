@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hsl\FunctionHHLibDictGroupBy\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hsl\FunctionHHLibDictGroupBy\BasicUsage;
 
 use namespace HH\Lib\Dict;
 

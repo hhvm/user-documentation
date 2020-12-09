@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHShapesMethodIdx\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHShapesMethodIdx\BasicUsage;
 
 function run(shape('x' => int, 'y' => int, ?'z' => int) $point): void {
   // The key 'x' exists in the Shape $point so it's returned

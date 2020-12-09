@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassMCRouterOptionExceptionMethodConstruct\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassMCRouterOptionExceptionMethodConstruct\BasicUsage;
 
 function construct_mcrouter(darray<string, mixed> $options): void {
   if (!\array_key_exists('config_str', $options)) {

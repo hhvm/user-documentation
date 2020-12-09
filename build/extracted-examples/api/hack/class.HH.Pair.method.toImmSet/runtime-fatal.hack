@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHPairMethodToImmSet\RuntimeFatal;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHPairMethodToImmSet\RuntimeFatal;
 
 <<__EntryPoint>>
 async function _main(): Awaitable<void> {

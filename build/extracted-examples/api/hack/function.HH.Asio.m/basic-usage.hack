@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\FunctionHHAsioM\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\FunctionHHAsioM\BasicUsage;
 
 /**
  * Query an arbitrary number of URLs in parallel

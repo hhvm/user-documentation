@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHMapMethodImmutable\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHMapMethodImmutable\BasicUsage;
 
 function expects_immutable(ImmMap<string, string> $iv): void {
   \var_dump($iv);

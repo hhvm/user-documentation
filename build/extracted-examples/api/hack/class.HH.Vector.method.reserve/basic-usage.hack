@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodReserve\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHVectorMethodReserve\BasicUsage;
 
 const int VECTOR_SIZE = 1000;
 

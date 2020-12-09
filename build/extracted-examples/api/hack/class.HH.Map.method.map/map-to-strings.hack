@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHMapMethodMap\MapToStrings;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHMapMethodMap\MapToStrings;
 
 <<__EntryPoint>>
 async function _main(): Awaitable<void> {

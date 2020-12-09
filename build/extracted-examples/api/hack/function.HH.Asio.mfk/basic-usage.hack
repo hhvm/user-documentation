@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\FunctionHHAsioMfk\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\FunctionHHAsioMfk\BasicUsage;
 
 enum COLOR: int {
   RED = 1;

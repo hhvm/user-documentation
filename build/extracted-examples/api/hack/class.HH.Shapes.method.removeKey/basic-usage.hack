@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHShapesMethodRemoveKey\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHShapesMethodRemoveKey\BasicUsage;
 
 function run(shape('x' => int, 'y' => int) $point): void {
   // Prints the value at key 'y'

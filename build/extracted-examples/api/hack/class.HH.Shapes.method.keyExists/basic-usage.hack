@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHShapesMethodKeyExists\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHShapesMethodKeyExists\BasicUsage;
 
 function run(shape(?'x' => ?int, ?'y' => ?int, ?'z' => ?int) $point): void {
   // The key 'x' exists in Shape $point

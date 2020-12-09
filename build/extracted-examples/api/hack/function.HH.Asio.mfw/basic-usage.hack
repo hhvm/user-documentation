@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\FunctionHHAsioMfw\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\FunctionHHAsioMfw\BasicUsage;
 
 <<__EntryPoint>>
 async function basic_usage_main(): Awaitable<void> {

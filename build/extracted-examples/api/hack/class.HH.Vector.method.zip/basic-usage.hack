@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHVectorMethodZip\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHVectorMethodZip\BasicUsage;
 
 <<__EntryPoint>>
 async function _main(): Awaitable<void> {

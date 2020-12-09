@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHSetMethodToImmSet\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHSetMethodToImmSet\BasicUsage;
 
 function expects_immutable(ImmSet<string> $is): void {
   \var_dump($is);

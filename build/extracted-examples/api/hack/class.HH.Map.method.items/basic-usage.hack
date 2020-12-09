@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\ClassHHMapMethodItems\BasicUsage;
+namespace HHVM\UserDocumentation\Api\Hack\ClassHHMapMethodItems\BasicUsage;
 
 <<__EntryPoint>>
 function basic_usage_main(): void {
