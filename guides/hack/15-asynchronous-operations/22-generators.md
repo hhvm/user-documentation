@@ -15,7 +15,7 @@ Here is an example of using the [async utility function](../asynchronous-operati
 [`usleep`](/hack/reference/function/HH.Asio.usleep/) to imitate a second-by-second countdown clock. Note that in the
 `happy_new_year` `foreach` loop we have the syntax `await as`. This is shorthand for calling `await $ait->next()`.
 
-```iterator.php
+```iterator.hack
 const int SECOND = 1000000; // microseconds
 
 async function countdown(int $from): AsyncIterator<int> {
@@ -61,7 +61,7 @@ generator using [`raise`](/hack/reference/class/HH.AsyncGenerator/raise/).
 If we are doing either of these two things, our generator must return `AsyncGenerator`. An `AsyncGenenator` has three type
 parameters: the key, the value. And the type being passed to [`send`](/hack/reference/class/HH.AsyncGenerator/send/).
 
-```send.php
+```send.hack
 const int HALF_SECOND = 500000; // microseconds
 
 async function get_name_string(int $id): Awaitable<string> {
@@ -123,7 +123,7 @@ varray(2) {
 
 Here is how to raise an exception to an async generator.
 
-```raise.php
+```raise.hack
 const int HALF_SECOND = 500000; // microseconds
 
 async function get_name_string(int $id): Awaitable<string> {

@@ -1,7 +1,7 @@
 A class may contain definitions for named constants, which have public visibility.  A class constant belongs to the class
 as a whole, so it is implicitly `static`.  For example:
 
-```auto-color.php
+```auto-color.hack
 class Automobile {
   const DEFAULT_COLOR = "white";
   // ...

@@ -9,7 +9,7 @@ unary minus is applied to the smallest value.
 
 Consider the following example:
 
-```leap-year-test.php
+```leap-year-test.hack
 function is_leap_year(int $yy): bool {
   return ((($yy & 3) === 0) && (($yy % 100) !== 0)) || (($yy % 400) === 0);
 }

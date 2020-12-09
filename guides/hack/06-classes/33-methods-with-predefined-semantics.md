@@ -44,7 +44,7 @@ See [object disposal](object-disposal.md) for a discussion of disposal and these
 
 This public instance method is intended to create a string representation of the instance on which it is called.  For example:
 
-```Point.php
+```Point.hack
 class Point {
   private static int $pointCount = 0; // static property with initializer
   private float $x; // instance property
@@ -76,7 +76,7 @@ in Hack.  That said, `__toString` can be called directly.
 If the instance's class is derived from a class that has or inherits a `__toString` method, the result of calling that method should be
 prepended to the returned string.  For example:
 
-```MyRangeException.php no-auto-output
+```MyRangeException.hack no-auto-output
 class MyRangeException extends \Exception {
   public function __toString(): string {
     return parent::__toString().">>MyRangeException stuff<<";

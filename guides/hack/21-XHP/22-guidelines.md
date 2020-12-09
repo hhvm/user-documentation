@@ -14,7 +14,7 @@ The constraints of XHP object children and attributes are done at various times:
 If you have a parent object, and you want to give information to some object further down the UI tree (e.g., `<ul>` to `<li>`), you
 can set a context for those lower objects and the lower objects can retrieve them. You use `setContext` and `getContext`
 
-```context.inc.php
+```context.inc.hack
 use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
 use type Facebook\XHP\HTML\{dd, dl, dt};
 
@@ -59,7 +59,7 @@ async function guidelines_examples_context_run(string $s): Awaitable<void> {
   echo await $xhp->toStringAsync();
 }
 ```
-```context.php
+```context.hack
 <<__EntryPoint>>
 async function startHere(): Awaitable<void> {
   await guidelines_examples_context_run('No');

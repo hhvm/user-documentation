@@ -29,7 +29,7 @@ occurred within that try-block
 
 Consider the following:
 
-```simple.php
+```simple.hack
 function do_it(int $x, int $y): void {
   try {
     $result = $x / $y;
@@ -60,7 +60,7 @@ only an exception of that type is thrown, is the catch handler code executed.
 
 Consider the following hierarchy of exception-class types:
 
-```hierarchy_of_exception_classes.php
+```hierarchy_of_exception_classes.hack
 class DeviceException extends \Exception { /*...*/ }
 class DiskException extends DeviceException { /*...*/ }
 class RemovableDiskException extends DiskException { /*...*/ }

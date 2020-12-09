@@ -6,7 +6,7 @@ In general, an async operation has the following pattern:
 However, sometimes an async function can throw an exception. The good news is that the same exception object that would be thrown in the
 non-async version of the code will be returned when we `await` the awaitable.
 
-```basic-exception.php
+```basic-exception.hack
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception("Return exception handle");
 }
@@ -28,7 +28,7 @@ function main(): void {
 The use of `from_async` ignores any successful awaitable results and just throw an exception of one of the
 awaitable results, if one of the results was an exception.
 
-```multiple-awaitable-exception.php
+```multiple-awaitable-exception.hack
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception("Return exception handle");
 }
@@ -68,7 +68,7 @@ namespace HH\Asio {
 
 Taking the example above and using the wrapping mechanism, this is what the code looks like:
 
-```wrapping-exceptions.php
+```wrapping-exceptions.hack
 async function exception_thrower(): Awaitable<void> {
   throw new \Exception();
 }

@@ -61,7 +61,7 @@ In this case, the namespace extends from the opening brace to the closing brace.
 A namespace can import&mdash;that is, get access to&mdash;one or more names into a scope, optionally giving them each an alias.
 Each of those names may designate a namespace, a sub-namespace, a class, an interface, or a trait.  For example:
 
-```namespaces.inc.php no-auto-output
+```namespaces.inc.hack no-auto-output
 namespace NS1 {
   const int CON1 = 100;
   function f(): void {
@@ -101,7 +101,7 @@ namespace NS2 {
 }
 ```
 
-```using-namespaces.php
+```using-namespaces.hack
 namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;
 
 <<__EntryPoint>>

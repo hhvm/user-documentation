@@ -1,7 +1,7 @@
 An *expression statement* is simply *any* expression followed by a semicolon (`;`).  The expression is evaluated for its side-effects *only*;
 any resulting value is discarded.  For example:
 
-```useful.php no-auto-output
+```useful.hack no-auto-output
 function do_it(): int {
   return 100;
 }
@@ -16,7 +16,7 @@ function f(): void {
 
 While the following expression statements are syntactically correct, they serve no useful purpose:
 
-```useless.php no-auto-output
+```useless.hack no-auto-output
 function f(int $i): void {
   $i;
   -$i;

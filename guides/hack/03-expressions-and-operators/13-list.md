@@ -1,6 +1,6 @@
 `list()` is special syntax for unpacking tuples. It looks like a function, but it isn't one. It can be used in positions that you would assign into.
 
-```basic-tuple-assignment.php
+```basic-tuple-assignment.hack
 $tuple = tuple('one', 'two', 'three');
 list($one, $two, $three) = $tuple;
 echo "1 -> {$one}, 2 -> {$two}, 3 -> {$three}\n";
@@ -9,7 +9,7 @@ echo "1 -> {$one}, 2 -> {$two}, 3 -> {$three}\n";
 The `list()` will consume the `tuple` on the right and assign the variables inside of itself in turn.
 If the types of the tuple elements differ, the `list()` syntax will make sure that the type information is preserved.
 
-```typed-tuple-assignment.php
+```typed-tuple-assignment.hack
 <<__EntryPoint>>
 function main(): void {
   $tuple = tuple('string', 1, false);
@@ -27,7 +27,7 @@ function takes_bool(bool $_): void {}
 
 You can use the special `$_` variable to ignore certain elements of the `tuple`. You can use `$_` multiple times in one assignment and have the types be different. You **MUST** use `$_` if you want to ignore the elements at the end. You are not allowed to use a `list()` with fewer elements than the length of the `tuple`.
 
-```ignored-tuple-assignment.php
+```ignored-tuple-assignment.hack
 $tuple = tuple('a', 'b', 'c', 1, 2, 3);
 list($_, $b, $c, $_, $two, $_) = $tuple;
 echo "b -> {$b}, c -> {$c}, two -> {$two}\n";
@@ -45,7 +45,7 @@ You may also use `list()` on a `vec<T>`, but it is not recommended.
 
 `list()` can be nested inside of another `list()` to unpack `tuples` from within `tuples`.
 
-```list-within-list.php
+```list-within-list.hack
 $tuple = tuple('top level', tuple('inner', 'nested'));
 list($top_level, list($inner, $nested)) = $tuple;
 echo "top level -> {$top_level}, inner -> {$inner}, nested -> {$nested}\n";
@@ -53,7 +53,7 @@ echo "top level -> {$top_level}, inner -> {$inner}, nested -> {$nested}\n";
 
 My personal favorite place to put a `list()` is inside a `foreach($vec_of_tuples as list($one, $two, $three))`.
 
-```list-within-foreach.php
+```list-within-foreach.hack
 $vec_of_tuples = vec[
   tuple('A', 'B', 'C'),
   tuple('a', 'b', 'c'),

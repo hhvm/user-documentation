@@ -46,7 +46,7 @@ change the execution order of unrelated code that might not be designed for that
 
 For example, given the following code:
 
-```limitations.php
+```limitations.hack
 async function do_cpu_work(): Awaitable<void> {
   print("Start CPU work\n");
   $a = 0;
@@ -92,7 +92,7 @@ happen because there are no operations that can be moved to the background:
 
 A naive way to make two cURL requests without async could look like this:
 
-```non-async-curl.php
+```non-async-curl.hack
 function curl_A(): mixed {
   $ch = \curl_init();
   \curl_setopt($ch, \CURLOPT_URL, "http://example.com/");
@@ -128,7 +128,7 @@ from `curl_A`, it has to sit around waiting for `curl_A` to finish before beginn
 
 Fortunately, HHVM provides an async version of `curl_exec`:
 
-```async-curl.php
+```async-curl.hack
 async function curl_A(): Awaitable<string> {
   $x = await \HH\Asio\curl_exec("http://example.com/");
   return $x;

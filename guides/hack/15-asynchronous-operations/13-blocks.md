@@ -21,7 +21,7 @@ Async blocks have two main use-cases. Remember, this is essentially syntactic su
 - Inline simple async statements that would before have required a function call to execute.
 - Replace the call required by an async lambda to return an actual `Awaitable<T>`.
 
-```syntactic-sugar.php
+```syntactic-sugar.hack
 async function gen_int(): Awaitable<int> {
   return 4;
 }

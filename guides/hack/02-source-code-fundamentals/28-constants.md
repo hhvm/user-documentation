@@ -2,7 +2,7 @@ A constant is a named value. Once defined, the value of the constant *cannot* be
 of two ways: using the `const` keyword at the top level, or inside a class or
 interface. For example:
 
-```defining-constants.php
+```defining-constants.hack
 const int MAX_COUNT = 123;
 class C {
   const float MAX_HEIGHT = 10.5;

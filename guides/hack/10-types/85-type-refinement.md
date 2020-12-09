@@ -5,7 +5,7 @@ occur with `arraykey` and its subtypes `int` and `string`, with nullable types a
 
 Certain program elements are capable of changing the type of an expression using what is called *type refinement*. Consider the following:
 
-```f1.php no-auto-output
+```f1.hack no-auto-output
 function f1(?int $p): void {
   //  $x = $p % 3;       // rejected; % not defined for ?int
   if ($p is int) { // type refinement occurs; $p has type int
@@ -21,7 +21,7 @@ be applied. However, once execution flows out of the `if` statement, the type of
 
 Consider the following:
 
-```f2.php no-auto-output
+```f2.hack no-auto-output
 function f2(?int $p): void {
   if ($p is null) { // type refinement occurs; $p has type null
     //    $x = $p % 3;      // rejected; % not defined for null
@@ -34,7 +34,7 @@ function f2(?int $p): void {
 The first assignment is rejected, not because we don't know `$p`'s type, but because we know its type is not `int`. See how an opposite
 type refinement occurs with the `else`.  Similarly, we can write the following:
 
-```f3.php no-auto-output
+```f3.hack no-auto-output
 function f3(?int $p): void {
   if (!$p is null) { // type refinement occurs; $p has type int
     $x = $p % 3; // accepted; % defined for int
@@ -48,7 +48,7 @@ function f3(?int $p): void {
 
 Consider the following example that contains multiple selection criteria:
 
-```f4.php no-auto-output
+```f4.hack no-auto-output
 function f4(?num $p): void {
   if (($p is int) || ($p is float)) {
     //    $x = $p**2;    // rejected
@@ -69,7 +69,7 @@ logical test `if ($x)` is equivalent to `if ($x is nonnull)`.]
 Thus far, all the examples use the value of an expression that designates a parameter (which is a local variable). Consider the following
 case, which involves a property:
 
-```f5.php no-auto-output
+```f5.hack no-auto-output
 class C {
   private ?int $p = 8; // holds an int, but type is ?int
   public function m(): void {

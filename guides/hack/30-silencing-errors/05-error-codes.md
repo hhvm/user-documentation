@@ -4,7 +4,7 @@ them. You can see the full list of error codes in
 
 ## 1002: Top-level code
 
-```1002_toplevel.php no-auto-output
+```1002_toplevel.hack no-auto-output
 namespace HHVM\UserDocumentation\Guides\Hack\SilencingErrors\ErrorCodes\Toplevel;
 
 /* HH_FIXME[1002] Top-level code isn't checked. */
@@ -18,7 +18,7 @@ attribute.
 
 ## 2049: Unbound name
 
-```2049_unbound_name.php no-auto-output
+```2049_unbound_name.hack no-auto-output
 function foo(): void {
   /* HH_FIXME[4107] No such function (type checking). */
   /* HH_FIXME[2049] No such function (global name check). */
@@ -36,7 +36,7 @@ legacy PHP APIs.
 
 ## 2050: Undefined Variable
 
-```2050_undefined_var.php no-auto-output
+```2050_undefined_var.hack no-auto-output
 function foo(): mixed {
   /* HH_FIXME[2050] This variable doesn't exist. */
   return $no_such_var;
@@ -53,7 +53,7 @@ legacy PHP APIs.
 
 ## 4005: Array access on a type that doesn't support indexing
 
-```4005_array_access.php no-auto-output
+```4005_array_access.hack no-auto-output
 function foo(int $m): void {
   /* HH_FIXME[4005] Indexing a type that isn't indexable. */
   $value = $m['foo'];
@@ -69,7 +69,7 @@ Suggestions: Refactor the code to use a Hack array or a
 
 ## 4006: Array append on an inappropriate type
 
-```4006_array_append.php no-auto-output
+```4006_array_append.hack no-auto-output
 function foo(mixed $m): void {
   /* HH_FIXME[4006] $m may not be an array. */
   $m[] = 1;
@@ -84,7 +84,7 @@ vec<_>`) to perform a runtime type check.
 
 ## 4032: Missing return type
 
-```4032_missing_return.php no-auto-output
+```4032_missing_return.hack no-auto-output
 /* HH_FIXME[4030] Missing a return type declaration. */
 function foo() {
   return 1;
@@ -112,7 +112,7 @@ you still want to use `array`, specify the type e.g. `array<mixed>`.
 
 ## 4051: Accessing a shape with an invalid field name
 
-```4051_field_name.php no-auto-output
+```4051_field_name.hack no-auto-output
 function foo(shape(...) $s): void {
   /* HH_FIXME[4051] Invalid shape field name. */
   $value = $s[1.0];
@@ -127,7 +127,7 @@ integer, or a class constant.
 
 ## 4053: Member not found
 
-```4053_member_not_found.php no-auto-output
+```4053_member_not_found.hack no-auto-output
 class MyClass {}
 
 function takes_myclass(MyClass $c): void {
@@ -146,7 +146,7 @@ type you're expecting.
 
 ## 4057: Missing shape field
 
-```4057_missing_field.php no-auto-output
+```4057_missing_field.hack no-auto-output
 function foo(): shape('x' => int) {
   /* HH_FIXME[4057] Missing the field `x`. */
   return shape();
@@ -161,7 +161,7 @@ Suggestions: Change your shape type to use optional fields.
 
 ## 4063: Nullable container access
 
-```4063_null_container.php no-auto-output
+```4063_null_container.hack no-auto-output
 function foo(?vec<int> $items): void {
   /* HH_FIXME[4063] $items can be null. */
   $x = $items[0];
@@ -176,7 +176,7 @@ assert with `$items as nonnull`.
 
 ## 4064: Accessing members on a nullable object
 
-```4064_nullable.php no-auto-output
+```4064_nullable.hack no-auto-output
 class MyClass {
   public int $x = 0;
   public function foo(): void {}
@@ -199,7 +199,7 @@ assert with `$m as nonnull`.
 
 ## 4101: Wrong number of type parameters
 
-```4101_type_params.php no-auto-output
+```4101_type_params.hack no-auto-output
 class MyBox<T> {
   public ?T $x = null;
 }
@@ -222,7 +222,7 @@ parameters inside function and method bodies.
 
 ## 4107: Unbound name (type checking)
 
-```4107_unbound_name_typing.php no-auto-output
+```4107_unbound_name_typing.hack no-auto-output
 function foo(): void {
   /* HH_FIXME[4107] No such function (type checking). */
   /* HH_FIXME[2049] No such function (global name check). */
@@ -240,7 +240,7 @@ legacy PHP APIs.
 
 ## 4108: Undefined shape field
 
-```4108_undef_field.php no-auto-output
+```4108_undef_field.hack no-auto-output
 function foo(shape('x' => int) $s): void {
   /* HH_FIXME[4108] No such field in this shape. */
   $value = $s['not_x'];
@@ -255,7 +255,7 @@ you're using.
 
 ## 4110: Bad type in expression
 
-```4110_bad_type.php no-auto-output
+```4110_bad_type.hack no-auto-output
 function takes_int(int $_): void {}
 
 function foo(): void {
@@ -298,7 +298,7 @@ Suggestions: Use a field type declaration with optional fields instead.
 
 ## 4128: Using deprecated code
 
-```4128_use_deprecated.php no-auto-output
+```4128_use_deprecated.hack no-auto-output
 function foo_new(): void {}
 
 <<__Deprecated("Use foo_new instead")>>
@@ -319,7 +319,7 @@ API.
 
 ## 4165: Accessing optional shape field
 
-```4165_optional_field.php no-auto-output
+```4165_optional_field.hack no-auto-output
 function foo(shape(?'x' => int) $s): void {
   /* HH_FIXME[4165] This field may not be present. */
   $value = $s['x'];
@@ -334,7 +334,7 @@ the missing field.
 
 ## 4193: Illegal XHP child
 
-```4193_xhp_child.php no-auto-output
+```4193_xhp_child.hack no-auto-output
 function foo(mixed $m): void {
   /* HH_FIXME[4193] $m may not be an XHPChild.*/
   $my_div = <div>{$m}</div>;
@@ -374,7 +374,7 @@ for empty values.
 
 ## 4297: Type inference failed
 
-```4297_infer.php no-auto-output
+```4297_infer.hack no-auto-output
 class MyA {
   public function doStuff(): void {}
 }
@@ -410,7 +410,7 @@ $d = dict<string, string>[];
 
 ## 4323: Type constraint violation
 
-```4323_constraints.php no-auto-output
+```4323_constraints.hack no-auto-output
 /* HH_FIXME[4323] A dict must have arraykey, int or string keys. */
 function foo(dict<mixed, bool> $d): void {}
 ```

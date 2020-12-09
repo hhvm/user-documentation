@@ -6,7 +6,7 @@ If the expression tests `true`, the *single* statement that follows is executed,
 control transfers to the point immediately following the end of the `while` statement. The loop body (that is, the single statement) is executed
 zero or more times. Consider the following:
 
-```table-of-squares.php
+```table-of-squares.hack
 $i = 1;
 while ($i <= 10) {
   echo "$i\t".($i * $i)."\n"; // output a table of squares

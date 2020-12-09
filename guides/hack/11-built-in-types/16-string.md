@@ -15,7 +15,7 @@ trailing characters are non-numeric. A *non-numeric string* is a string that is 
 
 Consider the following example:
 
-```__toString.php
+```__toString.hack
 class Point {
   private float $x;
   private float $y;

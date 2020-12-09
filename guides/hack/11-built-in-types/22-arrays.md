@@ -54,7 +54,7 @@ are 0 and 1.
 An existing element is accessed via the subscript operator, `[]`, and the value of an element can be changed; however, new values can only be added
 to the end by using subscript `[]`, and key values always start at 0, and go up in increments of 1. Consider the following:
 
-```vec-colors.php
+```vec-colors.hack
 $colors = vec[]; // create an empty vec
 \var_dump($colors);
 
@@ -94,7 +94,7 @@ same (or even compatible) types! That said, there are library functions to conve
 
 Consider the following:
 
-```dict-colors.php
+```dict-colors.hack
 $colors = dict[]; // create an empty dict
 \var_dump($colors);
 
@@ -157,7 +157,7 @@ form `keyset[`...`]`. There are three elements, and their corresponding keys are
 An existing element is accessed via the subscript operator, `[]`; the value of an element cannot be changed. And new values can only be added
 by using subscript `[]`. Consider the following:
 
-```keyset-colors.php
+```keyset-colors.hack
 $colors = keyset[]; // create an empty keyset
 \var_dump($colors);
 
@@ -337,7 +337,7 @@ It addresses how an instance behaves when assigned / passed into or returned fro
 An object has reference semantics.
 If I pass you a `Person` instance and you set the last name to `"Doe"`, I'll be able to observe that change on my instance (`$emma`).
 
-```reference-semantics.php
+```reference-semantics.hack
 <<__EntryPoint>>
 function main(): void {
   $john = new Person('John', 'Doe');
@@ -372,7 +372,7 @@ class Person {
 
 However, if you were to do the same with an array type, you'd not observe the changes in your variable (`$emma`).
 
-```dicts-have-value-semantics.php
+```dicts-have-value-semantics.hack
 <<__EntryPoint>>
 function main(): void {
   $john = make_person('John', 'Doe');
@@ -417,7 +417,7 @@ This will _copy out_ the changes made in `marry()` when the function finishes.
 
 Watch out! Collections have reference semantics!
 
-```maps-have-reference-semantics.php
+```maps-have-reference-semantics.hack
 <<__EntryPoint>>
 function main(): void {
   $john = make_person('John', 'Doe');
@@ -466,7 +466,7 @@ This makes it obvious that you intend to mutate the dict.
 
 From the perspective of the programmer, as soon as you give the value a (new) name.
 
-```assignment-with-value-containers.php
+```assignment-with-value-containers.hack
 $emma = dict['first' => 'Emma', 'last' => 'Smith'];
 $another_emma = $emma;
 

@@ -1,6 +1,6 @@
 Imagine that you have a class, and some various `extends` to that class.
 
-```non-parameterized.php
+```non-parameterized.hack
 abstract class User {
   public function __construct(private int $id) {}
   public function getID(): int {
@@ -33,7 +33,7 @@ of `User` will know exactly what type will be returned.
 While this situation could be handled by using generics, an alternate approach is to use type constants. Instead of types being declared
 as parameters directly on the class itself, type constants allow the type to be declared as class member constants instead.
 
-```type-constants.php
+```type-constants.hack
 abstract class User {
   abstract const type T as arraykey;
   public function __construct(private this::T $id) {}
@@ -103,7 +103,7 @@ You can think of `this::` in a similar manner as the [`this` return type](../bui
 This example shows the real benefit of type constants. The property is defined in `Base`, but can have different types depending
 on the context of where it is being used.
 
-```annotation.php
+```annotation.hack
 abstract class Base {
   abstract const type T;
   protected this::T $value;
@@ -148,7 +148,7 @@ Here are some examples of where type constants may be useful:
 
 Referencing type constants is as easy as referencing a static class constant.
 
-```referencing.php
+```referencing.hack
 abstract class UserTC {
   abstract const type Ttc as arraykey;
   public function __construct(private this::Ttc $id) {}
@@ -177,7 +177,7 @@ function run(): void {
 For type constants declared in classes, it is possible to provide a constraint as well as a concrete type. When a constraint is provided this allows
 the type constant to be overridden by child classes. This feature is *not* supported for interfaces.
 
-```overriding.php
+```overriding.hack
 abstract class BaseAbstract {
   abstract const type T;
 }
@@ -203,7 +203,7 @@ function run(): void {
 
 You can use type constants as inputs to class instance methods.
 
-```instance.php
+```instance.hack
 abstract class Box {
   abstract const type T;
   public function __construct(private this::T $value) {}

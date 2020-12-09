@@ -21,7 +21,7 @@ A custom XHP class needs to do three things:
 * implement the method `renderAsync` to return an XHP object (`x\node`) or the
   respective method of the chosen base class
 
-```basic.inc.php
+```basic.inc.hack
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\strong;
 
@@ -37,7 +37,7 @@ final xhp class intro_plain_str extends x\primitive {
   }
 }
 ```
-```basic.php
+```basic.hack
 <<__EntryPoint>>
 async function extending_examples_basic_run(): Awaitable<void> {
   $xhp = <introduction />;
@@ -94,7 +94,7 @@ The `->:` operator can be used to retrieve the value of an attribute.
 You can specify an attribute as required with the `@required` declaration after the attribute name. If you try to render the XHP object and
 have not set the required attribute, then an `XHPAttributeRequiredException` will be thrown.
 
-```required-attributes.inc.php
+```required-attributes.inc.hack
 use namespace Facebook\XHP\Core as x;
 
 final xhp class user_info extends x\element {
@@ -107,7 +107,7 @@ final xhp class user_info extends x\element {
   }
 }
 ```
-```required-attributes.php
+```required-attributes.hack
 use namespace Facebook\XHP;
 
 <<__EntryPoint>>
@@ -159,7 +159,7 @@ extend its functionality. In such cases, it should be combined with *attribute t
 
 Let's say you have a class that wants to inherit attributes from `<div>`. You could do something like this:
 
-```bad-attribute-transfer.inc.php
+```bad-attribute-transfer.inc.hack
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\div;
 
@@ -173,7 +173,7 @@ final xhp class ui_my_box extends x\element {
   }
 }
 ```
-```bad-attribute-transfer.php
+```bad-attribute-transfer.hack
 <<__EntryPoint>>
 async function extending_examples_bad_attribute_transfer_run(
 ): Awaitable<void> {
@@ -190,7 +190,7 @@ get those attributes.
 
 This can be addressed by using the `...` operator.
 
-```attribute-transfer.inc.php
+```attribute-transfer.inc.hack
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{div, XHPAttributeClobbering_DEPRECATED};
 
@@ -204,7 +204,7 @@ final xhp class ui_my_good_box extends x\element {
   }
 }
 ```
-```attribute-transfer.php
+```attribute-transfer.hack
 <<__EntryPoint>>
 async function extending_examples_good_attribute_transfer_run(
 ): Awaitable<void> {
@@ -248,7 +248,7 @@ satisfy the rules in its `getChildrenDeclaration()`, an `InvalidChildrenExceptio
 is thrown. Note that child validation only happens during rendering, no
 exception is thrown before that, e.g. when the invalid child is added.
 
-```children.inc.php
+```children.inc.hack
 // Conventionally aliased to XHPChild, which makes the children declarations
 // easier to read (more fluid).
 use namespace Facebook\XHP\{ChildValidation as XHPChild, Core as x};
@@ -293,7 +293,7 @@ xhp class my_html extends x\element {
   }
 }
 ```
-```children.php
+```children.hack
 use namespace Facebook\XHP;
 use type Facebook\XHP\HTML\{body, head, li, ul};
 
@@ -330,7 +330,7 @@ Using such interfaces makes it possible to implement `getChildrenDeclaration()`
 in other elements without having to manually list all possible child types, some
 of which may not even exist yet.
 
-```categories.inc.php
+```categories.inc.hack
 use namespace Facebook\XHP\{
   ChildValidation as XHPChild,
   Core as x,
@@ -352,7 +352,7 @@ xhp class my_text extends x\element implements Category\Phrase {
   }
 }
 ```
-```categories.php
+```categories.hack
 use type Facebook\XHP\HTML\em;
 
 <<__EntryPoint>>
@@ -381,7 +381,7 @@ As you may have noticed, all rendering methods (`renderAsync`, `stringifyAsync`)
 are declared to return an `Awaitable` and can therefore be implemented as async
 functions and use `await`.
 
-```xhp-async.inc.php
+```xhp-async.inc.hack
 use namespace Facebook\XHP\Core as x;
 
 final xhp class ui_get_status extends x\element {
@@ -394,7 +394,7 @@ final xhp class ui_get_status extends x\element {
   }
 }
 ```
-```xhp-async.php
+```xhp-async.hack
 <<__EntryPoint>>
 async function extending_examples_async_run(): Awaitable<void> {
   $status = <ui_get_status />;
@@ -426,7 +426,7 @@ In XHP-Lib v3, this trait is called `\XHPHelpers`.
 `XHPHTMLHelpers` has a method `getID` that you can call to give your rendered custom XHP object a unique ID that can be referred to in other
 parts of your code or UI framework (e.g., CSS).
 
-```get-id.inc.php
+```get-id.inc.hack
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{span, XHPHTMLHelpers};
 
@@ -438,7 +438,7 @@ xhp class my_id extends x\element {
   }
 }
 ```
-```get-id.php
+```get-id.hack
 <<__EntryPoint>>
 async function extending_examples_get_id_run(): Awaitable<void> {
   // This will print something like:
@@ -462,7 +462,7 @@ This is best illustrated with a standard HTML element, all of which have a
 XHP class, as long as it uses the trait and declares the `class` attribute
 directly or through inheritance.
 
-```add-class.php
+```add-class.hack
 use type Facebook\XHP\HTML\h1;
 
 function get_header(string $section_name): h1 {

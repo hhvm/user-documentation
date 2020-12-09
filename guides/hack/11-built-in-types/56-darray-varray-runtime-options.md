@@ -10,7 +10,7 @@ You can get a list of the runtime options that your current hhvm recognizes from
 This relies on the settings being in your `server.ini`.
 The output will look something like this.
 
-```get_all_runtime_options.php
+```get_all_runtime_options.hack
 function get_all_runtime_options(
 ): dict<string, shape(
   'global_value' => string,
@@ -175,7 +175,7 @@ this means that the following checks will currently always fail, but may
 pass in the future - for this reason, the `hhvm.hack_arr_is_shape_tuple_notices`
 runtime option has been added to raise notices for these type tests:
 
-```hack_arr_is_shape_tuple_notices.php
+```hack_arr_is_shape_tuple_notices.hack
 $_ = dict[] is shape();
 $_ = vec[42] is /*tuple*/(int);
 ```.ini

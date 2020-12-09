@@ -35,7 +35,7 @@ variables `$count` and `$message` take on the type of the respective value being
 
 Consider the following example:
 
-```local-variables.php
+```local-variables.hack
 function f(): void {
   $lv = 1;
   echo "\$lv = $lv\n";

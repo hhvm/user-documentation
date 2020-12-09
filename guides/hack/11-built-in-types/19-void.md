@@ -1,7 +1,7 @@
 The type `void` indicates the absence of a value. It is used to declare that a function does *not* return any value. As such, a void function
 can contain one or more `return` statements, provided none of them return a value.  Consider the following example:
 
-```draw-line.php no-auto-output
+```draw-line.hack no-auto-output
 function draw_line(Point $p1, Point $p2): void { /* ... */ }
 
 class Point {

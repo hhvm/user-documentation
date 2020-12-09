@@ -98,7 +98,7 @@ is performed.
 
 Consider the following example:
 
-```dq-variable-substitution.php
+```dq-variable-substitution.hack
 class C {
   public int $p1 = 2;
 }
@@ -120,7 +120,7 @@ Certain other (and sometimes non-printable) characters can also be expressed as 
 A heredoc literal supports variable substitution as defined for [double-quoted string literals](#string-literals__double-quoted-string-literals).
 For example:
 
-```heredoc-literals.php
+```heredoc-literals.hack
 <<__EntryPoint>>
 function main(): void {
   $v = 123;
@@ -143,7 +143,7 @@ A nowdoc string literal looks like a [heredoc string literal](#string-literals__
 id is enclosed in single quotes ('). The two forms of string literal have the same semantics and constraints except that a
 nowdoc string literal is not subject to variable substitution.  For example:
 
-```nowdoc-literals.php
+```nowdoc-literals.hack
 <<__EntryPoint>>
 function main(): void {
   $v = 123;
@@ -169,7 +169,7 @@ Here, `null` is used as a default argument value in the library function `log`.
 
 In the following example:
 
-```null-literal.php no-auto-output
+```null-literal.hack no-auto-output
 type IdSet = shape('id' => ?string, 'url' => ?string, 'count' => int);
 
 function get_IdSet(): IdSet {

@@ -2,7 +2,7 @@ The `new` operator allocates memory for an object that is an instance of the spe
 class's [constructor](../classes/constructors.md) passing it the optional argument list, just like a function call. If the class has no
 constructor, the constructor that class inherits (if any) is used.  For example:
 
-```Point.php
+```Point.hack
 class Point {
   private static int $pointCount = 0; // static property with initializer
   private float $x; // instance property

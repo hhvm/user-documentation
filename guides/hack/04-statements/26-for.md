@@ -1,7 +1,7 @@
 The `for` statement is typically used to step through a range of values in ascending or descending increments, performing some set of operations
 on each value.  For example:
 
-```table-of-squares.php
+```table-of-squares.hack
 for ($i = 1; $i <= 5; ++$i) {
   echo "$i\t".($i * $i)."\n"; // output a table of squares
 }

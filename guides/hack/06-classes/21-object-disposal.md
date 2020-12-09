@@ -7,7 +7,7 @@ In the following example, we define and use type `TextFile` to encapsulate a tex
 we need to make sure that output buffers are flushed, among other things. Let us call these tasks *object cleanup*.  (The
 example is skeletal; it has only the minimal machinery needed to demonstrate object disposal.)
 
-```TextFile.php
+```TextFile.hack
 class TextFile implements \IDisposable {
   private ?int $fileHandle = null;
   private bool $openFlag = false;
