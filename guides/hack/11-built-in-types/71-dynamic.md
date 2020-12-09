@@ -70,8 +70,6 @@ coercion_from_dynamic = true
 Unions with dynamic are also allowed to coerce to enforceable types provided that each element of the union can coerce.
 
 ```hack coercion_from_union.php.type-errors
-<?hh
-
 function expect_int(int $i): void {}
 function expect_string(string $s): void {}
 
