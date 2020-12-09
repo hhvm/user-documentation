@@ -352,7 +352,6 @@ abstract class FilterBase extends Markdown\RenderFilter {
             ),
         )
         |> Str\join($$, '\\');
-      $ns = Str\replace($ns, 'Api\\', 'Guides\\'); // TODO: remove
       $code = 'namespace HHVM\\UserDocumentation\\'.$ns.";\n\n$code";
     }
 
