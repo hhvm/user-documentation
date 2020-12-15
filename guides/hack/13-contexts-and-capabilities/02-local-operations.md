@@ -1,0 +1,74 @@
+## WARNING WARNING WARNING
+
+This section is under active development and represents an unreleased feature
+
+## Back to your regularly scheduled docs
+
+The existance of a capability (or lackthereof) within the contexts of a function plays a direct role in the operations allowed within that function.
+
+Consider the following potential (although not necessarily planned) contexts (with implied matching capabilities):
+* `throws<T>`, representing the permission to throw an exeption type `Te <: T`
+* `io`, representing the permission to do io
+* `statics`, representing the permission to access static members and global variables
+* `writeProp`, representing the permission to mutate properties of objects
+* `dynamic`, representing the permission to cast a value to the `dynamic` type
+
+In all of the below cases, the relevant local operations are only legal due to the existance of the matching capabilities within the context of the function. In the world where all these contexts (and matching capabilities exist), some or all may be included within the `defaults` context.
+
+```
+function io_good()[io]: void {
+  echo "good"; // ok
+  print "also ok"; // also ok
+}
+```
+
+```
+class FooException extends Exception {}
+class FooChildException extends FooException {}
+class BarException extends Exception {}
+
+function throws_foo_exception()[throws<FooException>]: void {
+  throw new FooException(); // ok: FooException <: FooException
+  throw new FooChildException(); // ok: FooChildException <: FooException  
+}
+
+function throws_bar_exception()[throws<BarException>]: void {
+  throw new BarException(); // ok: BarException <: BarException
+}
+
+function throws_foo_and_bar_exceptions()[throws<FooException>, throws<BarException>]: void {
+  throw new FooException(); ok: FooException <: FooException
+  throw new FooChildException(); // ok: FooChildException <: FooException
+  throw new BarException(); ok: BarException <: BarException
+}
+```
+
+```
+class HasAStatic {
+  public static int $i = 0;
+}
+
+function reads_and_writes_static()[statics]: void {
+  HasAStatic::$i++;
+}
+```
+
+```
+class SomeClass {
+  public int $i = 0;
+}
+
+function reads_and_writes_prop(SomeClass $sc)[writeprop]: void {
+  $sc->i++;
+}
+```
+
+```
+function casts_to_dynamic(int $in)[dynamic]: void {
+  invokes_off_dynamic($in as dynamic);
+}
+
+function invokes_off_dynamic(dynamic $in)[]: void {
+  $in->thisIsbananasAndDefinitelyThrowsButTypechecks();
+}
+```

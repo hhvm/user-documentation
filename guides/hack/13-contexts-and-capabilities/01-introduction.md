@@ -1,0 +1,85 @@
+## WARNING WARNING WARNING
+
+This section is under active development and represents an unreleased feature
+
+## Back to your regularly scheduled docs
+
+Contexts and capabilities overlay a coeffect system into the Hack type system through lightweight context annotations that logically map into a set of capabilities. These capabilities establish both the calling conventions (i.e., which functions/method may call which other functions/methods) as well as the operations permitted within the present context.
+
+Capabilities are permissions or descriptions of a permission. For example, one might consider the ability to do io or access globals as capabilities. Contexts are a higher level representation of a set of capabilities. A function may be comprised of one or more contexts which represent the set union of the underlying capabilities.
+
+At present, all declarations of contexts and capabilities live within the typechecker and runtime. There are no plans to change this in the immediate future.
+
+## Basic Declarations
+
+A function or method may optionally choose to list one or more contexts:
+
+```
+function no_listed_contexts(): void {...}
+function empty_context()[]: void {...}
+function one_context()[C]: void {...}
+function many_context()[C1, C2, ..., Cn]: void {...}
+```
+
+There exists a context named `defaults` that represents the set of capabilities present in a function prior to the introduction of this feature. When a function is not annotated with a context list, it implicitly received a list containing only the default context.
+
+The above declaration of `no_contexts` is fully equivilant to the following:
+
+```
+function no_contexts()[defaults]: void {...}
+```
+
+## Interaction of Contextful Functions
+
+In order to invoke a function, one must have access to all capabilities required by the callee. However, the caller may have more capabilities than is required by the callee, in which case simply not all capabilities are "passed" to the callee.
+
+In the following example, assume the existance of a `rand` context representing the capability set `{Rand}`, an `io` context representing the capability set `{IO}`, and that the `defaults` contexts represents the capability set `{Rand, IO}`.
+
+```
+/* has {} capability set */
+function pure_fun()[]: void {
+  return;
+}
+
+function rand_int()[rand]: int {
+  return HH\Lib\PseudoRandom\int();
+}
+
+function rand_fun()[rand]: void {
+  pure_fun(); // fine: {} ⊆ {Rand}
+  rand_int(); // fine: {Rand} ⊆ {Rand}
+}
+
+ // recall that this has the `defaults` context
+function unannotated_fun(): void {
+  rand_fun(); // fine: {Rand} ⊆ {IO, Rand,}
+}
+```
+
+## Paramterized Contexts
+
+While most contexts and capabilites represent the binary options of existance and lack thereof, it is also possible for either/both to be parameterized.
+
+In the following example, assume the existance of a `throws<T>` context representing the capability set `{Throws<T>}`. Rather than describing that a function *can* throw, this would describe which classes of exceptions a function may throw. In that scenario, the context would require a parameter representing the exception class: throws<-T as Exception>.
+
+```
+function throws_foo_exception()[throws<FooException>]: void { // {Throws<FooException>}
+  throw new FooException();
+}
+
+function throws_bar_exception()[throws<BarException>]: void { // {Throws<BarException>}
+  throw new BarException();
+}
+
+function throws_foo_or_bar_exception(bool $cond)[
+  throws<FooException>, throws<BarException> // {Throws<FooException>, Throws<BarException>}
+]: void {
+  if ($cond) {
+    throws_foo_exception();
+  } else {
+    throws_bar_exception();
+  }
+}
+```
+
+The above would indicate that throws_foo_or_bar_exception may throw any of the listed exception classes.
