@@ -4,12 +4,29 @@ This section is under active development and represents an unreleased feature
 
 ## Back to your regularly scheduled docs
 
-TODO
+Capabilities are contravariant.
 
-Semantically, capabilities work as if they were required parameters to functions, and are thus contravariant. This means that, for example, a closure that requires a [rand] or [] (pure) context may be passed where the expected type is a function that requires [rand, io]. (The converse is disallowed because that would mean giving an additional capability for randomness out of thin air.)
+This implies that a closure that requires a set of capabilities S<sub>a</sub> may be passed where the expected type is a function that requires S<sub>b</sub> as long as S<sub>a</sub> ⊆ S<sub>b</sub>.
 
-The errors then fall out by normal subtyping rules by internally treating permissions as (implicit) arguments of a function/method.
+```
+// Here the default context includes at least {Rand, IO}
+function requires_rand_io_arg((function()[rand, io]: void) $f): void {
+  $f();
+}
 
+function caller(): void {
+  // passing a function that requires fewer capabilities
+  requires_rand_io_arg(()[rand] ==> {...}); 
+  // passing a function that requires no capabilities 
+  requires_rand_io_arg(()[] ==> {...});  
+}
+```
+
+Additionally, this has the standard implication on inheritance hierarchies. Note that if S<sub>a</sub> ⊆ S<sub>b</sub> it is the case that S<sub>b</sub> is a subtype of S<sub>a</sub>.
+
+For the following, assume the default set contains {IO, Rand, Throws<mixed>}.
+
+```
 class Parent {
   public function maybeRand()[rand]: void {...} // {Rand}
   public function maybePure(): void {...} // {Throws<mixed>, IO, Rand}
@@ -24,9 +41,18 @@ class Child extends Mid {
   public function maybeRand()[]: void {...} // {} -> fine {} ⊆ {Rand}
   public function maybePure()[]: void {...} // {} -> fine {} ⊆ {IO}
 }
-In the above, the contexts on the methods in Parent and Child are required for Mid to typecheck successfully. Note also that maybePure in Parent need not be the pure context, and that maybeRand in Child need not be rand.
+```
 
-Capability subtyping
-In reality, there may also exist a subtyping relationship between capabilities; suppose that a new capability FileInput is defined. Since reading from a file does not preclude one from reading a special file such as /dev/random on a UNIX-like system, the semantic model should conservatively assume that a function with capability FileInput must also have the Rand capability. Therefore, FileInput must be a subtype (subcapability) of Rand.
+### Capability subtyping
 
-This has an important consequence that falls out by design: whenever some capability B that is subtype of capability A is available (in scope), any function (or operation) that requires A can be called (or performed, respectively).
+In reality, there may also exist a subtyping relationship between capabilities. Thus, whenever some capability B that is subtype of capability A is available, any function or operation that requires A may be called or performed, respectively. This works identically to standard type subtyping.
+
+For the following, assume that the following contexts and capabilities exist: Rand, ReadFile <: Rand, rand: {Rand}, readfile: {Readfile}
+
+```
+function requires_rand()[rand]: void {...}
+
+function has_readfile()[readfile]: void {
+  requires_rand(); fine {readfile} ⊆ {Rand} since readfile <: rand
+}
+```
