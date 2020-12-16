@@ -29,6 +29,17 @@ The above declaration of `no_contexts` is fully equivilant to the following:
 function no_contexts()[defaults]: void {...}
 ```
 
+Additionally, the context list may appear in function types:
+
+```
+function has_fn_args(
+  (function (): void) $no_list,
+  (function ()[io, rand]: void) $list,
+  (function ()[]: void) $empty_list,
+): void {...}
+
+```
+
 ## Interaction of Contextful Functions
 
 In order to invoke a function, one must have access to all capabilities required by the callee. However, the caller may have more capabilities than is required by the callee, in which case simply not all capabilities are "passed" to the callee.
