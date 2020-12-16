@@ -1,8 +1,6 @@
 **Topics covered in this section**
 
 * [break](break.md)
-* [Block](compound-statements.md)
-* [Compound statement ({ ... }](compound-statements.md)
 * [continue](continue.md)
 * [do/while](do.md)
 * [Expression statement](expression-statements.md)

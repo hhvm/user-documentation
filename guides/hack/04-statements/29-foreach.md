@@ -11,8 +11,6 @@ foreach ($colors as $color) {
 
 Here, we iterate over a collection of three strings in a vec of `string`. Inside the loop body, `$color` takes on the value of the current string.
 
-See [compound statements](compound-statements.md) for a discussion about the use of braces around the statement body.
-
 As each array element has an index as well as a value, we can access both. For example:
 
 ```Hack

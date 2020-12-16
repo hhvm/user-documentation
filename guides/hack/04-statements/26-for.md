@@ -21,8 +21,6 @@ for (; ; ) {
 }
 ```
 
-See [compound statements](compound-statements.md) for a discussion about the use of braces around the statement body.
-
 In the first `for` loop above, let's call `$i = 1` the *for-initializer*, `$i <= 10` the *for-control*, and `++$i` the *for-end-of-loop-action*.
 Each of these three parts can contain a comma-separated list of expressions.  For example:
 

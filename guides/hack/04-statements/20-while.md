@@ -30,5 +30,3 @@ zero-values are converted to `false`.
 
 The `do`/`while` statement behaves slightly differently than `while` in that the former executes the loop body *before* it tests the
 controlling expression, whereas `while` executes it after.
-
-See [compound statements](compound-statements.md) for a discussion about the use of braces around the statement body.

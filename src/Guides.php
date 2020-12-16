@@ -147,6 +147,7 @@ final class Guides {
           'operators-and-punctuators' => tuple('source-code-fundamentals', 'introduction'),
         ],
         'statements' => dict[
+          'compound-statements' => tuple('statements', 'introduction'),
           'labeled-statements' => tuple('statements', 'switch'),
           'throw' => tuple('statements', 'try'),
         ],
