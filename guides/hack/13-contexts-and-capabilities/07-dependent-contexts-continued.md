@@ -4,10 +4,9 @@ This section is under active development and represents an unreleased feature
 
 ## Back to your regularly scheduled docs
 
-TODO
-
 Dependent contexts may be accessed off of nullable parameters. If the dynamic value of the parameter is null, then the contexts list will be empty.
 
+```
 function type_const(
   ?SomeClassWithConstant $t,
   ?(function()[_]: void) $f,
@@ -17,19 +16,21 @@ function type_const(
     $f();
   }
 }
+```
+
 Parameters used for accessing a dependent context may not be reassigned within the function body.
 
-function type_const(SomeClassWithConstant $t)[$t::C]: void {
+```
+function nope(SomeClassWithConstant $t, (function()[_]: void) $f)[$t::C, ctx $f]: void {
   // disallowed
   $t = get_some_other_value();
+  $f = get_some_other_value();  
 }
+```
 
-function has_dependent_fn_arg((function()[_]: void) $f)[ctx $f]: void {
-  // disallowed
-  $f = get_some_other_value();
-}
 Dependent contexts may not be referenced within the body of a function. This restriction may be relaxed in a future version.
 
+```
 function f(
   (function()[_]: void $f,
   SomeClassWithConstant $t,
@@ -39,3 +40,5 @@ function f(
   (()[rand] ==> 1)(); // Allowed, not a dependent context
   (()[] ==> 1)();     // Allowed
   (() ==> 1)();       // Allowed. Note that this is logically equivalant to [rand, ctx $f, $t::C]
+}
+```
