@@ -6,7 +6,7 @@ This section is under active development and represents an unreleased feature
 
 The following contexts and capabilities are implemented at present.
 
-## Capabities
+## Capabilities
 
 ### Output
 
