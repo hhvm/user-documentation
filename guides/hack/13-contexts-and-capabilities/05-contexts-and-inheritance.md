@@ -8,8 +8,9 @@ Capabilities are contravariant.
 
 This implies that a closure that requires a set of capabilities S<sub>a</sub> may be passed where the expected type is a function that requires S<sub>b</sub> as long as S<sub>a</sub> ⊆ S<sub>b</sub>.
 
+For the following example, assume that the default context includes at least {Rand, IO}
+
 ```
-// Here the default context includes at least {Rand, IO}
 function requires_rand_io_arg((function()[rand, io]: void) $f): void {
   $f();
 }

@@ -8,6 +8,8 @@ Contexts and capabilities overlay a coeffect system into the Hack type system th
 
 Capabilities are permissions or descriptions of a permission. For example, one might consider the ability to do io or access globals as capabilities. Contexts are a higher level representation of a set of capabilities. A function may be comprised of one or more contexts which represent the set union of the underlying capabilities.
 
+## Defining contexts and capabilities
+
 At present, all declarations of contexts and capabilities live within the typechecker and runtime. There are no plans to change this in the immediate future.
 
 ## Basic Declarations
@@ -71,7 +73,7 @@ function unannotated_fun(): void {
 
 While most contexts and capabilities represent the binary options of existence and lack thereof, it is also possible for either/both to be parameterized.
 
-In the following example, assume the existence of a `throws<T>` context representing the capability set `{Throws<T>}`. Rather than describing that a function *can* throw, this would describe which classes of exceptions a function may throw. In that scenario, the context would require a parameter representing the exception class: throws<-T as Exception>.
+In the following example, assume the existence of a `throws<T>` context representing the capability set `{Throws<T>}`. Rather than describing that a function *can* throw, this would describe which classes of exceptions a function may throw. In that scenario, the context would require a parameter representing the exception class: `throws<-T as Exception>`.
 
 ```
 function throws_foo_exception()[throws<FooException>]: void { // {Throws<FooException>}
