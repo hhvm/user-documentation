@@ -4,16 +4,16 @@ This section is under active development and represents an unreleased feature
 
 ## Back to your regularly scheduled docs
 
-The existance of a capability (or lackthereof) within the contexts of a function plays a direct role in the operations allowed within that function.
+The existence of a capability (or lack thereof) within the contexts of a function plays a direct role in the operations allowed within that function.
 
 Consider the following potential (although not necessarily planned) contexts (with implied matching capabilities):
-* `throws<T>`, representing the permission to throw an exeption type `Te <: T`
+* `throws<T>`, representing the permission to throw an exception type `Te <: T`
 * `io`, representing the permission to do io
 * `statics`, representing the permission to access static members and global variables
 * `writeProp`, representing the permission to mutate properties of objects
 * `dynamic`, representing the permission to cast a value to the `dynamic` type
 
-In all of the below cases, the relevant local operations are only legal due to the existance of the matching capabilities within the context of the function. In the world where all these contexts (and matching capabilities exist), some or all may be included within the `defaults` context.
+In all of the below cases, the relevant local operations are only legal due to the existence of the matching capabilities within the context of the function. In the world where all these contexts (and matching capabilities exist), some or all may be included within the `defaults` context.
 
 ```
 function io_good()[io]: void {

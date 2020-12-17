@@ -23,7 +23,7 @@ function many_context()[C1, C2, ..., Cn]: void {...}
 
 There exists a context named `defaults` that represents the set of capabilities present in a function prior to the introduction of this feature. When a function is not annotated with a context list, it implicitly received a list containing only the default context.
 
-The above declaration of `no_contexts` is fully equivilant to the following:
+The above declaration of `no_contexts` is fully equivalent to the following:
 
 ```
 function no_contexts()[defaults]: void {...}
@@ -44,7 +44,7 @@ function has_fn_args(
 
 In order to invoke a function, one must have access to all capabilities required by the callee. However, the caller may have more capabilities than is required by the callee, in which case simply not all capabilities are "passed" to the callee.
 
-In the following example, assume the existance of a `rand` context representing the capability set `{Rand}`, an `io` context representing the capability set `{IO}`, and that the `defaults` contexts represents the capability set `{Rand, IO}`.
+In the following example, assume the existence of a `rand` context representing the capability set `{Rand}`, an `io` context representing the capability set `{IO}`, and that the `defaults` contexts represents the capability set `{Rand, IO}`.
 
 ```
 /* has {} capability set */
@@ -67,11 +67,11 @@ function unannotated_fun(): void {
 }
 ```
 
-## Paramterized Contexts
+## Parametrized Contexts
 
-While most contexts and capabilites represent the binary options of existance and lack thereof, it is also possible for either/both to be parameterized.
+While most contexts and capabilities represent the binary options of existence and lack thereof, it is also possible for either/both to be parameterized.
 
-In the following example, assume the existance of a `throws<T>` context representing the capability set `{Throws<T>}`. Rather than describing that a function *can* throw, this would describe which classes of exceptions a function may throw. In that scenario, the context would require a parameter representing the exception class: throws<-T as Exception>.
+In the following example, assume the existence of a `throws<T>` context representing the capability set `{Throws<T>}`. Rather than describing that a function *can* throw, this would describe which classes of exceptions a function may throw. In that scenario, the context would require a parameter representing the exception class: throws<-T as Exception>.
 
 ```
 function throws_foo_exception()[throws<FooException>]: void { // {Throws<FooException>}
