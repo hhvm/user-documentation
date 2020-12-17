@@ -12,7 +12,7 @@ The following contexts and capabilities are implemented at present.
 
 This gates the ability to use the `echo` and `print` intrinsics within function bodies.
 
-```
+```hack
 function does_echo_and_print(): void {
   echo 'like this';
   print 'or like this';
@@ -23,12 +23,14 @@ Additionally, stdlib functions that perform output operations such as file write
 
 ### WriteProperty
 
-This gates the ability to modify objects within function bodies. At present, all constructors implicitly have this capability.
+This gates the ability to modify objects within function bodies.
 
-```
+At present, all constructors have the ability to modify `$this`. Note that this does *not* imply that constructors can call functions requiring the WriteProperty capability.
+
+```hack
 Class SomeClass {
   public string $s = '';
-  public function modify_this(): void {
+  public function modifyThis(): void {
     $this->s = 'this applies as well';
   }
 }
@@ -40,12 +42,12 @@ function modify_objects(SomeClass $sc): void {
 }
 ```
 
-Hack Collections, being objects, require this capability to use the `[]` operator in a write context.
+Hack Collections, being objects, require this capability to use the array access operator in a write context.
 
-```
+```hack
 function modify_collection(): void {
   $v = Vector {};
-  $v[]= 'like this';
+  $v[] = 'like this';
   $m = Map {};
   $m['or'] = 'like this';
 }
@@ -57,10 +59,10 @@ stdlib functions that modify their inputs or methods that modify `$this` will re
 
 This gates the ability to access static variables and globals.
 
-```
+```hack
 Class SomeClass {
   public static string $s = '';
-  public function modify_this(): void {
+  public function modifyThis(): void {
     $this::$s; // like this
   }
 }
@@ -73,8 +75,6 @@ function access_statics(SomeClass $sc): void {
 stdlib functions that make use of mutable global state or expose the php-style superglobals will require this capability.
 
 ## Contexts
-
-It is worth noting here specifically that the empty context list `[]` trivially represents the empty capability set `{}`. This may be referred to as the "pure context."
 
 ### Defaults
 

@@ -15,14 +15,14 @@ Consider the following potential (although not necessarily planned) contexts (wi
 
 In all of the below cases, the relevant local operations are only legal due to the existence of the matching capabilities within the context of the function. In the world where all these contexts (and matching capabilities exist), some or all may be included within the `defaults` context.
 
-```
+```hack
 function io_good()[io]: void {
   echo "good"; // ok
   print "also ok"; // also ok
 }
 ```
 
-```
+```hack
 class FooException extends Exception {}
 class FooChildException extends FooException {}
 class BarException extends Exception {}
@@ -37,13 +37,13 @@ function throws_bar_exception()[throws<BarException>]: void {
 }
 
 function throws_foo_and_bar_exceptions()[throws<FooException>, throws<BarException>]: void {
-  throw new FooException(); ok: FooException <: FooException
+  throw new FooException(); // ok: FooException <: FooException
   throw new FooChildException(); // ok: FooChildException <: FooException
-  throw new BarException(); ok: BarException <: BarException
+  throw new BarException(); // ok: BarException <: BarException
 }
 ```
 
-```
+```hack
 class HasAStatic {
   public static int $i = 0;
 }
@@ -53,7 +53,7 @@ function reads_and_writes_static()[statics]: void {
 }
 ```
 
-```
+```hack
 class SomeClass {
   public int $i = 0;
 }
@@ -63,7 +63,7 @@ function reads_and_writes_prop(SomeClass $sc)[writeprop]: void {
 }
 ```
 
-```
+```hack
 function casts_to_dynamic(int $in)[dynamic]: void {
   invokes_off_dynamic($in as dynamic);
 }

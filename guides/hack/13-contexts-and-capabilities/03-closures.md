@@ -6,12 +6,12 @@ This section is under active development and represents an unreleased feature
 
 As with standard functions, closures may optionally choose to list one or more contexts. Note that the outer function may or may not have its own context list. Lambdas wishing to specify a list of contexts must include a (possibly empty) parenthesized argument list.
 
-```
+```hack
 function some_function(): void {
-  $no_list = () ==> {...};
-  $single = ()[C] ==> {...};
-  $multiple = ()[C1, C2, Cn] ==> {...};
-  $with_types = ()[C]: void ==> {...};
+  $no_list = () ==> {/* some fn body */};
+  $single = ()[C] ==> {/* some fn body */};
+  $multiple = ()[C1, C2, Cn] ==> {/* some fn body */};
+  $with_types = ()[C]: void ==> {/* some fn body */};
   // legacy functions work too
   $legacy = function()[C]: void {};
 }
@@ -19,19 +19,19 @@ function some_function(): void {
 
 By default, closures require the same capabilities as the context in which they are created.
 
-```
+```hack
 function foo()[io]: void { // scope has {IO}
-  $callable1 = () ==> {...}; // requires {IO} - By far the most common usage
+  $callable1 = () ==> {/* some fn body */}; // requires {IO} - By far the most common usage
 }
 ```
 
 Explicitly annotating the closure can be used to opt-out of this implicit behaviour. This is most useful when requiring the capabilities of the outer scope result in unnecessary restrictions, such as if the closure is returned rather than being invoked within the enclosing scope.
 
-```
+```hack
 function foo()[io]: void { // scope has {IO}
-  $callable = ()[] ==> {...}; // requires {}
-  $uncallable1 = ()[rand] ==> {...}; // requires {Rand}
-  $uncallable2 = ()[defaults] ==> {...}; // requires the default set
+  $callable = ()[] ==> {/* some fn body */}; // requires {}
+  $uncallable1 = ()[rand] ==> {/* some fn body */}; // requires {Rand}
+  $uncallable2 = ()[defaults] ==> {/* some fn body */}; // requires the default set
 }
 ```
 

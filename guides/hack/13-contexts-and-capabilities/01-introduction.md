@@ -4,9 +4,9 @@ This section is under active development and represents an unreleased feature
 
 ## Back to your regularly scheduled docs
 
-Contexts and capabilities provide a way to specify a set of capabilities for a function's implementation, and a permission system for its' callers. These capabilities may be in terms of what functions may be used in the implementation (e.g. a pure function cannot call non-pure functions), or in terms of other language features (e.g. a pure function can not write properties on $this).
+Contexts and capabilities provide a way to specify a set of capabilities for a function's implementation and a permission system for its' callers. These capabilities may be in terms of what functions may be used in the implementation (e.g. a pure function cannot call non-pure functions), or in terms of other language features (e.g. a pure function can not write properties on `$this`).
 
-Capabilities are permissions or descriptions of a permission. For example, one might consider the ability to do io or access globals as capabilities. Contexts are a higher level representation of a set of capabilities. A function may be comprised of one or more contexts which represent the set union of the underlying capabilities.
+Capabilities are permissions or descriptions of a permission. For example, one might consider the ability to do IO or access globals as capabilities. Contexts are a higher level representation of a set of capabilities. A function may be comprised of one or more contexts which represent the set union of the underlying capabilities.
 
 ## Defining contexts and capabilities
 
@@ -16,29 +16,29 @@ At present, all declarations of contexts and capabilities live within the typech
 
 A function or method may optionally choose to list one or more contexts:
 
-```
-function no_listed_contexts(): void {...}
-function empty_context()[]: void {...}
-function one_context()[C]: void {...}
-function many_context()[C1, C2, ..., Cn]: void {...}
+```hack
+function no_listed_contexts(): void {/* some fn body */}
+function empty_context()[]: void {/* some fn body */}
+function one_context()[C]: void {/* some fn body */}
+function many_context()[C1, C2, Cn]: void {/* some fn body */}
 ```
 
 There exists a context named `defaults` that represents the set of capabilities present in a function prior to the introduction of this feature. When a function is not annotated with a context list, it implicitly received a list containing only the default context.
 
 The above declaration of `no_listed_contexts` is fully equivalent to the following:
 
-```
-function no_listed_contexts()[defaults]: void {...}
+```hack
+function no_listed_contexts()[defaults]: void {/* some fn body */}
 ```
 
 Additionally, the context list may appear in function types:
 
-```
+```hack
 function has_fn_args(
   (function (): void) $no_list,
   (function ()[io, rand]: void) $list,
   (function ()[]: void) $empty_list,
-): void {...}
+): void {/* some fn body */}
 
 ```
 
@@ -48,7 +48,7 @@ In order to invoke a function, one must have access to all capabilities required
 
 In the following example, assume the existence of a `rand` context representing the capability set `{Rand}`, an `io` context representing the capability set `{IO}`, and that the `defaults` contexts represents the capability set `{Rand, IO}`.
 
-```
+```hack
 /* has {} capability set */
 function pure_fun()[]: void {
   return;
@@ -69,13 +69,13 @@ function unannotated_fun(): void {
 }
 ```
 
-## Parametrized Contexts
+## Parameterized Contexts
 
 While most contexts and capabilities represent the binary options of existence and lack thereof, it is also possible for either/both to be parameterized.
 
 In the following example, assume the existence of a `throws<T>` context representing the capability set `{Throws<T>}`. Rather than describing that a function *can* throw, this would describe which classes of exceptions a function may throw. In that scenario, the context would require a parameter representing the exception class: `throws<-T as Exception>`.
 
-```
+```hack
 function throws_foo_exception()[throws<FooException>]: void { // {Throws<FooException>}
   throw new FooException();
 }
