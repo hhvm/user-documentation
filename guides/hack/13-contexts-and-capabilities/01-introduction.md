@@ -4,7 +4,7 @@ This section is under active development and represents an unreleased feature
 
 ## Back to your regularly scheduled docs
 
-Contexts and capabilities overlay a coeffect system into the Hack type system through lightweight context annotations that logically map into a set of capabilities. These capabilities establish both the calling conventions (i.e., which functions/method may call which other functions/methods) as well as the operations permitted within the present context.
+Contexts and capabilities provide a way to specify a set of capabilities for a function's implementation, and a permission system for its' callers. These capabilities may be in terms of what functions may be used in the implementation (e.g. a pure function cannot call non-pure functions), or in terms of other language features (e.g. a pure function can not write properties on $this).
 
 Capabilities are permissions or descriptions of a permission. For example, one might consider the ability to do io or access globals as capabilities. Contexts are a higher level representation of a set of capabilities. A function may be comprised of one or more contexts which represent the set union of the underlying capabilities.
 
@@ -25,10 +25,10 @@ function many_context()[C1, C2, ..., Cn]: void {...}
 
 There exists a context named `defaults` that represents the set of capabilities present in a function prior to the introduction of this feature. When a function is not annotated with a context list, it implicitly received a list containing only the default context.
 
-The above declaration of `no_contexts` is fully equivalent to the following:
+The above declaration of `no_listed_contexts` is fully equivalent to the following:
 
 ```
-function no_contexts()[defaults]: void {...}
+function no_listed_contexts()[defaults]: void {...}
 ```
 
 Additionally, the context list may appear in function types:
@@ -96,3 +96,7 @@ function throws_foo_or_bar_exception(bool $cond)[
 ```
 
 The above would indicate that throws_foo_or_bar_exception may throw any of the listed exception classes.
+
+# Implications for Backwards Compatibility
+
+We may add additional capabilities in the future. As capabilities are specified in terms of what's permitted rather than what is not, the more restrictive your capability annotations are, the more likely it is that future changes will be incompatible with your code. This is especially true for functions that have the empty capability set. This should be considered as a tradeoff against increased confidence in more restricted code.

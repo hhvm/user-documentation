@@ -83,3 +83,9 @@ It is worth noting here specifically that the empty context list `[]` trivially 
 ### Local
 
 `local` represents the capability set {WriteProperty}.
+
+### The Empty List
+
+The empty context list, `[]`, has no capabilities. A function with no capabilities is the closest thing Hack has to 'pure' functions. As additional capabilities are added to Hack in the future, the restriction on these functions will increase.
+
+As such, this is sometimes referred to as the 'pure context'.
