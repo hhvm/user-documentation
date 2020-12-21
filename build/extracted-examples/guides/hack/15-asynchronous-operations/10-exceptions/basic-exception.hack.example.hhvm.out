@@ -1,0 +1,7 @@
+
+Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in /home/example/basic-exception.hack:7
+Stack trace:
+#0 /home/example/basic-exception.hack(15): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\BasicException\exception_thrower()
+#1 /home/example/basic-exception.hack(22): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\BasicException\basic_exception()
+#2 (): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\BasicException\main()
+#3 {main}

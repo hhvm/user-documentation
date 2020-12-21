@@ -17,7 +17,8 @@ www.pid
 *.stderr
 .*.hhast.*cache
 /api-sources/
-/build/
+/build/final/
+/build/scratch/
 /public/www.pid
 .sass-cache
 .bundle

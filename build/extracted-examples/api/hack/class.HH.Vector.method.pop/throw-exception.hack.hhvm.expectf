@@ -1,0 +1,9 @@
+
+Fatal error: Uncaught exception 'InvalidOperationException' with message 'Cannot pop empty Vector' in %s/throw-exception.hack:12
+Stack trace:
+#0 %s/throw-exception.hack(12): HH\Vector->pop()
+#1 (): HHVM\UserDocumentation\Api\Hack\ClassHHVectorMethodPop\ThrowException\_main()
+#2 (): Closure$__SystemLib\enter_async_entry_point()
+#3 (): HH\Asio\join()
+#4 (): __SystemLib\enter_async_entry_point()
+#5 {main}

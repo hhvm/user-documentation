@@ -1,0 +1,9 @@
+
+Fatal error: Uncaught Error: NOT IMPLEMENTED: `undefined` can not be produced. in /home/example/undefined.hack:9
+Stack trace:
+#0 /home/example/undefined.usage.hack(18): HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Nothing\Undefined\undefined()
+#1 (): HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Nothing\Undefined\main_async()
+#2 (): Closure$__SystemLib\enter_async_entry_point()
+#3 (): HH\Asio\join()
+#4 (): __SystemLib\enter_async_entry_point()
+#5 {main}

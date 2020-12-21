@@ -1,0 +1,2 @@
+
+Catchable fatal error: Argument 1 passed to HHVM\UserDocumentation\Guides\Hack\Generics\ReifiedGenerics\TypeVerification2\f() must be an instance of int, string given in %s/type-verification-2.hack.type-errors on line 15

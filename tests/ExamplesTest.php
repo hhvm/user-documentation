@@ -5,7 +5,7 @@ namespace HHVM\UserDocumentation\Tests;
 use type Facebook\HackTest\{DataProvider, HackTest};
 use type HHVM\UserDocumentation\{BuildPaths, LocalConfig};
 use type HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\Files;
-use namespace HH\Lib\{C, Dict, Str, Vec};
+use namespace HH\Lib\{C, Str, Vec};
 use namespace HHVM\UserDocumentation\ExampleTypechecker;
 
 /**
@@ -13,17 +13,8 @@ use namespace HHVM\UserDocumentation\ExampleTypechecker;
  */
 class ExamplesTest extends HackTest {
   const string TEST_RUNNER = BuildPaths::HHVM_TREE.'/hphp/test/run.php';
-  const vec<string> ROOTS = vec[
-    BuildPaths::GUIDES_MARKDOWN,
-    BuildPaths::API_EXAMPLES_DIR,
-  ];
 
-  public static function provideExampleRoots(): dict<string, (string)> {
-    return Dict\from_keys(self::ROOTS, $root ==> tuple($root));
-  }
-
-  <<DataProvider('provideExampleRoots')>>
-  public function testExamplesOutput(string $root): void {
+  public function testExamplesOutput(): void {
     $exclude_suffixes = vec[
       '.inc.php',
       '.inc.hack',
@@ -34,7 +25,7 @@ class ExamplesTest extends HackTest {
       |> Vec\map($$, $suffix ==> \preg_quote($suffix, '/'))
       |> Str\join($$, '|')
       |> '/('.$$.')$/';
-    $this->runExamples($root, Vector {'--exclude-pattern', $exclude_regexp});
+    $this->runExamples(Vector {'--exclude-pattern', $exclude_regexp});
   }
 
   /**
@@ -42,12 +33,11 @@ class ExamplesTest extends HackTest {
    * with .typechecker.expect).
    */
   public static function getExamplesWith(
-    string $root,
     Files $name_part,
   ): vec<(string, string)> {
     $ret = vec[];
     $it = new \RecursiveIteratorIterator(
-      new \RecursiveDirectoryIterator($root),
+      new \RecursiveDirectoryIterator(BuildPaths::EXAMPLES_EXTRACT_DIR),
     );
     foreach ($it as $info) {
       if (!$info->isFile()) {
@@ -66,15 +56,11 @@ class ExamplesTest extends HackTest {
   public static function provideExampleOutFiles(
   ): dict<string, (string, string, Files)> {
     $ret = dict[];
-    foreach (self::ROOTS as $root) {
-      foreach (
-        vec[Files::EXAMPLE_HHVM_OUT, Files::EXAMPLE_TYPECHECKER_OUT] as $type
-      ) {
-        foreach (
-          self::getExamplesWith($root, $type) as list($hack_file, $out_file)
-        ) {
-          $ret[$hack_file] = tuple($hack_file, $out_file, $type);
-        }
+    foreach (
+      vec[Files::EXAMPLE_HHVM_OUT, Files::EXAMPLE_TYPECHECKER_OUT] as $type
+    ) {
+      foreach (self::getExamplesWith($type) as list($hack_file, $out_file)) {
+        $ret[$hack_file] = tuple($hack_file, $out_file, $type);
       }
     }
     return $ret;
@@ -105,15 +91,12 @@ class ExamplesTest extends HackTest {
     }
   }
 
-  <<DataProvider('provideExampleRoots')>>
-  public async function testExamplesTypecheck(string $root): Awaitable<void> {
+  public async function testExamplesTypecheck(): Awaitable<void> {
     // Ideally HackTest would support parallelism via xbox or async;
     // statefullness needs to be avoid or managed first though :'(
 
     $concurrency_limit = 10;
-    $todo = new \HH\Lib\Ref(
-      self::getExamplesWith($root, Files::TYPECHECKER_EXPECT),
-    );
+    $todo = new \HH\Lib\Ref(self::getExamplesWith(Files::TYPECHECKER_EXPECT));
     await Vec\map_async(
       Vec\range(1, $concurrency_limit),
       async $_worker_id ==> {
@@ -167,7 +150,7 @@ class ExamplesTest extends HackTest {
     static::markTestSkipped("Couldn't find hh_server");
   }
 
-  private function runExamples(string $root, Vector<string> $extra_args): void {
+  private function runExamples(Vector<string> $extra_args): void {
     $command = Vector {
       \PHP_BINARY,
       '-d',
@@ -187,7 +170,7 @@ class ExamplesTest extends HackTest {
         LocalConfig::ROOT.'/src/utils/_private/init_docs_autoloader.php',
     };
     $command->addAll($extra_args);
-    $command[] = $root;
+    $command[] = BuildPaths::EXAMPLES_EXTRACT_DIR;
 
     $command_str = \implode(' ', $command->map($arg ==> \escapeshellarg($arg)));
     $exit_code = null;
