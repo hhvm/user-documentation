@@ -165,7 +165,12 @@ final class DataMerger {
     ScannedProperty $a,
     ScannedDefinition $b,
   ): ScannedProperty {
-    assert($b is ScannedProperty);
+    invariant(
+      $b is ScannedProperty,
+      'Expected %s, got %s.',
+      ScannedProperty::class,
+      \get_class($b),
+    );
 
     invariant(
       $a->isStatic() === $b->isStatic(),
@@ -197,7 +202,12 @@ final class DataMerger {
     ScannedConstant $a,
     ScannedDefinition $b,
   ): ScannedConstant {
-    assert($b is ScannedConstant);
+    invariant(
+      $b is ScannedConstant,
+      'Expected %s, got %s.',
+      ScannedConstant::class,
+      \get_class($b),
+    );
 
     $value = $a->getValue();
     if ($value->hasStaticValue()) {
@@ -451,7 +461,12 @@ final class DataMerger {
     ScannedFunction $a,
     ScannedDefinition $b,
   ): ScannedFunction {
-    assert($b is ScannedFunction);
+    invariant(
+      $b is ScannedFunction,
+      'Expected %s, got %s.',
+      ScannedFunction::class,
+      \get_class($b),
+    );
     return new ScannedFunction(
       $a->getASTx(),
       self::mergeNames($a->getName(), $b->getName()),
@@ -468,7 +483,12 @@ final class DataMerger {
     ScannedMethod $a,
     ScannedDefinition $b,
   ): ScannedMethod {
-    assert($b is ScannedMethod);
+    invariant(
+      $b is ScannedMethod,
+      'Expected %s, got %s.',
+      ScannedMethod::class,
+      \get_class($b),
+    );
 
     if ($a->isPrivate() || $b->isPrivate()) {
       $visibility = VisibilityToken::T_PRIVATE;
@@ -603,7 +623,12 @@ final class DataMerger {
     ScannedClassish $a,
     ScannedDefinition $b,
   ): ScannedClassish {
-    assert($b is ScannedClassish);
+    invariant(
+      $b is ScannedClassish,
+      'Expected %s, got %s.',
+      ScannedClassish::class,
+      \get_class($b),
+    );
 
     $name = self::mergeNames($a->getName(), $b->getName());
 
