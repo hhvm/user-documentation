@@ -22,7 +22,7 @@ function skipif(): void {
 
   try {
     $servers = Vector { \getenv('HHVM_TEST_MCROUTER') };
-    $mc = \MCRouter::createSimple($servers);
+    \MCRouter::createSimple($servers);
   } catch (\Exception $ex) {
     echo 'skip';
   }

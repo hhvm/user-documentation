@@ -1,6 +1,6 @@
 namespace Hack\UserDocumentation\API\Examples\AsyncMysql;
 
-use Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
+use type Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
 
 async function skipif_async(): Awaitable<void> {
   \init_docs_autoloader();
