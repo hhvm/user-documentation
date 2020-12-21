@@ -1,6 +1,7 @@
 .bundle/
 .elasticbeanstalk/
 build/
+!build/extracted-examples/
 !build/final/codegen/.gitkeep
 vendor/
 vendor-rb/
