@@ -4,7 +4,7 @@ documentation; they are added here again for consolidation purposes.
 
 ## Basic
 
-This example shows the basic tenants of async, particularly the keywords used:
+This example shows the basic tenets of async, particularly the keywords used:
 
 ```basic.hack
 // async specifies a function will return an awaitable. Awaitable<string> means
