@@ -151,6 +151,7 @@ final class Guides {
         ],
         'statements' => dict[
           'compound-statements' => tuple('statements', 'introduction'),
+          'expression-statements' => tuple('expressions-and-operators', 'introduction'),
           'labeled-statements' => tuple('statements', 'switch'),
           'throw' => tuple('statements', 'try'),
         ],
