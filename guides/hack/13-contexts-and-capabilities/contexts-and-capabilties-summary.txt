@@ -1,1 +1,1 @@
-A generalized system for the description and enforcement of permissions and restrictions of a context
+A generalized system for the description and enforcement of permissions and restrictions of a context.
