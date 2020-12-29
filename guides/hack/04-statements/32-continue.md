@@ -2,8 +2,9 @@ A `continue` statement terminates the execution of the innermost enclosing `do`,
 
 ```odd-values.hack
 for ($i = 1; $i <= 10; ++$i) {
-  if (($i % 2) === 0)
+  if (($i % 2) === 0) {
     continue;
+  }
   echo "$i is odd\n";
 }
 ```
