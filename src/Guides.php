@@ -67,6 +67,9 @@ final class Guides {
           'utility-functions' =>
             tuple('asynchronous-operations', 'utility-functions'),
         ],
+        'asynchronous-operations' => dict[
+          'some-basics' => tuple('asynchronous-operations', 'introduction'),
+        ]
         'attributes' => dict[
           'special' => tuple('attributes', 'predefined-attributes'),
           'syntax' => tuple('attributes', 'introduction'),
