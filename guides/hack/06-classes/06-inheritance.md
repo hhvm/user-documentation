@@ -42,7 +42,7 @@ class IncrementedIntBox extends IntBox {
 ```
 
 If a method is intended to override a method in a parent class, you
-should annotate it with `__Override`. This has no runtime effect, but
+should annotate it with `<<__Override>>`. This has no runtime effect, but
 ensures you get a type error if the parent method is removed.
 
 Hack does not support method overloading. Subclasses methods must have
@@ -67,7 +67,7 @@ class FloatBox extends NumBox {
 ```
 
 The only exception is constructors, which may have incompatible
-signatures with the parent class. You can use `__ConsistentConstruct`
+signatures with the parent class. You can use `<<__ConsistentConstruct>>`
 to require subclasses to have compatible types.
 
 ``` Hack
@@ -159,10 +159,10 @@ final class Dog {
 ```
 
 If your class has subclasses, but you want to prevent additional
-subclasses, use `__Sealed`.
+subclasses, use `<<__Sealed>>`.
 
 If you want to inherit from a final class for testing, use
-`__MockClass`.
+`<<__MockClass>>`.
 
 You can also combine `final` and `abstract` on classes. This produces
 a class that cannot be instantiated or have subclasses. The class is
