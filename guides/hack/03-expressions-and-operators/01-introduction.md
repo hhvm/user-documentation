@@ -1,7 +1,6 @@
 **Topics covered in this section**
 
 * [Arithmetic, `+`, `*` etc](addition.md)
-* [Array creation](array-creation.md)
 * [Assignment, `=`, `+=` etc](assignment.md)
 * [Async blocks](async-blocks.md)
 * [await](await.md)
