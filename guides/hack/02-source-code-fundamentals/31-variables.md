@@ -54,8 +54,8 @@ the function calls, so this function `f` outputs "`$lv = 1`" each time.
 
 ## Array Elements
 
-An array is created via a vec-literal, a dict-literal, a set-literal, using `array`, or the
-[array-creation operator](../expressions-and-operators/array-creation.md). At the same time, one or more elements
+An array is created via a vec-literal, a dict-literal, a set-literal,
+or using `array`. At the same time, one or more elements
 may be created for that array. New elements are inserted into an existing array via the
 [simple-assignment](../expressions-and-operators/assignment.md) operator in conjunction with the
 [subscript `[]`](../expressions-and-operators/subscript.md) operator.

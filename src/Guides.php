@@ -37,7 +37,7 @@ final class Guides {
     return dict[
       GuidesProduct::HACK => dict[
         'async' => tuple('asynchronous-operations', null),
-        'collections' => tuple('built-in-types', 'arrays'),
+        'collections' => tuple('arrays-and-collections', 'introduction'),
         'enums' => tuple('built-in-types', 'enumerated-types'),
         'lambdas' => tuple('functions', 'anonymous-functions'),
         'operators' => tuple('expressions-and-operators', null),
@@ -77,6 +77,7 @@ final class Guides {
           'attribute-specification' => tuple('attributes', 'introduction'),
         ],
         'built-in-types' => dict[
+          'arrays' => tuple('arrays-and-collections', 'introduction'),
           'function' => tuple('functions', 'introduction'),
         ],
         'callables' => dict[
@@ -166,7 +167,7 @@ final class Guides {
           'anonymous-function-objects' => tuple('functions', 'anonymous-functions'),
           'annotations' => tuple('functions', 'introduction'),
           'arraykey' => tuple('built-in-types', 'arraykey'),
-          'arrays' => tuple('built-in-types', 'arrays'),
+          'arrays' => tuple('arrays-and-collections', 'introduction'),
           'bool' => tuple('built-in-types', 'bool'),
           'casting' => tuple('types', 'type-conversion'),
           'classes' => tuple('classes', 'introduction'),
