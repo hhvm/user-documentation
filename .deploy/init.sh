@@ -27,7 +27,7 @@ if [ ! -e /opt/composer/composer.phar ]; then
 fi
 
 echo "** Installing Hack dependencies"
-php /opt/composer/composer.phar install
+php /opt/composer/composer.phar install --ignore-platform-reqs
 
 echo "** Run build"
 hhvm bin/build.php --auto
