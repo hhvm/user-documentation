@@ -70,3 +70,14 @@ function usage_example(): void {
   $x = apply_func(0, $x ==> $x + 1);
 }
 ```
+
+Variadic functions can also be passed as arguments.
+
+```Hack
+function takes_variadic_fun((function(int...): void) $f): void {
+  $f(1, 2, 3);
+
+  $args = vec[1, 2, 3];
+  $f(0, ...$args);
+}
+```
