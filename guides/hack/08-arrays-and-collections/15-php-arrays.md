@@ -1,7 +1,7 @@
 PHP arrays are legacy value types for storing iterable data. The types
 available are `varray`, `darray`, `varray_or_darray` and `array`
-(`array` only in some HHVM configurations), . They will
-eventually be removed.
+(`array` only in some HHVM configurations). They will eventually be
+removed.
 
 PHP arrays are immutable value types, just like Hack arrays. Unlike
 Hack arrays, they include legacy behaviors from PHP that can hide
