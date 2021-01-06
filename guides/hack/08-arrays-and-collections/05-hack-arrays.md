@@ -135,7 +135,7 @@ idx($items, 'z'); // null
 idx($items, 'z', 'default'); // 'default'
 
 // Inserting, updating or removing values in a dict. These operations 
-// set $items // to a modified copy, and do not modify the original value.
+// set $items to a modified copy, and do not modify the original value.
 $items['a'] = 42; // dict['a' => 42, 'b' => 3]
 $items['z'] = 100; // dict['a' => 42, 'b' => 3, 'z' => 100]
 unset($items['b']); // dict['a' => 42, 'z' => 100]

@@ -41,7 +41,7 @@ idx($items, 3, 'default'); // 'default'
 // Modifying items. These operations set $items
 // to a modified copy, and do not modify the original value.
 $items[0] = 'xx'; // varray['xx', 'b', 'c']
-$items[] = 'd'; // vbarray['xx', 'b', 'c', 'd']
+$items[] = 'd'; // varray['xx', 'b', 'c', 'd']
 
 // Getting the length.
 C\count($items); // 4
