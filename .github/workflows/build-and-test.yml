@@ -13,6 +13,7 @@ jobs:
         hhvm: [ '4.88' ]
     runs-on: ${{matrix.os}}-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Fetch docker images
         run: |
           docker pull hhvm/hhvm:${{matrix.hhvm}}-latest
