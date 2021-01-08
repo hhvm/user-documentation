@@ -1,0 +1,29 @@
+name: Continuous Integration
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '42 15 * * *'
+jobs:
+  build:
+    name: Build and Test
+    strategy:
+      matrix:
+        os: [ ubuntu ]
+        hhvm: [ '4.88' ]
+    runs-on: ${{matrix.os}}-latest
+    steps:
+      - name: Fetch docker images
+        run: |
+          docker pull hhvm/hhvm:${{matrix.hhvm}}-latest
+          docker pull hhvm/hhvm-proxygen:${{matrix.hhvm}}-latest
+      - name: Build
+        run: docker build -t hhvm/user-documentation:scratch -f .deploy/built-site.Dockerfile .
+      - name: Typecheck
+        run: docker run --rm -w /var/www hhvm/user-documentation:scratch hh_server --check .
+      - name: Run tests
+        run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hacktest tests/
+      - name: Lint
+        run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hhast-lint
+      - name: Verify codegen is unchanged
+        run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
