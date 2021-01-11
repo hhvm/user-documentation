@@ -1,8 +1,6 @@
-## WARNING WARNING WARNING
+# This is a new feature which must be enabled in your projects' configuration
 
-This section is under active development and represents an unreleased feature
-
-## Back to your regularly scheduled docs
+# NOTE: Context constant *constraints* are not yet available
 
 Classes and interfaces may define context constants:
 

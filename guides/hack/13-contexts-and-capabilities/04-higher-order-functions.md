@@ -1,8 +1,4 @@
-## WARNING WARNING WARNING
-
-This section is under active development and represents an unreleased feature
-
-## Back to your regularly scheduled docs
+# This is a new feature which must be enabled in your projects' configuration
 
 One may define a higher order function whose context depends on the dynamic context of one or more passed in function arguments.
 
