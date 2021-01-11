@@ -1,3 +1,5 @@
+# NOTE: Context constant *constraints* are not yet available
+
 Classes and interfaces may define context constants:
 
 ```hack
