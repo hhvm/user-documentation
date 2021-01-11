@@ -1,9 +1,3 @@
-## WARNING WARNING WARNING
-
-This section is under active development and represents an unreleased feature
-
-## Back to your regularly scheduled docs
-
 Dependent contexts may be accessed off of nullable parameters. If the dynamic value of the parameter is null, then the capability set required by that parameter is empty.
 
 ```hack

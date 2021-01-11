@@ -1,9 +1,3 @@
-## WARNING WARNING WARNING
-
-This section is under active development and represents an unreleased feature
-
-## Back to your regularly scheduled docs
-
 Contexts and capabilities provide a way to specify a set of capabilities for a function's implementation and a permission system for its' callers. These capabilities may be in terms of what functions may be used in the implementation (e.g. a pure function cannot call non-pure functions), or in terms of other language features (e.g. a pure function can not write properties on `$this`).
 
 Capabilities are permissions or descriptions of a permission. For example, one might consider the ability to do IO or access globals as capabilities. Contexts are a higher level representation of a set of capabilities. A function may be comprised of one or more contexts which represent the set union of the underlying capabilities.

@@ -1,9 +1,3 @@
-## WARNING WARNING WARNING
-
-This section is under active development and represents an unreleased feature
-
-## Back to your regularly scheduled docs
-
 Capabilities are contravariant.
 
 This implies that a closure that requires a set of capabilities S<sub>a</sub> may be passed where the expected type is a function that requires S<sub>b</sub> as long as S<sub>a</sub> ⊆ S<sub>b</sub>.

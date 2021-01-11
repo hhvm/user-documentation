@@ -1,9 +1,3 @@
-## WARNING WARNING WARNING
-
-This section is under active development and represents an unreleased feature
-
-## Back to your regularly scheduled docs
-
 As with standard functions, closures may optionally choose to list one or more contexts. Note that the outer function may or may not have its own context list. Lambdas wishing to specify a list of contexts must include a (possibly empty) parenthesized argument list.
 
 ```hack

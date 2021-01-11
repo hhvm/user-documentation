@@ -1,9 +1,3 @@
-## WARNING WARNING WARNING
-
-This section is under active development and represents an unreleased feature
-
-## Back to your regularly scheduled docs
-
 Classes and interfaces may define context constants:
 
 ```hack
