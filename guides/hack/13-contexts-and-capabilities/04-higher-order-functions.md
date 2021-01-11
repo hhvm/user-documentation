@@ -1,3 +1,5 @@
+# This is a new feature which must be enabled in your projects' configuration
+
 One may define a higher order function whose context depends on the dynamic context of one or more passed in function arguments.
 
 ```hack

@@ -1,3 +1,5 @@
+# This is a new feature which must be enabled in your projects' configuration
+
 Capabilities are contravariant.
 
 This implies that a closure that requires a set of capabilities S<sub>a</sub> may be passed where the expected type is a function that requires S<sub>b</sub> as long as S<sub>a</sub> ⊆ S<sub>b</sub>.

@@ -1,3 +1,5 @@
+# This is a new feature which must be enabled in your projects' configuration
+
 The following contexts and capabilities are implemented at present.
 
 ## Capabilities

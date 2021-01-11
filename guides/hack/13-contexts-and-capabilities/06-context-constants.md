@@ -1,3 +1,5 @@
+# This is a new feature which must be enabled in your projects' configuration
+
 # NOTE: Context constant *constraints* are not yet available
 
 Classes and interfaces may define context constants:

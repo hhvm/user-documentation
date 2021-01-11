@@ -1,3 +1,5 @@
+# This is a new feature which must be enabled in your projects' configuration
+
 The existence of a capability (or lack thereof) within the contexts of a function plays a direct role in the operations allowed within that function.
 
 Consider the following potential (although not necessarily planned) contexts (with implied matching capabilities):
