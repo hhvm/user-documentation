@@ -28,3 +28,46 @@ jobs:
         run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hhast-lint
       - name: Verify codegen is unchanged
         run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
+      - name: Export Docker image
+        run: docker save hhvm/user-documentation:scratch -o hack-docs.tar
+      - name: Save Docker image as build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: docker-image
+          path: hack-docs.tar
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download Docker image from build step
+        uses: actions/download-artifact@v2
+        with:
+          name: docker-image
+      - name: Import Docker image
+        run: docker load --input hack-docs.tar
+      - name: Build HHBC repo
+        run: |
+          mkdir ${{runner.temp}}/repo-out
+          docker run --rm \
+            -v ${{runner.temp}}/repo-out:/var/out \
+            -w /var/www \
+            hhvm/user-documentation:scratch \
+            .deploy/build-repo.sh
+      - name: Set image tag/name variables
+        run: |
+          DEPLOY_REV=$(git rev-parse --short HEAD)
+          HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
+          IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
+          IMAGE_NAME="hhvm/user-documentation:$IMAGE_TAG"
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+      - name: Build repo-authoritative Docker image
+        run: |
+          cp hhvm.prod.ini ${{runner.temp}}/repo-out
+          cp .deploy/prod.Dockerfile ${{runner.temp}}/repo-out/Dockerfile
+          (
+            cd ${{runner.temp}}/repo-out
+            docker build -t ${IMAGE_NAME} .
+          )
