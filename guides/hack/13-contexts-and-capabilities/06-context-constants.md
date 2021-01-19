@@ -1,6 +1,7 @@
-# This is a new feature which must be enabled in your projects' configuration
+**Note:** Context and capabilities are enabled by default since
+[HHVM 4.93](https://hhvm.com/blog/2021/01/19/hhvm-4.93.html).
 
-# NOTE: Context constant *constraints* are not yet available
+**Note:** Context constant *constraints* are not yet available.
 
 Classes and interfaces may define context constants:
 
@@ -25,12 +26,12 @@ may have one or more bounds,
 
 ```hack
 abstract class WithConstant {
-  // Subclasses must require *at least* [io]  
-  abstract const ctx CAnotherOne as [io];   
+  // Subclasses must require *at least* [io]
+  abstract const ctx CAnotherOne as [io];
   // Subclasses must require *at most* [defaults]
-  abstract const ctx COne super [defaults]; 
-  // Subclasses must require *at most* [defaults] and *at least* [io, rand] 
-  abstract const ctx CMany super [defaults] as [io, rand]; 
+  abstract const ctx COne super [defaults];
+  // Subclasses must require *at most* [defaults] and *at least* [io, rand]
+  abstract const ctx CMany super [defaults] as [io, rand];
 }
 ```
 
@@ -39,7 +40,7 @@ and may have defaults, though only when abstract
 ```hack
 interface IWithConstant {
   abstract const ctx C = [defaults];
-  abstract const ctx CWithBound super [defaults] = [io];  
+  abstract const ctx CWithBound super [defaults] = [io];
 }
 ```
 

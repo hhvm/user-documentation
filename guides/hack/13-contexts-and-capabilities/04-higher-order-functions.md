@@ -1,4 +1,5 @@
-# This is a new feature which must be enabled in your projects' configuration
+**Note:** Context and capabilities are enabled by default since
+[HHVM 4.93](https://hhvm.com/blog/2021/01/19/hhvm-4.93.html).
 
 One may define a higher order function whose context depends on the dynamic context of one or more passed in function arguments.
 
