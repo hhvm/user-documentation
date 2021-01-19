@@ -36,6 +36,7 @@ jobs:
           name: docker-image
           path: hack-docs.tar
   deploy:
+    # if: (github.event_name == "push" && github.ref == "refs/heads/master")
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
@@ -71,3 +72,20 @@ jobs:
             cd ${{runner.temp}}/repo-out
             docker build -t ${IMAGE_NAME} .
           )
+      - name: Install ElasticBeanstalk CLI
+        run: |
+          git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
+          ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+      - name: Configure ElasticBeanstalk
+        run: |
+          # Select an application to use: 1) hhvm-hack-docs
+          # Select the default environment: 1) ... doesn't matter, managed by script
+          # Do you want to continue with CodeCommit? n
+          echo -e "1\n1\nn\n" | eb init -r us-west-2
+          eb status
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Logging in to DockerHub
+          echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u "${{secrets.DOCKERHUB_USER}}" \
+            --password-stdin
