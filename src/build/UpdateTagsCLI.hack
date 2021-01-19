@@ -205,13 +205,13 @@ final class UpdateTagsCLI extends CLIBase {
         )
         |> \file_put_contents($path, $$);
     }
-    await $stdout->writeAllAsync(" - updating .travis.yml\n");
-    $path = LocalConfig::ROOT.'/.travis.yml';
+    await $stdout->writeAllAsync(" - updating GitHub Actions\n");
+    $path = LocalConfig::ROOT.'/.github/workflows/build-and-test.yml';
     \file_get_contents($path)
       |> Str\replace(
         $$,
-        'HHVM_VERSION='.$old_major_minor.'-latest',
-        'HHVM_VERSION='.$new_major_minor.'-latest',
+        "hhvm: [ '".$old_major_minor."' ]",
+        "hhvm: [ '".$new_major_minor."' ]",
       )
       |> \file_put_contents($path, $$);
   }
