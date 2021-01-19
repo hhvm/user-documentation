@@ -113,6 +113,9 @@ jobs:
           eb status "$STAGING_ENV"
           DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
           eb deploy "$STAGING_ENV" -m "$DEPLOY_MESSAGE" --staged -v
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Run test suite against staging
         run: |
           docker run --rm \
@@ -124,3 +127,6 @@ jobs:
            tests/
       - name: Swap staging and prod
         run: eb swap
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
