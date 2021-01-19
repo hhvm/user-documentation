@@ -97,7 +97,7 @@ jobs:
           docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
           docker push "$IMAGE_NAME"
           docker push "hhvm/user-documentation:latest"
-      - name: Identifying live vs staging environment
+      - name: Identify live vs staging environment
         run: |
           if eb status hhvm-hack-docs-a | grep -q 'CNAME: hhvm-hack-docs-staging.elasticbeanstalk.com'; then
             echo STAGING_ENV=hhvm-hack-docs-a >> $GITHUB_ENV
