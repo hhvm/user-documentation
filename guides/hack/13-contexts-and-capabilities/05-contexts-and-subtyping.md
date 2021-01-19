@@ -1,4 +1,5 @@
-# This is a new feature which must be enabled in your projects' configuration
+**Note:** Context and capabilities are enabled by default since
+[HHVM 4.93](https://hhvm.com/blog/2021/01/19/hhvm-4.93.html).
 
 Capabilities are contravariant.
 
@@ -13,9 +14,9 @@ function requires_rand_io_arg((function()[rand, io]: void) $f): void {
 
 function caller(): void {
   // passing a function that requires fewer capabilities
-  requires_rand_io_arg(()[rand] ==> {/* some fn body */}); 
-  // passing a function that requires no capabilities 
-  requires_rand_io_arg(()[] ==> {/* some fn body */});  
+  requires_rand_io_arg(()[rand] ==> {/* some fn body */});
+  // passing a function that requires no capabilities
+  requires_rand_io_arg(()[] ==> {/* some fn body */});
 }
 ```
 

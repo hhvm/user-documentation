@@ -1,4 +1,5 @@
-# This is a new feature which must be enabled in your projects' configuration
+**Note:** Context and capabilities are enabled by default since
+[HHVM 4.93](https://hhvm.com/blog/2021/01/19/hhvm-4.93.html).
 
 Dependent contexts may be accessed off of nullable parameters. If the dynamic value of the parameter is null, then the capability set required by that parameter is empty.
 
@@ -24,7 +25,7 @@ Parameters used for accessing a dependent context may not be reassigned.
 function nope(SomeClassWithConstant $t, (function()[_]: void) $f)[$t::C, ctx $f]: void {
   // both disallowed
   $t = get_some_other_value();
-  $f = get_some_other_value();  
+  $f = get_some_other_value();
 }
 ```
 

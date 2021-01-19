@@ -1,4 +1,5 @@
-# This is a new feature which must be enabled in your projects' configuration
+**Note:** Context and capabilities are enabled by default since
+[HHVM 4.93](https://hhvm.com/blog/2021/01/19/hhvm-4.93.html).
 
 The following contexts and capabilities are implemented at present.
 
@@ -64,7 +65,7 @@ Class SomeClass {
 }
 
 function access_statics(SomeClass $sc): void {
-  SomeClass::$s; // or like this  
+  SomeClass::$s; // or like this
 }
 ```
 
