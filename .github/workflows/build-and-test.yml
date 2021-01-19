@@ -62,6 +62,7 @@ jobs:
           HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
           IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
           IMAGE_NAME="hhvm/user-documentation:$IMAGE_TAG"
+          echo "DEPLOY_REV=$DEPLOY_REV" >> $GITHUB_ENV
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
       - name: Build repo-authoritative Docker image
@@ -87,7 +88,39 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      - name: Logging in to DockerHub
+      - name: Log in to DockerHub
         run: |
           echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u "${{secrets.DOCKERHUB_USER}}" \
             --password-stdin
+      - name: Push image to DockerHub
+        run: |
+          docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
+          docker push "$IMAGE_NAME"
+          docker push "hhvm/user-documentation:latest"
+      - name: Identifying live vs staging environment
+        run: |
+          if eb status hhvm-hack-docs-a | grep -q 'CNAME: hhvm-hack-docs-staging.elasticbeanstalk.com'; then
+            echo STAGING_ENV=hhvm-hack-docs-a >> $GITHUB_ENV
+          else
+            echo STAGING_ENV=hhvm-hack-docs-b >> $GITHUB_ENV
+          fi
+      - name: Update AWS configuration
+        run: |
+          sed -E 's,"hhvm/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
+            Dockerrun.aws.json.in > Dockerrun.aws.json
+      - name: Deploy to staging environment (${{env.STAGING_ENV}})
+        run: |
+          eb status "$STAGING_ENV"
+          DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
+          eb deploy "$STAGING_ENV" -m "$DEPLOY_MESSAGE" --staged -v
+      - name: Run test suite against staging
+        run: |
+          docker run --rm \
+            -w /var/www \
+            -e REMOTE_TEST_HOST=staging.docs.hhvm.com \
+            hhvm/user-documentation:scratch \
+            vendor/bin/hacktest \
+            --filter-groups remote \
+           tests/
+      - name: Swap staging and prod
+        run: eb swap
