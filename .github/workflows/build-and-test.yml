@@ -104,6 +104,9 @@ jobs:
           else
             echo STAGING_ENV=hhvm-hack-docs-b >> $GITHUB_ENV
           fi
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Update AWS configuration
         run: |
           sed -E 's,"hhvm/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
