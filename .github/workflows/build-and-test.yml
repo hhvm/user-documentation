@@ -76,6 +76,7 @@ jobs:
         run: |
           git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
           ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+          echo "PATH=$HOME/.ebcli-virtual-env/executables:$PATH" >> $GITHUB_ENV
       - name: Configure ElasticBeanstalk
         run: |
           # Select an application to use: 1) hhvm-hack-docs
