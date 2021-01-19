@@ -58,52 +58,27 @@ final class UpdateTagsCLI extends CLIBase {
     }
     list($project, $prefix) = self::REPOS_AND_TAG_PREFIXES[$product];
 
-
+    $refs = vec[
+      'git',
+      'ls-remote',
+      '--tags',
+      'https://github.com/'.$project.'.git',
+      '--quiet',
+      $prefix.'*'
+    ]
+      |> Vec\map($$, $arg ==> \escapeshellarg($arg))
+      |> Str\join($$, ' ')
+      |> Str\trim(\shell_exec($$))
+      |> Str\split($$, "\n");
     $tags = keyset[];
-    for ($page = 1; $page <= 20; ++$page) {
-      $url = Str\format(
-        'https://api.github.com/repos/%s/tags?per_page=100&page=%d',
-        $project,
-        $page,
-      );
-
-      $req = \curl_init($url);
-      \curl_setopt($req, \CURLOPT_USERAGENT, "docs.hhvm.com update-versions.h");
-      \curl_setopt($req, \CURLOPT_RETURNTRANSFER, true);
-      \curl_setopt($req, \CURLOPT_HEADER, true);
-
-      /* HHAST_IGNORE_ERROR[DontAwaitInALoop] */
-      $http_header_and_body = await \HH\Asio\curl_exec($req);
-      $header_length = \curl_getinfo($req, \CURLINFO_HEADER_SIZE);
-      $header = Str\slice($http_header_and_body, 0, $header_length);
-      invariant(
-        !Str\contains_ci($header, "\r\nX-Ratelimit-Remaining: 0\r\n"),
-        'Ratelimit for the github API has been exceeded.',
-      );
-      $body = Str\slice($http_header_and_body, $header_length);
-
-      $more_tags = \json_decode(
-        $body, /* assoc = */
-        true, /* depth = */
-        512,
-        \JSON_FB_HACK_ARRAYS,
-      )
-        |> Vec\map($$, $tag ==> $tag['name'] as string);
-
-      if (C\is_empty($more_tags)) {
-        // We reached the last page.
-        return Vec\filter($tags, $tag ==> Str\starts_with($tag, $prefix))
-          |> Vec\sort($$, ($a, $b) ==> \version_compare($a, $b))
-          |> C\lastx($$);
-      }
-
-      $tags = Keyset\union($tags, $more_tags);
+    foreach ($refs as $line) {
+      $parts = Str\split($line, "\t");
+      // $ref = $parts[0];
+      $name = $parts[1];
+      $tags[] = Str\strip_prefix($name, 'refs/tags/');
     }
-
-    invariant_violation(
-      'GitHub project %s has too many tags to process, giving up.',
-      $project,
-    );
+    return Vec\sort($tags, ($a, $b) ==> \version_compare($a, $b))
+      |> C\lastx($$);
   }
 
   <<__Override>>
