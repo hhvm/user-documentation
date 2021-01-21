@@ -5,7 +5,7 @@ The following contexts and capabilities are implemented at present.
 
 ## Capabilities
 
-### Output
+### IO
 
 This gates the ability to use the `echo` and `print` intrinsics within function bodies.
 
@@ -16,7 +16,7 @@ function does_echo_and_print(): void {
 }
 ```
 
-Additionally, stdlib functions that perform output operations such as file writes will require this capablity.
+Additionally, stdlib functions that perform output operations such as file writes and DB reads will require this capablity.
 
 ### WriteProperty
 
@@ -75,7 +75,7 @@ stdlib functions that make use of mutable global state or expose the php-style s
 
 ### Defaults
 
-`defaults` represents the capability set {Output, WriteProperty, AccessStaticVariable}.
+`defaults` represents the capability set {IO, WriteProperty, AccessStaticVariable}.
 
 ### Write_props
 
