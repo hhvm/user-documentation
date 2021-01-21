@@ -77,9 +77,9 @@ stdlib functions that make use of mutable global state or expose the php-style s
 
 `defaults` represents the capability set {Output, WriteProperty, AccessStaticVariable}.
 
-### Local
+### Write_props
 
-`local` represents the capability set {WriteProperty}.
+`write_props` represents the capability set {WriteProperty}.
 
 ### The Empty List
 
