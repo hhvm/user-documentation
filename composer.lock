@@ -584,20 +584,20 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v4.41.0",
+            "version": "v4.93.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "80a42c02f036f72a42f0415e80d6b847f4bf62d5"
+                "reference": "dc78b4cb45f721a09e01b9eac71ada7b9742eeee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/80a42c02f036f72a42f0415e80d6b847f4bf62d5",
-                "reference": "80a42c02f036f72a42f0415e80d6b847f4bf62d5",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/dc78b4cb45f721a09e01b9eac71ada7b9742eeee",
+                "reference": "dc78b4cb45f721a09e01b9eac71ada7b9742eeee",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.41"
+                "hhvm": "^4.93"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.5.1",
@@ -608,7 +608,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "4.x-dev",
+                    "dev-CI_current_pull_request": "4.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -618,9 +619,9 @@
             "description": "The Hack Standard Library",
             "support": {
                 "issues": "https://github.com/hhvm/hsl/issues",
-                "source": "https://github.com/hhvm/hsl/tree/v4.41.0"
+                "source": "https://github.com/hhvm/hsl/tree/v4.93.0"
             },
-            "time": "2020-05-01T23:05:23+00:00"
+            "time": "2021-01-20T22:27:26+00:00"
         },
         {
             "name": "hhvm/hsl-experimental",
