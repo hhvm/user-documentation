@@ -365,7 +365,6 @@ final class HHAPIDocBuildStep extends BuildStep {
         shape(
           'format' => HHAPIDoc\OutputFormat::MARKDOWN,
           'syntaxHighlighting' => true,
-          'hidePrivateMethods' => true,
         ),
       )
     );

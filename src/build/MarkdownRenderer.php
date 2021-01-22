@@ -26,7 +26,6 @@ final class MarkdownRenderer {
             MarkdownExt\IncludeGeneratedMarkdownBlock::class,
           ),
       )
-      ->setSourceType(Markdown\SourceType::TRUSTED)
       ->enableHTML_UNSAFE();
     $parser_ctx->getInlineContext()
       ->prependInlineTypes(MarkdownExt\AutoLinkifyInline::class);

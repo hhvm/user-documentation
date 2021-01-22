@@ -1,15 +1,15 @@
 {
     "require": {
         "facebook/xhp-lib": "^4.0",
-        "hhvm": "4.93.*",
-        "usox/hackttp": "~0.5.3",
+        "hhvm": "4.87.*",
+        "usox/hackttp": "^0.5.2",
         "hhvm/hhvm-autoload": "^3.0",
         "hhvm/type-assert": "^4.0",
         "facebook/hack-codegen": "^4.0",
         "facebook/hack-router-codegen": ">=0.14 <1.0",
         "facebook/hack-router": ">= 0.18 <1.0",
         "hhvm/hsl": "^4.25",
-        "hhvm/hsl-experimental": "^4.93",
+        "hhvm/hsl-experimental": "^4.41",
         "facebook/fbmarkdown": "^1.0",
         "facebook/hh-apidoc": ">=0.6 <1.0"
     },
@@ -18,5 +18,9 @@
         "facebook/definition-finder": "^2.0.0",
         "hhvm/hacktest": "^2.0",
         "facebook/fbexpect": "^2.6.1"
+    },
+    "scripts": {
+        "post-install-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch",
+        "post-update-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch"
     }
 }

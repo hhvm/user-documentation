@@ -24,7 +24,7 @@ async function main_async(): Awaitable<void> {
     await $f->writeAllAsync($message);
 
     $f->seek(0);
-    $content = await $f->readAllAsync();
+    $content = await $f->readAsync();
     await $out->writeAllAsync($content);
   }
 }

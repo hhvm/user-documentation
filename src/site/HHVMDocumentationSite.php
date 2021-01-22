@@ -14,7 +14,7 @@ use type Facebook\Experimental\Http\Message\{
   ResponseInterface,
   ServerRequestInterface,
 };
-use namespace HH\Lib\{File, IO};
+use namespace HH\Lib\{File, IO, Math};
 
 final class HHVMDocumentationSite {
   public static async function respondToAsync(
@@ -38,7 +38,7 @@ final class HHVMDocumentationSite {
     $read_handle = File\open_read_only($buffer_path);
     using ($read_handle->closeWhenDisposed()) {
       $out = IO\request_output();
-      $content = await $read_handle->readAllAsync();
+      $content = await $read_handle->readAsync(Math\INT64_MAX);
       await $out->writeAllAsync($content);
     }
     \unlink($buffer_path);
