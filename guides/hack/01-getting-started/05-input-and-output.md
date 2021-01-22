@@ -48,7 +48,7 @@ async function main_async(): Awaitable<void> {
     await $f->writeAllAsync($message);
 
     $f->seek(0);
-    $content = await $f->readAsync();
+    $content = await $f->readAllAsync();
     await $out->writeAllAsync($content);
   }
 }

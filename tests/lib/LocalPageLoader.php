@@ -4,7 +4,7 @@ namespace HHVM\UserDocumentation\Tests;
 
 use type Facebook\Experimental\Http\Message\{HTTPMethod, ResponseInterface};
 
-use namespace HH\Lib\{File, Math};
+use namespace HH\Lib\File;
 
 final class LocalPageLoader extends PageLoader {
   protected function __construct() {}
@@ -39,7 +39,7 @@ final class LocalPageLoader extends PageLoader {
     $write_handle->close();
     $read_handle = File\open_read_only($buffer_path);
     using $read_handle->closeWhenDisposed();
-    $content = await $read_handle->readAsync(Math\INT64_MAX);
+    $content = await $read_handle->readAllAsync();
     return tuple($response, $content);
   }
 }
