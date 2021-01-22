@@ -1,3 +1,4 @@
+hhvm.hack_arr_compat_array_slice_intish_cast_notices--------> global_value(1), local_value(1), access(4)
 hhvm.hack_arr_compat_cast_marked_array_notices--------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_check_compare--------------------------> global_value(), local_value(), access(4)
 hhvm.hack_arr_compat_compact_serialize_notices--------------> global_value(), local_value(), access(4)
