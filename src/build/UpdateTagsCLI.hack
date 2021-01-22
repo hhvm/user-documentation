@@ -12,7 +12,7 @@ namespace HHVM\UserDocumentation;
 
 use type Facebook\CLILib\CLIBase;
 use namespace Facebook\CLILib\CLIOptions;
-use namespace HH\Lib\{C, Dict, Keyset, Str, Vec};
+use namespace HH\Lib\{C, Dict, Str, Vec};
 use namespace Facebook\HackCodegen as CG;
 
 final class UpdateTagsCLI extends CLIBase {
