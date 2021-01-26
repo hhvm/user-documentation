@@ -34,6 +34,12 @@ final class ExtractFilter extends FilterBase {
       \mkdir(\dirname($path), 0777, true /* recursive */);
     }
     \file_put_contents($path, $content);
+
+    invariant(
+      \file_exists($path) && \file_get_contents($path) === $content,
+      "Failed to update or create %s",
+      $path
+    );
   }
 
   <<__Override>>
