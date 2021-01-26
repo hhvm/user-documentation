@@ -108,6 +108,8 @@ Entries are returned in the order specified by the enumerated type.
 
 ### Enumerated types inclusion
 
+*This is an experimental feature, that might not be available and must be enabled explictly with the `enable_enum_supertyping` global option.*
+
 An enumerated type can additionally be defined by including all the enumeration constants of other enumerated types.  A typical example would be:
 
 ```EnumSupertyping.hack no-auto-output
@@ -122,7 +124,11 @@ enum F: int {
   use E2;
   C = 2;
 }
-```                                                                                                                                        
+```
+
+```EnumSupertyping.hack.hhconfig
+enable_enum_supertyping=true
+```
 
 This code defines two enumerated types `E1` and `E2`, and a third enumerated type `F` whose enumeration constants include all the enumeration constants of `E1` and `E2`, in addition to those it defines directly.  All the enumeration constants `F::A`, `F::B`, `F::C` are thus defined.
 
