@@ -86,9 +86,9 @@ enum Permission: string {
 }
 ```
 
-All enumerated types behave as if they contain a set of public static methods.
+### Predefined methods on enumerated types
 
-Here is an example that uses several of these methods:
+All enumerated types implement some predefined public static methods, including `getValues()` and `getNames()`, which are put at work in the example below:
 
 ```Positions.enum-methods.hack
 $names = Position::getNames();
@@ -103,3 +103,29 @@ foreach ($values as $key => $value) {
   echo "\tkey >$key< has value >$value<\n";
 }
 ```
+
+Entries are returned in the order specified by the enumerated type.
+
+### Enumerated types inclusion
+
+An enumerated type can additionally be defined by including all the enumeration constants of other enumerated types.  A typical example would be:
+
+```EnumSupertyping.hack no-auto-output
+enum E1: int as int {
+  A = 0;
+}
+enum E2: int as int {
+  B = 1;
+}
+enum F: int {
+  use E1;
+  use E2;
+  C = 2;
+}
+```                                                                                                                                        
+
+This code defines two enumerated types `E1` and `E2`, and a third enumerated type `F` whose enumeration constants include all the enumeration constants of `E1` and `E2`, in addition to those it defines directly.  All the enumeration constants `F::A`, `F::B`, `F::C` are thus defined.
+
+The alternative syntax `use E1, E2;` is also supported.  All `use` statements must precede the enum constants declarations, and multiple definition of the same enumeration constant are forbidden.
+
+Library functions as `getValues()` and `getNames()` perform a post-order visit of the included enumerated types: first the constants of the included enumeration types (visited in the order specified by the `use` statements) are listed (recursively), and then the enumeration constants defined by the enumeration type itself.
