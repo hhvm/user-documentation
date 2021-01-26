@@ -149,6 +149,24 @@ final class HHAPIDocBuildStep extends BuildStep {
     foreach (APIProduct::getValues() as $product) {
       $content .= APISourcesBuildStep::getTagFileContent($product);
     }
+
+    // Get the last modified time of the last modified file in api-examples/
+    $max_mtime = null;
+    foreach (
+      new \RecursiveIteratorIterator(
+        new \RecursiveDirectoryIterator(BuildPaths::API_EXAMPLES_DIR),
+      ) as $file_info
+    ) {
+      if ($max_mtime is null || $file_info->getMTime() > $max_mtime) {
+        $max_mtime = $file_info->getMTime();
+      }
+    }
+    invariant(
+      $max_mtime is nonnull,
+      'Error finding the last modified file in api-examples/',
+    );
+    $content .= 'highest api-examples mtime: '.$max_mtime."\n";
+
     return $content;
   }
 
