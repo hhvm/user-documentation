@@ -68,6 +68,8 @@ type of `squares` now uses `string` as the first generic type argument, as the e
 The following example uses `yield` to generate a collection of strings, each of which is a record from a text file:
 
 ```process-file.hack
+use type HHVM\UserDocumentation\LocalConfig;
+
 function getTextFileLines(string $filename): \Generator<int, string, void> {
   $infile = \fopen($filename, 'r');
   if ($infile === false) {
@@ -90,7 +92,8 @@ function getTextFileLines(string $filename): \Generator<int, string, void> {
 
 <<__EntryPoint>>
 function main(): void {
-  foreach (getTextFileLines(__DIR__."/Testfile.txt") as $line) {
+  $path = LocalConfig::ROOT.'/src/utils/examples/Testfile.txt';
+  foreach (getTextFileLines($path) as $line) {
     echo ">$line<\n";
   }
 }

@@ -3,6 +3,8 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\ExpressionsAndOperators\Yield\ProcessFile;
 
+use type HHVM\UserDocumentation\LocalConfig;
+
 function getTextFileLines(string $filename): \Generator<int, string, void> {
   $infile = \fopen($filename, 'r');
   if ($infile === false) {
@@ -27,7 +29,8 @@ function getTextFileLines(string $filename): \Generator<int, string, void> {
 function main(): void {
   \init_docs_autoloader();
 
-  foreach (getTextFileLines(__DIR__."/Testfile.txt") as $line) {
+  $path = LocalConfig::ROOT.'/src/utils/examples/Testfile.txt';
+  foreach (getTextFileLines($path) as $line) {
     echo ">$line<\n";
   }
 }
