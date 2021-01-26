@@ -26,4 +26,6 @@ async function basic_usage_main(): Awaitable<void> {
     }
   }
 }
+```.skipif
+\Hack\UserDocumentation\API\Examples\MCRouter\skipif();
 ```
