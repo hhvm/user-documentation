@@ -1,6 +1,6 @@
 This page lists the most common error codes, and suggests how to fix
 them. You can see the full list of error codes in
-[error_map.ml](https://github.com/facebook/hhvm/blob/master/hphp/hack/test/errors/error_map.ml).
+[error_map.ml](https://github.com/facebook/hhvm/blob/master/hphp/hack/src/errors/error_codes.ml).
 
 ## 1002: Top-level code
 
