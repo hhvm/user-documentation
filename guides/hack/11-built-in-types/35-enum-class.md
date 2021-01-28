@@ -1,4 +1,4 @@
-* Disclaimer: This is a new feature, and you will have to enable it in your projects *
+** Disclaimer: This is a new feature, and you will have to enable it in your projects **
 
 
 Historically, the base type of an enumerated type (enum) is restricted to the `arraykey` type: it must be an integer, a string or another enum.
@@ -130,7 +130,7 @@ function test1(): void {
 To access the additional information added by `HH\MemberOf`, one has to change the function signature in the following way:
 
 ```EnumClassNames.hack no-auto-output
-public function show_name_from_Names(HH\MemberOf<Names, IHasName> $x): string {
+function show_name_from_Names(HH\MemberOf<Names, IHasName> $x): string {
   echo "Showing names from the enum class `Names` only";
   return $x->name(); // HH\MemberOf is transparent to the runtime
 }
@@ -237,7 +237,7 @@ Enum classes will soon support both the `final` modifier and the `__Sealed` attr
 
 ## Control over enum class constants
 
-Using coeffects (TODO: insert link to the doc), one can have control over what kind of expressions are allowed as enum class constants. Please refer to the coeffects documentation for more details about this feature.
+Using [coeffects](../contexts-and-capabilities/introduction.md), one can have control over what kind of expressions are allowed as enum class constants. Please refer to the coeffects documentation for more details about this feature.
 
 By default, all enum classes are under the `write_props` context. It is possible to override this explicitly by using:
 
