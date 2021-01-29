@@ -43,7 +43,7 @@ building the site:
 
 ## Building The Site
 
-If you would like to build the site locally (e.g., to test your [content contributions](#contributing-content)), you will need to install and configure your system to be able to build and run the site locally.
+If you would like to build the site locally (e.g., to test your [content contributions](CONTRIBUTING.md)), you will need to install and configure your system to be able to build and run the site locally.
 
 These are the basic step-by-step instructions to get you up and running. It assumes certain packages are installed on your system. Click [here](installation-detailed.md) for detailed installation information.
 

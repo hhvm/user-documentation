@@ -1,6 +1,6 @@
 For a summary, see the [await-as-an-expression](await-as-an-expression.md) docs.
 
-The guiding principal of “unconditionally consumed with the statement” is to prevent computation from being thrown away. Since we could run the awaits before the statement, if they turn out to not be consumed, it will result in waste. We intentionally ignore the possibility of Exceptions being thrown for the definition of “conditional”.
+The guiding principle of “unconditionally consumed with the statement” is to prevent computation from being thrown away. Since we could run the awaits before the statement, if they turn out to not be consumed, it will result in waste. We intentionally ignore the possibility of Exceptions being thrown for the definition of “conditional”.
 
 For the position to be considered “unconditionally consumed” we require all parents of the await expression until the closest statement pass this check.
 
