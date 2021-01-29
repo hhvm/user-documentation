@@ -21,7 +21,7 @@ use type Facebook\AutoloadMap\{IncludedRoots, RootImporter, Writer};
 final class UpdateAutoloaderBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
-    Log::i("\nUpdateAutoloaderBuildStep");
+    Log::i("UpdateAutoloaderBuildStep\n");
     $dev = \Facebook\AutoloadMap\Generated\is_dev();
     $importer = new RootImporter(
       LocalConfig::ROOT,

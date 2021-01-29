@@ -39,8 +39,11 @@ class Log {
     self::VERBOSE => Color::RESET,
   };
 
-  public static function e(string $msg): void {
-    self::print(self::ERROR, $msg);
+  public static function e(
+    \HH\FormatString<\PlainSprintf> $msg,
+    mixed ...$args
+  ): void {
+    self::print(self::ERROR, \vsprintf($msg, $args));
   }
 
   public static function w(string $msg): void {

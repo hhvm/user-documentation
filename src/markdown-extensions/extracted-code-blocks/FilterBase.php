@@ -77,6 +77,12 @@ abstract class FilterBase extends Markdown\RenderFilter {
     BuildPaths::GUIDES_MARKDOWN => BuildPaths::GUIDES_EXAMPLES_EXTRACT_DIR,
   ];
 
+  private static keyset<string> $validFiles = keyset[];
+
+  final public static function getAllValidFiles(): keyset<string> {
+    return self::$validFiles;
+  }
+
   <<__Override>>
   public function filter(
     Markdown\RenderContext $context,
@@ -188,7 +194,9 @@ abstract class FilterBase extends Markdown\RenderFilter {
 
     // Write or verify files.
     foreach ($files as $name => $content) {
-      static::processFile($examples_dir.'/'.$name, $content);
+      $path = $examples_dir.'/'.$name;
+      self::$validFiles[] = $path;
+      static::processFile($path, $content);
     }
 
     // Auto-generate or verify *existence* of output files if missing.
@@ -369,6 +377,11 @@ abstract class FilterBase extends Markdown\RenderFilter {
     return $headers.$code;
   }
 
+  /**
+   * Valid combination: return true
+   * Extra files: always throw from here
+   * Missing files: return false (subclass will either create them, or throw)
+   */
   private static function hasValidOutputFileSet(
     string $hack_file_path,
     Files $expect,
@@ -377,17 +390,50 @@ abstract class FilterBase extends Markdown\RenderFilter {
     Files $expectregex,
     bool $needs_example,
   ): bool {
-    return \file_exists($hack_file_path.'.'.$expect) ||
-      (
-        (
-          !$needs_example ||
-          \file_exists($hack_file_path.'.'.$example)
-        ) &&
-        (
-          \file_exists($hack_file_path.'.'.$expectf) ||
-          \file_exists($hack_file_path.'.'.$expectregex)
-        )
+    // Not all of these are allowed to exist at the same time, but at this point
+    // we may not know which exact combination will be generated, so for the
+    // purposes of self::$validFiles we have to consider them all valid. There
+    // are additional checks below for any invalid combinations.
+    self::$validFiles[] = $hack_file_path.'.'.$expect;
+    self::$validFiles[] = $hack_file_path.'.'.$expectf;
+    self::$validFiles[] = $hack_file_path.'.'.$expectregex;
+    self::$validFiles[] = $hack_file_path.'.'.$example;
+
+    $has_expect = \file_exists($hack_file_path.'.'.$expect);
+    $has_expectf = \file_exists($hack_file_path.'.'.$expectf);
+    $has_expectregex = \file_exists($hack_file_path.'.'.$expectregex);
+    $has_example = \file_exists($hack_file_path.'.'.$example);
+
+    if ($has_expect) {
+      // Simple case, .expect must be the only file.
+      invariant(
+        !$has_expectf && !$has_expectregex && !$has_example,
+        '%s has a .%s file, but also other conflicting expect/output files!',
+        $hack_file_path,
+        $expect,
       );
+      return true;
+    }
+
+    // Exactly one of these must be present, but never both.
+    invariant(
+      !$has_expectf || !$has_expectregex,
+      '%s has both a .%s and a conflicting .%s file!',
+      $hack_file_path,
+      $expectf,
+      $expectregex,
+    );
+
+    // Example file should exist if and only if $needs_example is set.
+    invariant(
+      $needs_example || !$has_example,
+      '%s has a redundant .%s file!',
+      $hack_file_path,
+      $example,
+    );
+
+    return (!$needs_example || $has_example) &&
+      ($has_expectf || $has_expectregex);
   }
 
   abstract protected static function processFile(
