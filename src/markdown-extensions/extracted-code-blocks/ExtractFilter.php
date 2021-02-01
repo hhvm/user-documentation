@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks;
 
-use namespace HH\Lib\{Regex, Str, Vec};
+use namespace HH\Lib\{C, Regex, Str, Vec};
 use namespace HHVM\UserDocumentation\ExampleTypechecker;
 use type HHVM\UserDocumentation\LocalConfig;
 
@@ -25,8 +25,17 @@ use type HHVM\UserDocumentation\LocalConfig;
  */
 final class ExtractFilter extends FilterBase {
 
+  private static keyset<string> $writtenPaths = keyset[];
+
   <<__Override>>
   protected static function processFile(string $path, string $content): void {
+    invariant(
+      !C\contains_key(self::$writtenPaths, $path),
+      'Found multiple code blocks with the same file name: %s',
+      $path,
+    );
+    self::$writtenPaths[] = $path;
+
     if (\file_exists($path) && \file_get_contents($path) === $content) {
       return;
     }
