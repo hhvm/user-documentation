@@ -15,7 +15,7 @@ enum class Boxes : IBox {
   Box<int> Year = new Box(2021);
 }
 
-function get<T>(HH\MemberOf<Boxes, Box<T>> $box) : T {
+function get<T>(\HH\MemberOf<Boxes, Box<T>> $box) : T {
   return $box->data;
 }
 

@@ -82,26 +82,19 @@ enum class EC : int {
 If we now look at `EC::A`, its type is `HH\MemberOf<EC, int>`. 
 
 
-```EnumClassNames.definition.hack no-auto-output
-enum class Names : IHasName {
-  HasName Hello = new HasName('hello');
-  ConstName Bar = new ConstName();
-}
-```
-
-If we look at `Names::World`, its type is `HH\MemberOf<Names, HasName>`, and `Names::ConstName` has type `HH\MemberOf<Names, ConstName>`.
+Let's have a look back at `Names::World`, its type is `HH\MemberOf<Names, HasName>`, and `Names::Bar` has type `HH\MemberOf<Names, ConstName>`.
 
 The addition of this type layer is here to give more information about the enumeration, namely its exact type
 (`HasName` vs `IHasName`) and from which enum class it comes from (`Names`).
 `HH\MemberOf` is designed to allow a transparent access to the underlying value: `HH\MemberOf<Names, HasName> <: HasName`.
 This means that this layer can be ignored if one doesn’t need the additional information, and `Names::Hello` can be used directly as an instance of the `HasName` class:
 
-```EnumClassNames.code0.hack no-auto-output
+```EnumClassIntro.names.code0.hack no-auto-output
 function expect_name(HasName $x) : void {}
-// Names::HasName has type HH\MemberOf<Names, HasName>
+// Names::Hello has type HH\MemberOf<Names, HasName>
 
 function test0(): void {
-  expect_name(Names::HasName); // ok !
+  expect_name(Names::Hello); // ok !
 }
 ```
 
@@ -109,7 +102,7 @@ function test0(): void {
 
 As previously explained, it is completely fine to use enum class constants as an instance of their declared type:
 
-```EnumClassNames.code1.hack no-auto-output
+```EnumClassIntro.names.code1.hack no-auto-output
 function show_name_interface(IHasName $x) : string {
   return $x->name();
 }
@@ -122,15 +115,15 @@ function test1(): void {
   show_name(new HasName('toto')); // Ok
   show_name_interface(Names::Bar); // Ok
   show_name(Names::Hello); // Ok
-  show_name(new ConstName()); // error, ConstName is not a subtype of HasName
-  show_name(Names::Bar); // error, ConstName is not a subtype of HasName
+  // show_name(new ConstName()); // error, ConstName is not a subtype of HasName
+  // show_name(Names::Bar); // error, ConstName is not a subtype of HasName
 }
 ```
 
 To access the additional information added by `HH\MemberOf`, one has to change the function signature in the following way:
 
-```EnumClassNames.code2.hack no-auto-output
-function show_name_from_Names(HH\MemberOf<Names, IHasName> $x): string {
+```EnumClassIntro.names.code2.hack no-auto-output
+function show_name_from_Names(\HH\MemberOf<Names, IHasName> $x): string {
   echo "Showing names from the enum class `Names` only";
   return $x->name(); // HH\MemberOf is transparent to the runtime
 }
@@ -165,7 +158,7 @@ enum class Boxes : IBox {
   Box<int> Year = new Box(2021);
 }
 
-function get<T>(HH\MemberOf<Boxes, Box<T>> $box) : T {
+function get<T>(\HH\MemberOf<Boxes, Box<T>> $box) : T {
   return $box->data;
 }
 
@@ -179,13 +172,13 @@ function test0(): void {
 Here we have a simple example of dependent typing: the return value of the `get` function depends on which constant is passed as an input. We can even make it more strict:
 
 ```EnumClassBox.code0.hack no-auto-output
-function get_int(HH\MemberOf<Boxes, Box<int>> $box) : int {
+function get_int(\HH\MemberOf<Boxes, Box<int>> $box) : int {
   return $box->data;
 }
 
 function test1(): void {
-  get(Boxes::Age); // ok
-  get(Boxes::Color); // type error, Color is not a Box<int>
+  get_int(Boxes::Age); // ok
+  // get_int(Boxes::Color); // type error, Color is not a Box<int>
 }
 ```
 
@@ -199,7 +192,7 @@ enum class EBase : IBox {
 }
 
 enum class EExtend : IBox extends EBase {
-  Box<int> Color = new Box('red');
+  Box<string> Color = new Box('red');
 }
 ```
 
@@ -213,22 +206,23 @@ enum class E : IBox {
 }
 
 enum class F : IBox {
-  Box<int> Age = new Box(42);
+  Box<string> Name = new Box('foo');
 }
 
 enum class X : IBox extends E, F { } // ok, no ambiguity
 
 
 enum class E0 : IBox extends E {
-  Box<string> Name = new Box('foo');
+  Box<int> Color = new Box(0);
 }
 
 enum class E1 : IBox extends E {
   Box<string> Color = new Box('red');
 }
 
-// type error, Y::Age is declared twice, in E0 and in E1
-enum class Y : IBox extends E0, E1 { }
+// type error, Y::Color is declared twice, in E0 and in E1
+// only he name is use for ambiguity
+// enum class Y : IBox extends E0, E1 { }
 ```
 
 ### Control over inheritance
@@ -294,7 +288,7 @@ abstract class DictBase {
   private dict<string, mixed> $raw_data = dict[];
   
   // generic code written once which enforces type safety
-  public function get<T>(HH\MemberOf<this::TKeys, Key<T>> $key) : ?T {
+  public function get<T>(\HH\MemberOf<this::TKeys, Key<T>> $key) : ?T {
     $name = $key->name();
     $raw_data = idx($this->raw_data, $name);
     // key might not be set
@@ -305,7 +299,7 @@ abstract class DictBase {
     return null;
   }
   
-  public function set<T>(HH\MemberOf<this::TKeys, Key<T>> $key, T $data): void {
+  public function set<T>(\HH\MemberOf<this::TKeys, Key<T>> $key, T $data): void {
     $name = $key->name();
     $this->raw_data[$name] = $data;
   }

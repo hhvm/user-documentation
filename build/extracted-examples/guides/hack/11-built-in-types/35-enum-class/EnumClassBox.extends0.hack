@@ -8,5 +8,5 @@ enum class EBase : IBox {
 }
 
 enum class EExtend : IBox extends EBase {
-  Box<int> Color = new Box('red');
+  Box<string> Color = new Box('red');
 }
