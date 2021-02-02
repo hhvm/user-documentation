@@ -220,9 +220,9 @@ enum class E1 : IBox extends E {
   Box<string> Color = new Box('red');
 }
 
+// enum class Y : IBox extends E0, E1 { }
 // type error, Y::Color is declared twice, in E0 and in E1
 // only he name is use for ambiguity
-// enum class Y : IBox extends E0, E1 { }
 ```
 
 ### Control over inheritance
