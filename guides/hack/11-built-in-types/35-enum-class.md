@@ -82,7 +82,7 @@ enum class EC : int {
 If we now look at `EC::A`, its type is `HH\MemberOf<EC, int>`. 
 
 
-```EnumClassNames.hack no-auto-output
+```EnumClassNames.definition.hack no-auto-output
 enum class Names : IHasName {
   HasName Hello = new HasName('hello');
   ConstName Bar = new ConstName();
@@ -96,7 +96,7 @@ The addition of this type layer is here to give more information about the enume
 `HH\MemberOf` is designed to allow a transparent access to the underlying value: `HH\MemberOf<Names, HasName> <: HasName`.
 This means that this layer can be ignored if one doesn’t need the additional information, and `Names::Hello` can be used directly as an instance of the `HasName` class:
 
-```EnumClassNames.hack no-auto-output
+```EnumClassNames.code0.hack no-auto-output
 function expect_name(HasName $x) : void {}
 // Names::HasName has type HH\MemberOf<Names, HasName>
 
@@ -109,7 +109,7 @@ function test0(): void {
 
 As previously explained, it is completely fine to use enum class constants as an instance of their declared type:
 
-```EnumClassNames.hack no-auto-output
+```EnumClassNames.code1.hack no-auto-output
 function show_name_interface(IHasName $x) : string {
   return $x->name();
 }
@@ -129,7 +129,7 @@ function test1(): void {
 
 To access the additional information added by `HH\MemberOf`, one has to change the function signature in the following way:
 
-```EnumClassNames.hack no-auto-output
+```EnumClassNames.code2.hack no-auto-output
 function show_name_from_Names(HH\MemberOf<Names, IHasName> $x): string {
   echo "Showing names from the enum class `Names` only";
   return $x->name(); // HH\MemberOf is transparent to the runtime
@@ -152,7 +152,7 @@ function test3(): void {
 
 As explained in the introduction, this feature also allows to write dependently typed code. Let’s consider the more involved code:
 
-```EnumClassBox.hack no-auto-output
+```EnumClassBox.definition.hack no-auto-output
 interface IBox {}
 
 class Box<T> implements IBox {
@@ -178,7 +178,7 @@ function test0(): void {
 
 Here we have a simple example of dependent typing: the return value of the `get` function depends on which constant is passed as an input. We can even make it more strict:
 
-```EnumClassBox.hack no-auto-output
+```EnumClassBox.code0.hack no-auto-output
 function get_int(HH\MemberOf<Boxes, Box<int>> $box) : int {
   return $box->data;
 }
@@ -193,7 +193,7 @@ function test1(): void {
 
 Enum classes can be composed together, as long as they implement the same base type:
 
-```EnumClassBox.hack no-auto-output
+```EnumClassBox.extends0.hack no-auto-output
 enum class EBase : IBox {
   Box<int> Age = new Box(42);
 }
@@ -207,7 +207,7 @@ In this example, `EExtend` inherits `Age` from `EBase`, which means that `EExten
 As with ordinary class extension, using the `extends` keyword will create a subtype relation between the enums: `EExtend <: EBase`.
 Enum classes support multiple inheritance as long as there is no ambiguity in the names of the constants, and that each enum class uses the same base type:
 
-```EnumClassBox.hack no-auto-output
+```EnumClassBox.extends1.hack no-auto-output
 enum class E : IBox {
   Box<int> Age = new Box(42);
 }
@@ -248,7 +248,7 @@ By default, all enum classes are under the `write_props` context. It is possible
 
 First, a couple of general Hack definitions:
 
-```EnumClassFull.hack no-auto-output
+```EnumClassFull.definition.hack no-auto-output
 function expect_string(string $_) : void {}
 
 interface IKey {
@@ -281,7 +281,7 @@ class StringKey extends Key<string> {
 
 Now let’s create the base definitions for our dictionary
 
-```EnumClassFull.hack no-auto-output
+```EnumClassFull.enum.hack no-auto-output
 enum class EKeys : IKey {
   // here are a default key, but this could be left empty
   Key<string> NAME = new StringKey('NAME');
@@ -314,7 +314,7 @@ abstract class DictBase {
 
 Now one just need to provide a set of keys and extends `DictBase`:
 
-```EnumClassFull.hack
+```EnumClassFull.user.hack
 class Foo { /* user code in here */ }
 
 class MyKeyType extends Key<Foo> { 
