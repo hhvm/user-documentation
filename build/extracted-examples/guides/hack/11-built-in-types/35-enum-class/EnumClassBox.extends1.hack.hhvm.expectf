@@ -1,2 +1,0 @@
-
-Fatal error: HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassBox\X cannot inherit the constant Age from HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassBox\F, because it was previously inherited from HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassBox\E in %s/EnumClassBox.extends1.hack on line 14

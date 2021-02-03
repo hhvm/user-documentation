@@ -48,6 +48,8 @@ enum class Names : IHasName {
   HasName World = new HasName('world');
   ConstName Bar = new ConstName();
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ## Declaring a new enum class
@@ -68,6 +70,8 @@ Another difference is that their types are more informative. Consider the enum:
 enum E : int {
   A = 42;
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 The type of `E::A` is just `E`. 
@@ -77,6 +81,8 @@ The type of `E::A` is just `E`.
 enum class EC : int {
   int A = 42;
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 If we now look at `EC::A`, its type is `HH\MemberOf<EC, int>`. 
@@ -96,6 +102,8 @@ function expect_name(HasName $x) : void {}
 function test0(): void {
   expect_name(Names::Hello); // ok !
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ## Defining function that expects enum class
@@ -118,6 +126,8 @@ function test1(): void {
   // show_name(new ConstName()); // error, ConstName is not a subtype of HasName
   // show_name(Names::Bar); // error, ConstName is not a subtype of HasName
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 To access the additional information added by `HH\MemberOf`, one has to change the function signature in the following way:
@@ -140,6 +150,8 @@ enum class OtherNames: IHasName {
 function test3(): void {
   show_name(OtherNames::Foo); // error, expected Names but got OtherNames
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 
@@ -167,6 +179,8 @@ function test0(): void {
   get(Boxes::Color); // ok, of type string, returns 'red'
   get(Boxes::Year); // ok, of type int, returns 2021
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 Here we have a simple example of dependent typing: the return value of the `get` function depends on which constant is passed as an input. We can even make it more strict:
@@ -180,6 +194,8 @@ function test1(): void {
   get_int(Boxes::Age); // ok
   // get_int(Boxes::Color); // type error, Color is not a Box<int>
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ## Extending an existing enum class
@@ -194,6 +210,8 @@ enum class EBase : IBox {
 enum class EExtend : IBox extends EBase {
   Box<string> Color = new Box('red');
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 In this example, `EExtend` inherits `Age` from `EBase`, which means that `EExtend::Age` is defined.
@@ -223,6 +241,8 @@ enum class E1 : IBox extends E {
 // enum class Y : IBox extends E0, E1 { }
 // type error, Y::Color is declared twice, in E0 and in E1
 // only he name is use for ambiguity
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ### Control over inheritance
@@ -271,6 +291,8 @@ class StringKey extends Key<string> {
     return Str\capitalize($s);
   }
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 Now let’s create the base definitions for our dictionary
@@ -304,6 +326,8 @@ abstract class DictBase {
     $this->raw_data[$name] = $data;
   }
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 Now one just need to provide a set of keys and extends `DictBase`:
@@ -335,8 +359,8 @@ function main() : void {
   // $d->set(MyKeys::AGE, new Foo()); // type error
   expect_string($d->get(MyKeys::NAME) as nonnull);
 }
-
-
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ## How to enable the feature
