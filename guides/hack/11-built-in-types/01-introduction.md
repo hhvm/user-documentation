@@ -8,6 +8,7 @@ This section covers the different types available in Hack.
 * [dict](arrays.md#dict)
 * [dynamic](dynamic.md)
 * [Enumerated Types (`enum`)](enumerated-types.md)
+* [Enum Classes (`enum class`)](enum-class.md)
 * [float](float.md)
 * [int](int.md)
 * [keyset](arrays.md#keyset)
