@@ -1,4 +1,4 @@
-** Disclaimer: This is a new feature, and you will have to enable it in your projects **
+**Disclaimer: This is a new feature, and you will have to enable it in your projects**
 
 
 Historically, the base type of an enumerated type (enum) is restricted to the `arraykey` type: it must be an integer, a string or another enum.
@@ -74,7 +74,7 @@ enum E : int {
 hhvm.hack.lang.enable_enum_classes=1
 ```
 
-The type of `E::A` is just `E`. 
+The type of `E::A` is just `E`.
 
 
 ```EnumClassEC.hack no-auto-output
@@ -85,7 +85,7 @@ enum class EC : int {
 hhvm.hack.lang.enable_enum_classes=1
 ```
 
-If we now look at `EC::A`, its type is `HH\MemberOf<EC, int>`. 
+If we now look at `EC::A`, its type is `HH\MemberOf<EC, int>`.
 
 
 Let's have a look back at `Names::World`, its type is `HH\MemberOf<Names, HasName>`, and `Names::Bar` has type `HH\MemberOf<Names, ConstName>`.
@@ -263,7 +263,9 @@ By default, all enum classes are under the `write_props` context. It is possible
 First, a couple of general Hack definitions:
 
 ```EnumClassFull.definition.hack no-auto-output
-function expect_string(string $_) : void {}
+function expect_string(string $str) : void {
+  echo 'expect_string called with: '.$str."\n";
+}
 
 interface IKey {
   public function name(): string;
@@ -308,7 +310,7 @@ abstract class DictBase {
   abstract const type TKeys as EKeys;
   // actual data storage
   private dict<string, mixed> $raw_data = dict[];
-  
+
   // generic code written once which enforces type safety
   public function get<T>(\HH\MemberOf<this::TKeys, Key<T>> $key) : ?T {
     $name = $key->name();
@@ -320,7 +322,7 @@ abstract class DictBase {
     }
     return null;
   }
-  
+
   public function set<T>(\HH\MemberOf<this::TKeys, Key<T>> $key, T $data): void {
     $name = $key->name();
     $this->raw_data[$name] = $data;
@@ -332,14 +334,14 @@ hhvm.hack.lang.enable_enum_classes=1
 
 Now one just need to provide a set of keys and extends `DictBase`:
 
-```EnumClassFull.user.hack
+```EnumClassFull.user0.hack no-auto-output
 class Foo { /* user code in here */ }
 
-class MyKeyType extends Key<Foo> { 
+class MyKeyType extends Key<Foo> {
   public function coerceTo(mixed $data): Foo {
     // user code validation
     return $data as Foo;
-  }  
+  }
 }
 
 enum class MyKeys : IKey extends EKeys {
@@ -350,7 +352,11 @@ enum class MyKeys : IKey extends EKeys {
 class MyDict extends DictBase {
   const type TKeys = MyKeys;
 }
+```.ini
+hhvm.hack.lang.enable_enum_classes=1
+```
 
+```EnumClassFull.user1.hack
 <<__EntryPoint>>
 function main() : void {
   $d = new MyDict();
@@ -367,8 +373,5 @@ hhvm.hack.lang.enable_enum_classes=1
 
 To use this new feature, you need to pass the following flags to HHVM/Hack
 
-* hhvm flags: `-v Hack.Lang.EnableEnumClasses=1`
-* hack flags: `--enable-enum-classes`
-
-This can be done on the command line, or in the `.hhvmconfig.hdf` and  `.hhconfig` configuration files.
-
+* hhvm flags: `-d hhvm.hack.lang.enable_enum_classes=1`
+* `.hhconfig` flags: `enable_enum_classes=true`

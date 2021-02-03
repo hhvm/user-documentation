@@ -13,7 +13,7 @@ abstract class DictBase {
   abstract const type TKeys as EKeys;
   // actual data storage
   private dict<string, mixed> $raw_data = dict[];
-  
+
   // generic code written once which enforces type safety
   public function get<T>(\HH\MemberOf<this::TKeys, Key<T>> $key) : ?T {
     $name = $key->name();
@@ -25,7 +25,7 @@ abstract class DictBase {
     }
     return null;
   }
-  
+
   public function set<T>(\HH\MemberOf<this::TKeys, Key<T>> $key, T $data): void {
     $name = $key->name();
     $this->raw_data[$name] = $data;
