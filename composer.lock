@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6f9ac83c4ae73a1cbd5a00275025a0d8",
+    "content-hash": "eb2e528f7891a88396f9e8625eef2752",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -477,16 +477,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.94.0",
+            "version": "v4.95.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "1ccdec0c416971b6410c505b75eab99d7de556ae"
+                "reference": "ab5248cab6f829e1cd066747152e5667336697dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/1ccdec0c416971b6410c505b75eab99d7de556ae",
-                "reference": "1ccdec0c416971b6410c505b75eab99d7de556ae",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/ab5248cab6f829e1cd066747152e5667336697dd",
+                "reference": "ab5248cab6f829e1cd066747152e5667336697dd",
                 "shasum": ""
             },
             "require": {
@@ -523,9 +523,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.94.0"
+                "source": "https://github.com/hhvm/hhast/tree/v4.95.0"
             },
-            "time": "2021-01-23T01:13:30+00:00"
+            "time": "2021-02-01T22:32:10+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -915,7 +915,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.94.*"
+        "hhvm": "4.95.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
