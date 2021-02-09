@@ -1,4 +1,4 @@
-# HHVM and Hack User Documentation [![Build Status](https://travis-ci.org/hhvm/user-documentation.svg?branch=master)](https://travis-ci.org/hhvm/user-documentation)
+# HHVM and Hack User Documentation
 
 This is the repo for the [HHVM and Hack user documentation](http://docs.hhvm.com). [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
 
