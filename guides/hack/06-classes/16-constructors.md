@@ -80,7 +80,7 @@ use it in the `Point` class above because we wanted the properties to have type
 the constructor parameters to have type `num`, so either integer or
 floating-point values can be passed in.
 
-Don't hesistate to &ldquo;un-promote&rdquo; a constructor parameter if it later
+Don't hesitate to &ldquo;un-promote&rdquo; a constructor parameter if it later
 turns out that a different internal data representation would be better. For
 example, if we later decided to store `$name` in a structured form instead of a string, we could easily make that change while keeping the public-facing
 constructor parameters unchanged (and therefore backwards-compatible).
