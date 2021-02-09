@@ -247,16 +247,14 @@ hhvm.hack.lang.enable_enum_classes=1
 
 ### Control over inheritance
 
-Enum classes will soon support both the `final` modifier and the `__Sealed` attribute, just like normal classes. This will enable a more fine grain control over the extension mechanics.
+Enum classes support the `__Sealed` attribute, just like normal classes. This will enable a more fine grain control over the extension mechanics.
+However enum classes do not yet support the `final` keyword.
 
 ## Control over enum class constants
 
 Using [coeffects](../contexts-and-capabilities/introduction.md), one can have control over what kind of expressions are allowed as enum class constants. Please refer to the coeffects documentation for more details about this feature.
 
-By default, all enum classes are under the `write_props` context. It is possible to override this explicitly by using:
-
-* the `<<__EnumClassContext()>>` attribute to specify that an enum class is “pure”
-* explicit attributes like  `<<__EnumClassContext('rx', 'write_props')>>` to specify a list of contexts.
+By default, all enum classes are under the `write_props` context. It is not possible to override this explicitly. The only work around must be a temporary one involving `HH_FIXME`s.
 
 ## Full example: dependent dictionary
 
