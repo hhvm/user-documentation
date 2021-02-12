@@ -3,29 +3,29 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Blocks\SyntacticSugar;
 
-async function gen_int(): Awaitable<int> {
+async function get_int_async(): Awaitable<int> {
   return 4;
 }
 
-async function gen_float(): Awaitable<float> {
+async function get_float_async(): Awaitable<float> {
   return 1.2;
 }
 
-async function gen_string(): Awaitable<string> {
+async function get_string_async(): Awaitable<string> {
   return "Hello";
 }
 
-async function gen_call<Tv>((function(): Awaitable<Tv>) $gen): Awaitable<Tv> {
+async function call_async<Tv>((function(): Awaitable<Tv>) $gen): Awaitable<Tv> {
   return await $gen();
 }
 
 async function use_async_lambda(): Awaitable<void> {
   // To use an async lambda with no arguments, you would need to have a helper
   // function to return an actual Awaitable for you.
-  $x = await gen_call(
+  $x = await call_async(
     async () ==> {
-      $y = await gen_float();
-      $z = await gen_int();
+      $y = await get_float_async();
+      $z = await get_int_async();
       return \round($y) + $z;
     },
   );
@@ -36,8 +36,8 @@ async function use_async_block(): Awaitable<void> {
   // With an async block, no helper function is needed. It is all built-in to the
   // async block itself.
   $x = await async {
-    $y = await gen_float();
-    $z = await gen_int();
+    $y = await get_float_async();
+    $z = await get_int_async();
     return \round($y) + $z;
   };
   \var_dump($x);
@@ -46,7 +46,7 @@ async function use_async_block(): Awaitable<void> {
 async function call_async_function(): Awaitable<void> {
   // Normally we have to call a simple async function and get its value, even
   // if it takes no arguments, etc.
-  $x = await gen_string();
+  $x = await get_string_async();
   \var_dump($x);
 }
 
