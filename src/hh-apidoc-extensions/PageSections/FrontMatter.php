@@ -71,20 +71,6 @@ final class FrontMatter extends PageSection {
       );
     }
 
-
-    $fbonly_messages = vec[];
-    $fb_alias = \HHVM\UserDocumentation\get_fbonly_alias($data['name']);
-    if ($fb_alias !== null) {
-      $fbonly_messages[] = "This function is available as `".
-        $fb_alias.
-        "()` in ".
-        "Facebook's www repository.";
-    }
-
-    if (!C\is_empty($fbonly_messages)) {
-      $data['fbonly messages'] = $fbonly_messages;
-    }
-
     return $data;
   }
 }

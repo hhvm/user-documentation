@@ -12,7 +12,7 @@
 namespace HHVM\UserDocumentation;
 
 use namespace Facebook\XHP\Core as x;
-use type Facebook\XHP\HTML\{a, div, h3, li, span, ul};
+use type Facebook\XHP\HTML\{a, div, h3, li, ul};
 use type HHVM\UserDocumentation\{APIDefinitionType, APIIndex, APIProduct};
 
 use namespace HH\Lib\{C, Str};
@@ -60,15 +60,9 @@ xhp class api_list extends x\element {
         $name = $name
           |> Str\strip_prefix($$, "HH\\Lib\\Experimental\\")
           |> Str\strip_prefix($$, "HH\\Lib\\");
-        $fb_alias = \HHVM\UserDocumentation\get_fbonly_alias($name);
-        if ($fb_alias !== null) {
-          $fbonly = <span class="fbOnly apiAlias">{$fb_alias}</span>;
-        } else {
-          $fbonly = null;
-        }
         $type_list->appendChild(
           <li>
-            <a href={$url}>{$name}{$fbonly}</a>
+            <a href={$url}>{$name}</a>
           </li>,
         );
       }
