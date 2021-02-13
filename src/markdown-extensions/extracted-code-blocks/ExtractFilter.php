@@ -28,7 +28,7 @@ final class ExtractFilter extends FilterBase {
   private static keyset<string> $writtenPaths = keyset[];
 
   <<__Override>>
-  protected static function processFile(string $path, string $content): void {
+  protected static function processFile(string $path, string $content): bool {
     invariant(
       !C\contains_key(self::$writtenPaths, $path),
       'Found multiple code blocks with the same file name: %s',
@@ -37,7 +37,7 @@ final class ExtractFilter extends FilterBase {
     self::$writtenPaths[] = $path;
 
     if (\file_exists($path) && \file_get_contents($path) === $content) {
-      return;
+      return false;
     }
     if (!\file_exists(\dirname($path))) {
       \mkdir(\dirname($path), 0777, true /* recursive */);
@@ -49,6 +49,7 @@ final class ExtractFilter extends FilterBase {
       "Failed to update or create %s",
       $path
     );
+    return true;
   }
 
   <<__Override>>
