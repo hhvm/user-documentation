@@ -29,7 +29,7 @@ interface IHasName {
 }
 
 class HasName implements IHasName {
-  public function __construct(private string $name) {}
+  public function __construct(private string $name)[] {}
   public function name() : string {
     return $this->name;
   }
@@ -161,7 +161,7 @@ As explained in the introduction, this feature also allows to write dependently 
 interface IBox {}
 
 class Box<T> implements IBox {
-  public function __construct(public T $data) {}
+  public function __construct(public T $data)[] {}
 }
 
 enum class Boxes : IBox {

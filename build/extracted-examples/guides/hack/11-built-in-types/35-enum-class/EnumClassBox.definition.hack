@@ -6,7 +6,7 @@ namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassBox
 interface IBox {}
 
 class Box<T> implements IBox {
-  public function __construct(public T $data) {}
+  public function __construct(public T $data)[] {}
 }
 
 enum class Boxes : IBox {
