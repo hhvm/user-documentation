@@ -335,12 +335,12 @@ the missing field.
 ## 4193: Illegal XHP child
 
 ```4193_xhp_child.hack no-auto-output
+use type Facebook\XHP\HTML\div;
+
 function foo(mixed $m): void {
-  /* HH_FIXME[4193] $m may not be an XHPChild.*/
+  /* HH_FIXME[4110] */ /* HH_FIXME[4193] $m may not be an XHPChild.*/
   $my_div = <div>{$m}</div>;
 }
-
-xhp class div {}
 ```
 
 Why it's bad: XHP expects child elements to be instance of `XHPChild`.

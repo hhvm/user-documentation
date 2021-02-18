@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5096f6eec3117700b553fab11fd17ccf",
+    "content-hash": "09453a51a8d1fa1ec23f5fbc56340dae",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -429,16 +429,16 @@
         },
         {
             "name": "facebook/xhp-lib",
-            "version": "v4.0.2",
+            "version": "v4.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/xhp-lib.git",
-                "reference": "a5bceceb9f1b2c88ad34443721a9fbcde520fd07"
+                "reference": "7d2d31ec2489bdeccff7a86dd283f4a6dc4fb084"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/a5bceceb9f1b2c88ad34443721a9fbcde520fd07",
-                "reference": "a5bceceb9f1b2c88ad34443721a9fbcde520fd07",
+                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/7d2d31ec2489bdeccff7a86dd283f4a6dc4fb084",
+                "reference": "7d2d31ec2489bdeccff7a86dd283f4a6dc4fb084",
                 "shasum": ""
             },
             "require": {
@@ -471,9 +471,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/xhp-lib/issues",
-                "source": "https://github.com/hhvm/xhp-lib/tree/v4.0.2"
+                "source": "https://github.com/hhvm/xhp-lib/tree/v4.0.3"
             },
-            "time": "2020-12-18T22:15:07+00:00"
+            "time": "2021-02-18T20:55:17+00:00"
         },
         {
             "name": "hhvm/hhast",
@@ -915,7 +915,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.96.*"
+        "hhvm": "4.97.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
