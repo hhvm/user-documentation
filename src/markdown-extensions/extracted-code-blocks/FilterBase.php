@@ -193,10 +193,30 @@ abstract class FilterBase extends Markdown\RenderFilter {
     }
 
     // Write or verify files.
+    $inputs_changed = false;
     foreach ($files as $name => $content) {
       $path = $examples_dir.'/'.$name;
       self::$validFiles[] = $path;
-      static::processFile($path, $content);
+      $inputs_changed =
+        static::processFile($path, $content) || $inputs_changed;
+    }
+
+    // If any inputs changed, delete all other files (mainly output/expect
+    // files, but also other files like hhconfig/skipif that may have been
+    // previously included in the example block but no longer are). This ensures
+    // that the correct subset of output/expect files is regenerated below.
+    if ($inputs_changed) {
+      foreach (Files::getValues() as $suffix) {
+        $name = $hack_filename.'.'.$suffix;
+        if (C\contains_key($files, $name)) {
+          continue;
+        }
+        $path = $examples_dir.'/'.$name;
+        if (\file_exists($path)) {
+          \unlink($path);
+          invariant(!\file_exists($path), 'Failed to delete %s', $path);
+        }
+      }
     }
 
     // Auto-generate or verify *existence* of output files if missing.
@@ -436,10 +456,13 @@ abstract class FilterBase extends Markdown\RenderFilter {
       ($has_expectf || $has_expectregex);
   }
 
+  /**
+   * Return true if the file changed.
+   */
   abstract protected static function processFile(
     string $name,
     string $content,
-  ): void;
+  ): bool;
 
   abstract protected static function processMissingTypecheckerOutput(
     string $hack_filename,

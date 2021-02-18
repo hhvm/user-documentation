@@ -24,7 +24,7 @@ final class VerifyFilter extends FilterBase {
   const FIX = 'Run `hhvm bin/build.php` and commit all generated files.';
 
   <<__Override>>
-  protected static function processFile(string $path, string $content): void {
+  protected static function processFile(string $path, string $content): bool {
     invariant(\file_exists($path), '%s is missing. %s', $path, self::FIX);
     invariant(
       \file_get_contents($path) === $content,
@@ -32,6 +32,7 @@ final class VerifyFilter extends FilterBase {
       $path,
       self::FIX,
     );
+    return false;
   }
 
   <<__Override>>
