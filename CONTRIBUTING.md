@@ -35,42 +35,205 @@ While we aren't 100% rigid on how we want contributions to come to us (we want t
 
 ## Code Examples
 
-- Code must, obviously, be written in Hack `<?hh`, unless you are specifically writing some sort of comparison, anti-pattern, etc.
+- Code must, obviously, be written in Hack, unless you are specifically writing some sort of comparison, anti-pattern, etc.
 - Hack code must typecheck with `hh_client` correctly.
 
 ### Code for Guides
 
-- In the guides, code samples should be in their own file under `<subtopic>-examples` directory. For example, if you are working on content for `hack/22-async/07-guidelines.md`, then your code should be placed in `hack/22-async/07-guidelines-examples`.
-- In the actual guide markdown `.md` files for a particular sub-topic, placeholders to examples should look like `@@ <sub-topic>-examples/example.php @@`, where the path to examples directory is relative to the root of the main overall topic. In the example below, the path is relative to the main `22-async` topic
+Code samples in all `.md` files (guides as well as api-examples) should follow
+this format:
 
+~~~
+```example.hack
+echo "Hello world!\n";
 ```
-@@ guidelines-examples/non-async-hello.php @@
+~~~
+
+The build script, when processing this `.md` file, will extract the example code
+and execute it via HHVM, then include both the example code and the output in
+the rendered HTML.
+
+The file name must be specified, so that the build script knows what name to use
+for the extracted file. In almost all cases, the file extension should be
+`.hack`, unless the example is specifically about a feature that requires a
+different extension (e.g. partial mode).
+
+#### Boilerplate
+
+The build script automatically adds common boilerplate code to each extracted
+example, e.g. the above `echo` statement would be automatically wrapped in an
+`<<__EntryPoint>>` function.
+
+#### Example Output
+
+Ideally, each code example should produce some output when HHVM runs it. For
+example, a sample class definition would ideally be followed by an
+`<<__EntryPoint>>` function that demonstrates its usage.
+
+However, if this would distract too much from the purpose of the guide, it's
+acceptable for some examples to not produce any output (e.g. an example class
+definition without usage). The extracted example file will still be typechecked
+and run, so at least we will still catch any typechecker and/or runtime errors.
+
+In rare cases, when it's impossible to make a code sample into valid Hack code
+without making it too distracting, you can include a "fake" example code block
+that will not be typechecked and executed. To do this, simply omit the file
+name:
+
+~~~
+```
+// Example code block without a file name will not be typechecked/executed.
+// Avoid these if at all possible.
+```
+~~~
+
+#### Namespaces
+
+By default, the build script will put each extracted example into a unique
+namespace, so each example must be standalone and *cannot* depend on others
+(e.g. use a class declared in another example code block).
+
+To override this, you can give multiple examples a shared *prefix* in their
+filename followed by a period (`.`):
+
+~~~
+Here's an example class:
+```example_class.definition.hack
+class C {}
+```
+And its usage:
+```example_class.usage.hack
+$c = new C();
+```
+~~~
+
+The build script will ignore everything after the *first* period in the filename
+when generating the namespace name.
+
+Note that this only works for examples in a single guide (single `.md` file);
+there is currently no way to put examples from separate guides into a shared
+namespace.
+
+#### Autoloading
+
+HHVM requires an "autoloader" to be explicitly initialized whenever any Hack
+file references definitions from another Hack file.
+
+The build script will insert the necessary initialization code automatically
+into any `<<__EntryPoint>>` function, so it is OK to rely on definitions from
+other examples inside any `<<__EntryPoint>>` function or functions called by it,
+**but not elsewhere**.
+
+For example, HHVM can never successfully run a file containing e.g. a class
+definition that references a parent class or other definition from another file
+(this is not a limitation specific to the docs site).
+
+~~~
+```example_hierarchy.parent.hack
+abstract class Parent {}
 ```
 
-**NOTE**: You *leave off the topic number prefix* in the example path. Those numbers are for our structuring only, but if we ever change the structure, we don't have to go through all the guides and make modifications. Our tooling handles things here.
+```example_hierarchy.child.hack
+// This file will NEVER successfully run in HHVM.
+final class Child extends Parent {}
+```
+~~~
 
-- All examples (guide and API) must be able to be run with the [HHVM test runner](https://github.com/hhvm/user-documentation#using-the-hhvm-test-runner). As such, all examples must have the following files associated with them:
-    + `.php` or `.php.type-errors`: The code itself. If your code is going to purposely have type errors, use that suffix instead.
-    + `.php.hhconfig`: This is an empty file for the typechecker.
-    + `.php.hhvm.expect[f]`: An HHVM test runner [hhvm expect file](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md#file-layout) with the expected results of running your code in HHVM.
-    + `.php.typechecker.expect[f]`: An HHVM test runner [typechecker expect file](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md#file-layout) with the expected results of running the typechecker on your code (e.g., in `--typechecker` mode). Most of the time this should be a file that contains `No errors!`.
-    + `.php.example.hhvm.out`: If you are using an `.hhvm.expectf` file, then this file will be a raw output version of that file without any patterns. i.e., the result of running `hhvm` on the source file.
-    + `.php.no.auto.output`: Don't print out any output after the source code. This supersedes `.php.example.hhvm.out` and `.hhvm.expect` (i.e., those files will be ignored when it comes to printing raw output in the docs). Use this if you want to control where the output goes, or if you want no output at all. 
-Add `.type-errors` after `.php` or `.hack` if typechecker errors are expected.
+In practice, this is fine because *running* a file containing a class definition
+is generally not needed. However, it *does* mean that trying to add an
+`<<__EntryPoint>>` function to `example_hierarchy.child.hack` won't work,
+because HHVM will fail with an "Undefined class Parent" error before it even
+reaches it.
 
-The [examples associated with the async introduction](https://github.com/hhvm/user-documentation/tree/master/guides/hack/22-async/01-introduction-examples) will give you a guide on how to structure these files.
+~~~
+```example_hierarchy.child.hack
+// This file will NEVER successfully run in HHVM.
+final class Child extends Parent {}
 
-We have provided a [simple shell script](https://github.com/hhvm/user-documentation/tree/master/bin/exskel.sh) that you can run to create skeletons of all the files above for your example.
+<<__EntryPoint>>
+function main(): void {
+  // This EntryPoint function is useless because HHVM will fail above.
+}
+```
+~~~
 
-### Code For APIs 
+The workaround is to put any code that depends on definitions from more than one
+other example into a separate code block.
 
-In addition to [all the files for a guide example](#code-for-guides) above, all API examples should also have an `.md` file associated with it that serves as a header (e.g., summary) to the example itself. 
+~~~
+```example_hierarchy.usage.hack
+$c = new Child();
+```
+~~~
 
-In general, follow the structure with what we did with [`Vector::splice`](https://github.com/hhvm/user-documentation/tree/master/api-examples/class.Vector/splice).
+This can also be more convenient because we can rely on the automatic
+boilerplate addition by the build script, instead of manually writing the
+`<<__EntryPoint>>` function header.
+
+#### Examples with Hack Errors
+
+Examples that are expected to fail typechecking should use the `.type-errors`
+extension:
+
+~~~
+```error_example.hack.type-errors
+function missing_return_type() {}
+```
+~~~
+
+The build script will run the Hack typechecker and include its output in the
+rendered HTML (instead of HHVM runtime output).
+
+#### Supporting Files
+
+An example code block may specify additional files to be extracted alongside the
+example code using the following format:
+
+~~~
+```nondeterministic_example.hack
+echo "Your lucky number is: ".\mt_rand(0, 99);
+```.example.hhvm.out
+Your lucky number is: 42
+```.expectf
+Your lucky number is: %d
+```
+~~~
+
+Supported extensions are inherited from the
+[HHVM test runner](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md#file-layout):
+
+- `.hhconfig` if the example requires specific *typechecker* flags
+  (e.g. demonstrating a feature that is not yet enabled by default)
+- `.ini` for *runtime* flags
+- `.hhvm.expect` if you want to manually specify the expected output, instead of
+  the build script doing it automatically
+- `.hhvm.expectf` to specify the expected output using printf-style syntax, like
+  in the example above
+- `.expectregex` to specify the expected output using a regular expression
+- `.example.hhvm.out` should contain one possible output (this will
+  be included in the rendered HTML instead of the `expectf`/`expectregex` file;
+  it is not needed for regular `expect` files)
+- `.typechecker.expect`, `.typechecker.expectf`, `.typechecker.expectregex`,
+  `.example.typechecker.out` are the same but for typechecker (Hack) output
+  instead of runtime (HHVM) output; they should only be included if the example
+  code is expected to fail typechecking *and* you don't want the build script to
+  generate them automatically
+- `.skipif` should contain valid Hack code that will print "skip" if the example
+  should not be run (e.g. a MySQL example that should not run if there isn't a
+  MySQL server running), otherwise print nothing
+
+### Code For APIs
+
+Adding a `.md` file to the correct subdirectory in
+[`api-examples`](https://github.com/hhvm/user-documentation/tree/master/api-examples)
+will cause the build script to add its content to the respective API page.
+
+The `.md` file may contain any combination of explanatory text and any number of
+code examples following the same rules as above.
 
 ## Generated Markdown
 
-This should be rare, but if you need to generate markdown on the fly (e.g., we do this for generating the HHVM Supported PHP INI Settings at http://docs.hhvm.com/hhvm/configuration/INI-settings#supported-php-ini-settings. 
+This should be rare, but if you need to generate markdown on the fly (e.g., we do this for generating the HHVM Supported PHP INI Settings at http://docs.hhvm.com/hhvm/configuration/INI-settings#supported-php-ini-settings.
 
 - Create a `BuildStep` ([PHP INI setting table example](https://github.com/hhvm/user-documentation/blob/master/src/build/PHPIniSupportInHHVMBuildStep.php)) for any data you might need to generate the markdown.
 - Create a `BuildStep` ([PHP INI setting table example](https://github.com/hhvm/user-documentation/blob/master/src/build/PHPIniSupportInHHVMMarkdownBuildStep.php))for manually creating the markdown to be rendered.
@@ -187,7 +350,7 @@ Time non lazy: 0.0096559524536133
 
 Each example is structured to be run with the [HHVM test runner](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md). We use the test runner internally to ensure that any changes made to HHVM do not cause a regression. The examples in the documentation here can be used for that purpose as well.
 
-You can run the HHVM test runner on the entire suite of examples, on one directory of examples or just one example itself. 
+You can run the HHVM test runner on the entire suite of examples, on one directory of examples or just one example itself.
 
 *Normally you will use our test suit described [above](#testing-changes) to test any changes you make (because it tests our examples as well). However, sometimes it is actually faster and more explicit to test one example directly with the HHVM test runner.*
 
