@@ -3,8 +3,8 @@ infrastructure. Async is especially useful with database access and caching, web
 
 ## MySQL
 
-The async MySQL extension is similar to the [`mysqli`](http://php.net/manual/en/book.mysqli.php) extension that comes with HHVM. The async
-MySQL extension is primarily used for asynchronously creating connections and querying MySQL databases.
+The async MySQL extension provides a Hack API to query MySQL and similar databases. All relevant methods return an `Awaitable`,
+which gives your code control over how it spends the time until the result is ready.
 
 The [full API](../reference/class/AsyncMysqlConnection/) contains all of the classes and methods available for accessing MySQL via async; we
 will only cover a few of the more common scenarios here.
@@ -12,15 +12,64 @@ will only cover a few of the more common scenarios here.
 The primary class for connecting to a MySQL database is [`AsyncMysqlConnectionPool`](../reference/class/AsyncMysqlClient/) and its
 primary method is the `async` [`connect`](../reference/class/AsyncMysqlClient/connect/).
 
-The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the two main
-query methods, [`query`](../reference/class/AsyncMysqlConnection/query/) and [`queryf`](../reference/class/AsyncMysqlConnection/queryf/),
-both of which are `async`. There is also a function to ensure that queries to be executed are safe called
-[`escapeString`](../reference/class/AsyncMysqlConnection/escapeString/).
+The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the three main query methods:
+`AsyncMysqlConnection::query`, `AsyncMysqlConnection::queryf`, and `AsyncMysqlConnection::queryAsync`
+all of which are `async`. The naming conventions for async methods have not been applied consistently.
+There is also a method which turns a raw string into an SQL escaped string `AsyncMysqlConnection::escapeString`.
+This method should only be used in combination with `AsyncMysqlConnection::query`.
 
+## Choosing a query method
+
+### `AsyncMysqlConnection::queryAsync`
+This method is the go-to for safe SQL queries. It handles escaping user input automatically and the `%Q` placeholder can be used to insert query fragments into other query fragments.
+
+For example:
+ - selecting a post by ID
+```SQL
+SELECT title, body FROM posts WHERE id %=d
+```
+ - Advanced search, which may allow the user to specify a handful of parameters
+```SQL
+SELECT %LC FROM %T WHERE %Q
+```
+ - Inserting _n_ rows in one big INSERT INTO statement
+```SQL
+INSERT INTO %T (%LC) VALUES (%Q)
+```
+
+For a list of all placeholders supported by `queryAsync`, see `HH\Lib\SQL\QueryFormatString`.
+Most placeholders are documented with examples here `AsyncMysqlConnection::queryf`.
+The types for the `%Lx` placeholders is not a Hack Collection when using queryAsync, but a Hack array instead.
+The documentation for `%Q` is flat out wrong for using `queryAsync` and should be ignored.
+
+### `AsyncMysqlConnection::query`
+This method is **dangerous** when used wrong. It accepts a _raw string_ and passes it to the database without scanning for dangerous characters or doing any automatic escaping.
+If your query contains ANY unescaped input, you are putting your database at risk.
+
+Using this method is preferred for one use case:
+
+When you can type out the query outright, without string interpolation or string concatenation.
+You can pass in a _hardcoded_ query. This can be preferred over `queryAsync` and `queryf`, since you can write your SQL string literals without having to write a `%s` placeholder. Which makes it easier to change the query later without the risk of messing up which parameter goes with which `%s`.
+
+This method can also be used to create queries by doing string manipulation. If you are doing this, you, the developer, must take responsibility for sanitizing the data. Escape everything that needs to be escaped and make triple sure there is not a sneaky way to get raw user data into the concatenated string at any point. As said, this method is dangerous and this is why.
+
+### `AsyncMysqlConnection::queryf`
+Is an older API which does what `queryAsync` does, but with more restrictions. It uses Hack Collections instead of Hack arrays for its `%Lx` arguments. There is no way to create fragments of queries for safe query building. It is also not possible to build a query without having an `\AsyncMysqlConnection`. New code should use `queryAsync` instead.
+
+## Getting results
 The primary class for retrieving results from a query is an abstract class called `AsyncMysqlResult`, which itself has two concrete
 subclasses called [`AsyncMysqlQueryResult`](../reference/class/AsyncMysqlQueryResult/) and
 [`AsyncMysqlErrorResult`](../reference/class/AsyncMysqlErrorResult/). The main methods on these classes are
-[`vectorRows`](../reference/class/AsyncMysqlQueryResult/vectorRows/) and [`mapRows`](../reference/class/AsyncMysqlQueryResult/mapRows/), both *non-async*.
+[`vectorRows`](../reference/class/AsyncMysqlQueryResult/vectorRows/) | [`vectorRowsTyped`](../reference/class/AsyncMysqlQueryResult/vectorRowsTyped/) and [`mapRows`](../reference/class/AsyncMysqlQueryResult/mapRows/) | [`mapRowsTyped`](../reference/class/AsyncMysqlQueryResult/mapRowsTyped/), which are *non-async*.
+
+### When to use the `____Typed` variant over its untyped counterpart.
+
+The typed functions will help you by turning database integers into Hack `int`s and _some, but not all_ fractional numbers into Hack `float`s.
+This is almost always preferred, except for cases where the result set includes unsigned 64-bit integers (UNSIGNED BIGINT).
+These numbers may be larger than the largest representable signed 64-bit integer and can therefore not be used in a Hack program.
+The runtime currently returns the largest signed 64-bit integer for all values which exceed the maximum signed 64-bit integer.
+
+The untyped function will return all fields as either a Hack `string` or a Hack `null`. So an integer `404` in the database would come back as `"404"`.
 
 Here is a simple example that shows how to get a user name from a database using this extension:
 
@@ -62,8 +111,8 @@ async function get_user_info(
   string $user,
 ): Awaitable<Vector<Map<string, ?string>>> {
   $result = await $conn->queryf(
-    'SELECT * from test_table WHERE name = %s',
-    $conn->escapeString($user),
+    'SELECT * from test_table WHERE name %=s',
+    $user,
   );
   // A vector of map objects holding the string values of each column
   // in the query, and the keys being the column names
