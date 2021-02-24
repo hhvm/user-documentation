@@ -10,10 +10,6 @@ an included file, both, or neither.
 The recommended way to approach this is to [use an autoloader](/hack/getting-started/starting-a-real-project#starting-a-real-project__autoloading) - however, first you need to include
 the autoloader itself.
 
-It is important to understand that unlike the C/C++ (or similar) preprocessor, file inclusion in Hack is *not* a text
-substitution process. That is, the contents of an included file are not treated as if they directly replaced the inclusion
-operation source in the including file.
-
 The `require_once()` directive is used for this:
 
 ```
