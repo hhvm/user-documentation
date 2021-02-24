@@ -3,8 +3,8 @@ infrastructure. Async is especially useful with database access and caching, web
 
 ## MySQL
 
-The async MySQL extension is a built-in way to execute queries against databases while running Hack code when the database is processing.
-The async MySQL extension is primarily used for asynchronously creating connections and querying MySQL databases.
+The async MySQL extension provides a Hack API to query MySQL and similar databases. All relevant methods return an `Awaitable`,
+which gives your code control over how it spends the time until the result is ready.
 
 The [full API](../reference/class/AsyncMysqlConnection/) contains all of the classes and methods available for accessing MySQL via async; we
 will only cover a few of the more common scenarios here.
@@ -13,26 +13,36 @@ The primary class for connecting to a MySQL database is [`AsyncMysqlConnectionPo
 primary method is the `async` [`connect`](../reference/class/AsyncMysqlClient/connect/).
 
 The primary class for querying a database is [`AsyncMysqlConnection`](../reference/class/AsyncMysqlConnection/) with the three main query methods:
-[`query`](../reference/class/AsyncMysqlConnection/query/),
-[`queryf`](../reference/class/AsyncMysqlConnection/queryf/), and
-[`queryAsync`](../references/class/AsyncMysqlConnection/queryAsync)
-all of which are `async`. The naming conventions for async method have not been applied consistently.
-There is also a function to ensure that queries to be executed are safe called
-[`escapeString`](../reference/class/AsyncMysqlConnection/escapeString/).
+`AsyncMysqlConnection::query`, `AsyncMysqlConnection::queryf`, and `AsyncMysqlConnection::queryAsync`
+all of which are `async`. The naming conventions for async methods have not been applied consistently.
+There is also a method which turns a raw string into an SQL escaped string `AsyncMysqlConnection::escapeString`.
+This method should only be used in combination with `AsyncMysqlConnection::query`.
 
 ## Choosing a query method
 
-### [`queryAsync`](../references/class/AsyncMysqlConnection/queryAsync)
-This method is the go-to for safe SQL queries. It handles escaping user input automatically and the `%Q` modifier can be used to insert query fragments into other query fragments.
+### `AsyncMysqlConnection::queryAsync`
+This method is the go-to for safe SQL queries. It handles escaping user input automatically and the `%Q` placeholder can be used to insert query fragments into other query fragments.
 
 For example:
  - selecting a post by ID
- - selecting the post with the most likes made within the last _n_ days by user _x_
- - updating all profiles from users who have been active in the last _n_ days by giving them a badge
+```SQL
+SELECT title, body FROM posts WHERE id %=d
+```
  - Advanced search, which may allow the user to specify a handful of parameters
+```SQL
+SELECT %LC FROM %T WHERE %Q
+```
  - Inserting _n_ rows in one big INSERT INTO statement
+```SQL
+INSERT INTO %T (%LC) VALUES (%Q)
+```
 
-### [`query`](../reference/class/AsyncMysqlConnection/query/)
+For a list of all placeholders supported by `queryAsync`, see `HH\Lib\SQL\QueryFormatString`.
+Most placeholders are documented with examples here `AsyncMysqlConnection::queryf`.
+The types for the `%Lx` placeholders is not a Hack Collection when using queryAsync, but a Hack array instead.
+The documentation for `%Q` is flat out wrong for using `queryAsync` and should be ignored.
+
+### `AsyncMysqlConnection::query`
 This method is **dangerous** when used wrong. It accepts a _raw string_ and passes it to the database without scanning for dangerous characters or doing any automatic escaping.
 If your query contains ANY unescaped input, you are putting your database at risk.
 
@@ -43,7 +53,7 @@ You can pass in a _hardcoded_ query. This can be preferred over `queryAsync` and
 
 This method can also be used to create queries by doing string manipulation. If you are doing this, you, the developer, must take responsibility for sanitizing the data. Escape everything that needs to be escaped and make triple sure there is not a sneaky way to get raw user data into the concatenated string at any point. As said, this method is dangerous and this is why.
 
-### [`queryf`](../reference/class/AsyncMysqlConnection/queryf/)
+### `AsyncMysqlConnection::queryf`
 Is an older API which does what `queryAsync` does, but with more restrictions. It uses Hack Collections instead of Hack arrays for its `%Lx` arguments. There is no way to create fragments of queries for safe query building. It is also not possible to build a query without having an `\AsyncMysqlConnection`. New code should use `queryAsync` instead.
 
 ## Getting results
@@ -101,8 +111,8 @@ async function get_user_info(
   string $user,
 ): Awaitable<Vector<Map<string, ?string>>> {
   $result = await $conn->queryf(
-    'SELECT * from test_table WHERE name = %s',
-    $conn->escapeString($user),
+    'SELECT * from test_table WHERE name %=s',
+    $user,
   );
   // A vector of map objects holding the string values of each column
   // in the query, and the keys being the column names
