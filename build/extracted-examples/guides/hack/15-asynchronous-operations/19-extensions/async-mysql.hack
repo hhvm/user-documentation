@@ -40,8 +40,8 @@ async function get_user_info(
   string $user,
 ): Awaitable<Vector<Map<string, ?string>>> {
   $result = await $conn->queryf(
-    'SELECT * from test_table WHERE name = %s',
-    $conn->escapeString($user),
+    'SELECT * from test_table WHERE name %=s',
+    $user,
   );
   // A vector of map objects holding the string values of each column
   // in the query, and the keys being the column names
