@@ -88,7 +88,7 @@ A trait can access methods and properties of the class that uses it, but these d
 
 ### Resolution of naming conflicts
 
-A trait can insert arbitrary properties and methods inside a class, and naming conflicts may arise.  Conflict resolution rules are different according whether the conflict concern a property or a method.
+A trait can insert arbitrary properties, constants, and methods inside a class, and naming conflicts may arise.  Conflict resolution rules are different according to whether the conflict concerns a property, constant, or method.
 
 If a class uses multiple traits that define the same property, say `$x`, then every trait must define the property `$x` with the same type, visibility modifier, and initialization value.  The class itself may, or not, define again the property `$x`, subject to the same conditions as above.
 
@@ -135,3 +135,7 @@ function main() : void {
 For methods, a rule of thumb is "traits provide a method implementation if the class itself does not".  If the class implements a method `m`, then traits used by the class can define methods named `m` provided that their interfaces are compatible (more precisely _super types_ of the type of the method defined in the class.  At runtime methods inserted by traits are ignored, and dispatch selects the method defined in the class.
 
 If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.
+
+For constants, constants inherited from the parent class take precedence over constants inherited from traits. If multiple used traits declare the same constant, the constant inherited from the first trait is used.
+Finally, constants inherited from interfaces declared on the class conflict with other inherited constants, including constants declared on traits.
+The single exception to this rule are constants inherited from traits via interfaces, as these will lose silently upon conflict.
