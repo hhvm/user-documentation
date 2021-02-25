@@ -121,6 +121,15 @@ jobs:
           aws elasticbeanstalk restart-app-server \
             --region us-west-2 \
             --environment-name "$STAGING_ENV"
+          for I in $(seq 5 10 55); do
+            echo "Waiting $I seconds..."
+            sleep "$I"
+            if eb status "$STAGING_ENV" | grep -i "Status: Ready"; then
+              exit 0
+            fi
+          done
+          echo "Timed out while waiting for $STAGING_ENV to become ready."
+          exit 1
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
