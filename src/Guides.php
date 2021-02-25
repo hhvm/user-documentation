@@ -109,6 +109,7 @@ final class Guides {
           'relational' => tuple('expressions-and-operators', 'comparisons'),
           'restrictions-on-arithmetic-operations' => tuple('expressions-and-operators', 'arithmetic'),
           'remainder' => tuple('expressions-and-operators', 'arithmetic'),
+          'some-basics' => tuple('expressions-and-operators', 'introduction'),
           'subtraction' => tuple('expressions-and-operators', 'arithmetic'),
           'unary-minus' => tuple('expressions-and-operators', 'arithmetic'),
           'unary-plus' => tuple('expressions-and-operators', 'arithmetic'),
