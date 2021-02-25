@@ -1,7 +1,6 @@
 **Topics covered in this section**
 
-* [break](break.md)
-* [continue](continue.md)
+* [break/continue](break-and-continue.md)
 * [do/while](do.md)
 * [for](for.md)
 * [foreach](foreach.md)
