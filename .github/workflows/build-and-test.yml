@@ -73,6 +73,11 @@ jobs:
             cd ${{runner.temp}}/repo-out
             docker build -t ${IMAGE_NAME} .
           )
+      - name: Install AWS CLI
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update
+          sudo apt-get install -y awscli
       - name: Install ElasticBeanstalk CLI
         run: |
           git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
@@ -111,6 +116,14 @@ jobs:
         run: |
           sed -E 's,"hhvm/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
             Dockerrun.aws.json.in > Dockerrun.aws.json
+      - name: Restart staging environment's Docker server (${{env.STAGING_ENV}})
+        run: |
+          aws elasticbeanstalk restart-app-server \
+            --region us-west-2 \
+            --environment-name "$STAGING_ENV"
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Deploy to staging environment (${{env.STAGING_ENV}})
         run: |
           eb status "$STAGING_ENV"
