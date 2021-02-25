@@ -14,7 +14,8 @@ while ($i <= 10) {
 }
 ```
 
-The execution of a `while` statement is impacted by a subordinate [`break`](break.md) or [`continue`](continue.md).
+The execution of a `while` statement is impacted by a subordinate
+[`break` or `continue`](break-and-continue.md).
 
 The controlling expression is often a combination of relational, equality, and logical expressions.  For example:
 
