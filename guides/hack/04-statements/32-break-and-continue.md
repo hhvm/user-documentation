@@ -1,3 +1,5 @@
+## `continue`
+
 A `continue` statement terminates the execution of the innermost enclosing `do`, `for`, `foreach`, or `while` statement.  For example:
 
 @@ continue-examples/odd-values.php @@
