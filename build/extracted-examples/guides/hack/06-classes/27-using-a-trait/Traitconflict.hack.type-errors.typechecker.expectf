@@ -1,0 +1,11 @@
+File "%s/Traitconflict.hack", line 14, characters 7-7:
+Class `HHVM\UserDocumentation\Guides\Hack\Classes\UsingATrait\Traitconflict\A` does not correctly implement all required members  (Typing[4340])
+  File "%s/Traitconflict.hack", line 14, characters 28-28:
+  Some members are incompatible with those declared in type `HHVM\UserDocumentation\Guides\Hack\Classes\UsingATrait\Traitconflict\T`
+  File "%s/Traitconflict.hack", line 11, characters 9-11:
+  Non-abstract constants defined in an interface cannot conflict with other inherited constants.
+  File "%s/Traitconflict.hack", line 7, characters 9-11:
+  `FOO` inherited from `HHVM\UserDocumentation\Guides\Hack\Classes\UsingATrait\Traitconflict\T`
+  File "%s/Traitconflict.hack", line 11, characters 9-11:
+  conflicts with constant `FOO` inherited from `HHVM\UserDocumentation\Guides\Hack\Classes\UsingATrait\Traitconflict\I`.
+
