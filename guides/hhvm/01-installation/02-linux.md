@@ -112,8 +112,3 @@ aws s3 sync \
   ./localpath/ \
   --exclude '*index.html'
 ```
-
-Additionally, the [Oregon State University Open Source Lab](https://osuosl.org) maintain a mirror, available
-via HTTP, FTP, and rsync, at https://ftp.osuosl.org/pub/hiphop/.
-
-The OSUOSL mirror has limited retention of nightly builds.
