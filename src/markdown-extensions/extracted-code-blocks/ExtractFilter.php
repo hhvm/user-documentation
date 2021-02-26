@@ -13,7 +13,7 @@ namespace HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks;
 
 use namespace HH\Lib\{C, Regex, Str, Vec};
 use namespace HHVM\UserDocumentation\ExampleTypechecker;
-use type HHVM\UserDocumentation\LocalConfig;
+use type HHVM\UserDocumentation\{LocalConfig, UpdateAutoloaderBuildStep};
 
 /**
  * @see FilterBase
@@ -118,6 +118,13 @@ final class ExtractFilter extends FilterBase {
     $exit_code = null;
     $output = null;
     \exec($env.' '.$command.' 2>&1', inout $output, inout $exit_code);
+
+    if ($exit_code !== 0) {
+      // Regenerate the autoload map and retry. This is a common failure when
+      // adding multiple related examples at the same time.
+      UpdateAutoloaderBuildStep::generateAutoloadMap();
+      \exec($env.' '.$command.' 2>&1', inout $output, inout $exit_code);
+    }
 
     self::writeOutput(
       Str\join($output, "\n"),

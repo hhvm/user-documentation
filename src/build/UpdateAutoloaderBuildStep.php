@@ -22,6 +22,10 @@ final class UpdateAutoloaderBuildStep extends BuildStep {
   <<__Override>>
   public function buildAll(): void {
     Log::i("UpdateAutoloaderBuildStep\n");
+    self::generateAutoloadMap();
+  }
+
+  public static function generateAutoloadMap(): void {
     $dev = \Facebook\AutoloadMap\Generated\is_dev();
     $importer = new RootImporter(
       LocalConfig::ROOT,
