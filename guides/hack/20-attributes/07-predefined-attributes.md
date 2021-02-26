@@ -219,7 +219,7 @@ class Item {
 The types of the parameters are restricted to the following: `null`, `bool`, `int`, `float`, `string`, any object type that implements
 `IMemoizeParam`, enum constants, tuples, shapes, and arrays/collections containing any supported element type.
 
-The interface type `IMemoizeParam` assists with memorizing objects passed to async functions.
+The interface type `IMemoizeParam` assists with memoizing objects passed to async functions.
 
 ### Exceptions
 
