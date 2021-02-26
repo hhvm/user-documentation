@@ -15,7 +15,6 @@ Some functions may have been split up into multiple functions if the PHP functio
 For the most up-to-date function signatures, please refer to your version of the typechecker definitions.
 
 * [apache](http://php.net/manual/en/book.apache.php)
-* [apc](http://php.net/manual/en/book.apc.php)
 * [array](http://php.net/manual/en/book.array.php)
 * [asio](/hack/asynchronous-operations/utility-functions)
 * [async_mysql](/hack/asynchronous-operations/extensions#mysql)
@@ -23,8 +22,8 @@ For the most up-to-date function signatures, please refer to your version of the
 * [bz2](http://php.net/manual/en/book.bzip2.php)
 * [ctype](http://php.net/manual/en/book.ctype.php)
 * [curl](http://php.net/manual/en/book.curl.php) ([async curl](/hack/asynchronous-operations/extensions#curl))
-* [date](http://php.net/manual/en/book.date.php)
-* [debugger](http://php.net/manual/en/book.debugger.php)
+* [datetime](https://www.php.net/manual/en/book.datetime.php)
+* [debugger (phpdbg)](https://www.php.net/manual/en/book.phpdbg.php)
 * [dom](http://php.net/manual/en/book.dom.php)
 * domdocument
 * [enum](/hack/built-in-types/enumerated-types)
@@ -32,7 +31,7 @@ For the most up-to-date function signatures, please refer to your version of the
 * fb
 * [fileinfo](http://php.net/manual/en/book.fileinfo.php)
 * [filter](http://php.net/manual/en/book.filter.php)
-* [gd](http://php.net/manual/en/book.gd.php)
+* [gd](https://www.php.net/manual/en/book.image.php)
 * [gmp](http://php.net/manual/en/book.gmp.php)
 * [hash](http://php.net/manual/en/book.hash.php)
 * hhvm.debugger
@@ -72,9 +71,9 @@ For the most up-to-date function signatures, please refer to your version of the
 * [soap](http://php.net/manual/en/book.soap.php)
 * [sockets](http://php.net/manual/en/book.sockets.php)
 * [spl](http://php.net/manual/en/book.spl.php)
-* [sqlite3](http://php.net/manual/en/book.sqlite.php)
+* [sqlite3](http://php.net/manual/en/book.sqlite3.php)
 * [stream](http://php.net/manual/en/book.stream.php) ([async streams](/hack/asynchronous-operations/extensions#streams))
-* [string](http://php.net/manual/en/book.string.php)
+* [string](http://php.net/manual/en/book.strings.php)
 * sysvmsg
 * sysvsem
 * sysvshm
