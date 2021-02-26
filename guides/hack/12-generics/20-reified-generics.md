@@ -4,10 +4,11 @@
 }
 ```
 # Reified Generics
-
 ## Introduction
 
 Generics are currently implemented in HHVM through erasure, in which the runtime drops all information about generics. This means that generics are not available at runtime. Although the typechecker is able to use the generic types for static typechecking, we are unable to enforce generic types at runtime.
+
+In contrast, a reified generic is not erased. Reified in this context means _To make real or material_. The runtime can use the information in this generic parameter for runtime enforcement of types. [TypeAssert](https://github.com/hhvm/type-assert) makes use of reified generics in `TypeSpec\of<T>()`. The `T` is _real or material_ at runtime, so TypeSpec can use this to construct a `TypeSpec<T>` for you.
 
 The goal of opt-in reified generics is to bridge the gap between generics and runtime availability while keeping erasure available to maintain performance when reification is not needed. To mark a generic as reified, simply add the `reify` keyword at the declaration site.
 
