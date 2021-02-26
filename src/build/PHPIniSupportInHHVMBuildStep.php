@@ -34,6 +34,11 @@ final class PHPIniSupportInHHVMBuildStep extends BuildStep {
       $settings,
       $setting ==> !Str\contains($setting, 'hhvm.'),
     );
+    // Remove curl.namedPools, which is not a PHP setting
+    $php_supported_settings = Vec\filter(
+      $php_supported_settings,
+      $php_supported_settings ==> !Str\contains($php_supported_settings, 'curl.namedPools'),
+    );
     $php_settings_with_urls = $this->getPHPSettingsWithURLs();
 
     $out = dict[];

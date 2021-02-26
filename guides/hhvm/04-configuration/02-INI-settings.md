@@ -6,6 +6,8 @@ Any setting prefixed with `hhvm.` are HHVM-specific options.
 
 Here is the supported list of [PHP INI settings](http://php.net/manual/en/ini.list.php) for HHVM. The documentation for each is available when you click the option.
 
+In addition to the PHP settings below, you can use `curl.namedPools` to initialize named connection pools via a comma-separated list.
+
 @@ guides-generated-markdown/php_ini_support_in_hhvm.md @@
 
 ## Common Options
