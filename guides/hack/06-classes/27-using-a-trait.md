@@ -136,6 +136,80 @@ For methods, a rule of thumb is "traits provide a method implementation if the c
 
 If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.
 
-For constants, constants inherited from the parent class take precedence over constants inherited from traits. If multiple used traits declare the same constant, the constant inherited from the first trait is used.
+For constants, constants inherited from the parent class take precedence over constants inherited from traits.
+
+```Traitparent.hack
+trait T {
+  const FOO = “trait”;
+}
+
+class B {
+  const FOO = “parent”;
+}
+
+class A extends B { use T; } 
+
+<<__EntryPoint>>
+function main() : void {
+  var_dump(A::FOO);
+}
+``` 
+
+If multiple used traits declare the same constant, the constant inherited from the first trait is used.
+
+```Traitmultiple.hack
+trait T1 {
+  const FOO = “one”;
+}
+
+trait T2 {
+  const FOO = “two”;
+}
+
+class A { use T1, T2; }
+
+<<__EntryPoint>>
+function main() : void {
+  var_dump(A::FOO);
+}
+``` 
+
 Finally, constants inherited from interfaces declared on the class conflict with other inherited constants, including constants declared on traits.
+
+```Traitconflict.hack
+trait T {
+  const FOO = “trait”;
+}
+
+interface I {
+  const FOO = “interface”;
+}
+
+class A implements I { use T; } 
+
+<<__EntryPoint>>
+function main() : void {
+  var_dump(A::FOO);
+}
+``` 
+
 The single exception to this rule are constants inherited from traits via interfaces, as these will lose silently upon conflict.
+
+```Traitinterface.hack
+interface I1 {
+  const FOO = “one”;
+}
+
+trait T implements I1 {}
+
+interface I {
+  const FOO = “two”;
+}
+
+class A implements I { use T; } 
+
+<<__EntryPoint>>
+function main() : void {
+  var_dump(A::FOO);
+}
+``` 
