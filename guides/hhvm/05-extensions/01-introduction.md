@@ -128,5 +128,4 @@ hhvm.dynamic_extensions[extension_name] = extension.so
 
 Creating your own extension is beyond the scope of this user guide, but there are some good external resources to help get you started:
 
-* https://github.com/facebook/hhvm/wiki/Extension-API
-* http://blog.golemon.com/2015/01/hhvm-extension-writing-part-i.html
+http://blog.golemon.com/2015/01/hhvm-extension-writing-part-i.html
