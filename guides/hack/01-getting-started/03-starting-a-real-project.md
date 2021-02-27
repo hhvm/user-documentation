@@ -183,9 +183,6 @@ This program:
  - calls the function
  - prints the results
 
-The `<<__EntryPoint>>` annotation marks this function as the point where
-execution starts - there is nothing special about the function name `main`.
-
 You can now execute your new program, either explicitly with HHVM, or by
 marking it as executable:
 
