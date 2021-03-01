@@ -5,13 +5,13 @@
 ```
 # Reified Generics
 
+A _Reified Generic_ is a [Generic](http://localhost:8080/hack/generics/some-basics) with type information accessible at runtime.
+
 ## Introduction
 
 Generics are currently implemented in HHVM through erasure, in which the runtime drops all information about generics. This means that generics are not available at runtime. Although the typechecker is able to use the generic types for static typechecking, we are unable to enforce generic types at runtime.
 
 In Hack, generics are opt-in. The goal of opt-in reified generics is to bridge the gap between generics and runtime availability while keeping erasure available to maintain performance when reification is not needed. To mark a generic as reified, simply add the `reify` keyword at the declaration site.
-
-_Reification_ is the process of making type information (in this case, for generics) available at runtime.
 
 ## Parameter and return type verification
 
