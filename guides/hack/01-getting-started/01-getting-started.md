@@ -5,6 +5,9 @@
   ]
 }
 ```
+
+[Hack](https://hacklang.org/) is built specifically for HHVM, a high performance runtime for your Hack applications, and reconciles the fast development cycle of a dynamically typed language with the discipline provided by static typing, while adding many features commonly found in other modern programming languages.
+
 ## Overview
 
 The prerequisites you need to write and execute Hack code are pretty straightforward:
