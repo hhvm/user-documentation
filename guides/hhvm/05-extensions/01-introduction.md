@@ -77,7 +77,6 @@ For the most up-to-date function signatures, please refer to your version of the
 * sysvmsg
 * sysvsem
 * sysvshm
-* [thread](http://php.net/manual/en/class.thread.php)
 * thrift_protocol
 * [url](http://php.net/manual/en/book.url.php)
 * xenon
