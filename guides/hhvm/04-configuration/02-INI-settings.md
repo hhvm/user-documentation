@@ -806,7 +806,7 @@ These are resource limit settings such as how often to check maximum memory and 
 | `hhvm.resource_limit.max_rss` | `int` | `0` | If set to something `> 0`, then this is the maximum amount of memory (in bytes) of the HHVM process should get.
 | `hhvm.resource_limit.max_rss_polling_cycle` | `int` | `0` | If set to something `> 0`, then this is how often to check whether we are hitting our `hhvm.resource_limit.max_rss` limit.
 | `hhvm.resource_limit.max_sql_row_count` | `int` | `0` | If set to something `> 0`, then this is the maximum number of rows that will be fetched at any given time.
-| `hhvm.resource_limit.serialization_size_limit` | `int` | `2146435072` (~2 MB) | The maximum size of a serialized string.
+| `hhvm.resource_limit.serialization_size_limit` | `int` | `2146435072` (~2 GB) | The maximum size of a serialized string.
 | `hhvm.resource_limit.socket_default_timeout` | `int` | `60` | The amount of time (in seconds) before an unused socket times out.
 
 ## Regular Expressions
