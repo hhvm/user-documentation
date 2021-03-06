@@ -97,12 +97,12 @@ Valid positions:
         * `>>`: `(await $yes) >> (await $yes)`
         * `^`: `(await $yes) ^ (await $yes)`
 * Pipe BinaryExpression (`|>`): Since we disallow dependent awaits in a single statement (or concurrent block), we need to disallow awaits in pipe operators that de-sugar to nested awaits. The simple rule to disallow this: we treat the `$$` as an `await` if the left side contains an `await`.
-    * Disallowed: `(await $x) |> (await $$)` de-sugers into `(await (await $x))`
-    * Allowed: `$x |> (await $$)` de-sugers into `(await $x)`
-    * Allowed: `(await $x) |> f($$)` de-sugers into `f(await $x)`
-    * Allowed: `(await $x) |> (f($$) + await $y)` de-sugers into `f(await $x) + await $y`
-    * Disallowed: `(await $x) |> f($$) |> await g($$)` de-sugers into `await g(f(await $x))`
-    * Disallowed: `(await $x) |> $y ?? $$` de-sugers into `$y ?? (``await $x)`
+    * Disallowed: `(await $x) |> (await $$)` de-sugars into `(await (await $x))`
+    * Allowed: `$x |> (await $$)` de-sugars into `(await $x)`
+    * Allowed: `(await $x) |> f($$)` de-sugars into `f(await $x)`
+    * Allowed: `(await $x) |> (f($$) + await $y)` de-sugars into `f(await $x) + await $y`
+    * Disallowed: `(await $x) |> f($$) |> await g($$)` de-sugars into `await g(f(await $x))`
+    * Disallowed: `(await $x) |> $y ?? $$` de-sugars into `$y ?? (``await $x)`
 * Statement position:
     * ExpressionStatement: `await $yes;`
     * ReturnStatement: `return await $yes;`
