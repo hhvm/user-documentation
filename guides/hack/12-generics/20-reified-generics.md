@@ -1,8 +1,3 @@
-```yamlmeta
-{
-  "min-versions": { "HHVM": "4.17" }
-}
-```
 # Reified Generics
 
 A _Reified Generic_ is a [Generic](http://localhost:8080/hack/generics/some-basics) with type information accessible at runtime.

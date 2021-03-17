@@ -1,9 +1,3 @@
-```yamlmeta
-{
-  "min-versions": { "HHVM": "4.6" }
-}
-```
-
 `concurrent` concurrently awaits all `await`s within a `concurrent` block and it works with [`await`-as-an-expression](await-as-an-expression.md) as well!
 
 Note: [concurrent doesn't mean multithreading](some-basics#limitations)
