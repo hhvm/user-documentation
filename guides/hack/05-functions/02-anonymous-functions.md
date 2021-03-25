@@ -1,9 +1,27 @@
 Hack supports anonymous functions.
 
+In the example below, the anonymous function, `$f`, evaluates to a function that
+returns the value of `$x + 1`.
+
 ``` Hack
 $f = $x ==> $x + 1;
 
-$two = $f(1);
+$two = $f(1); // result of 2
+```
+
+Anonymous functions pass _by value_, not by reference. This is also true for any
+[object property](../expressions-and-operators/member-selection) passed to an
+anonymous function.
+
+``` Hack
+$x = 5;
+$f = $x ==> $x + 1;
+
+$six = $f($x); // pass by value
+
+echo($six); // result of 6
+echo("\n");
+echo($x); // $x is unchanged; result of 5
 ```
 
 ## Type Inference
