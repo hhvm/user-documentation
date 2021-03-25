@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9f79b9ef33280fc3f8e00ee9f7bac4b",
+    "content-hash": "2a02045ed4161a37cc23730acf3c2215",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -477,22 +477,22 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.95.2",
+            "version": "v4.102.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "3e46fa202960ee784d4c2b7b8c684190f48d4cd8"
+                "reference": "bb0f0445b2e693270079dcced01a29919d87e955"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/3e46fa202960ee784d4c2b7b8c684190f48d4cd8",
-                "reference": "3e46fa202960ee784d4c2b7b8c684190f48d4cd8",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/bb0f0445b2e693270079dcced01a29919d87e955",
+                "reference": "bb0f0445b2e693270079dcced01a29919d87e955",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.5.0rc1",
-                "hhvm": "^4.94",
+                "hhvm": "^4.102",
                 "hhvm/hhvm-autoload": "^2.0.4|^3.0",
                 "hhvm/hsl": "^4.25",
                 "hhvm/hsl-experimental": "^4.58.0rc1",
@@ -523,9 +523,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.95.2"
+                "source": "https://github.com/hhvm/hhast/tree/v4.102.0"
             },
-            "time": "2021-02-04T20:37:40+00:00"
+            "time": "2021-03-24T20:16:41+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -584,20 +584,20 @@
         },
         {
             "name": "hhvm/hsl",
-            "version": "v4.93.1",
+            "version": "v4.94.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl.git",
-                "reference": "6378dbe0af714ef4ce08cd075571a84ce7a687af"
+                "reference": "9b660aa8910d4a34a8fe58f451e16b0475e0e613"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl/zipball/6378dbe0af714ef4ce08cd075571a84ce7a687af",
-                "reference": "6378dbe0af714ef4ce08cd075571a84ce7a687af",
+                "url": "https://api.github.com/repos/hhvm/hsl/zipball/9b660aa8910d4a34a8fe58f451e16b0475e0e613",
+                "reference": "9b660aa8910d4a34a8fe58f451e16b0475e0e613",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.93"
+                "hhvm": "^4.94"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.5.1",
@@ -619,26 +619,26 @@
             "description": "The Hack Standard Library",
             "support": {
                 "issues": "https://github.com/hhvm/hsl/issues",
-                "source": "https://github.com/hhvm/hsl/tree/v4.93.1"
+                "source": "https://github.com/hhvm/hsl/tree/v4.94.0"
             },
-            "time": "2021-02-11T01:12:20+00:00"
+            "time": "2021-03-01T23:57:19+00:00"
         },
         {
             "name": "hhvm/hsl-experimental",
-            "version": "v4.93.1",
+            "version": "v4.99.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hsl-experimental.git",
-                "reference": "31e5dc8f834d5e77381916c7f4db912b84b3c16c"
+                "reference": "914272cef8be40582ad6379428340ad9adc994c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/31e5dc8f834d5e77381916c7f4db912b84b3c16c",
-                "reference": "31e5dc8f834d5e77381916c7f4db912b84b3c16c",
+                "url": "https://api.github.com/repos/hhvm/hsl-experimental/zipball/914272cef8be40582ad6379428340ad9adc994c6",
+                "reference": "914272cef8be40582ad6379428340ad9adc994c6",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.93",
+                "hhvm": "^4.99",
                 "hhvm/hsl": "^4.15"
             },
             "provide": {
@@ -662,9 +662,9 @@
             "description": "The Hack Standard Library - Experimental Additions",
             "support": {
                 "issues": "https://github.com/hhvm/hsl-experimental/issues",
-                "source": "https://github.com/hhvm/hsl-experimental/tree/v4.93.1"
+                "source": "https://github.com/hhvm/hsl-experimental/tree/v4.99.0"
             },
-            "time": "2021-02-10T01:34:59+00:00"
+            "time": "2021-03-05T21:24:10+00:00"
         },
         {
             "name": "hhvm/type-assert",
@@ -915,7 +915,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.98.*"
+        "hhvm": "4.102.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
