@@ -24,6 +24,8 @@ echo("\n");
 echo($x); // $x is unchanged; result of 5
 ```
 
+If you need to mutate the reference, use the HSL `Ref` class.
+
 ## Type Inference
 
 Unlike named functions, type annotations are optional on anonymous functions.
