@@ -194,7 +194,7 @@ MCRouter is a memcached protocol-routing library. To help with  [memcached](http
 provides features such as connection pooling and prefix-based routing.
 
 The async MCRouter extension is basically an async subset of the Memcached extension that is part of HHVM. The primary class is
-[`MCRouter`](../reference/class/MCRouter/). There are two ways to create an instance of an MCRouter object. The
+`MCRouter`. There are two ways to create an instance of an MCRouter object. The
 [`createSimple`](../reference/class/MCRouter/createSimple/) method takes a vector of server addresses where memcached is running. The
 more configurable [`__construct`](../reference/class/MCRouter/__construct/) method allows for more option tweaking. After getting an object,
 we can use the `async` versions of the core memcached protocol methods like [`add`](../reference/class/MCRouter/add/),
