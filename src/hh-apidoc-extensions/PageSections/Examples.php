@@ -11,6 +11,7 @@
 
 namespace HHVM\UserDocumentation\HHAPIDocExt\PageSections;
 
+use type Facebook\DefinitionFinder\{ScannedClassish, ScannedFunction};
 use type Facebook\HHAPIDoc\PageSections\PageSection;
 use type HHVM\UserDocumentation\BuildPaths;
 use namespace HH\Lib\Str;
@@ -20,8 +21,16 @@ final class Examples extends PageSection {
   public function getMarkdown(): ?string {
     if ($this->parent !== null) {
       $subdirectory = 'class.'.$this->parent->getName().'/';
-    } else {
+    } else if ($this->definition is ScannedClassish) {
+      $subdirectory = 'class.';
+    } else if ($this->definition is ScannedFunction) {
       $subdirectory = 'function.';
+    } else {
+      invariant_violation(
+        'Please add support for definitions of type %s to %s.',
+        \get_class($this->definition),
+        __METHOD__,
+      );
     }
     $subdirectory .= $this->definition->getName();
 
