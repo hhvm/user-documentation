@@ -133,7 +133,7 @@ hhvm.hack.lang.enable_enum_classes=1
 To access the additional information added by `HH\MemberOf`, one has to change the function signature in the following way:
 
 ```EnumClassIntro.names.code2.hack no-auto-output
-function show_name_from_Names(\HH\MemberOf<Names, IHasName> $x): string {
+function show_name(\HH\MemberOf<Names, IHasName> $x): string {
   echo "Showing names from the enum class `Names` only";
   return $x->name(); // HH\MemberOf is transparent to the runtime
 }
