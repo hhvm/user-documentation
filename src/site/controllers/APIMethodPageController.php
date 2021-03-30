@@ -58,6 +58,11 @@ final class APIMethodPageController extends APIPageController {
   }
 
   <<__Override>>
+  protected function getSideNavSubpath(): vec<string> {
+    return vec[$this->getMethodDefinition()['name']];
+  }
+
+  <<__Override>>
   public async function getTitleAsync(): Awaitable<string> {
     return $this->getRootDefinition()['name'].
       '::'.
