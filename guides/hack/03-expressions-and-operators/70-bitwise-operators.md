@@ -47,7 +47,7 @@ The operator `>>` performs a bitwise right shift.
 
 ``` Hack
 0b1011 >> 2    // result is 0b10
-100 >> 2       // result is 50
+100 >> 2       // result is 25
 ```
 
 Note that right shifts extend the sign bit:
