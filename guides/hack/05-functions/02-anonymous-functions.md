@@ -9,22 +9,33 @@ $f = $x ==> $x + 1;
 $two = $f(1); // result of 2
 ```
 
-Anonymous functions pass _by value_, not by reference. This is also true for any
+## Default Functionality: Pass by Value
+Anonymous functions pass _by value_, not by reference, as shown in the example below.
+
+This is also true for any
 [object property](../expressions-and-operators/member-selection) passed to an
 anonymous function.
 
 ``` Hack
-$x = 5;
-$f = $x ==> $x + 1;
+$x = 1;
+$f = () ==> { $x = 2; }
+$f();
 
-$six = $f($x); // pass by value
-
-echo($six); // result of 6
-echo("\n");
-echo($x); // $x is unchanged; result of 5
+$x; // still 1
 ```
 
-If you need to mutate the reference, use the HSL `Ref` class.
+Variables are scoped to the function that they're assigned in; if you need to mutate the reference, use the HSL `Ref` class.
+
+### Closures
+When working with closures, note that variables are *captured at the definition site*, not the call site:
+
+``` Hack
+$x = 1;
+$f = () ==> { return $x; }
+$x = 2;
+
+$f(); // 1
+```
 
 ## Type Inference
 
