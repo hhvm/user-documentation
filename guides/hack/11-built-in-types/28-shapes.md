@@ -84,7 +84,7 @@ function uses_shape_internally(): void {
 }
 ```
 
-For large shapes, it is often convenient to define a type alias.
+For large shapes, it is often convenient to define a type alias.  This is useful because it creates a contract users of your function are expected to follow.
 
 ``` Hack
 type Server = shape('name' => string, 'age' => int);
@@ -93,6 +93,19 @@ type Server = shape('name' => string, 'age' => int);
 function takes_server(Server $s) {
   // ...
 }
+```
+
+While you can't instantiate these types directly, you can create a my_function_arguments_t by simply defining a shape that has all of the required fields. The typechecker will automatically infer if your shape can be accepted by code() or not.
+
+``` Hack
+$args = shape('name' => 'hello', 'age' => 10);
+$output = takes_server($args); // no error
+
+$args = shape('name' => null, 'age' => 10);
+$output = takes_server($args); // typechecker error: type mismatch
+
+$args = shape('name' => null, 'age' => 10, 'error' => true);
+$output = takes_server($args); // typechecker error: we have an extra field
 ```
 
 Since shapes are copy-on-write, updates can change the type.
@@ -209,4 +222,8 @@ function returns_wrong_shape(): shape('x' => int) {
 
 ## Converting Shapes
 
-You can use `Shapes::toArray` to convert a shape to a `darray`.
+You can use [`Shapes::toArray`](https://docs.hhvm.com/hack/reference/class/HH.Shapes/toArray/) to convert a shape to a `darray`, or You can use [`Shapes::toDict`](https://docs.hhvm.com/hack/reference/class/HH.Shapes/toDict/) to convert a shape to a `dict`.
+
+## Limitations
+
+Some limitations of shapes include only being able to index it using literal expressions (you can't index on a shape using a variable or dynamically formed string, for example), or to provide run-time typechecking, because it is actually just a dict (darray) at runtime.
