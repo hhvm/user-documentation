@@ -84,7 +84,7 @@ function uses_shape_internally(): void {
 }
 ```
 
-For large shapes, it is often convenient to define a type alias.  This is useful because it creates a contract users of your function are expected to follow.
+For large shapes, it is often convenient to define a type alias.  This is useful because it promotes code re-use and when the same type is being used, and provides a descriptive name for the type.
 
 ``` Hack
 type Server = shape('name' => string, 'age' => int);
@@ -95,7 +95,7 @@ function takes_server(Server $s) {
 }
 ```
 
-While you can't instantiate these types directly, you can create a my_function_arguments_t by simply defining a shape that has all of the required fields. The typechecker will automatically infer if your shape can be accepted by code() or not.
+Any shape value that has all of the required fields (and no undefined fields - unless the shape permits them) is considered a value of type `Server`; the type is not specified when creating the value.
 
 ``` Hack
 $args = shape('name' => 'hello', 'age' => 10);
@@ -104,7 +104,7 @@ $output = takes_server($args); // no error
 $args = shape('name' => null, 'age' => 10);
 $output = takes_server($args); // typechecker error: type mismatch
 
-$args = shape('name' => null, 'age' => 10, 'error' => true);
+$args = shape('name' => 'hello', 'age' => 10, 'error' => true);
 $output = takes_server($args); // typechecker error: we have an extra field
 ```
 
@@ -222,8 +222,10 @@ function returns_wrong_shape(): shape('x' => int) {
 
 ## Converting Shapes
 
-You can use [`Shapes::toArray`](https://docs.hhvm.com/hack/reference/class/HH.Shapes/toArray/) to convert a shape to a `darray`, or You can use [`Shapes::toDict`](https://docs.hhvm.com/hack/reference/class/HH.Shapes/toDict/) to convert a shape to a `dict`.
+Converting shapes to containers is strongly discouraged, however is necessary, this can be done with `Shapes:toDict()`.
+
+On older versions of HHVM, Shapes can also be converted to darrays with `Shapes::toArray()`; this should be avoided in new code, as darrays are currently an alias for the dict type, and will be removed from the language.
 
 ## Limitations
 
-Some limitations of shapes include only being able to index it using literal expressions (you can't index on a shape using a variable or dynamically formed string, for example), or to provide run-time typechecking, because it is actually just a dict (darray) at runtime.
+Some limitations of shapes include only being able to index it using literal expressions (you can't index on a shape using a variable or dynamically formed string, for example), or to provide run-time typechecking, because it is actually just a `dict` at runtime (or `darray` on older versions).
