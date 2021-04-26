@@ -97,15 +97,21 @@ function takes_server(Server $s) {
 
 Any shape value that has all of the required fields (and no undefined fields - unless the shape permits them) is considered a value of type `Server`; the type is not specified when creating the value.
 
-``` Hack
-$args = shape('name' => 'hello', 'age' => 10);
-$output = takes_server($args); // no error
+```shape-values-of-type.hack
+function takes_server(Server $s): void {
+  return;
+}
 
-$args = shape('name' => null, 'age' => 10);
-$output = takes_server($args); // typechecker error: type mismatch
+function test(): void {
+  $args = shape('name' => 'hello', 'age' => 10);
+  $output = takes_server($args); // no error
 
-$args = shape('name' => 'hello', 'age' => 10, 'error' => true);
-$output = takes_server($args); // typechecker error: we have an extra field
+  $args = shape('name' => null, 'age' => 10);
+  $output = takes_server($args); // typechecker error: type mismatch
+
+  $args = shape('name' => 'hello', 'age' => 10, 'error' => true);
+  $output = takes_server($args); // typechecker error: we have an extra field
+}
 ```
 
 Since shapes are copy-on-write, updates can change the type.
