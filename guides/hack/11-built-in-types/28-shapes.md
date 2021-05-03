@@ -84,14 +84,38 @@ function uses_shape_internally(): void {
 }
 ```
 
-For large shapes, it is often convenient to define a type alias.
+For large shapes, it is often convenient to define a type alias.  This is useful because it promotes code re-use and when the same type is being used, and provides a descriptive name for the type.
 
-``` Hack
+``` shape-values-of-type-define-server.hack
 type Server = shape('name' => string, 'age' => int);
 
 // Equivalent to the previous takes_server function.
-function takes_server(Server $s) {
+function takes_server(Server $s) : void{
   // ...
+  return;
+}
+```
+
+Any shape value that has all of the required fields (and no undefined fields - unless the shape permits them) is considered a value of type `Server`; the type is not specified when creating the value.
+
+```shape-values-of-type.hack
+use type \HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Shapes\ShapeValuesOfTypeDefineServer\Server;
+
+function takes_server(Server $s): void {
+  return;
+}
+
+function test(): void {
+  $args = shape('name' => 'hello', 'age' => 10);
+  takes_server($args); // no error
+
+  $args = shape('name' => null, 'age' => 10);
+  /* HH_FIXME[4110] Typechecker error: type mismatch */
+  takes_server($args);
+
+  $args = shape('name' => 'hello', 'age' => 10, 'error' => true);
+  /* HH_FIXME[4057] Typechecker error: we have an extra field */
+  takes_server($args);
 }
 ```
 
@@ -209,4 +233,10 @@ function returns_wrong_shape(): shape('x' => int) {
 
 ## Converting Shapes
 
-You can use `Shapes::toArray` to convert a shape to a `darray`.
+Converting shapes to containers is strongly discouraged, however is necessary, this can be done with `Shapes:toDict()`.
+
+On older versions of HHVM, Shapes can also be converted to darrays with `Shapes::toArray()`; this should be avoided in new code, as darrays are currently an alias for the dict type, and will be removed from the language.
+
+## Limitations
+
+Some limitations of shapes include only being able to index it using literal expressions (you can't index on a shape using a variable or dynamically formed string, for example), or to provide run-time typechecking, because it is actually just a `dict` at runtime (or `darray` on older versions).
