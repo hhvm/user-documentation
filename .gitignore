@@ -28,3 +28,4 @@ bourbon/
 *.orig
 *.rej
 Dockerrun.aws.json
+.var/
