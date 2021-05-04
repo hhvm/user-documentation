@@ -29,22 +29,13 @@ final class APISourcesBuildStep extends BuildStep {
         'hphp/system/php',
         'hphp/runtime/ext',
         'hphp/hack/hhi',
+        'hphp/hsl/src',
       ],
-    ),
-    APIProduct::HSL => shape(
-      'name' => 'hhvm/hsl',
-      'prefixes' => keyset['src/'],
     ),
     APIProduct::HSL_EXPERIMENTAL => shape(
       'name' => 'hhvm/hsl-experimental',
       'prefixes' => keyset[
         'src/debug/',
-        'src/file/',
-        'src/io/',
-        'src/network/',
-        'src/os/',
-        'src/tcp/',
-        'src/unix/',
       ],
     ),
   ];
