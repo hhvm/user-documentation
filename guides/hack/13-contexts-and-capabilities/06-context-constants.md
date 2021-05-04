@@ -1,7 +1,7 @@
 **Note:** Context and capabilities are enabled by default since
 [HHVM 4.93](https://hhvm.com/blog/2021/01/19/hhvm-4.93.html).
 
-**Note:** Context constant *constraints* are not yet available.
+**Note:** Context constant *constraints* are available since HHVM 4.108.
 
 Classes and interfaces may define context constants:
 

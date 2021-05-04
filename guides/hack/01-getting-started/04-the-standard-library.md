@@ -1,9 +1,17 @@
 ## The Hack Standard Library (HSL)
 
-The Hack Standard Library is rapidly evolving, and currently distributed
-separately to HHVM; there are two GitHub projects/composer packages:
+**Note:** Before HHVM 4.108, the Hack Standard Library was distributed
+[separately from HHVM](https://github.com/hhvm/hsl/).
 
-- [hhvm/hsl](https://github.com/hhvm/hsl/): The Hack Standard Library
+As of 4.108, HHVM is distributed with a growing set of functions and classes
+collectively called the [Hack Standard Library (HSL)](/hsl/reference/).
+These are intended to complement, or in some cases replace previous
+[built-in APIs](/hack/reference/).
+
+There are two related GitHub projects/Composer packages:
+
+- [hhvm/hsl](https://github.com/hhvm/hsl/): The Hack Standard Library for users
+  of HHVM < 4.108
 - [hhvm/hsl-experimental](https://github.com/hhvm/hsl-experimental/):
   Experimental features, which may be added to the Hack Standard Library in the
   future

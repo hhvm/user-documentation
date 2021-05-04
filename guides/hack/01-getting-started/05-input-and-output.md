@@ -1,11 +1,7 @@
 ## Input and Output
 
-Input and output is an active area of development in Hack; this page describes a proposed standard
-API, with a prototype available in [hsl-experimental], known as "HSL IO".
-
-[hsl-experimental]: https://github.com/hhvm/hsl-experimental/
-
-**HSL IO is currently experimental and not recommended for general use.**.
+A standard API for input and output, known as "HSL IO", is included in the
+[Hack Standard Library (HSL)](the-standard-library).
 
 <p class="fbOnly">HSL IO should not yet be used in Facebook www; you want
 the Facebook-specific `Filesystem` class instead. Post in the usual groups
