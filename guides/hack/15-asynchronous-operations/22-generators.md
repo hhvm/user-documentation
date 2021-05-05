@@ -99,23 +99,23 @@ function run(): void {
   \HH\Asio\join(associate_ids_to_names($ids));
 }
 ```.hhvm.expectf
-varray(2) {
+vec(2) {
   int(0)
   string(0) ""
 }
-varray(2) {
+vec(2) {
   int(1)
   string(7) "%s"
 }
-varray(2) {
+vec(2) {
   int(2)
   string(7) "%s"
 }
-varray(2) {
+vec(2) {
   int(3)
   string(7) "%s"
 }
-varray(2) {
+vec(2) {
   int(4)
   string(7) "%s"
 }
@@ -172,24 +172,24 @@ function run(): void {
   \HH\Asio\join(associate_ids_to_names($ids));
 }
 ```.hhvm.expectf
-varray(2) {
+vec(2) {
   int(0)
   string(0) ""
 }
-varray(2) {
+vec(2) {
   int(1)
   string(7) "%s"
 }
-varray(2) {
+vec(2) {
   int(2)
   string(7) "%s"
 }
 string(15) "Id of 3 is bad!"
-varray(2) {
+vec(2) {
   int(0)
   string(0) ""
 }
-varray(2) {
+vec(2) {
   int(4)
   string(7) "%s"
 }

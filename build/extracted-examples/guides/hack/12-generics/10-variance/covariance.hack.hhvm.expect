@@ -8,13 +8,13 @@ object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Covariance\C) (1) {
   object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Covariance\Cat) (0) {
   }
 }
-varray(2) {
+vec(2) {
   object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Covariance\Animal) (0) {
   }
   object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Covariance\Animal) (0) {
   }
 }
-varray(3) {
+vec(3) {
   object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Covariance\Cat) (0) {
   }
   object(HHVM\UserDocumentation\Guides\Hack\Generics\Variance\Covariance\Cat) (0) {

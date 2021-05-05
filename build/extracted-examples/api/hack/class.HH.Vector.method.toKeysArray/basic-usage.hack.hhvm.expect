@@ -1,5 +1,5 @@
 bool(true)
-varray(4) {
+vec(4) {
   int(0)
   int(1)
   int(2)

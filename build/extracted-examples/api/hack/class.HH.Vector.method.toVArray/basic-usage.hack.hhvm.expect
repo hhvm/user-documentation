@@ -1,5 +1,5 @@
 bool(true)
-varray(4) {
+vec(4) {
   string(3) "red"
   string(5) "green"
   string(4) "blue"
