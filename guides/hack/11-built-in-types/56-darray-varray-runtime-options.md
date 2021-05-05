@@ -169,18 +169,24 @@ If this is a string literal, the actual type is most likely `darray<_, _>`. If t
 
 ## Runtime typetests of shapes and tuples
 
-Shapes and tuples are currently implemented with `darray` and `varray`, however
-this is an implementation detail, and expected to change to `dict` and `vec`;
-this means that the following checks will currently always fail, but may
-pass in the future - for this reason, the `hhvm.hack_arr_is_shape_tuple_notices`
-runtime option has been added to raise notices for these type tests:
+In HHVM 4.102 or older, shapes and tuples were implemented with `darray` and
+`varray`. In HHVM 4.103 and newer, they are `dict` and `vec`;
+this means that the following checks would fail before HHVM 4.103, but now
+pass&mdash;for this reason, in HHVM 4.102 or older,
+the `hhvm.hack_arr_is_shape_tuple_notices`
+runtime option could be used to raise notices for these type tests:
 
-```hack_arr_is_shape_tuple_notices.hack
+```hack
 $_ = dict[] is shape();
 $_ = vec[42] is /*tuple*/(int);
-```.ini
-hhvm.hack_arr_compat_notices=1
-hhvm.hack_arr_is_shape_tuple_notices=1
+```
+
+*Output (before HHVM 4.103)*
+
+```
+Notice: Hack Array Compat: dict is shape in /home/example/hack_arr_is_shape_tuple_notices.hack on line 10
+
+Notice: Hack Array Compat: vec is tuple in /home/example/hack_arr_is_shape_tuple_notices.hack on line 11
 ```
 
 ## Check array key cast
