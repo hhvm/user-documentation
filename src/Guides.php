@@ -86,7 +86,11 @@ final class Guides {
         'classes' => dict[
           'some-basics' => tuple('classes', 'introduction'),
           'defining-a-basic-class' => tuple('classes', 'introduction'),
-        ],
+	  'implementing-an-interface' => tuple('traits-and-interfaces', 'implementing-an-interface'),
+	  'trait-and-interface-requirements' => tuple('traits-and-interfaces', 'trait-and-interface-requirements'),
+	  'using-a-trait' => tuple('traits-and-interfaces', 'using-a-trait'),
+
+	],
         'disposables' => dict[
           'introduction' => tuple('classes', 'object-disposal'),
         ],
@@ -130,7 +134,9 @@ final class Guides {
         'generics' => dict[
           'constraints' => tuple('generics', 'type-constraints'),
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
-          'type-arguments' => tuple('generics', 'type-parameters'),
+          'reified-generics' => tuple('reified-generics', 'reified-generics'),
+          'reified-generics-migration' => tuple('reified-generics', 'reified-generics-migration'),
+	  'type-arguments' => tuple('generics', 'type-parameters'),
         ],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),
@@ -143,8 +149,6 @@ final class Guides {
             tuple('source-code-fundamentals', 'script-inclusion'),
           'constructor-parameter-promotion' => tuple('classes', 'constructors'),
           'placeholder-variable' => tuple('source-code-fundamentals', 'names'),
-          'trait-and-interface-requirements' =>
-            tuple('classes', 'trait-and-interface-requirements'),
           'variadic-functions' => tuple('functions', 'introduction'),
         ],
         'overview' => dict[
@@ -178,7 +182,6 @@ final class Guides {
           'float' => tuple('built-in-types', 'float'),
           'inference' => tuple('types', 'type-inferencing'),
           'int' => tuple('built-in-types', 'int'),
-          'interfaces' => tuple('classes', 'implementing-an-interface'),
           'mixed' => tuple('built-in-types', 'mixed'),
           'nonnull' => tuple('built-in-types', 'nonnull'),
           'noreturn' => tuple('built-in-types', 'noreturn'),
@@ -189,7 +192,6 @@ final class Guides {
           'shapes' => tuple('built-in-types', 'shapes'),
           'string' => tuple('built-in-types', 'string'),
           'summary-table' => tuple('types', null),
-          'traits' => tuple('classes', 'using-a-trait'),
           'this' => tuple('built-in-types', 'this'),
           'tuples' => tuple('built-in-types', 'tuples'),
           'type-system' => tuple('types', null),
