@@ -30,6 +30,17 @@ type YAMLMeta = shape(
   ?'namespace' => string,
 );
 
+enum CategoriesHack: string as string {
+  CLASSES_INTERFACES_TRAITS = 'Classes Interfaces Traits';
+  CONTROL_FLOW = 'Control Flow';
+  GETTING_STARTED = 'Getting Started';
+  TYPES_GENERICS = 'Types and Generics';
+}
+
+enum CategoriesHHVM: string as string {
+  LEARN = 'Learn';
+}
+
 enum DocumentationSourceType: string {
   FILE = 'file';
   ELF_SECTION = 'elf_section';

@@ -50,6 +50,7 @@ abstract final class BuildPaths {
     self::SCRATCH_DIR.'/guides-generated-markdown';
   const string GUIDES_HTML = self::FINAL_DIR.'/guides-html';
   const string GUIDES_INDEX = self::CODEGEN_DIR.'/guides-index.php';
+  const string GUIDES_CATEGORY = self::CODEGEN_DIR.'/guides-category.php';
   const string GUIDES_SUMMARY = self::CODEGEN_DIR.'/guides-summary.php';
 
   // FooBar => URL (for markdown)
