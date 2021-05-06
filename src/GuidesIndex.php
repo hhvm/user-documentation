@@ -31,6 +31,12 @@ final class GuidesIndex {
     return $index[$product];
   }
 
+  private static function getCategories(
+  ): dict<GuidesProduct, dict<string, string>> {
+    return GuidesCategoryData::getData();
+  }
+
+
   private static function getSummaries(
   ): dict<GuidesProduct, dict<string, string>> {
     return GuidesSummaryData::getData();
@@ -106,6 +112,21 @@ final class GuidesIndex {
       $guide,
     );
     return Vec\keys(self::getIndex()[$product][$guide]);
+  }
+
+  public static function getFileForCategory(
+    GuidesProduct $product,
+    string $guide,
+  ): string {
+    $categories = self::getCategories();
+    $path = $categories[$product][$guide] ?? null;
+    invariant(
+      $path !== null,
+      'Product %s does not contain category %s',
+      $product,
+      $guide,
+    );
+    return __DIR__.'/../guides/'.$categories[$product][$guide];
   }
 
   public static function getFileForSummary(

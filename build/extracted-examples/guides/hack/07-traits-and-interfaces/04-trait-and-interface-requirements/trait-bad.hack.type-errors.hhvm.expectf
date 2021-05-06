@@ -1,0 +1,2 @@
+
+Fatal error: Class 'HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\TraitAndInterfaceRequirements\TraitBad\Paper' required to extend class 'HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\TraitAndInterfaceRequirements\TraitBad\Machine' by trait 'HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\TraitAndInterfaceRequirements\TraitBad\Plane' in %s/trait-bad.hack.type-errors on line 31
