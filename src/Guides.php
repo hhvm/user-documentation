@@ -86,7 +86,11 @@ final class Guides {
         'classes' => dict[
           'some-basics' => tuple('classes', 'introduction'),
           'defining-a-basic-class' => tuple('classes', 'introduction'),
-        ],
+	  'implementing-an-interface' => tuple('traits-and-interfaces', 'implementing-an-interface'),
+	  'trait-and-interface-requirements' => tuple('traits-and-interfaces', 'trait-and-interface-requirements'),
+	  'using-a-trait' => tuple('traits-and-interfaces', 'using-a-trait'),
+
+	],
         'disposables' => dict[
           'introduction' => tuple('classes', 'object-disposal'),
         ],
@@ -130,7 +134,9 @@ final class Guides {
         'generics' => dict[
           'constraints' => tuple('generics', 'type-constraints'),
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
-          'type-arguments' => tuple('generics', 'type-parameters'),
+          'reified-generics' => tuple('reified-generics', 'reified-generics'),
+          'reified-generics-migration' => tuple('reified-generics', 'reified-generics-migration'),
+	  'type-arguments' => tuple('generics', 'type-parameters'),
         ],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),
