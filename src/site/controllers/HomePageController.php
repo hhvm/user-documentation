@@ -11,7 +11,7 @@
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{a, div, h2, h3, h4, li, p, ul};
-use type HHVM\UserDocumentation\{CategoriesHack, CategoriesHHVM, GuidesIndex, GuidesProduct};
+use type HHVM\UserDocumentation\{CategoriesHHVM, CategoriesHack, GuidesIndex, GuidesProduct};
 
 final class HomePageController extends WebPageController {
   <<__Override>>
@@ -47,7 +47,7 @@ final class HomePageController extends WebPageController {
 
       $title = ucwords(strtr($guide, '-', ' '));
       $category = trim($this->getGuideCategory($product, $guide));
-     
+
       switch($category){
         case CategoriesHack::GETTING_STARTED:
           $category_root = $getting_started;
