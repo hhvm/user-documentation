@@ -42,7 +42,7 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
       |> Vec\sort($$);
 
     $summary_index = $this->createSummaryIndex($summaries);
-    
+
     $cg = $this->getCodegenFactory();
 
     $cg->codegenFile(BuildPaths::GUIDES_CATEGORY)

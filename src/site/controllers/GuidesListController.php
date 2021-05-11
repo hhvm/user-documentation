@@ -11,7 +11,7 @@
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{a, div, h3, h4, li, p, ul};
-use type HHVM\UserDocumentation\{CategoriesHack, CategoriesHHVM, GuidesIndex, GuidesProduct, URLBuilder};
+use type HHVM\UserDocumentation\{CategoriesHHVM, CategoriesHack, GuidesIndex, GuidesProduct, URLBuilder};
 
 final class GuidesListController extends WebPageController {
   use GuidesListControllerParametersTrait;
@@ -37,7 +37,7 @@ final class GuidesListController extends WebPageController {
   protected function getInnerContent(): x\node {
     $product = $this->getProduct();
     $guides = GuidesIndex::getGuides($product);
-    
+
     $root = <ul />;
 
     // Hack / HHVM  categories
@@ -57,16 +57,16 @@ final class GuidesListController extends WebPageController {
 
       switch($category){
         case CategoriesHack::GETTING_STARTED:
-	  $category_root = $getting_started; 
+	  $category_root = $getting_started;
 	  break;
 	case CategoriesHack::CONTROL_FLOW:
-	  $category_root = $control_flow; 
+	  $category_root = $control_flow;
 	  break;
-	case CategoriesHack::CLASSES_INTERFACES_TRAITS:  
-	  $category_root = $classes_interfaces_traits;  
+	case CategoriesHack::CLASSES_INTERFACES_TRAITS:
+	  $category_root = $classes_interfaces_traits;
 	  break;
-	case CategoriesHack::TYPES_GENERICS:  
-	  $category_root = $types_generics;  
+	case CategoriesHack::TYPES_GENERICS:
+	  $category_root = $types_generics;
 	  break;
 	case CategoriesHHVM::LEARN:
           $category_root = $learn;
@@ -92,7 +92,7 @@ final class GuidesListController extends WebPageController {
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CLASSES_INTERFACES_TRAITS}</h3><div class="guideListWrapper">{$classes_interfaces_traits}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::TYPES_GENERICS}</h3><div>{$types_generics}</div></li>);
     }
-  
+
     if ($product === GuidesProduct::HHVM){
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHHVM::LEARN}</h3><div>{$learn}</div></li>);
     }
