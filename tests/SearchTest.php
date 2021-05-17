@@ -42,7 +42,7 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
         'keyset contains',
         vec['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
-      tuple('reified', vec['/hack/generics/reified-generics']),
+      tuple('reified', vec['/hack/reified-generics/reified-generics']),
     ];
   }
 }
