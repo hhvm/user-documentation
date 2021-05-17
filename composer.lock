@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "994fe4df8d4d2076938654e6ed37480d",
+    "content-hash": "d7092d78fb28c3dd25381c8edb0971e2",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -916,7 +916,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.108.*"
+        "hhvm": "4.109.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
