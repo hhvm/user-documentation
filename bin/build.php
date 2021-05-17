@@ -26,7 +26,7 @@ function build_site(): void {
     if ($arg is BuildFlags) {
       $flags[] = $arg;
     } else {
-      $filters[] = $arg;
+      $filters[] = $arg as string;
     }
   }
 
