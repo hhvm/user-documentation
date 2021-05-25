@@ -2,7 +2,6 @@
 
 * [Arithmetic, `+`, `*` etc](addition.md)
 * [Assignment, `=`, `+=` etc](assignment.md)
-* [Async blocks](async-blocks.md)
 * [await](await.md)
 * [Bitwise Operators](bitwise-operators.md)
 * [Casting, `(int)`, `(float)`, `(bool)` `(string)`](casting.md)

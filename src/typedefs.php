@@ -31,7 +31,7 @@ type YAMLMeta = shape(
 );
 
 enum CategoriesHack: string as string {
-  CLASSES_INTERFACES_TRAITS = 'Classes Interfaces Traits';
+  CLASSES_INTERFACES_TRAITS = 'Classes, Interfaces, Traits';
   CONTROL_FLOW = 'Control Flow';
   GETTING_STARTED = 'Getting Started';
   TYPES_GENERICS = 'Types and Generics';
