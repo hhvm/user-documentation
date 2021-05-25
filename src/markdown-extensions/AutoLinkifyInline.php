@@ -20,12 +20,31 @@ use namespace HH\Lib\{Regex, Str, Vec};
  * Given something like `Vec\map()`, automatically make it a link
  */
 final class AutoLinkifyInline extends Inlines\Link {
+  private static bool $disabled = false;
+
   <<__Override>>
   public static function consume(
     Inlines\Context $context,
     string $markdown,
     int $offset,
   ): ?(Inlines\Link, int) {
+    if (self::$disabled) {
+      return null;
+    }
+
+    // If there is a link at the current position, parse it using the standard
+    // Inlines\Link, but with auto-linkifying disabled because nested links are
+    // invalid HTML.
+    self::$disabled = true;
+    try {
+      $result = Inlines\Link::consume($context, $markdown, $offset);
+    } finally {
+      self::$disabled = false;
+    }
+    if ($result is nonnull) {
+      return $result;
+    }
+
     $result = Inlines\CodeSpan::consume($context, $markdown, $offset);
     if ($result === null) {
       return null;

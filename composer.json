@@ -1,7 +1,7 @@
 {
     "require": {
         "facebook/xhp-lib": "^4.0",
-        "hhvm": "4.98.*",
+        "hhvm": "4.108.*",
         "usox/hackttp": "~0.5.3",
         "hhvm/hhvm-autoload": "^3.0",
         "hhvm/type-assert": "^4.0",
@@ -18,5 +18,9 @@
         "facebook/definition-finder": "^2.0.0",
         "hhvm/hacktest": "^2.0",
         "facebook/fbexpect": "^2.6.1"
+    },
+    "scripts": {
+        "post-install-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch",
+        "post-update-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch"
     }
 }

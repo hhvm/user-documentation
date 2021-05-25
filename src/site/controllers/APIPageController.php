@@ -9,11 +9,15 @@
  *
  */
 
+use namespace HH\Lib\Vec;
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\div;
+use namespace HHVM\UserDocumentation\ui;
 use type HHVM\UserDocumentation\{
   APIDefinitionType,
   APIIndexEntry,
+  APINavData,
+  APIProduct,
   BuildPaths,
   HTMLFileRenderable,
 };
@@ -61,5 +65,31 @@ abstract class APIPageController extends WebPageController {
     };
 
     return $change_map[$old] ?? null;
+  }
+
+  <<__Override>>
+  final protected function getSideNav(): x\node {
+    $api_nav_data = APINavData::get($this->getParameters()['Product']);
+    $path = Vec\concat(
+      vec[
+        $api_nav_data->getRootNameForType($this->getDefinitionType()),
+        $this->getRootDefinition()['name'],
+      ],
+      $this->getSideNavSubpath(),
+    );
+    return (
+      <ui:navbar
+        data={$api_nav_data->getNavData()}
+        activePath={$path}
+        extraNavListClass="apiNavList"
+      />
+    );
+  }
+
+  abstract protected function getParameters(
+  ): shape('Product' => APIProduct, ...);
+
+  protected function getSideNavSubpath(): vec<string> {
+    return vec[];
   }
 }

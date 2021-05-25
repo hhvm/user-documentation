@@ -74,7 +74,8 @@ final class HHAPIDocBuildStep extends BuildStep {
     // We have prefix whitelists (especially for hsl-experimental), but they're
     // already handled when extracting the tarball; no need to filter out non-
     // whitelisted files again here.
-    $hsl_sources = self::findSources(BuildPaths::HSL_TREE.'/src/', $exts);
+    $hsl_sources =
+      self::findSources(BuildPaths::HHVM_TREE.'/hphp/hsl/src/', $exts);
     $hsl_experimental_sources = self::findSources(
       BuildPaths::HSL_EXPERIMENTAL_TREE.'/src/',
       $exts,

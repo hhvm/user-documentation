@@ -13,14 +13,11 @@ use type HHVM\UserDocumentation\{
   APIDefinitionType,
   APIIndex,
   APIIndexEntry,
-  APINavData,
   APIProduct,
   URLBuilder,
 };
 
 use namespace HH\Lib\{C, Str};
-use namespace Facebook\XHP\Core as x;
-use namespace HHVM\UserDocumentation\ui;
 
 final class APIClassPageController extends APIPageController {
   use APIClassPageControllerParametersTrait;
@@ -65,22 +62,6 @@ final class APIClassPageController extends APIPageController {
   <<__Override>>
   protected function getHTMLFilePath(): string {
     return $this->getRootDefinition()['htmlPath'];
-  }
-
-  <<__Override>>
-  protected function getSideNav(): x\node {
-    $api_nav_data = APINavData::get($this->getParameters()['Product']);
-    $path = vec[
-      $api_nav_data->getRootNameForType($this->getDefinitionType()),
-      $this->getRootDefinition()['name'],
-    ];
-    return (
-      <ui:navbar
-        data={$api_nav_data->getNavData()}
-        activePath={$path}
-        extraNavListClass="apiNavList"
-      />
-    );
   }
 
   private function redirectIfHSLAPIWithHackProduct(): void {

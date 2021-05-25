@@ -1,0 +1,46 @@
+diff --git a/vendor/usox/hackttp/src/Response/TemporaryFileSapiEmitter.hack b/vendor/usox/hackttp/src/Response/TemporaryFileSapiEmitter.hack
+index 5eb02f6..747753a 100644
+--- a/vendor/usox/hackttp/src/Response/TemporaryFileSapiEmitter.hack
++++ b/vendor/usox/hackttp/src/Response/TemporaryFileSapiEmitter.hack
+@@ -34,27 +34,33 @@ final class TemporaryFileSapiEmitter implements EmitterInterface {
+ 
+ 		$body = $response->getBody();
+ 
+-		/* HH_FIXME[4053] */
+-		$path = $body->getPath();
+-
+-		$path as File\Path;
++		// Lambda is used to force $path to be string, not TAny (`_`).
++		$path = (): string ==> {
++			/*HH_FIXME[4053] getPath is not part of the WriteHandle interface.*/
++			$path_maybe_object = $body->getPath();
++			// Path is going to be removed from the hsl.
++			// We just used `->toString()` anyway.
++			// This hacky expression is needed, because `$path_maybe_object`
++			// is of the TAny type (`_`), so the typechecker won't error when
++			// `->getPath()` starts returning a string.
++			// This expression works for both Path and string.
++			return $path_maybe_object |> $$ is string ? $$ : $$->toString();
++		}();
+ 
+ 		$this->writeStatusLine($response);
+ 		$this->writeHeaders($response);
+ 
+-		$temporary_file_path = $path->toString();
+-
+ 		if ($body is IO\CloseableHandle) {
+ 			$body->close();
+ 		}
+ 
+-		$read_handle = File\open_read_only($temporary_file_path);
++		$read_handle = File\open_read_only($path);
+ 		using ($read_handle->closeWhenDisposed()) {
+ 			$out = IO\request_output();
+ 			$content = await $read_handle->readAllAsync();
+ 			await $out->writeAllAsync($content);
+ 		};
+-		\unlink($temporary_file_path);
++		\unlink($path);
+ 	}
+ 
+ 	/**

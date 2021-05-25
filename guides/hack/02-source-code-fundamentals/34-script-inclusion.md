@@ -34,7 +34,7 @@ We expect to make autoloading fully-automatic, and remove inclusion directives f
 
 ## Legacy Issues
 
-For relative paths, the configuration directive [`include_path`](http://docs.hhvm.com/manual/en/ini.core.php#ini.include-path) is used to resolve the include file's location.
+For relative paths, the configuration directive [`include_path`](https://docs.hhvm.com/hhvm/configuration/INI-settings#supported-php-ini-settings) is used to resolve the include file's location.
 
 It is currently possible (though strongly discoraged) for top-level code to exist in a file, without
 being in a function. In this cases, including a file may execute code, not just import definitions.

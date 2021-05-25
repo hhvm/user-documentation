@@ -9,6 +9,6 @@ async function skipif_async(): Awaitable<void> {
   try {
     await $pool->connect(CI::$host, CI::$port, CI::$db, CI::$user, CI::$passwd);
   } catch (\AsyncMysqlConnectException $_) {
-    die('Skip');
+    die('skip');
   }
 }

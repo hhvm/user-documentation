@@ -29,13 +29,52 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
 
     $this->renderFiles($sources);
 
+    Log::i("\nCreating categories");
+    $categories = \glob(self::SOURCE_ROOT.'/*/*/*-category.txt')
+      |> Vec\map($$, $path ==> Str\strip_prefix($path, self::SOURCE_ROOT.'/'))
+      |> Vec\sort($$);
+
+    $category_index = $this->createCategoryIndex($categories);
+
     Log::i("\nCreating summaries");
     $summaries = \glob(self::SOURCE_ROOT.'/*/*/*-summary.txt')
       |> Vec\map($$, $path ==> Str\strip_prefix($path, self::SOURCE_ROOT.'/'))
       |> Vec\sort($$);
 
     $summary_index = $this->createSummaryIndex($summaries);
+
     $cg = $this->getCodegenFactory();
+
+    $cg->codegenFile(BuildPaths::GUIDES_CATEGORY)
+      ->setNamespace("HHVM\\UserDocumentation")
+      ->addClass(
+        $cg->codegenClass('GuidesCategoryData')
+          ->setIsFinal(true)
+          ->setIsAbstract(true)
+          ->addMethod(
+            $cg->codegenMethod('getData')
+              ->setIsStatic(true)
+              ->setReturnType('dict<GuidesProduct, dict<string, string>>')
+              ->setBody(
+                $cg->codegenHackBuilder()
+                  ->addReturn(
+                    $category_index,
+                    CG\HackBuilderValues::dict(
+                      CG\HackBuilderKeys::lambda(
+                        ($_, $v) ==> Str\format(
+                          "GuidesProduct::%s",
+                          GuidesProduct::getNames()[$v],
+                        ),
+                      ),
+                      CG\HackBuilderValues::export(),
+                    ),
+                  )
+                  ->getCode(),
+              ),
+          ),
+      )
+      ->save();
+
     $cg->codegenFile(BuildPaths::GUIDES_SUMMARY)
       ->setNamespace("HHVM\\UserDocumentation")
       ->addClass(
@@ -65,6 +104,28 @@ final class GuidesHTMLBuildStep extends AbstractMarkdownRenderBuildStep {
           ),
       )
       ->save();
+  }
+
+  private function createCategoryIndex(
+    Traversable<string> $categories,
+  ): dict<GuidesProduct, dict<string, string>> {
+    $out = dict[];
+    foreach ($categories as $category) {
+      $parts = (new Vector(\explode('/', $category)))
+        ->map(
+          $part ==> \preg_match('/^[0-9]{2,}-/', $part)
+            ? \substr($part, \strpos($part, '-') + 1)
+            : $part,
+        );
+      if (\count($parts) !== 3) {
+        continue;
+      }
+      list($product, $section, $_page) = $parts;
+      $product as GuidesProduct;
+      $out[$product] ??= dict[];
+      $out[$product][$section] = $category;
+    }
+    return $out;
   }
 
   private function createSummaryIndex(

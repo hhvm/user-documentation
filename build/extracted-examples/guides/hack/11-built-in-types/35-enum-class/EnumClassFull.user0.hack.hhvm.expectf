@@ -1,2 +1,2 @@
 
-Fatal error: unknown class HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassFull\Key in %s/EnumClassFull.user0.hack on line 8
+Fatal error: Undefined enum: HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassFull\EKeys in %s/EnumClassFull.user0.hack on line 15

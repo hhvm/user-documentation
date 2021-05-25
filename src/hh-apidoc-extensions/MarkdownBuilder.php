@@ -20,7 +20,10 @@ final class MarkdownBuilder extends HHAPIDoc\DocumentationBuilder {
   ): keyset<classname<HHAPIDoc\PageSections\PageSection>> {
     $inherited = Keyset\filter(
       parent::getPageSections(),
-      $section ==> $section !== HHAPIDoc\PageSections\NameHeading::class,
+      $section ==>
+        $section !== HHAPIDoc\PageSections\NameHeading::class &&
+        // InterfaceSynopsis moved to the bottom (see below)
+        $section !== HHAPIDoc\PageSections\InterfaceSynopsis::class,
     );
     $sections = Vec\concat(
       vec[
@@ -29,6 +32,7 @@ final class MarkdownBuilder extends HHAPIDoc\DocumentationBuilder {
       $inherited,
       vec[
         PageSections\Examples::class,
+        HHAPIDoc\PageSections\InterfaceSynopsis::class,
       ],
     );
     // Insert "Guides" after description.

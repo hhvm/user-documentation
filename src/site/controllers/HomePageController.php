@@ -11,7 +11,7 @@
 
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{a, div, h2, h3, h4, li, p, ul};
-use type HHVM\UserDocumentation\{GuidesIndex, GuidesProduct};
+use type HHVM\UserDocumentation\{CategoriesHHVM, CategoriesHack, GuidesIndex, GuidesProduct};
 
 final class HomePageController extends WebPageController {
   <<__Override>>
@@ -27,7 +27,16 @@ final class HomePageController extends WebPageController {
   protected function getInnerContent(GuidesProduct $product): x\node {
     $guides = GuidesIndex::getGuides($product);
 
-    $root = <ul class="guideList" />;
+    $root = <ul />;
+
+    // Hack / HHVM  categories
+    $category_root = $root;
+    $getting_started = <ul class="guideList" />;
+    $control_flow = <ul class="guideList" />;
+    $classes_interfaces_traits = <ul class="guideList" />;
+    $types_generics = <ul class="guideList" />;
+    $learn = <ul class="guideList" />;
+
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
       $url = GuidePageControllerURIBuilder::getPath(shape(
@@ -37,17 +46,62 @@ final class HomePageController extends WebPageController {
       ));
 
       $title = ucwords(strtr($guide, '-', ' '));
+      $category = trim($this->getGuideCategory($product, $guide));
 
-      $root->appendChild(
+      switch($category){
+        case CategoriesHack::GETTING_STARTED:
+          $category_root = $getting_started;
+          break;
+        case CategoriesHack::CONTROL_FLOW:
+          $category_root = $control_flow;
+          break;
+        case CategoriesHack::CLASSES_INTERFACES_TRAITS:
+          $category_root = $classes_interfaces_traits;
+          break;
+        case CategoriesHack::TYPES_GENERICS:
+          $category_root = $types_generics;
+          break;
+        case CategoriesHHVM::LEARN:
+          $category_root = $learn;
+          break;
+        default:
+          $category_root = $root;
+          break;
+      }
+
+      $category_root->appendChild(
         <li>
-          <h4><a href={$url}>{$title}</a></h4>
+          <h4 class={$category}><a href={$url}>{$title}</a></h4>
           <div class="guideDescription">
             {$this->getGuideSummary($product, $guide)}
           </div>
         </li>,
       );
     }
+
+    if ($product === GuidesProduct::HACK){
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::GETTING_STARTED}</h3><div class="guideListWrapper">{$getting_started}</div></li>);
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CONTROL_FLOW}</h3><div class="guideListWrapper">{$control_flow}</div></li>);
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CLASSES_INTERFACES_TRAITS}</h3><div class="guideListWrapper">{$classes_interfaces_traits}</div></li>);
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::TYPES_GENERICS}</h3><div class="guideListWrapper">{$types_generics}</div></li>);
+    }
+
+    if ($product === GuidesProduct::HHVM){
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHHVM::LEARN}</h3><div>{$learn}</div></li>);
+    }
+
     return $root;
+  }
+
+  protected function getGuideCategory(
+    GuidesProduct $product,
+    string $guide,
+  ): string {
+    $path = GuidesIndex::getFileForCategory($product, $guide);
+    if (file_get_contents($path)) {
+      return file_get_contents($path);
+    }
+    return '';
   }
 
   protected function getGuideSummary(
@@ -67,7 +121,6 @@ final class HomePageController extends WebPageController {
       <x:frag>
         <div class="guideListWrapper">
           <h2 class="listTitle">Hack</h2>
-          <h3 class="listTitle">Learn</h3>
           {$this->getInnerContent(GuidesProduct::HACK)}
           <h3 class="listTitle">
             <a href="/hack/reference/">Hack API Reference</a>
@@ -81,7 +134,6 @@ final class HomePageController extends WebPageController {
         </div>
         <div class="guideListWrapper">
           <h2 class="listTitle">HHVM</h2>
-          <h3 class="listTitle">Learn</h3>
           {$this->getInnerContent(GuidesProduct::HHVM)}
         </div>
       </x:frag>;
