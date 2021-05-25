@@ -16,20 +16,20 @@ use namespace Facebook\TypeAssert;
 abstract final class SearchTermMatcher {
   // hard-coded operator synonyms
   const string ARITHMETIC = 'arithmetic';
-  const string ASSERTIONS = 'type assertions';
+  const string ASSERTIONS = 'type assertion';
   const string ASSIGNMENT = 'assignment';
   const string BINARY_PIPE = 'pipe';
-  const string BITWISE = 'bitwise operators';
+  const string BITWISE = 'bitwise';
   const string COALESCE = 'coalesce';
-  const string COMPARISONS = 'comparisons';
-  const string CONCATENATION = 'string concatenation';
+  const string COMPARISONS = 'comparison';
+  const string CONCATENATION = 'concatenation';
   const string EQUALITY = 'equality';
-  const string ERROR_CONTROL = 'error control';
-  const string INCREMENTING_DECREMENTING = 'incrementing and decrementing';
-  const string LOGICAL = 'logical operators';
-  const string MEMBER_SELECTION = 'member selection';
-  const string PRECEDENCE = 'expressions and operators: operator precedence';
-  const string SCOPE_RESOLUTION = 'scope resolution';
+  const string ERROR_CONTROL = 'suppress error';
+  const string INCREMENTING_DECREMENTING = 'increment decrement';
+  const string LOGICAL = 'logical';
+  const string MEMBER_SELECTION = 'objects properties methods';
+  const string PRECEDENCE = 'precedence';
+  const string SCOPE_RESOLUTION = 'select scope resolution';
   const string SUBSCRIPT = 'subscript';
   const string TERNARY = 'ternary';
 
