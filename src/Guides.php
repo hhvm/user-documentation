@@ -97,6 +97,7 @@ final class Guides {
         'expressions-and-operators' => dict[
           'addition' => tuple('expressions-and-operators', 'arithmetic'),
           'as' => tuple('expressions-and-operators', 'type-assertions'),
+          'async-blocks' => tuple('asynchronous-operations', 'blocks'),
           'bitwise-AND' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-exclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-inclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
