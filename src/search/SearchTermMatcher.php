@@ -14,6 +14,25 @@ use namespace HH\Lib\{C, Keyset, Math, Str, Vec};
 use namespace Facebook\TypeAssert;
 
 abstract final class SearchTermMatcher {
+  // hard-coded operator synonyms
+  const string ARITHMETIC = 'arithmetic';
+  const string ASSERTIONS = 'type assertion';
+  const string ASSIGNMENT = 'assignment';
+  const string BINARY_PIPE = 'pipe';
+  const string BITWISE = 'bitwise';
+  const string COALESCE = 'coalesce';
+  const string COMPARISONS = 'comparison';
+  const string CONCATENATION = 'concatenation';
+  const string EQUALITY = 'equality';
+  const string ERROR_CONTROL = 'suppress error';
+  const string INCREMENTING_DECREMENTING = 'increment decrement';
+  const string LOGICAL = 'logical';
+  const string MEMBER_SELECTION = 'objects properties methods';
+  const string PRECEDENCE = 'precedence';
+  const string SCOPE_RESOLUTION = 'select scope resolution';
+  const string SUBSCRIPT = 'subscript';
+  const string TERNARY = 'ternary';
+
   const dict<string, keyset<string>> SYNONYMS = dict[
     'vec' => keyset['c'],
     'dict' => keyset['c'],
@@ -25,6 +44,77 @@ abstract final class SearchTermMatcher {
     'varray' => keyset['vec'],
     'darray' => keyset['dict'],
     'array' => keyset['dict', 'keyset', 'vec'],
+    // Arithmetic
+    '+' => keyset[self::ARITHMETIC, self::PRECEDENCE],
+    '-' => keyset[self::ARITHMETIC, self::PRECEDENCE],
+    '*' => keyset[self::ARITHMETIC, self::PRECEDENCE],
+    '/' => keyset[self::ARITHMETIC, self::PRECEDENCE],
+    '%' => keyset[self::ARITHMETIC, self::PRECEDENCE],
+    '**' => keyset[self::ARITHMETIC, self::PRECEDENCE],
+    // Assignment
+    '=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '**=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '*=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '/=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '%=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '+=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '-=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '.=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '<<=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '>>=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '&=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '^=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    '|=' => keyset[self::ASSIGNMENT, self::PRECEDENCE],
+    // Comparisons
+    '>' => keyset[self::COMPARISONS, self::PRECEDENCE],
+    '<' => keyset[self::COMPARISONS, self::PRECEDENCE],
+    '>=' => keyset[self::COMPARISONS, self::PRECEDENCE],
+    '<=' => keyset[self::COMPARISONS, self::PRECEDENCE],
+    // Equality
+    '==' => keyset[self::EQUALITY, self::PRECEDENCE],
+    '!=' => keyset[self::EQUALITY, self::PRECEDENCE],
+    '===' => keyset[self::EQUALITY, self::PRECEDENCE],
+    '!==' => keyset[self::EQUALITY, self::PRECEDENCE],
+    '<=>' => keyset[self::EQUALITY, self::PRECEDENCE],
+    // Logical
+    '&&' => keyset[self::LOGICAL, self::PRECEDENCE],
+    '||' => keyset[self::LOGICAL, self::PRECEDENCE],
+    '!' => keyset[self::LOGICAL, self::PRECEDENCE],
+    // Bitwise
+    '&' => keyset[self::BITWISE, self::PRECEDENCE],
+    '|' => keyset[self::BITWISE, self::PRECEDENCE],
+    '^' => keyset[self::BITWISE, self::PRECEDENCE],
+    '<<' => keyset[self::BITWISE, self::PRECEDENCE],
+    '>>' => keyset[self::BITWISE, self::PRECEDENCE],
+    '~' => keyset[self::BITWISE, self::PRECEDENCE],
+    // Assertions
+    'is' => keyset[self::ASSERTIONS, self::PRECEDENCE],
+    'as' => keyset[self::ASSERTIONS, self::PRECEDENCE],
+    '?as' => keyset[self::ASSERTIONS, self::PRECEDENCE],
+    // Binary Pipe
+    '|>' => keyset[self::BINARY_PIPE, self::PRECEDENCE],
+    // Coalesce
+    '??' => keyset[self::COALESCE, self::PRECEDENCE],
+    '??=' => keyset[self::COALESCE, self::PRECEDENCE],
+    // Concatenation
+    '.' => keyset[self::CONCATENATION, self::PRECEDENCE],
+    // Error Control
+    '@' => keyset[self::ERROR_CONTROL, self::PRECEDENCE],
+    // Incrementing / Decrementing
+    '++' => keyset[self::INCREMENTING_DECREMENTING, self::PRECEDENCE],
+    '--' => keyset[self::INCREMENTING_DECREMENTING, self::PRECEDENCE],
+    // Member Selection
+    '->' => keyset[self::MEMBER_SELECTION, self::PRECEDENCE],
+    '?->' => keyset[self::MEMBER_SELECTION, self::PRECEDENCE],
+    '->:' => keyset[self::MEMBER_SELECTION],
+    // Subscript
+    '[]' => keyset[self::SUBSCRIPT, self::PRECEDENCE],
+    // Ternary
+    '?' => keyset[self::TERNARY, self::PRECEDENCE],
+    ':' => keyset[self::TERNARY, self::PRECEDENCE],
+    '?:' => keyset[self::TERNARY, self::PRECEDENCE],
+    // Scope Resolution
+    '::' => keyset[self::SCOPE_RESOLUTION],
   ];
 
   protected static function matchFullTerm(

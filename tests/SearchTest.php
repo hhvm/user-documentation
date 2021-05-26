@@ -43,6 +43,23 @@ final class SearchTest extends \Facebook\HackTest\HackTest {
         vec['HH\\Lib\\C\\contains', 'HH\\Lib\\C\\contains_key'],
       ),
       tuple('reified', vec['/hack/reified-generics/reified-generics']),
+      tuple('arithmetic', vec['/hack/expressions-and-operators/arithmetic']),
+      tuple('type assertion', vec['/hack/expressions-and-operators/type-assertions']),
+      tuple('assignment', vec['/hack/expressions-and-operators/assignment']),
+      tuple('pipe', vec['/hack/expressions-and-operators/pipe']),
+      tuple('bitwise', vec['/hack/expressions-and-operators/bitwise-operators']),
+      tuple('coalesce', vec['hack/expressions-and-operators/coalesce']),
+      tuple('comparison', vec['/hack/expressions-and-operators/comparisons']),
+      tuple('concatenation', vec['/hack/expressions-and-operators/string-concatenation']),
+      tuple('equality', vec['/hack/expressions-and-operators/equality']),
+      tuple('suppress error', vec['/hack/expressions-and-operators/error-control']),
+      tuple('increment decrement', vec['/hack/expressions-and-operators/incrementing-and-decrementing']),
+      tuple('logical', vec['/hack/expressions-and-operators/logical-operators']),
+      tuple('objects properties methods', vec['/hack/expressions-and-operators/member-selection']),
+      tuple('precedence', vec['/hack/expressions-and-operators/operator-precedence']),
+      tuple('select scope resolution', vec['/hack/expressions-and-operators/scope-resolution']),
+      tuple('subscript', vec['/hack/expressions-and-operators/subscript']),
+      tuple('ternary', vec['/hack/expressions-and-operators/ternary']),
     ];
   }
 }
