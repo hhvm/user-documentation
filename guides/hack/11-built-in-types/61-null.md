@@ -27,7 +27,7 @@ interface TraverseFrom<Tv, Ti> {
 }
 ```
 
-You can use `null` to define an class implementing this interface,
+You can use `null` to define a class implementing this interface,
 making it clear that you don't care about the argument to `startAt`.
 
 
