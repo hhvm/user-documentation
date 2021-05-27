@@ -1,4 +1,4 @@
-The Boolean type `bool` can store two distinct values, which correspond to the Boolean values True and False, respectively.
+The Boolean type `bool` can store two distinct values, which correspond to the Boolean values `true` and `false`, respectively.
 
 Consider the following example:
 
