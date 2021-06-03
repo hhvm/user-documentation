@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "546114cf21f83e799e7fe8b0c1be9bc5",
+    "content-hash": "73656d69f3c3502f2d61b19f070597a9",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -145,16 +145,16 @@
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "6d206958eef6c5870536d4adc7ba8478c01f2edf"
+                "reference": "92aa374affd27276be41a19254dacbdb66b65d1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/6d206958eef6c5870536d4adc7ba8478c01f2edf",
-                "reference": "6d206958eef6c5870536d4adc7ba8478c01f2edf",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/92aa374affd27276be41a19254dacbdb66b65d1c",
+                "reference": "92aa374affd27276be41a19254dacbdb66b65d1c",
                 "shasum": ""
             },
             "require": {
@@ -205,9 +205,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hack-codegen/issues",
-                "source": "https://github.com/hhvm/hack-codegen/tree/v4.4.0"
+                "source": "https://github.com/hhvm/hack-codegen/tree/v4.4.1"
             },
-            "time": "2021-03-31T16:03:48+00:00"
+            "time": "2021-06-01T19:29:04+00:00"
         },
         {
             "name": "facebook/hack-http-request-response-interfaces",
@@ -478,16 +478,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.103.1",
+            "version": "v4.103.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "a458cfa93c6de7e0d5d79e8242f50134187b8c6a"
+                "reference": "a5260d24fa6bc616ad76003a6dd3238328b1a30c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/a458cfa93c6de7e0d5d79e8242f50134187b8c6a",
-                "reference": "a458cfa93c6de7e0d5d79e8242f50134187b8c6a",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/a5260d24fa6bc616ad76003a6dd3238328b1a30c",
+                "reference": "a5260d24fa6bc616ad76003a6dd3238328b1a30c",
                 "shasum": ""
             },
             "require": {
@@ -524,9 +524,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.103.1"
+                "source": "https://github.com/hhvm/hhast/tree/v4.103.2"
             },
-            "time": "2021-03-31T22:58:13+00:00"
+            "time": "2021-05-24T20:36:34+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -762,16 +762,16 @@
         },
         {
             "name": "usox/hackttp",
-            "version": "v0.5.3",
+            "version": "v0.5.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/usox/hackttp.git",
-                "reference": "3c65defaf8f4aa98366a2d449434e89332f32307"
+                "reference": "a5ba0a2c4dc31f06b4907026b3bc0bd208a07a24"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/usox/hackttp/zipball/3c65defaf8f4aa98366a2d449434e89332f32307",
-                "reference": "3c65defaf8f4aa98366a2d449434e89332f32307",
+                "url": "https://api.github.com/repos/usox/hackttp/zipball/a5ba0a2c4dc31f06b4907026b3bc0bd208a07a24",
+                "reference": "a5ba0a2c4dc31f06b4907026b3bc0bd208a07a24",
                 "shasum": ""
             },
             "require": {
@@ -819,9 +819,9 @@
             ],
             "support": {
                 "issues": "https://github.com/usox/hackttp/issues",
-                "source": "https://github.com/usox/hackttp/tree/v0.5.3"
+                "source": "https://github.com/usox/hackttp/tree/v0.5.4"
             },
-            "time": "2021-01-21T07:33:05+00:00"
+            "time": "2021-04-12T06:06:05+00:00"
         }
     ],
     "packages-dev": [
@@ -916,7 +916,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.110.*"
+        "hhvm": "4.112.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

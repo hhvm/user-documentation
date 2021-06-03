@@ -1,7 +1,7 @@
 vec(2) {
   object(HH\Asio\WrappedException) (1) {
     ["exception":"HH\Asio\WrappedException":private]=>
-    object(Exception) (8) {
+    object(Exception) (7) {
       ["message":protected]=>
       string(%d) ""
       ["string":"Exception":private]=>
@@ -36,8 +36,6 @@ vec(2) {
         }
       }
       ["previous":"Exception":private]=>
-      NULL
-      ["userMetadata":protected]=>
       NULL
     }
   }
