@@ -101,6 +101,7 @@ type APIFunctionIndexEntry = shape(
   'name' => string,
   'htmlPath' => string,
   'urlPath' => string,
+  'deprecation' => ?string,
 );
 
 type APIMethodIndexEntry = shape(

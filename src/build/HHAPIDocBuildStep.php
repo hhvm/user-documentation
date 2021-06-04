@@ -282,7 +282,12 @@ final class HHAPIDocBuildStep extends BuildStep {
     return Dict\pull(
       $functions,
       $function ==> {
-        $function_name = $function['definition']->getName();
+        $def = $function['definition'];
+        $function_name = $def->getName();
+        $deprecated = $def->getAttributes()['__Deprecated'] ?? null;
+        if ($deprecated !== null) {
+          $deprecated = C\onlyx($deprecated) as string;
+        }
         return shape(
           'name' => $function_name,
           'htmlPath' => $html_paths->getPathForFunction($function_name),
@@ -293,6 +298,7 @@ final class HHAPIDocBuildStep extends BuildStep {
               'Type' => APIDefinitionType::FUNCTION_DEF,
             ),
           ),
+          'deprecation' => $deprecated,
         );
       },
       $function ==> Str\replace($function['definition']->getName(), "\\", '.'),

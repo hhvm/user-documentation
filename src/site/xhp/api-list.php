@@ -23,7 +23,7 @@ xhp class api_list extends x\element {
     ImmSet<APIDefinitionType> types @required;
 
   final private function getDefinitions(
-  ): Map<APIDefinitionType, Map<string, string>> {
+  ): Map<APIDefinitionType, Map<string, (string, bool)>> {
     switch ($this->:product) {
       case APIProduct::HACK:
       case APIProduct::HSL:
@@ -34,13 +34,16 @@ xhp class api_list extends x\element {
 
   final private function getHackDefinitions(
     APIProduct $product,
-  ): Map<APIDefinitionType, Map<string, string>> {
+  ): Map<APIDefinitionType, Map<string, (string, bool)>> {
     $out = Map {};
     foreach ($this->:types as $type) {
       $index = APIIndex::get($product)->getIndexForType($type);
       $out[$type] = Map {};
       foreach ($index as $node) {
-        $out[$type][$node['name']] = $node['urlPath'];
+        $out[$type][$node['name']] = tuple(
+          $node['urlPath'],
+          $type === APIDefinitionType::FUNCTION_DEF && ($node as APIFunctionIndexEntry)['deprecation'] !== null
+        );
       }
     }
     return $out;
@@ -56,13 +59,13 @@ xhp class api_list extends x\element {
       }
       $title = \ucwords($type.' Reference');
       $type_list = <ul class="apiList" />;
-      foreach ($api_references as $name => $url) {
+      foreach ($api_references as $name => list($url, $deprecated)) {
         $name = $name
           |> Str\strip_prefix($$, "HH\\Lib\\Experimental\\")
           |> Str\strip_prefix($$, "HH\\Lib\\");
         $type_list->appendChild(
           <li>
-            <a href={$url}>{$name}</a>
+            <a href={$url} class={$deprecated ? 'deprecated' : null}>{$name}</a>
           </li>,
         );
       }
