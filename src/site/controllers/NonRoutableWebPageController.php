@@ -376,12 +376,19 @@ EOF;
             </ul>
           </div>
           <div class="footerPanel">
-            <h2>Resources </h2>
+            <h2>Resources</h2>
             <ul>
               <li><a href="http://hhvm.com/blog">Blog</a></li>
               <li><a href="http://hacklang.org">Hack Website</a></li>
               <li><a href="http://hhvm.com">HHVM Website</a></li>
               <li><a href="https://www.facebook.com/hhvm">Facebook Page</a></li>
+            </ul>
+          </div>
+          <div class="footerPanel">
+            <h2>GitHub</h2>
+            <ul>
+              <li><a href="https://github.com/facebook/hhvm">Hack and HHVM</a></li>
+              <li><a href="https://github.com/hhvm/user-documentation">Source for This Site</a></li>
             </ul>
           </div>
         </div>
