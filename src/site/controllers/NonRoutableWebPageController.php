@@ -367,30 +367,21 @@ EOF;
             </ul>
           </div>
           <div class="footerPanel">
-            <h2>Hack Community</h2>
+            <h2>Community</h2>
             <ul>
-              <li><a href="http://hacklang.org/">Website</a></li>
-              <li><a href="https://twitter.com/hacklang">Twitter</a></li>
-              <li>
-                <a
-                  href="https://github.com/facebook/hhvm/tree/master/hphp/hack">
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/hhvm/user-documentation">
-                  Docs on GitHub
-                </a>
-              </li>
+              <li><a href="https://www.facebook.com/groups/hhvm.general">Facebook Group</a></li>
+              <li><a href="https://twitter.com/hacklang">Hack Twitter</a></li>
+              <li><a href="https://twitter.com/HipHopVM">HHVM Twitter</a></li>
+              <li><a href="https://hhvm.com/slack">Slack</a></li>
             </ul>
           </div>
           <div class="footerPanel">
-            <h2>HHVM Community</h2>
+            <h2>Resources </h2>
             <ul>
-              <li><a href="http://hhvm.com">Website</a></li>
               <li><a href="http://hhvm.com/blog">Blog</a></li>
-              <li><a href="https://www.facebook.com/hhvm">Facebook</a></li>
-              <li><a href="https://twitter.com/HipHopVM">Twitter</a></li>
+              <li><a href="http://hacklang.org">Hack Website</a></li>
+              <li><a href="http://hhvm.com">HHVM Website</a></li>
+              <li><a href="https://www.facebook.com/hhvm">Facebook Page</a></li>
             </ul>
           </div>
         </div>
