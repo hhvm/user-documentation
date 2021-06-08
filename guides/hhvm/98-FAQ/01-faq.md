@@ -48,7 +48,8 @@ There is also [a wiki listing HHVM users](https://github.com/facebook/hhvm/wiki/
 
 If you believe you may have found a security issue, please [see HHVM's SECURITY.md](https://github.com/facebook/hhvm/blob/master/SECURITY.md); otherwise, please [submit an issue](https://github.com/facebook/hhvm/wiki/How-to-Report-Issues).
 
-For real-time discussion, the team tends to hang out in [#hhvm on IRC](http://webchat.freenode.net/?channels=hhvm) during working hours US Pacific time (and knowledgeable community members are often around at other times too).
+Our user community is [on Facebook](https://facebook.com/groups/hhvm.general)
+and [on Slack](https://hhvm.com/slack).
 
 ### Should I use Proxygen or FastCGI?
 
