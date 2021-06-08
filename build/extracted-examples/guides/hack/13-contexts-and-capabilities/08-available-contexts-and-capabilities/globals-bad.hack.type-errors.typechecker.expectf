@@ -1,0 +1,14 @@
+File "%s/globals-bad.hack", line 11, characters 11-12:
+Reading static properties requires the capability ReadGlobals, which is not provided by the context. (Typing[4401])
+  File "%s/globals-bad.hack", line 10, characters 31-32:
+  The local (enclosing) context provides the capability set {}
+  File "coeffect/contexts.hhi", line 28, characters 1-23:
+  Hack provides a list of supported contexts here
+
+File "%s/globals-bad.hack", line 16, characters 14-15:
+Reading static properties requires the capability ReadGlobals, which is not provided by the context. (Typing[4401])
+  File "%s/globals-bad.hack", line 15, characters 25-26:
+  The local (enclosing) context provides the capability set {}
+  File "coeffect/contexts.hhi", line 28, characters 1-23:
+  Hack provides a list of supported contexts here
+
