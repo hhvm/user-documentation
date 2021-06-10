@@ -10,20 +10,10 @@ The following contexts and capabilities are implemented at present.
 This gates the ability to use the `echo` and `print` intrinsics within function bodies.
 Additionally, built-in functions that perform output operations such as file writes and DB reads will require this capablity.
 
-```io-good.hack
-// Valid example
-
-function has_io_capability()[io]: void {
-  echo 'like this ';
-  print 'or like this';
-}
-```
-
-```io-bad.hack.type-errors
-// Invalid example
-
-function pure_function()[]: void {
+```hack
+function does_echo_and_print(): void {
   echo 'like this';
+  print 'or like this';
 }
 ```
 
@@ -116,7 +106,6 @@ function pure_function()[]: void {
 ## Contexts
 
 - `defaults` represents the capability set {IO, WriteProperty, AccessGlobals}.
-- `io` represents the capability set {IO}.
 - `write_props` represents the capability set {WriteProperty}.
 - `globals` represents the capability set {AccessGlobals}.
 
