@@ -32,8 +32,8 @@ $items[] = 'd'; // vec['xx', 'b', 'c', 'd']
 C\count($items); // 4
 
 // Seeing if a vec contains a value or index.
-C\contains('b'); // true
-C\contains_key(2); // true
+C\contains($items, 'a'); // true
+C\contains_key($items, 2); // true
 
 // Iterating.
 foreach ($items as $item) {
