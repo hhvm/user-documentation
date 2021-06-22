@@ -26,7 +26,7 @@ These are the options that are probably the most commonly used on a day-to-day b
 | `hhvm.force_hh` | `bool` | `false` | If `true`, all code is treated as Hack code, even if it starts with `<?php`.  This setting affects `hhvm.enable_xhp` by forcing it to be `true` as well. This setting affects `hhvm.hack.lang.ints_overflows_to_ints` and `hhvm.log.always_log_unhandled_exceptions` by being the default value for them when they is not explicitly set. This setting affects `hhvm.server.allow_duplicate_cookies` by being the opposite value for a default when it is not explicitly set.
 | `hhvm.log.file` | `string` | standard error (`stderr`) | The location of the HHVM error log file. If `hhvm.log.use_cronolog` is set, then this setting will be used as the cron output file.
 | `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's [repo-authoritative mode](/hhvm/advanced-usage/repo-authoritative) to serve requests.
-| `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
+| `hhvm.repo.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo. (before HHVM 4.115: `hhvm.repo.central.path`)
 | `hhvm.server.type` | `string` | `"Proxygen"` | The type of server you want to serve up requests for the HHVM server. The default is `"proxygen"`, but you can also specify `"fastcgi"`.
 | `hhvm.server.port` | `int` | `80` | The port on which the HHVM server will listen for requests.
 | `hhvm.server.default_document` | `string` | `"index.php"` | The default document that will be served if a page is not explicitly specified.
@@ -763,7 +763,7 @@ When using HHVM's [Repo-Authoritative](/hhvm/advanced-usage/repo-authoritative) 
 | Setting | Type | Default | Description
 |---------|------|---------|------------
 | `hhvm.repo.authoritative` | `boolean` | `false` | If `true`, you are specifying that you will be using HHVM's repo- authoritative mode to serve requests.
-| `hhvm.repo.central.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo.
+| `hhvm.repo.path` | `string` | `""` | The path to the `hhvm.hhbc` file created when you compiled a repo-authoritative repo. (before HHVM 4.115: `hhvm.repo.central.path`)
 | `hhvm.repo.commit` | `bool` | `true` | If enabled, this will commit newly emitted units to the repo.
 | `hhvm.repo.debug_info` | `bool` | `true` | If enabled, the full source locations will be stored in the repo; otherwise, only line numbers will be stored.
 | `hhvm.repo.journal` | `string` | `delete` | If `delete`, then delete the on-disk SQLite journal upon each successful transaction commit. If `memory`, then store the SQLite journal in memory. `delete` is the safer mode to use.
