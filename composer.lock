@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd509773ee32d9c95cac705c9c6fb474",
+    "content-hash": "0c679e35d2e03c1bb31e215083ce635b",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -478,16 +478,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.113.0",
+            "version": "v4.113.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "14539efb5a8953b3428e39cbcbcb5461256e9008"
+                "reference": "b1bee070a577536dccab711841f3e51b1ff45a06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/14539efb5a8953b3428e39cbcbcb5461256e9008",
-                "reference": "14539efb5a8953b3428e39cbcbcb5461256e9008",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/b1bee070a577536dccab711841f3e51b1ff45a06",
+                "reference": "b1bee070a577536dccab711841f3e51b1ff45a06",
                 "shasum": ""
             },
             "require": {
@@ -524,9 +524,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.113.0"
+                "source": "https://github.com/hhvm/hhast/tree/v4.113.1"
             },
-            "time": "2021-06-08T21:23:11+00:00"
+            "time": "2021-06-21T18:04:24+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -916,7 +916,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.113.*"
+        "hhvm": "4.115.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
