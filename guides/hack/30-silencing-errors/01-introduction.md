@@ -1,7 +1,8 @@
 Errors reported by the Hack typechecker can be silenced with
-`HH_FIXME` and `HH_IGNORE_ERROR` comments.
+`HH_FIXME` and `HH_IGNORE_ERROR` comments. Errors arising from type mismatches 
+on expression may also be silenced using the `HH\FIXME\UNSAFE_CAST` function.
 
-## Silencing Errors
+## Silencing Errors with Comments
 
 ```
 /* HH_FIXME[4110] Your explanation here. */
@@ -22,7 +23,7 @@ type.
 The behavior of badly typed code may change between HHVM
 releases. This will usually be noted in the changelog.
 
-## `HH_FIXME` versus `HH_IGNORE_ERROR`
+### `HH_FIXME` versus `HH_IGNORE_ERROR`
 
 Both `HH_FIXME` and `HH_IGNORE_ERROR` have the same effect: they
 suppress an error.
@@ -39,7 +40,7 @@ You should generally use `HH_FIXME`. `HH_IGNORE_ERROR` is intended to
 signal to the reader that the type checker is wrong and you are
 deliberately suppressing the error. This should be very rare.
 
-## Error Codes
+### Error Codes
 
 Every Hack error has an associated error code. These are stable across
 Hack releases, and new errors always have new error codes.
@@ -57,7 +58,7 @@ that don't require type information.
 
 Error codes 4000 - 4999 are used for typing errors.
 
-## Configuring Error Suppression
+### Configuring Error Suppression
 
 Hack error suppression can be configured in the `.hhconfig` file at the root of a project.
 In hhvm version [4.62](https://hhvm.com/blog/2020/06/16/hhvm-4.62.html) and above, error suppression works on a whitelist system.
@@ -118,6 +119,48 @@ strict mode checks in partial files by using the error code in
 
 ```
 error_codes_treated_strictly = 1002, 2045, 2055, 2060, 4005
+```
+
+## Silencing Errors with `HH\FIXME\UNSAFE_CAST`
+
+```
+takes_int(HH\FIXME\UNSAFE_CAST<string,int>("foo",  "Your explanation here"));
+```
+
+To silence an error arising from a type mistmatch on a particular expression, 
+add a call to `HH\FIXME\UNSAFE_CAST` with the expression as the first argument,
+an optional (string literal) comment, and explicit type hints indicating the 
+actual type of the expression and the expected type.
+
+The `UNSAFE_CAST` function also **has no runtime effect**, however, in contrast 
+to `HH_FIXME` comments, the `UNSAFE_CAST` function _does_ change the type of the 
+expression.
+
+### Silencing Errors per Expression
+
+Whilst a single `HH_FIXME` comment will silence all related errors on the 
+proceeding line, the `UNSAFE_CAST` function must be applied to each 
+sub-expression that has a type mismatch.
+
+```
+function takes_int(int $i): int {
+  return $i + 1;
+}
+
+function takes_float(float $i): float {
+  /* HH_FIXME[4110] calls takes_int with wrong
+     param type AND returns wrong type */
+  return takes_int($i);
+}
+```
+
+```
+function takes_float(float $i): float {
+  return HH\FIXME\UNSAFE_CAST<int, float>(
+    takes_int(HH\FIXME\UNSAFE_CAST<float, int>($i, 'wrong param type')),
+    'returns wrong type',
+  );
+}
 ```
 
 ## Best Practices
