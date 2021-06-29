@@ -42,4 +42,4 @@ the concatenation of the three string literals and the two `float` property valu
 
 `'('`, `','`, `')'`, `"\$p1 = "`, and `"\n"` are examples of string literals.
 
-Strings are usually manipulated with functions from the `Str\` namespace in the [Hack Standard Library](/hsl/reference/)
+Strings are usually manipulated with functions from the `Str\` namespace in the [Hack Standard Library](/hsl/reference/).
