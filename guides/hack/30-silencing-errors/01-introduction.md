@@ -13,7 +13,7 @@ add a call to `HH\FIXME\UNSAFE_CAST` with the expression as the first argument,
 an optional (string literal) comment, and explicit type hints indicating the 
 actual type of the expression and the expected type.
 
-The `UNSAFE_CAST` function also **has no runtime effect**. However, in contrast 
+The `UNSAFE_CAST` function **has no runtime effect**. However, in contrast 
 to `HH_FIXME` comments, the `UNSAFE_CAST` function _does_ change the type of the 
 expression.
 
