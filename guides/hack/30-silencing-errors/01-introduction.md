@@ -36,10 +36,6 @@ function takes_float(float $i): float {
 ```
 
 ```silencing_errors_per_expression.cast.hack
-function takes_int(int $i): int {
-  return $i + 1;
-}
-
 function takes_float(float $i): float {
   return HH\FIXME\UNSAFE_CAST<int, float>(
     takes_int(HH\FIXME\UNSAFE_CAST<float, int>($i, 'wrong param type')),
