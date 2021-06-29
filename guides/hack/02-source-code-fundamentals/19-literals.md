@@ -97,9 +97,11 @@ Certain other (and sometimes non-printable) characters can also be expressed as 
 For example:
 
 ```
+$var = 42;
 $s = <<<   ID
 Wow, look at this text!
 We can even have a semicolon here! ; or '' or ""!
+Variable substitution: $var
 ID;
 echo ">$s<\n";
 ```
@@ -121,9 +123,11 @@ A nowdoc string literal looks like a [heredoc string literal](#string-literals__
 For example:
 
 ```
+$var = 42;
 $s = <<<   'ID'
 Wow, look at this text!
 We can even have a semicolon here! ; or '' or ""!
+Variable substitution: $var
 ID;
 echo ">$s<\n";
 ```
