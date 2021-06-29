@@ -2,6 +2,52 @@ Errors reported by the Hack typechecker can be silenced with
 `HH_FIXME` and `HH_IGNORE_ERROR` comments. Errors arising from type mismatches 
 on expression may also be silenced using the `HH\FIXME\UNSAFE_CAST` function.
 
+## Silencing Errors with `HH\FIXME\UNSAFE_CAST`
+
+```
+takes_int(HH\FIXME\UNSAFE_CAST<string,int>("foo",  "Your explanation here"));
+```
+
+To silence an error arising from a type mismatch on a particular expression, 
+add a call to `HH\FIXME\UNSAFE_CAST` with the expression as the first argument,
+an optional (string literal) comment, and explicit type hints indicating the 
+actual type of the expression and the expected type.
+
+The `UNSAFE_CAST` function also **has no runtime effect**. However, in contrast 
+to `HH_FIXME` comments, the `UNSAFE_CAST` function _does_ change the type of the 
+expression.
+
+### Silencing Errors per Expression
+
+Whilst a single `HH_FIXME` comment will silence all related errors on the 
+proceeding line, the `UNSAFE_CAST` function must be applied to each 
+sub-expression that has a type mismatch.
+
+```silencing_errors_per_expression.comments.hack
+function takes_int(int $i): int {
+  return $i + 1;
+}
+
+function takes_float(float $i): float {
+  /* HH_FIXME[4110] calls takes_int with wrong
+     param type AND returns wrong type */
+  return takes_int($i);
+}
+```
+
+```silencing_errors_per_expression.cast.hack
+function takes_int(int $i): int {
+  return $i + 1;
+}
+
+function takes_float(float $i): float {
+  return HH\FIXME\UNSAFE_CAST<int, float>(
+    takes_int(HH\FIXME\UNSAFE_CAST<float, int>($i, 'wrong param type')),
+    'returns wrong type',
+  );
+}
+```
+
 ## Silencing Errors with Comments
 
 ```
@@ -119,48 +165,6 @@ strict mode checks in partial files by using the error code in
 
 ```
 error_codes_treated_strictly = 1002, 2045, 2055, 2060, 4005
-```
-
-## Silencing Errors with `HH\FIXME\UNSAFE_CAST`
-
-```
-takes_int(HH\FIXME\UNSAFE_CAST<string,int>("foo",  "Your explanation here"));
-```
-
-To silence an error arising from a type mismatch on a particular expression, 
-add a call to `HH\FIXME\UNSAFE_CAST` with the expression as the first argument,
-an optional (string literal) comment, and explicit type hints indicating the 
-actual type of the expression and the expected type.
-
-The `UNSAFE_CAST` function also **has no runtime effect**. However, in contrast 
-to `HH_FIXME` comments, the `UNSAFE_CAST` function _does_ change the type of the 
-expression.
-
-### Silencing Errors per Expression
-
-Whilst a single `HH_FIXME` comment will silence all related errors on the 
-proceeding line, the `UNSAFE_CAST` function must be applied to each 
-sub-expression that has a type mismatch.
-
-```
-function takes_int(int $i): int {
-  return $i + 1;
-}
-
-function takes_float(float $i): float {
-  /* HH_FIXME[4110] calls takes_int with wrong
-     param type AND returns wrong type */
-  return takes_int($i);
-}
-```
-
-```
-function takes_float(float $i): float {
-  return HH\FIXME\UNSAFE_CAST<int, float>(
-    takes_int(HH\FIXME\UNSAFE_CAST<float, int>($i, 'wrong param type')),
-    'returns wrong type',
-  );
-}
 ```
 
 ## Best Practices
