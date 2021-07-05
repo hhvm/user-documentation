@@ -1,27 +1,25 @@
-<?hh
-
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassBox;
 
-enum class E : IBox {
+enum class DiamondBase : IBox {
   Box<int> Age = new Box(42);
 }
 
-enum class E1 : IBox extends E {
+enum class D1 : IBox extends DiamondBase {
   Box<string> Name1 = new Box('foo');
 }
 
-enum class E2 : IBox extends E {
+enum class D2 : IBox extends DiamondBase {
   Box<string> Name2 = new Box('bar');
 }
 
-enum class E3 : IBox extends E1, E2 {}
+enum class D3 : IBox extends D1, D2 {}
 
 <<__EntryPoint>>
 function main() : void {
   \init_docs_autoloader();
 
-  echo E3::Age->data;
+  echo D3::Age->data;
 }

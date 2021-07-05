@@ -140,32 +140,30 @@ enum class E1 : IBox extends E {
 Enum classes support diamond shaped inheritance as long as there is no ambiguity, like int:
 
 ```EnumClassBox.extends2.hack no-auto-output
-<?hh
-
-enum class E : IBox {
+enum class DiamondBase : IBox {
   Box<int> Age = new Box(42);
 }
 
-enum class E1 : IBox extends E {
+enum class D1 : IBox extends DiamondBase {
   Box<string> Name1 = new Box('foo');
 }
 
-enum class E2 : IBox extends E {
+enum class D2 : IBox extends DiamondBase {
   Box<string> Name2 = new Box('bar');
 }
 
-enum class E3 : IBox extends E1, E2 {}
+enum class D3 : IBox extends D1, D2 {}
 
 <<__EntryPoint>>
 function main() : void {
-  echo E3::Age->data;
+  echo D3::Age->data;
 }
 ```
 
-Here there is no ambiguity: the constant `Age` is inherited from `E`, and only from `E`.
+Here there is no ambiguity: the constant `Age` is inherited from `DiamondBase`, and only from there.
 The `main` function will echo `42` as expected.
 
-If either `E1`, `E2` or `E3` tries to define a constant named `Age`, there will be an error.
+If either `D1`, `D2` or `D3` tries to define a constant named `Age`, there will be an error.
 
 ### Control over inheritance
 
