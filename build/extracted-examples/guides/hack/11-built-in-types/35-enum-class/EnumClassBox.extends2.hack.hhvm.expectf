@@ -1,0 +1,2 @@
+
+Fatal error: Leading markup and `<?hh` are not permitted in `.hack` files, which are always `strict`. in %s/EnumClassBox.extends2.hack on line 1
