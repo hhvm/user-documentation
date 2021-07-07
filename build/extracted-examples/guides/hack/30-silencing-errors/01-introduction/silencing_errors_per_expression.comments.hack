@@ -7,7 +7,7 @@ function takes_int(int $i): int {
   return $i + 1;
 }
 
-function takes_float(float $i): float {
+function takes_float_with_fixme(float $i): float {
   /* HH_FIXME[4110] calls takes_int with wrong
      param type AND returns wrong type */
   return takes_int($i);

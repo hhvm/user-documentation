@@ -1,5 +1,5 @@
 Errors reported by the Hack typechecker can be silenced with
-`HH_FIXME` and `HH_IGNORE_ERROR` comments. Errors arising from type mismatches 
+`HH_FIXME` and `HH_IGNORE_ERROR` comments. Errors arising from type mismatches
 on expression may also be silenced using the `HH\FIXME\UNSAFE_CAST` function.
 
 ## Silencing Errors with `HH\FIXME\UNSAFE_CAST`
@@ -8,19 +8,19 @@ on expression may also be silenced using the `HH\FIXME\UNSAFE_CAST` function.
 takes_int(HH\FIXME\UNSAFE_CAST<string,int>("foo",  "Your explanation here"));
 ```
 
-To silence an error arising from a type mismatch on a particular expression, 
+To silence an error arising from a type mismatch on a particular expression,
 add a call to `HH\FIXME\UNSAFE_CAST` with the expression as the first argument,
-an optional (string literal) comment, and explicit type hints indicating the 
+an optional (string literal) comment, and explicit type hints indicating the
 actual type of the expression and the expected type.
 
-The `UNSAFE_CAST` function **has no runtime effect**. However, in contrast 
-to `HH_FIXME` comments, the `UNSAFE_CAST` function _does_ change the type of the 
+The `UNSAFE_CAST` function **has no runtime effect**. However, in contrast
+to `HH_FIXME` comments, the `UNSAFE_CAST` function _does_ change the type of the
 expression.
 
 ### Silencing Errors per Expression
 
-Whilst a single `HH_FIXME` comment will silence all related errors on the 
-proceeding line, the `UNSAFE_CAST` function must be applied to each 
+Whilst a single `HH_FIXME` comment will silence all related errors on the
+proceeding line, the `UNSAFE_CAST` function must be applied to each
 sub-expression that has a type mismatch.
 
 ```silencing_errors_per_expression.comments.hack
@@ -28,7 +28,7 @@ function takes_int(int $i): int {
   return $i + 1;
 }
 
-function takes_float(float $i): float {
+function takes_float_with_fixme(float $i): float {
   /* HH_FIXME[4110] calls takes_int with wrong
      param type AND returns wrong type */
   return takes_int($i);
@@ -36,8 +36,10 @@ function takes_float(float $i): float {
 ```
 
 ```silencing_errors_per_expression.cast.hack
-function takes_float(float $i): float {
+function takes_float_with_unsafe_cast(float $i): float {
+  /* HH_FIXME[4417] */
   return HH\FIXME\UNSAFE_CAST<int, float>(
+    /* HH_FIXME[4417] */
     takes_int(HH\FIXME\UNSAFE_CAST<float, int>($i, 'wrong param type')),
     'returns wrong type',
   );
@@ -118,7 +120,7 @@ Typing[4110] You cannot use HH_FIXME or HH_IGNORE_ERROR comments to suppress err
 If the file in which this error resides is in **partial** mode, add `4110` to the `allowed_fixme_codes_partial` key in your `.hhconfig`.
 If the file in which this error resides is in **strict** mode, add `4110` to the `allowed_fixme_codes_strict` key in your `.hhconfig`.
 
-As described further in Best Practices, suppressing errors on declarations is generally a bad idea. However, some errors can only be suppressed at a declaration. When suppressing an error at a declaration, you'll get an error like this. 
+As described further in Best Practices, suppressing errors on declarations is generally a bad idea. However, some errors can only be suppressed at a declaration. When suppressing an error at a declaration, you'll get an error like this.
 
 ```
 Typing[4047] You cannot use HH_FIXME or HH_IGNORE_ERROR comments to suppress error 4047 in declarations
