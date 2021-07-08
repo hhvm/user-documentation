@@ -10,7 +10,7 @@ You can get a list of the runtime options that your current hhvm recognizes from
 This relies on the settings being in your `server.ini`.
 The output will look something like this.
 
-```get_all_runtime_options.hack
+```hack
 function get_all_runtime_options(
 ): dict<string, shape(
   'global_value' => string,
@@ -33,6 +33,22 @@ async function main_async(): Awaitable<void> {
     );
   }
 }
+```
+
+*Example output (HHVM 4.115)*
+
+```
+hhvm.hack_arr_is_shape_tuple_notices------------------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_dv_arrs---------------------------------------> global_value(1), local_value(1), access(4)
+hhvm.hack_arr_dv_arr_var_export-----------------------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_cast_marked_array_notices--------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_compact_serialize_notices--------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_serialize_notices----------------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_is_vec_dict_notices--------------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_intish_cast_notices--------------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_fb_serialize_hack_arrays_notices-------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_check_compare--------------------------> global_value(), local_value(), access(4)
+hhvm.hack_arr_compat_notices--------------------------------> global_value(), local_value(), access(4)
 ```
 
 An important note: These settings will not work when you set them at runtime using ini_set(). You must set these in your configuration file or pass them in using the `-dsettinghere=valuehere` command line argument when invoking your script from the command line.

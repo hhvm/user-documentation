@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd509773ee32d9c95cac705c9c6fb474",
+    "content-hash": "506497bb6ea7b69e7c5d78bf76bb263b",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -478,16 +478,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.113.0",
+            "version": "v4.113.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "14539efb5a8953b3428e39cbcbcb5461256e9008"
+                "reference": "b1bee070a577536dccab711841f3e51b1ff45a06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/14539efb5a8953b3428e39cbcbcb5461256e9008",
-                "reference": "14539efb5a8953b3428e39cbcbcb5461256e9008",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/b1bee070a577536dccab711841f3e51b1ff45a06",
+                "reference": "b1bee070a577536dccab711841f3e51b1ff45a06",
                 "shasum": ""
             },
             "require": {
@@ -524,9 +524,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.113.0"
+                "source": "https://github.com/hhvm/hhast/tree/v4.113.1"
             },
-            "time": "2021-06-08T21:23:11+00:00"
+            "time": "2021-06-21T18:04:24+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -669,20 +669,20 @@
         },
         {
             "name": "hhvm/type-assert",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/type-assert.git",
-                "reference": "c5028eb6fc68259f90e46d80e1b78dee905c765f"
+                "reference": "8c907805af5313b2aa8e93242811e22d2de5dffe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/c5028eb6fc68259f90e46d80e1b78dee905c765f",
-                "reference": "c5028eb6fc68259f90e46d80e1b78dee905c765f",
+                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/8c907805af5313b2aa8e93242811e22d2de5dffe",
+                "reference": "8c907805af5313b2aa8e93242811e22d2de5dffe",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.80",
+                "hhvm": "^4.115",
                 "hhvm/hsl": "^4.0"
             },
             "require-dev": {
@@ -708,9 +708,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/type-assert/issues",
-                "source": "https://github.com/hhvm/type-assert/tree/v4.2.0"
+                "source": "https://github.com/hhvm/type-assert/tree/v4.2.1"
             },
-            "time": "2020-12-11T21:45:47+00:00"
+            "time": "2021-07-07T18:09:45+00:00"
         },
         {
             "name": "usox/hack-http-factory-interfaces",
@@ -916,7 +916,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.113.*"
+        "hhvm": "4.117.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

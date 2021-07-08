@@ -1,0 +1,17 @@
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\ContextsAndCapabilities\AvailableContextsAndCapabilities\WritePropsBad;
+
+// Invalid example
+
+class SomeClass {
+  public string $s = '';
+  public function modifyThis()[]: void {  // pure (empty context list)
+    $this->s = 'this applies as well';
+  }
+}
+
+function pure_function(SomeClass $sc)[]: void {
+  $sc->s = 'like this';
+}

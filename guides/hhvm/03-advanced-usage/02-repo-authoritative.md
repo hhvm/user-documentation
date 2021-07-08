@@ -63,7 +63,7 @@ Flag | Description
 
 ## Manually Deploying the Repo
 
-After you build the repo, an SQLite3 database file called `hhvm.hhbc` is created. You copy this file to your production server. HHVM will use this file when serving requests and will not need the physical source files.
+After you build the repo, a file called `hhvm.hhbc` is created (formerly an SQLite3 database, now uses a custom file format). You copy this file to your production server. HHVM will use this file when serving requests and will not need the physical source files.
 
 You must use the same HHVM version to run from the repo as you did to build the repo. In other words, a repo is tied to the version that built it. (Getting this wrong will lead to extremely cryptic errors about missing units in the repo.)
 
@@ -71,8 +71,10 @@ You can put the repo file anywhere as long as these two ini settings are set cor
 
 ```
 hhvm.repo.authoritative=true
-hhvm.repo.central.path=/path/to/hhvm.hhbc
+hhvm.repo.path=/path/to/hhvm.hhbc
 ```
+
+**Note**: Before HHVM 4.115, the relevant INI option was `hhvm.repo.central.path`.
 
 ## Static Content Cache
 

@@ -86,9 +86,56 @@ Escape sequence | Character name | Unicode character
 \xhh or \Xhh  | 1-2-digit hexadecimal digit value hh | U+00hh
 \u{xxxxxx} | UTF-8 encoding of Unicode codepoint U+xxxxxx | U+xxxxxx
 
-Within a double-quoted string literal a dollar ($) character *not* escaped by a backslash (\\) is handled using *variable
-substitution rules*, which follow.
+Within a double-quoted string literal a dollar ($) character *not* escaped by a backslash (\\) is handled using *[variable
+substitution rules](#variable-substitution)*.
 
+### Heredoc String Literals
+
+A heredoc string literal is a string literal delimited by `<<< id` and `id`. The literal can contain any source character.
+Certain other (and sometimes non-printable) characters can also be expressed as [escape sequences](#string-literals__double-quoted-string-literals).
+
+For example:
+
+```
+$var = 42;
+$s = <<<   ID
+Wow, look at this text!
+We can even have a semicolon here! ; or '' or ""!
+Variable substitution: $var
+ID;
+echo ">$s<\n";
+```
+
+Heredoc literals also support [variable substitution](#variable-substitution).
+
+When working with heredoc literals, keep the following rules in mind:
+* The start and end `id` must be the same.
+* Only horizontal white space is permitted between `<<<` and the start `id`.
+* No white space is permitted between the start `id` and the new-line that follows.
+* No white space is permitted between the new-line and the end `id` that follows.
+* Except for an optional semicolon (`;`), no characters&mdash;not even comments or white space&mdash;are permitted between the end `id` and the new-line that terminates that source line.
+
+### Nowdoc String Literals
+
+A nowdoc string literal looks like a [heredoc string literal](#string-literals__heredoc-string-literals) except that in the former the start
+`id` is enclosed in single quotes (`'`).
+
+For example:
+
+```
+$var = 42;
+$s = <<<   'ID'
+Wow, look at this text!
+We can even have a semicolon here! ; or '' or ""!
+Variable substitution: $var
+ID;
+echo ">$s<\n";
+```
+The two forms of string literal (heredoc, nowdoc) have the same semantics and constraints except that **nowdoc literals do not support variable substitution.**
+
+Remember: White space is not permitted between the start `id` and its enclosing single quotes (`'`).
+
+## Variable Substitution
 When a variable name is seen inside a double-quoted string, after that variable is evaluated, its value is converted to `string`
 and is substituted into the string in place of the variable-substitution expression. Subscript or property accesses are resolved
 according to the rules of the [subscript operator](../expressions-and-operators/subscript.md) and
@@ -112,50 +159,6 @@ function main(): void {
   echo "\$myC->p1 = >$myC->p1<\n";
 }
 ```
-
-### Heredoc String Literals
-
-A heredoc string literal is a string literal delimited by "`<<< id`" and "`id`". The literal can contain any source character.
-Certain other (and sometimes non-printable) characters can also be expressed as [escape sequences](#string-literals__double-quoted-string-literals).
-A heredoc literal supports variable substitution as defined for [double-quoted string literals](#string-literals__double-quoted-string-literals).
-For example:
-
-```heredoc-literals.hack
-<<__EntryPoint>>
-function main(): void {
-  $v = 123;
-  $s = <<<    ID
-S'o'me "\"t e\txt; \$v = $v"
-Some more text
-ID;
-  echo ">$s<\n";
-}
-```
-
-The start and end id must be the same. Only horizontal white space is permitted between `<<<` and the start id. No
-white space is permitted between the start id and the new-line that follows. No white space is permitted between the
-new-line and the end id that follows. Except for an optional semicolon (`;`), no characters&mdash;not even comments or white
-space&mdash;are permitted between the end id and the new-line that terminates that source line.
-
-### Nowdoc String Literals
-
-A nowdoc string literal looks like a [heredoc string literal](#string-literals__heredoc-string-literals) except that in the former the start
-id is enclosed in single quotes ('). The two forms of string literal have the same semantics and constraints except that a
-nowdoc string literal is not subject to variable substitution.  For example:
-
-```nowdoc-literals.hack
-<<__EntryPoint>>
-function main(): void {
-  $v = 123;
-  $s = <<<    'ID'
-S'o'me "\"t e\txt; \$v = $v"
-Some more text
-ID;
-  echo ">$s<\n\n";
-}
-```
-
-No white space is permitted between the start id and its enclosing single quotes (').
 
 ## The Null Literal
 
