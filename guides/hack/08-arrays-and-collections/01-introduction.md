@@ -40,7 +40,7 @@ Keyset\keys(dict['x' => 1]); // keyset['x']
 Vec\map(keyset[1, 2], $x ==> $x + 1); // vec[2, 3]
 ```
 
-## Arrays Cheatsheet
+## Arrays Cheat Sheet
 
 | Operation| `vec`    | `dict`   | `keyset` |
 |----------|----------|----------|----------|
@@ -59,3 +59,15 @@ Vec\map(keyset[1, 2], $x ==> $x + 1); // vec[2, 3]
 | Type Signature                               | `vec<Tv>`                    | `dict<Tk, Tv>`                 | `keyset<Tk>`                   |
 | Type Refinement                              | `$v is vec<_>`               | `$d is dict<_, _>`             | `$k is keyset<_>`              |
 | `Awaitable` Consolidation                    | `Vec\gen($v)`                | `Dict\gen($d)`                 | `Keyset\gen($x)`               |
+
+## Arrays Conversion Cheat sheet
+
+Prefer to use Hack arrays whenever possible. When interfacing with legacy APIs that expect older Containers, it may be easier to convert. Here's how:
+
+| Converting | To `Vector`| To `Map`   | To `Set`   | To `varray`| To `darray`|
+|------------|------------|------------|------------|------------|------------|
+| `dict`        | N/A                      | `new Map($d)` | N/A                   | N/A                  | `darray($d)` |
+| `dict` keys   | `Vector::fromKeysOf($d)` | N/A           | `Set::fromKeysOf($d)` | `PHP\array_keys($d)` | N/A          |
+| `dict` values | `new Vector($d)`         | N/A           | `new Set($d)`         | `varray($d)`         | N/A          |
+| `vec`         | `new Vector($v)`         | `new Map($v)` | `new Set($v)`         | `varray($v)`         | `darray($v)` |
+| `keyset`      | `new Vector($k)`         | `new Map($k)` | `new Set($k)`         | `varray($k)`         | `darray($k)` |
