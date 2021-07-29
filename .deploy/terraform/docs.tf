@@ -32,6 +32,8 @@ resource "aws_subnet" "az_a" {
     Name = "Hack/HHVM docs AZ a"
   }
   map_public_ip_on_launch = true
+  ipv6_cidr_block = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, 1)
+  assign_ipv6_address_on_creation = true
 }
 
 resource "aws_subnet" "az_b" {
@@ -42,8 +44,32 @@ resource "aws_subnet" "az_b" {
     Name = "Hack/HHVM docs AZ b"
   }
   map_public_ip_on_launch = true
+  ipv6_cidr_block = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, 2)
+  assign_ipv6_address_on_creation = true
 }
-  
+
+resource "aws_security_group" "bastion" {
+  name = "Hack/HHVM docs bastion"
+  vpc_id = aws_vpc.main.id
+  ingress {
+    description = "SSH"
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = [ "::/0" ]
+  }
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = [ "0.0.0.0/0" ]
+    ipv6_cidr_blocks = [ "::/0" ]
+  }
+  tags = {
+    Name = "Hack/HHVM docs bastion"
+  }
+}
 
 resource "aws_security_group" "internal" {
   name = "Hack/HHVM docs internal"
@@ -112,6 +138,14 @@ resource "aws_internet_gateway" "main" {
   }
 }
 
+resource "aws_route_table" "main" {
+  vpc_id = aws_vpc.main.id
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+}
+
 resource "aws_elastic_beanstalk_application" "docs" {
   name = "hhvm-hack-docs"
   appversion_lifecycle {
@@ -122,11 +156,10 @@ resource "aws_elastic_beanstalk_application" "docs" {
   }
 }
 
-resource "aws_elastic_beanstalk_environment" "docs_a" {
-  name = "hhvm-hack-docs-vpc-a"
+resource "aws_elastic_beanstalk_configuration_template" "docs" {
+  name = "hhvm-hack-docs-vpc"
   application = aws_elastic_beanstalk_application.docs.name
   solution_stack_name = "64bit Amazon Linux 2 v3.4.3 running Docker"
-  cname_prefix = "hack-hhvm-docs-vpc-staging"
   ///// Environment and Instances ////
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
@@ -142,6 +175,11 @@ resource "aws_elastic_beanstalk_environment" "docs_a" {
     namespace = "aws:autoscaling:launchconfiguration"
     name = "InstanceType"
     value = "t3.micro"
+  }
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name = "SecurityGroups"
+    value = aws_security_group.internal.id
   }
   setting {
     namespace = "aws:ec2:vpc"
@@ -208,16 +246,26 @@ resource "aws_elastic_beanstalk_environment" "docs_a" {
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name = "SecurityGroups"
-    value = join(",", [aws_security_group.public.id, aws_security_group.internal.id])
+    value = aws_security_group.public.id
+  }
+  setting {
+    namespace = "aws:elbv2:loadbalancer"
+    name = "ManagedSecurityGroup"
+    value = aws_security_group.public.id
+  }
+  setting {
+    namespace = "aws:elbv2:loadbalancer"
+    name = "IPAddressType"
+    value =  "dualstack"
   }
   setting {
     namespace = "aws:elbv2:listener:80"
-    name = "listenerEnabled"
+    name = "ListenerEnabled"
     value = "true"
   }
   setting {
     namespace = "aws:elbv2:listener:443"
-    name = "listenerEnabled"
+    name = "ListenerEnabled"
     value = "true"
   }
   setting {
@@ -230,4 +278,12 @@ resource "aws_elastic_beanstalk_environment" "docs_a" {
     name = "SSLCertificateArns"
     value = "arn:aws:acm:us-west-2:223121549624:certificate/8f845b56-937f-49b8-adf4-64b69a3caf57"
   }
+}
+
+resource "aws_elastic_beanstalk_environment" "docs_a" {
+  application = aws_elastic_beanstalk_application.docs.name
+  name = "hhvm-hack-docs-vpc-a"
+  cname_prefix = "hack-hhvm-docs-vpc-staging"
+  template_name = aws_elastic_beanstalk_configuration_template.docs.name
+  version_label = "app-1ef9-210727_182110-stage-210727_182110"
 }
