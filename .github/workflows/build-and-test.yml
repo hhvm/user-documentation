@@ -153,7 +153,7 @@ jobs:
             --filter-groups remote \
            tests/
       - name: Swap staging and prod
-        run: eb swap ${{env.STAGING_ENV}} --destination-name ${{env.PROD_ENV}}
+        run: eb swap ${{env.STAGING_ENV}} --destination_name ${{env.PROD_ENV}}
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
