@@ -40,6 +40,7 @@ abstract final class SearchScores {
   ///// API Reference Weights ///
 
   const float HSL_API_MULTIPLIER = 4.0;
+  const float HSL_LEGACY_FIXME_API_MULTIPLIER = 0.2;
   const float HACK_API_MULTIPLIER = 1.0;
 
   const float FUNCTION_MULTIPLIER = 1.0;

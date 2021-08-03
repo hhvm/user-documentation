@@ -24,7 +24,11 @@ final class APISearchResult extends SearchResult {
     switch ($product) {
       case APIProduct::HSL:
       case APIProduct::HSL_EXPERIMENTAL:
-        $score *= SearchScores::HSL_API_MULTIPLIER;
+        if (Str\starts_with($name, 'HH\\Lib\\Legacy_FIXME')) {
+          $score *= SearchScores::HSL_LEGACY_FIXME_API_MULTIPLIER;
+        } else {
+          $score *= SearchScores::HSL_API_MULTIPLIER;
+        }
         break;
       case APIProduct::HACK:
         $score *= SearchScores::HACK_API_MULTIPLIER;
