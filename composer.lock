@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "506497bb6ea7b69e7c5d78bf76bb263b",
+    "content-hash": "bd7ba108a5a080e360028b75ab130f74",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -530,21 +530,21 @@
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v3.2.0",
+            "version": "v3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "2c92708ac3c7ba9bb6d93c4bf7d97ea422ae41a2"
+                "reference": "0b5be45a7a57a6cc24f3a62889367656ff61ae4a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/2c92708ac3c7ba9bb6d93c4bf7d97ea422ae41a2",
-                "reference": "2c92708ac3c7ba9bb6d93c4bf7d97ea422ae41a2",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/0b5be45a7a57a6cc24f3a62889367656ff61ae4a",
+                "reference": "0b5be45a7a57a6cc24f3a62889367656ff61ae4a",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0|^2.0",
-                "hhvm": "^4.67",
+                "hhvm": "^4.109",
                 "hhvm/hsl": "^4.0"
             },
             "replace": {
@@ -579,9 +579,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hhvm-autoload/issues",
-                "source": "https://github.com/hhvm/hhvm-autoload/tree/v3.2.0"
+                "source": "https://github.com/hhvm/hhvm-autoload/tree/v3.3.0"
             },
-            "time": "2020-12-11T21:40:51+00:00"
+            "time": "2021-07-13T16:10:54+00:00"
         },
         {
             "name": "hhvm/hsl",
@@ -916,7 +916,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.117.*"
+        "hhvm": "4.121.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

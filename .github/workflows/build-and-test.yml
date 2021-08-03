@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu ]
-        hhvm: [ '4.117' ]
+        hhvm: [ '4.121' ]
     runs-on: ${{matrix.os}}-latest
     steps:
       - uses: actions/checkout@v2
@@ -105,8 +105,10 @@ jobs:
       - name: Identify live vs staging environment
         run: |
           if eb status hhvm-hack-docs-a | grep -q 'CNAME: hhvm-hack-docs-staging.elasticbeanstalk.com'; then
+            echo PROD_ENV=hhvm-hack-docs-b >> $GITHUB_ENV
             echo STAGING_ENV=hhvm-hack-docs-a >> $GITHUB_ENV
           else
+            echo PROD_ENV=hhvm-hack-docs-a >> $GITHUB_ENV
             echo STAGING_ENV=hhvm-hack-docs-b >> $GITHUB_ENV
           fi
         env:
@@ -151,7 +153,7 @@ jobs:
             --filter-groups remote \
            tests/
       - name: Swap staging and prod
-        run: eb swap
+        run: eb swap ${{env.STAGING_ENV}} --destination_name ${{env.PROD_ENV}}
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}

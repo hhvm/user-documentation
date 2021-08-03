@@ -24,7 +24,7 @@ async function basic_usage_main(): Awaitable<void> {
   // But awaits the awaitable result of the callback
   // rather than using it directly
   $saturdays =
-    await \HH\Asio\vf($times, async ($time) ==> (\gmdate('w', $time) == 6));
+    await \HH\Asio\vf($times, async ($time) ==> (\gmdate('w', $time) === '6'));
 
   foreach ($saturdays as $time) {
     echo \gmdate('r', $time), "\n";
