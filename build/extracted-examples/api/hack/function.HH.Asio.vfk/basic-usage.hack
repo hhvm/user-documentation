@@ -26,7 +26,7 @@ async function basic_usage_main(): Awaitable<void> {
   $saturdays = await \HH\Asio\vfk(
     $times,
     // All saturdays EXCEPT the one which happens to be the first vector element
-    async ($idx, $time) ==> ($idx > 0) && (\gmdate('w', $time) == 6),
+    async ($idx, $time) ==> ($idx > 0) && (\gmdate('w', $time) === '6'),
   );
 
   foreach ($saturdays as $time) {
