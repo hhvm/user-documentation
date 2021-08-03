@@ -17,6 +17,7 @@ These are the options that are probably the most commonly used on a day-to-day b
 | Setting | Type | Default | Description
 |---------|------|---------|------------
 | `hhvm.server_variables` | `array` | `$_SERVER` | Sets the contents of the `$_SERVER` variable.
+| `hhvm.server_variables['HH_TMPDIR']` | `string` | `/tmp/hh_server` | Set a custom path for /tmp files.
 | `hhvm.enable_obj_destruct_call` | `bool` | `false` | If `false`, `__destruct()` methods will not be called on an object at the end of the request. This can be a performance benefit if your system and application can handle the memory requirements. Deallocation can occur all at one time. If `true`, then HHVM will run all `__destruct()` methods in the usual way.
 | `hhvm.hack.lang.look_for_typechecker` | `bool` | `true` | When `true`, HHVM will only process Hack `<?hh` files if the Hack typechecker server is available and running. You normally turn this off in production and it will be turned off automatically in [repo authoritative mode](../advanced-usage/repo-authoritative.md).
 | hhvm.jit | `bool` | `true` | Enables the [JIT](https://en.wikipedia.org/wiki/Just-in-time_compilation) [compiler](http://hhvm.com/blog/2027/faster-and-cheaper-the-evolution-of-the-hhvm-jit). This is turned on by default for all supported distributions. Times when you might want to turn this off is for a [short running script](/hhvm/FAQ/faq#why-is-my-code-slow-at-startup) that may not make use of the JIT.
