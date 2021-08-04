@@ -1,3 +1,12 @@
+##### WARNING #####
+# The ElasticBeanstalk IPAddressType and SecurityGroup settings for load
+# balancers are currently silently ignored by AWS.
+#
+# If you are using this to set up a new instance, you'll need to:
+# - change the s3 bucket used for state to one you control
+# - manually change the load balancers to dual stack and set the security group
+#
+# Otherwise connections from the internet will be dropped.
 terraform {
   required_providers {
     aws = {
@@ -243,11 +252,6 @@ resource "aws_elastic_beanstalk_configuration_template" "docs" {
     namespace = "aws:elasticbeanstalk:environment"
     name = "LoadBalancerType"
     value = "application"
-  }
-  setting {
-    namespace = "aws:elbv2:loadbalancer"
-    name = "ManagedSecurityGroup"
-    value = aws_security_group.public.id
   }
   setting {
     namespace = "aws:elbv2:loadbalancer"
