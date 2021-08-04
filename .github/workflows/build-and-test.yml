@@ -142,7 +142,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Install Terraform
-        with: hashicorp/setup-terraform@v1
+        uses: hashicorp/setup-terraform@v1
       - name: Initialize Terraform
         run: (cd .deploy/terraform; terraform init)
         env:
