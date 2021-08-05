@@ -734,17 +734,18 @@ These are settings of the JIT for [Profile Guided Optimizations](https://en.wiki
 
 ## Garbage Collector Settings
 
-These are settings for the automated garbage collector.  To enable the automated GC, set `hhvm.enable_gc`, `hhvm.eager_gc` and `hhvm.quarantine` to true; or build with the `-DHHVM_EAGER_GC`.
+These are settings for the automated garbage collector.  To enable the automated GC, set `hhvm.enable_gc` to true.
 
 | Setting | Type | Default | Description
 | ------- | ---- | ------- | -----------
 | `hhvm.enable_gc` | `bool` | `HHVM_EAGER_GC` | Enable the garbage collector.
-| `hhvm.eager_gc` | `bool` | `HHVM_EAGER_GC` | Run the GC eagerly.
+| `hhvm.eager_gc` | `bool` | `HHVM_EAGER_GC` | Debugging tool. Run the GC as often as possible. Only supported in Debug builds.
 | `hhvm.filter_gc_points` | `bool` | `true` | Limit eager gc runs to once per surprise point.
-| `hhvm.quarantine` | `bool` | `HHVM_EAGER_GC` |
+| `hhvm.quarantine` | `bool` | `HHVM_EAGER_GC` | Debugging tool. Instead of freeing memory, mark it as a 'Hole', fill with 0x8a, and leak.
 | `hhvm.gc_sample_rate` | `int` | `0` |
 | `hhvm.gc_min_trigger` | `int` | `64 << 20` |
 | `hhvm.gc_trigger_pct` | `double` | `0.5` |
+
 
 ## APC Settings
 
