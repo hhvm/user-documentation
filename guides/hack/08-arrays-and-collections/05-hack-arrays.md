@@ -158,7 +158,7 @@ foreach ($items as $value) {
   echo $value; // e.g. 1
 }
 // Iterating keys and values.
-foreach ($items as $key => $Value) {
+foreach ($items as $key => $value) {
   echo $key;   // e.g. 'a'
   echo $value; // e.g. 1
 }
