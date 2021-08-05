@@ -143,6 +143,24 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Initialize Terraform
+        run: (cd .deploy/terraform; terraform init)
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Deploy to staging environment (Terraform)
+        run: |
+          PROD_TAG=$(eb tags hhvm-hack-docs-vpc-prod -l | awk '/DockerImage/{print $NF}')
+          echo "Current prod tag: ${PROD_TAG}"
+          (
+            cd .deploy/terraform
+            terraform "-var=prod_docker_image=${PROD_TAG}" "-var=staging_docker_image=${IMAGE_TAG}" apply --auto-approve
+          )
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Run test suite against staging
         run: |
           docker run --rm \
@@ -154,6 +172,15 @@ jobs:
            tests/
       - name: Swap staging and prod
         run: eb swap ${{env.STAGING_ENV}} --destination_name ${{env.PROD_ENV}}
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Deploy to prod (Terraform)
+        run: |
+          (
+            cd .deploy/terraform
+            terraform "-var=prod_docker_image=${IMAGE_TAG}" "-var=staging_docker_image=${IMAGE_TAG}" apply --auto-approve
+          )
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
