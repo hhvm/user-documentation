@@ -9,7 +9,7 @@ of the functions that help with this are:
 Name | Returns | Description
 -----|---------|------------
 `HH\Lib\Vec\filter_async<Tv>` | `Awaitable<vec<Tv>>` | Returns a new vec containing only the values for which the given async predicate returns `true`.
-`HH\Lib\Vec\from_async<Tv1, Tv2>` | `Awaitable<vec<Tv2>>` | Returns a new vec where each value is the result of calling the given async function on the original value.
+`HH\Lib\Vec\from_async<Tv>` | `Awaitable<vec<Tv>>` | Returns a new vec with each value awaited in parallel.
 `HH\Lib\Vec\map_async<Tv1, Tv2>` | `Awaitable<vec<Tv2>>` | Returns a new vec where each value is the result of calling the given async function on the original value.
 `HH\Lib\Dict\filter_async<Tk as arraykey, Tv>` | `Awaitable<dict<Tk,Tv>>` | Returns a new dict containing only the values for which the given async predicate returns `true`.
 `HH\Lib\Dict\filter_with_key_async<Tk as arraykey, Tv>` | `Awaitable<dict<Tk,Tv>>` | Like `filter_async`, but lets you utilize the keys of your dict too.
