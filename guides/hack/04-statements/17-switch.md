@@ -55,7 +55,7 @@ default:
 
 A default label is the keyword `default`, followed by `:`, followed by zero or more statements.  Note that the so-called body of a default
 label need *not* be made a compound statement; the set of statements associated with a particular default label ends with a `break`
-statement or the closing brace (`}) of the `switch` statement.
+statement or the closing brace (`}`) of the `switch` statement.
 
 If a `switch` contains more than one case label whose values compare equal to the controlling expression, the first in lexical order is
 considered the match.
