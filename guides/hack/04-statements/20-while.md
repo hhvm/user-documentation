@@ -20,7 +20,7 @@ The execution of a `while` statement is impacted by a subordinate
 The controlling expression is often a combination of relational, equality, and logical expressions.  For example:
 
 ```Hack
-while (($i <= 10 && $j !== 0)) || !getStatus() {
+while (($i <= 10 && $j !== 0) || !getStatus()) {
   ...
 }
 ```
