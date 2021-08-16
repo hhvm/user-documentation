@@ -102,47 +102,6 @@ jobs:
           docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
           docker push "$IMAGE_NAME"
           docker push "hhvm/user-documentation:latest"
-      - name: Identify live vs staging environment
-        run: |
-          if eb status hhvm-hack-docs-a | grep -q 'CNAME: hhvm-hack-docs-staging.elasticbeanstalk.com'; then
-            echo PROD_ENV=hhvm-hack-docs-b >> $GITHUB_ENV
-            echo STAGING_ENV=hhvm-hack-docs-a >> $GITHUB_ENV
-          else
-            echo PROD_ENV=hhvm-hack-docs-a >> $GITHUB_ENV
-            echo STAGING_ENV=hhvm-hack-docs-b >> $GITHUB_ENV
-          fi
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      - name: Update AWS configuration
-        run: |
-          sed -E 's,"hhvm/user-documentation:IMAGE_TAG","'$IMAGE_NAME'",' \
-            Dockerrun.aws.json.in > Dockerrun.aws.json
-      - name: Restart staging environment's Docker server (${{env.STAGING_ENV}})
-        run: |
-          aws elasticbeanstalk restart-app-server \
-            --region us-west-2 \
-            --environment-name "$STAGING_ENV"
-          for I in $(seq 5 10 55); do
-            echo "Waiting $I seconds..."
-            sleep "$I"
-            if eb status "$STAGING_ENV" | grep -i "Status: Ready"; then
-              exit 0
-            fi
-          done
-          echo "Timed out while waiting for $STAGING_ENV to become ready."
-          exit 1
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      - name: Deploy to staging environment (${{env.STAGING_ENV}})
-        run: |
-          eb status "$STAGING_ENV"
-          DEPLOY_MESSAGE="$(git log -1 --oneline $DEPLOY_REV)"
-          eb deploy "$STAGING_ENV" -m "$DEPLOY_MESSAGE" --staged -v
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v1
       - name: Initialize Terraform
@@ -173,11 +132,6 @@ jobs:
             vendor/bin/hacktest \
             --filter-groups remote \
            tests/
-      - name: Swap staging and prod
-        run: eb swap ${{env.STAGING_ENV}} --destination_name ${{env.PROD_ENV}}
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Deploy to prod (Terraform)
         run: |
           (
