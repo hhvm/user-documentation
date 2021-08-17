@@ -8,7 +8,7 @@ example of the block form:
 ```
 
 The type of the expression inside the parentheses must implement either `IDisposable` (or `IAsyncDisposable`). The scope of `$f1` is
-the `using` block, and at the end of that scope, `__dispose` (or `__disposeAsync`) is called. If the assignment (as in, ``$f1 = `) is
+the `using` block, and at the end of that scope, `__dispose` (or `__disposeAsync`) is called. If the assignment (as in, `$f1 = `) is
 omitted, we cannot access the object directly inside the block.
 
 Within the block, there are limits to what we can do with `$f1`. Specifically, we *cannot* assign to it again or make copies of it.  And to
