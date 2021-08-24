@@ -9,10 +9,10 @@ invariant(!$p is null && $p <= $max, "\$p's value %d must be <= %d", $p, $max);
 ```
 
 If the first argument value tests true, the program continues execution; otherwise, the library function
-[`invariant_violation`](http://www.php.net/invariant_violation) is called. That function does not return; instead, it either throws an
+`invariant_violation` is called. That function does not return; instead, it either throws an
 exception of type `\HH\InvariantException`, or calls the handler previously registered by the library function
-[`invariant_callback_register`](http://www.php.net/invariant_callback_register).
+`invariant_callback_register`.
 
 The first argument is a boolean expression. The second argument is a string that can contain
-text and/or optional formatting information as understood by the library function [`sprintf`](http://www.php.net/sprintf).  The optional
+text and/or optional formatting information as understood by the library function `Str\format`.  The optional
 comma-separated list of values following the string must match the set of types expected by the optional formatting information inside that string.
