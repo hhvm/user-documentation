@@ -242,6 +242,12 @@ resource "aws_elastic_beanstalk_configuration_template" "docs" {
     name = "MaxSize"
     value = "4"
   }
+  ///// Deployment /////
+  setting {
+    namespace = "aws:elasticbeanstalk:command"
+    name = "DeploymentPolicy"
+    value = "Immutable"
+  }
   ///// Load Balancing /////
   setting {
     namespace = "aws:elasticbeanstalk:environment"
