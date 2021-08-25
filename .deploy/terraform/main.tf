@@ -164,7 +164,7 @@ resource "aws_route_table" "main" {
 resource "aws_elastic_beanstalk_application" "docs" {
   name = "hhvm-hack-docs"
   appversion_lifecycle {
-    delete_source_from_s3 = true
+    delete_source_from_s3 = false
     max_age_in_days       = 0
     max_count             = 200
     service_role          = "arn:aws:iam::223121549624:role/aws-elasticbeanstalk-service-role"
