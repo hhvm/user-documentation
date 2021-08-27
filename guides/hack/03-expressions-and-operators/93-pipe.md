@@ -1,11 +1,15 @@
-The binary pipe operator, `|>`, evaluates its left-hand operand, and stores the result in the pre-defined *pipe variable* `$$`. There
-is a sequence point after the evaluation of the left-hand operand.  Then the right-hand operand is evaluated, and its type and value
-become the type and value of the whole expression.  The right-hand operand *must* contain at least one occurrence of the pipe variable `$$`.  For example:
+The binary pipe operator, `|>`, evaluates the result of a left-hand expression and stores the result in `$$`, the pre-defined pipe variable. The right-hand expression *must* contain at least one occurrence of `$$`.
 
-```Hack
+With the pipe operator, you can chain function calls, as shown in the code below.
+
+``` Hack
 $x = vec[2,1,3]
-  |> Vec\map($$, $a ==> $a * $a)
-  |> Vec\sort($$);
+  |> Vec\map($$, $a ==> $a * $a) // $$ with value vec[2,1,3]
+  |> Vec\sort($$); // $$ with value vec[4,1,9]
 ```
 
-A pipe expression *cannot* be used as the right-hand operand of an assignment operator.
+Written in another way, the code above is syntactically equivalent to:
+
+``` Hack
+Vec\sort(Vec\map(vec[2, 1, 3], $a ==> $a * $a)) // Evaluates to vec[1,4,9]
+```
