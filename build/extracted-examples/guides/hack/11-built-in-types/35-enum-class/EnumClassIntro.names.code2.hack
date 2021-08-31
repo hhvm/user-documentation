@@ -9,8 +9,8 @@ function show_name_from_names(\HH\MemberOf<Names, IHasName> $x): string {
 }
 
 function test2(): void {
-  show_name(new HasName('toto')); // error, this instance is not from the Names enum
-  show_name(Names::World); // no problem
+  show_name_from_names(new HasName('toto')); // error, this instance is not from the Names enum
+  show_name_from_names(Names::World); // no problem
 }
 
 enum class OtherNames: IHasName {
@@ -18,5 +18,5 @@ enum class OtherNames: IHasName {
 }
 
 function test3(): void {
-  show_name(OtherNames::Foo); // error, expected Names but got OtherNames
+  show_name_from_names(OtherNames::Foo); // error, expected Names but got OtherNames
 }
