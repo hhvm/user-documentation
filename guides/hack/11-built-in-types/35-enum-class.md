@@ -39,7 +39,7 @@ hhvm.hack.lang.enable_enum_classes=1
 
 ### Example: Interface as a Base Type
 
-```EnumClassIntroInterface.hack no-auto-output
+```EnumClassIntro.interface.hack no-auto-output
 // Some class definitions to make a more involved example
 interface IHasName {
   public function name() : string;
