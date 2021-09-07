@@ -69,6 +69,7 @@ final class Guides {
         ],
         'asynchronous-operations' => dict[
           'some-basics' => tuple('asynchronous-operations', 'introduction'),
+          'await-as-an-expression-spec' => tuple('asynchronous-operations', 'await-as-an-expression'),
         ],
         'attributes' => dict[
           'special' => tuple('attributes', 'predefined-attributes'),

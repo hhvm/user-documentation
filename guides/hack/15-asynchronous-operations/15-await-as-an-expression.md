@@ -32,9 +32,6 @@ $x = await async {       // yes!
 }
 ```
 
-You can read more on the [exhaustive list of allowed positions in the specification](await-as-an-expression-spec.md).
-
-
 ## Order-of-execution
 
 Similar to other aspects of `await`, we do not guarantee an order of execution of the expressions within a statement that contains `await`, but you should assume it could be significantly different than if the `await` wasn't present. **If you want stronger guarantees over order-of-execution, separate `await`s into their own statements.**
