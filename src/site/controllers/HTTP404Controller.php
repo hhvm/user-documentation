@@ -158,11 +158,11 @@ Please complete the information below:
 
 # How I got to this page:
 
-- - - eg "I clicked a link on <address of other site>" - - -
+- e.g. "I clicked a link on <address of other site>"
 
 # What I expected to find here:
 
-- - - eg "Documentation tell me how to <do something>" - - -
+- e.g. "Documentation that tells me how to <do something>"
 EOF;
   }
 
