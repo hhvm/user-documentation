@@ -82,11 +82,11 @@ Please complete the information below:
 
 # Where is the problem?
 
-- - - eg "The section describing how widgets work" - - -
+- e.g. "The section describing how widgets work"
 
 # What is the problem?
 
-- - - eg "It doesn't explain that widgets are singletons" - - -
+- e.g. "It doesn't explain that widgets are singletons"
 EOF;
   }
 
