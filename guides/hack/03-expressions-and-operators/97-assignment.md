@@ -18,10 +18,10 @@ $v[1] = 22;     // change the value of the element with key 1
 $v[-10] = 19;   // insert a new element with key -10
 ```
 
-For `vec` and `varray`, indexes must be within the range of the
+For `vec`, indexes must be within the range of the
 existing values. Use `$v[] = new_value;` to append new values.
 
-For a `dict` or a `darray`, we can insert at arbitrary keys.
+For `dict`, we can insert at arbitrary keys.
 
 ``` Hack
 $d = dict['x' => 1];
