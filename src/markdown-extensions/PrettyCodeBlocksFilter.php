@@ -47,6 +47,8 @@ final class PrettyCodeBlocksFilter extends RenderFilter {
 
       $classes .= ' source-language-'.$info_string;
       $info_string = 'PHP';
+    } else {
+      $classes .= ' output-block';
     }
 
     return vec[
