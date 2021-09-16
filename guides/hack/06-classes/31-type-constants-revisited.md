@@ -172,33 +172,6 @@ function run(): void {
 }
 ```
 
-### Overriding Type Constants
-
-For type constants declared in classes, it is possible to provide a constraint as well as a concrete type. When a constraint is provided this allows
-the type constant to be overridden by child classes. This feature is *not* supported for interfaces.
-
-```overriding.hack
-abstract class BaseAbstract {
-  abstract const type T;
-}
-
-class ChildWithConstraint extends BaseAbstract {
-  // We can override this constraint in a child of this concrete class
-  // since we provided an explicit "as constraint".
-  const type T as ?arraykey = ?arraykey;
-}
-
-class ChildOfChildWithNoConstraint extends ChildWithConstraint {
-  // Cannot override this in a child of this class.
-  const type T = arraykey;
-}
-
-<<__EntryPoint>>
-function run(): void {
-  echo "No real output!";
-}
-```
-
 ### Type Constants and Instance Methods
 
 You can use type constants as inputs to class instance methods.
