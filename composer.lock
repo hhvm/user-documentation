@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bd7ba108a5a080e360028b75ab130f74",
+    "content-hash": "64892719e7b5020a98dc40ad5a4c2690",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -478,27 +478,27 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.113.1",
+            "version": "v4.127.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "b1bee070a577536dccab711841f3e51b1ff45a06"
+                "reference": "f6480404bd1c02d4001a7d12580955a58134eb1a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/b1bee070a577536dccab711841f3e51b1ff45a06",
-                "reference": "b1bee070a577536dccab711841f3e51b1ff45a06",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/f6480404bd1c02d4001a7d12580955a58134eb1a",
+                "reference": "f6480404bd1c02d4001a7d12580955a58134eb1a",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.5.0rc1",
-                "hhvm": "^4.113",
+                "hhvm": "^4.123",
                 "hhvm/hhvm-autoload": "^2.0.4|^3.0",
                 "hhvm/hsl": "^4.25",
                 "hhvm/hsl-experimental": "^4.58.0rc1",
                 "hhvm/hsl-io": "^0.2.0|0.3.0",
-                "hhvm/type-assert": "^3.0|^4.0"
+                "hhvm/type-assert": "^4.2.2"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.1.1",
@@ -524,9 +524,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.113.1"
+                "source": "https://github.com/hhvm/hhast/tree/v4.127.1"
             },
-            "time": "2021-06-21T18:04:24+00:00"
+            "time": "2021-09-16T17:58:37+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -669,16 +669,16 @@
         },
         {
             "name": "hhvm/type-assert",
-            "version": "v4.2.1",
+            "version": "v4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/type-assert.git",
-                "reference": "8c907805af5313b2aa8e93242811e22d2de5dffe"
+                "reference": "7106e783dc43724efa5d4147456025a2316480f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/8c907805af5313b2aa8e93242811e22d2de5dffe",
-                "reference": "8c907805af5313b2aa8e93242811e22d2de5dffe",
+                "url": "https://api.github.com/repos/hhvm/type-assert/zipball/7106e783dc43724efa5d4147456025a2316480f0",
+                "reference": "7106e783dc43724efa5d4147456025a2316480f0",
                 "shasum": ""
             },
             "require": {
@@ -708,9 +708,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/type-assert/issues",
-                "source": "https://github.com/hhvm/type-assert/tree/v4.2.1"
+                "source": "https://github.com/hhvm/type-assert/tree/v4.2.2"
             },
-            "time": "2021-07-07T18:09:45+00:00"
+            "time": "2021-09-13T15:44:05+00:00"
         },
         {
             "name": "usox/hack-http-factory-interfaces",
@@ -827,21 +827,21 @@
     "packages-dev": [
         {
             "name": "facebook/fbexpect",
-            "version": "v2.7.8",
+            "version": "v2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbexpect.git",
-                "reference": "edae1a4d746bb4af21fd8f65431ba467ebf34cc1"
+                "reference": "2b83fa141602e05e0b78b6a8e111fdb7290143f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/edae1a4d746bb4af21fd8f65431ba467ebf34cc1",
-                "reference": "edae1a4d746bb4af21fd8f65431ba467ebf34cc1",
+                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/2b83fa141602e05e0b78b6a8e111fdb7290143f1",
+                "reference": "2b83fa141602e05e0b78b6a8e111fdb7290143f1",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
-                "hhvm": "^4.45",
+                "hhvm": "^4.56",
                 "hhvm/hacktest": "^1.0|^2.0",
                 "hhvm/hsl": "^4.0"
             },
@@ -857,9 +857,9 @@
             "description": "Unit test helpers for Facebook projects",
             "support": {
                 "issues": "https://github.com/hhvm/fbexpect/issues",
-                "source": "https://github.com/hhvm/fbexpect/tree/v2.7.8"
+                "source": "https://github.com/hhvm/fbexpect/tree/v2.8.0"
             },
-            "time": "2020-12-11T21:53:22+00:00"
+            "time": "2021-05-12T19:49:29+00:00"
         },
         {
             "name": "hhvm/hacktest",
@@ -916,8 +916,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.121.*"
+        "hhvm": "4.127.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
