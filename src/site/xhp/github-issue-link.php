@@ -53,7 +53,7 @@ final xhp class github_issue_link extends x\element {
   private function getMetadataForBody(): string {
     $build_id = LocalConfig::getBuildID();
     $request_time = (new \DateTime())
-      ->setTimezone(new \DateTimeZone('Etc/UTC'))
+      ->setTimezone(new \DateTimeZone('UTC'))
       ->format(\DateTime::RFC2822);
     $request_path = $this->getRequest()->getUri()->getPath();
 
