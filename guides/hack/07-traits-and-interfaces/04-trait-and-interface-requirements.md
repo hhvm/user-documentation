@@ -182,3 +182,20 @@ function run(): void {
 }
 ```
 
+**NOTE**: trait cannot be used as a type, comparing to some other languages. Only class and interface are types. For example,
+```trait.is.not.type
+trait T {}
+class C { use T; }
+$a = new C();
+$j = ($a is C);
+$k = ($a is T); # error!
+```
+leads to error
+```trait.is.not.type-error
+Hit fatal : "is" and "as" operators cannot be used with a trait
+    #0 at [:1]
+    #1 include(), called at [:1]
+    #2 include(), called at [:0]
+Hit fatal : "is" and "as" operators cannot be used with a trait
+Failed to evaluate expression
+```
