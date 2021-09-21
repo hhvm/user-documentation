@@ -84,7 +84,7 @@ $d1 = new Derived();
 $d1->b(); // as $d1 is an instance of Derived, Base::b() calls Derived::f()
 ```
 
-The value of the a scope-resolution expression ending in `::class` is a string containing the fully qualified name of the current
+The value of a scope-resolution expression ending in `::class` is a string containing the fully qualified name of the current
 class, which for a static qualifier, means the current class context.  A variable name followed by `::` and a name results in a
 constant whose value has the [`classname` type](../built-in-types/classname.md) for the variable name's type.  For example:
 
