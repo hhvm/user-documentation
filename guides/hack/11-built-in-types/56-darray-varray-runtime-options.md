@@ -1,3 +1,5 @@
+As of [HHVM 4.103](https://hhvm.com/blog/2021/03/31/hhvm-4.103.html), `darray` / `varray` are aliased to `dict` / `vec` respectively. Use [Hack arrays](http://localhost:8080/hack/arrays-and-collections/hack-arrays).
+
 ## WARNING WARNING WARNING
 
 _These runtime options are a migrational feature. This means that they come and go when new hhvm versions are released. Before relying on them, it is recommended to run the given example code. If this does not raise a "Hack Arr Compat Notice" this option is not available in your version of HHVM._

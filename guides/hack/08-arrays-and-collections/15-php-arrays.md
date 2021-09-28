@@ -1,5 +1,6 @@
-PHP arrays are legacy value types for storing iterable data. The types
-available are `varray`, `darray`, `varray_or_darray` and `array`
+**PHP arrays are legacy value types for storing iterable data.**
+
+The types available are `varray`, `darray`, `varray_or_darray` and `array`
 (`array` only in some HHVM configurations). They will eventually be
 removed.
 
@@ -18,7 +19,11 @@ var_dump(array_keys($x)[0]);
 
 ## `varray`
 
-*We recommend using `vec` instead of `varray` for new code.*
+#### Use Hack Arrays
+
+As of [HHVM 4.103](https://hhvm.com/blog/2021/03/31/hhvm-4.103.html), `varray` is aliased to `vec`. Use [`vec`](https://docs.hhvm.com/hack/arrays-and-collections/hack-arrays#vec).
+
+#### Working with varrays
 
 A `varray` is an ordered, iterable data structure.
 
@@ -67,7 +72,11 @@ varray(keyset[10, 11]); // varray[10, 11]
 
 ## `darray`
 
-*We recommend using `dict` instead of `darray` for new code.*
+#### Use Hack Arrays
+
+As of [HHVM 4.103](https://hhvm.com/blog/2021/03/31/hhvm-4.103.html), `darray` is aliased to `dict`. Use [`dict`](https://docs.hhvm.com/hack/arrays-and-collections/hack-arrays#dict).
+
+#### Working with darrays
 
 A `darray` is an ordered key-value data structure.
 

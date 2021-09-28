@@ -30,7 +30,7 @@ Arrays are compared by length, then by lexicographic ordering on
 elements:
 
 ``` Hack
-varray[5] < varray[1, 2]   // true (LHS has fewer elements)
+vec[5] < vec[1, 2]   // true (left-hand side has fewer elements)
 
-varray[0, 2] < varray[1,2] // true (0 < 1)
+vec[0, 2] < vec[1,2] // true (0 < 1)
 ```

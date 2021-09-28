@@ -8,9 +8,6 @@ Collections are object types for storing iterable data. The types
 available include `Vector`, `Map`, `Set`, `Pair` and helper
 interfaces.
 
-PHP arrays are legacy value types for storing iterable data. The types
-available are `varray`, `darray` and `varray_or_darray`.
-
 ## Quickstart
 
 You can create Hack arrays as follows:
