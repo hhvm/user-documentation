@@ -36,6 +36,7 @@ final class HomePageController extends WebPageController {
     $classes_interfaces_traits = <ul class="guideList" />;
     $types_generics = <ul class="guideList" />;
     $learn = <ul class="guideList" />;
+    $experimental = <ul class="guideList" />;
 
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
@@ -61,6 +62,9 @@ final class HomePageController extends WebPageController {
         case CategoriesHack::TYPES_GENERICS:
           $category_root = $types_generics;
           break;
+        case CategoriesHack::EXPERIMENTAL:
+          $category_root = $experimental;
+          break;
         case CategoriesHHVM::LEARN:
           $category_root = $learn;
           break;
@@ -84,6 +88,7 @@ final class HomePageController extends WebPageController {
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CONTROL_FLOW}</h3><div class="guideListWrapper">{$control_flow}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CLASSES_INTERFACES_TRAITS}</h3><div class="guideListWrapper">{$classes_interfaces_traits}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::TYPES_GENERICS}</h3><div class="guideListWrapper">{$types_generics}</div></li>);
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::EXPERIMENTAL}</h3><div class="guideListWrapper">{$experimental}</div></li>);
     }
 
     if ($product === GuidesProduct::HHVM){
@@ -127,8 +132,7 @@ final class HomePageController extends WebPageController {
           </h3>
           <p>Full reference docs for all functions, classes, interfaces, and traits in the Hack language.</p>
           <h3 class="listTitle">
-            <a href="/hsl/reference/">Hack Standard Library Reference</a> and <a
-              href="/hsl-experimental/reference/">Experimental Additions</a>
+            <a href="/hsl/reference/">Hack Standard Library Reference</a>
           </h3>
           <p>Full reference docs for all functions, classes, interfaces, and traits in the Hack Standard Library (HSL).</p>
         </div>
