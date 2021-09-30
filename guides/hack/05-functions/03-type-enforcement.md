@@ -30,7 +30,7 @@ function add_items($x, int $y) {
 ```
 
 When `add_items` is called, HHVM will only check the type of `$y`. It
-also will not the check type when `add_items` returns.
+will not check the type when `add_items` returns.
 
 The typechecker will also only check `$y` when it runs. It will assume
 that `$x` and the return value have the correct type. This unresolved
