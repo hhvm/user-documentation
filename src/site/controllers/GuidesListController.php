@@ -42,11 +42,13 @@ final class GuidesListController extends WebPageController {
 
     // Hack / HHVM  categories
     $category_root = $root;
+
     $getting_started = <ul class="guideList" />;
     $control_flow = <ul class="guideList" />;
     $classes_interfaces_traits = <ul class="guideList" />;
     $types_generics = <ul class="guideList" />;
     $learn = <ul class="guideList" />;
+    $experimental = <ul class="guideList" />;
 
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
@@ -57,24 +59,27 @@ final class GuidesListController extends WebPageController {
 
       switch($category){
         case CategoriesHack::GETTING_STARTED:
-	  $category_root = $getting_started;
-	  break;
-	case CategoriesHack::CONTROL_FLOW:
-	  $category_root = $control_flow;
-	  break;
-	case CategoriesHack::CLASSES_INTERFACES_TRAITS:
-	  $category_root = $classes_interfaces_traits;
-	  break;
-	case CategoriesHack::TYPES_GENERICS:
-	  $category_root = $types_generics;
-	  break;
-	case CategoriesHHVM::LEARN:
+          $category_root = $getting_started;
+      	  break;
+      	case CategoriesHack::CONTROL_FLOW:
+      	  $category_root = $control_flow;
+      	  break;
+      	case CategoriesHack::CLASSES_INTERFACES_TRAITS:
+      	  $category_root = $classes_interfaces_traits;
+      	  break;
+      	case CategoriesHack::TYPES_GENERICS:
+      	  $category_root = $types_generics;
+      	  break;
+        case CategoriesHack::EXPERIMENTAL:
+          $category_root = $experimental;
+          break;
+      	case CategoriesHHVM::LEARN:
           $category_root = $learn;
-	  break;
-	default:
-	  $category_root = $root;
-	  break;
-      }
+      	  break;
+      	default:
+      	  $category_root = $root;
+      	  break;
+            }
 
       $category_root->appendChild(
         <li>
@@ -90,7 +95,8 @@ final class GuidesListController extends WebPageController {
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::GETTING_STARTED}</h3><div class="guideListWrapper">{$getting_started}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CONTROL_FLOW}</h3><div class="guideListWrapper">{$control_flow}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CLASSES_INTERFACES_TRAITS}</h3><div class="guideListWrapper">{$classes_interfaces_traits}</div></li>);
-      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::TYPES_GENERICS}</h3><div>{$types_generics}</div></li>);
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::TYPES_GENERICS}</h3><div class="guideListWrapper">{$types_generics}</div></li>);
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::EXPERIMENTAL}</h3><div>{$experimental}</div></li>);
     }
 
     if ($product === GuidesProduct::HHVM){

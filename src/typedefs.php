@@ -35,6 +35,7 @@ enum CategoriesHack: string as string {
   CONTROL_FLOW = 'Control Flow';
   GETTING_STARTED = 'Getting Started';
   TYPES_GENERICS = 'Types and Generics';
+  EXPERIMENTAL = 'Experimental Additions';
 }
 
 enum CategoriesHHVM: string as string {
