@@ -1,6 +1,8 @@
 The following pages of documentation describe Hack language features in the *experimental* phase.
 
 ## About Experimental Features
+We have documented these features as they may appear in built-ins, including the Hack Standard Library.
+
 We _do not_ recommend using any of these features until they are formally announced and integrated into the main documentation set.
 
 ## Enabling an Experimental Feature

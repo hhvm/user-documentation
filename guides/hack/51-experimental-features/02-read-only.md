@@ -42,6 +42,9 @@ function test(readonly Bar $x) : void {
 }
 ```
 
+## How is it different from Coeffects?
+[Coeffects](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities) affects an entire function (and all the functions it calls), whereas readonly affects values / expressions.
+
 ## Applications
 This is a list of all of the valid locations of the keyword.
 
@@ -121,7 +124,7 @@ function foo(): void {
 ```
 
 ### Functions / Methods
-`readonly` can appear as a modifier on instance methods.
+`readonly` can appear as a modifier on instance methods, signaling that `$this` is readonly.
 
 ``` Hack
 class C {
@@ -171,8 +174,8 @@ function returns_mutable(readonly Foo $x): Foo {
 ### Closures
 A function type can be marked readonly: `readonly function(T1): T`.
 
-## Interactions with [Context and Capabilities](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities)
-If your function only has the `ReadGlobals` capability (i.e. is marked `read_globals` or `policied`) it can only access class static variables if they are wrapped in a readonly expression:
+## Interactions with [Coeffects](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities)
+If your function only has the `ReadGlobals` capability (i.e. is marked `read_globals`) it can only access class static variables if they are wrapped in a readonly expression:
 
 ``` Hack
 function read_static()[read_globals]: void {
@@ -198,6 +201,8 @@ function test(): void {
 
 ## Converting to non-readonly
 Sometimes you may encounter a readonly value that isn’t an object (i.e. a readonly int, due to the deepness property of readonly). In those cases, instead of returning a readonly int, you’ll want a way to tell Hack that the value you have is actually a value type. You can use the function `HH\Readonly\as_mut()` to convert any primitive type from readonly to mutable.
+
+Use `HH\Readonly\as_mut()` strictly for primitive types and value-type collections of primitive types (i.e. a vec of int).
 
 ``` Hack
 class Foo {
