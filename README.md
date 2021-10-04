@@ -2,7 +2,7 @@
 
 This is the repo for the [HHVM and Hack user documentation](http://docs.hhvm.com). [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
 
-If you see anything egregious, you can [file an issue](https://github.com/hhvm/user-documentation/issues/new) or ping us at #hhvm-dev on Freenode IRC or [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
+If you see anything egregious, you can [file an issue](https://github.com/hhvm/user-documentation/issues/new) or ping us at [hhvm.dev on Facebook](https://www.facebook.com/groups/hhvm.dev/)
 
 ## What?
 
