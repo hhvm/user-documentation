@@ -3,14 +3,10 @@ This object's property is being mutated (used as an lvalue)
 Setting non-mutable object properties requires the capability WriteProperty, which is not provided by the context. (Typing[4401])
   File "%s/write-props-bad.hack", line 10, characters 31-32:
   The local (enclosing) context provides the capability set {}
-  File "coeffect/contexts.hhi", line 28, characters 1-23:
-  Hack provides a list of supported contexts here
 
 File "%s/write-props-bad.hack", line 16, characters 3-8:
 This object's property is being mutated (used as an lvalue)
 Setting non-mutable object properties requires the capability WriteProperty, which is not provided by the context. (Typing[4401])
   File "%s/write-props-bad.hack", line 15, characters 38-39:
   The local (enclosing) context provides the capability set {}
-  File "coeffect/contexts.hhi", line 28, characters 1-23:
-  Hack provides a list of supported contexts here
 

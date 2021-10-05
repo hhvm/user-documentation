@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "64892719e7b5020a98dc40ad5a4c2690",
+    "content-hash": "153b81dd42dcdf95c45ed6b75e224e30",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -430,20 +430,20 @@
         },
         {
             "name": "facebook/xhp-lib",
-            "version": "v4.0.4",
+            "version": "v4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/xhp-lib.git",
-                "reference": "3804a7ddb385c4c7d44b011292be8a06ecad7c66"
+                "reference": "4369192cf92b2858028bff4805ce26634ad546f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/3804a7ddb385c4c7d44b011292be8a06ecad7c66",
-                "reference": "3804a7ddb385c4c7d44b011292be8a06ecad7c66",
+                "url": "https://api.github.com/repos/hhvm/xhp-lib/zipball/4369192cf92b2858028bff4805ce26634ad546f6",
+                "reference": "4369192cf92b2858028bff4805ce26634ad546f6",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.73",
+                "hhvm": "^4.102",
                 "hhvm/hsl": "^4.36.0"
             },
             "require-dev": {
@@ -472,9 +472,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/xhp-lib/issues",
-                "source": "https://github.com/hhvm/xhp-lib/tree/v4.0.4"
+                "source": "https://github.com/hhvm/xhp-lib/tree/v4.1.0"
             },
-            "time": "2021-05-04T13:59:53+00:00"
+            "time": "2021-10-05T14:58:05+00:00"
         },
         {
             "name": "hhvm/hhast",
@@ -916,8 +916,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.127.*"
+        "hhvm": "4.129.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
