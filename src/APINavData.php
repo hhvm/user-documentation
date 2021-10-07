@@ -12,8 +12,11 @@ namespace HHVM\UserDocumentation;
 
 final class APINavData {
   private APIIndex $index;
+  private string $product;
+
   private function __construct(APIProduct $product) {
     $this->index = APIIndex::get($product);
+    $this->product = $product;
   }
 
   <<__Memoize>>
@@ -22,14 +25,15 @@ final class APINavData {
   }
 
   public function getNavData(): dict<string, NavDataNode> {
+    $product = $this->product;
     return dict[
-      'Classes' => $this->getNavDataForClasses(APIDefinitionType::CLASS_DEF),
+      'Classes' => $this->getNavDataForClasses(APIDefinitionType::CLASS_DEF, $product),
       'Interfaces' =>
-        $this->getNavDataForClasses(APIDefinitionType::INTERFACE_DEF),
-      'Traits' => $this->getNavDataForClasses(APIDefinitionType::TRAIT_DEF),
+        $this->getNavDataForClasses(APIDefinitionType::INTERFACE_DEF, $product),
+      'Traits' => $this->getNavDataForClasses(APIDefinitionType::TRAIT_DEF, $product),
       'Functions' => shape(
         'name' => 'Functions',
-        'urlPath' => '/hack/reference/function/',
+        'urlPath' => '/'.$product.'/reference/function/',
         'children' => $this->getNavDataForFunctions(),
       ),
     ];
@@ -50,6 +54,7 @@ final class APINavData {
 
   private function getNavDataForClasses(
     APIDefinitionType $class_type,
+    string $product,
   ): NavDataNode {
     $nav_data = dict[];
     $classes = $this->index->getClassIndex($class_type);
@@ -63,7 +68,7 @@ final class APINavData {
     }
     return shape(
       'name' => $this->getRootNameForType($class_type),
-      'urlPath' => '/hack/reference/'.$class_type.'/',
+      'urlPath' => '/'.$product.'/reference/'.$class_type.'/',
       'children' => $nav_data,
     );
   }
