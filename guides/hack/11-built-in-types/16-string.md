@@ -1,45 +1,105 @@
-The string type, `string`, is used to represent a sequence of zero or more characters. Conceptually, a string can be considered as an array of
-characters -- the *elements* -- whose keys are the `int` values starting at zero. The type of each element is `string`. A string whose length is zero
-is an *empty string*.
+A `string` is a sequence of *bytes* - they are not required to be valid characters in any particular encoding, 
+for example, they may contain null bytes, or invalid UTF-8 sequences.
 
-A *numeric string* is a string containing the following: optional leading whitespace, followed by an optional sign, followed by a base-10 integer
-or floating-point number. A *leading-numeric string* is a string whose initial characters follow the requirements of a numeric string, and whose
-trailing characters are non-numeric. A *non-numeric string* is a string that is not a numeric string. For example:
+# Basic operations
 
-```Hack
-""              // empty string
-"Hello"         // string containing 5 characters
-" -123"         // numeric string
-'2e+5'          // numeric string
-```
+Concatenation and byte indexing are built-in operations; for example:
 
-Consider the following example:
+- `"foo"."bar"` results in `"foobar"`
+- `"abc"[1]` is `"b"`
+- if the source code is UTF-8, `"a😀c"[1] is byte `0xf0`, the first of the 4 bytes compromising the "😀" emoji in UTF-8
 
-```__toString.hack
-class Point {
-  private float $x;
-  private float $y;
-  public function __construct(num $x = 0, num $y = 0) {
-    $this->x = (float)$x;
-    $this->y = (float)$y;
-  }
-  public function __toString(): string {
-    return '('.$this->x.','.$this->y.')';
-  }
-  // ...
-}
+Other operations are supported by the `Str\` namespace in the [Hack Standard Library](/hsl/reference/), such as:
+
+- `Str\length("foo")` is 3
+- `Str\length("foo\0")` is 4
+- `Str\length("a😀c")` is 6
+- `Str\join(vec['foo', 'bar', 'baz'], '!')` is `"foo!bar!baz"`
+
+# Converting to numbers
+
+Use `Str\to_int()` to convert strings to integers; this will raise errors if the input contains additional data, such as `.0` or other trailing characters.
+
+`(int)` and `(float)` are more permissive, but have undefined behavior for inputs containing similar trailing data.
+
+# Bytes vs characters
+
+Functions in the `Str\` namespace with an `_l` suffix such as `Str\length_l()` take a `Locale\Locale` object
+as the first parameter, which represents the language, region/country, and encoding (e.g. `en_US.UTF-8`); if a
+multibyte encoding such as UTF-8 is specified, the `_l()` functions operate on characters instead of bytes. For
+example:
+
+- `Str\length("a😀c")` is 6
+- `Str\length_l(Locale\bytes(), "a😀c")` is 6
+- `Str\length_l(Locale\create("en_US.UTF-8"), "a😀c")` is 3
+- `Str\slice("a😀c", 2)` is `"a\xf0"` (2 bytes)
+- `Str\slice_l(Locale\create("en_US.UTF-8"), "a😀c", 2)` is `"a😀"` (5 bytes)
+
+In some encodings, the same character can be represented in multiple different ways, with multiple byte sequences;
+the `_l` functions will treat them as equivalent. For example, the letter `é` can be represented by either:
+
+- `"\u{00e9}"`, or "\xc3\xa9" ("LATIN SMALL LETTER E ACUTE")
+- `"\u{0065}\u{0301}"`, or `\x65\xcc\x81" ("LATIN SMALL LETTER E", followed by "COMBINING ACUTE ACCENT")
+
+This means that various comparison functions may report strings as equivalent, despite containing different
+byte sequences; if the result of a character-based operation is used for another function, that function
+should also be character-based.
+
+```hack character_ops.hack
+use namespace HH\Lib\{Locale,Str};
 
 <<__EntryPoint>>
 function main(): void {
-  $p1 = new Point(1.2, 3.3);
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo "\$p1 = ".$p1."\n";
+  $haystack = "abc\u{00e9}"; // ends with UTF-8 "LATIN SMALL LETTER E ACUTE"
+  $needle = "\u{0065}\u{0301}"; // "LATIN SMALL LETTER E", "COMBINING ACUTE ACCENT"
+  $locale = Locale\create("en_US.UTF-8");
+  \var_dump(dict[
+    'Byte test' => Str\ends_with($haystack, $needle), // false
+    'Character test' => Str\ends_with_l($locale, $haystack, $needle), // true
+    'Strip byte suffix' => Str\strip_suffix($haystack, $needle), // no change
+    'Strip character suffix' => Str\strip_suffix_l($locale, $haystack, $needle), // removed
+  ]);
 }
 ```
 
-Method [`__toString`](../classes/methods-with-predefined-semantics.md#method-__toString) has a return type of `string`. The return expression results in
-the concatenation of the three string literals and the two `float` property values into a single string.
+# The `Locale\bytes()` locale
 
-`'('`, `','`, `')'`, `"\$p1 = "`, and `"\n"` are examples of string literals.
+This locale is similar to the `"C"` or `"en_US_POSIX"` locale in other libraries and environments; we refer to
+it as the `bytes` locale to more clearly distinguish between this constant locale and the variable "active libc locale", and because the behavior is slightly different than libc both for performance, and to accomodate arbitrary byte sequences; for example, `Str\length("a\0b")` is 3, however, the libc `strlen` function returns 1 for the same input.
 
-Strings are usually manipulated with functions from the `Str\` namespace in the [Hack Standard Library](/hsl/reference/).
+While operations such as string formatting, uppercase, and lowercase are defined for this locale, they should
+only be used when localization is not a concern, for example when the output is intended to be machine-readable
+instead of human-readable, such as when generating code.
+
+# Functions without a locale parameter
+
+In HHVM 4.130 and above, this is the default locale used by the `Str\` functions that do not take an explicit
+locale - that is, `Str\foo($bar)` is equivalent to `Str\foo_l(Locale\bytes(), $bar)`. In prior versions, the
+active native/libc locale would be used instead; `Str\foo_l(Locale\get_native(), $bar)` can be used instead to
+emulate the prior behavior.
+
+This behavior was changed as:
+- functions such as `Str\format()` were frequently used to to generate machine-readable strings, leading to subtle
+  bugs when locale waas changed. For example, `Str\format('%.2f', 1.23)` could return eith '1.23' or '1,23'.
+- functions still operated on bytes rather than characters, even with `LC_CTYPE` was set to `UTF-8`.
+- users expect functions such as `Str\format()` and `Str\uppercase()` to be pure, however they can not be when
+  they depend on the current locale, which is effectively a global variable.
+
+# Recommendations
+
+- use the non-`_l` variants of functions when generating strings intended for machines to read.
+- use the non-`_l` variants when looking for searching for or operating on specific byte sequences.
+- avoid using `setlocale()` or `Locale\set_native()`; instead, store/pass a `Locale\Locale` object for the
+  viewer in a similar way to how you store/pass other information about the viewer, such as their ID.
+
+`setlocale()` and `Locale\set_native()` affect many C libraries and extension; in web requests, this can lead
+to error messages in logs being translated to the viewer rather than the log reader, though for CLI programs, this
+behavior can be desirable.
+
+# Supported encodings
+
+HHVM currently supports UTF-8, and single-byte encodings that are supported by the platform libc.
+
+Other encodings may be supported in the future, however `Locale\set_native()` is likely to be restricted to
+the current locales; for example, UTF-16 can not be supported by `Locale\set_native()`, as UTF-16 strings can
+contain null bytes.

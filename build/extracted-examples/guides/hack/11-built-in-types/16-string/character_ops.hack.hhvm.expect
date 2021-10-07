@@ -1,0 +1,10 @@
+dict(4) {
+  ["Byte test"]=>
+  bool(false)
+  ["Character test"]=>
+  bool(true)
+  ["Strip byte suffix"]=>
+  string(5) "abcé"
+  ["Strip character suffix"]=>
+  string(3) "abc"
+}
