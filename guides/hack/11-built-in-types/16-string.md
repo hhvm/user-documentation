@@ -7,7 +7,7 @@ Concatenation and byte indexing are built-in operations; for example:
 
 - `"foo"."bar"` results in `"foobar"`
 - `"abc"[1]` is `"b"`
-- if the source code is UTF-8, `"a😀c"[1] is byte `0xf0`, the first of the 4 bytes compromising the "😀" emoji in UTF-8
+- if the source code is UTF-8, `"a😀c"[1]` is byte `0xf0`, the first of the 4 bytes compromising the "😀" emoji in UTF-8
 
 Other operations are supported by the `Str\` namespace in the [Hack Standard Library](/hsl/reference/), such as:
 
@@ -42,8 +42,8 @@ the `_l` functions will treat them as equivalent. For example, the letter `é` c
 - `"\u{0065}\u{0301}"`, or `\x65\xcc\x81" ("LATIN SMALL LETTER E", followed by "COMBINING ACUTE ACCENT")
 
 This means that various comparison functions may report strings as equivalent, despite containing different
-byte sequences; if the result of a character-based operation is used for another function, that function
-should also be character-based.
+byte sequences - so if the result of a character-based operation is used for another function, that function
+should also be character-based:
 
 ```hack character_ops.hack
 use namespace HH\Lib\{Locale,Str};
@@ -64,8 +64,7 @@ function main(): void {
 
 # The `Locale\bytes()` locale
 
-This locale is similar to the `"C"` or `"en_US_POSIX"` locale in other libraries and environments; we refer to
-it as the `bytes` locale to more clearly distinguish between this constant locale and the variable "active libc locale", and because the behavior is slightly different than libc both for performance, and to accomodate arbitrary byte sequences; for example, `Str\length("a\0b")` is 3, however, the libc `strlen` function returns 1 for the same input.
+This locale is similar to the constant `"C"` or `"en_US_POSIX"` locale in other libraries and environments; we refer to it as the `bytes` locale to more clearly distinguish between this constant locale and the variable "active libc locale", and because the behavior is slightly different than libc both for performance, and to accomodate arbitrary byte sequences; for example, `Str\length("a\0b")` is 3, however, the libc `strlen` function returns 1 for the same input.
 
 While operations such as string formatting, uppercase, and lowercase are defined for this locale, they should
 only be used when localization is not a concern, for example when the output is intended to be machine-readable
@@ -75,12 +74,12 @@ instead of human-readable, such as when generating code.
 
 In HHVM 4.130 and above, this is the default locale used by the `Str\` functions that do not take an explicit
 locale - that is, `Str\foo($bar)` is equivalent to `Str\foo_l(Locale\bytes(), $bar)`. In prior versions, the
-active native/libc locale would be used instead; `Str\foo_l(Locale\get_native(), $bar)` can be used instead to
+active native/libc locale would be used instead; `Str\foo_l(Locale\get_native(), $bar)` can be used to
 emulate the prior behavior.
 
 This behavior was changed as:
 - functions such as `Str\format()` were frequently used to to generate machine-readable strings, leading to subtle
-  bugs when locale waas changed. For example, `Str\format('%.2f', 1.23)` could return eith '1.23' or '1,23'.
+  bugs when locale was changed. For example, `Str\format('%.2f', 1.23)` could return either '1.23' or '1,23'.
 - functions still operated on bytes rather than characters, even with `LC_CTYPE` was set to `UTF-8`.
 - users expect functions such as `Str\format()` and `Str\uppercase()` to be pure, however they can not be when
   they depend on the current locale, which is effectively a global variable.
