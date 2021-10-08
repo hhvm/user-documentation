@@ -12,7 +12,7 @@ namespace HHVM\UserDocumentation;
 
 final class APINavData {
   private APIIndex $index;
-  private string $product;
+  private APIProduct $product;
 
   private function __construct(APIProduct $product) {
     $this->index = APIIndex::get($product);
@@ -54,7 +54,7 @@ final class APINavData {
 
   private function getNavDataForClasses(
     APIDefinitionType $class_type,
-    string $product,
+    APIProduct $product,
   ): NavDataNode {
     $nav_data = dict[];
     $classes = $this->index->getClassIndex($class_type);
