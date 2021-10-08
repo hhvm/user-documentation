@@ -72,10 +72,7 @@ instead of human-readable, such as when generating code.
 
 # Functions without a locale parameter
 
-In HHVM 4.130 and above, this is the default locale used by the `Str\` functions that do not take an explicit
-locale - that is, `Str\foo($bar)` is equivalent to `Str\foo_l(Locale\bytes(), $bar)`. In prior versions, the
-active native/libc locale would be used instead; `Str\foo_l(Locale\get_native(), $bar)` can be used to
-emulate the prior behavior.
+In HHVM 4.130 and above, the bytes locale is the default locale used by the `Str\` functions that do not take an explicit locale - that is, `Str\foo($bar)` is equivalent to `Str\foo_l(Locale\bytes(), $bar)`. In prior versions, the active native/libc locale would be used instead; `Str\foo_l(Locale\get_native(), $bar)` can be used to    late the prior behavior.
 
 This behavior was changed as:
 - functions such as `Str\format()` were frequently used to to generate machine-readable strings, leading to subtle
