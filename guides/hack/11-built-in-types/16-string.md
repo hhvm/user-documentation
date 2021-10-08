@@ -90,6 +90,10 @@ This behavior was changed as:
 - use the non-`_l` variants when looking for searching for or operating on specific byte sequences.
 - avoid using `setlocale()` or `Locale\set_native()`; instead, store/pass a `Locale\Locale` object for the
   viewer in a similar way to how you store/pass other information about the viewer, such as their ID.
+- prefer `Locale\set_native()` over `setlocale()`.
+- if either is necessary, restore the default locale with `Locale\set_native(Locale\bytes())`; while this can be
+  functionally equivalent to various other locales (e.g. `"en_US"` or `"C"`), HHVM contains optimizations
+  specifically for the `Locale\bytes()` locale.
 
 `setlocale()` and `Locale\set_native()` affect many C libraries and extension; in web requests, this can lead
 to error messages in logs being translated to the viewer rather than the log reader, though for CLI programs, this
