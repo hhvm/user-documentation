@@ -22,9 +22,8 @@
       .subList {
         display: block;
       }
-
-      h4 > a {
-        text-transform: uppercase;
+      h4 {
+        background-color: #DADADA;
       }
     }
 
@@ -45,7 +44,7 @@
         font-size: 16px;
 
         a {
-          color: $darkblue;
+          color: $orange;
           padding-bottom: 10px;
           padding-top: 10px;
         }
