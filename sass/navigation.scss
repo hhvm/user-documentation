@@ -11,13 +11,28 @@
     font-size: 19px;
   }
 
+  h5 {
+    font-size: 16px;
+  }
+
   .navList {
     position: relative;
+
+    .navGroup.navGroupActive {
+      .subList {
+        display: block;
+      }
+
+      h4 > a {
+        text-transform: uppercase;
+      }
+    }
 
     li {
       a {
         color: $lightgrey;
         display: block;
+        font-weight: bold;
 
         &:hover {
           background-color: #DADADA;
@@ -27,11 +42,10 @@
 
       h4 {
         font-family: $base-font;
-        font-size: 12px;
-        text-transform: uppercase;
+        font-size: 16px;
 
         a {
-          color: $orange;
+          color: $darkblue;
           padding-bottom: 10px;
           padding-top: 10px;
         }
@@ -41,6 +55,7 @@
 
   .subList {
     margin-bottom: 20px;
+    display: none;
 
     .subListItem {
       h5 {
