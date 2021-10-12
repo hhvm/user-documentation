@@ -24,7 +24,7 @@ At the command-line, you would execute the script as follows:
 % hhvm /path/to/fib.hack 10
 ```
 
-You specify the `hhvm` binary, the path to `fib.php` and an argument to the script (arguments to scripts do not exist in all cases, of course).
+You specify the `hhvm` binary, the path to `fib.hack` and an argument to the script (arguments to scripts do not exist in all cases, of course).
 
 ```
 The 10 number in fibonacci is: 55
