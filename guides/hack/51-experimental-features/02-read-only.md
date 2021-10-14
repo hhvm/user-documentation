@@ -171,8 +171,61 @@ function returns_mutable(readonly Foo $x): Foo {
 }
 ```
 
-### Closures
-A function type can be marked readonly: `readonly function(T1): T`.
+### Closures and function types
+A function type can be marked readonly: `(readonly function(T1): T)`. Denoting a function/closure as readonly adds the restriction that the function/closure captures all values as readonly:
+
+```Hack
+function readonly_closure_example(): void {
+  $x = new Foo();
+  $f = readonly () ==> {
+    $x->prop = 4; // error, $x is readonly here!
+  };
+}
+```
+One way to make sense of this behavior is to think of closures as objects with an __invoke function (which is how HHVM implements all closures), and whose properties are the values it captures. A readonly closure is then defined as a closure whose __invoke function is annotated with readonly.
+
+Readonly closures affect Hack’s type system, where readonly closures are subtypes of their mutable counterparts. Specifically, a (readonly function(T1):T2) is a strict subtype of a (function(T1): T2).
+
+#### readonly (function (): T) versus (readonly function(): T): references vs. objects
+A `(readonly function(): T)` may look very similar to a `readonly (function(): T)`, but they are actually different. The first denotes a readonly closure object, which at definition time, captured readonly values. The second denotes a readonly **reference** to a regular, mutable closure object:
+
+```Hack
+function readonly_closures_example2(
+  (function (): T) : $regular_f,
+  (readonly function(): T): $ro_f,
+) : void {
+  $ro_regular_f = readonly $regular_f; // readonly (function(): T)
+  $ro_f; // (readonly function(): T)
+  $ro_ro_f = readonly $ro_f; // readonly (readonly function(): T)
+}
+```
+
+Since calling a mutable closure object can modify itself (and its captured values), a readonly reference to a regular closure **cannot** be called.
+
+```Hack
+function readonly_closure_call(
+  (function (): T) : $regular_f,
+  (readonly function(): T): $ro_f,
+) : void {
+  $ro_regular_f = readonly $regular_f; // readonly (function(): T)
+  $ro_regular_f(); // error, $ro_regular_f is a readonly reference to a regular function
+}
+```
+
+But a readonly closure object can have readonly references and call them, since they cannot modify the original closure object on call:
+
+```Hack
+function readonly_closure_call2(
+  (function (): T) : $regular_f,
+  (readonly function(): T): $ro_f,
+) : void {
+  $ro_regular_f = readonly $regular_f; // readonly (function(): T)
+  $ro_regular_f(); // error, $ro_regular_f is a readonly reference to a regular function
+  $ro_ro_f = readonly $ro_f; // readonly (readonly function(): T)
+  $ro_ro_f(); // safe
+}
+```
+
 
 ## Interactions with [Coeffects](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities)
 If your function only has the `ReadGlobals` capability (i.e. is marked `read_globals`) it can only access class static variables if they are wrapped in a readonly expression:
