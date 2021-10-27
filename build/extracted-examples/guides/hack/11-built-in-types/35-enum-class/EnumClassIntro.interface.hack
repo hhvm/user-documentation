@@ -21,7 +21,7 @@ class ConstName implements IHasName {
   }
 }
 
-// enum class which base type is the IHasName interface: each enum constant
+// enum class which base type is the IHasName interface: each enum value
 // can be any subtype of IHasName, here we see HasName and ConstName
 enum class Names : IHasName {
   HasName Hello = new HasName('hello');

@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught TypeError: Argument 1 passed to HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid\do_stuff() must be an instance of HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid\Foo, string given in %s/EnumClassInvalid.hack.type-errors:12
+Stack trace:
+#0 %s/EnumClassInvalid.hack.type-errors(16): HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid\do_stuff()
+#1 (): HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid\main()
+#2 {main}

@@ -1,0 +1,15 @@
+File "%s/EnumClassInvalid.hack", line 11, characters 3-10:
+Unbound name (typing): `HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid\var_dump` (Typing[4107])
+
+File "%s/EnumClassInvalid.hack", line 11, characters 3-10:
+Unbound name: `HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid\var_dump` (a global function) (Naming[2049])
+
+File "%s/EnumClassInvalid.hack", line 16, characters 12-19:
+Invalid argument (Typing[4110])
+  File "%s/EnumClassInvalid.hack", line 10, characters 19-21:
+  Expected `HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid\Foo`
+  File "%s/EnumClassInvalid.hack", line 7, characters 3-8:
+  But got `string`
+  File "BuiltinEnum.hhi", line 76, characters 42-46:
+    via this generic `TType`
+
