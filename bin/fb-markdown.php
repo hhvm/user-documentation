@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh
 /*
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
@@ -11,8 +11,6 @@
 
 namespace Facebook\Markdown;
 
-require_once(__DIR__.'/../vendor/hh_autoload.php');
-
 function cli_gfm_render(string $in): string {
   // Spec-compliance requires enabling HTML
   $parser_ctx = (new ParserContext())->enableHTML_UNSAFE();
@@ -24,4 +22,9 @@ function cli_gfm_render(string $in): string {
   return (new HTMLRenderer($render_ctx))->render($ast);
 }
 
-print(cli_gfm_render(\file_get_contents('/dev/stdin')));
+<<__EntryPoint>>
+function cli_gfm_render_main(): void {
+  require_once(__DIR__.'/../vendor/hh_autoload.hack');
+  \Facebook\AutoloadMap\initialize();
+  print(cli_gfm_render(\file_get_contents('/dev/stdin')));
+}

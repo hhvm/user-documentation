@@ -1,4 +1,4 @@
-<?hh // partial
+<?hh
 /*
  *  Copyright (c) 2004-present, Facebook, Inc.
  *  All rights reserved.
@@ -10,6 +10,7 @@
  */
 
 // The deploy process can use this to get higher rate limits
+<<__EntryPoint>>
 function dump_composer_github_oauth_token(): void {
   $config = getenv('HOME').'/.composer/auth.json';
   if (!file_exists($config)) {
@@ -24,5 +25,3 @@ function dump_composer_github_oauth_token(): void {
     print $token."\n";
   }
 }
-
-dump_composer_github_oauth_token();
