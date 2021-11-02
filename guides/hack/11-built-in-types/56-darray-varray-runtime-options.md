@@ -1,4 +1,4 @@
-As of [HHVM 4.103](https://hhvm.com/blog/2021/03/31/hhvm-4.103.html), `darray` / `varray` are aliased to `dict` / `vec` respectively. Use [Hack arrays](http://localhost:8080/hack/arrays-and-collections/hack-arrays).
+As of [HHVM 4.103](https://hhvm.com/blog/2021/03/31/hhvm-4.103.html), `darray` / `varray` are aliased to `dict` / `vec` respectively. Use [Hack arrays](https://docs.hhvm.com/hack/arrays-and-collections/hack-arrays).
 
 ## WARNING WARNING WARNING
 
