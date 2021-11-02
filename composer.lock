@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d817bed156462901d35096c91f69e05e",
+    "content-hash": "be540e87942350967e7a47530e3e9c08",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -478,16 +478,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.127.1",
+            "version": "v4.133.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "f6480404bd1c02d4001a7d12580955a58134eb1a"
+                "reference": "c1969515e8bc9ea2d581a3ce3380efd372126059"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/f6480404bd1c02d4001a7d12580955a58134eb1a",
-                "reference": "f6480404bd1c02d4001a7d12580955a58134eb1a",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/c1969515e8bc9ea2d581a3ce3380efd372126059",
+                "reference": "c1969515e8bc9ea2d581a3ce3380efd372126059",
                 "shasum": ""
             },
             "require": {
@@ -514,7 +514,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.x-dev"
+                    "dev-master": "4.x-dev",
+                    "dev-main": "4.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -524,9 +525,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.127.1"
+                "source": "https://github.com/hhvm/hhast/tree/v4.133.0"
             },
-            "time": "2021-09-16T17:58:37+00:00"
+            "time": "2021-10-25T21:13:45+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -916,8 +917,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.130.*"
+        "hhvm": "4.134.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

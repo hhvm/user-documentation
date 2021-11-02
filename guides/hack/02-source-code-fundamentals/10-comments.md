@@ -3,8 +3,6 @@ Hack has three comment syntaxes.
 ```show-comment-styles.hack no-auto-output
 // A single line comment.
 
-# Also a single line comment.
-
 /* A multi line comment.
  *
  */

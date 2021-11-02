@@ -5,8 +5,6 @@ namespace HHVM\UserDocumentation\Guides\Hack\SourceCodeFundamentals\Comments\Sho
 
 // A single line comment.
 
-# Also a single line comment.
-
 /* A multi line comment.
  *
  */
