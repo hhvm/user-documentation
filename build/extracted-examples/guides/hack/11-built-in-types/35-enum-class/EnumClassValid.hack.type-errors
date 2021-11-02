@@ -7,13 +7,11 @@ enum class Foo: string {
   string BAR = 'BAZ';
 }
 
-function do_stuff(Foo $value): void {
+function do_stuff(HH\MemberOf<Foo, string> $value): void {
   var_dump($value);
 }
 
 <<__EntryPoint>>
 function main(): void {
-  \init_docs_autoloader();
-
-  do_stuff(Foo::BAR); // Ok
+  do_stuff(Foo::BAR); // ok
 }

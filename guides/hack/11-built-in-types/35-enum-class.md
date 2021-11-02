@@ -26,13 +26,11 @@ enum class Ints : int {
   int A = 0;
   int B = 10;
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ### Example: Interface as a Base Type
 
-```EnumClassIntro.interface.hack no-auto-output
+```EnumClassIntro.Involved.hack no-auto-output
 // Some class definitions to make a more involved example
 interface IHasName {
   public function name() : string;
@@ -58,8 +56,6 @@ enum class Names : IHasName {
   HasName World = new HasName('world');
   ConstName Bar = new ConstName();
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ## Accessing values
@@ -76,6 +72,30 @@ By default, all enum classes are under the `write_props` context. It is not poss
 
 Enum classes can be composed together, as long as they implement the same base type:
 
+```EnumClassBox.definition.hack no-auto-output
+interface IBox {}
+
+class Box<T> implements IBox {
+  public function __construct(public T $data)[] {}
+}
+
+enum class Boxes : IBox {
+  Box<int> Age = new Box(42);
+  Box<string> Color = new Box('red');
+  Box<int> Year = new Box(2021);
+}
+
+function get<T>(\HH\MemberOf<Boxes, Box<T>> $box) : T {
+  return $box->data;
+}
+
+function test0(): void {
+  get(Boxes::Age); // ok, of type int, returns 42
+  get(Boxes::Color); // ok, of type string, returns 'red'
+  get(Boxes::Year); // ok, of type int, returns 2021
+}
+```
+
 ```EnumClassBox.extends0.hack no-auto-output
 enum class EBase : IBox {
   Box<int> Age = new Box(42);
@@ -84,8 +104,6 @@ enum class EBase : IBox {
 enum class EExtend : IBox extends EBase {
   Box<string> Color = new Box('red');
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 In this example, `EExtend` inherits `Age` from `EBase`, which means that `EExtend::Age` is defined.
@@ -116,8 +134,6 @@ enum class E1 : IBox extends E {
 // enum class Y : IBox extends E0, E1 { }
 // type error, Y::Color is declared twice, in E0 and in E1
 // only he name is use for ambiguity
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ### Control over inheritance
@@ -141,27 +157,23 @@ function do_stuff(Foo $value): void {
 function main(): void {
   do_stuff(Foo::BAR); // expected Foo but got string
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 However, if we instead define `do_stuff()` as receiving `HH\MemberOf<Foo, string>`, then we can use `Foo::Bar` with no issues.
 
-```EnumClassValid.hack no-auto-output
+```EnumClassValid.hack.type-errors no-auto-output
 enum class Foo: string {
   string BAR = 'BAZ';
 }
 
-function do_stuff(Foo $value): void {
+function do_stuff(HH\MemberOf<Foo, string> $value): void {
   var_dump($value);
 }
 
 <<__EntryPoint>>
 function main(): void {
-  do_stuff(Foo::BAR); // Ok
+  do_stuff(Foo::BAR); // ok
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ## Accessing enum class types
@@ -174,16 +186,12 @@ Let's examine `enum E` v. `enum class EC`.
 enum E : int {
   A = 42;
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ```EnumClassEC.hack no-auto-output
 enum class EC : int {
   int A = 42;
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 The built-in enum type of `E::A` is just `E`. All we know is that value `A` is declared within the enum: we know nothing of its underlying type.
@@ -225,8 +233,6 @@ class StringKey extends Key<string> {
     return Str\capitalize($s);
   }
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 Now let’s create the base definitions for our dictionary
@@ -260,8 +266,6 @@ abstract class DictBase {
     $this->raw_data[$name] = $data;
   }
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 Now one just need to provide a set of keys and extends `DictBase`:
@@ -284,8 +288,6 @@ enum class MyKeys : IKey extends EKeys {
 class MyDict extends DictBase {
   const type TKeys = MyKeys;
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ```EnumClassFull.user1.hack
@@ -297,6 +299,4 @@ function main() : void {
   // $d->set(MyKeys::AGE, new Foo()); // type error
   expect_string($d->get(MyKeys::NAME) as nonnull);
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
