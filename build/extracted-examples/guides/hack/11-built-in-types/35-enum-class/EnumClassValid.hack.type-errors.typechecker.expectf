@@ -7,7 +7,7 @@ Unbound name (typing): `HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClas
 File "%s/EnumClassValid.hack", line 11, characters 3-10:
 Unbound name: `HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassValid\var_dump` (a global function) (Naming[2049])
 
-File "%s/EnumClassValid.hack", line 16, characters 12-19:
+File "%s/EnumClassValid.hack", line 15, characters 12-19:
 Invalid argument (Typing[4110])
   File "%s/EnumClassValid.hack", line 10, characters 19-42:
   Expected `HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassValid\HH\MemberOf<HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassValid\Foo, string>`

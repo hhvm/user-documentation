@@ -153,7 +153,6 @@ function do_stuff(Foo $value): void {
   var_dump($value);
 }
 
-<<__EntryPoint>>
 function main(): void {
   do_stuff(Foo::BAR); // expected Foo but got string
 }
@@ -170,7 +169,6 @@ function do_stuff(HH\MemberOf<Foo, string> $value): void {
   var_dump($value);
 }
 
-<<__EntryPoint>>
 function main(): void {
   do_stuff(Foo::BAR); // ok
 }
