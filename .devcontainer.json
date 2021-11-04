@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "docs.hhvm.com",
+  "runArgs": [
+    "--init"
+  ],
+  "image": "hhvm/hhvm:4.134-latest",
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+	"terminal.integrated.profiles.linux": {
+		"bash": {
+			"path": "/bin/bash",
+			"args": [
+				"--login"
+			]
+		}
+	},
+	"terminal.integrated.defaultProfile.linux": "bash"
+},
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+	"pranayagarwal.vscode-hack",
+],
+
+  "postCreateCommand": "touch /docker_build; .deploy/init.sh",
+  "postStartCommand": "cd public; hhvm -m server -p 8080 -vServer.AllowRunAsRoot=1 -c ../hhvm.dev.ini",
+  "forwardPorts": [	8080 ]
+}

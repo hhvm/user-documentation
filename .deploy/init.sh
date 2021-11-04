@@ -20,14 +20,14 @@ locale-gen en_US.UTF-8
 
 echo "** Installing composer"
 mkdir /opt/composer
-wget -qO /dev/stdout https://getcomposer.org/installer | php -- --install-dir=/opt/composer
-if [ ! -e /opt/composer/composer.phar ]; then
+wget -qO /dev/stdout https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+if [ ! -x /usr/local/bin/composer ]; then
   echo "Failed to install composer"
   exit 1
 fi
 
 echo "** Installing Hack dependencies"
-php /opt/composer/composer.phar install
+composer install
 
 echo "** Run build"
 hhvm bin/build.php --auto
