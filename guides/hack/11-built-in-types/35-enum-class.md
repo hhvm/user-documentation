@@ -1,28 +1,36 @@
-**Disclaimer: This is a new feature, and you will have to enable it in your projects**
+In comparison to [enumerated types (enums)](enumerated-types), enum classes are not restricted to int and string values.
 
+## Enum types v. Enum class
+Built-in enum types limit the base type of an enum to `arraykey` -- an integer or string -- or another enum.
 
-Historically, the base type of an enumerated type (enum) is restricted to the `arraykey` type: it must be an integer, a string or another enum.
-This feature enables more types as base type for enumerations, as long as the type doesn’t have any generics:
-if an enum has type `t` as base type, then its enum constants are bound to values whose type is a subtype of `t`.
+The base type of an _enum class_ can be any type: they are not required to be constant expressions and objects are valid values. However, with Generics, if an enum has type `T` as a base type, its enum values are bound to values whose type are a subtype of `T`.
 
-Our main goal here is to allow more expressivity and replace some generated / boiler plate code: associating enum constants to different subtypes
-of the base type provides a lightweight form of dependent types that can be used as type-safe abstraction to write generic validator/sanitiser/loggers boiler-plate code.
+## Declaring a new enum class
 
-Here are a couple of simple examples:
+Enum classes are syntactically different from [enum types](enumerated-types), as they require:
+
+* the `enum class` keyword rather than the `enum` keyword
+* that each value is annotated with its precise type: for example, `string` in `string s = ...`
+
+### Example: Simple declarations
 
 ```EnumClassIntro.hack no-auto-output
-// Simple enum class where we allow any type
+// Enum class where we allow any type
 enum class Random : mixed {
   int X = 42;
   string S = 'foo';
 }
 
-// enum classes that mimics a normal enum
+// Enum class that mimics a normal enum (only allowing ints)
 enum class Ints : int {
   int A = 0;
   int B = 10;
 }
+```
 
+### Example: Interface as a Base Type
+
+```EnumClassIntro.Involved.hack no-auto-output
 // Some class definitions to make a more involved example
 interface IHasName {
   public function name() : string;
@@ -41,121 +49,28 @@ class ConstName implements IHasName {
   }
 }
 
-// enum class which base type is the IHasName interface: each enum constant
+// enum class which base type is the IHasName interface: each enum value
 // can be any subtype of IHasName, here we see HasName and ConstName
 enum class Names : IHasName {
   HasName Hello = new HasName('hello');
   HasName World = new HasName('world');
   ConstName Bar = new ConstName();
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
-## Declaring a new enum class
+## Accessing values
 
-Enum classes are syntactically different from existing enum types, as they require:
+Once declared, enum values are accessed using the `::` operator: `Names::Hello`, `Names::Bar`, ...
 
-* the `enum class` keyword rather than the `enum` keyword
-* that each constant is annotated with its precise type, as in `HasName Hello = ...`
+### Control over enum values
 
-Once declared, enum class constants are accessed like normal enum constants using the `::` operator: `Names::Hello`, `Names::Bar`, ...
+Using [coeffects](../contexts-and-capabilities/introduction.md), you can have control over which expressions are allowed as enum class constants.
 
+By default, all enum classes are under the `write_props` context. It is not possible to override this explicitly.
 
-### The `HH\MemberOf` alias
+## Extending an Existing enum class (Inheritance)
 
-Another difference is that their types are more informative. Consider the enum:
-
-```EnumClassEnum.hack no-auto-output
-enum E : int {
-  A = 42;
-}
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
-```
-
-The type of `E::A` is just `E`.
-
-
-```EnumClassEC.hack no-auto-output
-enum class EC : int {
-  int A = 42;
-}
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
-```
-
-If we now look at `EC::A`, its type is `HH\MemberOf<EC, int>`.
-
-
-Let's have a look back at `Names::World`, its type is `HH\MemberOf<Names, HasName>`, and `Names::Bar` has type `HH\MemberOf<Names, ConstName>`.
-
-The addition of this type layer is here to give more information about the enumeration, namely its exact type
-(`HasName` vs `IHasName`) and from which enum class it comes from (`Names`).
-`HH\MemberOf` is designed to allow a transparent access to the underlying value: `HH\MemberOf<Names, HasName> <: HasName`.
-This means that this layer can be ignored if one doesn’t need the additional information, and `Names::Hello` can be used directly as an instance of the `HasName` class:
-
-```EnumClassIntro.names.code0.hack no-auto-output
-function expect_name(HasName $x) : void {}
-// Names::Hello has type HH\MemberOf<Names, HasName>
-
-function test0(): void {
-  expect_name(Names::Hello); // ok !
-}
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
-```
-
-## Defining function that expects enum class
-
-As previously explained, it is completely fine to use enum class constants as an instance of their declared type:
-
-```EnumClassIntro.names.code1.hack no-auto-output
-function show_name_interface(IHasName $x) : string {
-  return $x->name();
-}
-
-function show_name(HasName $x) : string {
-  return $x->name();
-}
-
-function test1(): void {
-  show_name(new HasName('toto')); // Ok
-  show_name_interface(Names::Bar); // Ok
-  show_name(Names::Hello); // Ok
-  // show_name(new ConstName()); // error, ConstName is not a subtype of HasName
-  // show_name(Names::Bar); // error, ConstName is not a subtype of HasName
-}
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
-```
-
-To access the additional information added by `HH\MemberOf`, one has to change the function signature in the following way:
-
-```EnumClassIntro.names.code2.hack no-auto-output
-function show_name_from_names(\HH\MemberOf<Names, IHasName> $x): string {
-  echo "Showing names from the enum class `Names` only";
-  return $x->name(); // HH\MemberOf is transparent to the runtime
-}
-
-function test2(): void {
-  show_name(new HasName('toto')); // error, this instance is not from the Names enum
-  show_name(Names::World); // no problem
-}
-
-enum class OtherNames: IHasName {
-  HasName Foo = new HasName('foo');
-}
-
-function test3(): void {
-  show_name(OtherNames::Foo); // error, expected Names but got OtherNames
-}
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
-```
-
-
-As explained in the introduction, this feature also allows to write dependently typed code. Let’s consider the more involved code:
+Enum classes can be composed together, as long as they implement the same base type:
 
 ```EnumClassBox.definition.hack no-auto-output
 interface IBox {}
@@ -179,28 +94,7 @@ function test0(): void {
   get(Boxes::Color); // ok, of type string, returns 'red'
   get(Boxes::Year); // ok, of type int, returns 2021
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
-
-Here we have a simple example of dependent typing: the return value of the `get` function depends on which constant is passed as an input. We can even make it more strict:
-
-```EnumClassBox.code0.hack no-auto-output
-function get_int(\HH\MemberOf<Boxes, Box<int>> $box) : int {
-  return $box->data;
-}
-
-function test1(): void {
-  get_int(Boxes::Age); // ok
-  // get_int(Boxes::Color); // type error, Color is not a Box<int>
-}
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
-```
-
-## Extending an existing enum class
-
-Enum classes can be composed together, as long as they implement the same base type:
 
 ```EnumClassBox.extends0.hack no-auto-output
 enum class EBase : IBox {
@@ -210,13 +104,12 @@ enum class EBase : IBox {
 enum class EExtend : IBox extends EBase {
   Box<string> Color = new Box('red');
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 In this example, `EExtend` inherits `Age` from `EBase`, which means that `EExtend::Age` is defined.
+
 As with ordinary class extension, using the `extends` keyword will create a subtype relation between the enums: `EExtend <: EBase`.
-Enum classes support multiple inheritance as long as there is no ambiguity in the names of the constants, and that each enum class uses the same base type:
+Enum classes support multiple inheritance as long as there is no ambiguity in value names, and that each enum class uses the same base type:
 
 ```EnumClassBox.extends1.hack no-auto-output
 enum class E : IBox {
@@ -241,22 +134,69 @@ enum class E1 : IBox extends E {
 // enum class Y : IBox extends E0, E1 { }
 // type error, Y::Color is declared twice, in E0 and in E1
 // only he name is use for ambiguity
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ### Control over inheritance
 
-Enum classes support the `__Sealed` attribute, just like normal classes. This will enable a more fine grain control over the extension mechanics.
-However enum classes do not yet support the `final` keyword.
+Though the `final` keyword is not supported, Enum classes support the [`__Sealed`](../attributes/predefined-attributes#__sealed) attribute. Using `__Sealed`, you can specify which other enum classes, if any, are allowed to extend from your enum class.
 
-## Control over enum class constants
+## Defining a Function that expects an enum class
 
-Using [coeffects](../contexts-and-capabilities/introduction.md), one can have control over what kind of expressions are allowed as enum class constants. Please refer to the coeffects documentation for more details about this feature.
+When defining a function that expects an enum class value (e.g. `Foo::BAR`), you need to define the expected parameter appropriately with `HH\MemberOf` or you will run into errors.
 
-By default, all enum classes are under the `write_props` context. It is not possible to override this explicitly. The only work around must be a temporary one involving `HH_FIXME`s.
+```EnumClassInvalid.hack.type-errors no-auto-output
+enum class Foo: string {
+  string BAR = 'BAZ';
+}
 
-## Full example: dependent dictionary
+function do_stuff(Foo $value): void {
+  var_dump($value);
+}
+
+function main(): void {
+  do_stuff(Foo::BAR); // expected Foo but got string
+}
+```
+
+However, if we instead define `do_stuff()` as receiving `HH\MemberOf<Foo, string>`, then we can use `Foo::Bar` with no issues.
+
+```EnumClassValid.hack.type-errors no-auto-output
+enum class Foo: string {
+  string BAR = 'BAZ';
+}
+
+function do_stuff(HH\MemberOf<Foo, string> $value): void {
+  var_dump($value);
+}
+
+function main(): void {
+  do_stuff(Foo::BAR); // ok
+}
+```
+
+## Accessing enum class types
+
+**An enum class type is more informative than a traditional built-in enum type.**
+
+Let's examine `enum E` v. `enum class EC`.
+
+```EnumClassEnum.hack no-auto-output
+enum E : int {
+  A = 42;
+}
+```
+
+```EnumClassEC.hack no-auto-output
+enum class EC : int {
+  int A = 42;
+}
+```
+
+The built-in enum type of `E::A` is just `E`. All we know is that value `A` is declared within the enum: we know nothing of its underlying type.
+
+But if we look at the enum class `EC::A` its type is `HH\MemberOf<EC, int>`. We know that it's declared within the enum class `EC`, with type `int`.
+
+## Full Example: Dependent Dictionary
 
 First, a couple of general Hack definitions:
 
@@ -291,8 +231,6 @@ class StringKey extends Key<string> {
     return Str\capitalize($s);
   }
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 Now let’s create the base definitions for our dictionary
@@ -326,8 +264,6 @@ abstract class DictBase {
     $this->raw_data[$name] = $data;
   }
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 Now one just need to provide a set of keys and extends `DictBase`:
@@ -350,8 +286,6 @@ enum class MyKeys : IKey extends EKeys {
 class MyDict extends DictBase {
   const type TKeys = MyKeys;
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
 
 ```EnumClassFull.user1.hack
@@ -363,13 +297,4 @@ function main() : void {
   // $d->set(MyKeys::AGE, new Foo()); // type error
   expect_string($d->get(MyKeys::NAME) as nonnull);
 }
-```.ini
-hhvm.hack.lang.enable_enum_classes=1
 ```
-
-## How to enable the feature
-
-To use this new feature, you need to pass the following flags to HHVM/Hack
-
-* hhvm flags: `-d hhvm.hack.lang.enable_enum_classes=1`
-* `.hhconfig` flags: `enable_enum_classes=true`

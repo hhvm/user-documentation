@@ -1,0 +1,16 @@
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassInvalid;
+
+enum class Foo: string {
+  string BAR = 'BAZ';
+}
+
+function do_stuff(Foo $value): void {
+  var_dump($value);
+}
+
+function main(): void {
+  do_stuff(Foo::BAR); // expected Foo but got string
+}
