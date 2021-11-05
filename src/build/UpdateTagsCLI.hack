@@ -167,7 +167,7 @@ final class UpdateTagsCLI extends CLIBase {
 
     await $stdout->writeAllAsync(" - updating Dockerfiles\n");
     $dockerfiles = \glob(LocalConfig::ROOT.'/.deploy/*.Dockerfile');
-    $dockerfiles[] = LocalConfig::ROOT.'/.devcontainer.json';
+    $dockerfiles[] = LocalConfig::ROOT.'/.devcontainer/Dockerfile';
 
     foreach ($dockerfiles as $path) {
       \file_get_contents($path)

@@ -1,0 +1,34 @@
+{
+  "name": "docs.hhvm.com",
+  "runArgs": [
+    "--init"
+  ],
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "WORKSPACE": "${containerWorkspaceFolder}"
+    },
+    "context": ".."
+  },
+  "runArgs": [
+    "--env", "LC_ALL=C"
+  ],
+  "overrideCommand": false,
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "/bin/bash",
+        "args": [
+          "--login"
+        ]
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
+
+  "extensions": [ "pranayagarwal.vscode-hack" ],
+  "forwardPorts": [ 80 ],
+  "postCreateCommand": ".deploy/init.sh"
+}
