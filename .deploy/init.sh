@@ -15,6 +15,10 @@ echo "** Installing apt dependencies"
 apt-get clean
 apt-get update -y
 
+# Some environments (e.g. VSCode containers) will copy the exterior locale
+# settings, which can break things if the current locale isn't usable in the
+# container; using the `C` locale makes sure that the `locales` package
+# post-install succeeds.
 LC_ALL=C apt-get install -y ruby php-cli zip unzip locales
 
 echo "** Updating locales"
