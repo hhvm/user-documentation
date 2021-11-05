@@ -4,7 +4,16 @@
   "runArgs": [
     "--init"
   ],
-  "image": "hhvm/hhvm:4.134-latest",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "WORKSPACE": "${containerWorkspaceFolder}"
+    }
+  },
+  "runArgs": [
+    "--env", "LC_ALL=C"
+  ],
+  "overrideCommand": false,
 
   // Set *default* container specific settings.json values on container create.
   "settings": {
@@ -19,12 +28,7 @@
 	"terminal.integrated.defaultProfile.linux": "bash"
 },
 
-  // Add the IDs of extensions you want installed when the container is created.
-  "extensions": [
-	"pranayagarwal.vscode-hack",
-],
-
-  "postCreateCommand": "touch /docker_build; .deploy/init.sh",
-  "postStartCommand": "cd public; hhvm -m server -p 8080 -vServer.AllowRunAsRoot=1 -c ../hhvm.dev.ini",
-  "forwardPorts": [	8080 ]
+  "extensions": [	"pranayagarwal.vscode-hack" ],
+  "forwardPorts": [	80 ],
+  "postCreateCommand": ".deploy/init.sh"
 }

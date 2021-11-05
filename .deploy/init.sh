@@ -7,13 +7,15 @@ if [ ! -e /docker_build ]; then
   exit 1
 fi
 
+export DEBIAN_FRONTEND=noninteractive
+
 echo "** Installing apt dependencies"
 # This is done by the dockerfile, but the intermediate issue can be cached, so do
 # it again here.
 apt-get clean
 apt-get update -y
 
-apt-get install -y ruby php-cli zip unzip locales
+LC_ALL=C apt-get install -y ruby php-cli zip unzip locales
 
 echo "** Updating locales"
 locale-gen en_US.UTF-8

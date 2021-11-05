@@ -3,7 +3,6 @@
 FROM hhvm/hhvm:4.134-latest
 ARG DOCKER_BUILD_ENV=prod
 ENV TZ UTC
-ENV DEBIAN_FRONTEND noninteractive
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
