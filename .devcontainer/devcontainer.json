@@ -1,4 +1,3 @@
-// For format details, see https://aka.ms/devcontainer.json.
 {
   "name": "docs.hhvm.com",
   "runArgs": [
@@ -17,18 +16,18 @@
 
   // Set *default* container specific settings.json values on container create.
   "settings": {
-	"terminal.integrated.profiles.linux": {
-		"bash": {
-			"path": "/bin/bash",
-			"args": [
-				"--login"
-			]
-		}
-	},
-	"terminal.integrated.defaultProfile.linux": "bash"
-},
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "/bin/bash",
+        "args": [
+          "--login"
+        ]
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "bash"
+  },
 
-  "extensions": [	"pranayagarwal.vscode-hack" ],
-  "forwardPorts": [	80 ],
+  "extensions": [ "pranayagarwal.vscode-hack" ],
+  "forwardPorts": [ 80 ],
   "postCreateCommand": ".deploy/init.sh"
 }
