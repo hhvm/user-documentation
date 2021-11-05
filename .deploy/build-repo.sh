@@ -2,7 +2,7 @@
 set -e
 
 echo "** Uninstalling dev-dependencies"
-php /opt/composer/composer.phar install --no-dev
+composer install --no-dev
 
 echo "** Marking revision"
 git rev-parse HEAD > DOCSITE_REV
