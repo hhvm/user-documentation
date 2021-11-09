@@ -8,6 +8,7 @@ The following attributes are defined:
 * [__EntryPoint](#__entrypoint)
 * [__Explicit](#__explicit)
 * [__LateInit](#__lateinit)
+* [__LSB](#__lsb)
 * [__Memoize](#__memoize)
 * [__MemoizeLSB](#__memoizelsb)
 * [__MockClass](#__mockclass)
@@ -188,6 +189,10 @@ class Bar {
 
 It may be clearer to write your code using a memoized static method
 instead of a static property with `__LateInit`.
+
+## __LSB
+
+Marks this property as implicitly redeclared on all subclasses. This ensures each subclass has its own value for the property.
 
 ## __Memoize
 
