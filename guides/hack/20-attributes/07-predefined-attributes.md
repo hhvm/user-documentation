@@ -221,6 +221,8 @@ The types of the parameters are restricted to the following: `null`, `bool`, `in
 
 The interface type `IMemoizeParam` assists with memoizing objects passed to async functions.
 
+To clear the cache and avoid potential memory leaks, use `HH\clear_static_memoization`.
+
 ### Exceptions
 
 Thrown exceptions are not memoized, showing by the increasing counter in this
@@ -313,6 +315,8 @@ async function main(): Awaitable<void> {
 ## __MemoizeLSB
 
 This is like [<<__Memoize>>](#__memoize), but the cache has Late Static Binding. Each subclass has its own memoize cache.
+
+Similarly, you can clear the cache and avoid potential memory leaks with `HH\clear_lsb_memoization`.
 
 ## __MockClass
 
