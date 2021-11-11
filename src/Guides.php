@@ -127,18 +127,19 @@ final class Guides {
           'unary-minus' => tuple('expressions-and-operators', 'arithmetic'),
           'unary-plus' => tuple('expressions-and-operators', 'arithmetic'),
           'XHP-attribute-spread' => tuple('XHP', 'introduction'),
+          'readonly' => tuple('readonly', 'introduction')
         ],
-	'functions' => dict[
-	  'defining-a-function' => tuple('functions', 'introduction'),
-	  'some-basics' => tuple('functions', 'introduction'),
-	  'calling-a-function' => tuple('functions', 'format-strings'),
-	],
+        'functions' => dict[
+          'defining-a-function' => tuple('functions', 'introduction'),
+          'some-basics' => tuple('functions', 'introduction'),
+          'calling-a-function' => tuple('functions', 'format-strings'),
+        ],
         'generics' => dict[
           'constraints' => tuple('generics', 'type-constraints'),
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
           'reified-generics' => tuple('reified-generics', 'reified-generics'),
           'reified-generics-migration' => tuple('reified-generics', 'reified-generics-migration'),
-	  'type-arguments' => tuple('generics', 'type-parameters'),
+	        'type-arguments' => tuple('generics', 'type-parameters'),
         ],
         'operators' => dict[
           'lambda' => tuple('functions', 'anonymous-functions'),
