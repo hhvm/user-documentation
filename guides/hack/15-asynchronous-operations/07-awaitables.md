@@ -18,7 +18,7 @@ $x = async { print("Hello, world\n"); return 42; };
 \var_dump(await $x);
 ```
 
-This can be surprising when the result depends on the call stack; [exceptions](../exceptions)
+This can be surprising when the result depends on the call stack; [exceptions](exceptions)
 are the most common case of this.
 
 ## `Awaitable`
