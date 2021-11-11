@@ -3,8 +3,11 @@ In general, an async operation has the following pattern:
 * Get an awaitable back
 * `await` the awaitable to get a result
 
-However, sometimes an async function can throw an exception. The good news is that the same exception object that would be thrown in the
-non-async version of the code will be returned when we `await` the awaitable.
+If an exception is thrown within an `async` function body, the function does not
+technically throw - it returns an `Awaitable` that throws when resolved. This
+means that if an `Awaitable` is resolved multiple times, the same exception
+object instance will be thrown every time; as it is the same object every time,
+its data will be unchanged, **including backtraces**.
 
 ```basic-exception.hack
 async function exception_thrower(): Awaitable<void> {
@@ -91,5 +94,43 @@ async function wrapping_exceptions(): Awaitable<void> {
 <<__EntryPoint>>
 function main(): void {
   \HH\Asio\join(wrapping_exceptions());
+}
+```
+
+## Memoized Async Exceptions
+Because [`__Memoize`](../attributes/predefined-attributes#__memoize) caches the awaitable itself, **if an async function
+is memoized and throws, you will get the same exception backtrace on every
+failed call**.
+
+For example, both times an exception is caught here, `foo` is in the backtrace,
+but `bar` is not, as the call to `foo` led to the creation of the memoized
+awaitable:
+
+```memoized_async_throw.hack
+<<__Memoize>>
+async function throw_something(): Awaitable<int> {
+  throw new \Exception();
+}
+
+async function foo(): Awaitable<void> {
+  await throw_something();
+}
+
+async function bar(): Awaitable<void> {
+  await throw_something();
+}
+
+<<__EntryPoint>>
+async function main(): Awaitable<void> {
+  try {
+    await foo();
+  } catch (\Exception $e) {
+    \var_dump($e->getTrace()[2] as shape('function' => string, ...)['function']);
+  }
+  try {
+    await bar();
+  } catch (\Exception $e) {
+    \var_dump($e->getTrace()[2] as shape('function' => string, ...)['function']);
+  }
 }
 ```
