@@ -226,6 +226,10 @@ The types of the parameters are restricted to the following: `null`, `bool`, `in
 
 The interface type `IMemoizeParam` assists with memoizing objects passed to async functions.
 
+You can clear the cache with `HH\clear_static_memoization`. This should only be used **in tests** where:
+- the component being tested is meant to be immutable/idempotent for the entire request
+- the test needs to cover multiple initial states, where only one would truly be reachable in a single request
+
 ### Exceptions
 
 Thrown exceptions are not memoized, showing by the increasing counter in this
@@ -318,6 +322,10 @@ async function main(): Awaitable<void> {
 ## __MemoizeLSB
 
 This is like [<<__Memoize>>](#__memoize), but the cache has Late Static Binding. Each subclass has its own memoize cache.
+
+You can clear the cache with `HH\clear_lsb_memoization`. This should only be used **in tests** where:
+- the component being tested is meant to be immutable/idempotent for the entire request
+- the test needs to cover multiple initial states, where only one would truly be reachable in a single request
 
 ## __MockClass
 
