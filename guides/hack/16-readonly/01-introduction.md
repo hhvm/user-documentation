@@ -44,6 +44,6 @@ function test(readonly Bar $x) : void {
 * [Syntax](syntax.md): Basic syntax for readonly keyword
 * [Subtyping](subtyping.md): Rules and semantics for interacting with readonly and mutable values
 * [Explicit Readonly Keywords](explicit-readonly-keywords.md): Positions where the readonly keyword is explicitly required
-* [Containers and collections](containers-and-collections.md): Interactions between collections of readonly values
-* [Advanced interactions and semantics](advanced-semantics.md): More complex features and interactions
+* [Containers and Collections](containers-and-collections.md): Interactions between collections of readonly values
+* [Advanced Semantics](advanced-semantics.md): More complex features and interactions
 
