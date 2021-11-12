@@ -7,6 +7,20 @@
 An *awaitable* is the key construct in `async` code. An awaitable is a first-class object that represents a possibly asynchronous
 operation that may or may not have completed. We `await` the awaitable until the operation has completed.
 
+An `Awaitable` represents a particular execution; this means that awaiting the
+same awaitable twice **will not** execute the code twice. For example,
+while the result of both `await`s below is `42`, the `print()` call (and the
+`return`) only happen once:
+
+```await-twice.hack
+$x = async { print("Hello, world\n"); return 42; };
+\var_dump(await $x);
+\var_dump(await $x);
+```
+
+This can be surprising when the result depends on the call stack; [exceptions](exceptions)
+are the most common case of this.
+
 ## `Awaitable`
 
 Awaitables are represented by the interface called `Awaitable`. While there are several classes that implement `Awaitable`, there is no
