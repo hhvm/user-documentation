@@ -1,0 +1,2 @@
+
+Fatal error: This expression is readonly, but the collection you're modifying is mutable, which isn't allowed. in /home/example/readonly_container_example.hack on line 9

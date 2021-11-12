@@ -1,14 +1,26 @@
-`readonly` is a keyword used to create immutable references to [Objects](https://docs.hhvm.com/hack/classes/introduction) and their properties. 
+`readonly` is a keyword used to create immutable references to [Objects](/hack/classes/introduction) and their properties. 
 
 ### How does it work?
 Expressions in Hack can be annotated with the `readonly` keyword. When an object or reference is readonly, there are two main constraints on it:
 * **Readonlyness:** Object properties can not be modified (i.e. mutated).
 * **Deepness:** All nested properties of a readonly value are readonly.
 
+
 ### Readonlyness
 Object properties of readonly values can not be modified (i.e. mutated).
 
-``` Hack
+```Hack readonly.readonlyness.hack.type-errors
+class Bar {
+  public function __construct(
+    public Foo $foo,
+  ){}
+}
+class Foo {
+  public function __construct(
+    public int $prop,
+  ) {}
+}
+
 function test(readonly Foo $x) : void {
   $x->prop = 4; // error, $x is readonly, its properties can not be modified
 }
@@ -17,19 +29,7 @@ function test(readonly Foo $x) : void {
 ### Deepness
 All nested properties of readonly objects are readonly.
 
-``` Hack
-class Bar {
-  public function __construct(
-    public Foo $foo,
-  )
-}
-
-class Foo {
-  public function __construct(
-    public int $prop,
-  )
-}
-
+``` Hack readonly.deepness.hack.type-errors
 function test(readonly Bar $x) : void {
   $foo = $x->foo;
   $foo->prop = 3; // error, $foo is readonly

@@ -1,0 +1,6 @@
+File "%s/readonly_return.hack", line 7, characters 26-33:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
+File "%s/readonly_return.hack", line 8, characters 10-11:
+This expression is readonly, but we expected a mutable value because this function does not return readonly. Please mark it to return readonly if needed. (Parsing[1002])
+

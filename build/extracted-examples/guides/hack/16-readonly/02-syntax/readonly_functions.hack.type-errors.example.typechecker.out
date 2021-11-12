@@ -1,0 +1,6 @@
+File "/home/example/readonly_functions.hack", line 8, characters 10-17:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
+File "/home/example/readonly_functions.hack", line 9, characters 5-19:
+This expression is readonly, its members cannot be modified (Parsing[1002])
+

@@ -1,0 +1,13 @@
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Readonly\ContainersAndCollections\ReadonlyContainerForeach;
+
+class Foo {
+  public function __construct(public int $prop) {}
+}
+function container_foreach(readonly vec<Foo> $vec): void {
+  foreach($vec as $elem) {
+    $elem->prop = 3; // error, $elem is readonly
+  }
+}

@@ -1,0 +1,6 @@
+File "%s/readonly_as_mut.hack", line 11, characters 10-17:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
+File "%s/readonly_as_mut.hack", line 13, characters 12-29:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+

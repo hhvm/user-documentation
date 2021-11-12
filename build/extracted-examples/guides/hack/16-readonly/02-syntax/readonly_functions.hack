@@ -1,0 +1,11 @@
+// WARNING: Contains some auto-generated boilerplate code, see:
+// HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
+
+namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Syntax\ReadonlyFunctions;
+
+class C {
+  public function __construct(public int $prop) {}
+  public readonly function foo() : void {
+    $this->prop = 4; // error, $this is readonly.
+  }
+}

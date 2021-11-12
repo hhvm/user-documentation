@@ -1,0 +1,2 @@
+
+Fatal error: This expression is readonly, its members cannot be modified in /home/example/readonly_functions.hack on line 9

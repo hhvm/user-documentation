@@ -1,7 +1,11 @@
 From a typing perspective, one can think of a readonly object as a [supertype](/hack/types/supertypes-and-subtypes) of its mutable counterpart.
 For example, readonly values can not be passed to a function that takes mutable values.
 
-``` Hack
+``` Hack readonly_takes_mutable.hack.type-errors
+class Foo {
+  public int $prop = 0;
+}
+
 function takes_mutable(Foo $x): void {
   $x->prop = 4;
 }
@@ -15,7 +19,8 @@ function test(): void {
 
 Similarly, functions can not return readonly values unless they are marked to return readonly.
 
-``` Hack
+``` Hack readonly_return.hack.type-errors
+class Foo {}
 function returns_mutable(readonly Foo $x): Foo {
   return $x; // error, $x is readonly
 }
@@ -23,7 +28,8 @@ function returns_mutable(readonly Foo $x): Foo {
 
 Note that non readonly (mutable) values *can* be passed to a function that takes a readonly parameter:
 
-``` Hack
+``` Hack readonly_takes.hack.type-errors
+class Foo {}
 // promises not to modify $x
 function takes_readonly(readonly Foo $x): void {
 }
@@ -36,10 +42,13 @@ function test(): void {
 
 Similarly, class properties can not be set to readonly values unless they are declared as readonly properties.
 
-``` Hack
+``` Hack readonly_prop_assign.hack.type-errors
+class Bar {}
 class Foo {
-  readonly Bar $ro_prop;
-  Bar $mut_prop;
+  public function __construct(
+    public readonly Bar $ro_prop,
+    public Bar $mut_prop
+  ){}
 }
 
 function test(

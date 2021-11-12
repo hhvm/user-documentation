@@ -1,0 +1,6 @@
+File "/home/example/readonly_advanced_closures.hack", line 10, characters 19-26:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
+File "/home/example/readonly_advanced_closures.hack", line 12, characters 14-21:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
