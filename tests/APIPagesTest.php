@@ -221,4 +221,23 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
     expect(Str\contains($body, '<a href="#guides">'))
       ->toBeTrue('Missing guide links at %s.', $url);
   }
+
+  public async function testMessagesForFBWWW(): Awaitable<void> {
+    // Not HSL
+    list($_, $body) = await PageLoader::getPageAsync('/hack/reference/class/HH.AsyncGenerator/');
+    expect($body)->toNotContainSubstring('www repository');
+
+    // Function
+    list($_, $body) = await PageLoader::getPageAsync('/hsl/reference/function/HH.Lib.C.contains/');
+    expect($body)->toContainSubstring('This is available as <code>C\\contains</code> in the www repository');
+
+    // Class
+    list($_, $body) = await PageLoader::getPageAsync('/hsl/reference/class/HH.Lib.Async.Poll/');
+    expect($body)->toContainSubstring('This is available as <code>Async\\Poll</code> in the www repository');
+
+    // Method
+    // This autolinks because - unlike the previous tests - the target is not the current page.
+    list($_, $body) = await PageLoader::getPageAsync('/hsl/reference/class/HH.Lib.Async.Poll/add/');
+    expect($body)->toMatchRegExp('#The containing class is available as <a [^>]+><code>Async\\\\Poll</code></a> in the www repository#');
+  }
 }
