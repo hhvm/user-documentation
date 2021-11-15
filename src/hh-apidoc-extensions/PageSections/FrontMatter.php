@@ -42,21 +42,20 @@ final class FrontMatter extends PageSection {
       $data['class'] = $def->getName();
     }
 
-    $builtin = C\any(
-      $data['sources'],
-      $s ==> Str\starts_with($s, 'api-sources/hhvm/'),
-    );
-    if ($builtin) {
-      return $data;
-    }
+    $top_level_def = $class ?? $def;
 
     if (
-      C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hsl/'))
+      (
+        $top_level_def->getNamespaceName() === "HH\\Lib" ||
+        Str\starts_with($top_level_def->getNamespaceName(), "HH\\Lib\\")
+      ) &&
+      !C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hsl-experimental'))
     ) {
-      $data['lib'] = shape(
-        'name' => 'the Hack Standard Library',
-        'github' => 'hhvm/hsl',
-        'composer' => 'hhvm/hsl',
+      $data['fbonly messages'] ??= vec[];
+      $data['fbonly messages'][] = Str\format(
+        '%s is available as `%s` in the www repository.',
+        $class is nonnull ? 'The containing class' : 'This',
+        Str\strip_prefix($top_level_def->getName(), 'HH\\Lib\\'),
       );
     } else if (
       C\any(
@@ -70,6 +69,7 @@ final class FrontMatter extends PageSection {
         'composer' => 'hhvm/hsl-experimental',
       );
     }
+
 
     return $data;
   }
