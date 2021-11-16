@@ -1,6 +1,0 @@
-File "/home/example/explicit_readonly_prop.hack", line 14, characters 10-17:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-
-File "/home/example/explicit_readonly_prop.hack", line 9, characters 12-19:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-

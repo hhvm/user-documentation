@@ -1,12 +1,5 @@
-File "/home/example/readonly_methods.hack", line 16, characters 34-41:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-
-File "/home/example/readonly_methods.hack", line 17, characters 8-15:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-
-File "/home/example/readonly_methods.hack", line 9, characters 10-17:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-
-File "/home/example/readonly_methods.hack", line 9, characters 39-46:
-Cannot use unstable feature: `readonly` (Parsing[1002])
+File "/home/example/readonly_methods.hack", line 19, characters 3-4:
+This expression is readonly, so it can only call readonly methods (Typing[4413])
+  File "/home/example/readonly_methods.hack", line 13, characters 19-25:
+  This method is not readonly
 

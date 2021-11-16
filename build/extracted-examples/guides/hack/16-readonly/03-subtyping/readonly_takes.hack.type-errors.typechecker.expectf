@@ -1,3 +1,0 @@
-File "%s/readonly_takes.hack", line 8, characters 25-32:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-

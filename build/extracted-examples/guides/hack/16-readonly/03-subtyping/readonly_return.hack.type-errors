@@ -3,6 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Subtyping\ReadonlyReturn;
 
+<<file:__EnableUnstableFeatures("readonly")>>
 class Foo {}
 function returns_mutable(readonly Foo $x): Foo {
   return $x; // error, $x is readonly
