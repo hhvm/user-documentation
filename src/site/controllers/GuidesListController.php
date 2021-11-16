@@ -49,6 +49,7 @@ final class GuidesListController extends WebPageController {
     $types_generics = <ul class="guideList" />;
     $learn = <ul class="guideList" />;
     $experimental = <ul class="guideList" />;
+    $advanced = <ul class="guideList" />;
 
     foreach ($guides as $guide) {
       $pages = GuidesIndex::getPages($product, $guide);
@@ -70,6 +71,9 @@ final class GuidesListController extends WebPageController {
       	case CategoriesHack::TYPES_GENERICS:
       	  $category_root = $types_generics;
       	  break;
+        case CategoriesHack::ADVANCED_FEATURES:
+          $category_root = $advanced;
+          break;
         case CategoriesHack::EXPERIMENTAL:
           $category_root = $experimental;
           break;
@@ -96,6 +100,7 @@ final class GuidesListController extends WebPageController {
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CONTROL_FLOW}</h3><div class="guideListWrapper">{$control_flow}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::CLASSES_INTERFACES_TRAITS}</h3><div class="guideListWrapper">{$classes_interfaces_traits}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::TYPES_GENERICS}</h3><div class="guideListWrapper">{$types_generics}</div></li>);
+      $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::ADVANCED_FEATURES}</h3><div class="guideListWrapper">{$advanced}</div></li>);
       $root->appendChild(<li><h3 class="listTitle">{CategoriesHack::EXPERIMENTAL}</h3><div>{$experimental}</div></li>);
     }
 

@@ -1,0 +1,9 @@
+File "%s/readonly_container_example2.hack", line 7, characters 29-36:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
+File "%s/readonly_container_example2.hack", line 8, characters 16-23:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
+File "%s/readonly_container_example2.hack", line 9, characters 39-46:
+Cannot use unstable feature: `readonly` (Parsing[1002])
+
