@@ -1,2 +1,0 @@
-
-Fatal error: This expression is readonly, but we expected a mutable value because this function does not return readonly. Please mark it to return readonly if needed. in %s/readonly_return.hack on line 8
