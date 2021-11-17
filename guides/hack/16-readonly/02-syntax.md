@@ -1,7 +1,7 @@
 The `readonly` keyword can be applied to various positions in Hack.
 
 ## Parameters and return values
-Parameters and return values of any callable can be marked `readonly`.
+Parameters and return values of any callable (e.g. a function or method) can be marked `readonly`.
 
 ``` Hack readonly_parameters.hack
 <<file:__EnableUnstableFeatures("readonly")>>
@@ -21,10 +21,10 @@ function getFoo(readonly Bar $x): readonly Foo {
 }
 ```
 
-A readonly *parameter* signals that the function/method will not modify that parameter; a readonly *return type* signals that the function returns a readonly reference to an object that can not be modified.
+A readonly *parameter* signals that the function/method will not modify that parameter when called. A readonly *return type* signals that the function returns a readonly reference to an object that cannot be modified.
 
 ## Static and regular properties
-Static and regular properties can be marked `readonly` and, when applied, can not be modified.
+Static and regular properties marked as `readonly` cannot be modified.
 
 ``` Hack readonly_props.hack
 <<file:__EnableUnstableFeatures("readonly")>>
@@ -36,7 +36,7 @@ class Foo {
   ){}
 }
 ```
-A readonly property represents a property that holds a readonly reference(specifically, that the nested object within the property cannot be modified).
+A readonly property represents a property that holds a readonly reference (specifically, that the nested object within the property cannot be modified).
 
 
 ## Lambdas and function type signatures
@@ -110,6 +110,6 @@ function readonly_closure_example(): void {
 ```
 One way to make sense of this behavior is to think of closures as an object whose properties are the values it captures, which implement a special invocation function that executes the closure. A readonly closure is then defined as a closure whose invocation function is annotated with readonly. 
 
-Readonly closures affect Hack’s type system, where readonly closures are subtypes of their mutable counterparts. Specifically, a `(readonly function(T1):T2)` is a strict subtype of a `(function(T1): T2)`.
+Readonly closures affect Hack’s type system; readonly closures are subtypes of their mutable counterparts. That is, a `(readonly function(T1):T2)` is a strict subtype of a `(function(T1): T2)`.
 
 

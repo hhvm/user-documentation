@@ -16,5 +16,5 @@ class Foo {
 }
 
 function test(readonly Foo $x) : void {
-  $x->prop = 4; // error, $x is readonly, its properties can not be modified
+  $x->prop = 4; // error, $x is readonly, its properties cannot be modified
 }

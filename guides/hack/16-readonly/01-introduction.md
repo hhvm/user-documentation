@@ -2,12 +2,12 @@
 
 ### How does it work?
 Expressions in Hack can be annotated with the `readonly` keyword. When an object or reference is readonly, there are two main constraints on it:
-* **Readonlyness:** Object properties can not be modified (i.e. mutated).
+* **Readonlyness:** Object properties cannot be modified (i.e. mutated).
 * **Deepness:** All nested properties of a readonly value are readonly.
 
 
 ### Readonlyness
-Object properties of readonly values can not be modified (i.e. mutated).
+Object properties of readonly values cannot be modified (i.e. mutated).
 
 ```Hack readonly.readonlyness.hack.type-errors
 <<file:__EnableUnstableFeatures("readonly")>>
@@ -23,7 +23,7 @@ class Foo {
 }
 
 function test(readonly Foo $x) : void {
-  $x->prop = 4; // error, $x is readonly, its properties can not be modified
+  $x->prop = 4; // error, $x is readonly, its properties cannot be modified
 }
 ```
 
@@ -39,8 +39,8 @@ function test(readonly Bar $x) : void {
 }
 ```
 
-### How is `readonly` different from contexts and capabilities that control property mutation (such as write_props)?
-[Contexts](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities) such as `write_props` affect an entire function (and all the functions it calls), whereas readonly affects specific values / expressions. 
+### How is `readonly` different from contexts and capabilities that control property mutation (such as `write_props`)?
+[Contexts](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities) such as `write_props` affect an entire function (and all the functions it (****ambiguous it****) calls), whereas readonly affects specific values / expressions. 
 
 
 ### Topics covered in this section
