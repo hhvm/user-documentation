@@ -3,6 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Subtyping\ReadonlyPropAssign;
 
+<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {}
 class Foo {
   public function __construct(

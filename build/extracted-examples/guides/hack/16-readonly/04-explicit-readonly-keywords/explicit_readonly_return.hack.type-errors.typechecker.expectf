@@ -1,9 +1,0 @@
-File "%s/explicit_readonly_return.hack", line 12, characters 8-15:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-
-File "%s/explicit_readonly_return.hack", line 7, characters 30-37:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-
-File "%s/explicit_readonly_return.hack", line 8, characters 10-17:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-

@@ -1,2 +1,0 @@
-
-Fatal error: Cannot redeclare `read_static()` (previously declared in %s/readonly_coeffects.hack.type-errors:6) in %s/readonly_coeffects.hack.type-errors on line 9

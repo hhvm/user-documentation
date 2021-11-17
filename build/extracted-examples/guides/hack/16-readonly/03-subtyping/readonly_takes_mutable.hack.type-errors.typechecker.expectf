@@ -1,3 +1,7 @@
-File "%s/readonly_takes_mutable.hack", line 15, characters 10-17:
-Cannot use unstable feature: `readonly` (Parsing[1002])
+File "%s/readonly_takes_mutable.hack", line 17, characters 19-20:
+Invalid argument (Typing[4411])
+  File "%s/readonly_takes_mutable.hack", line 17, characters 19-20:
+  This expression is readonly
+  File "%s/readonly_takes_mutable.hack", line 11, characters 28-29:
+  It is incompatible with this parameter, which is mutable
 

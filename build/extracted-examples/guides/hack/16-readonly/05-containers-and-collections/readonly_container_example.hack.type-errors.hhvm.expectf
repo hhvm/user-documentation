@@ -1,2 +1,2 @@
 
-Fatal error: This expression is readonly, but the collection you're modifying is mutable, which isn't allowed. in %s/readonly_container_example.hack.type-errors on line 9
+Fatal error: This expression is readonly, but the collection you're modifying is mutable, which isn't allowed. in %s/readonly_container_example.hack.type-errors on line 11

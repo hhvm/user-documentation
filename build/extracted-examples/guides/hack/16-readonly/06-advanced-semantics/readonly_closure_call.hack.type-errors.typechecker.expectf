@@ -1,3 +1,0 @@
-File "%s/readonly_closure_call.hack", line 10, characters 19-26:
-Cannot use unstable feature: `readonly` (Parsing[1002])
-
