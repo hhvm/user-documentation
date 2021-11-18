@@ -1,5 +1,5 @@
 From a typing perspective, one can think of a readonly object as a [supertype](/hack/types/supertypes-and-subtypes) of its mutable counterpart.
-For example, readonly values can not be passed to a function that takes mutable values.
+For example, readonly values cannot be passed to a function that takes mutable values.
 
 ``` Hack readonly_takes_mutable.hack.type-errors
 <<file:__EnableUnstableFeatures("readonly")>>
@@ -18,7 +18,7 @@ function test(): void {
 }
 ```
 
-Similarly, functions can not return readonly values unless they are marked to return readonly.
+Similarly, functions cannot return readonly values unless they are annotated to return readonly.
 
 ``` Hack readonly_return.hack.type-errors
 <<file:__EnableUnstableFeatures("readonly")>>
@@ -26,9 +26,12 @@ class Foo {}
 function returns_mutable(readonly Foo $x): Foo {
   return $x; // error, $x is readonly
 }
+function returns_readonly(readonly Foo $x): readonly Foo {
+  return $x; // correct
+}
 ```
 
-Note that non readonly (mutable) values *can* be passed to a function that takes a readonly parameter:
+Note that non-readonly (i.e. mutable) values *can* be passed to a function that takes a readonly parameter:
 
 ``` Hack readonly_takes.hack
 <<file:__EnableUnstableFeatures("readonly")>>
@@ -43,7 +46,7 @@ function test(): void {
 }
 ```
 
-Similarly, class properties can not be set to readonly values unless they are declared as readonly properties.
+Similarly, class properties cannot be set to readonly values unless they are declared as readonly properties.
 
 ``` Hack readonly_prop_assign.hack.type-errors
 <<file:__EnableUnstableFeatures("readonly")>>

@@ -17,7 +17,7 @@ function test(): void {
 
 ```
 ## Accessing readonly properties
-Accessing a readonly property (i.e. a property that’s marked readonly at the declaration, not accessing a property off of a readonly object) requires readonly annotation.
+Accessing a readonly property (i.e. a property annotated readonly at the declaration, not accessing a property off of a readonly object) requires readonly annotation.
 
 ``` Hack explicit_readonly_prop.hack
 <<file:__EnableUnstableFeatures("readonly")>>
@@ -35,7 +35,7 @@ function test(Foo $f): void {
 ```
 
 ## Interactions with [Coeffects](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities)
-If your function has the `ReadGlobals` capability. but not the `AccessGlobals` capability (i.e. is marked `read_globals`) it can only access class static variables if they are wrapped in a readonly expression:
+If your function has the `ReadGlobals` capability but not the `AccessGlobals` capability (i.e. is marked `read_globals` or `controlled`), it can only access class static variables if they are wrapped in a readonly expression:
 
 ``` Hack readonly_coeffects.hack
 <<file:__EnableUnstableFeatures("readonly")>> 

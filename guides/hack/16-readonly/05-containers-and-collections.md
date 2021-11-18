@@ -12,7 +12,7 @@ function container_example(readonly Foo $x) : void {
 }
 ```
 
-To use readonly values within a containers, you can either declare the values in a array literal, or declare a array type (i.e. `vec` or `dict`) as readonly and append to it. 
+To use readonly values within a container, you can either declare the values in an array literal, or declare an array type (i.e. `vec` or `dict`) as readonly and append to it. 
 Note that the entire container literal is readonly if any of its contents are readonly. 
 
 ``` Hack readonly_container_example2.hack
@@ -41,7 +41,7 @@ function container_foreach(readonly vec<Foo> $vec): void {
 ```
 
 ### Readonly and Collection types
-Readonly has only limited support with object types like `Vector`, `Map` and `Pair`. Specifically, you can declare readonly collection literals of readonly values to create a readonly collection type(i.e a `readonly Vector<Foo>`), but since collection types themselves are mutable objects, you cannot append to a readonly collection. 
+Readonly has only limited support with object collection types like `Vector`, `Map` and `Pair`. Specifically, you can declare readonly collection literals of readonly values to create a readonly collection type (i.e a `readonly Vector<Foo>`), but since collection types themselves are mutable objects, you cannot append to or modify a readonly collection. 
 
 ``` Hack readonly_collection_example.hack.type-errors
 <<file:__EnableUnstableFeatures("readonly")>>
