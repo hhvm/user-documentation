@@ -40,7 +40,7 @@ function test(readonly Bar $x) : void {
 ```
 
 ### How is `readonly` different from contexts and capabilities that control property mutation (such as `write_props`)?
-[Contexts](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities) such as `write_props` affect an entire function (and all of its callees), whereas readonly affects specific values / expressions. 
+[Contexts](/hack/contexts-and-capabilities/available-contexts-and-capabilities) such as `write_props` affect an entire function (and all of its callees), whereas readonly affects specific values / expressions. 
 
 
 ### Topics covered in this section
