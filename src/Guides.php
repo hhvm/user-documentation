@@ -139,6 +139,7 @@ final class Guides {
           'open-and-closed-generic-types' => tuple('generics', 'type-erasure'),
           'reified-generics' => tuple('reified-generics', 'reified-generics'),
           'reified-generics-migration' => tuple('reified-generics', 'reified-generics-migration'),
+          'some-basics' => tuple('generics', 'introduction'),
 	        'type-arguments' => tuple('generics', 'type-parameters'),
         ],
         'operators' => dict[
