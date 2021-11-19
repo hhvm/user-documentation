@@ -22,7 +22,7 @@ xhp class api_list extends x\element {
     APIProduct product @required,
     ImmSet<APIDefinitionType> types @required;
 
-  final private function getDefinitions(
+  private function getDefinitions(
   ): Map<APIDefinitionType, Map<string, (string, bool)>> {
     switch ($this->:product) {
       case APIProduct::HACK:
@@ -32,7 +32,7 @@ xhp class api_list extends x\element {
     }
   }
 
-  final private function getHackDefinitions(
+  private function getHackDefinitions(
     APIProduct $product,
   ): Map<APIDefinitionType, Map<string, (string, bool)>> {
     $out = Map {};
@@ -49,7 +49,7 @@ xhp class api_list extends x\element {
     return $out;
   }
 
-  final private function getInnerContent(): x\node {
+  private function getInnerContent(): x\node {
     $defs = $this->getDefinitions();
 
     $root = <div class="referenceList" />;
