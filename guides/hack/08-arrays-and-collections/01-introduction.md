@@ -57,7 +57,7 @@ Vec\map(keyset[1, 2], $x ==> $x + 1); // vec[2, 3]
 | Type Refinement                              | `$v is vec<_>`               | `$d is dict<_, _>`             | `$k is keyset<_>`              |
 | `Awaitable` Consolidation                    | `Vec\from_async($v)`         | `Dict\from_async($d)`          | `Keyset\from_async($x)`        |
 
-* `$container` can be a Hack Array or Hack Collection
+\* `$container` can be a Hack Array or Hack Collection
 
 ## Arrays Conversion Cheat sheet
 
