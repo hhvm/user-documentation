@@ -12,6 +12,6 @@ class Automobile {
 function main(): void {
   \init_docs_autoloader();
 
-  $col = Automobile::DEFAULT_COLOR;
+  $col = Automobile::DEFAULT_COLOR; // or: $col = self::DEFAULT_COLOR;
   echo "\$col = $col\n";
 }
