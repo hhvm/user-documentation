@@ -137,7 +137,7 @@ enum class E1 : IBox extends E {
 ```
 
 ### Diamond shape scenarios
-Enum classes support diamond shaped inheritance as long as there is no ambiguity, like int:
+Enum classes support diamond shaped inheritance as long as there is no ambiguity, like in:
 
 ```EnumClassBox.extends2.hack no-auto-output
 enum class DiamondBase : IBox {
