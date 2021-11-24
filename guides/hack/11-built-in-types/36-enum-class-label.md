@@ -1,7 +1,8 @@
 # Experimental feature
 
-This feature is currently experimental and any file that uses label must start with the
-`<<file:__EnableUnstableFeatures('enum_class_label')>>` attribute.
+This feature is currently experimental and any file that relies on it must start with the following attribute:
+
+`<<file:__EnableUnstableFeatures('enum_class_label')>>`
 
 ## Values v. Bindings
 
@@ -30,8 +31,8 @@ Sometimes, the binding that was used to access a value from an enumeration is as
 was used to access `E::A`. Enum types provides a partial solution to this with the `getNames` static method, but it is only
 safe to call if all the values of the enumeration are distinct.
 
-Enum classes provides a way to do this by the newly introduced *Enum Class Label* expressions. For each value defined in an enum class, a corresponding
-label is defined. A label is a handle to access the relevant value. Think of it as an indirect access. Consider the following example:
+Enum classes provides a way to do this by using the newly introduced *Enum Class Label* expressions. For each value defined in an enum class, a corresponding
+label is defined. A label is a handle to access the related value. Think of it as an indirect access. Consider the following example:
 
 ```EnumClassLabel.definition.hack no-auto-output
 <<file:__EnableUnstableFeatures('enum_class_label')>>
@@ -64,13 +65,13 @@ Now, `full_print(E#A)` will echo `A 42` and `full_print(E#B)` will echo `B 42`.
 
 ## Full v. Short Labels
 
-We call labels like `E#A` *fully qualified* labels: the programmer wrote the full enum class names. However there are some situation where Hack can infer
-this part, and we can save the programmer that bit. For example, the previous calls could be written as `full_print(#A)` and `full_print(#B)`, leaving the `E` implicit.
-This is only allowed when there is enough type information to infer the right enum class name. For example, `$x = #A` is not allow and will result in a type error.
+We refer to labels like `E#A` as *fully qualified* labels: the programmer wrote the full enum class name. However there are some situations where Hack can infer
+this part, and we can save the programmer that bit. For example, the previous calls could be written as `full_print(#A)` and `full_print(#B)`, leaving `E` implicit.
+This is only allowed when there is enough type information to infer the right enum class name. For example, `$x = #A` is not allowed and will result in a type error.
 
 ### Special case of function calls
 
-When the first argument of a function is a label, we provide an alternative notation to call it. This was done to reflect some generated code pattern this feature helped removed:
+When the first argument of a function is a label, we provide an alternative notation to call it. This was done to reflect some generated code patterns this feature helped removed:
 ```EnumClassLabel.alt.hack no-auto-output
 function set<T>(HH\EnumClass\Label<E, T> $label, T $data) : void {
   // setting $data into some storage using $label as a key
@@ -88,9 +89,12 @@ As you can see, the short name can be written *before* the opening parenthesis o
 
 ## Known corner cases
 
+### The `#` character is no longer a one line comment
+This feature relies on the fact that Hack and HHVM no longer consider the character `#` as a one line comment. Please use `//` for such purpose.
+
 ### Labels and values cannot be exchanged
 If a method is expecting a label, one cannot pass in a value, and vice versa: `full_print(E::A)` will result in a type error and so will `partial_print(E#A)`.
 
 ### `MemberOf` is covariant, `Label` is invariant
 A label should be considered as a way to attach a type to a binding. Therefore it is invariant: `E#A` is not of type `HH\EnumClass\Label<E, arraykey>`.
-This can be misleading as first, because `HH\MemberOf` is invariant (it is data after all): `E::A` is of type `HH\MemberOf<E, arraykey>`.
+This can be misleading at first, because `HH\MemberOf` is invariant (it is data after all): `E::A` is of type `HH\MemberOf<E, arraykey>`.
