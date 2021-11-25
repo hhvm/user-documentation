@@ -36,6 +36,7 @@ label is defined. A label is a handle to access the related value. Think of it a
 
 ```EnumClassLabel.definition.hack no-auto-output
 <<file:__EnableUnstableFeatures('enum_class_label')>>
+
 // We are using int here for readability but it works for any type
 enum class E : int {
   int A = 42;
@@ -43,21 +44,23 @@ enum class E : int {
 }
 ```
 
-This example defines two constants `E::A: HH\MemberOf<E, int>` and `E::B: HH\MemberOf<E, int>`. Enum class labels add more definitions to the mix:
+This example defines two constants `E::A: \HH\MemberOf<E, int>` and `E::B: \HH\MemberOf<E, int>`. Enum class labels add more definitions to the mix:
 
-- `E#A: HH\EnumClass\Label<E, int>` is the label to access `E::A`
-- `E#B: HH\EnumClass\Label<E, int>` is the label to access `E::B`
+- `E#A: \HH\EnumClass\Label<E, int>` is the label to access `E::A`
+- `E#B: \HH\EnumClass\Label<E, int>` is the label to access `E::B`
 - `E::nameOf` is a static method expecting a label and returning its string representation: `E::nameOf(E#A) = "A"`
 - `E::valueOf` is a static method expecting a label and returning its value: `E::valueOf(E#A) = E::A`
 
 So we can rewrite the earlier example in a more resilient way:
 ```EnumClassLabel.example.achk no-auto-output
-function full_print(HH\EnumClass\Label<E, int> $label) : void {
+<<file:__EnableUnstableFeatures('enum_class_label')>>
+
+function full_print(\HH\EnumClass\Label<E, int> $label) : void {
   echo E::nameOf($label) . " ";
   echo E::valueOf($label) . "\n";
 }
 
-function partial_print(HH\MemberOf<E, int> $value) : void {
+function partial_print(\HH\MemberOf<E, int> $value) : void {
   echo $value . "\n";
 }
 ```
@@ -73,7 +76,9 @@ This is only allowed when there is enough type information to infer the right en
 
 When the first argument of a function is a label, we provide an alternative notation to call it. This was done to reflect some generated code patterns this feature helped removed:
 ```EnumClassLabel.alt.hack no-auto-output
-function set<T>(HH\EnumClass\Label<E, T> $label, T $data) : void {
+<<file:__EnableUnstableFeatures('enum_class_label')>>
+
+function set<T>(\HH\EnumClass\Label<E, T> $label, T $data) : void {
   // setting $data into some storage using $label as a key
 }
 
@@ -96,5 +101,5 @@ This feature relies on the fact that Hack and HHVM no longer consider the charac
 If a method is expecting a label, one cannot pass in a value, and vice versa: `full_print(E::A)` will result in a type error and so will `partial_print(E#A)`.
 
 ### `MemberOf` is covariant, `Label` is invariant
-A label should be considered as a way to attach a type to a binding. Therefore it is invariant: `E#A` is not of type `HH\EnumClass\Label<E, arraykey>`.
-This can be misleading at first, because `HH\MemberOf` is invariant (it is data after all): `E::A` is of type `HH\MemberOf<E, arraykey>`.
+A label should be considered as a way to attach a type to a binding. Therefore it is invariant: `E#A` is not of type `\HH\EnumClass\Label<E, arraykey>`.
+This can be misleading at first, because `\HH\MemberOf` is invariant (it is data after all): `E::A` is of type `\HH\MemberOf<E, arraykey>`.
