@@ -11,11 +11,12 @@ Here's a table of recent LTS releases as well as *expected* future LTS releases:
 
 | Version |    \*Release Date       |    \*End of Suppport       |
 | ------- | ----------------------- | -------------------------- |
-| 4.32    | November 19th, 2019     | October 21st, 2020         |
-| 4.56    | May 4th, 2020           | April 5th, 2021            |
-| 4.80    | October 21st, 2020      | *September 22nd, 2021*     | 
-| 4.102!! | March 23rd, 2021        | *March 7th, 2022*          |
-| 4.128   | *September 22nd, 2021*  | *August 24th, 2022*        |
+| [4.128](https://hhvm.com/blog/2021/09/21/hhvm-4.128.html)  | *September 22nd, 2021*  | *August 24th, 2022*        |
+| [4.102!!](https://hhvm.com/blog/2021/03/23/hhvm-4.102.html)| March 23rd, 2021        | *March 7th, 2022*          |
+| [4.80](https://hhvm.com/blog/2020/10/21/hhvm-4.80.html)    | October 21st, 2020      | *September 22nd, 2021*     | 
+| [4.56](https://hhvm.com/blog/2020/05/04/hhvm-4.56.html)    | May 4th, 2020           | April 5th, 2021            |
+| [4.32](https://hhvm.com/blog/2019/11/19/hhvm-4.32.html)    | November 19th, 2019     | October 21st, 2020         |
+
 
 \* *Dates in italics signify an **expected** date.*
 
