@@ -1,0 +1,2 @@
+
+Fatal error: Undefined interface: HHVM\UserDocumentation\Guides\Hack\ExpressionTrees\DefiningDsls\MyDsl\Spliceable in %s/my_dsl.splice_extend.hack on line 6
