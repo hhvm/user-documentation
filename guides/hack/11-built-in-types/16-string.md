@@ -62,6 +62,12 @@ function main(): void {
 }
 ```
 
+# Default encoding
+
+If a locale is specified without an encoding (e.g. `en_US`, compared to `en_US.UTF-8` or `en_US.ISO8859-1`), the system behavior will be followed. For example:
+- on most Linux systems, `en_US` uses a single-byte-per-character-encoding
+- on MacOS, `en_US` uses UTF-8
+
 # The `Locale\bytes()` locale
 
 This locale is similar to the constant `"C"` or `"en_US_POSIX"` locale in other libraries and environments; we refer to it as the `bytes` locale to more clearly distinguish between this constant locale and the variable "active libc locale", and because the behavior is slightly different than libc both for performance, and to accomodate arbitrary byte sequences; for example, `Str\length("a\0b")` is 3, however, the libc `strlen` function returns 1 for the same input.
@@ -88,6 +94,7 @@ This behavior was changed as:
 - avoid using `setlocale()` or `Locale\set_native()`; instead, store/pass a `Locale\Locale` object for the
   viewer in a similar way to how you store/pass other information about the viewer, such as their ID.
 - prefer `Locale\set_native()` over `setlocale()`.
+- if setting a locale, always explicitly specify an encoding, unless you are matching the behavior of other local executables or native libraries
 - if either is necessary, restore the default locale with `Locale\set_native(Locale\bytes())`; while this can be
   functionally equivalent to various other locales (e.g. `"en_US"` or `"C"`), HHVM contains optimizations
   specifically for the `Locale\bytes()` locale.
