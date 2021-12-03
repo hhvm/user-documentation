@@ -1,7 +1,7 @@
 ## Starting A Real Project
 
 Real projects generally aren't a single file in isolation; they tend to have
-dependencies such as the [Hack Standard Library], and various optional tools.
+dependencies such as the [TypeAssert](https://github.com/hhvm/type-assert), and various optional tools.
 
 A good starting point is to:
 - [install Composer]
