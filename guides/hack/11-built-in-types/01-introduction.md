@@ -1,24 +1,35 @@
-This section covers the different types available in Hack.
+This section covers the different built-in types available in Hack.
 
-**Topics covered in this section**
+## Primitive Types
+Hack has the following primitive types: 
+[bool](/hack/built-in-types/bool), 
+[int](/hack/built-in-types/int), 
+[float](/hack/built-in-types/float), and 
+[string](/hack/built-in-types/string).
 
-* [Arrays](arrays.md)
-* [bool](bool.md)
-* [classname](classname.md)
-* [dict](arrays.md#dict)
-* [dynamic](dynamic.md)
-* [Enumerated Types (`enum`)](enumerated-types.md)
-* [Enum Classes (`enum class`)](enum-class.md)
-* [float](float.md)
-* [int](int.md)
-* [keyset](arrays.md#keyset)
-* [nothing](nothing.md)
-* [noreturn](noreturn.md)
-* [Null Type](null.md)
-* [num](num.md)
-* [shape](shapes.md)
-* [string](string.md)
-* [this](this.md)
-* [Tuples](tuples.md)
-* [vec](arrays.md#vec)
-* [void](void.md)
+* Some types act as parent, container types, like [num (`int`/`float`)](/hack/built-in-types/num) and [arraykey (`int`/`string`)](/hack/built-in-types/arraykey).
+* Others like [mixed](/hack/built-in-types/mixed) act as supertypes, or, like [nothing](/hack/built-in-types/nothing), act as the complete opposite (no type).
+* Similar to `mixed` and `nothing`, [null](/hack/built-in-types/null) and [nonnull](/hack/built-in-types/nonnull) are mutually exclusive to one another.
+
+## Hack Arrays
+There are three types of [Hack Arrays](/hack/arrays-and-collections/introduction). They are:
+[vec](/hack/arrays-and-collections/hack-arrays#vec),
+[keyset](/hack/arrays-and-collections/hack-arrays#keyset), and 
+[dict](/hack/arrays-and-collections/hack-arrays#dict).
+
+Though not built-in as types, other alternatives exist in [Hack Collections](/hack/arrays-and-collections/collections).
+
+## Other Built-In Types
+Hack has other built-in types too, like:
+[enum](/hack/built-in-types/enum) (with [enum class](/hack/built-in-types/enum-class)),
+[shape](/hack/built-in-types/shapes), and 
+[tuples](/hack/built-in-types/tuples).
+
+## Function Return Types
+Other types like [noreturn](/hack/built-in-types/noreturn) and [void](/hack/built-in-types/void) are only valid as function return types .
+
+## Special Types
+These last few types are special in their utility and/or versatility: 
+[classname](/hack/built-in-types/classname), 
+[dynamic](/hack/built-in-types/dynamic), and
+[this](/hack/built-in-types/this).
