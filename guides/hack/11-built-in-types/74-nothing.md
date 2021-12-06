@@ -36,7 +36,7 @@ function returns_an_int(?int $nullable_int): int {
   $throwing_expr_lambda = () ==> throw_as_an_expression(new \Exception());
 
   // You can't write a statement on the RHS of an operator, because it operates on expressions.
-  // The type of the `??` operator is `(nothing & int)`, which simplifies to `int`,
+  // The type of the `??` operator is `(nothing | int)`, which simplifies to `int`,
   // so this return statement is valid.
   return $nullable_int ?? throw_as_an_expression(new \Exception());
 }
