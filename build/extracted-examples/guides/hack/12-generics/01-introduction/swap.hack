@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\Generics\SomeBasics\Swap;
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\Introduction\Swap;
 
 function swap<T>(inout T $i1, inout T $i2): void {
   $temp = $i1;

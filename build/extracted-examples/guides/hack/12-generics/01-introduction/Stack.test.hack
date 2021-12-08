@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\Generics\SomeBasics\Stack;
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\Introduction\Stack;
 
 function useIntStack(Stack<int> $stInt): void {
   $stInt->push(10);

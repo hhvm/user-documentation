@@ -63,7 +63,7 @@ abstract class WebController {
     return $this->parameters;
   }
 
-  final private static function getUriParametersSpec(
+  private static function getUriParametersSpec(
   ): self::TParameterDefinitions {
     try {
       $class = TypeAssert\classname_of(

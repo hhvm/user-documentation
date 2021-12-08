@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\Generics\SomeBasics\Stack;
+namespace HHVM\UserDocumentation\Guides\Hack\Generics\Introduction\Stack;
 
 class StackUnderflowException extends \Exception {}
 

@@ -68,13 +68,16 @@
 
       tbody {
         display: table-row-group;
+
+        tr {
+          &:nth-of-type(odd) {
+            background: #E8E8E8;
+          }
+        }
       }
 
       tr {
         display: table-row;
-        &:nth-of-type(odd) {
-          background: #E8E8E8;
-        }
 
         th, td {
           border-right: 1px dotted $lightgrey;

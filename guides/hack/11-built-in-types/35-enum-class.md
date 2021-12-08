@@ -136,6 +136,35 @@ enum class E1 : IBox extends E {
 // only he name is use for ambiguity
 ```
 
+### Diamond shape scenarios
+Enum classes support diamond shaped inheritance as long as there is no ambiguity, like in:
+
+```EnumClassBox.extends2.hack no-auto-output
+enum class DiamondBase : IBox {
+  Box<int> Age = new Box(42);
+}
+
+enum class D1 : IBox extends DiamondBase {
+  Box<string> Name1 = new Box('foo');
+}
+
+enum class D2 : IBox extends DiamondBase {
+  Box<string> Name2 = new Box('bar');
+}
+
+enum class D3 : IBox extends D1, D2 {}
+
+<<__EntryPoint>>
+function main() : void {
+  echo D3::Age->data;
+}
+```
+
+Here there is no ambiguity: the constant `Age` is inherited from `DiamondBase`, and only from there.
+The `main` function will echo `42` as expected.
+
+If either `D1`, `D2` or `D3` tries to define a constant named `Age`, there will be an error.
+
 ### Control over inheritance
 
 Though the `final` keyword is not supported, Enum classes support the [`__Sealed`](../attributes/predefined-attributes#__sealed) attribute. Using `__Sealed`, you can specify which other enum classes, if any, are allowed to extend from your enum class.
