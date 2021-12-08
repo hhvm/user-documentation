@@ -3,7 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Introduction\Readonly;
 
-<<file:__EnableUnstableFeatures("readonly")>>
 function test(readonly Bar $x) : void {
   $foo = $x->foo;
   $foo->prop = 3; // error, $foo is readonly

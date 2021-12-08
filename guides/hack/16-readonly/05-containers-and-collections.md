@@ -3,7 +3,6 @@
 Readonly values cannot be written to normal container types(such as`vec`, `Vector`, or `dict`):
 
 ``` Hack readonly_container_example.hack.type-errors
-<<file:__EnableUnstableFeatures("readonly")>>
 
 class Foo {}
 function container_example(readonly Foo $x) : void {
@@ -16,7 +15,6 @@ To use readonly values within a container, you can either declare the values in 
 Note that the entire container literal is readonly if any of its contents are readonly. 
 
 ``` Hack readonly_container_example2.hack
-<<file:__EnableUnstableFeatures("readonly")>>
 
 class Foo {}
 function container_example2(readonly Foo $x) : void {
@@ -28,7 +26,6 @@ function container_example2(readonly Foo $x) : void {
 Foreaching over a readonly container results in readonly values:
 
 ``` Hack readonly_container_foreach.hack.type-errors
-<<file:__EnableUnstableFeatures("readonly")>>
 
 class Foo {
   public function __construct(public int $prop) {}
@@ -44,7 +41,6 @@ function container_foreach(readonly vec<Foo> $vec): void {
 Readonly has only limited support with object collection types like `Vector`, `Map` and `Pair`. Specifically, you can declare readonly collection literals of readonly values to create a readonly collection type (i.e a `readonly Vector<Foo>`), but since collection types themselves are mutable objects, you cannot append to or modify a readonly collection. 
 
 ``` Hack readonly_collection_example.hack.type-errors
-<<file:__EnableUnstableFeatures("readonly")>>
 
 class Foo {}
 function collection_example(): void {

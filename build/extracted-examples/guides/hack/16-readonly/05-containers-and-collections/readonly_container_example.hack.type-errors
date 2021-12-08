@@ -3,8 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\ContainersAndCollections\ReadonlyContainerExample;
 
-<<file:__EnableUnstableFeatures("readonly")>>
-
 class Foo {}
 function container_example(readonly Foo $x) : void {
   $container = vec[];

@@ -3,8 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\ContainersAndCollections\ReadonlyContainerExample2;
 
-<<file:__EnableUnstableFeatures("readonly")>>
-
 class Foo {}
 function container_example2(readonly Foo $x) : void {
   $container = readonly vec[]; // container is now a readonly vec

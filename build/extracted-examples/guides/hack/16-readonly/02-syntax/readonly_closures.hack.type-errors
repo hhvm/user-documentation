@@ -3,7 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Syntax\ReadonlyClosures;
 
-<<file:__EnableUnstableFeatures("readonly")>>
 function readonly_closure_example(): void {
   $x = new Foo();
   $f = readonly () ==> {
