@@ -3,6 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Introduction\Readonly;
 
+<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {
   public function __construct(
     public Foo $foo,

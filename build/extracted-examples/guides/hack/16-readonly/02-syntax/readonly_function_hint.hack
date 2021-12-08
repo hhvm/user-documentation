@@ -3,6 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Syntax\ReadonlyFunctionHint;
 
+<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {}
 function call(
     (function(readonly Bar) : readonly Bar) $f,

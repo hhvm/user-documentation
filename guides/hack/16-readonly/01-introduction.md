@@ -10,6 +10,7 @@ Expressions in Hack can be annotated with the `readonly` keyword. When an object
 Object properties of readonly values cannot be modified (i.e. mutated).
 
 ```Hack readonly.readonlyness.hack.type-errors
+<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {
   public function __construct(
     public Foo $foo,
@@ -31,6 +32,7 @@ All nested properties of readonly objects are readonly.
 
 #### 
 ``` Hack readonly.deepness.hack.type-errors
+<<file:__EnableUnstableFeatures("readonly")>>
 function test(readonly Bar $x) : void {
   $foo = $x->foo;
   $foo->prop = 3; // error, $foo is readonly
@@ -46,5 +48,5 @@ function test(readonly Bar $x) : void {
 * [Subtyping](subtyping.md): Rules and semantics for interacting with readonly and mutable values
 * [Explicit Readonly Keywords](explicit-readonly-keywords.md): Positions where the readonly keyword is explicitly required
 * [Containers and Collections](containers-and-collections.md): Interactions between collections of readonly values
-* [Advanced Features and Semantics](advanced-semantics.md): More complex features and interactions
+* [Advanced Semantics](advanced-semantics.md): More complex features and interactions
 

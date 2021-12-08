@@ -1,3 +1,3 @@
-File "/home/example/readonly_collection_example.hack", line 9, characters 3-4:
+File "/home/example/readonly_collection_example.hack", line 11, characters 3-4:
 This value is readonly, its properties cannot be modified (Typing[4409])
 

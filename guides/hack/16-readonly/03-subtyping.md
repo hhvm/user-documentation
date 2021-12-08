@@ -2,6 +2,7 @@ From a typing perspective, one can think of a readonly object as a [supertype](/
 For example, readonly values cannot be passed to a function that takes mutable values.
 
 ``` Hack readonly_takes_mutable.hack.type-errors
+<<file:__EnableUnstableFeatures("readonly")>>
 class Foo {
   public int $prop = 0;
 }
@@ -20,6 +21,7 @@ function test(): void {
 Similarly, functions cannot return readonly values unless they are annotated to return readonly.
 
 ``` Hack readonly_return.hack.type-errors
+<<file:__EnableUnstableFeatures("readonly")>>
 class Foo {}
 function returns_mutable(readonly Foo $x): Foo {
   return $x; // error, $x is readonly
@@ -32,6 +34,7 @@ function returns_readonly(readonly Foo $x): readonly Foo {
 Note that non-readonly (i.e. mutable) values *can* be passed to a function that takes a readonly parameter:
 
 ``` Hack readonly_takes.hack
+<<file:__EnableUnstableFeatures("readonly")>>
 class Foo {}
 // promises not to modify $x
 function takes_readonly(readonly Foo $x): void {
@@ -46,6 +49,7 @@ function test(): void {
 Similarly, class properties cannot be set to readonly values unless they are declared as readonly properties.
 
 ``` Hack readonly_prop_assign.hack.type-errors
+<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {}
 class Foo {
   public function __construct(

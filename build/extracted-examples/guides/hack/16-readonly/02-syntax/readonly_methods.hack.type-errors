@@ -3,6 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Syntax\ReadonlyMethods;
 
+<<file:__EnableUnstableFeatures("readonly")>>
 class Data {}
 class Box {
   public function __construct(public Data $data) {}

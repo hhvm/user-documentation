@@ -3,6 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Syntax\ReadonlyExpressions;
 
+<<file:__EnableUnstableFeatures("readonly")>>
 class Foo {}
 function foo(): void {
   $x = new Foo();

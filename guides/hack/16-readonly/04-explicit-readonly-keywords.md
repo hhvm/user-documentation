@@ -4,6 +4,7 @@ There are a few places where an explicit readonly keyword is required when using
 Calling a function or method that returns readonly requires wrapping the result in a readonly expression.
 
 ``` Hack explicit_readonly_return.hack
+<<file:__EnableUnstableFeatures("readonly")>>
 
 class Foo {}
 function returns_readonly(): readonly Foo {
@@ -19,6 +20,7 @@ function test(): void {
 Accessing a readonly property (i.e. a property annotated readonly at the declaration, not accessing a property off of a readonly object) requires readonly annotation.
 
 ``` Hack explicit_readonly_prop.hack
+<<file:__EnableUnstableFeatures("readonly")>>
 
 class Bar {}
 class Foo {
