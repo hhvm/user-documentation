@@ -1,3 +1,3 @@
-File "/home/example/readonly_closures.hack", line 10, characters 5-16:
+File "/home/example/readonly_closures.hack", line 9, characters 5-16:
 This expression is readonly, its members cannot be modified (Parsing[1002])
 
