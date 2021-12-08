@@ -3,8 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\ExplicitReadonlyKeywords\ExplicitReadonlyProp;
 
-<<file:__EnableUnstableFeatures("readonly")>>
-
 class Bar {}
 class Foo {
   public function __construct(

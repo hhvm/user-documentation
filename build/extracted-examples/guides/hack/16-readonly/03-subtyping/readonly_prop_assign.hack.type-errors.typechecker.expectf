@@ -1,7 +1,7 @@
-File "%s/readonly_prop_assign.hack", line 19, characters 3-14:
+File "%s/readonly_prop_assign.hack", line 18, characters 3-14:
 Invalid property assignment (Typing[4411])
-  File "%s/readonly_prop_assign.hack", line 19, characters 18-21:
+  File "%s/readonly_prop_assign.hack", line 18, characters 18-21:
   This expression is readonly
-  File "%s/readonly_prop_assign.hack", line 11, characters 12-14:
+  File "%s/readonly_prop_assign.hack", line 10, characters 12-14:
   But it's being assigned to a mutable property
 

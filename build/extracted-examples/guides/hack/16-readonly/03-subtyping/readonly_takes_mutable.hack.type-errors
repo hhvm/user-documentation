@@ -3,7 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Subtyping\ReadonlyTakesMutable;
 
-<<file:__EnableUnstableFeatures("readonly")>>
 class Foo {
   public int $prop = 0;
 }

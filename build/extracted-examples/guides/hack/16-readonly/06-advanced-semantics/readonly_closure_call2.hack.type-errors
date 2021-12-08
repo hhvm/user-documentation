@@ -3,8 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\AdvancedSemantics\ReadonlyClosureCall2;
 
-<<file:__EnableUnstableFeatures("readonly")>>
-
 function readonly_closure_call2<T>(
   (function (): T) $regular_f,
   (readonly function(): T) $ro_f,
