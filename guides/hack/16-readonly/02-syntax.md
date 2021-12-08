@@ -4,7 +4,6 @@ The `readonly` keyword can be applied to various positions in Hack.
 Parameters and return values of any callable (e.g. a function or method) can be marked `readonly`.
 
 ``` Hack readonly_parameters.hack
-<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {
   public function __construct(
     public Foo $foo,
@@ -27,7 +26,6 @@ A readonly *parameter* signals that the function/method will not modify that par
 Static and regular properties marked as `readonly` cannot be modified.
 
 ``` Hack readonly_props.hack
-<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {}
 class Foo {
   private static readonly ?Bar $static_bar = null;
@@ -43,7 +41,6 @@ A readonly property represents a property that holds a readonly reference (speci
 `readonly` is allowed on inner parameters and return types on function typehints.
 
 ``` Hack readonly_function_hint.hack
-<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {}
 function call(
     (function(readonly Bar) : readonly Bar) $f,
@@ -56,7 +53,6 @@ function call(
 ## Expressions
 `readonly` can appear on expressions to convert mutable values to readonly. 
 ``` Hack readonly_expressions.hack
-<<file:__EnableUnstableFeatures("readonly")>>
 class Foo {}
 function foo(): void {
   $x = new Foo();
@@ -68,7 +64,6 @@ function foo(): void {
 `readonly` can appear as a modifier on instance methods, signaling that `$this` is readonly (i.e, that the method promises not to modify the instance). 
 
 ``` Hack readonly_functions.hack.type-errors
-<<file:__EnableUnstableFeatures("readonly")>>
 class C {
   public function __construct(public int $prop) {}
   public readonly function foo() : void {
@@ -79,7 +74,6 @@ class C {
 Note that readonly objects can only call readonly methods, since they promise not to modify the object.
 
 ``` Hack readonly_methods.hack.type-errors
-<<file:__EnableUnstableFeatures("readonly")>>
 class Data {}
 class Box {
   public function __construct(public Data $data) {}
@@ -100,7 +94,6 @@ function readonly_method_example(readonly Box $b): void {
 A function type can be marked readonly: `(readonly function(T1): T)`. Denoting a function/closure as readonly adds the restriction that the function/closure captures all values as readonly:
 
 ``` Hack readonly_closures.hack.type-errors
-<<file:__EnableUnstableFeatures("readonly")>>
 function readonly_closure_example(): void {
   $x = new Foo();
   $f = readonly () ==> {

@@ -3,8 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\ExplicitReadonlyKeywords\ExplicitReadonlyReturn;
 
-<<file:__EnableUnstableFeatures("readonly")>>
-
 class Foo {}
 function returns_readonly(): readonly Foo {
   return readonly new Foo();

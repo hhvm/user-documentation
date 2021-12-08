@@ -3,7 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Readonly\Syntax\ReadonlyProps;
 
-<<file:__EnableUnstableFeatures("readonly")>>
 class Bar {}
 class Foo {
   private static readonly ?Bar $static_bar = null;
