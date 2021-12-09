@@ -1,9 +1,3 @@
-# Experimental feature
-
-This feature is currently experimental and any file that relies on it must start with the following attribute:
-
-`<<file:__EnableUnstableFeatures('enum_class_label')>>`
-
 ## Values v. Bindings
 
 With [enum types](enumerated-types) and [enum classes](enum-class), most of the focus is given to their values.
@@ -35,7 +29,6 @@ Enum classes provides a way to do this by using the newly introduced *Enum Class
 label is defined. A label is a handle to access the related value. Think of it as an indirect access. Consider the following example:
 
 ```EnumClassLabel.definition.hack no-auto-output
-<<file:__EnableUnstableFeatures('enum_class_label')>>
 
 // We are using int here for readability but it works for any type
 enum class E : int {
@@ -53,7 +46,6 @@ This example defines two constants `E::A: \HH\MemberOf<E, int>` and `E::B: \HH\M
 
 So we can rewrite the earlier example in a more resilient way:
 ```EnumClassLabel.example.achk no-auto-output
-<<file:__EnableUnstableFeatures('enum_class_label')>>
 
 function full_print(\HH\EnumClass\Label<E, int> $label) : void {
   echo E::nameOf($label) . " ";
@@ -76,7 +68,6 @@ This is only allowed when there is enough type information to infer the right en
 
 When the first argument of a function is a label, we provide an alternative notation to call it. This was done to reflect some generated code patterns this feature helped removed:
 ```EnumClassLabel.alt.hack no-auto-output
-<<file:__EnableUnstableFeatures('enum_class_label')>>
 
 function set<T>(\HH\EnumClass\Label<E, T> $label, T $data) : void {
   // setting $data into some storage using $label as a key
