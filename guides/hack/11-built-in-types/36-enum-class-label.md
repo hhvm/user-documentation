@@ -45,7 +45,7 @@ This example defines two constants `E::A: \HH\MemberOf<E, int>` and `E::B: \HH\M
 - `E::valueOf` is a static method expecting a label and returning its value: `E::valueOf(E#A) = E::A`
 
 So we can rewrite the earlier example in a more resilient way:
-```EnumClassLabel.example.achk no-auto-output
+```EnumClassLabel.example.hack no-auto-output
 
 function full_print(\HH\EnumClass\Label<E, int> $label) : void {
   echo E::nameOf($label) . " ";
