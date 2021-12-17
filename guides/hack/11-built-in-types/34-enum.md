@@ -76,8 +76,13 @@ function main(): void {
 ## Library Methods
 All enums implement these public static methods.
 
-### `getNames() / getValues()`
-Returns a map-like array of enum constant values and their names.
+### `getValues()` / `getNames()`
+Returns a `dict` of enum constant values and their names. Can not contain duplicate keys.
+
+* `getValues()` returns a `dict` where the keys are the enum names and the values are the enum constant values. 
+  * In the example below, the keys/values would be: `0 => "Top"`, `1 => "Bottom"`, etc.
+* `getNames()` returns a `dict` but is reversed: the keys are the enum constant values, and the values are the enum's named constants.
+  * Following the same example, the keys/values would be: `"Top" => 0`, `"Bottom" => 1`, etc.
 
 ```NamesValues.hack
 enum Position: int {
@@ -127,6 +132,8 @@ function main(): void {
 }
 ```
 
+**Note:** Both library methods will, when no exact match is found, attempt to do a cast to the other `arraykey` type. If the cast is not reversible / lossless, or the resulting value is still not a member of the enum after the cast, the failure result occurs, where a failure for assert is throwing an `UnexpectedValueException` and a failure for `coerce` is returning null.
+
 ### `assertAll()`
 `assertAll($traversable)` calls `assert($value)` on every element of the traversable (e.g. [Hack Arrays](/hack/arrays-and-collections/hack-arrays)); if at least one value does not exist, throws an `UnexpectedValueException`.
 
@@ -166,6 +173,32 @@ function main(): void {
   \var_dump(Bits::isValid(2.0));
   \var_dump(Bits::isValid("2.0"));
   \var_dump(Bits::isValid(8));
+}
+```
+
+## `is` / `as`
+The operators [`is`](/hack/expressions-and-operators/type-assertions#checking-types-with-is) and [`as`/`?as`](/hack/expressions-and-operators/type-assertions#enforcing-types-with-as-and-as) behave similarly, but not exactly, to `isValid()` (similar to `is`) and `assert()`/`coerce()` (similar to `as`/`?as`).
+
+For `is`/`as`/`?as` refinement, the operators validate that a value is a part of a given enum. **Caution:** These operators may perform implicit int/string coercion of enum values to preserve compatibility with `isValid()`.
+
+```type-refinement-enum.hack no-auto-output
+enum MyEnum: int {
+  FOO = 1;
+}
+
+<<__EntryPoint>>
+function main(): void {
+1 is MyEnum; // true
+1 as MyEnum; // 1
+
+42 is MyEnum; // false
+42 as MyEnum; // TypeAssertionException
+
+'foo' is MyEnum; // false
+'foo' as MyEnum; // TypeAssertionException
+
+'1' is MyEnum; // CAUTION - true
+'1' as MyEnum; // CAUTION - '1'
 }
 ```
 
