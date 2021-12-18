@@ -77,12 +77,13 @@ function main(): void {
 All enums implement these public static methods.
 
 ### `getValues()` / `getNames()`
-Returns a `dict` of enum constant values and their names. Can not contain duplicate keys.
+Returns a `dict` of enum constant values and their names. 
 
-* `getValues()` returns a `dict` where the keys are the enum names and the values are the enum constant values. 
-  * In the example below, the keys/values would be: `0 => "Top"`, `1 => "Bottom"`, etc.
-* `getNames()` returns a `dict` but is reversed: the keys are the enum constant values, and the values are the enum's named constants.
-  * Following the same example, the keys/values would be: `"Top" => 0`, `"Bottom" => 1`, etc.
+* `getValues()` returns a `dict` where the keys are the enum names and the values are the enum constant values.
+  * In the example below, the keys/values would be: `"Top" => 0`, `"Bottom" => 1`, etc.
+* `getNames()` returns a `dict`, but is flipped: the keys are the enum constant values and the values are the enum's named constants.
+  * Following the same example, the keys/values would be: `0 => "Top"`, `1 => "Bottom"`, etc.
+  * Because a `dict` *can not* contain duplicate keys, when you call `getNames()` -- the static method that returns a `dict` and flips an enum's contant values *to* keys -- there is a possiblity of creating a `dict` with duplicates, resulting in an `HH\InvariantException`. In this situation, one safe option for discarding duplicates (and keeping the most recent of every duplicate) is `Dict\flip`.
 
 ```NamesValues.hack
 enum Position: int {
@@ -106,6 +107,8 @@ function main(): void {
   foreach ($values as $key => $value) {
     echo "\tkey >$key< has value >$value<\n";
   }
+
+  Dict\flip(Position::getValues()); // safe flip of values as keys
 }
 ```
 

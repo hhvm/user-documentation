@@ -3,6 +3,8 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Enum\NamesValues;
 
+use namespace HH\Lib\Dict;
+
 enum Position: int {
   Top = 0;
   Bottom = 1;
@@ -26,4 +28,6 @@ function main(): void {
   foreach ($values as $key => $value) {
     echo "\tkey >$key< has value >$value<\n";
   }
+
+  Dict\flip(Position::getValues()); // safe flip of values as keys
 }
