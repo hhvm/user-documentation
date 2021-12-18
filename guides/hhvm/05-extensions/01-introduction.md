@@ -26,7 +26,7 @@ For the most up-to-date function signatures, please refer to your version of the
 * [debugger (phpdbg)](https://www.php.net/manual/en/book.phpdbg.php)
 * [dom](http://php.net/manual/en/book.dom.php)
 * domdocument
-* [enum](/hack/built-in-types/enumerated-types)
+* [enum](/hack/built-in-types/enum)
 * [exif](http://php.net/manual/en/book.exif.php)
 * fb
 * [fileinfo](http://php.net/manual/en/book.fileinfo.php)

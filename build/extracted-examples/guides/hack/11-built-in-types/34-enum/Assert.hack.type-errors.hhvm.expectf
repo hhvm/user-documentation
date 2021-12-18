@@ -1,0 +1,6 @@
+
+Fatal error: Uncaught exception 'UnexpectedValueException' with message '16 is not a valid value for HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Enum\Assert\Bits' in %s/Assert.hack.type-errors:15
+Stack trace:
+#0 %s/Assert.hack.type-errors(15): HH\BuiltinEnum::assert()
+#1 (): HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Enum\Assert\main()
+#2 {main}

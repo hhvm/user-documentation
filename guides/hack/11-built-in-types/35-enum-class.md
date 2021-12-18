@@ -1,4 +1,4 @@
-In comparison to [enumerated types (enums)](enumerated-types), enum classes are not restricted to int and string values.
+In comparison to [enumerated types (enums)](/hack/built-in-types/enum), enum classes are not restricted to int and string values.
 
 ## Enum types v. Enum class
 Built-in enum types limit the base type of an enum to `arraykey` -- an integer or string -- or another enum.
@@ -7,7 +7,7 @@ The base type of an _enum class_ can be any type: they are not required to be co
 
 ## Declaring a new enum class
 
-Enum classes are syntactically different from [enum types](enumerated-types), as they require:
+Enum classes are syntactically different from [enum types](/hack/built-in-types/enum), as they require:
 
 * the `enum class` keyword rather than the `enum` keyword
 * that each value is annotated with its precise type: for example, `string` in `string s = ...`
