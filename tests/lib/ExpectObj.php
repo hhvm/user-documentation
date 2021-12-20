@@ -12,14 +12,22 @@ final class ExpectObj<T> extends \Facebook\FBExpect\ExpectObj<T> {
 
   public function toMatchExpectFile(string $file): void where T = string {
     $this->toMatchFileWrapper(
-      () ==> { $this->toEqual(\file_get_contents($file)); },
+      () ==> {
+        expect(\file_get_contents($this->var))->toEqual(
+          \file_get_contents($file),
+        );
+      },
       $file,
     );
   }
 
   public function toMatchExpectregexFile(string $file): void where T = string {
     $this->toMatchFileWrapper(
-      () ==> { $this->toMatchRegExp('/^'.\file_get_contents($file).'$/s'); },
+      () ==> {
+        expect(\file_get_contents($this->var))->toMatchRegExp(
+          '/^'.\file_get_contents($file).'$/s',
+        );
+      },
       $file,
     );
   }
@@ -48,27 +56,31 @@ final class ExpectObj<T> extends \Facebook\FBExpect\ExpectObj<T> {
       ])
       |> '/'.$$.'/';
     $this->toMatchFileWrapper(
-      () ==> { $this->toMatchRegExp($pattern); },
+      () ==> {
+        expect(\file_get_contents($this->var))->toMatchRegExp($pattern);
+      },
       $file,
     );
   }
 
   private function toMatchFileWrapper(
     (function(): void) $impl,
-    string $path,
+    string $expected_path,
   ): void where T = string {
+    $actual_path = $this->var;
     try {
       $impl();
     } catch (ExpectationFailedException $_) {
-      $extension = C\lastx(Str\split($path, '.'));
+      $extension = C\lastx(Str\split($expected_path, '.'));
       throw new ExpectationFailedException(Str\format(
-        "Actual data did not match expected data from %s\n".
-        "----- ACTUAL ----\n%s\n".
-        "----- %s ----\n%s\n----- END -----",
-        $path,
-        $this->var,
+        "Actual data did not match expected data\n".
+        "----- ACTUAL  ----\n  Path: %s\n--\n%s\n".
+        "----- %s ----\n  Path: %s\n--\n%s\n----- END -----",
+        $actual_path,
+        \file_get_contents($actual_path),
         Str\uppercase($extension),
-        \file_get_contents($path),
+        $expected_path,
+        \file_get_contents($expected_path),
       ));
     }
   }

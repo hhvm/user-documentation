@@ -81,11 +81,10 @@ class ExamplesTest extends HackTest {
       ? Files::HHVM_EXPECTREGEX
       : Files::TYPECHECKER_EXPECTREGEX;
 
-    $example_out = \file_get_contents($example_out_path);
     if (\file_exists($expectf)) {
-      expect($example_out)->toMatchExpectfFile($expectf);
+      expect($example_out_path)->toMatchExpectfFile($expectf);
     } else if (\file_exists($expectregex)) {
-      expect($example_out)->toMatchExpectregexFile($expectregex);
+      expect($example_out_path)->toMatchExpectregexFile($expectregex);
     } else {
       invariant_violation('Example has no .expectf or .expectregex file!');
     }
@@ -126,19 +125,20 @@ class ExamplesTest extends HackTest {
     list($stdout, $stderr) =
       await ExampleTypechecker\typecheck_example_async($in_file);
 
-    \file_put_contents($in_file.'.typechecker.stdout', $stdout);
+    $stdout_file = $in_file.'.typechecker.stdout';
+    \file_put_contents($stdout_file, $stdout);
     \file_put_contents($in_file.'.typechecker.stderr', $stderr);
 
     if (Str\ends_with($expect_file, '.expect')) {
-      expect($stdout)->toMatchExpectFile($expect_file);
+      expect($stdout_file)->toMatchExpectFile($expect_file);
     } else if (Str\ends_with($expect_file, '.expectf')) {
-      expect($stdout)->toMatchExpectfFile($expect_file);
+      expect($stdout_file)->toMatchExpectfFile($expect_file);
     } else {
-      expect(Str\ends_with($stdout, '.expectregex'))->toBeTrue(
+      expect(Str\ends_with($expect_file, '.expectregex'))->toBeTrue(
         "%s does not end with .expect, .expectf, or .expectregex",
         $expect_file,
       );
-      expect($stdout)->toMatchExpectregexFile($expect_file);
+      expect($stdout_file)->toMatchExpectregexFile($expect_file);
     }
   }
 
