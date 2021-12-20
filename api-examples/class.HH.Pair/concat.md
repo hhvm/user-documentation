@@ -3,6 +3,6 @@ This example creates a new `ImmVector` by concatenating a `Traversable` with the
 ```basic-usage.hack
 $p = Pair {'foo', -1.5};
 
-$v = $p->concat(varray[100, 'bar']);
+$v = $p->concat(vec[100, 'bar']);
 \var_dump($v);
 ```
