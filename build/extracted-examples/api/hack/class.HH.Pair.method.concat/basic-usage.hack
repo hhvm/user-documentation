@@ -9,6 +9,6 @@ async function _main(): Awaitable<void> {
 
   $p = Pair {'foo', -1.5};
 
-  $v = $p->concat(varray[100, 'bar']);
+  $v = $p->concat(vec[100, 'bar']);
   \var_dump($v);
 }
