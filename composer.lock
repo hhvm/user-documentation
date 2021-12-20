@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4ee0ba72d8059f972c26dc28701d36a6",
+    "content-hash": "32f7cc200c6e215f307f01bcd66111f0",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -146,20 +146,20 @@
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v4.4.1",
+            "version": "v4.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "92aa374affd27276be41a19254dacbdb66b65d1c"
+                "reference": "86b17508e18e9b98b663ac6b9a3e6c4228eb0185"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/92aa374affd27276be41a19254dacbdb66b65d1c",
-                "reference": "92aa374affd27276be41a19254dacbdb66b65d1c",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/86b17508e18e9b98b663ac6b9a3e6c4228eb0185",
+                "reference": "86b17508e18e9b98b663ac6b9a3e6c4228eb0185",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.80",
+                "hhvm": "^4.93",
                 "hhvm/hhvm-autoload": "^2.0|^3.0",
                 "hhvm/hsl": "^4.0"
             },
@@ -206,9 +206,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hack-codegen/issues",
-                "source": "https://github.com/hhvm/hack-codegen/tree/v4.4.1"
+                "source": "https://github.com/hhvm/hack-codegen/tree/v4.5.0"
             },
-            "time": "2021-06-01T19:29:04+00:00"
+            "time": "2021-12-14T17:32:37+00:00"
         },
         {
             "name": "facebook/hack-http-request-response-interfaces",
@@ -293,24 +293,24 @@
         },
         {
             "name": "facebook/hack-router-codegen",
-            "version": "v0.17.6",
+            "version": "v0.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-router-codegen.git",
-                "reference": "f9ee2df0d5f76141559fac92cb23855d33f0f429"
+                "reference": "1bab745d158f14535fc73ad801f4b135f07c2af7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-router-codegen/zipball/f9ee2df0d5f76141559fac92cb23855d33f0f429",
-                "reference": "f9ee2df0d5f76141559fac92cb23855d33f0f429",
+                "url": "https://api.github.com/repos/hhvm/hack-router-codegen/zipball/1bab745d158f14535fc73ad801f4b135f07c2af7",
+                "reference": "1bab745d158f14535fc73ad801f4b135f07c2af7",
                 "shasum": ""
             },
             "require": {
                 "facebook/definition-finder": "^2.7",
-                "facebook/hack-codegen": "^4.1.0",
+                "facebook/hack-codegen": "^4.5.0",
                 "facebook/hack-http-request-response-interfaces": "^0.2|^0.3",
                 "facebook/hack-router": "^0.19",
-                "hhvm": "^4.25",
+                "hhvm": "^4.93",
                 "hhvm/type-assert": "^3.0|^4.0"
             },
             "require-dev": {
@@ -343,9 +343,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hack-router-codegen/issues",
-                "source": "https://github.com/hhvm/hack-router-codegen/tree/v0.17.6"
+                "source": "https://github.com/hhvm/hack-router-codegen/tree/v0.18.0"
             },
-            "time": "2021-11-18T22:00:07+00:00"
+            "time": "2021-12-14T17:39:51+00:00"
         },
         {
             "name": "facebook/hh-apidoc",
@@ -482,16 +482,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.135.1",
+            "version": "v4.139.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "84e6f79dd7b09af25d9a7f0b309a6697839a7dcc"
+                "reference": "bf471e2a888e5bfcfd7b78dc4641b1a4eaf5bf19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/84e6f79dd7b09af25d9a7f0b309a6697839a7dcc",
-                "reference": "84e6f79dd7b09af25d9a7f0b309a6697839a7dcc",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/bf471e2a888e5bfcfd7b78dc4641b1a4eaf5bf19",
+                "reference": "bf471e2a888e5bfcfd7b78dc4641b1a4eaf5bf19",
                 "shasum": ""
             },
             "require": {
@@ -529,9 +529,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.135.1"
+                "source": "https://github.com/hhvm/hhast/tree/v4.139.0"
             },
-            "time": "2021-11-17T22:31:10+00:00"
+            "time": "2021-12-10T21:22:05+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -922,7 +922,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.136.*"
+        "hhvm": "4.140.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
