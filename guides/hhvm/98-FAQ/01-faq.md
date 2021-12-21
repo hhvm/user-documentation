@@ -67,7 +67,7 @@ Proxygen is recommended, but care is needed to forward headers appropriately.
 
 ## Configuration and Deployment
 
-## Why is my code slow at startup?
+### Why is my code slow at startup?
 
 The HHVM JIT needs time to warm up. The warmup usually occurs somewhere on the order of 10-11 requests, at which point the JIT has performed its optimizations and off we go at peak speed.
 
