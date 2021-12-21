@@ -46,8 +46,15 @@ async function typecheck_example_async(
   $hh_server_path = get_hh_server_path();
   invariant($hh_server_path is nonnull, "Couldn't find hh_server");
 
+  // HHVM_DISABLE_PERSONALITY: `hh_server` tries to disable ASLR via the
+  // `personality()` syscall, which fails in Docker.
   list($_exit_code, $stdout, $stderr) = await execute_async(
-    shape('environment' => dict['HH_TMPDIR' => $hh_tmp_dir->getPath()]),
+    shape(
+      'environment' => dict[
+        'HH_TMPDIR' => $hh_tmp_dir->getPath(),
+        'HHVM_DISABLE_PERSONALITY' => '1',
+      ],
+    ),
     $hh_server_path,
     '--check',
     '--max-procs=1',
