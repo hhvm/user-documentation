@@ -1,7 +1,6 @@
 .highlight {
   @include codetext;
   border-left: 3px solid $orange;
-  font-size: 12px;
   overflow-x: auto;
   padding: 10px;
   margin: 25px 0;
@@ -9,20 +8,10 @@
   &.fbgfm {
     padding: 0px;
   }
-
-  * code.hljs {
-    font-size: inherit;
-  }
 }
 
 p + .highlight {
   margin-top: 0;
-}
-
-@media only screen and (max-width: 480px) {
-  .highlight {
-    font-size: 60%;
-  }
 }
 
 .output-block span {
