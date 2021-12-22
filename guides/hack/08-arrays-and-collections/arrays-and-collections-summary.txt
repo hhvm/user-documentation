@@ -1,1 +1,1 @@
-Hack arrays, (legacy) PHP arrays, and mutable collections.
+Immutable collections, mutable collections, and APIs.

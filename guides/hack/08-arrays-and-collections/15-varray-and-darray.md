@@ -1,4 +1,5 @@
-**PHP arrays are legacy value types for storing iterable data.**
+**These are legacy value types for storing iterable data.** They are
+also called 'PHP arrays'.
 
 The types available are `varray`, `darray`, `varray_or_darray` and `array`
 (`array` only in some HHVM configurations). They will eventually be

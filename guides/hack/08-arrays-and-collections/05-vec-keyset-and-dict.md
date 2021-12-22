@@ -1,7 +1,8 @@
-There are three Hack array types: `vec`, `keyset` and `dict`.
+`vec`, `keyset` and `dict` are value types. Any mutation produces a
+new value, and does not modify the original value.
 
-Hack arrays are value types. Any mutation produces a new value, and
-does not modify the original value.
+These types are referred to as 'Hack arrays'. Prefer using these types
+whenever you're unsure.
 
 ## `vec`
 

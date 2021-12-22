@@ -58,6 +58,11 @@ final class Guides {
   ): dict<string, dict<string, (string, ?string)>> {
     return dict[
       GuidesProduct::HACK => dict[
+        'arrays-and-collections' => dict[
+          'hack-arrays' => tuple('arrays-and-collections', 'vec-keyset-and-dict'),
+          'collections' => tuple('arrays-and-collections', 'object-collections'),
+          'php-arrays' => tuple('arrays-and-collections', 'varray-and-darray'),
+        ],
         'async' => dict[
           'async-vs-awaitable' =>
             tuple('asynchronous-operations', 'async-vs.-awaitable'),

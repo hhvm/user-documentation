@@ -1,4 +1,4 @@
-The Hack Collection types are `Vector`, `ImmVector`, `Map`, `ImmMap`,
+The collection object types are `Vector`, `ImmVector`, `Map`, `ImmMap`,
 `Set`, `ImmSet` and `Pair`. There are also a range of helper
 interfaces, discussed below.
 
