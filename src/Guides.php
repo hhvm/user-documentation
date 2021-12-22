@@ -100,6 +100,7 @@ final class Guides {
           'addition' => tuple('expressions-and-operators', 'arithmetic'),
           'as' => tuple('expressions-and-operators', 'type-assertions'),
           'async-blocks' => tuple('asynchronous-operations', 'blocks'),
+          'banning-lval-as-an-expression' => tuple('expressions-and-operators', 'introduction'),
           'bitwise-AND' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-exclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
           'bitwise-inclusive-OR' => tuple('expressions-and-operators', 'bitwise-operators'),
