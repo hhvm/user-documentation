@@ -41,7 +41,7 @@ $ hh_client
 No errors!
 ```
 
-If you are seeing errors in `vendor/`, re-run the composer install command to ensure that all dependes are up to date.
+If you are seeing errors in `vendor/`, re-run the composer install command to ensure that all dependencies are up to date.
 
 **NOTE**: If you add, delete or rename a class in the primary source tree `src/`, you should run `php composer.phar dump-autoload` in order to make the autoload maps refresh correctly; otherwise you will get class not found exceptions.
 
