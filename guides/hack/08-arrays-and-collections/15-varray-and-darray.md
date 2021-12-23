@@ -160,18 +160,3 @@ The available runtime options change frequently; to get an up-to-date list, sear
 The `hhvm.hack_arr_compat_notices` option must be set to true for any of the `hhvm.hack_arr_` options to have an effect.
 
 Individual runtime settings are documented [here](/hack/built-in-types/darray-varray-runtime-options.md).
-
-### `.hhconfig` options
-
-`disallow_array_literal=true` disallows `array(...)` and `[...]`, forcing all
-such literals to be converted to either `varray[...]` or `darray[...]`. This
-option causes errors on HHVM versions prior to 4.25 due to various `array`
-literals in built-in functions, so it's only useful with newer versions of
-HHVM.
-
-`disallow_array_typehint=true` disallows using `array`, with or without
-generic type parameters, in any type annotations (function parameters, return
-values, instance variables, etc.). Currently, this option also causes errors
-because of various `array` typehints on built-in functions, which makes it
-hard to use, but will likely become more useful in the future, as these
-functions are migrated.
