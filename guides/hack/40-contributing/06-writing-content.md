@@ -62,7 +62,7 @@ Internal links should be absolute paths without a domain,
 e.g. `/hack/contributing/introduction`.
 
 Image paths should be relative to `public`,
-e.g. `/public/images/imagename.png`.
+e.g. `/images/imagename.png`.
 
 When removing or renaming pages, set up a redirect from the old
 URL. See [`Guides::getGuidePageRedirects`](https://github.com/hhvm/user-documentation/blob/9fd2aaeb60a236072ef99735a9114ec54d96da2c/src/Guides.php#L56).
