@@ -52,6 +52,12 @@ Each page should have a clear purpose, starting with a short
 description of the concept it's describing. Examples should always be
 provided, preferably under 15 lines.
 
+We assume the reader has a relatively recent version of
+HHVM. References to very old features will be removed, but we provide
+[Docker images of historical site
+versions](/hack/contributing/introduction#running-an-old-instance) if
+needed.
+
 It's not necessary to document all the incorrect ways a feature can be
 used. Content should focus on correct usage, and users can rely on the
 Hack type checker to tell them when they've done something wrong.
