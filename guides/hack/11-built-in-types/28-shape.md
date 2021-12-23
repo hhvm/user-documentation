@@ -99,7 +99,7 @@ function takes_server(Server $s) : void{
 Any shape value that has all of the required fields (and no undefined fields - unless the shape permits them) is considered a value of type `Server`; the type is not specified when creating the value.
 
 ```shape-values-of-type.hack
-use type \HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Shapes\ShapeValuesOfTypeDefineServer\Server;
+use type \HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Shape\ShapeValuesOfTypeDefineServer\Server;
 
 function takes_server(Server $s): void {
   return;
