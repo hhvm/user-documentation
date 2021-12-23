@@ -54,11 +54,12 @@ the function calls, so this function `f` outputs "`$lv = 1`" each time.
 
 ## Array Elements
 
-An array is created via a vec-literal, a dict-literal, a set-literal,
-or using `array`. At the same time, one or more elements
-may be created for that array. New elements are inserted into an existing array via the
-[simple-assignment](../expressions-and-operators/assignment.md) operator in conjunction with the
-[subscript `[]`](../expressions-and-operators/subscript.md) operator.
+An array is created via a vec-literal, a dict-literal, a
+keyset-literal. At the same time, one or more elements may be created
+for that array. New elements are inserted into an existing array via
+the [simple-assignment](../expressions-and-operators/assignment.md)
+operator in conjunction with the [subscript
+`[]`](../expressions-and-operators/subscript.md) operator.
 
 The scope of an array element is the same as the scope of that array's name.
 
@@ -67,9 +68,6 @@ $colors1 = vec["green", "yellow"];   // create a vec of two elements
 $colors1[] = "blue";                 // add element 2 with value "blue"
 $colors2 = dict[];                   // create an empty dict
 $colors2[4] = "black";               // create element 4 with value "black"
-$colors3 = array();                  // create empty array
-$colors3 = ["red", "white", "blue"]; // create array<string> with 3 elements
-$colors3[] = "green";                // insert a new element 3
 ```
 
 ## Instance Properties

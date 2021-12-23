@@ -94,6 +94,6 @@ class C1 { ... }
 class C2 {
   public static classname<\NS_cn\C1> $p1 = \NS_cn\C1::class;
   public static function f(?classname<C1> $p) : classname<C1> { ... }
-  public static array<classname<C1>> $p2 = array(C1::class);
+  public static vec<classname<C1>> $p2 = vec[C1::class];
 }
 ```
