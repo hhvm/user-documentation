@@ -149,7 +149,7 @@ EOF;
             <meta property="og:url" content={$canonical_url} />
             <meta property="og:title" content={$title} />
             <meta property="og:description" content="Offical documentation for Hack and HHVM" />
-            <meta property="og:image" content="http://docs.hhvm.com/favicon.png" />
+            <meta property="og:image" content="https://docs.hhvm.com/hack_logo_medium.png" />
 
             {$open_search}
             <comment>
