@@ -107,11 +107,10 @@ EOF;
     $open_search = null;
     $require_secure = false;
 
+    $canonical_url = 'http://docs.hhvm.com'.$this->getRequestedPath();
     switch ($this->getRequestedHost()) {
       case 'beta.docs.hhvm.com':
-        throw new RedirectException(
-          'http://docs.hhvm.com'.$this->getRequestedPath(),
-        );
+        throw new RedirectException($canonical_url);
       case 'docs.hhvm.com':
         $google_analytics =
           <script:google_analytics trackingID="UA-49208336-3" />;
@@ -145,6 +144,13 @@ EOF;
               content="width=device-width, initial-scale=1.0"
             />
             <link rel="shortcut icon" href="/favicon.png" />
+
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content={$canonical_url} />
+            <meta property="og:title" content={$title} />
+            <meta property="og:description" content="Offical documentation for Hack and HHVM" />
+            <meta property="og:image" content="http://docs.hhvm.com/favicon.png" />
+
             {$open_search}
             <comment>
               Build ID: {LocalConfig::getBuildID()}
