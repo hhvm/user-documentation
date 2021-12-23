@@ -7,16 +7,13 @@ The core tools are:
   in your programs
 - `hhvm`: this is used to execute your Hack code, and can either be used for
   CLI (e.g. `hhvm foo.hack`) or as a server, and has
-  [extensive documentation](/hhvm/)
+  [its own documentation](/hhvm/)
 
 ### Editors and IDEs
 
-You can use any plain-text editor to edit Hack files - however, enhanced
-integration with Hack is available for several editors.
-
-We primarily recommend using [Visual Studio Code] with the [VSCode-Hack]
-extension; this provides standard IDE-like features such as
-syntax highlighting, go-to-definition, and in-line display of Hack errors.
+We primarily recommend using [Visual Studio Code] with the
+[VSCode-Hack] extension; this provides IDE features such as syntax
+highlighting, go-to-definition, and inline display of Hack errors.
 
 For Vim users, [vim-hack] provides syntax highlighting and language detection,
 and the [ALE] project provides enhanced support for Hack.
