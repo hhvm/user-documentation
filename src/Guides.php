@@ -35,6 +35,9 @@ final class Guides {
     GuidesProduct $product,
   ): dict<string, (string, ?string)> {
     return dict[
+      GuidesProduct::HHVM => dict[
+        'getting-started' => tuple('basic-usage', 'introduction'),
+      ],
       GuidesProduct::HACK => dict[
         'async' => tuple('asynchronous-operations', null),
         'collections' => tuple('arrays-and-collections', 'introduction'),
