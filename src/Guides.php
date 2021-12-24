@@ -57,6 +57,11 @@ final class Guides {
     GuidesProduct $product,
   ): dict<string, dict<string, (string, ?string)>> {
     return dict[
+      GuidesProduct::HHVM => dict[
+        'getting-started' => dict[
+          'getting-started' => tuple('basic-usage', 'introduction'),
+        ],
+      ],
       GuidesProduct::HACK => dict[
         'arrays-and-collections' => dict[
           'hack-arrays' => tuple('arrays-and-collections', 'vec-keyset-and-dict'),

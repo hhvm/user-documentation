@@ -6,122 +6,68 @@
 }
 ```
 
-[Hack](https://hacklang.org/) is built specifically for HHVM, a high performance runtime for your Hack applications, and reconciles the fast development cycle of a dynamically typed language with the discipline provided by static typing, while adding many features commonly found in other modern programming languages.
+### 1. Installation
 
-## Overview
+The HHVM package includes everything you need to work with Hack,
+including the runtime and typechecker.
 
-The prerequisites you need to write and execute Hack code are pretty straightforward:
+See the [HHVM installation page](/hhvm/installation/introduction) to
+find the package relevant for your platform.
 
-* The [HHVM runtime](../../hhvm/getting-started/getting-started.md)
-* The Hack typechecker (included with HHVM packages/builds)
-* Optionally, a Hack-aware editor. We recommend [Visual Studio Code] with
-  [vscode-hack], and Vim with [ALE] also offers an excellent experience.
+### 2. Initialize A Project
 
-## Your First Hack Program
+Create a directory with a `.hhconfig` file in it. This will be the
+root of your project.
 
-Let's dive right in and create your first Hack program using the following, simple steps.
+```
+$ mkdir my_project
+$ cd my_project
+$ touch .hhconfig
+```
 
-### 1. Install HHVM and the Typechecker
+### 3. Write Your First Hack Program
 
-Check out the [HHVM getting started guide](../../hhvm/getting-started/getting-started.md) on how
-to install HHVM.
+Create a file called `my_project/hello.hack` with the following code:
 
-After you install HHVM, the Hack typechecker will be available to you, so you can statically check
-your code before you run it. It is *not* a compiler; but rather, a super-fast code analyzer that tries
-to catch dynamic programming errors before code is run instead of during or after.
-
-The typechecker is called `hh_client` and is available by default alongside HHVM in all official
-packages supported by the HHVM team. If you are using a community-contributed package, `hh_client`
-is very likely available there too, but you should check with your package maintainer.
-
-### 2. Setup for the Typechecker
-
-Choose a directory where you want to store your Hack code. In this directory, run `touch .hhconfig`. This
-creates an empty file that `hh_client` looks for as the *root* of your code to be typechecked. In
-order to properly analyze your code, the typechecker needs to do global analysis and be able to see
-all of your code. This means that it assumes a global autoloader for any code under this root, and
-checks all code recursively under this root together as one project.
-
-### 3. Write your first Hack program
-
-Using the editor of your choice (e.g., VSCode or vim), let's create a file called `first.hack` with the following code:
-
-``` myfirstprogram.hack no-auto-output
-namespace Hack\GettingStarted\MyFirstProgram;
-
+```hello.hack no-auto-output
 <<__EntryPoint>>
 function main(): void {
-  echo "Welcome to Hack!\n\n";
-
-  \printf("Table of Squares\n" .
-          "----------------\n");
-  for ($i = -5; $i <= 5; ++$i) {
-    \printf("  %2d        %2d  \n", $i, $i * $i);
-  }
-  \printf("----------------\n");
-  exit(0);
+  echo "Hello World!\n";
 }
 ```
 
-This guide assumes some knowledge of programming. Hack has a very similar look and feel to PHP, which in
-turn, supports a lot of syntax shared by C, C++, C#, Java, and JavaScript. Here are the key points to note about this example:
+### 4. Run The Typechecker
 
-* This code belongs to the unique, but arbitrary, namespace called `Hack\GettingStarted\MyFirstProgram`.
-* The `<<__EntryPoint>>` annotation marks this function as the point where execution starts - there is nothing special about the function name `main`.
-* `main` is a function that has no parameters and, being `void`, returns no value. Furthermore, this function
-is where the program will begin execution; that is, because of the `<<__EntryPoint>>` annotation, `main` is the entry-point function.
-* `echo` writes some text and a blank line to standard output.
-* `printf` also writes to standard output, but it provides format control, in this case, to right-justify the integer columns.
-* The `for` loop has variable `$i` go from -5 to +5, in steps of 1, and for each iteration, the value
-of `$i` and that value squared are written out together on a separate line.
-
-### 4. Run the Typechecker
-
-If you are using Visual Studio Code with vscode-hack or Vim with ALE, you will be seeing typechecking information as you write the program. If you run the typechecker from the command line, the command is just:
+Normally you'll get type errors and hover information from within your
+IDE. You can also run the typechecker directly to confirm that you
+have no type errors in any files in your project.
 
 ```
-$ hh_client first.hack
-```
-
-You should see:
-
-```
+$ cd my_project
+$ hh_client
 No errors!
 ```
 
-### 5. Run the code in HHVM
+### 5. Run Your Program
 
-After you get your Hack program to typecheck clean with no errors, you can then run the
-program in HHVM, as follows:
-
-```
-$ hhvm first.hack
-```
-
-Here is the output:
+HHVM provides the Hack runtime. You can run your program as follows:
 
 ```
-Welcome to Hack!
-
-Table of Squares
-----------------
-  -5        25
-  -4        16
-  -3         9
-  -2         4
-  -1         1
-   0         0
-   1         1
-   2         4
-   3         9
-   4        16
-   5        25
-----------------
-
+$ cd my_project
+$ hhvm hello.hack
+Hello World!
 ```
 
-Now, go forth and Hack away!
+### 6. Run A Website
 
-[Visual Studio Code]: https://code.visualstudio.com
-[vscode-hack]: https://marketplace.visualstudio.com/items?itemName=pranayagarwal.vscode-hack
-[ALE]: https://github.com/w0rp/ale
+Normally you'll start HHVM as a webserver, and it will automatically
+pick up any changes to files you make.
+
+
+```
+$ cd my_project
+$ hhvm -m server -p 8080
+```
+
+You can now visit <http://localhost:8080/hello.hack> to see "Hello
+World!" in your browser.
