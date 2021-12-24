@@ -202,8 +202,8 @@ You can run any example standalone. For example:
 
 ```
 # Assuming you are in the user-documentation repo directory
-% cd guides/hack/23-collections/10-examples-examples/
-% hhvm lazy.php
+$ cd guides/hack/23-collections/10-examples-examples/
+$ hhvm lazy.php
 ```
 
 And you will see output like:

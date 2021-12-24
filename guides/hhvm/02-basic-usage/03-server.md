@@ -5,7 +5,7 @@ Multiple requests can, of course, be served simultaneously, and HHVM also caches
 Here is the simplest way to run HHVM in server mode.
 
 ```
-% hhvm -m server -p 8080
+$ hhvm -m server -p 8080
 ```
 
 `-m` is the `mode` option; the default is [command-line](./command-line.md).
