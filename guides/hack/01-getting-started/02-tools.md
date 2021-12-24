@@ -1,5 +1,3 @@
-## Tools
-
 The core tools are:
 
 - `hh_client`: this is the command line interface for Hack's static analysis; it
