@@ -93,4 +93,4 @@ If a method is expecting a label, one cannot pass in a value, and vice versa: `f
 
 ### `MemberOf` is covariant, `Label` is invariant
 A label should be considered as a way to attach a type to a binding. Therefore it is invariant: `E#A` is not of type `\HH\EnumClass\Label<E, arraykey>`.
-This can be misleading at first, because `\HH\MemberOf` is invariant (it is data after all): `E::A` is of type `\HH\MemberOf<E, arraykey>`.
+This can be misleading at first, because `\HH\MemberOf` is covariant (it is data after all): `E::A` is of type `\HH\MemberOf<E, arraykey>`.
