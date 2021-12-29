@@ -30,7 +30,7 @@ echo "** Updating locales"
 locale-gen en_US.UTF-8
 
 echo "** Installing composer"
-wget -qO /dev/stdout https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+wget -qO /dev/stdout https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version="2.2.2"
 if [ ! -x /usr/local/bin/composer ]; then
   echo "Failed to install composer"
   exit 1
