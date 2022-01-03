@@ -18,7 +18,7 @@ abstract final class SearchScores {
   const float PREFIX_MATCH_SCORE = 90.0;
   const float SUFFIX_MATCH_SCORE = 90.0;
   const float WORD_MATCH_SCORE = 90.0;
-  const float SUBSTRING_MATCH_SCORE = 1.0;
+  const float SUBSTRING_MATCH_SCORE = 2.0;
   const float HARDCODED_RESULT_SCORE = 200.0;
 
   ///// Penalties /////
@@ -51,7 +51,7 @@ abstract final class SearchScores {
 
   ///// Guide Weights /////
 
-  const float GUIDES_MULTIPLIER = 1.5;
+  const float GUIDES_MULTIPLIER = 3.0;
   const float GUIDES_BOOST = 5.0;
   // e.g. async/introduction before async/extensions
   const float GUIDE_INTRODUCTION_MULTIPLIER = 1.1;

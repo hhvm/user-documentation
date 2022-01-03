@@ -1,9 +1,9 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Shapes\ShapeValuesOfType;
+namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Shape\ShapeValuesOfType;
 
-use type \HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Shapes\ShapeValuesOfTypeDefineServer\Server;
+use type \HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Shape\ShapeValuesOfTypeDefineServer\Server;
 
 function takes_server(Server $s): void {
   return;
