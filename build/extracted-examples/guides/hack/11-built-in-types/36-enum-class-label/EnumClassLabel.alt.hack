@@ -3,6 +3,8 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClassLabel\EnumClassLabel;
 
+<<file:__EnableUnstableFeatures('enum_class_label')>> // temp
+
 function set<T>(\HH\EnumClass\Label<E, T> $label, T $data) : void {
   // setting $data into some storage using $label as a key
 }
