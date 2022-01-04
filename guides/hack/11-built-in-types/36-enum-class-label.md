@@ -4,7 +4,7 @@ to support this. More information available at  https://github.com/hhvm/user-doc
 
 ## Values v. Bindings
 
-With [enum types](enumerated-types) and [enum classes](enum-class), most of the focus is given to their values.
+With [enum types](/hack/built-in-types/enum) and [enum classes](/hack/built-in-types/enum-class), most of the focus is given to their values.
 Expressions like `E::A` denote the value of `A` in `E`, but the fact that `A` was used to access it is lost.
 
 ```EnumClassLabelIntro.hack no-auto-output
@@ -65,13 +65,14 @@ Now, `full_print(E#A)` will echo `A 42` and `full_print(E#B)` will echo `B 42`.
 
 ## Full v. Short Labels
 
-We refer to labels like `E#A` as *fully qualified* labels: the programmer wrote the full enum class name. However there are some situations where Hack can infer
-this part, and we can save the programmer that bit. For example, the previous calls could be written as `full_print(#A)` and `full_print(#B)`, leaving `E` implicit.
+We refer to labels like `E#A` as *fully qualified* labels: the programmer wrote the full enum class name.
+However there are some situations where Hack can infer the class name; for example,
+the previous calls could be written as `full_print(#A)` and `full_print(#B)`, leaving `E` implicit.
 This is only allowed when there is enough type information to infer the right enum class name. For example, `$x = #A` is not allowed and will result in a type error.
 
 ### Special case of function calls
 
-When the first argument of a function is a label, we provide an alternative notation to call it. This was done to reflect some generated code patterns this feature helped removed:
+When the first argument of a function is a label, we provide an alternative notation to call it.
 ```EnumClassLabel.alt.hack no-auto-output
 <<file:__EnableUnstableFeatures('enum_class_label')>> // temp
 
@@ -91,8 +92,8 @@ As you can see, the short name can be written *before* the opening parenthesis o
 
 ## Known corner cases
 
-### The `#` character is no longer a one line comment
-This feature relies on the fact that Hack and HHVM no longer consider the character `#` as a one line comment. Please use `//` for such purpose.
+### The `#` character is no longer a signle-line comment
+This feature relies on the fact that Hack and HHVM no longer consider the character `#` as a single-line comment. Please use `//` for such purpose.
 
 ### Labels and values cannot be exchanged
 If a method is expecting a label, one cannot pass in a value, and vice versa: `full_print(E::A)` will result in a type error and so will `partial_print(E#A)`.
