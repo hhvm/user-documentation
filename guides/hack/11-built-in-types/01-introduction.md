@@ -21,7 +21,8 @@ Though not built-in as types, other alternatives exist in [Hack Collections](/ha
 
 ## Other Built-In Types
 Hack has other built-in types too, like:
-[enum](/hack/built-in-types/enum) (with [enum class](/hack/built-in-types/enum-class)),
+[enum](/hack/built-in-types/enum) (with [enum class](/hack/built-in-types/enum-class) and [enum class labels](/hack/built-in-types/enum-class-label)
+),
 [shape](/hack/built-in-types/shapes), and 
 [tuples](/hack/built-in-types/tuples).
 
