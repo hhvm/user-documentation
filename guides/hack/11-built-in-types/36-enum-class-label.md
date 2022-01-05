@@ -92,7 +92,7 @@ As you can see, the short name can be written *before* the opening parenthesis o
 
 ## Known corner cases
 
-### The `#` character is no longer a signle-line comment
+### The `#` character is no longer a single-line comment
 This feature relies on the fact that Hack and HHVM no longer consider the character `#` as a single-line comment. Please use `//` for such purpose.
 
 ### Labels and values cannot be exchanged
