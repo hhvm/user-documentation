@@ -233,7 +233,7 @@ function returns_wrong_shape(): shape('x' => int) {
 
 ## Converting Shapes
 
-Converting shapes to containers is strongly discouraged, however is necessary, this can be done with `Shapes:toDict()`.
+Converting shapes to containers is strongly discouraged, however is necessary, this can be done with `Shapes::toDict()`.
 
 On older versions of HHVM, Shapes can also be converted to darrays with `Shapes::toArray()`; this should be avoided in new code, as darrays are currently an alias for the dict type, and will be removed from the language.
 
