@@ -70,6 +70,7 @@ However there are some situations where Hack can infer the class name; for examp
 the previous calls could be written as `full_print(#A)` and `full_print(#B)`, leaving `E` implicit.
 This is only allowed when there is enough type information to infer the right enum class name. For example, `$x = #A` is not allowed and will result in a type error.
 
+<!--
 ### Special case of function calls
 
 When the first argument of a function is a label, we provide an alternative notation to call it.
@@ -89,6 +90,7 @@ function all_the_same(): void {
 ```
 
 As you can see, the short name can be written *before* the opening parenthesis of the function call. This only works for a single label argument, which must be the first one.
+-->
 
 ## Known corner cases
 
