@@ -29,4 +29,3 @@ A number of special comments are recognized; they are:
 * `// strict` and `// partial` in [headers](/hack/source-code-fundamentals/program-structure)
 * `/* HH_FIXME[1234] */` or `/* HH_IGNORE_ERROR[1234] */`, which
   suppresses typechecker error reporting for error 1234.
-* `#!` in `#!/path/to/executable` (e.g. `/usr/bin/hhvm`), which is the shebang line (interpreter directive).
