@@ -22,5 +22,10 @@
     "scripts": {
         "post-install-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch",
         "post-update-cmd": "patch --dry-run -Rf -p1 -i hackttp.patch || patch -p1 -i hackttp.patch"
+    },
+    "config": {
+        "allow-plugins": {
+            "hhvm/hhvm-autoload": true
+        }
     }
 }
