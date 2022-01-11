@@ -2,8 +2,7 @@
 
 $base-font: "Open Sans", Arial, Helvetica, sans-serif;
 $header-font: "Roboto", 'Helvetica Neue', Arial, sans-serif;
-
-$fa-font-path: "/s/evergreen/fonts/font-awesome-4.5.0/";
+$fa-font-path: "/s/evergreen/fonts/fontawesome-free-5.15.4-web";
 
 /* Colors */
 $orange: #fd8724;
@@ -39,7 +38,7 @@ $side-padding-mob: 10px;
 /* Mixins */
 
 @mixin codetext {
-  font-family: Hack, "Lucida Console", Monaco, "Courier New", monospace;
+  font-family: "Lucida Console", Monaco, "Courier New", monospace;
   font-size: 90%;
   line-height: 1.4em;
 }
@@ -53,7 +52,7 @@ $side-padding-mob: 10px;
 
 @mixin headerfade {
   opacity: 0.3;
-  @include transition(opacity 0.3s);
+  transition: opacity 0.3s;
 }
 
 @mixin apinavlink {
@@ -67,12 +66,12 @@ $side-padding-mob: 10px;
 @mixin buttonhover($color) {
   background-color: lighten($color, 30%);
   color: darken($color, 20%);
-  @include transition(background-color 0.3s, color 0.3s);
+  transition: background-color 0.3s, color 0.3s;
   overflow: hidden;
 
   .buttonText {
     border-bottom: 2px solid lighten($color, 25%);
-    @include transition(border-color 0.3s);
+    transition: border-color 0.3s;
 
     a {
       color: darken($color, 20%);

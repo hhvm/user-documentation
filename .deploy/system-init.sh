@@ -24,7 +24,7 @@ apt-get update -y
 # settings, which can break things if the current locale isn't usable in the
 # container; using the `C` locale makes sure that the `locales` package
 # post-install succeeds.
-LC_ALL=C apt-get install -y ruby php-cli zip unzip locales
+LC_ALL=C apt-get install -y php-cli zip unzip locales
 
 echo "** Updating locales"
 locale-gen en_US.UTF-8

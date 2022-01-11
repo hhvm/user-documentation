@@ -11,31 +11,23 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\Dict;
-
 final class SASSBuildStep extends BuildStep {
-  const string PROVIDER = LocalConfig::ROOT.'/sass/build.rb';
-
   <<__Override>>
   public function buildAll(): void {
     \HH\Asio\join($this->buildAllAsync());
   }
 
   private async function buildAllAsync(): Awaitable<void> {
-    Log::i("\nBuilding SASS");
+    Log::i("\nBuilding SASS...");
     $exit_code = null;
-    $options = shape(
-      'environment' => dict[
-        'GEM_HOME' => LocalConfig::ROOT.'/vendor-rb',
-      ]
-        |> Dict\merge($$, _Private\SuperGlobals\environment_variables()),
-    );
     list($exit_code, $stdout, $stderr) = await _Private\execute_async(
-      $options,
-      self::PROVIDER,
+      null,
+      SASSDependenciesBuildStep::getDartSASSExecutablePath(),
+      '--load-path='.LocalConfig::ROOT.'/sass',
+      '--load-path='.SASSDependenciesBuildStep::getFontAwesomeDir().'/scss',
+      LocalConfig::ROOT.'/sass/core.scss',
+      BuildPaths::CORE_CSS,
     );
-    invariant($exit_code === 0, 'Failed to build core CSS: %s', $stderr);
-
-    \file_put_contents(BuildPaths::CORE_CSS, $stdout);
+    invariant($exit_code === 0, "Failed to build core CSS: %s%s", $stdout,$stderr);
   }
 }

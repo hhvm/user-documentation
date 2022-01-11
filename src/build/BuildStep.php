@@ -38,11 +38,7 @@ abstract class BuildStep {
       |> Str\strip_prefix($$, '/')
       |> Str\split($$, '/')
       |> C\firstx($$)
-      |> Str\format(
-        '%s/%s/.tag',
-        BuildPaths::API_SOURCES_DIR,
-        $$,
-      );
+      |> Str\format('%s/%s/.tag', BuildPaths::API_SOURCES_DIR, $$);
     if (!\file_exists($tag_file)) {
       return null;
     }
@@ -82,7 +78,11 @@ abstract class BuildStep {
       );
     }
 
-    $rdi = new \RecursiveDirectoryIterator($root);
+    $rdi = new \RecursiveDirectoryIterator(
+      $root,
+      \FilesystemIterator::CURRENT_AS_FILEINFO |
+        \FilesystemIterator::FOLLOW_SYMLINKS,
+    );
     $rii = new \RecursiveIteratorIterator(
       $rdi,
       \RecursiveIteratorIterator::CHILD_FIRST,

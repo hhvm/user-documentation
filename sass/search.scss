@@ -35,7 +35,7 @@
       padding: 10px;
       position: relative;
       z-index: 9;
-      @include transition(background-color 0.3s);
+      transition: background-color 0.3s;
 
       &:required:invalid {
         box-shadow: none;
@@ -53,7 +53,7 @@
       left: 10px;
       right: 10px;
       top: 20px;
-      @include transition(left 0.3s);
+      transition: left 0.3s;
       position: absolute;
 
       .glyphIcon {
@@ -65,7 +65,7 @@
         color: rgba(white, 0.5);
         font-size: 12px;
         line-height: 1.2em;
-        @include transition(color 0.3s);
+        transition: color 0.3s;
       }
     }
 

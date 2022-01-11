@@ -3,9 +3,11 @@ see the current [HHVM version used on the deployed site](https://github.com/hhvm
 
 ## Prerequisites
 
-You'll need Ruby (for [SASS styling](https://sass-lang.com/)) and HHVM
+You'll need HHVM
 (see [installation instructions](/hhvm/installation/introduction))
-installed on your local machine.
+installed on your local machine, and the version must have the same major
+and minor (e.g. `4.123`) as the version specification in the `composer.json`
+file.
 
 You'll also need a checkout of the source code for this site.
 

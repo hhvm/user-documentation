@@ -62,7 +62,7 @@ function build_site(): void {
     RoutingCodegenBuildStep::class,
 
     // Needed by SASS
-    RubyDependenciesBuildStep::class,
+    SASSDependenciesBuildStep::class,
 
     // Static Resources
     SASSBuildStep::class,
