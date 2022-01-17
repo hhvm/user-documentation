@@ -41,14 +41,31 @@ enum class E : int {
 }
 ```
 
-This example defines two constants `E::A: \HH\MemberOf<E, int>` and `E::B: \HH\MemberOf<E, int>`. Enum class labels add more definitions to the mix:
+This enum class defines two constants:
+- `E::A` of type `HH\MemberOf<E, int>`
+- `E::B` of type `HH\MemberOf<E, int>`
 
-- `E#A: \HH\EnumClass\Label<E, int>` is the label to access `E::A`
-- `E#B: \HH\EnumClass\Label<E, int>` is the label to access `E::B`
-- `E::nameOf` is a static method expecting a label and returning its string representation: `E::nameOf(E#A) = "A"`
-- `E::valueOf` is a static method expecting a label and returning its value: `E::valueOf(E#A) = E::A`
+The main addition of labels is a new **opaque** type: `HH\EnumClasslabel`. Let's first recall its full definition:
+
+```
+newtype Label<-TEnumClass, TType> = mixed;
+```
+
+This type has two generic arguments which are the same as `HH\MemberOf`:
+- the first one is the enum class where the label is defined
+- the second one is the data type indexed by the label
+
+As an example, `HH\EnumClass\Label<E, int>` means that the label is from the enum class `E` and points to a value of type `int`.
+
+Let us go back to our enum class `E`. Labels add more definitions to the mix:
+
+- `E#A: HH\EnumClass\Label<E, int>` is the label to access `E::A`
+- `E#B: HH\EnumClass\Label<E, int>` is the label to access `E::B`
+- `E::nameOf` is a static method expecting a label and returning its string representation: `E::nameOf(E#A) === "A"`
+- `E::valueOf` is a static method expecting a label and returning its value: `E::valueOf(E#A) === E::A`
 
 So we can rewrite the earlier example in a more resilient way:
+
 ```EnumClassLabel.example.hack no-auto-output
 <<file:__EnableUnstableFeatures('enum_class_label')>> // temp
 
@@ -92,6 +109,35 @@ function all_the_same(): void {
 As you can see, the short name can be written *before* the opening parenthesis of the function call. This only works for a single label argument, which must be the first one.
 -->
 
+## Equality testing
+
+Enum class labels can be tested for equality using the `===` operator or a switch statement:
+
+```EnumClassLabel.equality1.hack no-auto-output
+<<file:__EnableUnstableFeatures('enum_class_label')>> // temp
+
+function test_eq(\HH\EnumClass\Label<E, int> $label) : void {
+  if ($label === E#A) { echo "label is A\n"; }
+  switch ($label) {
+    case E#A: break;
+    case E#B: break;
+  }
+}
+```
+
+Because the runtime doesn’t have all the typing information available, these tests only check the name component of a label. It means that for any two enum classes `E` and `F`, `E#A === F#A` will be true despite being from different enum classes. Also the support type (int in the case of the enum class `E`) is not taken into account either.
+
+```EnumClassLabel.equality2.hack no-auto-output
+class Foo {}
+
+enum class F : Foo {
+  Foo A = new Foo();
+}
+
+// E#A === E#B is false
+// E#A === F#A is true
+```
+
 ## Known corner cases
 
 ### The `#` character is no longer a single-line comment
@@ -101,5 +147,24 @@ This feature relies on the fact that Hack and HHVM no longer consider the charac
 If a method is expecting a label, one cannot pass in a value, and vice versa: `full_print(E::A)` will result in a type error and so will `partial_print(E#A)`.
 
 ### `MemberOf` is covariant, `Label` is invariant
-A label should be considered as a way to attach a type to a binding. Therefore it is invariant: `E#A` is not of type `\HH\EnumClass\Label<E, arraykey>`.
-This can be misleading at first, because `\HH\MemberOf` is covariant (it is data after all): `E::A` is of type `\HH\MemberOf<E, arraykey>`.
+
+Let’s recall the definition of `HH\MemberOf` and `HH\EnumClass\Label` along with some basic definitions:
+
+```EnumClassLabel.variance.hack no-auto-output
+newtype MemberOf<-TEnumClass, +TType> as TType = TType;
+newtype Label<-TEnumClass, TType> = mixed;
+
+class A {}
+class B extends A {}
+enum class G : A {
+  A X = new A();
+  B Y = new B();
+}
+```
+
+Firstly, `HH\MemberOf` has a `as TType` constraint. It means that since `G::X` is of type `HH\MemberOf<G, A>`, it is also of type `A`. For the same reasons, `G::Y` is of type `HH\MemberOf<G, B>` and `B`.
+Secondly, `HH\MemberOf` is covariant in `TType`. Since `B extends A`, it means that `G::Y` is also of type `HH\MemberOf<G, A>`. And because of all of that, `G::Y` is also of type `A`.
+
+Enum class values behave just like the underlying data they are set to.
+
+On the other hand, `HH\EnumClass\Label` is invariant in `TType`. It means that while `G#Y` is of type `HH\EnumClass\Label<G, B>`, it is not of type `HH\EnumClass\Label<G, A>`. Labels are opaque handles to access data; one can think about them as maps from names to types. Their typing has to be more strict, especially if we want to be able to extend this concept to other parts of a class (reflection like access to methods, properties, …). To make sure these possible extensions remain possible, we enforce a stricter typing for labels then for values.
