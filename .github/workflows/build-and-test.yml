@@ -81,7 +81,7 @@ jobs:
       - name: Install ElasticBeanstalk CLI
         run: |
           git clone --depth 10 https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
-          ./aws-elastic-beanstalk-cli-setup/scripts/bundled_installer
+          ./aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py
           echo "PATH=$HOME/.ebcli-virtual-env/executables:$PATH" >> $GITHUB_ENV
       - name: Configure ElasticBeanstalk
         run: |
