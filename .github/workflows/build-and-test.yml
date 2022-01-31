@@ -82,7 +82,7 @@ jobs:
         run: |
           wget https://github.com/aws/aws-elastic-beanstalk-cli-setup/archive/refs/tags/v0.2.0.tar.gz
           tar zxf v0.2.0.tar.gz
-          ./aws-elastic-beanstalk-cli-setup-0.2.0/scripts/ebcli_installer.py
+          python ./aws-elastic-beanstalk-cli-setup-0.2.0/scripts/ebcli_installer.py
           echo "PATH=$HOME/.ebcli-virtual-env/executables:$PATH" >> $GITHUB_ENV
       - name: Configure ElasticBeanstalk
         run: |
