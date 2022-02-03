@@ -72,7 +72,9 @@ git submodule update --init --recursive
 This will take a *long* time.
 
 ```
-cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock .
+mkdir build
+cd build
+cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock ..
 make -j [number_of_processor_cores] # eg. make -j 4
 sudo make install
 ```
