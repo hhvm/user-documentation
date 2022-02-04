@@ -46,12 +46,12 @@ async function typecheck_example_async(
   $hh_server_path = get_hh_server_path();
   invariant($hh_server_path is nonnull, "Couldn't find hh_server");
 
-  // HHVM_DISABLE_PERSONALITY: `hh_server` tries to disable ASLR via the
-  // `personality()` syscall, which fails in Docker.
   list($_exit_code, $stdout, $stderr) = await execute_async(
     shape(
       'environment' => dict[
         'HH_TMPDIR' => $hh_tmp_dir->getPath(),
+        // HHVM_DISABLE_PERSONALITY: `hh_server` tries to disable ASLR via the
+        // `personality()` syscall, which fails in Docker.
         'HHVM_DISABLE_PERSONALITY' => '1',
       ],
     ),
@@ -60,6 +60,11 @@ async function typecheck_example_async(
     '--max-procs=1',
     '--config',
     'extra_paths='.LocalConfig::ROOT.'/vendor/',
+    '--config',
+    // Composer generates .hack files in bin/ that are not hack; by default,
+    // hack ignores them, but as we're pulling them in via `extra_paths`, we
+    // need to explicitly ignore them
+    'ignored_paths=[".*vendor/bin/.*"]',
     $work_dir,
   );
 

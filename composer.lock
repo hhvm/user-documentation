@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32f7cc200c6e215f307f01bcd66111f0",
+    "content-hash": "19331bd595e369bcd05b8e899ebb08af",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -482,16 +482,16 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.139.0",
+            "version": "v4.139.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "bf471e2a888e5bfcfd7b78dc4641b1a4eaf5bf19"
+                "reference": "259bdaf273c493c52b459e329c0835868e988b83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/bf471e2a888e5bfcfd7b78dc4641b1a4eaf5bf19",
-                "reference": "bf471e2a888e5bfcfd7b78dc4641b1a4eaf5bf19",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/259bdaf273c493c52b459e329c0835868e988b83",
+                "reference": "259bdaf273c493c52b459e329c0835868e988b83",
                 "shasum": ""
             },
             "require": {
@@ -529,22 +529,22 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.139.0"
+                "source": "https://github.com/hhvm/hhast/tree/v4.139.3"
             },
-            "time": "2021-12-10T21:22:05+00:00"
+            "time": "2022-01-26T17:38:14+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "0b5be45a7a57a6cc24f3a62889367656ff61ae4a"
+                "reference": "4dd560e1a161597ea80aeb9a0e644bf79426a22c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/0b5be45a7a57a6cc24f3a62889367656ff61ae4a",
-                "reference": "0b5be45a7a57a6cc24f3a62889367656ff61ae4a",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/4dd560e1a161597ea80aeb9a0e644bf79426a22c",
+                "reference": "4dd560e1a161597ea80aeb9a0e644bf79426a22c",
                 "shasum": ""
             },
             "require": {
@@ -570,6 +570,7 @@
                 ],
                 "branch-alias": {
                     "dev-master": "3.x-dev",
+                    "dev-main": "3.x-dev",
                     "dev-CI_current_pull_request": "3.x-dev"
                 }
             },
@@ -584,9 +585,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hhvm-autoload/issues",
-                "source": "https://github.com/hhvm/hhvm-autoload/tree/v3.3.0"
+                "source": "https://github.com/hhvm/hhvm-autoload/tree/v3.3.1"
             },
-            "time": "2021-07-13T16:10:54+00:00"
+            "time": "2022-01-05T17:52:54+00:00"
         },
         {
             "name": "hhvm/hsl",
@@ -922,8 +923,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.140.*"
+        "hhvm": "4.147.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

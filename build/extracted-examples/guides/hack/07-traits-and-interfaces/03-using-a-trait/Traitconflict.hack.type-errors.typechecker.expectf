@@ -1,5 +1,5 @@
 File "%s/Traitconflict.hack", line 14, characters 7-7:
-Class `HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\UsingATrait\Traitconflict\A` does not correctly implement all required members  (Typing[4340])
+Class `HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\UsingATrait\Traitconflict\A` does not correctly implement all required members  (Typing[4374])
   File "%s/Traitconflict.hack", line 14, characters 28-28:
   Some members are incompatible with those declared in type `HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\UsingATrait\Traitconflict\T`
   File "%s/Traitconflict.hack", line 11, characters 9-11:
