@@ -379,9 +379,9 @@ final class HHAPIDocBuildStep extends BuildStep {
         // Empty index; this is used for auto-linking, but we do that when
         // processing the markdown, instead of when generating it.
         shape(
-          'types' => keyset[],
-          'newtypes' => keyset[],
-          'functions' => keyset[],
+          'types' => dict[],
+          'newtypes' => dict[],
+          'functions' => dict[],
           'classes' => dict[],
           'interfaces' => dict[],
           'traits' => dict[],
@@ -391,6 +391,7 @@ final class HHAPIDocBuildStep extends BuildStep {
           'format' => HHAPIDoc\OutputFormat::MARKDOWN,
           'syntaxHighlighting' => true,
           'hidePrivateMethods' => true,
+          'hideInheritedMethods' => true,
         ),
       )
     );
