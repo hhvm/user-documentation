@@ -11,7 +11,7 @@
         "hhvm/hsl": "^4.25",
         "hhvm/hsl-experimental": "^4.93",
         "facebook/fbmarkdown": "^1.0",
-        "facebook/hh-apidoc": ">=0.6 <0.8"
+        "facebook/hh-apidoc": "^0.8"
     },
     "require-dev": {
         "hhvm/hhast": "^4.0",
