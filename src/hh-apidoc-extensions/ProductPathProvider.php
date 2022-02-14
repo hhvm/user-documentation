@@ -46,8 +46,7 @@ final class ProductPathProvider implements HHAPIDoc\IPathProvider<?string> {
     if ($class === null) {
       return null;
     }
-    $method = $class['methods'][$method] ?? null;
-    return $method === null ? null : $method['urlPath'];
+    return $class['methods'][$method]['urlPath'] ?? null;
   }
 
   public function getPathForFunction(string $function): ?string {

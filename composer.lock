@@ -349,23 +349,23 @@
         },
         {
             "name": "facebook/hh-apidoc",
-            "version": "v0.7.0",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hh-apidoc.git",
-                "reference": "ff89604aaf70a8563b6d7f12982819d53094c071"
+                "reference": "217c451d3079179c6ecaa787de896f74011fd93f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hh-apidoc/zipball/ff89604aaf70a8563b6d7f12982819d53094c071",
-                "reference": "ff89604aaf70a8563b6d7f12982819d53094c071",
+                "url": "https://api.github.com/repos/hhvm/hh-apidoc/zipball/217c451d3079179c6ecaa787de896f74011fd93f",
+                "reference": "217c451d3079179c6ecaa787de896f74011fd93f",
                 "shasum": ""
             },
             "require": {
                 "facebook/definition-finder": "^2.13.0",
                 "facebook/fbmarkdown": "^1.6.5",
                 "facebook/hh-clilib": "^2.1.0",
-                "hhvm": "^4.80",
+                "hhvm": "^4.102",
                 "hhvm/hhast": "^4.80",
                 "hhvm/hsl": "^4.0",
                 "hhvm/hsl-experimental": "^4.53",
@@ -385,9 +385,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hh-apidoc/issues",
-                "source": "https://github.com/hhvm/hh-apidoc/tree/v0.7.0"
+                "source": "https://github.com/hhvm/hh-apidoc/tree/v0.8.0"
             },
-            "time": "2021-01-20T22:55:14+00:00"
+            "time": "2022-01-10T18:47:38+00:00"
         },
         {
             "name": "facebook/hh-clilib",

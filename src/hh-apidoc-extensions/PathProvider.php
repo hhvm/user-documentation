@@ -26,18 +26,21 @@ final class PathProvider implements HHAPIDoc\IPathProvider<?string> {
   public function getPathForClass(string $class): ?string {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForClass($class))
+      |> Vec\filter_nulls($$)
       |> C\first($$);
   }
 
   public function getPathForInterface(string $class): ?string {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForInterface($class))
+      |> Vec\filter_nulls($$)
       |> C\first($$);
   }
 
   public function getPathForTrait(string $class): ?string {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForTrait($class))
+      |> Vec\filter_nulls($$)
       |> C\first($$);
   }
 
@@ -47,6 +50,7 @@ final class PathProvider implements HHAPIDoc\IPathProvider<?string> {
   ): ?string {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForClassMethod($class, $method))
+      |> Vec\filter_nulls($$)
       |> C\first($$);
   }
 
@@ -56,6 +60,7 @@ final class PathProvider implements HHAPIDoc\IPathProvider<?string> {
   ): ?string {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForInterfaceMethod($class, $method))
+      |> Vec\filter_nulls($$)
       |> C\first($$);
   }
 
@@ -65,12 +70,14 @@ final class PathProvider implements HHAPIDoc\IPathProvider<?string> {
   ): ?string {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForTraitMethod($trait, $method))
+      |> Vec\filter_nulls($$)
       |> C\first($$);
   }
 
   public function getPathForFunction(string $function): ?string {
     return $this->providers
       |> Vec\map($$, $p ==> $p->getPathForFunction($function))
+      |> Vec\filter_nulls($$)
       |> C\first($$);
   }
 
