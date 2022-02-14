@@ -17,6 +17,7 @@ use type Facebook\DefinitionFinder\{
   ScannedDefinition,
   ScannedFunction,
   ScannedFunctionish,
+  ScannedMethod,
   ScannedNewtype,
   ScannedType,
 };
@@ -72,7 +73,6 @@ abstract final class ScannedDefinitionFilters {
     ) {
       return true;
     }
-
     return false;
   }
 
@@ -87,8 +87,10 @@ abstract final class ScannedDefinitionFilters {
 
   public static function shouldNotDocument(ScannedDefinition $def): bool {
     return (
-      Str\starts_with($def->getName(), '_') // non-namespaced name starts with _
-      ||
+      (
+        // non-namespaced name starts with _
+        Str\starts_with($def->getName(), '_') && !($def is ScannedMethod)
+      ) ||
       Str\contains($def->getName(), '\\_') // namespaced name starts with _
       ||
       Str\contains($def->getName(), 'WaitHandle') ||
