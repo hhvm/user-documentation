@@ -42,10 +42,8 @@ final class HHAPIDocBuildStep extends BuildStep {
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/system/php/', $exts),
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/runtime/ext/', $exts),
     );
-    $hhi_sources = self::findSources(
-      BuildPaths::HHVM_TREE.'/hphp/hack/hhi/',
-      $exts,
-    );
+    $hhi_sources =
+      self::findSources(BuildPaths::HHVM_TREE.'/hphp/hack/hhi/', $exts);
     Log::i("\nParsing builtins");
     list($runtime_defs, $hhi_defs) = \HH\Asio\join(async {
       return tuple(
@@ -64,9 +62,8 @@ final class HHAPIDocBuildStep extends BuildStep {
         if ($parent !== null) {
           return ScannedDefinitionFilters::isHHSpecific($parent);
         }
-        return ScannedDefinitionFilters::isHHSpecific(
-          $documentable['definition'],
-        );
+        return
+          ScannedDefinitionFilters::isHHSpecific($documentable['definition']);
       },
     );
 
@@ -76,25 +73,22 @@ final class HHAPIDocBuildStep extends BuildStep {
     // whitelisted files again here.
     $hsl_sources =
       self::findSources(BuildPaths::HHVM_TREE.'/hphp/hsl/src/', $exts);
-    $hsl_experimental_sources = self::findSources(
-      BuildPaths::HSL_EXPERIMENTAL_TREE.'/src/',
-      $exts,
-    );
+    $hsl_experimental_sources =
+      self::findSources(BuildPaths::HSL_EXPERIMENTAL_TREE.'/src/', $exts);
     Log::i("\nParsing HSL sources");
     $hsl_defs = \HH\Asio\join(self::parseAsync($hsl_sources));
-    $hsl_experimental_defs = \HH\Asio\join(
-      self::parseAsync($hsl_experimental_sources),
-    );
+    $hsl_experimental_defs =
+      \HH\Asio\join(self::parseAsync($hsl_experimental_sources));
 
-    Log::i("\nGenerating index for builtins");
+    Log::i("\nGenerating search and navigation index for builtins");
     $builtin_index = self::createProductIndex(APIProduct::HACK, $builtin_defs);
-    Log::i("\nGenerating index for the HSL");
+    Log::i("\nGenerating search and navigation index for the HSL");
     $hsl_index = self::createProductIndex(APIProduct::HSL, $hsl_defs);
     $hsl_experimental_index = self::createProductIndex(
       APIProduct::HSL_EXPERIMENTAL,
       $hsl_experimental_defs,
     );
-    Log::i("\nWriting index file");
+    Log::i("\nWriting search and navigation index file");
     \file_put_contents(
       BuildPaths::APIDOCS_INDEX_JSON,
       JSON\encode_shape(
@@ -107,14 +101,46 @@ final class HHAPIDocBuildStep extends BuildStep {
       ),
     );
 
-    Log::i("\nGenerating Markdown for builtins");
-    $builtin_md = self::buildMarkdown(APIProduct::HACK, $builtin_defs);
-    Log::i("\nGenerating Markdown for the HSL");
-    $hsl_md = self::buildMarkdown(APIProduct::HSL, $hsl_defs);
-    $hsl_experimental_md = self::buildMarkdown(
-      APIProduct::HSL_EXPERIMENTAL,
-      $hsl_experimental_defs,
+    // HHApiDoc index; needed so that e.g. `File\WriteHandle`'s documentation
+    // generation knows about `IO\WriteHandle`'s methods
+    Log::i("\nCreating cross-reference index");
+    $hh_apidoc_index = shape(
+      'types' => dict[],
+      'newtypes' => dict[],
+      'functions' => dict[],
+      'classes' => dict[],
+      'interfaces' => dict[],
+      'traits' => dict[],
     );
+    $all_documentables =
+      Vec\flatten(vec[$builtin_defs, $hsl_defs, $hsl_experimental_defs]);
+    foreach ($all_documentables as $documentable) {
+      $def = $documentable['definition'];
+      // types and newtypes are not currently supported by docs.hhvm.com
+      if ($def is ScannedFunction) {
+        $hh_apidoc_index['functions'][$def->getName()] = $documentable;
+        continue;
+      }
+      if ($def is ScannedClass) {
+        $hh_apidoc_index['classes'][$def->getName()] = $documentable;
+        continue;
+      }
+      if ($def is ScannedInterface) {
+        $hh_apidoc_index['interfaces'][$def->getName()] = $documentable;
+        continue;
+      }
+      if ($def is ScannedTrait) {
+        $hh_apidoc_index['traits'][$def->getName()] = $documentable;
+        continue;
+      }
+    }
+
+    Log::i("\nGenerating Markdown for builtins");
+    $builtin_md = self::buildMarkdown(APIProduct::HACK, $builtin_defs, $hh_apidoc_index);
+    Log::i("\nGenerating Markdown for the HSL");
+    $hsl_md = self::buildMarkdown(APIProduct::HSL, $hsl_defs, $hh_apidoc_index);
+    $hsl_experimental_md =
+      self::buildMarkdown(APIProduct::HSL_EXPERIMENTAL, $hsl_experimental_defs, $hh_apidoc_index);
 
     \file_put_contents(
       BuildPaths::APIDOCS_MARKDOWN.'/index.json',
@@ -175,10 +201,8 @@ final class HHAPIDocBuildStep extends BuildStep {
     APIProduct $product,
     vec<Documentable> $documentables,
   ): ProductAPIIndexShape {
-    $documentables = Vec\sort_by(
-      $documentables,
-      $d ==> $d['definition']->getName(),
-    );
+    $documentables =
+      Vec\sort_by($documentables, $d ==> $d['definition']->getName());
     return shape(
       'class' => self::createClassishIndex(
         $product,
@@ -274,10 +298,8 @@ final class HHAPIDocBuildStep extends BuildStep {
     APIProduct $product,
     vec<Documentable> $documentables,
   ): dict<string, APIFunctionIndexEntry> {
-    $functions = Dict\filter(
-      $documentables,
-      $d ==> $d['definition'] is ScannedFunction,
-    );
+    $functions =
+      Dict\filter($documentables, $d ==> $d['definition'] is ScannedFunction);
     $html_paths = HTMLPaths::get($product);
     return Dict\pull(
       $functions,
@@ -367,6 +389,7 @@ final class HHAPIDocBuildStep extends BuildStep {
   private static function buildMarkdown(
     APIProduct $product,
     vec<Documentable> $documentables,
+    \Facebook\HHAPIDoc\Index $index,
   ): vec<string> {
     $root = BuildPaths::APIDOCS_MARKDOWN.'/'.$product;
 
@@ -376,16 +399,7 @@ final class HHAPIDocBuildStep extends BuildStep {
     $md_paths = MarkdownPaths::get($product);
     $ctx = (
       new HHAPIDoc\DocumentationBuilderContext(
-        // Empty index; this is used for auto-linking, but we do that when
-        // processing the markdown, instead of when generating it.
-        shape(
-          'types' => dict[],
-          'newtypes' => dict[],
-          'functions' => dict[],
-          'classes' => dict[],
-          'interfaces' => dict[],
-          'traits' => dict[],
-        ),
+        $index,
         new HHAPIDocExt\PathProvider(),
         shape(
           'format' => HHAPIDoc\OutputFormat::MARKDOWN,
