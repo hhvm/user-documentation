@@ -1,7 +1,8 @@
 {
   "name": "docs.hhvm.com",
   "runArgs": [
-    "--init"
+    "--init",
+    "--env", "LC_ALL=C"
   ],
   "build": {
     "dockerfile": "Dockerfile",
@@ -10,9 +11,6 @@
     },
     "context": ".."
   },
-  "runArgs": [
-    "--env", "LC_ALL=C"
-  ],
   "overrideCommand": false,
 
   // Set *default* container specific settings.json values on container create.
