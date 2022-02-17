@@ -117,7 +117,9 @@ export CMAKE_PREFIX_PATH="$(echo "$HOMEBREW_DEPENDENCIES" | tr ',' "\n" | xargs 
 # - Make sure that CMake uses Homebrew's preferred OSX SDK
 # - set installation prefix for installing side-by-side with homebrew versions (optional)
 
-cmake . \
+mkdir build
+cd build
+cmake .. \
   -DMYSQL_UNIX_SOCK_ADDR=/tmp/mysql.sock \
   -DCMAKE_OSX_SYSROOT=${HOMEBREW_SDKROOT} \
   -DCMAKE_INSTALL_PREFIX=${HOMEBREW_CELLAR}/hhvm-local/$(date +%Y.%m.%d)
