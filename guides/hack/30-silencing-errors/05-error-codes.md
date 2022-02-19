@@ -279,9 +279,9 @@ consider using `<<__Soft>>` type hints on function signatures.
 If the type is coming from very dynamic code, consider using the
 `dynamic` type.
 
-## 4166: Unknown field in shape (deprecated)
+## 4166: Unknown field in shape (obsolete)
 
-This error code is deprecated. The typechecker now produces error 4110
+This error code is obsolete. The typechecker now produces error 4110
 in these situations.
 
 ```
@@ -348,7 +348,7 @@ Why it's bad: XHP expects child elements to be instance of `XHPChild`.
 Suggestions: Use `as` to assert a narrower type, or convert values to
 a valid XHP child, such as a string.
 
-## 4276: Truthiness check (deprecated)
+## 4276: Truthiness check (obsolete)
 
 ```
 $x = null;
@@ -362,7 +362,7 @@ if ($y) {
 }
 ```
 
-This error is deprecated, as it was making it harder to convert
+This error is obsolete, as it was making it harder to convert
 partial mode files to strict. We still
 recommend avoiding this code style.
 
