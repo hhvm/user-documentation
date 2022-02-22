@@ -60,6 +60,7 @@ final xhp class feedback extends x\element {
     $container_id = \json_encode($container->getID());
     return (
       <script language="javascript">
+        ga('send', 'event', 'Feedback', 'Useful', 'Guides Page', 1);
         var toggleButton = document.getElementById({$button_id});
         toggleButton.addEventListener(
         'click',
@@ -78,6 +79,7 @@ final xhp class feedback extends x\element {
     $container_id = \json_encode($container->getID());
     return (
       <script language="javascript">
+        ga('send', 'event', 'Feedback', 'Not Useful', 'Guides Page', 0);
         var toggleButton = document.getElementById({$button_id});
         toggleButton.addEventListener(
         'click',
