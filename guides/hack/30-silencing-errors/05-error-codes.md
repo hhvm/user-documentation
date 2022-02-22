@@ -348,7 +348,7 @@ Why it's bad: XHP expects child elements to be instance of `XHPChild`.
 Suggestions: Use `as` to assert a narrower type, or convert values to
 a valid XHP child, such as a string.
 
-## 4276: Truthiness check (obsolete)
+## 4276: Truthiness check
 
 ```
 $x = null;
@@ -362,7 +362,7 @@ if ($y) {
 }
 ```
 
-This error is obsolete, as it was making it harder to convert
+This error was [moved to a linter](https://github.com/hhvm/hhast), as it was making it harder to convert
 partial mode files to strict. We still
 recommend avoiding this code style.
 
