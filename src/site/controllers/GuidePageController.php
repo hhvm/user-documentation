@@ -98,6 +98,7 @@ final class GuidePageController extends WebPageController {
       <div class="guidePageWrapper">
         {$this->getInnerContent()}
         {$this->getPaginationLinks()}
+        {$this->getFeedbackForm()}
       </div>;
   }
 
@@ -228,6 +229,11 @@ final class GuidePageController extends WebPageController {
       $adj_guide = tuple($guide, $data);
     }
     return $adj_guide;
+  }
+
+  protected function getFeedbackForm(): x\node {
+    $feedback = <ui:feedback/>;
+    return $feedback;
   }
 
   <<__Override>>

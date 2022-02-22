@@ -1,0 +1,50 @@
+.feedbackForm {
+  line-height: normal;
+  padding-top: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+
+  .fa-thumbs-up {
+    vertical-align: text-top;
+  }
+  
+  .fa-thumbs-down {
+    vertical-align: text-bottom;
+  }
+
+  #form-basic {
+    display: block;
+  }
+
+  #form-yes {
+    display: none;
+  }
+  
+  #form-no {
+    display: none;
+  }
+
+  &.feedbackPromptOff {
+    #form-basic {
+      display: none;
+    }
+  }
+
+  &.goodFeedbackOn {
+    #form-yes {
+      display: block;
+    }
+  }
+
+  &.badFeedbackOn {
+    #form-no {
+      display: block;
+    }
+  }
+}
+
+.feedbackForm i {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
