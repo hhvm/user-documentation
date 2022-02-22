@@ -1,4 +1,4 @@
-This contains some helpful hints and frequently asked questions about HHVM.
+This FAQ contains helpful hints and frequently asked questions about HHVM.
 
 ## General
 
@@ -19,9 +19,7 @@ Facebook's entire site runs on HHVM (desktop, API and mobile), both in developme
 
 ### How do I install HHVM? Where are the binaries?
 
-New users may want to try our high-level overview [getting started guide](/hhvm/getting-started/getting-started).
-
-You can find more detailed installation information [here](/hhvm/installation/introduction).
+New users should read the [HHVM Introduction](/hhvm/basic-usage/introduction) guide.
 
 ### When does HHVM release a new version?
 
