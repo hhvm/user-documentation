@@ -117,7 +117,8 @@ $items is keyset<_>; // true
 ## `dict`
 
 A `dict` is an ordered key-value data structure. Keys must be
-`string`s or `int`s.
+`string`s or `int`s. `dict`s are ordered according to
+the insertion order.
 
 ```Hack
 // Creating a dict.
