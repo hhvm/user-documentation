@@ -1,4 +1,4 @@
-.feedbackForm {
+.pageFeedback {
   line-height: normal;
   padding-top: 20px;
   font-size: 15px;
@@ -13,38 +13,38 @@
     vertical-align: text-bottom;
   }
 
-  #form-basic {
+  #feedback-prompt-message {
     display: block;
   }
 
-  #form-yes {
+  #like-message {
     display: none;
   }
   
-  #form-no {
+  #dislike-message {
     display: none;
   }
 
   &.feedbackPromptOff {
-    #form-basic {
+    #feedback-prompt-message {
       display: none;
     }
   }
 
-  &.goodFeedbackOn {
-    #form-yes {
+  &.likeFeedbackOn {
+    #like-message {
       display: block;
     }
   }
 
-  &.badFeedbackOn {
-    #form-no {
+  &.dislikeFeedbackOn {
+    #dislike-message {
       display: block;
     }
   }
 }
 
-.feedbackForm i {
+.pageFeedback i {
   margin-left: 0.5em;
   margin-right: 0.5em;
 }
