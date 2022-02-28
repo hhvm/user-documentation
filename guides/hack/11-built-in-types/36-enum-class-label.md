@@ -1,7 +1,3 @@
-# Disclaimer
-This feature is on its way to be deployed. Most recent HHVM versions no longer need the `EnableUnstableFeatures` file attribute
-to support this. More information available at  https://github.com/hhvm/user-documentation/pull/1122
-
 ## Values v. Bindings
 
 With [enum types](/hack/built-in-types/enum) and [enum classes](/hack/built-in-types/enum-class), most of the focus is given to their values.
@@ -67,7 +63,6 @@ Let us go back to our enum class `E`. Labels add more definitions to the mix:
 So we can rewrite the earlier example in a more resilient way:
 
 ```EnumClassLabel.example.hack no-auto-output
-<<file:__EnableUnstableFeatures('enum_class_label')>> // temp
 
 function full_print(\HH\EnumClass\Label<E, int> $label) : void {
   echo E::nameOf($label) . " ";
@@ -92,7 +87,7 @@ This is only allowed when there is enough type information to infer the right en
 
 When the first argument of a function is a label, we provide an alternative notation to call it.
 ```EnumClassLabel.alt.hack no-auto-output
-<<file:__EnableUnstableFeatures('enum_class_label')>> // temp
+<<file:__EnableUnstableFeatures('enum_class_label')>>
 
 function set<T>(\HH\EnumClass\Label<E, T> $label, T $data) : void {
   // setting $data into some storage using $label as a key
@@ -102,7 +97,7 @@ function set<T>(\HH\EnumClass\Label<E, T> $label, T $data) : void {
 function all_the_same(): void {
   set(E#A, 42);
   set(#A, 42);
-  set#A(42);
+  set#A(42); // This is still experimental/gated
 }
 ```
 
@@ -114,7 +109,6 @@ As you can see, the short name can be written *before* the opening parenthesis o
 Enum class labels can be tested for equality using the `===` operator or a switch statement:
 
 ```EnumClassLabel.equality1.hack no-auto-output
-<<file:__EnableUnstableFeatures('enum_class_label')>> // temp
 
 function test_eq(\HH\EnumClass\Label<E, int> $label) : void {
   if ($label === E#A) { echo "label is A\n"; }
