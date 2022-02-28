@@ -3,8 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClassLabel\EnumClassLabel;
 
-<<file:__EnableUnstableFeatures('enum_class_label')>> // temp
-
 function full_print(\HH\EnumClass\Label<E, int> $label) : void {
   echo E::nameOf($label) . " ";
   echo E::valueOf($label) . "\n";
