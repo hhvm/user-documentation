@@ -21,8 +21,7 @@ final xhp class feedback extends x\element {
   protected async function renderAsync(): Awaitable<x\node> {
     $feedback_message =
       <div id="feedback-prompt-message">Was This Page Useful?
-        <a id="
-        " href="#"><i class="fa fa-solid fa-thumbs-up fa-lg"></i></a>
+        <a id="like-feedback" href="#"><i class="fa fa-solid fa-thumbs-up fa-lg"></i></a>
         <a id="dislike-feedback" href="#"><i class="fa fa-solid fa-thumbs-down fa-lg"></i></a>
       </div>;
 
