@@ -17,26 +17,19 @@ use type HHVM\UserDocumentation\ github_issue_link;
 
 final xhp class feedback extends x\element {
 
-
   <<__Override>>
   protected async function renderAsync(): Awaitable<x\node> {
-    $thumbs_up =
-      <a id="like-feedback" href="#"><i class="fa fa-solid fa-thumbs-up fa-lg"></i></a>;
-
-    $thumbs_down =
-      <a id="dislike-feedback" href="#"><i class="fa fa-solid fa-thumbs-down fa-lg"></i></a>;
-
     $feedback_message =
       <div id="feedback-prompt-message">Was This Page Useful?
-        {$thumbs_up}
-        {$thumbs_down}
+        <a id="like-feedback" href="#"><i class="fa fa-solid fa-thumbs-up fa-lg"></i></a>
+        <a id="dislike-fhhvm eedback" href="#"><i class="fa fa-solid fa-thumbs-down fa-lg"></i></a>
       </div>;
 
     $good_feedback_message =
       <div id="like-message">Thank You!</div>;
 
     $bad_feedback_message =
-      <div id="dislike-message">Thank You! If you'd like to share more feedback, please <github_issue_link issueTitle={$this->getGithubIssueTitle()} issueBody={$this->getGithubIssueBody()}>[file an issue]</github_issue_link>.</div>;
+      <div id="dislike-message">Thank You! If you'd like to share more feedback, please <github_issue_link issueTitle={$this->getGithubIssueTitle()} issueBody={$this->getGithubIssueBody()}>file an issue</github_issue_link>.</div>;
 
     $container = (
       <div id="feedback-container" class="pageFeedback">
