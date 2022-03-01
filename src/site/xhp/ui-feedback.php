@@ -21,8 +21,9 @@ final xhp class feedback extends x\element {
   protected async function renderAsync(): Awaitable<x\node> {
     $feedback_message =
       <div id="feedback-prompt-message">Was This Page Useful?
-        <a id="like-feedback" href="#"><i class="fa fa-solid fa-thumbs-up fa-lg"></i></a>
-        <a id="dislike-fhhvm eedback" href="#"><i class="fa fa-solid fa-thumbs-down fa-lg"></i></a>
+        <a id="
+        " href="#"><i class="fa fa-solid fa-thumbs-up fa-lg"></i></a>
+        <a id="dislike-feedback" href="#"><i class="fa fa-solid fa-thumbs-down fa-lg"></i></a>
       </div>;
 
     $good_feedback_message =
@@ -36,10 +37,10 @@ final xhp class feedback extends x\element {
         {$feedback_message}
         {$good_feedback_message}
         {$bad_feedback_message}
-        <script type="application/javascript" src="/js/feedback.js"></script>
       </div>
     );
 
+    $container->appendChild(varray[<script type="application/javascript" src="/js/feedback.js"></script>]);
 
     return $container;
   }
