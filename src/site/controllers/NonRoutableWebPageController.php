@@ -307,7 +307,7 @@ EOF;
               issueBody={$this->getGithubIssueBody()}
               controller={static::class}>
               <ui:glyph icon={UIGlyphIcon::BUG} />
-              report a problem or make a suggestion
+              See Something Wrong? File an Issue
             </github_issue_link>
           </div>
           <search_bar
@@ -332,28 +332,10 @@ EOF;
     parent::__construct($parameters, $request);
   }
 
-  private function getFeedbackFooter(): x\node {
-    return
-      <div class="footerPanel footerPanelFullWidth">
-        <h2>See something wrong?</h2>
-        <ui:button className="gitHubIssueButton" glyph={UIGlyphIcon::BUG}>
-          <span>
-            <github_issue_link
-              issueTitle={$this->getGithubIssueTitle()}
-              issueBody={$this->getGithubIssueBody()}
-              controller={static::class}>
-              Report a problem or make a suggestion.
-            </github_issue_link>
-          </span>
-        </ui:button>
-      </div>;
-  }
-
   private function getFooter(): footer {
     return
       <footer class="footerWrapper">
         <div class="mainWrapper">
-          {$this->getFeedbackFooter()}
           <div class="footerPanel">
             <h2>Hack</h2>
             <ul>

@@ -1,0 +1,50 @@
+.pageFeedback {
+  line-height: normal;
+  padding-top: 20px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+
+  .fa-thumbs-up {
+    vertical-align: text-top;
+  }
+  
+  .fa-thumbs-down {
+    vertical-align: text-bottom;
+  }
+
+  #feedback-prompt-message {
+    display: block;
+  }
+
+  #like-message {
+    display: none;
+  }
+  
+  #dislike-message {
+    display: none;
+  }
+
+  &.feedbackPromptOff {
+    #feedback-prompt-message {
+      display: none;
+    }
+  }
+
+  &.likeFeedbackOn {
+    #like-message {
+      display: block;
+    }
+  }
+
+  &.dislikeFeedbackOn {
+    #dislike-message {
+      display: block;
+    }
+  }
+}
+
+.pageFeedback i {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
