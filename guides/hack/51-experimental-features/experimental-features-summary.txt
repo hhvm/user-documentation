@@ -1,1 +1,1 @@
-Experimental features in the Hack language.
+Enable features in the experimental phase. 
