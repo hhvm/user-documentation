@@ -2,6 +2,7 @@ We can create an alias name for a type, and it is common to do so for non-trivia
 that alias can be used in almost all contexts in which a type specifier is permitted.  Any given type can have multiple aliases, and a type alias
 can itself have aliases.
 
+## Quickstart
 A type alias can be created in two ways: using `type` and `newtype`.
 
 ```Hack
@@ -9,10 +10,14 @@ type Complex = shape('real' => float, 'imag' => float);
 newtype Point = (float, float);
 ```
 
+A type alias can also be created with [Generics](/hack/generics/introduction) as parameters.
+
+## Using `type`
 An alias created using `type` (such as `Complex` above) is a *transparent type alias*. For a given type, that type and all transparent aliases
 to that type are all the same type and can be freely interchanged. There are no restrictions on where a transparent type alias can be defined,
 or which source code can access its underlying implementation.
 
+## Using `newtype`
 An alias created using `newtype` (such as `Point` above) is an *opaque type alias*. In the absence of a type-constraint (see `Counter`
 example below), each opaque alias type is distinct from its underlying type and from any other types aliasing it or its underlying type.
 Only source code in the file that contains the definition of the opaque type alias is allowed access to the underlying implementation. As
@@ -33,8 +38,9 @@ function distance(Point $p1, Point $p2): float {
 }
 ```
 
-Being in the same source file as the alias definition, the functions `create_Point` and `distance` have direct access to the integer
-fields in any `Point`'s tuple.  However, any file that includes this file does not.
+## `Type` v. `Newtype` | (Trasparent v. Opaque)
+
+Looking at the earlier example, being in the same source file as the alias definition, the functions `create_Point` and `distance` have direct access to the `float` fields in any `Point`'s tuple.  However, any file that includes this file does not.
 
 Similarly, if a source file defines the following opaque alias:
 
