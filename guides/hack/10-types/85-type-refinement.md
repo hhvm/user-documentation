@@ -73,7 +73,7 @@ case, which involves a property:
 class C {
   private ?int $p = 8; // holds an int, but type is ?int
   public function m(): void {
-    if ($this->p is int) { // type refinement occurs; $this->p1 is int
+    if ($this->p is int) { // type refinement occurs; $this->p is int
       $x = $this->p << 2; // allowed; type is int
       $this->n(); // could involve a permanent type refinement on $p
       //      $x = $this->p << 2;   // disallowed; might no longer be int
@@ -83,6 +83,6 @@ class C {
 }
 ```
 
-Inside the true path of the `if` statement, even though we know that `$this->p1` is an `int` to begin with, once any method in this class
+Inside the true path of the `if` statement, even though we know that `$this->p` is an `int` to begin with, once any method in this class
 is called, the implementation must assume that method could have caused a type refinement on anything currently in scope. As a result,
 the second attempt to left shift is rejected.
