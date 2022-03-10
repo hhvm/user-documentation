@@ -38,7 +38,7 @@ function distance(Point $p1, Point $p2): float {
 }
 ```
 
-## `Type` v. `Newtype` | (Trasparent v. Opaque)
+## `Type` v. `Newtype` | (Transparent v. Opaque)
 
 Looking at the earlier example, being in the same source file as the alias definition, the functions `create_Point` and `distance` have direct access to the `float` fields in any `Point`'s tuple.  However, any file that includes this file does not.
 
