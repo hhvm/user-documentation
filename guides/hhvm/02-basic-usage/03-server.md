@@ -38,17 +38,11 @@ HHVM uses the default [INI configuration](/hhvm/configuration/INI-settings) spec
 - Linux: `/etc/hhvm/` 
 - MacOS: `/usr/local/etc/hhvm/`
 
-## Client access to HHVM in server mode
+## Client access to HHVM in Server mode
 Normally, a web request of the form:
 
 ```
-http://your.site:8080/index.php
+http://your.site:8080/index.hack
 ```
 
 You can also use `curl` and other programs to access the HHVM server as well.
-
-## Debugging a Fatal Error
-If the code you're running is written in [Hack](/hack/) and you run into a fatal error regarding not running the typechecker, try the following:
-
-- Create an empty file named `.hhconfig` in the root directory of your source code.
-- Or pass `-d hhvm.hack.lang.look_for_typechecker=0` to the `hhvm -m server...` command you used above.
