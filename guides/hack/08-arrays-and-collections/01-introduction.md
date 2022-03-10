@@ -1,7 +1,7 @@
 Hack includes diverse range of array-like data structures.
 
 Hack arrays are value types for storing iterable data. The types
-available are `vec`, `dict` and `keyset`. **When in doubt, use Hack
+available are [`vec`](/hack/arrays-and-collections/vec-keyset-and-dict#vec), [`dict`](/hack/arrays-and-collections/vec-keyset-and-dict#dict) and [`keyset`](/hack/arrays-and-collections/vec-keyset-and-dict#keyset). **When in doubt, use Hack
 arrays**.
 
 Collections are object types for storing iterable data. The types
@@ -9,7 +9,6 @@ available include `Vector`, `Map`, `Set`, `Pair` and helper
 interfaces.
 
 ## Quickstart
-
 You can create Hack arrays as follows:
 
 ```Hack
@@ -20,6 +19,7 @@ $k = keyset[2, 1];
 $d = dict['a' => 1, 'b' => 3];
 ```
 
+## The Hack Standard Library (HSL)
 There are many helpful functions in the `C`, `Vec`, `Keyset` and `Dict`
 namespaces.
 
