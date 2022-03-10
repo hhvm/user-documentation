@@ -19,9 +19,9 @@ $k = keyset[2, 1];
 $d = dict['a' => 1, 'b' => 3];
 ```
 
-## The Hack Standard Library (HSL)
+## The Hack Standard Library
 There are many helpful functions in the `C`, `Vec`, `Keyset` and `Dict`
-namespaces.
+namespaces, which are a part of the [Hack Standard Library](/hsl/reference).
 
 ```Hack
 // The C namespace contains generic functions that are relevant to
