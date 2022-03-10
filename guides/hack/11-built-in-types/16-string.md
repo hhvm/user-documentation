@@ -112,7 +112,7 @@ the current locales; for example, UTF-16 can not be supported by `Locale\set_nat
 contain null bytes.
 
 # Working with `Regex\`
-Similar to `Str\`, functions in the `Regex\` namespace operate on bytes, not characters, unless `/u` is present in the pattern.
+Functions in the `Regex\` namespace operate on bytes (ASCII strings). If the string being inspected is UTF-8, use a pattern with the `u` flag. Failing to do so may result in one multi-byte character being interpreted as multiple characters. For example:
 
 - `Regex\replace("\u{1f600}", re"/./", 'Char')` is `CharCharCharChar`
 - `Regex\replace("\u{1f600}", re"/./u", 'Char')` is `Char`
