@@ -3,9 +3,11 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\GettingStarted\GettingStarted\Hello;
 
+use namespace HH\Lib\IO;
+
 <<__EntryPoint>>
-function main(): void {
+async function main(): Awaitable<void> {
   \init_docs_autoloader();
 
-  echo "Hello World!\n";
+  await IO\request_output()->writeAllAsync("Hello World!\n");
 }

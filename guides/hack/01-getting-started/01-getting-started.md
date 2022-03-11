@@ -30,9 +30,11 @@ $ touch .hhconfig
 Create a file called `my_project/hello.hack` with the following code:
 
 ```hello.hack no-auto-output
+use namespace HH\Lib\IO;
+
 <<__EntryPoint>>
-function main(): void {
-  echo "Hello World!\n";
+async function main(): Awaitable<void> {
+  await IO\request_output()->writeAllAsync("Hello World!\n");
 }
 ```
 
