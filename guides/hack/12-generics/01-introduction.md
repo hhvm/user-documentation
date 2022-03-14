@@ -9,25 +9,23 @@ Consider the following example in which `Stack` is a generic class having one ty
 
 ```Stack.inc.hack no-auto-output
 class StackUnderflowException extends \Exception {}
+use namespace HH\Lib\C;
 
 class Stack<T> {
   private vec<T> $stack;
-  private int $stackPtr;
 
   public function __construct() {
-    $this->stackPtr = 0;
     $this->stack = vec[];
   }
 
   public function push(T $value): void {
     $this->stack[] = $value;
-    $this->stackPtr++;
   }
 
   public function pop(): T {
-    if ($this->stackPtr > 0) {
-      $this->stackPtr--;
-      return $this->stack[$this->stackPtr];
+    $stack = $this->stack;
+    if (!C\is_empty($stack)) {
+      return C\pop_backx(inout $stack);
     } else {
       throw new StackUnderflowException();
     }
