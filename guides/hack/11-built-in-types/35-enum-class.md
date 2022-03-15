@@ -169,6 +169,33 @@ If either `D1`, `D2` or `D3` tries to define a constant named `Age`, there will 
 
 Though the `final` keyword is not supported, Enum classes support the [`__Sealed`](../attributes/predefined-attributes#__sealed) attribute. Using `__Sealed`, you can specify which other enum classes, if any, are allowed to extend from your enum class.
 
+
+## Abstract enum classes
+
+Like regular classes, enum classes come in two flavors: a concrete one and an abstract one. An abstract enum class can declare abstract members, where only their type and name are provided.
+
+```EnumClassIntro.Abstract.hack no-auto-output
+// abstract enum class with some abstract members
+abstract enum class AbstractNames : IHasName {
+  abstract HasName Foo;
+  HasName Bar = new HasName('bar');
+}
+```
+
+Abstract members do not support default values, and can't be accessed directly. They only map a name to a type.
+One must extends abstract enum classes into concrete ones, and provide all the abstract members to build a valid enum class.
+
+```EnumClassIntro.Concrete.hack no-auto-output
+enum class ConcreteNames : IHasName extends AbstractNames {
+  HasName Foo = new HasName('foo'); // one must provide all the abstract members
+  // Bar is inherited from AbstractNames
+}
+```
+
+All concrete members are inherited, and can't be redefined.
+
+
+
 ## Defining a Function that expects an enum class
 
 When defining a function that expects an enum class value (e.g. `Foo::BAR`), you need to define the expected parameter appropriately with `HH\MemberOf` or you will run into errors.

@@ -132,6 +132,10 @@ enum class F : Foo {
 // E#A === F#A is true
 ```
 
+## Enum class labels and abstract enum classes
+Abstract enum classes support labels like any other enum class. The main difference is that an abstract enum class only provides the `nameOf` static method.
+Since some of its members may be abstracted away, they do no provide the `valueOf()` or `getValues()` static methods.
+
 ## Known corner cases
 
 ### The `#` character is no longer a single-line comment
