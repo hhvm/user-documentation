@@ -69,9 +69,10 @@ function do_this(): void { /* ... */ }
 ```
 
 The presence of this attribute on a function has no effect, unless that function is actually called, in which case, for each call to that
-function, the type checker issues a diagnostic containing the text from the first attribute value.  The optional `int`-typed second attribute
-value (in this case, 7) indicates a *sample rate*. Assuming the program will still execute, every 1/sample-rate calls (as in, 1/7) to that
-function will be diagnosed at runtime.
+function, HHVM raises a notice containing the text from the first attribute value.  The optional `int`-typed second attribute
+value (in this case, 7) indicates a *sampling rate*. Assuming the program will still execute, every 1/sampling-rate calls (as in, 1/7) to that
+function will raise a notice at runtime. If omitted, the default sampling rate is 1 (i.e. all calls raise notices). To disable runtime notices, 
+use a sampling rate of 0.
 
 ## __DynamicallyCallable
 
