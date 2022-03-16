@@ -28,19 +28,17 @@ function takes_int(int $i): int {
   return $i + 1;
 }
 
-function takes_float_with_fixme(float $i): float {
+function takes_float_with_fixme(float $f): float {
   /* HH_FIXME[4110] calls takes_int with wrong
      param type AND returns wrong type */
-  return takes_int($i);
+  return takes_int($f);
 }
 ```
 
 ```silencing_errors_per_expression.cast.hack
-function takes_float_with_unsafe_cast(float $i): float {
-  /* HH_FIXME[4417] */
+function takes_float_with_unsafe_cast(float $f): float {
   return HH\FIXME\UNSAFE_CAST<int, float>(
-    /* HH_FIXME[4417] */
-    takes_int(HH\FIXME\UNSAFE_CAST<float, int>($i, 'wrong param type')),
+    takes_int(HH\FIXME\UNSAFE_CAST<float, int>($f, 'wrong param type')),
     'returns wrong type',
   );
 }
