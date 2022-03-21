@@ -21,7 +21,7 @@ async function intro_examples_tag_matching_validation_using_xhp(
 }
 
 <<__EntryPoint>>
-function intro_examples_tag_matching_validation_run(): void {
+async function intro_examples_tag_matching_validation_run(): Awaitable<void> {
   intro_examples_tag_matching_validation_using_string();
   await intro_examples_tag_matching_validation_using_xhp();
 }
