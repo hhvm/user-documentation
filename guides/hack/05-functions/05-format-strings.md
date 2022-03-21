@@ -1,4 +1,4 @@
-The Hack typechecker can check that format strings are being used correctly.
+The Hack typechecker checks that format strings are being used correctly.
 
 ## Quickstart
 ``` Hack
@@ -43,11 +43,15 @@ See `PlainSprintf` for in-depth information on all format specifiers.
 |-----------|----------------|---------------------------------------------------------------------------------------------------------------------|
 | b         | int            | Binary (`63` => `111111`)                                                                                           |
 | c         | int            | ASCII character (`63` => `?`)                                                                                       |
-| d, u      | int            | Signed int (d: `-1` => `-1`) \| Unsigned int (u: `-1` => `18446744073709551615`)                                    |
-| e, E      | float          | Scientific Notation, as lowercase or uppercase (e: `0.34` => `3.4e` \| E: `0.34` => `3.4E`)                         |
-| f, F      | float          | Locale Floating Point Number (f) \| Non-Locale Floating Point Number (F)                                            |
-| g         | float          | Locale Floating Point Number or Scientific Notation (`3.141592653` => `3.14159` \| `3141592653` => `3.1415e+9`) (🥧) |
+| d         | int            | Signed int (`-1` => `-1`)                                                                                           |
+| u         | int            | Unsigned int (`-1` => `18446744073709551615`)                                                                       |
+| e         | float          | Scientific Notation, as lowercase (`0.34` => `3.4e`)                                                                |
+| E         | float          | Scientific Notation, as uppercase (`0.34` => `3.4E`)                                                                |
+| f         | float          | Locale Floating Point Number                                                                                        |
+| F         | float          | Non-Locale Floating Point Number                                                                                    |
+| g         | float          | Locale Floating Point Number or Scientific Notation (`3.141592653` => `3.14159`, `3141592653` => `3.1415e+9`).      |
 | o         | int            | Octal (`63` => `77`)                                                                                                |
 | s         | string         | string                                                                                                              |
-| x, X      | int            | Hexadecimal, as lowercase or uppercase (x: `63` => `3f` \| X: `63` => `3F`)                                         |
+| x         | int            | Hexadecimal, as lowercase (`63` => `3f`)                                                                            |
+| X         | int            | Hexadecimal, as uppercase (`63` => `3F`)                                                                            |
 

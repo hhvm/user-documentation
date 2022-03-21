@@ -10,7 +10,7 @@ type Complex = shape('real' => float, 'imag' => float);
 newtype Point = (float, float);
 ```
 
-A type alias can also be created with [Generics](/hack/generics/introduction) as parameters.
+A type alias can include [Generics](/hack/generics/introduction) as parameters.
 
 ## Using `type`
 An alias created using `type` (such as `Complex` above) is a *transparent type alias*. For a given type, that type and all transparent aliases
@@ -38,17 +38,17 @@ function distance(Point $p1, Point $p2): float {
 }
 ```
 
-## `Type` v. `Newtype` | (Transparent v. Opaque)
+## Choosing between `type` and `newtype`
 
-Looking at the earlier example, being in the same source file as the alias definition, the functions `create_Point` and `distance` have direct access to the `float` fields in any `Point`'s tuple.  However, any file that includes this file does not.
+Looking at the earlier example, being in the same source file as the alias definition, the functions `create_Point` and `distance` have direct access to the `float` fields in any `Point`'s tuple. However, other files will not have this same access.
 
-Similarly, if a source file defines the following opaque alias:
+Similarly, if a source file defines the following opaque alias...
 
 ```Hack
 newtype Widget = int;
 ```
 
-any file that includes this file has no knowledge that a `Widget` is really an integer, so that the including file cannot perform any
+...any file that includes this file has no knowledge that a `Widget` is really an integer, so that the including file cannot perform any
 integer-like operations on a `Widget`.
 
 Consider a file that contains the following opaque type definition:

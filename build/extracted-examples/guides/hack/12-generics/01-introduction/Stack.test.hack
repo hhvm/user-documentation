@@ -3,7 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Generics\Introduction\Stack;
 
-function useIntStack(Stack<int> $stInt): void {
+function useIntStack(VecStack<int> $stInt): void {
   $stInt->push(10);
   $stInt->push(20);
   $stInt->push(30);

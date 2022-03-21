@@ -1,8 +1,7 @@
 Use HHVM server mode to create a HHVM process that continuously serves web requests, with these advantages:
 
-✔️ Multiple requests served simultaneously
-
-✔️ HHVM caches code to be shared across requests
+- Multiple requests served simultaneously
+- HHVM caches code to be shared across requests
 
 ## Quickstart
 Here's the simplest way to run HHVM in Server mode.
@@ -30,11 +29,13 @@ $ hhvm -m server -d hhvm.server.port=7777
 And we also could have overridden other defaults like the [server type](/hhvm/basic-usage/proxygen) or source root of your project files. For example:
 
 ```
-$ hhvm --mode server -d hhvm.server.type={$SERVER_TYPE} -d hhvm.server.source_root={$PROJECT_FOLDER}
+$ hhvm --mode server -d hhvm.server.type=${SERVER_TYPE} -d hhvm.server.source_root=${PROJECT_FOLDER}
 ```
 
 ### INI Configuration Values
-HHVM uses the default [INI configuration](/hhvm/configuration/INI-settings) specified in `server.ini`, typically found at these locations:
+HHVM uses the default [INI configuration](/hhvm/configuration/INI-settings) specified in `server.ini`. 
+
+The default ini locations are:
 - Linux: `/etc/hhvm/` 
 - MacOS: `/usr/local/etc/hhvm/`
 

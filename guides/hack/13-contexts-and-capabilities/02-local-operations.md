@@ -10,7 +10,7 @@ Consider the following potential (although not necessarily planned) contexts (wi
 * `write_prop`, representing the permission to mutate properties of objects
 * `dynamic`, representing the permission to cast a value to the `dynamic` type
 
-In all of the below cases, the relevant local operations are only legal due to the existence of the matching capabilities within the context of the function.
+In all of the below cases, the relevant local operations successfully typecheck due to the matching capabilities within the context of the function.
 
 ```hack
 function io_good()[io]: void {
