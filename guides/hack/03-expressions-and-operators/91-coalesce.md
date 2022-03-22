@@ -64,11 +64,6 @@ value.
 This is similar to `e1 = e1 ?? e2`, with the important difference that `e1` is
 only evaluated once.
 
-```Hack
-$arr[++$i] ??= 42;              // $i is incremented once
-$arr[++$i] = $arr[++$i] ?? 42;  // $i is incremented twice
-```
-
 The `??=` operator is very useful for initializing elements of a collection:
 
 ```assignment.hack

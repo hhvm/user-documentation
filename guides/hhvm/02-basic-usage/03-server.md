@@ -1,46 +1,49 @@
-Server mode is how you will use HHVM to serve web requests. The HHVM process starts up and continuously waits to serve web requests.
+Use HHVM server mode to create a HHVM process that continuously serves web requests, with these advantages:
 
-Multiple requests can, of course, be served simultaneously, and HHVM also caches code to be shared across requests as well.
+- Multiple requests served simultaneously
+- HHVM caches code to be shared across requests
 
-Here is the simplest way to run HHVM in server mode.
+## Quickstart
+Here's the simplest way to run HHVM in Server mode.
 
 ```
 $ hhvm -m server -p 8080
 ```
 
-`-m` is the `mode` option; the default is [command-line](./command-line.md).
+- `-m` is the `mode` option; the default is [Command Line mode](/hhvm/basic-usage/command-line).
+- `-p` is the port HHVM uses to listen for requests. The default is `80`.
 
-`-p` is the port where HHVM will listen for requests. The default is 80.
-
-And the root for your program files will be the current directory from where you launched the `hhvm` command above.
+Other things to know:
+- The root for your program files is the directory that you used to launch the `hhvm` command.
+- By default, HHVM uses the built-in [proxygen](/hhvm/basic-usage/proxygen) web server.
 
 ## Configuration Overrides
+Use the `-d` option to override [configuration](/hhvm/configuration/introduction) defaults and [other options](/hhvm/configuration/INI-settings). 
 
-`-d` specifies command-line [configuration](../configuration/introduction.md) overrides.
+In our earlier example, we started a HHVM server with `-p 8080`, but you could also have set the port with its expanded property: 
 
-In our example above, we are using the default HHVM built-in [proxygen](./proxygen.md) web server on port 8080.
+```
+$ hhvm -m server -d hhvm.server.port=7777
+```
 
-We could have removed the `-p 8080` and explicitly appended:
+And we also could have overridden other defaults like the [server type](/hhvm/basic-usage/proxygen) or source root of your project files. For example:
 
-`-d hhvm.server.type=proxygen -d hhvm.server.port=8080 -d hhvm.server.source_root=./`
+```
+$ hhvm --mode server -d hhvm.server.type=${SERVER_TYPE} -d hhvm.server.source_root=${PROJECT_FOLDER}
+```
 
-to the command above. While this is a more verbose way to accomplish the same command, there might be reasons to be explicit. And, of course, you can change various [other settings](../configuration/introduction.md) with `-d` as well.
+### INI Configuration Values
+HHVM uses the default [INI configuration](/hhvm/configuration/INI-settings) specified in `server.ini`. 
 
-HHVM will also use the default INI configuration `server.ini` (normally found in `/etc/hhvm/` in Linux distros and `/usr/local/etc/hhvm/` in MacOS).
+The default ini locations are:
+- Linux: `/etc/hhvm/` 
+- MacOS: `/usr/local/etc/hhvm/`
 
-## Client access to HHVM in server mode
-
+## Client access to HHVM in Server mode
 Normally, a web request of the form:
 
 ```
-http://your.site:8080/index.php
+http://your.site:8080/index.hack
 ```
 
 You can also use `curl` and other programs to access the HHVM server as well.
-
-### Possible Fatal Error
-
-If the code you are running is written in [Hack (<?hh)](/hack/) and you run into a [fatal error regarding not running the typechecker](/hhvm/FAQ/faq#running-code__how-do-i-fix-the-not-running-the-hack-typechecker-fatal-error), then you must do one of the following:
-
-- Create an empty file named `.hhconfig` in the root directory of your source code.
-- Or pass `-d hhvm.hack.lang.look_for_typechecker=0` to the `hhvm -m server...` command you used above.
