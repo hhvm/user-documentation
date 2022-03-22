@@ -3,6 +3,10 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Generics\Introduction\Stack;
 
+use namespace HH\Lib\Vec;
+
+use namespace HH\Lib\C;
+
 interface StackLike<T> {
     public function push(T $element): void;
     public function pop(): T;
@@ -10,25 +14,19 @@ interface StackLike<T> {
 
 class StackUnderflowException extends \Exception {}
 
-
 class VecStack<T> implements StackLike<T> {
     private vec<T> $elements = vec[];
-    private int $size = 0, $capacity = 0;
 
     public function push(T $element): void {
-        if ($this->size === $this->capacity) {
-            $this->elements[] = $element;
-            $this->capacity++;
-        } else {
-            $this->elements[$this->size] = $element;
-        }
-        $this->size++;
+        $this->elements[] = $element;
     }
 
     public function pop(): T {
-        if ($this->size > 0) {
-            $this->size--;
-            return $this->elements[$this->size];
+        $count = C\count($this->elements);
+        if ($count > 0) {
+            $element = $this->elements[$count - 1];
+            Vec\drop($this->elements, $count - 1);
+            return $element;
         }
         throw new StackUnderflowException();
     }

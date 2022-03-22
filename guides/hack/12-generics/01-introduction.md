@@ -8,6 +8,8 @@ Generics allow programmers to write a class or method with the ability to be par
 Consider the following example in which `VecStack` is a generic class having one type parameter, `T`:
 
 ```Stack.inc.hack no-auto-output
+use namespace HH\Lib\{C, Vec};
+
 interface StackLike<T> {
     public function push(T $element): void;
     public function pop(): T;
@@ -15,28 +17,26 @@ interface StackLike<T> {
 
 class StackUnderflowException extends \Exception {}
 
-
 class VecStack<T> implements StackLike<T> {
-    private vec<T> $elements = vec[];
-    private int $size = 0, $capacity = 0;
+    private vec<T> $elements;
+
+    public function __construct() {
+      $this->elements = vec[];
+    }
 
     public function push(T $element): void {
-        if ($this->size === $this->capacity) {
-            $this->elements[] = $element;
-            $this->capacity++;
-        } else {
-            $this->elements[$this->size] = $element;
-        }
-        $this->size++;
+      $this->elements[] = $element;
     }
 
     public function pop(): T {
-        if ($this->size > 0) {
-            $this->size--;
-            return $this->elements[$this->size];
-        }
-        throw new StackUnderflowException();
-    }
+      $count = C\count($this->elements);
+      if ($count > 0) {
+          $element = $this->elements[$count - 1];
+          $this->elements = Vec\take($this->elements, $count - 1);
+          return $element;
+      }
+      throw new StackUnderflowException();
+  }
 }
 ```
 
@@ -46,8 +46,10 @@ As shown, the type parameter `T` is used in the declaration of the instance prop
 function useIntStack(VecStack<int> $stInt): void {
   $stInt->push(10);
   $stInt->push(20);
+  echo 'pop => '.$stInt->pop()."\n"; // 20
   $stInt->push(30);
-  echo 'pop => '.$stInt->pop()."\n";
+  echo 'pop => '.$stInt->pop()."\n"; // 30
+  echo 'pop => '.$stInt->pop()."\n"; // 10
   //  $stInt->push(10.5); // rejected as not being type-safe
 }
 ```
