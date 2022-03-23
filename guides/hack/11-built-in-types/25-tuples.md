@@ -10,7 +10,7 @@ Consider the case in which we want to have a pair of related values, one a strin
 
 ```Hack
 $v = tuple("apples", 25);
-function process_pair((string, int)): void { ... }
+function process_pair((string, int) $pair): void { ... }
 function get_next_pair(): (string, int) { ... }
 ```
 
