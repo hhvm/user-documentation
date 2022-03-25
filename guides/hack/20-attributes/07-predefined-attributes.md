@@ -59,8 +59,9 @@ plus an ellipsis indicating a trailing variable-argument list.
 
 ## __Deprecated
 
-This attribute can be applied to a function to indicate that it has been *deprecated*; that is, it is obsolete, and calls to it should be
-revised. This attribute has two possible attribute values.  Consider the following example:
+If you mark a function with `__Deprecated`, the Hack typechecker will find all static invocations of that function and mark them as errors so that you can find those invocations and fix them as needed. For runtime invocations, any function marked with `__Deprecated` will still be called successfully, but with runtime logging so that you can find and fix those dynamic invocations later.
+
+Consider the following example:
 
 ```Hack
 <<__Deprecated("This function has been replaced by do_that", 7)>>
@@ -70,9 +71,12 @@ function do_this(): void { /* ... */ }
 
 The presence of this attribute on a function has no effect, unless that function is actually called, in which case, for each call to that
 function, HHVM raises a notice containing the text from the first attribute value.  The optional `int`-typed second attribute
-value (in this case, 7) indicates a *sampling rate*. Assuming the program will still execute, every 1/sampling-rate calls (as in, 1/7) to that
-function will raise a notice at runtime. If omitted, the default sampling rate is 1 (i.e. all calls raise notices). To disable runtime notices, 
-use a sampling rate of 0.
+value (in this case, 7) indicates a *sampling rate*.
+
+Every 1/sampling-rate calls (as in, 1/7) to that function will raise a notice at runtime. If omitted, the default sampling rate is 1 
+(i.e. all calls raise notices). 
+
+To disable runtime notices, use a sampling rate of 0.
 
 ## __DynamicallyCallable
 

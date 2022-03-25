@@ -47,6 +47,8 @@ change the execution order of unrelated code that might not be designed for that
 For example, given the following code:
 
 ```limitations.hack
+use namespace HH\Lib\Vec;
+
 async function do_cpu_work(): Awaitable<void> {
   print("Start CPU work\n");
   $a = 0;
@@ -129,6 +131,8 @@ from `curl_A`, it has to sit around waiting for `curl_A` to finish before beginn
 Fortunately, HHVM provides an async version of `curl_exec`:
 
 ```async-curl.hack
+use namespace HH\Lib\Vec;
+
 async function curl_A(): Awaitable<string> {
   $x = await \HH\Asio\curl_exec("http://example.com/");
   return $x;

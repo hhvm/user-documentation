@@ -5,46 +5,51 @@ can also be parameterized giving rise to *generic functions*.
 
 Generics allow programmers to write a class or method with the ability to be parameterized to any set of types, all while preserving type safety.
 
-Consider the following example in which `Stack` is a generic class having one type parameter, `T`:
+Consider the following example in which `VecStack` is a generic class having one type parameter, `T`:
 
 ```Stack.inc.hack no-auto-output
+use namespace HH\Lib\{C, Vec};
+
+interface StackLike<T> {
+    public function push(T $element): void;
+    public function pop(): T;
+}
+
 class StackUnderflowException extends \Exception {}
 
-class Stack<T> {
-  private vec<T> $stack;
-  private int $stackPtr;
+class VecStack<T> implements StackLike<T> {
+    private vec<T> $elements;
 
-  public function __construct() {
-    $this->stackPtr = 0;
-    $this->stack = vec[];
-  }
-
-  public function push(T $value): void {
-    $this->stack[] = $value;
-    $this->stackPtr++;
-  }
-
-  public function pop(): T {
-    if ($this->stackPtr > 0) {
-      $this->stackPtr--;
-      return $this->stack[$this->stackPtr];
-    } else {
-      throw new StackUnderflowException();
+    public function __construct() {
+      $this->elements = vec[];
     }
+
+    public function push(T $element): void {
+      $this->elements[] = $element;
+    }
+
+    public function pop(): T {
+      $count = C\count($this->elements);
+      if ($count > 0) {
+          $element = $this->elements[$count - 1];
+          $this->elements = Vec\take($this->elements, $count - 1);
+          return $element;
+      }
+      throw new StackUnderflowException();
   }
 }
 ```
 
-As shown, the type parameter `T` is used in the declaration of the instance property `$stack`, as the parameter type of the instance method
-`push`, and as the return type of the instance method `pop`. Note that although `push` and `pop` use the type parameter, they are not themselves
-generic methods.
+As shown, the type parameter `T` is used in the declaration of the instance property `$elements`, as a parameter for `push()`, and as a return type for `pop()`.
 
 ```Stack.test.hack no-auto-output
-function useIntStack(Stack<int> $stInt): void {
+function useIntStack(VecStack<int> $stInt): void {
   $stInt->push(10);
   $stInt->push(20);
+  echo 'pop => '.$stInt->pop()."\n"; // 20
   $stInt->push(30);
-  echo 'pop => '.$stInt->pop()."\n";
+  echo 'pop => '.$stInt->pop()."\n"; // 30
+  echo 'pop => '.$stInt->pop()."\n"; // 10
   //  $stInt->push(10.5); // rejected as not being type-safe
 }
 ```

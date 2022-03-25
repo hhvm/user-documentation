@@ -110,3 +110,9 @@ HHVM currently supports UTF-8, and single-byte encodings that are supported by t
 Other encodings may be supported in the future, however `Locale\set_native()` is likely to be restricted to
 the current locales; for example, UTF-16 can not be supported by `Locale\set_native()`, as UTF-16 strings can
 contain null bytes.
+
+# Working with `Regex\`
+Functions in the `Regex\` namespace operate on bytes. If the string being inspected is UTF-8, use a pattern with the `u` flag. Failing to do so may result in one multi-byte character being interpreted as multiple characters. For example:
+
+- `Regex\replace("\u{1f600}", re"/./", 'Char')` is `CharCharCharChar`
+- `Regex\replace("\u{1f600}", re"/./u", 'Char')` is `Char`
