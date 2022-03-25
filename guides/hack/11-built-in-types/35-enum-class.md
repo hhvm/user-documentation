@@ -172,7 +172,7 @@ Though the `final` keyword is not supported, Enum classes support the [`__Sealed
 
 ## Abstract enum classes
 
-Like regular classes, enum classes come in two flavors: a concrete one and an abstract one. An abstract enum class can declare abstract members, where only their type and name are provided.
+Like regular classes, enum classes come in two flavors: concrete and abstract. An abstract enum class can declare abstract members (constants), where only their type and name are provided.
 
 ```EnumClassIntro.Abstract.hack no-auto-output
 // abstract enum class with some abstract members
@@ -183,7 +183,8 @@ abstract enum class AbstractNames : IHasName {
 ```
 
 Abstract members do not support default values, and can't be accessed directly. They only map a name to a type.
-One must extends abstract enum classes into concrete ones, and provide all the abstract members to build a valid enum class.
+You must extend your abstract enum class into a concrete one with implementations of all abstract members to
+safely access members defined as abstract.
 
 ```EnumClassIntro.Concrete.hack no-auto-output
 enum class ConcreteNames : IHasName extends AbstractNames {
@@ -192,7 +193,7 @@ enum class ConcreteNames : IHasName extends AbstractNames {
 }
 ```
 
-All concrete members are inherited, and can't be redefined.
+All concrete members are inherited, and can't be overriden.
 
 
 

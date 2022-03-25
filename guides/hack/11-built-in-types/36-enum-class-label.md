@@ -134,7 +134,7 @@ enum class F : Foo {
 
 ## Enum class labels and abstract enum classes
 Abstract enum classes support labels like any other enum class. The main difference is that an abstract enum class only provides the `nameOf` static method.
-Since some of its members may be abstracted away, they do no provide the `valueOf()` or `getValues()` static methods.
+Since some of its members may be abstracted away, abstract enum classes do no provide the `valueOf()` or `getValues()` static methods.
 
 ## Known corner cases
 
@@ -165,4 +165,4 @@ Secondly, `HH\MemberOf` is covariant in `TType`. Since `B extends A`, it means t
 
 Enum class values behave just like the underlying data they are set to.
 
-On the other hand, `HH\EnumClass\Label` is invariant in `TType`. It means that while `G#Y` is of type `HH\EnumClass\Label<G, B>`, it is not of type `HH\EnumClass\Label<G, A>`. Labels are opaque handles to access data; one can think about them as maps from names to types. Their typing has to be more strict, especially if we want to be able to extend this concept to other parts of a class (reflection like access to methods, properties, …). To make sure these possible extensions remain possible, we enforce a stricter typing for labels then for values.
+On the other hand, `HH\EnumClass\Label` is invariant in `TType`. It means that while `G#Y` is of type `HH\EnumClass\Label<G, B>`, it is not of type `HH\EnumClass\Label<G, A>`. Labels are opaque handles to access data; you can think about them as maps from names to types. Their typing has to be more strict, especially if we want to be able to extend this concept to other parts of a class (reflection like access to methods, properties, …). To make sure these possible extensions remain possible, we enforce a stricter typing for labels than for values.
