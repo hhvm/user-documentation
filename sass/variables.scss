@@ -13,6 +13,7 @@ $grey: #505050;
 $midgrey: #303030;
 $lightgrey: #B0B0B0;
 $lightergrey: #F8F8F8;
+$bluishgrey: #ecf0f0;
 
 $green: #2db04b;
 $lightergreen: #DFF7E5;
@@ -44,9 +45,8 @@ $side-padding-mob: 10px;
 }
 
 @mixin codeemph {
-  background: $lightergreen;
+  background: darken($lightergrey, 3%);
   border-radius: 2px;
-  color: $green;
   padding: 1px 3px;
 }
 
