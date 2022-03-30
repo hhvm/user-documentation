@@ -1,4 +1,3 @@
-assume_php=false
 ignored_paths = [ "api-sources/.+", "vendor/.*tests/.+", "vendor-rb/.*", "vendor/bin/.*" ]
 disallow_elvis_space=true
 disallow_non_arraykey_keys=true
