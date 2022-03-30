@@ -23,15 +23,19 @@ function compute(int $val): void {
 }
 ```
 
+## The Placeholder Variable
 The name `$_`, referred to as the *placeholder variable*, is reserved for use in the
 [list intrinsic function](../expressions-and-operators/list.md) and the [foreach statement](../statements/foreach.md).
 
+## The Current Instance Variable
 The name `$this` is predefined inside any instance method or constructor when that method is called from within an object context.
 `$this` is read-only and designates the object on which the method is being called, or the object being constructed. The type of
 `$this` is [`this`](../built-in-types/this.md).
 
+## Reserved Names
 Names beginning with two underscores (__) are reserved by the Hack language.
 
+## XHP Name Constraints
 Note that [XHP classes](../XHP/introduction) have different name
 constraints. Class names may contain `:`, and must start with
 `:`. [XHP categories](../XHP/extending#children__categories) names

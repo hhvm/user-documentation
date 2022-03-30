@@ -2,6 +2,7 @@
 
 * [Arithmetic, `+`, `*` etc](addition.md)
 * [Assignment, `=`, `+=` etc](assignment.md)
+* [Attribute Selection, `->:`](attribute-selection.md)
 * [await](await.md)
 * [Bitwise Operators](bitwise-operators.md)
 * [Casting, `(int)`, `(float)`, `(bool)` `(string)`](casting.md)
