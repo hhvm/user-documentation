@@ -27,6 +27,7 @@
       }
     }
 
+    // horizontal line functionality in resized pseudo-element
     .navGroup:after {
       content: '';
       display: block;
@@ -34,6 +35,8 @@
       width: 80%;
       border-bottom: 1px solid #DADADA;
     }
+
+    .navGroup:hover:after { content: none; }
 
     li {
       a {
