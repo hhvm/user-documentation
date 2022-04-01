@@ -32,7 +32,7 @@ major differences&mdash;look for **Historical note** sections.
 <span class="fbOnly fbIcon">XHP namespaces are not enabled in Facebook's WWW
 repository, so all **Historical note** sections apply.</span>
 
-## Enable XHP for older HHVM versions
+## Enable XHP Classes
 We recommend using HHVM 4.73 or newer, since it's more thoroughly
 tested and doesn't require any extra configuration, however, XHP namespace support
 can be enabled in older HHVM versions (since around HHVM 4.46) by adding
@@ -50,7 +50,7 @@ hhvm.hack.lang.enable_xhp_class_modifier=true
 hhvm.hack.lang.disable_xhp_element_mangling=true
 ```
 
-## Disable XHP
+## Disable XHP Classes
 In HHVM 4.73 or newer, XHP namespace support can be disabled by setting these to
 `false`.
 
@@ -72,7 +72,7 @@ If these flags are disabled, or if you're using an older version of HHVM:
 Make sure to also use the correct version of XHP-Lib based on
 whether XHP namespace support is enabled in your HHVM version.
 
-## Additional Configuration Flags
+## Configuration Flags
 
 These are not enabled by default in any HHVM version, but we recommend enabling
 them in any new Hack projects:

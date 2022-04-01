@@ -154,7 +154,7 @@ is rendered (`toStringAsync()` is called) with any required attributes missing.
 With `check_xhp_attribute=true` (available since HHVM 4.8) this is also a
 typechecker error.
 
-Use the [`->:` operator](/hack/expressions-and-operators/attribute-selection) to select an attribute, and [`$this->:`](/hack/expressions-and-operators/attribute-selection#static-attributes) for static attributes.
+Use the [`->:` operator](/hack/expressions-and-operators/XHP-attribute-selection) to select an attribute, or `$this->:` in place of the named class instance.
 
 ## HTML Character References
 
