@@ -39,4 +39,4 @@ null. `$x?->foo(bar())` will call `bar()` even if `$x` is null.
 
 ## XHP Attribute Access
 
-The [operator `->:`](/hack/expressions-and-operators/attribute-selection) is used for accessing XHP attributes.
+The [operator `->:`](/hack/expressions-and-operators/XHP-attribute-selection) is used for accessing XHP attributes.
