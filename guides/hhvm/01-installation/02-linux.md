@@ -45,7 +45,7 @@ You will automatically receive patches such as HHVM 4.56.1, but you won't be upg
 If you get an HTTP 404 error from apt, please check if the hhvm version you attempted to install supports your operating system on the [blog](https://hhvm.com/blog).
 
 A particular version of note is hhvm 3.30. It requires an extra `-lts` after the minor version number. This version is **unsupported as of November 2019** and should not be used.
-`apt-add-repository "deb https://dl.hhvm.com/$(lsb_release --id --short | tr '[:upper:]' '[:lower:]') $(lsb_release --codename --short)-3.30-lts main"`
+`apt-add-repository "deb https://dl.hhvm.com/$(lsb_release --id --short | tr '[:upper:]' '[:lower:]') $(lsb_release --codename --short)-lts-3.30 main"`
 
 ## Choosing A Version
 
