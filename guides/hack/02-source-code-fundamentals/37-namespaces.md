@@ -28,7 +28,7 @@ Other types, such as `Exception`, and constants, and library functions (such as 
 ### XHP and the `HTML` Namespace
 As of HHVM 4.73 and XHP-Lib v4, standard XHP elements like `<p>` are defined in `Facebook\XHP\HTML` (for this example, specifically `Facebook\XHP\p`).
 
-For more information, see [XHP Namespace Support](/hack/XHP/setup#namespace-support).
+For more information, see [XHP Namespace Syntax](/hack/XHP/basic-usage#namespace-syntax).
 
 ## Defining a Namespace
 Namespaces can be defined with semicolons (`;`) or brace delimiters (`{ ... }`).
