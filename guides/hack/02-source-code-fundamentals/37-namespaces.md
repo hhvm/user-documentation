@@ -1,17 +1,15 @@
-A problem encountered when managing large projects is that of avoiding the use of the same name in the same scope for different
-purposes. This is especially problematic in a language that supports modular design and component libraries.  This problem is
-addressed by namespaces.
-
 A *namespace* is a container for a set of (typically related) definitions of classes, interfaces, traits, functions, and constants.
 
+## Using Sub-Namespaces
 A namespace may have *sub-namespaces*, where a sub-namespace name shares a common prefix with another namespace. For example, the
 namespace `Graphics` might have sub-namespaces `Graphics\TwoD` and `Graphics\ThreeD`, for two- and three-dimensional facilities,
 respectively. Apart from their common prefix, a namespace and its sub-namespaces have no special relationship. The namespace
 whose prefix is part of a sub-namespace need not actually exist for the sub-namespace to exist. That is, `NS1\Sub` can exist
 without `NS1`.
 
+## The Root Namespace
 In the absence of any namespace definition, the names of subsequent classes, interfaces, traits, functions, and constants are in
-the *default namespace*, which has no name, per se.
+the *root namespace*, which is not named.
 
 The names of some types (such as `Exception`), constants, and library functions (such as `sqrt`) are defined outside any namespace.
 To refer unambiguously to such names, one can prefix them with a backslash (`\`), as in `\Exception` and `\sqrt`. The names of

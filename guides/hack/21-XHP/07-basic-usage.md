@@ -63,7 +63,7 @@ $xhp = <h:p>Hello, world</h:p>;
 ```
 
 ```
-// from global namespace:
+// from the root namespace:
 $xhp = <Facebook:XHP:HTML:p>Hello, world</Facebook:XHP:HTML:p>;
 ```
 
