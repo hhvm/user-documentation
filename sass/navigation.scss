@@ -27,6 +27,17 @@
       }
     }
 
+    // horizontal line functionality in resized pseudo-element
+    .navGroup:after {
+      content: '';
+      display: block;
+      margin: 0 auto;
+      width: 80%;
+      border-bottom: 1px solid #DADADA;
+    }
+
+    .navGroup:hover:after { content: none; }
+
     li {
       a {
         color: $lightgrey;
@@ -54,6 +65,7 @@
 
   .subList {
     margin-bottom: 20px;
+    padding-left: 20px;
     display: none;
 
     .subListItem {
