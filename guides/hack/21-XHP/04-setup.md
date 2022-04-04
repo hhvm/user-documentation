@@ -69,7 +69,7 @@ There are currently two major supported versions of XHP-Lib:
   most mutations after an element is rendered) and deprecates some features
   (e.g. attribute "clobbering" in `XHPHTMLHelpers`).
 - **XHP-Lib v3:** to be used in older HHVM versions or when XHP namespace
-  support is disabled. Declares everything in the global namespace, with the
+  support is disabled. Declares everything in the root namespace, with the
   exception of `Facebook\XHP\ChildValidation`.
 
 All the following guides are written with the assumption that XHP namespace
