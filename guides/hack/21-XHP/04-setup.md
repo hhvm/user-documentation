@@ -27,7 +27,7 @@ In HHVM 4.73 or newer, XHP namespace support can be disabled by setting these to
 
 If these flags are disabled, or using an older version of HHVM:
 
-- XHP classes cannot be declared in namespaces (only in the global namespace)
+- XHP classes cannot be declared in namespaces (only in the root namespace)
 - any code that uses XHP classes also cannot be in a namespace, as HHVM
   previously didn't have any syntax to reference XHP classes across namespaces
 - note that the above two rules are not consistently enforced by the

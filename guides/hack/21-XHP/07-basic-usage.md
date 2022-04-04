@@ -63,12 +63,12 @@ $xhp = <h:p>Hello, world</h:p>;
 ```
 
 ```
-// from global namespace:
+// exists in the root namespace:
 $xhp = <Facebook:XHP:HTML:p>Hello, world</Facebook:XHP:HTML:p>;
 ```
 
 ```
-namespace CustomNamespace;  // from any namespace:
+namespace CustomNamespace;  // from a defined namespace:
 $xhp = <:Facebook:XHP:HTML:p>Hello, world</:Facebook:XHP:HTML:p>;
 ```
 
