@@ -1,6 +1,6 @@
-When working with [XHP](/hack/XHP/introduction), use the `->:` operator to retrieve an XHP Class [attribute](/hack/XHP/basic-usage#attributes) value.
+When working with [XHP](/hack/XHP/introduction), use the `->:` operator to retrieve an XHP Class [attribute](/hack/XHP/basic-usage#attributes) value. 
 
-You can also use `$this->:` in place of the named class instance.
+The operator can also be used on arbitrary expressions that resolve to an XHP object (e.g. `$a ?? $b)->:`).
 
 ```required-attributes.inc.hack
 use namespace Facebook\XHP\Core as x;

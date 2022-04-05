@@ -2,29 +2,29 @@ When combined, operators evaluate according to their associativity. For more inf
 
 ## Assignment Operators
 * [Assignment](/hack/expressions-and-operators/assignment) (`=`, `+=`, and more)
-* [Bitwise](/hack/expressions-and-operators/bitwise-operators) (`&`, `|`, `^`, `<<`, `>>`, `~`)
-* [Coalesce](/hack/expressions-and-operators/coalesce) (`??`, `??=`)
-* [Pipe](/hack/expressions-and-operators/pipe) (`|>` then stored in `$$`)
-* [Spaceship](/hack/expressions-and-operators/equality#the-spaceship-operator) (`<=>`)
-* [Ternary](/hack/expressions-and-operators/ternary) (`?` `:`, and `?:`)
+* [Coalescing Assignment](/hack/expressions-and-operators/coalesce#coalescing-assignment-operator) (`??=`)
 
 ## Comparison Operators
 * [Comparison](/hack/expressions-and-operators/comparisons) (`>`, `>=`,`<`,`<=`)
-* [Equality Comparison](/hack/expressions-and-operators/equality) (`==`, `!=`, `===`, and more)
+* [Equality Comparison](/hack/expressions-and-operators/equality) (`==`, `!=`, `===`,`!==`)
 * [Logical Comparison](/hack/expressions-and-operators/logical-operators) (`&&`, `||`, `!`)
+* [Spaceship Comparator](/hack/expressions-and-operators/equality#the-spaceship-operator) (`<=>`)
 
-## Math Operators
-* [Arithmetic](/hack/expressions-and-operators/arithmetic) (`+`, `-`, `*`, `/`,  and more)
+## Arithmetic Operators
+* [Arithmetic](/hack/expressions-and-operators/arithmetic) (`+`, `-`, `*`, `/`, and more)
 * [Increment](/hack/expressions-and-operators/incrementing-and-decrementing) (`++`)
 * [Decrement](/hack/expressions-and-operators/incrementing-and-decrementing) (`--`)
 
-## Class Operators
+## Bitwise and Bit Shift Operators
+* [Bitwise](/hack/expressions-and-operators/bitwise-operators) (`&`, `|`, `^`, `<<`, `>>`, `~`)
+
+## Class and Member Operators
 * [Create an Object](/hack/expressions-and-operators/new) (`new`)
 * [Access Instance Members](/hack/expressions-and-operators/member-selection) (`->`, `?->`)
 * [Access Static Members / Enum Properties](/hack/expressions-and-operators/scope-resolution) (`::`)
 * [Access XHP Attributes](/hack/expressions-and-operators/XHP-attribute-selection) (`->:`)
 
-## Type Operators
+## Built-in Type Operators
 * [Cast/Convert Types](/hack/expressions-and-operators/casting) (`(int)`, `(string)`, and more)
 * [Check Types](/hack/expressions-and-operators/type-assertions#checking-types-with-is) (`is`)
 * [Enforce Types](/hack/expressions-and-operators/type-assertions#enforcing-types-with-as-and-as) (`as`, `?as`)
@@ -32,12 +32,15 @@ When combined, operators evaluate according to their associativity. For more inf
 * [Index Hack Arrays and Strings](/hack/expressions-and-operators/subscript) (`[]`)
 * [Unpack Tuples](/hack/expressions-and-operators/list) (`list`)
 
-## Function Operators
-* [Async: Suspend Execution](/hack/expressions-and-operators/await) (`await`)
-* [Define a Generator](/hack/expressions-and-operators/yield) (`yield`)
-* [Write to Standard Output](/hack/expressions-and-operators/echo) (`echo`)
-* [Terminate](/hack/expressions-and-operators/exit) (`exit`)
-
-## Error Operators
-* [Indicate Errors](/hack/expressions-and-operators/invariant) (`invariant`)
+## Error Control Operators
+* [Check / Assert an invariant](/hack/expressions-and-operators/invariant) (`invariant`)
 * [Suppress Errors](/hack/expressions-and-operators/error-control) (`@`)
+
+## Other Function Operators
+* [Async: Suspend Execution](/hack/expressions-and-operators/await) (`await`)
+* [Coalesce: Non-Null Evaluation](/hack/expressions-and-operators/coalesce) (`??`)
+* [Echo: Write to Standard Output](/hack/expressions-and-operators/echo) (`echo`)
+* [Exit: Terminate a Function](/hack/expressions-and-operators/exit) (`exit`)
+* [Pipe: Chain Function Calls](/hack/expressions-and-operators/pipe) (`|>` then stored in `$$`)
+* [Ternary: Alternative `If` Evaluation](/hack/expressions-and-operators/ternary) (`? :`, `?:`)
+* [Yield: Define a Generator](/hack/expressions-and-operators/yield) (`yield`)

@@ -34,9 +34,3 @@ The name `$this` is predefined inside any instance method or constructor when th
 
 ## Reserved Names
 Names beginning with two underscores (__) are reserved by the Hack language.
-
-## XHP Name Constraints
-Note that [XHP classes](../XHP/introduction) have different name
-constraints. Class names may contain `:`, and must start with
-`:`. [XHP categories](../XHP/extending#children__categories) names
-start with `%`.
