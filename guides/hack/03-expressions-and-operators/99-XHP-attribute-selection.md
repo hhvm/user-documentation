@@ -1,4 +1,4 @@
-When working with [XHP](/hack/XHP/introduction), use the `->:` operator to retrieve an XHP Class [attribute](/hack/XHP/basic-usage#attributes) value. 
+When working with [XHP](/hack/XHP/introduction), use the `->:` operator to retrieve an XHP class [attribute](/hack/XHP/basic-usage#attributes) value. 
 
 The operator can also be used on arbitrary expressions that resolve to an XHP object (e.g. `$a ?? $b)->:`).
 

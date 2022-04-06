@@ -19,18 +19,18 @@ When combined, operators evaluate according to their associativity. For more inf
 * [Bitwise](/hack/expressions-and-operators/bitwise-operators) (`&`, `|`, `^`, `<<`, `>>`, `~`)
 
 ## Class and Member Operators
-* [Create an Object](/hack/expressions-and-operators/new) (`new`)
-* [Access Instance Members](/hack/expressions-and-operators/member-selection) (`->`, `?->`)
-* [Access Static Members / Enum Properties](/hack/expressions-and-operators/scope-resolution) (`::`)
+* [Access Instance Properties and Methods](/hack/expressions-and-operators/member-selection) (`->`, `?->`)
+* [Access Static Properties and Methods](/hack/expressions-and-operators/scope-resolution) (`::`)
 * [Access XHP Attributes](/hack/expressions-and-operators/XHP-attribute-selection) (`->:`)
+* [Create an Object](/hack/expressions-and-operators/new) (`new`)
 
 ## Built-in Type Operators
 * [Cast/Convert Types](/hack/expressions-and-operators/casting) (`(int)`, `(string)`, and more)
 * [Check Types](/hack/expressions-and-operators/type-assertions#checking-types-with-is) (`is`)
 * [Enforce Types](/hack/expressions-and-operators/type-assertions#enforcing-types-with-as-and-as) (`as`, `?as`)
-* [Concatenate a String](/hack/expressions-and-operators/string-concatenation) (`.`)
-* [Index Hack Arrays and Strings](/hack/expressions-and-operators/subscript) (`[]`)
-* [Unpack Tuples](/hack/expressions-and-operators/list) (`list`)
+* [Index into Hack Arrays and Strings](/hack/expressions-and-operators/subscript) (`[]`)
+* [String Concatenation](/hack/expressions-and-operators/string-concatenation) (`.`)
+* [Unpack Types](/hack/expressions-and-operators/list) (`list`)
 
 ## Error Control Operators
 * [Check / Assert an invariant](/hack/expressions-and-operators/invariant) (`invariant`)
