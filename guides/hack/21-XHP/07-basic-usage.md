@@ -154,6 +154,8 @@ is rendered (`toStringAsync()` is called) with any required attributes missing.
 With `check_xhp_attribute=true` (available since HHVM 4.8) this is also a
 typechecker error.
 
+Use the [`->:` operator](/hack/expressions-and-operators/XHP-attribute-selection) to select an attribute.
+
 ## HTML Character References
 
 In order to encode a reserved HTML character or a character that is not readily available to you, you can use HTML character references in XHP:

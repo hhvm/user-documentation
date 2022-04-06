@@ -46,6 +46,7 @@ same as zero to the power 123.) However,
 
 because there is no numeric conversion; the strings are compared character by character.
 
+## The Spaceship Operator
 Often referred to as the *spaceship operator*, the binary operator `<=>` compares the values of its operands and returns an `int`
 result. If the left-hand value is less than the right-hand value, the result is some unspecified negative value; else, if the left-hand
 value is greater than the right-hand value, the result is some unspecified positive value; otherwise, the values are equal and the result is zero. For example:
