@@ -68,7 +68,7 @@ $xhp = <Facebook:XHP:HTML:p>Hello, world</Facebook:XHP:HTML:p>;
 ```
 
 ```
-namespace CustomNamespace;  // from a defined namespace:
+namespace CustomNamespace;  // from any namespace:
 $xhp = <:Facebook:XHP:HTML:p>Hello, world</:Facebook:XHP:HTML:p>;
 ```
 

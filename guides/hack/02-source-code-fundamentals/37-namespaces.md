@@ -1,13 +1,13 @@
 A ***namespace*** is a container for a set of (typically related) definitions of classes, interfaces, traits, functions, and constants.
 
-When the same namespace is defined in multiple scripts, and those scripts are combined into the same program, the namespace
-is the union of all individual components.
-
-The predefined constant `__NAMESPACE__` contains the name of the current namespace.
+When the same namespace is declared across multiple scripts, and those scripts are combined into the same program, the resulting namespace
+is the union of all of the namespaces' individual components.
 
 ## The Root Namespace
 In the absence of any namespace definition, the names of subsequent classes, interfaces, traits, functions, and constants are in
 the ***root namespace***, which is not named.
+
+Some types, such as `Exception`, and constants, and library functions (such as `sqrt`) are here too. Prefix a backslash (`\`) to refer to these types or functions; for example: `\Exception`, `\sqrt`.
 
 ## Sub-Namespaces
 A namespace can have ***sub-namespaces***, where a sub-namespace name shares a common prefix with another namespace. 
@@ -20,20 +20,20 @@ Apart from their common prefix, a namespace and its sub-namespaces have no speci
 ## Reserved Namespaces
 The namespaces `HH`, `PHP`, `php`, and sub-namespaces beginning with those prefixes are reserved for use by Hack.
 
-### The `HH` Namespace
-Built-in types like `vec`, `keyset`, `dict`, and `shape` exist in the `HH` namespace (e.g. `HH\Lib\Vec`).
-
-Other types, such as `Exception`, and constants, and library functions (such as `sqrt`) are in `HH` too. Prefix a backslash (`\`) to refer to these types or functions; for example: `\Exception`, `\sqrt`.
-
-### XHP and the `HTML` Namespace
-As of HHVM 4.73 and XHP-Lib v4, standard XHP elements like `<p>` are defined in `Facebook\XHP\HTML` (for this example, specifically `Facebook\XHP\HTML\p`).
+## XHP and the `HTML` Namespace
+As of HHVM 4.73 and XHP-Lib v4, standard XHP elements like `<p>` are defined in `Facebook\XHP\HTML` (for this example, specifically `Facebook\XHP\p`).
 
 For more information, see [XHP Namespace Syntax](/hack/XHP/basic-usage#namespace-syntax).
 
-## Defining a Namespace
-Namespaces can be defined with semicolons (`;`) or brace delimiters (`{ ... }`).
+## Special Constants
+Use the word "namespace" in the form of `namespace\Foo` to refer to functions, type aliases, classes, and constants in the current namespace.
 
-With semicolons, a namespace extends until the end of the script, or until the next namespace definition, whichever is first.
+When debugging, use the predefined constant [`__NAMESPACE__`](/hack/source-code-fundamentals/constants#context-dependent-constants) to access the name of the current namespace.
+
+## Declaring a Namespace
+Namespace declarations can be file-scoped with `namespace MyNS;`, or block-scoped with `namespace MyNS { ... }`. 
+
+With semicolons, a namespace extends until the end of the script, or until the next namespace declaration, whichever is first.
 
 ```Hack
 namespace NS1;
@@ -64,10 +64,10 @@ With the `use` keyword, a namespace can import one or more member names into a s
 When importing many names, use `{ ... }`.
 
 ```Hack
-use NS1\{C, I, T}; // instead of `NS1\C, NS1\I, NS1\T`
+use namespace NS1\{C, I, T}; // instead of `NS1\C, NS1\I, NS1\T`
 ```
 
-Imported names can designate a namespace, a sub-namespace, a class, an interface, or a trait, as shown in the following example:
+Imported names can designate a namespace, a sub-namespace, a class or interface or trait, a function, or any built-in type, as shown in the following example:
 
 ```namespaces.inc.hack no-auto-output
 namespace NS1 {
