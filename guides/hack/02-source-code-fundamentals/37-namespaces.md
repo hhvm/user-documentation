@@ -3,6 +3,8 @@ A ***namespace*** is a container for a set of (typically related) definitions of
 When the same namespace is declared across multiple scripts, and those scripts are combined into the same program, the resulting namespace
 is the union of all of the namespaces' individual components.
 
+Use the word "namespace" in the form of `namespace\Foo` to refer to functions, type aliases, classes, and constants in the current namespace.
+
 ## The Root Namespace
 In the absence of any namespace definition, the names of subsequent classes, interfaces, traits, functions, and constants are in
 the ***root namespace***, which is not named.
