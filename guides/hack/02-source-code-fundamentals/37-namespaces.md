@@ -7,7 +7,7 @@ is the union of all of the namespaces' individual components.
 In the absence of any namespace definition, the names of subsequent classes, interfaces, traits, functions, and constants are in
 the ***root namespace***, which is not named.
 
-Some types, such as `Exception`, and constants, and library functions (such as `sqrt`) are here too. Prefix a backslash (`\`) to refer to these types or functions; for example: `\Exception`, `\sqrt`.
+Some types, such as `Exception`, and constants, and library functions (such as `sqrt`) are inherited from PHP and, as such, are also defined outside a namespace. Prefix a backslash (`\`) to refer to these types or functions; for example: `\Exception`, `\sqrt`.
 
 ## Sub-Namespaces
 A namespace can have ***sub-namespaces***, where a sub-namespace name shares a common prefix with another namespace. 
@@ -26,8 +26,6 @@ As of HHVM 4.73 and XHP-Lib v4, standard XHP elements like `<p>` are defined in 
 For more information, see [XHP Namespace Syntax](/hack/XHP/basic-usage#namespace-syntax).
 
 ## Special Constants
-Use the word "namespace" in the form of `namespace\Foo` to refer to functions, type aliases, classes, and constants in the current namespace.
-
 When debugging, use the predefined constant [`__NAMESPACE__`](/hack/source-code-fundamentals/constants#context-dependent-constants) to access the name of the current namespace.
 
 ## Declaring a Namespace
