@@ -21,7 +21,7 @@ Apart from their common prefix, a namespace and its sub-namespaces have no speci
 The namespaces `HH`, `PHP`, `php`, and sub-namespaces beginning with those prefixes are reserved for use by Hack.
 
 ## XHP and the `HTML` Namespace
-As of HHVM 4.73 and XHP-Lib v4, standard XHP elements like `<p>` are defined in `Facebook\XHP\HTML` (for this example, specifically `Facebook\XHP\p`).
+As of HHVM 4.73 and XHP-Lib v4, standard XHP elements like `<p>` are defined in `Facebook\XHP\HTML` (for this example, specifically `Facebook\XHP\HTML\p`).
 
 For more information, see [XHP Namespace Syntax](/hack/XHP/basic-usage#namespace-syntax).
 
