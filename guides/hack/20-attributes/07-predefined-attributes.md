@@ -279,7 +279,13 @@ You can clear the cache with `HH\clear_lsb_memoization`. This should only be use
 - the test needs to cover multiple initial states, where only one would truly be reachable in a single request
 
 ## __MockClass
-
+```yamlmeta
+{
+  "fbonly messages": [
+    "Mock classes are intended for test infrastructure. They should not be added or used directly in Facebook's WWW repository."
+  ]
+}
+```
 Mock classes are useful in testing frameworks when you want to test functionality provided by a legitimate, user-accessible class,
 by creating a new class (many times a child class) to help with the testing. However, what if a class is marked as `final` or a method in a
 class is marked as `final`? Your mocking framework would generally be out of luck.
