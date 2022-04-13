@@ -3,8 +3,6 @@ A ***namespace*** is a container for a set of (typically related) definitions of
 When the same namespace is declared across multiple scripts, and those scripts are combined into the same program, the resulting namespace
 is the union of all of the namespaces' individual components.
 
-Use the word "namespace" in the form of `namespace\Foo` to refer to functions, type aliases, classes, and constants in the current namespace.
-
 ## The Root Namespace
 In the absence of any namespace definition, the names of subsequent classes, interfaces, traits, functions, and constants are in
 the ***root namespace***, which is not named.
@@ -67,7 +65,10 @@ When importing many names, use `{ ... }`.
 use namespace NS1\{C, I, T}; // instead of `NS1\C, NS1\I, NS1\T`
 ```
 
-Imported names can designate a namespace, a sub-namespace, a class or interface or trait, a function, or any built-in type, as shown in the following example:
+Imported names can designate a namespace, a sub-namespace, a class or interface or trait, a function, or any built-in type.
+
+If an imported name introduces ambiguity, you can refer to name `foo` with `namespace\foo`—using the the actual word `namespace`. For example, if you're importing a function `bar()`, but also want to call the `bar()` function from within your own namespace, refer to the one native to your namespace with `namespace\bar()`.
+
 
 ```namespaces.inc.hack no-auto-output
 namespace NS1 {
