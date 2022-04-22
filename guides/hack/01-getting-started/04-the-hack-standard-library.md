@@ -70,4 +70,4 @@ In addition to the content outlined in [Asynchronous Operations](/hack/asynchron
 
 |      Namespace    | Description                                                                                                                                     |
 |-------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Async\`          | A library for controlling asynchronous behavior, with classes like `Async\Semaphore`, `Async\Poll`, and `Async\KeyedPoll`                        |
+| `Async\`          | A library for controlling asynchronous behavior, with classes like `Async\Semaphore`, `Async\Poll`, and `Async\KeyedPoll`.                      |
