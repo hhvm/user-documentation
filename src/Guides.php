@@ -66,6 +66,9 @@ final class Guides {
         ],
       ],
       GuidesProduct::HACK => dict[
+        'getting-started' => dict[
+          'the-standard-library' => tuple('getting-started', 'the-hack-standard-library'),
+        ],
         'arrays-and-collections' => dict[
           'hack-arrays' => tuple('arrays-and-collections', 'vec-keyset-and-dict'),
           'collections' => tuple('arrays-and-collections', 'object-collections'),
