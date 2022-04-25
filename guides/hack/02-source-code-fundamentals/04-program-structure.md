@@ -34,7 +34,7 @@ A file can import another file via [inclusion](script-inclusion.md).
 ## Legacy Files
 ```yamlmeta
 {
-  "metaOnly messages": [
+  "metaonly messages": [
     "All Hack source code at Meta should use the .php file extension and Hack strict mode (plain <?hh header line)."
   ]
 }

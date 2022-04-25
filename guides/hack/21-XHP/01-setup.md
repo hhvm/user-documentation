@@ -13,7 +13,7 @@ We stongly recommend using XHP-Lib v4, which includes XHP namespace support. XHP
 
 **Important:** All of the guides in this section are written with the assumption that XHP-Lib v4 is used, but there are notes pointing out any major differences—look for the **Historical note** sections.
 
-<span class="metaOnly metaIcon">**XHP namespaces are not enabled in Meta's WWW repository**, so all *Historical note* sections apply.</span>
+<span class="metaonly metaIcon">**XHP namespaces are not enabled in Meta's WWW repository**, so all *Historical note* sections apply.</span>
 
 #### XHP-Lib v4
 Used when XHP namespace support is enabled. Declares all base classes, interfaces and elements in namespaces (e.g. standard HTML elements are in `Facebook\XHP\HTML`). It is also more strict (e.g. disallows most mutations after an element is rendered) and deprecates some features (e.g. attribute "clobbering" in `XHPHTMLHelpers`).

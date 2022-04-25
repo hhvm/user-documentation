@@ -7,7 +7,7 @@ XHP class names must follow the same rules as any other Hack class names:
 Letters, numbers and `_` are allowed and the name mustn't start with a number.
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), XHP class
 names could also contain `:` (now a namespace separator) and `-` (now disallowed
 completely). These were translated to `__` and `_` respectively at runtime (this
@@ -49,7 +49,7 @@ async function extending_examples_basic_run(): Awaitable<void> {
 ```
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), use
 `class :intro_plain_str` instead of `xhp class intro_plain_str` (no `xhp`
 keyword, but requires a `:` prefix in the class name).
@@ -232,7 +232,7 @@ by using the `Facebook\XHP\ChildValidation\Validation` trait and implementing th
 `getChildrenDeclaration()` method.
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), a special
 `children` keyword with a regex-like syntax could be used instead
 ([examples](https://github.com/hhvm/xhp-lib/blob/v3.x/tests/ChildRuleTest.php)).
@@ -369,7 +369,7 @@ async function extending_examples_categories_run(): Awaitable<void> {
 ```
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonlymetaonly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), a special
 `category` keyword could be used instead of an interface
 (`category %name1, %name2;`).
@@ -406,7 +406,7 @@ async function extending_examples_async_run(): Awaitable<void> {
 ```
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonly metaIcon">(applies in Meta's WWW repository)</span>
 In XHP-Lib v3, most rendering methods are not async, and
 therefore a special `\XHPAsync` trait must be used in XHP classes that need to
 `await` something during rendering.
@@ -418,7 +418,7 @@ The `Facebook\XHP\HTML\XHPHTMLHelpers` trait implements two behaviors:
 * Managing the `class` attribute.
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonly metaIcon">(applies in Meta's WWW repository)</span>
 In XHP-Lib v3, this trait is called `\XHPHelpers`.
 
 ### Unique IDs

@@ -281,7 +281,7 @@ You can clear the cache with `HH\clear_lsb_memoization`. This should only be use
 ## __MockClass
 ```yamlmeta
 {
-  "metaOnly messages": [
+  "metaonly messages": [
     "Mock classes are intended for test infrastructure. They should not be added or used directly in Meta's WWW repository."
   ]
 }

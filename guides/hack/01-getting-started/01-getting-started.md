@@ -1,6 +1,6 @@
 ```yamlmeta
 {
-  "metaOnly messages": [
+  "metaonly messages": [
     "Unless you are specifically working on open source Hack code, you want [Metas's internal documentation](https://www.internalfb.com/intern/wiki/First-app/) instead for dev environment setup.  If you're just looking to [learn the Hack language itself](https://docs.hhvm.com/hack/source-code-fundamentals/introduction), skip this Getting Started section."
   ]
 }

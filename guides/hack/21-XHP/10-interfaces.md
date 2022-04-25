@@ -29,7 +29,7 @@ one of its two subclasses:
   any children
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), the names of
 `node`, `element` and `primitive` are `\XHPRoot`, `:x:element` and
 `:x:primitive` respectively.
@@ -50,7 +50,7 @@ XHP usually gets in the way of this by:
 The `\Facebook\XHP\UnsafeRenderable` and `\Facebook\XHP\XHPAlwaysValidChild` interfaces allow bypassing these safety mechanisms.
 
 **Historical note:**
-<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
+<span class="metaonly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), the names of
 these interfaces are `\XHPUnsafeRenderable` and `\XHPAlwaysValidChild`.
 
