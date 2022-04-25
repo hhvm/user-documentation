@@ -43,7 +43,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $messages = Vec\filter_nulls(vec[
       self::getVersionRequirementMessage($data),
       self::getLibMessage($data),
-      self::getFacebookMessages($data),
+      self::getMetaMessages($data),
     ]);
 
     if (C\is_empty($messages)) {
@@ -111,10 +111,10 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     );
   }
 
-  private static function getFacebookMessages(
+  private static function getMetaMessages(
     YAMLMeta $data,
   ): ?UnparsedBlocks\Block {
-    $messages = $data['fbonly messages'] ?? null;
+    $messages = $data['metaonly messages'] ?? null;
     if ($messages === null) {
       return null;
     }
@@ -123,13 +123,13 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $messages = Vec\map(
       $messages,
       $message ==> new UnparsedBlocks\InlineSequenceBlock(
-        '<div class="apiTopMessage fbOnly">'.
-        "**Facebook Engineer?**\n\n".
+        '<div class="apiTopMessage metaOnly">'.
+        "**Meta Engineer?**\n\n".
         '<p>'.
         $message.
         "</p>\n".
         '<!-- '.
-        'Not a Facebook engineer... yet? https://www.facebook.com/careers/'.
+        'Not a Meta engineer... yet? https://www.metacareers.com/'.
         " -->\n".
         '</div>',
       ),

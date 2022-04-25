@@ -24,7 +24,7 @@ type YAMLMeta = shape(
     'github' => string,
     'composer' => string,
   ),
-  ?'fbonly messages' => vec<string>,
+  ?'metaonly messages' => vec<string>,
   ?'min-versions' => dict<RequirableProduct, string>,
   ?'experimental' => bool,
   ?'namespace' => string,

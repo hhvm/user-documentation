@@ -15,8 +15,8 @@ use namespace HH\Lib\Str;
 use type Facebook\HackTest\DataProvider;
 use function HHVM\UserDocumentation\{
   cidr_to_bitstring_and_bitmask,
-  is_fb_ip_address,
   is_ip_in_range,
+  is_meta_ip_address,
 };
 use function Facebook\FBExpect\expect;
 
@@ -94,16 +94,16 @@ final class IPUtilsTest extends \Facebook\HackTest\HackTest {
   <<DataProvider('getExampleFacebookIPAddresses')>>
   public function testIsFacebookIPAddress(string $ip): void {
     if (Str\ends_with(\php_uname('n'), '.facebook.com')) {
-      static::markTestSkipped("Can't run on FB infra");
+      static::markTestSkipped("Can't run on Meta infra");
     }
-    expect(is_fb_ip_address($ip))->toBeTrue();
+    expect(is_meta_ip_address($ip))->toBeTrue();
   }
 
   <<DataProvider('getExampleNonFacebookIPAddresses')>>
   public function testIsNonFacebookIPAddress(string $ip): void {
     if (Str\ends_with(\php_uname('n'), '.facebook.com')) {
-      static::markTestSkipped("Can't run on FB infra");
+      static::markTestSkipped("Can't run on Meta infra");
     }
-    expect(is_fb_ip_address($ip))->toBeFalse();
+    expect(is_meta_ip_address($ip))->toBeFalse();
   }
 }

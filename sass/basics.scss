@@ -46,14 +46,14 @@ a {
   padding: 0.5em;
 }
 
-.fbOnly.apiAlias {
+.metaOnly.apiAlias {
   display: block;
   padding-left: 1em;
   font-style: italic;
 }
 
-.fbOnly.apiAlias:before, .fbIcon:before {
-  content: 'f';
+.metaOnly.apiAlias:before, .metaIcon:before {
+  content: 'Meta';
   margin-right: 0.25em;
   font-style: normal;
   background: linear-gradient(to top, #4267b2, #5890ff);
@@ -70,11 +70,11 @@ a {
   border-top: none;
 }
 
-.isNotFbViewer * .fbOnly {
+.isNotMetaViewer * .metaOnly {
   display: none;
 }
 
-.apiTopMessage.fbOnly p:last-child {
+.apiTopMessage.metaOnly p:last-child {
   padding-bottom: 0px;
 }
 

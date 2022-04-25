@@ -160,7 +160,7 @@ well supported and may change):
 Be very careful and deliberate when using these, as they are loosely typed but
 will throw exceptions for bad arguments.
 
-<span class="fbOnly fbIcon">In Facebook's WWW repository, prefer using higher
+<span class="metaOnly metaIcon">In Meta's WWW repository, prefer using higher
 level wrappers such as the `HackCallable` class.</span>
 
 ## Old syntax

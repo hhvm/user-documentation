@@ -48,11 +48,11 @@ function is_ip_in_range(string $ip, (string, string) $range): bool {
   return ($addr_bitstring & $range_bitmask) === $range_bitstring;
 }
 
-function get_fb_ip_ranges(): TIPRanges {
+function get_meta_ip_ranges(): TIPRanges {
   return apc_fetch_or_set_function_data(
     __FUNCTION__,
     () ==> {
-      $raw_data = \file_get_contents(BuildPaths::FB_IP_RANGES_JSON)
+      $raw_data = \file_get_contents(BuildPaths::META_IP_RANGES_JSON)
         |> JSON\decode_as_shape(TIPRangesJSON::class, $$);
 
       $ipv4 = Vec\map(
@@ -69,8 +69,8 @@ function get_fb_ip_ranges(): TIPRanges {
   );
 }
 
-function is_fb_ip_address(string $ip): bool {
-  $ranges = get_fb_ip_ranges();
+function is_meta_ip_address(string $ip): bool {
+  $ranges = get_meta_ip_ranges();
   return C\any(
     Vec\concat($ranges['ipv4'], $ranges['ipv6']),
     $range ==> is_ip_in_range($ip, $range),

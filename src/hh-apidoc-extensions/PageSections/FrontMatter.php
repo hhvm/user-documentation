@@ -51,8 +51,8 @@ final class FrontMatter extends PageSection {
       ) &&
       !C\any($data['sources'], $s ==> Str\starts_with($s, 'api-sources/hsl-experimental'))
     ) {
-      $data['fbonly messages'] ??= vec[];
-      $data['fbonly messages'][] = Str\format(
+      $data['metaonly messages'] ??= vec[];
+      $data['metaonly messages'][] = Str\format(
         '%s is available as `%s` in the www repository.',
         $class is nonnull ? 'The containing class' : 'This',
         Str\strip_prefix($top_level_def->getName(), 'HH\\Lib\\'),

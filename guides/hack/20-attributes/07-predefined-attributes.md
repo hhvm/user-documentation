@@ -281,8 +281,8 @@ You can clear the cache with `HH\clear_lsb_memoization`. This should only be use
 ## __MockClass
 ```yamlmeta
 {
-  "fbonly messages": [
-    "Mock classes are intended for test infrastructure. They should not be added or used directly in Facebook's WWW repository."
+  "metaOnly messages": [
+    "Mock classes are intended for test infrastructure. They should not be added or used directly in Meta's WWW repository."
   ]
 }
 ```

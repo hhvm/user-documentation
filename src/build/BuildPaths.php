@@ -66,7 +66,7 @@ abstract final class BuildPaths {
 
   const string STATIC_RESOURCES_MAP_JSON =
     self::FINAL_DIR.'/static_resources.json';
-  const string FB_IP_RANGES_JSON = self::FINAL_DIR.'/fb_ip_ranges.json';
+  const string META_IP_RANGES_JSON = self::FINAL_DIR.'/meta_ip_ranges.json';
 
   const string BUILD_ID_FILE = self::FINAL_DIR.'/build_id.txt';
 }

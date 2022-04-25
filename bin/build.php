@@ -41,7 +41,7 @@ function build_site(): void {
     // No Dependencies
     APISourcesBuildStep::class,
     PHPIniSupportInHHVMBuildStep::class,
-    FacebookIPRangesBuildStep::class,
+    MetaIPRangesBuildStep::class,
     // Just the API Sources
     HHAPIDocBuildStep::class,
 

@@ -13,7 +13,7 @@ $my_xhp_object = <p>Hello, world</p>;
 It is a real object, meaning that `is_object` will return `true` and you can call methods on it.
 
 **Historical note:**
-<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), XHP classes
 lived in a separate (but still global) namespace from regular classes, denoted
 by a `:` prefix in the typechecker and an `xhp_` prefix at runtime. `<p>` would
@@ -82,7 +82,7 @@ final xhp class my_element extends \Facebook\XHP\Core\element { ... }
 ```
 
 **Historical note:**
-<span class="fbOnly fbIcon">(applies in FB WWW repository)</span>
+<span class="metaOnly metaIcon">(applies in Meta's WWW repository)</span>
 Before XHP namespace support (in XHP-Lib v3), `:` is
 allowed as part of an XHP class name, but it is *not* a namespace separator. It
 is simply translated to `__` at runtime (this is called "name mangling"). For

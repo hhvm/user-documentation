@@ -13,20 +13,20 @@ namespace HHVM\UserDocumentation;
 
 use namespace HH\Lib\Str;
 
-final class FacebookIPRangesBuildStep extends BuildStep {
+final class MetaIPRangesBuildStep extends BuildStep {
 
   <<__Override>>
   public function buildAll(): void {
     if (Str\ends_with(\php_uname('n'), '.facebook.com')) {
-      Log::v("\nFBONLY: Creating empty list of FB employee IP addresses...");
-      \file_put_contents(BuildPaths::FB_IP_RANGES_JSON, \json_encode(
+      Log::v("\nMetaONLY: Creating empty list of Meta employee IP addresses...");
+      \file_put_contents(BuildPaths::META_IP_RANGES_JSON, \json_encode(
         shape('ipv4' => vec[], 'ipv6' => vec[]),
         \JSON_PRETTY_PRINT,
       ));
       return;
     }
 
-    Log::v("\nCreating list of FB employee IP addresses...");
+    Log::v("\nCreating list of Meta employee IP addresses...");
 
     $errno = null;
     $errstr = null;
@@ -55,7 +55,7 @@ final class FacebookIPRangesBuildStep extends BuildStep {
     \fclose($handle);
 
     \file_put_contents(
-      BuildPaths::FB_IP_RANGES_JSON,
+      BuildPaths::META_IP_RANGES_JSON,
       \json_encode(shape('ipv4' => $ipv4, 'ipv6' => $ipv6), \JSON_PRETTY_PRINT),
     );
   }

@@ -11,8 +11,8 @@
 
 use function HHVM\UserDocumentation\{
   cidr_to_bitstring_and_bitmask,
-  is_fb_ip_address,
   is_ip_in_range,
+  is_meta_ip_address,
 };
 use type Facebook\HackRouter\{RequestParameter, RequestParameters};
 use type Facebook\TypeAssert\IncorrectTypeException;
@@ -124,7 +124,7 @@ abstract class WebController {
     if ($ip === null) {
       return false;
     }
-    return is_fb_ip_address($ip);
+    return is_meta_ip_address($ip);
   }
 
   <<__Memoize>>
