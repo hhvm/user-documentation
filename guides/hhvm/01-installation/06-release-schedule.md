@@ -9,7 +9,7 @@ due at that time is delayed, support is extended.
 
 Here's a table of recent LTS releases as well as *expected* future LTS releases:
 
-| Version |    \*Release Date       |    \*End of Suppport       |
+| Version |    \*Release Date       |    \*End of Support       |
 | ------- | ----------------------- | -------------------------- |
 | [4.153](https://hhvm.com/blog/2022/03/17/hhvm-4.153.html)  | March 17, 2022        | *February 16, 2023*      |
 | [4.128](https://hhvm.com/blog/2021/09/21/hhvm-4.128.html)  | September 21, 2021    | *August 24, 2022*        |
