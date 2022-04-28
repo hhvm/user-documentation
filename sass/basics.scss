@@ -37,6 +37,33 @@ a {
   color: red;
 }
 
+.tipMessage {
+  border: 1px solid #c3e0c9;
+  background-color: #f3f9f4;
+  color: #526d8a;
+  font-size: smaller;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.warningMessage {
+  border: 1px solid #feedbb;
+  background-color: #fffdf7;
+  color: #526d8a;
+  font-size: smaller;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.dangerMessage {
+  border: 1px solid #e69a92;
+  background-color: #fff8f7;
+  color: #526d8a;
+  font-size: smaller;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+}
+
 .apiTopMessage {
   border: 1px solid $blue;
   background-color: lighten($blue, 40%);

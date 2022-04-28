@@ -44,6 +44,9 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       self::getVersionRequirementMessage($data),
       self::getLibMessage($data),
       self::getFacebookMessages($data),
+      self::getTipMessages($data),
+      self::getWarningMessages($data),
+      self::getDangerMessages($data),
     ]);
 
     if (C\is_empty($messages)) {
@@ -135,5 +138,65 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       ),
     );
     return new UnparsedBlocks\BlockSequence($messages);
+  }
+
+  private static function getTipMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $tip_messages = $data['tip'] ?? null;
+    if ($tip_messages === null) {
+      return null;
+    }
+
+    $tip_messages = Vec\map(
+      $tip_messages,
+      $tip_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="tipMessage">'.
+        "**Tip:**\n\n".
+        $tip_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($tip_messages);
+  }
+
+  private static function getWarningMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $warning_messages = $data['warning'] ?? null;
+    if ($warning_messages === null) {
+      return null;
+    }
+
+    $warning_messages = Vec\map(
+      $warning_messages,
+      $warning_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="warningMessage">'.
+        "**Warning:**\n\n".
+        $warning_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($warning_messages);
+  }
+
+  private static function getDangerMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $danger_messages = $data['danger'] ?? null;
+    if ($danger_messages === null) {
+      return null;
+    }
+
+    $danger_messages = Vec\map(
+      $danger_messages,
+      $danger_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="dangerMessage">'.
+        "**Danger:**\n\n".
+        $danger_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($danger_messages);
   }
 }
