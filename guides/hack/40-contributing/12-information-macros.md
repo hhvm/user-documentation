@@ -1,4 +1,4 @@
-This website supports tip, warning, and danger macro messages.
+This website supports tip, caution, and danger macro messages.
 
 ## Tip Message
 ```yamlmeta
@@ -12,10 +12,10 @@ Hack lets you write code quickly, while also having safety features built in, li
 
 Here's another paragraph that you might find in the documentation set to make this section feel more natural.
 
-## Warning Message
+## Caution Message
 ```yamlmeta
 {
-  "warning": [
+  "caution": [
     "We do not recommend using experimental features until they are formally announced and integrated into the main documentation set."
   ]
 }

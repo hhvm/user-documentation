@@ -45,7 +45,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       self::getLibMessage($data),
       self::getFacebookMessages($data),
       self::getTipMessages($data),
-      self::getWarningMessages($data),
+      self::getCautionMessages($data),
       self::getDangerMessages($data),
     ]);
 
@@ -56,7 +56,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
 
     return tuple(
       UnparsedBlocks\BlockSequence::flatten(
-        new UnparsedBlocks\HTMLBlock('<div class="apiTopMessages">'),
+        new UnparsedBlocks\HTMLBlock('<div class="message">'),
         $messages,
         new UnparsedBlocks\HTMLBlock('</div>'),
       ),
@@ -77,7 +77,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     }
 
     return UnparsedBlocks\BlockSequence::flatten(
-      new UnparsedBlocks\HTMLBlock('<div class="apiTopMessage apiFromLib">'),
+      new UnparsedBlocks\HTMLBlock('<div class="message api apiFromLib">'),
       new UnparsedBlocks\InlineSequenceBlock(
         'This functionality requires '.
         (
@@ -103,7 +103,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
 
     // TODO: fix XHP in namespaces
     return new UnparsedBlocks\HTMLBlock(
-      '<div class="apiTopMessage apiFromLib">'.
+      '<div class="message api apiFromLib">'.
       'Requires '.
       '<a href="https://github.com/'.
       $lib['github'].
@@ -126,7 +126,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $messages = Vec\map(
       $messages,
       $message ==> new UnparsedBlocks\InlineSequenceBlock(
-        '<div class="apiTopMessage fbOnly">'.
+        '<div class="message api fbOnly">'.
         "**Facebook Engineer?**\n\n".
         '<p>'.
         $message.
@@ -151,7 +151,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $tip_messages = Vec\map(
       $tip_messages,
       $tip_message ==> new UnparsedBlocks\InlineSequenceBlock(
-        '<div class="tipMessage">'.
+        '<div class="message tip">'.
         "**Tip:**\n\n".
         $tip_message.
         '</div>',
@@ -160,24 +160,24 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     return new UnparsedBlocks\BlockSequence($tip_messages);
   }
 
-  private static function getWarningMessages(
+  private static function getCautionMessages(
     YAMLMeta $data,
   ): ?UnparsedBlocks\Block {
-    $warning_messages = $data['warning'] ?? null;
-    if ($warning_messages === null) {
+    $caution_messages = $data['caution'] ?? null;
+    if ($caution_messages === null) {
       return null;
     }
 
-    $warning_messages = Vec\map(
-      $warning_messages,
-      $warning_message ==> new UnparsedBlocks\InlineSequenceBlock(
-        '<div class="warningMessage">'.
-        "**Warning:**\n\n".
-        $warning_message.
+    $caution_messages = Vec\map(
+      $caution_messages,
+      $caution_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="message caution">'.
+        "**Caution:**\n\n".
+        $caution_message.
         '</div>',
       ),
     );
-    return new UnparsedBlocks\BlockSequence($warning_messages);
+    return new UnparsedBlocks\BlockSequence($caution_messages);
   }
 
   private static function getDangerMessages(
@@ -191,7 +191,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $danger_messages = Vec\map(
       $danger_messages,
       $danger_message ==> new UnparsedBlocks\InlineSequenceBlock(
-        '<div class="dangerMessage">'.
+        '<div class="message danger">'.
         "**Danger:**\n\n".
         $danger_message.
         '</div>',

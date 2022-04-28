@@ -26,7 +26,7 @@ type YAMLMeta = shape(
   ),
   ?'fbonly messages' => vec<string>,
   ?'tip' => vec<string>,
-  ?'warning' => vec<string>,
+  ?'caution' => vec<string>,
   ?'danger' => vec<string>,
   ?'min-versions' => dict<RequirableProduct, string>,
   ?'experimental' => bool,
