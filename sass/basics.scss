@@ -37,13 +37,34 @@ a {
   color: red;
 }
 
-.apiTopMessage {
-  border: 1px solid $blue;
-  background-color: lighten($blue, 40%);
-  color: $darkblue;
-  font-size: smaller;
-  font-style: italic;
+.message {
+  font-size: medium;
   padding: 0.5em;
+  margin-bottom: 0.5em;
+
+  .tip {
+    border: 1px solid $green;
+    background-color: $lightgreen;
+  }
+
+  .caution {
+    border: 1px solid $darkyellow;
+    background-color: $lightyellow;
+  }
+
+  .danger {
+    border: 1px solid $red;
+    background-color: $lightred;
+  }
+
+  .api {
+    border: 1px solid $blue;
+    background-color: lighten($blue, 40%);
+    color: $darkblue;
+    font-size: smaller;
+    font-style: italic;
+    padding: 0.5em;
+  }
 }
 
 .fbOnly.apiAlias {
@@ -66,7 +87,7 @@ a {
   font-size: 120%;
 }
 
-.apiTopMessage:nth-child(n+2) {
+.api:nth-child(n+2) {
   border-top: none;
 }
 
@@ -74,7 +95,7 @@ a {
   display: none;
 }
 
-.apiTopMessage.fbOnly p:last-child {
+.api.fbOnly p:last-child {
   padding-bottom: 0px;
 }
 
