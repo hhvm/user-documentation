@@ -34,7 +34,7 @@ with PHP.  Composer can be thought of as an equivalent to `npm` or `yarn`.
 
 - `hackfmt` is a CLI code formatter included with HHVM and Hack, and is also
   used by the various editor and IDE integrations
-- [HHAST] is added provides code style linting, and the ability to automatically
+- [HHAST] provides code style linting, and the ability to automatically
   modify code to adapt to some changes in the language or libraries
 - [hacktest] and [fbexpect] are commonly used together for writing unit tests
 
