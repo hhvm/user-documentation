@@ -33,7 +33,7 @@ function test(Foo $f): void {
 ```
 
 ## Interactions with [Coeffects](https://docs.hhvm.com/hack/contexts-and-capabilities/available-contexts-and-capabilities)
-If your function has the `ReadGlobals` capability but not the `AccessGlobals` capability (i.e. is marked `read_globals` or `controlled`), it can only access class static variables if they are wrapped in a readonly expression:
+If your function has the `ReadGlobals` capability but not the `AccessGlobals` capability (i.e. is marked `read_globals` or `leak_safe`), it can only access class static variables if they are wrapped in a readonly expression:
 
 ``` Hack readonly_coeffects.hack
 <<file:__EnableUnstableFeatures("readonly")>> 
@@ -45,7 +45,7 @@ class Foo {
 function read_static()[read_globals]: void {
   $y = readonly Foo::$bar; // keyword required
 }
-function read_static2()[controlled]: void {
+function read_static2()[leak_safe]: void {
   $y = readonly Foo::$bar; // keyword required
 }
 ```
