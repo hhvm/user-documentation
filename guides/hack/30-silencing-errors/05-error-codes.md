@@ -51,11 +51,11 @@ which the typechecker is unaware of.
 Suggestions: Check your spelling. Use safe Hack APIs rather than
 legacy PHP APIs.
 
-## 4005: Array access on a type that doesn't support indexing
+## 4324: Array access on a type that doesn't support indexing
 
-```4005_array_access.hack no-auto-output
+```4324_array_access.hack no-auto-output
 function foo(int $m): void {
-  /* HH_FIXME[4005] Indexing a type that isn't indexable. */
+  /* HH_FIXME[4324] Indexing a type that isn't indexable. */
   $value = $m['foo'];
 }
 ```
@@ -66,6 +66,8 @@ leading to runtime type errors later.
 
 Suggestions: Refactor the code to use a Hack array or a
 `KeyedContainer`.
+
+** Note:** In previous versions of HHVM, error `4324` was known as error `4005`.
 
 ## 4006: Array append on an inappropriate type
 
