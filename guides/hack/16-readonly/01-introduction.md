@@ -7,7 +7,7 @@ Expressions in Hack can be annotated with the `readonly` keyword. When an object
 
 
 ### Readonlyness
-Object properties of readonly values cannot be modified (i.e. mutated).
+Object properties of `readonly` values cannot be modified (i.e. mutated).
 
 ```Hack readonly.readonlyness.hack.type-errors
 class Bar {
@@ -27,7 +27,7 @@ function test(readonly Foo $x) : void {
 ```
 
 ### Deepness
-All nested properties of readonly objects are readonly.
+All nested properties of `readonly` objects are readonly.
 
 #### 
 ``` Hack readonly.deepness.hack.type-errors
