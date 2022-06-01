@@ -12,6 +12,6 @@ class Foo {
 function read_static()[read_globals]: void {
   $y = readonly Foo::$bar; // keyword required
 }
-function read_static2()[leak_safe]: void {
+function read_static2()[controlled]: void {
   $y = readonly Foo::$bar; // keyword required
 }
