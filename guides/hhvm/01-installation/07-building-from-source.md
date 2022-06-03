@@ -74,7 +74,7 @@ This will take a *long* time.
 ```
 mkdir build
 cd build
-cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock ..
+cmake -DMYSQL_UNIX_SOCK_ADDR=/var/run/mysqld/mysqld.sock -B. -S..
 make -j [number_of_processor_cores] # eg. make -j 4
 sudo make install
 ```
@@ -119,7 +119,7 @@ export CMAKE_PREFIX_PATH="$(echo "$HOMEBREW_DEPENDENCIES" | tr ',' "\n" | xargs 
 
 mkdir build
 cd build
-cmake .. \
+cmake -B. -S.. \
   -DMYSQL_UNIX_SOCK_ADDR=/tmp/mysql.sock \
   -DCMAKE_OSX_SYSROOT=${HOMEBREW_SDKROOT} \
   -DCMAKE_INSTALL_PREFIX=${HOMEBREW_CELLAR}/hhvm-local/$(date +%Y.%m.%d)
