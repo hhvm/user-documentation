@@ -4,37 +4,37 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "705c9881064372e30d0a74baf8cc6d68",
+    "content-hash": "d0d3d92c584516675a6009d6f4d560d2",
     "packages": [
         {
             "name": "facebook/definition-finder",
-            "version": "v2.14.2",
+            "version": "v2.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/definition-finder.git",
-                "reference": "5f7708abaa7973387ddcc71ff00449852465bee4"
+                "reference": "c26866aed73922c3657f5faebb0dfc2d36b519b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/5f7708abaa7973387ddcc71ff00449852465bee4",
-                "reference": "5f7708abaa7973387ddcc71ff00449852465bee4",
+                "url": "https://api.github.com/repos/hhvm/definition-finder/zipball/c26866aed73922c3657f5faebb0dfc2d36b519b2",
+                "reference": "c26866aed73922c3657f5faebb0dfc2d36b519b2",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.78",
-                "hhvm/hhast": "^4.21.4",
-                "hhvm/hhvm-autoload": "^2.0|^3.0",
-                "hhvm/hsl": "^4.0",
+                "hhvm": "^4.158",
+                "hhvm/hhast": "^4.158",
                 "hhvm/type-assert": "^3.2|^4.0"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.6.1",
-                "hhvm/hacktest": "^2.0"
+                "hhvm/hacktest": "^2.0",
+                "hhvm/hhvm-autoload": "^2.0|^3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.x-dev"
+                    "dev-master": "2.x-dev",
+                    "dev-main": "2.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -51,9 +51,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/definition-finder/issues",
-                "source": "https://github.com/hhvm/definition-finder/tree/v2.14.2"
+                "source": "https://github.com/hhvm/definition-finder/tree/v2.16.0"
             },
-            "time": "2021-05-03T19:37:09+00:00"
+            "time": "2022-04-21T18:51:47+00:00"
         },
         {
             "name": "facebook/difflib",
@@ -98,21 +98,20 @@
         },
         {
             "name": "facebook/fbmarkdown",
-            "version": "v1.6.5",
+            "version": "v1.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbmarkdown.git",
-                "reference": "012fd9de7ff08cb22367cc7da581b2abc90d88fd"
+                "reference": "306614c26cfcb00425c17c7a20af7831784826b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/012fd9de7ff08cb22367cc7da581b2abc90d88fd",
-                "reference": "012fd9de7ff08cb22367cc7da581b2abc90d88fd",
+                "url": "https://api.github.com/repos/hhvm/fbmarkdown/zipball/306614c26cfcb00425c17c7a20af7831784826b9",
+                "reference": "306614c26cfcb00425c17c7a20af7831784826b9",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.25",
-                "hhvm/hsl": "^4.0",
+                "hhvm": "^4.128",
                 "hhvm/type-assert": "^3.1|^4.0"
             },
             "require-dev": {
@@ -124,7 +123,8 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.x-dev"
+                    "dev-master": "1.x-dev",
+                    "dev-main": "1.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -140,9 +140,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/fbmarkdown/issues",
-                "source": "https://github.com/hhvm/fbmarkdown/tree/v1.6.5"
+                "source": "https://github.com/hhvm/fbmarkdown/tree/v1.6.6"
             },
-            "time": "2020-12-21T22:50:34+00:00"
+            "time": "2022-05-06T22:33:19+00:00"
         },
         {
             "name": "facebook/hack-codegen",
@@ -482,22 +482,22 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.139.4",
+            "version": "v4.158.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "cade7dc28053b2731cfc0b54de8773771e4c04c6"
+                "reference": "65d54577488abe021142ca9caf87e5290b7d609e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/cade7dc28053b2731cfc0b54de8773771e4c04c6",
-                "reference": "cade7dc28053b2731cfc0b54de8773771e4c04c6",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/65d54577488abe021142ca9caf87e5290b7d609e",
+                "reference": "65d54577488abe021142ca9caf87e5290b7d609e",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.5.0rc1",
-                "hhvm": "^4.128",
+                "hhvm": "^4.157",
                 "hhvm/hhvm-autoload": "^2.0.4|^3.0",
                 "hhvm/hsl": "^4.25",
                 "hhvm/hsl-experimental": "^4.58.0rc1",
@@ -529,9 +529,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.139.4"
+                "source": "https://github.com/hhvm/hhast/tree/v4.158.3"
             },
-            "time": "2022-03-02T19:16:49+00:00"
+            "time": "2022-05-05T22:14:49+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -923,8 +923,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.154.*"
+        "hhvm": "4.160.*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
