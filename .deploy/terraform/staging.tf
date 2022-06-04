@@ -31,4 +31,7 @@ resource "aws_elastic_beanstalk_environment" "docs_staging" {
   tags = {
     DockerImage = var.staging_docker_image
   }
+  depends_on = [
+    aws_elastic_beanstalk_configuration_template.docs
+  ]
 }
