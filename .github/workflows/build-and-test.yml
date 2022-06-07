@@ -90,7 +90,7 @@ jobs:
           # Select an application to use: 1) hhvm-hack-docs
           # Select the default environment: 1) ... doesn't matter, managed by script
           # Do you want to continue with CodeCommit? n
-          echo -e "y\n1\n1\nn\n" | eb init -r us-west-2
+          echo -e "1\n1\nn\n3\n" | eb init -r us-west-2
           eb status
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
