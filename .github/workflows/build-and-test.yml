@@ -78,21 +78,6 @@ jobs:
           export DEBIAN_FRONTEND=noninteractive
           sudo apt-get update
           sudo apt-get install -y awscli
-      - name: Install ElasticBeanstalk CLI
-        run: |
-          wget https://github.com/aws/aws-elastic-beanstalk-cli-setup/archive/refs/tags/v0.2.0.tar.gz
-          tar zxf v0.2.0.tar.gz
-          pip install virtualenv
-          python ./aws-elastic-beanstalk-cli-setup-0.2.0/scripts/ebcli_installer.py
-          echo "PATH=$HOME/.ebcli-virtual-env/executables:$PATH" >> $GITHUB_ENV
-      - name: Configure ElasticBeanstalk
-        run: |
-          # Do you want to continue with CodeCommit? n
-          yes n | eb init -r us-west-2 --platform 'arn:aws:elasticbeanstalk:us-west-2::platform/Docker running on 64bit Amazon Linux 2/3.4.3' --keyname aws-eb hhvm-hack-docs
-          eb status
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Log in to DockerHub
         run: |
           echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u "${{secrets.DOCKERHUB_USER}}" \
