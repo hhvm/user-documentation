@@ -36,7 +36,7 @@ jobs:
           name: docker-image
           path: hack-docs.tar
   deploy:
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    if: github.event_name == 'push'
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
