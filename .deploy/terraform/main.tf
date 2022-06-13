@@ -172,7 +172,7 @@ resource "aws_elastic_beanstalk_application" "docs" {
 }
 
 resource "aws_elastic_beanstalk_configuration_template" "docs" {
-  name = "hhvm-hack-docs-vpc"
+  name = "hhvm-hack-docs-vpc-${uuid()}"
   application = aws_elastic_beanstalk_application.docs.name
   solution_stack_name = "64bit Amazon Linux 2 v3.4.3 running Docker"
   ///// Environment and Instances ////
