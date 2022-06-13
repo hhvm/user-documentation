@@ -24,7 +24,7 @@ resource "aws_elastic_beanstalk_application_version" "docs_staging" {
 
 resource "aws_elastic_beanstalk_environment" "docs_staging" {
   application = aws_elastic_beanstalk_application.docs.name
-  name = "hhvm-hack-docs-vpc-staging-${substr(uuid(), 0, 10)}"
+  name = "hhvm-hack-docs-vpc-staging-${uuid()}"
   cname_prefix = "hack-hhvm-docs-vpc-staging"
   template_name = aws_elastic_beanstalk_configuration_template.docs.name
   version_label = aws_elastic_beanstalk_application_version.docs_staging.id
