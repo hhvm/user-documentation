@@ -111,6 +111,10 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Choose Terraform workspace
+        run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+        env:
+          WORKSPACE_NAME: ${{github.ref_name}}
       - name: Deploy to staging environment (Terraform)
         run: |
           PROD_TAG=$(eb tags hhvm-hack-docs-vpc-prod -l | awk '/DockerImage/{print $NF}')
