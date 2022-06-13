@@ -34,7 +34,7 @@ provider "aws" {
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "Hack/HHVM docs"
+    Name = "Hack/HHVM docs (${terraform.workspace})"
   }
   assign_generated_ipv6_cidr_block = true
 }
@@ -44,7 +44,7 @@ resource "aws_subnet" "az_a" {
   cidr_block = "10.0.0.0/24"
   availability_zone = "us-west-2c"
   tags = {
-    Name = "Hack/HHVM docs AZ a"
+    Name = "Hack/HHVM docs AZ a (${terraform.workspace})"
   }
   map_public_ip_on_launch = true
   ipv6_cidr_block = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, 1)
@@ -56,7 +56,7 @@ resource "aws_subnet" "az_b" {
   cidr_block = "10.0.1.0/24"
   availability_zone = "us-west-2a"
   tags = {
-    Name = "Hack/HHVM docs AZ b"
+    Name = "Hack/HHVM docs AZ b (${terraform.workspace})"
   }
   map_public_ip_on_launch = true
   ipv6_cidr_block = cidrsubnet(aws_vpc.main.ipv6_cidr_block, 8, 2)
@@ -64,7 +64,7 @@ resource "aws_subnet" "az_b" {
 }
 
 resource "aws_security_group" "bastion" {
-  name = "Hack/HHVM docs bastion"
+  name = "Hack/HHVM docs bastion (${terraform.workspace})"
   vpc_id = aws_vpc.main.id
   ingress {
     description = "SSH"
@@ -82,12 +82,12 @@ resource "aws_security_group" "bastion" {
     ipv6_cidr_blocks = [ "::/0" ]
   }
   tags = {
-    Name = "Hack/HHVM docs bastion"
+    Name = "Hack/HHVM docs bastion (${terraform.workspace})"
   }
 }
 
 resource "aws_security_group" "internal" {
-  name = "Hack/HHVM docs internal"
+  name = "Hack/HHVM docs internal (${terraform.workspace})"
   vpc_id = aws_vpc.main.id
   ingress {
     description = "SSH"
@@ -111,12 +111,12 @@ resource "aws_security_group" "internal" {
     ipv6_cidr_blocks = [ "::/0" ]
   }
   tags = {
-    Name = "Hack/HHVM docs internal"
+    Name = "Hack/HHVM docs internal (${terraform.workspace})"
   }
 }
 
 resource "aws_security_group" "public" {
-  name = "Hack/HHVM docs public"
+  name = "Hack/HHVM docs public (${terraform.workspace})"
   vpc_id = aws_vpc.main.id
   ingress {
     description = "HTTP"
@@ -142,14 +142,14 @@ resource "aws_security_group" "public" {
     ipv6_cidr_blocks = ["::/0"]
   }
   tags = {
-    Name = "Hack/HHVM docs LB"
+    Name = "Hack/HHVM docs LB (${terraform.workspace})"
   }
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "Hack/HHVM docs IGW"
+    Name = "Hack/HHVM docs IGW (${terraform.workspace})"
   }
 }
 
@@ -162,7 +162,7 @@ resource "aws_route_table" "main" {
 }
 
 resource "aws_elastic_beanstalk_application" "docs" {
-  name = "hhvm-hack-docs"
+  name = "hhvm-hack-docs-${terraform.workspace}"
   appversion_lifecycle {
     delete_source_from_s3 = false
     max_age_in_days       = 0
@@ -172,7 +172,7 @@ resource "aws_elastic_beanstalk_application" "docs" {
 }
 
 resource "aws_elastic_beanstalk_configuration_template" "docs" {
-  name = "hhvm-hack-docs-vpc"
+  name = "hhvm-hack-docs-vpc-${terraform.workspace}"
   application = aws_elastic_beanstalk_application.docs.name
   solution_stack_name = "64bit Amazon Linux 2 v3.4.3 running Docker"
   ///// Environment and Instances ////
