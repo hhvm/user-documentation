@@ -96,11 +96,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Deploy to staging environment (Terraform)
         run: |
+          PROD_TAG=$(eb tags hhvm-hack-docs-vpc-prod -l | awk '/DockerImage/{print $NF}')
+          echo "Current prod tag: ${PROD_TAG}"
           (
             cd .deploy/terraform
             terraform apply \
               "-var=staging_docker_image=${IMAGE_TAG}" \
-              "-var=prod_docker_image=${IMAGE_TAG}" \
+              "-var=prod_docker_image=${PROD_TAG}" \
               --auto-approve
           )
         env:
