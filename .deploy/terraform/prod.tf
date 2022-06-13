@@ -25,7 +25,7 @@ resource "aws_elastic_beanstalk_application_version" "docs_prod" {
 resource "aws_elastic_beanstalk_environment" "docs_prod" {
   application = aws_elastic_beanstalk_application.docs.name
   name = "hhvm-hack-docs-vpc-prod-${substr(uuid(), 0, 10)}"
-  cname_prefix = "hack-hhvm-docs-vpc-prod-${substr(uuid(), 0, 10)}"
+  cname_prefix = "hack-hhvm-docs-vpc-prod"
   template_name = aws_elastic_beanstalk_configuration_template.docs.name
   version_label = aws_elastic_beanstalk_application_version.docs_prod.id
   tags = {
