@@ -35,3 +35,95 @@ jobs:
         with:
           name: docker-image
           path: hack-docs.tar
+  deploy:
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download Docker image from build step
+        uses: actions/download-artifact@v2
+        with:
+          name: docker-image
+      - name: Import Docker image
+        run: docker load --input hack-docs.tar
+      - name: Build HHBC repo
+        run: |
+          mkdir ${{runner.temp}}/repo-out
+          docker run --rm \
+            -v ${{runner.temp}}/repo-out:/var/out \
+            -w /var/www \
+            hhvm/user-documentation:scratch \
+            .deploy/build-repo.sh
+      - name: Set image tag/name variables
+        run: |
+          DEPLOY_REV=$(git rev-parse --short HEAD)
+          HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
+          IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
+          IMAGE_NAME="hhvm/user-documentation:$IMAGE_TAG"
+          echo "DEPLOY_REV=$DEPLOY_REV" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+      - name: Build repo-authoritative Docker image
+        run: |
+          cp hhvm.prod.ini ${{runner.temp}}/repo-out
+          cp .deploy/prod.Dockerfile ${{runner.temp}}/repo-out/Dockerfile
+          (
+            cd ${{runner.temp}}/repo-out
+            docker build -t ${IMAGE_NAME} .
+          )
+      - name: Install AWS CLI
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get update
+          sudo apt-get install -y awscli
+      - name: Log in to DockerHub
+        run: |
+          echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u "${{secrets.DOCKERHUB_USER}}" \
+            --password-stdin
+      - name: Push image to DockerHub
+        run: |
+          docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
+          docker push "$IMAGE_NAME"
+          docker push "hhvm/user-documentation:latest"
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+      - name: Initialize Terraform
+        run: (cd .deploy/terraform; terraform init)
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Deploy to staging environment (Terraform)
+        run: |
+          (
+            cd .deploy/terraform
+            terraform apply \
+              "-var=staging_docker_image=${IMAGE_TAG}" \
+              "-var=prod_docker_image=${IMAGE_TAG}" \
+              --auto-approve
+          )
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+      - name: Run test suite against staging
+        run: |
+          docker run --rm \
+            -w /var/www \
+            -e REMOTE_TEST_HOST=staging.docs.hhvm.com \
+            hhvm/user-documentation:scratch \
+            vendor/bin/hacktest \
+            --filter-groups remote \
+           tests/
+      - name: Deploy to prod (Terraform)
+        run: |
+          (
+            cd .deploy/terraform
+            terraform apply \
+              "-var=staging_docker_image=${IMAGE_TAG}" \
+              "-var=prod_docker_image=${IMAGE_TAG}" \
+              --auto-approve
+          )
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
