@@ -269,11 +269,13 @@ resource "aws_elastic_beanstalk_configuration_template" "docs" {
     name = "ManagedSecurityGroup"
     value = aws_security_group.public.id
   }
-  setting {
-    namespace = "aws:elbv2:loadbalancer"
-    name = "IPAddressType"
-    value =  "dualstack"
-  }
+  # Comment out the IPAddressType setting because it is an unsupported setting and it will result in failures in the newer version of Terraform AWS Provider (previously it was ignored)
+  #
+  # setting {
+  #   namespace = "aws:elbv2:loadbalancer"
+  #   name = "IPAddressType"
+  #   value =  "dualstack"
+  # }
   setting {
     namespace = "aws:elbv2:listener:80"
     name = "ListenerEnabled"
