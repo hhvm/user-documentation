@@ -85,7 +85,9 @@ jobs:
           pip install virtualenv
           python ./aws-elastic-beanstalk-cli-setup-0.2.0/scripts/ebcli_installer.py
           echo "PATH=$HOME/.ebcli-virtual-env/executables:$PATH" >> $GITHUB_ENV
-      - name: Configure ElasticBeanstalk
+      - id: configure-elastic-beanstalk
+        continue-on-error: true
+        name: Configure ElasticBeanstalk
         run: |
           # Select an application to use: 1) hhvm-hack-docs
           # Select the default environment: 1) ... doesn't matter, managed by script
@@ -115,10 +117,17 @@ jobs:
         run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
         env:
           WORKSPACE_NAME: ${{github.ref_name}}
-      - name: Deploy to staging environment (Terraform)
+      - name: Determine PROD_TAG from existing EB environment
+        if: steps.configure-elastic-beanstalk.conclusion == 'success'
         run: |
           PROD_TAG=$(eb tags hhvm-hack-docs-vpc-prod -l | awk '/DockerImage/{print $NF}')
-          echo "Current prod tag: ${PROD_TAG}"
+          echo "PROD_TAG=$PROD_TAG" >> $GITHUB_ENV
+      - name: Set fallback PROD_TAG to IMAGE_TAG
+        if: steps.configure-elastic-beanstalk.conclusion != 'success'
+        run: |
+          echo "PROD_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+      - name: Deploy to staging environment (Terraform)
+        run: |
           (
             cd .deploy/terraform
             terraform apply \
