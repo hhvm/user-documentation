@@ -91,7 +91,7 @@ jobs:
           # Select the default environment: 1) ... doesn't matter, managed by script
           # Do you want to continue with CodeCommit? n
           eb use hhvm-hack-docs
-          eb init -r us-west-2 --platform 'arn:aws:elasticbeanstalk:us-west-2::platform/Docker running on 64bit Amazon Linux 2/3.4.3' --keyname aws-eb
+          eb init -r us-west-2 --platform 'arn:aws:elasticbeanstalk:us-west-2::platform/Docker running on 64bit Amazon Linux 2/3.4.3'
           eb status
         env:
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
