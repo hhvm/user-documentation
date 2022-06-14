@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - "**"
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      WORKSPACE_NAME: ${{github.ref_name}}
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
+          aws-region: us-west-2
+      - uses: hashicorp/setup-terraform@v2
+      - run: terraform init
+      - run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+      - run: terraform plan
+      - if: github.ref_type == 'branch'
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: create-pull-request/${{github.ref_name}}
