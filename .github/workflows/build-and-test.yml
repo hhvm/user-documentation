@@ -120,6 +120,8 @@ jobs:
             terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
           )
         env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           WORKSPACE_NAME: ${{github.ref_name}}
       - name: Determine PROD_TAG from existing EB environment
         if: steps.configure-elastic-beanstalk.conclusion == 'success'
