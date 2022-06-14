@@ -129,7 +129,7 @@ jobs:
           PROD_TAG=$(eb tags hhvm-hack-docs-vpc-prod -l | awk '/DockerImage/{print $NF}')
           echo "PROD_TAG=$PROD_TAG" >> $GITHUB_ENV
       - name: Set fallback PROD_TAG to IMAGE_TAG
-        if: steps.configure-elastic-beanstalk.conclusion != 'success'
+        if: ${{!env.PROD_TAG}}
         run: |
           echo "PROD_TAG=$IMAGE_TAG" >> $GITHUB_ENV
       - name: Deploy to staging environment (Terraform)
