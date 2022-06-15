@@ -11,6 +11,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    concurrency: ${{github.ref_name}}
     env:
       WORKSPACE_NAME: ${{github.ref_name}}
     steps:
