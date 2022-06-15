@@ -49,5 +49,19 @@ module "ecs-fargate" {
     # }
   }
 
+  log_configuration = {
+    logDriver = "awslogs"
+    options = {
+      "awslogs-region"        = "us-west-2"
+      "awslogs-group"         = "/ecs/service/docs-${terraform.workspace}"
+      "awslogs-stream-prefix" = "ecs"
+    }
+    secretOptions = null
+  }
 }
 
+module "aws_cw_logs" {
+  source  = "cn-terraform/cloudwatch-logs/aws"
+  version = "1.0.10"
+  logs_path = "/ecs/service/docs-${terraform.workspace}"
+}
