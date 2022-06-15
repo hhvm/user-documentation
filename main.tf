@@ -27,12 +27,6 @@ module "ecs-fargate" {
   source  = "cn-terraform/ecs-fargate/aws"
   version = "2.0.41"
 
-  # module.ecs-fargate.module.ecs-fargate-service.module.ecs-alb.aws_lb.lb
-  # should depend on the subnets. Unfortunately Terraform does not infer the
-  # dependency according to
-  # https://github.com/hhvm/user-documentation/runs/6906339479
-  depends_on = [module.networking]
-
   name_prefix                  = "docs-${terraform.workspace}"
   vpc_id                       = module.networking.vpc_id
   public_subnets_ids           = module.networking.public_subnets_ids
