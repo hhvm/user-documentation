@@ -4,13 +4,21 @@ This section covers the different built-in types available in Hack.
 Hack has the following primitive types: 
 [bool](/hack/built-in-types/bool), 
 [int](/hack/built-in-types/int), 
-[float](/hack/built-in-types/float), and 
-[string](/hack/built-in-types/string).
+[float](/hack/built-in-types/float),
+[string](/hack/built-in-types/string), and
+[null](/hack/built-in-types/null).
 
-* Some types are subtypes of other types: for example, `int` and `float` are subtypes of [num](/hack/built-in-types/num).
-* Similarly, `int` and `string` are subtypes of [arraykey](/hack/built-in-types/arraykey).
-* Other types, like [mixed](/hack/built-in-types/mixed), act as supertypes, whereas [nothing](/hack/built-in-types/nothing) acts as the complete opposite (no type).
-* Finally, [null](/hack/built-in-types/null) and [nonnull](/hack/built-in-types/nonnull) are mutually exclusive to one another.
+## Union Types 
+Hack supports union types, like:
+* [num](/hack/built-in-types/num), where `int` and `float` are subtypes of `num`, and
+* [arraykey](/hack/built-in-types/arraykey), where `int` and `string` are subtypes of `arraykey`.
+
+## The Super Type
+Hack's super type is [mixed](/hack/built-in-types/mixed), which represents any value. All other types are subtypes of `mixed`. 
+
+A few things to know when working with `mixed` as a type:
+* The opposite of `mixed` is [nothing](/hack/built-in-types/nothing), a special type at the "bottom" of all other types.
+* `mixed` is equivalent to `?nonnull`. [nonnull](/hack/built-in-types/nonnull) is a type that represents any value except `null`. 
 
 ## Hack Arrays
 There are three types of [Hack Arrays](/hack/arrays-and-collections/introduction). They are:
@@ -22,8 +30,7 @@ Though not built-in as types, other alternatives exist in [Hack Collections](/ha
 
 ## Other Built-In Types
 Hack has other built-in types too, like:
-[enum](/hack/built-in-types/enum) (with [enum class](/hack/built-in-types/enum-class) and [enum class labels](/hack/built-in-types/enum-class-label)
-),
+[enum](/hack/built-in-types/enum) (with [enum class](/hack/built-in-types/enum-class) and [enum class labels](/hack/built-in-types/enum-class-label)),
 [shape](/hack/built-in-types/shapes), and 
 [tuples](/hack/built-in-types/tuples).
 
