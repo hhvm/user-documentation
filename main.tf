@@ -17,7 +17,7 @@ module "networking" {
   source                                      = "cn-terraform/networking/aws"
   name_prefix                                 = "docs-${terraform.workspace}"
   vpc_cidr_block                              = "192.168.0.0/16"
-  availability_zones                          = ["us-west-2a", "us-west-2b", "us-west-2c", "us-west-2d"]
+  availability_zones                          = ["us-west-1a", "us-west-1b", "us-west-1c", "us-west-1d"]
   public_subnets_cidrs_per_availability_zone  = ["192.168.0.0/19", "192.168.32.0/19", "192.168.64.0/19", "192.168.96.0/19"]
   private_subnets_cidrs_per_availability_zone = ["192.168.128.0/19", "192.168.160.0/19", "192.168.192.0/19", "192.168.224.0/19"]
   single_nat                                  = true
@@ -39,7 +39,7 @@ module "ecs-fargate" {
 
   enable_s3_logs = false
 
-  default_certificate_arn = "arn:aws:acm:us-west-2:223121549624:certificate/8f845b56-937f-49b8-adf4-64b69a3caf57"
+  default_certificate_arn = "arn:aws:acm:us-west-1:223121549624:certificate/8f845b56-937f-49b8-adf4-64b69a3caf57"
 
   lb_https_ports = {
     forward_https_to_http = {
@@ -51,7 +51,7 @@ module "ecs-fargate" {
   log_configuration = {
     logDriver = "awslogs"
     options = {
-      "awslogs-region"        = "us-west-2"
+      "awslogs-region"        = "us-west-1"
       "awslogs-group"         = "/ecs/service/docs-${terraform.workspace}"
       "awslogs-stream-prefix" = "ecs"
     }
