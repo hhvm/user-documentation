@@ -13,7 +13,7 @@ terraform {
   }
 }
 
-module "base-network" {
+module "networking" {
   source                                      = "cn-terraform/networking/aws"
   name_prefix                                 = "docs-${terraform.workspace}"
   vpc_cidr_block                              = "192.168.0.0/16"
@@ -28,9 +28,9 @@ module "ecs-fargate" {
   version = "2.0.41"
 
   name_prefix                  = "docs-${terraform.workspace}"
-  vpc_id                       = module.base-network.vpc_id
-  public_subnets_ids           = module.base-network.public_subnets_ids
-  private_subnets_ids          = module.base-network.private_subnets_ids
+  vpc_id                       = module.networking.vpc_id
+  public_subnets_ids           = module.networking.public_subnets_ids
+  private_subnets_ids          = module.networking.private_subnets_ids
   container_name               = "docs-${terraform.workspace}"
   container_image              = var.container_image
   container_cpu                = 4096
