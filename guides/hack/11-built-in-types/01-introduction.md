@@ -7,9 +7,10 @@ Hack has the following primitive types:
 [float](/hack/built-in-types/float), and 
 [string](/hack/built-in-types/string).
 
-* Some types act as parent, container types, like [num (`int`/`float`)](/hack/built-in-types/num) and [arraykey (`int`/`string`)](/hack/built-in-types/arraykey).
-* Others like [mixed](/hack/built-in-types/mixed) act as supertypes, or, like [nothing](/hack/built-in-types/nothing), act as the complete opposite (no type).
-* Similar to `mixed` and `nothing`, [null](/hack/built-in-types/null) and [nonnull](/hack/built-in-types/nonnull) are mutually exclusive to one another.
+* Some types are subtypes of other types: for example, `int` and `float` are subtypes of [num](/hack/built-in-types/num).
+* Similarly, `int` and `string` are subtypes of [arraykey](/hack/built-in-types/arraykey).
+* Other types, like [mixed](/hack/built-in-types/mixed), act as supertypes, whereas [nothing](/hack/built-in-types/nothing) acts as the complete opposite (no type).
+* Finally, [null](/hack/built-in-types/null) and [nonnull](/hack/built-in-types/nonnull) are mutually exclusive to one another.
 
 ## Hack Arrays
 There are three types of [Hack Arrays](/hack/arrays-and-collections/introduction). They are:
