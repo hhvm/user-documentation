@@ -41,7 +41,6 @@ module "ecs-fargate" {
 
   default_certificate_arn = "arn:aws:acm:us-west-2:223121549624:certificate/8f845b56-937f-49b8-adf4-64b69a3caf57"
 
-  lb_http_ports = {}
   lb_https_ports = {
     forward_https_to_http = {
       listener_port         = 443
