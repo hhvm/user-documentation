@@ -24,13 +24,8 @@ module "networking" {
 }
 
 module "ecs-fargate" {
-  source  = "github.com/Atry/terraform-aws-ecs-fargate?ref=03bc324413c2998e50cb901de7dab0bfe69e72c4"
-
-  # TODO: Use the module from upstream once the following PR get merged
-  # https://github.com/cn-terraform/terraform-aws-ecs-fargate/pull/50
-  #
-  # source = "cn-terraform/ecs-fargate/aws"
-  # version = "2.0.41"
+  source  = "cn-terraform/ecs-fargate/aws"
+  version = "2.0.42"
 
   name_prefix                  = "docs-${terraform.workspace}"
   vpc_id                       = module.networking.vpc_id
