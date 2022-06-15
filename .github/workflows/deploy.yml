@@ -22,7 +22,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v2
       - run: terraform init
       - run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
-      - run: terraform plan
+      - run: terraform apply -auto-approve
       - if: github.ref_type == 'branch'
         uses: peter-evans/create-pull-request@v4
         with:
