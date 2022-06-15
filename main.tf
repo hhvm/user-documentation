@@ -36,24 +36,9 @@ module "ecs-fargate" {
   container_cpu                = 4096
   container_memory             = 8192
   container_memory_reservation = 4096
-  lb_http_ports = {
-    default = {
-      listener_port     = 80
-      target_group_port = 80
-    }
-  }
-  lb_https_ports = {
-  }
 
   enable_s3_logs = false
 
-  port_mappings = [
-    {
-      containerPort = 80
-      hostPort      = 80
-      protocol      = "tcp"
-    }
-  ]
   log_configuration = {
     logDriver = "awslogs"
     options = {
