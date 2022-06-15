@@ -39,9 +39,14 @@ module "ecs-fargate" {
 
   enable_s3_logs = false
 
-  default_certificate_arn	= "arn:aws:acm:us-west-2:223121549624:certificate/8f845b56-937f-49b8-adf4-64b69a3caf57"
+  default_certificate_arn = "arn:aws:acm:us-west-2:223121549624:certificate/8f845b56-937f-49b8-adf4-64b69a3caf57"
 
-  lb_https_ports = {}
+  lb_https_ports = {
+    default = {
+      listener_port     = 443
+      target_group_port = 80
+    }
+  }
 
   log_configuration = {
     logDriver = "awslogs"
