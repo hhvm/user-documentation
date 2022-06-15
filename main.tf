@@ -44,8 +44,9 @@ module "ecs-fargate" {
   lb_http_ports = {}
   lb_https_ports = {
     forward_https_to_http = {
-      listener_port     = 443
-      target_group_port = 80
+      listener_port         = 443
+      target_group_port     = 80
+      target_group_protocol = "HTTP"
     }
   }
 
@@ -61,7 +62,7 @@ module "ecs-fargate" {
 }
 
 module "aws_cw_logs" {
-  source  = "cn-terraform/cloudwatch-logs/aws"
-  version = "1.0.10"
+  source    = "cn-terraform/cloudwatch-logs/aws"
+  version   = "1.0.10"
   logs_path = "/ecs/service/docs-${terraform.workspace}"
 }
