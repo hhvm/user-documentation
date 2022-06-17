@@ -1,5 +1,5 @@
 terraform {
-  required_version = "1.2.3"
+  required_version = "1.1.9"
 }
 
 module "networking" {
