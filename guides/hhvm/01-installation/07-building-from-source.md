@@ -1,3 +1,11 @@
+```yamlmeta
+{
+  "caution": [
+    "HHVM will no longer support homebrew on MacOS going forward. For more information, see [Stopping MacOS Homebrew Support](https://hhvm.com/blog/2022/06/17/deprecating-homebrew.html)."
+  ]
+}
+```
+
 Building from source is advisable generally when you need features that exist in our source that are not in a [package](http://beta.docs.hhvm.com/hhvm/installation/introduction#prebuilt-packages). Otherwise, installing from a package is the easiest and most stable way to get up and running.
 
 ## Requirements
