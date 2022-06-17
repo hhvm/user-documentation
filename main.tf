@@ -1,3 +1,7 @@
+terraform {
+  required_version = "1.2.3"
+}
+
 module "networking" {
   source                                      = "cn-terraform/networking/aws"
   name_prefix                                 = "docs-${terraform.workspace}"
