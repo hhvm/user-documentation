@@ -18,8 +18,8 @@ module "ecs-fargate" {
   private_subnets_ids          = module.networking.private_subnets_ids
   container_name               = "docs-${terraform.workspace}"
   container_image              = var.container_image
-  container_cpu                = 256
-  container_memory             = 2048
+  container_cpu                = 2 * 1024
+  container_memory             = 16 * 1024
   container_memory_reservation = null
 
   enable_s3_logs = false
