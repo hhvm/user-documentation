@@ -91,7 +91,7 @@ jobs:
         run: |
           docker push "$IMAGE_NAME"
       - if: github.ref == 'refs/heads/main'
-        name: Update latest tag to DockerHub
+        name: Update the latest tag to DockerHub
         run: |
           docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
           docker push "hhvm/user-documentation:latest"
@@ -112,42 +112,44 @@ jobs:
           cat > .var/tmp/deploy/terraform.tfvars <<EOF
           container_image = "$IMAGE_NAME"
           EOF
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
+          aws-region: us-west-2
+      - uses: hashicorp/setup-terraform@v2
+      - name: Push to staging branch
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update the Docker image name to ${{env.IMAGE_TAG}}, which was built from ${{github.sha}}
           repository: .var/tmp/deploy
           create_branch: true
           push_options: --force
           branch: deploy/staging-${{github.run_id}}
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
-          aws-region: us-west-2
-      - uses: hashicorp/setup-terraform@v2
-      - run: terraform init
-        working-directory: .var/tmp/deploy/
-      - id: terraform-staging-workspace
-        run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+      - name: Deploy staging server
+        run: |
+          terraform init &&
+          (terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME") &&
+          terraform apply -auto-approve
         working-directory: .var/tmp/deploy/
         env:
           WORKSPACE_NAME: staging-${{github.run_id}}
-      - run: terraform apply -auto-approve
-        working-directory: .var/tmp/deploy/
-      - id: print-lb-dns-name
+      - name: Print staging host name
+        id: print-staging-host-name
         run: terraform output -raw aws_lb_lb_dns_name
         working-directory: .var/tmp/deploy/
       - name: Wait until the server is up
-        run: wget --retry-connrefused --retry-on-http-error=503,504 --tries=720 --no-http-keep-alive --output-document=- "http://${{steps.print-lb-dns-name.outputs.stdout}}/"
+        run: wget --retry-connrefused --retry-on-http-error=503,504 --tries=720 --no-http-keep-alive --output-document=- "http://${{steps.print-staging-host-name.outputs.stdout}}/"
       - name: Run test suite against staging
         run: |
           docker run --rm \
             -w /var/www \
-            -e "REMOTE_TEST_HOST=${{steps.print-lb-dns-name.outputs.stdout}}" \
+            -e "REMOTE_TEST_HOST=${{steps.print-staging-host-name.outputs.stdout}}" \
             hhvm/user-documentation:scratch \
             vendor/bin/hacktest \
             --filter-groups remote \
             tests/
-      - run: |
+      - name: Destroy staging server and branch
+        run: |
           terraform workspace select "$WORKSPACE_NAME" && \
           terraform destroy -auto-approve && \
           git push origin :deploy/staging-${{github.run_id}}
@@ -155,13 +157,15 @@ jobs:
         working-directory: .var/tmp/deploy/
         env:
           WORKSPACE_NAME: staging-${{github.run_id}}
-      - uses: ad-m/github-push-action@master
+      - name: Push to prod branch
+        uses: ad-m/github-push-action@master
         with:
           directory: .var/tmp/deploy
           branch: deploy/prod-${{github.ref_name}}
-      - run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+      - name: Deploy prod server
+        run: |
+          (terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME") &&
+          terraform apply -auto-approve
         working-directory: .var/tmp/deploy/
         env:
           WORKSPACE_NAME: prod-${{github.ref_name}}
-      - run: terraform apply -auto-approve
-        working-directory: .var/tmp/deploy/
