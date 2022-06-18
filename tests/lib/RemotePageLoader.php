@@ -29,7 +29,7 @@ final class RemotePageLoader extends PageLoader {
           $scheme = 'http';
       }
     }
-    $url = $scheme.'://'.$test_host.$path;
+    $url = $scheme.'://'.($host_header ?? $test_host).$path;
     if ($query !== null) {
       $url .= '?'.$query;
     }
@@ -38,9 +38,7 @@ final class RemotePageLoader extends PageLoader {
     \curl_setopt($ch, \CURLOPT_HEADER, 1);
     \curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
 
-    if ($host_header) {
-      \curl_setopt($ch, \CURLOPT_HTTPHEADER, varray['Host: '.$host_header]);
-    }
+    \curl_setopt($ch, \CURLOPT_CONNECT_TO, vec['::'.$test_host.':']);
 
     $response = await \HH\Asio\curl_exec($ch);
     $status = (int)\curl_getinfo($ch, \CURLINFO_HTTP_CODE);
