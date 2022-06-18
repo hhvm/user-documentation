@@ -4,6 +4,14 @@ on:
   pull_request:
   schedule:
     - cron: '42 15 * * *'
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+concurrency: ${{github.ref}}
+
 jobs:
   build:
     name: Build and Test
@@ -28,10 +36,132 @@ jobs:
         run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hhast-lint
       - name: Verify codegen is unchanged
         run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
+      - name: Set up cache for Docker image
+        uses: actions/cache@v3
+        with:
+          key: ${{github.run_id}}
+          path: hack-docs.tar
       - name: Export Docker image
         run: docker save hhvm/user-documentation:scratch -o hack-docs.tar
-      - name: Save Docker image as build artifact
-        uses: actions/upload-artifact@v2
+  update-docker-image:
+    if: github.event_name == 'push'
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: download-tar
+        name: Set up cache for Docker image
+        uses: actions/cache@v3
         with:
-          name: docker-image
+          key: ${{github.run_id}}
           path: hack-docs.tar
+      - name: Import Docker image
+        run: docker load --input hack-docs.tar
+      - name: Build HHBC repo
+        run: |
+          mkdir ${{runner.temp}}/repo-out
+          docker run --rm \
+            -v ${{runner.temp}}/repo-out:/var/out \
+            -w /var/www \
+            hhvm/user-documentation:scratch \
+            .deploy/build-repo.sh
+      - name: Set image tag/name variables
+        run: |
+          DEPLOY_REV=$(git rev-parse --short HEAD)
+          HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
+          IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
+          IMAGE_NAME="hhvm/user-documentation:$IMAGE_TAG"
+          echo "DEPLOY_REV=$DEPLOY_REV" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
+      - name: Build repo-authoritative Docker image
+        run: |
+          cp hhvm.prod.ini ${{runner.temp}}/repo-out
+          cp .deploy/prod.Dockerfile ${{runner.temp}}/repo-out/Dockerfile
+          (
+            cd ${{runner.temp}}/repo-out
+            docker build -t ${IMAGE_NAME} .
+          )
+      - name: Log in to DockerHub
+        run: |
+          echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u "${{secrets.DOCKERHUB_USER}}" \
+            --password-stdin
+      - name: Push image to DockerHub
+        run: |
+          docker push "$IMAGE_NAME"
+      - if: github.ref == 'refs/heads/main'
+        name: Update latest tag to DockerHub
+        run: |
+          docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
+          docker push "hhvm/user-documentation:latest"
+      - name: Checkout the existing deploy branch
+        id: checkout-existing-deploy-branch
+        continue-on-error: true
+        uses: actions/checkout@v3
+        with:
+          path: .var/tmp/deploy
+          ref: deploy/prod-${{github.ref_name}}
+      - name: Checkout the default deploy branch
+        if: steps.checkout-existing-deploy-branch.outcome == 'failure'
+        uses: actions/checkout@v3
+        with:
+          path: .var/tmp/deploy
+          ref: deploy/prod-main
+      - run: |
+          cat > .var/tmp/deploy/terraform.tfvars <<EOF
+          container_image = "$IMAGE_NAME"
+          EOF
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update the Docker image name to ${{env.IMAGE_TAG}}, which was built from ${{github.sha}}
+          repository: .var/tmp/deploy
+          create_branch: true
+          push_options: --force
+          branch: deploy/staging-${{github.run_id}}
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
+          aws-region: us-west-2
+      - uses: hashicorp/setup-terraform@v2
+      - run: terraform init
+        working-directory: .var/tmp/deploy/
+      - id: terraform-staging-workspace
+        run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+        working-directory: .var/tmp/deploy/
+        env:
+          WORKSPACE_NAME: staging-${{github.run_id}}
+      - run: terraform apply -auto-approve
+        working-directory: .var/tmp/deploy/
+      - id: print-lb-dns-name
+        run: terraform output -raw aws_lb_lb_dns_name
+        working-directory: .var/tmp/deploy/
+      - name: Wait until the server is up
+        run: wget --retry-connrefused --retry-on-http-error=503,504 --tries=720 --no-http-keep-alive --output-document=- "http://${{steps.print-lb-dns-name.outputs.stdout}}/"
+      - name: Run test suite against staging
+        run: |
+          docker run --rm \
+            -w /var/www \
+            -e "REMOTE_TEST_HOST=${{steps.print-lb-dns-name.outputs.stdout}}" \
+            hhvm/user-documentation:scratch \
+            vendor/bin/hacktest \
+            --filter-groups remote \
+            tests/
+      - run: |
+          terraform workspace select "$WORKSPACE_NAME" && \
+          terraform destroy -auto-approve && \
+          git push origin :deploy/staging-${{github.run_id}}
+        if: always()
+        working-directory: .var/tmp/deploy/
+        env:
+          WORKSPACE_NAME: staging-${{github.run_id}}
+      - uses: ad-m/github-push-action@master
+        with:
+          directory: .var/tmp/deploy
+          branch: deploy/prod-${{github.ref_name}}
+      - run: terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME"
+        working-directory: .var/tmp/deploy/
+        env:
+          WORKSPACE_NAME: prod-${{github.ref_name}}
+      - run: terraform apply -auto-approve
+        working-directory: .var/tmp/deploy/
