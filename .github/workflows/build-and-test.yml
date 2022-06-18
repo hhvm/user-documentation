@@ -10,8 +10,6 @@ permissions:
   contents: write
   pull-requests: write
 
-concurrency: ${{github.ref}}
-
 jobs:
   build:
     name: Build and Test
@@ -44,6 +42,7 @@ jobs:
       - name: Export Docker image
         run: docker save hhvm/user-documentation:scratch -o hack-docs.tar
   update-docker-image:
+    concurrency: ${{github.ref}}
     if: github.event_name == 'push'
     name: Deploy
     needs: build
