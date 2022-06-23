@@ -4,7 +4,7 @@ This website supports note, tip, caution, and danger macro messages.
 ```yamlmeta
 {
   "note": [
-    "This change was introduced in [HHVM 4.136](https://hhvm.com/blog/2021/11/19/hhvm-4.136.html)"
+    "This change was introduced in [HHVM 4.136](https://hhvm.com/blog/2021/11/19/hhvm-4.136.html)."
   ]
 }
 ```
