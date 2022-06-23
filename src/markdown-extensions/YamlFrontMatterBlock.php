@@ -44,6 +44,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       self::getVersionRequirementMessage($data),
       self::getLibMessage($data),
       self::getFacebookMessages($data),
+      self::getNoteMessages($data),
       self::getTipMessages($data),
       self::getCautionMessages($data),
       self::getDangerMessages($data),
@@ -140,6 +141,26 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     return new UnparsedBlocks\BlockSequence($messages);
   }
 
+  private static function getNoteMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $note_messages = $data['note'] ?? null;
+    if ($note_messages === null) {
+      return null;
+    }
+
+    $note_messages = Vec\map(
+      $note_messages,
+      $note_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="message note">'.
+        "**Note:**\n\n".
+        $note_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($note_messages);
+  }
+
   private static function getTipMessages(
     YAMLMeta $data,
   ): ?UnparsedBlocks\Block {
@@ -192,7 +213,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       $danger_messages,
       $danger_message ==> new UnparsedBlocks\InlineSequenceBlock(
         '<div class="message danger">'.
-        "**Danger:**\n\n".
+        "**Warning:**\n\n".
         $danger_message.
         '</div>',
       ),
