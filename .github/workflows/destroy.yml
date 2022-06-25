@@ -1,7 +1,5 @@
 on:
   delete:
-    branches:
-      - deploy/**
 
 permissions:
   id-token: write
@@ -10,6 +8,7 @@ permissions:
 
 jobs:
   destroy:
+    if: startsWith(github.event.ref, 'deploy/')
     runs-on: ubuntu-latest
     defaults:
       run:
