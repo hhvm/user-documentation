@@ -25,6 +25,7 @@ type YAMLMeta = shape(
     'composer' => string,
   ),
   ?'fbonly messages' => vec<string>,
+  ?'note' => vec<string>,
   ?'tip' => vec<string>,
   ?'caution' => vec<string>,
   ?'danger' => vec<string>,

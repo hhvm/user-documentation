@@ -42,6 +42,11 @@ a {
   padding: 0.5em;
   margin-bottom: 0.5em;
 
+  .note {
+    border: 1px solid $darkblue;
+    background-color: $lightestblue;
+  }
+
   .tip {
     border: 1px solid $green;
     background-color: $lightgreen;

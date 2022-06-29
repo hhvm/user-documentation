@@ -1,4 +1,15 @@
-This website supports tip, caution, and danger macro messages.
+This website supports note, tip, caution, and danger macro messages.
+
+## Note Message
+```yamlmeta
+{
+  "note": [
+    "This change was introduced in [HHVM 4.136](https://hhvm.com/blog/2021/11/19/hhvm-4.136.html)."
+  ]
+}
+```
+
+The `noreturn` type can be upcasted to `dynamic`.
 
 ## Tip Message
 ```yamlmeta
@@ -9,8 +20,6 @@ This website supports tip, caution, and danger macro messages.
 }
 ```
 Hack lets you write code quickly, while also having safety features built in, like static type checking.
-
-Here's another paragraph that you might find in the documentation set to make this section feel more natural.
 
 ## Caution Message
 ```yamlmeta
@@ -23,9 +32,7 @@ Here's another paragraph that you might find in the documentation set to make th
 
 This website maintains documentation on Hack features that are in the *experimental* phase.
 
-Here's another paragraph that you might find in the documentation set to make this section feel more natural.
-
-## Danger Message
+## Warning Message
 ```yamlmeta
 {
   "danger": [
@@ -35,5 +42,3 @@ Here's another paragraph that you might find in the documentation set to make th
 ```
 
 While inherently dangerous, you can use `AsyncMysqlConnection::query` to query a MySQL database client.
-
-Here's another paragraph that you might find in the documentation set to make this section feel more natural.
