@@ -23,7 +23,7 @@ module "ecs-fargate" {
   container_memory             = 2048
   container_memory_reservation = null
 
-  enable_s3_logs = false
+  enable_s3_logs = true
 
   default_certificate_arn = "arn:aws:acm:us-west-2:223121549624:certificate/8f845b56-937f-49b8-adf4-64b69a3caf57"
 
