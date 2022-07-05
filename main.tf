@@ -11,7 +11,7 @@ module "networking" {
 
 module "ecs-fargate" {
   source  = "cn-terraform/ecs-fargate/aws"
-  version = "2.0.42"
+  version = "2.0.43"
 
   name_prefix                  = "docs-${terraform.workspace}"
   vpc_id                       = module.networking.vpc_id
