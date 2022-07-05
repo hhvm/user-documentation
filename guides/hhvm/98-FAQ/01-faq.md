@@ -26,7 +26,7 @@ New users should read the [HHVM Introduction](/hhvm/basic-usage/introduction) gu
 [Every two weeks](/hhvm/installation/release-schedule); each release is supported
 for 6 weeks.
 
-### Why is HHVM released every week?
+### Why is HHVM released every two weeks?
 
 This allows users to choose between many small updates, or fewer, larger
 updates.
