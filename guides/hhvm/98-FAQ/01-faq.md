@@ -13,7 +13,7 @@ Facebook's entire site runs on HHVM (desktop, API and mobile), both in developme
 ### What platforms is HHVM supported on?
 
 * **Linux**: HHVM has [Linux](/hhvm/installation/linux) support on flavors of Ubuntu and Debian.
-* **Mac OS X**: HHVM has [MacOS](/hhvm/installation/mac) support via Homebrew.
+* **Mac OS X**: HHVM has limited [MacOS](/hhvm/installation/mac) support via Homebrew.
 
 ## Users
 
@@ -23,10 +23,10 @@ New users should read the [HHVM Introduction](/hhvm/basic-usage/introduction) gu
 
 ### When does HHVM release a new version?
 
-[Every week](/hhvm/installation/release-schedule); each release is supported
+[Every two weeks](/hhvm/installation/release-schedule); each release is supported
 for 6 weeks.
 
-### Why is HHVM released every week?
+### Why is HHVM released every two weeks?
 
 This allows users to choose between many small updates, or fewer, larger
 updates.
@@ -39,8 +39,6 @@ The following sites use Hack and HHVM:
 * [Slack](https://slack.com)
 * [Quizlet](https://quizlet.com)
 * This website - [source is available](https://github.com/hhvm/user-documentation).
-
-There is also [a wiki listing HHVM users](https://github.com/facebook/hhvm/wiki/Users).
 
 ### What do I do if I run into a problem (e.g., an error, fatal or segfault)?
 
