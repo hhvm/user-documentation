@@ -1,5 +1,6 @@
 module "networking" {
   source                                      = "cn-terraform/networking/aws"
+  version                                     = "2.0.15"
   name_prefix                                 = "docs-${terraform.workspace}"
   vpc_cidr_block                              = "192.168.0.0/16"
   availability_zones                          = ["us-west-2a", "us-west-2b", "us-west-2c", "us-west-2d"]
