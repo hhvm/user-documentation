@@ -7,7 +7,6 @@ associativity.
 Operator | Description | Associativity
 ------------ | --------- | ---------
 `\` | [Namespace separator](/hack/source-code-fundamentals/namespaces)  | Left
-`$` | [Name operator](/hack/source-code-fundamentals/names) for variables, constants, functions, and user-defined types | Right
 `::` | [Scope resolution](/hack/expressions-and-operators/scope-resolution)  | Left
 `[]` | [Index resolution](/hack/expressions-and-operators/subscript) for Hack Arrays and Strings | Left
 `->`, `?->` | [Property selection](/hack/expressions-and-operators/member-selection) and [null-safe property selection](/hack/expressions-and-operators/member-selection#null-safe-member-access) | Left
@@ -32,5 +31,5 @@ Operator | Description | Associativity
 `?` `:`, `?:` | [Ternary evaluation](/hack/expressions-and-operators/ternary) and [Elvis operator](/hack/expressions-and-operators/ternary#elvis-operator) | Left
 `\|>` | [Pipe / Chain function calls](/hack/expressions-and-operators/pipe) | Left
 `=` `+=` `-=` `.=` `*=` `/=` `%=` `<<=` `>>=` `&=` `^=` `\|=`, `??=` | [Assignment operators](/hack/expressions-and-operators/assignment) and [Coalescing assignment operator](/hack/expressions-and-operators/coalesce#coalescing-assignment-operator) | Right
-`print` | Write to standard output | Right
+`echo` | [Write to standard output](/hack/expressions-and-operators/echo) | Right
 `include` `require` | [Include or Require a script](/hack/source-code-fundamentals/script-inclusion)| Left
