@@ -41,6 +41,7 @@ final class Guides {
       GuidesProduct::HACK => dict[
         'async' => tuple('asynchronous-operations', null),
         'collections' => tuple('arrays-and-collections', 'introduction'),
+        'disposables' => tuple('classes', 'object-disposal'),
         'enums' => tuple('built-in-types', 'enum'),
         'lambdas' => tuple('functions', 'anonymous-functions'),
         'operators' => tuple('expressions-and-operators', null),
