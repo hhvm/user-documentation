@@ -69,9 +69,14 @@ function do_this(): void { /* ... */ }
 
 ```
 
-* For each dynamic call to `do_this()`, the typechecker will log a diagnostic containing the message from the attribute value.
-* The optional `int` indicates a *sample rate*, meaning that every `1/{sample-rate}` calls to that
-function will be diagnosed at runtime. In the example above, the sample rate is `1/7`.
+The presence of this attribute on a function has no effect, unless that function is actually called, in which case, for each call to that
+function, HHVM raises a notice containing the text from the first attribute value.  The optional `int`-typed second attribute
+value (in this case, 7) indicates a *sampling rate*.
+
+Every 1/sampling-rate calls (as in, 1/7) to that function will raise a notice at runtime. If omitted, the default sampling rate is 1 
+(i.e. all calls raise notices). 
+
+To disable runtime notices, use a sampling rate of 0.
 
 ## __DynamicallyCallable
 
@@ -274,7 +279,13 @@ You can clear the cache with `HH\clear_lsb_memoization`. This should only be use
 - the test needs to cover multiple initial states, where only one would truly be reachable in a single request
 
 ## __MockClass
-
+```yamlmeta
+{
+  "fbonly messages": [
+    "Mock classes are intended for test infrastructure. They should not be added or used directly in Facebook's WWW repository."
+  ]
+}
+```
 Mock classes are useful in testing frameworks when you want to test functionality provided by a legitimate, user-accessible class,
 by creating a new class (many times a child class) to help with the testing. However, what if a class is marked as `final` or a method in a
 class is marked as `final`? Your mocking framework would generally be out of luck.

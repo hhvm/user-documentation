@@ -11,9 +11,9 @@ namespace HHVM\UserDocumentation\Guides\Hack\SilencingErrors\ErrorCodes\Toplevel
 echo "hello world\n";
 ```
 
-Why it's bad: Top-level code is not type checked.
+**Why it's bad:** Top-level code is not type checked.
 
-Suggestions: Put your code in a function and use the `__EntryPoint`
+**Suggestions:** Put your code in a function and use the `__EntryPoint`
 attribute.
 
 ## 2049: Unbound name
@@ -26,12 +26,12 @@ function foo(): void {
 }
 ```
 
-Why it's bad: This is usually a sign that a name is incorrect.
+**Why it's bad:** This is usually a sign that a name is incorrect.
 
 It may be useful for calling parts of the PHP standard library that
 the global name check is not aware of.
 
-Suggestions: Check your spelling. Use safe Hack APIs rather than
+**Suggestions:** Check your spelling. Use safe Hack APIs rather than
 legacy PHP APIs.
 
 ## 2050: Undefined Variable
@@ -43,29 +43,13 @@ function foo(): mixed {
 }
 ```
 
-Why it's bad: This is usually a sign that a variable name is incorrect.
+**Why it's bad:** This is usually a sign that a variable name is incorrect.
 
 It may be useful for accessing PHP constants (such as `$GLOBALS` or `$_GET`)
 which the typechecker is unaware of.
 
-Suggestions: Check your spelling. Use safe Hack APIs rather than
+**Suggestions:** Check your spelling. Use safe Hack APIs rather than
 legacy PHP APIs.
-
-## 4005: Array access on a type that doesn't support indexing
-
-```4005_array_access.hack no-auto-output
-function foo(int $m): void {
-  /* HH_FIXME[4005] Indexing a type that isn't indexable. */
-  $value = $m['foo'];
-}
-```
-
-Why it's bad: Indexing values that don't support values can produce
-surprising behavior. The runtime will log a warning and return null,
-leading to runtime type errors later.
-
-Suggestions: Refactor the code to use a Hack array or a
-`KeyedContainer`.
 
 ## 4006: Array append on an inappropriate type
 
@@ -76,10 +60,10 @@ function foo(mixed $m): void {
 }
 ```
 
-Why it's bad: Appending to other types (e.g. `int`) is undefined and
+**Why it's bad:** Appending to other types (e.g. `int`) is undefined and
 may throw an exception or convert the value to an array.
 
-Suggestions: If the type isn't specific enough, use `as` (e.g. `as
+**Suggestions:** If the type isn't specific enough, use `as` (e.g. `as
 vec<_>`) to perform a runtime type check.
 
 ## 4032: Missing return type
@@ -91,10 +75,10 @@ function foo() {
 }
 ```
 
-Why it's bad: When the typechecker does not know the return type, it
+**Why it's bad:** When the typechecker does not know the return type, it
 cannot check operations on the value returned.
 
-Suggestions: Add a return type to your function. If you're unsure of
+**Suggestions:** Add a return type to your function. If you're unsure of
 the type, consider using `__Soft`. You may also want to consider a
 `mixed` or `dynamic` return type.
 
@@ -104,10 +88,10 @@ the type, consider using `__Soft`. You may also want to consider a
 function foo(array $_): void {}
 ```
 
-Why it's bad: The typechecker knows very little about how the array is
+**Why it's bad:** The typechecker knows very little about how the array is
 structured.
 
-Suggestions: Use `darray`, `varray` or `varray_or_darray` instead. If
+**Suggestions:** Use `darray`, `varray` or `varray_or_darray` instead. If
 you still want to use `array`, specify the type e.g. `array<mixed>`.
 
 ## 4051: Accessing a shape with an invalid field name
@@ -119,10 +103,10 @@ function foo(shape(...) $s): void {
 }
 ```
 
-Why it's bad: The runtime may coerce values and access other fields of
+**Why it's bad:** The runtime may coerce values and access other fields of
 your shape. The typechecker also does not know what type `$value` has.
 
-Suggestions: Use a valid shape key: a string (recommended), an
+**Suggestions:** Use a valid shape key: a string (recommended), an
 integer, or a class constant.
 
 ## 4053: Member not found
@@ -138,10 +122,10 @@ function takes_myclass(MyClass $c): void {
 }
 ```
 
-Why it's bad: Accessing a non-existent method will cause a runtime
+**Why it's bad:** Accessing a non-existent method will cause a runtime
 error. Accessing a non-existent property will log a notice and return null.
 
-Suggestions: Ensure that the object you're accessing actually has the
+**Suggestions:** Ensure that the object you're accessing actually has the
 type you're expecting.
 
 ## 4057: Missing shape field
@@ -153,11 +137,11 @@ function foo(): shape('x' => int) {
 }
 ```
 
-Why it's bad: Returning a shape that's missing fields will cause
+**Why it's bad:** Returning a shape that's missing fields will cause
 errors when code tries to access those fields later. Note that shape
 fields are not enforced when calling or returning from functions.
 
-Suggestions: Change your shape type to use optional fields.
+**Suggestions:** Change your shape type to use optional fields.
 
 ## 4063: Nullable container access
 
@@ -168,10 +152,10 @@ function foo(?vec<int> $items): void {
 }
 ```
 
-Why it's bad: indexing a `null` returns null, leading to
+**Why it's bad:** indexing a `null` returns null, leading to
 runtime type errors later.
 
-Suggestions: Check that the value is non-null with `nullthrows` or
+**Suggestions:** Check that the value is non-null with `nullthrows` or
 assert with `$items as nonnull`.
 
 ## 4064: Accessing members on a nullable object
@@ -191,10 +175,10 @@ function foo(?MyClass $m): void {
 }
 ```
 
-Why it's bad: Accessing a property or a method on `null` will throw an
+**Why it's bad:** Accessing a property or a method on `null` will throw an
 exception.
 
-Suggestions: Check that the value is non-null with `nullthrows` or
+**Suggestions:** Check that the value is non-null with `nullthrows` or
 assert with `$m as nonnull`.
 
 ## 4101: Wrong number of type parameters
@@ -211,10 +195,10 @@ class TooFewArguments extends MyBox {}
 class TooManyArguments extends MyBox<mixed, mixed> {}
 ```
 
-Why it's bad: If the typechecker doesn't have full information about a
+**Why it's bad:** If the typechecker doesn't have full information about a
 class declaration, it cannot fully check code that uses the class.
 
-Suggestions: Add the necessary type parameters. You can usually use
+**Suggestions:** Add the necessary type parameters. You can usually use
 `mixed` or `nothing` as the type parameter on base classes.
 
 Note that this is only required for declarations. Hack can infer type
@@ -230,12 +214,12 @@ function foo(): void {
 }
 ```
 
-Why it's bad: This is usually a sign that a name is incorrect.
+**Why it's bad:** This is usually a sign that a name is incorrect.
 
 It may be useful for calling parts of the PHP standard library that
 the type checker is not aware of.
 
-Suggestions: Check your spelling. Use safe Hack APIs rather than
+**Suggestions:** Check your spelling. Use safe Hack APIs rather than
 legacy PHP APIs.
 
 ## 4108: Undefined shape field
@@ -247,10 +231,10 @@ function foo(shape('x' => int) $s): void {
 }
 ```
 
-Why it's bad: Accessing an undefined field may throw an exception or
+**Why it's bad:** Accessing an undefined field may throw an exception or
 return an unexpected value (for open shapes).
 
-Suggestions: Ensure that your shape type declaration has the fields
+**Suggestions:** Ensure that your shape type declaration has the fields
 you're using.
 
 ## 4110: Bad type in expression
@@ -266,11 +250,11 @@ function foo(): void {
 }
 ```
 
-Why it's bad: Using the wrong type can result in runtime errors (for
+**Why it's bad:** Using the wrong type can result in runtime errors (for
 enforced types), errors later (for unenforced types, such as erased
 generics) or surprising coercions (e.g. for arithmetic).
 
-Suggestions:
+**Suggestions:**
 
 If the type is too broad (e.g. using `mixed`), use `as SpecificType`
 to assert the specific runtime type. If you're not sure of the type,
@@ -291,10 +275,10 @@ function test(shape('a' => string) $s): shape() {
 }
 ```
 
-Why it's bad: Passing extra fields in a shape can lead to surprising
+**Why it's bad:** Passing extra fields in a shape can lead to surprising
 results when converting shapes to arrays.
 
-Suggestions: Use a field type declaration with optional fields instead.
+**Suggestions:** Use a field type declaration with optional fields instead.
 
 ## 4128: Using deprecated code
 
@@ -310,10 +294,10 @@ function bar(): void {
 }
 ```
 
-Why it's bad: Using functions or classes that have been marked as
+**Why it's bad:** Using functions or classes that have been marked as
 deprecated prevents cleanup of old APIs.
 
-Suggestions: `__Deprecated` takes a message which describes why
+**Suggestions:** [`__Deprecated`](/hack/attributes/predefined-attributes#__deprecated) takes a message which describes why
 something is deprecated. Take a look at that message to learn the new
 API.
 
@@ -326,10 +310,10 @@ function foo(shape(?'x' => int) $s): void {
 }
 ```
 
-Why it's bad: This code will throw an exception if the shape doesn't
+**Why it's bad:** This code will throw an exception if the shape doesn't
 have this field.
 
-Suggestions: Use `Shapes::idx` instead, so you can explicitly handle
+**Suggestions:** Use `Shapes::idx` instead, so you can explicitly handle
 the missing field.
 
 ## 4193: Illegal XHP child
@@ -343,9 +327,9 @@ function foo(mixed $m): void {
 }
 ```
 
-Why it's bad: XHP expects child elements to be instance of `XHPChild`.
+**Why it's bad:** XHP expects child elements to be instance of `XHPChild`.
 
-Suggestions: Use `as` to assert a narrower type, or convert values to
+**Suggestions:** Use `as` to assert a narrower type, or convert values to
 a valid XHP child, such as a string.
 
 ## 4276: Truthiness check
@@ -366,10 +350,10 @@ This error was [moved to a linter](https://github.com/hhvm/hhast), as it was mak
 partial mode files to strict. We still
 recommend avoiding this code style.
 
-Why it's bad: Truthiness rules can be surprising. `''` is falsy, but
+**Why it's bad:** Truthiness rules can be surprising. `''` is falsy, but
 so is `'0'`.
 
-Suggestions: Use `is null`, `Str\is_empty` or `=== 0` when checking
+**Suggestions:** Use `is null`, `Str\is_empty` or `=== 0` when checking
 for empty values.
 
 ## 4297: Type inference failed
@@ -387,13 +371,13 @@ function foo(): void {
 }
 ```
 
-Why it's bad: If the type checker cannot infer the type, it cannot
+**Why it's bad:** If the type checker cannot infer the type, it cannot
 check usage of values with that type.
 
 This usually occurs with anonymous functions, but can also occur when
 working with generic containers like `dict` or `vec`.
 
-Suggestions: For anonymous functions, add a type annotation.
+**Suggestions:** For anonymous functions, add a type annotation.
 
 ```
 $f = (MyA $x) ==> $x->doStuff();
@@ -415,12 +399,30 @@ $d = dict<string, string>[];
 function foo(dict<mixed, bool> $d): void {}
 ```
 
-Why it's bad: if a type has constraints on how it can be used, and you
+**Why it's bad:** if a type has constraints on how it can be used, and you
 break those constraints, it may not work as expected.
 
 In this example, we define a `dict` with `mixed` keys. We can then
 insert values that aren't `arraykey` types, leading to surprising
 value conversions.
 
-Suggestions: Look carefully at the error message to see what types are
+**Suggestions:** Look carefully at the error message to see what types are
 supported for the generic you're using.
+
+## 4324: Array access on a type that doesn't support indexing
+
+```4324_array_access.hack no-auto-output
+function foo(int $m): void {
+  /* HH_FIXME[4324] Indexing a type that isn't indexable. */
+  $value = $m['foo'];
+}
+```
+
+**Why it's bad:** Indexing values that don't support values can produce
+surprising behavior. The runtime will log a warning and return null,
+leading to runtime type errors later.
+
+**Suggestions:** Refactor the code to use a Hack array or a
+`KeyedContainer`.
+
+**Note:** In previous versions of HHVM, error `4324` was known as error `4005`.

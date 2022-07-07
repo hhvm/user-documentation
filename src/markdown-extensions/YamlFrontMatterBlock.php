@@ -44,6 +44,10 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       self::getVersionRequirementMessage($data),
       self::getLibMessage($data),
       self::getFacebookMessages($data),
+      self::getNoteMessages($data),
+      self::getTipMessages($data),
+      self::getCautionMessages($data),
+      self::getDangerMessages($data),
     ]);
 
     if (C\is_empty($messages)) {
@@ -53,7 +57,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
 
     return tuple(
       UnparsedBlocks\BlockSequence::flatten(
-        new UnparsedBlocks\HTMLBlock('<div class="apiTopMessages">'),
+        new UnparsedBlocks\HTMLBlock('<div class="message">'),
         $messages,
         new UnparsedBlocks\HTMLBlock('</div>'),
       ),
@@ -74,7 +78,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     }
 
     return UnparsedBlocks\BlockSequence::flatten(
-      new UnparsedBlocks\HTMLBlock('<div class="apiTopMessage apiFromLib">'),
+      new UnparsedBlocks\HTMLBlock('<div class="message api apiFromLib">'),
       new UnparsedBlocks\InlineSequenceBlock(
         'This functionality requires '.
         (
@@ -100,7 +104,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
 
     // TODO: fix XHP in namespaces
     return new UnparsedBlocks\HTMLBlock(
-      '<div class="apiTopMessage apiFromLib">'.
+      '<div class="message api apiFromLib">'.
       'Requires '.
       '<a href="https://github.com/'.
       $lib['github'].
@@ -123,7 +127,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $messages = Vec\map(
       $messages,
       $message ==> new UnparsedBlocks\InlineSequenceBlock(
-        '<div class="apiTopMessage fbOnly">'.
+        '<div class="message api fbOnly">'.
         "**Facebook Engineer?**\n\n".
         '<p>'.
         $message.
@@ -135,5 +139,85 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       ),
     );
     return new UnparsedBlocks\BlockSequence($messages);
+  }
+
+  private static function getNoteMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $note_messages = $data['note'] ?? null;
+    if ($note_messages === null) {
+      return null;
+    }
+
+    $note_messages = Vec\map(
+      $note_messages,
+      $note_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="message note">'.
+        "**Note:**\n\n".
+        $note_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($note_messages);
+  }
+
+  private static function getTipMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $tip_messages = $data['tip'] ?? null;
+    if ($tip_messages === null) {
+      return null;
+    }
+
+    $tip_messages = Vec\map(
+      $tip_messages,
+      $tip_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="message tip">'.
+        "**Tip:**\n\n".
+        $tip_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($tip_messages);
+  }
+
+  private static function getCautionMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $caution_messages = $data['caution'] ?? null;
+    if ($caution_messages === null) {
+      return null;
+    }
+
+    $caution_messages = Vec\map(
+      $caution_messages,
+      $caution_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="message caution">'.
+        "**Caution:**\n\n".
+        $caution_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($caution_messages);
+  }
+
+  private static function getDangerMessages(
+    YAMLMeta $data,
+  ): ?UnparsedBlocks\Block {
+    $danger_messages = $data['danger'] ?? null;
+    if ($danger_messages === null) {
+      return null;
+    }
+
+    $danger_messages = Vec\map(
+      $danger_messages,
+      $danger_message ==> new UnparsedBlocks\InlineSequenceBlock(
+        '<div class="message danger">'.
+        "**Warning:**\n\n".
+        $danger_message.
+        '</div>',
+      ),
+    );
+    return new UnparsedBlocks\BlockSequence($danger_messages);
   }
 }

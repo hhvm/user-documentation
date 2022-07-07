@@ -63,7 +63,7 @@ $xhp = <h:p>Hello, world</h:p>;
 ```
 
 ```
-// from global namespace:
+// exists in the root namespace:
 $xhp = <Facebook:XHP:HTML:p>Hello, world</Facebook:XHP:HTML:p>;
 ```
 
@@ -153,6 +153,8 @@ Some attributes are required, and XHP will throw an exception when an XHP object
 is rendered (`toStringAsync()` is called) with any required attributes missing.
 With `check_xhp_attribute=true` (available since HHVM 4.8) this is also a
 typechecker error.
+
+Use the [`->:` operator](/hack/expressions-and-operators/XHP-attribute-selection) to select an attribute.
 
 ## HTML Character References
 

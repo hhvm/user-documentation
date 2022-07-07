@@ -13,15 +13,21 @@ $grey: #505050;
 $midgrey: #303030;
 $lightgrey: #B0B0B0;
 $lightergrey: #F8F8F8;
+$bluishgrey: #ecf0f0;
 
 $green: #2db04b;
-$lightergreen: #DFF7E5;
+$lightgreen: #DFF7E54D;
 
 $blue: #6986a6;
+$lightestblue: #e6e5ff4d;
 $lightblue: lighten($blue, 10%);
 $darkblue: darken($blue, 10%);
 
 $red: #d64932;
+$lightred: #FFC8B14D;
+
+$darkyellow: #b6b60b;
+$lightyellow: #FFFCE54D; 
 
 $footer-bg: $midgrey;
 
@@ -44,9 +50,8 @@ $side-padding-mob: 10px;
 }
 
 @mixin codeemph {
-  background: $lightergreen;
+  background: darken($lightergrey, 3%);
   border-radius: 2px;
-  color: $green;
   padding: 1px 3px;
 }
 

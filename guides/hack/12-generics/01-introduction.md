@@ -11,31 +11,41 @@ Consider the following example in which `VecStack` is a generic class having one
 use namespace HH\Lib\{C, Vec};
 
 interface StackLike<T> {
-    public function push(T $element): void;
-    public function pop(): T;
+  public function isEmpty(): bool;
+  public function push(T $element): void;
+  public function pop(): T;
 }
 
 class StackUnderflowException extends \Exception {}
 
 class VecStack<T> implements StackLike<T> {
-    private vec<T> $elements;
+  private int $stackPtr;
 
-    public function __construct() {
-      $this->elements = vec[];
-    }
+  public function __construct(private vec<T> $elements = vec[]) {
+    $this->stackPtr = C\count($elements) - 1;
+  }
 
-    public function push(T $element): void {
+  public function isEmpty(): bool {
+    return $this->stackPtr === -1;
+  }
+
+  public function push(T $element): void {
+    $this->stackPtr++;
+    if (C\count($this->elements) === $this->stackPtr) {
       $this->elements[] = $element;
+    } else {
+      $this->elements[$this->stackPtr] = $element;
     }
+  }
 
-    public function pop(): T {
-      $count = C\count($this->elements);
-      if ($count > 0) {
-          $element = $this->elements[$count - 1];
-          $this->elements = Vec\take($this->elements, $count - 1);
-          return $element;
-      }
+  public function pop(): T {
+    if ($this->isEmpty()) {
       throw new StackUnderflowException();
+    }
+    $element = $this->elements[$this->stackPtr];
+    $this->elements[$this->stackPtr] = $this->elements[0];
+    $this->stackPtr--;
+    return $element;
   }
 }
 ```
@@ -43,7 +53,7 @@ class VecStack<T> implements StackLike<T> {
 As shown, the type parameter `T` is used in the declaration of the instance property `$elements`, as a parameter for `push()`, and as a return type for `pop()`.
 
 ```Stack.test.hack no-auto-output
-function useIntStack(VecStack<int> $stInt): void {
+function useIntStack(StackLike<int> $stInt): void {
   $stInt->push(10);
   $stInt->push(20);
   echo 'pop => '.$stInt->pop()."\n"; // 20

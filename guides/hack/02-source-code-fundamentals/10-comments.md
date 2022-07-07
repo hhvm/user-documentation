@@ -1,3 +1,11 @@
+```yamlmeta
+{
+  "note": [
+    "Hash comments (`#`) are no longer supported, and are a parse error since [HHVM 4.133](https://hhvm.com/blog/2021/10/26/hhvm-4.133.html)."
+  ]
+}
+```
+
 Hack has three comment syntaxes.
 
 ```show-comment-styles.hack no-auto-output

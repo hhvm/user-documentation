@@ -4,13 +4,19 @@ on:
   pull_request:
   schedule:
     - cron: '42 15 * * *'
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
 jobs:
   build:
     name: Build and Test
     strategy:
       matrix:
         os: [ ubuntu ]
-        hhvm: [ '4.147' ]
+        hhvm: [ '4.160' ]
     runs-on: ${{matrix.os}}-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,24 +34,27 @@ jobs:
         run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hhast-lint
       - name: Verify codegen is unchanged
         run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
+      - name: Set up cache for Docker image
+        uses: actions/cache@v3
+        with:
+          key: ${{github.run_id}}
+          path: hack-docs.tar
       - name: Export Docker image
         run: docker save hhvm/user-documentation:scratch -o hack-docs.tar
-      - name: Save Docker image as build artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: docker-image
-          path: hack-docs.tar
-  deploy:
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+  update-docker-image:
+    concurrency: ${{github.ref}}
+    if: github.event_name == 'push'
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Download Docker image from build step
-        uses: actions/download-artifact@v2
+      - id: download-tar
+        name: Set up cache for Docker image
+        uses: actions/cache@v3
         with:
-          name: docker-image
+          key: ${{github.run_id}}
+          path: hack-docs.tar
       - name: Import Docker image
         run: docker load --input hack-docs.tar
       - name: Build HHBC repo
@@ -73,76 +82,89 @@ jobs:
             cd ${{runner.temp}}/repo-out
             docker build -t ${IMAGE_NAME} .
           )
-      - name: Install AWS CLI
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          sudo apt-get update
-          sudo apt-get install -y awscli
-      - name: Install ElasticBeanstalk CLI
-        run: |
-          wget https://github.com/aws/aws-elastic-beanstalk-cli-setup/archive/refs/tags/v0.2.0.tar.gz
-          tar zxf v0.2.0.tar.gz
-          pip install virtualenv
-          python ./aws-elastic-beanstalk-cli-setup-0.2.0/scripts/ebcli_installer.py
-          echo "PATH=$HOME/.ebcli-virtual-env/executables:$PATH" >> $GITHUB_ENV
-      - name: Configure ElasticBeanstalk
-        run: |
-          # Select an application to use: 1) hhvm-hack-docs
-          # Select the default environment: 1) ... doesn't matter, managed by script
-          # Do you want to continue with CodeCommit? n
-          echo -e "1\n1\nn\n" | eb init -r us-west-2
-          eb status
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
       - name: Log in to DockerHub
         run: |
           echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u "${{secrets.DOCKERHUB_USER}}" \
             --password-stdin
       - name: Push image to DockerHub
         run: |
-          docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
           docker push "$IMAGE_NAME"
-          docker push "hhvm/user-documentation:latest"
-      - name: Install Terraform
-        uses: hashicorp/setup-terraform@v1
-      - name: Initialize Terraform
-        run: (cd .deploy/terraform; terraform init)
-        env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      - name: Deploy to staging environment (Terraform)
+      - if: github.ref == 'refs/heads/main'
+        name: Update the latest tag to DockerHub
         run: |
-          PROD_TAG=$(eb tags hhvm-hack-docs-vpc-prod -l | awk '/DockerImage/{print $NF}')
-          echo "Current prod tag: ${PROD_TAG}"
-          (
-            cd .deploy/terraform
-            terraform apply \
-              "-var=staging_docker_image=${IMAGE_TAG}" \
-              "-var=prod_docker_image=${PROD_TAG}" \
-              --auto-approve
-          )
+          docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
+          docker push "hhvm/user-documentation:latest"
+      - name: Checkout the existing deploy branch
+        id: checkout-existing-deploy-branch
+        continue-on-error: true
+        uses: actions/checkout@v3
+        with:
+          path: .var/tmp/deploy
+          ref: deploy/prod-${{github.ref_name}}
+      - name: Checkout the default deploy branch
+        if: steps.checkout-existing-deploy-branch.outcome == 'failure'
+        uses: actions/checkout@v3
+        with:
+          path: .var/tmp/deploy
+          ref: deploy/prod-main
+      - run: |
+          cat > .var/tmp/deploy/terraform.tfvars <<EOF
+          container_image = "$IMAGE_NAME"
+          EOF
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
+          aws-region: us-west-2
+      - uses: hashicorp/setup-terraform@v2
+      - name: Push to staging branch
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update the Docker image name to ${{env.IMAGE_TAG}}, which was built from ${{github.sha}}
+          repository: .var/tmp/deploy
+          create_branch: true
+          push_options: --force
+          branch: deploy/staging-${{github.run_id}}
+      - name: Deploy staging server
+        run: |
+          terraform init &&
+          (terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME") &&
+          terraform apply -auto-approve
+        working-directory: .var/tmp/deploy/
         env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          WORKSPACE_NAME: staging-${{github.run_id}}
+      - name: Print staging host name
+        id: print-staging-host-name
+        run: terraform output -raw aws_lb_lb_dns_name
+        working-directory: .var/tmp/deploy/
+      - name: Wait until the server is up
+        run: wget --retry-connrefused --retry-on-http-error=503,504 --tries=720 --no-http-keep-alive --output-document=- "http://${{steps.print-staging-host-name.outputs.stdout}}/"
       - name: Run test suite against staging
         run: |
           docker run --rm \
             -w /var/www \
-            -e REMOTE_TEST_HOST=staging.docs.hhvm.com \
+            -e "REMOTE_TEST_HOST=${{steps.print-staging-host-name.outputs.stdout}}" \
             hhvm/user-documentation:scratch \
             vendor/bin/hacktest \
             --filter-groups remote \
-           tests/
-      - name: Deploy to prod (Terraform)
+            tests/
+      - name: Destroy staging server and branch
         run: |
-          (
-            cd .deploy/terraform
-            terraform apply \
-              "-var=staging_docker_image=${IMAGE_TAG}" \
-              "-var=prod_docker_image=${IMAGE_TAG}" \
-              --auto-approve
-          )
+          terraform workspace select "$WORKSPACE_NAME" && \
+          terraform destroy -auto-approve && \
+          git push origin :deploy/staging-${{github.run_id}}
+        if: always()
+        working-directory: .var/tmp/deploy/
         env:
-          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+          WORKSPACE_NAME: staging-${{github.run_id}}
+      - name: Push to prod branch
+        uses: ad-m/github-push-action@master
+        with:
+          directory: .var/tmp/deploy
+          branch: deploy/prod-${{github.ref_name}}
+      - name: Deploy prod server
+        run: |
+          (terraform workspace select "$WORKSPACE_NAME" || terraform workspace new "$WORKSPACE_NAME") &&
+          terraform apply -auto-approve
+        working-directory: .var/tmp/deploy/
+        env:
+          WORKSPACE_NAME: prod-${{github.ref_name}}

@@ -1,4 +1,12 @@
-We currently support installing HHVM on MacOS via [Homebrew](http://brew.sh/):
+```yamlmeta
+{
+  "caution": [
+    "HHVM will no longer support homebrew on MacOS going forward. For more information, see [Stopping MacOS Homebrew Support](https://hhvm.com/blog/2022/06/17/deprecating-homebrew.html)."
+  ]
+}
+```
+
+We have limited support for installing HHVM on MacOS via [Homebrew](http://brew.sh/):
 
 ```
 brew tap hhvm/hhvm

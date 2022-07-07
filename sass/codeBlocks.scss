@@ -17,3 +17,7 @@ p + .highlight {
 .output-block span {
   color: inherit;
 }
+
+.hljs {
+  background: $lightergrey !important;
+}

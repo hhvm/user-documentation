@@ -9,6 +9,15 @@ $f = $x ==> $x + 1;
 $two = $f(1); // result of 2
 ```
 
+To create an anonymous function with more than one parameter, surround the parameter
+list with parentheses:
+
+``` Hack
+$f = ($x, $y) ==> $x + $y;
+
+$three = $f(1, 2);  // result of 3
+```
+
 Anonymous functions pass _by value_, not by reference. This is also true for any
 [object property](../expressions-and-operators/member-selection) passed to an
 anonymous function.

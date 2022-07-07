@@ -1,0 +1,28 @@
+on:
+  delete:
+
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
+jobs:
+  destroy:
+    if: startsWith(github.event.ref, 'deploy/')
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .deploy/terraform
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          [[ "${{github.event.ref}}" =~ ^deploy/(.*)$ ]] && \
+          echo "WORKSPACE_NAME=${BASH_REMATCH[1]}" > "$GITHUB_ENV"
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
+          aws-region: us-west-2
+      - uses: hashicorp/setup-terraform@v2
+      - run: terraform init
+      - run: terraform workspace select "$WORKSPACE_NAME"
+      - run: terraform destroy -auto-approve
