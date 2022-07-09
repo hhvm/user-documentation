@@ -98,11 +98,8 @@ Note that the visitor runtime does not see the type of `$x`.
 |-----------------|-------------------------------------------------------------------------------------|-----------------------------------|
 | `foo(...)`      | `$v->visitCall($position, $v->visitGlobalFunction($position, foo<>), vec[...])`     | `MyDsl::symbolType(foo<>)()`      |
 | `Foo::bar(...)` | `$v->visitCall($position, $v->visitStaticMethod($position, Foo::bar<>), vec[...])`  | `MyDsl::symbolType(Foo::bar<>)()` |
-| `$x->bar(...)`  | `$v->visitMethodCall($position, $v->visitLocal($position, '$x'), 'bar', vec[...])` | `$x->bar(...)`                    |
 
 Note that the function or method must have a Hack definition, so the typechecker can verify that it's being called with appropriate arguments.
-
-The visitor runtime only receives the method name for instance methods. For global functions and static methods, the visitor receives a function pointer, which contains more information.
 
 ## XHP Literals
 
