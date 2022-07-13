@@ -127,7 +127,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
     $messages = Vec\map(
       $messages,
       $message ==> new UnparsedBlocks\InlineSequenceBlock(
-        '<div class="message api fbOnly">'.
+        '<div class="message api fbOnly" data-nosnippet>'.
         "**Meta Engineer?**\n\n".
         '<p>'.
         $message.
