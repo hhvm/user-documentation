@@ -133,7 +133,7 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
         $message.
         "</p>\n".
         '<!-- '.
-        'Not a Meta engineer... yet? https://www.facebook.com/careers/'.
+        'Not a Meta engineer... yet? https://metacareers.com/'.
         " -->\n".
         '</div>',
       ),
