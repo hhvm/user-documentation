@@ -128,12 +128,12 @@ abstract class YamlFrontMatterBlock implements UnparsedBlocks\BlockProducer {
       $messages,
       $message ==> new UnparsedBlocks\InlineSequenceBlock(
         '<div class="message api fbOnly">'.
-        "**Facebook Engineer?**\n\n".
+        "**Meta Engineer?**\n\n".
         '<p>'.
         $message.
         "</p>\n".
         '<!-- '.
-        'Not a Facebook engineer... yet? https://www.facebook.com/careers/'.
+        'Not a Meta engineer... yet? https://www.facebook.com/careers/'.
         " -->\n".
         '</div>',
       ),
