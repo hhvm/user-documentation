@@ -3,9 +3,9 @@
 A standard API for input and output, known as "HSL IO", is included in the
 [Hack Standard Library (HSL)](the-standard-library).
 
-<p class="fbOnly">HSL IO should not yet be used in Facebook www; you want
+<span data-nosnippet class="fbOnly">HSL IO should not yet be used in Facebook www; you want
 the Facebook-specific `Filesystem` class instead. Post in the usual groups
-if you can't find a suitable alternative for HSL IO.</p>
+if you can't find a suitable alternative for HSL IO.</span>
 
 HSL IO differs from most other language's standard IO libraries in two particularly significant ways:
 - provide as much safety as possible through the type system instead of runtime checking. For example,
