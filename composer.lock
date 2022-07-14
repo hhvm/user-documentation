@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d0d3d92c584516675a6009d6f4d560d2",
+    "content-hash": "e3eeab008cf9fa37ad524894c7f2372c",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -146,28 +146,27 @@
         },
         {
             "name": "facebook/hack-codegen",
-            "version": "v4.5.0",
+            "version": "v4.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hack-codegen.git",
-                "reference": "86b17508e18e9b98b663ac6b9a3e6c4228eb0185"
+                "reference": "8a67f08a0a729fa4aa16d6bb183955055a4bde6f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/86b17508e18e9b98b663ac6b9a3e6c4228eb0185",
-                "reference": "86b17508e18e9b98b663ac6b9a3e6c4228eb0185",
+                "url": "https://api.github.com/repos/hhvm/hack-codegen/zipball/8a67f08a0a729fa4aa16d6bb183955055a4bde6f",
+                "reference": "8a67f08a0a729fa4aa16d6bb183955055a4bde6f",
                 "shasum": ""
             },
             "require": {
-                "hhvm": "^4.93",
-                "hhvm/hhvm-autoload": "^2.0|^3.0",
-                "hhvm/hsl": "^4.0"
+                "hhvm": "^4.128"
             },
             "require-dev": {
                 "facebook/difflib": "^1.0",
                 "facebook/fbexpect": "^2.6.1",
                 "hhvm/hacktest": "^2.0",
                 "hhvm/hhast": "^4.80",
+                "hhvm/hhvm-autoload": "^2.0|^3.0",
                 "hhvm/hsl-experimental": "^4.53",
                 "hhvm/type-assert": "^3.1|^4.0"
             },
@@ -206,9 +205,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hack-codegen/issues",
-                "source": "https://github.com/hhvm/hack-codegen/tree/v4.5.0"
+                "source": "https://github.com/hhvm/hack-codegen/tree/v4.5.1"
             },
-            "time": "2021-12-14T17:32:37+00:00"
+            "time": "2022-06-06T17:05:49+00:00"
         },
         {
             "name": "facebook/hack-http-request-response-interfaces",
@@ -482,32 +481,29 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.158.3",
+            "version": "v4.161.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "65d54577488abe021142ca9caf87e5290b7d609e"
+                "reference": "0a9ffc51a94188c0c1cc6f5389ea8ebf596d8475"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/65d54577488abe021142ca9caf87e5290b7d609e",
-                "reference": "65d54577488abe021142ca9caf87e5290b7d609e",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/0a9ffc51a94188c0c1cc6f5389ea8ebf596d8475",
+                "reference": "0a9ffc51a94188c0c1cc6f5389ea8ebf596d8475",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.5.0rc1",
-                "hhvm": "^4.157",
-                "hhvm/hhvm-autoload": "^2.0.4|^3.0",
-                "hhvm/hsl": "^4.25",
-                "hhvm/hsl-experimental": "^4.58.0rc1",
-                "hhvm/hsl-io": "^0.2.0|0.3.0",
+                "hhvm": "^4.161",
                 "hhvm/type-assert": "^4.2.2"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.8.1",
                 "facebook/hack-codegen": "^4.0",
-                "hhvm/hacktest": "^2.3.0"
+                "hhvm/hacktest": "^2.3.0",
+                "hhvm/hhvm-autoload": "^2.0.4|^3.0"
             },
             "bin": [
                 "bin/hhast-lint",
@@ -529,28 +525,27 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.158.3"
+                "source": "https://github.com/hhvm/hhast/tree/v4.161.2"
             },
-            "time": "2022-05-05T22:14:49+00:00"
+            "time": "2022-07-09T17:27:26+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
-            "version": "v3.3.1",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhvm-autoload.git",
-                "reference": "4dd560e1a161597ea80aeb9a0e644bf79426a22c"
+                "reference": "186d1fc5d5bf69caebaacac5c80a69e3c08f50d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/4dd560e1a161597ea80aeb9a0e644bf79426a22c",
-                "reference": "4dd560e1a161597ea80aeb9a0e644bf79426a22c",
+                "url": "https://api.github.com/repos/hhvm/hhvm-autoload/zipball/186d1fc5d5bf69caebaacac5c80a69e3c08f50d4",
+                "reference": "186d1fc5d5bf69caebaacac5c80a69e3c08f50d4",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0|^2.0",
-                "hhvm": "^4.109",
-                "hhvm/hsl": "^4.0"
+                "hhvm": "^4.153"
             },
             "replace": {
                 "facebook/hhvm-autoload": "1.*"
@@ -585,9 +580,9 @@
             ],
             "support": {
                 "issues": "https://github.com/hhvm/hhvm-autoload/issues",
-                "source": "https://github.com/hhvm/hhvm-autoload/tree/v3.3.1"
+                "source": "https://github.com/hhvm/hhvm-autoload/tree/v3.3.2"
             },
-            "time": "2022-01-05T17:52:54+00:00"
+            "time": "2022-05-30T18:49:17+00:00"
         },
         {
             "name": "hhvm/hsl",
@@ -833,23 +828,22 @@
     "packages-dev": [
         {
             "name": "facebook/fbexpect",
-            "version": "v2.8.1",
+            "version": "v2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/fbexpect.git",
-                "reference": "c1fb447cf539353761830c01c317e3e14cf72968"
+                "reference": "5ad14d4f6e6e57a468f9b415d97ab6050630e144"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/c1fb447cf539353761830c01c317e3e14cf72968",
-                "reference": "c1fb447cf539353761830c01c317e3e14cf72968",
+                "url": "https://api.github.com/repos/hhvm/fbexpect/zipball/5ad14d4f6e6e57a468f9b415d97ab6050630e144",
+                "reference": "5ad14d4f6e6e57a468f9b415d97ab6050630e144",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.3.0",
-                "hhvm": "^4.56",
-                "hhvm/hacktest": "^1.0|^2.0",
-                "hhvm/hsl": "^4.0"
+                "hhvm": "^4.128",
+                "hhvm/hacktest": "^1.0|^2.0"
             },
             "require-dev": {
                 "hhvm/hhast": "^4.0",
@@ -863,35 +857,33 @@
             "description": "Unit test helpers for Facebook projects",
             "support": {
                 "issues": "https://github.com/hhvm/fbexpect/issues",
-                "source": "https://github.com/hhvm/fbexpect/tree/v2.8.1"
+                "source": "https://github.com/hhvm/fbexpect/tree/v2.9.1"
             },
-            "time": "2021-11-17T21:48:29+00:00"
+            "time": "2022-06-06T19:39:09+00:00"
         },
         {
             "name": "hhvm/hacktest",
-            "version": "v2.3.0",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hacktest.git",
-                "reference": "c8dd77a8ff011836013d15c2c1718eae0b23efe6"
+                "reference": "84b7a0094f59329dc41ac29ad77d09f85a9b1c91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/c8dd77a8ff011836013d15c2c1718eae0b23efe6",
-                "reference": "c8dd77a8ff011836013d15c2c1718eae0b23efe6",
+                "url": "https://api.github.com/repos/hhvm/hacktest/zipball/84b7a0094f59329dc41ac29ad77d09f85a9b1c91",
+                "reference": "84b7a0094f59329dc41ac29ad77d09f85a9b1c91",
                 "shasum": ""
             },
             "require": {
                 "facebook/hh-clilib": "^2.5.0rc1",
-                "hhvm": "^4.60",
-                "hhvm/hhvm-autoload": "^2.0.2|^3.0",
-                "hhvm/hsl-experimental": "^4.58.0rc1",
-                "hhvm/hsl-io": "^0.2.0|^0.3.0",
+                "hhvm": "^4.128",
                 "hhvm/type-assert": "^3.0|^4.0"
             },
             "require-dev": {
                 "facebook/fbexpect": "^2.8.1",
-                "hhvm/hhast": "^4.0"
+                "hhvm/hhast": "^4.0",
+                "hhvm/hhvm-autoload": "^2.0.2|^3.0"
             },
             "bin": [
                 "bin/hacktest",
@@ -912,9 +904,9 @@
             "description": "The Hack Test Library",
             "support": {
                 "issues": "https://github.com/hhvm/hacktest/issues",
-                "source": "https://github.com/hhvm/hacktest/tree/v2.3.0"
+                "source": "https://github.com/hhvm/hacktest/tree/v2.4.0"
             },
-            "time": "2021-11-17T21:55:40+00:00"
+            "time": "2022-06-06T18:42:25+00:00"
         }
     ],
     "aliases": [],
@@ -923,7 +915,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.160.*"
+        "hhvm": "4.164.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
