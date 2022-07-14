@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu ]
-        hhvm: [ '4.160' ]
+        hhvm: [ '4.164' ]
     runs-on: ${{matrix.os}}-latest
     steps:
       - uses: actions/checkout@v2
