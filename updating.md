@@ -25,7 +25,7 @@ See `bin/update-versions --help` for more options.
 # Updating to a new version of HHVM and the HSL from a Codespace
 
 First, ensure that your Codespace has a large enough machine type to perform 
-these upgrade operations. At minimum, an 8-core, 64GB machine is usually necessary.
+these upgrade operations. At minimum, an 16-core, 32GB machine is usually necessary.
 
 As usual, run `update-versions` to update the targetted HHVM version. 
 By default, the script uses the latest, publicly-available HHVM verison.
