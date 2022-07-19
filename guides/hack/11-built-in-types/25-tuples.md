@@ -39,7 +39,7 @@ Here is a more exotic example of a type involve a tuple:
 
 This declares a nullable type for a tuple containing an `int` and a tuple, which in turn, contains a `string` and a `float`.
 
-For non-trivial tuple types, it can be cumbersome to write out the complete type. Fortunately, Hack provides a type-aliasing capability via
+For non-trivial tuple types, it can be cumbersome to write out the complete type. Fortunately, Hack provides type-aliasing via
 `newtype` (and `type`). For example:
 
 ```distance-between-Points.hack no-auto-output
