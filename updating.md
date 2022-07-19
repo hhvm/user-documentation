@@ -27,7 +27,7 @@ See `bin/update-versions --help` for more options.
 First, ensure that your Codespace has a large enough machine type to perform 
 these upgrade operations. At minimum, a 16-core, 32GB machine is usually necessary.
 
-As usual, run `update-versions` to update the targetted HHVM version. 
+After, run `update-versions` to update the targetted HHVM version. 
 By default, the script uses the latest, publicly-available HHVM verison.
 
 ```
@@ -36,7 +36,7 @@ $ bin/update-versions
 
 Next, add a commit, push your branch, and create a new Codespace.
 
-Creating a new Codespace is necessary because, at this point, the version of HHVM running on the 
+**Note:** Creating a new Codespace is necessary because, at this point, the version of HHVM running on the 
 Codespace and the targetted version of HHVM (for the upgrade) will be different.
 
 To check the active version on the machine, use this command:
