@@ -1,7 +1,9 @@
-A class can implement a set of capabilities&mdash;herein called a *contract*---through what is called an interface. An *interface* is a set of
-method declarations and constants.  Note that the methods are only declared, not defined; that is, an interface defines a type consisting
+A class can implement a *contract* through an interface, which is a set of required
+method declarations and constants.  
+
+Note that the methods are only declared, not defined; that is, an interface defines a type consisting
 of *abstract* methods, where those methods are implemented by client classes as they see fit. An interface allows unrelated classes to
-implement the same facilities with the same names and types without requiring those classes to share a common base class.  For example:
+implement the same facilities with the same names and types without requiring those classes to share a common base class. For example:
 
 ```MyCollection.hack no-auto-output
 interface MyCollection {

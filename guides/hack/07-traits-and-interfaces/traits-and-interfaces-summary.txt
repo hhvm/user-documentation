@@ -1,1 +1,1 @@
-Implementing class capabilities and optimizing code reuse.
+Mechanisms for code reuse and code constraint within classes.
