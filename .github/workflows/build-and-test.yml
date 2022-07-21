@@ -115,6 +115,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
           aws-region: us-west-2
+          role-duration-seconds: 7200
       - uses: hashicorp/setup-terraform@v2
       - name: Push to staging branch
         uses: stefanzweifel/git-auto-commit-action@v4
