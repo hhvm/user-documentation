@@ -113,6 +113,7 @@ jobs:
           EOF
       - uses: aws-actions/configure-aws-credentials@v1
         with:
+          role-duration-seconds: 7000
           role-to-assume: arn:aws:iam::223121549624:role/hhvm-user-documentation-github-actions
           aws-region: us-west-2
       - uses: hashicorp/setup-terraform@v2
