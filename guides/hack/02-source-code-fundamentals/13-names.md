@@ -23,9 +23,12 @@ function compute(int $val): void {
 }
 ```
 
-## The Placeholder Variable
-The name `$_`, referred to as the *placeholder variable*, is reserved for use in the
-[list intrinsic function](../expressions-and-operators/list.md) and the [foreach statement](../statements/foreach.md).
+## Placeholder Variables
+Variables beginning with `$_` are referred to as *placeholder variables*, and should be used where an assignment is structurally required but the value is unused. This is frequently used for the
+[list intrinsic function](../expressions-and-operators/list.md) and the [foreach statement](../statements/foreach.md) - for example:
+
+* `list($foo, $_, $bar) = baz();` if `baz()` returns a 3-element tuple but the middle element is unused
+* `foreach ($container as $key => $_) { /* ... */ }` when iterating a keyed container and the values are unneeded
 
 ## The Current Instance Variable
 The name `$this` is predefined inside any instance method or constructor when that method is called from within an object context.
