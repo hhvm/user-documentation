@@ -8,7 +8,7 @@ newtype Label<-TEnumClass, TType> = mixed;
 
 class A {}
 class B extends A {}
-enum class G : A {
+enum class G: A {
   A X = new A();
   B Y = new B();
 }

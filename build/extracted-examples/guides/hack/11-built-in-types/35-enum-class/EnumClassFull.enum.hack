@@ -3,7 +3,7 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassFull;
 
-enum class EKeys : IKey {
+enum class EKeys: IKey {
   // here are a default key, but this could be left empty
   Key<string> NAME = new StringKey('NAME');
 }
@@ -15,7 +15,7 @@ abstract class DictBase {
   private dict<string, mixed> $raw_data = dict[];
 
   // generic code written once which enforces type safety
-  public function get<T>(\HH\MemberOf<this::TKeys, Key<T>> $key) : ?T {
+  public function get<T>(\HH\MemberOf<this::TKeys, Key<T>> $key): ?T {
     $name = $key->name();
     $raw_data = idx($this->raw_data, $name);
     // key might not be set

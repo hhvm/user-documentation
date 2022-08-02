@@ -9,13 +9,13 @@ class Box<T> implements IBox {
   public function __construct(public T $data)[] {}
 }
 
-enum class Boxes : IBox {
+enum class Boxes: IBox {
   Box<int> Age = new Box(42);
   Box<string> Color = new Box('red');
   Box<int> Year = new Box(2021);
 }
 
-function get<T>(\HH\MemberOf<Boxes, Box<T>> $box) : T {
+function get<T>(\HH\MemberOf<Boxes, Box<T>> $box): T {
   return $box->data;
 }
 

@@ -16,13 +16,13 @@ Enum classes are syntactically different from [enum types](/hack/built-in-types/
 
 ```EnumClassIntro.hack no-auto-output
 // Enum class where we allow any type
-enum class Random : mixed {
+enum class Random: mixed {
   int X = 42;
   string S = 'foo';
 }
 
 // Enum class that mimics a normal enum (only allowing ints)
-enum class Ints : int {
+enum class Ints: int {
   int A = 0;
   int B = 10;
 }
@@ -33,12 +33,12 @@ enum class Ints : int {
 ```EnumClassIntro.Involved.hack no-auto-output
 // Some class definitions to make a more involved example
 interface IHasName {
-  public function name() : string;
+  public function name(): string;
 }
 
 class HasName implements IHasName {
   public function __construct(private string $name)[] {}
-  public function name() : string {
+  public function name(): string {
     return $this->name;
   }
 }
@@ -51,7 +51,7 @@ class ConstName implements IHasName {
 
 // enum class which base type is the IHasName interface: each enum value
 // can be any subtype of IHasName, here we see HasName and ConstName
-enum class Names : IHasName {
+enum class Names: IHasName {
   HasName Hello = new HasName('hello');
   HasName World = new HasName('world');
   ConstName Bar = new ConstName();
@@ -79,13 +79,13 @@ class Box<T> implements IBox {
   public function __construct(public T $data)[] {}
 }
 
-enum class Boxes : IBox {
+enum class Boxes: IBox {
   Box<int> Age = new Box(42);
   Box<string> Color = new Box('red');
   Box<int> Year = new Box(2021);
 }
 
-function get<T>(\HH\MemberOf<Boxes, Box<T>> $box) : T {
+function get<T>(\HH\MemberOf<Boxes, Box<T>> $box): T {
   return $box->data;
 }
 
@@ -97,11 +97,11 @@ function test0(): void {
 ```
 
 ```EnumClassBox.extends0.hack no-auto-output
-enum class EBase : IBox {
+enum class EBase: IBox {
   Box<int> Age = new Box(42);
 }
 
-enum class EExtend : IBox extends EBase {
+enum class EExtend: IBox extends EBase {
   Box<string> Color = new Box('red');
 }
 ```
@@ -112,26 +112,26 @@ As with ordinary class extension, using the `extends` keyword will create a subt
 Enum classes support multiple inheritance as long as there is no ambiguity in value names, and that each enum class uses the same base type:
 
 ```EnumClassBox.extends1.hack no-auto-output
-enum class E : IBox {
+enum class E: IBox {
   Box<int> Age = new Box(42);
 }
 
-enum class F : IBox {
+enum class F: IBox {
   Box<string> Name = new Box('foo');
 }
 
-enum class X : IBox extends E, F { } // ok, no ambiguity
+enum class X: IBox extends E, F { } // ok, no ambiguity
 
 
-enum class E0 : IBox extends E {
+enum class E0: IBox extends E {
   Box<int> Color = new Box(0);
 }
 
-enum class E1 : IBox extends E {
+enum class E1: IBox extends E {
   Box<string> Color = new Box('red');
 }
 
-// enum class Y : IBox extends E0, E1 { }
+// enum class Y: IBox extends E0, E1 { }
 // type error, Y::Color is declared twice, in E0 and in E1
 // only he name is use for ambiguity
 ```
@@ -140,22 +140,22 @@ enum class E1 : IBox extends E {
 Enum classes support diamond shaped inheritance as long as there is no ambiguity, like in:
 
 ```EnumClassBox.extends2.hack no-auto-output
-enum class DiamondBase : IBox {
+enum class DiamondBase: IBox {
   Box<int> Age = new Box(42);
 }
 
-enum class D1 : IBox extends DiamondBase {
+enum class D1: IBox extends DiamondBase {
   Box<string> Name1 = new Box('foo');
 }
 
-enum class D2 : IBox extends DiamondBase {
+enum class D2: IBox extends DiamondBase {
   Box<string> Name2 = new Box('bar');
 }
 
-enum class D3 : IBox extends D1, D2 {}
+enum class D3: IBox extends D1, D2 {}
 
 <<__EntryPoint>>
-function main() : void {
+function main(): void {
   echo D3::Age->data;
 }
 ```
@@ -176,7 +176,7 @@ Like regular classes, enum classes come in two flavors: concrete and abstract. A
 
 ```EnumClassIntro.Abstract.hack no-auto-output
 // abstract enum class with some abstract members
-abstract enum class AbstractNames : IHasName {
+abstract enum class AbstractNames: IHasName {
   abstract HasName Foo;
   HasName Bar = new HasName('bar');
 }
@@ -187,7 +187,7 @@ You must extend your abstract enum class into a concrete one with implementation
 safely access members defined as abstract.
 
 ```EnumClassIntro.Concrete.hack no-auto-output
-enum class ConcreteNames : IHasName extends AbstractNames {
+enum class ConcreteNames: IHasName extends AbstractNames {
   HasName Foo = new HasName('foo'); // one must provide all the abstract members
   // Bar is inherited from AbstractNames
 }
@@ -238,13 +238,13 @@ function main(): void {
 Let's examine `enum E` v. `enum class EC`.
 
 ```EnumClassEnum.hack no-auto-output
-enum E : int {
+enum E: int {
   A = 42;
 }
 ```
 
 ```EnumClassEC.hack no-auto-output
-enum class EC : int {
+enum class EC: int {
   int A = 42;
 }
 ```
@@ -258,7 +258,7 @@ But if we look at the enum class `EC::A` its type is `HH\MemberOf<EC, int>`. We 
 First, a couple of general Hack definitions:
 
 ```EnumClassFull.definition.hack no-auto-output
-function expect_string(string $str) : void {
+function expect_string(string $str): void {
   echo 'expect_string called with: '.$str."\n";
 }
 
@@ -293,7 +293,7 @@ class StringKey extends Key<string> {
 Now let’s create the base definitions for our dictionary
 
 ```EnumClassFull.enum.hack no-auto-output
-enum class EKeys : IKey {
+enum class EKeys: IKey {
   // here are a default key, but this could be left empty
   Key<string> NAME = new StringKey('NAME');
 }
@@ -305,7 +305,7 @@ abstract class DictBase {
   private dict<string, mixed> $raw_data = dict[];
 
   // generic code written once which enforces type safety
-  public function get<T>(\HH\MemberOf<this::TKeys, Key<T>> $key) : ?T {
+  public function get<T>(\HH\MemberOf<this::TKeys, Key<T>> $key): ?T {
     $name = $key->name();
     $raw_data = idx($this->raw_data, $name);
     // key might not be set
@@ -335,7 +335,7 @@ class MyKeyType extends Key<Foo> {
   }
 }
 
-enum class MyKeys : IKey extends EKeys {
+enum class MyKeys: IKey extends EKeys {
   Key<int> AGE = new IntKey('AGE');
   MyKeyType BLI = new MyKeyType('BLI');
 }
@@ -347,7 +347,7 @@ class MyDict extends DictBase {
 
 ```EnumClassFull.user1.hack
 <<__EntryPoint>>
-function main() : void {
+function main(): void {
   $d = new MyDict();
   $d->set(MyKeys::NAME, 'tony');
   $d->set(MyKeys::BLI, new Foo());

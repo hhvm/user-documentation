@@ -5,7 +5,7 @@ namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClassLabel\EnumCla
 
 class Foo {}
 
-enum class F : Foo {
+enum class F: Foo {
   Foo A = new Foo();
 }
 

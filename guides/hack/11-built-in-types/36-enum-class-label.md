@@ -4,12 +4,12 @@ With [enum types](/hack/built-in-types/enum) and [enum classes](/hack/built-in-t
 Expressions like `E::A` denote the value of `A` in `E`, but the fact that `A` was used to access it is lost.
 
 ```EnumClassLabelIntro.hack no-auto-output
-enum E : int {
+enum E: int {
   A = 42;
   B = 42;
 }
 
-function f(E $value) : void {
+function f(E $value): void {
   switch($value) {
     case E::A: echo "A "; break;
     case E::B: echo "B "; break;
@@ -31,7 +31,7 @@ label is defined. A label is a handle to access the related value. Think of it a
 ```EnumClassLabel.definition.hack no-auto-output
 
 // We are using int here for readability but it works for any type
-enum class E : int {
+enum class E: int {
   int A = 42;
   int B = 42;
 }
@@ -64,12 +64,12 @@ So we can rewrite the earlier example in a more resilient way:
 
 ```EnumClassLabel.example.hack no-auto-output
 
-function full_print(\HH\EnumClass\Label<E, int> $label) : void {
+function full_print(\HH\EnumClass\Label<E, int> $label): void {
   echo E::nameOf($label) . " ";
   echo E::valueOf($label) . "\n";
 }
 
-function partial_print(\HH\MemberOf<E, int> $value) : void {
+function partial_print(\HH\MemberOf<E, int> $value): void {
   echo $value . "\n";
 }
 ```
@@ -89,7 +89,7 @@ When the first argument of a function is a label, we provide an alternative nota
 ```EnumClassLabel.alt.hack no-auto-output
 <<file:__EnableUnstableFeatures('enum_class_label')>>
 
-function set<T>(\HH\EnumClass\Label<E, T> $label, T $data) : void {
+function set<T>(\HH\EnumClass\Label<E, T> $label, T $data): void {
   // setting $data into some storage using $label as a key
 }
 
@@ -110,7 +110,7 @@ Enum class labels can be tested for equality using the `===` operator or a switc
 
 ```EnumClassLabel.equality1.hack no-auto-output
 
-function test_eq(\HH\EnumClass\Label<E, int> $label) : void {
+function test_eq(\HH\EnumClass\Label<E, int> $label): void {
   if ($label === E#A) { echo "label is A\n"; }
   switch ($label) {
     case E#A: break;
@@ -124,7 +124,7 @@ Because the runtime doesn’t have all the typing information available, these t
 ```EnumClassLabel.equality2.hack no-auto-output
 class Foo {}
 
-enum class F : Foo {
+enum class F: Foo {
   Foo A = new Foo();
 }
 
@@ -154,7 +154,7 @@ newtype Label<-TEnumClass, TType> = mixed;
 
 class A {}
 class B extends A {}
-enum class G : A {
+enum class G: A {
   A X = new A();
   B Y = new B();
 }
