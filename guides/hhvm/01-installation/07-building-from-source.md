@@ -6,7 +6,7 @@
 }
 ```
 
-Building from source is advisable generally when you need features that exist in our source that are not in a [package](http://beta.docs.hhvm.com/hhvm/installation/introduction#prebuilt-packages). Otherwise, installing from a package is the easiest and most stable way to get up and running.
+Building from source is advisable generally when you need features that exist in our source that are not in a [package](/hhvm/installation/introduction#prebuilt-packages). Otherwise, installing from a package is the easiest and most stable way to get up and running.
 
 ## Requirements
 
@@ -16,21 +16,12 @@ Building from source is advisable generally when you need features that exist in
   - Sierra or High Sierra
   - Clang from Xcode Command Line Tools
 - Linux:
-  - GCC 5 or GCC 7
+  - GCC 7+
   - we only actively support building on distributions we create binary packages for; your mileage may vary on other systems
 
 We only support building with the bundled OCaml; you may need to uninstall
 (or `brew unlink` on Mac) other ocamlc and ocamlbuild binaries before
 building HHVM.
-
-### GCC 5
-
-If your Linux-based system comes with an earlier GCC, you must build GCC and G++; we [script a minimal build](https://github.com/hhvm/packaging/blob/master/build-deps/build-gcc) for
-several of our binary packages.
-
-HHVM might build with GCC 4.9, however:
- - we are no longer testing this
- - HHVM is [known to trigger optimization bugs in GCC 4.9](https://github.com/facebook/hhvm/issues/8011)
 
 ## Installing Build Dependencies
 
