@@ -5,7 +5,7 @@ namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassFul
 
 use namespace HH\Lib\Str;
 
-function expect_string(string $str) : void {
+function expect_string(string $str): void {
   echo 'expect_string called with: '.$str."\n";
 }
 

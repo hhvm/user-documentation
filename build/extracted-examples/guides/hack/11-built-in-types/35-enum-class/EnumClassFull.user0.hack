@@ -12,7 +12,7 @@ class MyKeyType extends Key<Foo> {
   }
 }
 
-enum class MyKeys : IKey extends EKeys {
+enum class MyKeys: IKey extends EKeys {
   Key<int> AGE = new IntKey('AGE');
   MyKeyType BLI = new MyKeyType('BLI');
 }

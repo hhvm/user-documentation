@@ -1,1 +1,2 @@
-Fatal error: unknown class HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassFull\Key in %s/build/extracted-examples/guides/hack/11-built-in-types/35-enum-class/EnumClassFull.user0.hack on line 8
+
+Fatal error: unknown class HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassFull\Key in %s/EnumClassFull.user0.hack on line 8

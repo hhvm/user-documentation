@@ -3,6 +3,6 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassEnum;
 
-enum E : int {
+enum E: int {
   A = 42;
 }

@@ -4,7 +4,7 @@
 namespace HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\EnumClass\EnumClassFull;
 
 <<__EntryPoint>>
-function main() : void {
+function main(): void {
   \init_docs_autoloader();
 
   $d = new MyDict();
