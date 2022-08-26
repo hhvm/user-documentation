@@ -1,2 +1,0 @@
-
-Fatal error: Undefined interface: HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\AsyncVsAwaitable\Car\Car in %s/car.non-async-impl.hack on line 6

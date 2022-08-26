@@ -77,7 +77,7 @@ final class Guides {
         ],
         'async' => dict[
           'async-vs-awaitable' =>
-            tuple('asynchronous-operations', 'async-vs.-awaitable'),
+            tuple('asynchronous-operations', 'introduction'),
           'awaitables' => tuple('asynchronous-operations', 'awaitables'),
           'exceptions' => tuple('asynchronous-operations', 'exceptions'),
           'extensions' => tuple('asynchronous-operations', 'extensions'),
@@ -88,6 +88,7 @@ final class Guides {
           'await-as-an-expression-spec' => tuple('asynchronous-operations', 'await-as-an-expression'),
           'further-resources' => tuple('asynchronous-operations', 'introduction'),
           'some-basics' => tuple('asynchronous-operations', 'introduction'),
+          'async-vs.-awaitable' => tuple('asynchronous-operations', 'introduction'),
         ],
         'attributes' => dict[
           'special' => tuple('attributes', 'predefined-attributes'),
