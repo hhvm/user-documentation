@@ -1,7 +1,7 @@
 // WARNING: Contains some auto-generated boilerplate code, see:
 // HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks\FilterBase::addBoilerplate
 
-namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Blocks\SyntacticSugar;
+namespace HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\AsyncBlocks\SyntacticSugar;
 
 async function get_int_async(): Awaitable<int> {
   return 4;
