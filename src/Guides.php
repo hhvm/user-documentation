@@ -89,6 +89,7 @@ final class Guides {
           'further-resources' => tuple('asynchronous-operations', 'introduction'),
           'some-basics' => tuple('asynchronous-operations', 'introduction'),
           'async-vs.-awaitable' => tuple('asynchronous-operations', 'introduction'),
+          'blocks' => tuple('asynchronous-operations', 'async-blocks'),
         ],
         'attributes' => dict[
           'special' => tuple('attributes', 'predefined-attributes'),
