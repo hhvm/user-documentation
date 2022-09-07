@@ -42,3 +42,16 @@ $x = 0;
 $y = $x + 1;
 $x++;
 ```
+
+When used as a postfix the condition is evaluated before the variable is incrimented.
+A prefix works inversely.
+```Hack
+    $x = 0;
+    echo($x++);
+```
+This first example results in the output `0`, while the one below results in `1`,
+as the value of x is increased before it is printed.
+```Hack
+    $x = 0;
+    echo(++$x);
+```
