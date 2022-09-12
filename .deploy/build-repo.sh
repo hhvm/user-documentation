@@ -9,7 +9,7 @@ git rev-parse HEAD > DOCSITE_REV
 
 echo "** Building repository"
 set -x
-hhvm --hphp --target hhbc \
+hhvm --hphp \
   -l3 \
   -d hhvm.check_return_type_hints=3 \
   --module src \
