@@ -19,13 +19,12 @@ To use repo authoritative mode, you need to build a repo, and then deploy that r
 To build a repo including all files recursively under `/path/to/root`, invoke HHVM like this:
 
 ```
-hhvm --hphp -t hhbc --input-dir /path/to/root
+hhvm --hphp --input-dir /path/to/root
 ```
 
 Flag | Description
 -----|------------
 `--hphp` | Signals to HHVM that we are doing an offline operation instead of executing Hack code.
-`-t hhbc` | `t` is for target. `hhbc` is for HHVM Bytecode. So the output of the repo will be HHVM bytecode.
 `--input-dir` | The directory containing the source files to compile into the repo.
 
 For a full list of options, see `hhvm --hphp --help`
@@ -35,8 +34,8 @@ For a full list of options, see `hhvm --hphp --help`
 Instead of a directory, you can also pass it an explicit list of filenames to put in the repo or a master file that contains all of the files, one per line, that should be put in the repo. (Keep in mind that the commands below are generating two *separate* repos -- you can't add to or remove from a repo once it's been generated!)
 
 ```
-hhvm --hphp -t hhbc file1.php file2.php
-hhvm --hphp -t hhbc --input-list master-file-list.txt
+hhvm --hphp file1.php file2.php
+hhvm --hphp --input-list master-file-list.txt
 ```
 
 The `master-file-list.txt` should look like this:
@@ -51,7 +50,7 @@ lib/c.php
 ### Specific directories
 
 ```
-hhvm --hphp -t hhbc --module src --module vendor --ffile public/index.php
+hhvm --hphp --module src --module vendor --ffile public/index.php
 ```
 
 Flag | Description
