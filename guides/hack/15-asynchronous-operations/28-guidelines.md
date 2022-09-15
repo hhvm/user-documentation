@@ -493,10 +493,11 @@ function main(): void {
 }
 ```
 
-## Use `join` in Non-async Functions
+## Integrating async and non-async functions
 
-Imagine we are making a call to an `async` function `join_async` from a non-async scope. In order to obtain the desired results, we must
-`join` in order to get the result from an awaitable.
+If you need to call an async function from a non-async function, the best approach is to refactor so that the caller is also async. Sometimes this might need refactoring an unmanageable number of recursive call sites, so an alternative is available - but best avoided:
+
+Imagine we are making a call to an `async` function `join_async` from a non-async scope. If refactoring to an entirely async call stack is not possible, `HH\Asio\join()` can be used to resolve the awaitable:
 
 ```join.hack
 async function join_async(): Awaitable<string> {
@@ -514,7 +515,9 @@ function main(): void {
 }
 ```
 
-This scenario normally occurs in the global scope, but can occur anywhere.
+**THIS IS A COUNTEREXAMPLE**: in real-world code, the entrypoint should be made async instead.
+
+`HH\Asio\join()` is not just a blocking form of `await`: no other Hack code in the current request will be executed until the awaitable you pass to `join()` is completed, blocking the entire request until then.
 
 ## Remember Async Is NOT Multi-threading
 
