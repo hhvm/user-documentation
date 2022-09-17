@@ -1,0 +1,9 @@
+Result when keys present in dict: 
+Dict
+(
+    [key1] => value 1
+)
+Result when keys not present in dict: 
+Dict
+(
+)
