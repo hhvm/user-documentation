@@ -28,5 +28,8 @@
 
   "extensions": [ "pranayagarwal.vscode-hack" ],
   "forwardPorts": [ 80 ],
-  "postCreateCommand": ".deploy/init.sh"
+  "postCreateCommand": ".deploy/init.sh",
+  "hostRequirements": {
+    "memory": "8gb" 
+  }
 }
