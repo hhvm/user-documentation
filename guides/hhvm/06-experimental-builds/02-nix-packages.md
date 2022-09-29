@@ -1,12 +1,10 @@
 ## Overview
 
-The prebuilt nix packages of HHVM are distributed as binary cache of a nix flake. To install HHVM via nix:
+The nix packages of HHVM are distributed as a nix flake along with its binary cache. To install HHVM via nix:
 
 1. Install nix package manager
 2. Configure nix to enable flake and set up binary cache
 3. Install the HHVM package, or build it from source if the binary cache is not available
-
-Currently the nix packages are built and tested on x64 Linux.
 
 ## For NixOS Users
 
@@ -145,7 +143,7 @@ Since HHVM is built with Nix for new HHVM versions only, the `ref` parameter mus
 point to a child commit of
 [21870f6097ac7dea56ea57cc9113bcfd0d1a03d0](https://github.com/facebook/hhvm/commit/21870f6097ac7dea56ea57cc9113bcfd0d1a03d0).
 
-The default package is the HHVM built with gcc. Alternatively you can install HHVM built with clang by prepending `#hhvm_clang` to the `git+https` URL. For example:
+The default HHVM packages are built with gcc. Alternatively you can install HHVM built with clang by prepending `#hhvm_clang` to the `git+https` URL. For example:
 * To install HHVM 4.169.0 built with clang:
     * `nix profile install 'git+https://github.com/facebook/hhvm.git?submodules=1&shallow=1&ref=refs/tags/HHVM-4.169.0#hhvm_clang'`
 
@@ -155,4 +153,3 @@ Also note that the binary cache for a git commit would take hours of time to be
 available. If you are trying to install a recent commit, of which the binary
 cache is not available yet, Nix will build it from source for you automatically,
 otherwise Nix will just download the prebuilt binary.
-
