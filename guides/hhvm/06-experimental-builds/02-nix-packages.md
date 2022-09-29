@@ -23,7 +23,7 @@ environment.systemPackages = [
 
 
 In addition, if you want to build HHVM from source, add the following setting to
-disable sandboxing because HHVM cannot be built in Nix's sandboxing build
+disable sandboxing because HHVM cannot be built in nix's sandboxing build
 environment.
 
 
@@ -79,9 +79,9 @@ configuration for older NixOS might be different.
 
 ## For Linux Users Other Than NixOS
 
-For Linux users other than NixOS, the HHVM Nix package can be installed with the
+For Linux users other than NixOS, the HHVM nix package can be installed with the
 following command if you have a [multi-user installation of
-Nix](https://nixos.org/download.html#nix-install-linux):
+nix](https://nixos.org/download.html#nix-install-linux):
 
 
 ``` bash
@@ -101,7 +101,7 @@ hhvm --version
 
 
 Or if you have a [single-user installation of
-Nix](https://nixos.org/download.html#nix-install-linux):
+nix](https://nixos.org/download.html#nix-install-linux):
 
 
 ``` bash
@@ -118,7 +118,7 @@ nix profile install 'git+https://github.com/facebook/hhvm.git?submodules=1&shall
 hhvm --version
 ```
 
-The above configuration is tested on Nix 2.9.1. The configuration for older Nix
+The above configuration is tested on nix 2.9.1. The configuration for older nix
 might be different.
 
 ## Specifying HHVM Versions
@@ -139,17 +139,17 @@ URL, which can be any git branch or tag. For example:
     * `nix profile install
       'git+https://github.com/facebook/hhvm.git?submodules=1&shallow=1&ref=refs/heads/HHVM-4.169'`
 
-Since HHVM is built with Nix for new HHVM versions only, the `ref` parameter must
+Since HHVM is built with nix for new HHVM versions only, the `ref` parameter must
 point to a child commit of
 [21870f6097ac7dea56ea57cc9113bcfd0d1a03d0](https://github.com/facebook/hhvm/commit/21870f6097ac7dea56ea57cc9113bcfd0d1a03d0).
 
 The default HHVM packages are built with gcc. Alternatively you can install HHVM built with clang by prepending `#hhvm_clang` to the `git+https` URL. For example:
-* To install HHVM 4.169.0 built with clang:
-    * `nix profile install 'git+https://github.com/facebook/hhvm.git?submodules=1&shallow=1&ref=refs/tags/HHVM-4.169.0#hhvm_clang'`
+* To install HHVM nightly version 2022.09.28 built with clang:
+    * `nix profile install 'git+https://github.com/facebook/hhvm.git?submodules=1&shallow=1&ref=refs/tags/nightly-2022.09.28#hhvm_clang'`
 
-The `hhvm_clang` package is available since the commit [7c911c6035bae429157dfa092a600dc171ffb226](https://github.com/facebook/hhvm/commit/7c911c6035bae429157dfa092a600dc171ffb226).
+The `hhvm_clang` package is available since the commit [fa355d19b9330526e200ee614494cf3f306faa02](https://github.com/facebook/hhvm/commit/fa355d19b9330526e200ee614494cf3f306faa02).
 
 Also note that the binary cache for a git commit would take hours of time to be
 available. If you are trying to install a recent commit, of which the binary
-cache is not available yet, Nix will build it from source for you automatically,
-otherwise Nix will just download the prebuilt binary.
+cache is not available yet, nix will build it from source for you automatically,
+otherwise nix will just download the prebuilt binary.
