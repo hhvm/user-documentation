@@ -2,6 +2,7 @@ The following attributes are defined:
 * [__AcceptDisposable](#__acceptdisposable)
 * [__ConsistentConstruct](#__consistentconstruct)
 * [__Deprecated](#__deprecated)
+* [__Docs](#__docs)
 * [__DynamicallyCallable](#__dynamicallycallable)
 * [__DynamicallyConstructible](#__dynamicallyconstructible)
 * [__Enforceable](#__enforceable)
@@ -77,6 +78,25 @@ Every 1/sampling-rate calls (as in, 1/7) to that function will raise a notice at
 (i.e. all calls raise notices). 
 
 To disable runtime notices, use a sampling rate of 0.
+
+## __Docs
+
+Associates a documentation URL with a type.
+
+```Hack
+<<__Docs("http://www.example.com/my_framework")>>
+class MyFrameworkBaseClass {}
+```
+
+The IDE will include this URL when hovering over the
+`MyFrameworkBaseClass` type name.
+
+```Hack
+class MyClass extends MyFrameworkBaseClass {}
+```
+
+Docs URLs are also inherited. Hovering over the `MyClass` type name
+will also show the docs URL.
 
 ## __DynamicallyCallable
 
