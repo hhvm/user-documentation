@@ -6,7 +6,7 @@ We provide a Visual Studio Code workspace file to develop HHVM. To set up the VS
 
 1. Install nix
 2. Checkout HHVM with all submodules: `git clone
-   https://github.com/facebook/hhvm.git --depth 1 --recurse-submodules `
+   https://github.com/facebook/hhvm.git --depth 1 --recurse-submodules`
 3. Open `hhvm.code-workspace` from Visual Studio Code for the gcc toolchain
    - Alternatively, open `clang.code-workspace` for the clang toolchain.
 4. Install extension recommendations
