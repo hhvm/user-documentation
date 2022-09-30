@@ -1,8 +1,15 @@
 We also provide prebuilt universal rpm packages, which do not depend on system libraries and are expected to run on Fedora, RHEL, CentOS or any other Linux distributions with `rpm` package manager.
 
-The packages are built in GitHub Actions and uploaded as build artifacts, and can be found from the [GitHub Actions page of Nix CI](https://github.com/facebook/hhvm/actions/workflows/nix.yml). For example, [search the branch `nightly-2022.09.29`](https://github.com/facebook/hhvm/actions/workflows/nix.yml?query=branch%3Anightly-2022.09.29+event%3Apush) to find the workflow run for the nightly version 2022.09.29. Then, in [the workflow run summary page](https://github.com/facebook/hhvm/actions/runs/3148241495), you can download `bundle.rpm`, which can be then installed with the `rpm` tool:
+The packages are built in GitHub Actions and uploaded as build artifacts, and can be found from the [GitHub Actions page of Nix CI](https://github.com/facebook/hhvm/actions/workflows/nix.yml). For example, [search the branch `nightly-2022.09.30`](https://github.com/facebook/hhvm/actions/workflows/nix.yml?query=branch%3Anightly-2022.09.30+event%3Apush) to find the workflow run for the nightly version 2022.09.30. Then, in [the workflow run summary page](https://github.com/facebook/hhvm/actions/runs/3155903519), you can download either `hhvm.rpm`, the HHVM package built with gcc, or `hhvm_clang.rpm`, the HHVM package built with clang, which can be then installed with the `rpm` tool:
+
+``` bash
+sudo rpm -i hhvm.rpm
 ```
-sudo rpm -i bundle.rpm
+
+or 
+
+``` bash
+sudo rpm -i hhvm_clang.rpm
 ```
 
 ## Known Issue
