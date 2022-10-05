@@ -6,7 +6,7 @@ We also provide prebuilt universal deb packages, which do not depend on system l
 apt-get update &&
 apt-get install --yes software-properties-common apt-transport-https &&
 apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94 &&
-add-apt-repository 'deb https://dl.hhvm.com/universal lts-release main' &&
+add-apt-repository 'deb https://dl.hhvm.com/universal release main' &&
 apt-get update &&
 apt-get install --yes hhvm &&
 hhvm --version
