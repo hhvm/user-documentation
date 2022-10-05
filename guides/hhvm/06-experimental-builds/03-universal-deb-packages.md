@@ -1,6 +1,6 @@
 We also provide prebuilt universal deb packages, which do not depend on system libraries and are expected to run on any version of Debian, Ubuntu or any other Linux distributions with `apt` package manager.
 
-## Obtaining The Latest LTS Version
+## Obtaining The Latest Release Version
 
 ``` bash
 apt-get update &&
