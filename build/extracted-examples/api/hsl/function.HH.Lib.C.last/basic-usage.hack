@@ -15,6 +15,6 @@ async function _main(): Awaitable<void> {
 
   $empty_traversable = vec[];
   $last_element = C\last($empty_traversable);
-  $last_element_as_string = $last_element ? $last_element : "null";
+  $last_element_as_string = $last_element ?? "null";
   echo "Last element in empty traversable: $last_element_as_string";
 }
