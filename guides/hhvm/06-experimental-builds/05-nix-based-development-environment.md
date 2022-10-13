@@ -47,7 +47,7 @@ To incrementally edit the source and build HHVM:
    variables.
    - Alternatively, to enter the development shell with clang,
    run `nix-shell shell_clang.nix` or `nix develop "git+file://$(pwd)?submodules=1&shallow=1#clang"`
-4. In the development shell, run `cmake -C "$CMAKE_INIT_CACHE" -Bbuild`
+4. In the development shell, run `cmake -C "$CMAKE_INIT_CACHE" -B_build`
    to configure HHVM.
 5. In the development shell, run `cd build && make` to build HHVM.
 6. Make some changes to the source code.
