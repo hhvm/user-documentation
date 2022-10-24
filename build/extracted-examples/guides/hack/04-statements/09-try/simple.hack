@@ -3,6 +3,8 @@
 
 namespace HHVM\UserDocumentation\Guides\Hack\Statements\Try\Simple;
 
+use namespace HH\Lib\Math;
+
 function do_it(int $x, int $y): void {
   try {
     $result = $x / $y;
