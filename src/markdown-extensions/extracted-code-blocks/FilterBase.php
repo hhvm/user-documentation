@@ -11,7 +11,7 @@
 
 namespace HHVM\UserDocumentation\MarkdownExt\ExtractedCodeBlocks;
 
-use namespace HH\Lib\{C, Dict, Keyset, Regex, Str, Vec, Math};
+use namespace HH\Lib\{C, Dict, Keyset, Math, Regex, Str, Vec};
 use namespace Facebook\{Markdown, Markdown\Blocks};
 use namespace HHVM\UserDocumentation\MarkdownExt;
 use type HHVM\UserDocumentation\BuildPaths;
@@ -67,10 +67,10 @@ abstract class FilterBase extends Markdown\RenderFilter {
     'C',
     'Dict',
     'Keyset',
+    'Math',
     'Regex',
     'Str',
     'Vec',
-    'Math',
   ];
 
   const dict<string, string> PATHS = dict[
