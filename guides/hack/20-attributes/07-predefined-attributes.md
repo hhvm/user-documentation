@@ -255,6 +255,9 @@ You can clear the cache with `HH\clear_static_memoization`. This should only be 
 - the component being tested is meant to be immutable/idempotent for the entire request
 - the test needs to cover multiple initial states, where only one would truly be reachable in a single request
 
+NOTE: Putting Memoize attribute on a function will cause it to bind to the declaring class. Any uses of static:: constructs to retrieve
+definitions from subclasses will not work and can cause unexpected results.
+
 ### Exceptions
 
 Thrown exceptions are not memoized, showing by the increasing counter in this
