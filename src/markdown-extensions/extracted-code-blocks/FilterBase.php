@@ -67,6 +67,7 @@ abstract class FilterBase extends Markdown\RenderFilter {
     'C',
     'Dict',
     'Keyset',
+    'Math',
     'Regex',
     'Str',
     'Vec',
