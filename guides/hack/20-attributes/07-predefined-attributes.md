@@ -5,6 +5,7 @@ The following attributes are defined:
 * [__Docs](#__docs)
 * [__DynamicallyCallable](#__dynamicallycallable)
 * [__DynamicallyConstructible](#__dynamicallyconstructible)
+* [__EnableMethodTraitDiamond](#__enablemethodtraitdiamond)
 * [__Enforceable](#__enforceable)
 * [__EntryPoint](#__entrypoint)
 * [__Explicit](#__explicit)
@@ -109,6 +110,13 @@ configuration) on dynamic calls to functions or methods without this attribute.
 Allows this class to be instantiated dynamically, based on a string of
 its name. HHVM will warn on error (depending on configuration) on
 dynamic instantiations of classes without this attribute.
+
+## __EnableMethodTraitDiamond
+
+This attribute can be applied to a class or trait to enable resolution of traits used along multiple paths.
+
+See [using a trait](../traits-and-interfaces/using-a-trait.md) for an example of its use.
+
 
 ## __Enforceable
 

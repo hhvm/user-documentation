@@ -134,7 +134,38 @@ function main() : void {
 
 For methods, a rule of thumb is "traits provide a method implementation if the class itself does not".  If the class implements a method `m`, then traits used by the class can define methods named `m` provided that their interfaces are compatible (more precisely _super types_ of the type of the method defined in the class.  At runtime methods inserted by traits are ignored, and dispatch selects the method defined in the class.
 
-If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.
+If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.  
+
+Traits inherited along multiple paths (aka. "diamond traits") are rejected by Hack and HHVM whenever they define methods.  However the experimental `<<__EnableMethodTraitDiamond>>` attribute can be specified on the base class (or trait) to enable support for diamond traits that define methods, provided that method resolution remains unambiguous.  For instance, in the example below the invocation of `(new C())->foo()` unambiguously  resolves to the method `foo` defined in trait `T`:
+
+
+```MethodTraitDiamond.hack
+<<file:__EnableUnstableFeatures('method_trait_diamond')>>
+
+trait T {
+  public function foo(): void { echo "I am T"; }
+}
+
+trait T1 { use T; }
+trait T2 { use T; }
+
+<<__EnableMethodTraitDiamond>>
+class C {
+  use T1, T2;
+}
+
+<<__EntryPoint>>
+function main() : void {
+  (new C())->foo();
+}
+```.ini
+hhvm.diamond_trait_methods=1
+```
+
+Since the `<<__EnableMethodTraitDiamond>>` attribute is specified on the class `C`, the example is accepted by Hack and HHVM.
+
+_Remark_: a diamond trait cannot define properties if it is used by a class via the `<<__EnableMethodTraitDiamond>>` attribute.
+
 
 For constants, constants inherited from the parent class take precedence over constants inherited from traits.
 
