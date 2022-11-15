@@ -1,0 +1,2 @@
+
+Fatal error: Cannot enable unstable feature: 'require_class' is unstable and unstable features are disabled in %s/requireclassgood.hack on line 6
