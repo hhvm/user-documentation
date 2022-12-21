@@ -37,7 +37,7 @@ final class SASSDependenciesBuildStep extends BuildStep {
       'url' =>
         'https://github.com/sass/dart-sass/releases/download/1.47.0/dart-sass-1.47.0-linux-x64.tar.gz',
       'sha256' =>
-        'b2bb1da7d97b6f0fb064c7bea552c39371d0d95d7a445c04e6b923a4ce128dfc',
+        '8e736455d56fb36f01904c5f24df0f98392eca090a1f2b666ac0985dd50d47c5',
     );
   }
 
