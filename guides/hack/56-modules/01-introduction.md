@@ -1,4 +1,5 @@
 Modules are an experimental feature for organizing code and separating your internal and external APIs. Modules are collections of Hack files that share an identity or utility. 
+Please note that this guide is currently a work in progress, and may be missing details as we continue to work on this experimental feature. 
 
 # Feature Overview 
 Here, we give an introduction to the feature. We'll go into specific details and semantics in the next few sections. 
@@ -46,3 +47,4 @@ public function bar_test(): void {
 }
 ```
 
+We'll go into greater detail on each of these features in the following sections. 
