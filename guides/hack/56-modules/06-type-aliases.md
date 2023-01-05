@@ -35,7 +35,7 @@ A module-level type alias is opaque outside of the module it's defined in, and t
 module newtype FooModule = FooInternal; // ok 
 module newtype FooModuleErr as FooInternal = FooInternal; // error, FooInternal is an internal type, cannot be used as a constraint 
 ```
-Since the entire point of module newtypes is to create an interface surrounding a module boundary, you cannot mark module newtypes themselves internal. 
+Since the purpose of module newtypes is to create an interface surrounding a module boundary, you cannot mark module newtypes themselves internal. 
 
 ```hack
 internal module newtype FooModuleErr2 = int; // Parse error
