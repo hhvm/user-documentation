@@ -6,7 +6,7 @@ You can define a new module with the `new module` keywords.
 ```hack
 new module foo {}
 ```
-Modules do not share a namespace with other symbols. Module names can contain periods `.` to help delineate between directories or logical units. Periods in module names do not currently have any semantic meaning, but this may change with new versions of Hack as we expand the functionality fo the feature. 
+Modules do not share a namespace with other symbols. Module names can contain periods `.` to help delineate between directories or logical units. Periods in module names do not currently have any semantic meaning.
 ```hack
 new module foo {}
 new module foo.bar {}
