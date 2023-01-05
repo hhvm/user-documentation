@@ -33,7 +33,7 @@ internal class FooInternal {
 }
 internal function foo_fun(): void {}
 ```
-In general, an internal symbol cannot be accessed outside of the module its defined in. 
+An internal symbol cannot be accessed outside of the module its defined in. 
 
 
 ```hack
@@ -43,5 +43,3 @@ public function bar_test(): void {
   $x = new FooInternal(); // error! FooInternal is internal to module foo. 
 }
 ```
-
-We'll go into greater detail on each of these features in the following sections. 

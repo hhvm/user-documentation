@@ -1,7 +1,3 @@
-This section details some advanced semantics and behaviors of modules.
-
-## Closures and function pointers
-
 Within a module, you can create a pointer to an internal function and pass it anywhere for use. Pointers to internal functions can only be created from within a module, but can be called and acccessed from anywhere.
 ```hack
 module foo;

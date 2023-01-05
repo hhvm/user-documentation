@@ -1,7 +1,7 @@
 # Module level visibility and inheritance
 
 ## Inheriting methods and properties
-This section discusses the relationships between Hack's object hierarchy and `internal`. In general, override rules for internal class members are consistent with that of private and protected: you can only override a class member with a visibility that's at least as visible as the previous. 
+In general, override rules for internal class members are consistent with that of private and protected: you can only override a class member with a visibility that's at least as visible as the previous. 
 
 ```hack
 module foo;
@@ -49,8 +49,7 @@ public class Bar {}
 internal class Foo extends Bar {}
 public class Baz extends Foo {}
 ```
-You can think of this behavior as freely choosing which symbols in your module to export to your public API. Since the visibility of a toplevel entity only affects how it is statically referenced, no inheritance rules need to be applied when overriding them. Note that even if the toplevel symbol visibilities do not need to match any relationship, the individual members of those symbols do need to meet inheritance rules as discussed previously. 
-
+You can think of this behavior as freely choosing which symbols in your module to export to your public API. Since the visibility of a toplevel entity only affects how it is statically referenced, no inheritance rules need to be applied when overriding them. 
 
 You cannot, however, extend an internal class, implement an internal interface, or use an internal trait from a different module.
 ```hack

@@ -21,7 +21,7 @@ public class Bar {
 
 
 ## Public traits
-Since public traits have "copy-paste" behavior in that their implementations can be copied to any other module, these traits must be treated as if they are outside of any module for safety. Therefore, public traits cannot access any internal symbols or implementations from the module they are defined in. 
+Since public traits by nature can have their implementations copied to any class in any other module, they leak internal implementations to the public. Therefore, public traits cannot access any internal symbols or implementations from the module they are defined in. You can think of public traits as not belonging to any specific module, even if they are defined within one. 
 
 ```hack
 module foo;
@@ -34,11 +34,11 @@ public trait TBar {
     }
 }
 ```
-Public traits also cannot have internal members, as they may be used by classes outside of any module. 
+Public traits also cannot have internal methods or properties, as they may be used by classes outside of any module. 
 
 ```hack
 
 public trait TBar {
-    internal function foo(): void {} // error, public traits cannot have internal members
+    internal function foo(): void {} // error, public traits cannot have internal methods or properties
 }
 ```
