@@ -1,7 +1,7 @@
 Type aliases have special rules when it comes to internal types depending on which kind of type alias is used. 
 
 ## Internal type aliases
-An opaque or normal type alias can be marked internal. Just as with classes, this means that the type can only be referenced from within the module.
+A type alias declared with `type` can be marked internal. Just as with classes, this means that the type can only be referenced from within the module.
 
 ```hack
 module foo;
