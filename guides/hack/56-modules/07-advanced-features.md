@@ -41,7 +41,7 @@ public function test(): void {
 }
 ```
 
-However, calling a function via string invocatino must respect module boundaries. That is, if you try to call a function from outside of the current module using a string invocation, the runtime will throw an error. (The typechecker already bans this type of dynamic behavior).
+However, calling a function via string invocation must respect module boundaries. That is, if you try to call a function from outside of the current module using a string invocation, the runtime will throw an error. (The typechecker already bans this type of dynamic behavior).
 
 ```hack
 module bar; 
