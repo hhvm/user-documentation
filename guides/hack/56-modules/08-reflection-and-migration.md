@@ -1,4 +1,4 @@
-# Reflection
+## Reflection
 
 You can reflect on the module of a class or function using its corresponding methods.
 
@@ -14,7 +14,7 @@ ReflectionClass::isInternalToModule()
 ReflectionFunctionAbstract::isInternalToModule()
 ```
 
-# Migration and <<__SoftInternal>>
+## Migration and <<__SoftInternal>>
 When migrating existing code to use internal, you can use the <<__SoftInternal>> attribute to help detect dynamic usages of the code outside of the module. 
 Internal symbols with <<__SoftInternal>> will raise a warning in HHVM instead of an exception.
 

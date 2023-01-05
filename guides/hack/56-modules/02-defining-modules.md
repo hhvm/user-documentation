@@ -1,4 +1,4 @@
-# Defining modules
+## Defining modules
 You can define a module with the `new module` syntax. A module, just like any other toplevel entity (classes, functions, etc), can have at most one definition. 
 
 ```hack

@@ -13,7 +13,7 @@ internal newtype FooOpaque2 as Foo = Foo;
 
 Internal newtypes can also be constrained by other internal types, since they can only be used from within the module.
 
-### Public Opaque type aliases
+## Public Opaque type aliases
 Since public opaque type aliases hide their implementations from users outside of the current file, you can implement them with internal types. The opaque type alias acts as an empty interface for the internal type. You cannot, however, constrain them with an internal type, since a public user would not know what type it's being constrained by.
 
 ```hack

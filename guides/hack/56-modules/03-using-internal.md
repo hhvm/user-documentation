@@ -1,4 +1,4 @@
-# Internal and module level visibility
+## Internal and module level visibility
 One goal of using modules is to separate a code unit's public and private APIs. If a file is part of a module, its toplevel functions, classes, interfaces, traits, enums, and typedefs can be marked `internal`. An internal toplevel symbol cannot be referenced outside of its module. If a symbol is not internal, it is `public`, and it's part of the public API of the module. You can optionally use the `public` keyword on toplevel symbols to denote them as public. 
 
 ```hack
@@ -62,7 +62,7 @@ function test(IFoo $x): void {
 We will go over the inheritance and override rules in a different section.
 
 
-### Referencing internal symbols in your public API
+## Referencing internal symbols in your public API
 Public symbols within your module generally cannot reference internal symbols directly. 
 
 ```hack
