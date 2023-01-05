@@ -6,7 +6,7 @@ An opaque or normal type alias can be marked internal. Just as with classes, thi
 ```hack
 module foo;
 internal class Foo {}
-interanal type FooInternal = Foo;
+internal type FooInternal = Foo;
 internal newtype FooOpaque = FooInternal;
 internal newtype FooOpaque2 as Foo = Foo; 
 ```
