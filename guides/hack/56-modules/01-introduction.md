@@ -1,5 +1,4 @@
 Modules are an experimental feature for organizing code and separating your internal and external APIs. Modules are collections of Hack files that share an identity or utility. 
-Please note that this guide is currently a work in progress, and may be missing details as we continue to work on this experimental feature. 
 
 
 ## Module definitions
