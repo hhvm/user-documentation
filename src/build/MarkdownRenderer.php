@@ -11,7 +11,6 @@
 
 namespace HHVM\UserDocumentation;
 
-use namespace HH\Lib\C;
 use namespace Facebook\Markdown;
 
 final class MarkdownRenderer {
