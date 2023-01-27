@@ -19,7 +19,7 @@ jobs:
         hhvm: [ '4.164' ]
     runs-on: ${{matrix.os}}-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Fetch docker images
         run: |
           docker pull hhvm/hhvm:${{matrix.hhvm}}-latest
@@ -48,7 +48,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: download-tar
         name: Set up cache for Docker image
         uses: actions/cache@v3
