@@ -1,3 +1,0 @@
-File "/home/example/readonly_functions.hack", line 9, characters 5-19:
-This expression is readonly, its members cannot be modified (Parsing[1002])
-

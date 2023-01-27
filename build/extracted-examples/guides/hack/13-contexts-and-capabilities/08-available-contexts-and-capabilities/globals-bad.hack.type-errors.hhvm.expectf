@@ -1,1 +1,0 @@
-Fatal error: Reading static properties requires the capability ReadGlobals, which is not provided by the context. Add the context `[read_globals]` after the function parameter list (or amend an existing context with a new comma delineated entry `read_globals`). in %s/globals-bad.hack.type-errors on line 11

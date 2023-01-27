@@ -1,9 +1,0 @@
-
-Fatal error: Uncaught exception 'OutOfBoundsException' with message 'Integer key 2 is out of bounds' in %s/missing-key.hack:13
-Stack trace:
-#0 %s/missing-key.hack(13): HH\Pair->at()
-#1 (): HHVM\UserDocumentation\Api\Hack\ClassHHPairMethodAt\MissingKey\_main()
-#2 (): Closure$__SystemLib\enter_async_entry_point()
-#3 (): HH\Asio\join()
-#4 (): __SystemLib\enter_async_entry_point()
-#5 {main}

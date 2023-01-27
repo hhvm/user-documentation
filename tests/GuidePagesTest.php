@@ -77,7 +77,7 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
 
     expect($body)->toContainSubstring('highlight');
     expect($body)->toContainSubstring(
-      'namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;',
+      'namespace NS1',
     );
   }
 

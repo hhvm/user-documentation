@@ -1,5 +1,0 @@
-File "/home/example/readonly_closure_call2.hack", line 11, characters 5-17:
-This function is readonly, so it must be marked readonly at declaration time to be called. (Typing[4428])
-  File "/home/example/readonly_closure_call2.hack", line 7, characters 3-18:
-  Did you mean to annotate this typehint as a (readonly function(): T)?
-

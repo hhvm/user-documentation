@@ -1,5 +1,0 @@
-File "%s/new-reify.hack", line 18, characters 5-5:
-A newable type argument must be a concrete class or a newable type parameter. (Typing[4307])
-  File "%s/new-reify.hack", line 12, characters 32-32:
-  Type parameter `T` was declared `__Newable` here
-

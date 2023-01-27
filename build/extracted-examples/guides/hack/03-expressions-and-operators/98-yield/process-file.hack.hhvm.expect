@@ -1,5 +1,0 @@
->A Hack program is made up of a well-formed series of source *tokens* <
->(such as user-defined names, keywords, operators, punctuators, and literals). <
->To avoid ambiguity or to make source code more readable, in a source file, <
->white space characters can be placed before the first token, after the last token, <
->and between any two adjacent tokens. <

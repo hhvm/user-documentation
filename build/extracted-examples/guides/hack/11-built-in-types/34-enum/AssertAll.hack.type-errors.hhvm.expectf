@@ -1,7 +1,0 @@
-
-Fatal error: Uncaught exception 'UnexpectedValueException' with message '16 is not a valid value for HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Enum\AssertAll\Bits' in %s/AssertAll.hack.type-errors:19
-Stack trace:
-#0 (): HH\BuiltinEnum::assert()
-#1 %s/AssertAll.hack.type-errors(19): HH\BuiltinEnum::assertAll()
-#2 (): HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Enum\AssertAll\main()
-#3 {main}

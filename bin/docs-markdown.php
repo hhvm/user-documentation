@@ -20,6 +20,5 @@ function cli_markdown_render(): string {
   return (new MarkdownRenderer())->renderMarkdownToHTML(
     $file,
     \file_get_contents($file),
-    keyset[],
   );
 }

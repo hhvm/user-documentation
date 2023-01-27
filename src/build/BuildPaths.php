@@ -42,8 +42,6 @@ abstract final class BuildPaths {
   const string EXAMPLES_EXTRACT_DIR =
     self::BUILD_ROOT_DIR.'/extracted-examples';
   const string API_EXAMPLES_EXTRACT_DIR = self::EXAMPLES_EXTRACT_DIR.'/api';
-  const string GUIDES_EXAMPLES_EXTRACT_DIR =
-    self::EXAMPLES_EXTRACT_DIR.'/guides';
 
   const string GUIDES_MARKDOWN = LocalConfig::ROOT.'/guides';
   const string GUIDES_GENERATED_MARKDOWN =

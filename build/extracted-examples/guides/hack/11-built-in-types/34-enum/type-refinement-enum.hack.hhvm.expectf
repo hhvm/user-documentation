@@ -1,4 +1,0 @@
-
-Fatal error: Uncaught exception 'TypeAssertionException' with message 'Expected HHVM\UserDocumentation\Guides\Hack\BuiltInTypes\Enum\TypeRefinementEnum\MyEnum, got int' in %s/type-refinement-enum.hack:18
-Stack trace:
-#0 {main}

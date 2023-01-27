@@ -1,9 +1,0 @@
-
-Fatal error: Uncaught exception 'InvalidArgumentException' with message 'Only integer values and string values may be used with Sets' in %s/nonempty-exception.hack:11
-Stack trace:
-#0 %s/nonempty-exception.hack(11): HH\Set->zip()
-#1 (): HHVM\UserDocumentation\Api\Hack\ClassHHSetMethodZip\NonemptyException\_main()
-#2 (): Closure$__SystemLib\enter_async_entry_point()
-#3 (): HH\Asio\join()
-#4 (): __SystemLib\enter_async_entry_point()
-#5 {main}

@@ -1,5 +1,0 @@
-File "/home/example/readonly_methods.hack", line 18, characters 3-4:
-This expression is readonly, so it can only call readonly methods (Typing[4413])
-  File "/home/example/readonly_methods.hack", line 12, characters 19-25:
-  This method is not readonly
-
