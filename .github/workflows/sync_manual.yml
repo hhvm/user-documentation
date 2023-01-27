@@ -1,9 +1,12 @@
 name: Update guides/hack from facebook/hhvm repo
 
 on:
+  push:
   schedule:
-    # On the hour, every hour.
-    - cron: '0 * * * *'
+    # Fifteen minutes past the hour, every hour.
+    # (GitHub actions are heavily used at o'clock, so arbitrarily
+    # choose another time.)
+    - cron: '15 * * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,13 +15,13 @@ jobs:
         run: wget https://github.com/facebook/hhvm/archive/refs/heads/master.zip
 
       - name: Unzip
-        run: unzip -q hhvm-master.zip
+        run: unzip -q master.zip
 
       - name: Remove old copy of Hack guides
         run: rm -r guides/hack
 
       - name: Use the latest copy of the manual from facebook/hhvm instead
-        run: cp -r hhvm-master/hphp/hack/manual/hack guides
+        run: cp -r master/hphp/hack/manual/hack guides
 
       - name: Create a commit
         uses: stefanzweifel/git-auto-commit-action@v4
