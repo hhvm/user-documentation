@@ -1,0 +1,26 @@
+name: Update guides/hack from facebook/hhvm repo
+
+on:
+  schedule:
+    # On the hour, every hour.
+    - cron: '0 * * * *'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the latest facebook/hhvm
+        run: wget https://github.com/facebook/hhvm/archive/refs/heads/master.zip
+
+      - name: Unzip
+        run: unzip -q hhvm-master.zip
+
+      - name: Remove old copy of Hack guides
+        run: rm -r guides/hack
+
+      - name: Use the latest copy of the manual from facebook/hhvm instead
+        run: cp -r hhvm-master/hphp/hack/manual/hack guides
+
+      - name: Create a commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update guides/hack from HHVM repostory
