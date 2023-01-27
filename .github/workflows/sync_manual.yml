@@ -29,6 +29,9 @@ jobs:
       - name: Use the latest copy of the manual from facebook/hhvm instead
         run: cp -r hhvm-master/hphp/hack/manual/hack guides
 
+      - name: Clean up
+        run: rm -r hhvm-master master.zip
+
       - name: Create a commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
