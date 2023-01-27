@@ -11,6 +11,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout user-documentation
+        uses: actions/checkout@v3
+
       - name: Download the latest facebook/hhvm
         run: wget https://github.com/facebook/hhvm/archive/refs/heads/master.zip
 
