@@ -10,7 +10,7 @@ The website has three content sections:
   site [includes
   examples](https://github.com/hhvm/user-documentation/tree/main/api-examples)
   for each API
-  
+
 ## File Naming Conventions
 
 A guide is a folder with a numeric prefix:

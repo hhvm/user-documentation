@@ -12,7 +12,7 @@ same awaitable twice **will not** execute the code twice. For example,
 while the result of both `await`s below is `42`, the `print()` call (and the
 `return`) only happen once:
 
-```await-twice.hack
+```Hack
 $x = async { print("Hello, world\n"); return 42; };
 \var_dump(await $x);
 \var_dump(await $x);
@@ -29,13 +29,17 @@ need to concern ourselves with their implementation details. `Awaitable` is the 
 The type returned from an async function is `Awaitable<T>`, where `T` is the final result type (e.g., `int`) of the awaited value.
 
 ```Hack
-async function foo(): Awaitable<int> { ... }
+async function foo(): Awaitable<int> {
+  throw new Exception('unimplemented');
+}
 
-$x = foo();         // $x will be an Awaitable<int>
-$x = await foo();   // $x will be an int
+async function demo(): Awaitable<void> {
+  $x = foo();         // $x will be an Awaitable<int>
+  $x = await foo();   // $x will be an int
+}
 ```
 
-```awaitable-return.hack
+```Hack
 async function f(): Awaitable<int> {
   return 2;
 }
@@ -47,7 +51,7 @@ async function f(): Awaitable<int> {
 
 <<__EntryPoint>>
 function join_main(): void {
-  \var_dump(\HH\Asio\join(f()));
+  var_dump(\HH\Asio\join(f()));
 }
 ```
 
@@ -66,7 +70,7 @@ such as a `main` block, we will need to use `join`, as will be shown below.
 
 Many times, we will `await` on one `Awaitable`, get the result, and move on. For example:
 
-```single-awaitable.hack
+```Hack
 async function foo(): Awaitable<int> {
   return 3;
 }
@@ -75,7 +79,7 @@ async function foo(): Awaitable<int> {
 async function single_awaitable_main(): Awaitable<void> {
   $aw = foo(); // awaitable of type Awaitable<int>
   $result = await $aw; // an int after $aw completes
-  \var_dump($result);
+  var_dump($result);
 }
 ```
 
@@ -88,7 +92,7 @@ Here we are using one of the library helper-functions in order to batch a bunch 
 * `HH\Lib\Vec\from_async`: vec of awaitables with consecutive integer keys
 * `HH\Lib\Dict\from_async`: dict of awaitables with integer or string keys
 
-```multiple-awaitables.hack
+```Hack
 async function quads(float $n): Awaitable<float> {
   return $n * 4.0;
 }
@@ -110,7 +114,7 @@ takes an `Awaitable` and blocks until it resolves to a result.
 
 This means that invocations of async functions from the top-level scope cannot be awaited, and must be joined.
 
-```join.hack
+```Hack
 async function get_raw(string $url): Awaitable<string> {
   return await \HH\Asio\curl_exec($url);
 }

@@ -73,12 +73,10 @@ The untyped function will return all fields as either a Hack `string` or a Hack 
 
 Here is a simple example that shows how to get a user name from a database using this extension:
 
-```async-mysql.hack
-use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
-
-async function get_connection(): Awaitable<\AsyncMysqlConnection> {
+```Hack no-extract
+async function get_connection(): Awaitable<AsyncMysqlConnection> {
   // Get a connection pool with default options
-  $pool = new \AsyncMysqlConnectionPool(darray[]);
+  $pool = new AsyncMysqlConnectionPool(darray[]);
   // Change credentials to something that works in order to test this code
   return await $pool->connect(
     CI::$host,
@@ -90,7 +88,7 @@ async function get_connection(): Awaitable<\AsyncMysqlConnection> {
 }
 
 async function fetch_user_name(
-  \AsyncMysqlConnection $conn,
+  AsyncMysqlConnection $conn,
   int $user_id,
 ): Awaitable<?string> {
   // Your table and column may differ, of course
@@ -107,7 +105,7 @@ async function fetch_user_name(
 }
 
 async function get_user_info(
-  \AsyncMysqlConnection $conn,
+  AsyncMysqlConnection $conn,
   string $user,
 ): Awaitable<Vector<Map<string, ?string>>> {
   $result = await $conn->queryf(
@@ -125,22 +123,12 @@ async function async_mysql_tutorial(): Awaitable<void> {
   $conn = await get_connection();
   if ($conn !== null) {
     $result = await fetch_user_name($conn, 2);
-    \var_dump($result);
+    var_dump($result);
     $info = await get_user_info($conn, 'Fred Emmott');
-    \var_dump($info is vec<_>);
-    \var_dump($info[0] is dict<_, _>);
+    var_dump($info is vec<_>);
+    var_dump($info[0] is dict<_, _>);
   }
 }
-```.example.hhvm.out
-string(11) "Fred Emmott"
-bool(true)
-bool(true)
-```.hhvm.expectf
-string(%d) "%s"
-bool(true)
-bool(true)
-```.skipif
-await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```
 
 ### Connection Pools
@@ -151,16 +139,14 @@ does support connection pooling.
 The async MySQL extension provides a mechanism to pool connection objects so we don't have to create a new connection every time we
 want to make a query. The class is [`AsyncMysqlConnectionPool`](../reference/class/AsyncMysqlConnectionPool/) and one can be created like this:
 
-```async-mysql-connection-pool.hack
-use \Hack\UserDocumentation\API\Examples\AsyncMysql\ConnectionInfo as CI;
-
-function get_pool(): \AsyncMysqlConnectionPool {
-  return new \AsyncMysqlConnectionPool(
+```hack no-extract
+function get_pool(): AsyncMysqlConnectionPool {
+  return new AsyncMysqlConnectionPool(
     darray['pool_connection_limit' => 100],
   ); // See API for more pool options
 }
 
-async function get_connection(): Awaitable<\AsyncMysqlConnection> {
+async function get_connection(): Awaitable<AsyncMysqlConnection> {
   $pool = get_pool();
   $conn = await $pool->connect(
     CI::$host,
@@ -175,13 +161,8 @@ async function get_connection(): Awaitable<\AsyncMysqlConnection> {
 <<__EntryPoint>>
 async function run(): Awaitable<void> {
   $conn = await get_connection();
-  \var_dump($conn);
+  var_dump($conn);
 }
-```.hhvm.expect
-object(AsyncMysqlConnection) (0) {
-}
-```.skipif
-await \Hack\UserDocumentation\API\Examples\AsyncMysql\skipif_async();
 ```
 
 It is ***highly recommended*** that connection pools are used for MySQL connections; if for some reason we really need one, single asynchronous
@@ -202,15 +183,15 @@ we can use the `async` versions of the core memcached protocol methods like [`ad
 
 Here is a simple example showing how one might get a user name from memcached:
 
-```async-mcrouter.hack
-function get_mcrouter_object(): \MCRouter {
+```hack no-extract
+function get_mcrouter_object(): MCRouter {
   $servers = Vector {\getenv('HHVM_TEST_MCROUTER')};
-  $mc = \MCRouter::createSimple($servers);
+  $mc = MCRouter::createSimple($servers);
   return $mc;
 }
 
 async function add_user_name(
-  \MCRouter $mcr,
+  MCRouter $mcr,
   int $id,
   string $value,
 ): Awaitable<void> {
@@ -221,7 +202,7 @@ async function add_user_name(
 async function get_user_name(\MCRouter $mcr, int $user_id): Awaitable<string> {
   $key = 'name:'.$user_id;
   try {
-    $res = await \HH\Asio\wrap($mcr->get($key));
+    $res = await HH\Asio\wrap($mcr->get($key));
     if ($res->isSucceeded()) {
       return $res->getResult();
     }
@@ -237,14 +218,8 @@ async function run(): Awaitable<void> {
   $mcr = get_mcrouter_object();
   await add_user_name($mcr, 1, 'Joel');
   $name = await get_user_name($mcr, 1);
-  \var_dump($name); // Should print "Joel"
+  var_dump($name); // Should print "Joel"
 }
-```.example.hhvm.out
-string(4) "Joel"
-```.hhvm.expectf
-string(%d) "%s"
-```.skipif
-\Hack\UserDocumentation\API\Examples\MCRouter\skipif();
 ```
 
 If an issue occurs when using this protocol, two possible exceptions can be thrown: `MCRouterException` when something goes wrong with
@@ -260,7 +235,7 @@ cURL provides a data transfer library for URLs. The async cURL extension provide
 other. `curl_multi_await` is the async version of HHVM's `curl_multi_select`. It waits until there is activity on the cURL handle and
 when it completes, we use `curl_multi_exec` to process the result, just as we would in the non-async situation.
 
-```Hack
+```hack no-extract
 async function curl_multi_await(resource $mh, float $timeout = 1.0): Awaitable<int>;
 ```
 
@@ -269,7 +244,7 @@ async function curl_multi_await(resource $mh, float $timeout = 1.0): Awaitable<i
 The function `HH\Asio\curl_exec` is a wrapper around `curl_multi_await`. It is easy to use as we don't necessarily have to worry about
 resource creation since we can just pass a string URL to it.
 
-```Hack
+```hack no-extract
 namespace HH\Asio {
   async function curl_exec(mixed $urlOrHandle): Awaitable<string>;
 }
@@ -278,7 +253,7 @@ namespace HH\Asio {
 Here is an example of getting a vector of URL contents, using a lambda expression to cut down on the code verbosity that would come with
 full closure syntax:
 
-```async-curl.hack
+```hack no-extract
 function get_urls(): vec<string> {
   return vec[
     "http://example.com",
@@ -291,18 +266,18 @@ async function get_combined_contents(
   vec<string> $urls,
 ): Awaitable<vec<string>> {
   // Use lambda shorthand syntax here instead of full closure syntax
-  $handles = \HH\Lib\Vec\map_with_key(
+  $handles = Vec\map_with_key(
     $urls,
-    ($idx, $url) ==> \HH\Asio\curl_exec($url),
+    ($idx, $url) ==> HH\Asio\curl_exec($url),
   );
-  $contents = await \HH\Lib\Vec\from_async($handles);
-  echo \HH\Lib\C\count($contents)."\n";
+  $contents = await Vec\from_async($handles);
+  echo C\count($contents)."\n";
   return $contents;
 }
 
 <<__EntryPoint>>
 function main(): void {
-  \HH\Asio\join(get_combined_contents(get_urls()));
+  HH\Asio\join(get_combined_contents(get_urls()));
 }
 ```
 
@@ -314,26 +289,26 @@ to HHVM's [`stream_select`](http://php.net/manual/en/function.stream-select.php)
 can use [HH\Lib\Vec\from_async](../reference/function/HH.Lib.Vec.from_async/) to await multiple stream handles, but the resulting combined awaitable won't be complete
 until all of the underlying streams have completed.
 
-```Hack
+```Hack no-extract
 async function stream_await(resource $fp, int $events, float $timeout = 0.0): Awaitable<int>;
 ```
 
 The following example shows how to use [`stream_await`](../reference/function/stream_await/) to write to resources:
 
-```async-stream.hack
+```Hack
 function get_resources(): vec<resource> {
-  $r1 = \fopen('php://stdout', 'w');
-  $r2 = \fopen('php://stdout', 'w');
-  $r3 = \fopen('php://stdout', 'w');
+  $r1 = fopen('php://stdout', 'w');
+  $r2 = fopen('php://stdout', 'w');
+  $r3 = fopen('php://stdout', 'w');
 
   return vec[$r1, $r2, $r3];
 }
 
 async function write_all(vec<resource> $resources): Awaitable<void> {
   $write_single_resource = async function(resource $r) {
-    $status = await \stream_await($r, \STREAM_AWAIT_WRITE, 1.0);
-    if ($status === \STREAM_AWAIT_READY) {
-      \fwrite($r, \str_shuffle('ABCDEF').\PHP_EOL);
+    $status = await stream_await($r, STREAM_AWAIT_WRITE, 1.0);
+    if ($status === STREAM_AWAIT_READY) {
+      fwrite($r, str_shuffle('ABCDEF').\PHP_EOL);
     }
   };
   // You will get 3 shuffled strings, each on a separate line.
@@ -342,10 +317,6 @@ async function write_all(vec<resource> $resources): Awaitable<void> {
 
 <<__EntryPoint>>
 function main(): void {
-  \HH\Asio\join(write_all(get_resources()));
+  HH\Asio\join(write_all(get_resources()));
 }
-```.hhvm.expectf
-%s
-%s
-%s
 ```

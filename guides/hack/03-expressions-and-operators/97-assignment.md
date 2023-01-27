@@ -43,7 +43,7 @@ $s[3] = "y"; // $s is now "xb y"
 Infix operators in Hack have a corresponding compound assignment
 operator. For example, `+` has compound assignment operator `+=`.
 
-``` Hack
+``` Hack no-extract
 $x += 10;
 
 // Equivalent to:

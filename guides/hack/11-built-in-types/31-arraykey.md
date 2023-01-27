@@ -1,9 +1,12 @@
 The type `arraykey` can represent any integer or string value.  For example:
 
 ```Hack
-function processKey(arraykey $p): void {
-  if ($p is int) ...         // we have an int
-  else ...                   // we have a string
+function process_key(arraykey $p): void {
+  if ($p is int) {
+    // we have an int
+  } else {
+    // we have a string
+  }
 }
 ```
 

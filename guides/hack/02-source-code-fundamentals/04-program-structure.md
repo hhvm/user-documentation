@@ -14,9 +14,8 @@ in any order:
 
 Consider the following file:
 
-```hello-world.hack
+```hack
 #!/usr/bin/env hhvm
-namespace Hack\UserDocumentation\Fundamentals\ProgramStructure\Examples\HelloWorld;
 
 <<__EntryPoint>>
 function main(): void {

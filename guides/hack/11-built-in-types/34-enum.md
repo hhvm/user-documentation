@@ -1,11 +1,11 @@
-Use an enum (enumerated type) to create a set of named, constant, immutable values. 
+Use an enum (enumerated type) to create a set of named, constant, immutable values.
 
 In Hack, enums are limited to `int` or `string` (as an [`Arraykey`](/hack/built-in-types/arraykey)), or other `enum` values.
 
 ## Quickstart
 To access an enum's value, use its full name, as in `Colors::Blue` or `Permission::Read`.
 
-```Colors.hack no-auto-output
+```Hack
 enum Colors: int {
   Red = 3;
   Green = 5;
@@ -14,7 +14,7 @@ enum Colors: int {
 }
 ```
 
-```Permission.hack no-auto-output
+```Hack
 enum Permission: string {
   Read = 'R';
   Write = 'W';
@@ -25,7 +25,7 @@ enum Permission: string {
 
 Additionally, by using the [`as`](/hack/expressions-and-operators/type-assertions#enforcing-types-with-as-and-as) operator to enforce type, you can initialize your enum with static expressions that reference other enum values.
 
-```BitFlags.hack no-auto-output
+```Hack
 enum BitFlags: int as int {
   F1 = 1; // value 1
   F2 = BitFlags::F1 << 1; // value 2
@@ -37,7 +37,7 @@ enum BitFlags: int as int {
 ## Full Example
 With an enum, we can create a placement-direction system with names like `Top`, `Bottom`, `Left`, `Right`, and `Center`, then direct output accordingly to write text to the top, bottom, left, right, or center of a window.
 
-```Positions.inc.hack no-auto-output
+```Hack
 enum Position: int {
   Top = 0;
   Bottom = 1;
@@ -77,7 +77,7 @@ function main(): void {
 All enums implement these public static methods.
 
 ### `getValues()` / `getNames()`
-Returns a `dict` of enum constant values and their names. 
+Returns a `dict` of enum constant values and their names.
 
 * `getValues()` returns a `dict` where the keys are the enum names and the values are the enum constant values.
   * In the example below, the keys/values would be: `"Top" => 0`, `"Bottom" => 1`, etc.
@@ -85,7 +85,7 @@ Returns a `dict` of enum constant values and their names.
   * Following the same example, the keys/values would be: `0 => "Top"`, `1 => "Bottom"`, etc.
   * Because a `dict` *can not* contain duplicate keys, when you call `getNames()`—the static method that returns a `dict` and flips an enum's constant values *to* keys—there is a possiblity of creating a `dict` with duplicates, resulting in an `HH\InvariantException`. In this situation, one safe option for discarding duplicates (and keeping the most recent of every duplicate) is `Dict\flip`.
 
-```NamesValues.hack
+```Hack
 enum Position: int {
   Top = 0;
   Bottom = 1;
@@ -117,7 +117,7 @@ function main(): void {
 
 `coerce($value)` checks if a value exists in an enum, and if it does, returns the value; if the value does not exist, returns `null`.
 
-```Assert.hack.type-errors no-auto-output
+```Hack
 enum Bits: int {
   B1 = 2;
   B2 = 4;
@@ -141,7 +141,7 @@ function main(): void {
 `assertAll($traversable)` calls `assert($value)` on every element of the traversable (e.g. [Hack Arrays](/hack/arrays-and-collections/hack-arrays)); if at least one value does not exist, throws an `UnexpectedValueException`.
 
 
-```AssertAll.hack.type-errors no-auto-output
+```Hack
 enum Bits: int {
   B1 = 2;
   B2 = 4;
@@ -163,7 +163,7 @@ function main(): void {
 ### `isValid()`
 `isValid($value)` checks if a value exists in an enum, and if it does, returns `true`; if the value does not exist, it returns `false`.
 
-```IsValid.hack
+```Hack
 enum Bits: int {
   B1 = 2;
   B2 = 4;
@@ -184,7 +184,7 @@ The operators [`is`](/hack/expressions-and-operators/type-assertions#checking-ty
 
 For `is`/`as`/`?as` refinement, the operators validate that a value is a part of a given enum. **Caution:** These operators may perform implicit int/string coercion of enum values to preserve compatibility with `isValid()`.
 
-```type-refinement-enum.hack no-auto-output
+```Hack
 enum MyEnum: int {
   FOO = 1;
 }
@@ -210,7 +210,7 @@ You can define an enum to include all of the constants of another enum with the 
 
 In the following example, `enum` `F` contains all of the constants of `enum` `E1` and `enum` `E2`.
 
-```EnumSupertyping.hack no-auto-output
+```Hack
 enum E1: int as int {
   A = 0;
 }
@@ -228,6 +228,6 @@ enum F: int {
 Enum Inclusion is subject to a few restrictions:
 * **Order**: All `use` statements must precede enum constant declarations.
 * **Uniqueness**: All constant names across all enums must be unique.
-* **Subtype Relation**: In the above example, `E1` and `E2` are not considered subtypes of `F`; that is, the Hack Typechecker rejects passing `E1::A` or `E2::B` to a function that expects an argument of type `F`. 
+* **Subtype Relation**: In the above example, `E1` and `E2` are not considered subtypes of `F`; that is, the Hack Typechecker rejects passing `E1::A` or `E2::B` to a function that expects an argument of type `F`.
 
 **Note:** Library functions like `getNames()` and `getValues()` perform a post-order traversal of all included enums.

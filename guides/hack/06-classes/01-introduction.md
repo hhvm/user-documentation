@@ -2,7 +2,7 @@ Classes provide a way to group functionality and state together.
 
 To define a class, use the `class` keyword.
 
-```class.hack no-auto-output
+```Hack
 class Counter {
   private int $i = 0;
 

@@ -4,7 +4,7 @@ present at the top level.
 
 Consider the following:
 
-```use.hack
+```Hack file:use.hack
 namespace UseNS {
 
   const int CON = 100;
@@ -94,8 +94,10 @@ one namespace, references to that name would be ambiguous, so this is disallowed
 In the case of `use namespace`, we can implicitly reference names inside the given namespace by using a prefix that is the right-most
 part of the fully qualified name. For example, once
 
-```Hack
-use namespace Hack\UserDocumentation\Statements\use\Examples\XXX;
+```Hack file:use.hack
+namespace {
+  use namespace Hack\UserDocumentation\Statements\use\Examples\XXX;
+}
 ```
 
 has been seen, we can access `CON2` via the abbreviated `XXX\CON2`.

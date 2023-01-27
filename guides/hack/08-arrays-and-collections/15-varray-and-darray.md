@@ -9,7 +9,7 @@ bugs.
 For example, in HHVM 4.36, invalid array keys are accepted and
 silently coerced to an `arraykey`.
 
-``` Hack
+```Hack no-extract
 $x = darray[false => 123];
 var_dump(array_keys($x)[0]);
 // int(0), not `bool(false)`
@@ -25,7 +25,7 @@ As of [HHVM 4.103](https://hhvm.com/blog/2021/03/31/hhvm-4.103.html), `varray` i
 
 A `varray` is an ordered, iterable data structure.
 
-```Hack
+```Hack no-extract
 // Creating a varray.
 function get_items(): varray<string> {
   $items = varray['a', 'b', 'c'];
@@ -78,7 +78,7 @@ As of [HHVM 4.103](https://hhvm.com/blog/2021/03/31/hhvm-4.103.html), `darray` i
 
 A `darray` is an ordered key-value data structure.
 
-```Hack
+```Hack no-extract
 // Creating a darray.
 function get_items(): darray<string, int> {
   $items = darray['a' => 1, 'b' => 3];

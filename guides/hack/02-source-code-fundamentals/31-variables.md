@@ -18,16 +18,19 @@ inside any compound statement. It has function scope.
 Consider the following example:
 
 ```Hack
-function do_it(bool $p1): void {  // assigned the value true when called
+function do_it(bool $p1): void {
   $count = 10;
-  ...
+  // ...
   if ($p1) {
-    $message = "Can't open master file.";
-    ...
+    $message = "Can't open file.";
+    // ...
   }
-  ...
+  // ...
 }
-do_it(true);
+
+function call_it(): void {
+  do_it(true);
+}
 ```
 
 Here, the parameter `$p1` (which is a local variable) takes on the value `true` when `do_it` is called. The local
@@ -35,7 +38,7 @@ variables `$count` and `$message` take on the type of the respective value being
 
 Consider the following example:
 
-```local-variables.hack
+```hack
 function f(): void {
   $lv = 1;
   echo "\$lv = $lv\n";
@@ -49,7 +52,7 @@ function main(): void {
 }
 ```
 
-As you can see, the value of the local variable `$lv` is not preserved between
+In this example, the value of the local variable `$lv` is not preserved between
 the function calls, so this function `f` outputs "`$lv = 1`" each time.
 
 ## Array Elements

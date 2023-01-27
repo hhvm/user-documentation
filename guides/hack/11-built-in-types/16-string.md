@@ -1,4 +1,4 @@
-A `string` is a sequence of *bytes* - they are not required to be valid characters in any particular encoding, 
+A `string` is a sequence of *bytes* - they are not required to be valid characters in any particular encoding,
 for example, they may contain null bytes, or invalid UTF-8 sequences.
 
 # Basic operations
@@ -45,7 +45,7 @@ This means that various comparison functions may report strings as equivalent, d
 byte sequences - so if the result of a character-based operation is used for another function, that function
 should also be character-based:
 
-```hack character_ops.hack
+```Hack
 use namespace HH\Lib\{Locale,Str};
 
 <<__EntryPoint>>

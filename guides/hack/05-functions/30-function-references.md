@@ -8,7 +8,7 @@ versions, see [old syntax](#old-syntax) below.
 
 To refer to a top-level (global) function named `foo`, you can write:
 
-```
+```Hack no-extract
 foo<>; // a reference to global function 'foo'
 ```
 
@@ -20,7 +20,7 @@ the function. Note that the type checker keeps track of the
 [function's type](/hack/built-in-types/function)
 and correctly checks all calls.
 
-```
+```Hack no-extract
 function foo(string $x): bool { ... }
 
 $x = foo<>;     // $x:(function(string): bool)
@@ -32,21 +32,21 @@ This syntax supports namespaced names the same way you would refer to them as
 part of a function call, so the following function references are all
 equivalent:
 
-```
+```Hack no-extract
 $fun = \Foo\Bar\Baz\derp<>;
 ```
 
-```
+```Hack no-extract
 namespace Foo;
 $fun = Bar\Baz\derp<>;
 ```
 
-```
+```Hack no-extract
 use namespace Foo\Bar\Baz;
 $fun = Baz\derp<>;
 ```
 
-```
+```Hack no-extract
 use function Foo\Bar\Baz\derp;
 $fun = derp<>;
 ```
@@ -58,7 +58,7 @@ the familiar method call syntax, without providing the call arguments. Just
 append type arguments (like `<>`) to the function call receiver
 (like `MyClass::bar`).
 
-```
+```Hack no-extract
 MyClass::bar<>; // a reference to static method 'MyClass::bar'
 ```
 
@@ -82,7 +82,7 @@ If you wish to pass along explicit generic arguments, either as a hint to the
 type checker, or in the case of a function with reified type parameters when
 they are required, that is also supported:
 
-```
+```Hack no-extract
 i_am_erased<int, _>; // erased generics (note wildcard)
 i_am_reified<C<string>>; // a reified generic
 ```
@@ -98,7 +98,7 @@ i_am_reified<C<string>>; // a reified generic
 
 Example with erased generics:
 
-```
+```Hack no-extract
 function fizz<Ta as num, Tb>(Ta $a, Tb $b): mixed { ... }
 
 $x = fizz<int, string>; // OK
@@ -122,7 +122,7 @@ fizz<string, int>;
 
 Example with [reified generics](/hack/generics/reified-generics):
 
-```
+```Hack no-extract
 function buzz<reify T as arraykey>(T $x): mixed { ... }
 
 $w = buzz<int>; // OK
@@ -174,9 +174,9 @@ There is also no equivalent syntax for referencing non-static methods. For
 those, use the built-in functions `inst_meth` and `meth_caller`, or use an
 [anonymous function](anonymous-functions) instead:
 
-```
+```Hack no-extract
 class C {
-  public function foo(): void { ... }
+  public function foo(): void {}
 }
 
 $obj = new C();

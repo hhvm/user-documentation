@@ -13,7 +13,7 @@ At present, all declarations of contexts and capabilities live within the typech
 
 A function or method may optionally choose to list one or more contexts:
 
-```hack
+```hack no-extract
 function no_listed_contexts(): void {/* some fn body */}
 function empty_context()[]: void {/* some fn body */}
 function one_context()[C]: void {/* some fn body */}
@@ -30,7 +30,7 @@ function no_listed_contexts()[defaults]: void {/* some fn body */}
 
 Additionally, the context list may appear in function types:
 
-```hack
+```hack no-extract
 function has_fn_args(
   (function (): void) $no_list,
   (function ()[io, rand]: void) $list,
@@ -45,7 +45,7 @@ In order to invoke a function, one must have access to all capabilities required
 
 In the following example, assume the existence of a `rand` context representing the capability set `{Rand}`, an `io` context representing the capability set `{IO}`, and that the `defaults` contexts represents the capability set `{Rand, IO}`.
 
-```hack
+```hack no-extract
 /* has {} capability set */
 function pure_fun()[]: void {
   return;
@@ -72,7 +72,7 @@ While most contexts and capabilities represent the binary options of existence a
 
 In the following example, assume the existence of a `throws<T>` context representing the capability set `{Throws<T>}`. Rather than describing that a function *can* throw, this would describe which classes of exceptions a function may throw. In that scenario, the context would require a parameter representing the exception class: `throws<-T as Exception>`.
 
-```hack
+```hack no-extract
 function throws_foo_exception()[throws<FooException>]: void { // {Throws<FooException>}
   throw new FooException();
 }

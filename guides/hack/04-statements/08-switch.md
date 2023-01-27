@@ -2,7 +2,7 @@ A `switch` statement typically consists of a controlling expression, some case l
 value of the controlling expression, execution passes to one of the case labels, the default label, or to the statement immediately
 following the switch statement.  For example:
 
-```Hack
+```Hack no-extract
 enum Bank: int {
   DEPOSIT = 1;
   WITHDRAWAL = 2;
@@ -14,13 +14,13 @@ function processTransaction(Transaction $t): void {
   switch ($trType) {
 
   case Bank::TRANSFER:
-    ...
+    // ...
     break;
   case Bank::DEPOSIT:
-    ...
+    // ...
     break;
   case Bank::WITHDRAWAL:
-    ...
+    // ...
     break;
   }
 }
@@ -37,19 +37,21 @@ expression has type `int`. Here, we're unlikely to have case labels cover the co
 necessary.  For example:
 
 ```Hack
+$v = 100;
+
 switch ($v) {
-case 20:
-  ...
-  break;
-case 10:
-  ...
-  break;
-case 30:
-  ...
-  break;
-default:
-  ...
-  break;
+  case 20:
+    // ...
+    break;
+  case 10:
+    // ...
+    break;
+  case 30:
+    // ...
+    break;
+  default:
+    // ...
+    break;
 }
 ```
 
@@ -68,37 +70,34 @@ If no `break` statement is seen for a case or default before a subsequent case l
 encountered, an implementation might issue a warning. However, such a warning can be suppressed by placing a source line containing the
 special comment `// FALLTHROUGH`, at the end of that case or default statement group.
 
-Case-label values can be runtime expressions, and the types of sibling case-label values need not be the same.
-
 ```Hack
 $v = 10;
 switch ($v) {
-default:
-  ...
-  break;      // break ends "group" of default statements
-case 20:
-  ...
-  break;      // break ends "group" of case 20 statements
-case 10:
-  ...
-  // FALLTHROUGH
-case 30:
-  ...         // no break, but then none is really needed either
-}
-// -----------------------------------------
-$v = 30;
-switch ($v) {
-case 30.0:  // <===== this case matches with 30
-  ...
-  break;
-default:
-  ...
-  break;
-case 30:    // <===== rather than this case matching with 30
-  ...
-  break;
+  case 10:
+    // ...
+    // FALLTHROUGH
+  case 30:
+    // ...         // Handle 10 or 30
+    break;
+  default:
+    // ...
+    break;
 }
 ```
 
+Case-label values can be runtime expressions, and the types of sibling case-label values need not be the same.
+
 **Note switch uses `==` equality for comparing the value with the
 different cases.**. See [equality](../expressions-and-operators/equality.md) for more details.
+
+```Hack
+$v = 30;
+switch ($v) {
+  case 30.0:  // <===== this case matches with 30
+    // ...
+    break;
+  default:
+    // ...
+    break;
+}
+```

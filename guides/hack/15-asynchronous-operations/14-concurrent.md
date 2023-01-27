@@ -4,7 +4,7 @@ Note: [concurrent doesn't mean multithreading](some-basics#limitations)
 
 ## Syntax
 
-```
+```Hack no-extract
 concurrent {
   $x = await x_async();
   await void_async();
@@ -21,7 +21,7 @@ Similar to `await`-as-an-expression, `concurrent` blocks don't provide a guarant
 
 For this example, we provide no guarantee on the execution order of the calls to `x()`, `y_async()` and `z_async()`. The assignments into `$result` are guaranteed to be well ordered however.
 
-```
+```Hack no-extract
 $result = vec[];
 concurrent {
   $result[] = x() + await y_async();
@@ -33,7 +33,7 @@ concurrent {
 
 If any statement in a `concurrent` block throws, there are no guarantees about which (if any) awaited values were assigned or which exception will be propagated if more than one of them threw. For example if you have:
 
-```
+```Hack no-extract
 $x = 0;
 try {
   concurrent {
@@ -49,7 +49,7 @@ Then it is explicitly undefined whether `var_dump` will see `$x === 0` or `$x ==
 
 If you need granular exception handling, consider using nested try-catch blocks inside the concurrent block:
 
-```
+```Hack no-extract
 concurrent {
   $x = await async {
     try {

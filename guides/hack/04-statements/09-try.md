@@ -11,11 +11,11 @@ A `throw` statement throws an exception immediately and unconditionally.  Contro
 following the throw. For example:
 
 ```Hack
-if ($denominator === 0) throw new HH\Lib\Math\DivisionByZeroException();
+class MyException extends Exception {}
 
-class MyException extends Exception { ... }
-
-throw new MyException();
+function demo(): void {
+  throw new MyException();
+}
 ```
 
 The type of the exception must be `Throwable` or a subclass of `Throwable`.
@@ -29,29 +29,21 @@ occurred within that try-block
 
 Consider the following:
 
-```simple.hack
+```Hack
 function do_it(int $x, int $y): void {
   try {
     $result = $x / $y;
     echo "\$result = $result\n";
     // ...
   }
-  /*
-  catch (\HH\Lib\Math\DivisionByZeroException $ex) {
+  catch (DivisionByZeroException $ex) {
     echo "Caught a DivisionByZeroException\n";
     // ...
   }
-  */
-  catch (\Exception $ex) {
+  catch (Exception $ex) {
     echo "Caught an Exception\n";
     // ...
   }
-}
-
-<<__EntryPoint>>
-function main(): void {
-  do_it(100, 5);
-  //  do_it(6, 0);
 }
 ```
 
@@ -60,8 +52,8 @@ only an exception of that type is thrown, is the catch handler code executed.
 
 Consider the following hierarchy of exception-class types:
 
-```hierarchy_of_exception_classes.hack
-class DeviceException extends \Exception { /*...*/ }
+```Hack
+class DeviceException extends Exception { /*...*/ }
 class DiskException extends DeviceException { /*...*/ }
 class RemovableDiskException extends DiskException { /*...*/ }
 class FloppyDiskException extends RemovableDiskException { /*...*/ }
@@ -111,4 +103,3 @@ execution of that catch-block can start, the runtime first executes, in order, a
 deeply than the one that caught the exception.
 
 If no matching catch-block is found, the behavior is implementation-defined.
-

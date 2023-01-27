@@ -1,7 +1,7 @@
 A constructor is a specially named instance method that is used to initialize the instance immediately after it has been created.  A
 constructor is called by the [`new` operator](../expressions-and-operators/new.md).  For example:
 
-```Point.hack
+```Hack
 class Point {
   private static int $pointCount = 0; // static property with initializer
   private float $x; // instance property
@@ -12,18 +12,10 @@ class Point {
     $this->y = (float)$y; // access instance property
     ++Point::$pointCount; // include new Point in Point count
   }
-
-  public function __toString(): string { // instance method
-    return '('.$this->x.','.$this->y.')';
-  }
-  // ...
 }
 
-<<__EntryPoint>>
-function main(): void {
+function demo(): void {
   $p1 = new Point(2.3);
-  /* HH_FIXME[4067] implicit __toString() is now deprecated */
-  echo "\$p1 is $p1\n";
 }
 ```
 
@@ -39,7 +31,7 @@ A constructor does not require a return type, but if one is included, it must be
 
 If you have created a class in Hack, you have probably seen a pattern like this:
 
-```duplication.noexec.hack no-auto-output
+```Hack
 final class User {
   private int $id;
   private string $name;
@@ -60,7 +52,7 @@ the constructor parameters and in the assignment. This can be quite cumbersome.
 With *constructor parameter promotion*, all that repetitive boilerplate is
 removed.
 
-```promotion.noexec.hack no-auto-output
+```Hack
 final class User {
   public function __construct(
     private int $id,
@@ -85,7 +77,7 @@ turns out that a different internal data representation would be better. For
 example, if we later decided to store `$name` in a structured form instead of a string, we could easily make that change while keeping the public-facing
 constructor parameters unchanged (and therefore backwards-compatible).
 
-```unpromotion.noexec.hack no-auto-output
+```Hack no-extract
 final class User {
   private ParsedName $name;
 
@@ -109,7 +101,7 @@ final class User {
 * Other code in the constructor is run **after** the parameter promotion
   assignment.
 
-```promotion-rules.noexec.hack no-auto-output
+```Hack
 final class User {
   private static dict<int, User> $allUsers = dict[];
   private int $age;

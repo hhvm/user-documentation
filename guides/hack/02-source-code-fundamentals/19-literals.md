@@ -5,7 +5,9 @@ literal is `bool`. For example:
 
 ```Hack
 $val = true;
-if ($val === false) ...
+if ($val === false) {
+  // ...
+}
 ```
 
 ## Integer Literals
@@ -14,16 +16,16 @@ Integer literals can be written as decimal; hexadecimal (with prefix `0x` or `0X
 octal (with prefix `0`); or binary (with prefix `0b` or `0B`).  The type of an integer literal is `int`.  For example:
 
 ```Hack
-$count = 10      // decimal 10
-0b101010 >> 4    // binary 101010 and decimal 4
-0XAf << 012      // hexadecimal Af and octal 12
+$count = 10;      // decimal 10
+0b101010 >> 4;    // binary 101010 and decimal 4
+0XAf << 012;      // hexadecimal Af and octal 12
 ```
 
 Integer literals can also contain underscores as digit separators. They function only as visual aids, they have no
 actual meaning. For example:
 
 ```Hack
-$amount = 394_493_392 // completely equivalent to 394493392
+$amount = 394_493_392; // completely equivalent to 394493392
 $address = 0x49AD_DF30;
 $permission = 012_212_001;
 ```
@@ -34,7 +36,7 @@ Floating-point literals typically have an integer part, a decimal point, and a f
 exponent part. They are written using decimal digits.  The type of a floating-point literal is `float`.  For example:
 
 ```Hack
-123.456 + 0.6E27 + 2.34e-3
+123.456 + 0.6E27 + 2.34e-3;
 ```
 
 The predefined constants `INF` and `NAN` provide access to the floating- point values for infinity and Not-a-Number, respectively.
@@ -42,7 +44,7 @@ The predefined constants `INF` and `NAN` provide access to the floating- point v
 Floating-point literals may also contain underscores as digit separators in the integer part, the fractional part, and the exponent part. For example:
 
 ```Hack
-123_456.49_30e-30_30
+123_456.49_30e-30_30;
 ```
 
 ## String Literals
@@ -62,8 +64,8 @@ A single-quoted string literal is a string literal delimited by single-quotes ('
 character except single-quote (') and backslash (\\), which can only be represented by their corresponding escape sequence, \\' and \\\\.  For example:
 
 ```Hack
-'Welcome to Hack!'
-'Can embed a single quote (\') and a backslash (\\) like this'
+'Welcome to Hack!';
+'Can embed a single quote (\') and a backslash (\\) like this';
 ```
 
 ### Double-Quoted String Literals
@@ -72,16 +74,16 @@ A double-quoted string literal is a string literal delimited by double-quotes ("
 character except double-quote (") and backslash (\\), which can only be represented by their corresponding escape sequence, \\" and \\\\.  For example:
 
 ```Hack
-"Welcome to Hack!"
-"Can embed a double quote (\") and a backslash (\\) like this"
+"Welcome to Hack!";
+"Can embed a double quote (\") and a backslash (\\) like this";
 ```
 
 Certain other (and sometimes non-printable) characters can also be expressed as escape sequences.  An *escape sequence*
 represents a single-character encoding.  For example:
 
 ```Hack
-"First line 1\nSecond line 2\n\nFourth line\n"
-"Can embed a double quote (\") and a backslash (\\) like this"
+"First line 1\nSecond line 2\n\nFourth line\n";
+"Can embed a double quote (\") and a backslash (\\) like this";
 ```
 
 Here are the supported escape sequences:
@@ -160,7 +162,7 @@ is performed.
 
 Consider the following example:
 
-```dq-variable-substitution.hack
+```hack
 class C {
   public int $p1 = 2;
 }
@@ -180,14 +182,14 @@ function main(): void {
 There is one null-literal value, `null`, which has type `null`.  For example:
 
 ```Hack
-function log(num $arg, ?num $base = null): float { ... }
+function has_default_arg(num $arg, ?num $base = null): void {}
 ```
 
-Here, `null` is used as a default argument value in the library function `log`.
+Here, `null` is used as a default argument value in the function `has_default_arg`.
 
 In the following example:
 
-```null-literal.hack no-auto-output
+```hack
 type IdSet = shape('id' => ?string, 'url' => ?string, 'count' => int);
 
 function get_IdSet(): IdSet {

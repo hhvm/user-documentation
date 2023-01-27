@@ -1,9 +1,11 @@
 Expression trees support "splicing", where you insert one expression tree into another.
 
 ```hack
-function splicing_example(bool $b): MyDslExprTree<MyDslString> {
-  $name = $b ? MyDsl`"world"` : MyDsl`"universe"`;
-  return MyDsl`"Hello, ".${$name}."!"`;
+<<file:__EnableUnstableFeatures('expression_trees')>>
+
+function splicing_example(bool $b): ExprTree<ExampleDsl, mixed, ExampleString> {
+  $name = $b ? ExampleDsl`"world"` : ExampleDsl`"universe"`;
+  return ExampleDsl`"Hello, ".${$name}."!"`;
 }
 ```
 
@@ -12,34 +14,37 @@ This allows you to build different expressions based on runtime values. DSL expr
 The above example is equivalent to this:
 
 ```hack
-function splicing_example2(bool $b): MyDslExprTree<MyDslString> {
-  return $b ? MyDsl`"Hello, "."world"."!"` : MyDsl`"Hello, "."universe"."!"`;
+<<file:__EnableUnstableFeatures('expression_trees')>>
+
+function splicing_example2(bool $b): ExprTree<ExampleDsl, mixed, ExampleString> {
+  return $b ? ExampleDsl`"Hello, "."world"."!"` : ExampleDsl`"Hello, "."universe"."!"`;
 }
 ```
 
 ## Limitations
 
-Every DSL expression must be valid in isolation. You cannot use free variables expression trees, even when splicing.
+Every DSL expression must be valid in isolation. You cannot use free
+variables in expression trees, even when splicing.
 
-```hack
-$var = MyDsl`$x`; // type error: $x is not defined
-MyDsl`($x) ==> { return ${$var}; }`;
+```hack error
+$var = ExampleDsl`$x`; // type error: $x is not defined
+ExampleDsl`($x) ==> { return ${$var}; }`;
 ```
 
 ## Implementing Splicing
 
 A visitor needs to support the `splice` method to allow splicing. The `splice` method is passed the inner expression tree value, along with a unique key that may be used for caching visitor results.
 
-```hack
+```hack no-extract
 final class MyDsl {
   public function splice(
     ?ExprPos $_pos,
     string $_key,
     Spliceable<MyDsl, MyDslAst, mixed> $code,
-  ): EtDemoAst {
+  ): MyDslAst {
     return $code->visit($this);
   }
- 
+
   // ...
 }
 ```

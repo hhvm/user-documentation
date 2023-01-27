@@ -3,7 +3,7 @@
 With [enum types](/hack/built-in-types/enum) and [enum classes](/hack/built-in-types/enum-class), most of the focus is given to their values.
 Expressions like `E::A` denote the value of `A` in `E`, but the fact that `A` was used to access it is lost.
 
-```EnumClassLabelIntro.hack no-auto-output
+```Hack
 enum E: int {
   A = 42;
   B = 42;
@@ -28,8 +28,7 @@ safe to call if all the values of the enumeration are distinct.
 Enum classes provides a way to do this by using the newly introduced *Enum Class Label* expressions. For each value defined in an enum class, a corresponding
 label is defined. A label is a handle to access the related value. Think of it as an indirect access. Consider the following example:
 
-```EnumClassLabel.definition.hack no-auto-output
-
+```Hack file:label.hack
 // We are using int here for readability but it works for any type
 enum class E: int {
   int A = 42;
@@ -43,7 +42,7 @@ This enum class defines two constants:
 
 The main addition of labels is a new **opaque** type: `HH\EnumClasslabel`. Let's first recall its full definition:
 
-```
+```Hack
 newtype Label<-TEnumClass, TType> = mixed;
 ```
 
@@ -62,8 +61,7 @@ Let us go back to our enum class `E`. Labels add more definitions to the mix:
 
 So we can rewrite the earlier example in a more resilient way:
 
-```EnumClassLabel.example.hack no-auto-output
-
+```Hack file:label.hack
 function full_print(\HH\EnumClass\Label<E, int> $label): void {
   echo E::nameOf($label) . " ";
   echo E::valueOf($label) . "\n";
@@ -82,34 +80,11 @@ However there are some situations where Hack can infer the class name; for examp
 the previous calls could be written as `full_print(#A)` and `full_print(#B)`, leaving `E` implicit.
 This is only allowed when there is enough type information to infer the right enum class name. For example, `$x = #A` is not allowed and will result in a type error.
 
-<!--
-### Special case of function calls
-
-When the first argument of a function is a label, we provide an alternative notation to call it.
-```EnumClassLabel.alt.hack no-auto-output
-<<file:__EnableUnstableFeatures('enum_class_label')>>
-
-function set<T>(\HH\EnumClass\Label<E, T> $label, T $data): void {
-  // setting $data into some storage using $label as a key
-}
-
-// all these calls are equivalent
-function all_the_same(): void {
-  set(E#A, 42);
-  set(#A, 42);
-  set#A(42); // This is still experimental/gated
-}
-```
-
-As you can see, the short name can be written *before* the opening parenthesis of the function call. This only works for a single label argument, which must be the first one.
--->
-
 ## Equality testing
 
 Enum class labels can be tested for equality using the `===` operator or a switch statement:
 
-```EnumClassLabel.equality1.hack no-auto-output
-
+```Hack file:label.hack
 function test_eq(\HH\EnumClass\Label<E, int> $label): void {
   if ($label === E#A) { echo "label is A\n"; }
   switch ($label) {
@@ -121,7 +96,7 @@ function test_eq(\HH\EnumClass\Label<E, int> $label): void {
 
 Because the runtime doesn’t have all the typing information available, these tests only check the name component of a label. It means that for any two enum classes `E` and `F`, `E#A === F#A` will be true despite being from different enum classes. Also the support type (int in the case of the enum class `E`) is not taken into account either.
 
-```EnumClassLabel.equality2.hack no-auto-output
+```Hack
 class Foo {}
 
 enum class F: Foo {
@@ -148,7 +123,7 @@ If a method is expecting a label, one cannot pass in a value, and vice versa: `f
 
 Let’s recall the definition of `HH\MemberOf` and `HH\EnumClass\Label` along with some basic definitions:
 
-```EnumClassLabel.variance.hack no-auto-output
+```Hack
 newtype MemberOf<-TEnumClass, +TType> as TType = TType;
 newtype Label<-TEnumClass, TType> = mixed;
 

@@ -1,8 +1,8 @@
-A class can contain definitions for named constants. 
+A class can contain definitions for named constants.
 
 Because a class constant belongs to the class as a whole, it is implicitly `static`. For example:
 
-```auto-color.hack
+```Hack
 class Automobile {
   const DEFAULT_COLOR = "white";
   // ...
@@ -23,11 +23,11 @@ Inside a parent class, use `self::foo` to access a named constant `foo`. Outside
 
 ## Type Inference
 If a class constant's type is omitted, it can be inferred. For example:
-* the inferred type of `const DEFAULT_COLOR = "white"` is `string`, 
+* the inferred type of `const DEFAULT_COLOR = "white"` is `string`,
 * the inferred type of `const DEFAULT_VALUE = 42` is `int`.
 * the inferred type of `const DEFAULT_FOODS = vec["apple", "orange", "banana"]` is `vec`.
 
 ## Limitations
-Constants can not be assigned to legacy container types like `Vector`, `Map`, `Set`, et al., and closures. 
+Constants can not be assigned to legacy container types like `Vector`, `Map`, `Set`, et al., and closures.
 
 Instead, create constants with equivalent types like `array`, `vec`, `dict`, and `set`. When using these types, all subinitializers must resolve to constant expressions.

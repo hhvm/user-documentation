@@ -1,30 +1,39 @@
 For the most part, we deal with class types directly via their names.  For example:
 
-```Hack
-class Employee { ... }
-$emp = new Employee( ... );
+```Hack no-extract
+class Employee {
+  // ...
+}
+
+$emp = new Employee();
 ```
 
 However, in some applications, it is useful to be able to abstract a class' name rather than to hard-code it.  Consider the following:
 
-```Hack
-class Employee { ... }
+```Hack file:employee.hack
+<<__ConsistentConstruct>>
+class Employee {
+  // ...
+}
 
 function f(classname<Employee> $clsname): void {
   $w = new $clsname();  // create an object whose type is passed in
-  ...
 }
 ```
 
 This function can be called with the name of the class `Employee` or any of its
 subclasses.
 
-```Hack
-class Intern extends Employee { ... }
+```Hack no-extract
+class Intern extends Employee {
+  // ...
+}
 
-f(Employee::class);  // will call: new Employee();
-f(Intern::class);    // will call: new Intern();
-f(Vector::class);    // typechecker error!
+function demo(): void {
+  f(Employee::class);  // will call: new Employee();
+  f(Intern::class);    // will call: new Intern();
+  f(Vector::class);    // typechecker error!
+}
 ```
 
 In Hack code, the class names must be specified using "`::class` literals"

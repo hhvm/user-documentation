@@ -64,8 +64,7 @@ Fullname: hhvm.hack_arr_compat_check_implicit_varray_append
 Before HHVM 4.64, this setting will raise a notice under the following condition.
 If it does not raise a warning, this option is not available in your version of hhvm.
 
-```hack
-use namespace HHVM\UserDocumentation\_Private;
+```hack no-extract
 
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
@@ -104,9 +103,7 @@ Fullname: hhvm.hack_arr_compat_check_varray_promote
 Before HHVM 4.64, this setting will raise a notice under the following condition.
 If it does not raise a warning, this option is not available in your version of hhvm.
 
-```hack
-use namespace HHVM\UserDocumentation\_Private;
-
+```hack no-extract
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
   using _Private\print_short_errors();
@@ -216,9 +213,7 @@ Fullname: hhvm.hack_arr_compat_check_array_key_cast
 Before HHVM 4.66, this setting will raise a notice under the following condition.
 If it does not raise a warning, this option is not available in your version of hhvm.
 
-```hack
-use namespace HHVM\UserDocumentation\_Private;
-
+```hack no-extract
 <<__EntryPoint>>
 async function main_async(): Awaitable<void> {
   using _Private\print_short_errors();

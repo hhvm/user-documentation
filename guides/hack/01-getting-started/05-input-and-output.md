@@ -22,12 +22,9 @@ Additional design goals include:
 
 For a more detailed overview, see the documentation for `IO\Handle`; basic operations include:
 
-```hsl-io-basics.hack
-namespace Hack\GettingStarted\HSLIO;
-
+```Hack
 use namespace HH\Lib\{File, IO};
 
-<<__EntryPoint>>
 async function main_async(): Awaitable<void> {
   // STDIN for CLI, or HTTP POST data
   $_in = IO\request_input();

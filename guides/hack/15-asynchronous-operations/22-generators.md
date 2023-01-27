@@ -15,7 +15,7 @@ Here is an example of using the [async utility function](../asynchronous-operati
 [`usleep`](/hack/reference/function/HH.Asio.usleep/) to imitate a second-by-second countdown clock. Note that in the
 `happy_new_year` `foreach` loop we have the syntax `await as`. This is shorthand for calling `await $ait->next()`.
 
-```iterator.hack
+```Hack
 const int SECOND = 1000000; // microseconds
 
 async function countdown(int $from): AsyncIterator<int> {
@@ -61,7 +61,7 @@ generator using [`raise`](/hack/reference/class/HH.AsyncGenerator/raise/).
 If we are doing either of these two things, our generator must return `AsyncGenerator`. An `AsyncGenenator` has three type
 parameters: the key, the value. And the type being passed to [`send`](/hack/reference/class/HH.AsyncGenerator/send/).
 
-```send.hack
+```Hack
 const int HALF_SECOND = 500000; // microseconds
 
 async function get_name_string(int $id): Awaitable<string> {
@@ -98,32 +98,11 @@ function run(): void {
   $ids = vec[1, 2, 3, 4];
   \HH\Asio\join(associate_ids_to_names($ids));
 }
-```.hhvm.expectf
-vec(2) {
-  int(0)
-  string(0) ""
-}
-vec(2) {
-  int(1)
-  string(7) "%s"
-}
-vec(2) {
-  int(2)
-  string(7) "%s"
-}
-vec(2) {
-  int(3)
-  string(7) "%s"
-}
-vec(2) {
-  int(4)
-  string(7) "%s"
-}
 ```
 
 Here is how to raise an exception to an async generator.
 
-```raise.hack
+```Hack
 const int HALF_SECOND = 500000; // microseconds
 
 async function get_name_string(int $id): Awaitable<string> {
@@ -170,27 +149,5 @@ async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
 function run(): void {
   $ids = vec[1, 2, 3, 4];
   \HH\Asio\join(associate_ids_to_names($ids));
-}
-```.hhvm.expectf
-vec(2) {
-  int(0)
-  string(0) ""
-}
-vec(2) {
-  int(1)
-  string(7) "%s"
-}
-vec(2) {
-  int(2)
-  string(7) "%s"
-}
-string(15) "Id of 3 is bad!"
-vec(2) {
-  int(0)
-  string(0) ""
-}
-vec(2) {
-  int(4)
-  string(7) "%s"
 }
 ```

@@ -6,7 +6,7 @@ If the expression tests `true`, the *single* statement that follows is executed,
 control transfers to the point immediately following the end of the `while` statement. The loop body (that is, the single statement) is executed
 zero or more times. Consider the following:
 
-```table-of-squares.hack
+```Hack
 $i = 1;
 while ($i <= 10) {
   echo "$i\t".($i * $i)."\n"; // output a table of squares
@@ -19,9 +19,9 @@ The execution of a `while` statement is impacted by a subordinate
 
 The controlling expression is often a combination of relational, equality, and logical expressions.  For example:
 
-```Hack
+```Hack no-extract
 while (($i <= 10 && $j !== 0) || !getStatus()) {
-  ...
+  // ...
 }
 ```
 

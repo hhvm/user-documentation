@@ -10,17 +10,16 @@ enum ControlStatus: int {
 }
 
 function main(ControlStatus $p1): void {
-  switch ($p1)
-  {
+  switch ($p1) {
   case ControlStatus::Stopped:
-    ...
+    // ...
     break;
   case ControlStatus::Stopping:
-    ...
+    // ...
     break;
-  ...
+  default:
+    break;
   }
-  ...
 }
 ```
 
@@ -30,12 +29,16 @@ operator allows the selection of a static property, static method, or instance m
 ```Hack
 final class MathLibrary {
   const PI = 3.1415926;
-  public static function sin(float $val): float { ... }
-  ...
+  public static function sin(float $val): float {
+    return 0.0; // stub
+  }
 }
-$radius = 3.4;
-$area = MathLibrary::PI * $radius * $radius;
-$v = MathLibrary::sin(2.34);
+
+function use_it(): void {
+  $radius = 3.4;
+  $area = MathLibrary::PI * $radius * $radius;
+  $v = MathLibrary::sin(2.34);
+}
 ```
 
 From within a class, `::` also allows the selection of an overridden property or method.
@@ -48,20 +51,16 @@ class Point {
   public static function getPointCount(): int {
     return self::$pointCount;
   }
-  ...
 }
 ```
 
 From within a class, `parent::m` refers to the closest member `m` in the base-class hierarchy, not including the current class.  For example:
 
 ```Hack
-class MyRangeException extends \Exception {
-  public function __construct(string $message, ...)
-  {
-    parent::__construct($message);
-    ...
+class MyRangeException extends Exception {
+  public function __construct(string $message) {
+    parent::__construct('MyRangeException: '.$message);
   }
-  ...
 }
 ```
 
@@ -73,15 +72,23 @@ class Base {
   public function b(): void {
     static::f();  // calls the most appropriate f()
   }
-  public static function f(): void { ... }
+  public static function f(): void {
+    //...
+  }
 }
+
 class Derived extends Base {
-  public static function f(): void { ... }
+  public static function f(): void {
+    // ...
+  }
 }
-$b1 = new Base();
-$b1->b(); // as $b1 is an instance of Base, Base::b() calls Base::f()
-$d1 = new Derived();
-$d1->b(); // as $d1 is an instance of Derived, Base::b() calls Derived::f()
+
+function demo(): void {
+  $b1 = new Base();
+  $b1->b(); // as $b1 is an instance of Base, Base::b() calls Base::f()
+  $d1 = new Derived();
+  $d1->b(); // as $d1 is an instance of Derived, Base::b() calls Derived::f()
+}
 ```
 
 The value of a scope-resolution expression ending in `::class` is a string containing the fully qualified name of the current
@@ -90,10 +97,12 @@ constant whose value has the [`classname` type](../built-in-types/classname.md) 
 
 ```Hack
 namespace NS_cn;
-class C1 { ... }
+class C1 {
+  // ...
+}
 class C2 {
-  public static classname<\NS_cn\C1> $p1 = \NS_cn\C1::class;
-  public static function f(?classname<C1> $p) : classname<C1> { ... }
+  public static classname<C1> $p1 = C1::class;
+  public static function f(?classname<C1> $p): void {}
   public static vec<classname<C1>> $p2 = vec[C1::class];
 }
 ```

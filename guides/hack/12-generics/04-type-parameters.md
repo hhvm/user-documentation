@@ -9,18 +9,18 @@ of a class constant, an attribute, a method, an enum constant, or a namespace). 
 
 In the following case, class `Vector` has one type parameter, `Tv`. Method `map` also has one type parameter, `Tu`.
 
-```Hack
+```Hack no-extract
 final class Vector<Tv> implements MutableVector<Tv> {
-  ...
+  // ...
   public function map<Tu>((function(Tv): Tu) $callback): Vector<Tu> { ... }
 }
 ```
 
 In the following case, class `Map` has two type parameters, `Tk` and `Tv`. Method `zip` has one, `Tu`.
 
-```Hack
+```Hack no-extract
 final class Map<Tk, Tv> implements MutableMap<Tk, Tv> {
-  ...
+  // ...
   public function zip<Tu>(Traversable<Tu> $iter): Map<Tk, Pair<Tv, Tu>> { ... }
 }
 ```
@@ -28,7 +28,9 @@ final class Map<Tk, Tv> implements MutableMap<Tk, Tv> {
 In the following case, function `max_value` has one type parameter, `T`.
 
 ```Hack
-function max_value<T>(T $p1, T $p2): T { ... }
+function max_value<T>(T $p1, T $p2): T {
+  throw new Exception("unimplemented");
+}
 ```
 
 Generic type constraints are discussed in [type constraints](type-constraints.md).

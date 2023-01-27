@@ -1,4 +1,4 @@
-`readonly` is a keyword used to create immutable references to [Objects](/hack/classes/introduction) and their properties. 
+`readonly` is a keyword used to create immutable references to [Objects](/hack/classes/introduction) and their properties.
 
 ### How does it work?
 Expressions in Hack can be annotated with the `readonly` keyword. When an object or reference is readonly, there are two main constraints on it:
@@ -9,7 +9,7 @@ Expressions in Hack can be annotated with the `readonly` keyword. When an object
 ### Readonlyness
 Object properties of `readonly` values cannot be modified (i.e. mutated).
 
-```Hack readonly.readonlyness.hack.type-errors
+```Hack error
 class Bar {
   public function __construct(
     public Foo $foo,
@@ -29,8 +29,7 @@ function test(readonly Foo $x) : void {
 ### Deepness
 All nested properties of `readonly` objects are readonly.
 
-#### 
-``` Hack readonly.deepness.hack.type-errors
+``` Hack error
 function test(readonly Bar $x) : void {
   $foo = $x->foo;
   $foo->prop = 3; // error, $foo is readonly
@@ -38,7 +37,7 @@ function test(readonly Bar $x) : void {
 ```
 
 ### How is `readonly` different from contexts and capabilities that control property mutation (such as `write_props`)?
-[Contexts](/hack/contexts-and-capabilities/available-contexts-and-capabilities) such as `write_props` affect an entire function (and all of its callees), whereas readonly affects specific values / expressions. 
+[Contexts](/hack/contexts-and-capabilities/available-contexts-and-capabilities) such as `write_props` affect an entire function (and all of its callees), whereas readonly affects specific values / expressions.
 
 
 ### Topics covered in this section
@@ -47,4 +46,3 @@ function test(readonly Bar $x) : void {
 * [Explicit Readonly Keywords](explicit-readonly-keywords.md): Positions where the readonly keyword is explicitly required
 * [Containers and Collections](containers-and-collections.md): Interactions between collections of readonly values
 * [Advanced Features and Semantics](advanced-semantics.md): More complex features and interactions
-

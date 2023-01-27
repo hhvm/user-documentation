@@ -21,9 +21,9 @@ function demo(): void {
   $v = vec[1, 2];
   // $v is unaffected by this function call.
   $v2 = update_value($v);
-  
-  PHP\var_dump($v); // vec[1, 2]
-  PHP\var_dump($v2); // vec[42, 2, 100]
+
+  var_dump($v); // vec[1, 2]
+  var_dump($v2); // vec[42, 2, 100]
 }
 ```
 
@@ -41,10 +41,10 @@ function update_person(vec<Person> $items): void {
 
 function demo(): void {
   $v = vec[new Person("old")];
-  
+
   update_person($v);
-  
-  PHP\var_dump($v); // vec[Person { name: "new" }]
+
+  var_dump($v); // vec[Person { name: "new" }]
 }
 ```
 
@@ -63,7 +63,7 @@ function demo(): void {
   $v = vec[1, 2];
   update_value(inout $v);
 
-  PHP\var_dump($v); // vec[42, 2, 100]
+  var_dump($v); // vec[42, 2, 100]
 }
 ```
 
@@ -71,7 +71,7 @@ function demo(): void {
 
 The `Ref` class provides a single value that can be mutated.
 
-``` Hack
+```Hack no-extract
 function update_value(Ref<vec<int>> $items): void {
   $inner = $items->get();
   $inner[0] = 42;
@@ -83,7 +83,7 @@ function demo(): void {
   $v = new Ref(vec[1, 2]);
   update_value($v);
 
-  PHP\var_dump($v->get()); // vec[42, 2, 100]
+  var_dump($v->get()); // vec[42, 2, 100]
 }
 
 ```
@@ -104,6 +104,6 @@ function demo(): void {
   $v = Vector {1, 2};
   update_value($v);
 
-  PHP\var_dump($v); // Vector {42, 2, 100}
+  var_dump($v); // Vector {42, 2, 100}
 }
 ```

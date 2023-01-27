@@ -5,7 +5,7 @@ is executed zero or more times. For example:
 ```Hack
 $colors = vec["red", "white", "blue"];
 foreach ($colors as $color) {
-  ...
+  // ...
 }
 ```
 
@@ -16,7 +16,7 @@ As each array element has an index as well as a value, we can access both. For e
 ```Hack
 $colors = vec["red", "white", "blue"];
 foreach ($colors as $key => $color) {
-  ...
+  // ...
 }
 ```
 
@@ -27,7 +27,7 @@ We can cause each element's value to be ignored, using `$_`, as follows:
 ```Hack
   $a = dict['a' => 10, 'f' => 30];
   foreach ($a as $key => $_) { // 10 and 30 are ignored
-    ...
+    // ...
   }
 ```
 

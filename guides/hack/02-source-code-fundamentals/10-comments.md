@@ -8,7 +8,7 @@
 
 Hack has three comment syntaxes.
 
-```show-comment-styles.hack no-auto-output
+```hack
 // A single line comment.
 
 /* A multi line comment.
@@ -27,7 +27,7 @@ function foo(): void {}
 Multi-line comments start with `/*` and end with `*/`. Comments
 starting `/**` are also used for documentation.
 
-Single-line comments start with `//` and end with a newline. 
+Single-line comments start with `//` and end with a newline.
 
 `#` is not a valid comment character, as it is used to represent an [Enum Class Label](/hack/built-in-types/enum-class-label).
 

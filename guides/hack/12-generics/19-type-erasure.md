@@ -21,7 +21,7 @@ For async functions, Hack will also enforce the wrapped return type at
 runtime. For example, the following function will produce a runtime
 error:
 
-```Hack
+```Hack error
 async function my_foo(): Awaitable<int> {
   return "not an int";
 }

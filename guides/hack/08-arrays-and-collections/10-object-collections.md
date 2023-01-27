@@ -18,7 +18,8 @@ methods.
 
 *Where possible, we recommend using `vec` instead.*
 
-A `Vector` is a mutable ordered data structure.
+A `Vector` is a mutable ordered data structure. It is
+created with the `Vector {}` syntax.
 
 ```Hack
 // Creating a Vector.
@@ -26,6 +27,12 @@ function get_items(): Vector<string> {
   $items = Vector {'a', 'b', 'c'};
   return $items;
 }
+```
+
+`Vector`s can be accessed with the following syntax.
+
+```Hack
+$items = Vector {'a', 'b', 'c'};
 
 // Accessing items by index.
 $items[0]; // 'a'
@@ -80,8 +87,10 @@ function get_items(): ImmVector<string> {
 
 *Where possible, we recommend using `keyset` instead.*
 
-A `Set` is a mutable, ordered, data structure without duplicates. It can
-only contain `string` or `int` values.
+A `Set` is a mutable, ordered, data structure without duplicates. It
+is created with the `Set {}` syntax.
+
+A `Set` can only contain `string` or `int` values.
 
 ```Hack
 // Creating a Set.
@@ -89,6 +98,12 @@ function get_items(): Set<string> {
   $items = Set {'a', 'b', 'c'};
   return $items;
 }
+```
+
+`Set`s can be accessed with the following syntax.
+
+```Hack
+$items = Set {'a', 'b', 'c'};
 
 // Checking if a Set contains a value.
 C\contains_key($items, 'a'); // true
@@ -133,8 +148,10 @@ function get_items(): ImmSet<string> {
 
 *Where possible, we recommend using `dict` instead.*
 
-A `Map` is a mutable, ordered, key-value data structure. Keys must be
-`string`s or `int`s.
+A `Map` is a mutable, ordered, key-value data structure. It is
+created with the `Map {}` syntax.
+
+Keys must be `string`s or `int`s.
 
 ```Hack
 // Creating a Map.
@@ -142,6 +159,12 @@ function get_items(): Map<string, int> {
   $items = Map {'a' => 1, 'b' => 3};
   return $items;
 }
+```
+
+`Map`s can be accessed with the following syntax.
+
+```Hack
+$items = Map {'a' => 1, 'b' => 3};
 
 // Accessing items by key.
 $items['a']; // 1
@@ -170,7 +193,7 @@ foreach ($items as $value) {
   echo $value;
 }
 // Iterating keys and values.
-foreach ($items as $key => $Value) {
+foreach ($items as $key => $value) {
   echo $key;
   echo $value;
 }
@@ -184,7 +207,7 @@ new Map(dict['key1' => 'value1']); // Map { 'key1' => 'value1'}
 new Map(vec['a', 'b']); // Map {0 => 'a', 1 => 'b'}
 
 // Type checks
-$items is Map<_>; // true
+$items is Map<_, _>; // true
 ```
 
 `ImmMap` is an immutable version of `Map`.
@@ -201,13 +224,20 @@ function get_items(): ImmMap<string, int> {
 
 *Where possible, we recommend using `tuple` instead.*
 
-A `Pair` is an immutable data structure with two items.
+A `Pair` is an immutable data structure with two items. It is
+created with the `Pair {}` syntax.
 
 ``` Hack
 function get_items(): Pair<int, string> {
   $items = Pair {42, 'foo'};
   return $items;
 }
+```
+
+`Pair`s can be accessed with the following syntax.
+
+```Hack
+$items = Pair {42, 'foo'};
 
 // Destructuring a Pair value.
 list($x, $y) = $items; // $x: 42, $y: 'foo'

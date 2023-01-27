@@ -85,7 +85,7 @@ an old HHVM/Hack version.
 ## Running A Production Instance
 
 Running a production instance is very similar to a development
-instance. 
+instance.
 
 Configure a webserver and HHVM to serve the `public/`
 directory. Ensure that all requests that don't match a local file are

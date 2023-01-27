@@ -3,7 +3,7 @@ numbers.
 
 The following are equivalent:
 
-``` Hack
+```Hack no-extract
 $i = $i + 1;
 $i += 1;
 $i++;
@@ -12,7 +12,7 @@ $i++;
 
 Similarly for decrement:
 
-``` Hack
+```Hack no-extract
 $i = $i - 1;
 $i -= 1;
 $i--;
@@ -30,7 +30,7 @@ for ($i = 1; $i <= 10; $i++) {
 Note that `++` and `--` are statements, not expressions. They cannot
 be used in larger expressions.
 
-```Hack
+```Hack error
 $x = 0;
 $y = $x++; // Parse error.
 ```

@@ -3,7 +3,7 @@
 
 Dependent contexts may be accessed off of nullable parameters. If the dynamic value of the parameter is null, then the capability set required by that parameter is empty.
 
-```hack
+```hack no-extract
 function type_const(
   ?SomeClassWithConstant $t,
 )[$t::C]: void {
@@ -21,7 +21,7 @@ function fn_arg(
 
 Parameters used for accessing a dependent context may not be reassigned.
 
-```hack
+```hack no-extract
 function nope(SomeClassWithConstant $t, (function()[_]: void) $f)[$t::C, ctx $f]: void {
   // both disallowed
   $t = get_some_other_value();
@@ -31,7 +31,7 @@ function nope(SomeClassWithConstant $t, (function()[_]: void) $f)[$t::C, ctx $f]
 
 Dependent contexts may not be referenced within the body of a function. This restriction may be relaxed in a future version.
 
-```hack
+```hack no-extract
 function f(
   (function()[_]: void $f,
   SomeClassWithConstant $t,

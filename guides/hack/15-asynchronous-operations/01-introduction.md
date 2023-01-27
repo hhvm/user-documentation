@@ -46,7 +46,7 @@ change the execution order of unrelated code that might not be designed for that
 
 For example, given the following code:
 
-```limitations.hack
+```Hack
 use namespace HH\Lib\Vec;
 
 async function do_cpu_work(): Awaitable<void> {
@@ -94,7 +94,7 @@ happen because there are no operations that can be moved to the background:
 
 A naive way to make two cURL requests without async could look like this:
 
-```non-async-curl.hack
+```Hack
 function curl_A(): mixed {
   $ch = \curl_init();
   \curl_setopt($ch, \CURLOPT_URL, "http://example.com/");
@@ -117,10 +117,6 @@ function main(): void {
   $end = \microtime(true);
   echo "Total time taken: ".\strval($end - $start)." seconds\n";
 }
-```.example.hhvm.out
-Total time taken: 1.050155878067 seconds
-```.hhvm.expectf
-Total time taken: %f seconds
 ```
 
 In the example above, the call to `curl_exec` in `curl_A` is blocking any other processing. Thus, even though `curl_B` is an independent call
@@ -130,7 +126,7 @@ from `curl_A`, it has to sit around waiting for `curl_A` to finish before beginn
 
 Fortunately, HHVM provides an async version of `curl_exec`:
 
-```async-curl.hack
+```Hack
 use namespace HH\Lib\Vec;
 
 async function curl_A(): Awaitable<string> {
@@ -154,10 +150,6 @@ async function async_curl(): Awaitable<void> {
 function main(): void {
   \HH\Asio\join(async_curl());
 }
-```.example.hhvm.out
-Total time taken: 0.74790596961975 seconds
-```.hhvm.expectf
-Total time taken: %f seconds
 ```
 
 The async version allows the scheduler to run other code while waiting for a response from cURL. The most likely behavior is that as we're

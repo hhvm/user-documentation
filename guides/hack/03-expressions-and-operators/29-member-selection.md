@@ -1,7 +1,7 @@
 The operator `->` is used to access instance properties and instance
 methods on objects.
 
-```IntBox.hack no-auto-output
+```Hack file:intbox.hack
 class IntBox {
   private int $x;
 
@@ -28,7 +28,7 @@ The operator `?->` allows access to objects that [may be null](../types/nullable
 If the value is null, the result is null. Otherwise, `?->` behaves
 like `->`.
 
-``` Hack
+```Hack file:intbox.hack
 function my_example(?IntBox $ib): ?int {
   return $ib?->getX();
 }

@@ -6,7 +6,8 @@ without changing its value, see [type assertions](type-assertions.md).
 (int)3.14; // 3, rounds towards zero
 
 (bool)0; // false
-(string)new MyClass(); // calls __toString()
+
+(string)false; // ""
 ```
 
 Casts are only supported for `bool`, `int`, `float` and `string`. See

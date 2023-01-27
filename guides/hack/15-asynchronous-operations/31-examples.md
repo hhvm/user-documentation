@@ -6,7 +6,7 @@ documentation; they are added here again for consolidation purposes.
 
 This example shows the basic tenets of async, particularly the keywords used:
 
-```basic.hack
+```Hack
 // async specifies a function will return an awaitable. Awaitable<string> means
 // that the awaitable will ultimately return a string when complete
 async function trivial(): Awaitable<string> {
@@ -31,7 +31,7 @@ async function call_trivial(): Awaitable<void> {
 
 To get the result of an awaitable in a non-async function, use `join`:
 
-```join.hack no-auto-output
+```Hack
 async function join_async(): Awaitable<string> {
   return "Hello";
 }
@@ -51,7 +51,7 @@ function main(): void {
 
 Closure and lambda expressions can involve async functions:
 
-```closures.hack
+```Hack
 <<__EntryPoint>>
 async function closure_async(): Awaitable<void> {
   // closure
@@ -73,7 +73,7 @@ async function closure_async(): Awaitable<void> {
 
 This shows a way to organize async functions such that we have a nice clean data dependency graph:
 
-```data-dependencies.hack
+```Hack
 class PostData {
   // using constructor argument promotion
   public function __construct(public string $text) {}
@@ -138,10 +138,6 @@ async function generate_page(int $author_id): Awaitable<string> {
 function main(): void {
   print \HH\Asio\join(generate_page(13324)); // just made up a user id
 }
-```.expectregex
-[A-Z]{26} \d+
-[A-Z]{26} \d+
-[A-Z]{26} \d+
 ```
 
 ## Batching
@@ -149,7 +145,7 @@ function main(): void {
 Use rescheduling (via `HH\Asio\later`) to batch up operations to send multiple keys in a single request over a high latency network (for
 example purposes, the network isn't high latency, but just returns something random):
 
-```batching.hack
+```Hack
 async function b_one(string $key): Awaitable<string> {
   $subkey = await Batcher::lookup($key);
   return await Batcher::lookup($subkey);
@@ -208,9 +204,6 @@ async function multi_key_lookup(
   }
   return $r;
 }
-```.expectregex
-[A-F]{6}
-[A-F]{6}
 ```
 
 ## Polling
@@ -218,7 +211,7 @@ async function multi_key_lookup(
 We can use rescheduling in a polling loop to allow other awaitables to run. A polling loop may be needed where a service does not have
 an async function to add to the scheduler:
 
-```polling.hack
+```Hack
 // Of course, this is all made up :)
 class Polling {
   private int $count = 0;

@@ -2,7 +2,7 @@ A constant is a named value. Once defined, the value of the constant *cannot* be
 of two ways: using the `const` keyword at the top level, or inside a class or
 interface. For example:
 
-```defining-constants.hack
+```hack
 const int MAX_COUNT = 123;
 class C {
   const float MAX_HEIGHT = 10.5;
@@ -35,4 +35,3 @@ are not fixed:
 ## Core Predefined Constants
 
 Namespace HH\Lib\Math contains a number of integer-related constants (such as `INT64_MAX` and `INT64_MIN`).
-

@@ -28,7 +28,7 @@ class OtherClass {
 You can define your own attribute by implementing an attribute
 interface in the HH namespace.
 
-``` Hack
+```Hack file:contributors.hack
 class Contributors implements HH\ClassAttribute {
   public function __construct(private string $author, private ?keyset<string> $maintainers = null) {}
   public function getAuthor(): string {
@@ -57,9 +57,9 @@ You need to use reflection to access attribute arguments.
 
 Given the `MyClass` example defined above:
 
-``` Hack
+```Hack file:contributors.hack
 $rc = new ReflectionClass('MyClass');
 $my_class_contributors = $rc->getAttributeClass(Contributors::class);
-$my_class_contributors->getAuthor(); // "John Doe"
-$my_class_contributors->getMaintainers(); // keyset["ORM Team", "Core Library Team"]
+$my_class_contributors?->getAuthor(); // "John Doe"
+$my_class_contributors?->getMaintainers(); // keyset["ORM Team", "Core Library Team"]
 ```

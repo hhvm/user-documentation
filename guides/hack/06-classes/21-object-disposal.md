@@ -7,7 +7,7 @@ In the following example, we define and use type `TextFile` to encapsulate a tex
 we need to make sure that output buffers are flushed, among other things. Let us call these tasks *object cleanup*.  (The
 example is skeletal; it has only the minimal machinery needed to demonstrate object disposal.)
 
-```TextFile.hack
+```Hack
 class TextFile implements \IDisposable {
   private ?int $fileHandle = null;
   private bool $openFlag = false;
@@ -141,10 +141,14 @@ If classes in a class hierarchy need cleanup, it is the responsibility of the di
 in its base class explicitly.
 
 For objects of a class type to be used in an asynchronous context, that type must implement interface `IAsyncDisposable` instead,
-which requires a public method called `__disposeAsync` to be defined with the following signature:
+which requires a public method called `__disposeAsync`, like this:
 
 ```Hack
-public async function __disposeAsync(): Awaitable<void>;
+class Example implements IAsyncDisposable {
+  public async function __disposeAsync(): Awaitable<void> {
+    // Cleanup here.
+  }
+}
 ```
 
 Now, related `using` clauses *must* be preceded by `await`.

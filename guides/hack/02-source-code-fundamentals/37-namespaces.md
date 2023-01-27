@@ -10,10 +10,10 @@ the ***root namespace***, which is not named.
 Some types, such as `Exception`, and constants, and library functions (such as `sqrt`) are inherited from PHP and, as such, are also defined outside a namespace. Prefix a backslash (`\`) to refer to these types or functions; for example: `\Exception`, `\sqrt`.
 
 ## Sub-Namespaces
-A namespace can have ***sub-namespaces***, where a sub-namespace name shares a common prefix with another namespace. 
+A namespace can have ***sub-namespaces***, where a sub-namespace name shares a common prefix with another namespace.
 
 For example, the namespace `Graphics` can have sub-namespaces `Graphics\TwoD` and `Graphics\ThreeD`, for two- and three-dimensional facilities,
-respectively. 
+respectively.
 
 Apart from their common prefix, a namespace and its sub-namespaces have no special relationship. For example, `NS1\Sub` can exist without `NS1`. A named top-level namespace does not need to exist for a sub-namespace to exist.
 
@@ -29,31 +29,28 @@ For more information, see [XHP Namespace Syntax](/hack/XHP/basic-usage#namespace
 When debugging, use the predefined constant [`__NAMESPACE__`](/hack/source-code-fundamentals/constants#context-dependent-constants) to access the name of the current namespace.
 
 ## Declaring a Namespace
-Namespace declarations can be file-scoped with `namespace MyNS;`, or block-scoped with `namespace MyNS { ... }`. 
+Namespace declarations can be file-scoped with `namespace MyNS;`, or block-scoped with `namespace MyNS { ... }`.
 
 With semicolons, a namespace extends until the end of the script, or until the next namespace declaration, whichever is first.
 
 ```Hack
 namespace NS1;
-...				// __NAMESPACE__ is "NS1"
+// ...              // __NAMESPACE__ is "NS1"
 namespace NS3\Sub1;
-...				// __NAMESPACE__ is "NS3\Sub1"
+// ...              // __NAMESPACE__ is "NS3\Sub1"
 ```
 
 With brace delimiters, a namespace extends from the opening brace to the closing brace.
 
 ```Hack
-namespace NS1
-{
-...                   // __NAMESPACE__ is "NS1"
+namespace NS1 {
+  // __NAMESPACE__ is "NS1"
 }
-namespace
-{
-...                   // __NAMESPACE__ is ""
+namespace {
+  // __NAMESPACE__ is ""
 }
-namespace NS3\Sub1;
-{
-...                   // __NAMESPACE__ is "NS3\Sub1"
+namespace NS3\Sub1 {
+  // __NAMESPACE__ is "NS3\Sub1"
 }
 ```
 ## Importing from other Namespaces
@@ -61,7 +58,7 @@ With the `use` keyword, a namespace can import one or more member names into a s
 
 When importing many names, use `{ ... }`.
 
-```Hack
+```Hack no-extract
 use namespace NS1\{C, I, T}; // instead of `NS1\C, NS1\I, NS1\T`
 ```
 
@@ -70,7 +67,7 @@ Imported names can designate a namespace, a sub-namespace, a class or interface 
 If an imported name introduces ambiguity, you can refer to name `foo` with `namespace\foo`—using the the actual word `namespace`. For example, if you're importing a function `bar()`, but also want to call the `bar()` function from within your own namespace, refer to the one native to your namespace with `namespace\bar()`.
 
 
-```namespaces.inc.hack no-auto-output
+```Hack
 namespace NS1 {
   const int CON1 = 100;
   function f(): void {
@@ -107,14 +104,5 @@ namespace NS2 {
     echo "CON1 = ".\NS1\CON1."\n";
     \NS1\f();
   }
-}
-```
-
-```using-namespaces.hack
-namespace Hack\UserDocumentation\Fundamentals\Namespaces\Examples\Main;
-
-<<__EntryPoint>>
-function main(): void {
-  \NS2\f();
 }
 ```

@@ -1,7 +1,7 @@
 The type `num` can represent any `int` or `float` value. This type can be useful when specifying the interface to a function. Consider the
 following function declarations from the math library:
 
-```Hack
+```Hack no-extract
 function sqrt(num $arg): float;
 function log(num $arg, ?num $base = null): float;
 function abs<T as num>(T $number): T;
@@ -15,7 +15,7 @@ type `Container`-of-type-`num` and returns a nullable-of-`float`.
 
 Consider the following example:
 
-```num-argument-type.hack no-auto-output
+```Hack
 class Point {
   private float $x;
   private float $y;

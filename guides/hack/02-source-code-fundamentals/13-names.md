@@ -3,7 +3,7 @@ with an upper- or lowercase letter or underscore, which can optionally be follow
 
 Local variable names, function parameter names and property names *must* be preceded by `$`. For example:
 
-```various-names.hack no-auto-output
+```hack
 class Data {
   const int MAX_VALUE = 100;
   private int $value = 0;

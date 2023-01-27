@@ -160,13 +160,13 @@ function all_in_one_xhp_example_main(): void {
   };
 
   $max_label_len = \max($inputs->mapWithKey(($k, $_) ==> \strlen($k)));
-  print \HH\Lib\Str\repeat(' ', $max_label_len + 1)." | XHPRoot | XHPChild\n";
-  print \HH\Lib\Str\repeat('-', $max_label_len + 1)."-|---------|----------\n";
+  print Str\repeat(' ', $max_label_len + 1)." | XHPRoot | XHPChild\n";
+  print Str\repeat('-', $max_label_len + 1)."-|---------|----------\n";
 
   foreach ($inputs as $label => $input) {
     \printf(
       " %s | %-7s | %s\n",
-      \HH\Lib\Str\pad_left($label, $max_label_len, ' '),
+      Str\pad_left($label, $max_label_len, ' '),
       $input is x\node ? 'yes' : 'no',
       $input is \XHPChild ? 'yes' : 'no',
     );

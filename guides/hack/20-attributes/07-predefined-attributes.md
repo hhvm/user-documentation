@@ -38,7 +38,7 @@ This attribute can be applied to classes; it has no attribute values.  Consider 
 ```Hack
 <<__ConsistentConstruct>>
 class Base {
-  public function __construct() { ... }
+  public function __construct() {}
 
   public static function make(): this {
     return new static();
@@ -47,12 +47,13 @@ class Base {
 
 class Derived extends Base {
   public function __construct() {
-    ...
     parent::__construct();
   }
 }
 
-$v2 = Derived::make();
+function demo(): void {
+  $v2 = Derived::make();
+}
 ```
 
 When `make` is called on a `Derived` object, `new static` results in `Derived`'s constructor being called knowing only the parameter list
@@ -68,15 +69,14 @@ Consider the following example:
 ```Hack
 <<__Deprecated("This function has been replaced by do_that", 7)>>
 function do_this(): void { /* ... */ }
-
 ```
 
 The presence of this attribute on a function has no effect, unless that function is actually called, in which case, for each call to that
 function, HHVM raises a notice containing the text from the first attribute value.  The optional `int`-typed second attribute
 value (in this case, 7) indicates a *sampling rate*.
 
-Every 1/sampling-rate calls (as in, 1/7) to that function will raise a notice at runtime. If omitted, the default sampling rate is 1 
-(i.e. all calls raise notices). 
+Every 1/sampling-rate calls (as in, 1/7) to that function will raise a notice at runtime. If omitted, the default sampling rate is 1
+(i.e. all calls raise notices).
 
 To disable runtime notices, use a sampling rate of 0.
 
@@ -84,7 +84,7 @@ To disable runtime notices, use a sampling rate of 0.
 
 Associates a documentation URL with a type.
 
-```Hack
+```Hack file:base.hack
 <<__Docs("http://www.example.com/my_framework")>>
 class MyFrameworkBaseClass {}
 ```
@@ -92,7 +92,7 @@ class MyFrameworkBaseClass {}
 The IDE will include this URL when hovering over the
 `MyFrameworkBaseClass` type name.
 
-```Hack
+```Hack file:base.hack
 class MyClass extends MyFrameworkBaseClass {}
 ```
 
@@ -122,7 +122,7 @@ See [using a trait](../traits-and-interfaces/using-a-trait.md) for an example of
 
 A type is _enforceable_ if it can be used in `is` and `as` expressions.  Examples of non-enforceable types are function types and erased (non-reified) generics.  The `__Enforceable` attribute is used to annotate abstract type constants so they can only be instantiated with enforceable types, and thus used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
 
-```enforceable.hack.type-errors
+```Hack error
 abstract class A {
   abstract const type Tnoenf;
   <<__Enforceable>>
@@ -153,7 +153,7 @@ Similarly, the `__Enforceable` attribute can also be used to annotate reified ge
 Requires callers to explicitly specify the value for a generic
 type. Normally Hack allows generics to be inferred at the call site.
 
-```explicit.hack no-auto-output
+```Hack error
 function values_are_equal<<<__Explicit>> T>(T $x, T $y): bool {
   return $x === $y;
 }
@@ -163,7 +163,6 @@ function example_usage(int $x, int $y, string $s): void {
 
   // Without <<__Explicit>>, this code would be fine, even though
   // it always returns false.
-  /* HH_FIXME[4347] Demonstrating the error. */
   values_are_equal($x, $s);
 }
 ```
@@ -176,7 +175,7 @@ has no attribute values. For example:
 ```Hack
 <<__EntryPoint>>
 function main(): void {
-  \printf("Hello, World!\n");
+  printf("Hello, World!\n");
 }
 ```
 
@@ -235,12 +234,12 @@ and/or order of the parameters can change that key. Functions with variadic para
 
 This attribute can be applied to functions and static or instance methods; it has no attribute values.  Consider the following example:
 
-```Hack
+```Hack no-extract
 class Item {
   <<__Memoize>>
   public static function get_name_from_product_code(int $productCode): string {
     if (name-in-cache) {
-      return name-from-cache
+      return name-from-cache;
     } else {
       return Item::get_name_from_storage($productCode);
     }
@@ -274,7 +273,7 @@ Consider using `__MemoizeLSB` instead on static methods.
 Thrown exceptions are not memoized, showing by the increasing counter in this
 example:
 
-```memoize-throw.hack
+```Hack
 class CountThrows {
   private int $count = -1;
   <<__Memoize>>
@@ -327,7 +326,7 @@ class is marked as `final`? Your mocking framework would generally be out of luc
 The `__MockClass` attribute allows you to override the restriction of `final` on a class or method within a class, so that a
 mock class can exist.
 
-```mock.hack
+```Hack no-extract
 final class FinalClass {
   public static function f(): void {
     echo __METHOD__, "\n";
@@ -365,7 +364,7 @@ Mock classes *cannot* extend types `vec`, `dict`, and `keyset`, or the Hack lega
 
 This attribute is used to annotate reified type parameters to ensure that they are only instantiated with classes on which `new` can be safely called.  A common pattern, defining a function that creates instances of a class passed as type parameter, is:
 
-```newable.hack no-auto-output
+```Hack
 final class A {}
 
 function f<<<__Newable>> reify T as A>(): T {
@@ -377,7 +376,7 @@ The class `A` must either be final (as in the example) or annotated with `__Cons
 
 A complete example thus is:
 
-```newable-complete.hack no-auto-output
+```Hack
 <<__ConsistentConstruct>>
 abstract class A {
   public function __construct(int $x, int $y) {}
@@ -482,10 +481,15 @@ For example:
 
 ```Hack
 <<__Sealed(X::class, Y::class)>>
-abstract class A { ... }
+abstract class A {}
+
+class X extends A {}
+class Y extends A {}
 
 <<__Sealed(Z::class)>>
-interface I { ... }
+interface I {}
+
+class Z implements I {}
 ```
 
 Only classes `X` and `Y` can directly extend class `A`, and only class `Z` can directly implement interface `I`.

@@ -124,7 +124,7 @@ Note that the function or method must have a Hack definition, so the typechecker
 
 Expression trees may only contain expressions between the backticks.
 
-```hack
+```hack error
 MyDsl`1`; // OK: 1 is an expression
 MyDsl`while(true) {}`; // Bad: statement
 MyDsl`() ==> { while true() {} }`; // OK: statements are allowed in lambdas

@@ -4,7 +4,7 @@ You can write expressions using normal Hack syntax, and all the normal Hack tool
 
 Unlike normal Hack code, **expression tree code is not executed**.
 
-```hack
+```hack no-extract
 $e = MyDsl`foo() + 1`;
 ```
 
@@ -12,7 +12,7 @@ $e = MyDsl`foo() + 1`;
 
 Hack converts an expression tree to a series of method calls on a visitor.
 
-```hack
+```hack no-extract
 // You write code like this:
 $e = MyDsl`1 + 2`;
 
@@ -28,17 +28,17 @@ $e =
 
 The visitor can also define the types associated with literals and operators. This enables Hack to typecheck the DSL expression, even if `1` doesn't represent a Hack `int`.
 
-```hack
+```hack no-extract
 // The type checker will also check that this "virtualized" expression is correct,
 // even though this virtualized code isn't executed.
-(MyDsl::intType())->__plus(MyDsl::intType())
+(MyDsl::intType())->__plus(MyDsl::intType());
 ```
 
 ## Why?
 
 DSLs without expression trees are verbose and unchecked.
 
-```hack
+```hack no-extract
 // No checking or highlighting at all.
 takes_dsl_string("foo()");
 

@@ -3,7 +3,7 @@ optionally return a single value (but one which could contain other values, as i
 type), whose type must be compatible with the function's declared return type.  If the `return` statement contains no value, or there
 is no `return` statement (in which case, execution drops into the function's closing brace), no value is returned.  For example:
 
-```return.hack no-auto-output
+```Hack
 function average_float(float $p1, float $p2): float {
   return ($p1 + $p2) / 2.0;
 }

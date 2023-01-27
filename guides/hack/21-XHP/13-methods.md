@@ -21,7 +21,7 @@ Method | Description
 `setAttribute(string $name, mixed $val): this` | Sets the value of the XHP object's attribute named `$name`. This does no validation, attributes are only validated when retrieved using `getAttribute` or during rendering.
 `setAttributes(KeyedTraversable<string, mixed> $attrs): this` | Replaces the XHP object's array of attributes with `$attrs`.
 
-```list-builder.hack
+```hack no-extract
 use namespace Facebook\XHP\Core as x;
 use type Facebook\XHP\HTML\{li, p, ul};
 

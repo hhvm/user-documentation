@@ -21,7 +21,7 @@ When defining a function that will never return (it either throws, loops forever
 
 `nothing` can be used to create a `throw` expression in this way.
 
-```throw-as-an-expression.hack no-auto-output
+```Hack
 function throw_as_an_expression(\Throwable $t): nothing {
   throw $t;
 }
@@ -51,17 +51,17 @@ async function main_async(): Awaitable<void> {
 
 When writing a new bit of functionality, you may need to pass a value to a function you can't produce without a lot of work. `nothing` can be used as a placeholder value in place of any type without causing type errors. The typechecker will continue checking the rest of your program and the runtime will throw if this code path gets executed. I have called this function `undefined`, as an homage to Haskell [undefined](https://wiki.haskell.org/Undefined).
 
-```undefined.hack no-auto-output
+```Hack file:undefined.hack
 type undefined = nothing;
 
 function undefined(): undefined {
-  throw new \Error('NOT IMPLEMENTED: `undefined` can not be produced.');
+  throw new Exception('NOT IMPLEMENTED: `undefined` cannot be produced.');
 }
 ```
 
 And here is how to use it
 
-```undefined.usage.hack
+```Hack file:undefined.hack
 interface MyInterface {
   public function isAmazed(): bool;
 }
@@ -91,7 +91,7 @@ When making a new / empty `Container<T>`, Hack will infer its type to be `Contai
 
 Should you be able to pass an empty vec where a `vec<string>` is expected? Yes, there is no element inside that is not a `string`, so that should be fine. You can even pass the same vec into a function that takes a `vec<bool>` since there are no elements that are not of type `bool`. What are you allowed to do with the `$nothing` of this foreach? Well, you can do anything to it. Since nothing is a subtype of everything, you can pass it to any method and do all the things you want to.
 
-```empty-vec.hack no-auto-output
+```Hack
 function takes_vec_of_strings(vec<string> $_): void {}
 function takes_vec_of_bools(vec<bool> $_): void {}
 
@@ -112,7 +112,7 @@ async function main_async(): Awaitable<void> {
 
 To make an interface that requires that you implement a method, without saying anything about its types. This does still make a requirement about the amount of parameters that are required parameters.
 
-```very-wide-interface.hack no-auto-output
+```Hack
 interface DontForgetToImplementShipIt {
   public function shipIt(nothing $_): mixed;
 }
@@ -154,7 +154,7 @@ It is important to note that `Software::shipIt()` is not directly callable witho
 
 Contravariant generic types can use `nothing` to allow all values to be passed. This acts in a similar way that `mixed` acts of covariant generics, such as `vec<mixed>`.
 
-```contravariant.hack no-auto-output
+```Hack
 final class MyClass<-T> {
   public function consume(T $value): void {}
   public function someOtherMethod(): void {}

@@ -6,7 +6,7 @@ intended use of the trait or interface.
 
 To introduce a trait requirement, you can have one or more of the following in your trait:
 
-```Hack
+```Hack no-extract
 require extends <class name>;
 require implements <interface name>;
 ```
@@ -15,7 +15,7 @@ require implements <interface name>;
 
 To introduce an interface requirement, you can have one or more of following in your interface:
 
-```Hack
+```Hack no-extract
 require extends <class name>;
 ```
 
@@ -23,7 +23,7 @@ require extends <class name>;
 
 Here is an example of a trait that introduces a class and interface requirement, and shows a class that meets the requirement:
 
-```trait-good.hack
+```Hack
 abstract class Machine {
   public function openDoors(): void {
     return;
@@ -65,7 +65,7 @@ function run(): void {
 
 Here is an example of a trait that introduces a class and interface requirement, and shows a class that *does not* meet the requirement:
 
-```trait-bad.hack.type-errors
+```Hack error
 abstract class Machine {
   public function openDoors(): void {
     return;
@@ -118,7 +118,7 @@ _non-generic, _final_, class `<class name>`.  This contrasts with the `require e
 By relaxing the strict subtype constraint of `require extends`, `require class` constraints allow splitting the implementation of a class into a
 class and one (or multiple) traits, as in the following:
 
-```
+```Hack
 <<file:__EnableUnstableFeatures('require_class')>>
 
 trait T {
@@ -138,7 +138,7 @@ final class C {
 
 Here is an example of an interface that introduces a class requirement, and shows a class that meets the requirement:
 
-```interface-good.hack
+```Hack
 abstract class Machine {
   public function openDoors(): void {
     return;
@@ -174,7 +174,7 @@ function run(): void {
 
 Here is an example of an interface that introduces a class requirement, and shows a class that *does not* meet the requirement:
 
-```interface-bad.hack.type-errors
+```Hack error
 abstract class Machine {
   public function openDoors(): void {
     return;
@@ -208,7 +208,8 @@ function run(): void {
 ```
 
 **NOTE**: trait cannot be used as a type, comparing to some other languages. Only class and interface are types. For example,
-```trait.is.not.type
+
+```Hack no-extract
 trait T {}
 class C { use T; }
 $a = new C();
@@ -216,7 +217,8 @@ $j = ($a is C);
 $k = ($a is T); # error!
 ```
 leads to error
-```trait.is.not.type-error
+
+```
 Hit fatal : "is" and "as" operators cannot be used with a trait
     #0 at [:1]
     #1 include(), called at [:1]

@@ -1,11 +1,11 @@
 A class can implement a *contract* through an interface, which is a set of required
-method declarations and constants.  
+method declarations and constants.
 
 Note that the methods are only declared, not defined; that is, an interface defines a type consisting
 of *abstract* methods, where those methods are implemented by client classes as they see fit. An interface allows unrelated classes to
 implement the same facilities with the same names and types without requiring those classes to share a common base class. For example:
 
-```MyCollection.hack no-auto-output
+```Hack
 interface MyCollection {
   const MAX_NUMBER_ITEMS = 1000;
   public function put(int $item): void;
@@ -50,9 +50,9 @@ application without impacting existing code.
 
 An interface can extend another interface; for example:
 
-```Hack
+```Hack no-extract
 interface Iterator<Tv> extends Traversable<Tv> {
-  ...
+  // ...
 }
 ```
 

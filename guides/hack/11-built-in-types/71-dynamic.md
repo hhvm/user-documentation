@@ -9,8 +9,8 @@ a more manageable manner than `mixed`. With `dynamic`, the presence of dynamism 
 is local to the function, and dynamic behaviors cannot leak into code that does not know about it.
 
 Consider the following:
-```Hack
 
+```Hack
 function f(dynamic $x) : void {
   $n = $x + 5;            // $n is a num
   $s = $x . "hello!";     // $s is a string
@@ -35,7 +35,7 @@ and a subtype only of the top type `mixed`. The type interfaces with other types
 examples). All types coerce to `dynamic`, which allows callers to pass any type into a function that expects dynamic. Also, any type
 coerces to its supertypes. Coercion points include function calls, return statements, and property assignment.
 
-```coercion_to_dynamic.hack no-auto-output
+```Hack
 function f(dynamic $d): void {}
 function g(arraykey $a): void {}
 
@@ -54,7 +54,7 @@ The runtime enforces a set of types by throwing `TypeHintViolationException` whe
 
 Hack approximates this runtime behavior by allowing values of type `dynamic` to coerce to enforceable types at coercion points.
 
-```coercion_from_dynamic.hack.type-errors
+```Hack error
 function enforced(int $i): void {}
 function notEnforced(shape('a' => int) $s): void {}
 
@@ -69,7 +69,7 @@ coercion_from_dynamic = true
 
 Unions with dynamic are also allowed to coerce to enforceable types provided that each element of the union can coerce.
 
-```hack coercion_from_union.hack.type-errors
+```hack error
 function expect_int(int $i): void {}
 function expect_string(string $s): void {}
 

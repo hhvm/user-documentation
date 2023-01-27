@@ -5,7 +5,7 @@ implements the interface `Iterator`. As such, that object can be iterated over u
 the runtime calls the generator function implicitly to get the element. Then the runtime saves the state of the generator for subsequent
 element-fetch requests. Consider the following example:
 
-```series.hack
+```Hack
 function series(
   int $start,
   int $end,
@@ -43,12 +43,12 @@ for each collection. This is demonstrated in the output, which has keys 0-5.
 
 `yield` can also specify the value of a key; for example:
 
-```squares.hack
+```Hack
 function squares(
   int $start,
   int $end,
   string $keyPrefix = "",
-): \Generator<string, int, void> {
+): Generator<string, int, void> {
   for ($i = $start; $i <= $end; ++$i) {
     yield $keyPrefix.$i => $i * $i; // specify a key/value pair
   }
@@ -67,34 +67,24 @@ type of `squares` now uses `string` as the first generic type argument, as the e
 
 The following example uses `yield` to generate a collection of strings, each of which is a record from a text file:
 
-```process-file.hack
-use type HHVM\UserDocumentation\LocalConfig;
-
-function getTextFileLines(string $filename): \Generator<int, string, void> {
-  $infile = \fopen($filename, 'r');
+```Hack
+function getTextFileLines(string $filename): Generator<int, string, void> {
+  $infile = fopen($filename, 'r');
   if ($infile === false) {
     // handle file-open failure
   }
 
   try {
     while (true) {
-      $textLine = \fgets($infile);
+      $textLine = fgets($infile);
       if ($textLine === false) {
         break;
       }
-      $textLine = \rtrim($textLine, "\r\n"); // strip off line terminator
+      $textLine = rtrim($textLine, "\r\n"); // strip off line terminator
       yield $textLine;
     }
   } finally {
-    \fclose($infile);
-  }
-}
-
-<<__EntryPoint>>
-function main(): void {
-  $path = LocalConfig::ROOT.'/src/utils/examples/Testfile.txt';
-  foreach (getTextFileLines($path) as $line) {
-    echo ">$line<\n";
+    fclose($infile);
   }
 }
 ```

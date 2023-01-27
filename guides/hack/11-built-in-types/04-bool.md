@@ -2,7 +2,7 @@ The Boolean type `bool` can store two distinct values, which correspond to the B
 
 Consider the following example:
 
-```leap-year-test.hack
+```Hack
 function is_leap_year(int $yy): bool {
   return ((($yy & 3) === 0) && (($yy % 100) !== 0)) || (($yy % 400) === 0);
 }

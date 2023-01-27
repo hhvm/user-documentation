@@ -1,7 +1,7 @@
 HHVM does a runtime type check for function arguments and return
 values.
 
-``` Hack
+```Hack error
 function takes_int(int $_): void {}
 
 function check_parameter(): void {

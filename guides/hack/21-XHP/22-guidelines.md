@@ -91,7 +91,7 @@ original XHP class from its `renderAsync` method).
 
 Attribute declarations look like Hack property declarations:
 
-```Hack
+```Hack no-extract
 public string $prop;
 attribute string attr;
 ```

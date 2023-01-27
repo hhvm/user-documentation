@@ -29,7 +29,7 @@ $ touch .hhconfig
 
 Create a file called `my_project/hello.hack` with the following code:
 
-```hello.hack no-auto-output
+```Hack
 use namespace HH\Lib\IO;
 
 <<__EntryPoint>>

@@ -15,52 +15,64 @@ In this part, we'll walk you through how to migrate a non reified function to a 
 
 ```Hack
 class C<T> {}
-function f(C<int> $x) {}
+function f(C<int> $x): void {}
 
-f(new C()); // OK
+function demo(): void {
+  f(new C()); // OK
+}
 ```
 
 1) You have managed to write out all the type annotations (either pre-existing or by using `<<__Soft>>` annotation logging)
 
-```Hack
+```Hack error
 class C<<<__Soft>> reify T> {}
-function f(C<int> $x) {}
+function f(C<int> $x): void {}
 
-f(new C<string>()); // Typechecker error: string incompatible with int
+function demo(): void {
+  f(new C<string>()); // Typechecker error: string incompatible with int
+}
 ```
 
 2) You now want to remove `__Soft` and start using the generic. So you move `__Soft` to `__Warn`.
 
-```Hack
+```Hack error
 class C<<<__Warn>> reify T> {}
-function f(C<int> $x) {}
+function f(C<int> $x): void {}
 
-f(new C<string>()); // Runtime warning: string incompatible with int
+function demo(): void {
+  f(new C<string>()); // Runtime warning: string incompatible with int
+}
 ```
 
 3) By using logging, you have added `__Soft` to everywhere it's used and now it will be safe to remove `__Warn`.
 
-```Hack
+```Hack error
 class C<<<__Warn>> reify T> {}
-function f(C< <<__Soft>> int> $x) {}
+function f(C< <<__Soft>> int> $x): void {}
 
-f(new C<string>()); // Runtime warning: string incompatible with int
+function demo(): void {
+  f(new C<string>()); // Runtime warning: string incompatible with int
+}
 ```
 
 4) `__Warn` goes away
 
-```Hack
+```Hack error
 class C<reify T> {}
-function f(C< <<__Soft>> int> $x) {}
+function f(C< <<__Soft>> int> $x): void {}
 
-f(new C<string>()); // Runtime warning: string incompatible with int
+function demo(): void {
+  f(new C<string>()); // Runtime warning: string incompatible with int
+}
 ```
 
 5) Fix the use site
 
 ```Hack
 class C<reify T> {}
-function f(C<string> $x) {}
+function f(C<string> $x): void {}
 
-f(new C<string>()) // OK
+function demo(): void {
+  f(new C<string>()); // OK
+}
 ```

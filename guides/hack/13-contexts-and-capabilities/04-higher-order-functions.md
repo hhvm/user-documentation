@@ -15,7 +15,7 @@ function has_dependent_fn_arg(
 
 One may reference the dependent context of a function argument in later arguments as well as in the return type.
 
-```hack
+```hack no-extract
 function has_double_dependent_fn_arg(
   (function()[_]: void) $f1,
   (function()[ctx $f1]: void) $f2,
@@ -34,7 +34,7 @@ function has_dependent_return(
 
 The semantics of the argument-dependent-context are such that the higher order function's type is specialized per invocation.
 
-```hack
+```hack no-extract
 function callee(
   (function()[_]: void) $f,
 )[rand, ctx $f]: void {

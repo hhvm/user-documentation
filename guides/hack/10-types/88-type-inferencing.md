@@ -2,11 +2,12 @@ While certain kinds of variables must have their type declared explicitly, other
 look at the context in which those variables are used.  For example:
 
 ```Hack
-$v = 100;
-function is_leap_year(int $yy): bool {
+function foo(int $i): void {
+    $v = 100;
+}
 ```
 
-As we can see, `$v` is implicitly typed as `int`, and `$yy` is explicitly typed.
+As we can see, `$v` is implicitly typed as `int`, and `$i` is explicitly typed.
 
 In Hack,
 * Types **must be declared** for properties and for the parameters and the return type of named functions.
@@ -17,14 +18,14 @@ The process of type inferencing does not cross function boundaries.
 
 Here's an example involving a local variable:
 
-```Hack
+```Hack file:c.hack
 function f(): void {
   $v = 'acb';       // $v has type string
-  ...
+  // ...
   $v = true;        // $v has type bool
-  ...
-  $v = dict['red' => 10; 'green' => 15]; // $v has type dict<string, int>
-  ...
+  // ...
+  $v = dict['red' => 10, 'green' => 15]; // $v has type dict<string, int>
+  // ...
   $v = new C();     // $v has type C
 }
 ```
@@ -33,12 +34,11 @@ For each assignment, the type of `$v` is inferred from the type of the expressio
 of function statics is inferred in the same manner, as are function parameters. For example:
 
 ```Hack
-function g(int $p1 = -1): void
-{
+function g(int $p1 = -1): void {
   // on entry to the function, $p1 has the declared type int
-  ...
+  // ...
   $p1 = 23.56;      // $p1 has type float
-  ...
+  // ...
 }
 ```
 
@@ -46,7 +46,7 @@ As a parameter, `$p1` is required to have a declared type, in this case, `int`. 
 
 In the case of a class constant, if the type is omitted, it is inferred from the initializer:
 
-```Hack
+```Hack file:c.hack
 class C {
   const C1 = 10;            // type int inferred from initializer
   const string C2 = "red";  // type string declared
@@ -58,23 +58,11 @@ Let's consider types in closures:
 ```Hack
 $doubler = $p ==> $p * 2;
 $doubler(3);
-$doubler(4.2);
 ```
 
 The type of the parameter `$p` and the function's return type have been omitted. These types are inferred each time the anonymous function
 is called through the variable `$doubler`. When `3` is passed, as that has type `int`, that is inferred as the type of `$p`. The literal `2`
 also has type `int`, so the type of the value returned is the type of `$p * 2`, which is `int`, and that becomes the function's return type.
-When `4.2` is passed, as that has type `float`, that is inferred as the type of `$p`. The literal `2` has type `int`, so the type of the value
-returned is the type of `$p * 2`, which is `float`, and that becomes the function's return type.
-
-Consider the following, subtly different, version (note the literal 2.0 instead of 2):
-
-```Hack
-$doubler = $p ==> $p * 2.0;
-```
-
-Whether an `int` or `float` value is passed, it matters not, as when either is multiplied by a `float`, the result is `float`, so that
-becomes the function's return type.
 
 We can add partial explicit type information; the following all result in the same behavior:
 

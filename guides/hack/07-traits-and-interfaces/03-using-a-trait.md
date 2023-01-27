@@ -2,7 +2,7 @@ Traits are a mechanism for code reuse that overcomes some limitations of Hack si
 
 In its simplest form a trait defines properties and method declarations.  A trait cannot be instantiated with `new`, but it can be _used_ inside one or more classes, via the `use` clause.  Informally, whenever a trait is used by a class, the property and method definitions of the trait are inlined (copy/pasted) inside the class itself.  The example below shows a simple trait defining a method that returns even numbers.  The trait is used by two, unrelated, classes.
 
-```Simple.hack
+```Hack
 trait T {
   public int $x = 0;
 
@@ -38,7 +38,7 @@ function main() : void {
 
 A class can use multiple traits, and traits themselves can use one or more traits.  The example below uses three traits, to generate even numbers, to generate odd numbers given a generator of even numbers, and to test if a number is odd:
 
-```Multiple.hack
+```Hack
 trait T1 {
   public int $x = 0;
 
@@ -94,7 +94,7 @@ If a class uses multiple traits that define the same property, say `$x`, then ev
 
 Beware that at runtime all the instances of the multiply defined property `$x` are _aliased_. This might be source of unexpected interference between traits implementing unrelated services: in the example below the trait `T2` breaks the invariant of trait `T1` whenever both are used by the same class.
 
-```PropertyConflict.hack
+```Hack
 trait T1 {
   public static int $x = 0;
 
@@ -134,12 +134,12 @@ function main() : void {
 
 For methods, a rule of thumb is "traits provide a method implementation if the class itself does not".  If the class implements a method `m`, then traits used by the class can define methods named `m` provided that their interfaces are compatible (more precisely _super types_ of the type of the method defined in the class.  At runtime methods inserted by traits are ignored, and dispatch selects the method defined in the class.
 
-If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.  
+If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.
 
 Traits inherited along multiple paths (aka. "diamond traits") are rejected by Hack and HHVM whenever they define methods.  However the experimental `<<__EnableMethodTraitDiamond>>` attribute can be specified on the base class (or trait) to enable support for diamond traits that define methods, provided that method resolution remains unambiguous.  For instance, in the example below the invocation of `(new C())->foo()` unambiguously  resolves to the method `foo` defined in trait `T`:
 
 
-```MethodTraitDiamond.hack
+```Hack
 <<file:__EnableUnstableFeatures('method_trait_diamond')>>
 
 trait T {
@@ -158,6 +158,8 @@ class C {
 function main() : void {
   (new C())->foo();
 }
+```
+
 ```.ini
 hhvm.diamond_trait_methods=1
 ```
@@ -169,7 +171,7 @@ _Remark_: a diamond trait cannot define properties if it is used by a class via 
 
 For constants, constants inherited from the parent class take precedence over constants inherited from traits.
 
-```Traitparent.hack
+```Hack
 trait T {
   const FOO = 'trait';
 }
@@ -188,7 +190,7 @@ function main() : void {
 
 If multiple used traits declare the same constant, the constant inherited from the first trait is used.
 
-```Traitmultiple.hack
+```Hack
 trait T1 {
   const FOO = 'one';
 }
@@ -207,7 +209,7 @@ function main() : void {
 
 Finally, constants inherited from interfaces declared on the class conflict with other inherited constants, including constants declared on traits.
 
-```Traitconflict.hack.type-errors
+```Hack error
 trait T {
   const FOO = 'trait';
 }
@@ -226,7 +228,7 @@ function main() : void {
 
 The single exception to this rule are constants inherited from traits via interfaces, as these will lose silently upon conflict.
 
-```Traitinterface.hack
+```Hack
 interface I1 {
   const FOO = 'one';
 }

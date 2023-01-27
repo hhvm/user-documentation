@@ -1,4 +1,4 @@
-XHP provides a native XML-like representation of output. 
+XHP provides a native XML-like representation of output.
 
 After adding the required dependencies, read the [Introduction](/hack/XHP/introduction).
 
@@ -6,7 +6,7 @@ After adding the required dependencies, read the [Introduction](/hack/XHP/introd
 While XHP syntax is a part of the Hack language, implementation is in [XHP-Lib](https://github.com/hhvm/xhp-lib/), a library that needs to be installed with [Composer](https://getcomposer.org/).
 
 * XHP-Lib includes the base classes and interfaces, and definitions of standard HTML elements.
-* Support for namespaced XHP classes (elements like `<p>`) is enabled by default since HHVM 4.73. 
+* Support for namespaced XHP classes (elements like `<p>`) is enabled by default since HHVM 4.73.
 
 ### XHP-Lib Versions
 We stongly recommend using XHP-Lib v4, which includes XHP namespace support. XHP-Lib v3 is not officially maintained.

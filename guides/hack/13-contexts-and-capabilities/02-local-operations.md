@@ -12,14 +12,14 @@ Consider the following potential (although not necessarily planned) contexts (wi
 
 In all of the below cases, the relevant local operations successfully typecheck due to the matching capabilities within the context of the function.
 
-```hack
+```hack no-extract
 function io_good()[io]: void {
   echo "good"; // ok
   print "also ok"; // also ok
 }
 ```
 
-```hack
+```hack no-extract
 class FooException extends Exception {}
 class FooChildException extends FooException {}
 class BarException extends Exception {}
@@ -40,7 +40,7 @@ function throws_foo_and_bar_exceptions()[throws<FooException>, throws<BarExcepti
 }
 ```
 
-```hack
+```hack no-extract
 class HasAStatic {
   public static int $i = 0;
 }
@@ -55,12 +55,12 @@ class SomeClass {
   public int $i = 0;
 }
 
-function reads_and_writes_prop(SomeClass $sc)[write_prop]: void {
+function reads_and_writes_prop(SomeClass $sc)[write_props]: void {
   $sc->i++;
 }
 ```
 
-```hack
+```hack no-extract
 function casts_to_dynamic(int $in)[dynamic]: void {
   invokes_off_dynamic($in as dynamic);
 }

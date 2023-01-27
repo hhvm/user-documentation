@@ -6,7 +6,7 @@ The library functions `is_finite`, `is_infinite`, and `is_nan` indicate if a giv
 
 Consider the following example:
 
-```average.hack
+```Hack
 function average_float(float $p1, float $p2): float {
   return ($p1 + $p2) / 2.0;
 }

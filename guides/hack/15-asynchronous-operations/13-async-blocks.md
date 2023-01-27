@@ -21,7 +21,7 @@ Async blocks have two main use-cases. Remember, this is essentially syntactic su
 - Inline simple async statements that would before have required a function call to execute.
 - Replace the call required by an async lambda to return an actual `Awaitable<T>`.
 
-```syntactic-sugar.hack
+```Hack
 async function get_int_async(): Awaitable<int> {
   return 4;
 }
@@ -94,7 +94,8 @@ In async named-functions, `async` immediately precedes `function`, which, in tur
 lambdas, `async` also immediately precedes the parameters.
 
 So:
-```
+
+```Hack no-extract
 $x = async () ==> { ... } // good
 $x = () ==> async { ... } // bad
 ```

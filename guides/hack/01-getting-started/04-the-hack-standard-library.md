@@ -65,7 +65,7 @@ Other low-level APIs used by HSL IO.
 | `TCP\`            | APIs for client and server interaction that uses the Transmission Control Protocol (TCP).                                                       |
 | `Network\`        | APIs for client and server interaction.                                                                                                         |
 
-## Async 
+## Async
 In addition to the content outlined in [Asynchronous Operations](/hack/asynchronous-operations/introduction), there are a few utility classes in the `Async\` namespace.
 
 |      Namespace    | Description                                                                                                                                     |

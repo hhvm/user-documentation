@@ -7,7 +7,7 @@ This implies that a closure that requires a set of capabilities S<sub>a</sub> ma
 
 For the following example, assume that the default context includes *at least* {Rand, IO}
 
-```hack
+```hack no-extract
 function requires_rand_io_arg((function()[rand, io]: void) $f): void {
   $f();
 }
@@ -24,7 +24,7 @@ Additionally, this has the standard implication on inheritance hierarchies. Note
 
 For the following, assume the default set contains {IO, Rand, Throws<mixed>}.
 
-```hack
+```hack no-extract
 class Parent_ {
   public function maybeRand()[rand]: void {/* some fn body */} // {Rand}
   public function maybePure(): void {/* some fn body */} // {Throws<mixed>, IO, Rand}
@@ -47,7 +47,7 @@ In reality, there may also exist a subtyping relationship between capabilities. 
 
 For the following, assume that the following contexts and capabilities exist: Rand, ReadFile <: Rand, rand: {Rand}, readfile: {Readfile}
 
-```hack
+```hack no-extract
 function requires_rand()[rand]: void {/* some fn body */}
 
 function has_readfile()[readfile]: void {

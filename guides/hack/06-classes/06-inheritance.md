@@ -104,6 +104,7 @@ class IncrementedIntBox extends IntBox {
   public function get(): int {
     return parent::get() + 1;
   }
+}
 ```
 
 This also works for static methods.

@@ -22,7 +22,7 @@ The type checker understands `is` and [refines
 values](../types/type-refinement.md) inside conditionals or after
 `invariant` calls.
 
-```Hack
+```Hack no-extract
 function transport(Vehicle $v): void {
   if ($v is Car) {
     $v->drive();
@@ -38,7 +38,7 @@ function transport(Vehicle $v): void {
 A common pattern with `is` refinement is to use `nonnull` rather than
 an explicit type.
 
-``` Hack
+``` Hack no-extract
 function transport(?Car $c): void {
   if ($c is nonnull) {
     // Infers that $c is Car, but saves us
@@ -56,9 +56,12 @@ For enums, `is` also checks that the value is valid.
 enum MyEnum: int {
   FOO = 1;
 }
-1 is MyEnum       // true
-42 is MyEnum      // false
-'foo' is MyEnum   // false
+
+function demo(): void {
+  1 is MyEnum;       // true
+  42 is MyEnum;      // false
+  'foo' is MyEnum;   // false
+}
 ```
 
 ### Generics
@@ -96,12 +99,15 @@ against the underlying runtime type.
 
 ``` Hack
 type myint = int;
-1 is myint; // true
+
+function demo(): void {
+  1 is myint; // true
+}
 ```
 
 ## Enforcing Types with `as` and `?as`
 
-`as` performs the same checks as `is`. 
+`as` performs the same checks as `is`.
 
 However, it throws `TypeAssertionException` if the value has a
 different type. The type checker understands that the value must have
@@ -115,7 +121,7 @@ the type specified afterwards, so it
 
 `as` enables you to narrow a type.
 
-```Hack
+```Hack no-extract
 // Normally you'd want to make transport take a Vehicle
 // directly, so you can check when you call the function.
 function transport(mixed $m): void {
@@ -147,22 +153,3 @@ generics.
 
 Hack also provides type predicate functions `is_int`, `is_bool` and so
 on. You should use `is` instead.
-
-## Legacy `instanceof`
-
-**The `instanceof` operator does not exist in HHVM 4.15+ and will
-result in a parse error. Use `is` instead.**
-
-The operator `instanceof` checks if the left-hand operand has the type
-of right-hand operand. It returns a `bool` result.
-
-```Hack
-class C1 { ... }
-class C2 { ... }
-class D extends C1 { ... }
-
-$d = new D();
-$d instanceof C1;      // true
-$d instanceof C2;      // false
-$d instanceof D;       // true
-```

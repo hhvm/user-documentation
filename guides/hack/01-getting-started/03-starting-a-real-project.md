@@ -140,7 +140,7 @@ numbers; save the following as `src/square_vec.hack`:
 ```Hack
 use namespace HH\Lib\Vec;
 
-function square_vec(vec<num> $numbers): vec<int> {
+function square_vec(vec<num> $numbers): vec<num> {
   return Vec\map($numbers, $number ==> $number * $number);
 }
 ```
@@ -162,7 +162,7 @@ We now have a function that is valid Hack, but it's not tested, and nothing call
 
 Save the following as `bin/square_some_things.hack`:
 
-```Hack
+```Hack no-extract
 #!/usr/bin/env hhvm
 
 <<__EntryPoint>>
@@ -237,7 +237,7 @@ Function "main()" does not match conventions; consider renaming to "main_async"
 [HackTest] is used to create unit test classes, and [fbexpect] is used to
 express assertions. Let's create a basic test as `tests/MyTest.hack`:
 
-```hack
+```hack no-extract
 use function Facebook\FBExpect\expect;
 use type Facebook\HackTest\{DataProvider, HackTest};
 

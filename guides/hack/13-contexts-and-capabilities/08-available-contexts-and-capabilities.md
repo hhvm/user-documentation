@@ -10,7 +10,7 @@ The following contexts and capabilities are implemented at present.
 This gates the ability to use the `echo` and `print` intrinsics within function bodies.
 Additionally, built-in functions that perform output operations such as file writes and DB reads will require this capablity.
 
-```hack
+```Hack
 function does_echo_and_print(): void {
   echo 'like this';
   print 'or like this';
@@ -24,7 +24,7 @@ Built-in functions that modify their inputs or methods that modify `$this` will 
 
 At present, all constructors have the ability to modify `$this`. Note that this does *not* imply that constructors can call functions requiring the WriteProperty capability.
 
-```write-props-good.hack
+```Hack
 // Valid example
 
 class SomeClass {
@@ -41,7 +41,7 @@ function can_write_props(SomeClass $sc)[write_props]: void {
 }
 ```
 
-```write-props-bad.hack.type-errors
+```Hack error
 // Invalid example
 
 class SomeClass {
@@ -58,7 +58,7 @@ function pure_function(SomeClass $sc)[]: void {
 
 Hack Collections, being objects, require this capability to use the array access operator in a write context.
 
-```write-props-collections.hack
+```Hack
 function modify_collection()[write_props]: void {
   $v = Vector {};
   $v[] = 'like this';
@@ -72,7 +72,7 @@ function modify_collection()[write_props]: void {
 This gates the ability to access static variables and globals.
 Built-in functions that make use of mutable global state or expose the php-style superglobals will require this capability.
 
-```globals-good.hack
+```Hack
 // Valid example
 
 class SomeClass {
@@ -87,7 +87,7 @@ function access_static()[globals]: void {
 }
 ```
 
-```globals-bad.hack.type-errors
+```Hack error
 // Invalid example
 
 class SomeClass {

@@ -3,7 +3,7 @@ You can incrementally port code to use XHP.
 Assume your output is currently handled by the following function, which might
 be called from many places.
 
-```Hack
+```hack no-extract
 function render_component(string $text, Uri $uri): string {
   $uri = htmlspecialchars($uri->toString());
   $text = htmlspecialchars($text);
@@ -15,7 +15,7 @@ function render_component(string $text, Uri $uri): string {
 
 You can start by simply using XHP in `render_component`:
 
-```Hack
+```hack no-extract
 async function render_component(string $text, Uri $uri): Awaitable<string> {
   $link = <a href={$uri->toString()}>{$text}</a>;
   return await $link->toStringAsync();
@@ -30,7 +30,7 @@ strings around in the end.
 
 You could make `render_component` into a class:
 
-```Hack
+```hack no-extract
 namespace ui;
 
 class link extends x\element {
@@ -45,7 +45,7 @@ class link extends x\element {
 
 Keep a legacy `render_component` around while you are converting the old code that uses `render_component` to use the class.
 
-```Hack
+```hack no-extract
 async function render_component(string $text, Uri $uri): Awaitable<string> {
   return await (<ui:link uri={$uri} text={$text} />)->toStringAsync();
 }

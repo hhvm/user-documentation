@@ -4,7 +4,7 @@ All `await`s within the same statement will execute concurrently.
 
 ## Examples
 
-```
+```Hack no-extract
 $sum =
   await x_async() +      // yes!
   await y_async();       // yes!
@@ -38,7 +38,7 @@ Similar to other aspects of `await`, we do not guarantee an order of execution o
 
 In this example, you should make no assumptions about the order in which `a_async()`, `b()`, `c_async()` or `d()` are executed, but you can assume that both `await`'ed functions (`a_async()` and `c_async()`) will be concurrently awaited.
 
-```
+```Hack no-extract
 $x = foo(
   await a_async(),
   b(),
@@ -53,7 +53,7 @@ To further help protect against depending on order-of-execution, we've
 banned assignment or updating variables as-an-expression for
 statements that contain an `await`.
 
-```
+```Hack no-extract
 // Yes!
 $x = await x_async();
 // No, assignment as an expression
@@ -68,7 +68,7 @@ await bar_async(baz(inout $x));
 
 Hack doesn't currently support nested `await`s.
 
-```
+```Hack error
 // Syntax error.
 $y = await foo_async(await bar_async());
 

@@ -6,7 +6,8 @@ whenever you're unsure.
 
 ## `vec`
 
-A `vec` is an ordered, iterable data structure.
+A `vec` is an ordered, iterable data structure. It is created with
+the `vec[]` syntax.
 
 ```Hack
 // Creating a vec.
@@ -14,6 +15,12 @@ function get_items(): vec<string> {
   $items = vec['a', 'b', 'c'];
   return $items;
 }
+```
+
+`vec`s can be accessed with the following syntax.
+
+```Hack
+$items = vec['a', 'b', 'c'];
 
 // Accessing items by index.
 $items[0]; // 'a'
@@ -69,8 +76,10 @@ $items is vec<_>; // true
 
 ## `keyset`
 
-A `keyset` is an ordered data structure without duplicates. It can
-only contain `string` or `int` values.
+A `keyset` is an ordered data structure without duplicates. It is
+created with the `keyset[]` syntax.
+
+A `keyset` can only contain `string` or `int` values.
 
 
 ```Hack
@@ -79,11 +88,17 @@ function get_items(): keyset<string> {
   $items = keyset['a', 'b', 'c'];
   return $items;
 }
+```
+
+`keyset`s can be accessed with the following syntax.
+
+```Hack
+$items = keyset['a', 'b', 'c'];
 
 // Checking if a keyset contains a value.
 C\contains($items, 'a'); // true
 
-// Adding/removing items. These operations set $items to a modified copy, 
+// Adding/removing items. These operations set $items to a modified copy,
 // and do not modify the original value.
 $items[] = 'd'; // keyset['a', 'b', 'c', 'd']
 $items[] = 'a'; // keyset['a', 'b', 'c', 'd']
@@ -103,7 +118,7 @@ keyset[1, 2] === keyset[2, 1]; // false
 Keyset\equal(keyset[1, 2], keyset[2, 1]); // true
 
 // Combining keysets.
-Keyset\union(keyset[1, 2], keyset[2, 3]) // keyset[1, 2, 3]
+Keyset\union(keyset[1, 2], keyset[2, 3]); // keyset[1, 2, 3]
 
 // Converting from an Iterable.
 keyset(vec[1, 2, 1]); // keyset[1, 2]
@@ -116,9 +131,11 @@ $items is keyset<_>; // true
 
 ## `dict`
 
-A `dict` is an ordered key-value data structure. Keys must be
-`string`s or `int`s. `dict`s are ordered according to
-the insertion order.
+A `dict` is an ordered key-value data structure. It is
+created with the `dict[]` syntax.
+
+Keys must be `string`s or `int`s. `dict`s are ordered according to the
+insertion order.
 
 ```Hack
 // Creating a dict.
@@ -126,6 +143,12 @@ function get_items(): dict<string, int> {
   $items = dict['a' => 1, 'b' => 3];
   return $items;
 }
+```
+
+`dicts`s can be accessed with the following syntax.
+
+```Hack
+$items = dict['a' => 1, 'b' => 3];
 
 // Accessing items by key.
 $items['a']; // 1
@@ -136,7 +159,7 @@ idx($items, 'a'); // 1
 idx($items, 'z'); // null
 idx($items, 'z', 'default'); // 'default'
 
-// Inserting, updating or removing values in a dict. These operations 
+// Inserting, updating or removing values in a dict. These operations
 // set $items to a modified copy, and do not modify the original value.
 $items['a'] = 42; // dict['a' => 42, 'b' => 3]
 $items['z'] = 100; // dict['a' => 42, 'b' => 3, 'z' => 100]

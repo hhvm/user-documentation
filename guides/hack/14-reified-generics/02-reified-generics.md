@@ -10,7 +10,7 @@ In Hack, generics are opt-in. The goal of opt-in reified generics is to bridge t
 
 ## Parameter and return type verification
 
-```type-verification.hack.type-errors
+```hack no-extract
 class C<reify T> {}
 
 function f(C<int> $c): void {}
@@ -22,13 +22,11 @@ function main(): void {
   $c2 = new C<string>();
   f($c2); // parameter type hint violation
 }
-```.hhconfig
-enable_experimental_tc_features=reified_generics
 ```
 
 The reified type parameter is checked as well:
 
-```type-verification-2.hack.type-errors
+```hack no-extract
 class C<reify T> {}
 
 function f<reify T>(T $x): C<T> {
@@ -41,15 +39,13 @@ function main(): void {
   f<int>("yep"); // parameter type hint violation
   f<string>("yep"); // return type hint violation
 }
-```.hhconfig
-enable_experimental_tc_features=reified_generics
 ```
 
 ## Type testing and assertion with `is` and `as` expressions
 
 Suppose you have a `vec<mixed>` and you want to extract all types `T` from it. Prior to reified generics, you'd need to implement a new function for each type `T` but with reified generics you can do this in a generic way. Start by adding the keyword `reify` to the type parameter list.
 
-```type-testing.hack no-auto-output
+```Hack
 function filter<<<__Enforceable>> reify T>(vec<mixed> $list): vec<T> {
   $ret = vec[];
   foreach ($list as $elem) {
@@ -67,13 +63,11 @@ function main(): void {
   filter<string>(vec[1, "hi", true]);
   // => vec["hi"]
 }
-```.hhconfig
-enable_experimental_tc_features=reified_generics
 ```
 
 Notice that the reified type parameter has the attribute `<<__Enforceable>>`. In order to use type testing and type assertion, the reified type parameter must be marked as `<<__Enforceable>>`, which means that we can fully enforce this type parameter, i.e. it does not contain any erased generics, not a function type, etc.
 
-```Hack
+```Hack no-extract
 class A {}
 class B<reify T> {}
 class C<reify Ta, Tb> {}
@@ -89,7 +83,7 @@ C<int, string> // NOT enforceable as C's second generic is erased
 
 Prior to reified generics, in order to create a new instance of a class without a constant class name, you'd need to pass it as `classname<T>` which is not type safe. In the runtime, classnames are strings.
 
-```new-reify.hack.type-errors
+```hack error
 <<__ConsistentConstruct>>
 abstract class A {}
 
@@ -106,27 +100,27 @@ function main(): void {
   f<B>(); // success
   f<C>(); // success
 }
-```.hhconfig
-enable_experimental_tc_features=reified_generics
 ```
 
 Notice that the reified type parameter has the attribute `<<__Newable>>`. In order for a type to be `<<__Newable>>`, the type must represent a class that's not abstract and has a consistent constructor or be a final class. Creating a new instance using the reified generics also carries across the generics given. For example,
 
-```Hack
+```Hack error
 final class A<reify T> {}
 
 function f<<<__Newable>> reify T as A<string>>(): A<string> {
   return new T();
 }
 
-// creates a new A<int> and since f's return type is A<string>,
-// this raises a type hint violation
-f<A<int>>();
+function demo(): void {
+  // creates a new A<int> and since f's return type is A<string>,
+  // this raises a type hint violation
+  f<A<int>>();
+}
 ```
 
 ## Accessing a class constant / static class method
 
-```access.hack no-auto-output
+```Hack
 class C {
   const string class_const = "hi";
   public static function h<reify T>(): void {}
@@ -143,8 +137,6 @@ function g<reify T as C>(): void {
   T::class_const;
   T::h<int>();
 }
-```.hhconfig
-enable_experimental_tc_features=reified_generics
 ```
 
 Accessing static class properties (`T::$class_property`) is currently not
@@ -155,27 +147,25 @@ supported.
 Hack Arrays can be used as inner type for classes since we do not need to check whether each element of the `vec` is `string`.
 Look at the limitations section for more information on when Hack Arrays cannot be used.
 
-```Hack
+```Hack error
 class Box<reify T> {}
 
 function foo(): Box<vec<string>> {
   return new Box<vec<int>>(); // Type hint violation
 }
-
-foo();
 ```
 
 # Limitations
 
 * No support for subtyping (reified type parameter on classes are invariant, they cannot be co/contra-variant
 
-```Hack
+```Hack error
 class C<reify +Ta> {} // Cannot make the generic covariant
 ```
 
 * Static class methods cannot use the reified type parameter of its class
 
-```Hack
+```Hack error
 class C<reify T> {
   public static function f(): void {
     return new T(); // Cannot use T
@@ -185,23 +175,27 @@ class C<reify T> {
 
 * Hack arrays cannot be reified when used as containers with `__Enforceable` or `__Newable`
 
-```Hack
+```Hack error
 function f<<<__Enforceable>> reify T>(T $x): void {
   $x is vec<int>; // Cannot use vec<int>
   $x is T;
 }
 
-f<vec<int>>(); // not enforceable
+function demo(): void {
+  f<vec<int>>(); // not enforceable
+}
 ```
 
 but can be used as inner type for classes
 
 * If a type parameter is reified, it must be provided at all call sites; it cannot be inferred.
 
-```Hack
+```Hack error
 function f<reify T>(): void {}
 
-f(); // need to provide the generics here
+function foo(): void {
+  f(); // need to provide the generics here
+}
 ```
 
 # Migration Features

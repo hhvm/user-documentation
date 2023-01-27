@@ -12,7 +12,7 @@ $x = vec[2,1,3]
 Written in another way, the code above is syntactically equivalent to:
 
 ``` Hack
-Vec\sort(Vec\map(vec[2, 1, 3], $a ==> $a * $a)) // Evaluates to vec[1,4,9]
+Vec\sort(Vec\map(vec[2, 1, 3], $a ==> $a * $a)); // Evaluates to vec[1,4,9]
 ```
 ## Await and the Binary Pipe
 `Await` cannot be used as an expression to the right of the pipe operator.

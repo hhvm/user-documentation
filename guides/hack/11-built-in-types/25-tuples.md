@@ -1,14 +1,14 @@
 Suppose we wish to have a function return multiple values. We can do that by using a tuple containing two or more elements. A
 tuple is an *ordered* set of one or more elements, which can have different types. The number of elements in a particular tuple is fixed
-when that tuple is created. After a tuple has been created, no elements can be added or removed. A tuple is a mutable value type. 
+when that tuple is created. After a tuple has been created, no elements can be added or removed. A tuple is a mutable value type.
 This means that when you hand a tuple to a function or assign it to a local variable a logical copy is made.
-You can change the values at a given index by assigning using the subscript notation. This will change the type 
-of the value stored in the variable accordingly when needed. However you can not assign to an index that 
+You can change the values at a given index by assigning using the subscript notation. This will change the type
+of the value stored in the variable accordingly when needed. However you can not assign to an index that
 did not exist when the tuple was created.
 
 Consider the case in which we want to have a pair of related values, one a string, the other an integer. For example:
 
-```Hack
+```Hack no-extract
 $v = tuple("apples", 25);
 function process_pair((string, int) $pair): void { ... }
 function get_next_pair(): (string, int) { ... }
@@ -33,7 +33,7 @@ $t[0] = 99;                       // change 10 to 99
 
 Here is a more exotic example of a type involve a tuple:
 
-```Hack
+```Hack no-extract
 ?(int, (string, float))
 ```
 
@@ -42,7 +42,7 @@ This declares a nullable type for a tuple containing an `int` and a tuple, which
 For non-trivial tuple types, it can be cumbersome to write out the complete type. Fortunately, Hack provides type-aliasing via
 `newtype` (and `type`). For example:
 
-```distance-between-Points.hack no-auto-output
+```Hack
 newtype Point = (float, float);
 
 function create_point(float $x, float $y): Point {
@@ -52,7 +52,6 @@ function create_point(float $x, float $y): Point {
 function distance(Point $p1, Point $p2): float {
   $dx = $p1[0] - $p2[0];
   $dy = $p1[1] - $p2[1];
-  return \sqrt($dx * $dx + $dy * $dy);
+  return sqrt($dx * $dx + $dy * $dy);
 }
 ```
-

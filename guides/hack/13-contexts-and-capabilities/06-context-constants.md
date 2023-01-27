@@ -5,7 +5,7 @@
 
 Classes and interfaces may define context constants:
 
-```hack
+```hack no-extract
 class WithConstant {
   const ctx C = [io];
   public function has_io()[self::C]: void {
@@ -24,7 +24,7 @@ interface IWithConstant {
 
 may have one or more bounds,
 
-```hack
+```hack no-extract
 abstract class WithConstant {
   // Subclasses must require *at least* [io]
   abstract const ctx CAnotherOne as [io];
@@ -37,7 +37,7 @@ abstract class WithConstant {
 
 and may have defaults, though only when abstract
 
-```hack
+```hack no-extract
 interface IWithConstant {
   abstract const ctx C = [defaults];
   abstract const ctx CWithBound super [defaults] = [io];
@@ -49,7 +49,7 @@ When inheriting a class containing a context constant with a default, the first 
 
 One may define a member function whose context depends on the `this` type or the exact value of context constant.
 
-```hack
+```hack no-extract
 class ClassWithConstant {
   const ctx C = [io];
 }
@@ -62,7 +62,7 @@ abstract class AnotherClassWithConstant {
 
 One may define a function whose context depends on the dynamic context constant of one or more passed in arguments.
 
-```hack
+```hack no-extract
 function uses_const_ctx(SomeClassWithConstant $t)[$t::C]: void {
   $t->usesC();
 }
@@ -70,7 +70,7 @@ function uses_const_ctx(SomeClassWithConstant $t)[$t::C]: void {
 
 One may reference the dependent context constant of a argument in later arguments as well as in the return type.
 
-```hack
+```hack no-extract
 function uses_const_ctx_more(
   SomeClassWithConstant $t,
   (function()[$t::C]: void) $f

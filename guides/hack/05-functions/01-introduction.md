@@ -1,6 +1,6 @@
 The `function` keyword defines a global function.
 
-```add_one.hack no-auto-output
+```Hack
 function add_one(int $x): int {
   return $x + 1;
 }
@@ -12,7 +12,7 @@ The `function` keyword can also be used to define [methods](/hack/classes/method
 
 Hack supports default values for parameters.
 
-```add_num.hack no-auto-output
+```Hack
 function add_value(int $x, int $y = 1): int {
   return $x + $y;
 }
@@ -23,7 +23,7 @@ This function can take one or two arguments. `add_value(3)` returns 4.
 Required parameters must come before optional parameters, so the
 following code is invalid:
 
-```Hack
+```Hack error
 function add_value_bad(int $x = 1, int $y): int {
   return $x + $y;
 }
@@ -34,10 +34,10 @@ function add_value_bad(int $x = 1, int $y): int {
 You can use `...` to define a function that takes a variable number of
 arguments.
 
-```varargs.hack no-auto-output
+```Hack file:sumints.hack
 function sum_ints(int $val, int ...$vals): int {
   $result = $val;
-  
+
   foreach ($vals as $v) {
     $result += $v;
   }
@@ -48,7 +48,7 @@ function sum_ints(int $val, int ...$vals): int {
 This function requires at least one argument, but has no maximum
 number of arguments.
 
-``` Hack
+```Hack file:sumints.hack
 // Passing positional arguments.
 sum_ints(1, 2, 3);
 
@@ -61,7 +61,7 @@ sum_ints(0, ...$args);
 
 Functions are values in Hack, so they can be passed as arguments too.
 
-```function_type.hack no-auto-output
+```Hack
 function apply_func(int $v, (function(int): int) $f): int {
   return $f($v);
 }

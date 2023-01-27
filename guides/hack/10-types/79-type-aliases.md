@@ -34,7 +34,7 @@ function create_Point(float $x, float $y): Point {
 function distance(Point $p1, Point $p2): float {
   $dx = $p1[0] - $p2[0];
   $dy = $p1[1] - $p2[1];
-  return \sqrt($dx*$dx + $dy*$dy);
+  return sqrt($dx*$dx + $dy*$dy);
 }
 ```
 
@@ -72,10 +72,10 @@ into an `int`, but not the other way around.
 
 Consider the following:
 
-```Hack
+```Hack no-extract
 class C {
   const type T2 as arraykey = int;
-  ...
+  // ...
 }
 ```
 

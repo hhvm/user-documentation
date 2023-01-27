@@ -41,4 +41,3 @@ function my_filter_nulls<T as nonnull>(vec<?T> $items): vec<T> {
   return $result;
 }
 ```
-

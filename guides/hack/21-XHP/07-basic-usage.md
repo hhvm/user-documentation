@@ -5,7 +5,7 @@ other XHP objects or text nodes (or, rarely, other non-XHP objects).
 
 Instead of using the `new` operator, creating XHP looks very much like XML:
 
-```
+```Hack no-extract
 $my_xhp_object = <p>Hello, world</p>;
 ```
 
@@ -24,7 +24,7 @@ conflict with a class named `xhp_p`.
 The following example utilizes three XHP classes: `div`, `strong`, `i`. Whitespace is insignificant, so you can create a readable
 tree structure in your code.
 
-```basic.hack
+```hack no-extract
 use type Facebook\XHP\HTML\{div, i, strong};
 
 <<__EntryPoint>>
@@ -107,7 +107,7 @@ This also works for attributes:
 
 More complicated expressions are also supported, for example:
 
-```hack-xhp.hack
+```hack no-extract
 use type Facebook\XHP\HTML\{div, i, strong};
 
 class MyBasicUsageExampleClass {

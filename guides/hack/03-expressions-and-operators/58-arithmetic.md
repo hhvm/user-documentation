@@ -2,15 +2,15 @@ Hack provides the standard arithmetic operators. These only operate on numeric t
 
 ## Addition
 
-The operator `+` produces the sum of its operands. 
+The operator `+` produces the sum of its operands.
 
 If both operands have type `int`, the result is `int`. Otherwise, the
 operands are converted to `float` and the result is `float`.
 
 ```Hack
--10 + 100       // int with value 90
-100 + -3.4e2    // float with value -240
-9.5 + 23.444    // float with value 32.944
+-10 + 100;       // int with value 90
+100 + -3.4e2;    // float with value -240
+9.5 + 23.444;    // float with value 32.944
 ```
 
 ## Subtraction
@@ -22,9 +22,9 @@ If both operands have type `int`, the result is `int`. Otherwise, the
 operands are converted to `float` and the result is `float`.
 
 ```Hack
--10 - 100       // int with value -110
-100 - -3.4e2    // float with value 440
-9.5 - 23.444    // float with value -13.944
+-10 - 100;       // int with value -110
+100 - -3.4e2;    // float with value 440
+9.5 - 23.444;    // float with value -13.944
 ```
 
 ## Multiplication
@@ -35,8 +35,8 @@ If both operands have type `int`, the result is `int`. Otherwise, the
 operands are converted to `float` and the result is `float`.
 
 ```Hack
--10 * 100        // int result with value -1000
-100 * -3.4e10    // float result with value -3400000000000.0
+-10 * 100;        // int result with value -1000
+100 * -3.4e10;    // float result with value -3400000000000.0
 ```
 
 ## Division
@@ -49,9 +49,9 @@ If both operands have type `int`, and the result can be represented
 exactly as an `int`, then the result is an `int`. Otherwise, the result is `float`.
 
 ```Hack
-300 / 100       // int result with value 3
-100 / 123       // float result with value 0.8130081300813
-12.34 / 2.3     // float result with value 5.3652173913043
+300 / 100;       // int result with value 3
+100 / 123;       // float result with value 0.8130081300813
+12.34 / 2.3;     // float result with value 5.3652173913043
 ```
 
 ## Modulo
@@ -60,11 +60,8 @@ The operator `%` produces the `int` remainder from dividing the
 left-hand `int` operand by the right-hand `int` operand. If the right
 hand side is 0, an exception is thrown.
 
-`float` operands are rounded to `int` values.
-
 ```Hack
-5 % 2     // int result with value 1
-5.1 % 2.9 // int result with value 1
+5 % 2;     // int result with value 1
 ```
 
 ## Exponent
@@ -99,7 +96,7 @@ $v = 10;
 The unary minus operator `-` requires an `int` or `float` value, and
 returns the negated value.
 
-```
+```Hack
 $v = 10;
 $x = -$v; // $x has value -10
 ```

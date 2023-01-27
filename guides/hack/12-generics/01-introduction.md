@@ -7,7 +7,7 @@ Generics allow programmers to write a class or method with the ability to be par
 
 Consider the following example in which `VecStack` is a generic class having one type parameter, `T`:
 
-```Stack.inc.hack no-auto-output
+```Hack file:stack.hack
 use namespace HH\Lib\{C, Vec};
 
 interface StackLike<T> {
@@ -52,7 +52,7 @@ class VecStack<T> implements StackLike<T> {
 
 As shown, the type parameter `T` is used in the declaration of the instance property `$elements`, as a parameter for `push()`, and as a return type for `pop()`.
 
-```Stack.test.hack no-auto-output
+```Hack file:stack.hack
 function useIntStack(StackLike<int> $stInt): void {
   $stInt->push(10);
   $stInt->push(20);
@@ -70,7 +70,7 @@ The *arity* of a generic type or method is the number of type parameters declare
 
 Here is an example of a generic function, `swap`, having one type parameter, `T`:
 
-```swap.hack
+```Hack
 function swap<T>(inout T $i1, inout T $i2): void {
   $temp = $i1;
   $i1 = $i2;
