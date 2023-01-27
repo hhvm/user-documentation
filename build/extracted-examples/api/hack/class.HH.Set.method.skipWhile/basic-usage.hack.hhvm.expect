@@ -1,8 +1,0 @@
-object(HH\Set) (6) {
-  int(13)
-  int(21)
-  int(34)
-  int(55)
-  int(89)
-  int(144)
-}

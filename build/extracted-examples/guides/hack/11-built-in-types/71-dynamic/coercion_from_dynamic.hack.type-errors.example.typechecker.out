@@ -1,7 +1,0 @@
-File "/home/example/coercion_from_dynamic.hack", line 12, characters 15-16:
-Invalid argument (Typing[4110])
-  File "/home/example/coercion_from_dynamic.hack", line 7, characters 22-38:
-  Expected `shape('a' => int)`
-  File "/home/example/coercion_from_dynamic.hack", line 9, characters 17-23:
-  But got `dynamic`
-

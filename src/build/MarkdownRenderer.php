@@ -35,16 +35,12 @@ final class MarkdownRenderer {
 
   <<__Memoize>>
   private function getRenderContext(
-    bool $is_automated_build,
   ): MarkdownExt\RenderContext {
     $render_ctx = (new MarkdownExt\RenderContext())
       ->appendFilters(
         new MarkdownExt\HeadingAnchorsFilter(),
         new MarkdownExt\VersionedImagesFilter(),
         new MarkdownExt\InternalMarkdownLinksFilter(),
-        $is_automated_build
-          ? new MarkdownExt\ExtractedCodeBlocks\VerifyFilter()
-          : new MarkdownExt\ExtractedCodeBlocks\ExtractFilter(),
         new MarkdownExt\PrettyCodeBlocksFilter(),
       );
     return $render_ctx;
@@ -53,13 +49,12 @@ final class MarkdownRenderer {
   public function renderMarkdownToHTML(
     string $file,
     string $markdown,
-    keyset<BuildFlags> $build_flags,
   ): string {
     $parser_ctx = $this->getParserContext()
       ->resetFileData()
       ->setFilePath($file);
     $render_ctx = $this
-      ->getRenderContext(C\contains_key($build_flags, BuildFlags::AUTOMATED))
+      ->getRenderContext()
       ->resetFileData()
       ->setFilePath($file);
 

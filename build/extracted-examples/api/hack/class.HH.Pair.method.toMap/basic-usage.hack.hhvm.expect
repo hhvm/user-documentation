@@ -1,7 +1,0 @@
-bool(true)
-object(HH\Map) (2) {
-  [0]=>
-  string(3) "foo"
-  [1]=>
-  float(-1.5)
-}

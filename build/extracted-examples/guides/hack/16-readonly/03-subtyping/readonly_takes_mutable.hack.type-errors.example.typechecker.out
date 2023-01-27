@@ -1,7 +1,0 @@
-File "/home/example/readonly_takes_mutable.hack", line 16, characters 19-20:
-Invalid argument (Typing[4411])
-  File "/home/example/readonly_takes_mutable.hack", line 16, characters 19-20:
-  This expression is readonly
-  File "/home/example/readonly_takes_mutable.hack", line 10, characters 28-29:
-  It is incompatible with this parameter, which is mutable
-

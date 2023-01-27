@@ -1,7 +1,0 @@
-
-Fatal error: Uncaught exception 'Exception' with message 'Return exception handle' in %s/multiple-awaitable-exception.hack:9
-Stack trace:
-#0 %s/multiple-awaitable-exception.hack(17): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\exception_thrower()
-#1 %s/multiple-awaitable-exception.hack(28): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\multiple_waithandle_exception()
-#2 (): HHVM\UserDocumentation\Guides\Hack\AsynchronousOperations\Exceptions\MultipleAwaitableException\main()
-#3 {main}

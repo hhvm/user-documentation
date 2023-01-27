@@ -34,13 +34,7 @@ final class PrettyCodeBlocksFilter extends RenderFilter {
     $info_string = $node->getInfoString();
     $classes = 'highlight fbgfm';
     $code = $node->getCode();
-    if (
-      $info_string !== null &&
-      (
-        Str\lowercase($info_string) === 'hack' ||
-        Str\lowercase($info_string) === 'hacksignature'
-      )
-    ) {
+    if ($info_string !== null && Str\starts_with_ci($info_string, 'hack')) {
       if (Str\lowercase($info_string) === 'hacksignature') {
         $code = Str\split($code, "\n") |> Vec\drop($$, 1) |> Str\join($$, "\n");
       }

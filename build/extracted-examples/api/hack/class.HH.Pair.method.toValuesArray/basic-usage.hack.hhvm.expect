@@ -1,5 +1,0 @@
-bool(true)
-vec(2) {
-  string(3) "foo"
-  float(-1.5)
-}

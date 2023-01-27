@@ -1,7 +1,0 @@
-File "%s/trait-bad.hack", line 31, characters 7-11:
-This class does not satisfy all the requirements of its traits or interfaces. (Typing[4111])
-  File "%s/trait-bad.hack", line 32, characters 7-11:
-  This requires to extend or implement HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\TraitAndInterfaceRequirements\TraitBad\Machine
-  File "%s/trait-bad.hack", line 19, characters 19-25:
-  Required here
-

@@ -1,6 +1,0 @@
-File "%s/globals-bad.hack", line 11, characters 5-12:
-Reading static properties requires the capability ReadGlobals, which is not provided by the context. Add the context `[read_globals]` after the function parameter list (or amend an existing context with a new comma delineated entry `read_globals`). (Parsing[1002])
-
-File "%s/globals-bad.hack", line 16, characters 3-15:
-Reading static properties requires the capability ReadGlobals, which is not provided by the context. Add the context `[read_globals]` after the function parameter list (or amend an existing context with a new comma delineated entry `read_globals`). (Parsing[1002])
-

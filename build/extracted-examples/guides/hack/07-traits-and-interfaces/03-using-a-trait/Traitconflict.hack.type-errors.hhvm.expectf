@@ -1,2 +1,0 @@
-
-Fatal error: HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\UsingATrait\Traitconflict\A cannot inherit the constant FOO, because it was previously inherited from HHVM\UserDocumentation\Guides\Hack\TraitsAndInterfaces\UsingATrait\Traitconflict\I in %s/Traitconflict.hack.type-errors on line 14

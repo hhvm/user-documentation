@@ -1,3 +1,0 @@
-coercion_from_dynamic = true
-coercion_from_union = true
-complex_coercion = true
