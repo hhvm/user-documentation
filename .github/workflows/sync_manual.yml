@@ -2,6 +2,10 @@ name: Update guides/hack from facebook/hhvm repo
 
 on:
   push:
+    branches:
+      # Run when changes are pushed to main too. This makes it easier
+      # to make changes to this file and see the results.
+      - main
   schedule:
     # Fifteen minutes past the hour, every hour.
     # (GitHub actions are heavily used at o'clock, so arbitrarily
