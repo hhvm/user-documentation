@@ -43,7 +43,7 @@ jobs:
         run: docker save hhvm/user-documentation:scratch -o hack-docs.tar
   update-docker-image:
     concurrency: ${{github.ref}}
-    if: github.event_name == 'push'
+    if: github.ref == 'refs/heads/main'
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
