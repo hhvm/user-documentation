@@ -3,7 +3,9 @@ on:
   push:
   pull_request:
   schedule:
-    - cron: '42 15 * * *'
+    # Every four hours, avoiding o'clock because GitHub actions
+    # are slower at exactly :00.
+    - cron: '42 1,5,9,13,17,21 * * *'
 
 permissions:
   id-token: write
