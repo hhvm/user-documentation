@@ -1,1 +1,1 @@
-container_image = "hhvm/user-documentation:HHVM-4.164-2023-03-06-b5564b9"
+container_image = "hhvm/user-documentation:HHVM-4.164-2023-03-07-b5564b9"
