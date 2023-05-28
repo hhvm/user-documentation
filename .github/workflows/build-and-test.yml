@@ -17,9 +17,9 @@ jobs:
     name: Build and Test
     strategy:
       matrix:
-        os: [ ubuntu ]
-        hhvm: [ '4.164' ]
-    runs-on: ${{matrix.os}}-latest
+        os: [ ubuntu-20.04 ]
+        hhvm: [ '4.168' ]
+    runs-on: ${{matrix.os}}
     steps:
       - uses: actions/checkout@v3
       - name: Fetch docker images
