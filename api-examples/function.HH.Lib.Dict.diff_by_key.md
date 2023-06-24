@@ -6,5 +6,5 @@ $dict_after_diff_by_key = Dict\diff_by_key($dict_1, $dict_2, $dict_3);
 echo "Dict after diff by key: \n";
 \print_r($dict_after_diff_by_key);
 //Output: Dict after diff by key:
-//dict["key_2" => 2, "key_5" => 5];
+//dict["key_2" => 2, "key_5" => 5]
 ```
