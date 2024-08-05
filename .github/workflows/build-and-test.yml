@@ -28,8 +28,6 @@ jobs:
           docker pull hhvm/hhvm-proxygen:${{matrix.hhvm}}-latest
       - name: Build
         run: docker build -t hhvm/user-documentation:scratch -f .deploy/built-site.Dockerfile .
-        env:
-          COMPOSER_ALLOW_SUPERUSER: 1
       - name: Typecheck
         run: docker run --rm -w /var/www hhvm/user-documentation:scratch hh_server --check .
       - name: Run tests
