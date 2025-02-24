@@ -88,16 +88,19 @@ switch ($v) {
 Case-label values can be runtime expressions, and the types of sibling case-label values need not be the same.
 
 **Note switch uses `==` equality for comparing the value with the
-different cases.**. See [equality](../expressions-and-operators/equality.md) for more details.
+different cases.** See [equality](../expressions-and-operators/equality.md) for more details.
+
+Because of the surprising semantics of using `==` on objects, keysets, dicts, and shapes,
+it is not recommended to switch over these types of values. For example:
 
 ```Hack
-$v = 30;
+$v = keyset[1, 2, 3];
 switch ($v) {
-  case 30.0:  // <===== this case matches with 30
-    // ...
+  case keyset[3, 2, 1]:  // <== Matches this case
+    // because `keyset[1, 2, 3] == keyset[3, 2, 1]`
     break;
-  default:
-    // ...
+  case keyset[1, 2, 3]:
+    // This case is unreachable, because of the order independent comparison.
     break;
 }
 ```
