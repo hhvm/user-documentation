@@ -93,7 +93,7 @@ jobs:
           )
       - name: Log in to Container Registry
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login "$REGISTRY" -u "${{ github.actor }}"" --password-stdin
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login "$REGISTRY" -u "${{ github.actor }}" --password-stdin
       - name: Push image to Container Registry
         run: |
           docker push "$REGISTRY/$IMAGE_NAME"
