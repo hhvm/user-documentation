@@ -74,12 +74,12 @@ automatically.
 
 If you want to see old versions of the docs, we provide [regular
 Docker images of this
-site](https://hub.docker.com/r/meta/hhvm-user-documentation/tags). This is
+site](https://hub.docker.com/r/hhvm/user-documentation/tags). This is
 not suitable for development, but it's useful if you're working with
 an old HHVM/Hack version.
 
 1. Install [Docker](https://docs.docker.com/engine/installation/).
-2. Start a container with `docker run -p 8080:80 -d meta/hhvm-user-documentation`.
+2. Start a container with `docker run -p 8080:80 -d hhvm/user-documentation`.
 3. You can then access a local copy of the documentation at <http://localhost:8080>.
 
 ## Running A Production Instance
