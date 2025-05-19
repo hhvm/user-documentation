@@ -1,8 +1,8 @@
 # HHVM and Hack User Documentation
 
-This is the repo for the [HHVM and Hack user documentation](http://docs.hhvm.com). [Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome.
+This is the repo for the [HHVM and Hack user documentation](http://docs.hhvm.com).
 
-If you see anything broken, please [file an issue](https://github.com/hhvm/user-documentation/issues/new).
+[Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome. If you see anything broken, please [file an issue](https://github.com/hhvm/user-documentation/issues/new).
 
 ## Structure
 
