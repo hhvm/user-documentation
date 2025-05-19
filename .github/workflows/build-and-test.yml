@@ -11,6 +11,13 @@ permissions:
   id-token: write
   contents: write
   pull-requests: write
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_SCRATCH: ${{ github.repository }}:scratch
+  IMAGE_LATEST: ${{ github.repository }}:latest
 
 jobs:
   build:
@@ -27,22 +34,22 @@ jobs:
           docker pull hhvm/hhvm:${{matrix.hhvm}}-latest
           docker pull hhvm/hhvm-proxygen:${{matrix.hhvm}}-latest
       - name: Build
-        run: docker build -t meta/hhvm-user-documentation:scratch -f .deploy/built-site.Dockerfile .
+        run: docker build -t $IMAGE_SCRATCH -f .deploy/built-site.Dockerfile .
       - name: Typecheck
-        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch hh_server --check .
+        run: docker run --rm -w /var/www $IMAGE_SCRATCH hh_server --check .
       - name: Run tests
-        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch vendor/bin/hacktest tests/
+        run: docker run --rm -w /var/www $IMAGE_SCRATCH vendor/bin/hacktest tests/
       - name: Lint
-        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch vendor/bin/hhast-lint
+        run: docker run --rm -w /var/www $IMAGE_SCRATCH vendor/bin/hhast-lint
       - name: Verify codegen is unchanged
-        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
+        run: docker run --rm -w /var/www $IMAGE_SCRATCH vendor/bin/hh-codegen-verify-signatures src
       - name: Set up cache for Docker image
         uses: actions/cache@v3
         with:
           key: ${{github.run_id}}
           path: hack-docs.tar
       - name: Export Docker image
-        run: docker save meta/hhvm-user-documentation:scratch -o hack-docs.tar
+        run: docker save $IMAGE_SCRATCH -o hack-docs.tar
   update-docker-image:
     concurrency: ${{github.ref}}
     if: github.ref == 'refs/heads/main'
@@ -65,14 +72,14 @@ jobs:
           docker run --rm \
             -v ${{runner.temp}}/repo-out:/var/out \
             -w /var/www \
-            meta/hhvm-user-documentation:scratch \
+            $IMAGE_SCRATCH \
             .deploy/build-repo.sh
       - name: Set image tag/name variables
         run: |
           DEPLOY_REV=$(git rev-parse --short HEAD)
           HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
           IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
-          IMAGE_NAME="meta/hhvm-user-documentation:$IMAGE_TAG"
+          IMAGE_NAME="$IMAGE_NAME:$IMAGE_TAG"
           echo "DEPLOY_REV=$DEPLOY_REV" >> $GITHUB_ENV
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
@@ -84,18 +91,17 @@ jobs:
             cd ${{runner.temp}}/repo-out
             docker build -t ${IMAGE_NAME} .
           )
-      - name: Log in to DockerHub
+      - name: Log in to Container Registry
         run: |
-          echo "${{secrets.DOCKERHUB_PASSWORD}}" | docker login -u "${{secrets.DOCKERHUB_USER}}" \
-            --password-stdin
-      - name: Push image to DockerHub
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login "$REGISTRY" -u "${{ github.actor }}"" --password-stdin
+      - name: Push image to Container Registry
         run: |
-          docker push "$IMAGE_NAME"
+          docker push "$REGISTRY/$IMAGE_NAME"
       - if: github.ref == 'refs/heads/main'
-        name: Update the latest tag to DockerHub
+        name: Update the latest tag to Container Registry
         run: |
-          docker tag "$IMAGE_NAME" meta/hhvm-user-documentation:latest
-          docker push "meta/hhvm-user-documentation:latest"
+          docker tag "$IMAGE_NAME" $IMAGE_LATEST
+          docker push "$REGISTRY/$IMAGE_LATEST"
       - name: Checkout the existing deploy branch
         id: checkout-existing-deploy-branch
         continue-on-error: true
@@ -111,7 +117,7 @@ jobs:
           ref: deploy/prod-main
       - run: |
           cat > .var/tmp/deploy/terraform.tfvars <<EOF
-          container_image = "$IMAGE_NAME"
+          container_image = "$REGISTRY/$IMAGE_NAME"
           EOF
       - uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -146,7 +152,7 @@ jobs:
           docker run --rm \
             -w /var/www \
             -e "REMOTE_TEST_HOST=${{steps.print-staging-host-name.outputs.stdout}}" \
-            meta/hhvm-user-documentation:scratch \
+            $IMAGE_SCRATCH \
             vendor/bin/hacktest \
             --filter-groups remote \
             tests/
