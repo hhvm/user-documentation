@@ -100,7 +100,7 @@ jobs:
       - if: github.ref == 'refs/heads/main'
         name: Update the latest tag to Container Registry
         run: |
-          docker tag "$IMAGE_NAME" "$REGISTRY/$IMAGE_LATEST"
+          docker tag "$REGISTRY/$IMAGE_NAME" "$REGISTRY/$IMAGE_LATEST"
           docker push "$REGISTRY/$IMAGE_LATEST"
       - name: Checkout the existing deploy branch
         id: checkout-existing-deploy-branch
