@@ -27,22 +27,22 @@ jobs:
           docker pull hhvm/hhvm:${{matrix.hhvm}}-latest
           docker pull hhvm/hhvm-proxygen:${{matrix.hhvm}}-latest
       - name: Build
-        run: docker build -t hhvm/user-documentation:scratch -f .deploy/built-site.Dockerfile .
+        run: docker build -t meta/hhvm-user-documentation:scratch -f .deploy/built-site.Dockerfile .
       - name: Typecheck
-        run: docker run --rm -w /var/www hhvm/user-documentation:scratch hh_server --check .
+        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch hh_server --check .
       - name: Run tests
-        run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hacktest tests/
+        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch vendor/bin/hacktest tests/
       - name: Lint
-        run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hhast-lint
+        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch vendor/bin/hhast-lint
       - name: Verify codegen is unchanged
-        run: docker run --rm -w /var/www hhvm/user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
+        run: docker run --rm -w /var/www meta/hhvm-user-documentation:scratch vendor/bin/hh-codegen-verify-signatures src
       - name: Set up cache for Docker image
         uses: actions/cache@v3
         with:
           key: ${{github.run_id}}
           path: hack-docs.tar
       - name: Export Docker image
-        run: docker save hhvm/user-documentation:scratch -o hack-docs.tar
+        run: docker save meta/hhvm-user-documentation:scratch -o hack-docs.tar
   update-docker-image:
     concurrency: ${{github.ref}}
     if: github.ref == 'refs/heads/main'
@@ -65,14 +65,14 @@ jobs:
           docker run --rm \
             -v ${{runner.temp}}/repo-out:/var/out \
             -w /var/www \
-            hhvm/user-documentation:scratch \
+            meta/hhvm-user-documentation:scratch \
             .deploy/build-repo.sh
       - name: Set image tag/name variables
         run: |
           DEPLOY_REV=$(git rev-parse --short HEAD)
           HHVM_VERSION=$(awk '/APIProduct::HACK/{print $NF}' src/codegen/PRODUCT_TAGS.php | cut -f2 -d- | cut -f1-2 -d.)
           IMAGE_TAG="HHVM-${HHVM_VERSION}-$(date +%Y-%m-%d)-${DEPLOY_REV}"
-          IMAGE_NAME="hhvm/user-documentation:$IMAGE_TAG"
+          IMAGE_NAME="meta/hhvm-user-documentation:$IMAGE_TAG"
           echo "DEPLOY_REV=$DEPLOY_REV" >> $GITHUB_ENV
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
           echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
@@ -94,8 +94,8 @@ jobs:
       - if: github.ref == 'refs/heads/main'
         name: Update the latest tag to DockerHub
         run: |
-          docker tag "$IMAGE_NAME" hhvm/user-documentation:latest
-          docker push "hhvm/user-documentation:latest"
+          docker tag "$IMAGE_NAME" meta/hhvm-user-documentation:latest
+          docker push "meta/hhvm-user-documentation:latest"
       - name: Checkout the existing deploy branch
         id: checkout-existing-deploy-branch
         continue-on-error: true
@@ -146,7 +146,7 @@ jobs:
           docker run --rm \
             -w /var/www \
             -e "REMOTE_TEST_HOST=${{steps.print-staging-host-name.outputs.stdout}}" \
-            hhvm/user-documentation:scratch \
+            meta/hhvm-user-documentation:scratch \
             vendor/bin/hacktest \
             --filter-groups remote \
             tests/
