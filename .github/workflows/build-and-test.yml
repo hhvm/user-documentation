@@ -89,7 +89,7 @@ jobs:
           cp .deploy/prod.Dockerfile ${{runner.temp}}/repo-out/Dockerfile
           (
             cd ${{runner.temp}}/repo-out
-            docker build -t ${IMAGE_NAME} .
+            docker build -t "$REGISTRY/$IMAGE_NAME" .
           )
       - name: Log in to Container Registry
         run: |
@@ -100,7 +100,7 @@ jobs:
       - if: github.ref == 'refs/heads/main'
         name: Update the latest tag to Container Registry
         run: |
-          docker tag "$IMAGE_NAME" $IMAGE_LATEST
+          docker tag "$IMAGE_NAME" "$REGISTRY/$IMAGE_LATEST"
           docker push "$REGISTRY/$IMAGE_LATEST"
       - name: Checkout the existing deploy branch
         id: checkout-existing-deploy-branch
