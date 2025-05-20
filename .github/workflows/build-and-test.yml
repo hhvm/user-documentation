@@ -132,7 +132,7 @@ jobs:
           repository: .var/tmp/deploy
           create_branch: true
           push_options: --force
-          branch: deploy/staging-${{github.run_id}}
+          branch: deploy/stag-${{github.run_id}}
       - name: Deploy staging server
         run: |
           terraform init &&
@@ -160,7 +160,7 @@ jobs:
         run: |
           terraform workspace select "$WORKSPACE_NAME" && \
           terraform destroy -auto-approve && \
-          git push origin :deploy/staging-${{github.run_id}}
+          git push origin :deploy/stag-${{github.run_id}}
         if: always()
         working-directory: .var/tmp/deploy/
         env:
