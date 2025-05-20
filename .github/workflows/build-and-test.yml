@@ -140,7 +140,7 @@ jobs:
           terraform apply -auto-approve
         working-directory: .var/tmp/deploy/
         env:
-          WORKSPACE_NAME: staging-${{github.run_id}}
+          WORKSPACE_NAME: stag-${{github.run_id}}
       - name: Print staging host name
         id: print-staging-host-name
         run: terraform output -raw aws_lb_lb_dns_name
@@ -164,7 +164,7 @@ jobs:
         if: always()
         working-directory: .var/tmp/deploy/
         env:
-          WORKSPACE_NAME: staging-${{github.run_id}}
+          WORKSPACE_NAME: stag-${{github.run_id}}
       - name: Push to prod branch
         uses: ad-m/github-push-action@master
         with:
