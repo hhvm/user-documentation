@@ -5,7 +5,6 @@ HHVM is officially supported on most major [linux platforms](./linux.md), with l
 The easiest way to get going with HHVM is to use one of our supported prebuilt packages. Currently prebuilt packages are available for:
 
 * [Several versions of Debian and Ubuntu](./linux.md)
-* [MacOS](./mac.md)
 
 ### LTS Releases
 
