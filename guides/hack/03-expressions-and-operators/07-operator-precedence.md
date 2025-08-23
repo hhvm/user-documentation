@@ -20,7 +20,7 @@ Operator | Description | Associativity
 `*` `/` `%` | [Multiplication, Division, and Modulo](/hack/expressions-and-operators/arithmetic) | Left
 `.`, `+` `-` (two arguments) | [String concatenation](/hack/expressions-and-operators/string-concatenation) and [Addition / Subtraction](/hack/expressions-and-operators/arithmetic) | Left
 `<<` `>>` | [Bitwise shifting](/hack/expressions-and-operators/bitwise-operators) (left and right) | Left
-`<` `<=` `>` `>=`, `<=>` | [Comparison operators](/hack/expressions-and-operators/comparisons) and [Spaceship operator](/hack/expressions-and-operators/equality#the-spaceship-operator) | None
+`<` `<=` `>` `>=`, `<=>` | [Comparison operators](/hack/expressions-and-operators/comparisons) and [Spaceship operator](/hack/expressions-and-operators/comparisons#the-spaceship-operator) | None
 `===` `!==` `==` `!=` | [Equality operators](/hack/expressions-and-operators/equality) | None
 `&` | [Bitwise AND](/hack/expressions-and-operators/bitwise-operators) | Left
 `^` | [Bitwise XOR](/hack/expressions-and-operators/bitwise-operators) | Left
