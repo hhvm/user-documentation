@@ -1,4 +1,4 @@
-FROM hhvm/hhvm-proxygen:4.164-latest
+FROM hhvm/hhvm-proxygen:4.168-latest
 
 ARG WORKSPACE
 
