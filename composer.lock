@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3eeab008cf9fa37ad524894c7f2372c",
+    "content-hash": "17d47ebd770fa1e5e4d43218093a5fae",
     "packages": [
         {
             "name": "facebook/definition-finder",
@@ -481,22 +481,22 @@
         },
         {
             "name": "hhvm/hhast",
-            "version": "v4.161.2",
+            "version": "v4.168.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hhvm/hhast.git",
-                "reference": "0a9ffc51a94188c0c1cc6f5389ea8ebf596d8475"
+                "reference": "01f7fed70d675643b200e8661e07eaed781592af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hhvm/hhast/zipball/0a9ffc51a94188c0c1cc6f5389ea8ebf596d8475",
-                "reference": "0a9ffc51a94188c0c1cc6f5389ea8ebf596d8475",
+                "url": "https://api.github.com/repos/hhvm/hhast/zipball/01f7fed70d675643b200e8661e07eaed781592af",
+                "reference": "01f7fed70d675643b200e8661e07eaed781592af",
                 "shasum": ""
             },
             "require": {
                 "facebook/difflib": "^1.0.0",
                 "facebook/hh-clilib": "^2.5.0rc1",
-                "hhvm": "^4.161",
+                "hhvm": "^4.168.2",
                 "hhvm/type-assert": "^4.2.2"
             },
             "require-dev": {
@@ -525,9 +525,9 @@
             "description": "A mutable AST library for Hack with linting and code migrations",
             "support": {
                 "issues": "https://github.com/hhvm/hhast/issues",
-                "source": "https://github.com/hhvm/hhast/tree/v4.161.2"
+                "source": "https://github.com/hhvm/hhast/tree/v4.168.2"
             },
-            "time": "2022-07-09T17:27:26+00:00"
+            "time": "2023-01-25T18:12:29+00:00"
         },
         {
             "name": "hhvm/hhvm-autoload",
@@ -915,7 +915,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "hhvm": "4.164.*"
+        "hhvm": "4.168.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"
