@@ -1,3 +1,5 @@
+# Code Samples
+
 All code samples are automatically type checked and executed, to ensure they're correct.
 
 ## Basic Usage
@@ -143,7 +145,7 @@ Your lucky number is: %d
 ~~~
 
 Supported extensions are inherited from the
-[HHVM test runner](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md#file-layout):
+[HHVM test runner](https://github.com/facebook/hhvm/blob/master/hphp/test/README#file-layout):
 
 - `.hhconfig` if the example requires specific *typechecker* flags
   (e.g. demonstrating a feature that is not yet enabled by default)
@@ -193,7 +195,7 @@ guides/[hhvm | hack]/##-topic/##-subtopic-examples
 e.g.,
 
 ```
-$ guides/hack/23-collections/06-constructing-examples
+$ guides/hack/23-collections/constructing-examples
 ```
 
 ### Standalone
@@ -202,7 +204,7 @@ You can run any example standalone. For example:
 
 ```
 # Assuming you are in the user-documentation repo directory
-$ cd guides/hack/23-collections/10-examples-examples/
+$ cd guides/hack/23-collections/examples-examples/
 $ hhvm lazy.php
 ```
 
@@ -239,7 +241,7 @@ Time non lazy: 0.0096559524536133
 
 ### Using the HHVM Test Runner
 
-Each example is structured to be run with the [HHVM test runner](https://github.com/facebook/hhvm/blob/master/hphp/test/README.md). We use the test runner internally to ensure that any changes made to HHVM do not cause a regression. The examples in the documentation here can be used for that purpose as well.
+Each example is structured to be run with the [HHVM test runner](https://github.com/facebook/hhvm/blob/master/hphp/test/README). We use the test runner internally to ensure that any changes made to HHVM do not cause a regression. The examples in the documentation here can be used for that purpose as well.
 
 You can run the HHVM test runner on the entire suite of examples, on one directory of examples or just one example itself.
 
@@ -252,9 +254,9 @@ You can run the HHVM test runner on the entire suite of examples, on one directo
 # Won't normally need to do this; just use our test suite instead.
 
 # Test with the typechecker
-$ api-sources/hhvm/hphp/test/run --hhserver-binary-path $(which hh_server) --typechecker guides/hack/05-statements/
+$ api-sources/hhvm/hphp/test/run --hhserver-binary-path $(which hh_server) --typechecker guides/hack/statements/
 # Test with the runtime
-$ api-sources/hhvm/hphp/test/run --hhvm-binary-path $(which hhvm) guides/hack/05-statements/
+$ api-sources/hhvm/hphp/test/run --hhvm-binary-path $(which hhvm) guides/hack/statements/
 ```
 
 Here is the output you should see when you run the test runner. Assume we are running the examples in the collections topic:

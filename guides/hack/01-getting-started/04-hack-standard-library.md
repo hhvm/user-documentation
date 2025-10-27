@@ -1,8 +1,9 @@
-# About the Hack Standard Library (HSL)
+# The Hack Standard Library
+
 HHVM is distributed with a growing set of functions and classes
-collectively called the [Hack Standard Library (HSL)](/hsl/reference/).
+collectively called the [Hack Standard Library (HSL)](/hsl/overview).
 These are intended to complement, or in some cases replace previous
-[built-in APIs](/hack/reference/).
+[built-in APIs](/apis/overview).
 
 There are two related GitHub projects/Composer packages:
 - [hhvm/hsl](https://github.com/hhvm/hsl/): The Hack Standard Library for users
@@ -15,7 +16,7 @@ There are two related GitHub projects/Composer packages:
 in a [separate repository](https://github.com/hhvm/hsl/) from HHVM.
 
 # HSL Namespaces
-The Hack Standard Library is grouped by namespace. For a full list, see [HSL Reference](/hsl/reference/).
+The Hack Standard Library is grouped by namespace. For a full list, see [HSL Reference](/hsl/overview).
 
 Also included is the static class `Ref`, with `Ref::get` and `Ref::set`, which is useful for setting reference values with [anonymous functions](/hack/functions/anonymous-functions).
 

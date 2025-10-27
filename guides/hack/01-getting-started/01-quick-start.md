@@ -1,10 +1,10 @@
-```yamlmeta
-{
-  "fbonly messages": [
-    "Unless you are specifically working on open source Hack code, you want [Facebook's internal documentation](https://our.internmc.facebook.com/intern/wiki/First-app/) instead for dev environment setup.  If you're just looking to [learn the Hack language itself](https://docs.hhvm.com/hack/source-code-fundamentals/introduction), skip this Getting Started section."
-  ]
-}
-```
+# Quick Start
+
+<FbInfo>
+
+Unless you are specifically working on open source Hack code, you want [Facebook's internal documentation](https://our.internmc.facebook.com/intern/wiki/First-app/) instead for dev environment setup. If you're just looking to [learn the Hack language itself](/hack/source-code-fundamentals/introduction), skip this Getting Started section.
+
+</FbInfo>
 
 ### 1. Installation
 
@@ -29,7 +29,7 @@ $ touch .hhconfig
 
 Create a file called `my_project/hello.hack` with the following code:
 
-```Hack
+```hack
 use namespace HH\Lib\IO;
 
 <<__EntryPoint>>
@@ -44,7 +44,7 @@ Normally you'll get type errors and hover information from within your
 IDE. You can also run the typechecker directly to confirm that you
 have no type errors in any files in your project.
 
-```
+```bash
 $ cd my_project
 $ hh_client
 No errors!
@@ -54,7 +54,7 @@ No errors!
 
 HHVM provides the Hack runtime. You can run your program as follows:
 
-```
+```bash
 $ cd my_project
 $ hhvm hello.hack
 Hello World!
@@ -66,10 +66,10 @@ Normally you'll start HHVM as a webserver, and it will automatically
 pick up any changes to files you make.
 
 
-```
+```bash
 $ cd my_project
 $ hhvm -m server -p 8080
 ```
 
-You can now visit <http://localhost:8080/hello.hack> to see "Hello
+You can now visit [http://localhost:8080/hello.hack](http://localhost:8080/hello.hack) to see "Hello
 World!" in your browser.

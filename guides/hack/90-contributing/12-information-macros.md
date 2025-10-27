@@ -1,3 +1,5 @@
+# Information Macros
+
 This website supports note, tip, caution, and danger macro messages.
 
 ## Note Message

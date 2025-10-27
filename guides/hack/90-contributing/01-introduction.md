@@ -1,5 +1,10 @@
-This website is itself written in Hack and running on HHVM. You can
-see the current [HHVM version used on the deployed site](https://github.com/hhvm/user-documentation/blob/main/.deploy/built-site.Dockerfile#L3).
+# Introduction
+
+:::caution
+
+The below instructions are out of date. The documentation site is now moved over to [Docusaurus](https://docusaurus.io/).
+
+:::
 
 ## Prerequisites
 
@@ -64,7 +69,7 @@ $ cd public
 $ hhvm -m server -p 8080 -c ../hhvm.dev.ini
 ```
 
-You can now see your local instance by visiting <http://localhost:8080>.
+You can now see your local instance by visiting [http://localhost:8080](http://localhost:8080).
 
 When you make changes, you'll need to run `build.php` again. You can
 leave HHVM serving the site, and it will pick up the changes
@@ -82,7 +87,7 @@ an old HHVM/Hack version.
 
 1. Install [Docker](https://docs.docker.com/engine/installation/).
 2. Start a container with: `docker run -p 8080:80 -d ghcr.io/hhvm/user-documentation`.
-3. You can then access a local copy of the documentation at <http://localhost:8080>.
+3. You can then access a local copy of the documentation at [http://localhost:8080](http://localhost:8080).
 
 ## Running A Production Instance
 

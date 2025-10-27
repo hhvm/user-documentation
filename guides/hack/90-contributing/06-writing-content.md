@@ -1,3 +1,5 @@
+# Writing Content
+
 The website has three content sections:
 
 * [Hack
@@ -32,7 +34,7 @@ for grouping on the home page) and a `foo-summary.txt` (shown as a subheading on
 the home page).
 
 ```
-$ ls guides/hack/01-getting-started/
+$ ls guides/hack/getting-started/
 01-getting-started.md
 02-tools.md
 getting-started-category.txt
