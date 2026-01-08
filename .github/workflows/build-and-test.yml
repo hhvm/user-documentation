@@ -5,7 +5,7 @@ on:
   schedule:
     # Every four hours, avoiding o'clock because GitHub actions
     # are slower at exactly :00.
-    - cron: '42 1,5,9,13,17,21 * * *'
+    - cron: "42 1,5,9,13,17,21 * * *"
 
 permissions:
   id-token: write
@@ -24,8 +24,8 @@ jobs:
     name: Build and Test
     strategy:
       matrix:
-        os: [ ubuntu ]
-        hhvm: [ '4.164' ]
+        os: [ubuntu]
+        hhvm: ["4.164"]
     runs-on: ${{matrix.os}}-latest
     steps:
       - uses: actions/checkout@v3
@@ -52,7 +52,8 @@ jobs:
         run: docker save $IMAGE_SCRATCH -o hack-docs.tar
   update-docker-image:
     concurrency: ${{github.ref}}
-    if: github.ref == 'refs/heads/main'
+    if: false
+    # if: github.ref == 'refs/heads/main'
     name: Deploy
     needs: build
     runs-on: ubuntu-latest
