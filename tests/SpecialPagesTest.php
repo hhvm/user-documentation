@@ -73,6 +73,9 @@ class SpecialPagesTest extends \Facebook\HackTest\HackTest {
     string $from,
     string $to,
   ): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($response, $_body) = await PageLoader::getPageAsync($from);
     expect($response->getStatusCode())->toBeSame(301);
 

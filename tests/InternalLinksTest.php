@@ -8,11 +8,14 @@ use type Facebook\HackTest\DataProvider;
  * @large
  */
 final class InternalLinksTest extends \Facebook\HackTest\HackTest {
-  <<DataProvider('internalLinksList')>>
+  // <<DataProvider('internalLinksList')>>
   public async function testInternalLink(
-    string $target,
-    vec<string> $sources,
+    // string $target,
+    // vec<string> $sources,
   ): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($response, $_body) = await PageLoader::getPageAsync($target);
     if ($response->getStatusCode() === 301) {
       $target = $response->getHeaderLine('Location');
@@ -34,6 +37,9 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
 
   public async function testDoesNotBreakExternalMarkdownLinks(
   ): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($_response, $body) = await PageLoader::getPageAsync(
       '/hack/getting-started/tools',
     );
@@ -42,6 +48,9 @@ final class InternalLinksTest extends \Facebook\HackTest\HackTest {
   }
 
   public async function testCanGetLinksList(): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     $_ = $this->internalLinksList();
   }
 

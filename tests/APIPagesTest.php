@@ -223,6 +223,9 @@ class APIPagesTest extends \Facebook\HackTest\HackTest {
   }
 
   public async function testMessagesForFBWWW(): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     // Not HSL
     list($_, $body) = await PageLoader::getPageAsync('/hack/reference/class/HH.AsyncGenerator/');
     expect($body)->toNotContainSubstring('www repository');

@@ -63,6 +63,9 @@ class AutoLinkifyAPITest extends \Facebook\HackTest\HackTest {
     string $keyword,
     string $dest,
   ): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($_page, $body) = await PageLoader::getPageAsync($source);
 
     $dom = new \DOMDocument();

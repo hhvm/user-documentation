@@ -5,7 +5,7 @@ namespace HHVM\UserDocumentation\Tests;
 use namespace HH\Lib\{C, Str};
 use type HHVM\UserDocumentation\{Guides, GuidesIndex, GuidesProduct};
 use function Facebook\FBExpect\expect;
-use type Facebook\HackTest\DataProvider;
+// use type Facebook\HackTest\DataProvider;
 
 final class LegacyRedirectsTest extends \Facebook\HackTest\HackTest {
   public function getGuideRedirects(): dict<string, (string, string)> {
@@ -42,11 +42,14 @@ final class LegacyRedirectsTest extends \Facebook\HackTest\HackTest {
     return Str\format('/%s/%s/%s', $product, $guide, $page);
   }
 
-  <<DataProvider('getGuideRedirects')>>
+  // <<DataProvider('getGuideRedirects')>>
   public async function testGuideRedirects(
-    string $in,
-    string $target,
+    // string $in,
+    // string $target,
   ): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($response, $_body) = await PageLoader::getPageAsync($in);
     expect($response->getStatusCode())->toBeSame(301);
     $actual_target = $response->getHeaderLine('Location');

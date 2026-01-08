@@ -7,6 +7,9 @@ use type Facebook\HackTest\{DataProvider, TestGroup};
 final class OpenSearchTest extends \Facebook\HackTest\HackTest {
   <<TestGroup('remote')>>
   public async function testNoOpenSearchOnStaging(): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($response, $body) = await PageLoader::getPageAsync(
       'https://staging.docs.hhvm.com/',
     );
@@ -17,6 +20,9 @@ final class OpenSearchTest extends \Facebook\HackTest\HackTest {
 
   <<TestGroup('remote')>>
   public async function testOpenSearchOnProd(): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($response, $body) = await PageLoader::getPageAsync(
       'https://docs.hhvm.com/',
     );

@@ -31,6 +31,9 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     string $name,
     string $path,
   ): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     await $this->testGuidePageQuick($name, $path);
   }
 
@@ -55,6 +58,9 @@ class GuidePagesTest extends \Facebook\HackTest\HackTest {
     string $name,
     string $path,
   ): Awaitable<void> {
+
+    static::markTestSkipped("Disabled in preparation for migration to Docusaurus");
+
     list($response, $body) = await PageLoader::getPageAsync($path);
 
     // /hack/foo/ => /hack/foo/introduction
