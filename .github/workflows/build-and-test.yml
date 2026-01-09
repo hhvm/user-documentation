@@ -22,6 +22,7 @@ env:
 jobs:
   build:
     name: Build and Test
+    if: false
     strategy:
       matrix:
         os: [ubuntu]

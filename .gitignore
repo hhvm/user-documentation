@@ -29,3 +29,4 @@ bourbon/
 *.rej
 Dockerrun.aws.json
 .var/
+sdoc-cache.json
