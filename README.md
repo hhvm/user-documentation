@@ -1,17 +1,25 @@
-# HHVM and Hack User Documentation
+# Website
 
-This is the repo for the [HHVM and Hack user documentation](http://docs.hhvm.com).
+This website is built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 
-[Contributions](CONTRIBUTING.md) and [feedback](https://github.com/hhvm/user-documentation/issues/new) are welcome. If you see anything broken, please [file an issue](https://github.com/hhvm/user-documentation/issues/new).
+### Installation
 
-## Structure
+```
+$ yarn install
+```
 
-There are three keys areas to this repo:
+### Local Development
 
-* **User Documentation**: The [guides](https://github.com/hhvm/user-documentation/tree/master/guides). We realized that finding out how to do simple things like setting up HHVM to more complicated things like using `async` were more tedious than they should be. The documentation should be a friend, not a nuisance.
-* **API Reference**: We use our own HHVM code documentation for Hack and HHVM specific API documentation. And for anything PHP specific, we defer to [php.net](http://php.net). This serves two purposes:
-    - The HHVM source code is the source of truth
-    - We don't duplicate PHP documentation, and [their documentation](http://php.net) will serve as the source of truth for PHP-specific documentation
-* **Infrastructure**: An easier, more modular and scalable way for documentation. Markdown for [user-guide](https://github.com/hhvm/user-documentation/tree/master/guides) content. Easy to follow, Hack-based [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site.
+```
+$ yarn start-fb
+```
 
-Check out the [source code](https://github.com/hhvm/user-documentation/tree/master/src) for building the site. [`bin/build.php`](https://github.com/hhvm/user-documentation/blob/master/bin/build.php) is where all the execution begins.
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build
+
+```
+$ yarn docusaurus build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.

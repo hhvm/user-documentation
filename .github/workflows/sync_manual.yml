@@ -29,22 +29,12 @@ jobs:
 
       - name: Remove old copy of Hack guides
         run: |
-          rm -rf manual/hack
-          rm -rf manual/hhvm
-          rm -rf manual/hsl
-          rm -rf manual/apis
-          rm -rf website
-          rm -f manual/*.*
+          rm -rf manual/*
 
       - name: Use the latest copy of the manual from facebook/hhvm instead
         run: |
-          cp -r hhvm-master/hphp/hack/manual/hack manual
-          cp -r hhvm-master/hphp/hack/manual/hhvm manual
-          cp -r hhvm-master/hphp/hack/manual/hsl manual
-          cp -r hhvm-master/hphp/hack/manual/apis manual
-          cp -r hhvm-master/hphp/hack/manual/hack-overview.mdx manual
-          cp -r hhvm-master/hphp/hack/manual/hhvm-overview.mdx manual
-          cp -r hhvm-master/hphp/hack/website .
+          cp -r hhvm-master/hphp/hack/manual/* manual
+          cp -r hhvm-master/hphp/hack/website/* .
 
       - name: Clean up
         run: rm -r hhvm-master master.zip
