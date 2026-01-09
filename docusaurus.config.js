@@ -39,7 +39,7 @@ const darkCodeTheme = require('prism-react-renderer').themes.vsDark;
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           routeBasePath: 'docs',
-          path: '../manual/',
+          path: './manual/',
           editUrl: 'https://www.internalfb.com/code/fbsource/fbcode/hphp/hack/website',
         },
         experimentalXRepoSnippets: {
