@@ -28,6 +28,8 @@ jobs:
             npm i
           fi
           npm run build
+        env:
+          DOCUSAURUS_BASE_URL: ${{ vars.DOCUSAURUS_BASE_URL }}
 
   build:
     name: Build Docusaurus
@@ -49,6 +51,8 @@ jobs:
             npm i
           fi
           npm run build
+        env:
+          DOCUSAURUS_BASE_URL: ${{ vars.DOCUSAURUS_BASE_URL }}
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
