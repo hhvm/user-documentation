@@ -1,4 +1,4 @@
-name: documentation
+name: Build and Deploy GitHub Pages
 
 on:
   pull_request:

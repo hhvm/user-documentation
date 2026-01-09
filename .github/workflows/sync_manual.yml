@@ -1,4 +1,4 @@
-name: Update guides from facebook/hhvm repo
+name: Update Guides from facebook/hhvm
 
 on:
   push:
