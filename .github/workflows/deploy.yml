@@ -8,27 +8,11 @@ on:
 
 jobs:
 
-  test-env:
-    name: Test Environment
-    if: true
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - name: List Variables
-        run: |
-          echo $DOCUSAURUS_BASE_URL
-        env:
-          DOCUSAURUS_BASE_URL: ${{ vars.DOCUSAURUS_BASE_URL }}
-
   checks:
     name: Check Docusaurus Build
-    if: false
-    #if: github.event_name != 'push'
+    if: github.event_name != 'push'
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -50,9 +34,9 @@ jobs:
 
   build:
     name: Build Docusaurus
-    if: false
-    #if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    environment: github-pages
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
