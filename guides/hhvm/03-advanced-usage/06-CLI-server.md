@@ -1,3 +1,5 @@
+# CLI Server
+
 This module hosts a server on a local socket which can be used to execute
 Hack code. The server will delegate file system operations as well as
 proc_open commands to the client, allowing the server to masquerade as the
@@ -50,13 +52,13 @@ A `UnixServerQuarantineApc` is also available, which forces all apc operations
 performed by the CLI server to use a per user cache not shared with the
 webserver.
 
-The INI style runtime options are documented [here](/hhvm/configuration/INI-settings#cli-server).
+The INI style runtime options are documented [here](/docs/hhvm/configuration/INI-settings#cli-server).
 
 ### CLI server vs repo auth
 
 If you need to run CLI-like jobs in a production environment, for example
 from a cron job or alike, CLI server mode looks very appealing. It is however
-important to note that CLI server mode and [repo auth mode](./repo-authoritative)
+important to note that CLI server mode and [repo auth mode](/docs/hhvm/advanced-usage/repo-authoritative)
 can not be combined. All else being equal, repo auth mode will be a lot faster
 than CLI server mode.
 

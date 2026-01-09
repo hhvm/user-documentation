@@ -1,25 +1,7 @@
-```yamlmeta
-{
-  "caution": [
-    "HHVM will no longer support homebrew on MacOS going forward. For more information, see [Stopping MacOS Homebrew Support](https://hhvm.com/blog/2022/06/17/deprecating-homebrew.html)."
-  ]
-}
-```
+# Mac
 
-We have limited support for installing HHVM on MacOS via [Homebrew](http://brew.sh/):
+<FbCaution>
 
-```
-brew tap hhvm/hhvm
-brew install hhvm
-```
+HHVM no longer supports homebrew on MacOS. For more information, see [Stopping MacOS Homebrew Support](https://hhvm.com/blog/2022/06/17/deprecating-homebrew.html).
 
-This will install binary packages on recent versions of MacOS (as of 2019-03-12, this means Mojave and High Sierra). If binary packages are not available
-(or you pass `--build-from-source`), building will take between 20 minutes on a Mac Pro, to several hours on a MacBook Air.
-
-Several other packages are available:
-
-- `brew install hhvm-nightly`: installs the most recent nightly build
-- `brew install hhvm-VERSION`: install a specific x.y version; for example,
-  `brew install hhvm-4.56` or `brew install hhvm-4.32`
-
-You can also [manually build from source](building-from-source#building-hhvm__macos).
+</FbCaution>

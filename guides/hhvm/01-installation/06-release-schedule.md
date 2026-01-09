@@ -1,3 +1,5 @@
+# Release Schedule
+
 We release biweekly (every two weeks), promoting a recent
 nightly build. The majority of releases are supported for 6 weeks.
 

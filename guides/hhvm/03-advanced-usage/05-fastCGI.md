@@ -1,4 +1,6 @@
-HHVM has built-in support for two server types: [Proxygen](../basic-usage/proxygen.md) and FastCGI.
+# FastCGI
+
+HHVM has built-in support for two server types: [Proxygen](/docs/hhvm/basic-usage/proxygen) and FastCGI.
 
 FastCGI provides a high performance interface between your codebase and web server (e.g., persistent processes between requests, etc.), but which will also obviously require a front-end compatible web server to serve the requests (e.g., [nginx](http://nginx.org/)).
 
@@ -32,21 +34,27 @@ sudo apt-get install apache2
 
 The recommended way of integrating with Apache is using `mod_proxy` `mod_proxy_fcgi`. Enable the modules, then in your Apache configuration, add a line as so:
 
-    ProxyPass / fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/
-    # Or if you used a unix socket
-    # ProxyPass / unix://var/run/hhvm/sock|fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/
+```
+ProxyPass / fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/
+# Or if you used a unix socket
+# ProxyPass / unix://var/run/hhvm/sock|fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/
+```
 
 This will route *all* the traffic to the FastCGI server. If you want to route only certain requests (e.g. only those from a subdirectory or ending *.php, you can use `ProxyPassMatch`, e.g.
 
-    ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/$1
+```
+ProxyPassMatch ^/(.*\.php(/.*)?)$ fcgi://127.0.0.1:9000/path/to/your/www/root/goes/here/$1
+```
 
 Consult `mod_proxy_fcgi` docs for more details on how to use `ProxyPass` and `ProxyPassMatch`.
 
 Also make sure to set up a `DirectoryIndex` in your Apache configuration like this:
 
-    <Directory /path/to/your/www/root/>
-        DirectoryIndex index.php
-    </Directory>
+```
+<Directory /path/to/your/www/root/>
+    DirectoryIndex index.php
+</Directory>
+```
 
 This will try to access `index.php` when you send a request to a directory.
 
@@ -105,4 +113,3 @@ location ~ {
     include        fastcgi_params;
 }
 ```
-

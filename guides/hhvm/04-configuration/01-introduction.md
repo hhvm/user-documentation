@@ -1,8 +1,10 @@
-After [installing HHVM](../installation/introduction.md), you will want to configure it to run scripts from the command line and/or serve web traffic.
+# Introduction
+
+After [installing HHVM](/docs/hhvm/installation/introduction), you will want to configure it to run scripts from the command line and/or serve web traffic.
 
 ## Configuration Options
 
-HHVM has a very large set of [configuration options](./INI-settings.md). Many are not meant for the end HHVM user, but there are some key options that will be useful for anyone deploying HHVM.
+HHVM has a very large set of [configuration options](/docs/hhvm/configuration/INI-settings). Many are not meant for the end HHVM user, but there are some key options that will be useful for anyone deploying HHVM.
 
 ### INI Format
 
@@ -26,4 +28,4 @@ hhvm -c config.ini -d hhvm.log.file = /tmp/temp.log -d hhvm.force_hh = 1 file.ph
 
 If the same option is specified more than once, then the option that HHVM reads last will be the value used. HHVM reads the command line left to right and INI configuration files top to bottom.
 
-Check out our [INI settings page](/hhvm/configuration/INI-settings#common-options) for the common configuration options you are likely to use day-to-day.
+Check out our [INI settings page](/docs/hhvm/configuration/INI-settings#common-options) for the common configuration options you are likely to use day-to-day.

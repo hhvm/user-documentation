@@ -1,3 +1,5 @@
+# Repo Authoritative
+
 By default, HHVM starts execution at a single entrypoint file - loading,
 compiling, and executing code on-the-fly as it is needed. A `require` of a brand
 new file can just load up that file and execute it; writing new files and
