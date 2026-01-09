@@ -1,5 +1,0 @@
-deploy:
-  artifact: Dockerrun.aws.json
-global:
-  application_name: hhvm-hack-docs
-  default_region: us-west-2
