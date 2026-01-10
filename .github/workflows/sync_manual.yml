@@ -8,7 +8,7 @@ on:
       - main
   schedule:
     # Fifteen minutes past the hour, every hour.
-    # (GitHub actions are heavily used at o'clock, so arbitrarily
+    # (GitHub Actions are heavily used at o'clock, so arbitrarily
     # choose another time.)
     - cron: '15 * * * *'
 jobs:
@@ -33,6 +33,7 @@ jobs:
 
       - name: Use the latest copy of the manual from facebook/hhvm instead
         run: |
+          rm hhvm-master/hphp/hack/website/README.md
           cp -r hhvm-master/hphp/hack/manual/* manual
           cp -r hhvm-master/hphp/hack/website/* .
           sed -i "s#'\.\./manual/'#'./manual/'#g" docusaurus.config.js
