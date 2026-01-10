@@ -5,12 +5,15 @@ on:
     branches: [main]
   push:
     branches: [main]
-
+  schedule:
+    # Every four hours, avoiding o'clock because GitHub Actions
+    # are slower at exactly :00.
+    - cron: "42 1,5,9,13,17,21 * * *"
 jobs:
 
   checks:
     name: Check Docusaurus Build
-    if: github.event_name != 'push'
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     environment: github-pages
     steps:
