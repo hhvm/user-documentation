@@ -17,7 +17,6 @@ jobs:
     name: Check Docusaurus Build
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    environment: github-pages
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,8 +33,6 @@ jobs:
             npm i
           fi
           npm run build
-        env:
-          DOCUSAURUS_BASE_URL: ${{ vars.DOCUSAURUS_BASE_URL }}
 
   build:
     name: Build Docusaurus
