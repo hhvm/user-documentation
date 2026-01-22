@@ -39,6 +39,7 @@ jobs:
           cp -r hhvm-master/hphp/hack/manual/* manual
           cp -r hhvm-master/hphp/hack/website/* .
           sed -i "s#'\.\./manual/'#'./manual/'#g" docusaurus.config.js
+          sed -i "s#/edit/main/manual/#/edit/main/#g" docusaurus.config.js
 
       - name: Clean up
         run: rm -r hhvm-master master.zip
