@@ -1,0 +1,7 @@
+{
+  "name": "Hack/HHVM Documentation (Static)",
+  "dockerFile": "Dockerfile",
+  "forwardPorts": [4000, 35729],
+  "runArgs": ["--name", "devc_hhdocs_static"],
+  "postStartCommand": "bundle install && bundle exec jekyll serve --baseurl='' --livereload --force_polling"
+}

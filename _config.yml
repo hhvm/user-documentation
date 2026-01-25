@@ -1,0 +1,4 @@
+baseurl: "/build"
+title: HackDocs
+description: "Hack/HHVM Documentation"
+source: build/

@@ -23,3 +23,5 @@ sdoc-cache.json
 .docusaurus/
 build/
 node_modules/
+_site/
+Gemfile.lock

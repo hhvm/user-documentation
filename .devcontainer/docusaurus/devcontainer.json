@@ -1,0 +1,16 @@
+{
+  "name": "Hack/HHVM Documentation (Live)",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "forwardPorts": [3000],
+  "runArgs": ["--name", "devc_hhdocs_live"],
+  "containerUser": "vscode",
+  "postCreateCommand": "yarn install",
+  "waitFor": "postCreateCommand",
+  "postStartCommand": "yarn docusaurus start --host 0.0.0.0",
+  "features": {
+    "node": {
+      "version": "22"
+    },
+    "github-cli": "latest"
+  }
+}
