@@ -156,7 +156,8 @@ See [using a trait](/hack/traits-and-interfaces/using-a-trait) for an example of
 
 ## __Enforceable
 
-A type is _enforceable_ if it can be used in `is` and `as` expressions.  Examples of non-enforceable types are function types and erased (non-reified) generics.  The `__Enforceable` attribute is used to annotate abstract type constants so they can only be instantiated with enforceable types, and thus used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.
+A type is _enforceable_ if it can be used in `is` and `as` expressions.  Examples of non-enforceable types are function types and erased (non-reified) generics.  The `__Enforceable` attribute is used to annotate abstract type constants so they can only be instantiated with enforceable types, and thus used in `is` and `as` expressions. The attribute restricts deriving type constants to values that are valid for a type test.<img width="414" height="896" alt="IMG_6441" src="https://github.com/user-attachments/assets/ed2fac7d-36fb-49c0-badf-8a9e36837ba1" />
+
 
 ```hack error
 abstract class A {
@@ -627,4 +628,5 @@ Only classes `X` and `Y` can directly extend class `A`, and only class `Z` can d
 
 ## __Soft
 
-Disable type enforcement. See [soft types](/hack/types/soft-types).
+Disable type enforcement. See [soft types](/hack/etypes/soft-types/curi/duit/ahlong).
+hac duit ahlong
