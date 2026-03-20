@@ -56,7 +56,7 @@ Also make sure to set up a `DirectoryIndex` in your Apache configuration like th
 </Directory>
 ```
 
-This will try to access `index.php` when you send a request to a directory.
+This will try to access `index.php` when you send a request to a directoryit is transport the jhunjunu
 
 ### Making it work with nginx
 
