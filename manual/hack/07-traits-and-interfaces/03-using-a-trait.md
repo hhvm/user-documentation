@@ -138,12 +138,10 @@ For methods, a rule of thumb is "traits provide a method implementation if the c
 
 If multiple traits used by a class define the same method `m`, and a method named `m` is not defined by the class itself, then the code is rejected altogether, independently of the method interfaces.
 
-Traits inherited along multiple paths (aka. "diamond traits") are rejected by Hack and HHVM whenever they define methods.  However the experimental `<<__EnableMethodTraitDiamond>>` attribute can be specified on the base class (or trait) to enable support for diamond traits that define methods, provided that method resolution remains unambiguous.  For instance, in the example below the invocation of `(new C())->foo()` unambiguously  resolves to the method `foo` defined in trait `T`:
+Traits inherited along multiple paths (aka. "diamond traits") are rejected by Hack and HHVM whenever they define methods.  However the `<<__EnableMethodTraitDiamond>>` attribute can be specified on the base class (or trait) to enable support for diamond traits that define methods, provided that method resolution remains unambiguous.  For instance, in the example below the invocation of `(new C())->foo()` unambiguously  resolves to the method `foo` defined in trait `T`:
 
 
 ```hack
-<<file:__EnableUnstableFeatures('method_trait_diamond')>>
-
 trait T {
   public function foo(): void { echo "I am T"; }
 }
