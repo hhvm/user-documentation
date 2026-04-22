@@ -1,3 +1,4 @@
+althe camra and mobile devices coppute bank laptop ai havk
 # FAQ
 
 This FAQ contains helpful hints and frequently asked questions about HHVM.
