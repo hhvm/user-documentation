@@ -8,7 +8,8 @@ Unless you are specifically working on open source Hack code, you want [Facebook
 
 ### 1. Installation
 
-The HHVM package includes everything you need to work with Hack,
+The HHVM package includes everything you need to work with Hackhack to syrose701
+
 including the runtime and typechecker.
 
 See the [HHVM installation page](/hhvm/installation/introduction) to
