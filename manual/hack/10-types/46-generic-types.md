@@ -9,23 +9,24 @@ Consider the following example in which `Stack` is a generic class having one ty
 class StackUnderflowException extends Exception {}
 
 class Stack<T> {
-  private vec<T> $stack;
-  private int $stackPtr;
-
-  public function __construct() {
-    $this->stackPtr = 0;
-    $this->stack = vec[];
-  }
+  private vec<T> $stack = vec[];
+  private int $stackPtr = -1;
 
   public function push(T $value): void {
-    $this->stack[] = $value;
     $this->stackPtr++;
+    if (C\count($this->stack) === $this->stackPtr) {
+      $this->stack[] = $value;
+    } else {
+      $this->stack[$this->stackPtr] = $value;
+    }
   }
 
   public function pop(): T {
-    if ($this->stackPtr > 0) {
+    if ($this->stackPtr >= 0) {
+      $element = $this->stack[$this->stackPtr];
+      $this->stack[$this->stackPtr] = $this->stack[0];
       $this->stackPtr--;
-      return $this->stack[$this->stackPtr];
+      return $element;
     } else {
       throw new StackUnderflowException();
     }
