@@ -5,6 +5,8 @@
 generator and the calling code. Instead of returning once or requiring something that could be memory-intensive like an array, generators
 yield values to the calling code as many times as necessary in order to provide the values being iterated over.
 
+For an introduction to generators and the `yield` operator, see [Yield](/hack/expressions-and-operators/yield).
+
 Generators can be `async` functions; an async generator behaves similarly to a normal generator except that each yielded value is an
 `Awaitable` that is `await`ed upon.
 
@@ -42,8 +44,8 @@ async function happy_new_year(int $start): Awaitable<void> {
 }
 
 <<__EntryPoint>>
-function run(): void {
-  \HH\Asio\join(happy_new_year(5)); // 5 second countdown
+async function run(): Awaitable<void> {
+  await happy_new_year(5); // 5 second countdown
 }
 ```
 
@@ -96,9 +98,9 @@ async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   $ids = vec[1, 2, 3, 4];
-  \HH\Asio\join(associate_ids_to_names($ids));
+  await associate_ids_to_names($ids);
 }
 ```
 
@@ -148,8 +150,8 @@ async function associate_ids_to_names(vec<int> $ids): Awaitable<void> {
 }
 
 <<__EntryPoint>>
-function run(): void {
+async function run(): Awaitable<void> {
   $ids = vec[1, 2, 3, 4];
-  \HH\Asio\join(associate_ids_to_names($ids));
+  await associate_ids_to_names($ids);
 }
 ```

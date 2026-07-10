@@ -78,7 +78,7 @@ Here is a simple example that shows how to get a user name from a database using
 ```hack no-extract
 async function get_connection(): Awaitable<AsyncMysqlConnection> {
   // Get a connection pool with default options
-  $pool = new AsyncMysqlConnectionPool(darray[]);
+  $pool = new AsyncMysqlConnectionPool(dict[]);
   // Change credentials to something that works in order to test this code
   return await $pool->connect(
     CI::$host,
@@ -144,7 +144,7 @@ want to make a query. The class is [`AsyncMysqlConnectionPool`](/apis/Classes/As
 ```hack no-extract
 function get_pool(): AsyncMysqlConnectionPool {
   return new AsyncMysqlConnectionPool(
-    darray['pool_connection_limit' => 100],
+    dict['pool_connection_limit' => 100],
   ); // See API for more pool options
 }
 
@@ -268,18 +268,17 @@ async function get_combined_contents(
   vec<string> $urls,
 ): Awaitable<vec<string>> {
   // Use lambda shorthand syntax here instead of full closure syntax
-  $handles = Vec\map_with_key(
+  $contents = await Vec\map_with_key_async(
     $urls,
-    ($idx, $url) ==> HH\Asio\curl_exec($url),
+    async ($idx, $url) ==> await HH\Asio\curl_exec($url),
   );
-  $contents = await Vec\from_async($handles);
   echo C\count($contents)."\n";
   return $contents;
 }
 
 <<__EntryPoint>>
-function main(): void {
-  HH\Asio\join(get_combined_contents(get_urls()));
+async function main(): Awaitable<void> {
+  await get_combined_contents(get_urls());
 }
 ```
 
@@ -288,7 +287,7 @@ function main(): void {
 The async stream extension has one function, [`stream_await`](/apis/Functions/stream_await/), which is functionally similar
 to HHVM's [`stream_select`](http://php.net/manual/en/function.stream-select.php). It waits for a stream to enter a state (e.g.,
 `STREAM_AWAIT_READY`), but without the multiplexing functionality of [`stream_select`](http://php.net/manual/en/function.stream-select.php). We
-can use [HH\Lib\Vec\from_async](/hsl/Functions/HH.Lib.Vec/from_async/) to await multiple stream handles, but the resulting combined awaitable won't be complete
+can use [HH\Lib\Vec\map_async](/hsl/Functions/HH.Lib.Vec/map_async/) to await multiple stream handles, but the resulting combined awaitable won't be complete
 until all of the underlying streams have completed.
 
 ```hack no-extract
@@ -314,11 +313,11 @@ async function write_all(vec<resource> $resources): Awaitable<void> {
     }
   };
   // You will get 3 shuffled strings, each on a separate line.
-  await Vec\from_async(\array_map($write_single_resource, $resources));
+  await Vec\map_async($resources, $write_single_resource);
 }
 
 <<__EntryPoint>>
-function main(): void {
-  HH\Asio\join(write_all(get_resources()));
+async function main(): Awaitable<void> {
+  await write_all(get_resources());
 }
 ```

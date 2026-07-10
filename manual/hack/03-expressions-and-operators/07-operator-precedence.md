@@ -16,7 +16,7 @@ Operator | Description | Associativity
 `#`, `()` | [Enum class labels](/hack/built-in-types/enum-class-label) and [Function calling](/hack/functions/introduction) | Left
 `clone` | Object cloning (shallowly, not deeply) | None
 `readonly`, `await`, `++` `--` (postfix) | [Using readonly](/hack/readonly/explicit-readonly-keywords), [Suspending an async function](/hack/expressions-and-operators/await), and [Incrementing / Decrementing](/hack/expressions-and-operators/incrementing-and-decrementing) (postfix) | Right
-`(int)` `(float)` `(string)`, `**`, `@`, `++` `--` (prefix) | [Casting](/hack/expressions-and-operators/casting), [Exponentiation](/hack/expressions-and-operators/arithmetic#exponent), [Suppressing errors](/hack/expressions-and-operators/error-control), and [Incrementing / Decrementing](/hack/expressions-and-operators/incrementing-and-decrementing) (prefix) | Right
+`(int)` `(float)` `(string)`, `**`, `++` `--` (prefix) | [Casting](/hack/expressions-and-operators/casting), [Exponentiation](/hack/expressions-and-operators/arithmetic#exponent), and [Incrementing / Decrementing](/hack/expressions-and-operators/incrementing-and-decrementing) (prefix) | Right
 `is`, `as` `?as` |[Type checks / Type assertions](/hack/expressions-and-operators/type-assertions) | Left
 `!`, `~`, `+` `-` (one argument) | [Logical negation](/hack/expressions-and-operators/logical-operators), [Bitwise negation](/hack/expressions-and-operators/bitwise-operators#bitwise-negation), and [Unary Addition / Subtraction](/hack/expressions-and-operators/arithmetic) | Right
 `*` `/` `%` | [Multiplication, Division, and Modulo](/hack/expressions-and-operators/arithmetic) | Left
@@ -31,7 +31,7 @@ Operator | Description | Associativity
 `\|\|` | [Logical OR](/hack/expressions-and-operators/logical-operators) | Left
 `??` | [Coalesce operator](/hack/expressions-and-operators/coalesce) | Right
 `?` `:`, `?:` | [Ternary evaluation](/hack/expressions-and-operators/ternary) and [Elvis operator](/hack/expressions-and-operators/ternary#elvis-operator) | Left
-`\|>` | [Pipe / Chain function calls](/hack/expressions-and-operators/pipe) | Left
+`\|>`, `\|?>` | [Pipe / Chain function calls](/hack/expressions-and-operators/pipe) and [Nullsafe pipe](/hack/expressions-and-operators/nullsafe-pipe) | Left
 `=` `+=` `-=` `.=` `*=` `/=` `%=` `<<=` `>>=` `&=` `^=` `\|=`, `??=` | [Assignment operators](/hack/expressions-and-operators/assignment) and [Coalescing assignment operator](/hack/expressions-and-operators/coalesce#coalescing-assignment-operator) | Right
-`echo` | [Write to standard output](/hack/expressions-and-operators/echo) | Right
+`echo` | [Write to standard output](/hack/statements/echo) | Right
 `include` `require` | [Include or Require a script](/hack/source-code-fundamentals/script-inclusion)| Left

@@ -2,7 +2,6 @@
 
 The following attributes are defined:
 - [\_\_AcceptDisposable](#__acceptdisposable)
-- [\_\_AutocompleteSortText](#__autocompletesorttext)
 - [\_\_ConsistentConstruct](#__consistentconstruct)
 - [\_\_Deprecated](#__deprecated)
 - [\_\_Docs](#__docs)
@@ -10,8 +9,8 @@ The following attributes are defined:
 - [\_\_DynamicallyConstructible](#__dynamicallyconstructible)
 - [\_\_EnableMethodTraitDiamond](#__enablemethodtraitdiamond)
 - [\_\_Enforceable](#__enforceable)
-- [\_\_Explicit](#__explicit)
 - [\_\_EntryPoint](#__entrypoint)
+- [\_\_Explicit](#__explicit)
 - [\_\_LateInit](#__lateinit)
 - [\_\_LSB](#__lsb)
 - [\_\_Memoize](#__memoize)
@@ -33,35 +32,6 @@ The following attributes are defined:
 This attribute can be applied to a function parameter that has a type that implements interface `IDisposable` or `IAsyncDisposable`.
 
 See [object disposal](/hack/classes/object-disposal) for an example of its use.
-
-## __AutocompleteSortText
-
-When we are displaying autocomplete suggestions, we sort method suggestions
-alphabetically. To override what text is used for sorting a specific method in
-the autocomplete suggestions, use the `__AutocompleteSortText` attribute.
-
-```hack file:base.hack
-class Dog {
-  <<__AutocompleteSortText('!getName')>>
-  public function getName(): string {
-    return "Clifford";
-  }
-
-  public function getOwner(): string {
-    return "Emily";
-  }
-
-  public function getFriends(): vec<string> {
-    return vec["Cleo"];
-  }
-}
-```
-
-In the above example, autocomplete suggestions would typically show in the
-order: `getFriends`, `getName`, `getOwner`
-
-But since the `__AutocompleteSortText` is used, the order is: `getName`,
-`getFriends`, `getOwner`
 
 ## __ConsistentConstruct
 
@@ -184,6 +154,20 @@ class B2 extends A {
 
 Similarly, the `__Enforceable` attribute can also be used to annotate reified generics, enabling the generic to be used in a type test expression.
 
+## __EntryPoint
+
+A Hack program begins execution at a top-level function referred to as the *entry-point function*. A top-level function can be designated as such using this attribute, which
+has no attribute values. For example:
+
+```hack
+<<__EntryPoint>>
+function main(): void {
+  printf("Hello, World!\n");
+}
+```
+
+Note: An entry-point function will *not* be automatically executed if the file containing such a function is included via require or the autoloader.
+
 ## __Explicit
 
 Requires callers to explicitly specify the value for a generic
@@ -202,20 +186,6 @@ function example_usage(int $x, int $y, string $s): void {
   values_are_equal($x, $s);
 }
 ```
-
-## __EntryPoint
-
-A Hack program begins execution at a top-level function referred to as the *entry-point function*. A top-level function can be designated as such using this attribute, which
-has no attribute values. For example:
-
-```hack
-<<__EntryPoint>>
-function main(): void {
-  printf("Hello, World!\n");
-}
-```
-
-Note: An entry-point function will *not* be automatically executed if the file containing such a function is included via require or the autoloader.
 
 ## __LateInit
 
@@ -264,7 +234,7 @@ Marks this property as implicitly redeclared on all subclasses. This ensures eac
 
 ## __Memoize
 
-The presence of this attribute causes the designated method to automatically cache each value it looks up and returns, so future calls with
+The presence of this attribute causes the designated function or method to automatically cache each value it looks up and returns, so future calls with
 the same parameters can be retrieved more efficiently. The set of parameters is hashed into a single hash key, so changing the type, number,
 and/or order of the parameters can change that key. Functions with variadic parameters can not be memoized.
 
@@ -306,7 +276,7 @@ Consider using `__MemoizeLSB` instead on static methods.
 
 ### Exceptions
 
-Thrown exceptions are not memoized, showing by the increasing counter in this
+Thrown exceptions are not memoized, as shown by the increasing counter in this
 example:
 
 ```hack
@@ -333,7 +303,7 @@ function main(): void {
 ```
 
 ### Awaitables and Exceptions
-As memoize caches an [Awaitable](/hack/asynchronous-operations/awaitables) itself, this means that **if an async function
+As `__Memoize` caches an [Awaitable](/hack/asynchronous-operations/awaitables) itself, this means that **if an async function
 is memoized and throws, you will get the same exception backtrace on every
 failed call**.
 
@@ -503,7 +473,7 @@ function f<<<__Newable>> reify T as A>(): T {
 }
 ```
 
-The class `A` must either be final (as in the example) or annotated with `__ConsistentConstruct`.  The `__Newable` attribute ensures that the function `f` is only be applied to a _non-abstract_ class, say `C`, while the `as A` constraint guarantees that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`.  The generic type `T` must be reified so that the runtime has access to it, refer to [Generics: Reified Generics](/hack/reified-generics/reified-generics) for details.
+The class `A` must either be final (as in the example) or annotated with `__ConsistentConstruct`.  The `__Newable` attribute ensures that the function `f` can only be applied to a _non-abstract_ class, say `C`, while the `as A` constraint guarantees that the interface of the constructor of `C` is uniquely determined by the interface of the constructor of class `A`.  The generic type `T` must be reified so that the runtime has access to it, refer to [Generics: Reified Generics](/hack/reified-generics/reified-generics) for details.
 
 A complete example thus is:
 
@@ -605,25 +575,104 @@ See [object disposal](/hack/classes/object-disposal) for an example of its use.
 
 ## __Sealed
 
-A class that is *sealed* can be extended directly only by the classes named in the attribute value list. Similarly, an interface that is sealed
-can be implemented directly only by the classes named in the attribute value list. Classes named in the attribute value list can themselves be
-extended arbitrarily unless they are final or also sealed. In this way, sealing provides a single-level restraint on inheritance.
-For example:
+The `__Sealed` attribute can be used on classes/interfaces/traits and methods.
+
+#### Sealed classes, interfaces and traits
+
+A class that is *sealed* can be **extended** directly only by the classes named in the attribute value list. Classes named in the attribute value list can themselves be
+extended arbitrarily unless they are final or also sealed. In this way, sealing provides a single-level restraint on inheritance.  For example:
 
 ```hack
 <<__Sealed(X::class, Y::class)>>
 abstract class A {}
 
 class X extends A {}
+
+<<__Sealed(J::class)>>
 class Y extends A {}
 
-<<__Sealed(Z::class)>>
-interface I {}
-
-class Z implements I {}
+class J extends Y {}
 ```
 
-Only classes `X` and `Y` can directly extend class `A`, and only class `Z` can directly implement interface `I`.
+Only classes `X` and `Y` can directly extend class `A`, and only class `J` can directly extend class `Y`.  Class `X` can be extended by any other class.
+
+Similarly, an interface that is sealed
+can be **implemented** directly only by the classes named in the attribute value list, and a trait that is sealed can be **used** directly only by the classes or traits named in the attribute value list.
+
+#### Sealed methods
+
+A method that is sealed can be **overridden** only by methods defined in classes or traits named in the attribute value list. Overriding methods in classes/traits in the attribute value list can themselves be overridden arbitrarily unless they are final or also sealed.  For example, given:
+
+```hack
+class C {
+  <<__Sealed(D::class)>>
+  public function foo(): void {  echo "I am foo in C\n"; }
+}
+
+class D extends C {
+  <<__Override>>
+  public function foo(): void { echo "I am foo in D\n"; }
+}
+```
+
+only class `D` can define a method `foo` that overrides method `foo` in `C`.
+
+Typical use cases are methods that ought to be `final` except for a few specialised implementations in traits that need to override them.  This situation can be enforced with this pattern:
+
+```hack
+class C {
+  <<__Sealed(T::class)>>
+  public function foo(): void { echo "I am foo in C\n"; }
+}
+
+trait T {
+  require extends C;
+
+  <<__Override>>
+  final public function foo(): void { echo "I am foo in T\n"; }
+}
+
+class D extends C {
+  // D cannot override directly foo, the following raises an error
+  // public function foo(): void { echo "I am foo in D\n" }
+
+  // however D can use trait T which overrides `foo`
+  use T;
+}
+```
+
+#### Remark: the Sealed attribute controls only the direct extends/overrides
+
+The `__Sealed` attribute restricts only the *direct* extensions or overrides — it does not propagate further. Classes or methods permitted by the seal can themselves be freely extended or overridden by anyone (unless they are independently sealed or final).
+
+For classes:
+
+```hack
+<<__Sealed(B::class)>>
+class A {}
+
+class B extends A {}  // OK: B is named in A's seal list
+class C extends B {}  // OK: B is not sealed, so any class can extend it
+```
+
+For methods:
+
+```hack
+class A {
+  <<__Sealed(B::class)>>
+  public function foo(): void {}
+}
+
+class B extends A {
+  <<__Override>>
+  public function foo(): void {}  // OK: B is named in A::foo's seal list
+}
+
+class C extends B {
+  <<__Override>>
+  public function foo(): void {}  // OK: B::foo is not sealed, so C can override it
+}
+```
 
 ## __Soft
 
