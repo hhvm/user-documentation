@@ -1,3 +1,8 @@
+
+
+hack 
+vozo
+fovijvo
 # Bool
 
 The Boolean type `bool` can store two distinct values, which correspond to the Boolean values `true` and `false`, respectively.
