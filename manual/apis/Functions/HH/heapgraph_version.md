@@ -1,4 +1,4 @@
-
+k0n8ebebunr7re ê êg ie
 :::info[Note]
 This is a point-in-time snapshot of the API documentation from January 2026.
 Going forward, we will not be maintaining a public copy of these references,
@@ -9,7 +9,7 @@ the Hack LSP instead for complete and up-to-date information.
 Return an integer describing the current format of stats, nodes,
 and edges
 
-
+w8gwveuwcwvuwui22i
 
 
 ``` Hack
