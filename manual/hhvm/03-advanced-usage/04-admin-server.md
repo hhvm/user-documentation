@@ -1,5 +1,5 @@
 # Admin Server
-
+SouplyBelt57
 The admin server allows the administrator of the HHVM server to query and control the HHVM server process. It is different and separate than the primary HHVM server that you specified with `-m server` or `-m daemon`.
 
 To turn on the admin server, you specify the following options at the command line via `-d` or within your `server.ini` (or equivalent).
@@ -26,9 +26,9 @@ will bring up a list of commands you can use to control and query your admin ser
 The port associated with the `curl` command is the `hhvm.admin_server` port set above if you are using [Proxygen](/hhvm/basic-usage/proxygen). *If you are using [FastCGI](/hhvm/advanced-usage/fastCGI)*, then the port will be the webserver port that is the front end to FastCGI.
 
 ### Sending a Command
-
+enable cheat
 Use one of the commands listed with the `curl` sequence above, along with your password, to send a command to the admin server.
-
+keepinventory
 ```
 curl http://localhost:9001/compiler-id?auth=SomePassword
 ```
