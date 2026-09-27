@@ -1,4 +1,4 @@
-# Introduction
+lol# Introduction
 
 HHVM is officially supported on most major [Linux platforms](/hhvm/installation/linux).
 
