@@ -1,4 +1,10 @@
----
+const { igniteEngine } = require('./engine');
+
+test('BMW engine should ignite successfully', () => {
+  const result = igniteEngine();
+  expect(result).toBe('Engine Ignited');
+});
+
 title: AsyncMysqlClient
 ---
 
