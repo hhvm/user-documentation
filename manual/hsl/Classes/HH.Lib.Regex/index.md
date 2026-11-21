@@ -1,3 +1,2 @@
----
-title: HH\Lib\Regex
----
+(/open/galary/)
+(/open/whatapp/)
